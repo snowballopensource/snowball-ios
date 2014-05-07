@@ -4,7 +4,7 @@
 #import "_SBClip.h"
 
 const struct SBClipAttributes SBClipAttributes = {
-	.id = @"id",
+	.remoteID = @"remoteID",
 	.video_url = @"video_url",
 };
 
@@ -47,7 +47,7 @@ const struct SBClipFetchedProperties SBClipFetchedProperties = {
 
 
 
-@dynamic id;
+@dynamic remoteID;
 
 
 

@@ -21,6 +21,7 @@
 		BA048E20191AF9A70083B0DC /* Snowball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA048E1E191AF9A70083B0DC /* Snowball.xcdatamodeld */; };
 		BA048E26191AFAD90083B0DC /* _SBClip.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E23191AFAD90083B0DC /* _SBClip.m */; };
 		BA048E2B191AFB110083B0DC /* SBClip.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E2A191AFB110083B0DC /* SBClip.m */; };
+		BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E2D191AFDA50083B0DC /* SBManagedObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,9 @@
 		BA048E23191AFAD90083B0DC /* _SBClip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SBClip.m; sourceTree = "<group>"; };
 		BA048E29191AFB110083B0DC /* SBClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBClip.h; sourceTree = "<group>"; };
 		BA048E2A191AFB110083B0DC /* SBClip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBClip.m; sourceTree = "<group>"; };
+		BA048E2C191AFDA50083B0DC /* SBManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedObject.h; sourceTree = "<group>"; };
+		BA048E2D191AFDA50083B0DC /* SBManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBManagedObject.m; sourceTree = "<group>"; };
+		BA048E2F191AFE9A0083B0DC /* SBDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBDefines.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +135,7 @@
 				BA048DE9191AF6730083B0DC /* Snowball-Info.plist */,
 				BA048DEA191AF6730083B0DC /* InfoPlist.strings */,
 				BA048DED191AF6730083B0DC /* main.m */,
+				BA048E2F191AFE9A0083B0DC /* SBDefines.h */,
 				BA048DEF191AF6730083B0DC /* Snowball-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -176,10 +181,12 @@
 		BA048E21191AFAD10083B0DC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BA048E1E191AF9A70083B0DC /* Snowball.xcdatamodeld */,
+				BA048E2C191AFDA50083B0DC /* SBManagedObject.h */,
+				BA048E2D191AFDA50083B0DC /* SBManagedObject.m */,
 				BA048E29191AFB110083B0DC /* SBClip.h */,
 				BA048E2A191AFB110083B0DC /* SBClip.m */,
 				BA048E28191AFAE10083B0DC /* Generated */,
-				BA048E1E191AF9A70083B0DC /* Snowball.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -332,6 +339,7 @@
 				BA048E20191AF9A70083B0DC /* Snowball.xcdatamodeld in Sources */,
 				BA048E18191AF83A0083B0DC /* SBReelViewController.m in Sources */,
 				BA048DF8191AF6730083B0DC /* SBViewController.m in Sources */,
+				BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */,
 				BA048E1D191AF8D40083B0DC /* SBAPIManager.m in Sources */,
 				BA048DF2191AF6730083B0DC /* SBAppDelegate.m in Sources */,
 			);

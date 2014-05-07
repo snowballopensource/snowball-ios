@@ -2,10 +2,10 @@
 // Make changes to SBClip.h instead.
 
 #import <CoreData/CoreData.h>
-
+#import "SBManagedObject.h"
 
 extern const struct SBClipAttributes {
-	__unsafe_unretained NSString *id;
+	__unsafe_unretained NSString *remoteID;
 	__unsafe_unretained NSString *video_url;
 } SBClipAttributes;
 
@@ -22,7 +22,7 @@ extern const struct SBClipFetchedProperties {
 @interface SBClipID : NSManagedObjectID {}
 @end
 
-@interface _SBClip : NSManagedObject {}
+@interface _SBClip : SBManagedObject {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
@@ -32,11 +32,11 @@ extern const struct SBClipFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString* id;
+@property (nonatomic, strong) NSString* remoteID;
 
 
 
-//- (BOOL)validateId:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateRemoteID:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -62,8 +62,8 @@ extern const struct SBClipFetchedProperties {
 @interface _SBClip (CoreDataGeneratedPrimitiveAccessors)
 
 
-- (NSString*)primitiveId;
-- (void)setPrimitiveId:(NSString*)value;
+- (NSString*)primitiveRemoteID;
+- (void)setPrimitiveRemoteID:(NSString*)value;
 
 
 
