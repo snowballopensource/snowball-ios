@@ -19,6 +19,8 @@
 		BA048E18191AF83A0083B0DC /* SBReelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E17191AF83A0083B0DC /* SBReelViewController.m */; };
 		BA048E1D191AF8D40083B0DC /* SBAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E1C191AF8D40083B0DC /* SBAPIManager.m */; };
 		BA048E20191AF9A70083B0DC /* Snowball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA048E1E191AF9A70083B0DC /* Snowball.xcdatamodeld */; };
+		BA048E26191AFAD90083B0DC /* _SBClip.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E23191AFAD90083B0DC /* _SBClip.m */; };
+		BA048E2B191AFB110083B0DC /* SBClip.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E2A191AFB110083B0DC /* SBClip.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,10 @@
 		BA048E1B191AF8D40083B0DC /* SBAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAPIManager.h; sourceTree = "<group>"; };
 		BA048E1C191AF8D40083B0DC /* SBAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAPIManager.m; sourceTree = "<group>"; };
 		BA048E1F191AF9A70083B0DC /* Snowball.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Snowball.xcdatamodel; sourceTree = "<group>"; };
+		BA048E22191AFAD90083B0DC /* _SBClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SBClip.h; sourceTree = "<group>"; };
+		BA048E23191AFAD90083B0DC /* _SBClip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SBClip.m; sourceTree = "<group>"; };
+		BA048E29191AFB110083B0DC /* SBClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBClip.h; sourceTree = "<group>"; };
+		BA048E2A191AFB110083B0DC /* SBClip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBClip.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +116,7 @@
 				BA048DF1191AF6730083B0DC /* SBAppDelegate.m */,
 				BA048E1B191AF8D40083B0DC /* SBAPIManager.h */,
 				BA048E1C191AF8D40083B0DC /* SBAPIManager.m */,
-				BA048E1E191AF9A70083B0DC /* Snowball.xcdatamodeld */,
+				BA048E21191AFAD10083B0DC /* Model */,
 				BA048E1A191AF85D0083B0DC /* View */,
 				BA048E19191AF84B0083B0DC /* Controller */,
 				BA048DF9191AF6730083B0DC /* Images.xcassets */,
@@ -165,6 +171,26 @@
 				BA048DF3191AF6730083B0DC /* Main.storyboard */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		BA048E21191AFAD10083B0DC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BA048E29191AFB110083B0DC /* SBClip.h */,
+				BA048E2A191AFB110083B0DC /* SBClip.m */,
+				BA048E28191AFAE10083B0DC /* Generated */,
+				BA048E1E191AF9A70083B0DC /* Snowball.xcdatamodeld */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		BA048E28191AFAE10083B0DC /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				BA048E22191AFAD90083B0DC /* _SBClip.h */,
+				BA048E23191AFAD90083B0DC /* _SBClip.m */,
+			);
+			name = Generated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,6 +326,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA048E2B191AFB110083B0DC /* SBClip.m in Sources */,
+				BA048E26191AFAD90083B0DC /* _SBClip.m in Sources */,
 				BA048DEE191AF6730083B0DC /* main.m in Sources */,
 				BA048E20191AF9A70083B0DC /* Snowball.xcdatamodeld in Sources */,
 				BA048E18191AF83A0083B0DC /* SBReelViewController.m in Sources */,
