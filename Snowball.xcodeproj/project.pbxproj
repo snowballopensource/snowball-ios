@@ -7,18 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA048DE2191AF6730083B0DC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA048DE1191AF6730083B0DC /* Foundation.framework */; };
-		BA048DE4191AF6730083B0DC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA048DE3191AF6730083B0DC /* CoreGraphics.framework */; };
-		BA048DE6191AF6730083B0DC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA048DE5191AF6730083B0DC /* UIKit.framework */; };
 		BA048DEC191AF6730083B0DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA048DEA191AF6730083B0DC /* InfoPlist.strings */; };
 		BA048DEE191AF6730083B0DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048DED191AF6730083B0DC /* main.m */; };
 		BA048DF2191AF6730083B0DC /* SBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048DF1191AF6730083B0DC /* SBAppDelegate.m */; };
 		BA048DF5191AF6730083B0DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA048DF3191AF6730083B0DC /* Main.storyboard */; };
 		BA048DF8191AF6730083B0DC /* SBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048DF7191AF6730083B0DC /* SBViewController.m */; };
 		BA048DFA191AF6730083B0DC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA048DF9191AF6730083B0DC /* Images.xcassets */; };
-		BA048E01191AF6730083B0DC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA048E00191AF6730083B0DC /* XCTest.framework */; };
-		BA048E02191AF6730083B0DC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA048DE1191AF6730083B0DC /* Foundation.framework */; };
-		BA048E03191AF6730083B0DC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA048DE5191AF6730083B0DC /* UIKit.framework */; };
 		BA048E0B191AF6730083B0DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA048E09191AF6730083B0DC /* InfoPlist.strings */; };
 		BA048E0D191AF6730083B0DC /* SnowballTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E0C191AF6730083B0DC /* SnowballTests.m */; };
 /* End PBXBuildFile section */
@@ -35,9 +29,6 @@
 
 /* Begin PBXFileReference section */
 		BA048DDE191AF6730083B0DC /* Snowball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snowball.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA048DE1191AF6730083B0DC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		BA048DE3191AF6730083B0DC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		BA048DE5191AF6730083B0DC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BA048DE9191AF6730083B0DC /* Snowball-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Snowball-Info.plist"; sourceTree = "<group>"; };
 		BA048DEB191AF6730083B0DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BA048DED191AF6730083B0DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -49,7 +40,6 @@
 		BA048DF7191AF6730083B0DC /* SBViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBViewController.m; sourceTree = "<group>"; };
 		BA048DF9191AF6730083B0DC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BA048DFF191AF6730083B0DC /* SnowballTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnowballTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA048E00191AF6730083B0DC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		BA048E08191AF6730083B0DC /* SnowballTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SnowballTests-Info.plist"; sourceTree = "<group>"; };
 		BA048E0A191AF6730083B0DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BA048E0C191AF6730083B0DC /* SnowballTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnowballTests.m; sourceTree = "<group>"; };
@@ -60,9 +50,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA048DE4191AF6730083B0DC /* CoreGraphics.framework in Frameworks */,
-				BA048DE6191AF6730083B0DC /* UIKit.framework in Frameworks */,
-				BA048DE2191AF6730083B0DC /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,9 +57,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA048E01191AF6730083B0DC /* XCTest.framework in Frameworks */,
-				BA048E03191AF6730083B0DC /* UIKit.framework in Frameworks */,
-				BA048E02191AF6730083B0DC /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,10 +85,6 @@
 		BA048DE0191AF6730083B0DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BA048DE1191AF6730083B0DC /* Foundation.framework */,
-				BA048DE3191AF6730083B0DC /* CoreGraphics.framework */,
-				BA048DE5191AF6730083B0DC /* UIKit.framework */,
-				BA048E00191AF6730083B0DC /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -457,6 +437,7 @@
 				BA048E12191AF6730083B0DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BA048E13191AF6730083B0DC /* Build configuration list for PBXNativeTarget "SnowballTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +446,7 @@
 				BA048E15191AF6730083B0DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
