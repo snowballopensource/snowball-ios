@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
+#import "SBClip.h"
 #import "SBReelViewController.h"
 
 @interface SBReelViewController ()
@@ -19,7 +20,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    
+    [SBClip getClipsWithSuccess:^{
+    } failure:^(NSError *error) {
+    }];
 }
 
 @end

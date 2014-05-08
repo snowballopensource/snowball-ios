@@ -6,7 +6,7 @@
 
 extern const struct SBClipAttributes {
 	__unsafe_unretained NSString *remoteID;
-	__unsafe_unretained NSString *video_url;
+	__unsafe_unretained NSString *videoURL;
 } SBClipAttributes;
 
 extern const struct SBClipRelationships {
@@ -42,11 +42,11 @@ extern const struct SBClipFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString* video_url;
+@property (nonatomic, strong) NSString* videoURL;
 
 
 
-//- (BOOL)validateVideo_url:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateVideoURL:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -68,8 +68,8 @@ extern const struct SBClipFetchedProperties {
 
 
 
-- (NSString*)primitiveVideo_url;
-- (void)setPrimitiveVideo_url:(NSString*)value;
+- (NSString*)primitiveVideoURL;
+- (void)setPrimitiveVideoURL:(NSString*)value;
 
 
 

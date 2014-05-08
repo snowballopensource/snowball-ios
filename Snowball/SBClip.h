@@ -10,4 +10,7 @@
 
 @interface SBClip : _SBClip
 
++ (void)getClipsWithSuccess:(void (^)(void))success
+                    failure:(void (^)(NSError *error))failure;
+
 @end

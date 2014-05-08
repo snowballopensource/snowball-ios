@@ -5,7 +5,7 @@
 
 const struct SBClipAttributes SBClipAttributes = {
 	.remoteID = @"remoteID",
-	.video_url = @"video_url",
+	.videoURL = @"videoURL",
 };
 
 const struct SBClipRelationships SBClipRelationships = {
@@ -54,7 +54,7 @@ const struct SBClipFetchedProperties SBClipFetchedProperties = {
 
 
 
-@dynamic video_url;
+@dynamic videoURL;
 
 
 
