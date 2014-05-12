@@ -12,5 +12,7 @@
 
 #import "SBDefines.h"
 
+#import <AVFoundation/AVFoundation.h>
+
 #import <AFNetworking/AFNetworking.h>
 #import <MagicalRecord/CoreData+MagicalRecord.h>

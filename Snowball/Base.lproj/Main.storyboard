@@ -12,11 +12,36 @@
                         <viewControllerLayoutGuide type="top" id="aSe-cf-czb"/>
                         <viewControllerLayoutGuide type="bottom" id="LqN-w4-Luf"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="9WT-BW-3MC">
+                    <view key="view" contentMode="scaleToFill" id="9WT-BW-3MC" customClass="SBPlayerView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pa6-ZK-eac">
+                                <rect key="frame" x="20" y="476" width="35" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Seek">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="seek:" destination="D54-9P-BdS" eventType="touchUpInside" id="eFT-jM-MWE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJz-BC-O1S">
+                                <rect key="frame" x="20" y="514" width="91" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Previous Clip">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="previous:" destination="D54-9P-BdS" eventType="touchUpInside" id="ffG-P9-Bb3"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="playerView" destination="9WT-BW-3MC" id="T3S-Jc-qnp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fe9-26-Sr0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

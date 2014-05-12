@@ -22,6 +22,7 @@
 		BA048E26191AFAD90083B0DC /* _SBClip.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E23191AFAD90083B0DC /* _SBClip.m */; };
 		BA048E2B191AFB110083B0DC /* SBClip.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E2A191AFB110083B0DC /* SBClip.m */; };
 		BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E2D191AFDA50083B0DC /* SBManagedObject.m */; };
+		BA5238A51920B9630088A730 /* SBPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5238A41920B9630088A730 /* SBPlayerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		BA048E2C191AFDA50083B0DC /* SBManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedObject.h; sourceTree = "<group>"; };
 		BA048E2D191AFDA50083B0DC /* SBManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBManagedObject.m; sourceTree = "<group>"; };
 		BA048E2F191AFE9A0083B0DC /* SBDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBDefines.h; sourceTree = "<group>"; };
+		BA5238A31920B9630088A730 /* SBPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBPlayerView.h; sourceTree = "<group>"; };
+		BA5238A41920B9630088A730 /* SBPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBPlayerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +177,8 @@
 			isa = PBXGroup;
 			children = (
 				BA048DF3191AF6730083B0DC /* Main.storyboard */,
+				BA5238A31920B9630088A730 /* SBPlayerView.h */,
+				BA5238A41920B9630088A730 /* SBPlayerView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -335,6 +340,7 @@
 			files = (
 				BA048E2B191AFB110083B0DC /* SBClip.m in Sources */,
 				BA048E26191AFAD90083B0DC /* _SBClip.m in Sources */,
+				BA5238A51920B9630088A730 /* SBPlayerView.m in Sources */,
 				BA048DEE191AF6730083B0DC /* main.m in Sources */,
 				BA048E20191AF9A70083B0DC /* Snowball.xcdatamodeld in Sources */,
 				BA048E18191AF83A0083B0DC /* SBReelViewController.m in Sources */,
