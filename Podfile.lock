@@ -18,16 +18,18 @@ PODS:
   - AFNetworking/UIKit (2.2.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - MagicalRecord (2.2):
-    - MagicalRecord/Core
-  - MagicalRecord/Core (2.2)
+  - MagicalRecord (2.3.0-beta.1)
 
 DEPENDENCIES:
   - AFNetworking
-  - MagicalRecord
+  - MagicalRecord (from `https://github.com/magicalpanda/MagicalRecord.git`)
+
+EXTERNAL SOURCES:
+  MagicalRecord:
+    :git: https://github.com/magicalpanda/MagicalRecord.git
 
 SPEC CHECKSUMS:
   AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
-  MagicalRecord: 95d49d74ef752cd52f6ad87bcb474817fc3978cf
+  MagicalRecord: 1ae96754b1c1bc1cf551e3fdc7ea00d11039e139
 
 COCOAPODS: 0.32.1
