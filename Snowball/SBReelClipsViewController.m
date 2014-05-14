@@ -34,16 +34,21 @@
                           failure:nil];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.playerView.player pause];
+}
+
 #pragma mark - View Actions
 
 - (IBAction)takeVideo:(id)sender {
     [SBVideoPickerController launchCameraInView:self.view
                                          sender:self
-                                     completion:^(NSData *videoData) {
+                                     completion:^(NSData *videoData, NSURL *videoLocalURL) {
                                          SBClip *clip = [SBClip MR_createEntity];
                                          [clip setReel:self.reel];
                                          [clip setVideoToSubmit:videoData];
                                          [clip save];
+                                         [self playLocalVideoImmediately:videoLocalURL];
                                          [clip create];
                                      }];
 }
@@ -65,6 +70,12 @@
     [self.playerView setPlayer:player];
     [player setActionAtItemEnd:AVPlayerActionAtItemEndAdvance];
     [player play];
+}
+
+- (void)playLocalVideoImmediately:(NSURL *)videoLocalURL {
+    [self.playerView.player removeAllItems];
+    AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:videoLocalURL];
+    [self.playerView.player replaceCurrentItemWithPlayerItem:playerItem];
 }
 
 @end

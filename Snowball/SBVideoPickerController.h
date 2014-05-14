@@ -10,6 +10,6 @@
 
 @interface SBVideoPickerController : UIImagePickerController
 
-+ (void)launchCameraInView:(UIView *)view sender:(id)sender completion:(void(^)(NSData *videoData))completion;
++ (void)launchCameraInView:(UIView *)view sender:(id)sender completion:(void(^)(NSData *videoData, NSURL *videoLocalURL))completion;
 
 @end

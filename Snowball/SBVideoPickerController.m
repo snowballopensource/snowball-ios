@@ -10,13 +10,13 @@
 
 @interface SBVideoPickerController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-@property (nonatomic, copy) void(^completionBlock)(NSData *videoData);
+@property (nonatomic, copy) void(^completionBlock)(NSData *videoData, NSURL *videoLocalURL);
 
 @end
 
 @implementation SBVideoPickerController
 
-+ (void)launchCameraInView:(UIView *)view sender:(id)sender completion:(void(^)(NSData *videoData))completion {
++ (void)launchCameraInView:(UIView *)view sender:(id)sender completion:(void(^)(NSData *videoData, NSURL *videoLocalURL))completion {
     SBVideoPickerController *videoPickerController = [SBVideoPickerController new];
     [videoPickerController setCompletionBlock:completion];
     
@@ -49,7 +49,7 @@
     NSURL *videoURL = info[UIImagePickerControllerMediaURL];
     NSData *videoData = [NSData dataWithContentsOfURL:videoURL];
     [picker dismissViewControllerAnimated:YES completion:^{
-        self.completionBlock(videoData);
+        self.completionBlock(videoData, videoURL);
     }];
 }
 
