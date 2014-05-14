@@ -1,5 +1,5 @@
 //
-//  SBReelViewController.m
+//  SBReelClipsViewController.m
 //  Snowball
 //
 //  Created by James Martinez on 5/7/14.
@@ -8,31 +8,36 @@
 
 #import "SBClip.h"
 #import "SBPlayerView.h"
-#import "SBReelViewController.h"
+#import "SBReel.h"
+#import "SBReelClipsViewController.h"
 
-@interface SBReelViewController ()
+@interface SBReelClipsViewController ()
 
-@property (weak, nonatomic) IBOutlet SBPlayerView *playerView;
+@property (nonatomic, weak) IBOutlet SBPlayerView *playerView;
 
 @end
 
-@implementation SBReelViewController
+@implementation SBReelClipsViewController // TODO: make this a managed controller somehow
 
 #pragma mark - UIViewController
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    [SBClip getClipsWithSuccess:^{
-        [self playReel];
-    } failure:^(NSError *error) {
-    }];
+    // TODO: make this paginated
+    [SBClip getRecentClipsForReel:self.reel
+                             page:0
+                          success:^(BOOL canLoadMore) {
+                              [self playReel];
+                          }
+                          failure:nil];
 }
 
 #pragma mark - Video Player
 
 - (void)playReel {
-    NSArray *clips = [SBClip MR_findAll];
+    // TODO: make this managed
+    NSArray *clips = [self.reel.clips allObjects];
     NSMutableArray *playerItems = [NSMutableArray new];
     for (SBClip *clip in clips) {
         if ([clip.videoURL length] > 0) {

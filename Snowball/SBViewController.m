@@ -14,4 +14,8 @@
 
 @implementation SBViewController
 
++ (NSString *)identifier {
+    return NSStringFromClass(self);
+}
+
 @end

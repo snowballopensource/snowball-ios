@@ -9,6 +9,7 @@ const struct SBClipAttributes SBClipAttributes = {
 };
 
 const struct SBClipRelationships SBClipRelationships = {
+	.reel = @"reel",
 };
 
 const struct SBClipFetchedProperties SBClipFetchedProperties = {
@@ -60,6 +61,10 @@ const struct SBClipFetchedProperties SBClipFetchedProperties = {
 
 
 
+
+@dynamic reel;
+
+	
 
 
 

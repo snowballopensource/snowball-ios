@@ -10,7 +10,9 @@
 
 @interface SBClip : _SBClip
 
-+ (void)getClipsWithSuccess:(void (^)(void))success
-                    failure:(void (^)(NSError *error))failure;
++ (void)getRecentClipsForReel:(SBReel *)reel
+                         page:(NSUInteger)page
+                      success:(void (^)(BOOL canLoadMore))success
+                      failure:(void (^)(NSError *error))failure;
 
 @end

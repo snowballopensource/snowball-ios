@@ -10,6 +10,6 @@
 
 @interface SBPlayerView : UIView
 
-@property (strong, nonatomic) AVQueuePlayer *player;
+@property (nonatomic, strong) AVQueuePlayer *player;
 
 @end

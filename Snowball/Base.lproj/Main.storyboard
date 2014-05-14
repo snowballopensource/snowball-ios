@@ -1,13 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="D54-9P-BdS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="I9d-VW-d0B">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Reel View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="N5b-Zz-gLc">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="I9d-VW-d0B" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YGg-m4-YK2">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="qom-V6-RAS" kind="relationship" relationship="rootViewController" id="L8b-xs-JmI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y3r-NW-BlK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-976" y="22"/>
+        </scene>
+        <!--Reels View Controller-->
+        <scene sceneID="U7B-rR-fw0">
+            <objects>
+                <viewController id="qom-V6-RAS" customClass="SBReelsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JfD-Pq-5eM"/>
+                        <viewControllerLayoutGuide type="bottom" id="CZP-dk-0Bt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1bq-SN-yi1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Xh3-3G-cJd">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="qom-V6-RAS" id="mpZ-JQ-Ilw"/>
+                                    <outlet property="delegate" destination="qom-V6-RAS" id="4o7-4M-n70"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Rih-po-8ca"/>
+                    <connections>
+                        <outlet property="tableView" destination="Xh3-3G-cJd" id="b3d-Ty-Nzu"/>
+                        <segue destination="D54-9P-BdS" kind="push" identifier="SBReelClipsViewController" id="Gcf-NX-Zug"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MEg-Z4-iZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-455" y="22"/>
+        </scene>
+        <!--Reel Clips View Controller-->
         <scene sceneID="XPT-pZ-9uC">
             <objects>
-                <viewController id="D54-9P-BdS" customClass="SBReelViewController" sceneMemberID="viewController">
+                <viewController id="D54-9P-BdS" customClass="SBReelClipsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aSe-cf-czb"/>
                         <viewControllerLayoutGuide type="bottom" id="LqN-w4-Luf"/>
@@ -24,6 +73,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="vhB-DJ-slf"/>
                     <connections>
                         <outlet property="playerView" destination="XlL-cb-VqF" id="QRj-Ko-jJt"/>
                     </connections>

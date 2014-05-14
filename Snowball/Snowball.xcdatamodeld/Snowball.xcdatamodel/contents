@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C1021" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Clip" representedClassName="SBClip" syncable="YES">
-        <attribute name="remoteID" optional="YES" attributeType="String" syncable="YES">
+        <attribute name="remoteID" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="id"/>
             </userInfo>
@@ -11,11 +11,29 @@
                 <entry key="mappedKeyName" value="video_url"/>
             </userInfo>
         </attribute>
+        <relationship name="reel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reel" inverseName="clips" inverseEntity="Reel" syncable="YES">
+            <userInfo>
+                <entry key="relatedByAttribute" value="remoteID"/>
+            </userInfo>
+        </relationship>
+        <userInfo>
+            <entry key="relatedByAttribute" value="remoteID"/>
+        </userInfo>
+    </entity>
+    <entity name="Reel" representedClassName="SBReel" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remoteID" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="id"/>
+            </userInfo>
+        </attribute>
+        <relationship name="clips" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Clip" inverseName="reel" inverseEntity="Clip" syncable="YES"/>
         <userInfo>
             <entry key="relatedByAttribute" value="remoteID"/>
         </userInfo>
     </entity>
     <elements>
-        <element name="Clip" positionX="-63" positionY="-18" width="128" height="75"/>
+        <element name="Clip" positionX="-63" positionY="-18" width="128" height="88"/>
+        <element name="Reel" positionX="-63" positionY="0" width="128" height="88"/>
     </elements>
 </model>

@@ -15,4 +15,6 @@
 #import <AVFoundation/AVFoundation.h>
 
 #import <AFNetworking/AFNetworking.h>
+#import <BlocksKit/BlocksKit+UIKit.h>
 #import <MagicalRecord/CoreData+MagicalRecord.h>
+#import <ObjectiveSugar/ObjectiveSugar.h>

@@ -10,11 +10,13 @@ extern const struct SBClipAttributes {
 } SBClipAttributes;
 
 extern const struct SBClipRelationships {
+	__unsafe_unretained NSString *reel;
 } SBClipRelationships;
 
 extern const struct SBClipFetchedProperties {
 } SBClipFetchedProperties;
 
+@class SBReel;
 
 
 
@@ -52,6 +54,13 @@ extern const struct SBClipFetchedProperties {
 
 
 
+@property (nonatomic, strong) SBReel *reel;
+
+//- (BOOL)validateReel:(id*)value_ error:(NSError**)error_;
+
+
+
+
 
 @end
 
@@ -72,6 +81,11 @@ extern const struct SBClipFetchedProperties {
 - (void)setPrimitiveVideoURL:(NSString*)value;
 
 
+
+
+
+- (SBReel*)primitiveReel;
+- (void)setPrimitiveReel:(SBReel*)value;
 
 
 @end

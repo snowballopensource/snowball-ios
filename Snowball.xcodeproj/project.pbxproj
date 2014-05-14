@@ -16,13 +16,21 @@
 		BA048DFA191AF6730083B0DC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA048DF9191AF6730083B0DC /* Images.xcassets */; };
 		BA048E0B191AF6730083B0DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA048E09191AF6730083B0DC /* InfoPlist.strings */; };
 		BA048E0D191AF6730083B0DC /* SnowballTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E0C191AF6730083B0DC /* SnowballTests.m */; };
-		BA048E18191AF83A0083B0DC /* SBReelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E17191AF83A0083B0DC /* SBReelViewController.m */; };
+		BA048E18191AF83A0083B0DC /* SBReelClipsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E17191AF83A0083B0DC /* SBReelClipsViewController.m */; };
 		BA048E1D191AF8D40083B0DC /* SBAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E1C191AF8D40083B0DC /* SBAPIManager.m */; };
 		BA048E20191AF9A70083B0DC /* Snowball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA048E1E191AF9A70083B0DC /* Snowball.xcdatamodeld */; };
 		BA048E26191AFAD90083B0DC /* _SBClip.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E23191AFAD90083B0DC /* _SBClip.m */; };
 		BA048E2B191AFB110083B0DC /* SBClip.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E2A191AFB110083B0DC /* SBClip.m */; };
 		BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E2D191AFDA50083B0DC /* SBManagedObject.m */; };
 		BA5238A51920B9630088A730 /* SBPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5238A41920B9630088A730 /* SBPlayerView.m */; };
+		BA936FF01923104800D3CAFB /* SBManagedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FEF1923104800D3CAFB /* SBManagedViewController.m */; };
+		BA936FF3192310B200D3CAFB /* SBManagedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FF2192310B200D3CAFB /* SBManagedTableViewController.m */; };
+		BA936FF7192312DF00D3CAFB /* SBReelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FF6192312DF00D3CAFB /* SBReelsViewController.m */; };
+		BA936FFA192313D700D3CAFB /* SBTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FF9192313D700D3CAFB /* SBTableViewCell.m */; };
+		BA936FFD1923143400D3CAFB /* SBReelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FFC1923143400D3CAFB /* SBReelTableViewCell.m */; };
+		BA9370001923153100D3CAFB /* _SBReel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FFF1923153100D3CAFB /* _SBReel.m */; };
+		BA9370031923153D00D3CAFB /* SBReel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9370021923153D00D3CAFB /* SBReel.m */; };
+		BA937006192317F600D3CAFB /* SBReelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA937005192317F600D3CAFB /* SBReelTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,8 +61,8 @@
 		BA048E08191AF6730083B0DC /* SnowballTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SnowballTests-Info.plist"; sourceTree = "<group>"; };
 		BA048E0A191AF6730083B0DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BA048E0C191AF6730083B0DC /* SnowballTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnowballTests.m; sourceTree = "<group>"; };
-		BA048E16191AF83A0083B0DC /* SBReelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBReelViewController.h; sourceTree = "<group>"; };
-		BA048E17191AF83A0083B0DC /* SBReelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBReelViewController.m; sourceTree = "<group>"; };
+		BA048E16191AF83A0083B0DC /* SBReelClipsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBReelClipsViewController.h; sourceTree = "<group>"; };
+		BA048E17191AF83A0083B0DC /* SBReelClipsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBReelClipsViewController.m; sourceTree = "<group>"; };
 		BA048E1B191AF8D40083B0DC /* SBAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAPIManager.h; sourceTree = "<group>"; };
 		BA048E1C191AF8D40083B0DC /* SBAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAPIManager.m; sourceTree = "<group>"; };
 		BA048E1F191AF9A70083B0DC /* Snowball.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Snowball.xcdatamodel; sourceTree = "<group>"; };
@@ -67,6 +75,21 @@
 		BA048E2F191AFE9A0083B0DC /* SBDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBDefines.h; sourceTree = "<group>"; };
 		BA5238A31920B9630088A730 /* SBPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBPlayerView.h; sourceTree = "<group>"; };
 		BA5238A41920B9630088A730 /* SBPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBPlayerView.m; sourceTree = "<group>"; };
+		BA936FEE1923104800D3CAFB /* SBManagedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedViewController.h; sourceTree = "<group>"; };
+		BA936FEF1923104800D3CAFB /* SBManagedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBManagedViewController.m; sourceTree = "<group>"; };
+		BA936FF1192310B200D3CAFB /* SBManagedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedTableViewController.h; sourceTree = "<group>"; };
+		BA936FF2192310B200D3CAFB /* SBManagedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBManagedTableViewController.m; sourceTree = "<group>"; };
+		BA936FF5192312DF00D3CAFB /* SBReelsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBReelsViewController.h; sourceTree = "<group>"; };
+		BA936FF6192312DF00D3CAFB /* SBReelsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBReelsViewController.m; sourceTree = "<group>"; };
+		BA936FF8192313D700D3CAFB /* SBTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBTableViewCell.h; sourceTree = "<group>"; };
+		BA936FF9192313D700D3CAFB /* SBTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBTableViewCell.m; sourceTree = "<group>"; };
+		BA936FFB1923143400D3CAFB /* SBReelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBReelTableViewCell.h; sourceTree = "<group>"; };
+		BA936FFC1923143400D3CAFB /* SBReelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBReelTableViewCell.m; sourceTree = "<group>"; };
+		BA936FFE1923153100D3CAFB /* _SBReel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SBReel.h; sourceTree = "<group>"; };
+		BA936FFF1923153100D3CAFB /* _SBReel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SBReel.m; sourceTree = "<group>"; };
+		BA9370011923153D00D3CAFB /* SBReel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBReel.h; sourceTree = "<group>"; };
+		BA9370021923153D00D3CAFB /* SBReel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBReel.m; sourceTree = "<group>"; };
+		BA937005192317F600D3CAFB /* SBReelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBReelTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,9 +146,9 @@
 				BA048DF1191AF6730083B0DC /* SBAppDelegate.m */,
 				BA048E1B191AF8D40083B0DC /* SBAPIManager.h */,
 				BA048E1C191AF8D40083B0DC /* SBAPIManager.m */,
-				BA048E21191AFAD10083B0DC /* Model */,
-				BA048E1A191AF85D0083B0DC /* View */,
-				BA048E19191AF84B0083B0DC /* Controller */,
+				BA048E21191AFAD10083B0DC /* Models */,
+				BA048E1A191AF85D0083B0DC /* Views */,
+				BA048E19191AF84B0083B0DC /* Controllers */,
 				BA048DF9191AF6730083B0DC /* Images.xcassets */,
 				BA048DE8191AF6730083B0DC /* Supporting Files */,
 			);
@@ -162,28 +185,32 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BA048E19191AF84B0083B0DC /* Controller */ = {
+		BA048E19191AF84B0083B0DC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				BA048DF6191AF6730083B0DC /* SBViewController.h */,
 				BA048DF7191AF6730083B0DC /* SBViewController.m */,
-				BA048E16191AF83A0083B0DC /* SBReelViewController.h */,
-				BA048E17191AF83A0083B0DC /* SBReelViewController.m */,
+				BA936FF4192312CF00D3CAFB /* Managed */,
+				BA936FF5192312DF00D3CAFB /* SBReelsViewController.h */,
+				BA936FF6192312DF00D3CAFB /* SBReelsViewController.m */,
+				BA048E16191AF83A0083B0DC /* SBReelClipsViewController.h */,
+				BA048E17191AF83A0083B0DC /* SBReelClipsViewController.m */,
 			);
-			name = Controller;
+			name = Controllers;
 			sourceTree = "<group>";
 		};
-		BA048E1A191AF85D0083B0DC /* View */ = {
+		BA048E1A191AF85D0083B0DC /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				BA048DF3191AF6730083B0DC /* Main.storyboard */,
 				BA5238A31920B9630088A730 /* SBPlayerView.h */,
 				BA5238A41920B9630088A730 /* SBPlayerView.m */,
+				BA9370041923173200D3CAFB /* Cells */,
 			);
-			name = View;
+			name = Views;
 			sourceTree = "<group>";
 		};
-		BA048E21191AFAD10083B0DC /* Model */ = {
+		BA048E21191AFAD10083B0DC /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				BA048E1E191AF9A70083B0DC /* Snowball.xcdatamodeld */,
@@ -191,18 +218,45 @@
 				BA048E2D191AFDA50083B0DC /* SBManagedObject.m */,
 				BA048E29191AFB110083B0DC /* SBClip.h */,
 				BA048E2A191AFB110083B0DC /* SBClip.m */,
+				BA9370011923153D00D3CAFB /* SBReel.h */,
+				BA9370021923153D00D3CAFB /* SBReel.m */,
 				BA048E28191AFAE10083B0DC /* Generated */,
 			);
-			name = Model;
+			name = Models;
 			sourceTree = "<group>";
 		};
 		BA048E28191AFAE10083B0DC /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				BA936FFE1923153100D3CAFB /* _SBReel.h */,
+				BA936FFF1923153100D3CAFB /* _SBReel.m */,
 				BA048E22191AFAD90083B0DC /* _SBClip.h */,
 				BA048E23191AFAD90083B0DC /* _SBClip.m */,
 			);
 			name = Generated;
+			sourceTree = "<group>";
+		};
+		BA936FF4192312CF00D3CAFB /* Managed */ = {
+			isa = PBXGroup;
+			children = (
+				BA936FEE1923104800D3CAFB /* SBManagedViewController.h */,
+				BA936FEF1923104800D3CAFB /* SBManagedViewController.m */,
+				BA936FF1192310B200D3CAFB /* SBManagedTableViewController.h */,
+				BA936FF2192310B200D3CAFB /* SBManagedTableViewController.m */,
+			);
+			name = Managed;
+			sourceTree = "<group>";
+		};
+		BA9370041923173200D3CAFB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BA936FF8192313D700D3CAFB /* SBTableViewCell.h */,
+				BA936FF9192313D700D3CAFB /* SBTableViewCell.m */,
+				BA936FFB1923143400D3CAFB /* SBReelTableViewCell.h */,
+				BA936FFC1923143400D3CAFB /* SBReelTableViewCell.m */,
+				BA937005192317F600D3CAFB /* SBReelTableViewCell.xib */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,6 +338,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA937006192317F600D3CAFB /* SBReelTableViewCell.xib in Resources */,
 				BA048DFA191AF6730083B0DC /* Images.xcassets in Resources */,
 				BA048DEC191AF6730083B0DC /* InfoPlist.strings in Resources */,
 				BA048DF5191AF6730083B0DC /* Main.storyboard in Resources */,
@@ -338,16 +393,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA9370001923153100D3CAFB /* _SBReel.m in Sources */,
 				BA048E2B191AFB110083B0DC /* SBClip.m in Sources */,
 				BA048E26191AFAD90083B0DC /* _SBClip.m in Sources */,
+				BA936FF3192310B200D3CAFB /* SBManagedTableViewController.m in Sources */,
+				BA936FFD1923143400D3CAFB /* SBReelTableViewCell.m in Sources */,
 				BA5238A51920B9630088A730 /* SBPlayerView.m in Sources */,
 				BA048DEE191AF6730083B0DC /* main.m in Sources */,
 				BA048E20191AF9A70083B0DC /* Snowball.xcdatamodeld in Sources */,
-				BA048E18191AF83A0083B0DC /* SBReelViewController.m in Sources */,
+				BA048E18191AF83A0083B0DC /* SBReelClipsViewController.m in Sources */,
+				BA9370031923153D00D3CAFB /* SBReel.m in Sources */,
 				BA048DF8191AF6730083B0DC /* SBViewController.m in Sources */,
 				BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */,
 				BA048E1D191AF8D40083B0DC /* SBAPIManager.m in Sources */,
+				BA936FF01923104800D3CAFB /* SBManagedViewController.m in Sources */,
 				BA048DF2191AF6730083B0DC /* SBAppDelegate.m in Sources */,
+				BA936FFA192313D700D3CAFB /* SBTableViewCell.m in Sources */,
+				BA936FF7192312DF00D3CAFB /* SBReelsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

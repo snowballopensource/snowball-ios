@@ -18,11 +18,29 @@ PODS:
   - AFNetworking/UIKit (2.2.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - BlocksKit (2.2.3):
+    - BlocksKit/All
+  - BlocksKit/All (2.2.3):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+    - BlocksKit/MessageUI
+    - BlocksKit/UIKit
+  - BlocksKit/Core (2.2.3)
+  - BlocksKit/DynamicDelegate (2.2.3)
+  - BlocksKit/MessageUI (2.2.3):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - BlocksKit/UIKit (2.2.3):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
   - MagicalRecord (2.3.0-beta.1)
+  - ObjectiveSugar (1.1.0)
 
 DEPENDENCIES:
   - AFNetworking
+  - BlocksKit
   - MagicalRecord (from `https://github.com/magicalpanda/MagicalRecord.git`)
+  - ObjectiveSugar
 
 EXTERNAL SOURCES:
   MagicalRecord:
@@ -30,6 +48,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
+  BlocksKit: d2f8e007646282b4ffc525c15bdf432ad3d11d78
   MagicalRecord: 1ae96754b1c1bc1cf551e3fdc7ea00d11039e139
+  ObjectiveSugar: fed588577bcf9733546aeaa089de444e4bab9a52
 
 COCOAPODS: 0.32.1

@@ -1,5 +1,5 @@
 //
-//  SBReelViewController.h
+//  SBReelClipsViewController.h
 //  Snowball
 //
 //  Created by James Martinez on 5/7/14.
@@ -8,6 +8,10 @@
 
 #import "SBViewController.h"
 
-@interface SBReelViewController : SBViewController
+@class SBReel;
+
+@interface SBReelClipsViewController : SBViewController
+
+@property (strong, nonatomic) SBReel *reel;
 
 @end

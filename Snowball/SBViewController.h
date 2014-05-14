@@ -10,4 +10,6 @@
 
 @interface SBViewController : UIViewController
 
++ (NSString *)identifier;
+
 @end
