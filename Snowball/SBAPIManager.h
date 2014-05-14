@@ -12,4 +12,6 @@
 
 + (instancetype)sharedManager;
 
+- (void)loadAuthToken;
+
 @end

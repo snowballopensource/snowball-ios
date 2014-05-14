@@ -10,7 +10,7 @@
 
 @implementation SBReelTableViewCell
 
-#pragma mark - GLTableViewCell
+#pragma mark - SBTableViewCell
 
 + (CGFloat)height {
     return 100.0f;

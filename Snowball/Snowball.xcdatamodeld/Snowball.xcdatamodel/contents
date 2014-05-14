@@ -32,8 +32,21 @@
             <entry key="relatedByAttribute" value="remoteID"/>
         </userInfo>
     </entity>
+    <entity name="User" representedClassName="SBUser" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remoteID" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <userInfo>
+            <entry key="relatedByAttribute" value="remoteID"/>
+        </userInfo>
+    </entity>
     <elements>
         <element name="Clip" positionX="-63" positionY="-18" width="128" height="88"/>
         <element name="Reel" positionX="-63" positionY="0" width="128" height="88"/>
+        <element name="User" positionX="-54" positionY="18" width="128" height="88"/>
     </elements>
 </model>

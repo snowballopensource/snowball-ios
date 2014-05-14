@@ -7,8 +7,9 @@
 //
 
 #import "SBAPIManager.h"
+#import "SBUser.h"
 
-static NSString * const KBBaseURL = @"http://localhost:5000/api/v1";
+static NSString * const SBBaseURL = @"http://localhost:5000/api/v1";
 
 @implementation SBAPIManager
 
@@ -16,9 +17,16 @@ static NSString * const KBBaseURL = @"http://localhost:5000/api/v1";
     static SBAPIManager* sharedManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedManager = [[SBAPIManager alloc] initWithBaseURL:[NSURL URLWithString:KBBaseURL]];
+        sharedManager = [[SBAPIManager alloc] initWithBaseURL:[NSURL URLWithString:SBBaseURL]];
     });
     return sharedManager;
+}
+
+#pragma mark - Authentication Token
+
+- (void)loadAuthToken {
+    [self.requestSerializer setAuthorizationHeaderFieldWithUsername:[SBUser currentUser].authToken
+                                                           password:@""];
 }
 
 @end

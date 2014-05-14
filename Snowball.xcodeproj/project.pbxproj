@@ -32,6 +32,14 @@
 		BA9370031923153D00D3CAFB /* SBReel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9370021923153D00D3CAFB /* SBReel.m */; };
 		BA937006192317F600D3CAFB /* SBReelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA937005192317F600D3CAFB /* SBReelTableViewCell.xib */; };
 		BA93700C1923253D00D3CAFB /* SBVideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA93700B1923253D00D3CAFB /* SBVideoPickerController.m */; };
+		BAC9FB3319241296008742EE /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAC9FB3219241296008742EE /* Authentication.storyboard */; };
+		BAC9FB3619241388008742EE /* SBAuthenticationNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB3519241388008742EE /* SBAuthenticationNavigationController.m */; };
+		BAC9FB3A192413C6008742EE /* SBAuthenticationMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB39192413C6008742EE /* SBAuthenticationMenuViewController.m */; };
+		BAC9FB3D1924152D008742EE /* SBSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB3C1924152D008742EE /* SBSignUpViewController.m */; };
+		BAC9FB4019241536008742EE /* SBSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB3F19241536008742EE /* SBSignInViewController.m */; };
+		BAC9FB4319241774008742EE /* SBSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB4219241774008742EE /* SBSessionManager.m */; };
+		BAC9FB471924183E008742EE /* _SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB451924183E008742EE /* _SBUser.m */; };
+		BAC9FB4B19241858008742EE /* SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB4A19241858008742EE /* SBUser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +101,21 @@
 		BA937005192317F600D3CAFB /* SBReelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBReelTableViewCell.xib; sourceTree = "<group>"; };
 		BA93700A1923253D00D3CAFB /* SBVideoPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBVideoPickerController.h; sourceTree = "<group>"; };
 		BA93700B1923253D00D3CAFB /* SBVideoPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBVideoPickerController.m; sourceTree = "<group>"; };
+		BAC9FB3219241296008742EE /* Authentication.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
+		BAC9FB3419241388008742EE /* SBAuthenticationNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAuthenticationNavigationController.h; sourceTree = "<group>"; };
+		BAC9FB3519241388008742EE /* SBAuthenticationNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAuthenticationNavigationController.m; sourceTree = "<group>"; };
+		BAC9FB38192413C6008742EE /* SBAuthenticationMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAuthenticationMenuViewController.h; sourceTree = "<group>"; };
+		BAC9FB39192413C6008742EE /* SBAuthenticationMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAuthenticationMenuViewController.m; sourceTree = "<group>"; };
+		BAC9FB3B1924152D008742EE /* SBSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSignUpViewController.h; sourceTree = "<group>"; };
+		BAC9FB3C1924152D008742EE /* SBSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSignUpViewController.m; sourceTree = "<group>"; };
+		BAC9FB3E19241536008742EE /* SBSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSignInViewController.h; sourceTree = "<group>"; };
+		BAC9FB3F19241536008742EE /* SBSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSignInViewController.m; sourceTree = "<group>"; };
+		BAC9FB4119241774008742EE /* SBSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSessionManager.h; sourceTree = "<group>"; };
+		BAC9FB4219241774008742EE /* SBSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSessionManager.m; sourceTree = "<group>"; };
+		BAC9FB441924183E008742EE /* _SBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SBUser.h; sourceTree = "<group>"; };
+		BAC9FB451924183E008742EE /* _SBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SBUser.m; sourceTree = "<group>"; };
+		BAC9FB4919241858008742EE /* SBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUser.h; sourceTree = "<group>"; };
+		BAC9FB4A19241858008742EE /* SBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +172,8 @@
 				BA048DF1191AF6730083B0DC /* SBAppDelegate.m */,
 				BA048E1B191AF8D40083B0DC /* SBAPIManager.h */,
 				BA048E1C191AF8D40083B0DC /* SBAPIManager.m */,
+				BAC9FB4119241774008742EE /* SBSessionManager.h */,
+				BAC9FB4219241774008742EE /* SBSessionManager.m */,
 				BA048E21191AFAD10083B0DC /* Models */,
 				BA048E1A191AF85D0083B0DC /* Views */,
 				BA048E19191AF84B0083B0DC /* Controllers */,
@@ -200,6 +225,7 @@
 				BA048E17191AF83A0083B0DC /* SBReelClipsViewController.m */,
 				BA93700A1923253D00D3CAFB /* SBVideoPickerController.h */,
 				BA93700B1923253D00D3CAFB /* SBVideoPickerController.m */,
+				BAC9FB371924138B008742EE /* Authentication */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -208,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				BA048DF3191AF6730083B0DC /* Main.storyboard */,
+				BAC9FB3219241296008742EE /* Authentication.storyboard */,
 				BA5238A31920B9630088A730 /* SBPlayerView.h */,
 				BA5238A41920B9630088A730 /* SBPlayerView.m */,
 				BA9370041923173200D3CAFB /* Cells */,
@@ -225,6 +252,8 @@
 				BA048E2A191AFB110083B0DC /* SBClip.m */,
 				BA9370011923153D00D3CAFB /* SBReel.h */,
 				BA9370021923153D00D3CAFB /* SBReel.m */,
+				BAC9FB4919241858008742EE /* SBUser.h */,
+				BAC9FB4A19241858008742EE /* SBUser.m */,
 				BA048E28191AFAE10083B0DC /* Generated */,
 			);
 			name = Models;
@@ -233,6 +262,8 @@
 		BA048E28191AFAE10083B0DC /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				BAC9FB441924183E008742EE /* _SBUser.h */,
+				BAC9FB451924183E008742EE /* _SBUser.m */,
 				BA936FFE1923153100D3CAFB /* _SBReel.h */,
 				BA936FFF1923153100D3CAFB /* _SBReel.m */,
 				BA048E22191AFAD90083B0DC /* _SBClip.h */,
@@ -262,6 +293,21 @@
 				BA937005192317F600D3CAFB /* SBReelTableViewCell.xib */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		BAC9FB371924138B008742EE /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				BAC9FB3419241388008742EE /* SBAuthenticationNavigationController.h */,
+				BAC9FB3519241388008742EE /* SBAuthenticationNavigationController.m */,
+				BAC9FB38192413C6008742EE /* SBAuthenticationMenuViewController.h */,
+				BAC9FB39192413C6008742EE /* SBAuthenticationMenuViewController.m */,
+				BAC9FB3B1924152D008742EE /* SBSignUpViewController.h */,
+				BAC9FB3C1924152D008742EE /* SBSignUpViewController.m */,
+				BAC9FB3E19241536008742EE /* SBSignInViewController.h */,
+				BAC9FB3F19241536008742EE /* SBSignInViewController.m */,
+			);
+			name = Authentication;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,6 +393,7 @@
 				BA048DFA191AF6730083B0DC /* Images.xcassets in Resources */,
 				BA048DEC191AF6730083B0DC /* InfoPlist.strings in Resources */,
 				BA048DF5191AF6730083B0DC /* Main.storyboard in Resources */,
+				BAC9FB3319241296008742EE /* Authentication.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,20 +445,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAC9FB3D1924152D008742EE /* SBSignUpViewController.m in Sources */,
 				BA9370001923153100D3CAFB /* _SBReel.m in Sources */,
 				BA048E2B191AFB110083B0DC /* SBClip.m in Sources */,
 				BA048E26191AFAD90083B0DC /* _SBClip.m in Sources */,
 				BA936FF3192310B200D3CAFB /* SBManagedTableViewController.m in Sources */,
 				BA936FFD1923143400D3CAFB /* SBReelTableViewCell.m in Sources */,
 				BA5238A51920B9630088A730 /* SBPlayerView.m in Sources */,
+				BAC9FB471924183E008742EE /* _SBUser.m in Sources */,
 				BA048DEE191AF6730083B0DC /* main.m in Sources */,
+				BAC9FB4B19241858008742EE /* SBUser.m in Sources */,
 				BA048E20191AF9A70083B0DC /* Snowball.xcdatamodeld in Sources */,
+				BAC9FB4319241774008742EE /* SBSessionManager.m in Sources */,
 				BA048E18191AF83A0083B0DC /* SBReelClipsViewController.m in Sources */,
 				BA9370031923153D00D3CAFB /* SBReel.m in Sources */,
 				BA048DF8191AF6730083B0DC /* SBViewController.m in Sources */,
 				BA93700C1923253D00D3CAFB /* SBVideoPickerController.m in Sources */,
+				BAC9FB3A192413C6008742EE /* SBAuthenticationMenuViewController.m in Sources */,
 				BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */,
+				BAC9FB4019241536008742EE /* SBSignInViewController.m in Sources */,
 				BA048E1D191AF8D40083B0DC /* SBAPIManager.m in Sources */,
+				BAC9FB3619241388008742EE /* SBAuthenticationNavigationController.m in Sources */,
 				BA936FF01923104800D3CAFB /* SBManagedViewController.m in Sources */,
 				BA048DF2191AF6730083B0DC /* SBAppDelegate.m in Sources */,
 				BA936FFA192313D700D3CAFB /* SBTableViewCell.m in Sources */,
