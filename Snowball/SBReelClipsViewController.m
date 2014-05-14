@@ -10,6 +10,7 @@
 #import "SBPlayerView.h"
 #import "SBReel.h"
 #import "SBReelClipsViewController.h"
+#import "SBVideoPickerController.h"
 
 @interface SBReelClipsViewController ()
 
@@ -31,6 +32,20 @@
                               [self playReel];
                           }
                           failure:nil];
+}
+
+#pragma mark - View Actions
+
+- (IBAction)takeVideo:(id)sender {
+    [SBVideoPickerController launchCameraInView:self.view
+                                         sender:self
+                                     completion:^(NSData *videoData) {
+                                         SBClip *clip = [SBClip MR_createEntity];
+                                         [clip setReel:self.reel];
+                                         [clip setVideoToSubmit:videoData];
+                                         [clip save];
+                                         [clip create];
+                                     }];
 }
 
 #pragma mark - Video Player

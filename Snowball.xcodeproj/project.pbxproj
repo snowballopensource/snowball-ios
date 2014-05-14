@@ -31,6 +31,7 @@
 		BA9370001923153100D3CAFB /* _SBReel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FFF1923153100D3CAFB /* _SBReel.m */; };
 		BA9370031923153D00D3CAFB /* SBReel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9370021923153D00D3CAFB /* SBReel.m */; };
 		BA937006192317F600D3CAFB /* SBReelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA937005192317F600D3CAFB /* SBReelTableViewCell.xib */; };
+		BA93700C1923253D00D3CAFB /* SBVideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA93700B1923253D00D3CAFB /* SBVideoPickerController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,8 @@
 		BA9370011923153D00D3CAFB /* SBReel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBReel.h; sourceTree = "<group>"; };
 		BA9370021923153D00D3CAFB /* SBReel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBReel.m; sourceTree = "<group>"; };
 		BA937005192317F600D3CAFB /* SBReelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBReelTableViewCell.xib; sourceTree = "<group>"; };
+		BA93700A1923253D00D3CAFB /* SBVideoPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBVideoPickerController.h; sourceTree = "<group>"; };
+		BA93700B1923253D00D3CAFB /* SBVideoPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBVideoPickerController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +198,8 @@
 				BA936FF6192312DF00D3CAFB /* SBReelsViewController.m */,
 				BA048E16191AF83A0083B0DC /* SBReelClipsViewController.h */,
 				BA048E17191AF83A0083B0DC /* SBReelClipsViewController.m */,
+				BA93700A1923253D00D3CAFB /* SBVideoPickerController.h */,
+				BA93700B1923253D00D3CAFB /* SBVideoPickerController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -404,6 +409,7 @@
 				BA048E18191AF83A0083B0DC /* SBReelClipsViewController.m in Sources */,
 				BA9370031923153D00D3CAFB /* SBReel.m in Sources */,
 				BA048DF8191AF6730083B0DC /* SBViewController.m in Sources */,
+				BA93700C1923253D00D3CAFB /* SBVideoPickerController.m in Sources */,
 				BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */,
 				BA048E1D191AF8D40083B0DC /* SBAPIManager.m in Sources */,
 				BA936FF01923104800D3CAFB /* SBManagedViewController.m in Sources */,

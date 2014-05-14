@@ -12,6 +12,8 @@
 
 @implementation SBClip
 
+@synthesize videoToSubmit;
+
 #pragma mark - Remote
 
 + (void)getRecentClipsForReel:(SBReel *)reel
@@ -30,6 +32,33 @@
                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                   if (failure) { failure(error); };
                               }];
+}
+
+#pragma mark - SBManagedObject
+
+- (void)createWithSuccess:(void(^)(void))success failure:(void(^)(NSError *error))failure {
+    NSString *path = [NSString stringWithFormat:@"reels/%@/clips", self.reel.remoteID];
+    [[SBAPIManager sharedManager] POST:path
+                            parameters:nil
+             constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                 [formData appendPartWithFileData:self.videoToSubmit
+                                             name:@"video"
+                                         fileName:@"video.mp4"
+                                         mimeType:@"video/mp4"];
+             } success:^(NSURLSessionDataTask *task, id responseObject) {
+                 NSDictionary *_clip = responseObject[@"clip"];
+                 [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                     SBClip *clip = [self MR_inContext:localContext];
+                     [clip MR_importValuesForKeysWithObject:_clip];
+                 }];
+                 if (success) { success(); }
+             } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                 [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                     SBClip *clip = [self MR_inContext:localContext];
+                     [clip MR_deleteEntity];
+                 }];
+                 if (failure) { failure(error); };
+             }];
 }
 
 @end
