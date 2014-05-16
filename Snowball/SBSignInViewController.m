@@ -19,6 +19,13 @@
 
 @implementation SBSignInViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    [self.emailTextField setText:@"jamescmartinez@gmail.com"];
+    [self.passwordTextField setText:@"something"];
+}
+
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

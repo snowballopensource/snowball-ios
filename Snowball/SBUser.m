@@ -53,6 +53,10 @@ static SBUser *_currentUser = nil;
     [[SBAPIManager sharedManager] loadAuthToken];
 }
 
++ (void)removeCurrentUser {
+    [self setCurrentUser:nil];
+}
+
 #pragma mark - Authentication
 
 + (void)signInWithEmail:(NSString *)email

@@ -12,6 +12,7 @@
 
 + (void)setupSession;
 + (void)requestUserAuthenticationIfNecessary:(BOOL)animated;
++ (void)signOut;
 
 + (NSDate *)sessionDate;
 

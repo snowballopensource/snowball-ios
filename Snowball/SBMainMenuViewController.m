@@ -7,12 +7,19 @@
 //
 
 #import "SBMainMenuViewController.h"
+#import "SBSessionManager.h"
 
 @interface SBMainMenuViewController () <UITableViewDelegate>
 
 @end
 
 @implementation SBMainMenuViewController
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 1) {
+        [SBSessionManager signOut];
+    }
+}
 
 #pragma mark - ECSlidingViewController
 

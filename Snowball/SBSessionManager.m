@@ -29,6 +29,11 @@
     }
 }
 
++ (void)signOut {
+    [SBUser removeCurrentUser];
+    [self requestUserAuthenticationIfNecessary:YES];
+}
+
 #pragma mark - Session Date
 
 + (NSDate *)sessionDate {

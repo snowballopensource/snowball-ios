@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *authToken;
 
 + (SBUser *)currentUser;
++ (void)removeCurrentUser;
 
 + (void)signInWithEmail:(NSString *)email
                password:(NSString *)password
