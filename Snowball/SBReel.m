@@ -13,7 +13,9 @@
 @implementation SBReel
 
 - (NSArray *)recentClipPosterURLs {
-    NSArray *clips = [SBClip MR_findAllSortedBy:@"createdAt" ascending:YES];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"reel == %@", self];
+    NSFetchRequest *fetchRequest = [SBClip MR_requestAllSortedBy:@"createdAt" ascending:NO withPredicate:predicate];
+    NSArray *clips = [SBClip MR_executeFetchRequest:fetchRequest];
     NSArray *lastClips;
     if ([clips count] > 5) {
         NSRange range = NSMakeRange([clips count]-5, 5);
