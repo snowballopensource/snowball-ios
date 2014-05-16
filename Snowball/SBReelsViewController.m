@@ -29,9 +29,12 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    SBReelClipsViewController *reelClipsViewController = [segue destinationViewController];
-    SBReel *reel = [self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForSelectedRow]];
-    [reelClipsViewController setReel:reel];
+    UIViewController *destinationViewController = [segue destinationViewController];
+    if ([destinationViewController isKindOfClass:[SBReelClipsViewController class]]) {
+        SBReelClipsViewController *reelClipsViewController = [segue destinationViewController];
+        SBReel *reel = [self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForSelectedRow]];
+        [reelClipsViewController setReel:reel];
+    }
 }
 
 #pragma mark - UITableViewDataSource

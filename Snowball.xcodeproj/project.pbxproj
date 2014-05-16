@@ -23,6 +23,7 @@
 		BA048E2B191AFB110083B0DC /* SBClip.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E2A191AFB110083B0DC /* SBClip.m */; };
 		BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E2D191AFDA50083B0DC /* SBManagedObject.m */; };
 		BA5238A51920B9630088A730 /* SBPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5238A41920B9630088A730 /* SBPlayerView.m */; };
+		BA5CD67F192689430087D3A2 /* SBMainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD67E192689430087D3A2 /* SBMainMenuViewController.m */; };
 		BA936FF01923104800D3CAFB /* SBManagedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FEF1923104800D3CAFB /* SBManagedViewController.m */; };
 		BA936FF3192310B200D3CAFB /* SBManagedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FF2192310B200D3CAFB /* SBManagedTableViewController.m */; };
 		BA936FF7192312DF00D3CAFB /* SBReelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FF6192312DF00D3CAFB /* SBReelsViewController.m */; };
@@ -84,6 +85,8 @@
 		BA048E2F191AFE9A0083B0DC /* SBDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBDefines.h; sourceTree = "<group>"; };
 		BA5238A31920B9630088A730 /* SBPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBPlayerView.h; sourceTree = "<group>"; };
 		BA5238A41920B9630088A730 /* SBPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBPlayerView.m; sourceTree = "<group>"; };
+		BA5CD67D192689430087D3A2 /* SBMainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBMainMenuViewController.h; sourceTree = "<group>"; };
+		BA5CD67E192689430087D3A2 /* SBMainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBMainMenuViewController.m; sourceTree = "<group>"; };
 		BA936FEE1923104800D3CAFB /* SBManagedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedViewController.h; sourceTree = "<group>"; };
 		BA936FEF1923104800D3CAFB /* SBManagedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBManagedViewController.m; sourceTree = "<group>"; };
 		BA936FF1192310B200D3CAFB /* SBManagedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedTableViewController.h; sourceTree = "<group>"; };
@@ -218,6 +221,7 @@
 			children = (
 				BA048DF6191AF6730083B0DC /* SBViewController.h */,
 				BA048DF7191AF6730083B0DC /* SBViewController.m */,
+				BA5CD68519268B6C0087D3A2 /* Main Menu */,
 				BA936FF4192312CF00D3CAFB /* Managed */,
 				BA936FF5192312DF00D3CAFB /* SBReelsViewController.h */,
 				BA936FF6192312DF00D3CAFB /* SBReelsViewController.m */,
@@ -270,6 +274,15 @@
 				BA048E23191AFAD90083B0DC /* _SBClip.m */,
 			);
 			name = Generated;
+			sourceTree = "<group>";
+		};
+		BA5CD68519268B6C0087D3A2 /* Main Menu */ = {
+			isa = PBXGroup;
+			children = (
+				BA5CD67D192689430087D3A2 /* SBMainMenuViewController.h */,
+				BA5CD67E192689430087D3A2 /* SBMainMenuViewController.m */,
+			);
+			name = "Main Menu";
 			sourceTree = "<group>";
 		};
 		BA936FF4192312CF00D3CAFB /* Managed */ = {
@@ -462,6 +475,7 @@
 				BA048DF8191AF6730083B0DC /* SBViewController.m in Sources */,
 				BA93700C1923253D00D3CAFB /* SBVideoPickerController.m in Sources */,
 				BAC9FB3A192413C6008742EE /* SBAuthenticationMenuViewController.m in Sources */,
+				BA5CD67F192689430087D3A2 /* SBMainMenuViewController.m in Sources */,
 				BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */,
 				BAC9FB4019241536008742EE /* SBSignInViewController.m in Sources */,
 				BA048E1D191AF8D40083B0DC /* SBAPIManager.m in Sources */,
