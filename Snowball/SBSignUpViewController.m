@@ -22,10 +22,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.usernameTextField setText:@"something"];
-    [self.emailTextField setText:@"jamescmartinez@gmail.com"];
+#if DEBUG
+    [self.usernameTextField setText:@"snowballdev"];
+    [self.emailTextField setText:@"blackhole@snowball.is"];
     [self.passwordTextField setText:@"something"];
+#endif
 }
 
 #pragma mark - UITextFieldDelegate

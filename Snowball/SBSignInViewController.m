@@ -21,9 +21,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [self.emailTextField setText:@"jamescmartinez@gmail.com"];
+#if DEBUG
+    [self.emailTextField setText:@"blackhole@snowball.is"];
     [self.passwordTextField setText:@"something"];
+#endif
 }
 
 #pragma mark - UITextFieldDelegate
