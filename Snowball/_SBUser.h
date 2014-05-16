@@ -11,11 +11,13 @@ extern const struct SBUserAttributes {
 } SBUserAttributes;
 
 extern const struct SBUserRelationships {
+	__unsafe_unretained NSString *clips;
 } SBUserRelationships;
 
 extern const struct SBUserFetchedProperties {
 } SBUserFetchedProperties;
 
+@class SBClip;
 
 
 
@@ -64,10 +66,22 @@ extern const struct SBUserFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSSet *clips;
+
+- (NSMutableSet*)clipsSet;
+
+
+
+
 
 @end
 
 @interface _SBUser (CoreDataGeneratedAccessors)
+
+- (void)addClips:(NSSet*)value_;
+- (void)removeClips:(NSSet*)value_;
+- (void)addClipsObject:(SBClip*)value_;
+- (void)removeClipsObject:(SBClip*)value_;
 
 @end
 
@@ -90,6 +104,11 @@ extern const struct SBUserFetchedProperties {
 - (void)setPrimitiveUsername:(NSString*)value;
 
 
+
+
+
+- (NSMutableSet*)primitiveClips;
+- (void)setPrimitiveClips:(NSMutableSet*)value;
 
 
 @end

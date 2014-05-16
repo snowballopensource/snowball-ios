@@ -5,18 +5,24 @@
 #import "SBManagedObject.h"
 
 extern const struct SBClipAttributes {
+	__unsafe_unretained NSString *createdAt;
+	__unsafe_unretained NSString *posterURL;
 	__unsafe_unretained NSString *remoteID;
 	__unsafe_unretained NSString *videoURL;
 } SBClipAttributes;
 
 extern const struct SBClipRelationships {
 	__unsafe_unretained NSString *reel;
+	__unsafe_unretained NSString *user;
 } SBClipRelationships;
 
 extern const struct SBClipFetchedProperties {
 } SBClipFetchedProperties;
 
 @class SBReel;
+@class SBUser;
+
+
 
 
 
@@ -29,6 +35,30 @@ extern const struct SBClipFetchedProperties {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (SBClipID*)objectID;
+
+
+
+
+
+@property (nonatomic, strong) NSNumber* createdAt;
+
+
+
+@property int32_t createdAtValue;
+- (int32_t)createdAtValue;
+- (void)setCreatedAtValue:(int32_t)value_;
+
+//- (BOOL)validateCreatedAt:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSString* posterURL;
+
+
+
+//- (BOOL)validatePosterURL:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -61,6 +91,13 @@ extern const struct SBClipFetchedProperties {
 
 
 
+@property (nonatomic, strong) SBUser *user;
+
+//- (BOOL)validateUser:(id*)value_ error:(NSError**)error_;
+
+
+
+
 
 @end
 
@@ -69,6 +106,21 @@ extern const struct SBClipFetchedProperties {
 @end
 
 @interface _SBClip (CoreDataGeneratedPrimitiveAccessors)
+
+
+- (NSNumber*)primitiveCreatedAt;
+- (void)setPrimitiveCreatedAt:(NSNumber*)value;
+
+- (int32_t)primitiveCreatedAtValue;
+- (void)setPrimitiveCreatedAtValue:(int32_t)value_;
+
+
+
+
+- (NSString*)primitivePosterURL;
+- (void)setPrimitivePosterURL:(NSString*)value;
+
+
 
 
 - (NSString*)primitiveRemoteID;
@@ -86,6 +138,11 @@ extern const struct SBClipFetchedProperties {
 
 - (SBReel*)primitiveReel;
 - (void)setPrimitiveReel:(SBReel*)value;
+
+
+
+- (SBUser*)primitiveUser;
+- (void)setPrimitiveUser:(SBUser*)value;
 
 
 @end

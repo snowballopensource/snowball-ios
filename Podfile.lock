@@ -37,6 +37,9 @@ PODS:
   - MagicalRecord (2.3.0-beta.1)
   - MBProgressHUD (0.8)
   - ObjectiveSugar (1.1.0)
+  - SDWebImage (3.6):
+    - SDWebImage/Core
+  - SDWebImage/Core (3.6)
 
 DEPENDENCIES:
   - AFNetworking
@@ -45,6 +48,7 @@ DEPENDENCIES:
   - MagicalRecord (from `https://github.com/magicalpanda/MagicalRecord.git`)
   - MBProgressHUD
   - ObjectiveSugar
+  - SDWebImage
 
 EXTERNAL SOURCES:
   MagicalRecord:
@@ -57,5 +61,6 @@ SPEC CHECKSUMS:
   MagicalRecord: 1ae96754b1c1bc1cf551e3fdc7ea00d11039e139
   MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
   ObjectiveSugar: fed588577bcf9733546aeaa089de444e4bab9a52
+  SDWebImage: 7eb273e54ca8a2e506ad9bd5e80c35b2a4d7c95e
 
 COCOAPODS: 0.32.1

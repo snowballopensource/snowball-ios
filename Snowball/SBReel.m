@@ -7,9 +7,27 @@
 //
 
 #import "SBAPIManager.h"
+#import "SBClip.h"
 #import "SBReel.h"
 
 @implementation SBReel
+
+- (NSArray *)recentClipPosterURLs {
+    NSArray *clips = [SBClip MR_findAllSortedBy:@"createdAt" ascending:YES];
+    NSArray *lastClips;
+    if ([clips count] > 5) {
+        NSRange range = NSMakeRange([clips count]-5, 5);
+        lastClips = [clips subarrayWithRange:range];
+    } else {
+        lastClips = clips;
+    }
+    NSMutableArray *recentClipPosterURLs = [@[] mutableCopy];
+    [lastClips each:^(id object) {
+        SBClip *clip = (SBClip *)object;
+        [recentClipPosterURLs addObject:clip.posterURL];
+    }];
+    return [recentClipPosterURLs copy];
+}
 
 #pragma mark - Remote
 

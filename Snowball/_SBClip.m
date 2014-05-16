@@ -4,12 +4,15 @@
 #import "_SBClip.h"
 
 const struct SBClipAttributes SBClipAttributes = {
+	.createdAt = @"createdAt",
+	.posterURL = @"posterURL",
 	.remoteID = @"remoteID",
 	.videoURL = @"videoURL",
 };
 
 const struct SBClipRelationships SBClipRelationships = {
 	.reel = @"reel",
+	.user = @"user",
 };
 
 const struct SBClipFetchedProperties SBClipFetchedProperties = {
@@ -41,9 +44,47 @@ const struct SBClipFetchedProperties SBClipFetchedProperties = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"createdAtValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"createdAt"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 
 	return keyPaths;
 }
+
+
+
+
+@dynamic createdAt;
+
+
+
+- (int32_t)createdAtValue {
+	NSNumber *result = [self createdAt];
+	return [result intValue];
+}
+
+- (void)setCreatedAtValue:(int32_t)value_ {
+	[self setCreatedAt:[NSNumber numberWithInt:value_]];
+}
+
+- (int32_t)primitiveCreatedAtValue {
+	NSNumber *result = [self primitiveCreatedAt];
+	return [result intValue];
+}
+
+- (void)setPrimitiveCreatedAtValue:(int32_t)value_ {
+	[self setPrimitiveCreatedAt:[NSNumber numberWithInt:value_]];
+}
+
+
+
+
+
+@dynamic posterURL;
+
+
 
 
 
@@ -63,6 +104,10 @@ const struct SBClipFetchedProperties SBClipFetchedProperties = {
 
 
 @dynamic reel;
+
+	
+
+@dynamic user;
 
 	
 

@@ -49,6 +49,7 @@
 - (void)configureCell:(SBReelTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     SBReel *reel = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [cell.nameLabel setText:[reel.name uppercaseString]];
+    [cell.posterImageView setImageWithURL:[NSURL URLWithString:[[reel recentClipPosterURLs] firstObject]]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

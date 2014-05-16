@@ -11,5 +11,6 @@
 @interface SBReelTableViewCell : SBTableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *posterImageView;
 
 @end

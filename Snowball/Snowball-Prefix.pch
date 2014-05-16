@@ -21,3 +21,4 @@
 #import <MagicalRecord/CoreData+MagicalRecord.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <ObjectiveSugar/ObjectiveSugar.h>
+#import <SDWebImage/UIImageView+WebCache.h>
