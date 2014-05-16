@@ -11,7 +11,6 @@
 @interface SBTableViewCell : UITableViewCell
 
 + (NSString *)identifier;
-+ (CGFloat)height;
 
 + (void)registerNibToTableView:(UITableView *)tableView;
 

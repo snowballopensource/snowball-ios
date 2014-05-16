@@ -10,10 +10,4 @@
 
 @implementation SBReelTableViewCell
 
-#pragma mark - SBTableViewCell
-
-+ (CGFloat)height {
-    return 100.0f;
-}
-
 @end

@@ -52,10 +52,6 @@
     [cell.posterImageView setImageWithURL:[NSURL URLWithString:[[reel recentClipPosterURLs] firstObject]]];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [SBReelTableViewCell height];
-}
-
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -26,6 +26,7 @@
 		BA5CD67F192689430087D3A2 /* SBMainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD67E192689430087D3A2 /* SBMainMenuViewController.m */; };
 		BA5CD68819269A530087D3A2 /* SBJSONResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD68719269A530087D3A2 /* SBJSONResponseSerializer.m */; };
 		BA5CD68B19269B170087D3A2 /* NSError+Snowball.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD68A19269B170087D3A2 /* NSError+Snowball.m */; };
+		BA5CD6921926CEDA0087D3A2 /* SBFadeOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD6911926CEDA0087D3A2 /* SBFadeOverlayView.m */; };
 		BA936FF01923104800D3CAFB /* SBManagedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FEF1923104800D3CAFB /* SBManagedViewController.m */; };
 		BA936FF3192310B200D3CAFB /* SBManagedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FF2192310B200D3CAFB /* SBManagedTableViewController.m */; };
 		BA936FF7192312DF00D3CAFB /* SBReelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FF6192312DF00D3CAFB /* SBReelsViewController.m */; };
@@ -93,6 +94,8 @@
 		BA5CD68719269A530087D3A2 /* SBJSONResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSONResponseSerializer.m; sourceTree = "<group>"; };
 		BA5CD68919269B170087D3A2 /* NSError+Snowball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Snowball.h"; sourceTree = "<group>"; };
 		BA5CD68A19269B170087D3A2 /* NSError+Snowball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Snowball.m"; sourceTree = "<group>"; };
+		BA5CD6901926CEDA0087D3A2 /* SBFadeOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFadeOverlayView.h; sourceTree = "<group>"; };
+		BA5CD6911926CEDA0087D3A2 /* SBFadeOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFadeOverlayView.m; sourceTree = "<group>"; };
 		BA936FEE1923104800D3CAFB /* SBManagedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedViewController.h; sourceTree = "<group>"; };
 		BA936FEF1923104800D3CAFB /* SBManagedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBManagedViewController.m; sourceTree = "<group>"; };
 		BA936FF1192310B200D3CAFB /* SBManagedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedTableViewController.h; sourceTree = "<group>"; };
@@ -247,6 +250,8 @@
 				BAC9FB3219241296008742EE /* Authentication.storyboard */,
 				BA5238A31920B9630088A730 /* SBPlayerView.h */,
 				BA5238A41920B9630088A730 /* SBPlayerView.m */,
+				BA5CD6901926CEDA0087D3A2 /* SBFadeOverlayView.h */,
+				BA5CD6911926CEDA0087D3A2 /* SBFadeOverlayView.m */,
 				BA9370041923173200D3CAFB /* Cells */,
 			);
 			name = Views;
@@ -501,6 +506,7 @@
 				BA9370031923153D00D3CAFB /* SBReel.m in Sources */,
 				BA048DF8191AF6730083B0DC /* SBViewController.m in Sources */,
 				BA93700C1923253D00D3CAFB /* SBVideoPickerController.m in Sources */,
+				BA5CD6921926CEDA0087D3A2 /* SBFadeOverlayView.m in Sources */,
 				BAC9FB3A192413C6008742EE /* SBAuthenticationMenuViewController.m in Sources */,
 				BA5CD67F192689430087D3A2 /* SBMainMenuViewController.m in Sources */,
 				BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */,

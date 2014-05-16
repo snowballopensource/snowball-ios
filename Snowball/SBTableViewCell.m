@@ -14,10 +14,6 @@
     return NSStringFromClass(self);
 }
 
-+ (CGFloat)height {
-    return 44;
-}
-
 + (void)registerNibToTableView:(UITableView *)tableView {
     [tableView registerNib:[UINib nibWithNibName:[self identifier] bundle:nil]
     forCellReuseIdentifier:[self identifier]];
