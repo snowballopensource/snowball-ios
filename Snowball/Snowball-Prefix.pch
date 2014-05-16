@@ -12,9 +12,12 @@
 
 #import "SBDefines.h"
 
+#import "NSError+Snowball.h"
+
 #import <AVFoundation/AVFoundation.h>
 
 #import <AFNetworking/AFNetworking.h>
 #import <BlocksKit/BlocksKit+UIKit.h>
 #import <MagicalRecord/CoreData+MagicalRecord.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 #import <ObjectiveSugar/ObjectiveSugar.h>

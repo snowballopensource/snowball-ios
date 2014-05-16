@@ -7,6 +7,7 @@
 //
 
 #import "SBAPIManager.h"
+#import "SBJSONResponseSerializer.h"
 #import "SBUser.h"
 
 static NSString * const SBBaseURL = @"http://localhost:5000/api/v1";
@@ -18,6 +19,8 @@ static NSString * const SBBaseURL = @"http://localhost:5000/api/v1";
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedManager = [[SBAPIManager alloc] initWithBaseURL:[NSURL URLWithString:SBBaseURL]];
+        [sharedManager setResponseSerializer:[SBJSONResponseSerializer serializer]];
+        [sharedManager loadAuthToken];
     });
     return sharedManager;
 }

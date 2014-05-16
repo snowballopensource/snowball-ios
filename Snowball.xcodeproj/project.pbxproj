@@ -24,6 +24,8 @@
 		BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E2D191AFDA50083B0DC /* SBManagedObject.m */; };
 		BA5238A51920B9630088A730 /* SBPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5238A41920B9630088A730 /* SBPlayerView.m */; };
 		BA5CD67F192689430087D3A2 /* SBMainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD67E192689430087D3A2 /* SBMainMenuViewController.m */; };
+		BA5CD68819269A530087D3A2 /* SBJSONResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD68719269A530087D3A2 /* SBJSONResponseSerializer.m */; };
+		BA5CD68B19269B170087D3A2 /* NSError+Snowball.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD68A19269B170087D3A2 /* NSError+Snowball.m */; };
 		BA936FF01923104800D3CAFB /* SBManagedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FEF1923104800D3CAFB /* SBManagedViewController.m */; };
 		BA936FF3192310B200D3CAFB /* SBManagedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FF2192310B200D3CAFB /* SBManagedTableViewController.m */; };
 		BA936FF7192312DF00D3CAFB /* SBReelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FF6192312DF00D3CAFB /* SBReelsViewController.m */; };
@@ -87,6 +89,10 @@
 		BA5238A41920B9630088A730 /* SBPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBPlayerView.m; sourceTree = "<group>"; };
 		BA5CD67D192689430087D3A2 /* SBMainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBMainMenuViewController.h; sourceTree = "<group>"; };
 		BA5CD67E192689430087D3A2 /* SBMainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBMainMenuViewController.m; sourceTree = "<group>"; };
+		BA5CD68619269A530087D3A2 /* SBJSONResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSONResponseSerializer.h; sourceTree = "<group>"; };
+		BA5CD68719269A530087D3A2 /* SBJSONResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSONResponseSerializer.m; sourceTree = "<group>"; };
+		BA5CD68919269B170087D3A2 /* NSError+Snowball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Snowball.h"; sourceTree = "<group>"; };
+		BA5CD68A19269B170087D3A2 /* NSError+Snowball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Snowball.m"; sourceTree = "<group>"; };
 		BA936FEE1923104800D3CAFB /* SBManagedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedViewController.h; sourceTree = "<group>"; };
 		BA936FEF1923104800D3CAFB /* SBManagedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBManagedViewController.m; sourceTree = "<group>"; };
 		BA936FF1192310B200D3CAFB /* SBManagedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedTableViewController.h; sourceTree = "<group>"; };
@@ -173,8 +179,8 @@
 			children = (
 				BA048DF0191AF6730083B0DC /* SBAppDelegate.h */,
 				BA048DF1191AF6730083B0DC /* SBAppDelegate.m */,
-				BA048E1B191AF8D40083B0DC /* SBAPIManager.h */,
-				BA048E1C191AF8D40083B0DC /* SBAPIManager.m */,
+				BA5CD68D19269B1F0087D3A2 /* API */,
+				BA5CD68C19269B1A0087D3A2 /* Categories */,
 				BAC9FB4119241774008742EE /* SBSessionManager.h */,
 				BAC9FB4219241774008742EE /* SBSessionManager.m */,
 				BA048E21191AFAD10083B0DC /* Models */,
@@ -283,6 +289,26 @@
 				BA5CD67E192689430087D3A2 /* SBMainMenuViewController.m */,
 			);
 			name = "Main Menu";
+			sourceTree = "<group>";
+		};
+		BA5CD68C19269B1A0087D3A2 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				BA5CD68919269B170087D3A2 /* NSError+Snowball.h */,
+				BA5CD68A19269B170087D3A2 /* NSError+Snowball.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		BA5CD68D19269B1F0087D3A2 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				BA048E1B191AF8D40083B0DC /* SBAPIManager.h */,
+				BA048E1C191AF8D40083B0DC /* SBAPIManager.m */,
+				BA5CD68619269A530087D3A2 /* SBJSONResponseSerializer.h */,
+				BA5CD68719269A530087D3A2 /* SBJSONResponseSerializer.m */,
+			);
+			name = API;
 			sourceTree = "<group>";
 		};
 		BA936FF4192312CF00D3CAFB /* Managed */ = {
@@ -471,6 +497,7 @@
 				BA048E20191AF9A70083B0DC /* Snowball.xcdatamodeld in Sources */,
 				BAC9FB4319241774008742EE /* SBSessionManager.m in Sources */,
 				BA048E18191AF83A0083B0DC /* SBReelClipsViewController.m in Sources */,
+				BA5CD68B19269B170087D3A2 /* NSError+Snowball.m in Sources */,
 				BA9370031923153D00D3CAFB /* SBReel.m in Sources */,
 				BA048DF8191AF6730083B0DC /* SBViewController.m in Sources */,
 				BA93700C1923253D00D3CAFB /* SBVideoPickerController.m in Sources */,
@@ -482,6 +509,7 @@
 				BAC9FB3619241388008742EE /* SBAuthenticationNavigationController.m in Sources */,
 				BA936FF01923104800D3CAFB /* SBManagedViewController.m in Sources */,
 				BA048DF2191AF6730083B0DC /* SBAppDelegate.m in Sources */,
+				BA5CD68819269A530087D3A2 /* SBJSONResponseSerializer.m in Sources */,
 				BA936FFA192313D700D3CAFB /* SBTableViewCell.m in Sources */,
 				BA936FF7192312DF00D3CAFB /* SBReelsViewController.m in Sources */,
 			);

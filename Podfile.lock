@@ -35,6 +35,7 @@ PODS:
     - BlocksKit/DynamicDelegate
   - ECSlidingViewController (2.0.2)
   - MagicalRecord (2.3.0-beta.1)
+  - MBProgressHUD (0.8)
   - ObjectiveSugar (1.1.0)
 
 DEPENDENCIES:
@@ -42,6 +43,7 @@ DEPENDENCIES:
   - BlocksKit
   - ECSlidingViewController
   - MagicalRecord (from `https://github.com/magicalpanda/MagicalRecord.git`)
+  - MBProgressHUD
   - ObjectiveSugar
 
 EXTERNAL SOURCES:
@@ -53,6 +55,7 @@ SPEC CHECKSUMS:
   BlocksKit: d2f8e007646282b4ffc525c15bdf432ad3d11d78
   ECSlidingViewController: bc3d3893c040ae4b10fcf8efb5db34711738b1c3
   MagicalRecord: 1ae96754b1c1bc1cf551e3fdc7ea00d11039e139
+  MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
   ObjectiveSugar: fed588577bcf9733546aeaa089de444e4bab9a52
 
 COCOAPODS: 0.32.1
