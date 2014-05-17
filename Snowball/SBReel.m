@@ -26,7 +26,9 @@
     NSMutableArray *recentClipPosterURLs = [@[] mutableCopy];
     [lastClips each:^(id object) {
         SBClip *clip = (SBClip *)object;
-        [recentClipPosterURLs addObject:clip.posterURL];
+        if (clip.posterURL) {
+            [recentClipPosterURLs addObject:clip.posterURL];
+        }
     }];
     return [recentClipPosterURLs copy];
 }

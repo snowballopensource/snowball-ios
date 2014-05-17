@@ -50,6 +50,7 @@
                                          [clip save];
                                          [self playLocalVideoImmediately:videoLocalURL];
                                          [clip create];
+                                         // [SBClip createClipInUploadManager:clip];
                                      }];
 }
 
@@ -57,7 +58,9 @@
 
 - (void)playReel {
     // TODO: make this managed
-    NSArray *clips = [self.reel.clips allObjects];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"reel == %@", self.reel];
+    NSFetchRequest *fetchRequest = [SBClip MR_requestAllSortedBy:@"createdAt" ascending:YES withPredicate:predicate];
+    NSArray *clips = [SBClip MR_executeFetchRequest:fetchRequest];
     NSMutableArray *playerItems = [NSMutableArray new];
     for (SBClip *clip in clips) {
         if ([clip.videoURL length] > 0) {
