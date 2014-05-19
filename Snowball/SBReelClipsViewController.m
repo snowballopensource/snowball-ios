@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
+#import "SBLongRunningTaskManager.h"
 #import "SBClip.h"
 #import "SBPlayerView.h"
 #import "SBReel.h"
@@ -44,13 +45,14 @@
     [SBVideoPickerController launchCameraInView:self.view
                                          sender:self
                                      completion:^(NSData *videoData, NSURL *videoLocalURL) {
-                                         SBClip *clip = [SBClip MR_createEntity];
-                                         [clip setReel:self.reel];
-                                         [clip setVideoToSubmit:videoData];
-                                         [clip save];
+                                         [SBLongRunningTaskManager addBlockToQueue:^{
+                                             SBClip *clip = [SBClip MR_createEntity];
+                                             [clip setReel:[self.reel MR_inContext:clip.managedObjectContext]];
+                                             [clip setVideoToSubmit:videoData];
+                                             [clip save];
+                                             [clip create];
+                                         }];
                                          [self playLocalVideoImmediately:videoLocalURL];
-                                         [clip create];
-                                         // [SBClip createClipInUploadManager:clip];
                                      }];
 }
 
