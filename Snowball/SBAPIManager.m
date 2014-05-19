@@ -11,6 +11,7 @@
 #import "SBUser.h"
 
 static NSString * const SBBaseURL = @"http://localhost:5000/api/v1";
+// static NSString * const SBBaseURL = @"http://snowball-production.herokuapp.com/api/v1";
 
 @implementation SBAPIManager
 
