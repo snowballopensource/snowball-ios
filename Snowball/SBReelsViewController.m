@@ -77,6 +77,8 @@
                            success:^(BOOL canLoadMore){
                                [self setIsLoading:!canLoadMore];
                                [self.refreshControl endRefreshing];
+                               [self setFetchedResultsController:nil];
+                               [self.tableView reloadData];
                            } failure:^(NSError *error) {
                                [self.refreshControl endRefreshing];
                            }];
