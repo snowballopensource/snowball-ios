@@ -40,13 +40,9 @@ extern const struct SBClipFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSNumber* createdAt;
+@property (nonatomic, strong) NSDate* createdAt;
 
 
-
-@property int32_t createdAtValue;
-- (int32_t)createdAtValue;
-- (void)setCreatedAtValue:(int32_t)value_;
 
 //- (BOOL)validateCreatedAt:(id*)value_ error:(NSError**)error_;
 
@@ -108,11 +104,8 @@ extern const struct SBClipFetchedProperties {
 @interface _SBClip (CoreDataGeneratedPrimitiveAccessors)
 
 
-- (NSNumber*)primitiveCreatedAt;
-- (void)setPrimitiveCreatedAt:(NSNumber*)value;
-
-- (int32_t)primitiveCreatedAtValue;
-- (void)setPrimitiveCreatedAtValue:(int32_t)value_;
+- (NSDate*)primitiveCreatedAt;
+- (void)setPrimitiveCreatedAt:(NSDate*)value;
 
 
 

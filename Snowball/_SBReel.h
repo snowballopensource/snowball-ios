@@ -5,7 +5,9 @@
 #import "SBManagedObject.h"
 
 extern const struct SBReelAttributes {
+	__unsafe_unretained NSString *homeFeedSession;
 	__unsafe_unretained NSString *name;
+	__unsafe_unretained NSString *parsedAt;
 	__unsafe_unretained NSString *remoteID;
 } SBReelAttributes;
 
@@ -17,6 +19,8 @@ extern const struct SBReelFetchedProperties {
 } SBReelFetchedProperties;
 
 @class SBClip;
+
+
 
 
 
@@ -34,11 +38,31 @@ extern const struct SBReelFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSDate* homeFeedSession;
+
+
+
+//- (BOOL)validateHomeFeedSession:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) NSString* name;
 
 
 
 //- (BOOL)validateName:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSDate* parsedAt;
+
+
+
+//- (BOOL)validateParsedAt:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -76,8 +100,20 @@ extern const struct SBReelFetchedProperties {
 @interface _SBReel (CoreDataGeneratedPrimitiveAccessors)
 
 
+- (NSDate*)primitiveHomeFeedSession;
+- (void)setPrimitiveHomeFeedSession:(NSDate*)value;
+
+
+
+
 - (NSString*)primitiveName;
 - (void)setPrimitiveName:(NSString*)value;
+
+
+
+
+- (NSDate*)primitiveParsedAt;
+- (void)setPrimitiveParsedAt:(NSDate*)value;
 
 
 

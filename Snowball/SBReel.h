@@ -12,8 +12,8 @@
 
 - (NSArray *)recentClipPosterURLs;
 
-+ (void)getRecentReelsOnPage:(NSUInteger)page
-                     success:(void (^)(BOOL canLoadMore))success
-                     failure:(void (^)(NSError *error))failure;
++ (void)getHomeFeedReelsOnPage:(NSUInteger)page
+                       success:(void (^)(BOOL canLoadMore))success
+                       failure:(void (^)(NSError *error))failure;
 
 @end

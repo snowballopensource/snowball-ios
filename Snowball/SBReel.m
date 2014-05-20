@@ -9,6 +9,7 @@
 #import "SBAPIManager.h"
 #import "SBClip.h"
 #import "SBReel.h"
+#import "SBSessionManager.h"
 
 @implementation SBReel
 
@@ -35,16 +36,20 @@
 
 #pragma mark - Remote
 
-+ (void)getRecentReelsOnPage:(NSUInteger)page
-                     success:(void (^)(BOOL canLoadMore))success
-                     failure:(void (^)(NSError *error))failure {
++ (void)getHomeFeedReelsOnPage:(NSUInteger)page
+                       success:(void (^)(BOOL canLoadMore))success
+                       failure:(void (^)(NSError *error))failure {
     NSString *path = [NSString stringWithFormat:@"reels"];;
     [[SBAPIManager sharedManager] GET:path
                            parameters:@{@"page": @(page)}
                               success:^(NSURLSessionDataTask *task, id responseObject) {
                                   NSArray *_reels = responseObject[@"reels"];
                                   [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-                                      [SBReel MR_importFromArray:_reels inContext:localContext];
+                                      [_reels each:^(id object) {
+                                          SBReel *reel = [SBReel MR_importFromObject:object inContext:localContext];
+                                          [reel setParsedAt:[NSDate date]];
+                                          [reel setHomeFeedSession:[SBSessionManager sessionDate]];
+                                      }];
                                   }];
                                   if (success) { success([_reels count]); };
                               } failure:^(NSURLSessionDataTask *task, NSError *error) {

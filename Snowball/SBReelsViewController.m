@@ -10,6 +10,7 @@
 #import "SBReelClipsViewController.h"
 #import "SBReelsViewController.h"
 #import "SBReelTableViewCell.h"
+#import "SBSessionManager.h"
 
 @interface SBReelsViewController ()
 
@@ -23,9 +24,10 @@
     [super viewDidLoad];
     
     [SBReelTableViewCell registerNibToTableView:self.tableView];
-
+    
     [self setEntityClass:[SBReel class]];
-    [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:NO]]];
+    [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"parsedAt" ascending:YES]]];
+    [self setPredicate:[NSPredicate predicateWithFormat:@"homeFeedSession == %@", [SBSessionManager sessionDate]]];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -71,13 +73,13 @@
 #pragma mark - SBManagedTableViewController
 
 - (void)getRemoteObjects {
-    [SBReel getRecentReelsOnPage:self.currentPage
-                         success:^(BOOL canLoadMore){
-                             [self setIsLoading:!canLoadMore];
-                             [self.refreshControl endRefreshing];
-                         } failure:^(NSError *error) {
-                             [self.refreshControl endRefreshing];
-                         }];
+    [SBReel getHomeFeedReelsOnPage:self.currentPage
+                           success:^(BOOL canLoadMore){
+                               [self setIsLoading:!canLoadMore];
+                               [self.refreshControl endRefreshing];
+                           } failure:^(NSError *error) {
+                               [self.refreshControl endRefreshing];
+                           }];
 }
 
 @end

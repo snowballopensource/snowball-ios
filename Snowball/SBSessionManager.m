@@ -12,9 +12,6 @@
 @implementation SBSessionManager
 
 + (void)setupSession {
-    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"sessionStart"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
     [self requestUserAuthenticationIfNecessary:NO];
 }
 
@@ -37,7 +34,12 @@
 #pragma mark - Session Date
 
 + (NSDate *)sessionDate {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionStart"];
+    static NSDate* sessionDate = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sessionDate = [NSDate date];
+    });
+    return sessionDate;
 }
 
 #pragma mark - Private

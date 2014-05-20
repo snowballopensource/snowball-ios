@@ -4,7 +4,9 @@
 #import "_SBReel.h"
 
 const struct SBReelAttributes SBReelAttributes = {
+	.homeFeedSession = @"homeFeedSession",
 	.name = @"name",
+	.parsedAt = @"parsedAt",
 	.remoteID = @"remoteID",
 };
 
@@ -48,7 +50,21 @@ const struct SBReelFetchedProperties SBReelFetchedProperties = {
 
 
 
+@dynamic homeFeedSession;
+
+
+
+
+
+
 @dynamic name;
+
+
+
+
+
+
+@dynamic parsedAt;
 
 
 
