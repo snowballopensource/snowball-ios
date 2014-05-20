@@ -34,9 +34,11 @@ PODS:
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
   - ECSlidingViewController (2.0.2)
+  - GPUImage (0.1.4)
   - MagicalRecord (2.3.0-beta.1)
   - MBProgressHUD (0.8)
   - ObjectiveSugar (1.1.0)
+  - PBJVision (0.2.1)
   - SDWebImage (3.6):
     - SDWebImage/Core
   - SDWebImage/Core (3.6)
@@ -45,9 +47,11 @@ DEPENDENCIES:
   - AFNetworking
   - BlocksKit
   - ECSlidingViewController
+  - GPUImage
   - MagicalRecord (from `https://github.com/magicalpanda/MagicalRecord.git`)
   - MBProgressHUD
   - ObjectiveSugar
+  - PBJVision
   - SDWebImage
 
 EXTERNAL SOURCES:
@@ -58,9 +62,11 @@ SPEC CHECKSUMS:
   AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
   BlocksKit: d2f8e007646282b4ffc525c15bdf432ad3d11d78
   ECSlidingViewController: bc3d3893c040ae4b10fcf8efb5db34711738b1c3
+  GPUImage: f9b32e12350792a630e596ffc7b050bea3662670
   MagicalRecord: 1ae96754b1c1bc1cf551e3fdc7ea00d11039e139
   MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
   ObjectiveSugar: fed588577bcf9733546aeaa089de444e4bab9a52
+  PBJVision: 76d67381ce5c02b2a8609c914f307e748b3b1766
   SDWebImage: 7eb273e54ca8a2e506ad9bd5e80c35b2a4d7c95e
 
 COCOAPODS: 0.32.1

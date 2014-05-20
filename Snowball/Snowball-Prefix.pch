@@ -18,7 +18,9 @@
 
 #import <AFNetworking/AFNetworking.h>
 #import <BlocksKit/BlocksKit+UIKit.h>
+#import <GPUImage/GPUImage.h>
 #import <MagicalRecord/CoreData+MagicalRecord.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <ObjectiveSugar/ObjectiveSugar.h>
+#import <PBJVision/PBJVision.h>
 #import <SDWebImage/UIImageView+WebCache.h>

@@ -22,6 +22,9 @@
 		BA048E26191AFAD90083B0DC /* _SBClip.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E23191AFAD90083B0DC /* _SBClip.m */; };
 		BA048E2B191AFB110083B0DC /* SBClip.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E2A191AFB110083B0DC /* SBClip.m */; };
 		BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E2D191AFDA50083B0DC /* SBManagedObject.m */; };
+		BA15B9E5192AC9EF00453F8F /* UIViewController+StatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BA15B9E4192AC9EF00453F8F /* UIViewController+StatusBar.m */; };
+		BA15B9EA192AD76B00453F8F /* SBCameraNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BA15B9E9192AD76B00453F8F /* SBCameraNavigationBar.m */; };
+		BA15B9ED192AD9AD00453F8F /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = BA15B9EC192AD9AD00453F8F /* UINavigationBar+CustomHeight.m */; };
 		BA217C9A192A4DF500F04D03 /* SBLongRunningTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA217C99192A4DF500F04D03 /* SBLongRunningTaskManager.m */; };
 		BA5238A51920B9630088A730 /* SBPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5238A41920B9630088A730 /* SBPlayerView.m */; };
 		BA5CD67F192689430087D3A2 /* SBMainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD67E192689430087D3A2 /* SBMainMenuViewController.m */; };
@@ -87,6 +90,12 @@
 		BA048E2C191AFDA50083B0DC /* SBManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedObject.h; sourceTree = "<group>"; };
 		BA048E2D191AFDA50083B0DC /* SBManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBManagedObject.m; sourceTree = "<group>"; };
 		BA048E2F191AFE9A0083B0DC /* SBDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBDefines.h; sourceTree = "<group>"; };
+		BA15B9E3192AC9EF00453F8F /* UIViewController+StatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+StatusBar.h"; sourceTree = "<group>"; };
+		BA15B9E4192AC9EF00453F8F /* UIViewController+StatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+StatusBar.m"; sourceTree = "<group>"; };
+		BA15B9E8192AD76B00453F8F /* SBCameraNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCameraNavigationBar.h; sourceTree = "<group>"; };
+		BA15B9E9192AD76B00453F8F /* SBCameraNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCameraNavigationBar.m; sourceTree = "<group>"; };
+		BA15B9EB192AD9AD00453F8F /* UINavigationBar+CustomHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+CustomHeight.h"; sourceTree = "<group>"; };
+		BA15B9EC192AD9AD00453F8F /* UINavigationBar+CustomHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+CustomHeight.m"; sourceTree = "<group>"; };
 		BA217C98192A4DF500F04D03 /* SBLongRunningTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBLongRunningTaskManager.h; sourceTree = "<group>"; };
 		BA217C99192A4DF500F04D03 /* SBLongRunningTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBLongRunningTaskManager.m; sourceTree = "<group>"; };
 		BA5238A31920B9630088A730 /* SBPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBPlayerView.h; sourceTree = "<group>"; };
@@ -255,6 +264,8 @@
 				BA5238A41920B9630088A730 /* SBPlayerView.m */,
 				BA5CD6901926CEDA0087D3A2 /* SBFadeOverlayView.h */,
 				BA5CD6911926CEDA0087D3A2 /* SBFadeOverlayView.m */,
+				BA15B9E8192AD76B00453F8F /* SBCameraNavigationBar.h */,
+				BA15B9E9192AD76B00453F8F /* SBCameraNavigationBar.m */,
 				BA9370041923173200D3CAFB /* Cells */,
 			);
 			name = Views;
@@ -304,6 +315,10 @@
 			children = (
 				BA5CD68919269B170087D3A2 /* NSError+Snowball.h */,
 				BA5CD68A19269B170087D3A2 /* NSError+Snowball.m */,
+				BA15B9E3192AC9EF00453F8F /* UIViewController+StatusBar.h */,
+				BA15B9E4192AC9EF00453F8F /* UIViewController+StatusBar.m */,
+				BA15B9EB192AD9AD00453F8F /* UINavigationBar+CustomHeight.h */,
+				BA15B9EC192AD9AD00453F8F /* UINavigationBar+CustomHeight.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -511,12 +526,15 @@
 				BA9370031923153D00D3CAFB /* SBReel.m in Sources */,
 				BA048DF8191AF6730083B0DC /* SBViewController.m in Sources */,
 				BA93700C1923253D00D3CAFB /* SBVideoPickerController.m in Sources */,
+				BA15B9ED192AD9AD00453F8F /* UINavigationBar+CustomHeight.m in Sources */,
 				BA5CD6921926CEDA0087D3A2 /* SBFadeOverlayView.m in Sources */,
 				BAC9FB3A192413C6008742EE /* SBAuthenticationMenuViewController.m in Sources */,
 				BA5CD67F192689430087D3A2 /* SBMainMenuViewController.m in Sources */,
 				BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */,
+				BA15B9EA192AD76B00453F8F /* SBCameraNavigationBar.m in Sources */,
 				BA217C9A192A4DF500F04D03 /* SBLongRunningTaskManager.m in Sources */,
 				BAC9FB4019241536008742EE /* SBSignInViewController.m in Sources */,
+				BA15B9E5192AC9EF00453F8F /* UIViewController+StatusBar.m in Sources */,
 				BA048E1D191AF8D40083B0DC /* SBAPIManager.m in Sources */,
 				BAC9FB3619241388008742EE /* SBAuthenticationNavigationController.m in Sources */,
 				BA936FF01923104800D3CAFB /* SBManagedViewController.m in Sources */,
