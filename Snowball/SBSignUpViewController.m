@@ -45,17 +45,17 @@
 #pragma mark - Actions
 
 - (IBAction)signUp:(id)sender {
-    // [self showSpinner];
+    [self showSpinner];
     [SBUser signUpWithUsername:self.usernameTextField.text
                          email:self.emailTextField.text
                       password:self.passwordTextField.text
                        success:^{
-                           // [self hideSpinner];
+                           [self hideSpinner];
                            [(SBAuthenticationNavigationController *)self.navigationController dismiss];
                        }
                        failure:^(NSError *error) {
-                           // [self hideSpinner];
-                           // [error displayInView:self.view];
+                           [self hideSpinner];
+                           [error displayInView:self.view];
                        }];
 }
 

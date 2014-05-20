@@ -41,16 +41,16 @@
 #pragma mark - Actions
 
 - (IBAction)signIn:(id)sender {
-    // [self showSpinner];
+    [self showSpinner];
     [SBUser signInWithEmail:self.emailTextField.text
                    password:self.passwordTextField.text
                     success:^{
-                        // [self hideSpinner];
+                        [self hideSpinner];
                         [(SBAuthenticationNavigationController *)self.navigationController dismiss];
                     }
                     failure:^(NSError *error) {
-                        // [self hideSpinner];
-                        // [error displayInView:self.view];
+                        [self hideSpinner];
+                        [error displayInView:self.view];
                     }];
 }
 

@@ -31,7 +31,7 @@
 #pragma mark - Actions
 
 - (IBAction)authenticateWithFacebook:(id)sender {
-    // [self showSpinner];
+    [self showSpinner];
     // TODO: implement this
     NSLog(@"Not yet implemented");
 }
