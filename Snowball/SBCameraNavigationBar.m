@@ -25,7 +25,7 @@
 }
 
 - (void)setupCamera {
-    self.videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPresetLow cameraPosition:AVCaptureDevicePositionBack];
+    [self setVideoCamera:[[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPresetLow cameraPosition:AVCaptureDevicePositionBack]];
     [self.videoCamera setFrameRate:24];
     [self.videoCamera setOutputImageOrientation:UIInterfaceOrientationPortrait];
     
