@@ -41,7 +41,7 @@
     
     [self.videoCamera startCameraCapture];
     
-    [self addSubview:filterView];
+    [self insertSubview:filterView atIndex:0];
 }
 
 @end
