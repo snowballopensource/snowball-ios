@@ -1,21 +1,21 @@
 PODS:
-  - AFNetworking (2.2.3):
+  - AFNetworking (2.2.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
     - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.2.3):
+  - AFNetworking/NSURLConnection (2.2.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.2.3):
+  - AFNetworking/NSURLSession (2.2.4):
     - AFNetworking/NSURLConnection
-  - AFNetworking/Reachability (2.2.3)
-  - AFNetworking/Security (2.2.3)
-  - AFNetworking/Serialization (2.2.3)
-  - AFNetworking/UIKit (2.2.3):
+  - AFNetworking/Reachability (2.2.4)
+  - AFNetworking/Security (2.2.4)
+  - AFNetworking/Serialization (2.2.4)
+  - AFNetworking/UIKit (2.2.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - BlocksKit (2.2.3):
@@ -35,7 +35,9 @@ PODS:
     - BlocksKit/DynamicDelegate
   - ECSlidingViewController (2.0.2)
   - GPUImage (0.1.4)
-  - MagicalRecord (2.3.0-beta.1)
+  - MagicalRecord (2.3.0-beta.2):
+    - MagicalRecord/Core
+  - MagicalRecord/Core (2.3.0-beta.2)
   - MBProgressHUD (0.8)
   - ObjectiveSugar (1.1.0)
   - PBJVision (0.2.1)
@@ -59,14 +61,14 @@ EXTERNAL SOURCES:
     :git: https://github.com/magicalpanda/MagicalRecord.git
 
 SPEC CHECKSUMS:
-  AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
-  BlocksKit: d2f8e007646282b4ffc525c15bdf432ad3d11d78
-  ECSlidingViewController: bc3d3893c040ae4b10fcf8efb5db34711738b1c3
-  GPUImage: f9b32e12350792a630e596ffc7b050bea3662670
-  MagicalRecord: 1ae96754b1c1bc1cf551e3fdc7ea00d11039e139
-  MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
-  ObjectiveSugar: fed588577bcf9733546aeaa089de444e4bab9a52
-  PBJVision: 76d67381ce5c02b2a8609c914f307e748b3b1766
-  SDWebImage: 7eb273e54ca8a2e506ad9bd5e80c35b2a4d7c95e
+  AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
+  BlocksKit: 07c8a80f04275efac6a5f8b973782489c083a182
+  ECSlidingViewController: 6c11fadb10d720c2d48bc577962332bdd4264c9f
+  GPUImage: ac2bde5f4dbea02a81ced6313964cec1f2043ca9
+  MagicalRecord: b7d8943e180dbd5c1dd48a807885e0059ce0bc82
+  MBProgressHUD: c356980b0cd097f19acec959b49dca5eb8ec31be
+  ObjectiveSugar: f48793f5902c77cfc02a4ce46d2e8ecddcad4dc2
+  PBJVision: cf25feb5c6ca44bfc979f46c058605cf76027748
+  SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
 
-COCOAPODS: 0.32.1
+COCOAPODS: 0.33.1
