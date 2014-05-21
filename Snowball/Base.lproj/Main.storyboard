@@ -63,6 +63,7 @@
                     <navigationItem key="navigationItem" id="Rih-po-8ca"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="cameraNavigationBar" destination="RlV-bx-eje" id="LaG-Wk-jHU"/>
                         <outlet property="tableView" destination="Xh3-3G-cJd" id="b3d-Ty-Nzu"/>
                         <segue destination="D54-9P-BdS" kind="push" identifier="SBReelClipsViewController" id="Gcf-NX-Zug"/>
                     </connections>

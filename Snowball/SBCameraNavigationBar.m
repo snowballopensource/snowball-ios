@@ -15,6 +15,7 @@
 
 + (instancetype)sharedManager;
 
+@property (nonatomic) BOOL cameraEnabled;
 @property (nonatomic, strong) GPUImageVideoCamera *videoCamera;
 @property (nonatomic, strong) GPUImageView *filterView;
 
@@ -38,6 +39,7 @@
 
 @interface SBCameraNavigationBar ()
 
+@property (nonatomic) BOOL cameraEnabled;
 @property (nonatomic, strong) GPUImageVideoCamera *videoCamera;
 @property (nonatomic, strong) GPUImageView *filterView;
 
@@ -48,15 +50,16 @@
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        [self setCameraEnabled:YES];
+        // [self setCamera:YES];
     }
     return self;
 }
 
-- (void)setCameraEnabled:(BOOL)cameraEnabled {
+- (void)setCamera:(BOOL)cameraEnabled {
+    if (self.cameraEnabled == cameraEnabled) {
+        return;
+    }
     if (cameraEnabled) {
-        _cameraEnabled = YES;
-
         unless (self.videoCamera) {
             [self setVideoCamera:[[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPresetLow cameraPosition:AVCaptureDevicePositionBack]];
             [self.videoCamera setFrameRate:24];
@@ -72,7 +75,7 @@
             [self.videoCamera addTarget:gaussianBlurFilter];
             [gaussianBlurFilter addTarget:self.filterView];
         }
-
+        
         [self.videoCamera startCameraCapture];
         [self insertSubview:self.filterView atIndex:0];
     }
@@ -82,6 +85,15 @@
         [self setFilterView:nil];
         [self setVideoCamera:nil];
     }
+    [self setCameraEnabled:cameraEnabled];
+}
+
+- (BOOL)cameraEnabled {
+    return [SBCameraNavigationBarManager sharedManager].cameraEnabled;
+}
+
+- (void)setCameraEnabled:(BOOL)cameraEnabled {
+    [[SBCameraNavigationBarManager sharedManager] setCameraEnabled:cameraEnabled];
 }
 
 - (GPUImageVideoCamera *)videoCamera {

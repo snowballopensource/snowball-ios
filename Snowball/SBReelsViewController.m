@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
+#import "SBCameraNavigationBar.h"
 #import "SBReel.h"
 #import "SBReelClipsViewController.h"
 #import "SBReelsViewController.h"
@@ -13,6 +14,8 @@
 #import "SBSessionManager.h"
 
 @interface SBReelsViewController ()
+
+@property (nonatomic, weak) IBOutlet SBCameraNavigationBar *cameraNavigationBar;
 
 @end
 
@@ -42,11 +45,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [self.cameraNavigationBar setCamera:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     [super viewWillDisappear:animated];
+    [self.cameraNavigationBar setCamera:NO];
 }
 
 #pragma mark - UITableViewDataSource
