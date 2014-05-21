@@ -23,7 +23,6 @@
 		BA048E2B191AFB110083B0DC /* SBClip.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E2A191AFB110083B0DC /* SBClip.m */; };
 		BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E2D191AFDA50083B0DC /* SBManagedObject.m */; };
 		BA15B9E5192AC9EF00453F8F /* UIViewController+StatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BA15B9E4192AC9EF00453F8F /* UIViewController+StatusBar.m */; };
-		BA15B9EA192AD76B00453F8F /* SBCameraNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BA15B9E9192AD76B00453F8F /* SBCameraNavigationBar.m */; };
 		BA15B9ED192AD9AD00453F8F /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = BA15B9EC192AD9AD00453F8F /* UINavigationBar+CustomHeight.m */; };
 		BA217C9A192A4DF500F04D03 /* SBLongRunningTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA217C99192A4DF500F04D03 /* SBLongRunningTaskManager.m */; };
 		BA5238A51920B9630088A730 /* SBPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5238A41920B9630088A730 /* SBPlayerView.m */; };
@@ -41,6 +40,7 @@
 		BA937006192317F600D3CAFB /* SBReelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA937005192317F600D3CAFB /* SBReelTableViewCell.xib */; };
 		BA93700C1923253D00D3CAFB /* SBVideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA93700B1923253D00D3CAFB /* SBVideoPickerController.m */; };
 		BAC81380192BC5E1002323E1 /* UIViewController+Spinner.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC8137F192BC5E1002323E1 /* UIViewController+Spinner.m */; };
+		BAC81398192C3E1B002323E1 /* SBCameraNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC81397192C3E1B002323E1 /* SBCameraNavigationBar.m */; };
 		BAC9FB3319241296008742EE /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAC9FB3219241296008742EE /* Authentication.storyboard */; };
 		BAC9FB3619241388008742EE /* SBAuthenticationNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB3519241388008742EE /* SBAuthenticationNavigationController.m */; };
 		BAC9FB3A192413C6008742EE /* SBAuthenticationMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB39192413C6008742EE /* SBAuthenticationMenuViewController.m */; };
@@ -93,8 +93,6 @@
 		BA048E2F191AFE9A0083B0DC /* SBDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBDefines.h; sourceTree = "<group>"; };
 		BA15B9E3192AC9EF00453F8F /* UIViewController+StatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+StatusBar.h"; sourceTree = "<group>"; };
 		BA15B9E4192AC9EF00453F8F /* UIViewController+StatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+StatusBar.m"; sourceTree = "<group>"; };
-		BA15B9E8192AD76B00453F8F /* SBCameraNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCameraNavigationBar.h; sourceTree = "<group>"; };
-		BA15B9E9192AD76B00453F8F /* SBCameraNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCameraNavigationBar.m; sourceTree = "<group>"; };
 		BA15B9EB192AD9AD00453F8F /* UINavigationBar+CustomHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+CustomHeight.h"; sourceTree = "<group>"; };
 		BA15B9EC192AD9AD00453F8F /* UINavigationBar+CustomHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+CustomHeight.m"; sourceTree = "<group>"; };
 		BA217C98192A4DF500F04D03 /* SBLongRunningTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBLongRunningTaskManager.h; sourceTree = "<group>"; };
@@ -128,6 +126,8 @@
 		BA93700B1923253D00D3CAFB /* SBVideoPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBVideoPickerController.m; sourceTree = "<group>"; };
 		BAC8137E192BC5E1002323E1 /* UIViewController+Spinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Spinner.h"; sourceTree = "<group>"; };
 		BAC8137F192BC5E1002323E1 /* UIViewController+Spinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Spinner.m"; sourceTree = "<group>"; };
+		BAC81396192C3E1B002323E1 /* SBCameraNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCameraNavigationBar.h; sourceTree = "<group>"; };
+		BAC81397192C3E1B002323E1 /* SBCameraNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCameraNavigationBar.m; sourceTree = "<group>"; };
 		BAC9FB3219241296008742EE /* Authentication.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		BAC9FB3419241388008742EE /* SBAuthenticationNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAuthenticationNavigationController.h; sourceTree = "<group>"; };
 		BAC9FB3519241388008742EE /* SBAuthenticationNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAuthenticationNavigationController.m; sourceTree = "<group>"; };
@@ -267,8 +267,8 @@
 				BA5238A41920B9630088A730 /* SBPlayerView.m */,
 				BA5CD6901926CEDA0087D3A2 /* SBFadeOverlayView.h */,
 				BA5CD6911926CEDA0087D3A2 /* SBFadeOverlayView.m */,
-				BA15B9E8192AD76B00453F8F /* SBCameraNavigationBar.h */,
-				BA15B9E9192AD76B00453F8F /* SBCameraNavigationBar.m */,
+				BAC81396192C3E1B002323E1 /* SBCameraNavigationBar.h */,
+				BAC81397192C3E1B002323E1 /* SBCameraNavigationBar.m */,
 				BA9370041923173200D3CAFB /* Cells */,
 			);
 			name = Views;
@@ -530,13 +530,13 @@
 				BA5CD68B19269B170087D3A2 /* NSError+Snowball.m in Sources */,
 				BA9370031923153D00D3CAFB /* SBReel.m in Sources */,
 				BA048DF8191AF6730083B0DC /* SBViewController.m in Sources */,
+				BAC81398192C3E1B002323E1 /* SBCameraNavigationBar.m in Sources */,
 				BA93700C1923253D00D3CAFB /* SBVideoPickerController.m in Sources */,
 				BA15B9ED192AD9AD00453F8F /* UINavigationBar+CustomHeight.m in Sources */,
 				BA5CD6921926CEDA0087D3A2 /* SBFadeOverlayView.m in Sources */,
 				BAC9FB3A192413C6008742EE /* SBAuthenticationMenuViewController.m in Sources */,
 				BA5CD67F192689430087D3A2 /* SBMainMenuViewController.m in Sources */,
 				BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */,
-				BA15B9EA192AD76B00453F8F /* SBCameraNavigationBar.m in Sources */,
 				BA217C9A192A4DF500F04D03 /* SBLongRunningTaskManager.m in Sources */,
 				BAC9FB4019241536008742EE /* SBSignInViewController.m in Sources */,
 				BA15B9E5192AC9EF00453F8F /* UIViewController+StatusBar.m in Sources */,

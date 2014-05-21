@@ -10,4 +10,6 @@
 
 @interface SBCameraNavigationBar : UIView
 
+@property (nonatomic) BOOL cameraEnabled;
+
 @end
