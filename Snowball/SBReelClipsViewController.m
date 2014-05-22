@@ -11,11 +11,17 @@
 #import "SBPlayerView.h"
 #import "SBReel.h"
 #import "SBReelClipsViewController.h"
+#import "SBUser.h"
 #import "SBVideoPickerController.h"
 
 @interface SBReelClipsViewController ()
 
 @property (nonatomic, weak) IBOutlet SBPlayerView *playerView;
+@property (nonatomic, weak) IBOutlet UILabel *userNameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *likesCountLabel;
+
+@property (nonatomic, copy) NSArray *clips;
+@property (nonatomic, copy, readonly) NSArray *playerItems;
 
 @end
 
@@ -25,6 +31,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
+    [self.userNameLabel setText:@""];
+    [self.likesCountLabel setText:@""];
 
     // TODO: make this paginated
     [SBClip getRecentClipsForReel:self.reel
@@ -59,28 +68,53 @@
 #pragma mark - Video Player
 
 - (void)playReel {
-    // TODO: make this managed
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"reel == %@", self.reel];
     NSFetchRequest *fetchRequest = [SBClip MR_requestAllSortedBy:@"createdAt" ascending:YES withPredicate:predicate];
-    NSArray *clips = [SBClip MR_executeFetchRequest:fetchRequest];
-    NSMutableArray *playerItems = [NSMutableArray new];
-    for (SBClip *clip in clips) {
-        if ([clip.videoURL length] > 0) {
-            NSURL *videoURL = [NSURL URLWithString:clip.videoURL];
-            AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:videoURL];
-            [playerItems addObject:playerItem];
-        }
-    }
-    AVQueuePlayer *player = [[AVQueuePlayer alloc] initWithItems:[playerItems copy]];
-    [self.playerView setPlayer:player];
+    [self setClips:[SBClip MR_executeFetchRequest:fetchRequest]];
+    [self clipWillPlay:[self.clips firstObject]];
+    AVQueuePlayer *player = [[AVQueuePlayer alloc] initWithItems:self.playerItems];
     [player setActionAtItemEnd:AVPlayerActionAtItemEndAdvance];
     [player play];
+    [self.playerView setPlayer:player];
 }
 
 - (void)playLocalVideoImmediately:(NSURL *)videoLocalURL {
     [self.playerView.player removeAllItems];
     AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:videoLocalURL];
     [self.playerView.player replaceCurrentItemWithPlayerItem:playerItem];
+}
+
+- (void)playerItemDidReachEnd:(NSNotification *)notification {
+    AVPlayerItem *currentPlayerItem = [notification object];
+    NSUInteger currentPlayerItemIndex = [self.playerItems indexOfObject:currentPlayerItem];
+    if (currentPlayerItemIndex < [self.playerItems count]) {
+        SBClip *nextClip = self.clips[currentPlayerItemIndex+1];
+        [self clipWillPlay:nextClip];
+    }
+}
+
+- (void)clipWillPlay:(SBClip *)clip {
+    [self.userNameLabel setText:clip.user.username];
+    [self.likesCountLabel setText:@"0"];
+}
+
+#pragma mark - Setters / Getters
+
+- (void)setClips:(NSArray *)clips {
+    _clips = [clips copy];
+    NSMutableArray *playerItems = [NSMutableArray new];
+    for (SBClip *clip in self.clips) {
+        if ([clip.videoURL length] > 0) {
+            NSURL *videoURL = [NSURL URLWithString:clip.videoURL];
+            AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:videoURL];
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(playerItemDidReachEnd:)
+                                                         name:AVPlayerItemDidPlayToEndTimeNotification
+                                                       object:playerItem];
+            [playerItems addObject:playerItem];
+        }
+    }
+    _playerItems = [playerItems copy];
 }
 
 @end
