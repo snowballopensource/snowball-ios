@@ -11,6 +11,8 @@
 @implementation SBPushNotificationManager
 
 + (void)setup {
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+
     // Build settings are in AirshipConfig.plist
     [UAirship takeOff];
     [UAPush setDefaultPushEnabledValue:NO];
