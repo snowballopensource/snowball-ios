@@ -7,6 +7,7 @@
 //
 
 #import "SBAPIManager.h"
+#import "SBPushNotificationManager.h"
 #import "SBUser.h"
 
 static NSString *const kSBCurrentUserRemoteID = @"SBCurrentUserRemoteID";
@@ -43,6 +44,7 @@ static SBUser *_currentUser = nil;
                                                   forKey:kSBCurrentUserRemoteID];
         [[NSUserDefaults standardUserDefaults] setObject:currentUser.authToken
                                                   forKey:kSBCurrentUserAuthToken];
+        [SBPushNotificationManager enablePushWithUserID:currentUser.remoteID];
     }
     else {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBCurrentUserRemoteID];
@@ -54,6 +56,7 @@ static SBUser *_currentUser = nil;
 }
 
 + (void)removeCurrentUser {
+    [SBPushNotificationManager disablePush];
     [self setCurrentUser:nil];
 }
 
@@ -72,6 +75,7 @@ static SBUser *_currentUser = nil;
                                    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                                        user = [SBUser MR_importFromObject:_user inContext:localContext];
                                    }];
+                                   user = [user MR_inContext:[NSManagedObjectContext MR_defaultContext]];
                                    [user setAuthToken:[_user objectForKey:@"auth_token"]];
                                    [SBUser setCurrentUser:user];
                                    if (success) { success(); }
@@ -94,6 +98,7 @@ static SBUser *_currentUser = nil;
                                    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                                        user = [SBUser MR_importFromObject:_user inContext:localContext];
                                    }];
+                                   user = [user MR_inContext:[NSManagedObjectContext MR_defaultContext]];
                                    [user setAuthToken:[_user objectForKey:@"auth_token"]];
                                    [SBUser setCurrentUser:user];
                                    if (success) { success(); }

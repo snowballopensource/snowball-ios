@@ -10,8 +10,7 @@
 
 @interface SBSessionManager : NSObject
 
-+ (void)setupSession;
-+ (void)requestUserAuthenticationIfNecessary:(BOOL)animated;
++ (void)startSession;
 + (void)signOut;
 
 + (NSDate *)sessionDate;

@@ -11,8 +11,13 @@
 
 @implementation SBSessionManager
 
-+ (void)setupSession {
++ (void)startSession {
     [self requestUserAuthenticationIfNecessary:NO];
+}
+
++ (void)signOut {
+    [SBUser removeCurrentUser];
+    [self requestUserAuthenticationIfNecessary:YES];
 }
 
 + (void)requestUserAuthenticationIfNecessary:(BOOL)animated {
@@ -24,11 +29,6 @@
             [[UIApplication sharedApplication].delegate.window setRootViewController:[self authenticationNavigationController]];
         }
     }
-}
-
-+ (void)signOut {
-    [SBUser removeCurrentUser];
-    [self requestUserAuthenticationIfNecessary:YES];
 }
 
 #pragma mark - Session Date

@@ -7,13 +7,15 @@
 //
 
 #import "SBAppDelegate.h"
+#import "SBPushNotificationManager.h"
 #import "SBSessionManager.h"
 
 @implementation SBAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [MagicalRecord setupCoreDataStack];
-    [SBSessionManager setupSession];
+    [SBSessionManager startSession];
+    [SBPushNotificationManager setup];
     return YES;
 }
 

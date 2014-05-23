@@ -44,6 +44,7 @@ PODS:
   - SDWebImage (3.6):
     - SDWebImage/Core
   - SDWebImage/Core (3.6)
+  - UrbanAirship-iOS-SDK (4.0.0)
 
 DEPENDENCIES:
   - AFNetworking
@@ -55,6 +56,7 @@ DEPENDENCIES:
   - ObjectiveSugar
   - PBJVision
   - SDWebImage
+  - UrbanAirship-iOS-SDK
 
 EXTERNAL SOURCES:
   MagicalRecord:
@@ -70,5 +72,6 @@ SPEC CHECKSUMS:
   ObjectiveSugar: f48793f5902c77cfc02a4ce46d2e8ecddcad4dc2
   PBJVision: cf25feb5c6ca44bfc979f46c058605cf76027748
   SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
+  UrbanAirship-iOS-SDK: 04b797ae27f0ed8b79b02c4c859256808e8d89cf
 
 COCOAPODS: 0.33.1
