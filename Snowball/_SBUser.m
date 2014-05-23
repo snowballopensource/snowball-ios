@@ -4,7 +4,10 @@
 #import "_SBUser.h"
 
 const struct SBUserAttributes SBUserAttributes = {
+	.clipsCount = @"clipsCount",
 	.email = @"email",
+	.followersCount = @"followersCount",
+	.likesCount = @"likesCount",
 	.remoteID = @"remoteID",
 	.username = @"username",
 };
@@ -42,6 +45,21 @@ const struct SBUserFetchedProperties SBUserFetchedProperties = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"clipsCountValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"clipsCount"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"followersCountValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"followersCount"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"likesCountValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"likesCount"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 
 	return keyPaths;
 }
@@ -49,8 +67,86 @@ const struct SBUserFetchedProperties SBUserFetchedProperties = {
 
 
 
+@dynamic clipsCount;
+
+
+
+- (int32_t)clipsCountValue {
+	NSNumber *result = [self clipsCount];
+	return [result intValue];
+}
+
+- (void)setClipsCountValue:(int32_t)value_ {
+	[self setClipsCount:[NSNumber numberWithInt:value_]];
+}
+
+- (int32_t)primitiveClipsCountValue {
+	NSNumber *result = [self primitiveClipsCount];
+	return [result intValue];
+}
+
+- (void)setPrimitiveClipsCountValue:(int32_t)value_ {
+	[self setPrimitiveClipsCount:[NSNumber numberWithInt:value_]];
+}
+
+
+
+
+
 @dynamic email;
 
+
+
+
+
+
+@dynamic followersCount;
+
+
+
+- (int32_t)followersCountValue {
+	NSNumber *result = [self followersCount];
+	return [result intValue];
+}
+
+- (void)setFollowersCountValue:(int32_t)value_ {
+	[self setFollowersCount:[NSNumber numberWithInt:value_]];
+}
+
+- (int32_t)primitiveFollowersCountValue {
+	NSNumber *result = [self primitiveFollowersCount];
+	return [result intValue];
+}
+
+- (void)setPrimitiveFollowersCountValue:(int32_t)value_ {
+	[self setPrimitiveFollowersCount:[NSNumber numberWithInt:value_]];
+}
+
+
+
+
+
+@dynamic likesCount;
+
+
+
+- (int32_t)likesCountValue {
+	NSNumber *result = [self likesCount];
+	return [result intValue];
+}
+
+- (void)setLikesCountValue:(int32_t)value_ {
+	[self setLikesCount:[NSNumber numberWithInt:value_]];
+}
+
+- (int32_t)primitiveLikesCountValue {
+	NSNumber *result = [self primitiveLikesCount];
+	return [result intValue];
+}
+
+- (void)setPrimitiveLikesCountValue:(int32_t)value_ {
+	[self setPrimitiveLikesCount:[NSNumber numberWithInt:value_]];
+}
 
 
 

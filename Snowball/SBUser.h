@@ -26,4 +26,7 @@
                    success:(void (^)(void))success
                    failure:(void (^)(NSError *error))failure;
 
+- (void)getWithSuccess:(void (^)(void))success
+               failure:(void (^)(NSError *error))failure;
+
 @end

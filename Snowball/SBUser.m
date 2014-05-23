@@ -107,6 +107,24 @@ static SBUser *_currentUser = nil;
                                }];
 }
 
+- (void)getWithSuccess:(void (^)(void))success
+               failure:(void (^)(NSError *error))failure {
+    NSString *path = [NSString stringWithFormat:@"users/%@", self.remoteID];
+    [[SBAPIManager sharedManager] GET:path
+                           parameters:nil
+                              success:^(NSURLSessionDataTask *task, id responseObject) {
+                                  NSArray *_user = responseObject[@"user"];
+                                  [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                                      [SBUser MR_importFromObject:_user inContext:localContext];
+                                  }];
+                                  if (success) { success(); };
+                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                  if (failure) { failure(error); };
+                              }];
+}
+
+
+
 #pragma mark - SBManagedObject
 
 - (void)updateWithSuccess:(void(^)(void))success failure:(void(^)(NSError *error))failure {
