@@ -14,6 +14,30 @@
 
 @synthesize videoToSubmit;
 
+#pragma mark - Like
+
+- (void)likeWithSuccess:(void (^)(void))success failure:(void (^)(NSError *error))failure {
+    [self setLikedValue:YES];
+    [self setLikesCountValue:self.likesCountValue+1];
+    [self save];
+    [self postLikeWithSuccess:^{
+        if (success) { success(); };
+    } failure:^(NSError *error) {
+        if (failure) { failure(error); };
+    }];
+}
+
+- (void)unlikeWithSuccess:(void (^)(void))success failure:(void (^)(NSError *error))failure {
+    [self setLikedValue:NO];
+    [self setLikesCountValue:self.likesCountValue-1];
+    [self save];
+    [self deleteLikeWithSuccess:^{
+        if (success) { success(); };
+    } failure:^(NSError *error) {
+        if (failure) { failure(error); };
+    }];
+}
+
 #pragma mark - Remote
 
 + (void)getRecentClipsForReel:(SBReel *)reel
@@ -34,7 +58,7 @@
                               }];
 }
 
-- (void)likeWithSuccess:(void (^)(void))success failure:(void (^)(NSError *error))failure {
+- (void)postLikeWithSuccess:(void (^)(void))success failure:(void (^)(NSError *error))failure {
     NSString *path = [NSString stringWithFormat:@"clips/%@/likes", self.remoteID];
     [[SBAPIManager sharedManager] POST:path
                             parameters:nil
@@ -56,7 +80,7 @@
                                }];
 }
 
-- (void)unlikeWithSuccess:(void (^)(void))success failure:(void (^)(NSError *error))failure {
+- (void)deleteLikeWithSuccess:(void (^)(void))success failure:(void (^)(NSError *error))failure {
     NSString *path = [NSString stringWithFormat:@"clips/%@/likes", self.remoteID];
     [[SBAPIManager sharedManager] DELETE:path
                               parameters:nil

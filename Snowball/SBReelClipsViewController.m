@@ -68,21 +68,20 @@
 
 - (IBAction)likeClip:(id)sender {
     if (self.currentClip.likedValue) {
-        NSLog(@"Unliking...");
-        [self.currentClip unlikeWithSuccess:^{
-            NSLog(@"Unliked.");
-        } failure:^(NSError *error) {
-            NSLog(@"Failed Unliked.");
-        }];
+        [self.currentClip unlikeWithSuccess:nil
+                                    failure:^(NSError *error) {
+                                        [error displayInView:self.view];
+                                        [self updateClipUI];
+                                    }];
     }
     else {
-        NSLog(@"Liking...");
-        [self.currentClip likeWithSuccess:^{
-            NSLog(@"Liked.");
-        } failure:^(NSError *error) {
-            NSLog(@"Failed Liked.");
-        }];
+        [self.currentClip likeWithSuccess:nil
+                                  failure:^(NSError *error) {
+                                      [error displayInView:self.view];
+                                      [self updateClipUI];
+                                  }];
     }
+    [self updateClipUI];
 }
 
 #pragma mark - Video Player
@@ -113,10 +112,9 @@
     }
 }
 
-- (void)setCurrentClip:(SBClip *)currentClip {
-    _currentClip = currentClip;
-    [self.userNameLabel setText:currentClip.user.username];
-    [self.likesCountLabel setText:[NSString stringWithFormat:@"%@", currentClip.likesCount]];
+- (void)updateClipUI {
+    [self.userNameLabel setText:self.currentClip.user.username];
+    [self.likesCountLabel setText:[NSString stringWithFormat:@"%@", self.currentClip.likesCount]];
 }
 
 #pragma mark - Setters / Getters
@@ -136,6 +134,11 @@
         }
     }
     _playerItems = [playerItems copy];
+}
+
+- (void)setCurrentClip:(SBClip *)currentClip {
+    _currentClip = currentClip;
+    [self updateClipUI];
 }
 
 @end
