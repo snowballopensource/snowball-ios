@@ -20,6 +20,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *userNameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *likesCountLabel;
 
+@property (nonatomic, strong) SBClip *currentClip;
 @property (nonatomic, copy) NSArray *clips;
 @property (nonatomic, copy, readonly) NSArray *playerItems;
 
@@ -65,13 +66,32 @@
                                      }];
 }
 
+- (IBAction)likeClip:(id)sender {
+    if (self.currentClip.likedValue) {
+        NSLog(@"Unliking...");
+        [self.currentClip unlikeWithSuccess:^{
+            NSLog(@"Unliked.");
+        } failure:^(NSError *error) {
+            NSLog(@"Failed Unliked.");
+        }];
+    }
+    else {
+        NSLog(@"Liking...");
+        [self.currentClip likeWithSuccess:^{
+            NSLog(@"Liked.");
+        } failure:^(NSError *error) {
+            NSLog(@"Failed Liked.");
+        }];
+    }
+}
+
 #pragma mark - Video Player
 
 - (void)playReel {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"reel == %@", self.reel];
     NSFetchRequest *fetchRequest = [SBClip MR_requestAllSortedBy:@"createdAt" ascending:YES withPredicate:predicate];
     [self setClips:[SBClip MR_executeFetchRequest:fetchRequest]];
-    [self clipWillPlay:[self.clips firstObject]];
+    [self setCurrentClip:[self.clips firstObject]];
     AVQueuePlayer *player = [[AVQueuePlayer alloc] initWithItems:self.playerItems];
     [player setActionAtItemEnd:AVPlayerActionAtItemEndAdvance];
     [player play];
@@ -86,16 +106,17 @@
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
     AVPlayerItem *currentPlayerItem = [notification object];
-    NSUInteger currentPlayerItemIndex = [self.playerItems indexOfObject:currentPlayerItem];
-    if (currentPlayerItemIndex < [self.playerItems count]) {
-        SBClip *nextClip = self.clips[currentPlayerItemIndex+1];
-        [self clipWillPlay:nextClip];
+    NSUInteger nextPlayerItemIndex = [self.playerItems indexOfObject:currentPlayerItem];
+    if (nextPlayerItemIndex < [self.playerItems count]) {
+        SBClip *nextClip = self.clips[nextPlayerItemIndex];
+        [self setCurrentClip:nextClip];
     }
 }
 
-- (void)clipWillPlay:(SBClip *)clip {
-    [self.userNameLabel setText:clip.user.username];
-    [self.likesCountLabel setText:@"0"];
+- (void)setCurrentClip:(SBClip *)currentClip {
+    _currentClip = currentClip;
+    [self.userNameLabel setText:currentClip.user.username];
+    [self.likesCountLabel setText:[NSString stringWithFormat:@"%@", currentClip.likesCount]];
 }
 
 #pragma mark - Setters / Getters

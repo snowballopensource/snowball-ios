@@ -34,6 +34,50 @@
                               }];
 }
 
+- (void)likeWithSuccess:(void (^)(void))success failure:(void (^)(NSError *error))failure {
+    NSString *path = [NSString stringWithFormat:@"clips/%@/likes", self.remoteID];
+    [[SBAPIManager sharedManager] POST:path
+                            parameters:nil
+                               success:^(NSURLSessionDataTask *task, id responseObject) {
+                                   [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                                       SBClip *clip = [self MR_inContext:localContext];
+                                       NSInteger statusCode = [(NSHTTPURLResponse *)task.response statusCode];
+                                       BOOL liked = (statusCode == 201) ? YES : NO;
+                                       [clip setLikedValue:liked];
+                                   }];
+                                   if (success) { success(); };
+                               }
+                               failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                   [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                                       SBClip *clip = [self MR_inContext:localContext];
+                                       [clip setLikedValue:NO];
+                                   }];
+                                   if (failure) { failure(error); };
+                               }];
+}
+
+- (void)unlikeWithSuccess:(void (^)(void))success failure:(void (^)(NSError *error))failure {
+    NSString *path = [NSString stringWithFormat:@"clips/%@/likes", self.remoteID];
+    [[SBAPIManager sharedManager] DELETE:path
+                              parameters:nil
+                                 success:^(NSURLSessionDataTask *task, id responseObject) {
+                                     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                                         SBClip *clip = [self MR_inContext:localContext];
+                                         NSInteger statusCode = [(NSHTTPURLResponse *)task.response statusCode];
+                                         BOOL liked = (statusCode == 204) ? NO : YES;
+                                         [clip setLikedValue:liked];
+                                     }];
+                                     if (success) { success(); };
+                                 }
+                                 failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                                         SBClip *clip = [self MR_inContext:localContext];
+                                         [clip setLikedValue:YES];
+                                     }];
+                                     if (failure) { failure(error); };
+                                 }];
+}
+
 #pragma mark - SBManagedObject
 
 - (void)createWithSuccess:(void(^)(void))success failure:(void(^)(NSError *error))failure {
