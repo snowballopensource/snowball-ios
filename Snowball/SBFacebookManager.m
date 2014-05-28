@@ -54,7 +54,7 @@
         [self setAuthenticationSuccessBlock:success];
         [self setAuthenticationFailureBlock:failure];
 
-        [FBSession openActiveSessionWithReadPermissions:@[@"public_profile"]
+        [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"email"]
                                            allowLoginUI:allowSignInUI
                                       completionHandler:
          ^(FBSession *session, FBSessionState state, NSError *error) {
