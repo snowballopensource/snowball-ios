@@ -19,6 +19,14 @@
     return YES;
 }
 
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [SBSessionManager handleDidBecomeActive];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [SBSessionManager handleOpenURL:url sourceApplication:sourceApplication];
+}
+
 - (void)applicationWillTerminate:(UIApplication *)application {
     [MagicalRecord cleanUp];
 }

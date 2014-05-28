@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
+#import "SBFacebookManager.h"
 #import "SBSessionManager.h"
 #import "SBUser.h"
 
@@ -13,10 +14,12 @@
 
 + (void)startSession {
     [self requestUserAuthenticationIfNecessary:NO];
+    [SBFacebookManager startSession];
 }
 
 + (void)signOut {
     [SBUser removeCurrentUser];
+    [SBFacebookManager signOut];
     [self requestUserAuthenticationIfNecessary:YES];
 }
 
@@ -31,6 +34,21 @@
     }
 }
 
++ (BOOL)validSession {
+    if ([SBUser currentUser]) return true;
+    return false;
+}
+
+#pragma mark - Handlers
+
++ (void)handleDidBecomeActive {
+    [SBFacebookManager handleDidBecomeActive];
+}
+
++ (BOOL)handleOpenURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication {
+    return [SBFacebookManager handleOpenURL:url sourceApplication:sourceApplication];
+}
+
 #pragma mark - Session Date
 
 + (NSDate *)sessionDate {
@@ -43,11 +61,6 @@
 }
 
 #pragma mark - Private
-
-+ (BOOL)validSession {
-    if ([SBUser currentUser]) return true;
-    return false;
-}
 
 + (UINavigationController *)authenticationNavigationController {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Authentication" bundle:nil];

@@ -1,22 +1,21 @@
 //
-//  SBSessionManager.h
+//  SBFacebookManager.h
 //  Snowball
 //
-//  Created by James Martinez on 5/14/14.
+//  Created by James Martinez on 5/27/14.
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface SBSessionManager : NSObject
+@interface SBFacebookManager : NSObject
 
 + (void)startSession;
++ (void)signInWithSuccess:(void (^)(void))success
+                  failure:(void (^)(NSError *error))failure;
 + (void)signOut;
-+ (BOOL)validSession;
 
 + (void)handleDidBecomeActive;
 + (BOOL)handleOpenURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication;
-
-+ (NSDate *)sessionDate;
 
 @end

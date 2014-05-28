@@ -6,7 +6,9 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
+#import "SBAuthenticationNavigationController.h"
 #import "SBAuthenticationMenuViewController.h"
+#import "SBFacebookManager.h"
 
 @interface SBAuthenticationMenuViewController ()
 
@@ -32,8 +34,12 @@
 
 - (IBAction)authenticateWithFacebook:(id)sender {
     [self showSpinner];
-    // TODO: implement this
-    NSLog(@"Not yet implemented");
+    [SBFacebookManager signInWithSuccess:^{
+        [self hideSpinner];
+        [(SBAuthenticationNavigationController *)self.navigationController dismiss];
+    } failure:^(NSError *error) {
+        [error displayInView:self.view];
+    }];
 }
 
 - (IBAction)showTermsOfService:(id)sender {

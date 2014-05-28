@@ -21,6 +21,7 @@
 
 #import <AFNetworking/AFNetworking.h>
 #import <BlocksKit/BlocksKit+UIKit.h>
+#import <Facebook-iOS-SDK/FacebookSDK/Facebook.h>
 #import <GPUImage/GPUImage.h>
 #import <MagicalRecord/CoreData+MagicalRecord.h>
 #import <MBProgressHUD/MBProgressHUD.h>

@@ -33,7 +33,10 @@ PODS:
   - BlocksKit/UIKit (2.2.3):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
+  - Bolts (1.1.0)
   - ECSlidingViewController (2.0.2)
+  - Facebook-iOS-SDK (3.14.1):
+    - Bolts
   - GPUImage (0.1.4)
   - MagicalRecord (2.3.0-beta.2):
     - MagicalRecord/Core
@@ -50,6 +53,7 @@ DEPENDENCIES:
   - AFNetworking
   - BlocksKit
   - ECSlidingViewController
+  - Facebook-iOS-SDK
   - GPUImage
   - MagicalRecord (from `https://github.com/magicalpanda/MagicalRecord.git`)
   - MBProgressHUD
@@ -65,7 +69,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
   BlocksKit: 07c8a80f04275efac6a5f8b973782489c083a182
+  Bolts: 91c2af8eae1d44e1dd75946a5b0ae04a43ea43e4
   ECSlidingViewController: 6c11fadb10d720c2d48bc577962332bdd4264c9f
+  Facebook-iOS-SDK: e9b3d5ac54ee3e5e693f4eef470b97911b3d076d
   GPUImage: ac2bde5f4dbea02a81ced6313964cec1f2043ca9
   MagicalRecord: b7d8943e180dbd5c1dd48a807885e0059ce0bc82
   MBProgressHUD: c356980b0cd097f19acec959b49dca5eb8ec31be

@@ -62,6 +62,26 @@ static SBUser *_currentUser = nil;
 
 #pragma mark - Authentication
 
++ (void)facebookAuthWithAccessToken:(NSString *)accessToken
+                            success:(void (^)(void))success
+                            failure:(void (^)(NSError *error))failure {
+    [[SBAPIManager sharedManager] POST:@"auth/facebook"
+                            parameters:@{@"access_token": accessToken}
+                               success:^(NSURLSessionDataTask *task, id responseObject) {
+                                   __block SBUser *user = nil;
+                                   NSDictionary *_user = responseObject[@"user"];
+                                   [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                                       user = [SBUser MR_importFromObject:_user inContext:localContext];
+                                   }];
+                                   user = [user MR_inContext:[NSManagedObjectContext MR_defaultContext]];
+                                   [user setAuthToken:[_user objectForKey:@"auth_token"]];
+                                   [SBUser setCurrentUser:user];
+                                   if (success) { success(); }
+                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                   if (failure) { failure(error); };
+                               }];
+}
+
 + (void)signInWithEmail:(NSString *)email
                password:(NSString *)password
                 success:(void (^)(void))success
@@ -128,24 +148,24 @@ static SBUser *_currentUser = nil;
 #pragma mark - SBManagedObject
 
 - (void)updateWithSuccess:(void(^)(void))success failure:(void(^)(NSError *error))failure {
-//    NSMutableDictionary *userParameters = [NSMutableDictionary new];
-//    userParameters[@"name"] = self.name;
-//    userParameters[@"username"] = self.username;
-//    userParameters[@"email"] = self.email;
-//    NSDictionary *parameters = @{ @"user": [userParameters copy] };
-//    NSString *path = [NSString stringWithFormat:@"users/%@", [GLUser currentUser].remoteID];
-//    [[GLAPIManager sharedManager] PUT:path
-//                           parameters:parameters
-//                              success:^(NSURLSessionDataTask *task, id responseObject) {
-//                                  NSDictionary *_user = responseObject[@"user"];
-//                                  [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-//                                      GLUser *user = [self MR_inContext:localContext];
-//                                      [user MR_importValuesForKeysWithObject:_user];
-//                                  }];
-//                                  if (success) { success(); }
-//                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//                                  if (failure) { failure(error); };
-//                              }];
+    //    NSMutableDictionary *userParameters = [NSMutableDictionary new];
+    //    userParameters[@"name"] = self.name;
+    //    userParameters[@"username"] = self.username;
+    //    userParameters[@"email"] = self.email;
+    //    NSDictionary *parameters = @{ @"user": [userParameters copy] };
+    //    NSString *path = [NSString stringWithFormat:@"users/%@", [GLUser currentUser].remoteID];
+    //    [[GLAPIManager sharedManager] PUT:path
+    //                           parameters:parameters
+    //                              success:^(NSURLSessionDataTask *task, id responseObject) {
+    //                                  NSDictionary *_user = responseObject[@"user"];
+    //                                  [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+    //                                      GLUser *user = [self MR_inContext:localContext];
+    //                                      [user MR_importValuesForKeysWithObject:_user];
+    //                                  }];
+    //                                  if (success) { success(); }
+    //                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
+    //                                  if (failure) { failure(error); };
+    //                              }];
 }
 
 @end

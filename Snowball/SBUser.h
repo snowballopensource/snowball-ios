@@ -15,6 +15,10 @@
 + (SBUser *)currentUser;
 + (void)removeCurrentUser;
 
++ (void)facebookAuthWithAccessToken:(NSString *)accessToken
+                            success:(void (^)(void))success
+                            failure:(void (^)(NSError *error))failure;
+
 + (void)signInWithEmail:(NSString *)email
                password:(NSString *)password
                 success:(void (^)(void))success

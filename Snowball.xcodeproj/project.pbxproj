@@ -52,6 +52,7 @@
 		BAC9FB4319241774008742EE /* SBSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB4219241774008742EE /* SBSessionManager.m */; };
 		BAC9FB471924183E008742EE /* _SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB451924183E008742EE /* _SBUser.m */; };
 		BAC9FB4B19241858008742EE /* SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB4A19241858008742EE /* SBUser.m */; };
+		BAD86C2F193553BC0046EE22 /* SBFacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD86C2E193553BC0046EE22 /* SBFacebookManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +152,8 @@
 		BAC9FB451924183E008742EE /* _SBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SBUser.m; sourceTree = "<group>"; };
 		BAC9FB4919241858008742EE /* SBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUser.h; sourceTree = "<group>"; };
 		BAC9FB4A19241858008742EE /* SBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUser.m; sourceTree = "<group>"; };
+		BAD86C2D193553BC0046EE22 /* SBFacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFacebookManager.h; sourceTree = "<group>"; };
+		BAD86C2E193553BC0046EE22 /* SBFacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFacebookManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,6 +324,8 @@
 			children = (
 				BA29C7EA192FD9C900F59684 /* SBPushNotificationManager.h */,
 				BA29C7EB192FD9C900F59684 /* SBPushNotificationManager.m */,
+				BAD86C2D193553BC0046EE22 /* SBFacebookManager.h */,
+				BAD86C2E193553BC0046EE22 /* SBFacebookManager.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -555,6 +560,7 @@
 				BA29C7EC192FD9C900F59684 /* SBPushNotificationManager.m in Sources */,
 				BAC81398192C3E1B002323E1 /* SBCameraNavigationBar.m in Sources */,
 				BA93700C1923253D00D3CAFB /* SBVideoPickerController.m in Sources */,
+				BAD86C2F193553BC0046EE22 /* SBFacebookManager.m in Sources */,
 				BA15B9ED192AD9AD00453F8F /* UINavigationBar+CustomHeight.m in Sources */,
 				BA5CD6921926CEDA0087D3A2 /* SBFadeOverlayView.m in Sources */,
 				BAC9FB3A192413C6008742EE /* SBAuthenticationMenuViewController.m in Sources */,
