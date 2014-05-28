@@ -24,11 +24,12 @@
                 success:(void (^)(void))success
                 failure:(void (^)(NSError *error))failure;
 
-+ (void)signUpWithUsername:(NSString *)username
-                     email:(NSString *)email
-                  password:(NSString *)password
-                   success:(void (^)(void))success
-                   failure:(void (^)(NSError *error))failure;
++ (void)signUpWithName:(NSString *)name
+              username:(NSString *)username
+                 email:(NSString *)email
+              password:(NSString *)password
+               success:(void (^)(void))success
+               failure:(void (^)(NSError *error))failure;
 
 - (void)getWithSuccess:(void (^)(void))success
                failure:(void (^)(NSError *error))failure;

@@ -12,6 +12,7 @@
 
 @interface SBSignUpViewController ()
 
+@property (nonatomic, weak) IBOutlet UITextField *nameTextField;
 @property (nonatomic, weak) IBOutlet UITextField *usernameTextField;
 @property (nonatomic, weak) IBOutlet UITextField *emailTextField;
 @property (nonatomic, weak) IBOutlet UITextField *passwordTextField;
@@ -23,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 #if DEBUG
+    [self.nameTextField setText:@"test user"];
     [self.usernameTextField setText:@"snowballdev"];
     [self.emailTextField setText:@"blackhole@snowball.is"];
     [self.passwordTextField setText:@"something"];
@@ -46,17 +48,18 @@
 
 - (IBAction)signUp:(id)sender {
     [self showSpinner];
-    [SBUser signUpWithUsername:self.usernameTextField.text
-                         email:self.emailTextField.text
-                      password:self.passwordTextField.text
-                       success:^{
-                           [self hideSpinner];
-                           [(SBAuthenticationNavigationController *)self.navigationController dismiss];
-                       }
-                       failure:^(NSError *error) {
-                           [self hideSpinner];
-                           [error displayInView:self.view];
-                       }];
+    [SBUser signUpWithName:self.nameTextField.text
+                  username:self.usernameTextField.text
+                     email:self.emailTextField.text
+                  password:self.passwordTextField.text
+                   success:^{
+                       [self hideSpinner];
+                       [(SBAuthenticationNavigationController *)self.navigationController dismiss];
+                   }
+                   failure:^(NSError *error) {
+                       [self hideSpinner];
+                       [error displayInView:self.view];
+                   }];
 }
 
 @end

@@ -104,12 +104,13 @@ static SBUser *_currentUser = nil;
                                }];
 }
 
-+ (void)signUpWithUsername:(NSString *)username
-                     email:(NSString *)email
-                  password:(NSString *)password
-                   success:(void (^)(void))success
-                   failure:(void (^)(NSError *error))failure {
-    NSDictionary *parameters = @{ @"user": @{ @"username": username, @"email": email, @"password": password } };
++ (void)signUpWithName:(NSString *)name
+              username:(NSString *)username
+                 email:(NSString *)email
+              password:(NSString *)password
+               success:(void (^)(void))success
+               failure:(void (^)(NSError *error))failure {
+    NSDictionary *parameters = @{ @"user": @{ @"name": name, @"username": username, @"email": email, @"password": password } };
     [[SBAPIManager sharedManager] POST:@"users/sign_up"
                             parameters:parameters
                                success:^(NSURLSessionDataTask *task, id responseObject) {
