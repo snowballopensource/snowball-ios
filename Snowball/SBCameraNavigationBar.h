@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SBCameraNavigationBar : UIView
+@interface SBCameraNavigationBar : GPUImageView
 
-- (void)setCamera:(BOOL)cameraEnabled;
+- (void)startCamera;
 
 @end

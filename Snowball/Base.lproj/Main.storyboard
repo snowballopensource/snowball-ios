@@ -188,6 +188,16 @@
                                             <segue destination="6xs-xX-SJg" kind="unwind" unwindAction="unwindToMenuViewController:" id="PO2-fm-L0k"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HkL-dO-8yP">
+                                        <rect key="frame" x="270" y="25" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="+">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="oXS-Jf-RHe" kind="modal" id="AUs-n2-Stz"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -197,7 +207,7 @@
                     <navigationItem key="navigationItem" id="Rih-po-8ca"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="cameraNavigationBar" destination="RlV-bx-eje" id="LaG-Wk-jHU"/>
+                        <outlet property="cameraNavigationBar" destination="RlV-bx-eje" id="CSt-ct-2rA"/>
                         <outlet property="tableView" destination="Xh3-3G-cJd" id="b3d-Ty-Nzu"/>
                         <segue destination="D54-9P-BdS" kind="push" identifier="SBReelClipsViewController" id="Gcf-NX-Zug"/>
                     </connections>
@@ -231,7 +241,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="takeVideo:" destination="D54-9P-BdS" eventType="touchUpInside" id="3HP-JM-HxR"/>
+                                    <segue destination="oXS-Jf-RHe" kind="modal" id="hxy-uf-ViZ"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="James" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffR-Oc-TVl">
@@ -271,6 +281,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fe9-26-Sr0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="60" y="22"/>
+        </scene>
+        <!--Video Picker View Controller-->
+        <scene sceneID="wVN-og-jaS">
+            <objects>
+                <viewController id="oXS-Jf-RHe" customClass="SBVideoPickerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="guJ-7F-ehV"/>
+                        <viewControllerLayoutGuide type="bottom" id="3IH-1S-6uZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PJT-zo-qf9" customClass="SBFullScreenCameraView">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kF-v5-kfX">
+                                <rect key="frame" x="20" y="518" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissViewController:" destination="oXS-Jf-RHe" eventType="touchUpInside" id="T7A-Zw-Two"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Ppt-fS-msg"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1u1-0B-rgP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="566" y="22"/>
         </scene>
         <!--Main Menu View Controller-->
         <scene sceneID="9mK-Yg-irm">
@@ -405,4 +447,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="AUs-n2-Stz"/>
+    </inferredMetricsTieBreakers>
 </document>

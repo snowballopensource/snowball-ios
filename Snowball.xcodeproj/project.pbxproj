@@ -28,6 +28,8 @@
 		BA29C7EC192FD9C900F59684 /* SBPushNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA29C7EB192FD9C900F59684 /* SBPushNotificationManager.m */; };
 		BA29C7EE192FDAE400F59684 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA29C7ED192FDAE400F59684 /* AirshipConfig.plist */; };
 		BA29C7F2192FEBC400F59684 /* SBProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA29C7F1192FEBC400F59684 /* SBProfileViewController.m */; };
+		BA3D9A2A19382C79003C5670 /* SBVideoPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3D9A2919382C79003C5670 /* SBVideoPickerViewController.m */; };
+		BA4AC5E21938EBF00004D5CF /* SBFullScreenCameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4AC5E11938EBF00004D5CF /* SBFullScreenCameraView.m */; };
 		BA5238A51920B9630088A730 /* SBPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5238A41920B9630088A730 /* SBPlayerView.m */; };
 		BA5CD67F192689430087D3A2 /* SBMainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD67E192689430087D3A2 /* SBMainMenuViewController.m */; };
 		BA5CD68819269A530087D3A2 /* SBJSONResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD68719269A530087D3A2 /* SBJSONResponseSerializer.m */; };
@@ -41,7 +43,7 @@
 		BA9370001923153100D3CAFB /* _SBReel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FFF1923153100D3CAFB /* _SBReel.m */; };
 		BA9370031923153D00D3CAFB /* SBReel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9370021923153D00D3CAFB /* SBReel.m */; };
 		BA937006192317F600D3CAFB /* SBReelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA937005192317F600D3CAFB /* SBReelTableViewCell.xib */; };
-		BA93700C1923253D00D3CAFB /* SBVideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA93700B1923253D00D3CAFB /* SBVideoPickerController.m */; };
+		BA98D0021936B85200753E1B /* SBCameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA98D0011936B85200753E1B /* SBCameraManager.m */; };
 		BAC81380192BC5E1002323E1 /* UIViewController+Spinner.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC8137F192BC5E1002323E1 /* UIViewController+Spinner.m */; };
 		BAC81398192C3E1B002323E1 /* SBCameraNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC81397192C3E1B002323E1 /* SBCameraNavigationBar.m */; };
 		BAC9FB3319241296008742EE /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAC9FB3219241296008742EE /* Authentication.storyboard */; };
@@ -106,6 +108,10 @@
 		BA29C7ED192FDAE400F59684 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AirshipConfig.plist; sourceTree = "<group>"; };
 		BA29C7F0192FEBC400F59684 /* SBProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBProfileViewController.h; sourceTree = "<group>"; };
 		BA29C7F1192FEBC400F59684 /* SBProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBProfileViewController.m; sourceTree = "<group>"; };
+		BA3D9A2819382C79003C5670 /* SBVideoPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBVideoPickerViewController.h; sourceTree = "<group>"; };
+		BA3D9A2919382C79003C5670 /* SBVideoPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBVideoPickerViewController.m; sourceTree = "<group>"; };
+		BA4AC5E01938EBF00004D5CF /* SBFullScreenCameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFullScreenCameraView.h; sourceTree = "<group>"; };
+		BA4AC5E11938EBF00004D5CF /* SBFullScreenCameraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFullScreenCameraView.m; sourceTree = "<group>"; };
 		BA5238A31920B9630088A730 /* SBPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBPlayerView.h; sourceTree = "<group>"; };
 		BA5238A41920B9630088A730 /* SBPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBPlayerView.m; sourceTree = "<group>"; };
 		BA5CD67D192689430087D3A2 /* SBMainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBMainMenuViewController.h; sourceTree = "<group>"; };
@@ -131,8 +137,8 @@
 		BA9370011923153D00D3CAFB /* SBReel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBReel.h; sourceTree = "<group>"; };
 		BA9370021923153D00D3CAFB /* SBReel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBReel.m; sourceTree = "<group>"; };
 		BA937005192317F600D3CAFB /* SBReelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBReelTableViewCell.xib; sourceTree = "<group>"; };
-		BA93700A1923253D00D3CAFB /* SBVideoPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBVideoPickerController.h; sourceTree = "<group>"; };
-		BA93700B1923253D00D3CAFB /* SBVideoPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBVideoPickerController.m; sourceTree = "<group>"; };
+		BA98D0001936B85200753E1B /* SBCameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCameraManager.h; sourceTree = "<group>"; };
+		BA98D0011936B85200753E1B /* SBCameraManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCameraManager.m; sourceTree = "<group>"; };
 		BAC8137E192BC5E1002323E1 /* UIViewController+Spinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Spinner.h"; sourceTree = "<group>"; };
 		BAC8137F192BC5E1002323E1 /* UIViewController+Spinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Spinner.m"; sourceTree = "<group>"; };
 		BAC81396192C3E1B002323E1 /* SBCameraNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCameraNavigationBar.h; sourceTree = "<group>"; };
@@ -214,7 +220,7 @@
 				BAC9FB4219241774008742EE /* SBSessionManager.m */,
 				BA048E21191AFAD10083B0DC /* Models */,
 				BA048E1A191AF85D0083B0DC /* Views */,
-				BA048E19191AF84B0083B0DC /* Controllers */,
+				BA048E19191AF84B0083B0DC /* View Controllers */,
 				BA29C7EF192FDC0400F59684 /* Managers */,
 				BA048DF9191AF6730083B0DC /* Images.xcassets */,
 				BA048DE8191AF6730083B0DC /* Supporting Files */,
@@ -253,7 +259,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BA048E19191AF84B0083B0DC /* Controllers */ = {
+		BA048E19191AF84B0083B0DC /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				BA048DF6191AF6730083B0DC /* SBViewController.h */,
@@ -264,13 +270,13 @@
 				BA936FF6192312DF00D3CAFB /* SBReelsViewController.m */,
 				BA048E16191AF83A0083B0DC /* SBReelClipsViewController.h */,
 				BA048E17191AF83A0083B0DC /* SBReelClipsViewController.m */,
-				BA93700A1923253D00D3CAFB /* SBVideoPickerController.h */,
-				BA93700B1923253D00D3CAFB /* SBVideoPickerController.m */,
+				BA3D9A2819382C79003C5670 /* SBVideoPickerViewController.h */,
+				BA3D9A2919382C79003C5670 /* SBVideoPickerViewController.m */,
 				BA29C7F0192FEBC400F59684 /* SBProfileViewController.h */,
 				BA29C7F1192FEBC400F59684 /* SBProfileViewController.m */,
 				BAC9FB371924138B008742EE /* Authentication */,
 			);
-			name = Controllers;
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		BA048E1A191AF85D0083B0DC /* Views */ = {
@@ -282,8 +288,7 @@
 				BA5238A41920B9630088A730 /* SBPlayerView.m */,
 				BA5CD6901926CEDA0087D3A2 /* SBFadeOverlayView.h */,
 				BA5CD6911926CEDA0087D3A2 /* SBFadeOverlayView.m */,
-				BAC81396192C3E1B002323E1 /* SBCameraNavigationBar.h */,
-				BAC81397192C3E1B002323E1 /* SBCameraNavigationBar.m */,
+				BA4AC5DF1938EA960004D5CF /* Camera */,
 				BA9370041923173200D3CAFB /* Cells */,
 			);
 			name = Views;
@@ -326,8 +331,21 @@
 				BA29C7EB192FD9C900F59684 /* SBPushNotificationManager.m */,
 				BAD86C2D193553BC0046EE22 /* SBFacebookManager.h */,
 				BAD86C2E193553BC0046EE22 /* SBFacebookManager.m */,
+				BA98D0001936B85200753E1B /* SBCameraManager.h */,
+				BA98D0011936B85200753E1B /* SBCameraManager.m */,
 			);
 			name = Managers;
+			sourceTree = "<group>";
+		};
+		BA4AC5DF1938EA960004D5CF /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				BAC81396192C3E1B002323E1 /* SBCameraNavigationBar.h */,
+				BAC81397192C3E1B002323E1 /* SBCameraNavigationBar.m */,
+				BA4AC5E01938EBF00004D5CF /* SBFullScreenCameraView.h */,
+				BA4AC5E11938EBF00004D5CF /* SBFullScreenCameraView.m */,
+			);
+			name = Camera;
 			sourceTree = "<group>";
 		};
 		BA5CD68519268B6C0087D3A2 /* Main Menu */ = {
@@ -542,11 +560,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAC9FB3D1924152D008742EE /* SBSignUpViewController.m in Sources */,
+				BA98D0021936B85200753E1B /* SBCameraManager.m in Sources */,
 				BA9370001923153100D3CAFB /* _SBReel.m in Sources */,
 				BA048E2B191AFB110083B0DC /* SBClip.m in Sources */,
 				BA048E26191AFAD90083B0DC /* _SBClip.m in Sources */,
 				BA936FF3192310B200D3CAFB /* SBManagedTableViewController.m in Sources */,
 				BA936FFD1923143400D3CAFB /* SBReelTableViewCell.m in Sources */,
+				BA4AC5E21938EBF00004D5CF /* SBFullScreenCameraView.m in Sources */,
 				BA5238A51920B9630088A730 /* SBPlayerView.m in Sources */,
 				BAC9FB471924183E008742EE /* _SBUser.m in Sources */,
 				BA048DEE191AF6730083B0DC /* main.m in Sources */,
@@ -559,9 +579,9 @@
 				BA048DF8191AF6730083B0DC /* SBViewController.m in Sources */,
 				BA29C7EC192FD9C900F59684 /* SBPushNotificationManager.m in Sources */,
 				BAC81398192C3E1B002323E1 /* SBCameraNavigationBar.m in Sources */,
-				BA93700C1923253D00D3CAFB /* SBVideoPickerController.m in Sources */,
 				BAD86C2F193553BC0046EE22 /* SBFacebookManager.m in Sources */,
 				BA15B9ED192AD9AD00453F8F /* UINavigationBar+CustomHeight.m in Sources */,
+				BA3D9A2A19382C79003C5670 /* SBVideoPickerViewController.m in Sources */,
 				BA5CD6921926CEDA0087D3A2 /* SBFadeOverlayView.m in Sources */,
 				BAC9FB3A192413C6008742EE /* SBAuthenticationMenuViewController.m in Sources */,
 				BA5CD67F192689430087D3A2 /* SBMainMenuViewController.m in Sources */,
