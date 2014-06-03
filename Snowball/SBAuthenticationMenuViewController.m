@@ -9,8 +9,12 @@
 #import "SBAuthenticationNavigationController.h"
 #import "SBAuthenticationMenuViewController.h"
 #import "SBFacebookManager.h"
+#import "SBWebViewController.h"
 
 @interface SBAuthenticationMenuViewController ()
+
+@property (nonatomic, weak) IBOutlet UIButton *termsButton;
+@property (nonatomic, weak) IBOutlet UIButton *privacyButton;
 
 @end
 
@@ -30,6 +34,18 @@
     [super viewWillDisappear:animated];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [super prepareForSegue:segue sender:sender];
+    if ([segue.destinationViewController isKindOfClass:[SBWebViewController class]]) {
+        SBWebViewController *vc = segue.destinationViewController;
+        if (sender == self.termsButton) {
+            [vc setUrl:[NSURL URLWithString:@"http://snowball.is/terms"]];
+        } else if (sender == self.privacyButton) {
+            [vc setUrl:[NSURL URLWithString:@"http://snowball.is/privacy"]];
+        }
+    }
+}
+
 #pragma mark - Actions
 
 - (IBAction)authenticateWithFacebook:(id)sender {
@@ -40,16 +56,6 @@
     } failure:^(NSError *error) {
         [error displayInView:self.view];
     }];
-}
-
-- (IBAction)showTermsOfService:(id)sender {
-    // TODO: implement this
-    NSLog(@"Not yet implemented");
-}
-
-- (IBAction)showPrivacyPolicy:(id)sender {
-    // TODO: implement this
-    NSLog(@"Not yet implemented");
 }
 
 @end

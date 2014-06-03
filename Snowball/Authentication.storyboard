@@ -68,7 +68,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="showTermsOfService:" destination="YY8-xt-qJI" eventType="touchUpInside" id="s2x-o2-Pl8"/>
+                                    <segue destination="pVi-IR-Ym2" kind="push" id="VpW-yT-JVs"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AZL-H9-Jwe">
@@ -78,17 +78,50 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="showPrivacyPolicy:" destination="YY8-xt-qJI" eventType="touchUpInside" id="NmU-ac-hOP"/>
+                                    <segue destination="pVi-IR-Ym2" kind="push" id="AOA-3W-2xc"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="a7e-K8-PXe"/>
+                    <connections>
+                        <outlet property="privacyButton" destination="AZL-H9-Jwe" id="iKZ-Bc-NQ3"/>
+                        <outlet property="termsButton" destination="efR-JT-aX9" id="J5x-yt-H4J"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zyd-99-UK8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="440" y="94"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="Hu1-Sg-Hir">
+            <objects>
+                <viewController id="pVi-IR-Ym2" customClass="SBWebViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4ya-kw-lsw"/>
+                        <viewControllerLayoutGuide type="bottom" id="cyD-Ar-mVf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="b56-gT-lSd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vp5-Y5-wAQ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ofl-94-0Pm"/>
+                    <connections>
+                        <outlet property="webView" destination="Vp5-Y5-wAQ" id="dlb-I3-Pr2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9xH-TV-tAn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="878" y="1549"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="Umd-s3-SXI">
@@ -300,4 +333,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="AOA-3W-2xc"/>
+    </inferredMetricsTieBreakers>
 </document>

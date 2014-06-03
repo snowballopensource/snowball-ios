@@ -55,6 +55,7 @@
 		BAC9FB471924183E008742EE /* _SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB451924183E008742EE /* _SBUser.m */; };
 		BAC9FB4B19241858008742EE /* SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB4A19241858008742EE /* SBUser.m */; };
 		BAD86C2F193553BC0046EE22 /* SBFacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD86C2E193553BC0046EE22 /* SBFacebookManager.m */; };
+		BAEC7C10193DE528003FAE13 /* SBWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAEC7C0F193DE528003FAE13 /* SBWebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +161,8 @@
 		BAC9FB4A19241858008742EE /* SBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUser.m; sourceTree = "<group>"; };
 		BAD86C2D193553BC0046EE22 /* SBFacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFacebookManager.h; sourceTree = "<group>"; };
 		BAD86C2E193553BC0046EE22 /* SBFacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFacebookManager.m; sourceTree = "<group>"; };
+		BAEC7C0E193DE528003FAE13 /* SBWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBWebViewController.h; sourceTree = "<group>"; };
+		BAEC7C0F193DE528003FAE13 /* SBWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBWebViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -419,6 +422,8 @@
 				BAC9FB3C1924152D008742EE /* SBSignUpViewController.m */,
 				BAC9FB3E19241536008742EE /* SBSignInViewController.h */,
 				BAC9FB3F19241536008742EE /* SBSignInViewController.m */,
+				BAEC7C0E193DE528003FAE13 /* SBWebViewController.h */,
+				BAEC7C0F193DE528003FAE13 /* SBWebViewController.m */,
 			);
 			name = Authentication;
 			sourceTree = "<group>";
@@ -585,6 +590,7 @@
 				BA5CD6921926CEDA0087D3A2 /* SBFadeOverlayView.m in Sources */,
 				BAC9FB3A192413C6008742EE /* SBAuthenticationMenuViewController.m in Sources */,
 				BA5CD67F192689430087D3A2 /* SBMainMenuViewController.m in Sources */,
+				BAEC7C10193DE528003FAE13 /* SBWebViewController.m in Sources */,
 				BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */,
 				BA217C9A192A4DF500F04D03 /* SBLongRunningTaskManager.m in Sources */,
 				BA29C7F2192FEBC400F59684 /* SBProfileViewController.m in Sources */,
