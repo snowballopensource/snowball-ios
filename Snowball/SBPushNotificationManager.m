@@ -14,6 +14,7 @@
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 
     // Build settings are in AirshipConfig.plist
+    [UAirship setLogging:NO];
     [UAirship takeOff];
     [UAPush setDefaultPushEnabledValue:NO];
 }
