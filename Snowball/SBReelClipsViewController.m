@@ -82,7 +82,7 @@
 }
 
 - (void)playLocalVideoImmediately:(NSURL *)videoLocalURL {
-    [self.playerView.player removeAllItems];
+    [(AVQueuePlayer *)self.playerView.player removeAllItems];
     AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:videoLocalURL];
     [self.playerView.player replaceCurrentItemWithPlayerItem:playerItem];
 }

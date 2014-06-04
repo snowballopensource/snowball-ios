@@ -8,12 +8,15 @@
 
 #import "SBCameraManager.h"
 #import "SBCameraViewController.h"
+#import "SBCreateReelViewController.h"
 
 @interface SBCameraViewController ()
 
 @property (nonatomic, weak) IBOutlet UIButton *dismissButton;
 @property (nonatomic, weak) IBOutlet UIButton *recordButton;
 @property (nonatomic, weak) IBOutlet UIButton *flipCameraButton;
+
+@property (nonatomic, strong) NSURL *recordingURL;
 
 @end
 
@@ -27,17 +30,25 @@
     [self.view insertSubview:previewView atIndex:0];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[SBCreateReelViewController class]]) {
+        SBCreateReelViewController *vc = segue.destinationViewController;
+        [vc setInitialRecordingURL:self.recordingURL];
+    }
+}
+
 #pragma mark - View Actions
 
 - (IBAction)toggleMovieRecording:(id)sender {
     if ([[SBCameraManager sharedManager] isRecording]) {
         [self.recordButton setEnabled:NO];
         [[SBCameraManager sharedManager] stopRecordingWithCompletion:^(NSURL *fileURL) {
+            [self setRecordingURL:fileURL];
             if (self.reel) {
                 [self dismissViewControllerAnimated:YES completion:nil];
                 // TODO: upload clip to existing reel
             } else {
-                [self performSegueWithIdentifier:@"SBCreateReelViewController" sender:self];
+                [self performSegueWithIdentifier:[SBCreateReelViewController identifier] sender:self];
             }
         }];
     } else {

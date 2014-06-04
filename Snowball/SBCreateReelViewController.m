@@ -7,16 +7,27 @@
 //
 
 #import "SBCreateReelViewController.h"
+#import "SBPlayerView.h"
 
 @interface SBCreateReelViewController ()
 
-@property (nonatomic, strong) IBOutlet UIButton *finishButton;
+@property (nonatomic, weak) IBOutlet SBPlayerView *playerView;
+@property (nonatomic, weak) IBOutlet UIButton *finishButton;
 
 @end
 
 @implementation SBCreateReelViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    AVPlayer *player = [[AVPlayer alloc] initWithURL:self.initialRecordingURL];
+    [self.playerView setPlayer:player];
+    [player play];
+}
+
 - (IBAction)finish:(id)sender {
+
     // TODO: create reel with initial clip
 }
 

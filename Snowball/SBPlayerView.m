@@ -14,9 +14,9 @@
     return [AVPlayerLayer class];
 }
 
-- (AVQueuePlayer *)player {
+- (AVPlayer *)player {
     AVPlayerLayer *playerLayer = (AVPlayerLayer *)self.layer;
-    return (AVQueuePlayer *)playerLayer.player;
+    return (AVPlayer *)playerLayer.player;
 }
 
 - (void)setPlayer:(AVPlayer *)player {

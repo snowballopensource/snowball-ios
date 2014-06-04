@@ -366,6 +366,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ogY-go-wb8" customClass="SBPlayerView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Share to:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSp-96-xSt">
                                 <rect key="frame" x="20" y="191" width="70" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -399,6 +404,7 @@
                     <navigationItem key="navigationItem" id="9J4-rc-iI6"/>
                     <connections>
                         <outlet property="finishButton" destination="kCU-jh-EQ3" id="YC9-6L-nRY"/>
+                        <outlet property="playerView" destination="ogY-go-wb8" id="wZa-k0-r0q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DR7-Zf-QKq" userLabel="First Responder" sceneMemberID="firstResponder"/>

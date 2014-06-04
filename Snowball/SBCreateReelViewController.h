@@ -10,4 +10,6 @@
 
 @interface SBCreateReelViewController : SBViewController
 
+@property (nonatomic, strong) NSURL *initialRecordingURL;
+
 @end
