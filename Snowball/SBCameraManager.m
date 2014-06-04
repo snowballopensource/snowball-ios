@@ -54,7 +54,6 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [self createPreviewView];
         [self initializeCamera];
     }
     return self;
@@ -62,15 +61,13 @@
 
 #pragma mark - Private
 
-- (void)createPreviewView {
-    [self setPreviewView:[SBCameraPreviewView new]];
-}
-
 - (void)initializeCamera {
     AVCaptureSession *captureSession = [[AVCaptureSession alloc] init];
     [self setCaptureSession:captureSession];
+
+    [self createPreviewView];
     [self.previewView setCaptureSession:captureSession];
-    
+
     [self checkDeviceAuthorizationStatus];
     
     // In general it is not safe to mutate an AVCaptureSession or any of its inputs, outputs, or connections from multiple threads at the same time.
@@ -124,6 +121,11 @@
         }]];
         [[self captureSession] startRunning];
     });
+}
+
+- (void)createPreviewView {
+    [self setPreviewView:[SBCameraPreviewView new]];
+    [(AVCaptureVideoPreviewLayer*)self.previewView.layer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
 }
 
 // TODO: this needs to be implemented somewhere
