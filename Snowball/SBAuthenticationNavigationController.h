@@ -10,6 +10,7 @@
 
 @interface SBAuthenticationNavigationController : UINavigationController
 
++ (NSString *)identifier;
 - (void)dismiss;
 
 @end

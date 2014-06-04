@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
+#import "SBAuthenticationNavigationController.h"
 #import "SBFacebookManager.h"
 #import "SBSessionManager.h"
 #import "SBUser.h"
@@ -64,7 +65,7 @@
 
 + (UINavigationController *)authenticationNavigationController {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Authentication" bundle:nil];
-    return [storyboard instantiateViewControllerWithIdentifier:@"SBAuthenticationNavigationController"];
+    return [storyboard instantiateViewControllerWithIdentifier:[SBAuthenticationNavigationController identifier]];
 }
 
 @end

@@ -14,6 +14,10 @@
 
 @implementation SBAuthenticationNavigationController
 
++ (NSString *)identifier {
+    return NSStringFromClass(self);
+}
+
 - (void)dismiss {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *vc = [storyboard instantiateInitialViewController];
