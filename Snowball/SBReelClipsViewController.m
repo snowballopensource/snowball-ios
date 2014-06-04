@@ -50,22 +50,6 @@
 
 #pragma mark - View Actions
 
-- (IBAction)takeVideo:(id)sender {
-#warning come here for camera code
-//    [SBVideoPickerController launchCameraInView:self.view
-//                                         sender:self
-//                                     completion:^(NSData *videoData, NSURL *videoLocalURL) {
-//                                         [SBLongRunningTaskManager addBlockToQueue:^{
-//                                             SBClip *clip = [SBClip MR_createEntity];
-//                                             [clip setReel:[self.reel MR_inContext:clip.managedObjectContext]];
-//                                             [clip setVideoToSubmit:videoData];
-//                                             [clip save];
-//                                             [clip create];
-//                                         }];
-//                                         [self playLocalVideoImmediately:videoLocalURL];
-//                                     }];
-}
-
 - (IBAction)likeClip:(id)sender {
     if (self.currentClip.likedValue) {
         [self.currentClip unlikeWithSuccess:nil

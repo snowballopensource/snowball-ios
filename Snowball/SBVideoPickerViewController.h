@@ -10,4 +10,6 @@
 
 @interface SBVideoPickerViewController : SBViewController
 
+@property (nonatomic, copy) void(^videoCaptureCompleteBlock)(NSData *videoData);
+
 @end
