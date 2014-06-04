@@ -37,13 +37,11 @@ PODS:
   - ECSlidingViewController (2.0.2)
   - Facebook-iOS-SDK (3.14.1):
     - Bolts
-  - GPUImage (0.1.4)
   - MagicalRecord (2.3.0-beta.2):
     - MagicalRecord/Core
   - MagicalRecord/Core (2.3.0-beta.2)
   - MBProgressHUD (0.8)
   - ObjectiveSugar (1.1.0)
-  - PBJVision (0.2.1)
   - SDWebImage (3.6):
     - SDWebImage/Core
   - SDWebImage/Core (3.6)
@@ -54,11 +52,9 @@ DEPENDENCIES:
   - BlocksKit
   - ECSlidingViewController
   - Facebook-iOS-SDK
-  - GPUImage
   - MagicalRecord (from `https://github.com/magicalpanda/MagicalRecord.git`)
   - MBProgressHUD
   - ObjectiveSugar
-  - PBJVision
   - SDWebImage
   - UrbanAirship-iOS-SDK
 
@@ -72,11 +68,9 @@ SPEC CHECKSUMS:
   Bolts: 91c2af8eae1d44e1dd75946a5b0ae04a43ea43e4
   ECSlidingViewController: 6c11fadb10d720c2d48bc577962332bdd4264c9f
   Facebook-iOS-SDK: e9b3d5ac54ee3e5e693f4eef470b97911b3d076d
-  GPUImage: ac2bde5f4dbea02a81ced6313964cec1f2043ca9
   MagicalRecord: b7d8943e180dbd5c1dd48a807885e0059ce0bc82
   MBProgressHUD: c356980b0cd097f19acec959b49dca5eb8ec31be
   ObjectiveSugar: f48793f5902c77cfc02a4ce46d2e8ecddcad4dc2
-  PBJVision: cf25feb5c6ca44bfc979f46c058605cf76027748
   SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
   UrbanAirship-iOS-SDK: 04b797ae27f0ed8b79b02c4c859256808e8d89cf
 

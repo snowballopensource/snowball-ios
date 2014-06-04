@@ -8,10 +8,30 @@
 
 #import <Foundation/Foundation.h>
 
+/*
+ *
+ * SBCameraManager manages an SBCameraPreviewView, similar to to the way a view controller manages a view, but the
+ * major difference is that this class is a singleton.
+ * The preview view that this class creates is a single view that can get shared across the app.
+ *
+ */
+
+@interface SBCameraPreviewView : UIView
+
+@property (nonatomic, strong) AVCaptureSession *captureSession;
+
+@end
+
 @interface SBCameraManager : NSObject
 
-@property (nonatomic, strong) GPUImageVideoCamera *videoCamera;
-
 + (instancetype)sharedManager;
+
+@property (nonatomic, strong) SBCameraPreviewView *previewView;
+
+- (void)startRecording;
+- (void)stopRecording;
+- (BOOL)isRecording;
+- (void)changeCamera;
+- (void)focusAndExposePoint:(CGPoint)point;
 
 @end

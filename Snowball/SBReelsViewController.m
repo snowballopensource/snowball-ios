@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
-#import "SBCameraNavigationBar.h"
+#import "SBCameraManager.h"
 #import "SBReel.h"
 #import "SBReelClipsViewController.h"
 #import "SBReelsViewController.h"
@@ -15,7 +15,7 @@
 
 @interface SBReelsViewController ()
 
-@property (nonatomic, weak) IBOutlet SBCameraNavigationBar *cameraNavigationBar;
+@property (nonatomic, weak) IBOutlet UIView *cameraContainerView;
 
 @end
 
@@ -45,7 +45,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    [self.cameraNavigationBar startCamera];
+
+    SBCameraPreviewView *previewView = [SBCameraManager sharedManager].previewView;
+    [previewView setFrame:self.cameraContainerView.bounds];
+    [self.cameraContainerView addSubview:previewView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

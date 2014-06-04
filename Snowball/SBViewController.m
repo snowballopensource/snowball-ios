@@ -18,4 +18,10 @@
     return NSStringFromClass(self);
 }
 
+#pragma mark - Actions
+
+- (IBAction)dismissModal:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end
