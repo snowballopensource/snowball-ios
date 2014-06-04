@@ -33,7 +33,12 @@
     if ([[SBCameraManager sharedManager] isRecording]) {
         [self.recordButton setEnabled:NO];
         [[SBCameraManager sharedManager] stopRecordingWithCompletion:^(NSURL *fileURL) {
-            [self dismissViewControllerAnimated:YES completion:nil];
+            if (self.reel) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+                // TODO: upload clip to existing reel
+            } else {
+                [self performSegueWithIdentifier:@"SBCreateReelViewController" sender:self];
+            }
         }];
     } else {
         [self.dismissButton setHidden:YES];

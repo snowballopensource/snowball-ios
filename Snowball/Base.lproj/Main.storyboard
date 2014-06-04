@@ -200,7 +200,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="oXS-Jf-RHe" kind="modal" id="AUs-n2-Stz"/>
+                                            <segue destination="Ver-4P-zS4" kind="modal" id="z3v-BC-I2d"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -246,7 +246,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="oXS-Jf-RHe" kind="modal" id="hxy-uf-ViZ"/>
+                                    <segue destination="Ver-4P-zS4" kind="modal" id="1hm-VP-obM"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="James" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffR-Oc-TVl">
@@ -348,10 +348,77 @@
                         <outlet property="dismissButton" destination="3kF-v5-kfX" id="TXR-nc-WWw"/>
                         <outlet property="flipCameraButton" destination="ERy-cm-1mW" id="beo-d6-MRA"/>
                         <outlet property="recordButton" destination="5YU-3V-fxy" id="ijf-LG-UzS"/>
+                        <segue destination="Ib8-uJ-4ks" kind="push" identifier="SBCreateReelViewController" id="IGl-OD-vFp"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="566" y="22"/>
+            <point key="canvasLocation" x="1140" y="22"/>
+        </scene>
+        <!--Create Reel View Controller-->
+        <scene sceneID="buy-ul-KRc">
+            <objects>
+                <viewController storyboardIdentifier="SBCreateReelViewController" id="Ib8-uJ-4ks" customClass="SBCreateReelViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="h8D-NA-5SQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="yUy-F3-GnH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Bc0-d9-3Ls">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Share to:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSp-96-xSt">
+                                <rect key="frame" x="20" y="191" width="70" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kCU-jh-EQ3">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="All Friends >">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="finish:" destination="Ib8-uJ-4ks" eventType="touchUpInside" id="Ub5-Y6-YTd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hdt-5d-8hU">
+                                <rect key="frame" x="20" y="20" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="X">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissModal:" destination="Ib8-uJ-4ks" eventType="touchUpInside" id="6zS-Kv-aPj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9J4-rc-iI6"/>
+                    <connections>
+                        <outlet property="finishButton" destination="kCU-jh-EQ3" id="YC9-6L-nRY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DR7-Zf-QKq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1630" y="22"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="1dZ-Yh-ry9">
+            <objects>
+                <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="Ver-4P-zS4" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nw9-x1-D8z">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="oXS-Jf-RHe" kind="relationship" relationship="rootViewController" id="qrX-Ca-IXr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vx2-0b-Tws" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="614" y="22"/>
         </scene>
         <!--Main Menu View Controller-->
         <scene sceneID="9mK-Yg-irm">
@@ -487,6 +554,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="AUs-n2-Stz"/>
+        <segue reference="z3v-BC-I2d"/>
     </inferredMetricsTieBreakers>
 </document>

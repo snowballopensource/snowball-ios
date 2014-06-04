@@ -1,5 +1,5 @@
 //
-//  SBCameraViewController.h
+//  SBCreateReelViewController.h
 //  Snowball
 //
 //  Created by James Martinez on 6/4/14.
@@ -8,10 +8,6 @@
 
 #import "SBViewController.h"
 
-@class SBReel;
-
-@interface SBCameraViewController : SBViewController
-
-@property (nonatomic, strong) SBReel *reel;
+@interface SBCreateReelViewController : SBViewController
 
 @end
