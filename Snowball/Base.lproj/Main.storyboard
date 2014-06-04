@@ -346,7 +346,7 @@
                     <navigationItem key="navigationItem" id="Ppt-fS-msg"/>
                     <connections>
                         <outlet property="flipCameraButton" destination="ERy-cm-1mW" id="beo-d6-MRA"/>
-                        <outlet property="recordButton" destination="5YU-3V-fxy" id="i4f-XY-aYp"/>
+                        <outlet property="recordButton" destination="5YU-3V-fxy" id="ijf-LG-UzS"/>
                     </connections>
                 </viewController>
             </objects>

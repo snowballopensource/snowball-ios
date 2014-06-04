@@ -30,10 +30,12 @@
 
 - (IBAction)toggleMovieRecording:(id)sender {
     if ([[SBCameraManager sharedManager] isRecording]) {
-        [self.recordButton setEnabled:YES];
         [[SBCameraManager sharedManager] stopRecording];
+        [self.flipCameraButton setEnabled:YES];
+        [self.recordButton setTitle:@"CAPTURE" forState:UIControlStateNormal];
     } else {
-        [self.recordButton setEnabled:NO];
+        [self.flipCameraButton setEnabled:NO];
+        [self.recordButton setTitle:@"Stop Capture" forState:UIControlStateNormal];
         [[SBCameraManager sharedManager] startRecording];
     }
 }
