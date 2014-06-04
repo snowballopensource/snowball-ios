@@ -345,6 +345,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Ppt-fS-msg"/>
                     <connections>
+                        <outlet property="dismissButton" destination="3kF-v5-kfX" id="TXR-nc-WWw"/>
                         <outlet property="flipCameraButton" destination="ERy-cm-1mW" id="beo-d6-MRA"/>
                         <outlet property="recordButton" destination="5YU-3V-fxy" id="ijf-LG-UzS"/>
                     </connections>

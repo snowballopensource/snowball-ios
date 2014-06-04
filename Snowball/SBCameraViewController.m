@@ -11,6 +11,7 @@
 
 @interface SBCameraViewController ()
 
+@property (nonatomic, weak) IBOutlet UIButton *dismissButton;
 @property (nonatomic, weak) IBOutlet UIButton *recordButton;
 @property (nonatomic, weak) IBOutlet UIButton *flipCameraButton;
 
@@ -26,15 +27,17 @@
     [self.view insertSubview:previewView atIndex:0];
 }
 
-#pragma mark View Actions
+#pragma mark - View Actions
 
 - (IBAction)toggleMovieRecording:(id)sender {
     if ([[SBCameraManager sharedManager] isRecording]) {
-        [[SBCameraManager sharedManager] stopRecording];
-        [self.flipCameraButton setEnabled:YES];
-        [self.recordButton setTitle:@"CAPTURE" forState:UIControlStateNormal];
+        [self.recordButton setEnabled:NO];
+        [[SBCameraManager sharedManager] stopRecordingWithCompletion:^(NSURL *fileURL) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }];
     } else {
-        [self.flipCameraButton setEnabled:NO];
+        [self.dismissButton setHidden:YES];
+        [self.flipCameraButton setHidden:YES];
         [self.recordButton setTitle:@"Stop Capture" forState:UIControlStateNormal];
         [[SBCameraManager sharedManager] startRecording];
     }

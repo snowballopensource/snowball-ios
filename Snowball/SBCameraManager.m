@@ -36,6 +36,8 @@
 @property (nonatomic) UIBackgroundTaskIdentifier backgroundRecordingID;
 @property (nonatomic, getter = isDeviceAuthorized) BOOL deviceAuthorized;
 @property (nonatomic, strong) id runtimeErrorHandlingObserver;
+@property (nonatomic, copy) void(^recordingCompletionBlock)(NSURL *fileURL);
+
 @end
 
 @implementation SBCameraManager
@@ -226,7 +228,8 @@
     });
 }
 
-- (void)stopRecording {
+- (void)stopRecordingWithCompletion:(void(^)(NSURL *fileURL))completion {
+    [self setRecordingCompletionBlock:completion];
     dispatch_async(self.captureSessionQueue, ^{
         [[self movieFileOutput] stopRecording];
     });
@@ -289,7 +292,7 @@
     // Note the backgroundRecordingID for use in the ALAssetsLibrary completion handler to end the background task associated with this recording. This allows a new recording to be started, associated with a new UIBackgroundTaskIdentifier, once the movie file output's -isRecording is back to NO — which happens sometime after this method returns.
     UIBackgroundTaskIdentifier backgroundRecordingID = self.backgroundRecordingID;
     [self setBackgroundRecordingID:UIBackgroundTaskInvalid];
-    
+
     [[[ALAssetsLibrary alloc] init] writeVideoAtPathToSavedPhotosAlbum:outputFileURL completionBlock:^(NSURL *assetURL, NSError *error) {
         if (error) NSLog(@"%@", error);
         
@@ -297,6 +300,10 @@
         
         if (backgroundRecordingID != UIBackgroundTaskInvalid)
             [[UIApplication sharedApplication] endBackgroundTask:backgroundRecordingID];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.recordingCompletionBlock) self.recordingCompletionBlock(assetURL);
+        });
     }];
 }
 

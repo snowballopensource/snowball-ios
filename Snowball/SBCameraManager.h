@@ -29,7 +29,7 @@
 @property (nonatomic, strong) SBCameraPreviewView *previewView;
 
 - (void)startRecording;
-- (void)stopRecording;
+- (void)stopRecordingWithCompletion:(void(^)(NSURL *fileURL))completion;
 - (BOOL)isRecording;
 - (void)changeCamera;
 - (void)focusAndExposePoint:(CGPoint)point;
