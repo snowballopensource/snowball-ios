@@ -49,15 +49,17 @@
             [self setRecordingURL:fileURL];
             if (self.reel) {
                 [self dismissViewControllerAnimated:YES completion:nil];
+                // This is semi duplicated code.
+                SBClip *clip = [SBClip MR_createEntity];
+                [clip setReel:[self.reel MR_inContext:clip.managedObjectContext]];
                 NSData *data = [NSData dataWithContentsOfURL:fileURL];
+                [clip setVideoToSubmit:data];
+                [clip save];
                 [SBLongRunningTaskManager addBlockToQueue:^{
-                    SBClip *clip = [SBClip MR_createEntity];
-                    [clip setReel:[self.reel MR_inContext:clip.managedObjectContext]];
-                    [clip setVideoToSubmit:data];
-                    [clip save];
                     [clip create];
                 }];
             } else {
+                // reel gets created in this view controller
                 [self performSegueWithIdentifier:[SBCreateReelViewController identifier] sender:self];
             }
         }];

@@ -426,6 +426,7 @@
 		BAE1FF1819401B60000A9D80 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
+				BAE1FF1519401B5C000A9D80 /* SBCameraNavigationController.h */,
 				BAE1FF1619401B5C000A9D80 /* SBCameraNavigationController.m */,
 				BAE89607193F6E6600E96E6B /* SBCameraViewController.h */,
 				BAE89608193F6E6600E96E6B /* SBCameraViewController.m */,
@@ -451,7 +452,6 @@
 				BA936FF6192312DF00D3CAFB /* SBReelsViewController.m */,
 				BA048E16191AF83A0083B0DC /* SBReelClipsViewController.h */,
 				BA048E17191AF83A0083B0DC /* SBReelClipsViewController.m */,
-				BAE1FF1519401B5C000A9D80 /* SBCameraNavigationController.h */,
 				BAE1FF1819401B60000A9D80 /* Camera */,
 			);
 			name = Reel;

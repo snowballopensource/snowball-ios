@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
-#import "SBLongRunningTaskManager.h"
 #import "SBCameraViewController.h"
 #import "SBCameraNavigationController.h"
 #import "SBClip.h"

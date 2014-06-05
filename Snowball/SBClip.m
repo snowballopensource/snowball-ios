@@ -105,9 +105,18 @@
 #pragma mark - SBManagedObject
 
 - (void)createWithSuccess:(void(^)(void))success failure:(void(^)(NSError *error))failure {
-    NSString *path = [NSString stringWithFormat:@"reels/%@/clips", self.reel.remoteID];
+    NSString *path = @"";
+    NSDictionary *parameters = nil;
+    if ([self.reel.remoteID length] > 0) {
+        // reel exists on server, adding to reel
+        path = [NSString stringWithFormat:@"reels/%@/clips", self.reel.remoteID];
+    } else {
+        // reel does not exist on server, nesting it so that it is created
+        path = [NSString stringWithFormat:@"clips"];
+        parameters = @{ @"clip": @{ @"reel_attributes": @{ @"name": @"" } } };
+    }
     [[SBAPIManager sharedManager] POST:path
-                            parameters:nil
+                            parameters:parameters
              constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                  [formData appendPartWithFileData:self.videoToSubmit
                                              name:@"clip[video]"

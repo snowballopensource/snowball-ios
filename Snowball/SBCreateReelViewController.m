@@ -7,7 +7,10 @@
 //
 
 #import "SBCreateReelViewController.h"
+#import "SBClip.h"
+#import "SBLongRunningTaskManager.h"
 #import "SBPlayerView.h"
+#import "SBReel.h"
 
 @interface SBCreateReelViewController ()
 
@@ -27,8 +30,18 @@
 }
 
 - (IBAction)finish:(id)sender {
-
-    // TODO: create reel with initial clip
+    // This is semi duplicated code.
+    SBClip *clip = [SBClip MR_createEntity];
+    SBReel *reel = [SBReel MR_createEntity];
+    [clip setReel:reel];
+    NSData *data = [NSData dataWithContentsOfURL:self.initialRecordingURL];
+    [clip setVideoToSubmit:data];
+    [reel save];
+    [clip save];
+    [SBLongRunningTaskManager addBlockToQueue:^{
+        [clip create];
+    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

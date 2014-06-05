@@ -30,7 +30,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _queue = dispatch_queue_create("com.snowball.snowball.longtaskqueue", DISPATCH_QUEUE_SERIAL);
+        _queue = dispatch_queue_create("com.snowball.snbl.longtaskqueue", DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
