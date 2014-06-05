@@ -7,6 +7,8 @@
 //
 
 #import "SBLongRunningTaskManager.h"
+#import "SBCameraViewController.h"
+#import "SBCameraNavigationController.h"
 #import "SBClip.h"
 #import "SBPlayerView.h"
 #import "SBReel.h"
@@ -46,6 +48,13 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [self.playerView.player pause];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[SBCameraNavigationController class]]) {
+        SBCameraViewController *vc = (SBCameraViewController *)[[(SBCameraNavigationController *)segue.destinationViewController viewControllers] firstObject];
+        [vc setReel:self.reel];
+    }
 }
 
 #pragma mark - View Actions

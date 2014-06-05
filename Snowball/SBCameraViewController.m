@@ -46,7 +46,7 @@
             [self setRecordingURL:fileURL];
             if (self.reel) {
                 [self dismissViewControllerAnimated:YES completion:nil];
-                // TODO: upload clip to existing reel
+                
             } else {
                 [self performSegueWithIdentifier:[SBCreateReelViewController identifier] sender:self];
             }

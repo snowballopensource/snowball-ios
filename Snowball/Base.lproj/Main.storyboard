@@ -290,12 +290,6 @@
         <!--Camera View Controller-->
         <scene sceneID="wVN-og-jaS">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1u1-0B-rgP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="O6C-IR-hrb">
-                    <connections>
-                        <action selector="focusAndExposeTap:" destination="oXS-Jf-RHe" id="DrH-cd-khc"/>
-                    </connections>
-                </tapGestureRecognizer>
                 <viewController id="oXS-Jf-RHe" customClass="SBCameraViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="guJ-7F-ehV"/>
@@ -351,13 +345,19 @@
                         <segue destination="Ib8-uJ-4ks" kind="push" identifier="SBCreateReelViewController" id="IGl-OD-vFp"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1u1-0B-rgP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="O6C-IR-hrb">
+                    <connections>
+                        <action selector="focusAndExposeTap:" destination="oXS-Jf-RHe" id="DrH-cd-khc"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1140" y="22"/>
         </scene>
         <!--Create Reel View Controller-->
         <scene sceneID="buy-ul-KRc">
             <objects>
-                <viewController storyboardIdentifier="SBCreateReelViewController" id="Ib8-uJ-4ks" customClass="SBCreateReelViewController" sceneMemberID="viewController">
+                <viewController id="Ib8-uJ-4ks" customClass="SBCreateReelViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="h8D-NA-5SQ"/>
                         <viewControllerLayoutGuide type="bottom" id="yUy-F3-GnH"/>
@@ -411,10 +411,10 @@
             </objects>
             <point key="canvasLocation" x="1630" y="22"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Camera Navigation Controller-->
         <scene sceneID="1dZ-Yh-ry9">
             <objects>
-                <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="Ver-4P-zS4" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="Ver-4P-zS4" customClass="SBCameraNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="nw9-x1-D8z">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -560,6 +560,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="z3v-BC-I2d"/>
+        <segue reference="1hm-VP-obM"/>
     </inferredMetricsTieBreakers>
 </document>

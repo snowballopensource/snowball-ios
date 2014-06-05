@@ -6,11 +6,10 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "SBNavigationController.h"
 
-@interface SBAuthenticationNavigationController : UINavigationController
+@interface SBAuthenticationNavigationController : SBNavigationController
 
-+ (NSString *)identifier;
 - (void)dismiss;
 
 @end
