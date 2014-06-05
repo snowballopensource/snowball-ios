@@ -220,14 +220,11 @@
 			children = (
 				BA048DF0191AF6730083B0DC /* SBAppDelegate.h */,
 				BA048DF1191AF6730083B0DC /* SBAppDelegate.m */,
-				BA5CD68D19269B1F0087D3A2 /* API */,
-				BA5CD68C19269B1A0087D3A2 /* Categories */,
-				BAC9FB4119241774008742EE /* SBSessionManager.h */,
-				BAC9FB4219241774008742EE /* SBSessionManager.m */,
 				BA048E21191AFAD10083B0DC /* Models */,
 				BA048E1A191AF85D0083B0DC /* Views */,
 				BA048E19191AF84B0083B0DC /* View Controllers */,
 				BA29C7EF192FDC0400F59684 /* Managers */,
+				BA5CD68C19269B1A0087D3A2 /* Categories */,
 				BA048DF9191AF6730083B0DC /* Images.xcassets */,
 				BA048DE8191AF6730083B0DC /* Supporting Files */,
 			);
@@ -329,6 +326,9 @@
 		BA29C7EF192FDC0400F59684 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				BA5CD68D19269B1F0087D3A2 /* API */,
+				BAC9FB4119241774008742EE /* SBSessionManager.h */,
+				BAC9FB4219241774008742EE /* SBSessionManager.m */,
 				BA29C7EA192FD9C900F59684 /* SBPushNotificationManager.h */,
 				BA29C7EB192FD9C900F59684 /* SBPushNotificationManager.m */,
 				BAD86C2D193553BC0046EE22 /* SBFacebookManager.h */,
