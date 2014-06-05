@@ -222,9 +222,11 @@
         [SBCameraManager setFlashMode:AVCaptureFlashModeOff forDevice:[[self videoDeviceInput] device]];
         
         // Start recording to a temporary file.
-        // TODO: change this output file location
         NSString *outputFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[@"movie" stringByAppendingPathExtension:@"mov"]];
-        [[self movieFileOutput] startRecordingToOutputFileURL:[NSURL fileURLWithPath:outputFilePath] recordingDelegate:self];
+        NSURL *outputFileURL = [NSURL fileURLWithPath:outputFilePath];
+        // Remove previous file if one exists.
+        [[NSFileManager defaultManager] removeItemAtURL:outputFileURL error:nil];
+        [[self movieFileOutput] startRecordingToOutputFileURL:outputFileURL recordingDelegate:self];
     });
 }
 
@@ -296,13 +298,11 @@
     [[[ALAssetsLibrary alloc] init] writeVideoAtPathToSavedPhotosAlbum:outputFileURL completionBlock:^(NSURL *assetURL, NSError *error) {
         if (error) NSLog(@"%@", error);
         
-        [[NSFileManager defaultManager] removeItemAtURL:outputFileURL error:nil];
-        
         if (backgroundRecordingID != UIBackgroundTaskInvalid)
             [[UIApplication sharedApplication] endBackgroundTask:backgroundRecordingID];
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (self.recordingCompletionBlock) self.recordingCompletionBlock(assetURL);
+            if (self.recordingCompletionBlock) self.recordingCompletionBlock(outputFileURL);
         });
     }];
 }

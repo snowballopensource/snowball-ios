@@ -9,6 +9,9 @@
 #import "SBCameraManager.h"
 #import "SBCameraViewController.h"
 #import "SBCreateReelViewController.h"
+#import "SBClip.h"
+#import "SBLongRunningTaskManager.h"
+#import "SBReel.h"
 
 @interface SBCameraViewController ()
 
@@ -46,7 +49,14 @@
             [self setRecordingURL:fileURL];
             if (self.reel) {
                 [self dismissViewControllerAnimated:YES completion:nil];
-                
+                NSData *data = [NSData dataWithContentsOfURL:fileURL];
+                [SBLongRunningTaskManager addBlockToQueue:^{
+                    SBClip *clip = [SBClip MR_createEntity];
+                    [clip setReel:[self.reel MR_inContext:clip.managedObjectContext]];
+                    [clip setVideoToSubmit:data];
+                    [clip save];
+                    [clip create];
+                }];
             } else {
                 [self performSegueWithIdentifier:[SBCreateReelViewController identifier] sender:self];
             }

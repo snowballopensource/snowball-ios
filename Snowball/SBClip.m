@@ -110,7 +110,7 @@
                             parameters:nil
              constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                  [formData appendPartWithFileData:self.videoToSubmit
-                                             name:@"video"
+                                             name:@"clip[video]"
                                          fileName:@"video.mp4"
                                          mimeType:@"video/mp4"];
              } success:^(NSURLSessionDataTask *task, id responseObject) {
