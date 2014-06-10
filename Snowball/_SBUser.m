@@ -4,6 +4,7 @@
 #import "_SBUser.h"
 
 const struct SBUserAttributes SBUserAttributes = {
+	.avatarURL = @"avatarURL",
 	.bio = @"bio",
 	.email = @"email",
 	.name = @"name",
@@ -47,6 +48,13 @@ const struct SBUserFetchedProperties SBUserFetchedProperties = {
 
 	return keyPaths;
 }
+
+
+
+
+@dynamic avatarURL;
+
+
 
 
 

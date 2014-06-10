@@ -45,7 +45,7 @@
                                     <action selector="editProfile:" destination="IFG-iR-E64" eventType="touchUpInside" id="3cX-rP-7UD"/>
                                 </connections>
                             </button>
-                            <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hiq-KG-yVd" customClass="SBUserImageView">
+                            <imageView appearanceType="aqua" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hiq-KG-yVd" customClass="SBUserImageView">
                                 <rect key="frame" x="120" y="88" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -67,6 +67,7 @@
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="dyV-kD-Ame"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="avatar" destination="Hiq-KG-yVd" id="9h3-PW-Kea"/>
                         <outlet property="bioLabel" destination="dX9-Hg-Qhv" id="Pfb-c1-25k"/>
                         <outlet property="editProfileButton" destination="MN2-n1-KUh" id="25y-ON-LSi"/>
                         <outlet property="nameLabel" destination="XJu-NK-JdO" id="WB7-on-mcg"/>

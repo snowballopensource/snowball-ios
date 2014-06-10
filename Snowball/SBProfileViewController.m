@@ -8,12 +8,14 @@
 
 #import "SBProfileViewController.h"
 #import "SBUser.h"
+#import "SBUserImageView.h"
 
 @interface SBProfileViewController ()
 
 @property (nonatomic, weak) IBOutlet UILabel *usernameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *bioLabel;
+@property (nonatomic, weak) IBOutlet SBUserImageView *avatar;
 
 @property (nonatomic, weak) IBOutlet UIButton *editProfileButton;
 
@@ -54,6 +56,7 @@
     [self.usernameLabel setText:self.user.username];
     [self.nameLabel setText:self.user.name];
     [self.bioLabel setText:self.user.bio];
+    [self.avatar setImageWithURL:[NSURL URLWithString:self.user.avatarURL]];
 }
 
 @end

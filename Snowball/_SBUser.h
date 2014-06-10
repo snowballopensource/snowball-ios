@@ -5,6 +5,7 @@
 #import "SBManagedObject.h"
 
 extern const struct SBUserAttributes {
+	__unsafe_unretained NSString *avatarURL;
 	__unsafe_unretained NSString *bio;
 	__unsafe_unretained NSString *email;
 	__unsafe_unretained NSString *name;
@@ -27,6 +28,7 @@ extern const struct SBUserFetchedProperties {
 
 
 
+
 @interface SBUserID : NSManagedObjectID {}
 @end
 
@@ -35,6 +37,16 @@ extern const struct SBUserFetchedProperties {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (SBUserID*)objectID;
+
+
+
+
+
+@property (nonatomic, strong) NSString* avatarURL;
+
+
+
+//- (BOOL)validateAvatarURL:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -110,6 +122,12 @@ extern const struct SBUserFetchedProperties {
 @end
 
 @interface _SBUser (CoreDataGeneratedPrimitiveAccessors)
+
+
+- (NSString*)primitiveAvatarURL;
+- (void)setPrimitiveAvatarURL:(NSString*)value;
+
+
 
 
 - (NSString*)primitiveBio;

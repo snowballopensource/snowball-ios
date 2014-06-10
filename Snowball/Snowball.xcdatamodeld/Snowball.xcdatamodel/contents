@@ -61,6 +61,11 @@
         </userInfo>
     </entity>
     <entity name="User" representedClassName="SBUser" syncable="YES">
+        <attribute name="avatarURL" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="avatar_url"/>
+            </userInfo>
+        </attribute>
         <attribute name="bio" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -78,6 +83,6 @@
     <elements>
         <element name="Clip" positionX="-63" positionY="-18" width="128" height="163"/>
         <element name="Reel" positionX="-63" positionY="0" width="128" height="118"/>
-        <element name="User" positionX="-54" positionY="18" width="128" height="133"/>
+        <element name="User" positionX="-54" positionY="18" width="128" height="148"/>
     </elements>
 </model>
