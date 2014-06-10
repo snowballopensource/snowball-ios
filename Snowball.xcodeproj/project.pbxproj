@@ -46,6 +46,7 @@
 		BAA19C471946902F0034D439 /* MuseoSans-700.otf in Resources */ = {isa = PBXBuildFile; fileRef = BAA19C461946902F0034D439 /* MuseoSans-700.otf */; };
 		BAA19C4A1946945C0034D439 /* UILabel+CustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA19C491946945C0034D439 /* UILabel+CustomFont.m */; };
 		BAA19C4D194694770034D439 /* UIFont+Snowball.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA19C4C194694770034D439 /* UIFont+Snowball.m */; };
+		BAA19C5019469B370034D439 /* SBUserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA19C4F19469B370034D439 /* SBUserImageView.m */; };
 		BAC81380192BC5E1002323E1 /* UIViewController+Spinner.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC8137F192BC5E1002323E1 /* UIViewController+Spinner.m */; };
 		BAC9FB3319241296008742EE /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAC9FB3219241296008742EE /* Authentication.storyboard */; };
 		BAC9FB3619241388008742EE /* SBAuthenticationNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB3519241388008742EE /* SBAuthenticationNavigationController.m */; };
@@ -147,6 +148,8 @@
 		BAA19C491946945C0034D439 /* UILabel+CustomFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+CustomFont.m"; sourceTree = "<group>"; };
 		BAA19C4B194694770034D439 /* UIFont+Snowball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+Snowball.h"; sourceTree = "<group>"; };
 		BAA19C4C194694770034D439 /* UIFont+Snowball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Snowball.m"; sourceTree = "<group>"; };
+		BAA19C4E19469B370034D439 /* SBUserImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUserImageView.h; sourceTree = "<group>"; };
+		BAA19C4F19469B370034D439 /* SBUserImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUserImageView.m; sourceTree = "<group>"; };
 		BAC8137E192BC5E1002323E1 /* UIViewController+Spinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Spinner.h"; sourceTree = "<group>"; };
 		BAC8137F192BC5E1002323E1 /* UIViewController+Spinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Spinner.m"; sourceTree = "<group>"; };
 		BAC9FB3219241296008742EE /* Authentication.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
@@ -298,6 +301,8 @@
 				BA5238A41920B9630088A730 /* SBPlayerView.m */,
 				BA5CD6901926CEDA0087D3A2 /* SBFadeOverlayView.h */,
 				BA5CD6911926CEDA0087D3A2 /* SBFadeOverlayView.m */,
+				BAA19C4E19469B370034D439 /* SBUserImageView.h */,
+				BAA19C4F19469B370034D439 /* SBUserImageView.m */,
 				BA4AC5DF1938EA960004D5CF /* Camera */,
 				BA9370041923173200D3CAFB /* Cells */,
 			);
@@ -661,6 +666,7 @@
 				BAE1FF1419401B38000A9D80 /* SBNavigationController.m in Sources */,
 				BA936FFA192313D700D3CAFB /* SBTableViewCell.m in Sources */,
 				BAC81380192BC5E1002323E1 /* UIViewController+Spinner.m in Sources */,
+				BAA19C5019469B370034D439 /* SBUserImageView.m in Sources */,
 				BA936FF7192312DF00D3CAFB /* SBReelsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
