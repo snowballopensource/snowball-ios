@@ -54,7 +54,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="AUU-9v-d45">
-                        <barButtonItem key="rightBarButtonItem" title="Menu" id="dyV-kD-Ame">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="dyV-kD-Ame">
                             <connections>
                                 <segue destination="D7A-4K-Ypw" kind="unwind" unwindAction="unwindToMenuViewController:" id="UUj-qJ-15T"/>
                             </connections>
@@ -64,6 +64,7 @@
                         <outlet property="avatar" destination="Hiq-KG-yVd" id="9h3-PW-Kea"/>
                         <outlet property="bioLabel" destination="dX9-Hg-Qhv" id="Pfb-c1-25k"/>
                         <outlet property="editProfileButton" destination="MN2-n1-KUh" id="25y-ON-LSi"/>
+                        <outlet property="menuButton" destination="dyV-kD-Ame" id="LUy-BF-hqQ"/>
                         <outlet property="nameLabel" destination="XJu-NK-JdO" id="WB7-on-mcg"/>
                         <outlet property="usernameLabel" destination="BbF-vw-EO8" id="FsO-9x-GMX"/>
                     </connections>

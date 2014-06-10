@@ -12,6 +12,7 @@
 
 @interface SBProfileViewController ()
 
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *menuButton;
 @property (nonatomic, weak) IBOutlet UILabel *usernameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *bioLabel;
@@ -39,6 +40,10 @@
     } failure:^(NSError *error) {
         [error displayInView:self.view];
     }];
+
+    if ([self.navigationController.viewControllers firstObject] != self) {
+        [self.menuButton setHidden:YES];
+    }
 }
 
 #pragma mark - Actions

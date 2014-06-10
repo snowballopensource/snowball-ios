@@ -56,6 +56,7 @@
 		BAC9FB4319241774008742EE /* SBSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB4219241774008742EE /* SBSessionManager.m */; };
 		BAC9FB471924183E008742EE /* _SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB451924183E008742EE /* _SBUser.m */; };
 		BAC9FB4B19241858008742EE /* SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB4A19241858008742EE /* SBUser.m */; };
+		BACD812F19477D51009A70B6 /* UIBarButtonItem+Hidden.m in Sources */ = {isa = PBXBuildFile; fileRef = BACD812E19477D51009A70B6 /* UIBarButtonItem+Hidden.m */; };
 		BAD86C2F193553BC0046EE22 /* SBFacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD86C2E193553BC0046EE22 /* SBFacebookManager.m */; };
 		BAE1FF1419401B38000A9D80 /* SBNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE1FF1319401B38000A9D80 /* SBNavigationController.m */; };
 		BAE1FF1719401B5C000A9D80 /* SBCameraNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE1FF1619401B5C000A9D80 /* SBCameraNavigationController.m */; };
@@ -167,6 +168,8 @@
 		BAC9FB451924183E008742EE /* _SBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SBUser.m; sourceTree = "<group>"; };
 		BAC9FB4919241858008742EE /* SBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUser.h; sourceTree = "<group>"; };
 		BAC9FB4A19241858008742EE /* SBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUser.m; sourceTree = "<group>"; };
+		BACD812D19477D51009A70B6 /* UIBarButtonItem+Hidden.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Hidden.h"; sourceTree = "<group>"; };
+		BACD812E19477D51009A70B6 /* UIBarButtonItem+Hidden.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Hidden.m"; sourceTree = "<group>"; };
 		BAD86C2D193553BC0046EE22 /* SBFacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFacebookManager.h; sourceTree = "<group>"; };
 		BAD86C2E193553BC0046EE22 /* SBFacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFacebookManager.m; sourceTree = "<group>"; };
 		BAE1FF1219401B38000A9D80 /* SBNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBNavigationController.h; sourceTree = "<group>"; };
@@ -376,6 +379,8 @@
 			children = (
 				BA5CD68919269B170087D3A2 /* NSError+Snowball.h */,
 				BA5CD68A19269B170087D3A2 /* NSError+Snowball.m */,
+				BACD812D19477D51009A70B6 /* UIBarButtonItem+Hidden.h */,
+				BACD812E19477D51009A70B6 /* UIBarButtonItem+Hidden.m */,
 				BAA19C4B194694770034D439 /* UIFont+Snowball.h */,
 				BAA19C4C194694770034D439 /* UIFont+Snowball.m */,
 				BAA19C481946945C0034D439 /* UILabel+CustomFont.h */,
@@ -663,6 +668,7 @@
 				BA936FF01923104800D3CAFB /* SBManagedViewController.m in Sources */,
 				BA048DF2191AF6730083B0DC /* SBAppDelegate.m in Sources */,
 				BA5CD68819269A530087D3A2 /* SBJSONResponseSerializer.m in Sources */,
+				BACD812F19477D51009A70B6 /* UIBarButtonItem+Hidden.m in Sources */,
 				BAE1FF1419401B38000A9D80 /* SBNavigationController.m in Sources */,
 				BA936FFA192313D700D3CAFB /* SBTableViewCell.m in Sources */,
 				BAC81380192BC5E1002323E1 /* UIViewController+Spinner.m in Sources */,

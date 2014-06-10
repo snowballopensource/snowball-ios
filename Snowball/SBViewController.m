@@ -18,6 +18,14 @@
     return NSStringFromClass(self);
 }
 
+#pragma mark - UIViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    [self.navigationItem setLeftItemsSupplementBackButton:YES];
+}
+
 #pragma mark - Actions
 
 - (IBAction)dismissModal:(id)sender {
