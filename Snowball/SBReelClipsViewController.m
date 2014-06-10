@@ -10,6 +10,7 @@
 #import "SBCameraNavigationController.h"
 #import "SBClip.h"
 #import "SBPlayerView.h"
+#import "SBProfileViewController.h"
 #import "SBReel.h"
 #import "SBReelClipsViewController.h"
 #import "SBUser.h"
@@ -17,8 +18,8 @@
 @interface SBReelClipsViewController ()
 
 @property (nonatomic, weak) IBOutlet SBPlayerView *playerView;
-@property (nonatomic, weak) IBOutlet UILabel *userNameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *likesCountLabel;
+@property (nonatomic, weak) IBOutlet UIButton *userButton;
 
 @property (nonatomic, strong) SBClip *currentClip;
 @property (nonatomic, copy) NSArray *clips;
@@ -33,7 +34,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    [self.userNameLabel setText:@""];
+    [self.userButton setTitle:@"" forState:UIControlStateNormal];
     [self.likesCountLabel setText:@""];
 
     // TODO: make this paginated
@@ -53,6 +54,9 @@
     if ([segue.destinationViewController isKindOfClass:[SBCameraNavigationController class]]) {
         SBCameraViewController *vc = (SBCameraViewController *)[[(SBCameraNavigationController *)segue.destinationViewController viewControllers] firstObject];
         [vc setReel:self.reel];
+    } else if ([segue.destinationViewController isKindOfClass:[SBProfileViewController class]]) {
+        SBProfileViewController *vc = segue.destinationViewController;
+        [vc setUser:self.currentClip.user];
     }
 }
 
@@ -105,7 +109,7 @@
 }
 
 - (void)updateClipUI {
-    [self.userNameLabel setText:self.currentClip.user.username];
+    [self.userButton setTitle:self.currentClip.user.username forState:UIControlStateNormal];
     [self.likesCountLabel setText:[NSString stringWithFormat:@"%@", self.currentClip.likesCount]];
 }
 
