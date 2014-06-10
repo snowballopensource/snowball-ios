@@ -12,9 +12,6 @@
 @interface SBProfileViewController ()
 
 @property (nonatomic, weak) IBOutlet UILabel *usernameLabel;
-@property (nonatomic, weak) IBOutlet UILabel *likesCountLabel;
-@property (nonatomic, weak) IBOutlet UILabel *followersCountLabel;
-@property (nonatomic, weak) IBOutlet UILabel *clipsCountLabel;
 @property (nonatomic, weak) IBOutlet UIButton *editProfileButton;
 
 @end
@@ -52,9 +49,6 @@
         [self.editProfileButton setHidden:NO];
     }
     [self.usernameLabel setText:self.user.username];
-    [self.likesCountLabel setText:[NSString stringWithFormat:@"%d", self.user.likesCountValue]];
-    [self.followersCountLabel setText:@"0"];
-    [self.clipsCountLabel setText:[NSString stringWithFormat:@"%d", self.user.clipsCountValue]];
 }
 
 @end
