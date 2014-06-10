@@ -40,7 +40,9 @@
 }
 
 + (void)signOut {
-    [FBSession.activeSession closeAndClearTokenInformation];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[FBSession activeSession] closeAndClearTokenInformation];
+    });
 }
 
 #pragma mark - Private
@@ -48,8 +50,8 @@
 - (void)createSessionAllowingSignInUI:(BOOL)allowSignInUI
                               success:(void (^)(void))success
                               failure:(void (^)(NSError *error))failure {
-    if (FBSession.activeSession.state == FBSessionStateOpen || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
-        [FBSession.activeSession closeAndClearTokenInformation];
+    if ([FBSession activeSession].state == FBSessionStateOpen || [FBSession activeSession].state == FBSessionStateOpenTokenExtended) {
+        [SBFacebookManager signOut];
     } else {
         [self setAuthenticationSuccessBlock:success];
         [self setAuthenticationFailureBlock:failure];
@@ -70,7 +72,7 @@
 }
 
 + (BOOL)handleOpenURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication {
-    [FBSession.activeSession setStateChangeHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+    [[FBSession activeSession] setStateChangeHandler:^(FBSession *session, FBSessionState state, NSError *error) {
         [[self sharedManager] sessionStateChanged:session state:state error:error];
     }];
     return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
