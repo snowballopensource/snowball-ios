@@ -42,6 +42,10 @@
 		BA9370031923153D00D3CAFB /* SBReel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9370021923153D00D3CAFB /* SBReel.m */; };
 		BA937006192317F600D3CAFB /* SBReelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA937005192317F600D3CAFB /* SBReelTableViewCell.xib */; };
 		BA98D0021936B85200753E1B /* SBCameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA98D0011936B85200753E1B /* SBCameraManager.m */; };
+		BAA19C3F19468F580034D439 /* MuseoSans-300.otf in Resources */ = {isa = PBXBuildFile; fileRef = BAA19C3519468F580034D439 /* MuseoSans-300.otf */; };
+		BAA19C471946902F0034D439 /* MuseoSans-700.otf in Resources */ = {isa = PBXBuildFile; fileRef = BAA19C461946902F0034D439 /* MuseoSans-700.otf */; };
+		BAA19C4A1946945C0034D439 /* UILabel+CustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA19C491946945C0034D439 /* UILabel+CustomFont.m */; };
+		BAA19C4D194694770034D439 /* UIFont+Snowball.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA19C4C194694770034D439 /* UIFont+Snowball.m */; };
 		BAC81380192BC5E1002323E1 /* UIViewController+Spinner.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC8137F192BC5E1002323E1 /* UIViewController+Spinner.m */; };
 		BAC9FB3319241296008742EE /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAC9FB3219241296008742EE /* Authentication.storyboard */; };
 		BAC9FB3619241388008742EE /* SBAuthenticationNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB3519241388008742EE /* SBAuthenticationNavigationController.m */; };
@@ -137,6 +141,12 @@
 		BA937005192317F600D3CAFB /* SBReelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBReelTableViewCell.xib; sourceTree = "<group>"; };
 		BA98D0001936B85200753E1B /* SBCameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCameraManager.h; sourceTree = "<group>"; };
 		BA98D0011936B85200753E1B /* SBCameraManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCameraManager.m; sourceTree = "<group>"; };
+		BAA19C3519468F580034D439 /* MuseoSans-300.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MuseoSans-300.otf"; sourceTree = "<group>"; };
+		BAA19C461946902F0034D439 /* MuseoSans-700.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MuseoSans-700.otf"; sourceTree = "<group>"; };
+		BAA19C481946945C0034D439 /* UILabel+CustomFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+CustomFont.h"; sourceTree = "<group>"; };
+		BAA19C491946945C0034D439 /* UILabel+CustomFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+CustomFont.m"; sourceTree = "<group>"; };
+		BAA19C4B194694770034D439 /* UIFont+Snowball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+Snowball.h"; sourceTree = "<group>"; };
+		BAA19C4C194694770034D439 /* UIFont+Snowball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Snowball.m"; sourceTree = "<group>"; };
 		BAC8137E192BC5E1002323E1 /* UIViewController+Spinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Spinner.h"; sourceTree = "<group>"; };
 		BAC8137F192BC5E1002323E1 /* UIViewController+Spinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Spinner.m"; sourceTree = "<group>"; };
 		BAC9FB3219241296008742EE /* Authentication.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
@@ -234,6 +244,7 @@
 		BA048DE8191AF6730083B0DC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BAA19C3119468F480034D439 /* Fonts */,
 				BA29C7ED192FDAE400F59684 /* AirshipConfig.plist */,
 				BA048DE9191AF6730083B0DC /* Snowball-Info.plist */,
 				BA048DEA191AF6730083B0DC /* InfoPlist.strings */,
@@ -360,6 +371,10 @@
 			children = (
 				BA5CD68919269B170087D3A2 /* NSError+Snowball.h */,
 				BA5CD68A19269B170087D3A2 /* NSError+Snowball.m */,
+				BAA19C4B194694770034D439 /* UIFont+Snowball.h */,
+				BAA19C4C194694770034D439 /* UIFont+Snowball.m */,
+				BAA19C481946945C0034D439 /* UILabel+CustomFont.h */,
+				BAA19C491946945C0034D439 /* UILabel+CustomFont.m */,
 				BA15B9EC192AD9AD00453F8F /* UINavigationBar+CustomHeight.m */,
 				BA15B9EB192AD9AD00453F8F /* UINavigationBar+CustomHeight.h */,
 				BAC8137E192BC5E1002323E1 /* UIViewController+Spinner.h */,
@@ -404,6 +419,15 @@
 				BA937005192317F600D3CAFB /* SBReelTableViewCell.xib */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		BAA19C3119468F480034D439 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				BAA19C3519468F580034D439 /* MuseoSans-300.otf */,
+				BAA19C461946902F0034D439 /* MuseoSans-700.otf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		BAC9FB371924138B008742EE /* Authentication */ = {
@@ -538,10 +562,12 @@
 			files = (
 				BA937006192317F600D3CAFB /* SBReelTableViewCell.xib in Resources */,
 				BA048DFA191AF6730083B0DC /* Images.xcassets in Resources */,
+				BAA19C471946902F0034D439 /* MuseoSans-700.otf in Resources */,
 				BA048DEC191AF6730083B0DC /* InfoPlist.strings in Resources */,
 				BA29C7EE192FDAE400F59684 /* AirshipConfig.plist in Resources */,
 				BA048DF5191AF6730083B0DC /* Main.storyboard in Resources */,
 				BAC9FB3319241296008742EE /* Authentication.storyboard in Resources */,
+				BAA19C3F19468F580034D439 /* MuseoSans-300.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,6 +624,7 @@
 				BA98D0021936B85200753E1B /* SBCameraManager.m in Sources */,
 				BA9370001923153100D3CAFB /* _SBReel.m in Sources */,
 				BA048E2B191AFB110083B0DC /* SBClip.m in Sources */,
+				BAA19C4D194694770034D439 /* UIFont+Snowball.m in Sources */,
 				BA048E26191AFAD90083B0DC /* _SBClip.m in Sources */,
 				BA936FF3192310B200D3CAFB /* SBManagedTableViewController.m in Sources */,
 				BA936FFD1923143400D3CAFB /* SBReelTableViewCell.m in Sources */,
@@ -611,6 +638,7 @@
 				BA048E18191AF83A0083B0DC /* SBReelClipsViewController.m in Sources */,
 				BA5CD68B19269B170087D3A2 /* NSError+Snowball.m in Sources */,
 				BA9370031923153D00D3CAFB /* SBReel.m in Sources */,
+				BAA19C4A1946945C0034D439 /* UILabel+CustomFont.m in Sources */,
 				BA048DF8191AF6730083B0DC /* SBViewController.m in Sources */,
 				BA29C7EC192FD9C900F59684 /* SBPushNotificationManager.m in Sources */,
 				BAD86C2F193553BC0046EE22 /* SBFacebookManager.m in Sources */,
