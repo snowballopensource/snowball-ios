@@ -4,7 +4,9 @@
 #import "_SBUser.h"
 
 const struct SBUserAttributes SBUserAttributes = {
+	.bio = @"bio",
 	.email = @"email",
+	.name = @"name",
 	.remoteID = @"remoteID",
 	.username = @"username",
 };
@@ -49,7 +51,21 @@ const struct SBUserFetchedProperties SBUserFetchedProperties = {
 
 
 
+@dynamic bio;
+
+
+
+
+
+
 @dynamic email;
+
+
+
+
+
+
+@dynamic name;
 
 
 

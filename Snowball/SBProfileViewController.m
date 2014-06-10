@@ -12,6 +12,9 @@
 @interface SBProfileViewController ()
 
 @property (nonatomic, weak) IBOutlet UILabel *usernameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *bioLabel;
+
 @property (nonatomic, weak) IBOutlet UIButton *editProfileButton;
 
 @end
@@ -49,6 +52,8 @@
         [self.editProfileButton setHidden:NO];
     }
     [self.usernameLabel setText:self.user.username];
+    [self.nameLabel setText:self.user.name];
+    [self.bioLabel setText:self.user.bio];
 }
 
 @end

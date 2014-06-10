@@ -61,7 +61,9 @@
         </userInfo>
     </entity>
     <entity name="User" representedClassName="SBUser" syncable="YES">
+        <attribute name="bio" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="remoteID" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="id"/>
@@ -76,6 +78,6 @@
     <elements>
         <element name="Clip" positionX="-63" positionY="-18" width="128" height="163"/>
         <element name="Reel" positionX="-63" positionY="0" width="128" height="118"/>
-        <element name="User" positionX="-54" positionY="18" width="128" height="105"/>
+        <element name="User" positionX="-54" positionY="18" width="128" height="133"/>
     </elements>
 </model>

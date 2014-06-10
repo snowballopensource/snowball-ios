@@ -5,7 +5,9 @@
 #import "SBManagedObject.h"
 
 extern const struct SBUserAttributes {
+	__unsafe_unretained NSString *bio;
 	__unsafe_unretained NSString *email;
+	__unsafe_unretained NSString *name;
 	__unsafe_unretained NSString *remoteID;
 	__unsafe_unretained NSString *username;
 } SBUserAttributes;
@@ -18,6 +20,8 @@ extern const struct SBUserFetchedProperties {
 } SBUserFetchedProperties;
 
 @class SBClip;
+
+
 
 
 
@@ -36,11 +40,31 @@ extern const struct SBUserFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSString* bio;
+
+
+
+//- (BOOL)validateBio:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) NSString* email;
 
 
 
 //- (BOOL)validateEmail:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSString* name;
+
+
+
+//- (BOOL)validateName:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -88,8 +112,20 @@ extern const struct SBUserFetchedProperties {
 @interface _SBUser (CoreDataGeneratedPrimitiveAccessors)
 
 
+- (NSString*)primitiveBio;
+- (void)setPrimitiveBio:(NSString*)value;
+
+
+
+
 - (NSString*)primitiveEmail;
 - (void)setPrimitiveEmail:(NSString*)value;
+
+
+
+
+- (NSString*)primitiveName;
+- (void)setPrimitiveName:(NSString*)value;
 
 
 
