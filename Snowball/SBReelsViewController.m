@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
-#import "SBCameraManager.h"
+#import "SBCameraViewController.h"
 #import "SBReel.h"
 #import "SBReelClipsViewController.h"
 #import "SBReelsViewController.h"
@@ -14,8 +14,6 @@
 #import "SBSessionManager.h"
 
 @interface SBReelsViewController ()
-
-@property (nonatomic, weak) IBOutlet UIView *cameraContainerView;
 
 @end
 
@@ -39,15 +37,12 @@
         SBReelClipsViewController *reelClipsViewController = [segue destinationViewController];
         SBReel *reel = [self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForSelectedRow]];
         [reelClipsViewController setReel:reel];
+    } else if ([destinationViewController isKindOfClass:[SBCameraViewController class]]) {
+        [(SBCameraViewController *)destinationViewController setRecordingCompletionBlock:^(NSURL *fileURL) {
+            NSLog(@"Recording completed @ %@", [fileURL path]);
+            // TODO: upload video
+        }];
     }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-
-    SBCameraPreviewView *previewView = [SBCameraManager sharedManager].previewView;
-    [previewView setFrame:self.cameraContainerView.bounds];
-    [self.cameraContainerView addSubview:previewView];
 }
 
 #pragma mark - UITableViewDataSource

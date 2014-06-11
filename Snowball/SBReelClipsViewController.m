@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
-#import "SBCameraViewController.h"
 #import "SBCameraNavigationController.h"
 #import "SBClip.h"
+#import "SBFullScreenCameraViewController.h"
 #import "SBPlayerView.h"
 #import "SBProfileViewController.h"
 #import "SBReel.h"
@@ -52,7 +52,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[SBCameraNavigationController class]]) {
-        SBCameraViewController *vc = (SBCameraViewController *)[[(SBCameraNavigationController *)segue.destinationViewController viewControllers] firstObject];
+        SBFullScreenCameraViewController *vc = (SBFullScreenCameraViewController *)[[(SBCameraNavigationController *)segue.destinationViewController viewControllers] firstObject];
         [vc setReel:self.reel];
     } else if ([segue.destinationViewController isKindOfClass:[SBProfileViewController class]]) {
         SBProfileViewController *vc = segue.destinationViewController;

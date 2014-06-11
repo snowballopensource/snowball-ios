@@ -175,11 +175,14 @@
                                     <outlet property="delegate" destination="qom-V6-RAS" id="4o7-4M-n70"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nCd-sY-IrB">
+                            <containerView appearanceType="aqua" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aij-ep-S9J">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
+                                <connections>
+                                    <segue destination="k3x-92-bAS" kind="embed" id="FKf-LR-LCF"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -196,7 +199,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="cameraContainerView" destination="nCd-sY-IrB" id="c0v-MW-cgV"/>
                         <outlet property="tableView" destination="Xh3-3G-cJd" id="b3d-Ty-Nzu"/>
                         <segue destination="D54-9P-BdS" kind="push" identifier="SBReelClipsViewController" id="Gcf-NX-Zug"/>
                     </connections>
@@ -275,73 +277,6 @@
             </objects>
             <point key="canvasLocation" x="60" y="22"/>
         </scene>
-        <!--Camera View Controller-->
-        <scene sceneID="wVN-og-jaS">
-            <objects>
-                <viewController id="oXS-Jf-RHe" customClass="SBCameraViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="guJ-7F-ehV"/>
-                        <viewControllerLayoutGuide type="bottom" id="3IH-1S-6uZ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="PJT-zo-qf9" customClass="SBCameraPreviewView">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kF-v5-kfX">
-                                <rect key="frame" x="20" y="518" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="X">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="dismissModal:" destination="oXS-Jf-RHe" eventType="touchUpInside" id="dZN-Bq-e8q"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5YU-3V-fxy">
-                                <rect key="frame" x="125" y="518" width="71" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="CAPTURE">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="toggleMovieRecording:" destination="oXS-Jf-RHe" eventType="touchUpInside" id="8xS-Ka-G9B"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ERy-cm-1mW">
-                                <rect key="frame" x="270" y="20" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Flip">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="changeCamera:" destination="oXS-Jf-RHe" eventType="touchUpInside" id="1Oh-Fg-Sdq"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <gestureRecognizers/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="O6C-IR-hrb" appends="YES" id="RqY-ow-0bz"/>
-                        </connections>
-                    </view>
-                    <navigationItem key="navigationItem" id="Ppt-fS-msg"/>
-                    <connections>
-                        <outlet property="dismissButton" destination="3kF-v5-kfX" id="TXR-nc-WWw"/>
-                        <outlet property="flipCameraButton" destination="ERy-cm-1mW" id="beo-d6-MRA"/>
-                        <outlet property="recordButton" destination="5YU-3V-fxy" id="ijf-LG-UzS"/>
-                        <segue destination="Ib8-uJ-4ks" kind="push" identifier="SBCreateReelViewController" id="IGl-OD-vFp"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1u1-0B-rgP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="O6C-IR-hrb">
-                    <connections>
-                        <action selector="focusAndExposeTap:" destination="oXS-Jf-RHe" id="DrH-cd-khc"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="1140" y="22"/>
-        </scene>
         <!--Create Reel View Controller-->
         <scene sceneID="buy-ul-KRc">
             <objects>
@@ -376,16 +311,6 @@
                                     <action selector="finish:" destination="Ib8-uJ-4ks" eventType="touchUpInside" id="Ub5-Y6-YTd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hdt-5d-8hU">
-                                <rect key="frame" x="20" y="20" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="X">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="dismissModal:" destination="Ib8-uJ-4ks" eventType="touchUpInside" id="6zS-Kv-aPj"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -402,17 +327,52 @@
         <!--Camera Navigation Controller-->
         <scene sceneID="1dZ-Yh-ry9">
             <objects>
-                <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="Ver-4P-zS4" customClass="SBCameraNavigationController" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nw9-x1-D8z">
+                <navigationController definesPresentationContext="YES" id="Ver-4P-zS4" customClass="SBCameraNavigationController" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nw9-x1-D8z" customClass="SBTransparentNavigationBar">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="oXS-Jf-RHe" kind="relationship" relationship="rootViewController" id="qrX-Ca-IXr"/>
+                        <segue destination="PrZ-Lb-gYI" kind="relationship" relationship="rootViewController" id="Tin-MY-mhQ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vx2-0b-Tws" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="614" y="22"/>
+        </scene>
+        <!--Full Screen Camera View Controller-->
+        <scene sceneID="wX9-4Z-sCO">
+            <objects>
+                <viewController id="PrZ-Lb-gYI" customClass="SBFullScreenCameraViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ne1-jk-9A6"/>
+                        <viewControllerLayoutGuide type="bottom" id="0X6-fr-Ukb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yPm-nI-agq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <containerView appearanceType="aqua" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aiF-eI-bCi">
+                                <rect key="frame" x="0.0" y="124" width="320" height="320"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="k3x-92-bAS" kind="embed" id="hZg-bF-hOv"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="U95-VE-toI">
+                        <barButtonItem key="leftBarButtonItem" title="X" id="Eux-36-fXU">
+                            <connections>
+                                <action selector="dismissModal:" destination="PrZ-Lb-gYI" id="XKr-wc-WrQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nn1-Il-PIh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1124" y="22"/>
         </scene>
         <!--Main Menu View Controller-->
         <scene sceneID="9mK-Yg-irm">
@@ -541,6 +501,37 @@
             </objects>
             <point key="canvasLocation" x="-455" y="-761"/>
         </scene>
+        <!--Camera View Controller-->
+        <scene sceneID="gYd-dP-Hjh">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="k3x-92-bAS" customClass="SBCameraViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IL9-QX-3H0"/>
+                        <viewControllerLayoutGuide type="bottom" id="SEg-4R-7Ah"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="QYH-N4-cCx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Me1-N9-iOa" appends="YES" id="obO-kb-io1"/>
+                        </connections>
+                    </view>
+                    <toolbarItems/>
+                    <connections>
+                        <outlet property="longPressGestureRecognizer" destination="Me1-N9-iOa" id="GPG-4y-9Fo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0bB-Zr-zdb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.050000000000000003" id="Me1-N9-iOa">
+                    <connections>
+                        <action selector="toggleCapture:" destination="k3x-92-bAS" id="VvO-qp-8pK"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="60" y="-513"/>
+        </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -550,5 +541,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="IYo-Aj-2pF"/>
         <segue reference="tOQ-Pt-FOZ"/>
+        <segue reference="hZg-bF-hOv"/>
     </inferredMetricsTieBreakers>
 </document>
