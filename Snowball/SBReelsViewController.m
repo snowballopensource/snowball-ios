@@ -7,6 +7,7 @@
 //
 
 #import "SBCameraViewController.h"
+#import "SBCreateReelViewController.h"
 #import "SBReel.h"
 #import "SBReelClipsViewController.h"
 #import "SBReelsViewController.h"
@@ -14,6 +15,8 @@
 #import "SBSessionManager.h"
 
 @interface SBReelsViewController ()
+
+@property (nonatomic, strong) IBOutlet NSURL *recordingURL;
 
 @end
 
@@ -40,8 +43,11 @@
     } else if ([destinationViewController isKindOfClass:[SBCameraViewController class]]) {
         [(SBCameraViewController *)destinationViewController setRecordingCompletionBlock:^(NSURL *fileURL) {
             NSLog(@"Recording completed @ %@", [fileURL path]);
-            // TODO: upload video
+            [self setRecordingURL:fileURL];
+            [self performSegueWithIdentifier:[SBCreateReelViewController identifier] sender:self];
         }];
+    } else if ([destinationViewController isKindOfClass:[SBCreateReelViewController class]]) {
+        [(SBCreateReelViewController *)destinationViewController setInitialRecordingURL:self.recordingURL];
     }
 }
 

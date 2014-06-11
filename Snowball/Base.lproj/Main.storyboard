@@ -192,15 +192,11 @@
                                 <segue destination="6xs-xX-SJg" kind="unwind" unwindAction="unwindToMenuViewController:" id="Gmt-cd-j7E"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="+" id="MrP-GF-cml">
-                            <connections>
-                                <segue destination="Ver-4P-zS4" kind="modal" id="IYo-Aj-2pF"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Xh3-3G-cJd" id="b3d-Ty-Nzu"/>
                         <segue destination="D54-9P-BdS" kind="push" identifier="SBReelClipsViewController" id="Gcf-NX-Zug"/>
+                        <segue destination="Ib8-uJ-4ks" kind="push" identifier="SBCreateReelViewController" id="N3b-XY-EoT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MEg-Z4-iZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -369,6 +365,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="Ib8-uJ-4ks" kind="push" identifier="SBCreateReelViewController" id="QmG-6y-0Sy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nn1-Il-PIh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -539,8 +538,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="IYo-Aj-2pF"/>
+        <segue reference="FKf-LR-LCF"/>
+        <segue reference="N3b-XY-EoT"/>
         <segue reference="tOQ-Pt-FOZ"/>
-        <segue reference="hZg-bF-hOv"/>
     </inferredMetricsTieBreakers>
 </document>

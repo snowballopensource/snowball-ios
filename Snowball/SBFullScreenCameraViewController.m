@@ -9,6 +9,7 @@
 #import "SBCameraViewController.h"
 #import "SBFullScreenCameraViewController.h"
 #import "SBReel.h"
+#import "SBCreateReelViewController.h"
 
 @interface SBFullScreenCameraViewController ()
 
@@ -20,14 +21,7 @@
     if ([segue.destinationViewController isKindOfClass:[SBCameraViewController class]]) {
         [(SBCameraViewController *)segue.destinationViewController setRecordingCompletionBlock:^(NSURL *fileURL) {
             NSLog(@"Recording completed @ %@", [fileURL path]);
-            // TODO: upload video
-            // If reel, upload to reel
-            // else, show options to create new reel
-            if (self.reel) {
-
-            } else {
-
-            }
+            // TODO: upload video to reel
             [self dismissViewControllerAnimated:YES completion:nil];
         }];
     }
