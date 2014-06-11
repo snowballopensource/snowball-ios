@@ -44,16 +44,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
 
     SBCameraPreviewView *previewView = [SBCameraManager sharedManager].previewView;
     [previewView setFrame:self.cameraContainerView.bounds];
     [self.cameraContainerView addSubview:previewView];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
-    [super viewWillDisappear:animated];
 }
 
 #pragma mark - UITableViewDataSource
