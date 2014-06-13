@@ -47,7 +47,6 @@
                                   [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                                       [_reels each:^(id object) {
                                           SBReel *reel = [SBReel MR_importFromObject:object inContext:localContext];
-                                          [reel setParsedAt:[NSDate date]];
                                           [reel setHomeFeedSession:[SBSessionManager sessionDate]];
                                       }];
                                   }];

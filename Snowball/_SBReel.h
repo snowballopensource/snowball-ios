@@ -7,8 +7,8 @@
 extern const struct SBReelAttributes {
 	__unsafe_unretained NSString *homeFeedSession;
 	__unsafe_unretained NSString *name;
-	__unsafe_unretained NSString *parsedAt;
 	__unsafe_unretained NSString *remoteID;
+	__unsafe_unretained NSString *updatedAt;
 } SBReelAttributes;
 
 extern const struct SBReelRelationships {
@@ -58,21 +58,21 @@ extern const struct SBReelFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSDate* parsedAt;
-
-
-
-//- (BOOL)validateParsedAt:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
 @property (nonatomic, strong) NSString* remoteID;
 
 
 
 //- (BOOL)validateRemoteID:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSDate* updatedAt;
+
+
+
+//- (BOOL)validateUpdatedAt:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -112,14 +112,14 @@ extern const struct SBReelFetchedProperties {
 
 
 
-- (NSDate*)primitiveParsedAt;
-- (void)setPrimitiveParsedAt:(NSDate*)value;
-
-
-
-
 - (NSString*)primitiveRemoteID;
 - (void)setPrimitiveRemoteID:(NSString*)value;
+
+
+
+
+- (NSDate*)primitiveUpdatedAt;
+- (void)setPrimitiveUpdatedAt:(NSDate*)value;
 
 
 

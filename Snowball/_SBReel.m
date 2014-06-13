@@ -6,8 +6,8 @@
 const struct SBReelAttributes SBReelAttributes = {
 	.homeFeedSession = @"homeFeedSession",
 	.name = @"name",
-	.parsedAt = @"parsedAt",
 	.remoteID = @"remoteID",
+	.updatedAt = @"updatedAt",
 };
 
 const struct SBReelRelationships SBReelRelationships = {
@@ -64,14 +64,14 @@ const struct SBReelFetchedProperties SBReelFetchedProperties = {
 
 
 
-@dynamic parsedAt;
-
-
-
-
-
-
 @dynamic remoteID;
+
+
+
+
+
+
+@dynamic updatedAt;
 
 
 
