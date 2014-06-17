@@ -17,5 +17,4 @@
 @property (nonatomic, weak) IBOutlet UIImageView *participantFourImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *participantFiveImageView;
 
-
 @end

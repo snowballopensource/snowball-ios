@@ -14,6 +14,7 @@
     self = [super initWithCoder:coder];
     if (self) {
         [self.layer setCornerRadius:(self.frame.size.width/2)];
+        [self setClipsToBounds:YES];
     }
     return self;
 }

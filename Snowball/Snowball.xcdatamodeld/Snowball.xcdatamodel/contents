@@ -56,7 +56,17 @@
         </attribute>
         <relationship name="clips" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Clip" inverseName="reel" inverseEntity="Clip" syncable="YES">
             <userInfo>
-                <entry key="mappedKeyName" value="recent_clips"/>
+                <entry key="relatedByAttribute" value="remoteID"/>
+            </userInfo>
+        </relationship>
+        <relationship name="participants" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="reels" inverseEntity="User" syncable="YES">
+            <userInfo>
+                <entry key="relatedByAttribute" value="remoteID"/>
+            </userInfo>
+        </relationship>
+        <relationship name="recentParticipants" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="User" inverseName="recentReels" inverseEntity="User" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="recent_participants"/>
                 <entry key="relatedByAttribute" value="remoteID"/>
             </userInfo>
         </relationship>
@@ -80,13 +90,15 @@
         </attribute>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="clips" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Clip" inverseName="user" inverseEntity="Clip" syncable="YES"/>
+        <relationship name="recentReels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Reel" inverseName="recentParticipants" inverseEntity="Reel" syncable="YES"/>
+        <relationship name="reels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Reel" inverseName="participants" inverseEntity="Reel" syncable="YES"/>
         <userInfo>
             <entry key="relatedByAttribute" value="remoteID"/>
         </userInfo>
     </entity>
     <elements>
         <element name="Clip" positionX="-63" positionY="-18" width="128" height="163"/>
-        <element name="Reel" positionX="-63" positionY="0" width="128" height="120"/>
-        <element name="User" positionX="-54" positionY="18" width="128" height="148"/>
+        <element name="Reel" positionX="-63" positionY="0" width="128" height="148"/>
+        <element name="User" positionX="-54" positionY="18" width="128" height="178"/>
     </elements>
 </model>

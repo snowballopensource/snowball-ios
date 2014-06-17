@@ -13,6 +13,7 @@
 #import "SBReelsViewController.h"
 #import "SBReelTableViewCell.h"
 #import "SBSessionManager.h"
+#import "SBUser.h"
 
 @interface SBReelsViewController ()
 
@@ -63,6 +64,32 @@
 - (void)configureCell:(SBReelTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     SBReel *reel = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [cell.nameLabel setText:reel.name];
+
+    if ([reel.recentParticipants count] > 0) {
+        NSString *imageOneURLString = [(SBUser *)[reel.recentParticipants firstObject] avatarURL];
+        [cell.participantOneImageView setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.participantOneImageView setImageWithURL:[NSURL URLWithString:imageOneURLString]];
+    }
+    if ([reel.recentParticipants count] > 1) {
+        NSString *imageTwoURLString = [(SBUser *)[reel.recentParticipants objectAtIndex:1] avatarURL];
+        [cell.participantTwoImageView setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.participantTwoImageView setImageWithURL:[NSURL URLWithString:imageTwoURLString]];
+    }
+    if ([reel.recentParticipants count] > 2) {
+        NSString *imageThreeURLString = [(SBUser *)[reel.recentParticipants objectAtIndex:2] avatarURL];
+        [cell.participantThreeImageView setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.participantThreeImageView setImageWithURL:[NSURL URLWithString:imageThreeURLString]];
+    }
+    if ([reel.recentParticipants count] > 3) {
+        NSString *imageFourURLString = [(SBUser *)[reel.recentParticipants objectAtIndex:3] avatarURL];
+        [cell.participantFourImageView setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.participantFourImageView setImageWithURL:[NSURL URLWithString:imageFourURLString]];
+    }
+    if ([reel.recentParticipants count] > 4) {
+        NSString *imageFiveURLString = [(SBUser *)[reel.recentParticipants objectAtIndex:4] avatarURL];
+        [cell.participantFiveImageView setBackgroundColor:[UIColor lightGrayColor]];
+        [cell.participantFiveImageView setImageWithURL:[NSURL URLWithString:imageFiveURLString]];
+    }
 }
 
 #pragma mark - UITableViewDelegate
