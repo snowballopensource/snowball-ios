@@ -16,7 +16,7 @@
 
 @interface SBReelsViewController ()
 
-@property (nonatomic, strong) IBOutlet NSURL *recordingURL;
+@property (nonatomic, strong) NSURL *recordingURL;
 
 @end
 
@@ -63,7 +63,6 @@
 - (void)configureCell:(SBReelTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     SBReel *reel = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [cell.nameLabel setText:reel.name];
-    [cell.posterImageView setImageWithURL:[NSURL URLWithString:[[reel recentClipPosterURLs] firstObject]]];
 }
 
 #pragma mark - UITableViewDelegate
