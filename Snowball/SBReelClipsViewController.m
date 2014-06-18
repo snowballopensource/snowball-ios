@@ -18,7 +18,6 @@
 @interface SBReelClipsViewController ()
 
 @property (nonatomic, weak) IBOutlet SBPlayerView *playerView;
-@property (nonatomic, weak) IBOutlet UILabel *likesCountLabel;
 @property (nonatomic, weak) IBOutlet UIButton *userButton;
 
 @property (nonatomic, strong) SBClip *currentClip;
@@ -35,7 +34,6 @@
     [super viewWillAppear:animated];
 
     [self.userButton setTitle:@"" forState:UIControlStateNormal];
-    [self.likesCountLabel setText:@""];
 
     // TODO: make this paginated
     [SBClip getRecentClipsForReel:self.reel
@@ -58,26 +56,6 @@
         SBProfileViewController *vc = segue.destinationViewController;
         [vc setUser:self.currentClip.user];
     }
-}
-
-#pragma mark - View Actions
-
-- (IBAction)likeClip:(id)sender {
-    if (self.currentClip.likedValue) {
-        [self.currentClip unlikeWithSuccess:nil
-                                    failure:^(NSError *error) {
-                                        [error displayInView:self.view];
-                                        [self updateClipUI];
-                                    }];
-    }
-    else {
-        [self.currentClip likeWithSuccess:nil
-                                  failure:^(NSError *error) {
-                                      [error displayInView:self.view];
-                                      [self updateClipUI];
-                                  }];
-    }
-    [self updateClipUI];
 }
 
 #pragma mark - Video Player
@@ -110,7 +88,6 @@
 
 - (void)updateClipUI {
     [self.userButton setTitle:self.currentClip.user.username forState:UIControlStateNormal];
-    [self.likesCountLabel setText:[NSString stringWithFormat:@"%@", self.currentClip.likesCount]];
 }
 
 #pragma mark - Setters / Getters

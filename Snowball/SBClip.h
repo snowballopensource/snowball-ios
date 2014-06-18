@@ -15,9 +15,6 @@
                       success:(void (^)(BOOL canLoadMore))success
                       failure:(void (^)(NSError *error))failure;
 
-- (void)likeWithSuccess:(void (^)(void))success failure:(void (^)(NSError *error))failure;
-- (void)unlikeWithSuccess:(void (^)(void))success failure:(void (^)(NSError *error))failure;
-
 @property (nonatomic, strong) NSData *videoToSubmit;
 
 @end

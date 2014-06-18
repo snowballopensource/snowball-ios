@@ -6,8 +6,6 @@
 
 extern const struct SBClipAttributes {
 	__unsafe_unretained NSString *createdAt;
-	__unsafe_unretained NSString *liked;
-	__unsafe_unretained NSString *likesCount;
 	__unsafe_unretained NSString *posterURL;
 	__unsafe_unretained NSString *remoteID;
 	__unsafe_unretained NSString *videoURL;
@@ -23,8 +21,6 @@ extern const struct SBClipFetchedProperties {
 
 @class SBReel;
 @class SBUser;
-
-
 
 
 
@@ -49,34 +45,6 @@ extern const struct SBClipFetchedProperties {
 
 
 //- (BOOL)validateCreatedAt:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
-@property (nonatomic, strong) NSNumber* liked;
-
-
-
-@property BOOL likedValue;
-- (BOOL)likedValue;
-- (void)setLikedValue:(BOOL)value_;
-
-//- (BOOL)validateLiked:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
-@property (nonatomic, strong) NSNumber* likesCount;
-
-
-
-@property int32_t likesCountValue;
-- (int32_t)likesCountValue;
-- (void)setLikesCountValue:(int32_t)value_;
-
-//- (BOOL)validateLikesCount:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -138,24 +106,6 @@ extern const struct SBClipFetchedProperties {
 
 - (NSDate*)primitiveCreatedAt;
 - (void)setPrimitiveCreatedAt:(NSDate*)value;
-
-
-
-
-- (NSNumber*)primitiveLiked;
-- (void)setPrimitiveLiked:(NSNumber*)value;
-
-- (BOOL)primitiveLikedValue;
-- (void)setPrimitiveLikedValue:(BOOL)value_;
-
-
-
-
-- (NSNumber*)primitiveLikesCount;
-- (void)setPrimitiveLikesCount:(NSNumber*)value;
-
-- (int32_t)primitiveLikesCountValue;
-- (void)setPrimitiveLikesCountValue:(int32_t)value_;
 
 
 

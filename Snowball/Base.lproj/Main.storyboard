@@ -248,9 +248,9 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XlL-cb-VqF" customClass="SBPlayerView">
-                                <rect key="frame" x="0.0" y="194" width="320" height="180"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o6G-fS-UZO">
                                 <rect key="frame" x="237" y="518" width="63" height="30"/>
@@ -260,22 +260,6 @@
                                 </state>
                                 <connections>
                                     <segue destination="Ver-4P-zS4" kind="modal" id="1hm-VP-obM"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8j-3Q-JbM">
-                                <rect key="frame" x="290" y="397" width="10" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5KG-Xq-wqC">
-                                <rect key="frame" x="252" y="393" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Like">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="likeClip:" destination="D54-9P-BdS" eventType="touchUpInside" id="DDQ-gQ-BWI"/>
                                 </connections>
                             </button>
                             <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N36-Oy-i29">
@@ -290,12 +274,11 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="vhB-DJ-slf"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="likesCountLabel" destination="Z8j-3Q-JbM" id="kMS-Q1-23l"/>
                         <outlet property="playerView" destination="XlL-cb-VqF" id="QRj-Ko-jJt"/>
                         <outlet property="userButton" destination="N36-Oy-i29" id="oWF-di-HY1"/>
                     </connections>
@@ -390,10 +373,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="U95-VE-toI">
-                        <barButtonItem key="leftBarButtonItem" title="X" id="Eux-36-fXU">
-                            <connections>
-                                <action selector="dismissModal:" destination="PrZ-Lb-gYI" id="XKr-wc-WrQ"/>
-                            </connections>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="2JR-Hc-1Yi">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xJO-fo-Haw">
+                                <rect key="frame" x="16" y="9" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="button-x-normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="button-x-highlighted"/>
+                            </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -594,6 +582,8 @@
         <image name="button-menu-black" width="25" height="25"/>
         <image name="button-menu-highlighted" width="25" height="25"/>
         <image name="button-menu-normal" width="25" height="25"/>
+        <image name="button-x-highlighted" width="25" height="25"/>
+        <image name="button-x-normal" width="25" height="25"/>
         <image name="icon-camera" width="35" height="25"/>
         <image name="icon-feed-logo" width="40" height="40"/>
         <image name="icon-menu-friends" width="40" height="40"/>
@@ -606,8 +596,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="N3b-XY-EoT"/>
-        <segue reference="FKf-LR-LCF"/>
-        <segue reference="RT5-2S-Em1"/>
+        <segue reference="QmG-6y-0Sy"/>
+        <segue reference="tOQ-Pt-FOZ"/>
+        <segue reference="hZg-bF-hOv"/>
     </inferredMetricsTieBreakers>
 </document>
