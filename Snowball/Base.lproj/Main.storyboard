@@ -252,19 +252,10 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o6G-fS-UZO">
-                                <rect key="frame" x="237" y="518" width="63" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="New Clip">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Ver-4P-zS4" kind="modal" id="1hm-VP-obM"/>
-                                </connections>
-                            </button>
                             <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N36-Oy-i29">
-                                <rect key="frame" x="20" y="393" width="224" height="30"/>
+                                <rect key="frame" x="80" y="405" width="220" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="jamescmartinez">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -273,6 +264,33 @@
                                     <segue destination="IFG-iR-E64" kind="push" id="tOQ-Pt-FOZ"/>
                                 </connections>
                             </button>
+                            <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jUC-WR-fBN" customClass="SBUserImageView">
+                                <rect key="frame" x="20" y="400" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view appearanceType="aqua" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CcJ-23-ER1">
+                                <rect key="frame" x="245" y="320" width="75" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o6G-fS-UZO">
+                                        <rect key="frame" x="17" y="19" width="40" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="button-camera-normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" image="button-camera-highlighted"/>
+                                        <connections>
+                                            <segue destination="Ver-4P-zS4" kind="modal" id="1hm-VP-obM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
+                            <view appearanceType="aqua" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5JC-Mz-GFZ">
+                                <rect key="frame" x="0.0" y="320" width="245" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -281,6 +299,7 @@
                     <connections>
                         <outlet property="playerView" destination="XlL-cb-VqF" id="QRj-Ko-jJt"/>
                         <outlet property="userButton" destination="N36-Oy-i29" id="oWF-di-HY1"/>
+                        <outlet property="userImageView" destination="jUC-WR-fBN" id="0F6-gd-BlE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fe9-26-Sr0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -324,7 +343,21 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="9J4-rc-iI6"/>
+                    <navigationItem key="navigationItem" id="9J4-rc-iI6">
+                        <barButtonItem key="leftBarButtonItem" id="gKM-mM-Aql">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1Rn-wd-KqL">
+                                <rect key="frame" x="16" y="9" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="button-x-normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="button-x-highlighted"/>
+                                <connections>
+                                    <action selector="dismissModal:" destination="Ib8-uJ-4ks" eventType="touchUpInside" id="m9j-DY-bde"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="finishButton" destination="kCU-jh-EQ3" id="YC9-6L-nRY"/>
                         <outlet property="playerView" destination="ogY-go-wb8" id="wZa-k0-r0q"/>
@@ -362,7 +395,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView appearanceType="aqua" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aiF-eI-bCi">
-                                <rect key="frame" x="0.0" y="124" width="320" height="320"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
@@ -373,7 +406,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="U95-VE-toI">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="2JR-Hc-1Yi">
+                        <barButtonItem key="leftBarButtonItem" id="2JR-Hc-1Yi">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xJO-fo-Haw">
                                 <rect key="frame" x="16" y="9" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -381,6 +414,9 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" image="button-x-highlighted"/>
+                                <connections>
+                                    <action selector="dismissModal:" destination="PrZ-Lb-gYI" eventType="touchUpInside" id="FWS-u5-K59"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -579,6 +615,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="button-camera-highlighted" width="40" height="20"/>
+        <image name="button-camera-normal" width="40" height="20"/>
         <image name="button-menu-black" width="25" height="25"/>
         <image name="button-menu-highlighted" width="25" height="25"/>
         <image name="button-menu-normal" width="25" height="25"/>

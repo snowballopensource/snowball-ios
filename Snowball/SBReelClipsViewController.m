@@ -19,6 +19,7 @@
 
 @property (nonatomic, weak) IBOutlet SBPlayerView *playerView;
 @property (nonatomic, weak) IBOutlet UIButton *userButton;
+@property (nonatomic, weak) IBOutlet UIImageView *userImageView;
 
 @property (nonatomic, strong) SBClip *currentClip;
 @property (nonatomic, copy) NSArray *clips;
@@ -88,6 +89,7 @@
 
 - (void)updateClipUI {
     [self.userButton setTitle:self.currentClip.user.username forState:UIControlStateNormal];
+    [self.userImageView setImageWithURL:[NSURL URLWithString:self.currentClip.user.avatarURL]];
 }
 
 #pragma mark - Setters / Getters
