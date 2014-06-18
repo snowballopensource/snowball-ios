@@ -15,6 +15,14 @@
 
 @implementation SBMainMenuViewController
 
+- (void)viewDidLoad{
+    [super viewDidLoad];
+
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+}
+
+#pragma mark - UITableViewDelegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         [SBSessionManager signOut];

@@ -29,6 +29,7 @@
 		BA29C7EE192FDAE400F59684 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA29C7ED192FDAE400F59684 /* AirshipConfig.plist */; };
 		BA29C7F2192FEBC400F59684 /* SBProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA29C7F1192FEBC400F59684 /* SBProfileViewController.m */; };
 		BA5238A51920B9630088A730 /* SBPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5238A41920B9630088A730 /* SBPlayerView.m */; };
+		BA53F16B1952397400DFD7B9 /* SBMeUserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA53F16A1952397400DFD7B9 /* SBMeUserImageView.m */; };
 		BA5CD67F192689430087D3A2 /* SBMainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD67E192689430087D3A2 /* SBMainMenuViewController.m */; };
 		BA5CD68819269A530087D3A2 /* SBJSONResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD68719269A530087D3A2 /* SBJSONResponseSerializer.m */; };
 		BA5CD68B19269B170087D3A2 /* NSError+Snowball.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD68A19269B170087D3A2 /* NSError+Snowball.m */; };
@@ -120,6 +121,8 @@
 		BA29C7F1192FEBC400F59684 /* SBProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBProfileViewController.m; sourceTree = "<group>"; };
 		BA5238A31920B9630088A730 /* SBPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBPlayerView.h; sourceTree = "<group>"; };
 		BA5238A41920B9630088A730 /* SBPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBPlayerView.m; sourceTree = "<group>"; };
+		BA53F1691952397400DFD7B9 /* SBMeUserImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBMeUserImageView.h; sourceTree = "<group>"; };
+		BA53F16A1952397400DFD7B9 /* SBMeUserImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBMeUserImageView.m; sourceTree = "<group>"; };
 		BA5CD67D192689430087D3A2 /* SBMainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBMainMenuViewController.h; sourceTree = "<group>"; };
 		BA5CD67E192689430087D3A2 /* SBMainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBMainMenuViewController.m; sourceTree = "<group>"; };
 		BA5CD68619269A530087D3A2 /* SBJSONResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSONResponseSerializer.h; sourceTree = "<group>"; };
@@ -312,6 +315,8 @@
 				BA5CD6911926CEDA0087D3A2 /* SBFadeOverlayView.m */,
 				BAA19C4E19469B370034D439 /* SBUserImageView.h */,
 				BAA19C4F19469B370034D439 /* SBUserImageView.m */,
+				BA53F1691952397400DFD7B9 /* SBMeUserImageView.h */,
+				BA53F16A1952397400DFD7B9 /* SBMeUserImageView.m */,
 				BACD81301947D960009A70B6 /* SBTransparentNavigationBar.h */,
 				BACD81311947D960009A70B6 /* SBTransparentNavigationBar.m */,
 				BA4AC5DF1938EA960004D5CF /* Camera */,
@@ -657,6 +662,7 @@
 				BA048E20191AF9A70083B0DC /* Snowball.xcdatamodeld in Sources */,
 				BAC9FB4319241774008742EE /* SBSessionManager.m in Sources */,
 				BA048E18191AF83A0083B0DC /* SBReelClipsViewController.m in Sources */,
+				BA53F16B1952397400DFD7B9 /* SBMeUserImageView.m in Sources */,
 				BA5CD68B19269B170087D3A2 /* NSError+Snowball.m in Sources */,
 				BA9370031923153D00D3CAFB /* SBReel.m in Sources */,
 				BAA19C4A1946945C0034D439 /* UILabel+CustomFont.m in Sources */,
