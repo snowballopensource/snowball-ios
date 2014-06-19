@@ -34,4 +34,9 @@
 - (void)getWithSuccess:(void (^)(void))success
                failure:(void (^)(NSError *error))failure;
 
++ (void)findUsersByPhoneNumbers:(NSArray *)phoneNumbers
+                           page:(NSUInteger)page
+                        success:(void (^)(NSArray *users))success
+                        failure:(void (^)(NSError *error))failure;
+
 @end

@@ -134,7 +134,7 @@ static SBUser *_currentUser = nil;
     [[SBAPIManager sharedManager] GET:path
                            parameters:nil
                               success:^(NSURLSessionDataTask *task, id responseObject) {
-                                  NSArray *_user = responseObject[@"user"];
+                                  NSDictionary *_user = responseObject[@"user"];
                                   [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                                       [SBUser MR_importFromObject:_user inContext:localContext];
                                   }];
@@ -144,7 +144,34 @@ static SBUser *_currentUser = nil;
                               }];
 }
 
+#pragma mark - Finding Users
 
++ (void)findUsersByPhoneNumbers:(NSArray *)phoneNumbers
+                           page:(NSUInteger)page
+                        success:(void (^)(NSArray *users))success
+                        failure:(void (^)(NSError *error))failure {
+    NSMutableArray *contacts = [@[] mutableCopy];
+    for (NSString *phoneNumber in phoneNumbers) {
+        [contacts addObject:@{@"phone_number": phoneNumber}];
+    }
+    NSDictionary *parameters = @{ @"contacts": [contacts copy], @"page": @(page) };
+    [[SBAPIManager sharedManager] POST:@"users/find_by_contacts"
+                            parameters:parameters
+                               success:^(NSURLSessionDataTask *task, id responseObject) {
+                                   NSArray *_users = responseObject[@"users"];
+                                   __block NSArray *users;
+                                   [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                                       users = [SBUser MR_importFromArray:_users inContext:localContext];
+                                   }];
+                                   NSMutableArray *mainContextUsers = [@[] mutableCopy];
+                                   for (SBUser *user in users) {
+                                       [mainContextUsers addObject:[user MR_inContext:[NSManagedObjectContext MR_defaultContext]]];
+                                   }
+                                   if (success) { success(mainContextUsers); }
+                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                   if (failure) { failure(error); };
+                               }];
+}
 
 #pragma mark - SBManagedObject
 

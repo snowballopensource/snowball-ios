@@ -8,8 +8,11 @@
 
 #import "SBAddressBookManager.h"
 #import "SBFindFriendsViewController.h"
+#import "SBUser.h"
 
 @interface SBFindFriendsViewController ()
+
+@property (nonatomic, strong) NSArray *users;
 
 @end
 
@@ -17,7 +20,14 @@
 
 - (IBAction)findFriendsViaContacts:(id)sender {
     [SBAddressBookManager getAllPhoneNumbersWithCompletion:^(NSArray *phoneNumbers) {
-        NSLog(@"Numbers: %@", phoneNumbers);
+        // TODO: make this paginated
+        [SBUser findUsersByPhoneNumbers:phoneNumbers
+                                   page:0
+                                success:^(NSArray *users) {
+                                    NSLog(@"%@", users);
+                                } failure:^(NSError *error) {
+                                    [error displayInView:self.view];
+                                }];
     }];
 }
 
