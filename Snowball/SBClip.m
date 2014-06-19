@@ -45,7 +45,7 @@
     } else {
         // reel does not exist on server, nesting it so that it is created
         path = [NSString stringWithFormat:@"clips"];
-        parameters = @{ @"clip": @{ @"reel_attributes": @{ @"name": @"" } } };
+        parameters = @{ @"clip": @{ @"reel_attributes": @{ @"name": @"Reel" } } };
     }
     [[SBAPIManager sharedManager] POST:path
                             parameters:parameters
