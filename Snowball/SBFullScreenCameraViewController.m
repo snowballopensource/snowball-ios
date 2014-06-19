@@ -7,9 +7,11 @@
 //
 
 #import "SBCameraViewController.h"
-#import "SBFullScreenCameraViewController.h"
-#import "SBReel.h"
+#import "SBClip.h"
 #import "SBCreateReelViewController.h"
+#import "SBFullScreenCameraViewController.h"
+#import "SBLongRunningTaskManager.h"
+#import "SBReel.h"
 
 @interface SBFullScreenCameraViewController ()
 
@@ -20,8 +22,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[SBCameraViewController class]]) {
         [(SBCameraViewController *)segue.destinationViewController setRecordingCompletionBlock:^(NSURL *fileURL) {
-            NSLog(@"Recording completed @ %@", [fileURL path]);
-            // TODO: upload video to reel
+            // This is semi duplicated code since clips are uploaded in two places.
+            SBClip *clip = [SBClip MR_createEntity];
+            [clip setReel:self.reel];
+            NSData *data = [NSData dataWithContentsOfURL:fileURL];
+            [clip setVideoToSubmit:data];
+            [clip save];
+            [SBLongRunningTaskManager addBlockToQueue:^{
+                [clip create];
+            }];
             [self dismissViewControllerAnimated:YES completion:nil];
         }];
     }

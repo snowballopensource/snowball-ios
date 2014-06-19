@@ -362,6 +362,8 @@
 			isa = PBXGroup;
 			children = (
 				BA5CD68D19269B1F0087D3A2 /* API */,
+				BA217C98192A4DF500F04D03 /* SBLongRunningTaskManager.h */,
+				BA217C99192A4DF500F04D03 /* SBLongRunningTaskManager.m */,
 				BAC9FB4119241774008742EE /* SBSessionManager.h */,
 				BAC9FB4219241774008742EE /* SBSessionManager.m */,
 				BA29C7EA192FD9C900F59684 /* SBPushNotificationManager.h */,
@@ -420,8 +422,6 @@
 				BA048E1C191AF8D40083B0DC /* SBAPIManager.m */,
 				BA5CD68619269A530087D3A2 /* SBJSONResponseSerializer.h */,
 				BA5CD68719269A530087D3A2 /* SBJSONResponseSerializer.m */,
-				BA217C98192A4DF500F04D03 /* SBLongRunningTaskManager.h */,
-				BA217C99192A4DF500F04D03 /* SBLongRunningTaskManager.m */,
 			);
 			name = API;
 			sourceTree = "<group>";
