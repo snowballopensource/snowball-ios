@@ -26,7 +26,7 @@
 
     AVPlayer *player = [[AVPlayer alloc] initWithURL:self.initialRecordingURL];
     [self.playerView setPlayer:player];
-    [player play];
+    [(AVPlayerLayer *)self.playerView.layer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
 }
 
 - (IBAction)finish:(id)sender {
