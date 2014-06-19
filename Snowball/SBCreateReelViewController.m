@@ -41,7 +41,7 @@
     [SBLongRunningTaskManager addBlockToQueue:^{
         [clip create];
     }];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end
