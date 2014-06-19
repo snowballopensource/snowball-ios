@@ -35,6 +35,8 @@
 		BA5CD68B19269B170087D3A2 /* NSError+Snowball.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD68A19269B170087D3A2 /* NSError+Snowball.m */; };
 		BA5CD6921926CEDA0087D3A2 /* SBFadeOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD6911926CEDA0087D3A2 /* SBFadeOverlayView.m */; };
 		BA8E994519536EE700DCECD9 /* UIButton+CustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E994419536EE700DCECD9 /* UIButton+CustomFont.m */; };
+		BA8E994B1953801600DCECD9 /* SBFindFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E994A1953801600DCECD9 /* SBFindFriendsViewController.m */; };
+		BA8E994F195382FE00DCECD9 /* SBAddressBookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E994E195382FE00DCECD9 /* SBAddressBookManager.m */; };
 		BA936FF01923104800D3CAFB /* SBManagedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FEF1923104800D3CAFB /* SBManagedViewController.m */; };
 		BA936FF3192310B200D3CAFB /* SBManagedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FF2192310B200D3CAFB /* SBManagedTableViewController.m */; };
 		BA936FF7192312DF00D3CAFB /* SBReelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FF6192312DF00D3CAFB /* SBReelsViewController.m */; };
@@ -134,6 +136,10 @@
 		BA5CD6911926CEDA0087D3A2 /* SBFadeOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFadeOverlayView.m; sourceTree = "<group>"; };
 		BA8E994319536EE700DCECD9 /* UIButton+CustomFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+CustomFont.h"; sourceTree = "<group>"; };
 		BA8E994419536EE700DCECD9 /* UIButton+CustomFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CustomFont.m"; sourceTree = "<group>"; };
+		BA8E99491953801600DCECD9 /* SBFindFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFindFriendsViewController.h; sourceTree = "<group>"; };
+		BA8E994A1953801600DCECD9 /* SBFindFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFindFriendsViewController.m; sourceTree = "<group>"; };
+		BA8E994D195382FE00DCECD9 /* SBAddressBookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAddressBookManager.h; sourceTree = "<group>"; };
+		BA8E994E195382FE00DCECD9 /* SBAddressBookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAddressBookManager.m; sourceTree = "<group>"; };
 		BA936FEE1923104800D3CAFB /* SBManagedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedViewController.h; sourceTree = "<group>"; };
 		BA936FEF1923104800D3CAFB /* SBManagedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBManagedViewController.m; sourceTree = "<group>"; };
 		BA936FF1192310B200D3CAFB /* SBManagedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedTableViewController.h; sourceTree = "<group>"; };
@@ -301,6 +307,7 @@
 				BA5CD68519268B6C0087D3A2 /* Main Menu */,
 				BA936FF4192312CF00D3CAFB /* Managed */,
 				BAE8960E193FACD200E96E6B /* Reel */,
+				BA8E994C1953802100DCECD9 /* Friends */,
 				BAE8960D193FACCC00E96E6B /* Profile */,
 				BAC9FB371924138B008742EE /* Authentication */,
 			);
@@ -372,6 +379,8 @@
 				BAD86C2E193553BC0046EE22 /* SBFacebookManager.m */,
 				BA98D0001936B85200753E1B /* SBCameraManager.h */,
 				BA98D0011936B85200753E1B /* SBCameraManager.m */,
+				BA8E994D195382FE00DCECD9 /* SBAddressBookManager.h */,
+				BA8E994E195382FE00DCECD9 /* SBAddressBookManager.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -424,6 +433,15 @@
 				BA5CD68719269A530087D3A2 /* SBJSONResponseSerializer.m */,
 			);
 			name = API;
+			sourceTree = "<group>";
+		};
+		BA8E994C1953802100DCECD9 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				BA8E99491953801600DCECD9 /* SBFindFriendsViewController.h */,
+				BA8E994A1953801600DCECD9 /* SBFindFriendsViewController.m */,
+			);
+			name = Friends;
 			sourceTree = "<group>";
 		};
 		BA936FF4192312CF00D3CAFB /* Managed */ = {
@@ -681,6 +699,7 @@
 				BAE1FF1719401B5C000A9D80 /* SBCameraNavigationController.m in Sources */,
 				BAEC7C10193DE528003FAE13 /* SBWebViewController.m in Sources */,
 				BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */,
+				BA8E994F195382FE00DCECD9 /* SBAddressBookManager.m in Sources */,
 				BA217C9A192A4DF500F04D03 /* SBLongRunningTaskManager.m in Sources */,
 				BA29C7F2192FEBC400F59684 /* SBProfileViewController.m in Sources */,
 				BAC9FB4019241536008742EE /* SBSignInViewController.m in Sources */,
@@ -691,6 +710,7 @@
 				BA936FF01923104800D3CAFB /* SBManagedViewController.m in Sources */,
 				BA048DF2191AF6730083B0DC /* SBAppDelegate.m in Sources */,
 				BA5CD68819269A530087D3A2 /* SBJSONResponseSerializer.m in Sources */,
+				BA8E994B1953801600DCECD9 /* SBFindFriendsViewController.m in Sources */,
 				BACD812F19477D51009A70B6 /* UIBarButtonItem+Hidden.m in Sources */,
 				BAE1FF1419401B38000A9D80 /* SBNavigationController.m in Sources */,
 				BA936FFA192313D700D3CAFB /* SBTableViewCell.m in Sources */,
