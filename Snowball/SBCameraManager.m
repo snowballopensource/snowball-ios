@@ -38,6 +38,8 @@
 @property (nonatomic, strong) id runtimeErrorHandlingObserver;
 @property (nonatomic, copy) void(^recordingCompletionBlock)(NSURL *fileURL);
 
+@property (nonatomic, strong) AVAssetExportSession *exporter;
+
 @end
 
 @implementation SBCameraManager
@@ -295,15 +297,59 @@
     UIBackgroundTaskIdentifier backgroundRecordingID = self.backgroundRecordingID;
     [self setBackgroundRecordingID:UIBackgroundTaskInvalid];
 
-    [[[ALAssetsLibrary alloc] init] writeVideoAtPathToSavedPhotosAlbum:outputFileURL completionBlock:^(NSURL *assetURL, NSError *error) {
-        if (error) NSLog(@"%@", error);
-        
-        if (backgroundRecordingID != UIBackgroundTaskInvalid)
-            [[UIApplication sharedApplication] endBackgroundTask:backgroundRecordingID];
+    [self cropVideoAtURL:outputFileURL completion:^(NSURL *croppedFileURL) {
+        [[[ALAssetsLibrary alloc] init] writeVideoAtPathToSavedPhotosAlbum:croppedFileURL completionBlock:^(NSURL *assetURL, NSError *error) {
+            if (error) NSLog(@"%@", error);
+            
+            if (backgroundRecordingID != UIBackgroundTaskInvalid)
+                [[UIApplication sharedApplication] endBackgroundTask:backgroundRecordingID];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (self.recordingCompletionBlock) self.recordingCompletionBlock(croppedFileURL);
+            });
+        }];
+    }];
+}
 
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (self.recordingCompletionBlock) self.recordingCompletionBlock(outputFileURL);
-        });
+- (void)cropVideoAtURL:(NSURL *)fileURL completion:(void(^)(NSURL *croppedFileURL))completion; {
+    // Crop video, then save to album.
+    // http://stackoverflow.com/a/5231713/801858
+    AVAsset *asset = [AVAsset assetWithURL:fileURL];
+    AVAssetTrack *videoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] firstObject];
+
+    // When thinking about the following code, think of capturing video in landscape!
+    // e.g. videoTrack.naturalSize.height is the width if you are holding the phone portrait
+    
+    AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
+    [videoComposition setRenderSize:CGSizeMake(videoTrack.naturalSize.height, videoTrack.naturalSize.height)];
+    [videoComposition setFrameDuration:CMTimeMake(1, 30)];
+    
+    AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
+    [instruction setTimeRange:CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(60, 30))];
+    
+    AVMutableVideoCompositionLayerInstruction *transformer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
+    // Crop to middle of the view
+    // http://www.one-dreamer.com/cropping-video-square-like-vine-instagram-xcode/
+    
+    CGAffineTransform initialTransform = CGAffineTransformMakeTranslation(videoTrack.naturalSize.height, -(videoTrack.naturalSize.width - videoTrack.naturalSize.height) /2 );
+    CGAffineTransform transform = CGAffineTransformRotate(initialTransform, M_PI_2);
+
+    [transformer setTransform:transform atTime:kCMTimeZero];
+    [instruction setLayerInstructions:@[transformer]];
+    [videoComposition setInstructions:@[instruction]];
+    
+    NSString *outputFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[@"movie_cropped" stringByAppendingPathExtension:@"mov"]];
+    NSURL *outputFileURL = [NSURL fileURLWithPath:outputFilePath];
+    // Remove previous file if one exists.
+    [[NSFileManager defaultManager] removeItemAtURL:outputFileURL error:nil];
+    
+    //Export
+    [self setExporter:[[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetHighestQuality]];
+    [self.exporter setVideoComposition:videoComposition];
+    [self.exporter setOutputURL:outputFileURL];
+    [self.exporter setOutputFileType:AVFileTypeMPEG4];
+    [self.exporter exportAsynchronouslyWithCompletionHandler:^{
+        completion(self.exporter.outputURL);
     }];
 }
 

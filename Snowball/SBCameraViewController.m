@@ -23,21 +23,20 @@
     SBCameraPreviewView *previewView = [SBCameraManager sharedManager].previewView;
     [previewView setFrame:self.view.frame];
     [self.view insertSubview:previewView atIndex:0];
-    [self.view setAlpha:0.5];
 }
 
 #pragma mark - View Actions
 
 - (IBAction)toggleCapture:(id)sender {
     if ([[SBCameraManager sharedManager] isRecording]) {
-        [self.view setAlpha:0.5];
         [self.longPressGestureRecognizer setEnabled:FALSE];
+        [self showSpinner];
         [[SBCameraManager sharedManager] stopRecordingWithCompletion:^(NSURL *fileURL) {
+            [self hideSpinner];
             [self.longPressGestureRecognizer setEnabled:TRUE];
             if (self.recordingCompletionBlock) self.recordingCompletionBlock(fileURL);
         }];
     } else {
-        [self.view setAlpha:1.0];
         [[SBCameraManager sharedManager] startRecording];
     }
 }
