@@ -37,6 +37,8 @@
 		BA8E994519536EE700DCECD9 /* UIButton+CustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E994419536EE700DCECD9 /* UIButton+CustomFont.m */; };
 		BA8E994B1953801600DCECD9 /* SBFindFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E994A1953801600DCECD9 /* SBFindFriendsViewController.m */; };
 		BA8E994F195382FE00DCECD9 /* SBAddressBookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E994E195382FE00DCECD9 /* SBAddressBookManager.m */; };
+		BA8E995519539A9200DCECD9 /* SBUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E995419539A9200DCECD9 /* SBUserTableViewCell.m */; };
+		BA8E995719539A9F00DCECD9 /* SBUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA8E995619539A9F00DCECD9 /* SBUserTableViewCell.xib */; };
 		BA936FF01923104800D3CAFB /* SBManagedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FEF1923104800D3CAFB /* SBManagedViewController.m */; };
 		BA936FF3192310B200D3CAFB /* SBManagedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FF2192310B200D3CAFB /* SBManagedTableViewController.m */; };
 		BA936FF7192312DF00D3CAFB /* SBReelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FF6192312DF00D3CAFB /* SBReelsViewController.m */; };
@@ -140,6 +142,9 @@
 		BA8E994A1953801600DCECD9 /* SBFindFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFindFriendsViewController.m; sourceTree = "<group>"; };
 		BA8E994D195382FE00DCECD9 /* SBAddressBookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAddressBookManager.h; sourceTree = "<group>"; };
 		BA8E994E195382FE00DCECD9 /* SBAddressBookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAddressBookManager.m; sourceTree = "<group>"; };
+		BA8E995319539A9200DCECD9 /* SBUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUserTableViewCell.h; sourceTree = "<group>"; };
+		BA8E995419539A9200DCECD9 /* SBUserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUserTableViewCell.m; sourceTree = "<group>"; };
+		BA8E995619539A9F00DCECD9 /* SBUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBUserTableViewCell.xib; sourceTree = "<group>"; };
 		BA936FEE1923104800D3CAFB /* SBManagedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedViewController.h; sourceTree = "<group>"; };
 		BA936FEF1923104800D3CAFB /* SBManagedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBManagedViewController.m; sourceTree = "<group>"; };
 		BA936FF1192310B200D3CAFB /* SBManagedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedTableViewController.h; sourceTree = "<group>"; };
@@ -463,6 +468,9 @@
 				BA936FFB1923143400D3CAFB /* SBReelTableViewCell.h */,
 				BA936FFC1923143400D3CAFB /* SBReelTableViewCell.m */,
 				BA937005192317F600D3CAFB /* SBReelTableViewCell.xib */,
+				BA8E995319539A9200DCECD9 /* SBUserTableViewCell.h */,
+				BA8E995419539A9200DCECD9 /* SBUserTableViewCell.m */,
+				BA8E995619539A9F00DCECD9 /* SBUserTableViewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -608,6 +616,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA8E995719539A9F00DCECD9 /* SBUserTableViewCell.xib in Resources */,
 				BA937006192317F600D3CAFB /* SBReelTableViewCell.xib in Resources */,
 				BA048DFA191AF6730083B0DC /* Images.xcassets in Resources */,
 				BAA19C471946902F0034D439 /* MuseoSans-700.otf in Resources */,
@@ -670,6 +679,7 @@
 				BAC9FB3D1924152D008742EE /* SBSignUpViewController.m in Sources */,
 				BAE89609193F6E6600E96E6B /* SBCameraViewController.m in Sources */,
 				BA98D0021936B85200753E1B /* SBCameraManager.m in Sources */,
+				BA8E995519539A9200DCECD9 /* SBUserTableViewCell.m in Sources */,
 				BACD81321947D960009A70B6 /* SBTransparentNavigationBar.m in Sources */,
 				BA9370001923153100D3CAFB /* _SBReel.m in Sources */,
 				BA048E2B191AFB110083B0DC /* SBClip.m in Sources */,
