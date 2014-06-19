@@ -31,7 +31,7 @@
     [SBReelTableViewCell registerNibToTableView:self.tableView];
     
     [self setEntityClass:[SBReel class]];
-    [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"updatedAt" ascending:YES]]];
+    [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"updatedAt" ascending:NO]]];
     [self setPredicate:[NSPredicate predicateWithFormat:@"homeFeedSession == %@", [SBSessionManager sessionDate]]];
 }
 
