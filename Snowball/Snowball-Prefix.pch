@@ -13,10 +13,12 @@
 #import "SBDefines.h"
 
 #import "NSError+Snowball.h"
+#import "NSString+Initials.h"
 #import "UIBarButtonItem+Hidden.h"
 #import "UIFont+Snowball.h"
 #import "UILabel+CustomFont.h"
 #import "UINavigationBar+CustomHeight.h"
+#import "UIView+ImageRepresentation.h"
 #import "UIViewController+Spinner.h"
 #import "UIViewController+StatusBar.h"
 

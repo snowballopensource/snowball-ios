@@ -8,11 +8,12 @@
 
 #import "SBFollowButton.h"
 #import "SBTableViewCell.h"
+#import "SBUserImageView.h"
 
 @interface SBUserTableViewCell : SBTableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
-@property (nonatomic, weak) IBOutlet UIImageView *userImageView;
+@property (nonatomic, weak) IBOutlet SBUserImageView *userImageView;
 @property (nonatomic, weak) IBOutlet SBFollowButton *followButton;
 
 @end

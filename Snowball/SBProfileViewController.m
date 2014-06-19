@@ -26,21 +26,21 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    
     [self.editProfileButton setHidden:YES];
-
+    
     if (!self.user) {
         [self setUser:[SBUser currentUser]];
     }
-
+    
     [self updateUIFromUser];
-
+    
     [self.user getWithSuccess:^{
         [self updateUIFromUser];
     } failure:^(NSError *error) {
         [error displayInView:self.view];
     }];
-
+    
     if ([self.navigationController.viewControllers firstObject] != self) {
         [self.menuButton setHidden:YES];
     }
@@ -61,7 +61,8 @@
     [self.usernameLabel setText:self.user.username];
     [self.nameLabel setText:self.user.name];
     [self.bioLabel setText:self.user.bio];
-    [self.avatar setImageWithURL:[NSURL URLWithString:self.user.avatarURL]];
+    [self.avatar setImageWithURL:[NSURL URLWithString:self.user.avatarURL]
+                placeholderImage:[SBUserImageView placeholderImageWithInitials:[self.user.name initials] withSize:self.avatar.frame.size]];
 }
 
 @end

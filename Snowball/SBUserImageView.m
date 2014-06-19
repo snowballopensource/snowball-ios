@@ -19,4 +19,17 @@
     return self;
 }
 
+#pragma mark - Placeholder Image
+
++ (UIImage *)placeholderImageWithInitials:(NSString *)initials withSize:(CGSize)size {
+    UIView *placeholderView = [[self alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    [placeholderView setBackgroundColor:[UIColor lightGrayColor]];
+    UILabel *initialsLabel = [[UILabel alloc] initWithFrame:placeholderView.bounds];
+    [initialsLabel setTextColor:[UIColor whiteColor]];
+    [initialsLabel setTextAlignment:NSTextAlignmentCenter];
+    [initialsLabel setText:initials];
+    [placeholderView addSubview:initialsLabel];
+    return [placeholderView imageRepresentation];
+}
+
 @end

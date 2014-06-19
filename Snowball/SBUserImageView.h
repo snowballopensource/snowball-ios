@@ -10,4 +10,6 @@
 
 @interface SBUserImageView : UIImageView
 
++ (UIImage *)placeholderImageWithInitials:(NSString *)initials withSize:(CGSize)size;
+
 @end

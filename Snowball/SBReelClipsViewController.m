@@ -14,6 +14,7 @@
 #import "SBReel.h"
 #import "SBReelClipsViewController.h"
 #import "SBUser.h"
+#import "SBUserImageView.h"
 
 @interface SBReelClipsViewController ()
 
@@ -33,9 +34,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    
     [self.userButton setTitle:@"" forState:UIControlStateNormal];
-
+    
     // TODO: make this paginated
     [SBClip getRecentClipsForReel:self.reel
                              page:0
@@ -89,7 +90,8 @@
 
 - (void)updateClipUI {
     [self.userButton setTitle:self.currentClip.user.username forState:UIControlStateNormal];
-    [self.userImageView setImageWithURL:[NSURL URLWithString:self.currentClip.user.avatarURL]];
+    [self.userImageView setImageWithURL:[NSURL URLWithString:self.currentClip.user.avatarURL]
+                       placeholderImage:[SBUserImageView placeholderImageWithInitials:[self.currentClip.user.name initials] withSize:self.userImageView.frame.size]];
 }
 
 #pragma mark - Setters / Getters

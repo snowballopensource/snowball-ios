@@ -14,6 +14,7 @@
 #import "SBReelTableViewCell.h"
 #import "SBSessionManager.h"
 #import "SBUser.h"
+#import "SBUserImageView.h"
 
 @interface SBReelsViewController ()
 
@@ -64,31 +65,36 @@
 - (void)configureCell:(SBReelTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     SBReel *reel = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [cell.nameLabel setText:reel.name];
-
+    
     if ([reel.recentParticipants count] > 0) {
-        NSString *imageOneURLString = [(SBUser *)[reel.recentParticipants firstObject] avatarURL];
-        [cell.participantOneImageView setBackgroundColor:[UIColor lightGrayColor]];
-        [cell.participantOneImageView setImageWithURL:[NSURL URLWithString:imageOneURLString]];
+        SBUser *user = (SBUser *)[reel.recentParticipants firstObject];
+        NSString *imageOneURLString = [user avatarURL];
+        [cell.participantOneImageView setImageWithURL:[NSURL URLWithString:imageOneURLString]
+                                     placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:cell.participantOneImageView.frame.size]];
     }
     if ([reel.recentParticipants count] > 1) {
-        NSString *imageTwoURLString = [(SBUser *)[reel.recentParticipants objectAtIndex:1] avatarURL];
-        [cell.participantTwoImageView setBackgroundColor:[UIColor lightGrayColor]];
-        [cell.participantTwoImageView setImageWithURL:[NSURL URLWithString:imageTwoURLString]];
+        SBUser *user = (SBUser *)[reel.recentParticipants objectAtIndex:1];
+        NSString *imageTwoURLString = [user avatarURL];
+        [cell.participantOneImageView setImageWithURL:[NSURL URLWithString:imageTwoURLString]
+                                     placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:cell.participantOneImageView.frame.size]];
     }
     if ([reel.recentParticipants count] > 2) {
-        NSString *imageThreeURLString = [(SBUser *)[reel.recentParticipants objectAtIndex:2] avatarURL];
-        [cell.participantThreeImageView setBackgroundColor:[UIColor lightGrayColor]];
-        [cell.participantThreeImageView setImageWithURL:[NSURL URLWithString:imageThreeURLString]];
+        SBUser *user = (SBUser *)[reel.recentParticipants objectAtIndex:2];
+        NSString *imageThreeURLString = [user avatarURL];
+        [cell.participantOneImageView setImageWithURL:[NSURL URLWithString:imageThreeURLString]
+                                     placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:cell.participantOneImageView.frame.size]];
     }
     if ([reel.recentParticipants count] > 3) {
-        NSString *imageFourURLString = [(SBUser *)[reel.recentParticipants objectAtIndex:3] avatarURL];
-        [cell.participantFourImageView setBackgroundColor:[UIColor lightGrayColor]];
-        [cell.participantFourImageView setImageWithURL:[NSURL URLWithString:imageFourURLString]];
+        SBUser *user = (SBUser *)[reel.recentParticipants objectAtIndex:3];
+        NSString *imageFourURLString = [user avatarURL];
+        [cell.participantOneImageView setImageWithURL:[NSURL URLWithString:imageFourURLString]
+                                     placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:cell.participantOneImageView.frame.size]];
     }
     if ([reel.recentParticipants count] > 4) {
-        NSString *imageFiveURLString = [(SBUser *)[reel.recentParticipants objectAtIndex:4] avatarURL];
-        [cell.participantFiveImageView setBackgroundColor:[UIColor lightGrayColor]];
-        [cell.participantFiveImageView setImageWithURL:[NSURL URLWithString:imageFiveURLString]];
+        SBUser *user = (SBUser *)[reel.recentParticipants objectAtIndex:4];
+        NSString *imageFiveURLString = [user avatarURL];
+        [cell.participantOneImageView setImageWithURL:[NSURL URLWithString:imageFiveURLString]
+                                     placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:cell.participantOneImageView.frame.size]];
     }
 }
 

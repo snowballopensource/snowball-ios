@@ -40,6 +40,8 @@
 		BA8E995519539A9200DCECD9 /* SBUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E995419539A9200DCECD9 /* SBUserTableViewCell.m */; };
 		BA8E995719539A9F00DCECD9 /* SBUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA8E995619539A9F00DCECD9 /* SBUserTableViewCell.xib */; };
 		BA8E995A1953A0CB00DCECD9 /* SBFollowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E99591953A0CB00DCECD9 /* SBFollowButton.m */; };
+		BA8E995D1953A76300DCECD9 /* NSString+Initials.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E995C1953A76300DCECD9 /* NSString+Initials.m */; };
+		BA8E99631953A8B700DCECD9 /* UIView+ImageRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E99621953A8B700DCECD9 /* UIView+ImageRepresentation.m */; };
 		BA936FF01923104800D3CAFB /* SBManagedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FEF1923104800D3CAFB /* SBManagedViewController.m */; };
 		BA936FF3192310B200D3CAFB /* SBManagedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FF2192310B200D3CAFB /* SBManagedTableViewController.m */; };
 		BA936FF7192312DF00D3CAFB /* SBReelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FF6192312DF00D3CAFB /* SBReelsViewController.m */; };
@@ -148,6 +150,10 @@
 		BA8E995619539A9F00DCECD9 /* SBUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBUserTableViewCell.xib; sourceTree = "<group>"; };
 		BA8E99581953A0CB00DCECD9 /* SBFollowButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFollowButton.h; sourceTree = "<group>"; };
 		BA8E99591953A0CB00DCECD9 /* SBFollowButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFollowButton.m; sourceTree = "<group>"; };
+		BA8E995B1953A76300DCECD9 /* NSString+Initials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Initials.h"; sourceTree = "<group>"; };
+		BA8E995C1953A76300DCECD9 /* NSString+Initials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Initials.m"; sourceTree = "<group>"; };
+		BA8E99611953A8B700DCECD9 /* UIView+ImageRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ImageRepresentation.h"; sourceTree = "<group>"; };
+		BA8E99621953A8B700DCECD9 /* UIView+ImageRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ImageRepresentation.m"; sourceTree = "<group>"; };
 		BA936FEE1923104800D3CAFB /* SBManagedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedViewController.h; sourceTree = "<group>"; };
 		BA936FEF1923104800D3CAFB /* SBManagedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBManagedViewController.m; sourceTree = "<group>"; };
 		BA936FF1192310B200D3CAFB /* SBManagedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedTableViewController.h; sourceTree = "<group>"; };
@@ -416,6 +422,8 @@
 			children = (
 				BA5CD68919269B170087D3A2 /* NSError+Snowball.h */,
 				BA5CD68A19269B170087D3A2 /* NSError+Snowball.m */,
+				BA8E995B1953A76300DCECD9 /* NSString+Initials.h */,
+				BA8E995C1953A76300DCECD9 /* NSString+Initials.m */,
 				BACD812D19477D51009A70B6 /* UIBarButtonItem+Hidden.h */,
 				BACD812E19477D51009A70B6 /* UIBarButtonItem+Hidden.m */,
 				BA8E994319536EE700DCECD9 /* UIButton+CustomFont.h */,
@@ -426,6 +434,8 @@
 				BAA19C491946945C0034D439 /* UILabel+CustomFont.m */,
 				BA15B9EB192AD9AD00453F8F /* UINavigationBar+CustomHeight.h */,
 				BA15B9EC192AD9AD00453F8F /* UINavigationBar+CustomHeight.m */,
+				BA8E99611953A8B700DCECD9 /* UIView+ImageRepresentation.h */,
+				BA8E99621953A8B700DCECD9 /* UIView+ImageRepresentation.m */,
 				BAC8137E192BC5E1002323E1 /* UIViewController+Spinner.h */,
 				BAC8137F192BC5E1002323E1 /* UIViewController+Spinner.m */,
 				BA15B9E3192AC9EF00453F8F /* UIViewController+StatusBar.h */,
@@ -697,6 +707,7 @@
 				BAC9FB471924183E008742EE /* _SBUser.m in Sources */,
 				BA048DEE191AF6730083B0DC /* main.m in Sources */,
 				BAC9FB4B19241858008742EE /* SBUser.m in Sources */,
+				BA8E995D1953A76300DCECD9 /* NSString+Initials.m in Sources */,
 				BA048E20191AF9A70083B0DC /* Snowball.xcdatamodeld in Sources */,
 				BAC9FB4319241774008742EE /* SBSessionManager.m in Sources */,
 				BA048E18191AF83A0083B0DC /* SBReelClipsViewController.m in Sources */,
@@ -717,6 +728,7 @@
 				BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */,
 				BA8E994F195382FE00DCECD9 /* SBAddressBookManager.m in Sources */,
 				BA217C9A192A4DF500F04D03 /* SBLongRunningTaskManager.m in Sources */,
+				BA8E99631953A8B700DCECD9 /* UIView+ImageRepresentation.m in Sources */,
 				BA29C7F2192FEBC400F59684 /* SBProfileViewController.m in Sources */,
 				BAC9FB4019241536008742EE /* SBSignInViewController.m in Sources */,
 				BA15B9E5192AC9EF00453F8F /* UIViewController+StatusBar.m in Sources */,

@@ -48,7 +48,8 @@
 - (void)configureCell:(SBUserTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     SBUser *user = self.users[indexPath.row];
     [cell.nameLabel setText:user.name];
-    [cell.userImageView setImageWithURL:[NSURL URLWithString:user.avatarURL]];
+    [cell.userImageView setImageWithURL:[NSURL URLWithString:user.avatarURL]
+                       placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:cell.userImageView.frame.size]];
     [cell.followButton setFollowing:user.followingValue];
 }
 
