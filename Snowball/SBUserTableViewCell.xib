@@ -14,7 +14,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cXN-zx-Fsp">
-                        <rect key="frame" x="80" y="20" width="220" height="21"/>
+                        <rect key="frame" x="80" y="20" width="101" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -24,12 +24,25 @@
                         <rect key="frame" x="20" y="10" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
+                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwk-l4-ghr" customClass="SBFollowButton">
+                        <rect key="frame" x="240" y="17" width="60" height="25"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" image="button-follow-normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="highlighted" image="button-follow-highlighted"/>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="followButton" destination="gwk-l4-ghr" id="VT5-O4-5Fg"/>
                 <outlet property="nameLabel" destination="cXN-zx-Fsp" id="WE7-2X-7X2"/>
                 <outlet property="userImageView" destination="zzV-LD-vgH" id="KSB-5L-Wu5"/>
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="button-follow-highlighted" width="60" height="25"/>
+        <image name="button-follow-normal" width="60" height="25"/>
+    </resources>
 </document>

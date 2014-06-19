@@ -150,7 +150,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView appearanceType="aqua" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HLy-CJ-3I2">
-                                <rect key="frame" x="0.0" y="138" width="320" height="430"/>
+                                <rect key="frame" x="0.0" y="170" width="320" height="398"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>

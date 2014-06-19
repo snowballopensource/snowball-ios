@@ -8,6 +8,7 @@ extern const struct SBUserAttributes {
 	__unsafe_unretained NSString *avatarURL;
 	__unsafe_unretained NSString *bio;
 	__unsafe_unretained NSString *email;
+	__unsafe_unretained NSString *following;
 	__unsafe_unretained NSString *name;
 	__unsafe_unretained NSString *remoteID;
 	__unsafe_unretained NSString *username;
@@ -25,6 +26,7 @@ extern const struct SBUserFetchedProperties {
 @class SBClip;
 @class SBReel;
 @class SBReel;
+
 
 
 
@@ -71,6 +73,20 @@ extern const struct SBUserFetchedProperties {
 
 
 //- (BOOL)validateEmail:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSNumber* following;
+
+
+
+@property BOOL followingValue;
+- (BOOL)followingValue;
+- (void)setFollowingValue:(BOOL)value_;
+
+//- (BOOL)validateFollowing:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -166,6 +182,15 @@ extern const struct SBUserFetchedProperties {
 
 - (NSString*)primitiveEmail;
 - (void)setPrimitiveEmail:(NSString*)value;
+
+
+
+
+- (NSNumber*)primitiveFollowing;
+- (void)setPrimitiveFollowing:(NSNumber*)value;
+
+- (BOOL)primitiveFollowingValue;
+- (void)setPrimitiveFollowingValue:(BOOL)value_;
 
 
 

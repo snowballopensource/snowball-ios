@@ -7,6 +7,7 @@ const struct SBUserAttributes SBUserAttributes = {
 	.avatarURL = @"avatarURL",
 	.bio = @"bio",
 	.email = @"email",
+	.following = @"following",
 	.name = @"name",
 	.remoteID = @"remoteID",
 	.username = @"username",
@@ -47,6 +48,11 @@ const struct SBUserFetchedProperties SBUserFetchedProperties = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"followingValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"following"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 
 	return keyPaths;
 }
@@ -70,6 +76,32 @@ const struct SBUserFetchedProperties SBUserFetchedProperties = {
 
 @dynamic email;
 
+
+
+
+
+
+@dynamic following;
+
+
+
+- (BOOL)followingValue {
+	NSNumber *result = [self following];
+	return [result boolValue];
+}
+
+- (void)setFollowingValue:(BOOL)value_ {
+	[self setFollowing:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveFollowingValue {
+	NSNumber *result = [self primitiveFollowing];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveFollowingValue:(BOOL)value_ {
+	[self setPrimitiveFollowing:[NSNumber numberWithBool:value_]];
+}
 
 
 

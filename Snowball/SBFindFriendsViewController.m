@@ -49,6 +49,7 @@
     SBUser *user = self.users[indexPath.row];
     [cell.nameLabel setText:user.name];
     [cell.userImageView setImageWithURL:[NSURL URLWithString:user.avatarURL]];
+    [cell.followButton setFollowing:user.followingValue];
 }
 
 #pragma mark - Actions
