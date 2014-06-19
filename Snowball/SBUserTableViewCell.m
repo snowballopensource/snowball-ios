@@ -10,4 +10,12 @@
 
 @implementation SBUserTableViewCell
 
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    }
+    return self;
+}
+
 @end
