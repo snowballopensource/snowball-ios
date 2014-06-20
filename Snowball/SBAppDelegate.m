@@ -7,6 +7,7 @@
 //
 
 #import "SBAppDelegate.h"
+#import "SBAnalyticsManager.h"
 #import "SBPushNotificationManager.h"
 #import "SBSessionManager.h"
 
@@ -16,6 +17,7 @@
     [MagicalRecord setupCoreDataStack];
     [SBSessionManager startSession];
     [SBPushNotificationManager setup];
+    [SBAnalyticsManager start];
     return YES;
 }
 

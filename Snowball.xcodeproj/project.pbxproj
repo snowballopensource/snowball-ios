@@ -42,6 +42,7 @@
 		BA8E995A1953A0CB00DCECD9 /* SBFollowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E99591953A0CB00DCECD9 /* SBFollowButton.m */; };
 		BA8E995D1953A76300DCECD9 /* NSString+Initials.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E995C1953A76300DCECD9 /* NSString+Initials.m */; };
 		BA8E99631953A8B700DCECD9 /* UIView+ImageRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E99621953A8B700DCECD9 /* UIView+ImageRepresentation.m */; };
+		BA8E996A1953C81100DCECD9 /* SBAnalyticsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E99691953C81100DCECD9 /* SBAnalyticsManager.m */; };
 		BA936FF01923104800D3CAFB /* SBManagedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FEF1923104800D3CAFB /* SBManagedViewController.m */; };
 		BA936FF3192310B200D3CAFB /* SBManagedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FF2192310B200D3CAFB /* SBManagedTableViewController.m */; };
 		BA936FF7192312DF00D3CAFB /* SBReelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA936FF6192312DF00D3CAFB /* SBReelsViewController.m */; };
@@ -154,6 +155,8 @@
 		BA8E995C1953A76300DCECD9 /* NSString+Initials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Initials.m"; sourceTree = "<group>"; };
 		BA8E99611953A8B700DCECD9 /* UIView+ImageRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ImageRepresentation.h"; sourceTree = "<group>"; };
 		BA8E99621953A8B700DCECD9 /* UIView+ImageRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ImageRepresentation.m"; sourceTree = "<group>"; };
+		BA8E99681953C81100DCECD9 /* SBAnalyticsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAnalyticsManager.h; sourceTree = "<group>"; };
+		BA8E99691953C81100DCECD9 /* SBAnalyticsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAnalyticsManager.m; sourceTree = "<group>"; };
 		BA936FEE1923104800D3CAFB /* SBManagedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedViewController.h; sourceTree = "<group>"; };
 		BA936FEF1923104800D3CAFB /* SBManagedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBManagedViewController.m; sourceTree = "<group>"; };
 		BA936FF1192310B200D3CAFB /* SBManagedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedTableViewController.h; sourceTree = "<group>"; };
@@ -397,6 +400,8 @@
 				BA98D0011936B85200753E1B /* SBCameraManager.m */,
 				BA8E994D195382FE00DCECD9 /* SBAddressBookManager.h */,
 				BA8E994E195382FE00DCECD9 /* SBAddressBookManager.m */,
+				BA8E99681953C81100DCECD9 /* SBAnalyticsManager.h */,
+				BA8E99691953C81100DCECD9 /* SBAnalyticsManager.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -564,6 +569,7 @@
 				BA048DDB191AF6730083B0DC /* Frameworks */,
 				BA048DDC191AF6730083B0DC /* Resources */,
 				FC3B16518CF24083ADE4B254 /* Copy Pods Resources */,
+				BA8E99671953C7EE00DCECD9 /* Crittercism dSYM Upload */,
 			);
 			buildRules = (
 			);
@@ -654,6 +660,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		BA8E99671953C7EE00DCECD9 /* Crittercism dSYM Upload */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Crittercism dSYM Upload";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "APP_ID=\"53a389b5d478bc6de400000a\"\nAPI_KEY=\"CNTb4Ok1SpdNT2EHhU1EQ27QrR8dUZQi\"\nsource \"${SRCROOT}\"/Pods/CrittercismSDK/CrittercismSDK/dsym_upload.sh";
+		};
 		D2688E237F474137BA9A1F33 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -738,6 +758,7 @@
 				BA936FF01923104800D3CAFB /* SBManagedViewController.m in Sources */,
 				BA048DF2191AF6730083B0DC /* SBAppDelegate.m in Sources */,
 				BA5CD68819269A530087D3A2 /* SBJSONResponseSerializer.m in Sources */,
+				BA8E996A1953C81100DCECD9 /* SBAnalyticsManager.m in Sources */,
 				BA8E994B1953801600DCECD9 /* SBFindFriendsViewController.m in Sources */,
 				BACD812F19477D51009A70B6 /* UIBarButtonItem+Hidden.m in Sources */,
 				BAE1FF1419401B38000A9D80 /* SBNavigationController.m in Sources */,
