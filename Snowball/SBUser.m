@@ -68,14 +68,12 @@ static SBUser *_currentUser = nil;
     [[SBAPIManager sharedManager] POST:@"auth/facebook"
                             parameters:@{@"access_token": accessToken}
                                success:^(NSURLSessionDataTask *task, id responseObject) {
-                                   __block SBUser *user = nil;
                                    NSDictionary *_user = responseObject[@"user"];
                                    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-                                       user = [SBUser MR_importFromObject:_user inContext:localContext];
+                                       SBUser *user = [SBUser MR_importFromObject:_user inContext:localContext];
+                                       [user setAuthToken:[_user objectForKey:@"auth_token"]];
+                                       [SBUser setCurrentUser:user];
                                    }];
-                                   user = [user MR_inContext:[NSManagedObjectContext MR_defaultContext]];
-                                   [user setAuthToken:[_user objectForKey:@"auth_token"]];
-                                   [SBUser setCurrentUser:user];
                                    if (success) { success(); }
                                } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                    if (failure) { failure(error); };
@@ -90,14 +88,12 @@ static SBUser *_currentUser = nil;
     [[SBAPIManager sharedManager] POST:@"users/sign_in"
                             parameters:parameters
                                success:^(NSURLSessionDataTask *task, id responseObject) {
-                                   __block SBUser *user = nil;
                                    NSDictionary *_user = responseObject[@"user"];
                                    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-                                       user = [SBUser MR_importFromObject:_user inContext:localContext];
+                                       SBUser *user = [SBUser MR_importFromObject:_user inContext:localContext];
+                                       [user setAuthToken:[_user objectForKey:@"auth_token"]];
+                                       [SBUser setCurrentUser:user];
                                    }];
-                                   user = [user MR_inContext:[NSManagedObjectContext MR_defaultContext]];
-                                   [user setAuthToken:[_user objectForKey:@"auth_token"]];
-                                   [SBUser setCurrentUser:user];
                                    if (success) { success(); }
                                } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                    if (failure) { failure(error); };
@@ -114,14 +110,12 @@ static SBUser *_currentUser = nil;
     [[SBAPIManager sharedManager] POST:@"users/sign_up"
                             parameters:parameters
                                success:^(NSURLSessionDataTask *task, id responseObject) {
-                                   __block SBUser *user = nil;
                                    NSDictionary *_user = responseObject[@"user"];
                                    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-                                       user = [SBUser MR_importFromObject:_user inContext:localContext];
+                                       SBUser *user = [SBUser MR_importFromObject:_user inContext:localContext];
+                                       [user setAuthToken:[_user objectForKey:@"auth_token"]];
+                                       [SBUser setCurrentUser:user];
                                    }];
-                                   user = [user MR_inContext:[NSManagedObjectContext MR_defaultContext]];
-                                   [user setAuthToken:[_user objectForKey:@"auth_token"]];
-                                   [SBUser setCurrentUser:user];
                                    if (success) { success(); }
                                } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                    if (failure) { failure(error); };
