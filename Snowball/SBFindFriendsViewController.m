@@ -11,7 +11,7 @@
 #import "SBUser.h"
 #import "SBUserTableViewCell.h"
 
-@interface SBFindFriendsViewController ()
+@interface SBFindFriendsViewController () <SBUserTableViewCellDelegate>
 
 @property (nonatomic, strong) NSArray *users;
 
@@ -46,11 +46,25 @@
 }
 
 - (void)configureCell:(SBUserTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    [cell setDelegate:self];
     SBUser *user = self.users[indexPath.row];
     [cell.nameLabel setText:user.name];
     [cell.userImageView setImageWithURL:[NSURL URLWithString:user.avatarURL]
                        placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:cell.userImageView.frame.size]];
     [cell.followButton setFollowing:user.followingValue];
+}
+
+#pragma mark - SBUserTableViewCellDelegate
+
+- (void)followUserButtonPressedInCell:(SBUserTableViewCell *)cell {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    SBUser *user = self.users[indexPath.row];
+    [cell.followButton setFollowing:!user.followingValue];
+    if (user.followingValue) {
+        [user unfollowWithSuccess:nil failure:nil];
+    } else {
+        [user followWithSuccess:nil failure:nil];
+    }
 }
 
 #pragma mark - Actions

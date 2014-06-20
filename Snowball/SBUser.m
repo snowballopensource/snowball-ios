@@ -173,6 +173,62 @@ static SBUser *_currentUser = nil;
                                }];
 }
 
+#pragma mark - Following
+
+- (void)followWithSuccess:(void (^)(void))success
+                  failure:(void (^)(NSError *error))failure {
+    [self setFollowingValue:YES];
+    [self save];
+    [self postFollowWithSuccess:^{
+        if (success) { success(); }
+    } failure:^(NSError *error) {
+        if (failure) { failure(error); }
+    }];
+}
+
+- (void)unfollowWithSuccess:(void (^)(void))success
+                    failure:(void (^)(NSError *error))failure {
+    [self setFollowingValue:NO];
+    [self save];
+    [self deleteFollowWithSuccess:^{
+        if (success) { success(); }
+    } failure:^(NSError *error) {
+        if (failure) { failure(error); }
+    }];
+}
+
+- (void)postFollowWithSuccess:(void (^)(void))success
+                      failure:(void (^)(NSError *error))failure {
+    NSString *path = [NSString stringWithFormat:@"users/%@/follow", self.remoteID];
+    [[SBAPIManager sharedManager] POST:path
+                            parameters:nil
+                               success:^(NSURLSessionDataTask *task, id responseObject) {
+                                   if (success) { success(); }
+                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                   [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                                       SBUser *user = [self MR_inContext:localContext];
+                                       [user setFollowingValue:NO];
+                                   }];
+                                   if (failure) { failure(error); };
+                               }];
+}
+
+- (void)deleteFollowWithSuccess:(void (^)(void))success
+                        failure:(void (^)(NSError *error))failure {
+    NSString *path = [NSString stringWithFormat:@"users/%@/follow", self.remoteID];
+    [[SBAPIManager sharedManager] DELETE:path
+                              parameters:nil
+                                 success:^(NSURLSessionDataTask *task, id responseObject) {
+                                     if (success) { success(); }
+                                 } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                                         SBUser *user = [self MR_inContext:localContext];
+                                         [user setFollowingValue:YES];
+                                     }];
+                                     if (failure) { failure(error); };
+                                 }];
+}
+
 #pragma mark - SBManagedObject
 
 - (void)updateWithSuccess:(void(^)(void))success failure:(void(^)(NSError *error))failure {

@@ -10,10 +10,20 @@
 #import "SBTableViewCell.h"
 #import "SBUserImageView.h"
 
+@class SBUserTableViewCell;
+
+@protocol SBUserTableViewCellDelegate <NSObject>
+
+- (void)followUserButtonPressedInCell:(SBUserTableViewCell *)cell;
+
+@end
+
 @interface SBUserTableViewCell : SBTableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet SBUserImageView *userImageView;
 @property (nonatomic, weak) IBOutlet SBFollowButton *followButton;
+
+@property (nonatomic, weak) id<SBUserTableViewCellDelegate> delegate;
 
 @end

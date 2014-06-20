@@ -39,4 +39,10 @@
                         success:(void (^)(NSArray *users))success
                         failure:(void (^)(NSError *error))failure;
 
+- (void)followWithSuccess:(void (^)(void))success
+                  failure:(void (^)(NSError *error))failure;
+
+- (void)unfollowWithSuccess:(void (^)(void))success
+                    failure:(void (^)(NSError *error))failure;
+
 @end

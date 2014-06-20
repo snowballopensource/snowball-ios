@@ -18,4 +18,12 @@
     return self;
 }
 
+#pragma mark - Actions
+
+- (IBAction)followUserButtonPressed:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(followUserButtonPressedInCell:)]) {
+        [self.delegate followUserButtonPressedInCell:self];
+    }
+}
+
 @end
