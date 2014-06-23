@@ -49,6 +49,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [self.playerView.player pause];
+    [super viewWillDisappear:animated];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
