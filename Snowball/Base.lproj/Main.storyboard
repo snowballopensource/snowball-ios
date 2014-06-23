@@ -435,7 +435,7 @@
             </objects>
             <point key="canvasLocation" x="614" y="22"/>
         </scene>
-        <!--Participants View Controller-->
+        <!--Participants View Controller - Participants-->
         <scene sceneID="b93-0L-fht">
             <objects>
                 <viewController id="stb-kS-ZGX" customClass="SBParticipantsViewController" sceneMemberID="viewController">
@@ -459,7 +459,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="gE8-XY-1CP"/>
+                    <navigationItem key="navigationItem" title="Participants" id="gE8-XY-1CP"/>
                     <connections>
                         <outlet property="tableView" destination="Vtr-fw-SXs" id="1Bz-qa-ZRr"/>
                     </connections>

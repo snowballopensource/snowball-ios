@@ -18,6 +18,7 @@
     [SBSessionManager startSession];
     [SBPushNotificationManager setup];
     [SBAnalyticsManager start];
+    [self setupAppearance];
     return YES;
 }
 
@@ -31,6 +32,13 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     [MagicalRecord cleanUp];
+}
+
+#pragma mark - Private
+
+- (void)setupAppearance {
+    NSDictionary *navigationBarTitleTextAttributes = @{ NSFontAttributeName: [UIFont fontWithName:[UIFont snowballFontNameNormal] size:20]};
+    [[UINavigationBar appearance] setTitleTextAttributes:navigationBarTitleTextAttributes];
 }
 
 @end
