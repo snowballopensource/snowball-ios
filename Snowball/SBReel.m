@@ -10,6 +10,7 @@
 #import "SBClip.h"
 #import "SBReel.h"
 #import "SBSessionManager.h"
+#import "SBUser.h"
 
 @implementation SBReel
 
@@ -51,6 +52,30 @@
                                       }];
                                   }];
                                   if (success) { success([_reels count]); };
+                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                  if (failure) { failure(error); };
+                              }];
+}
+
++ (void)getParticipantsForReel:(SBReel *)reel
+                        onPage:(NSUInteger)page
+                       success:(void (^)(BOOL canLoadMore))success
+                       failure:(void (^)(NSError *error))failure {
+    NSString *path = [NSString stringWithFormat:@"reels/%@/participants", reel.remoteID];
+    [[SBAPIManager sharedManager] GET:path
+                           parameters:@{@"page": @(page)}
+                              success:^(NSURLSessionDataTask *task, id responseObject) {
+                                  NSArray *_users = responseObject[@"users"];
+                                  [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                                      NSArray *users = [SBUser MR_importFromArray:_users inContext:localContext];
+                                      SBReel *localReel = [reel MR_inContext:localContext];
+                                      if (page > 1) {
+                                          [localReel addParticipants:[NSSet setWithArray:users]];
+                                      } else {
+                                          [localReel setParticipants:[NSSet setWithArray:users]];
+                                      }
+                                  }];
+                                  if (success) { success([_users count]); };
                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                   if (failure) { failure(error); };
                               }];

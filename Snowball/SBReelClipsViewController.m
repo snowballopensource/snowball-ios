@@ -9,6 +9,7 @@
 #import "SBCameraNavigationController.h"
 #import "SBClip.h"
 #import "SBFullScreenCameraViewController.h"
+#import "SBParticipantsViewController.h"
 #import "SBPlayerView.h"
 #import "SBProfileViewController.h"
 #import "SBReel.h"
@@ -57,6 +58,9 @@
     } else if ([segue.destinationViewController isKindOfClass:[SBProfileViewController class]]) {
         SBProfileViewController *vc = segue.destinationViewController;
         [vc setUser:self.currentClip.user];
+    } else if ([segue.destinationViewController isKindOfClass:[SBParticipantsViewController class]]) {
+        SBParticipantsViewController *vc = segue.destinationViewController;
+        [vc setReel:self.reel];
     }
 }
 

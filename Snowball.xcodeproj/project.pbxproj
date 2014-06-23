@@ -70,6 +70,7 @@
 		BACD81321947D960009A70B6 /* SBTransparentNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BACD81311947D960009A70B6 /* SBTransparentNavigationBar.m */; };
 		BACD81351947E8B1009A70B6 /* SBFullScreenCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BACD81341947E8B1009A70B6 /* SBFullScreenCameraViewController.m */; };
 		BAD86C2F193553BC0046EE22 /* SBFacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD86C2E193553BC0046EE22 /* SBFacebookManager.m */; };
+		BADB9AB81958B52D00AB8C5C /* SBParticipantsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BADB9AB71958B52D00AB8C5C /* SBParticipantsViewController.m */; };
 		BAE1FF1419401B38000A9D80 /* SBNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE1FF1319401B38000A9D80 /* SBNavigationController.m */; };
 		BAE1FF1719401B5C000A9D80 /* SBCameraNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE1FF1619401B5C000A9D80 /* SBCameraNavigationController.m */; };
 		BAE89609193F6E6600E96E6B /* SBCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE89608193F6E6600E96E6B /* SBCameraViewController.m */; };
@@ -207,6 +208,8 @@
 		BACD81341947E8B1009A70B6 /* SBFullScreenCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFullScreenCameraViewController.m; sourceTree = "<group>"; };
 		BAD86C2D193553BC0046EE22 /* SBFacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFacebookManager.h; sourceTree = "<group>"; };
 		BAD86C2E193553BC0046EE22 /* SBFacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFacebookManager.m; sourceTree = "<group>"; };
+		BADB9AB61958B52D00AB8C5C /* SBParticipantsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBParticipantsViewController.h; sourceTree = "<group>"; };
+		BADB9AB71958B52D00AB8C5C /* SBParticipantsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBParticipantsViewController.m; sourceTree = "<group>"; };
 		BAE1FF1219401B38000A9D80 /* SBNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBNavigationController.h; sourceTree = "<group>"; };
 		BAE1FF1319401B38000A9D80 /* SBNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBNavigationController.m; sourceTree = "<group>"; };
 		BAE1FF1519401B5C000A9D80 /* SBCameraNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCameraNavigationController.h; sourceTree = "<group>"; };
@@ -552,6 +555,8 @@
 				BA936FF6192312DF00D3CAFB /* SBReelsViewController.m */,
 				BA048E16191AF83A0083B0DC /* SBReelClipsViewController.h */,
 				BA048E17191AF83A0083B0DC /* SBReelClipsViewController.m */,
+				BADB9AB61958B52D00AB8C5C /* SBParticipantsViewController.h */,
+				BADB9AB71958B52D00AB8C5C /* SBParticipantsViewController.m */,
 				BAE1FF1819401B60000A9D80 /* Camera */,
 			);
 			name = Reel;
@@ -672,7 +677,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "APP_ID=\"53a389b5d478bc6de400000a\"\nAPI_KEY=\"CNTb4Ok1SpdNT2EHhU1EQ27QrR8dUZQi\"\nsource \"${SRCROOT}\"/Pods/CrittercismSDK/CrittercismSDK/dsym_upload.sh";
+			shellScript = "if [$CONFIGURATION == Release]; then\n    APP_ID=\"53a389b5d478bc6de400000a\"\n    API_KEY=\"CNTb4Ok1SpdNT2EHhU1EQ27QrR8dUZQi\"\n    source \"${SRCROOT}\"/Pods/CrittercismSDK/CrittercismSDK/dsym_upload.sh\nfi\n";
 		};
 		D2688E237F474137BA9A1F33 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -716,6 +721,7 @@
 				BA98D0021936B85200753E1B /* SBCameraManager.m in Sources */,
 				BA8E995519539A9200DCECD9 /* SBUserTableViewCell.m in Sources */,
 				BACD81321947D960009A70B6 /* SBTransparentNavigationBar.m in Sources */,
+				BADB9AB81958B52D00AB8C5C /* SBParticipantsViewController.m in Sources */,
 				BA9370001923153100D3CAFB /* _SBReel.m in Sources */,
 				BA048E2B191AFB110083B0DC /* SBClip.m in Sources */,
 				BAA19C4D194694770034D439 /* UIFont+Snowball.m in Sources */,
