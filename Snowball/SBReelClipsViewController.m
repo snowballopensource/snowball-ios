@@ -37,11 +37,14 @@
     [super viewWillAppear:animated];
     
     [self.userButton setTitle:@"" forState:UIControlStateNormal];
+
+    [self showSpinner];
     
     // TODO: make this paginated
     [SBClip getRecentClipsForReel:self.reel
                              page:0
                           success:^(BOOL canLoadMore) {
+                              [self hideSpinner];
                               [self playReel];
                           }
                           failure:nil];
