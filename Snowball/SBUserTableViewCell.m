@@ -49,7 +49,6 @@
             [self.checkButton setHidden:YES];
             break;
     }
-    _style = style;
 }
 
 @end
