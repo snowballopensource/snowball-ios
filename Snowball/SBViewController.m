@@ -25,7 +25,7 @@
 
     // [self.navigationItem setLeftItemsSupplementBackButton:YES];
 
-    [self setupBackButton];
+    [self setBackButtonStyle:SBViewControllerBackButtonStyleLight];
 }
 
 #pragma mark - Actions
@@ -34,11 +34,19 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - Private
+#pragma mark - Public
 
-- (void)setupBackButton {
+- (void)setBackButtonStyle:(SBViewControllerBackButtonStyle)style {
     unless ([self.navigationController.viewControllers firstObject] == self) {
-        UIImage *backButtonImage = [UIImage imageNamed:@"button-back-normal"] ;
+        UIImage *backButtonImage = nil;
+        switch (style) {
+            case SBViewControllerBackButtonStyleDark:
+                backButtonImage = [UIImage imageNamed:@"button-back-black-normal"];
+                break;
+            default:
+                backButtonImage = [UIImage imageNamed:@"button-back-normal"] ;
+                break;
+        }
         [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
         
         UIImage *backButtonHighlightedImage = [UIImage imageNamed:@"button-back-highlighted"] ;
@@ -54,6 +62,8 @@
         [self.navigationItem setLeftBarButtonItem:barBackButton];
     }
 }
+
+#pragma mark - Private
 
 - (void)back {
     [self.navigationController popViewControllerAnimated:YES];

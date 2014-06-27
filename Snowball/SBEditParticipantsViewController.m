@@ -17,6 +17,12 @@
 
 @implementation SBEditParticipantsViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    [self setBackButtonStyle:SBViewControllerBackButtonStyleDark];
+}
+
 #pragma mark - SBFollowingViewController
 
 - (void)configureCell:(SBUserTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {

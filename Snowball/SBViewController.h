@@ -10,6 +10,12 @@
 
 @interface SBViewController : UIViewController
 
+typedef NS_ENUM(NSInteger, SBViewControllerBackButtonStyle) {
+    SBViewControllerBackButtonStyleLight,
+    SBViewControllerBackButtonStyleDark
+};
+
 + (NSString *)identifier;
+- (void)setBackButtonStyle:(SBViewControllerBackButtonStyle)style;
 
 @end
