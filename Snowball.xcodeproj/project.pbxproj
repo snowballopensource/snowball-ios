@@ -34,6 +34,8 @@
 		BA5CD68819269A530087D3A2 /* SBJSONResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD68719269A530087D3A2 /* SBJSONResponseSerializer.m */; };
 		BA5CD68B19269B170087D3A2 /* NSError+Snowball.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD68A19269B170087D3A2 /* NSError+Snowball.m */; };
 		BA5CD6921926CEDA0087D3A2 /* SBFadeOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD6911926CEDA0087D3A2 /* SBFadeOverlayView.m */; };
+		BA632029195CED8500BA6B75 /* SBEditParticipantsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA632028195CED8500BA6B75 /* SBEditParticipantsViewController.m */; };
+		BA63202C195CEE4B00BA6B75 /* SBFollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA63202B195CEE4B00BA6B75 /* SBFollowingViewController.m */; };
 		BA8E994519536EE700DCECD9 /* UIButton+CustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E994419536EE700DCECD9 /* UIButton+CustomFont.m */; };
 		BA8E994B1953801600DCECD9 /* SBFindFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E994A1953801600DCECD9 /* SBFindFriendsViewController.m */; };
 		BA8E994F195382FE00DCECD9 /* SBAddressBookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E994E195382FE00DCECD9 /* SBAddressBookManager.m */; };
@@ -57,6 +59,7 @@
 		BAA19C4A1946945C0034D439 /* UILabel+CustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA19C491946945C0034D439 /* UILabel+CustomFont.m */; };
 		BAA19C4D194694770034D439 /* UIFont+Snowball.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA19C4C194694770034D439 /* UIFont+Snowball.m */; };
 		BAA19C5019469B370034D439 /* SBUserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA19C4F19469B370034D439 /* SBUserImageView.m */; };
+		BAAA0E33195CF1CB002B1148 /* SBCheckButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAA0E32195CF1CB002B1148 /* SBCheckButton.m */; };
 		BAC81380192BC5E1002323E1 /* UIViewController+Spinner.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC8137F192BC5E1002323E1 /* UIViewController+Spinner.m */; };
 		BAC9FB3319241296008742EE /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAC9FB3219241296008742EE /* Authentication.storyboard */; };
 		BAC9FB3619241388008742EE /* SBAuthenticationNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB3519241388008742EE /* SBAuthenticationNavigationController.m */; };
@@ -141,6 +144,10 @@
 		BA5CD68A19269B170087D3A2 /* NSError+Snowball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Snowball.m"; sourceTree = "<group>"; };
 		BA5CD6901926CEDA0087D3A2 /* SBFadeOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFadeOverlayView.h; sourceTree = "<group>"; };
 		BA5CD6911926CEDA0087D3A2 /* SBFadeOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFadeOverlayView.m; sourceTree = "<group>"; };
+		BA632027195CED8500BA6B75 /* SBEditParticipantsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBEditParticipantsViewController.h; sourceTree = "<group>"; };
+		BA632028195CED8500BA6B75 /* SBEditParticipantsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBEditParticipantsViewController.m; sourceTree = "<group>"; };
+		BA63202A195CEE4B00BA6B75 /* SBFollowingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFollowingViewController.h; sourceTree = "<group>"; };
+		BA63202B195CEE4B00BA6B75 /* SBFollowingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFollowingViewController.m; sourceTree = "<group>"; };
 		BA8E994319536EE700DCECD9 /* UIButton+CustomFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+CustomFont.h"; sourceTree = "<group>"; };
 		BA8E994419536EE700DCECD9 /* UIButton+CustomFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CustomFont.m"; sourceTree = "<group>"; };
 		BA8E99491953801600DCECD9 /* SBFindFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFindFriendsViewController.h; sourceTree = "<group>"; };
@@ -183,6 +190,8 @@
 		BAA19C4C194694770034D439 /* UIFont+Snowball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Snowball.m"; sourceTree = "<group>"; };
 		BAA19C4E19469B370034D439 /* SBUserImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUserImageView.h; sourceTree = "<group>"; };
 		BAA19C4F19469B370034D439 /* SBUserImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUserImageView.m; sourceTree = "<group>"; };
+		BAAA0E31195CF1CB002B1148 /* SBCheckButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCheckButton.h; sourceTree = "<group>"; };
+		BAAA0E32195CF1CB002B1148 /* SBCheckButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCheckButton.m; sourceTree = "<group>"; };
 		BAC8137E192BC5E1002323E1 /* UIViewController+Spinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Spinner.h"; sourceTree = "<group>"; };
 		BAC8137F192BC5E1002323E1 /* UIViewController+Spinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Spinner.m"; sourceTree = "<group>"; };
 		BAC9FB3219241296008742EE /* Authentication.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
@@ -351,6 +360,8 @@
 				BACD81311947D960009A70B6 /* SBTransparentNavigationBar.m */,
 				BA8E99581953A0CB00DCECD9 /* SBFollowButton.h */,
 				BA8E99591953A0CB00DCECD9 /* SBFollowButton.m */,
+				BAAA0E31195CF1CB002B1148 /* SBCheckButton.h */,
+				BAAA0E32195CF1CB002B1148 /* SBCheckButton.m */,
 				BA4AC5DF1938EA960004D5CF /* Camera */,
 				BA9370041923173200D3CAFB /* Cells */,
 			);
@@ -463,6 +474,19 @@
 			name = API;
 			sourceTree = "<group>";
 		};
+		BA632026195CED6D00BA6B75 /* Participants */ = {
+			isa = PBXGroup;
+			children = (
+				BADB9AB61958B52D00AB8C5C /* SBParticipantsViewController.h */,
+				BADB9AB71958B52D00AB8C5C /* SBParticipantsViewController.m */,
+				BA63202A195CEE4B00BA6B75 /* SBFollowingViewController.h */,
+				BA63202B195CEE4B00BA6B75 /* SBFollowingViewController.m */,
+				BA632027195CED8500BA6B75 /* SBEditParticipantsViewController.h */,
+				BA632028195CED8500BA6B75 /* SBEditParticipantsViewController.m */,
+			);
+			name = Participants;
+			sourceTree = "<group>";
+		};
 		BA8E994C1953802100DCECD9 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
@@ -555,8 +579,7 @@
 				BA936FF6192312DF00D3CAFB /* SBReelsViewController.m */,
 				BA048E16191AF83A0083B0DC /* SBReelClipsViewController.h */,
 				BA048E17191AF83A0083B0DC /* SBReelClipsViewController.m */,
-				BADB9AB61958B52D00AB8C5C /* SBParticipantsViewController.h */,
-				BADB9AB71958B52D00AB8C5C /* SBParticipantsViewController.m */,
+				BA632026195CED6D00BA6B75 /* Participants */,
 				BAE1FF1819401B60000A9D80 /* Camera */,
 			);
 			name = Reel;
@@ -723,17 +746,20 @@
 				BACD81321947D960009A70B6 /* SBTransparentNavigationBar.m in Sources */,
 				BADB9AB81958B52D00AB8C5C /* SBParticipantsViewController.m in Sources */,
 				BA9370001923153100D3CAFB /* _SBReel.m in Sources */,
+				BA632029195CED8500BA6B75 /* SBEditParticipantsViewController.m in Sources */,
 				BA048E2B191AFB110083B0DC /* SBClip.m in Sources */,
 				BAA19C4D194694770034D439 /* UIFont+Snowball.m in Sources */,
 				BA048E26191AFAD90083B0DC /* _SBClip.m in Sources */,
 				BA936FF3192310B200D3CAFB /* SBManagedTableViewController.m in Sources */,
 				BA936FFD1923143400D3CAFB /* SBReelTableViewCell.m in Sources */,
+				BAAA0E33195CF1CB002B1148 /* SBCheckButton.m in Sources */,
 				BA5238A51920B9630088A730 /* SBPlayerView.m in Sources */,
 				BAE8960C193FAB8C00E96E6B /* SBCreateReelViewController.m in Sources */,
 				BAC9FB471924183E008742EE /* _SBUser.m in Sources */,
 				BA048DEE191AF6730083B0DC /* main.m in Sources */,
 				BAC9FB4B19241858008742EE /* SBUser.m in Sources */,
 				BA8E995D1953A76300DCECD9 /* NSString+Initials.m in Sources */,
+				BA63202C195CEE4B00BA6B75 /* SBFollowingViewController.m in Sources */,
 				BA048E20191AF9A70083B0DC /* Snowball.xcdatamodeld in Sources */,
 				BAC9FB4319241774008742EE /* SBSessionManager.m in Sources */,
 				BA048E18191AF83A0083B0DC /* SBReelClipsViewController.m in Sources */,

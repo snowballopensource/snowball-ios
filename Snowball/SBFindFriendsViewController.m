@@ -51,7 +51,12 @@
     [cell.nameLabel setText:user.name];
     [cell.userImageView setImageWithURL:[NSURL URLWithString:user.avatarURL]
                        placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:cell.userImageView.frame.size]];
-    [cell.followButton setFollowing:user.followingValue];
+    if (user == [SBUser currentUser]) {
+        [cell setStyle:SBUserTableViewCellStyleNone];
+    } else {
+        [cell setStyle:SBUserTableViewCellStyleFollowable];
+        [cell.followButton setFollowing:user.followingValue];
+    }
 }
 
 #pragma mark - SBUserTableViewCellDelegate

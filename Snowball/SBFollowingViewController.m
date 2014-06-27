@@ -1,21 +1,20 @@
 //
-//  SBParticipantsViewController.m
+//  SBFollowingViewController.m
 //  Snowball
 //
-//  Created by James Martinez on 6/23/14.
+//  Created by James Martinez on 6/26/14.
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
-#import "SBParticipantsViewController.h"
-#import "SBReel.h"
+#import "SBFollowingViewController.h"
 #import "SBUser.h"
 #import "SBUserTableViewCell.h"
 
-@interface SBParticipantsViewController () <SBUserTableViewCellDelegate>
+@interface SBFollowingViewController () <SBUserTableViewCellDelegate>
 
 @end
 
-@implementation SBParticipantsViewController
+@implementation SBFollowingViewController
 
 #pragma mark - UIViewController
 
@@ -26,7 +25,7 @@
     
     [self setEntityClass:[SBUser class]];
     [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:NO]]];
-    [self setPredicate:[NSPredicate predicateWithFormat:@"ANY reels == %@", self.reel]];
+    [self setPredicate:[NSPredicate predicateWithFormat:@"following == true"]];
 }
 
 #pragma mark - UITableViewDataSource
@@ -68,14 +67,15 @@
 #pragma mark - SBManagedTableViewController
 
 - (void)getRemoteObjects {
-    [SBReel getParticipantsForReel:self.reel
-                            onPage:self.currentPage
-                           success:^(BOOL canLoadMore) {
-                               [self setIsLoading:!canLoadMore];
-                               [self.refreshControl endRefreshing];
-                           } failure:^(NSError *error) {
-                               [self.refreshControl endRefreshing];
-                           }];
+    // TODO: Get people I'm following
+//    [SBReel getParticipantsForReel:self.reel
+//                            onPage:self.currentPage
+//                           success:^(BOOL canLoadMore) {
+//                               [self setIsLoading:!canLoadMore];
+//                               [self.refreshControl endRefreshing];
+//                           } failure:^(NSError *error) {
+//                               [self.refreshControl endRefreshing];
+//                           }];
 }
 
 @end

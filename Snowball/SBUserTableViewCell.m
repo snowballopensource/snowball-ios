@@ -26,4 +26,30 @@
     }
 }
 
+- (IBAction)checkUserButtonPressed:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(checkUserButtonPressedInCell:)]) {
+        [self.delegate checkUserButtonPressedInCell:self];
+    }
+}
+
+#pragma mark - Setters / Getters
+
+- (void)setStyle:(SBUserTableViewCellStyle)style {
+    switch (style) {
+        case SBUserTableViewCellStyleSelectable:
+            [self.followButton setHidden:YES];
+            [self.checkButton setHidden:NO];
+            break;
+        case SBUserTableViewCellStyleFollowable:
+            [self.followButton setHidden:NO];
+            [self.checkButton setHidden:YES];
+            break;
+        default:
+            [self.followButton setHidden:YES];
+            [self.checkButton setHidden:YES];
+            break;
+    }
+    _style = style;
+}
+
 @end

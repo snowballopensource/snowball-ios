@@ -35,9 +35,21 @@
                             <action selector="followUserButtonPressed:" destination="xsA-6h-miA" eventType="touchUpInside" id="0Ht-Bw-6GU"/>
                         </connections>
                     </button>
+                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yh4-bD-rcG" customClass="SBCheckButton">
+                        <rect key="frame" x="265" y="17" width="35" height="25"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" image="button-check-normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="highlighted" image="button-check-highlighted"/>
+                        <connections>
+                            <action selector="checkUserButtonPressed:" destination="xsA-6h-miA" eventType="touchUpInside" id="h9O-pI-7N1"/>
+                        </connections>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="checkButton" destination="yh4-bD-rcG" id="apO-1Q-QX2"/>
                 <outlet property="followButton" destination="gwk-l4-ghr" id="VT5-O4-5Fg"/>
                 <outlet property="nameLabel" destination="cXN-zx-Fsp" id="WE7-2X-7X2"/>
                 <outlet property="userImageView" destination="zzV-LD-vgH" id="KSB-5L-Wu5"/>
@@ -45,6 +57,8 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="button-check-highlighted" width="35" height="25"/>
+        <image name="button-check-normal" width="35" height="25"/>
         <image name="button-follow-highlighted" width="60" height="25"/>
         <image name="button-follow-normal" width="60" height="25"/>
     </resources>
