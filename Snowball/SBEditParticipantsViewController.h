@@ -8,6 +8,10 @@
 
 #import "SBFollowingViewController.h"
 
+@class SBReel;
+
 @interface SBEditParticipantsViewController : SBFollowingViewController
+
+@property (nonatomic, strong) SBReel *reel;
 
 @end

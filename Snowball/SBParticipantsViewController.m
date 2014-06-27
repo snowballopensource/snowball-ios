@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
+#import "SBEditParticipantsViewController.h"
 #import "SBParticipantsViewController.h"
 #import "SBReel.h"
 #import "SBUser.h"
@@ -27,6 +28,13 @@
     [self setEntityClass:[SBUser class]];
     [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:NO]]];
     [self setPredicate:[NSPredicate predicateWithFormat:@"ANY reels == %@", self.reel]];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[SBEditParticipantsViewController class]]) {
+        SBEditParticipantsViewController *vc = segue.destinationViewController;
+        [vc setReel:self.reel];
+    }
 }
 
 #pragma mark - UITableViewDataSource

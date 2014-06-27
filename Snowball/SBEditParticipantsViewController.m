@@ -7,6 +7,7 @@
 //
 
 #import "SBEditParticipantsViewController.h"
+#import "SBReel.h"
 #import "SBUser.h"
 #import "SBUserTableViewCell.h"
 
@@ -20,9 +21,11 @@
 
 - (void)configureCell:(SBUserTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     [super configureCell:cell atIndexPath:indexPath];
+    
     [cell setStyle:SBUserTableViewCellStyleSelectable];
-    // TODO: set selected if user is a participant
-    [cell.checkButton setParticipating:YES];
+
+    SBUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [cell.checkButton setParticipating:[self.reel.participants containsObject:user]];
 }
 
 #pragma mark - SBUserTableViewCellDelegate
@@ -30,19 +33,16 @@
 - (void)checkUserButtonPressedInCell:(SBUserTableViewCell *)cell {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     SBUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    // TODO: set cell participating if user is a participant
-    NSLog(@"Not done yet.");
-    // should look something like this:
-    
-    /*
-     [cell.followButton setFollowing:!user.followingValue];
-     if (user.followingValue) {
-     [user unfollowWithSuccess:nil failure:nil];
-     } else {
-     [user followWithSuccess:nil failure:nil];
-     }
-     }
-     */
+
+    BOOL participating = [self.reel.participants containsObject:user];
+    [cell.checkButton setParticipating:!participating];
+    if (participating) {
+        // TODO: remove from participating
+        // looks something like [user unfollowWithSuccess:nil failure:nil];
+
+    } else {
+        // TODO: add to participating
+    }
 }
 
 @end
