@@ -22,11 +22,11 @@
                        failure:(void (^)(NSError *error))failure;
 
 - (void)addParticipant:(SBUser *)user
-           withSuccess:(void (^)(void))success
+               success:(void (^)(void))success
                failure:(void (^)(NSError *error))failure;
 
 - (void)removeParticipant:(SBUser *)user
-              withSuccess:(void (^)(void))success
+                  success:(void (^)(void))success
                   failure:(void (^)(NSError *error))failure;
 
 @end

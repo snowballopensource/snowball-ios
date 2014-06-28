@@ -84,33 +84,33 @@
 #pragma mark - Participants
 
 - (void)addParticipant:(SBUser *)user
-           withSuccess:(void (^)(void))success
+               success:(void (^)(void))success
                failure:(void (^)(NSError *error))failure {
     [user addReelsObject:self];
     [self save];
     [self postParticipant:user
-              withSuccess:^{
-                  if (success) { success(); }
-              } failure:^(NSError *error) {
-                  if (failure) { failure(error); }
-              }];
+                  success:^{
+                      if (success) { success(); }
+                  } failure:^(NSError *error) {
+                      if (failure) { failure(error); }
+                  }];
 }
 
 - (void)removeParticipant:(SBUser *)user
-              withSuccess:(void (^)(void))success
+                  success:(void (^)(void))success
                   failure:(void (^)(NSError *error))failure {
     [user removeReelsObject:self];
     [self save];
     [self deleteParticipant:user
-              withSuccess:^{
-                  if (success) { success(); }
-              } failure:^(NSError *error) {
-                  if (failure) { failure(error); }
-              }];
+                    success:^{
+                        if (success) { success(); }
+                    } failure:^(NSError *error) {
+                        if (failure) { failure(error); }
+                    }];
 }
 
 - (void)postParticipant:(SBUser *)user
-            withSuccess:(void (^)(void))success
+                success:(void (^)(void))success
                 failure:(void (^)(NSError *error))failure {
     NSString *path = [NSString stringWithFormat:@"reels/%@/participants/%@", self.remoteID, user.remoteID];
     [[SBAPIManager sharedManager] POST:path
@@ -127,7 +127,7 @@
 }
 
 - (void)deleteParticipant:(SBUser *)user
-              withSuccess:(void (^)(void))success
+                  success:(void (^)(void))success
                   failure:(void (^)(NSError *error))failure {
     NSString *path = [NSString stringWithFormat:@"reels/%@/participants/%@", self.remoteID, user.remoteID];
     [[SBAPIManager sharedManager] DELETE:path

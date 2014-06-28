@@ -169,6 +169,26 @@ static SBUser *_currentUser = nil;
 
 #pragma mark - Following
 
+- (void)getFollowingOnPage:(NSUInteger)page
+                   success:(void (^)(BOOL canLoadMore))success
+                   failure:(void (^)(NSError *error))failure {
+    NSString *path = [NSString stringWithFormat:@"users/%@/following", self.remoteID];
+    [[SBAPIManager sharedManager] GET:path
+                           parameters:@{@"page": @(page)}
+                              success:^(NSURLSessionDataTask *task, id responseObject) {
+                                  NSArray *_users = responseObject[@"users"];
+                                  [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                                      [_users each:^(id object) {
+                                          SBUser *user = [SBUser MR_importFromObject:object inContext:localContext];
+                                          [user setFollowingValue:YES];
+                                      }];
+                                  }];
+                                  if (success) { success([_users count]); };
+                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                  if (failure) { failure(error); };
+                              }];
+}
+
 - (void)followWithSuccess:(void (^)(void))success
                   failure:(void (^)(NSError *error))failure {
     [self setFollowingValue:YES];

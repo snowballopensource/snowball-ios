@@ -67,15 +67,13 @@
 #pragma mark - SBManagedTableViewController
 
 - (void)getRemoteObjects {
-    // TODO: Get people I'm following
-//    [SBReel getParticipantsForReel:self.reel
-//                            onPage:self.currentPage
-//                           success:^(BOOL canLoadMore) {
-//                               [self setIsLoading:!canLoadMore];
-//                               [self.refreshControl endRefreshing];
-//                           } failure:^(NSError *error) {
-//                               [self.refreshControl endRefreshing];
-//                           }];
+    [[SBUser currentUser] getFollowingOnPage:self.currentPage
+                                     success:^(BOOL canLoadMore) {
+                                         [self setIsLoading:!canLoadMore];
+                                         [self.refreshControl endRefreshing];
+                                     } failure:^(NSError *error) {
+                                         [self.refreshControl endRefreshing];
+                                     }];
 }
 
 @end

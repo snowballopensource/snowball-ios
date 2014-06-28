@@ -39,6 +39,10 @@
                         success:(void (^)(NSArray *users))success
                         failure:(void (^)(NSError *error))failure;
 
+- (void)getFollowingOnPage:(NSUInteger)page
+                   success:(void (^)(BOOL canLoadMore))success
+                   failure:(void (^)(NSError *error))failure;
+
 - (void)followWithSuccess:(void (^)(void))success
                   failure:(void (^)(NSError *error))failure;
 
