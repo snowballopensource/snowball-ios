@@ -21,4 +21,12 @@
                        success:(void (^)(BOOL canLoadMore))success
                        failure:(void (^)(NSError *error))failure;
 
+- (void)addParticipant:(SBUser *)user
+           withSuccess:(void (^)(void))success
+               failure:(void (^)(NSError *error))failure;
+
+- (void)removeParticipant:(SBUser *)user
+              withSuccess:(void (^)(void))success
+                  failure:(void (^)(NSError *error))failure;
+
 @end

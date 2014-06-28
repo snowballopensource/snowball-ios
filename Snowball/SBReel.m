@@ -81,4 +81,66 @@
                               }];
 }
 
+#pragma mark - Participants
+
+- (void)addParticipant:(SBUser *)user
+           withSuccess:(void (^)(void))success
+               failure:(void (^)(NSError *error))failure {
+    [user addReelsObject:self];
+    [self save];
+    [self postParticipant:user
+              withSuccess:^{
+                  if (success) { success(); }
+              } failure:^(NSError *error) {
+                  if (failure) { failure(error); }
+              }];
+}
+
+- (void)removeParticipant:(SBUser *)user
+              withSuccess:(void (^)(void))success
+                  failure:(void (^)(NSError *error))failure {
+    [user removeReelsObject:self];
+    [self save];
+    [self deleteParticipant:user
+              withSuccess:^{
+                  if (success) { success(); }
+              } failure:^(NSError *error) {
+                  if (failure) { failure(error); }
+              }];
+}
+
+- (void)postParticipant:(SBUser *)user
+            withSuccess:(void (^)(void))success
+                failure:(void (^)(NSError *error))failure {
+    NSString *path = [NSString stringWithFormat:@"reels/%@/participants/%@", self.remoteID, user.remoteID];
+    [[SBAPIManager sharedManager] POST:path
+                            parameters:nil
+                               success:^(NSURLSessionDataTask *task, id responseObject) {
+                                   if (success) { success(); }
+                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                   [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                                       SBUser *_user = [user MR_inContext:localContext];
+                                       [_user removeReelsObject:self];
+                                   }];
+                                   if (failure) { failure(error); };
+                               }];
+}
+
+- (void)deleteParticipant:(SBUser *)user
+              withSuccess:(void (^)(void))success
+                  failure:(void (^)(NSError *error))failure {
+    NSString *path = [NSString stringWithFormat:@"reels/%@/participants/%@", self.remoteID, user.remoteID];
+    [[SBAPIManager sharedManager] DELETE:path
+                              parameters:nil
+                                 success:^(NSURLSessionDataTask *task, id responseObject) {
+                                     if (success) { success(); }
+                                 } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                                         SBUser *_user = [user MR_inContext:localContext];
+                                         [_user addReelsObject:self];
+                                     }];
+                                     if (failure) { failure(error); };
+                                 }];
+}
+
 @end

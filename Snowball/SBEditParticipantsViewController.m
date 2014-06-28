@@ -43,11 +43,10 @@
     BOOL participating = [self.reel.participants containsObject:user];
     [cell.checkButton setParticipating:!participating];
     if (participating) {
-        // TODO: remove from participating
-        // looks something like [user unfollowWithSuccess:nil failure:nil];
+        [self.reel removeParticipant:user withSuccess:nil failure:nil];
 
     } else {
-        // TODO: add to participating
+        [self.reel addParticipant:user withSuccess:nil failure:nil];
     }
 }
 
