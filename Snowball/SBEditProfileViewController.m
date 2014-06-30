@@ -23,6 +23,8 @@
 
     [self.tableView setBackgroundColor:[UIColor whiteColor]];
 
+    [self setBackButtonStyle:UIViewControllerBackButtonStyleDark];
+
     SBUser *user = [SBUser currentUser];
     [self.userImageView setImageWithURL:[NSURL URLWithString:user.avatarURL]
                        placeholderImage:[SBUserImageView placeholderImageWithInitials:user.name.initials withSize:self.userImageView.bounds.size]];

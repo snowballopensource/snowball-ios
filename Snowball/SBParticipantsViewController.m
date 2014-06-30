@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self setBackButtonStyle:SBViewControllerBackButtonStyleDark];
+    [self setBackButtonStyle:UIViewControllerBackButtonStyleDark];
     
     [SBUserTableViewCell registerNibToTableView:self.tableView];
     

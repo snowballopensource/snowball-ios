@@ -214,7 +214,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Edit Profile" id="x2J-Q4-uas">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="V2S-k3-CGR">
+                        <barButtonItem key="rightBarButtonItem" id="V2S-k3-CGR">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ccp-tW-Wsv">
                                 <rect key="frame" x="269" y="9" width="35" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

@@ -61,6 +61,7 @@
 		BAA19C5019469B370034D439 /* SBUserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA19C4F19469B370034D439 /* SBUserImageView.m */; };
 		BAAA0E33195CF1CB002B1148 /* SBCheckButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAA0E32195CF1CB002B1148 /* SBCheckButton.m */; };
 		BAB0A72F1962024D00BF5C92 /* SBEditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB0A72E1962024D00BF5C92 /* SBEditProfileViewController.m */; };
+		BAB0A7321962098800BF5C92 /* UIViewController+CustomBackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB0A7311962098800BF5C92 /* UIViewController+CustomBackButton.m */; };
 		BAC81380192BC5E1002323E1 /* UIViewController+Spinner.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC8137F192BC5E1002323E1 /* UIViewController+Spinner.m */; };
 		BAC9FB3319241296008742EE /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAC9FB3219241296008742EE /* Authentication.storyboard */; };
 		BAC9FB3619241388008742EE /* SBAuthenticationNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB3519241388008742EE /* SBAuthenticationNavigationController.m */; };
@@ -195,6 +196,8 @@
 		BAAA0E32195CF1CB002B1148 /* SBCheckButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCheckButton.m; sourceTree = "<group>"; };
 		BAB0A72D1962024D00BF5C92 /* SBEditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBEditProfileViewController.h; sourceTree = "<group>"; };
 		BAB0A72E1962024D00BF5C92 /* SBEditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBEditProfileViewController.m; sourceTree = "<group>"; };
+		BAB0A7301962098800BF5C92 /* UIViewController+CustomBackButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CustomBackButton.h"; sourceTree = "<group>"; };
+		BAB0A7311962098800BF5C92 /* UIViewController+CustomBackButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CustomBackButton.m"; sourceTree = "<group>"; };
 		BAC8137E192BC5E1002323E1 /* UIViewController+Spinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Spinner.h"; sourceTree = "<group>"; };
 		BAC8137F192BC5E1002323E1 /* UIViewController+Spinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Spinner.m"; sourceTree = "<group>"; };
 		BAC9FB3219241296008742EE /* Authentication.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
@@ -458,6 +461,8 @@
 				BA15B9EC192AD9AD00453F8F /* UINavigationBar+CustomHeight.m */,
 				BA8E99611953A8B700DCECD9 /* UIView+ImageRepresentation.h */,
 				BA8E99621953A8B700DCECD9 /* UIView+ImageRepresentation.m */,
+				BAB0A7301962098800BF5C92 /* UIViewController+CustomBackButton.h */,
+				BAB0A7311962098800BF5C92 /* UIViewController+CustomBackButton.m */,
 				BAC8137E192BC5E1002323E1 /* UIViewController+Spinner.h */,
 				BAC8137F192BC5E1002323E1 /* UIViewController+Spinner.m */,
 				BA15B9E3192AC9EF00453F8F /* UIViewController+StatusBar.h */,
@@ -744,6 +749,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAB0A7321962098800BF5C92 /* UIViewController+CustomBackButton.m in Sources */,
 				BAC9FB3D1924152D008742EE /* SBSignUpViewController.m in Sources */,
 				BAE89609193F6E6600E96E6B /* SBCameraViewController.m in Sources */,
 				BA98D0021936B85200753E1B /* SBCameraManager.m in Sources */,

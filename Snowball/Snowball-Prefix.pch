@@ -19,6 +19,7 @@
 #import "UILabel+CustomFont.h"
 #import "UINavigationBar+CustomHeight.h"
 #import "UIView+ImageRepresentation.h"
+#import "UIViewController+CustomBackButton.h"
 #import "UIViewController+Spinner.h"
 #import "UIViewController+StatusBar.h"
 

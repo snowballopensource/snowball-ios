@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self setBackButtonStyle:SBViewControllerBackButtonStyleDark];
+    [self setBackButtonStyle:UIViewControllerBackButtonStyleDark];
 }
 
 #pragma mark - SBFollowingViewController
