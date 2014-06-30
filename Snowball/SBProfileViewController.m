@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
+#import "SBEditProfileViewController.h"
 #import "SBProfileViewController.h"
 #import "SBUser.h"
 #import "SBUserImageView.h"
@@ -44,12 +45,6 @@
     if ([self.navigationController.viewControllers firstObject] != self) {
         [self.menuButton setHidden:YES];
     }
-}
-
-#pragma mark - Actions
-
-- (IBAction)editProfile:(id)sender {
-    [UIAlertView bk_showAlertViewWithTitle:@"Not implemented." message:nil cancelButtonTitle:@"OK" otherButtonTitles:nil handler:nil];
 }
 
 #pragma mark - Private

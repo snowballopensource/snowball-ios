@@ -60,6 +60,7 @@
 		BAA19C4D194694770034D439 /* UIFont+Snowball.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA19C4C194694770034D439 /* UIFont+Snowball.m */; };
 		BAA19C5019469B370034D439 /* SBUserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA19C4F19469B370034D439 /* SBUserImageView.m */; };
 		BAAA0E33195CF1CB002B1148 /* SBCheckButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAA0E32195CF1CB002B1148 /* SBCheckButton.m */; };
+		BAB0A72F1962024D00BF5C92 /* SBEditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB0A72E1962024D00BF5C92 /* SBEditProfileViewController.m */; };
 		BAC81380192BC5E1002323E1 /* UIViewController+Spinner.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC8137F192BC5E1002323E1 /* UIViewController+Spinner.m */; };
 		BAC9FB3319241296008742EE /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAC9FB3219241296008742EE /* Authentication.storyboard */; };
 		BAC9FB3619241388008742EE /* SBAuthenticationNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB3519241388008742EE /* SBAuthenticationNavigationController.m */; };
@@ -192,6 +193,8 @@
 		BAA19C4F19469B370034D439 /* SBUserImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUserImageView.m; sourceTree = "<group>"; };
 		BAAA0E31195CF1CB002B1148 /* SBCheckButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCheckButton.h; sourceTree = "<group>"; };
 		BAAA0E32195CF1CB002B1148 /* SBCheckButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCheckButton.m; sourceTree = "<group>"; };
+		BAB0A72D1962024D00BF5C92 /* SBEditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBEditProfileViewController.h; sourceTree = "<group>"; };
+		BAB0A72E1962024D00BF5C92 /* SBEditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBEditProfileViewController.m; sourceTree = "<group>"; };
 		BAC8137E192BC5E1002323E1 /* UIViewController+Spinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Spinner.h"; sourceTree = "<group>"; };
 		BAC8137F192BC5E1002323E1 /* UIViewController+Spinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Spinner.m"; sourceTree = "<group>"; };
 		BAC9FB3219241296008742EE /* Authentication.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
@@ -568,6 +571,8 @@
 			children = (
 				BA29C7F0192FEBC400F59684 /* SBProfileViewController.h */,
 				BA29C7F1192FEBC400F59684 /* SBProfileViewController.m */,
+				BAB0A72D1962024D00BF5C92 /* SBEditProfileViewController.h */,
+				BAB0A72E1962024D00BF5C92 /* SBEditProfileViewController.m */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -799,6 +804,7 @@
 				BAC81380192BC5E1002323E1 /* UIViewController+Spinner.m in Sources */,
 				BAA19C5019469B370034D439 /* SBUserImageView.m in Sources */,
 				BA936FF7192312DF00D3CAFB /* SBReelsViewController.m in Sources */,
+				BAB0A72F1962024D00BF5C92 /* SBEditProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
