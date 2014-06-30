@@ -9,6 +9,7 @@ const struct SBUserAttributes SBUserAttributes = {
 	.email = @"email",
 	.following = @"following",
 	.name = @"name",
+	.phoneNumber = @"phoneNumber",
 	.remoteID = @"remoteID",
 	.username = @"username",
 };
@@ -108,6 +109,13 @@ const struct SBUserFetchedProperties SBUserFetchedProperties = {
 
 
 @dynamic name;
+
+
+
+
+
+
+@dynamic phoneNumber;
 
 
 

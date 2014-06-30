@@ -78,6 +78,11 @@
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="following" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phoneNumber" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="phone_number"/>
+            </userInfo>
+        </attribute>
         <attribute name="remoteID" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="id"/>
@@ -94,6 +99,6 @@
     <elements>
         <element name="Clip" positionX="-63" positionY="-18" width="128" height="135"/>
         <element name="Reel" positionX="-63" positionY="0" width="128" height="148"/>
-        <element name="User" positionX="-54" positionY="18" width="128" height="195"/>
+        <element name="User" positionX="-54" positionY="18" width="128" height="210"/>
     </elements>
 </model>

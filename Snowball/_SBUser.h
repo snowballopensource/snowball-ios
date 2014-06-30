@@ -10,6 +10,7 @@ extern const struct SBUserAttributes {
 	__unsafe_unretained NSString *email;
 	__unsafe_unretained NSString *following;
 	__unsafe_unretained NSString *name;
+	__unsafe_unretained NSString *phoneNumber;
 	__unsafe_unretained NSString *remoteID;
 	__unsafe_unretained NSString *username;
 } SBUserAttributes;
@@ -26,6 +27,7 @@ extern const struct SBUserFetchedProperties {
 @class SBClip;
 @class SBReel;
 @class SBReel;
+
 
 
 
@@ -97,6 +99,16 @@ extern const struct SBUserFetchedProperties {
 
 
 //- (BOOL)validateName:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSString* phoneNumber;
+
+
+
+//- (BOOL)validatePhoneNumber:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -197,6 +209,12 @@ extern const struct SBUserFetchedProperties {
 
 - (NSString*)primitiveName;
 - (void)setPrimitiveName:(NSString*)value;
+
+
+
+
+- (NSString*)primitivePhoneNumber;
+- (void)setPrimitivePhoneNumber:(NSString*)value;
 
 
 
