@@ -101,4 +101,14 @@
 }
 */
 
+#pragma mark - View Actions
+
+- (IBAction)editProfileImage:(id)sender {
+    [UIAlertView bk_showAlertViewWithTitle:@"Hello!" message:@"Haven't finished this yet. :)" cancelButtonTitle:@"Ok" otherButtonTitles:nil handler:nil];
+}
+
+- (IBAction)done:(id)sender {
+    [UIAlertView bk_showAlertViewWithTitle:@"Hello!" message:@"Haven't finished this yet. :)" cancelButtonTitle:@"Ok" otherButtonTitles:nil handler:nil];
+}
+
 @end

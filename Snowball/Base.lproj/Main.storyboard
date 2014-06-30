@@ -104,6 +104,9 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <state key="highlighted" image="button-editprofile-editphoto-highlighted"/>
+                                    <connections>
+                                        <action selector="editProfileImage:" destination="czy-eE-qQ4" eventType="touchUpInside" id="dli-zI-lbV"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -222,6 +225,9 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" image="button-check-highlighted"/>
+                                <connections>
+                                    <action selector="done:" destination="czy-eE-qQ4" eventType="touchUpInside" id="qQn-8j-DiQ"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
