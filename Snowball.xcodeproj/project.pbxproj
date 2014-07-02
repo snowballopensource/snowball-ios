@@ -36,6 +36,7 @@
 		BA5CD6921926CEDA0087D3A2 /* SBFadeOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD6911926CEDA0087D3A2 /* SBFadeOverlayView.m */; };
 		BA632029195CED8500BA6B75 /* SBEditParticipantsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA632028195CED8500BA6B75 /* SBEditParticipantsViewController.m */; };
 		BA63202C195CEE4B00BA6B75 /* SBFollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA63202B195CEE4B00BA6B75 /* SBFollowingViewController.m */; };
+		BA6AD8EF1964C66100FEADB2 /* UITextField+CustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6AD8EE1964C66100FEADB2 /* UITextField+CustomFont.m */; };
 		BA8E994519536EE700DCECD9 /* UIButton+CustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E994419536EE700DCECD9 /* UIButton+CustomFont.m */; };
 		BA8E994B1953801600DCECD9 /* SBFindFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E994A1953801600DCECD9 /* SBFindFriendsViewController.m */; };
 		BA8E994F195382FE00DCECD9 /* SBAddressBookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E994E195382FE00DCECD9 /* SBAddressBookManager.m */; };
@@ -150,6 +151,8 @@
 		BA632028195CED8500BA6B75 /* SBEditParticipantsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBEditParticipantsViewController.m; sourceTree = "<group>"; };
 		BA63202A195CEE4B00BA6B75 /* SBFollowingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFollowingViewController.h; sourceTree = "<group>"; };
 		BA63202B195CEE4B00BA6B75 /* SBFollowingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFollowingViewController.m; sourceTree = "<group>"; };
+		BA6AD8ED1964C66100FEADB2 /* UITextField+CustomFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+CustomFont.h"; sourceTree = "<group>"; };
+		BA6AD8EE1964C66100FEADB2 /* UITextField+CustomFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+CustomFont.m"; sourceTree = "<group>"; };
 		BA8E994319536EE700DCECD9 /* UIButton+CustomFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+CustomFont.h"; sourceTree = "<group>"; };
 		BA8E994419536EE700DCECD9 /* UIButton+CustomFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CustomFont.m"; sourceTree = "<group>"; };
 		BA8E99491953801600DCECD9 /* SBFindFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFindFriendsViewController.h; sourceTree = "<group>"; };
@@ -459,6 +462,8 @@
 				BAA19C491946945C0034D439 /* UILabel+CustomFont.m */,
 				BA15B9EB192AD9AD00453F8F /* UINavigationBar+CustomHeight.h */,
 				BA15B9EC192AD9AD00453F8F /* UINavigationBar+CustomHeight.m */,
+				BA6AD8ED1964C66100FEADB2 /* UITextField+CustomFont.h */,
+				BA6AD8EE1964C66100FEADB2 /* UITextField+CustomFont.m */,
 				BA8E99611953A8B700DCECD9 /* UIView+ImageRepresentation.h */,
 				BA8E99621953A8B700DCECD9 /* UIView+ImageRepresentation.m */,
 				BAB0A7301962098800BF5C92 /* UIViewController+CustomBackButton.h */,
@@ -773,6 +778,7 @@
 				BA63202C195CEE4B00BA6B75 /* SBFollowingViewController.m in Sources */,
 				BA048E20191AF9A70083B0DC /* Snowball.xcdatamodeld in Sources */,
 				BAC9FB4319241774008742EE /* SBSessionManager.m in Sources */,
+				BA6AD8EF1964C66100FEADB2 /* UITextField+CustomFont.m in Sources */,
 				BA048E18191AF83A0083B0DC /* SBReelClipsViewController.m in Sources */,
 				BA53F16B1952397400DFD7B9 /* SBMeUserImageView.m in Sources */,
 				BA5CD68B19269B170087D3A2 /* NSError+Snowball.m in Sources */,

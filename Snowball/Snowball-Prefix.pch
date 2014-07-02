@@ -18,6 +18,7 @@
 #import "UIFont+Snowball.h"
 #import "UILabel+CustomFont.h"
 #import "UINavigationBar+CustomHeight.h"
+#import "UITextField+CustomFont.h"
 #import "UIView+ImageRepresentation.h"
 #import "UIViewController+CustomBackButton.h"
 #import "UIViewController+Spinner.h"

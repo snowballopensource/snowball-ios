@@ -14,6 +14,13 @@
 
 @property (nonatomic, weak) IBOutlet SBUserImageView *userImageView;
 
+@property (nonatomic, weak) IBOutlet UITextField *usernameTextField;
+@property (nonatomic, weak) IBOutlet UITextField *nameTextField;
+@property (nonatomic, weak) IBOutlet UITextField *bioTextField;
+@property (nonatomic, weak) IBOutlet UITextField *emailTextField;
+@property (nonatomic, weak) IBOutlet UITextField *phoneTextField;
+
+
 @end
 
 @implementation SBEditProfileViewController
@@ -30,6 +37,11 @@
                                                                      withSize:self.userImageView.bounds.size];
     [self.userImageView setImageWithURL:[NSURL URLWithString:user.avatarURL]
                        placeholderImage:placeholderImage];
+    [self.usernameTextField setText:user.username];
+    [self.nameTextField setText:user.name];
+    [self.bioTextField setText:user.bio];
+    [self.emailTextField setText:user.email];
+    [self.phoneTextField setText:user.phoneNumber];
 }
 
 #pragma mark - View Actions
