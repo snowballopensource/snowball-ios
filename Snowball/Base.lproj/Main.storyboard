@@ -226,7 +226,7 @@
                                 </state>
                                 <state key="highlighted" image="button-check-highlighted"/>
                                 <connections>
-                                    <action selector="done:" destination="czy-eE-qQ4" eventType="touchUpInside" id="qQn-8j-DiQ"/>
+                                    <action selector="save:" destination="czy-eE-qQ4" eventType="touchUpInside" id="gLj-1Y-g8e"/>
                                 </connections>
                             </button>
                         </barButtonItem>
