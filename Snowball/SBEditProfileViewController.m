@@ -51,7 +51,26 @@
 }
 
 - (IBAction)save:(id)sender {
-    [UIAlertView bk_showAlertViewWithTitle:@"Hello!" message:@"Haven't finished this yet. :)" cancelButtonTitle:@"Ok" otherButtonTitles:nil handler:nil];
+    if (self.usernameTextField.text.length == 0) {
+        [UIAlertView bk_showAlertViewWithTitle:@"Whoops!"
+                                       message:@"Please enter a username."
+                             cancelButtonTitle:@"Ok"
+                             otherButtonTitles:nil
+                                       handler:nil];
+    } else if (self.emailTextField.text.length == 0) {
+        [UIAlertView bk_showAlertViewWithTitle:@"Whoops!"
+                                       message:@"Please enter your email address."
+                             cancelButtonTitle:@"Ok"
+                             otherButtonTitles:nil
+                                       handler:nil];
+    } else {
+        // TODO: save the profile
+        [UIAlertView bk_showAlertViewWithTitle:@"Hello!"
+                                       message:@"Haven't finished this yet. :)"
+                             cancelButtonTitle:@"Ok"
+                             otherButtonTitles:nil
+                                       handler:nil];
+    }
 }
 
 @end
