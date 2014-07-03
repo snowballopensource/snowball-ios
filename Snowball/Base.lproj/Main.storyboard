@@ -176,10 +176,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="fbY-Vq-VbJ">
+                            <tableViewSection headerTitle="PRIVATE INFORMATION" id="fbY-Vq-VbJ">
                                 <cells>
                                     <tableViewCell appearanceType="aqua" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="eaj-i9-PAm">
-                                        <rect key="frame" x="0.0" y="399" width="320" height="65"/>
+                                        <rect key="frame" x="0.0" y="427" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eaj-i9-PAm" id="U9a-T7-XTK">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
@@ -199,7 +199,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="eFQ-Dd-YaJ">
-                                        <rect key="frame" x="0.0" y="464" width="320" height="65"/>
+                                        <rect key="frame" x="0.0" y="492" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eFQ-Dd-YaJ" id="287-oh-78U">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>

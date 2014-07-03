@@ -39,6 +39,10 @@
 - (void)setupAppearance {
     NSDictionary *navigationBarTitleTextAttributes = @{ NSFontAttributeName: [UIFont fontWithName:[UIFont snowballFontNameNormal] size:20]};
     [[UINavigationBar appearance] setTitleTextAttributes:navigationBarTitleTextAttributes];
+
+    [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setFont:[UIFont fontWithName:[UIFont snowballFontNameBold] size:12]];
+    [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setTextColor:[UIColor blackColor]];
+
 }
 
 @end
