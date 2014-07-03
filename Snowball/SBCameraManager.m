@@ -85,7 +85,7 @@
         
         NSError *error = nil;
         
-        AVCaptureDevice *videoDevice = [SBCameraManager deviceWithMediaType:AVMediaTypeVideo preferringPosition:AVCaptureDevicePositionBack];
+        AVCaptureDevice *videoDevice = [SBCameraManager deviceWithMediaType:AVMediaTypeVideo preferringPosition:AVCaptureDevicePositionFront];
         AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&error];
         
         if (error) NSLog(@"%@", error);
