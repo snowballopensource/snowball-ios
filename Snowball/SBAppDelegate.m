@@ -14,7 +14,7 @@
 @implementation SBAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [MagicalRecord setupCoreDataStack];
+    [MagicalRecord setupAutoMigratingCoreDataStack];
     [SBSessionManager startSession];
     [SBPushNotificationManager setup];
     [SBAnalyticsManager start];
