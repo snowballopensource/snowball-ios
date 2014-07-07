@@ -51,7 +51,12 @@
                                   NSArray *_reels = responseObject[@"reels"];
                                   [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                                       [_reels each:^(id object) {
-                                          SBReel *reel = [SBReel MR_importFromObject:object inContext:localContext];
+                                          SBReel *reel = [SBReel MR_findFirstByAttribute:@"remoteID"
+                                                                               withValue:object[@"id"]
+                                                                               inContext:localContext];
+                                          [reel setRecentParticipants:nil];
+                                          [reel setParticipants:nil];
+                                          [reel MR_importValuesForKeysWithObject:object];
                                           [reel setHomeFeedSession:[SBSessionManager sessionDate]];
                                       }];
                                   }];
