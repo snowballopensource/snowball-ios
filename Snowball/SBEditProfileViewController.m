@@ -64,12 +64,20 @@
                              otherButtonTitles:nil
                                        handler:nil];
     } else {
-        // TODO: save the profile
-        [UIAlertView bk_showAlertViewWithTitle:@"Hello!"
-                                       message:@"Haven't finished this yet. :)"
-                             cancelButtonTitle:@"Ok"
-                             otherButtonTitles:nil
-                                       handler:nil];
+        [self showSpinner];
+        SBUser *user = [SBUser currentUser];
+        [user setName:self.nameTextField.text];
+        [user setUsername:self.usernameTextField.text];
+        [user setEmail:self.emailTextField.text];
+        [user setBio:self.bioTextField.text];
+        [user setPhoneNumber:self.phoneTextField.text];
+        [user updateWithSuccess:^{
+            [self hideSpinner];
+            [self.navigationController popViewControllerAnimated:YES];
+        } failure:^(NSError *error) {
+            [self hideSpinner];
+            [error displayInView:self.view];
+        }];
     }
 }
 

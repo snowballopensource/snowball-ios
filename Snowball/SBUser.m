@@ -246,24 +246,26 @@ static SBUser *_currentUser = nil;
 #pragma mark - SBManagedObject
 
 - (void)updateWithSuccess:(void(^)(void))success failure:(void(^)(NSError *error))failure {
-    //    NSMutableDictionary *userParameters = [NSMutableDictionary new];
-    //    userParameters[@"name"] = self.name;
-    //    userParameters[@"username"] = self.username;
-    //    userParameters[@"email"] = self.email;
-    //    NSDictionary *parameters = @{ @"user": [userParameters copy] };
-    //    NSString *path = [NSString stringWithFormat:@"users/%@", [GLUser currentUser].remoteID];
-    //    [[GLAPIManager sharedManager] PUT:path
-    //                           parameters:parameters
-    //                              success:^(NSURLSessionDataTask *task, id responseObject) {
-    //                                  NSDictionary *_user = responseObject[@"user"];
-    //                                  [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-    //                                      GLUser *user = [self MR_inContext:localContext];
-    //                                      [user MR_importValuesForKeysWithObject:_user];
-    //                                  }];
-    //                                  if (success) { success(); }
-    //                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
-    //                                  if (failure) { failure(error); };
-    //                              }];
+    NSMutableDictionary *userParameters = [@{} mutableCopy];
+    if (self.name) userParameters[@"name"] = self.name;
+    if (self.username) userParameters[@"username"] = self.username;
+    if (self.email) userParameters[@"email"] = self.email;
+    if (self.bio) userParameters[@"bio"] = self.bio;
+    if (self.phoneNumber) userParameters[@"phone_number"] = self.phoneNumber;
+    NSDictionary *parameters = @{ @"user": [userParameters copy] };
+    NSString *path = [NSString stringWithFormat:@"users/%@", self.remoteID];
+    [[SBAPIManager sharedManager] PUT:path
+                           parameters:parameters
+                              success:^(NSURLSessionDataTask *task, id responseObject) {
+                                  NSDictionary *_user = responseObject[@"user"];
+                                  [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                                      SBUser *user = [self MR_inContext:localContext];
+                                      [user MR_importValuesForKeysWithObject:_user];
+                                  }];
+                                  if (success) { success(); }
+                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                  if (failure) { failure(error); };
+                              }];
 }
 
 @end
