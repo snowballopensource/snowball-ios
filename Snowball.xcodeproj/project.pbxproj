@@ -715,7 +715,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [$CONFIGURATION == Release]; then\n    APP_ID=\"53a389b5d478bc6de400000a\"\n    API_KEY=\"CNTb4Ok1SpdNT2EHhU1EQ27QrR8dUZQi\"\n    source \"${SRCROOT}\"/Pods/CrittercismSDK/CrittercismSDK/dsym_upload.sh\nfi\n";
+			shellScript = "if [$CONFIGURATION == \"Release\"]; then\n    APP_ID=\"53a389b5d478bc6de400000a\"\n    API_KEY=\"CNTb4Ok1SpdNT2EHhU1EQ27QrR8dUZQi\"\n    source \"${SRCROOT}\"/Pods/CrittercismSDK/CrittercismSDK/dsym_upload.sh\nfi\n";
 		};
 		D2688E237F474137BA9A1F33 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
