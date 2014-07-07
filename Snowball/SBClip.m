@@ -17,12 +17,16 @@
 #pragma mark - Remote
 
 + (void)getRecentClipsForReel:(SBReel *)reel
-                         page:(NSUInteger)page
+                        since:(NSDate *)since
                       success:(void (^)(BOOL canLoadMore))success
                       failure:(void (^)(NSError *error))failure {
-    NSString *path = [NSString stringWithFormat:@"reels/%@/clips", reel.remoteID];;
+    NSDictionary *parameters;
+    if (since) {
+        parameters = @{@"since_date": @([since timeIntervalSince1970])};
+    }
+    NSString *path = [NSString stringWithFormat:@"reels/%@/clips", reel.remoteID];
     [[SBAPIManager sharedManager] GET:path
-                           parameters:@{@"page": @(page)}
+                           parameters:parameters
                               success:^(NSURLSessionDataTask *task, id responseObject) {
                                   NSArray *_clips = responseObject[@"clips"];
                                   [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {

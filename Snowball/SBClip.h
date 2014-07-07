@@ -11,7 +11,7 @@
 @interface SBClip : _SBClip
 
 + (void)getRecentClipsForReel:(SBReel *)reel
-                         page:(NSUInteger)page
+                        since:(NSDate *)since
                       success:(void (^)(BOOL canLoadMore))success
                       failure:(void (^)(NSError *error))failure;
 

@@ -35,6 +35,10 @@
     return [recentClipPosterURLs copy];
 }
 
+- (SBClip *)lastClip {
+    return [[SBClip MR_findAllSortedBy:@"createdAt" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"reel == %@", self]] lastObject];
+}
+
 #pragma mark - Remote
 
 + (void)getHomeFeedReelsOnPage:(NSUInteger)page

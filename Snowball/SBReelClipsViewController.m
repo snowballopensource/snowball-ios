@@ -24,12 +24,13 @@
 @property (nonatomic, weak) IBOutlet UIImageView *userImageView;
 
 @property (nonatomic, strong) SBClip *currentClip;
+@property (nonatomic, strong) NSDate *sinceDate;
 @property (nonatomic, copy) NSArray *clips;
 @property (nonatomic, copy, readonly) NSArray *playerItems;
 
 @end
 
-@implementation SBReelClipsViewController // TODO: make this a managed controller somehow
+@implementation SBReelClipsViewController
 
 #pragma mark - UIViewController
 
@@ -40,9 +41,9 @@
 
     [self showSpinner];
     
-    // TODO: make this paginated
+    [self setSinceDate:self.reel.lastClip.createdAt];
     [SBClip getRecentClipsForReel:self.reel
-                             page:0
+                            since:self.sinceDate
                           success:^(BOOL canLoadMore) {
                               [self hideSpinner];
                               [self playReel];
@@ -71,7 +72,12 @@
 #pragma mark - Video Player
 
 - (void)playReel {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"reel == %@", self.reel];
+    NSPredicate *predicate;
+    if (self.sinceDate) {
+        predicate = [NSPredicate predicateWithFormat:@"reel == %@ && createdAt >= %@", self.reel, self.sinceDate];
+    } else {
+        predicate = [NSPredicate predicateWithFormat:@"reel == %@", self.reel];
+    }
     NSFetchRequest *fetchRequest = [SBClip MR_requestAllSortedBy:@"createdAt" ascending:YES withPredicate:predicate];
     [self setClips:[SBClip MR_executeFetchRequest:fetchRequest]];
     [self setCurrentClip:[self.clips firstObject]];

@@ -8,7 +8,11 @@
 
 #import "_SBReel.h"
 
+@class SBClip;
+
 @interface SBReel : _SBReel
+
+@property (nonatomic, strong, readonly) SBClip *lastClip;
 
 - (NSArray *)recentClipPosterURLs;
 
