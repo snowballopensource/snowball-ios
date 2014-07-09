@@ -8,6 +8,18 @@
 
 #import "SBReelTableViewCell.h"
 
+@interface SBReelTableViewCell ()
+
+@property (nonatomic, weak) IBOutlet UIImageView *disclosureIndicator;
+@property (nonatomic, weak) IBOutlet UIImageView *hasNewClipIndicator;
+
+@end
+
 @implementation SBReelTableViewCell
+
+- (void)setShowsNewClipIndicator:(BOOL)showsNewClipIndicator {
+    [self.hasNewClipIndicator setHidden:!showsNewClipIndicator];
+    [self.disclosureIndicator setHidden:showsNewClipIndicator];
+}
 
 @end

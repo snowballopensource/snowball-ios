@@ -8,6 +8,7 @@
 
 #import "SBCameraViewController.h"
 #import "SBCreateReelViewController.h"
+#import "SBClip.h"
 #import "SBReel.h"
 #import "SBReelClipsViewController.h"
 #import "SBReelsViewController.h"
@@ -101,6 +102,9 @@
         [cell.participantFiveImageView setImageWithURL:[NSURL URLWithString:imageFiveURLString]
                                       placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:cell.participantFiveImageView.frame.size]];
     }
+
+    BOOL hasNewClip = !([reel.updatedAt compare:reel.lastClip.createdAt] == NSOrderedDescending);
+    [cell setShowsNewClipIndicator:hasNewClip];
 }
 
 #pragma mark - UITableViewDelegate

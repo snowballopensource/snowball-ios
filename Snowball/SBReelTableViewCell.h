@@ -17,4 +17,6 @@
 @property (nonatomic, weak) IBOutlet UIImageView *participantFourImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *participantFiveImageView;
 
+@property (nonatomic) BOOL showsNewClipIndicator;
+
 @end
