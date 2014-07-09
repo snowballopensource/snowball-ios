@@ -82,7 +82,12 @@
     [self setClips:[SBClip MR_executeFetchRequest:fetchRequest]];
     [self setCurrentClip:[self.clips firstObject]];
     AVQueuePlayer *player = [[AVQueuePlayer alloc] initWithItems:self.playerItems];
-    [player setActionAtItemEnd:AVPlayerActionAtItemEndAdvance];
+    if (self.clips.count == 1) {
+        // This prevents it from tring to advance to nothing so that it freezes on last frame
+        [player setActionAtItemEnd:AVPlayerActionAtItemEndPause];
+    } else {
+        [player setActionAtItemEnd:AVPlayerActionAtItemEndAdvance];
+    }
     [player play];
     [self.playerView setPlayer:player];
 }
@@ -100,6 +105,10 @@
         SBClip *nextClip = self.clips[nextPlayerItemIndex];
         [self setCurrentClip:nextClip];
     }
+    if (nextPlayerItemIndex == [self.playerItems count]-1) {
+        // Last clip coming up next
+        [self.playerView.player setActionAtItemEnd:AVPlayerActionAtItemEndPause];
+    }
 }
 
 - (void)updateClipUI {
@@ -111,9 +120,8 @@
 #pragma mark - Setters / Getters
 
 - (void)setClips:(NSArray *)clips {
-    _clips = [clips copy];
     NSMutableArray *playerItems = [NSMutableArray new];
-    for (SBClip *clip in self.clips) {
+    for (SBClip *clip in clips) {
         if ([clip.videoURL length] > 0) {
             NSURL *videoURL = [NSURL URLWithString:clip.videoURL];
             AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:videoURL];
@@ -124,6 +132,7 @@
             [playerItems addObject:playerItem];
         }
     }
+    _clips = [clips copy];
     _playerItems = [playerItems copy];
 }
 
