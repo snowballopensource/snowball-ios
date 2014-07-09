@@ -54,9 +54,13 @@
                                           SBReel *reel = [SBReel MR_findFirstByAttribute:@"remoteID"
                                                                                withValue:object[@"id"]
                                                                                inContext:localContext];
-                                          [reel setRecentParticipants:nil];
-                                          [reel setParticipants:nil];
-                                          [reel MR_importValuesForKeysWithObject:object];
+                                          if (reel) {
+                                              [reel setRecentParticipants:nil];
+                                              [reel setParticipants:nil];
+                                              [reel MR_importValuesForKeysWithObject:object];
+                                          } else {
+                                              reel = [SBReel MR_importFromObject:object inContext:localContext];
+                                          }
                                           [reel setHomeFeedSession:[SBSessionManager sessionDate]];
                                       }];
                                   }];
