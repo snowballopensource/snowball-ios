@@ -16,7 +16,9 @@
         //http://stackoverflow.com/a/18969325/801858
         [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
         [self setShadowImage:[UIImage new]];
-        [self setTranslucent:YES];    }
+        [self setTranslucent:YES];
+        [self setUserInteractionEnabled:NO];
+    }
     return self;
 }
 

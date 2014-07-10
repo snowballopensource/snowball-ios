@@ -41,4 +41,8 @@
     }
 }
 
+- (IBAction)flipCamera:(id)sender {
+    NSLog(@"Flip camera.");
+}
+
 @end
