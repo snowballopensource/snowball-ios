@@ -48,6 +48,7 @@ PODS:
   - SDWebImage (3.6):
     - SDWebImage/Core
   - SDWebImage/Core (3.6)
+  - UITintedButton (1.0)
   - UrbanAirship-iOS-SDK (4.0.0)
 
 DEPENDENCIES:
@@ -60,6 +61,7 @@ DEPENDENCIES:
   - MBProgressHUD
   - ObjectiveSugar
   - SDWebImage
+  - UITintedButton
   - UrbanAirship-iOS-SDK
 
 EXTERNAL SOURCES:
@@ -77,6 +79,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: c356980b0cd097f19acec959b49dca5eb8ec31be
   ObjectiveSugar: f48793f5902c77cfc02a4ce46d2e8ecddcad4dc2
   SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
+  UITintedButton: 0f8c0683f07b3547003cdac57007ad635e016d07
   UrbanAirship-iOS-SDK: 04b797ae27f0ed8b79b02c4c859256808e8d89cf
 
 COCOAPODS: 0.33.1

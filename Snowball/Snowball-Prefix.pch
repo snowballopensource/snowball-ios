@@ -15,6 +15,7 @@
 #import "NSError+Snowball.h"
 #import "NSString+Initials.h"
 #import "UIBarButtonItem+Hidden.h"
+#import "UIButton+TintColorImage.h"
 #import "UIFont+Snowball.h"
 #import "UILabel+CustomFont.h"
 #import "UINavigationBar+CustomHeight.h"
@@ -34,6 +35,7 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <ObjectiveSugar/ObjectiveSugar.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <UITintedButton/UIButton+tintImage.h>
 #import <UrbanAirship-iOS-SDK/UAirship.h>
 #import <UrbanAirship-iOS-SDK/UAConfig.h>
 #import <UrbanAirship-iOS-SDK/UAPush.h>
