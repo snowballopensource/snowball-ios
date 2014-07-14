@@ -22,9 +22,18 @@
 - (void)setShowsNewClipIndicator:(BOOL)showsNewClipIndicator {
     [self.hasNewClipIndicator setHidden:!showsNewClipIndicator];
     [self.disclosureIndicator setHidden:showsNewClipIndicator];
+    _showsNewClipIndicator = showsNewClipIndicator;
 }
 
 - (void)setState:(SBReelTableViewCellState)state animated:(BOOL)animated {
+    switch (state) {
+        case SBReelTableViewCellStatePendingUpload:
+            [self.disclosureIndicator setHidden:YES];
+            [self.hasNewClipIndicator setHidden:YES];
+            break;
+        default:
+            break;
+    }
     _state = state;
 }
 
