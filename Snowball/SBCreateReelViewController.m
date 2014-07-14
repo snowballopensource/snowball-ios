@@ -30,7 +30,7 @@
 }
 
 - (IBAction)finish:(id)sender {
-    // This is semi duplicated code since clips are uploaded in two places.
+    // This is semi duplicated code since clips are uploaded in three places.
     SBClip *clip = [SBClip MR_createEntity];
     SBReel *reel = [SBReel MR_createEntity];
     [clip setReel:reel];

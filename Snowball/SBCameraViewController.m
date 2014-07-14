@@ -66,6 +66,7 @@
             [self showSpinner];
             [[SBCameraManager sharedManager] stopRecordingWithCompletion:^(NSURL *fileURL) {
                 [self hideSpinner];
+                [self.progressView setHidden:YES];
                 [self.longPressGestureRecognizer setEnabled:TRUE];
                 if (self.recordingCompletionBlock) self.recordingCompletionBlock(fileURL);
             }];

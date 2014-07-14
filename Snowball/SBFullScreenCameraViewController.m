@@ -22,7 +22,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[SBCameraViewController class]]) {
         [(SBCameraViewController *)segue.destinationViewController setRecordingCompletionBlock:^(NSURL *fileURL) {
-            // This is semi duplicated code since clips are uploaded in two places.
+            // This is semi duplicated code since clips are uploaded in three places.
             SBClip *clip = [SBClip MR_createEntity];
             [clip setReel:self.reel];
             NSData *data = [NSData dataWithContentsOfURL:fileURL];

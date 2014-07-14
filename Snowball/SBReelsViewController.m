@@ -9,6 +9,7 @@
 #import "SBCameraViewController.h"
 #import "SBCreateReelViewController.h"
 #import "SBClip.h"
+#import "SBLongRunningTaskManager.h"
 #import "SBReel.h"
 #import "SBReelClipsViewController.h"
 #import "SBReelsViewController.h"
@@ -112,7 +113,28 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:[SBReelClipsViewController identifier] sender:self];
+    switch (self.cellState) {
+        case SBReelTableViewCellStatePendingUpload: {
+            // This is semi duplicated code since clips are uploaded in three places.
+            SBClip *clip = [SBClip MR_createEntity];
+            SBReel *reel = [self.fetchedResultsController objectAtIndexPath:indexPath];
+            [clip setReel:reel];
+            NSData *data = [NSData dataWithContentsOfURL:self.recordingURL];
+            [clip setVideoToSubmit:data];
+            [reel save];
+            [clip save];
+            [SBLongRunningTaskManager addBlockToQueue:^{
+                [clip create];
+            }];
+            [self setCellState:SBReelTableViewCellStateNormal];
+            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+            [self.tableView reloadData];
+        }
+            break;
+        default:
+            [self performSegueWithIdentifier:[SBReelClipsViewController identifier] sender:self];
+            break;
+    }
 }
 
 #pragma mark - SBManagedTableViewController
