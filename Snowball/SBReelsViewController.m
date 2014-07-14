@@ -160,28 +160,47 @@
 
 - (void)setCellState:(SBReelTableViewCellState)cellState {
     switch (cellState) {
-        case SBReelTableViewCellStatePendingUpload: {
-            AVPlayer *player = [[AVPlayer alloc] initWithURL:self.recordingURL];
-            [self.playerView setPlayer:player];
-            [(AVPlayerLayer *)self.playerView.layer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-            [self.playerView setHidden:NO];
-            [player play];
-            [[NSNotificationCenter defaultCenter] addObserverForName:AVPlayerItemDidPlayToEndTimeNotification
-                                                              object:[player currentItem]
-                                                               queue:[NSOperationQueue mainQueue]
-                                                          usingBlock:^(NSNotification *note) {
-                                                              [self.playerView.player seekToTime:kCMTimeZero];
-                                                              [self.playerView.player play];
-                                                          }];
-        }
+        case SBReelTableViewCellStatePendingUpload:
+            [self showCameraPreview];
             break;
         default:
+            [self hideCameraPreview];
             break;
     }
     for (SBReelTableViewCell *cell in [self.tableView visibleCells]) {
         [cell setState:cellState animated:YES];
     }
     _cellState = cellState;
+}
+
+#pragma mark - View Actions
+
+- (IBAction)hideCameraPreview:(id)sender {
+    [self setCellState:SBReelTableViewCellStateNormal];
+}
+
+#pragma mark - Private Actions
+
+- (void)hideCameraPreview {
+    [self.playerView setHidden:YES];
+    [self.playerView setPlayer:nil];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+- (void)showCameraPreview {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    AVPlayer *player = [[AVPlayer alloc] initWithURL:self.recordingURL];
+    [self.playerView setPlayer:player];
+    [(AVPlayerLayer *)self.playerView.layer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+    [self.playerView setHidden:NO];
+    [player play];
+    [[NSNotificationCenter defaultCenter] addObserverForName:AVPlayerItemDidPlayToEndTimeNotification
+                                                      object:[player currentItem]
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      [self.playerView.player seekToTime:kCMTimeZero];
+                                                      [self.playerView.player play];
+                                                  }];
 }
 
 @end
