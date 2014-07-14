@@ -912,6 +912,7 @@
                     </view>
                     <toolbarItems/>
                     <connections>
+                        <outlet property="flipCameraButton" destination="D4z-Fq-xXx" id="uQD-tT-TRZ"/>
                         <outlet property="longPressGestureRecognizer" destination="Me1-N9-iOa" id="GPG-4y-9Fo"/>
                     </connections>
                 </viewController>
@@ -919,6 +920,7 @@
                 <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.050000000000000003" id="Me1-N9-iOa">
                     <connections>
                         <action selector="toggleCapture:" destination="k3x-92-bAS" id="VvO-qp-8pK"/>
+                        <outlet property="delegate" destination="k3x-92-bAS" id="DD6-iV-yTM"/>
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>

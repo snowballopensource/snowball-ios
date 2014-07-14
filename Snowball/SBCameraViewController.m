@@ -9,9 +9,10 @@
 #import "SBCameraManager.h"
 #import "SBCameraViewController.h"
 
-@interface SBCameraViewController ()
+@interface SBCameraViewController () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, weak) IBOutlet UILongPressGestureRecognizer *longPressGestureRecognizer;
+@property (nonatomic, weak) IBOutlet UIButton *flipCameraButton;
 
 @end
 
@@ -42,7 +43,16 @@
 }
 
 - (IBAction)flipCamera:(id)sender {
-    NSLog(@"Flip camera.");
+    [[SBCameraManager sharedManager] changeCamera];
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([touch.view isDescendantOfView:self.flipCameraButton]) {
+        return NO;
+    }
+    return YES;
 }
 
 @end
