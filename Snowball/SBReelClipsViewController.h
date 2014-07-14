@@ -14,4 +14,6 @@
 
 @property (strong, nonatomic) SBReel *reel;
 
+@property (nonatomic, strong) NSURL *localVideoURL;
+
 @end

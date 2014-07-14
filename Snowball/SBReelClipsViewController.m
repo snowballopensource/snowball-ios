@@ -38,17 +38,20 @@
     [super viewWillAppear:animated];
     
     [self.userButton setTitle:@"" forState:UIControlStateNormal];
-
-    [self showSpinner];
     
-    [self setSinceDate:self.reel.lastClip.createdAt];
-    [SBClip getRecentClipsForReel:self.reel
-                            since:self.sinceDate
-                          success:^(BOOL canLoadMore) {
-                              [self hideSpinner];
-                              [self playReel];
-                          }
-                          failure:nil];
+    if (self.localVideoURL) {
+        [self playLocalVideoImmediately];
+    } else {
+        [self showSpinner];
+        [self setSinceDate:self.reel.lastClip.createdAt];
+        [SBClip getRecentClipsForReel:self.reel
+                                since:self.sinceDate
+                              success:^(BOOL canLoadMore) {
+                                  [self hideSpinner];
+                                  [self playReel];
+                              }
+                              failure:nil];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -92,10 +95,11 @@
     [self.playerView setPlayer:player];
 }
 
-- (void)playLocalVideoImmediately:(NSURL *)videoLocalURL {
-    [(AVQueuePlayer *)self.playerView.player removeAllItems];
-    AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:videoLocalURL];
-    [self.playerView.player replaceCurrentItemWithPlayerItem:playerItem];
+- (void)playLocalVideoImmediately {
+    AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:self.localVideoURL];
+    AVQueuePlayer *player = [[AVQueuePlayer alloc] initWithItems:@[playerItem]];
+    [self.playerView setPlayer:player];
+    [self.playerView.player play];
 }
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {

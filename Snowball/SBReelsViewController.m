@@ -48,8 +48,12 @@
     UIViewController *destinationViewController = [segue destinationViewController];
     if ([destinationViewController isKindOfClass:[SBReelClipsViewController class]]) {
         SBReelClipsViewController *reelClipsViewController = [segue destinationViewController];
-        SBReel *reel = [self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForSelectedRow]];
-        [reelClipsViewController setReel:reel];
+        if (self.recordingURL) {
+            [reelClipsViewController setLocalVideoURL:self.recordingURL];
+        } else {
+            SBReel *reel = [self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForSelectedRow]];
+            [reelClipsViewController setReel:reel];
+        }
     } else if ([destinationViewController isKindOfClass:[SBCameraViewController class]]) {
         [(SBCameraViewController *)destinationViewController setRecordingCompletionBlock:^(NSURL *fileURL) {
             [self setRecordingURL:fileURL];
@@ -132,8 +136,7 @@
                 [clip create];
             }];
             [self setCellState:SBReelTableViewCellStateNormal];
-            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-            [self.tableView reloadData];
+            [self performSegueWithIdentifier:[SBReelClipsViewController identifier] sender:self];
         }
             break;
         default:
