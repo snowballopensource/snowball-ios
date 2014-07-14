@@ -105,6 +105,7 @@
         }
         
         AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
+        [movieFileOutput setMaxRecordedDuration:CMTimeMake(10, 1)];
         if ([captureSession canAddOutput:movieFileOutput]) {
             [captureSession addOutput:movieFileOutput];
             AVCaptureConnection *connection = [movieFileOutput connectionWithMediaType:AVMediaTypeVideo];

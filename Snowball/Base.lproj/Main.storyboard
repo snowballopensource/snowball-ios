@@ -903,6 +903,11 @@
                                     <action selector="flipCamera:" destination="k3x-92-bAS" eventType="touchUpInside" id="G12-d8-Q8x"/>
                                 </connections>
                             </button>
+                            <progressView appearanceType="aqua" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xUt-8u-irL">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -914,6 +919,7 @@
                     <connections>
                         <outlet property="flipCameraButton" destination="D4z-Fq-xXx" id="uQD-tT-TRZ"/>
                         <outlet property="longPressGestureRecognizer" destination="Me1-N9-iOa" id="GPG-4y-9Fo"/>
+                        <outlet property="progressView" destination="xUt-8u-irL" id="jlg-ZY-O8r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0bB-Zr-zdb" userLabel="First Responder" sceneMemberID="firstResponder"/>
