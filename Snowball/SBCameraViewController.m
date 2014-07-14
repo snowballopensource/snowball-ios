@@ -29,16 +29,25 @@
 #pragma mark - View Actions
 
 - (IBAction)toggleCapture:(id)sender {
-    if ([[SBCameraManager sharedManager] isRecording]) {
-        [self.longPressGestureRecognizer setEnabled:FALSE];
-        [self showSpinner];
-        [[SBCameraManager sharedManager] stopRecordingWithCompletion:^(NSURL *fileURL) {
-            [self hideSpinner];
-            [self.longPressGestureRecognizer setEnabled:TRUE];
-            if (self.recordingCompletionBlock) self.recordingCompletionBlock(fileURL);
-        }];
-    } else {
-        [[SBCameraManager sharedManager] startRecording];
+    switch (self.longPressGestureRecognizer.state) {
+        case UIGestureRecognizerStateBegan: {
+            [[SBCameraManager sharedManager] startRecording];
+        }
+            break;
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateCancelled:
+        case UIGestureRecognizerStateFailed: {
+            [self.longPressGestureRecognizer setEnabled:FALSE];
+            [self showSpinner];
+            [[SBCameraManager sharedManager] stopRecordingWithCompletion:^(NSURL *fileURL) {
+                [self hideSpinner];
+                [self.longPressGestureRecognizer setEnabled:TRUE];
+                if (self.recordingCompletionBlock) self.recordingCompletionBlock(fileURL);
+            }];
+        }
+            break;
+        default:
+            break;
     }
 }
 
