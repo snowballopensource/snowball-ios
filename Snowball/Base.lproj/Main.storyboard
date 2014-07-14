@@ -893,7 +893,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D4z-Fq-xXx">
-                                <rect key="frame" x="260" y="19" width="40" height="22"/>
+                                <rect key="frame" x="264" y="26" width="40" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="button-camera-highlighted">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -957,8 +957,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="QmG-6y-0Sy"/>
+        <segue reference="N3b-XY-EoT"/>
+        <segue reference="FKf-LR-LCF"/>
         <segue reference="tOQ-Pt-FOZ"/>
-        <segue reference="hZg-bF-hOv"/>
     </inferredMetricsTieBreakers>
 </document>
