@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-#if DEBUG
+#ifdef DEBUG
     [self.nameTextField setText:@"test user"];
     [self.usernameTextField setText:@"snowballdev"];
     [self.emailTextField setText:@"blackhole@snowball.is"];

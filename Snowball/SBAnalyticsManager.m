@@ -11,7 +11,9 @@
 @implementation SBAnalyticsManager
 
 + (void)start {
+#ifndef DEBUG
     [Crittercism enableWithAppID:@"53a389b5d478bc6de400000a"];
+#endif
 }
 
 @end

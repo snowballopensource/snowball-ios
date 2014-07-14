@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-#if DEBUG
+#ifdef DEBUG
     [self.emailTextField setText:@"blackhole@snowball.is"];
     [self.passwordTextField setText:@"something"];
 #endif
