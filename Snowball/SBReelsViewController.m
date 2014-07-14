@@ -10,6 +10,7 @@
 #import "SBCreateReelViewController.h"
 #import "SBClip.h"
 #import "SBLongRunningTaskManager.h"
+#import "SBPlayerView.h"
 #import "SBReel.h"
 #import "SBReelClipsViewController.h"
 #import "SBReelsViewController.h"
@@ -22,6 +23,8 @@
 
 @property (nonatomic) SBReelTableViewCellState cellState;
 @property (nonatomic, strong) NSURL *recordingURL;
+
+@property (nonatomic, weak) IBOutlet SBPlayerView *playerView;
 
 @end
 
@@ -37,6 +40,8 @@
     [self setEntityClass:[SBReel class]];
     [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"updatedAt" ascending:NO]]];
     [self setPredicate:[NSPredicate predicateWithFormat:@"homeFeedSession == %@", [SBSessionManager sessionDate]]];
+
+    [self.playerView setHidden:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -154,6 +159,25 @@
 #pragma mark - Setters / Getters
 
 - (void)setCellState:(SBReelTableViewCellState)cellState {
+    switch (cellState) {
+        case SBReelTableViewCellStatePendingUpload: {
+            AVPlayer *player = [[AVPlayer alloc] initWithURL:self.recordingURL];
+            [self.playerView setPlayer:player];
+            [(AVPlayerLayer *)self.playerView.layer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+            [self.playerView setHidden:NO];
+            [player play];
+            [[NSNotificationCenter defaultCenter] addObserverForName:AVPlayerItemDidPlayToEndTimeNotification
+                                                              object:[player currentItem]
+                                                               queue:[NSOperationQueue mainQueue]
+                                                          usingBlock:^(NSNotification *note) {
+                                                              [self.playerView.player seekToTime:kCMTimeZero];
+                                                              [self.playerView.player play];
+                                                          }];
+        }
+            break;
+        default:
+            break;
+    }
     for (SBReelTableViewCell *cell in [self.tableView visibleCells]) {
         [cell setState:cellState animated:YES];
     }
