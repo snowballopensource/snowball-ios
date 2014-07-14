@@ -19,6 +19,7 @@
 
 @interface SBReelsViewController ()
 
+@property (nonatomic) SBReelTableViewCellState cellState;
 @property (nonatomic, strong) NSURL *recordingURL;
 
 @end
@@ -45,9 +46,8 @@
         [reelClipsViewController setReel:reel];
     } else if ([destinationViewController isKindOfClass:[SBCameraViewController class]]) {
         [(SBCameraViewController *)destinationViewController setRecordingCompletionBlock:^(NSURL *fileURL) {
-            NSLog(@"Recording completed @ %@", [fileURL path]);
             [self setRecordingURL:fileURL];
-            [self performSegueWithIdentifier:[SBCreateReelViewController identifier] sender:self];
+            [self setCellState:SBReelTableViewCellStatePendingUpload];
         }];
     } else if ([destinationViewController isKindOfClass:[SBCreateReelViewController class]]) {
         [(SBCreateReelViewController *)destinationViewController setInitialRecordingURL:self.recordingURL];
@@ -71,7 +71,7 @@
     [cell.participantThreeImageView setImage:nil];
     [cell.participantFourImageView setImage:nil];
     [cell.participantFiveImageView setImage:nil];
-    
+
     if ([reel.recentParticipants count] > 0) {
         SBUser *user = (SBUser *)[reel.recentParticipants firstObject];
         NSString *imageOneURLString = [user avatarURL];
@@ -105,6 +105,8 @@
 
     BOOL hasNewClip = !([reel.updatedAt compare:reel.lastClip.createdAt] == NSOrderedDescending);
     [cell setShowsNewClipIndicator:hasNewClip];
+
+    [cell setState:self.cellState animated:NO];
 }
 
 #pragma mark - UITableViewDelegate
@@ -125,6 +127,15 @@
                            } failure:^(NSError *error) {
                                [self.refreshControl endRefreshing];
                            }];
+}
+
+#pragma mark - Setters / Getters
+
+- (void)setCellState:(SBReelTableViewCellState)cellState {
+    for (SBReelTableViewCell *cell in [self.tableView visibleCells]) {
+        [cell setState:cellState animated:YES];
+    }
+    _cellState = cellState;
 }
 
 @end

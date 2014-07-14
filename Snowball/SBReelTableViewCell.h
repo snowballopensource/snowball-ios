@@ -8,6 +8,11 @@
 
 #import "SBTableViewCell.h"
 
+typedef NS_ENUM(NSInteger, SBReelTableViewCellState) {
+    SBReelTableViewCellStateNormal,
+    SBReelTableViewCellStatePendingUpload
+};
+
 @interface SBReelTableViewCell : SBTableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
@@ -18,5 +23,7 @@
 @property (nonatomic, weak) IBOutlet UIImageView *participantFiveImageView;
 
 @property (nonatomic) BOOL showsNewClipIndicator;
+
+- (void)setState:(SBReelTableViewCellState)state animated:(BOOL)animated;
 
 @end
