@@ -12,6 +12,7 @@
 
 @property (nonatomic, weak) IBOutlet UIImageView *disclosureIndicator;
 @property (nonatomic, weak) IBOutlet UIImageView *hasNewClipIndicator;
+@property (nonatomic, weak) IBOutlet UIImageView *addClipIndicator;
 
 @property (nonatomic) SBReelTableViewCellState state;
 
@@ -30,8 +31,10 @@
         case SBReelTableViewCellStatePendingUpload:
             [self.disclosureIndicator setHidden:YES];
             [self.hasNewClipIndicator setHidden:YES];
+            [self.addClipIndicator setHidden:NO];
             break;
         default:
+            [self.addClipIndicator setHidden:YES];
             break;
     }
     _state = state;

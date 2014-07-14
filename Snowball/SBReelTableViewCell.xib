@@ -53,9 +53,14 @@
                         <rect key="frame" x="270" y="17" width="34" height="39"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
+                    <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="button-plus-normal" translatesAutoresizingMaskIntoConstraints="NO" id="dGE-h7-PY5">
+                        <rect key="frame" x="260" y="17" width="40" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="addClipIndicator" destination="dGE-h7-PY5" id="Zs1-WQ-gKq"/>
                 <outlet property="disclosureIndicator" destination="ait-5Y-CjM" id="CqM-8U-jQP"/>
                 <outlet property="hasNewClipIndicator" destination="mbZ-o6-dqt" id="Qyx-we-rd2"/>
                 <outlet property="nameLabel" destination="3sD-nS-szW" id="PeV-pW-OAC"/>
@@ -70,6 +75,7 @@
     <resources>
         <image name="button-chevron-highlighted" width="25" height="25"/>
         <image name="button-chevron-normal" width="25" height="25"/>
+        <image name="button-plus-normal" width="40" height="40"/>
         <image name="icon-newclip" width="34" height="39"/>
     </resources>
 </document>
