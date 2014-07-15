@@ -63,6 +63,9 @@
     if ([segue.destinationViewController isKindOfClass:[SBCameraNavigationController class]]) {
         SBFullScreenCameraViewController *vc = (SBFullScreenCameraViewController *)[[(SBCameraNavigationController *)segue.destinationViewController viewControllers] firstObject];
         [vc setReel:self.reel];
+        [vc setRecordingCompletionBlock:^(NSURL *fileURL) {
+            [self setLocalVideoURL:fileURL];
+        }];
     } else if ([segue.destinationViewController isKindOfClass:[SBProfileViewController class]]) {
         SBProfileViewController *vc = segue.destinationViewController;
         [vc setUser:self.currentClip.user];

@@ -13,5 +13,6 @@
 @interface SBFullScreenCameraViewController : SBViewController
 
 @property (nonatomic, strong) SBReel *reel;
+@property (nonatomic, copy) void(^recordingCompletionBlock)(NSURL *fileURL);
 
 @end

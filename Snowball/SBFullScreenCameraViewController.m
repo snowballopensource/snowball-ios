@@ -31,6 +31,7 @@
             [SBLongRunningTaskManager addBlockToQueue:^{
                 [clip create];
             }];
+            if (self.recordingCompletionBlock) self.recordingCompletionBlock(fileURL);
             [self dismissViewControllerAnimated:YES completion:nil];
         }];
     }
