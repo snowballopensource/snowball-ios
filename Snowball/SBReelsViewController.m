@@ -48,12 +48,8 @@
     UIViewController *destinationViewController = [segue destinationViewController];
     if ([destinationViewController isKindOfClass:[SBReelClipsViewController class]]) {
         SBReelClipsViewController *reelClipsViewController = [segue destinationViewController];
-        if (self.recordingURL) {
-            [reelClipsViewController setLocalVideoURL:self.recordingURL];
-        } else {
-            SBReel *reel = [self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForSelectedRow]];
-            [reelClipsViewController setReel:reel];
-        }
+        SBReel *reel = [self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForSelectedRow]];
+        [reelClipsViewController setReel:reel];
     } else if ([destinationViewController isKindOfClass:[SBCameraViewController class]]) {
         [(SBCameraViewController *)destinationViewController setRecordingCompletionBlock:^(NSURL *fileURL) {
             [self setRecordingURL:fileURL];
@@ -62,6 +58,7 @@
     } else if ([destinationViewController isKindOfClass:[SBCreateReelViewController class]]) {
         [(SBCreateReelViewController *)destinationViewController setInitialRecordingURL:self.recordingURL];
     }
+    [self setRecordingURL:nil];
 }
 
 #pragma mark - UITableViewDataSource
@@ -136,7 +133,7 @@
                 [clip create];
             }];
             [self setCellState:SBReelTableViewCellStateNormal];
-            [self performSegueWithIdentifier:[SBReelClipsViewController identifier] sender:self];
+            [self.tableView reloadData];
         }
             break;
         default:
