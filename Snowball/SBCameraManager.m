@@ -67,6 +67,7 @@
 
 - (void)initializeCamera {
     AVCaptureSession *captureSession = [[AVCaptureSession alloc] init];
+    [captureSession setSessionPreset:AVCaptureSessionPreset1280x720];
     [self setCaptureSession:captureSession];
 
     [self createPreviewView];
