@@ -70,6 +70,7 @@
                      SBClip *clip = [self MR_inContext:localContext];
                      [clip MR_deleteEntity];
                  }];
+                 [error displayInView:[UIApplication sharedApplication].delegate.window.rootViewController.view];
                  if (failure) { failure(error); };
              }];
 }
