@@ -31,11 +31,12 @@
 // addClip
 
 - (void)setState:(SBReelTableViewCellState)state animated:(BOOL)animated {
+    CGFloat animationDuration = 0.25;
     switch (state) {
         case SBReelTableViewCellStatePendingUpload: {
             [self.addClipIndicator setHidden:NO];
             if (animated) {
-                [UIView animateWithDuration:0.3
+                [UIView animateWithDuration:animationDuration
                                  animations:^{
                                      [self.disclosureIndicator setCenter:CGPointMake(self.disclosureIndicator.center.x+100, self.disclosureIndicator.center.y)];
                                      [self.hasNewClipIndicator setCenter:CGPointMake(self.hasNewClipIndicator.center.x+100, self.hasNewClipIndicator.center.y)];
@@ -49,7 +50,7 @@
             break;
         default: {
             if (animated) {
-                [UIView animateWithDuration:0.3
+                [UIView animateWithDuration:animationDuration
                                  animations:^{
                                      [self.disclosureIndicator setCenter:CGPointMake(self.disclosureIndicator.center.x-100, self.disclosureIndicator.center.y)];
                                      [self.hasNewClipIndicator setCenter:CGPointMake(self.hasNewClipIndicator.center.x-100, self.hasNewClipIndicator.center.y)];

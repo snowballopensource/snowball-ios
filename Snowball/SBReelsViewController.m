@@ -43,7 +43,7 @@
 
     [self.playerView setHidden:YES];
 
-    [self startCellStateDemo];
+    // [self startCellStateDemo];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
