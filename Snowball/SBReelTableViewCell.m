@@ -35,6 +35,7 @@
             break;
         default:
             [self.addClipIndicator setHidden:YES];
+            [self setShowsNewClipIndicator:_showsNewClipIndicator];
             break;
     }
     _state = state;

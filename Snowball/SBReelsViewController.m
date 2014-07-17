@@ -42,6 +42,8 @@
     [self setPredicate:[NSPredicate predicateWithFormat:@"homeFeedSession == %@", [SBSessionManager sessionDate]]];
 
     [self.playerView setHidden:YES];
+
+    [self startCellStateDemo];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -133,7 +135,6 @@
                 [clip create];
             }];
             [self setCellState:SBReelTableViewCellStateNormal];
-            [self.tableView reloadData];
         }
             break;
         default:
@@ -201,6 +202,22 @@
                                                       [self.playerView.player seekToTime:kCMTimeZero];
                                                       [self.playerView.player play];
                                                   }];
+}
+
+#pragma mark - Testing
+
+- (void)startCellStateDemo {
+    [NSTimer bk_scheduledTimerWithTimeInterval:5.0
+                                         block:^(NSTimer *timer) {
+                                             if (self.cellState == SBReelTableViewCellStateNormal) {
+                                                 [self setCellState:SBReelTableViewCellStatePendingUpload];
+                                                 NSLog(@"Pending Upload");
+                                             } else {
+                                                 [self setCellState:SBReelTableViewCellStateNormal];
+                                                 NSLog(@"Normal");
+                                             }
+                                         }
+                                       repeats:YES];
 }
 
 @end
