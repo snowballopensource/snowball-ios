@@ -207,7 +207,7 @@
 #pragma mark - Testing
 
 - (void)startCellStateDemo {
-    [NSTimer bk_scheduledTimerWithTimeInterval:5.0
+    [NSTimer bk_scheduledTimerWithTimeInterval:2.0
                                          block:^(NSTimer *timer) {
                                              if (self.cellState == SBReelTableViewCellStateNormal) {
                                                  [self setCellState:SBReelTableViewCellStatePendingUpload];
