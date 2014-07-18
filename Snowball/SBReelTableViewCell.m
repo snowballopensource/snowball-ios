@@ -31,6 +31,16 @@
 // addClip
 
 - (void)setState:(SBReelTableViewCellState)state animated:(BOOL)animated {
+    static CGFloat defaultDisclosureIndicatorCenterX = 0;
+    static CGFloat defaultHasNewClipIndicatorCenterX = 0;
+    static CGFloat defaultAddClipIndicatorCenterX = 0;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        defaultDisclosureIndicatorCenterX = self.disclosureIndicator.center.x;
+        defaultHasNewClipIndicatorCenterX = self.hasNewClipIndicator.center.x;
+        defaultAddClipIndicatorCenterX = self.addClipIndicator.center.x;
+    });
+    
     CGFloat animationDuration = 0.25;
     switch (state) {
         case SBReelTableViewCellStatePendingUpload: {
@@ -38,9 +48,15 @@
             if (animated) {
                 [UIView animateWithDuration:animationDuration
                                  animations:^{
-                                     [self.disclosureIndicator setCenter:CGPointMake(self.disclosureIndicator.center.x+100, self.disclosureIndicator.center.y)];
-                                     [self.hasNewClipIndicator setCenter:CGPointMake(self.hasNewClipIndicator.center.x+100, self.hasNewClipIndicator.center.y)];
-                                     [self.addClipIndicator setCenter:CGPointMake(self.addClipIndicator.center.x-100, self.addClipIndicator.center.y)];
+                                     if (self.disclosureIndicator.center.x == defaultDisclosureIndicatorCenterX) {
+                                         [self.disclosureIndicator setCenter:CGPointMake(defaultDisclosureIndicatorCenterX+100, self.disclosureIndicator.center.y)];
+                                     }
+                                     if (self.hasNewClipIndicator.center.x == defaultHasNewClipIndicatorCenterX) {
+                                         [self.hasNewClipIndicator setCenter:CGPointMake(defaultHasNewClipIndicatorCenterX+100, self.hasNewClipIndicator.center.y)];
+                                     }
+                                     if (self.addClipIndicator.center.x == defaultAddClipIndicatorCenterX) {
+                                         [self.addClipIndicator setCenter:CGPointMake(defaultAddClipIndicatorCenterX-100, self.addClipIndicator.center.y)];
+                                     }
                                  }];
             } else {
                 [self.disclosureIndicator setHidden:YES];
@@ -52,9 +68,15 @@
             if (animated) {
                 [UIView animateWithDuration:animationDuration
                                  animations:^{
-                                     [self.disclosureIndicator setCenter:CGPointMake(self.disclosureIndicator.center.x-100, self.disclosureIndicator.center.y)];
-                                     [self.hasNewClipIndicator setCenter:CGPointMake(self.hasNewClipIndicator.center.x-100, self.hasNewClipIndicator.center.y)];
-                                     [self.addClipIndicator setCenter:CGPointMake(self.addClipIndicator.center.x+100, self.addClipIndicator.center.y)];
+                                     unless (self.disclosureIndicator.center.x == defaultDisclosureIndicatorCenterX) {
+                                         [self.disclosureIndicator setCenter:CGPointMake(defaultDisclosureIndicatorCenterX, self.disclosureIndicator.center.y)];
+                                     }
+                                     unless (self.hasNewClipIndicator.center.x == defaultHasNewClipIndicatorCenterX) {
+                                         [self.hasNewClipIndicator setCenter:CGPointMake(defaultHasNewClipIndicatorCenterX, self.hasNewClipIndicator.center.y)];
+                                     }
+                                     unless (self.addClipIndicator.center.x == defaultAddClipIndicatorCenterX) {
+                                         [self.addClipIndicator setCenter:CGPointMake(defaultAddClipIndicatorCenterX, self.addClipIndicator.center.y)];
+                                     }
                                  } completion:^(BOOL finished) {
                                      [self.addClipIndicator setHidden:YES];
                                  }];

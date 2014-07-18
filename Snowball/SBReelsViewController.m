@@ -25,6 +25,7 @@
 @property (nonatomic, strong) NSURL *recordingURL;
 
 @property (nonatomic, weak) IBOutlet SBPlayerView *playerView;
+@property (nonatomic, weak) IBOutlet UIView *createNewSnowballView;
 
 @end
 
@@ -40,10 +41,16 @@
     [self setEntityClass:[SBReel class]];
     [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"updatedAt" ascending:NO]]];
     [self setPredicate:[NSPredicate predicateWithFormat:@"homeFeedSession == %@", [SBSessionManager sessionDate]]];
-
+    
     [self.playerView setHidden:YES];
-
+    [self.createNewSnowballView setHidden:YES];
+    
     // [self startCellStateDemo];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self setCellState:SBReelTableViewCellStateNormal];
+    [super viewWillDisappear:animated];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -80,7 +87,7 @@
     [cell.participantThreeImageView setImage:nil];
     [cell.participantFourImageView setImage:nil];
     [cell.participantFiveImageView setImage:nil];
-
+    
     if ([reel.recentParticipants count] > 0) {
         SBUser *user = (SBUser *)[reel.recentParticipants firstObject];
         NSString *imageOneURLString = [user avatarURL];
@@ -111,10 +118,10 @@
         [cell.participantFiveImageView setImageWithURL:[NSURL URLWithString:imageFiveURLString]
                                       placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:cell.participantFiveImageView.frame.size]];
     }
-
+    
     BOOL hasNewClip = !([reel.updatedAt compare:reel.lastClip.createdAt] == NSOrderedDescending);
     [cell setShowsNewClipIndicator:hasNewClip];
-
+    
     [cell setState:self.cellState animated:NO];
 }
 
@@ -141,6 +148,7 @@
             [self performSegueWithIdentifier:[SBReelClipsViewController identifier] sender:self];
             break;
     }
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - SBManagedTableViewController
@@ -163,9 +171,11 @@
     switch (cellState) {
         case SBReelTableViewCellStatePendingUpload:
             [self showCameraPreview];
+            [self showNewSnowballView];
             break;
         default:
             [self hideCameraPreview];
+            [self hideNewSnowballView];
             break;
     }
     for (SBReelTableViewCell *cell in [self.tableView visibleCells]) {
@@ -176,6 +186,7 @@
 
 #pragma mark - View Actions
 
+// TODO: refactor to -cancelNewClipCreation
 - (IBAction)hideCameraPreview:(id)sender {
     [self setCellState:SBReelTableViewCellStateNormal];
 }
@@ -204,6 +215,26 @@
                                                   }];
 }
 
+- (void)hideNewSnowballView {
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         CGFloat newY = self.createNewSnowballView.frame.origin.y + self.createNewSnowballView.frame.size.height;
+                         [self.createNewSnowballView setFrame:CGRectMake(self.createNewSnowballView.frame.origin.x, newY, self.createNewSnowballView.frame.size.width, self.createNewSnowballView.frame.size.height)];
+                     }
+                     completion:^(BOOL finished) {
+                         [self.createNewSnowballView setHidden:YES];
+                     }];
+}
+
+- (void)showNewSnowballView {
+    [self.createNewSnowballView setHidden:NO];
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         CGFloat newY = self.createNewSnowballView.frame.origin.y - self.createNewSnowballView.frame.size.height;
+                         [self.createNewSnowballView setFrame:CGRectMake(self.createNewSnowballView.frame.origin.x, newY, self.createNewSnowballView.frame.size.width, self.createNewSnowballView.frame.size.height)];
+                     }];
+}
+
 #pragma mark - Testing
 
 - (void)startCellStateDemo {
@@ -211,10 +242,8 @@
                                          block:^(NSTimer *timer) {
                                              if (self.cellState == SBReelTableViewCellStateNormal) {
                                                  [self setCellState:SBReelTableViewCellStatePendingUpload];
-                                                 NSLog(@"Pending Upload");
                                              } else {
                                                  [self setCellState:SBReelTableViewCellStateNormal];
-                                                 NSLog(@"Normal");
                                              }
                                          }
                                        repeats:YES];
