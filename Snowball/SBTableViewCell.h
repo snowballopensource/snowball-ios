@@ -14,4 +14,6 @@
 
 + (void)registerNibToTableView:(UITableView *)tableView;
 
+- (void)configureForObject:(id)object;
+
 @end

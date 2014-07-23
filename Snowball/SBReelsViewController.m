@@ -81,48 +81,7 @@
 
 - (void)configureCell:(SBReelTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     SBReel *reel = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [cell.nameLabel setText:reel.name];
-    [cell.participantOneImageView setImage:nil];
-    [cell.participantTwoImageView setImage:nil];
-    [cell.participantThreeImageView setImage:nil];
-    [cell.participantFourImageView setImage:nil];
-    [cell.participantFiveImageView setImage:nil];
-    
-    if ([reel.recentParticipants count] > 0) {
-        SBUser *user = (SBUser *)[reel.recentParticipants firstObject];
-        NSString *imageOneURLString = [user avatarURL];
-        [cell.participantOneImageView setImageWithURL:[NSURL URLWithString:imageOneURLString]
-                                     placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:cell.participantOneImageView.frame.size]];
-    }
-    if ([reel.recentParticipants count] > 1) {
-        SBUser *user = (SBUser *)[reel.recentParticipants objectAtIndex:1];
-        NSString *imageTwoURLString = [user avatarURL];
-        [cell.participantTwoImageView setImageWithURL:[NSURL URLWithString:imageTwoURLString]
-                                     placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:cell.participantTwoImageView.frame.size]];
-    }
-    if ([reel.recentParticipants count] > 2) {
-        SBUser *user = (SBUser *)[reel.recentParticipants objectAtIndex:2];
-        NSString *imageThreeURLString = [user avatarURL];
-        [cell.participantThreeImageView setImageWithURL:[NSURL URLWithString:imageThreeURLString]
-                                       placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:cell.participantThreeImageView.frame.size]];
-    }
-    if ([reel.recentParticipants count] > 3) {
-        SBUser *user = (SBUser *)[reel.recentParticipants objectAtIndex:3];
-        NSString *imageFourURLString = [user avatarURL];
-        [cell.participantFourImageView setImageWithURL:[NSURL URLWithString:imageFourURLString]
-                                      placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:cell.participantFourImageView.frame.size]];
-    }
-    if ([reel.recentParticipants count] > 4) {
-        SBUser *user = (SBUser *)[reel.recentParticipants objectAtIndex:4];
-        NSString *imageFiveURLString = [user avatarURL];
-        [cell.participantFiveImageView setImageWithURL:[NSURL URLWithString:imageFiveURLString]
-                                      placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:cell.participantFiveImageView.frame.size]];
-    }
-    
-    BOOL hasNewClip = !([reel.updatedAt compare:reel.lastClip.createdAt] == NSOrderedDescending);
-    [cell setShowsNewClipIndicator:hasNewClip];
-    
-    [cell setState:self.cellState animated:NO];
+    [cell configureForObject:reel state:self.cellState];
 }
 
 #pragma mark - UITableViewDelegate
@@ -192,6 +151,8 @@
 }
 
 #pragma mark - Private Actions
+
+// Do not call any of these directly. They should be called via -setCellState
 
 - (void)hideCameraPreview {
     [self.playerView setHidden:YES];

@@ -19,4 +19,8 @@
     forCellReuseIdentifier:[self identifier]];
 }
 
+- (void)configureForObject:(id)object {
+    REQUIRE_SUBCLASS
+}
+
 @end
