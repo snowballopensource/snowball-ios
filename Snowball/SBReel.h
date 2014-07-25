@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong, readonly) SBClip *lastClip;
 
-- (NSArray *)recentClipPosterURLs;
+- (BOOL)hasNewClip;
 
 + (void)getHomeFeedReelsOnPage:(NSUInteger)page
                        success:(void (^)(BOOL canLoadMore))success

@@ -60,26 +60,19 @@
 
     [self setTintColor:[UIColor randomColor]];
 
-    if (state == SBReelTableViewCellStateNormal) {
-        // If the state is normal, we figure out if it does indeed have a new clip.
-        BOOL hasNewClip = !([reel.updatedAt compare:reel.lastClip.createdAt] == NSOrderedDescending);
-        if (hasNewClip) {
-            [self setState:SBReelTableViewCellStateHasNewClip];
-        } else {
-            [self setState:SBReelTableViewCellStateNormal];
-        }
-    } else {
-        [self setState:state];
-    }
+    [self setState:state forReel:reel animated:NO];
 }
 
 #pragma mark - State
 
 - (void)setState:(SBReelTableViewCellState)state {
-    [self setState:state animated:NO];
+    NSAssert(false, @"Use -setState:forReel:animated instead of -setState");
 }
 
-- (void)setState:(SBReelTableViewCellState)state animated:(BOOL)animated {
+- (void)setState:(SBReelTableViewCellState)state forReel:(SBReel *)reel animated:(BOOL)animated {
+    if (reel.hasNewClip && state == SBReelTableViewCellStateNormal) {
+        state = SBReelTableViewCellStateHasNewClip;
+    }
     _state = state;
 
     [self positionSubviewsForState:state animated:animated];

@@ -138,7 +138,8 @@
             break;
     }
     for (SBReelTableViewCell *cell in [self.tableView visibleCells]) {
-        [cell setState:cellState animated:YES];
+        SBReel *reel = [self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
+        [cell setState:cellState forReel:reel animated:YES];
     }
     _cellState = cellState;
 }

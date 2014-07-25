@@ -14,25 +14,8 @@
 
 @implementation SBReel
 
-- (NSArray *)recentClipPosterURLs {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"reel == %@", self];
-    NSFetchRequest *fetchRequest = [SBClip MR_requestAllSortedBy:@"createdAt" ascending:NO withPredicate:predicate];
-    NSArray *clips = [SBClip MR_executeFetchRequest:fetchRequest];
-    NSArray *lastClips;
-    if ([clips count] > 5) {
-        NSRange range = NSMakeRange([clips count]-5, 5);
-        lastClips = [clips subarrayWithRange:range];
-    } else {
-        lastClips = clips;
-    }
-    NSMutableArray *recentClipPosterURLs = [@[] mutableCopy];
-    [lastClips each:^(id object) {
-        SBClip *clip = (SBClip *)object;
-        if (clip.posterURL) {
-            [recentClipPosterURLs addObject:clip.posterURL];
-        }
-    }];
-    return [recentClipPosterURLs copy];
+- (BOOL)hasNewClip {
+    return !([self.updatedAt compare:self.lastClip.createdAt] == NSOrderedDescending);
 }
 
 - (SBClip *)lastClip {
