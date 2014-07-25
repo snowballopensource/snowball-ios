@@ -7,6 +7,7 @@
 extern const struct SBReelAttributes {
 	__unsafe_unretained NSString *homeFeedSession;
 	__unsafe_unretained NSString *name;
+	__unsafe_unretained NSString *recentParticipantsNames;
 	__unsafe_unretained NSString *remoteID;
 	__unsafe_unretained NSString *updatedAt;
 } SBReelAttributes;
@@ -14,7 +15,6 @@ extern const struct SBReelAttributes {
 extern const struct SBReelRelationships {
 	__unsafe_unretained NSString *clips;
 	__unsafe_unretained NSString *participants;
-	__unsafe_unretained NSString *recentParticipants;
 } SBReelRelationships;
 
 extern const struct SBReelFetchedProperties {
@@ -22,7 +22,7 @@ extern const struct SBReelFetchedProperties {
 
 @class SBClip;
 @class SBUser;
-@class SBUser;
+
 
 
 
@@ -62,6 +62,16 @@ extern const struct SBReelFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSString* recentParticipantsNames;
+
+
+
+//- (BOOL)validateRecentParticipantsNames:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) NSString* remoteID;
 
 
@@ -96,13 +106,6 @@ extern const struct SBReelFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSOrderedSet *recentParticipants;
-
-- (NSMutableOrderedSet*)recentParticipantsSet;
-
-
-
-
 
 @end
 
@@ -118,11 +121,6 @@ extern const struct SBReelFetchedProperties {
 - (void)addParticipantsObject:(SBUser*)value_;
 - (void)removeParticipantsObject:(SBUser*)value_;
 
-- (void)addRecentParticipants:(NSOrderedSet*)value_;
-- (void)removeRecentParticipants:(NSOrderedSet*)value_;
-- (void)addRecentParticipantsObject:(SBUser*)value_;
-- (void)removeRecentParticipantsObject:(SBUser*)value_;
-
 @end
 
 @interface _SBReel (CoreDataGeneratedPrimitiveAccessors)
@@ -136,6 +134,12 @@ extern const struct SBReelFetchedProperties {
 
 - (NSString*)primitiveName;
 - (void)setPrimitiveName:(NSString*)value;
+
+
+
+
+- (NSString*)primitiveRecentParticipantsNames;
+- (void)setPrimitiveRecentParticipantsNames:(NSString*)value;
 
 
 
@@ -160,11 +164,6 @@ extern const struct SBReelFetchedProperties {
 
 - (NSMutableSet*)primitiveParticipants;
 - (void)setPrimitiveParticipants:(NSMutableSet*)value;
-
-
-
-- (NSMutableOrderedSet*)primitiveRecentParticipants;
-- (void)setPrimitiveRecentParticipants:(NSMutableOrderedSet*)value;
 
 
 @end

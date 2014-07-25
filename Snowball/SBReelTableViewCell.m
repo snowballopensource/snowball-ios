@@ -15,11 +15,7 @@
 @interface SBReelTableViewCell ()
 
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
-@property (nonatomic, weak) IBOutlet UIImageView *participantOneImageView;
-@property (nonatomic, weak) IBOutlet UIImageView *participantTwoImageView;
-@property (nonatomic, weak) IBOutlet UIImageView *participantThreeImageView;
-@property (nonatomic, weak) IBOutlet UIImageView *participantFourImageView;
-@property (nonatomic, weak) IBOutlet UIImageView *participantFiveImageView;
+@property (nonatomic, weak) IBOutlet UILabel *recentParticipantsNamesLabel;
 
 @property (nonatomic, weak) IBOutlet UIImageView *disclosureIndicator;
 @property (nonatomic, weak) IBOutlet UIImageView *hasNewClipIndicator;
@@ -34,6 +30,16 @@
 
 @implementation SBReelTableViewCell
 
+- (void)setTintColor:(UIColor *)tintColor {
+    [super setTintColor:tintColor];
+
+    [self.recentParticipantsNamesLabel setTextColor:tintColor];
+    [self.nameLabel setTextColor:tintColor];
+    [self.disclosureIndicator setImageTintColor:tintColor];
+    [self.hasNewClipIndicator setImageTintColor:tintColor];
+    [self.addClipIndicator setImageTintColor:tintColor];
+}
+
 #pragma mark - SBTableViewCell
 
 - (void)configureForObject:(id)object {
@@ -43,43 +49,16 @@
 - (void)configureForObject:(id)object state:(SBReelTableViewCellState)state {
     SBReel *reel = (SBReel *)object;
 
-    [self.nameLabel setText:reel.name];
-    [self.participantOneImageView setImage:nil];
-    [self.participantTwoImageView setImage:nil];
-    [self.participantThreeImageView setImage:nil];
-    [self.participantFourImageView setImage:nil];
-    [self.participantFiveImageView setImage:nil];
-    
-    if ([reel.recentParticipants count] > 0) {
-        SBUser *user = (SBUser *)[reel.recentParticipants firstObject];
-        NSString *imageOneURLString = [user avatarURL];
-        [self.participantOneImageView setImageWithURL:[NSURL URLWithString:imageOneURLString]
-                                     placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:self.participantOneImageView.frame.size]];
+    [self.recentParticipantsNamesLabel setText:reel.recentParticipantsNames];
+    [self.nameLabel setFont:[UIFont fontWithName:[UIFont snowballFontNameMedium] size:24]];
+    if (reel.name) {
+        [self.nameLabel setText:reel.name];
+    } else {
+        [self.nameLabel setText:nil];
     }
-    if ([reel.recentParticipants count] > 1) {
-        SBUser *user = (SBUser *)[reel.recentParticipants objectAtIndex:1];
-        NSString *imageTwoURLString = [user avatarURL];
-        [self.participantTwoImageView setImageWithURL:[NSURL URLWithString:imageTwoURLString]
-                                     placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:self.participantTwoImageView.frame.size]];
-    }
-    if ([reel.recentParticipants count] > 2) {
-        SBUser *user = (SBUser *)[reel.recentParticipants objectAtIndex:2];
-        NSString *imageThreeURLString = [user avatarURL];
-        [self.participantThreeImageView setImageWithURL:[NSURL URLWithString:imageThreeURLString]
-                                       placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:self.participantThreeImageView.frame.size]];
-    }
-    if ([reel.recentParticipants count] > 3) {
-        SBUser *user = (SBUser *)[reel.recentParticipants objectAtIndex:3];
-        NSString *imageFourURLString = [user avatarURL];
-        [self.participantFourImageView setImageWithURL:[NSURL URLWithString:imageFourURLString]
-                                      placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:self.participantFourImageView.frame.size]];
-    }
-    if ([reel.recentParticipants count] > 4) {
-        SBUser *user = (SBUser *)[reel.recentParticipants objectAtIndex:4];
-        NSString *imageFiveURLString = [user avatarURL];
-        [self.participantFiveImageView setImageWithURL:[NSURL URLWithString:imageFiveURLString]
-                                      placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:self.participantFiveImageView.frame.size]];
-    }
+    [self.nameLabel setFont:[UIFont fontWithName:[UIFont snowballFontNameMedium] size:12]];
+
+    [self setTintColor:[UIColor randomColor]];
 
     if (state == SBReelTableViewCellStateNormal) {
         // If the state is normal, we figure out if it does indeed have a new clip.

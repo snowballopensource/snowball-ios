@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="14A261i" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="14A298i" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Clip" representedClassName="SBClip" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES">
             <userInfo>
@@ -38,6 +38,11 @@
     <entity name="Reel" representedClassName="SBReel" syncable="YES">
         <attribute name="homeFeedSession" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recentParticipantsNames" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="recent_participants_names"/>
+            </userInfo>
+        </attribute>
         <attribute name="remoteID" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="id"/>
@@ -55,12 +60,6 @@
         </relationship>
         <relationship name="participants" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="reels" inverseEntity="User" syncable="YES">
             <userInfo>
-                <entry key="relatedByAttribute" value="remoteID"/>
-            </userInfo>
-        </relationship>
-        <relationship name="recentParticipants" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="User" inverseName="recentReels" inverseEntity="User" syncable="YES">
-            <userInfo>
-                <entry key="mappedKeyName" value="recent_participants"/>
                 <entry key="relatedByAttribute" value="remoteID"/>
             </userInfo>
         </relationship>
@@ -90,7 +89,6 @@
         </attribute>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="clips" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Clip" inverseName="user" inverseEntity="Clip" syncable="YES"/>
-        <relationship name="recentReels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Reel" inverseName="recentParticipants" inverseEntity="Reel" syncable="YES"/>
         <relationship name="reels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Reel" inverseName="participants" inverseEntity="Reel" syncable="YES"/>
         <userInfo>
             <entry key="relatedByAttribute" value="remoteID"/>
@@ -99,6 +97,6 @@
     <elements>
         <element name="Clip" positionX="-63" positionY="-18" width="128" height="135"/>
         <element name="Reel" positionX="-63" positionY="0" width="128" height="148"/>
-        <element name="User" positionX="-54" positionY="18" width="128" height="210"/>
+        <element name="User" positionX="-54" positionY="18" width="128" height="195"/>
     </elements>
 </model>

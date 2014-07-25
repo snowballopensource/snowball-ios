@@ -10,8 +10,12 @@
 
 @implementation UIFont (Snowball)
 
-+ (NSString *)snowballFontNameNormal {
++ (NSString *)snowballFontNameBook {
     return @"MuseoSans-300";
+}
+
++ (NSString *)snowballFontNameMedium {
+    return @"MuseoSans-500";
 }
 
 + (NSString *)snowballFontNameBold {

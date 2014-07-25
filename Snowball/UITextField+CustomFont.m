@@ -11,7 +11,7 @@
 @implementation UITextField (CustomFont)
 
 - (void)awakeFromNib {
-    UIFont *font = [UIFont fontWithName:[UIFont snowballFontNameNormal]
+    UIFont *font = [UIFont fontWithName:[UIFont snowballFontNameBook]
                                    size:self.font.pointSize];
     [self setFont:font];
 }

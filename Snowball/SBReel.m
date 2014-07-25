@@ -55,7 +55,6 @@
                                                                                withValue:object[@"id"]
                                                                                inContext:localContext];
                                           if (reel) {
-                                              [reel setRecentParticipants:nil];
                                               [reel setParticipants:nil];
                                               [reel MR_importValuesForKeysWithObject:object];
                                           } else {

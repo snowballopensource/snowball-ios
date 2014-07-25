@@ -10,7 +10,8 @@
 
 @interface UIFont (Snowball)
 
-+ (NSString *)snowballFontNameNormal;
++ (NSString *)snowballFontNameBook;
++ (NSString *)snowballFontNameMedium;
 + (NSString *)snowballFontNameBold;
 
 @end

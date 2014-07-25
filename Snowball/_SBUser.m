@@ -16,7 +16,6 @@ const struct SBUserAttributes SBUserAttributes = {
 
 const struct SBUserRelationships SBUserRelationships = {
 	.clips = @"clips",
-	.recentReels = @"recentReels",
 	.reels = @"reels",
 };
 
@@ -145,19 +144,6 @@ const struct SBUserFetchedProperties SBUserFetchedProperties = {
 	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"clips"];
   
 	[self didAccessValueForKey:@"clips"];
-	return result;
-}
-	
-
-@dynamic recentReels;
-
-	
-- (NSMutableSet*)recentReelsSet {
-	[self willAccessValueForKey:@"recentReels"];
-  
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"recentReels"];
-  
-	[self didAccessValueForKey:@"recentReels"];
 	return result;
 }
 	

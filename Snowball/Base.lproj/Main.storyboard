@@ -985,13 +985,13 @@
         <image name="button-check-highlighted" width="35" height="25"/>
         <image name="button-check-normal" width="35" height="25"/>
         <image name="button-chevron-highlighted" width="25" height="25"/>
-        <image name="button-chevron-normal" width="25" height="25"/>
+        <image name="button-chevron-normal" width="13" height="24"/>
         <image name="button-editprofile-editphoto-highlighted" width="35" height="35"/>
         <image name="button-editprofile-editphoto-normal" width="35" height="35"/>
         <image name="button-menu-black" width="25" height="25"/>
         <image name="button-menu-highlighted" width="25" height="25"/>
         <image name="button-menu-normal" width="25" height="25"/>
-        <image name="button-plus-normal" width="40" height="40"/>
+        <image name="button-plus-normal" width="28" height="28"/>
         <image name="button-x-highlighted" width="25" height="25"/>
         <image name="button-x-normal" width="25" height="25"/>
         <image name="icon-editprofile-email" width="25" height="25"/>

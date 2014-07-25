@@ -13,30 +13,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="cPP-Be-rzp" customClass="SBUserImageView">
-                        <rect key="frame" x="20" y="7" width="40" height="40"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </imageView>
-                    <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="lI8-ne-ZMa" customClass="SBUserImageView">
-                        <rect key="frame" x="70" y="7" width="40" height="40"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </imageView>
-                    <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="ROm-J8-Udx" customClass="SBUserImageView">
-                        <rect key="frame" x="120" y="7" width="40" height="40"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </imageView>
-                    <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="mKY-kc-1qJ" customClass="SBUserImageView">
-                        <rect key="frame" x="170" y="7" width="40" height="40"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </imageView>
-                    <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="RnT-J7-rLM" customClass="SBUserImageView">
-                        <rect key="frame" x="220" y="7" width="40" height="40"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </imageView>
                     <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3sD-nS-szW">
-                        <rect key="frame" x="20" y="53" width="280" height="15"/>
+                        <rect key="frame" x="20" y="47" width="238" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Lk2-Gb-dge">
+                        <rect key="frame" x="20" y="12" width="238" height="29"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -45,16 +32,16 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button-plus-normal" id="dGE-h7-PY5">
-                        <rect key="frame" x="260" y="17" width="40" height="40"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
-                    <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-newclip" id="mbZ-o6-dqt">
+                    <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button-play-normal" id="mbZ-o6-dqt">
                         <rect key="frame" x="266" y="17" width="34" height="39"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button-chevron-normal" highlightedImage="button-chevron-highlighted" id="ait-5Y-CjM">
-                        <rect key="frame" x="275" y="24" width="25" height="25"/>
+                    <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button-chevron-normal" id="ait-5Y-CjM">
+                        <rect key="frame" x="287" y="24" width="13" height="24"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button-plus-normal" id="dGE-h7-PY5">
+                        <rect key="frame" x="272" y="23" width="28" height="28"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                 </subviews>
@@ -64,18 +51,13 @@
                 <outlet property="disclosureIndicator" destination="ait-5Y-CjM" id="CqM-8U-jQP"/>
                 <outlet property="hasNewClipIndicator" destination="mbZ-o6-dqt" id="Qyx-we-rd2"/>
                 <outlet property="nameLabel" destination="3sD-nS-szW" id="PeV-pW-OAC"/>
-                <outlet property="participantFiveImageView" destination="RnT-J7-rLM" id="HcH-1f-gim"/>
-                <outlet property="participantFourImageView" destination="mKY-kc-1qJ" id="IN3-BJ-647"/>
-                <outlet property="participantOneImageView" destination="cPP-Be-rzp" id="eqs-uh-06G"/>
-                <outlet property="participantThreeImageView" destination="ROm-J8-Udx" id="uR9-VU-yGV"/>
-                <outlet property="participantTwoImageView" destination="lI8-ne-ZMa" id="9kF-0Q-S05"/>
+                <outlet property="recentParticipantsNamesLabel" destination="Lk2-Gb-dge" id="fu6-jA-Cex"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="button-chevron-highlighted" width="25" height="25"/>
-        <image name="button-chevron-normal" width="25" height="25"/>
-        <image name="button-plus-normal" width="40" height="40"/>
-        <image name="icon-newclip" width="34" height="39"/>
+        <image name="button-chevron-normal" width="13" height="24"/>
+        <image name="button-play-normal" width="34" height="39"/>
+        <image name="button-plus-normal" width="28" height="28"/>
     </resources>
 </document>

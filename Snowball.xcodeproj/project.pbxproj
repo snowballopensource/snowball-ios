@@ -38,6 +38,9 @@
 		BA632029195CED8500BA6B75 /* SBEditParticipantsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA632028195CED8500BA6B75 /* SBEditParticipantsViewController.m */; };
 		BA63202C195CEE4B00BA6B75 /* SBFollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA63202B195CEE4B00BA6B75 /* SBFollowingViewController.m */; };
 		BA6AD8EF1964C66100FEADB2 /* UITextField+CustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6AD8EE1964C66100FEADB2 /* UITextField+CustomFont.m */; };
+		BA7DEC4B1981F3DC00943BFF /* UIImageView+TintColor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7DEC4A1981F3DC00943BFF /* UIImageView+TintColor.m */; };
+		BA7DEC4E1981F4A400943BFF /* UIColor+RandomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7DEC4D1981F4A400943BFF /* UIColor+RandomColor.m */; };
+		BA7DEC521981F8B000943BFF /* MuseoSans-500.otf in Resources */ = {isa = PBXBuildFile; fileRef = BA7DEC511981F88B00943BFF /* MuseoSans-500.otf */; };
 		BA8E994519536EE700DCECD9 /* UIButton+CustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E994419536EE700DCECD9 /* UIButton+CustomFont.m */; };
 		BA8E994B1953801600DCECD9 /* SBFindFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E994A1953801600DCECD9 /* SBFindFriendsViewController.m */; };
 		BA8E994F195382FE00DCECD9 /* SBAddressBookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E994E195382FE00DCECD9 /* SBAddressBookManager.m */; };
@@ -156,6 +159,11 @@
 		BA63202B195CEE4B00BA6B75 /* SBFollowingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFollowingViewController.m; sourceTree = "<group>"; };
 		BA6AD8ED1964C66100FEADB2 /* UITextField+CustomFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+CustomFont.h"; sourceTree = "<group>"; };
 		BA6AD8EE1964C66100FEADB2 /* UITextField+CustomFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+CustomFont.m"; sourceTree = "<group>"; };
+		BA7DEC491981F3DC00943BFF /* UIImageView+TintColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+TintColor.h"; sourceTree = "<group>"; };
+		BA7DEC4A1981F3DC00943BFF /* UIImageView+TintColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+TintColor.m"; sourceTree = "<group>"; };
+		BA7DEC4C1981F4A400943BFF /* UIColor+RandomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+RandomColor.h"; sourceTree = "<group>"; };
+		BA7DEC4D1981F4A400943BFF /* UIColor+RandomColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RandomColor.m"; sourceTree = "<group>"; };
+		BA7DEC511981F88B00943BFF /* MuseoSans-500.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MuseoSans-500.otf"; sourceTree = "<group>"; };
 		BA8E994319536EE700DCECD9 /* UIButton+CustomFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+CustomFont.h"; sourceTree = "<group>"; };
 		BA8E994419536EE700DCECD9 /* UIButton+CustomFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CustomFont.m"; sourceTree = "<group>"; };
 		BA8E99491953801600DCECD9 /* SBFindFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFindFriendsViewController.h; sourceTree = "<group>"; };
@@ -461,8 +469,12 @@
 				BA8E994419536EE700DCECD9 /* UIButton+CustomFont.m */,
 				BA40CBD8196F54020001C44C /* UIButton+TintColorImage.h */,
 				BA40CBD9196F54020001C44C /* UIButton+TintColorImage.m */,
+				BA7DEC4C1981F4A400943BFF /* UIColor+RandomColor.h */,
+				BA7DEC4D1981F4A400943BFF /* UIColor+RandomColor.m */,
 				BAA19C4B194694770034D439 /* UIFont+Snowball.h */,
 				BAA19C4C194694770034D439 /* UIFont+Snowball.m */,
+				BA7DEC491981F3DC00943BFF /* UIImageView+TintColor.h */,
+				BA7DEC4A1981F3DC00943BFF /* UIImageView+TintColor.m */,
 				BAA19C481946945C0034D439 /* UILabel+CustomFont.h */,
 				BAA19C491946945C0034D439 /* UILabel+CustomFont.m */,
 				BA15B9EB192AD9AD00453F8F /* UINavigationBar+CustomHeight.h */,
@@ -544,6 +556,7 @@
 			isa = PBXGroup;
 			children = (
 				BAA19C3519468F580034D439 /* MuseoSans-300.otf */,
+				BA7DEC511981F88B00943BFF /* MuseoSans-500.otf */,
 				BAA19C461946902F0034D439 /* MuseoSans-700.otf */,
 			);
 			name = Fonts;
@@ -693,6 +706,7 @@
 				BA29C7EE192FDAE400F59684 /* AirshipConfig.plist in Resources */,
 				BA048DF5191AF6730083B0DC /* Main.storyboard in Resources */,
 				BAC9FB3319241296008742EE /* Authentication.storyboard in Resources */,
+				BA7DEC521981F8B000943BFF /* MuseoSans-500.otf in Resources */,
 				BAA19C3F19468F580034D439 /* MuseoSans-300.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -760,6 +774,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAB0A7321962098800BF5C92 /* UIViewController+CustomBackButton.m in Sources */,
+				BA7DEC4B1981F3DC00943BFF /* UIImageView+TintColor.m in Sources */,
 				BAC9FB3D1924152D008742EE /* SBSignUpViewController.m in Sources */,
 				BAE89609193F6E6600E96E6B /* SBCameraViewController.m in Sources */,
 				BA98D0021936B85200753E1B /* SBCameraManager.m in Sources */,
@@ -822,6 +837,7 @@
 				BAC81380192BC5E1002323E1 /* UIViewController+Spinner.m in Sources */,
 				BAA19C5019469B370034D439 /* SBUserImageView.m in Sources */,
 				BA936FF7192312DF00D3CAFB /* SBReelsViewController.m in Sources */,
+				BA7DEC4E1981F4A400943BFF /* UIColor+RandomColor.m in Sources */,
 				BAB0A72F1962024D00BF5C92 /* SBEditProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

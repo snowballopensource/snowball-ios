@@ -37,7 +37,7 @@
 #pragma mark - Private
 
 - (void)setupAppearance {
-    NSDictionary *navigationBarTitleTextAttributes = @{ NSFontAttributeName: [UIFont fontWithName:[UIFont snowballFontNameNormal] size:20]};
+    NSDictionary *navigationBarTitleTextAttributes = @{ NSFontAttributeName: [UIFont fontWithName:[UIFont snowballFontNameBook] size:20]};
     [[UINavigationBar appearance] setTitleTextAttributes:navigationBarTitleTextAttributes];
 
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setFont:[UIFont fontWithName:[UIFont snowballFontNameBold] size:12]];

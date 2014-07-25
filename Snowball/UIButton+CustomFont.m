@@ -11,7 +11,7 @@
 @implementation UIButton (CustomFont)
 
 - (void)awakeFromNib {
-    UIFont *font = [UIFont fontWithName:[UIFont snowballFontNameNormal]
+    UIFont *font = [UIFont fontWithName:[UIFont snowballFontNameBook]
                                    size:self.titleLabel.font.pointSize];
     [self.titleLabel setFont:font];
 }

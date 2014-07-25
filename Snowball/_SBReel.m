@@ -6,6 +6,7 @@
 const struct SBReelAttributes SBReelAttributes = {
 	.homeFeedSession = @"homeFeedSession",
 	.name = @"name",
+	.recentParticipantsNames = @"recentParticipantsNames",
 	.remoteID = @"remoteID",
 	.updatedAt = @"updatedAt",
 };
@@ -13,7 +14,6 @@ const struct SBReelAttributes SBReelAttributes = {
 const struct SBReelRelationships SBReelRelationships = {
 	.clips = @"clips",
 	.participants = @"participants",
-	.recentParticipants = @"recentParticipants",
 };
 
 const struct SBReelFetchedProperties SBReelFetchedProperties = {
@@ -66,6 +66,13 @@ const struct SBReelFetchedProperties SBReelFetchedProperties = {
 
 
 
+@dynamic recentParticipantsNames;
+
+
+
+
+
+
 @dynamic remoteID;
 
 
@@ -102,19 +109,6 @@ const struct SBReelFetchedProperties SBReelFetchedProperties = {
 	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"participants"];
   
 	[self didAccessValueForKey:@"participants"];
-	return result;
-}
-	
-
-@dynamic recentParticipants;
-
-	
-- (NSMutableOrderedSet*)recentParticipantsSet {
-	[self willAccessValueForKey:@"recentParticipants"];
-  
-	NSMutableOrderedSet *result = (NSMutableOrderedSet*)[self mutableOrderedSetValueForKey:@"recentParticipants"];
-  
-	[self didAccessValueForKey:@"recentParticipants"];
 	return result;
 }
 	
