@@ -942,10 +942,9 @@
                             <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D4z-Fq-xXx">
                                 <rect key="frame" x="186" y="-13" width="200" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="button-camera-highlighted">
+                                <state key="normal" image="button-camera-normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="button-camera-normal"/>
                                 <connections>
                                     <action selector="flipCamera:" destination="k3x-92-bAS" eventType="touchUpInside" id="G12-d8-Q8x"/>
                                 </connections>
@@ -982,7 +981,7 @@
     </scenes>
     <resources>
         <image name="button-camera-highlighted" width="40" height="20"/>
-        <image name="button-camera-normal" width="40" height="20"/>
+        <image name="button-camera-normal" width="33" height="21"/>
         <image name="button-check-highlighted" width="35" height="25"/>
         <image name="button-check-normal" width="35" height="25"/>
         <image name="button-chevron-highlighted" width="25" height="25"/>

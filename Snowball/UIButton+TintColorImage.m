@@ -13,13 +13,15 @@
 - (void)setImageTintColor:(UIColor *)color {
     [self setImageTintColor:color forState:UIControlStateNormal];
 
+    const CGFloat offset = 0.2;
     CGFloat hue;
     CGFloat saturation;
     CGFloat brightness;
     CGFloat alpha;
     [color getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
-    brightness = brightness - 0.2;
+    brightness = brightness - offset;
     UIColor *highlightColor = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:alpha];
+    if (color == [UIColor whiteColor]) highlightColor = [UIColor colorWithWhite:1 - offset alpha:1];
     [self setImageTintColor:highlightColor forState:UIControlStateHighlighted];
 }
 

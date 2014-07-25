@@ -21,6 +21,12 @@
 
 @implementation SBCameraViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    [self.flipCameraButton setImageTintColor:[UIColor whiteColor]];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
