@@ -10,6 +10,7 @@
 
 typedef NS_ENUM(NSInteger, SBReelTableViewCellState) {
     SBReelTableViewCellStateNormal,
+    SBReelTableViewCellStateHasNewClip,
     SBReelTableViewCellStatePendingUpload
 };
 

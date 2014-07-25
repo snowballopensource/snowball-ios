@@ -21,83 +21,18 @@
 @property (nonatomic, weak) IBOutlet UIImageView *participantFourImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *participantFiveImageView;
 
-@property (nonatomic) BOOL showsNewClipIndicator;
-
 @property (nonatomic, weak) IBOutlet UIImageView *disclosureIndicator;
 @property (nonatomic, weak) IBOutlet UIImageView *hasNewClipIndicator;
 @property (nonatomic, weak) IBOutlet UIImageView *addClipIndicator;
+@property (nonatomic) BOOL showsDisclosureIndicator;
+@property (nonatomic) BOOL showsHasNewClipIndicator;
+@property (nonatomic) BOOL showsAddClipIndicator;
 
 @property (nonatomic) SBReelTableViewCellState state;
 
 @end
 
 @implementation SBReelTableViewCell
-
-- (void)setShowsNewClipIndicator:(BOOL)showsNewClipIndicator {
-    [self.hasNewClipIndicator setHidden:!showsNewClipIndicator];
-    [self.disclosureIndicator setHidden:showsNewClipIndicator];
-    _showsNewClipIndicator = showsNewClipIndicator;
-}
-
-- (void)setState:(SBReelTableViewCellState)state animated:(BOOL)animated {
-    static CGFloat defaultDisclosureIndicatorCenterX = 0;
-    static CGFloat defaultHasNewClipIndicatorCenterX = 0;
-    static CGFloat defaultAddClipIndicatorCenterX = 0;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        defaultDisclosureIndicatorCenterX = self.disclosureIndicator.center.x;
-        defaultHasNewClipIndicatorCenterX = self.hasNewClipIndicator.center.x;
-        defaultAddClipIndicatorCenterX = self.addClipIndicator.center.x;
-    });
-    
-    CGFloat animationDuration = 0.25;
-    switch (state) {
-        case SBReelTableViewCellStatePendingUpload: {
-            [self.addClipIndicator setHidden:NO];
-            if (animated) {
-                [UIView animateWithDuration:animationDuration
-                                 animations:^{
-                                     if (self.disclosureIndicator.center.x == defaultDisclosureIndicatorCenterX) {
-                                         [self.disclosureIndicator setCenter:CGPointMake(defaultDisclosureIndicatorCenterX+100, self.disclosureIndicator.center.y)];
-                                     }
-                                     if (self.hasNewClipIndicator.center.x == defaultHasNewClipIndicatorCenterX) {
-                                         [self.hasNewClipIndicator setCenter:CGPointMake(defaultHasNewClipIndicatorCenterX+100, self.hasNewClipIndicator.center.y)];
-                                     }
-                                     if (self.addClipIndicator.center.x == defaultAddClipIndicatorCenterX) {
-                                         [self.addClipIndicator setCenter:CGPointMake(defaultAddClipIndicatorCenterX-100, self.addClipIndicator.center.y)];
-                                     }
-                                 }];
-            } else {
-                [self.disclosureIndicator setHidden:YES];
-                [self.hasNewClipIndicator setHidden:YES];
-            }
-        }
-            break;
-        default: {
-            if (animated) {
-                [UIView animateWithDuration:animationDuration
-                                 animations:^{
-                                     unless (self.disclosureIndicator.center.x == defaultDisclosureIndicatorCenterX) {
-                                         [self.disclosureIndicator setCenter:CGPointMake(defaultDisclosureIndicatorCenterX, self.disclosureIndicator.center.y)];
-                                     }
-                                     unless (self.hasNewClipIndicator.center.x == defaultHasNewClipIndicatorCenterX) {
-                                         [self.hasNewClipIndicator setCenter:CGPointMake(defaultHasNewClipIndicatorCenterX, self.hasNewClipIndicator.center.y)];
-                                     }
-                                     unless (self.addClipIndicator.center.x == defaultAddClipIndicatorCenterX) {
-                                         [self.addClipIndicator setCenter:CGPointMake(defaultAddClipIndicatorCenterX, self.addClipIndicator.center.y)];
-                                     }
-                                 } completion:^(BOOL finished) {
-                                     [self.addClipIndicator setHidden:YES];
-                                 }];
-            } else {
-                [self.addClipIndicator setHidden:YES];
-                [self setShowsNewClipIndicator:_showsNewClipIndicator];
-            }
-        }
-            break;
-    }
-    _state = state;
-}
 
 #pragma mark - SBTableViewCell
 
@@ -145,11 +80,125 @@
         [self.participantFiveImageView setImageWithURL:[NSURL URLWithString:imageFiveURLString]
                                       placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:self.participantFiveImageView.frame.size]];
     }
-    
-    BOOL hasNewClip = !([reel.updatedAt compare:reel.lastClip.createdAt] == NSOrderedDescending);
-    [self setShowsNewClipIndicator:hasNewClip];
-    
+
+    if (state == SBReelTableViewCellStateNormal) {
+        // If the state is normal, we figure out if it does indeed have a new clip.
+        BOOL hasNewClip = !([reel.updatedAt compare:reel.lastClip.createdAt] == NSOrderedDescending);
+        if (hasNewClip) {
+            [self setState:SBReelTableViewCellStateHasNewClip];
+        } else {
+            [self setState:SBReelTableViewCellStateNormal];
+        }
+    } else {
+        [self setState:state];
+    }
+}
+
+#pragma mark - State
+
+- (void)setState:(SBReelTableViewCellState)state {
     [self setState:state animated:NO];
+}
+
+- (void)setState:(SBReelTableViewCellState)state animated:(BOOL)animated {
+    _state = state;
+
+    [self positionSubviewsForState:state animated:animated];
+}
+
+- (void)positionSubviewsForState:(SBReelTableViewCellState)state animated:(BOOL)animated {
+    const CGFloat animationDuration = 0.25;
+    switch (state) {
+        case SBReelTableViewCellStateHasNewClip: {
+            void(^positionSubviews)() = ^{
+                [self setShowsAddClipIndicator:NO];
+                [self setShowsDisclosureIndicator:NO];
+                [self setShowsHasNewClipIndicator:YES];
+            };
+            if (animated) {
+                [UIView animateWithDuration:animationDuration
+                                 animations:^{
+                                     positionSubviews();
+                                 }];
+            } else {
+                positionSubviews();
+            }
+        }
+            break;
+        case SBReelTableViewCellStatePendingUpload: {
+            void(^positionSubviews)() = ^{
+                [self setShowsAddClipIndicator:YES];
+                [self setShowsDisclosureIndicator:NO];
+                [self setShowsHasNewClipIndicator:NO];
+            };
+            if (animated) {
+                [UIView animateWithDuration:animationDuration
+                                 animations:^{
+                                     positionSubviews();
+                                 }];
+            } else {
+                positionSubviews();
+            }
+        }
+            break;
+        default: { // SBReelTableViewCellStateNormal
+            void(^positionSubviews)() = ^{
+                [self setShowsAddClipIndicator:NO];
+                [self setShowsDisclosureIndicator:YES];
+                [self setShowsHasNewClipIndicator:NO];
+            };
+            if (animated) {
+                [UIView animateWithDuration:animationDuration
+                                 animations:^{
+                                     positionSubviews();
+                                 }];
+            } else {
+                positionSubviews();
+            }
+        }
+            break;
+    }
+}
+
+#pragma mark - Hiding/Showing Indicators
+
+- (void)setShowsAddClipIndicator:(BOOL)showsAddClipIndicator {
+    static CGFloat defaultAddClipIndicatorCenterX = 0;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        defaultAddClipIndicatorCenterX = self.addClipIndicator.center.x;
+    });
+
+    CGFloat newCenterX = (showsAddClipIndicator) ? defaultAddClipIndicatorCenterX : defaultAddClipIndicatorCenterX + 100;
+    [self.addClipIndicator setCenter:CGPointMake(newCenterX, self.addClipIndicator.center.y)];
+
+    _showsAddClipIndicator = showsAddClipIndicator;
+}
+
+- (void)setShowsDisclosureIndicator:(BOOL)showsDisclosureIndicator {
+    static CGFloat defaultDisclosureIndicatorCenterX = 0;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        defaultDisclosureIndicatorCenterX = self.disclosureIndicator.center.x;
+    });
+
+    CGFloat newCenterX = (showsDisclosureIndicator) ? defaultDisclosureIndicatorCenterX : defaultDisclosureIndicatorCenterX + 100;
+    [self.disclosureIndicator setCenter:CGPointMake(newCenterX, self.disclosureIndicator.center.y)];
+
+    _showsDisclosureIndicator = showsDisclosureIndicator;
+}
+
+- (void)setShowsHasNewClipIndicator:(BOOL)showsHasNewClipIndicator {
+    static CGFloat defaultHasNewClipIndicatorCenterX = 0;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        defaultHasNewClipIndicatorCenterX = self.hasNewClipIndicator.center.x;
+    });
+
+    CGFloat newCenterX = (showsHasNewClipIndicator) ? defaultHasNewClipIndicatorCenterX : defaultHasNewClipIndicatorCenterX + 100;
+    [self.hasNewClipIndicator setCenter:CGPointMake(newCenterX, self.hasNewClipIndicator.center.y)];
+
+    _showsHasNewClipIndicator = showsHasNewClipIndicator;
 }
 
 @end
