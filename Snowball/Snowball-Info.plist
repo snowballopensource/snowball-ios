@@ -23,8 +23,11 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLName</key>
+			<string>is.snowball.snowball</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>snowball</string>
 				<string>fb536080506421625</string>
 			</array>
 		</dict>
