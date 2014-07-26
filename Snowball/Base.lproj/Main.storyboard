@@ -489,7 +489,7 @@
         <!--Reel Clips View Controller-->
         <scene sceneID="XPT-pZ-9uC">
             <objects>
-                <viewController id="D54-9P-BdS" customClass="SBReelClipsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SBReelClipsViewController" id="D54-9P-BdS" customClass="SBReelClipsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aSe-cf-czb"/>
                         <viewControllerLayoutGuide type="bottom" id="LqN-w4-Luf"/>

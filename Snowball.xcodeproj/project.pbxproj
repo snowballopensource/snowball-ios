@@ -79,6 +79,7 @@
 		BACD812F19477D51009A70B6 /* UIBarButtonItem+Hidden.m in Sources */ = {isa = PBXBuildFile; fileRef = BACD812E19477D51009A70B6 /* UIBarButtonItem+Hidden.m */; };
 		BACD81321947D960009A70B6 /* SBTransparentNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BACD81311947D960009A70B6 /* SBTransparentNavigationBar.m */; };
 		BACD81351947E8B1009A70B6 /* SBFullScreenCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BACD81341947E8B1009A70B6 /* SBFullScreenCameraViewController.m */; };
+		BACEC3AA19835F390032FCFE /* SBDeepLinkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BACEC3A919835F390032FCFE /* SBDeepLinkManager.m */; };
 		BAD86C2F193553BC0046EE22 /* SBFacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD86C2E193553BC0046EE22 /* SBFacebookManager.m */; };
 		BADB9AB81958B52D00AB8C5C /* SBParticipantsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BADB9AB71958B52D00AB8C5C /* SBParticipantsViewController.m */; };
 		BAE1FF1419401B38000A9D80 /* SBNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE1FF1319401B38000A9D80 /* SBNavigationController.m */; };
@@ -235,6 +236,8 @@
 		BACD81311947D960009A70B6 /* SBTransparentNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBTransparentNavigationBar.m; sourceTree = "<group>"; };
 		BACD81331947E8B1009A70B6 /* SBFullScreenCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFullScreenCameraViewController.h; sourceTree = "<group>"; };
 		BACD81341947E8B1009A70B6 /* SBFullScreenCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFullScreenCameraViewController.m; sourceTree = "<group>"; };
+		BACEC3A819835F390032FCFE /* SBDeepLinkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBDeepLinkManager.h; sourceTree = "<group>"; };
+		BACEC3A919835F390032FCFE /* SBDeepLinkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBDeepLinkManager.m; sourceTree = "<group>"; };
 		BAD86C2D193553BC0046EE22 /* SBFacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFacebookManager.h; sourceTree = "<group>"; };
 		BAD86C2E193553BC0046EE22 /* SBFacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFacebookManager.m; sourceTree = "<group>"; };
 		BADB9AB61958B52D00AB8C5C /* SBParticipantsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBParticipantsViewController.h; sourceTree = "<group>"; };
@@ -436,6 +439,8 @@
 				BA8E994E195382FE00DCECD9 /* SBAddressBookManager.m */,
 				BA8E99681953C81100DCECD9 /* SBAnalyticsManager.h */,
 				BA8E99691953C81100DCECD9 /* SBAnalyticsManager.m */,
+				BACEC3A819835F390032FCFE /* SBDeepLinkManager.h */,
+				BACEC3A919835F390032FCFE /* SBDeepLinkManager.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -838,6 +843,7 @@
 				BAA19C5019469B370034D439 /* SBUserImageView.m in Sources */,
 				BA936FF7192312DF00D3CAFB /* SBReelsViewController.m in Sources */,
 				BA7DEC4E1981F4A400943BFF /* UIColor+RandomColor.m in Sources */,
+				BACEC3AA19835F390032FCFE /* SBDeepLinkManager.m in Sources */,
 				BAB0A72F1962024D00BF5C92 /* SBEditProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

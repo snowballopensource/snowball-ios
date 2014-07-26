@@ -7,6 +7,7 @@
 //
 
 #import "SBAuthenticationNavigationController.h"
+#import "SBDeepLinkManager.h"
 #import "SBFacebookManager.h"
 #import "SBSessionManager.h"
 #import "SBUser.h"
@@ -47,13 +48,8 @@
 }
 
 + (BOOL)handleOpenURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication {
-    if ([[url scheme] isEqualToString:@"snowball"]) {
-        NSString *remoteID = @"";
-        if ([[url path] length] > 1) remoteID = [[url path] substringFromIndex:1]; // Remove / in path (e.g. "/12345" to "12345")
-        if ([[url host] isEqualToString:@"reel"] && [remoteID length] > 1) {
-            // TODO: go to reel
-            return YES;
-        }
+    if ([SBDeepLinkManager handleDeepLinkURL:url]) {
+        return YES;
     }
     return [SBFacebookManager handleOpenURL:url sourceApplication:sourceApplication];
 }
