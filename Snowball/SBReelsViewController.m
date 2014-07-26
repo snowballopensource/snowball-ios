@@ -50,6 +50,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [self setCellState:SBReelTableViewCellStateNormal];
+    [self.playerView.player pause];
     [super viewWillDisappear:animated];
 }
 
