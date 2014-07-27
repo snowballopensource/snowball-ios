@@ -107,7 +107,11 @@
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
     AVPlayerItem *currentPlayerItem = [notification object];
-    NSUInteger nextPlayerItemIndex = [self.playerItems indexOfObject:currentPlayerItem]+1;
+    NSUInteger currentPlayerItemIndex = [self.playerItems indexOfObject:currentPlayerItem];
+    SBClip *currentClip = self.clips[currentPlayerItemIndex];
+    [self.reel setLastWatchedClip:currentClip];
+    [self.reel save];
+    NSUInteger nextPlayerItemIndex = currentPlayerItemIndex+1;
     if (nextPlayerItemIndex < [self.playerItems count]) {
         SBClip *nextClip = self.clips[nextPlayerItemIndex];
         [self setCurrentClip:nextClip];
