@@ -43,7 +43,7 @@
         [self playLocalVideoImmediately];
     } else {
         [self showSpinner];
-        [self setSinceDate:self.reel.lastClip.createdAt];
+        [self setSinceDate:self.reel.lastWatchedClip.createdAt];
         [SBClip getRecentClipsForReel:self.reel
                                 since:self.sinceDate
                               success:^(BOOL canLoadMore) {

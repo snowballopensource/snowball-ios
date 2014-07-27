@@ -12,8 +12,6 @@
 
 @interface SBReel : _SBReel
 
-@property (nonatomic, strong, readonly) SBClip *lastClip;
-
 - (BOOL)hasNewClip;
 
 + (void)getHomeFeedReelsOnPage:(NSUInteger)page

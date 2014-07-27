@@ -13,6 +13,7 @@ const struct SBReelAttributes SBReelAttributes = {
 
 const struct SBReelRelationships SBReelRelationships = {
 	.clips = @"clips",
+	.lastWatchedClip = @"lastWatchedClip",
 	.participants = @"participants",
 };
 
@@ -98,6 +99,10 @@ const struct SBReelFetchedProperties SBReelFetchedProperties = {
 	[self didAccessValueForKey:@"clips"];
 	return result;
 }
+	
+
+@dynamic lastWatchedClip;
+
 	
 
 @dynamic participants;

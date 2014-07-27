@@ -14,12 +14,14 @@ extern const struct SBReelAttributes {
 
 extern const struct SBReelRelationships {
 	__unsafe_unretained NSString *clips;
+	__unsafe_unretained NSString *lastWatchedClip;
 	__unsafe_unretained NSString *participants;
 } SBReelRelationships;
 
 extern const struct SBReelFetchedProperties {
 } SBReelFetchedProperties;
 
+@class SBClip;
 @class SBClip;
 @class SBUser;
 
@@ -99,6 +101,13 @@ extern const struct SBReelFetchedProperties {
 
 
 
+@property (nonatomic, strong) SBClip *lastWatchedClip;
+
+//- (BOOL)validateLastWatchedClip:(id*)value_ error:(NSError**)error_;
+
+
+
+
 @property (nonatomic, strong) NSSet *participants;
 
 - (NSMutableSet*)participantsSet;
@@ -159,6 +168,11 @@ extern const struct SBReelFetchedProperties {
 
 - (NSMutableSet*)primitiveClips;
 - (void)setPrimitiveClips:(NSMutableSet*)value;
+
+
+
+- (SBClip*)primitiveLastWatchedClip;
+- (void)setPrimitiveLastWatchedClip:(SBClip*)value;
 
 
 

@@ -15,11 +15,7 @@
 @implementation SBReel
 
 - (BOOL)hasNewClip {
-    return !([self.updatedAt compare:self.lastClip.createdAt] == NSOrderedDescending);
-}
-
-- (SBClip *)lastClip {
-    return [[SBClip MR_findAllSortedBy:@"createdAt" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"reel == %@", self]] lastObject];
+    return !([self.updatedAt compare:self.lastWatchedClip.createdAt] == NSOrderedDescending);
 }
 
 #pragma mark - Remote
