@@ -529,7 +529,6 @@
                                         <state key="normal" image="button-camera-normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <state key="highlighted" image="button-camera-highlighted"/>
                                         <connections>
                                             <segue destination="Ver-4P-zS4" kind="modal" id="1hm-VP-obM"/>
                                         </connections>
@@ -548,7 +547,6 @@
                                 <state key="normal" image="button-chevron-normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="button-chevron-highlighted"/>
                                 <connections>
                                     <segue destination="stb-kS-ZGX" kind="push" id="59E-yl-XsK"/>
                                 </connections>
@@ -980,11 +978,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="button-camera-highlighted" width="40" height="20"/>
         <image name="button-camera-normal" width="33" height="21"/>
         <image name="button-check-highlighted" width="35" height="25"/>
         <image name="button-check-normal" width="35" height="25"/>
-        <image name="button-chevron-highlighted" width="25" height="25"/>
         <image name="button-chevron-normal" width="13" height="24"/>
         <image name="button-editprofile-editphoto-highlighted" width="35" height="35"/>
         <image name="button-editprofile-editphoto-normal" width="35" height="35"/>
