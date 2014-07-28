@@ -66,15 +66,15 @@
                  }];
                  if (success) { success(); }
              } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                 [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-                     SBClip *clip = [self MR_inContext:localContext];
-                     [clip MR_deleteEntity];
-                 }];
                  static NSUInteger failureCount = 0;
                  if (failureCount < 5) {
                      [self createWithSuccess:success failure:failure];
                      failureCount++;
                  } else {
+                     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                         SBClip *clip = [self MR_inContext:localContext];
+                         [clip MR_deleteEntity];
+                     }];
                      [error displayInView:[UIApplication sharedApplication].delegate.window.rootViewController.view];
                      if (failure) { failure(error); };
                  }
