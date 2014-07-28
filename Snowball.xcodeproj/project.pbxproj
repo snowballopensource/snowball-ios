@@ -29,6 +29,7 @@
 		BA29C7EC192FD9C900F59684 /* SBPushNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA29C7EB192FD9C900F59684 /* SBPushNotificationManager.m */; };
 		BA29C7EE192FDAE400F59684 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA29C7ED192FDAE400F59684 /* AirshipConfig.plist */; };
 		BA29C7F2192FEBC400F59684 /* SBProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA29C7F1192FEBC400F59684 /* SBProfileViewController.m */; };
+		BA3660EB1986C6A700AEB03E /* UIViewController+ModalDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3660EA1986C6A700AEB03E /* UIViewController+ModalDetection.m */; };
 		BA40CBDA196F54020001C44C /* UIButton+TintColorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BA40CBD9196F54020001C44C /* UIButton+TintColorImage.m */; };
 		BA5238A51920B9630088A730 /* SBPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5238A41920B9630088A730 /* SBPlayerView.m */; };
 		BA53F16B1952397400DFD7B9 /* SBMeUserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA53F16A1952397400DFD7B9 /* SBMeUserImageView.m */; };
@@ -143,6 +144,8 @@
 		BA29C7ED192FDAE400F59684 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AirshipConfig.plist; sourceTree = "<group>"; };
 		BA29C7F0192FEBC400F59684 /* SBProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBProfileViewController.h; sourceTree = "<group>"; };
 		BA29C7F1192FEBC400F59684 /* SBProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBProfileViewController.m; sourceTree = "<group>"; };
+		BA3660E91986C6A700AEB03E /* UIViewController+ModalDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ModalDetection.h"; sourceTree = "<group>"; };
+		BA3660EA1986C6A700AEB03E /* UIViewController+ModalDetection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ModalDetection.m"; sourceTree = "<group>"; };
 		BA40CBD8196F54020001C44C /* UIButton+TintColorImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+TintColorImage.h"; sourceTree = "<group>"; };
 		BA40CBD9196F54020001C44C /* UIButton+TintColorImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+TintColorImage.m"; sourceTree = "<group>"; };
 		BA5238A31920B9630088A730 /* SBPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBPlayerView.h; sourceTree = "<group>"; };
@@ -495,6 +498,8 @@
 				BA8E99621953A8B700DCECD9 /* UIView+ImageRepresentation.m */,
 				BAB0A7301962098800BF5C92 /* UIViewController+CustomBackButton.h */,
 				BAB0A7311962098800BF5C92 /* UIViewController+CustomBackButton.m */,
+				BA3660E91986C6A700AEB03E /* UIViewController+ModalDetection.h */,
+				BA3660EA1986C6A700AEB03E /* UIViewController+ModalDetection.m */,
 				BAC8137E192BC5E1002323E1 /* UIViewController+Spinner.h */,
 				BAC8137F192BC5E1002323E1 /* UIViewController+Spinner.m */,
 				BA15B9E3192AC9EF00453F8F /* UIViewController+StatusBar.h */,
@@ -825,6 +830,7 @@
 				BAE1FF1719401B5C000A9D80 /* SBCameraNavigationController.m in Sources */,
 				BAEC7C10193DE528003FAE13 /* SBWebViewController.m in Sources */,
 				BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */,
+				BA3660EB1986C6A700AEB03E /* UIViewController+ModalDetection.m in Sources */,
 				BA8E994F195382FE00DCECD9 /* SBAddressBookManager.m in Sources */,
 				BA217C9A192A4DF500F04D03 /* SBLongRunningTaskManager.m in Sources */,
 				BA1DB1C519864F8D0078609B /* NSDate+TimeAgoString.m in Sources */,

@@ -13,6 +13,7 @@
 @interface SBReelClipsViewController : SBViewController
 
 @property (strong, nonatomic) SBReel *reel;
+@property (strong, nonatomic) NSString *reelID; // for deep linking
 
 @property (nonatomic, strong) NSURL *localVideoURL;
 

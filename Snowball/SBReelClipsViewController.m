@@ -23,6 +23,8 @@
 @property (nonatomic, weak) IBOutlet UIButton *userButton;
 @property (nonatomic, weak) IBOutlet UIImageView *userImageView;
 
+@property (nonatomic, weak) IBOutlet UIButton *modalXButton;
+
 @property (nonatomic, strong) SBClip *currentClip;
 @property (nonatomic, strong) NSDate *sinceDate;
 @property (nonatomic, copy) NSArray *clips;
@@ -34,11 +36,25 @@
 
 #pragma mark - UIViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    unless (self.reel) {
+        self.reel = [SBReel MR_findFirstByAttribute:@"remoteID" withValue:self.reelID];
+    }
+
+    if ([self isModal]) {
+        [self.modalXButton setHidden:NO];
+    } else {
+        [self.modalXButton setHidden:YES];
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+
     [self.userButton setTitle:@"" forState:UIControlStateNormal];
-    
+
     if (self.localVideoURL) {
         [self playLocalVideoImmediately];
     } else {

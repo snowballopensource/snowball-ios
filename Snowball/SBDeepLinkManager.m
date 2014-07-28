@@ -8,9 +8,7 @@
 
 #import "SBDeepLinkManager.h"
 
-//#import <ECSlidingViewController/ECSlidingViewController.h>
-//#import "SBReel.h"
-//#import "SBReelClipsViewController.h"
+#import "SBReelClipsViewController.h"
 
 @implementation SBDeepLinkManager
 
@@ -20,16 +18,17 @@
     if ([[url path] length] > 1) {
         remoteID = [[url path] substringFromIndex:1];
     }
-    
+
     if ([[url host] isEqualToString:@"reel"] && [remoteID length] > 1) {
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        ECSlidingViewController *slidingVC = [storyboard instantiateInitialViewController];
-//        UINavigationController *nc = (UINavigationController *)slidingVC.topViewController;
-//        SBReelClipsViewController *vc = [storyboard instantiateViewControllerWithIdentifier:[SBReelClipsViewController identifier]];
-//        [vc setReel:[SBReel MR_findFirstByAttribute:@"remoteID" withValue:remoteID]];
-//        [nc pushViewController:vc animated:NO];
-//
-//        return YES;
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        // ECSlidingViewController *slidingVC = [storyboard instantiateInitialViewController];
+        // UINavigationController *nc = (UINavigationController *)slidingVC.topViewController;
+        SBReelClipsViewController *vc = [storyboard instantiateViewControllerWithIdentifier:[SBReelClipsViewController identifier]];
+        [vc setReelID:remoteID];
+        [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:vc animated:YES completion:nil];
+        // [nc pushViewController:vc animated:YES];
+
+        return YES;
     }
     return NO;
 }
