@@ -44,6 +44,12 @@
     
     [self.playerView setHidden:YES];
     [self.createNewSnowballView setHidden:YES];
+
+    [self.createNewSnowballView.subviews each:^(id object) {
+        if ([object isKindOfClass:[UIImageView class]]) {
+            [object setImageTintColor:[UIColor whiteColor]];
+        }
+    }];
     
     // [self startCellStateDemo];
 }
