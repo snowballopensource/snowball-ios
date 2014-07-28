@@ -66,7 +66,7 @@
 
     [self setTintColor:[UIColor randomColor]];
 
-    [self.unwatchedClipTimestamp setText:@"82m"];
+    [self.unwatchedClipTimestamp setText:[reel.lastClipCreatedAt shortTimeAgoString]];
 
     [self setState:state forReel:reel animated:NO];
 }

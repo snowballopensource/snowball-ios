@@ -12,6 +12,7 @@
 
 #import "SBDefines.h"
 
+#import "NSDate+TimeAgoString.h"
 #import "NSError+Snowball.h"
 #import "NSString+Initials.h"
 #import "UIBarButtonItem+Hidden.h"

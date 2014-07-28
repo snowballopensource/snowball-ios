@@ -24,6 +24,7 @@
 		BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E2D191AFDA50083B0DC /* SBManagedObject.m */; };
 		BA15B9E5192AC9EF00453F8F /* UIViewController+StatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BA15B9E4192AC9EF00453F8F /* UIViewController+StatusBar.m */; };
 		BA15B9ED192AD9AD00453F8F /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = BA15B9EC192AD9AD00453F8F /* UINavigationBar+CustomHeight.m */; };
+		BA1DB1C519864F8D0078609B /* NSDate+TimeAgoString.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1DB1C419864F8D0078609B /* NSDate+TimeAgoString.m */; };
 		BA217C9A192A4DF500F04D03 /* SBLongRunningTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA217C99192A4DF500F04D03 /* SBLongRunningTaskManager.m */; };
 		BA29C7EC192FD9C900F59684 /* SBPushNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA29C7EB192FD9C900F59684 /* SBPushNotificationManager.m */; };
 		BA29C7EE192FDAE400F59684 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA29C7ED192FDAE400F59684 /* AirshipConfig.plist */; };
@@ -133,6 +134,8 @@
 		BA15B9E4192AC9EF00453F8F /* UIViewController+StatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+StatusBar.m"; sourceTree = "<group>"; };
 		BA15B9EB192AD9AD00453F8F /* UINavigationBar+CustomHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+CustomHeight.h"; sourceTree = "<group>"; };
 		BA15B9EC192AD9AD00453F8F /* UINavigationBar+CustomHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+CustomHeight.m"; sourceTree = "<group>"; };
+		BA1DB1C319864F8D0078609B /* NSDate+TimeAgoString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgoString.h"; sourceTree = "<group>"; };
+		BA1DB1C419864F8D0078609B /* NSDate+TimeAgoString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeAgoString.m"; sourceTree = "<group>"; };
 		BA217C98192A4DF500F04D03 /* SBLongRunningTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBLongRunningTaskManager.h; sourceTree = "<group>"; };
 		BA217C99192A4DF500F04D03 /* SBLongRunningTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBLongRunningTaskManager.m; sourceTree = "<group>"; };
 		BA29C7EA192FD9C900F59684 /* SBPushNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBPushNotificationManager.h; sourceTree = "<group>"; };
@@ -464,6 +467,8 @@
 		BA5CD68C19269B1A0087D3A2 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				BA1DB1C319864F8D0078609B /* NSDate+TimeAgoString.h */,
+				BA1DB1C419864F8D0078609B /* NSDate+TimeAgoString.m */,
 				BA5CD68919269B170087D3A2 /* NSError+Snowball.h */,
 				BA5CD68A19269B170087D3A2 /* NSError+Snowball.m */,
 				BA8E995B1953A76300DCECD9 /* NSString+Initials.h */,
@@ -822,6 +827,7 @@
 				BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */,
 				BA8E994F195382FE00DCECD9 /* SBAddressBookManager.m in Sources */,
 				BA217C9A192A4DF500F04D03 /* SBLongRunningTaskManager.m in Sources */,
+				BA1DB1C519864F8D0078609B /* NSDate+TimeAgoString.m in Sources */,
 				BA8E99631953A8B700DCECD9 /* UIView+ImageRepresentation.m in Sources */,
 				BA29C7F2192FEBC400F59684 /* SBProfileViewController.m in Sources */,
 				BAC9FB4019241536008742EE /* SBSignInViewController.m in Sources */,
