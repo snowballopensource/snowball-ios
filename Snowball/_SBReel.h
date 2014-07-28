@@ -6,10 +6,10 @@
 
 extern const struct SBReelAttributes {
 	__unsafe_unretained NSString *homeFeedSession;
+	__unsafe_unretained NSString *lastClipCreatedAt;
 	__unsafe_unretained NSString *name;
 	__unsafe_unretained NSString *recentParticipantsNames;
 	__unsafe_unretained NSString *remoteID;
-	__unsafe_unretained NSString *updatedAt;
 } SBReelAttributes;
 
 extern const struct SBReelRelationships {
@@ -54,6 +54,16 @@ extern const struct SBReelFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSDate* lastClipCreatedAt;
+
+
+
+//- (BOOL)validateLastClipCreatedAt:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) NSString* name;
 
 
@@ -79,16 +89,6 @@ extern const struct SBReelFetchedProperties {
 
 
 //- (BOOL)validateRemoteID:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
-@property (nonatomic, strong) NSDate* updatedAt;
-
-
-
-//- (BOOL)validateUpdatedAt:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -141,6 +141,12 @@ extern const struct SBReelFetchedProperties {
 
 
 
+- (NSDate*)primitiveLastClipCreatedAt;
+- (void)setPrimitiveLastClipCreatedAt:(NSDate*)value;
+
+
+
+
 - (NSString*)primitiveName;
 - (void)setPrimitiveName:(NSString*)value;
 
@@ -155,12 +161,6 @@ extern const struct SBReelFetchedProperties {
 
 - (NSString*)primitiveRemoteID;
 - (void)setPrimitiveRemoteID:(NSString*)value;
-
-
-
-
-- (NSDate*)primitiveUpdatedAt;
-- (void)setPrimitiveUpdatedAt:(NSDate*)value;
 
 
 

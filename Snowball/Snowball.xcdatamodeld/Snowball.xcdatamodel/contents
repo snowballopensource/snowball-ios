@@ -38,6 +38,11 @@
     </entity>
     <entity name="Reel" representedClassName="SBReel" syncable="YES">
         <attribute name="homeFeedSession" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="lastClipCreatedAt" optional="YES" attributeType="Date" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="last_clip_created_at"/>
+            </userInfo>
+        </attribute>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recentParticipantsNames" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
@@ -47,11 +52,6 @@
         <attribute name="remoteID" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="id"/>
-            </userInfo>
-        </attribute>
-        <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES">
-            <userInfo>
-                <entry key="mappedKeyName" value="updated_at"/>
             </userInfo>
         </attribute>
         <relationship name="clips" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Clip" inverseName="reel" inverseEntity="Clip" syncable="YES">
@@ -98,7 +98,7 @@
     </entity>
     <elements>
         <element name="Clip" positionX="-63" positionY="-18" width="128" height="148"/>
-        <element name="Reel" positionX="-63" positionY="0" width="128" height="163"/>
+        <element name="Reel" positionX="-63" positionY="0" width="128" height="165"/>
         <element name="User" positionX="-54" positionY="18" width="128" height="195"/>
     </elements>
 </model>

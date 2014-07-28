@@ -5,10 +5,10 @@
 
 const struct SBReelAttributes SBReelAttributes = {
 	.homeFeedSession = @"homeFeedSession",
+	.lastClipCreatedAt = @"lastClipCreatedAt",
 	.name = @"name",
 	.recentParticipantsNames = @"recentParticipantsNames",
 	.remoteID = @"remoteID",
-	.updatedAt = @"updatedAt",
 };
 
 const struct SBReelRelationships SBReelRelationships = {
@@ -60,6 +60,13 @@ const struct SBReelFetchedProperties SBReelFetchedProperties = {
 
 
 
+@dynamic lastClipCreatedAt;
+
+
+
+
+
+
 @dynamic name;
 
 
@@ -75,13 +82,6 @@ const struct SBReelFetchedProperties SBReelFetchedProperties = {
 
 
 @dynamic remoteID;
-
-
-
-
-
-
-@dynamic updatedAt;
 
 
 
