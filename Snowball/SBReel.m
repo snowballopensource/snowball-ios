@@ -15,7 +15,15 @@
 @implementation SBReel
 
 - (BOOL)hasNewClip {
-    return !([self.updatedAt compare:self.lastWatchedClip.createdAt] == NSOrderedDescending);
+    if (self.updatedAt && self.lastWatchedClip.createdAt) {
+        NSComparisonResult result = [self.updatedAt compare:self.lastWatchedClip.createdAt];
+        if (result == NSOrderedDescending) {
+            return YES;
+        }
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 #pragma mark - Remote
