@@ -43,7 +43,13 @@
                                                                                inContext:localContext];
                                           if (reel) {
                                               [reel setParticipants:nil];
+                                              NSDate *lastClipCreatedAt = reel.lastClipCreatedAt;
                                               [reel MR_importValuesForKeysWithObject:object];
+                                              NSComparisonResult result = [lastClipCreatedAt compare:reel.lastClipCreatedAt];
+                                              if (result == NSOrderedDescending) {
+                                                  // Overrite server imported createdAt with local one
+                                                  [reel setLastClipCreatedAt:lastClipCreatedAt];
+                                              }
                                           } else {
                                               reel = [SBReel MR_importFromObject:object inContext:localContext];
                                           }
