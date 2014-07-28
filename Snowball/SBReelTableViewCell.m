@@ -17,12 +17,16 @@
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *recentParticipantsNamesLabel;
 
-@property (nonatomic, weak) IBOutlet UIImageView *disclosureIndicator;
-@property (nonatomic, weak) IBOutlet UIImageView *hasNewClipIndicator;
-@property (nonatomic, weak) IBOutlet UIImageView *addClipIndicator;
 @property (nonatomic) BOOL showsDisclosureIndicator;
-@property (nonatomic) BOOL showsHasNewClipIndicator;
+@property (nonatomic, weak) IBOutlet UIImageView *disclosureIndicator;
+
+@property (nonatomic) BOOL showsHasNewClipIndicatonGroup;
+@property (nonatomic, weak) IBOutlet UIImageView *hasNewClipIndicator;
+@property (nonatomic, weak) IBOutlet UIImageView *unwatchedClipIcon;
+@property (nonatomic, weak) IBOutlet UILabel *unwatchedClipTimestamp;
+
 @property (nonatomic) BOOL showsAddClipIndicator;
+@property (nonatomic, weak) IBOutlet UIImageView *addClipIndicator;
 
 @property (nonatomic) SBReelTableViewCellState state;
 
@@ -38,6 +42,8 @@
     [self.disclosureIndicator setImageTintColor:tintColor];
     [self.hasNewClipIndicator setImageTintColor:tintColor];
     [self.addClipIndicator setImageTintColor:tintColor];
+
+    [self.unwatchedClipTimestamp setFont:[UIFont fontWithName:[UIFont snowballFontNameMedium] size:self.unwatchedClipTimestamp.font.pointSize]];
 }
 
 #pragma mark - SBTableViewCell
@@ -59,6 +65,8 @@
     [self.nameLabel setFont:[UIFont fontWithName:[UIFont snowballFontNameMedium] size:12]];
 
     [self setTintColor:[UIColor randomColor]];
+
+    [self.unwatchedClipTimestamp setText:@"82m"];
 
     [self setState:state forReel:reel animated:NO];
 }
@@ -85,7 +93,7 @@
             void(^positionSubviews)() = ^{
                 [self setShowsAddClipIndicator:NO];
                 [self setShowsDisclosureIndicator:NO];
-                [self setShowsHasNewClipIndicator:YES];
+                [self setShowsHasNewClipIndicatonGroup:YES];
             };
             if (animated) {
                 [UIView animateWithDuration:animationDuration
@@ -101,7 +109,7 @@
             void(^positionSubviews)() = ^{
                 [self setShowsAddClipIndicator:YES];
                 [self setShowsDisclosureIndicator:NO];
-                [self setShowsHasNewClipIndicator:NO];
+                [self setShowsHasNewClipIndicatonGroup:NO];
             };
             if (animated) {
                 [UIView animateWithDuration:animationDuration
@@ -117,7 +125,7 @@
             void(^positionSubviews)() = ^{
                 [self setShowsAddClipIndicator:NO];
                 [self setShowsDisclosureIndicator:YES];
-                [self setShowsHasNewClipIndicator:NO];
+                [self setShowsHasNewClipIndicatonGroup:NO];
             };
             if (animated) {
                 [UIView animateWithDuration:animationDuration
@@ -160,17 +168,25 @@
     _showsDisclosureIndicator = showsDisclosureIndicator;
 }
 
-- (void)setShowsHasNewClipIndicator:(BOOL)showsHasNewClipIndicator {
+- (void)setShowsHasNewClipIndicatonGroup:(BOOL)showsHasNewClipIndicatonGroup {
     static CGFloat defaultHasNewClipIndicatorCenterX = 0;
+    static CGFloat defaultUnwatchedClipIconCenterX = 0;
+    static CGFloat defaultUnwatchedClipTimestampCenterX = 0;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         defaultHasNewClipIndicatorCenterX = self.hasNewClipIndicator.center.x;
+        defaultUnwatchedClipIconCenterX = self.unwatchedClipIcon.center.x;
+        defaultUnwatchedClipTimestampCenterX = self.unwatchedClipTimestamp.center.x;
     });
 
-    CGFloat newCenterX = (showsHasNewClipIndicator) ? defaultHasNewClipIndicatorCenterX : defaultHasNewClipIndicatorCenterX + 100;
-    [self.hasNewClipIndicator setCenter:CGPointMake(newCenterX, self.hasNewClipIndicator.center.y)];
+    CGFloat newHasNewClipIndicatorCenterX = (showsHasNewClipIndicatonGroup) ? defaultHasNewClipIndicatorCenterX : defaultHasNewClipIndicatorCenterX + 100;
+    [self.hasNewClipIndicator setCenter:CGPointMake(newHasNewClipIndicatorCenterX, self.hasNewClipIndicator.center.y)];
+    CGFloat newUnwatchedClipIconCenterX = (showsHasNewClipIndicatonGroup) ? defaultUnwatchedClipIconCenterX : defaultUnwatchedClipIconCenterX + 100;
+    [self.unwatchedClipIcon setCenter:CGPointMake(newUnwatchedClipIconCenterX, self.unwatchedClipIcon.center.y)];
+    CGFloat newUnwatchedClipTimestampCenterX = (showsHasNewClipIndicatonGroup) ? defaultUnwatchedClipTimestampCenterX : defaultUnwatchedClipTimestampCenterX + 100;
+    [self.unwatchedClipTimestamp setCenter:CGPointMake(newUnwatchedClipTimestampCenterX, self.unwatchedClipTimestamp.center.y)];
 
-    _showsHasNewClipIndicator = showsHasNewClipIndicator;
+    _showsHasNewClipIndicatonGroup = showsHasNewClipIndicatonGroup;
 }
 
 @end
