@@ -13,6 +13,7 @@
 @interface SBReel : _SBReel
 
 - (BOOL)hasNewClip;
+- (BOOL)hasPendingUpload;
 
 + (void)getHomeFeedReelsOnPage:(NSUInteger)page
                        success:(void (^)(BOOL canLoadMore))success

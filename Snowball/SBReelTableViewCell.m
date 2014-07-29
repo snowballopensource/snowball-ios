@@ -29,6 +29,9 @@
 @property (nonatomic) BOOL showsAddClipIndicator;
 @property (nonatomic, weak) IBOutlet UIImageView *addClipIndicator;
 
+@property (nonatomic) BOOL showsUploadingIndicator;
+@property (nonatomic, weak) IBOutlet UIImageView *uploadingIndicator;
+
 @property (nonatomic) SBReelTableViewCellState state;
 
 @end
@@ -43,6 +46,7 @@
     [self.disclosureIndicator setImageTintColor:tintColor];
     [self.hasNewClipIndicator setImageTintColor:tintColor];
     [self.addClipIndicator setImageTintColor:tintColor];
+    [self.uploadingIndicator setImageTintColor:tintColor];
 
     [self.unwatchedClipTimestamp setFont:[UIFont fontWithName:[UIFont snowballFontNameMedium] size:self.unwatchedClipTimestamp.font.pointSize]];
 }
@@ -84,6 +88,9 @@
     if (reel.hasNewClip && state == SBReelTableViewCellStateNormal) {
         state = SBReelTableViewCellStateHasNewClip;
     }
+    if (reel.hasPendingUpload && (state == SBReelTableViewCellStateNormal || state == SBReelTableViewCellStateHasNewClip)) {
+        state = SBReelTableViewCellStateUploading;
+    }
     if (state == SBReelTableViewCellStateHasNewClip) {
         [self.unwatchedClipThumbnail setImageWithURL:[NSURL URLWithString:reel.lastClipThumbnailURL]];
     }
@@ -94,55 +101,52 @@
 
 - (void)positionSubviewsForState:(SBReelTableViewCellState)state animated:(BOOL)animated {
     const CGFloat animationDuration = 0.25;
+    void(^positionSubviews)() = nil;
     switch (state) {
         case SBReelTableViewCellStateHasNewClip: {
-            void(^positionSubviews)() = ^{
+            positionSubviews = ^{
                 [self setShowsAddClipIndicator:NO];
                 [self setShowsDisclosureIndicator:NO];
                 [self setShowsHasNewClipIndicatonGroup:YES];
+                [self setShowsUploadingIndicator:NO];
             };
-            if (animated) {
-                [UIView animateWithDuration:animationDuration
-                                 animations:^{
-                                     positionSubviews();
-                                 }];
-            } else {
-                positionSubviews();
-            }
         }
             break;
-        case SBReelTableViewCellStatePendingUpload: {
-            void(^positionSubviews)() = ^{
+        case SBReelTableViewCellStateAddClip: {
+            positionSubviews = ^{
                 [self setShowsAddClipIndicator:YES];
                 [self setShowsDisclosureIndicator:NO];
                 [self setShowsHasNewClipIndicatonGroup:NO];
+                [self setShowsUploadingIndicator:NO];
             };
-            if (animated) {
-                [UIView animateWithDuration:animationDuration
-                                 animations:^{
-                                     positionSubviews();
-                                 }];
-            } else {
-                positionSubviews();
-            }
+        }
+            break;
+        case SBReelTableViewCellStateUploading: {
+            positionSubviews = ^{
+                [self setShowsAddClipIndicator:NO];
+                [self setShowsDisclosureIndicator:NO];
+                [self setShowsHasNewClipIndicatonGroup:NO];
+                [self setShowsUploadingIndicator:YES];
+            };
         }
             break;
         default: { // SBReelTableViewCellStateNormal
-            void(^positionSubviews)() = ^{
+            positionSubviews = ^{
                 [self setShowsAddClipIndicator:NO];
                 [self setShowsDisclosureIndicator:YES];
                 [self setShowsHasNewClipIndicatonGroup:NO];
+                [self setShowsUploadingIndicator:NO];
             };
-            if (animated) {
-                [UIView animateWithDuration:animationDuration
-                                 animations:^{
-                                     positionSubviews();
-                                 }];
-            } else {
-                positionSubviews();
-            }
         }
             break;
+    }
+    if (animated) {
+        [UIView animateWithDuration:animationDuration
+                         animations:^{
+                             positionSubviews();
+                         }];
+    } else {
+        positionSubviews();
     }
 }
 
@@ -197,6 +201,19 @@
     [self.unwatchedClipThumbnail setCenter:CGPointMake(newUnwatchedClipThumbnailCenterX, self.unwatchedClipThumbnail.center.y)];
 
     _showsHasNewClipIndicatonGroup = showsHasNewClipIndicatonGroup;
+}
+
+- (void)setShowsUploadingIndicator:(BOOL)showsUploadingIndicator {
+    static CGFloat defaultUploadingIndicatorCenterX = 0;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        defaultUploadingIndicatorCenterX = self.uploadingIndicator.center.x;
+    });
+
+    CGFloat newCenterX = (showsUploadingIndicator) ? defaultUploadingIndicatorCenterX : defaultUploadingIndicatorCenterX + 100;
+    [self.uploadingIndicator setCenter:CGPointMake(newCenterX, self.uploadingIndicator.center.y)];
+
+    _showsUploadingIndicator = showsUploadingIndicator;
 }
 
 @end

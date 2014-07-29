@@ -69,7 +69,7 @@
     } else if ([destinationViewController isKindOfClass:[SBCameraViewController class]]) {
         [(SBCameraViewController *)destinationViewController setRecordingCompletionBlock:^(NSURL *fileURL) {
             [self setRecordingURL:fileURL];
-            [self setCellState:SBReelTableViewCellStatePendingUpload];
+            [self setCellState:SBReelTableViewCellStateAddClip];
         }];
     } else if ([destinationViewController isKindOfClass:[SBCreateReelViewController class]]) {
         [(SBCreateReelViewController *)destinationViewController setInitialRecordingURL:self.recordingURL];
@@ -95,14 +95,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (self.cellState) {
-        case SBReelTableViewCellStatePendingUpload: {
+        case SBReelTableViewCellStateAddClip: {
             // This is semi duplicated code since clips are uploaded in three places.
             SBClip *clip = [SBClip MR_createEntity];
             SBReel *reel = [self.fetchedResultsController objectAtIndexPath:indexPath];
             [clip setReel:reel];
             NSData *data = [NSData dataWithContentsOfURL:self.recordingURL];
             [clip setVideoToSubmit:data];
-            [reel setLastClipCreatedAt:[NSDate date]];
             [reel save];
             [clip save];
             [SBLongRunningTaskManager addBlockToQueue:^{
@@ -136,7 +135,7 @@
 
 - (void)setCellState:(SBReelTableViewCellState)cellState {
     switch (cellState) {
-        case SBReelTableViewCellStatePendingUpload:
+        case SBReelTableViewCellStateAddClip:
             [self showCameraPreview];
             [self showNewSnowballView];
             break;
@@ -211,7 +210,7 @@
     [NSTimer bk_scheduledTimerWithTimeInterval:2.0
                                          block:^(NSTimer *timer) {
                                              if (self.cellState == SBReelTableViewCellStateNormal) {
-                                                 [self setCellState:SBReelTableViewCellStatePendingUpload];
+                                                 [self setCellState:SBReelTableViewCellStateAddClip];
                                              } else {
                                                  [self setCellState:SBReelTableViewCellStateNormal];
                                              }
