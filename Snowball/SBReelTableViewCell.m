@@ -30,7 +30,8 @@
 @property (nonatomic, weak) IBOutlet UIImageView *addClipIndicator;
 
 @property (nonatomic) BOOL showsUploadingIndicator;
-@property (nonatomic, weak) IBOutlet UIImageView *uploadingIndicator;
+@property (nonatomic, weak) IBOutlet UIView *uploadingIndicator;
+@property (nonatomic, strong) UIActivityIndicatorView *uploadingIndicatorSpinner;
 
 @property (nonatomic) SBReelTableViewCellState state;
 
@@ -46,7 +47,7 @@
     [self.disclosureIndicator setImageTintColor:tintColor];
     [self.hasNewClipIndicator setImageTintColor:tintColor];
     [self.addClipIndicator setImageTintColor:tintColor];
-    [self.uploadingIndicator setImageTintColor:tintColor];
+    [self.uploadingIndicator setBackgroundColor:tintColor];
 
     [self.unwatchedClipTimestamp setFont:[UIFont fontWithName:[UIFont snowballFontNameMedium] size:self.unwatchedClipTimestamp.font.pointSize]];
 }
@@ -159,7 +160,7 @@
         defaultAddClipIndicatorCenterX = self.addClipIndicator.center.x;
     });
 
-    CGFloat newCenterX = (showsAddClipIndicator) ? defaultAddClipIndicatorCenterX : defaultAddClipIndicatorCenterX + 100;
+    CGFloat newCenterX = (showsAddClipIndicator) ? defaultAddClipIndicatorCenterX : defaultAddClipIndicatorCenterX + 150;
     [self.addClipIndicator setCenter:CGPointMake(newCenterX, self.addClipIndicator.center.y)];
 
     _showsAddClipIndicator = showsAddClipIndicator;
@@ -172,7 +173,7 @@
         defaultDisclosureIndicatorCenterX = self.disclosureIndicator.center.x;
     });
 
-    CGFloat newCenterX = (showsDisclosureIndicator) ? defaultDisclosureIndicatorCenterX : defaultDisclosureIndicatorCenterX + 100;
+    CGFloat newCenterX = (showsDisclosureIndicator) ? defaultDisclosureIndicatorCenterX : defaultDisclosureIndicatorCenterX + 150;
     [self.disclosureIndicator setCenter:CGPointMake(newCenterX, self.disclosureIndicator.center.y)];
 
     _showsDisclosureIndicator = showsDisclosureIndicator;
@@ -191,13 +192,13 @@
         defaultUnwatchedClipThumbnailCenterX = self.unwatchedClipThumbnail.center.x;
     });
 
-    CGFloat newHasNewClipIndicatorCenterX = (showsHasNewClipIndicatonGroup) ? defaultHasNewClipIndicatorCenterX : defaultHasNewClipIndicatorCenterX + 100;
+    CGFloat newHasNewClipIndicatorCenterX = (showsHasNewClipIndicatonGroup) ? defaultHasNewClipIndicatorCenterX : defaultHasNewClipIndicatorCenterX + 150;
     [self.hasNewClipIndicator setCenter:CGPointMake(newHasNewClipIndicatorCenterX, self.hasNewClipIndicator.center.y)];
-    CGFloat newUnwatchedClipIconCenterX = (showsHasNewClipIndicatonGroup) ? defaultUnwatchedClipIconCenterX : defaultUnwatchedClipIconCenterX + 100;
+    CGFloat newUnwatchedClipIconCenterX = (showsHasNewClipIndicatonGroup) ? defaultUnwatchedClipIconCenterX : defaultUnwatchedClipIconCenterX + 150;
     [self.unwatchedClipIcon setCenter:CGPointMake(newUnwatchedClipIconCenterX, self.unwatchedClipIcon.center.y)];
-    CGFloat newUnwatchedClipTimestampCenterX = (showsHasNewClipIndicatonGroup) ? defaultUnwatchedClipTimestampCenterX : defaultUnwatchedClipTimestampCenterX + 100;
+    CGFloat newUnwatchedClipTimestampCenterX = (showsHasNewClipIndicatonGroup) ? defaultUnwatchedClipTimestampCenterX : defaultUnwatchedClipTimestampCenterX + 150;
     [self.unwatchedClipTimestamp setCenter:CGPointMake(newUnwatchedClipTimestampCenterX, self.unwatchedClipTimestamp.center.y)];
-    CGFloat newUnwatchedClipThumbnailCenterX = (showsHasNewClipIndicatonGroup) ? defaultUnwatchedClipThumbnailCenterX : defaultUnwatchedClipThumbnailCenterX + 100;
+    CGFloat newUnwatchedClipThumbnailCenterX = (showsHasNewClipIndicatonGroup) ? defaultUnwatchedClipThumbnailCenterX : defaultUnwatchedClipThumbnailCenterX + 150;
     [self.unwatchedClipThumbnail setCenter:CGPointMake(newUnwatchedClipThumbnailCenterX, self.unwatchedClipThumbnail.center.y)];
 
     _showsHasNewClipIndicatonGroup = showsHasNewClipIndicatonGroup;
@@ -210,7 +211,19 @@
         defaultUploadingIndicatorCenterX = self.uploadingIndicator.center.x;
     });
 
-    CGFloat newCenterX = (showsUploadingIndicator) ? defaultUploadingIndicatorCenterX : defaultUploadingIndicatorCenterX + 100;
+    CGFloat newCenterX = 0;
+    if (showsUploadingIndicator) {
+        unless (self.uploadingIndicatorSpinner) {
+            self.uploadingIndicatorSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+            [self.uploadingIndicatorSpinner setFrame:self.uploadingIndicator.bounds];
+            [self.uploadingIndicator addSubview:self.uploadingIndicatorSpinner];
+        }
+        [self.uploadingIndicatorSpinner startAnimating];
+        newCenterX = defaultUploadingIndicatorCenterX;
+    } else {
+        [self.uploadingIndicatorSpinner stopAnimating];
+        newCenterX = defaultUploadingIndicatorCenterX + 150;
+    }
     [self.uploadingIndicator setCenter:CGPointMake(newCenterX, self.uploadingIndicator.center.y)];
 
     _showsUploadingIndicator = showsUploadingIndicator;

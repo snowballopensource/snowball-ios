@@ -14,14 +14,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3sD-nS-szW">
-                        <rect key="frame" x="20" y="41" width="180" height="15"/>
+                        <rect key="frame" x="20" y="41" width="179" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="82m" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cN3-be-FaS">
-                        <rect key="frame" x="226" y="41" width="30" height="15"/>
+                        <rect key="frame" x="216" y="41" width="30" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="deviceRGB"/>
@@ -51,14 +51,14 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-clock" id="ILn-Ou-1Np">
-                        <rect key="frame" x="217" y="43" width="11" height="11"/>
+                        <rect key="frame" x="207" y="43" width="11" height="11"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Nmn-xP-hue">
-                        <rect key="frame" x="265" y="10" width="44" height="44"/>
+                    <view appearanceType="aqua" contentMode="scaleToFill" id="UW0-iq-GZd">
+                        <rect key="frame" x="255" y="0.0" width="65" height="65"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
-                    </imageView>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -70,7 +70,7 @@
                 <outlet property="unwatchedClipIcon" destination="ILn-Ou-1Np" id="Ye4-Km-bLv"/>
                 <outlet property="unwatchedClipThumbnail" destination="WFa-L1-gCR" id="Evi-tJ-DiV"/>
                 <outlet property="unwatchedClipTimestamp" destination="cN3-be-FaS" id="xte-cB-rjj"/>
-                <outlet property="uploadingIndicator" destination="Nmn-xP-hue" id="jst-am-4gv"/>
+                <outlet property="uploadingIndicator" destination="UW0-iq-GZd" id="mq6-1f-X4w"/>
             </connections>
         </tableViewCell>
     </objects>
