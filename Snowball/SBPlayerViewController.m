@@ -16,7 +16,7 @@
 @property (nonatomic, weak) IBOutlet SBPlayerView *playerView;
 
 @property (nonatomic, strong) NSArray *clips;
-@property (nonatomic, strong, readonly) NSArray *playerItems;
+@property (nonatomic) NSUInteger currentClipIndex;
 
 @end
 
@@ -24,13 +24,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self showSpinner];
     [SBClip getRecentClipsForReel:self.reel
                             since:self.reel.lastWatchedClip.createdAt
                           success:^(BOOL canLoadMore) {
                               [self playReel];
-                              [self hideSpinner];
                           }
                           failure:nil];
 }
@@ -52,7 +51,8 @@
     NSFetchRequest *fetchRequest = [SBClip MR_requestAllSortedBy:@"createdAt" ascending:YES withPredicate:predicate];
     [self setClips:[SBClip MR_executeFetchRequest:fetchRequest]];
     self.clipChangedBlock([self.clips firstObject]);
-    AVQueuePlayer *player = [[AVQueuePlayer alloc] initWithItems:self.playerItems];
+    AVQueuePlayer *player = [[AVQueuePlayer alloc] initWithItems:[self createPlayerItems]];
+    [self.playerView setPlayer:player];
     if (self.clips.count == 1) {
         // This prevents it from tring to advance to nothing so that it freezes on last frame
         [player setActionAtItemEnd:AVPlayerActionAtItemEndPause];
@@ -60,6 +60,7 @@
         [player setActionAtItemEnd:AVPlayerActionAtItemEndAdvance];
     }
     
+    // Handle buffering during clip playback
     [player bk_addObserverForKeyPath:@"rate" task:^(id target) {
         if (player.rate == 1) {
             [self hideSpinner];
@@ -73,9 +74,7 @@
             }];
         }
     }];
-    
     [player play];
-    [self.playerView setPlayer:player];
 }
 
 - (void)playLocalVideo {
@@ -86,37 +85,33 @@
 }
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
-    AVPlayerItem *currentPlayerItem = [notification object];
-    NSUInteger currentPlayerItemIndex = [self.playerItems indexOfObject:currentPlayerItem];
-    SBClip *currentClip = self.clips[currentPlayerItemIndex];
-    [self.reel setLastWatchedClip:currentClip];
+    SBClip *previousClip = self.clips[self.currentClipIndex];
+    [self.reel setLastWatchedClip:previousClip];
     [self.reel save];
-    NSUInteger nextPlayerItemIndex = currentPlayerItemIndex+1;
-    if (nextPlayerItemIndex < [self.playerItems count]) {
-        SBClip *nextClip = self.clips[nextPlayerItemIndex];
+    
+    NSUInteger nextClipIndex = self.currentClipIndex+1;
+    
+    if (nextClipIndex < [self.clips count]) {
+        SBClip *nextClip = self.clips[nextClipIndex];
         self.clipChangedBlock(nextClip);
     }
-    if (nextPlayerItemIndex == [self.playerItems count]-1) {
+    if (nextClipIndex == [self.clips count]-1) {
         // Last clip coming up next
         [self.playerView.player setActionAtItemEnd:AVPlayerActionAtItemEndPause];
     }
+    
+    self.currentClipIndex ++;
 }
 
-- (void)setClips:(NSArray *)clips {
-    NSMutableArray *playerItems = [NSMutableArray new];
-    for (SBClip *clip in clips) {
+- (NSArray *)createPlayerItems {
+    NSMutableArray *playerItems = [@[] mutableCopy];
+    for (SBClip *clip in self.clips) {
         if ([clip.videoURL length] > 0) {
-            NSURL *videoURL = [NSURL URLWithString:clip.videoURL];
-            AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:videoURL];
-            [[NSNotificationCenter defaultCenter] addObserver:self
-                                                     selector:@selector(playerItemDidReachEnd:)
-                                                         name:AVPlayerItemDidPlayToEndTimeNotification
-                                                       object:playerItem];
+            AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:clip.videoURL]];
             [playerItems addObject:playerItem];
         }
     }
-    _clips = [clips copy];
-    _playerItems = [playerItems copy];
+    return [playerItems copy];
 }
 
 @end
