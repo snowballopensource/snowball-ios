@@ -6,8 +6,8 @@
 
 extern const struct SBClipAttributes {
 	__unsafe_unretained NSString *createdAt;
-	__unsafe_unretained NSString *posterURL;
 	__unsafe_unretained NSString *remoteID;
+	__unsafe_unretained NSString *thumbnailURL;
 	__unsafe_unretained NSString *videoURL;
 } SBClipAttributes;
 
@@ -52,21 +52,21 @@ extern const struct SBClipFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString* posterURL;
-
-
-
-//- (BOOL)validatePosterURL:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
 @property (nonatomic, strong) NSString* remoteID;
 
 
 
 //- (BOOL)validateRemoteID:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSString* thumbnailURL;
+
+
+
+//- (BOOL)validateThumbnailURL:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -119,14 +119,14 @@ extern const struct SBClipFetchedProperties {
 
 
 
-- (NSString*)primitivePosterURL;
-- (void)setPrimitivePosterURL:(NSString*)value;
-
-
-
-
 - (NSString*)primitiveRemoteID;
 - (void)setPrimitiveRemoteID:(NSString*)value;
+
+
+
+
+- (NSString*)primitiveThumbnailURL;
+- (void)setPrimitiveThumbnailURL:(NSString*)value;
 
 
 

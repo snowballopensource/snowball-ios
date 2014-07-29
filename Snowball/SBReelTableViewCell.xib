@@ -34,6 +34,10 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="WFa-L1-gCR">
+                        <rect key="frame" x="255" y="0.0" width="65" height="65"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                     <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button-play-normal" id="mbZ-o6-dqt">
                         <rect key="frame" x="266" y="13" width="34" height="39"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -59,6 +63,7 @@
                 <outlet property="nameLabel" destination="3sD-nS-szW" id="PeV-pW-OAC"/>
                 <outlet property="recentParticipantsNamesLabel" destination="Lk2-Gb-dge" id="fu6-jA-Cex"/>
                 <outlet property="unwatchedClipIcon" destination="ILn-Ou-1Np" id="Ye4-Km-bLv"/>
+                <outlet property="unwatchedClipThumbnail" destination="WFa-L1-gCR" id="Evi-tJ-DiV"/>
                 <outlet property="unwatchedClipTimestamp" destination="cN3-be-FaS" id="xte-cB-rjj"/>
             </connections>
         </tableViewCell>

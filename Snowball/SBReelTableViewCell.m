@@ -24,6 +24,7 @@
 @property (nonatomic, weak) IBOutlet UIImageView *hasNewClipIndicator;
 @property (nonatomic, weak) IBOutlet UIImageView *unwatchedClipIcon;
 @property (nonatomic, weak) IBOutlet UILabel *unwatchedClipTimestamp;
+@property (nonatomic, weak) IBOutlet UIImageView *unwatchedClipThumbnail;
 
 @property (nonatomic) BOOL showsAddClipIndicator;
 @property (nonatomic, weak) IBOutlet UIImageView *addClipIndicator;
@@ -68,6 +69,8 @@
 
     [self.unwatchedClipTimestamp setText:[reel.lastClipCreatedAt shortTimeAgoString]];
 
+    [self.unwatchedClipThumbnail setImageWithURL:[NSURL URLWithString:reel.lastClipThumbnailURL]];
+
     [self setState:state forReel:reel animated:NO];
 }
 
@@ -80,6 +83,9 @@
 - (void)setState:(SBReelTableViewCellState)state forReel:(SBReel *)reel animated:(BOOL)animated {
     if (reel.hasNewClip && state == SBReelTableViewCellStateNormal) {
         state = SBReelTableViewCellStateHasNewClip;
+    }
+    if (state == SBReelTableViewCellStateHasNewClip) {
+        [self.unwatchedClipThumbnail setImageWithURL:[NSURL URLWithString:reel.lastClipThumbnailURL]];
     }
     _state = state;
 
@@ -172,11 +178,13 @@
     static CGFloat defaultHasNewClipIndicatorCenterX = 0;
     static CGFloat defaultUnwatchedClipIconCenterX = 0;
     static CGFloat defaultUnwatchedClipTimestampCenterX = 0;
+    static CGFloat defaultUnwatchedClipThumbnailCenterX = 0;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         defaultHasNewClipIndicatorCenterX = self.hasNewClipIndicator.center.x;
         defaultUnwatchedClipIconCenterX = self.unwatchedClipIcon.center.x;
         defaultUnwatchedClipTimestampCenterX = self.unwatchedClipTimestamp.center.x;
+        defaultUnwatchedClipThumbnailCenterX = self.unwatchedClipThumbnail.center.x;
     });
 
     CGFloat newHasNewClipIndicatorCenterX = (showsHasNewClipIndicatonGroup) ? defaultHasNewClipIndicatorCenterX : defaultHasNewClipIndicatorCenterX + 100;
@@ -185,6 +193,8 @@
     [self.unwatchedClipIcon setCenter:CGPointMake(newUnwatchedClipIconCenterX, self.unwatchedClipIcon.center.y)];
     CGFloat newUnwatchedClipTimestampCenterX = (showsHasNewClipIndicatonGroup) ? defaultUnwatchedClipTimestampCenterX : defaultUnwatchedClipTimestampCenterX + 100;
     [self.unwatchedClipTimestamp setCenter:CGPointMake(newUnwatchedClipTimestampCenterX, self.unwatchedClipTimestamp.center.y)];
+    CGFloat newUnwatchedClipThumbnailCenterX = (showsHasNewClipIndicatonGroup) ? defaultUnwatchedClipThumbnailCenterX : defaultUnwatchedClipThumbnailCenterX + 100;
+    [self.unwatchedClipThumbnail setCenter:CGPointMake(newUnwatchedClipThumbnailCenterX, self.unwatchedClipThumbnail.center.y)];
 
     _showsHasNewClipIndicatonGroup = showsHasNewClipIndicatonGroup;
 }

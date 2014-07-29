@@ -5,8 +5,8 @@
 
 const struct SBClipAttributes SBClipAttributes = {
 	.createdAt = @"createdAt",
-	.posterURL = @"posterURL",
 	.remoteID = @"remoteID",
+	.thumbnailURL = @"thumbnailURL",
 	.videoURL = @"videoURL",
 };
 
@@ -59,14 +59,14 @@ const struct SBClipFetchedProperties SBClipFetchedProperties = {
 
 
 
-@dynamic posterURL;
-
-
-
-
-
-
 @dynamic remoteID;
+
+
+
+
+
+
+@dynamic thumbnailURL;
 
 
 

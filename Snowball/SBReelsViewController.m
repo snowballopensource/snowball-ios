@@ -103,6 +103,20 @@
             NSData *data = [NSData dataWithContentsOfURL:self.recordingURL];
             [clip setVideoToSubmit:data];
             [reel setLastClipCreatedAt:[NSDate date]];
+            
+            AVAsset *asset = [AVAsset assetWithURL:self.recordingURL];
+            AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+            CGImageRef imageRef = [imageGenerator copyCGImageAtTime:kCMTimeZero actualTime:nil error:nil];
+            NSString *outputFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[@"movie_thumbnail" stringByAppendingPathExtension:@"png"]];
+            UIImage *image = [UIImage imageWithCGImage:imageRef];
+            NSData *pngData = UIImagePNGRepresentation(image);
+            [pngData writeToFile:outputFilePath atomically:YES];
+            NSURL *thumbnailURL = [NSURL fileURLWithPath:outputFilePath];
+
+            [reel setLastClipThumbnailURL:[thumbnailURL absoluteString]];
+
+            [NSURL fileURLWithPath:outputFilePath];
+            
             [reel save];
             [clip save];
             [SBLongRunningTaskManager addBlockToQueue:^{

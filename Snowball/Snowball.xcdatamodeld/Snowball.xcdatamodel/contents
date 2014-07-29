@@ -6,14 +6,14 @@
                 <entry key="mappedKeyName" value="created_at"/>
             </userInfo>
         </attribute>
-        <attribute name="posterURL" optional="YES" attributeType="String" syncable="YES">
-            <userInfo>
-                <entry key="mappedKeyName" value="poster_url"/>
-            </userInfo>
-        </attribute>
         <attribute name="remoteID" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="thumbnailURL" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="thumbnail_url"/>
             </userInfo>
         </attribute>
         <attribute name="videoURL" optional="YES" attributeType="String" syncable="YES">
@@ -43,6 +43,7 @@
                 <entry key="mappedKeyName" value="last_clip_created_at"/>
             </userInfo>
         </attribute>
+        <attribute name="lastClipThumbnailURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recentParticipantsNames" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
@@ -97,8 +98,8 @@
         </userInfo>
     </entity>
     <elements>
-        <element name="Clip" positionX="-63" positionY="-18" width="128" height="148"/>
-        <element name="Reel" positionX="-63" positionY="0" width="128" height="165"/>
+        <element name="Clip" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="Reel" positionX="-63" positionY="0" width="128" height="178"/>
         <element name="User" positionX="-54" positionY="18" width="128" height="195"/>
     </elements>
 </model>
