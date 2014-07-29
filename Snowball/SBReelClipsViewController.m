@@ -110,6 +110,17 @@
     } else {
         [player setActionAtItemEnd:AVPlayerActionAtItemEndAdvance];
     }
+
+    [player bk_addObserverForKeyPath:@"rate" task:^(id target) {
+        if (player.rate == 0 && CMTimeGetSeconds(player.currentItem.currentTime) != CMTimeGetSeconds(player.currentItem.duration)) {
+            [player.currentItem bk_addObserverForKeyPath:@"playbackLikelyToKeepUp" task:^(id target) {
+                if (player.currentItem.playbackLikelyToKeepUp) {
+                    [player play];
+                }
+            }];
+        }
+    }];
+
     [player play];
     [self.playerView setPlayer:player];
 }
