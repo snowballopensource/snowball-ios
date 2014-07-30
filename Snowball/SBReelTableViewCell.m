@@ -89,7 +89,7 @@
     if (reel.hasNewClip && state == SBReelTableViewCellStateNormal) {
         state = SBReelTableViewCellStateHasNewClip;
     }
-    if (reel.hasPendingUpload && (state == SBReelTableViewCellStateNormal || state == SBReelTableViewCellStateHasNewClip)) {
+    if (reel.hasPendingUpload && state != SBReelTableViewCellStateAddClip) {
         state = SBReelTableViewCellStateUploading;
     }
     if (state == SBReelTableViewCellStateHasNewClip) {
