@@ -19,9 +19,10 @@
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        UIImageView *uploadingIndicator = [[UIImageView alloc] initWithFrame:self.bounds];
-        [uploadingIndicator setImage:[UIImage imageNamed:@"icon-airplane"]];
-        [uploadingIndicator setContentMode:UIViewContentModeCenter];
+        UIImage *uploadingIcon = [UIImage imageNamed:@"icon-airplane"];
+        UIImageView *uploadingIndicator = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, uploadingIcon.size.width, uploadingIcon.size.height)];
+        [uploadingIndicator setImage:uploadingIcon];
+        [uploadingIndicator setCenter:self.center];
         [self addSubview:uploadingIndicator];
         [self setUploadingIndicator:uploadingIndicator];
         [self animate:YES];
@@ -30,19 +31,21 @@
 }
 
 - (void)animate:(BOOL)animate {
-    static CGFloat defaultUploadingIndicatorCenterX = 0;
+    static CGFloat defaultUploadingIndicatorOriginX = 0;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        defaultUploadingIndicatorCenterX = self.uploadingIndicator.center.x;
+        defaultUploadingIndicatorOriginX = self.uploadingIndicator.frame.origin.x;
     });
-    CGFloat leftCenterX = defaultUploadingIndicatorCenterX * -1;
-    CGFloat rightCenterX = self.frame.size.width + defaultUploadingIndicatorCenterX;
-    [self.uploadingIndicator setCenter:CGPointMake(leftCenterX, self.uploadingIndicator.center.y)];
-    [UIView animateWithDuration:4
+    CGFloat leftOriginX = self.uploadingIndicator.frame.size.width * -1;
+    CGFloat rightOriginX = self.frame.size.width + self.uploadingIndicator.frame.size.width;
+
+    [self.uploadingIndicator setFrame:CGRectMake(leftOriginX, self.uploadingIndicator.frame.origin.y, self.uploadingIndicator.frame.size.width, self.uploadingIndicator.frame.size.height)];
+
+    [UIView animateWithDuration:1.5
                           delay:0
-                        options:UIViewAnimationOptionRepeat
+                        options:UIViewAnimationOptionRepeat | UIViewAnimationOptionCurveEaseIn
                      animations:^{
-                         [self.uploadingIndicator setCenter:CGPointMake(rightCenterX, self.uploadingIndicator.center.y)];
+                         [self.uploadingIndicator setFrame:CGRectMake(rightOriginX, self.uploadingIndicator.frame.origin.y, self.uploadingIndicator.frame.size.width, self.uploadingIndicator.frame.size.height)];
                      }
                      completion:nil];
 }
