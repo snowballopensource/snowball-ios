@@ -56,7 +56,7 @@
     [self setClips:[SBClip MR_executeFetchRequest:fetchRequest]];
     NSUInteger toGo = [self.clips count]-1;
     if (toGo > 0) {
-        [self.toGoCountLabel setText:[NSString stringWithFormat:@"%d more to go...", toGo]];
+        [self.toGoCountLabel setText:[NSString stringWithFormat:@"%zd more to go...", toGo]];
     } else {
         [self.toGoCountLabel setText:@"Last one..."];
     }
@@ -104,7 +104,7 @@
     if (nextClipIndex < [self.clips count]) {
         NSUInteger toGo = [self.clips count]-1-nextClipIndex;
         if (toGo > 0) {
-            [self.toGoCountLabel setText:[NSString stringWithFormat:@"%d more to go...", toGo]];
+            [self.toGoCountLabel setText:[NSString stringWithFormat:@"%zd more to go...", toGo]];
         } else {
             [self.toGoCountLabel setText:@"Last one..."];
         }
