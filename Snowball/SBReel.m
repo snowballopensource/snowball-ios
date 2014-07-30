@@ -61,7 +61,7 @@
                                               [reel setParticipants:nil];
                                               [reel MR_importValuesForKeysWithObject:object];
                                           } else {
-                                              reel = [SBReel MR_importFromObject:object inContext:localContext];
+                                              [SBReel MR_importFromObject:object inContext:localContext];
                                           }
                                       }];
                                   }];
