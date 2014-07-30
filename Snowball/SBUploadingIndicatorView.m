@@ -37,7 +37,6 @@
     });
     CGFloat leftCenterX = defaultUploadingIndicatorCenterX * -1;
     CGFloat rightCenterX = self.frame.size.width + defaultUploadingIndicatorCenterX;
-    NSLog(@"%@", NSStringFromCGPoint(CGPointMake(leftCenterX, rightCenterX)));
     [self.uploadingIndicator setCenter:CGPointMake(leftCenterX, self.uploadingIndicator.center.y)];
     [UIView animateWithDuration:4
                           delay:0
@@ -46,10 +45,6 @@
                          [self.uploadingIndicator setCenter:CGPointMake(rightCenterX, self.uploadingIndicator.center.y)];
                      }
                      completion:nil];
-}
-
-- (void)endAnimating {
-    
 }
 
 @end
