@@ -32,7 +32,7 @@
         static NSUInteger timeout = 300;
         NSUInteger timeSince = [lastClip.createdAt timeIntervalSinceNow]*-1;
         if (timeSince < timeout) {
-            return (lastClip.remoteID.length < 1) ? YES : NO;
+            return (lastClip.videoURL.length < 1) ? YES : NO;
         }
     }
     return NO;
