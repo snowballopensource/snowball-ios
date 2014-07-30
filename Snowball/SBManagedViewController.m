@@ -32,7 +32,12 @@
 
 - (NSFetchRequest *)fetchRequest {
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:[self.entityClass entityName]
+    // Xcode gets confused between -entityName (NSFetchRequest) and +entityName (mogenerator)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-method-access"
+    NSString *entityName = [self.entityClass entityName];
+#pragma GCC diagnostic pop
+    [fetchRequest setEntity:[NSEntityDescription entityForName:entityName
                                         inManagedObjectContext:[NSManagedObjectContext MR_defaultContext]]];
     [fetchRequest setSortDescriptors:self.sortDescriptors];
     [fetchRequest setPredicate:self.predicate];
