@@ -213,6 +213,7 @@
     
     CGFloat newCenterX = (showsUploadingIndicator) ? defaultUploadingIndicatorCenterX : defaultUploadingIndicatorCenterX + 150;
     [self.uploadingIndicator setCenter:CGPointMake(newCenterX, self.uploadingIndicator.center.y)];
+    [self.uploadingIndicator animate];
     
     _showsUploadingIndicator = showsUploadingIndicator;
 }

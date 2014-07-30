@@ -10,4 +10,6 @@
 
 @interface SBUploadingIndicatorView : UIView
 
+- (void)animate;
+
 @end

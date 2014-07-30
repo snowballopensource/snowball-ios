@@ -25,12 +25,11 @@
         [uploadingIndicator setCenter:self.center];
         [self addSubview:uploadingIndicator];
         [self setUploadingIndicator:uploadingIndicator];
-        [self animate:YES];
     }
     return self;
 }
 
-- (void)animate:(BOOL)animate {
+- (void)animate {
     static CGFloat defaultUploadingIndicatorOriginX = 0;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
