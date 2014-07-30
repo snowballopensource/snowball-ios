@@ -45,6 +45,7 @@
                           delay:0
                         options:UIViewAnimationOptionRepeat | UIViewAnimationOptionCurveEaseIn
                      animations:^{
+                         [UIView setAnimationRepeatCount:INFINITY];
                          [self.uploadingIndicator setFrame:CGRectMake(rightOriginX, self.uploadingIndicator.frame.origin.y, self.uploadingIndicator.frame.size.width, self.uploadingIndicator.frame.size.height)];
                      }
                      completion:nil];
