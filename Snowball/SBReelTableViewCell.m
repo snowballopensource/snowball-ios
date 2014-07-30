@@ -9,6 +9,7 @@
 #import "SBClip.h"
 #import "SBReel.h"
 #import "SBReelTableViewCell.h"
+#import "SBUploadingIndicatorView.h"
 #import "SBUser.h"
 #import "SBUserImageView.h"
 
@@ -30,7 +31,7 @@
 @property (nonatomic, weak) IBOutlet UIImageView *addClipIndicator;
 
 @property (nonatomic) BOOL showsUploadingIndicator;
-@property (nonatomic, weak) IBOutlet UIView *uploadingIndicator;
+@property (nonatomic, weak) IBOutlet SBUploadingIndicatorView *uploadingIndicator;
 
 @property (nonatomic) SBReelTableViewCellState state;
 

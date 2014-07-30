@@ -5,7 +5,6 @@
 #import "SBManagedObject.h"
 
 extern const struct SBReelAttributes {
-	__unsafe_unretained NSString *homeFeedSession;
 	__unsafe_unretained NSString *lastClipCreatedAt;
 	__unsafe_unretained NSString *lastClipThumbnailURL;
 	__unsafe_unretained NSString *name;
@@ -32,7 +31,6 @@ extern const struct SBReelFetchedProperties {
 
 
 
-
 @interface SBReelID : NSManagedObjectID {}
 @end
 
@@ -41,16 +39,6 @@ extern const struct SBReelFetchedProperties {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (SBReelID*)objectID;
-
-
-
-
-
-@property (nonatomic, strong) NSDate* homeFeedSession;
-
-
-
-//- (BOOL)validateHomeFeedSession:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -145,12 +133,6 @@ extern const struct SBReelFetchedProperties {
 @end
 
 @interface _SBReel (CoreDataGeneratedPrimitiveAccessors)
-
-
-- (NSDate*)primitiveHomeFeedSession;
-- (void)setPrimitiveHomeFeedSession:(NSDate*)value;
-
-
 
 
 - (NSDate*)primitiveLastClipCreatedAt;

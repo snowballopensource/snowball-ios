@@ -39,6 +39,7 @@
 		BA5CD6921926CEDA0087D3A2 /* SBFadeOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD6911926CEDA0087D3A2 /* SBFadeOverlayView.m */; };
 		BA632029195CED8500BA6B75 /* SBEditParticipantsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA632028195CED8500BA6B75 /* SBEditParticipantsViewController.m */; };
 		BA63202C195CEE4B00BA6B75 /* SBFollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA63202B195CEE4B00BA6B75 /* SBFollowingViewController.m */; };
+		BA670C9A198933F000E2D536 /* SBUploadingIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA670C99198933F000E2D536 /* SBUploadingIndicatorView.m */; };
 		BA6AD8EF1964C66100FEADB2 /* UITextField+CustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6AD8EE1964C66100FEADB2 /* UITextField+CustomFont.m */; };
 		BA7DEC4B1981F3DC00943BFF /* UIImageView+TintColor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7DEC4A1981F3DC00943BFF /* UIImageView+TintColor.m */; };
 		BA7DEC4E1981F4A400943BFF /* UIColor+RandomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7DEC4D1981F4A400943BFF /* UIColor+RandomColor.m */; };
@@ -165,6 +166,8 @@
 		BA632028195CED8500BA6B75 /* SBEditParticipantsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBEditParticipantsViewController.m; sourceTree = "<group>"; };
 		BA63202A195CEE4B00BA6B75 /* SBFollowingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFollowingViewController.h; sourceTree = "<group>"; };
 		BA63202B195CEE4B00BA6B75 /* SBFollowingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFollowingViewController.m; sourceTree = "<group>"; };
+		BA670C98198933F000E2D536 /* SBUploadingIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUploadingIndicatorView.h; sourceTree = "<group>"; };
+		BA670C99198933F000E2D536 /* SBUploadingIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUploadingIndicatorView.m; sourceTree = "<group>"; };
 		BA6AD8ED1964C66100FEADB2 /* UITextField+CustomFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+CustomFont.h"; sourceTree = "<group>"; };
 		BA6AD8EE1964C66100FEADB2 /* UITextField+CustomFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+CustomFont.m"; sourceTree = "<group>"; };
 		BA7DEC491981F3DC00943BFF /* UIImageView+TintColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+TintColor.h"; sourceTree = "<group>"; };
@@ -395,6 +398,8 @@
 				BA8E99591953A0CB00DCECD9 /* SBFollowButton.m */,
 				BAAA0E31195CF1CB002B1148 /* SBCheckButton.h */,
 				BAAA0E32195CF1CB002B1148 /* SBCheckButton.m */,
+				BA670C98198933F000E2D536 /* SBUploadingIndicatorView.h */,
+				BA670C99198933F000E2D536 /* SBUploadingIndicatorView.m */,
 				BA4AC5DF1938EA960004D5CF /* Camera */,
 				BA9370041923173200D3CAFB /* Cells */,
 			);
@@ -843,6 +848,7 @@
 				BAE1FF1719401B5C000A9D80 /* SBCameraNavigationController.m in Sources */,
 				BAEC7C10193DE528003FAE13 /* SBWebViewController.m in Sources */,
 				BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */,
+				BA670C9A198933F000E2D536 /* SBUploadingIndicatorView.m in Sources */,
 				BA3660EB1986C6A700AEB03E /* UIViewController+ModalDetection.m in Sources */,
 				BA8E994F195382FE00DCECD9 /* SBAddressBookManager.m in Sources */,
 				BA217C9A192A4DF500F04D03 /* SBLongRunningTaskManager.m in Sources */,

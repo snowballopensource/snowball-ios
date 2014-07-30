@@ -63,7 +63,6 @@
                                           } else {
                                               reel = [SBReel MR_importFromObject:object inContext:localContext];
                                           }
-                                          [reel setHomeFeedSession:[SBSessionManager sessionDate]];
                                       }];
                                   }];
                                   if (success) { success([_reels count]); };

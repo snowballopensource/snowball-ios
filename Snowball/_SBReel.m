@@ -4,7 +4,6 @@
 #import "_SBReel.h"
 
 const struct SBReelAttributes SBReelAttributes = {
-	.homeFeedSession = @"homeFeedSession",
 	.lastClipCreatedAt = @"lastClipCreatedAt",
 	.lastClipThumbnailURL = @"lastClipThumbnailURL",
 	.name = @"name",
@@ -50,13 +49,6 @@ const struct SBReelFetchedProperties SBReelFetchedProperties = {
 
 	return keyPaths;
 }
-
-
-
-
-@dynamic homeFeedSession;
-
-
 
 
 

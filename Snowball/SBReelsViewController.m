@@ -40,7 +40,6 @@
     
     [self setEntityClass:[SBReel class]];
     [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"lastClipCreatedAt" ascending:NO]]];
-    [self setPredicate:[NSPredicate predicateWithFormat:@"homeFeedSession == %@", [SBSessionManager sessionDate]]];
     
     [self.playerView setHidden:YES];
     [self.createNewSnowballView setHidden:YES];
@@ -126,7 +125,6 @@
                                [self setIsLoading:!canLoadMore];
                                [self.refreshControl endRefreshing];
                                [self setFetchedResultsController:nil];
-                               [self.tableView reloadData];
                            } failure:^(NSError *error) {
                                [self.refreshControl endRefreshing];
                            }];

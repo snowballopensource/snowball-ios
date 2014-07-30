@@ -54,15 +54,9 @@
                         <rect key="frame" x="207" y="43" width="11" height="11"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <view appearanceType="aqua" contentMode="scaleToFill" id="UW0-iq-GZd">
+                    <view appearanceType="aqua" contentMode="scaleToFill" id="UW0-iq-GZd" customClass="SBUploadingIndicatorView">
                         <rect key="frame" x="255" y="0.0" width="65" height="65"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-airplane" id="vbB-TW-CCC">
-                                <rect key="frame" x="16" y="19" width="33" height="28"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </subviews>
@@ -84,7 +78,6 @@
         <image name="button-chevron-normal" width="13" height="24"/>
         <image name="button-play-normal" width="34" height="39"/>
         <image name="button-plus-normal" width="28" height="28"/>
-        <image name="icon-airplane" width="33" height="28"/>
         <image name="icon-clock" width="11" height="11"/>
     </resources>
 </document>
