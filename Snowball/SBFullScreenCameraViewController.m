@@ -28,6 +28,7 @@
             NSData *data = [NSData dataWithContentsOfURL:fileURL];
             [clip setVideoToSubmit:data];
             [self.reel save];
+            [clip setCreatedAt:[NSDate date]];
             [clip save];
             [SBLongRunningTaskManager addBlockToQueue:^{
                 [clip create];

@@ -103,6 +103,7 @@
             NSData *data = [NSData dataWithContentsOfURL:self.recordingURL];
             [clip setVideoToSubmit:data];
             [reel save];
+            [clip setCreatedAt:[NSDate date]];
             [clip save];
             [SBLongRunningTaskManager addBlockToQueue:^{
                 [clip create];

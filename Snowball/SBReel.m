@@ -27,11 +27,19 @@
 }
 
 - (BOOL)hasPendingUpload {
-    SBClip *lastClip = [[self.clips allObjects] lastObject];
+    SBClip *lastClip = [self lastClip];
     if (lastClip) {
-        return (lastClip.remoteID.length < 1) ? YES : NO;
+        static NSUInteger timeout = 300;
+        NSUInteger timeSince = [lastClip.createdAt timeIntervalSinceNow]*-1;
+        if (timeSince < timeout) {
+            return (lastClip.remoteID.length < 1) ? YES : NO;
+        }
     }
     return NO;
+}
+
+- (SBClip *)lastClip {
+    return [SBClip MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"reel == %@", self] sortedBy:@"createdAt" ascending:NO];
 }
 
 #pragma mark - Remote
