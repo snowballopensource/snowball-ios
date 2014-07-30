@@ -49,8 +49,6 @@
             [object setImageTintColor:[UIColor whiteColor]];
         }
     }];
-    
-    // [self startCellStateDemo];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -201,20 +199,6 @@
                          CGFloat newY = self.createNewSnowballView.frame.origin.y - self.createNewSnowballView.frame.size.height;
                          [self.createNewSnowballView setFrame:CGRectMake(self.createNewSnowballView.frame.origin.x, newY, self.createNewSnowballView.frame.size.width, self.createNewSnowballView.frame.size.height)];
                      }];
-}
-
-#pragma mark - Testing
-
-- (void)startCellStateDemo {
-    [NSTimer bk_scheduledTimerWithTimeInterval:2.0
-                                         block:^(NSTimer *timer) {
-                                             if (self.cellState == SBReelTableViewCellStateNormal) {
-                                                 [self setCellState:SBReelTableViewCellStateAddClip];
-                                             } else {
-                                                 [self setCellState:SBReelTableViewCellStateNormal];
-                                             }
-                                         }
-                                       repeats:YES];
 }
 
 @end
