@@ -33,8 +33,9 @@
     [self setupPullToRefresh];
     
     // Start loading remote objects on first page immediately.
-    [self setCurrentPage:1];
-    [self getRemoteObjects];
+    [self.refreshControl beginRefreshing];
+    [self.refreshControl sendActionsForControlEvents:UIControlEventValueChanged];
+    [self.tableView setContentOffset:CGPointMake(0, -self.refreshControl.frame.size.height) animated:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
