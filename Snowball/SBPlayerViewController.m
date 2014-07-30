@@ -16,7 +16,7 @@
 @property (nonatomic, weak) IBOutlet SBPlayerView *playerView;
 
 @property (nonatomic, strong) NSArray *clips;
-@property (nonatomic) NSUInteger currentClipIndex;
+@property (nonatomic, strong) SBClip *currentClip;
 
 @end
 
@@ -50,7 +50,7 @@
     }
     NSFetchRequest *fetchRequest = [SBClip MR_requestAllSortedBy:@"createdAt" ascending:YES withPredicate:predicate];
     [self setClips:[SBClip MR_executeFetchRequest:fetchRequest]];
-    self.clipChangedBlock([self.clips firstObject]);
+    [self setCurrentClip:[self.clips firstObject]];
     AVQueuePlayer *player = [[AVQueuePlayer alloc] initWithItems:[self createPlayerItems]];
     [self.playerView setPlayer:player];
     if (self.clips.count == 1) {
@@ -85,22 +85,21 @@
 }
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
-    SBClip *previousClip = self.clips[self.currentClipIndex];
+    NSUInteger currentClipIndex = [self.clips indexOfObject:self.currentClip];
+    SBClip *previousClip = self.clips[currentClipIndex];
     [self.reel setLastWatchedClip:previousClip];
     [self.reel save];
-    
-    NSUInteger nextClipIndex = self.currentClipIndex+1;
-    
+
+    NSUInteger nextClipIndex = currentClipIndex+1;
+
     if (nextClipIndex < [self.clips count]) {
         SBClip *nextClip = self.clips[nextClipIndex];
-        self.clipChangedBlock(nextClip);
+        [self setCurrentClip:nextClip];
     }
     if (nextClipIndex == [self.clips count]-1) {
         // Last clip coming up next
         [self.playerView.player setActionAtItemEnd:AVPlayerActionAtItemEndPause];
     }
-    
-    self.currentClipIndex ++;
 }
 
 - (NSArray *)createPlayerItems {
@@ -114,6 +113,11 @@
         [playerItems addObject:playerItem];
     }
     return [playerItems copy];
+}
+
+- (void)setCurrentClip:(SBClip *)currentClip {
+    self.clipChangedBlock(currentClip);
+    _currentClip = currentClip;
 }
 
 @end
