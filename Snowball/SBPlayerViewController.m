@@ -44,9 +44,9 @@
 - (void)playReel {
     NSPredicate *predicate;
     if (self.reel.lastWatchedClip.createdAt) {
-        predicate = [NSPredicate predicateWithFormat:@"reel == %@ && createdAt >= %@", self.reel, self.reel.lastWatchedClip.createdAt];
+        predicate = [NSPredicate predicateWithFormat:@"reel == %@ && videoURL != nil && createdAt >= %@", self.reel, self.reel.lastWatchedClip.createdAt];
     } else {
-        predicate = [NSPredicate predicateWithFormat:@"reel == %@", self.reel];
+        predicate = [NSPredicate predicateWithFormat:@"reel == %@ && videoURL != nil", self.reel];
     }
     NSFetchRequest *fetchRequest = [SBClip MR_requestAllSortedBy:@"createdAt" ascending:YES withPredicate:predicate];
     [self setClips:[SBClip MR_executeFetchRequest:fetchRequest]];
@@ -106,14 +106,12 @@
 - (NSArray *)createPlayerItems {
     NSMutableArray *playerItems = [@[] mutableCopy];
     for (SBClip *clip in self.clips) {
-        if ([clip.videoURL length] > 0) {
-            AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:clip.videoURL]];
-            [[NSNotificationCenter defaultCenter] addObserver:self
-                                                     selector:@selector(playerItemDidReachEnd:)
-                                                         name:AVPlayerItemDidPlayToEndTimeNotification
-                                                       object:playerItem];
-            [playerItems addObject:playerItem];
-        }
+        AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:clip.videoURL]];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(playerItemDidReachEnd:)
+                                                     name:AVPlayerItemDidPlayToEndTimeNotification
+                                                   object:playerItem];
+        [playerItems addObject:playerItem];
     }
     return [playerItems copy];
 }
