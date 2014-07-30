@@ -31,7 +31,6 @@
 
 @property (nonatomic) BOOL showsUploadingIndicator;
 @property (nonatomic, weak) IBOutlet UIView *uploadingIndicator;
-@property (nonatomic, strong) UIActivityIndicatorView *uploadingIndicatorSpinner;
 
 @property (nonatomic) SBReelTableViewCellState state;
 
@@ -210,22 +209,10 @@
     dispatch_once(&onceToken, ^{
         defaultUploadingIndicatorCenterX = self.uploadingIndicator.center.x;
     });
-
-    CGFloat newCenterX = 0;
-    if (showsUploadingIndicator) {
-        unless (self.uploadingIndicatorSpinner) {
-            self.uploadingIndicatorSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-            [self.uploadingIndicatorSpinner setFrame:self.uploadingIndicator.bounds];
-            [self.uploadingIndicator addSubview:self.uploadingIndicatorSpinner];
-        }
-        [self.uploadingIndicatorSpinner startAnimating];
-        newCenterX = defaultUploadingIndicatorCenterX;
-    } else {
-        [self.uploadingIndicatorSpinner stopAnimating];
-        newCenterX = defaultUploadingIndicatorCenterX + 150;
-    }
+    
+    CGFloat newCenterX = (showsUploadingIndicator) ? defaultUploadingIndicatorCenterX : defaultUploadingIndicatorCenterX + 150;
     [self.uploadingIndicator setCenter:CGPointMake(newCenterX, self.uploadingIndicator.center.y)];
-
+    
     _showsUploadingIndicator = showsUploadingIndicator;
 }
 
