@@ -34,6 +34,8 @@ static SBUser *_currentUser = nil;
             return nil;
         }
         [_currentUser setAuthToken:currentUserAuthToken];
+
+        [SBPushNotificationManager enablePushWithUserID:_currentUser.remoteID];
     }
     return _currentUser;
 }
@@ -46,7 +48,6 @@ static SBUser *_currentUser = nil;
                                                   forKey:kSBCurrentUserRemoteID];
         [[NSUserDefaults standardUserDefaults] setObject:user.authToken
                                                   forKey:kSBCurrentUserAuthToken];
-        [SBPushNotificationManager enablePushWithUserID:user.remoteID];
     }
     else {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBCurrentUserRemoteID];
