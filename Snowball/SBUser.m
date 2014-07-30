@@ -39,19 +39,21 @@ static SBUser *_currentUser = nil;
 }
 
 + (void)setCurrentUser:(SBUser *)currentUser {
-    if (currentUser) {
-        [[NSUserDefaults standardUserDefaults] setObject:currentUser.remoteID
+    SBUser *user = [currentUser MR_inContext:[NSManagedObjectContext MR_defaultContext]];
+    [user setAuthToken:currentUser.authToken];
+    if (user) {
+        [[NSUserDefaults standardUserDefaults] setObject:user.remoteID
                                                   forKey:kSBCurrentUserRemoteID];
-        [[NSUserDefaults standardUserDefaults] setObject:currentUser.authToken
+        [[NSUserDefaults standardUserDefaults] setObject:user.authToken
                                                   forKey:kSBCurrentUserAuthToken];
-        [SBPushNotificationManager enablePushWithUserID:currentUser.remoteID];
+        [SBPushNotificationManager enablePushWithUserID:user.remoteID];
     }
     else {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBCurrentUserRemoteID];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBCurrentUserAuthToken];
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
-    _currentUser = currentUser;
+    _currentUser = user;
     [[SBAPIManager sharedManager] loadAuthToken];
 }
 
