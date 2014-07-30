@@ -108,6 +108,10 @@
     for (SBClip *clip in self.clips) {
         if ([clip.videoURL length] > 0) {
             AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:clip.videoURL]];
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(playerItemDidReachEnd:)
+                                                         name:AVPlayerItemDidPlayToEndTimeNotification
+                                                       object:playerItem];
             [playerItems addObject:playerItem];
         }
     }
