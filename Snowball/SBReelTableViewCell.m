@@ -66,7 +66,7 @@
     if (reel.name) {
         [self.nameLabel setText:reel.name];
     } else {
-        [self.nameLabel setText:nil];
+        [self.nameLabel setText:@""];
     }
     [self.nameLabel setFont:[UIFont fontWithName:[UIFont snowballFontNameMedium] size:12]];
 

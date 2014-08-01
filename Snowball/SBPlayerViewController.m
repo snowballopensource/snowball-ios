@@ -23,9 +23,11 @@
 
 @implementation SBPlayerViewController
 
+#pragma mark - UIViewController
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [self showSpinner];
     [SBClip getRecentClipsForReel:self.reel
                             since:self.reel.lastWatchedClip.createdAt
@@ -48,9 +50,9 @@
 - (void)playReel {
     NSPredicate *predicate;
     if (self.reel.lastWatchedClip.createdAt) {
-        predicate = [NSPredicate predicateWithFormat:@"reel == %@ && videoURL != nil && createdAt >= %@", self.reel, self.reel.lastWatchedClip.createdAt];
+        predicate = [NSPredicate predicateWithFormat:@"remoteID != nil && reel == %@ && videoURL != nil && createdAt >= %@", self.reel, self.reel.lastWatchedClip.createdAt];
     } else {
-        predicate = [NSPredicate predicateWithFormat:@"reel == %@ && videoURL != nil", self.reel];
+        predicate = [NSPredicate predicateWithFormat:@"remoteID != nil && reel == %@ && videoURL != nil", self.reel];
     }
     NSFetchRequest *fetchRequest = [SBClip MR_requestAllSortedBy:@"createdAt" ascending:YES withPredicate:predicate];
     [self setClips:[SBClip MR_executeFetchRequest:fetchRequest]];
@@ -69,21 +71,9 @@
     } else {
         [player setActionAtItemEnd:AVPlayerActionAtItemEndAdvance];
     }
-    
-    // Handle buffering during clip playback
-    [player bk_addObserverForKeyPath:@"rate" task:^(id target) {
-        if (player.rate == 1) {
-            [self hideSpinner];
-        }
-        if (player.rate == 0 && CMTimeGetSeconds(player.currentItem.currentTime) != CMTimeGetSeconds(player.currentItem.duration)) {
-            [self showSpinner];
-            [player.currentItem bk_addObserverForKeyPath:@"playbackLikelyToKeepUp" task:^(id target) {
-                if (player.currentItem.playbackLikelyToKeepUp) {
-                    [player play];
-                }
-            }];
-        }
-    }];
+
+    [self setupPlayerIssueHandling];
+
     [player play];
 }
 
@@ -120,6 +110,8 @@
     }
 }
 
+#pragma mark - Private
+
 - (NSArray *)createPlayerItems {
     NSMutableArray *playerItems = [@[] mutableCopy];
     for (SBClip *clip in self.clips) {
@@ -132,6 +124,34 @@
     }
     return [playerItems copy];
 }
+
+- (void)setupPlayerIssueHandling {
+    AVQueuePlayer *player = (AVQueuePlayer *)self.playerView.player;
+
+    // Handle player errors
+    [player bk_addObserverForKeyPath:@"status" task:^(id target) {
+        if (player.status == AVPlayerStatusFailed) {
+            NSLog(@"Player Error: %@", player.error);
+        }
+    }];
+
+    // Handle buffering during clip playback
+    [player bk_addObserverForKeyPath:@"rate" task:^(id target) {
+        if (player.rate == 1) {
+            [self hideSpinner];
+        }
+        if (player.rate == 0 && CMTimeGetSeconds(player.currentItem.currentTime) != CMTimeGetSeconds(player.currentItem.duration)) {
+            [self showSpinner];
+            [player.currentItem bk_addObserverForKeyPath:@"playbackLikelyToKeepUp" task:^(id target) {
+                if (player.currentItem.playbackLikelyToKeepUp) {
+                    [player play];
+                }
+            }];
+        }
+    }];
+}
+
+#pragma mark - Setters / Getters
 
 - (void)setCurrentClip:(SBClip *)currentClip {
     self.clipChangedBlock(currentClip);
