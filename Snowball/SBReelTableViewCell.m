@@ -141,13 +141,24 @@
         }
             break;
     }
+    void(^completion)(void) = ^{
+        if (self.showsUploadingIndicator) {
+            [self.uploadingIndicator beginAnimating];
+        } else {
+            [self.uploadingIndicator endAnimating];
+        }
+    };
     if (animated) {
         [UIView animateWithDuration:animationDuration
                          animations:^{
                              positionSubviews();
+                         }
+                         completion:^(BOOL finished) {
+                             completion();
                          }];
     } else {
         positionSubviews();
+        completion();
     }
 }
 
@@ -213,11 +224,6 @@
     
     CGFloat newCenterX = (showsUploadingIndicator) ? defaultUploadingIndicatorCenterX : defaultUploadingIndicatorCenterX + 150;
     [self.uploadingIndicator setCenter:CGPointMake(newCenterX, self.uploadingIndicator.center.y)];
-    if (showsUploadingIndicator) {
-        [self.uploadingIndicator animate:YES];
-    } else {
-        [self.uploadingIndicator animate:NO];
-    }
     
     _showsUploadingIndicator = showsUploadingIndicator;
 }

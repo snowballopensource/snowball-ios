@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) UIImageView *uploadingIndicator;
 
-@property (nonatomic) BOOL isAnimating;
+@property (nonatomic) BOOL animating;
 
 @end
 
@@ -21,27 +21,18 @@
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        UIImage *uploadingIcon = [UIImage imageNamed:@"icon-airplane"];
-        UIImageView *uploadingIndicator = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, uploadingIcon.size.width, uploadingIcon.size.height)];
-        [uploadingIndicator setImage:uploadingIcon];
-        [uploadingIndicator setCenter:self.center];
-        [self addSubview:uploadingIndicator];
-        [self setUploadingIndicator:uploadingIndicator];
+        UIImage *image = [UIImage imageNamed:@"icon-airplane"];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        [self setUploadingIndicator:imageView];
+        [self addSubview:self.uploadingIndicator];
     }
     return self;
 }
 
-- (void)animate:(BOOL)animated {
-    static CGFloat defaultUploadingIndicatorOriginX = 0;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        defaultUploadingIndicatorOriginX = self.uploadingIndicator.frame.origin.x;
-    });
-    
-    if (animated) {
+- (void)beginAnimating {
+    unless (self.animating) {
         CGFloat leftOriginX = self.uploadingIndicator.frame.size.width * -1;
         CGFloat rightOriginX = self.frame.size.width + self.uploadingIndicator.frame.size.width;
-        
         [self.uploadingIndicator setFrame:CGRectMake(leftOriginX, self.uploadingIndicator.frame.origin.y, self.uploadingIndicator.frame.size.width, self.uploadingIndicator.frame.size.height)];
         [UIView animateWithDuration:1.5
                               delay:0
@@ -51,12 +42,15 @@
                              [self.uploadingIndicator setFrame:CGRectMake(rightOriginX, self.uploadingIndicator.frame.origin.y, self.uploadingIndicator.frame.size.width, self.uploadingIndicator.frame.size.height)];
                          }
                          completion:^(BOOL finished) {
-                             [self setIsAnimating:NO];
+                             [self setAnimating:NO];
                          }];
-    } else {
-        [self.uploadingIndicator setFrame:CGRectMake(defaultUploadingIndicatorOriginX, self.uploadingIndicator.frame.origin.y, self.uploadingIndicator.frame.size.width, self.uploadingIndicator.frame.size.height)];
-        
     }
+}
+
+- (void)endAnimating {
+    [self.layer removeAllAnimations];
+    [self.uploadingIndicator.layer removeAllAnimations];
+    [self setAnimating:NO];
 }
 
 @end
