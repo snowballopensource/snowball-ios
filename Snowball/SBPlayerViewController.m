@@ -41,7 +41,8 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [self.playerView.player pause];
+    AVQueuePlayer *player = (AVQueuePlayer *)self.playerView.player;
+    [player removeAllItems];
     [super viewWillDisappear:animated];
 }
 
