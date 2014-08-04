@@ -10,7 +10,7 @@
 
 @interface SBUploadingIndicatorView ()
 
-@property (nonatomic, strong) UIImageView *uploadingIndicator;
+@property (nonatomic, strong) UIImageView *uploadingImageView;
 
 @property (nonatomic) BOOL animating;
 
@@ -23,23 +23,23 @@
     if (self) {
         UIImage *image = [UIImage imageNamed:@"icon-airplane"];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-        [self setUploadingIndicator:imageView];
-        [self addSubview:self.uploadingIndicator];
+        [self setUploadingImageView:imageView];
+        [self addSubview:self.uploadingImageView];
     }
     return self;
 }
 
 - (void)beginAnimating {
     unless (self.animating) {
-        CGFloat leftOriginX = self.uploadingIndicator.frame.size.width * -1;
-        CGFloat rightOriginX = self.frame.size.width + self.uploadingIndicator.frame.size.width;
-        [self.uploadingIndicator setFrame:CGRectMake(leftOriginX, self.uploadingIndicator.frame.origin.y, self.uploadingIndicator.frame.size.width, self.uploadingIndicator.frame.size.height)];
+        CGFloat leftOriginX = self.uploadingImageView.frame.size.width * -1;
+        CGFloat rightOriginX = self.frame.size.width + self.uploadingImageView.frame.size.width;
+        [self.uploadingImageView setFrame:CGRectMake(leftOriginX, self.uploadingImageView.frame.origin.y, self.uploadingImageView.frame.size.width, self.uploadingImageView.frame.size.height)];
         [UIView animateWithDuration:1.5
                               delay:0
                             options:UIViewAnimationOptionRepeat | UIViewAnimationOptionCurveEaseIn
                          animations:^{
                              [UIView setAnimationRepeatCount:INFINITY];
-                             [self.uploadingIndicator setFrame:CGRectMake(rightOriginX, self.uploadingIndicator.frame.origin.y, self.uploadingIndicator.frame.size.width, self.uploadingIndicator.frame.size.height)];
+                             [self.uploadingImageView setFrame:CGRectMake(rightOriginX, self.uploadingImageView.frame.origin.y, self.uploadingImageView.frame.size.width, self.uploadingImageView.frame.size.height)];
                          }
                          completion:^(BOOL finished) {
                              [self setAnimating:NO];
@@ -49,7 +49,7 @@
 
 - (void)endAnimating {
     [self.layer removeAllAnimations];
-    [self.uploadingIndicator.layer removeAllAnimations];
+    [self.uploadingImageView.layer removeAllAnimations];
     [self setAnimating:NO];
 }
 
