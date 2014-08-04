@@ -33,13 +33,16 @@
     unless (self.animating) {
         CGFloat leftOriginX = self.uploadingImageView.frame.size.width * -1;
         CGFloat rightOriginX = self.frame.size.width + self.uploadingImageView.frame.size.width;
-        [self.uploadingImageView setFrame:CGRectMake(leftOriginX, self.uploadingImageView.frame.origin.y, self.uploadingImageView.frame.size.width, self.uploadingImageView.frame.size.height)];
+        CGFloat centerY = (self.bounds.size.height / 2) - (self.uploadingImageView.frame.size.height / 2);
+
+        [self.uploadingImageView setFrame:CGRectMake(leftOriginX, centerY, self.uploadingImageView.frame.size.width, self.uploadingImageView.frame.size.height)];
+
         [UIView animateWithDuration:1.5
                               delay:0
                             options:UIViewAnimationOptionRepeat | UIViewAnimationOptionCurveEaseIn
                          animations:^{
                              [UIView setAnimationRepeatCount:INFINITY];
-                             [self.uploadingImageView setFrame:CGRectMake(rightOriginX, self.uploadingImageView.frame.origin.y, self.uploadingImageView.frame.size.width, self.uploadingImageView.frame.size.height)];
+                             [self.uploadingImageView setFrame:CGRectMake(rightOriginX, centerY, self.uploadingImageView.frame.size.width, self.uploadingImageView.frame.size.height)];
                          }
                          completion:^(BOOL finished) {
                              [self setAnimating:NO];
