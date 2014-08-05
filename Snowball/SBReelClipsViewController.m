@@ -9,7 +9,6 @@
 #import "SBClip.h"
 #import "SBParticipantsViewController.h"
 #import "SBPlayerViewController.h"
-#import "SBProfileViewController.h"
 #import "SBReel.h"
 #import "SBReelClipsViewController.h"
 #import "SBUser.h"
@@ -51,10 +50,7 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.destinationViewController isKindOfClass:[SBProfileViewController class]]) {
-        SBProfileViewController *vc = segue.destinationViewController;
-        [vc setUser:self.currentClip.user];
-    } else if ([segue.destinationViewController isKindOfClass:[SBParticipantsViewController class]]) {
+    if ([segue.destinationViewController isKindOfClass:[SBParticipantsViewController class]]) {
         SBParticipantsViewController *vc = segue.destinationViewController;
         [vc setReel:self.reel];
     } else if ([segue.destinationViewController isKindOfClass:[SBPlayerViewController class]]) {

@@ -16,7 +16,6 @@
 
 @property (nonatomic, weak) IBOutlet UITextField *usernameTextField;
 @property (nonatomic, weak) IBOutlet UITextField *nameTextField;
-@property (nonatomic, weak) IBOutlet UITextField *bioTextField;
 @property (nonatomic, weak) IBOutlet UITextField *emailTextField;
 @property (nonatomic, weak) IBOutlet UITextField *phoneTextField;
 
@@ -33,20 +32,27 @@
     [self setBackButtonStyle:UIViewControllerBackButtonStyleDark];
 
     SBUser *user = [SBUser currentUser];
-    UIImage *placeholderImage = [SBUserImageView placeholderImageWithInitials:user.name.initials
-                                                                     withSize:self.userImageView.bounds.size];
-    [self.userImageView setImageWithURL:[NSURL URLWithString:user.avatarURL]
-                       placeholderImage:placeholderImage];
-    [self.usernameTextField setText:user.username];
-    [self.nameTextField setText:user.name];
-    [self.bioTextField setText:user.bio];
-    [self.emailTextField setText:user.email];
-    [self.phoneTextField setText:user.phoneNumber];
+    [self showSpinner];
+    [user getWithSuccess:^{
+        UIImage *placeholderImage = [SBUserImageView placeholderImageWithInitials:user.name.initials
+                                                                         withSize:self.userImageView.bounds.size];
+        [self.userImageView setImageWithURL:[NSURL URLWithString:user.avatarURL]
+                           placeholderImage:placeholderImage];
+        [self.usernameTextField setText:user.username];
+        [self.nameTextField setText:user.name];
+        [self.emailTextField setText:user.email];
+        [self.phoneTextField setText:user.phoneNumber];
+        [self hideSpinner];
+    } failure:^(NSError *error) {
+        [self hideSpinner];
+        [error displayInView:self.view];
+    }];
 }
 
 #pragma mark - View Actions
 
 - (IBAction)editProfileImage:(id)sender {
+    // TODO: allow profile image editing
     [UIAlertView bk_showAlertViewWithTitle:@"Hello!" message:@"Haven't finished this yet. :)" cancelButtonTitle:@"Ok" otherButtonTitles:nil handler:nil];
 }
 
@@ -69,7 +75,6 @@
         [user setName:self.nameTextField.text];
         [user setUsername:self.usernameTextField.text];
         [user setEmail:self.emailTextField.text];
-        [user setBio:self.bioTextField.text];
         [user setPhoneNumber:self.phoneTextField.text];
         [user updateWithSuccess:^{
             [self hideSpinner];
