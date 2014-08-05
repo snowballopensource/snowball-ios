@@ -31,10 +31,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    unless (self.reel) {
-        self.reel = [SBReel MR_findFirstByAttribute:@"remoteID" withValue:self.reelID];
-    }
 
     if ([self isModal]) {
         [self.modalXButton setHidden:NO];
@@ -62,6 +58,16 @@
         if (self.localVideoURL) {
             [vc setLocalVideoURL:self.localVideoURL];
         } else {
+            // This ensures we have a reel before showing video player
+            unless (self.reel) {
+                SBReel *reel = [SBReel MR_findFirstByAttribute:@"remoteID" withValue:self.reelID];
+                unless (reel) {
+                    reel = [SBReel MR_createEntity];
+                    [reel setRemoteID:self.reelID];
+                    [reel save];
+                }
+                [self setReel:reel];
+            }
             [vc setReel:self.reel];
         }
     }
