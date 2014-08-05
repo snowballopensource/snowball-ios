@@ -81,13 +81,11 @@
 		BAC9FB4B19241858008742EE /* SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC9FB4A19241858008742EE /* SBUser.m */; };
 		BACD812F19477D51009A70B6 /* UIBarButtonItem+Hidden.m in Sources */ = {isa = PBXBuildFile; fileRef = BACD812E19477D51009A70B6 /* UIBarButtonItem+Hidden.m */; };
 		BACD81321947D960009A70B6 /* SBTransparentNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BACD81311947D960009A70B6 /* SBTransparentNavigationBar.m */; };
-		BACD81351947E8B1009A70B6 /* SBFullScreenCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BACD81341947E8B1009A70B6 /* SBFullScreenCameraViewController.m */; };
 		BACEC3AA19835F390032FCFE /* SBDeepLinkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BACEC3A919835F390032FCFE /* SBDeepLinkManager.m */; };
 		BAD86C2F193553BC0046EE22 /* SBFacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD86C2E193553BC0046EE22 /* SBFacebookManager.m */; };
 		BADB9AB81958B52D00AB8C5C /* SBParticipantsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BADB9AB71958B52D00AB8C5C /* SBParticipantsViewController.m */; };
 		BAE17A771987FFAF0019BDA1 /* SBPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE17A761987FFAF0019BDA1 /* SBPlayerViewController.m */; };
 		BAE1FF1419401B38000A9D80 /* SBNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE1FF1319401B38000A9D80 /* SBNavigationController.m */; };
-		BAE1FF1719401B5C000A9D80 /* SBCameraNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE1FF1619401B5C000A9D80 /* SBCameraNavigationController.m */; };
 		BAE89609193F6E6600E96E6B /* SBCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE89608193F6E6600E96E6B /* SBCameraViewController.m */; };
 		BAE8960C193FAB8C00E96E6B /* SBCreateReelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE8960B193FAB8C00E96E6B /* SBCreateReelViewController.m */; };
 		BAEC7C10193DE528003FAE13 /* SBWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAEC7C0F193DE528003FAE13 /* SBWebViewController.m */; };
@@ -244,8 +242,6 @@
 		BACD812E19477D51009A70B6 /* UIBarButtonItem+Hidden.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Hidden.m"; sourceTree = "<group>"; };
 		BACD81301947D960009A70B6 /* SBTransparentNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBTransparentNavigationBar.h; sourceTree = "<group>"; };
 		BACD81311947D960009A70B6 /* SBTransparentNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBTransparentNavigationBar.m; sourceTree = "<group>"; };
-		BACD81331947E8B1009A70B6 /* SBFullScreenCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFullScreenCameraViewController.h; sourceTree = "<group>"; };
-		BACD81341947E8B1009A70B6 /* SBFullScreenCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFullScreenCameraViewController.m; sourceTree = "<group>"; };
 		BACEC3A819835F390032FCFE /* SBDeepLinkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBDeepLinkManager.h; sourceTree = "<group>"; };
 		BACEC3A919835F390032FCFE /* SBDeepLinkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBDeepLinkManager.m; sourceTree = "<group>"; };
 		BAD86C2D193553BC0046EE22 /* SBFacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFacebookManager.h; sourceTree = "<group>"; };
@@ -256,8 +252,6 @@
 		BAE17A761987FFAF0019BDA1 /* SBPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBPlayerViewController.m; sourceTree = "<group>"; };
 		BAE1FF1219401B38000A9D80 /* SBNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBNavigationController.h; sourceTree = "<group>"; };
 		BAE1FF1319401B38000A9D80 /* SBNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBNavigationController.m; sourceTree = "<group>"; };
-		BAE1FF1519401B5C000A9D80 /* SBCameraNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCameraNavigationController.h; sourceTree = "<group>"; };
-		BAE1FF1619401B5C000A9D80 /* SBCameraNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCameraNavigationController.m; sourceTree = "<group>"; };
 		BAE89607193F6E6600E96E6B /* SBCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCameraViewController.h; sourceTree = "<group>"; };
 		BAE89608193F6E6600E96E6B /* SBCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCameraViewController.m; sourceTree = "<group>"; };
 		BAE8960A193FAB8C00E96E6B /* SBCreateReelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCreateReelViewController.h; sourceTree = "<group>"; };
@@ -617,10 +611,6 @@
 		BAE1FF1819401B60000A9D80 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				BAE1FF1519401B5C000A9D80 /* SBCameraNavigationController.h */,
-				BAE1FF1619401B5C000A9D80 /* SBCameraNavigationController.m */,
-				BACD81331947E8B1009A70B6 /* SBFullScreenCameraViewController.h */,
-				BACD81341947E8B1009A70B6 /* SBFullScreenCameraViewController.m */,
 				BAE8960A193FAB8C00E96E6B /* SBCreateReelViewController.h */,
 				BAE8960B193FAB8C00E96E6B /* SBCreateReelViewController.m */,
 			);
@@ -845,7 +835,6 @@
 				BA5CD6921926CEDA0087D3A2 /* SBFadeOverlayView.m in Sources */,
 				BAC9FB3A192413C6008742EE /* SBAuthenticationMenuViewController.m in Sources */,
 				BA5CD67F192689430087D3A2 /* SBMainMenuViewController.m in Sources */,
-				BAE1FF1719401B5C000A9D80 /* SBCameraNavigationController.m in Sources */,
 				BAEC7C10193DE528003FAE13 /* SBWebViewController.m in Sources */,
 				BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */,
 				BA670C9A198933F000E2D536 /* SBUploadingIndicatorView.m in Sources */,
@@ -869,7 +858,6 @@
 				BAE1FF1419401B38000A9D80 /* SBNavigationController.m in Sources */,
 				BA936FFA192313D700D3CAFB /* SBTableViewCell.m in Sources */,
 				BA40CBDA196F54020001C44C /* UIButton+TintColorImage.m in Sources */,
-				BACD81351947E8B1009A70B6 /* SBFullScreenCameraViewController.m in Sources */,
 				BAC81380192BC5E1002323E1 /* UIViewController+Spinner.m in Sources */,
 				BAE17A771987FFAF0019BDA1 /* SBPlayerViewController.m in Sources */,
 				BAA19C5019469B370034D439 /* SBUserImageView.m in Sources */,

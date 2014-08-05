@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="kNE-s6-OVH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A314h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="kNE-s6-OVH">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -522,23 +522,6 @@
                                 <rect key="frame" x="20" y="400" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <view appearanceType="aqua" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CcJ-23-ER1">
-                                <rect key="frame" x="245" y="320" width="75" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o6G-fS-UZO">
-                                        <rect key="frame" x="17" y="19" width="40" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="button-camera-normal">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="Ver-4P-zS4" kind="modal" id="1hm-VP-obM"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
-                            </view>
                             <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tir-XE-yFw">
                                 <rect key="frame" x="275" y="523" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -646,21 +629,6 @@
             </objects>
             <point key="canvasLocation" x="1630" y="22"/>
         </scene>
-        <!--Camera Navigation Controller-->
-        <scene sceneID="1dZ-Yh-ry9">
-            <objects>
-                <navigationController definesPresentationContext="YES" id="Ver-4P-zS4" customClass="SBCameraNavigationController" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nw9-x1-D8z" customClass="SBTransparentNavigationBar">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="PrZ-Lb-gYI" kind="relationship" relationship="rootViewController" id="Tin-MY-mhQ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vx2-0b-Tws" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="614" y="22"/>
-        </scene>
         <!--Participants View Controller - Participants-->
         <scene sceneID="b93-0L-fht">
             <objects>
@@ -738,52 +706,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IZI-pg-YqL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1124" y="790"/>
-        </scene>
-        <!--Full Screen Camera View Controller-->
-        <scene sceneID="wX9-4Z-sCO">
-            <objects>
-                <viewController id="PrZ-Lb-gYI" customClass="SBFullScreenCameraViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ne1-jk-9A6"/>
-                        <viewControllerLayoutGuide type="bottom" id="0X6-fr-Ukb"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="yPm-nI-agq">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <containerView appearanceType="aqua" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aiF-eI-bCi">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <connections>
-                                    <segue destination="k3x-92-bAS" kind="embed" id="hZg-bF-hOv"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="U95-VE-toI">
-                        <barButtonItem key="leftBarButtonItem" id="2JR-Hc-1Yi">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xJO-fo-Haw">
-                                <rect key="frame" x="16" y="9" width="25" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="button-x-normal">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted" image="button-x-highlighted"/>
-                                <connections>
-                                    <action selector="dismissModal:" destination="PrZ-Lb-gYI" eventType="touchUpInside" id="FWS-u5-K59"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <segue destination="Ib8-uJ-4ks" kind="push" identifier="SBCreateReelViewController" id="QmG-6y-0Sy"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nn1-Il-PIh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1124" y="22"/>
         </scene>
         <!--Main Menu View Controller-->
         <scene sceneID="9mK-Yg-irm">
@@ -1058,7 +980,5 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="tOQ-Pt-FOZ"/>
-        <segue reference="3Co-2d-AGn"/>
-        <segue reference="FKf-LR-LCF"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -6,9 +6,7 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
-#import "SBCameraNavigationController.h"
 #import "SBClip.h"
-#import "SBFullScreenCameraViewController.h"
 #import "SBParticipantsViewController.h"
 #import "SBPlayerViewController.h"
 #import "SBProfileViewController.h"
@@ -53,13 +51,7 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.destinationViewController isKindOfClass:[SBCameraNavigationController class]]) {
-        SBFullScreenCameraViewController *vc = (SBFullScreenCameraViewController *)[[(SBCameraNavigationController *)segue.destinationViewController viewControllers] firstObject];
-        [vc setReel:self.reel];
-        [vc setRecordingCompletionBlock:^(NSURL *fileURL) {
-            [self setLocalVideoURL:fileURL];
-        }];
-    } else if ([segue.destinationViewController isKindOfClass:[SBProfileViewController class]]) {
+    if ([segue.destinationViewController isKindOfClass:[SBProfileViewController class]]) {
         SBProfileViewController *vc = segue.destinationViewController;
         [vc setUser:self.currentClip.user];
     } else if ([segue.destinationViewController isKindOfClass:[SBParticipantsViewController class]]) {
