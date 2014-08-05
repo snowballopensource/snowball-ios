@@ -26,7 +26,12 @@
 
     [SBUserTableViewCell registerNibToTableView:self.tableView];
 
-    [self.tableView setHidden:YES];
+    if ([SBAddressBookManager authorized]) {
+        [self showSpinner];
+        [self getContactsFromAddressBook];
+    } else {
+        [self.tableView setHidden:YES];
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -76,18 +81,33 @@
 
 - (IBAction)findFriendsViaContacts:(id)sender {
     [self showSpinner];
+    [self getContactsFromAddressBook];
+}
+
+#pragma mark - Private
+
+- (void)getContactsFromAddressBook {
     [SBAddressBookManager getAllPhoneNumbersWithCompletion:^(NSArray *phoneNumbers) {
-        [SBUser findUsersByPhoneNumbers:phoneNumbers
-                                   page:0  // TODO: make this paginated
-                                success:^(NSArray *users) {
-                                    [self setUsers:users];
-                                    [self hideSpinner];
-                                    [self.tableView setHidden:NO];
-                                    [self.tableView reloadData];
-                                } failure:^(NSError *error) {
-                                    [error displayInView:self.view];
-                                }];
+        if ([phoneNumbers count] > 0) {
+            [SBUser findUsersByPhoneNumbers:phoneNumbers
+                                       page:0  // TODO: make this paginated
+                                    success:^(NSArray *users) {
+                                        [self setUsers:users];
+                                        [self hideSpinner];
+                                        [self showTableView];
+                                    } failure:^(NSError *error) {
+                                        [self hideSpinner];
+                                        [error displayInView:self.view];
+                                    }];
+        } else {
+            [self hideSpinner];
+        }
     }];
+}
+
+- (void)showTableView {
+    [self.tableView setHidden:NO];
+    [self.tableView reloadData];
 }
 
 @end

@@ -12,4 +12,6 @@
 
 + (void)getAllPhoneNumbersWithCompletion:(void(^)(NSArray *phoneNumbers))completion;
 
++ (BOOL)authorized;
+
 @end

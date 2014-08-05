@@ -54,6 +54,17 @@
     }
 }
 
++ (BOOL)authorized {
+    switch (ABAddressBookGetAuthorizationStatus()) {
+        case kABAuthorizationStatusAuthorized:
+            return YES;
+            break;
+        default:
+            return NO;
+            break;
+    }
+}
+
 + (void)showNoAccessAlert {
     // User has denied access
     // TODO: show an alert telling user to change privacy setting in settings app
