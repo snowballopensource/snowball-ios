@@ -173,11 +173,9 @@
 - (void)hideCameraPreview {
     [self.playerView setHidden:YES];
     [self.playerView setPlayer:nil];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)showCameraPreview {
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
     AVPlayer *player = [[AVPlayer alloc] initWithURL:self.recordingURL];
     [self.playerView setPlayer:player];
     [(AVPlayerLayer *)self.playerView.layer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
