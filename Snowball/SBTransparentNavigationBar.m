@@ -21,27 +21,4 @@
     return self;
 }
 
-- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
-    // This is an ugly little hack to allow touches to pass through the nav bar
-    // if tapped on the right side of the screen. This allows for the flip camera
-    // button to be located underneath the navbar.
-    BOOL pointInside = NO;
-    for (UIView *view in self.subviews) {
-        if (CGRectContainsPoint(view.frame, point)) {
-            pointInside = YES;
-            if ([[NSString stringWithFormat:@"%@", view.class] isEqualToString:@"_UINavigationBarBackground"]) {
-                CGFloat oneThird = self.frame.size.width / 3;
-                CGRect rightThird = CGRectMake(self.frame.origin.x + oneThird * 2,
-                                               self.frame.origin.y,
-                                               oneThird,
-                                               self.frame.size.height);
-                if (CGRectContainsPoint(rightThird, point)) {
-                    pointInside = NO;
-                }
-            }
-        }
-    }
-    return pointInside;
-}
-
 @end
