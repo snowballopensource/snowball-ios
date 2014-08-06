@@ -33,11 +33,11 @@
 @property (nonatomic) BOOL showsUploadingIndicator;
 @property (nonatomic, weak) IBOutlet SBUploadingIndicatorView *uploadingIndicator;
 
-@property (nonatomic) SBReelTableViewCellState state;
-
 @end
 
 @implementation SBReelTableViewCell
+
+#pragma mark - UIView
 
 - (void)setTintColor:(UIColor *)tintColor {
     [super setTintColor:tintColor];
@@ -55,7 +55,7 @@
 #pragma mark - SBTableViewCell
 
 - (void)configureForObject:(id)object {
-    [self configureForObject:object state:SBReelTableViewCellStateNormal];
+    NSAssert(false, @"Use -configureForObject:state: instead of -configureForObject:");
 }
 
 - (void)configureForObject:(id)object state:(SBReelTableViewCellState)state {
@@ -76,29 +76,16 @@
 
     [self.unwatchedClipThumbnail setImageWithURL:[NSURL URLWithString:reel.lastClipThumbnailURL]];
 
-    [self setState:state forReel:reel animated:NO];
+    [self setState:state animated:NO];
 }
 
 #pragma mark - State
 
-- (void)setState:(SBReelTableViewCellState)state {
-    NSAssert(false, @"Use -setState:forReel:animated instead of -setState");
-}
-
-- (void)setState:(SBReelTableViewCellState)state forReel:(SBReel *)reel animated:(BOOL)animated {
-    if (reel.hasNewClip && state == SBReelTableViewCellStateNormal) {
-        state = SBReelTableViewCellStateHasNewClip;
-    }
-    if (reel.hasPendingUpload && state != SBReelTableViewCellStateAddClip) {
-        state = SBReelTableViewCellStateUploading;
-    }
-    if (state == SBReelTableViewCellStateHasNewClip) {
-        [self.unwatchedClipThumbnail setImageWithURL:[NSURL URLWithString:reel.lastClipThumbnailURL]];
-    }
-    _state = state;
-
+- (void)setState:(SBReelTableViewCellState)state animated:(BOOL)animated {
     [self positionSubviewsForState:state animated:animated];
 }
+
+#pragma mark - Hiding/Showing Indicators
 
 - (void)positionSubviewsForState:(SBReelTableViewCellState)state animated:(BOOL)animated {
     const CGFloat animationDuration = 0.25;
@@ -161,8 +148,6 @@
         completion();
     }
 }
-
-#pragma mark - Hiding/Showing Indicators
 
 - (void)setShowsAddClipIndicator:(BOOL)showsAddClipIndicator {
     static CGFloat defaultAddClipIndicatorCenterX = 0;

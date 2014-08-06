@@ -11,6 +11,7 @@
 typedef NS_ENUM(NSInteger, SBReelTableViewCellState) {
     SBReelTableViewCellStateNormal,
     SBReelTableViewCellStateHasNewClip,
+    SBReelTableViewCellStatePlaying,
     SBReelTableViewCellStateAddClip,
     SBReelTableViewCellStateUploading
 };
@@ -19,6 +20,6 @@ typedef NS_ENUM(NSInteger, SBReelTableViewCellState) {
 
 - (void)configureForObject:(id)object state:(SBReelTableViewCellState)state;
 
-- (void)setState:(SBReelTableViewCellState)state forReel:(SBReel *)reel animated:(BOOL)animated;
+- (void)setState:(SBReelTableViewCellState)state animated:(BOOL)animated;
 
 @end

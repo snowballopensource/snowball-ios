@@ -20,9 +20,15 @@
 #import "SBUser.h"
 #import "SBUserImageView.h"
 
+typedef NS_ENUM(NSInteger, SBReelsViewControllerState) {
+    SBReelsViewControllerStateNormal,
+    SBReelsViewControllerStateAddClip,
+    SBReelsViewControllerStatePlaying
+};
+
 @interface SBReelsViewController ()
 
-@property (nonatomic) SBReelTableViewCellState cellState;
+@property (nonatomic, readonly) SBReelsViewControllerState state;
 @property (nonatomic, strong) NSURL *recordingURL;
 
 @property (nonatomic, weak) IBOutlet SBPlayerView *playerView;
@@ -41,10 +47,10 @@
     
     [self setEntityClass:[SBReel class]];
     [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"lastClipCreatedAt" ascending:NO]]];
-    
-    [self.playerView setHidden:YES];
-    [self.createNewSnowballView setHidden:YES];
 
+    [self setState:SBReelsViewControllerStateNormal animated:NO];
+
+    // TODO: remove this
     [self.createNewSnowballView.subviews each:^(id object) {
         if ([object isKindOfClass:[UIImageView class]]) {
             [object setImageTintColor:[UIColor whiteColor]];
@@ -59,7 +65,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO animated:animated];
-    [self setCellState:SBReelTableViewCellStateNormal];
+    [self setState:SBReelsViewControllerStateNormal animated:animated];
     [self.playerView.player pause];
     [super viewWillDisappear:animated];
 }
@@ -73,7 +79,7 @@
     } else if ([destinationViewController isKindOfClass:[SBCameraViewController class]]) {
         [(SBCameraViewController *)destinationViewController setRecordingCompletionBlock:^(NSURL *fileURL) {
             [self setRecordingURL:fileURL];
-            [self setCellState:SBReelTableViewCellStateAddClip];
+            [self setState:SBReelsViewControllerStateAddClip animated:YES];
         }];
     } else if ([destinationViewController isKindOfClass:[SBCreateReelViewController class]]) {
         [(SBCreateReelViewController *)destinationViewController setInitialRecordingURL:self.recordingURL];
@@ -92,14 +98,15 @@
 
 - (void)configureCell:(SBReelTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     SBReel *reel = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [cell configureForObject:reel state:self.cellState];
+    SBReelTableViewCellState cellState = [self cellStateForCellAtIndexPath:indexPath];
+    [cell configureForObject:reel state:cellState];
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (self.cellState) {
-        case SBReelTableViewCellStateAddClip: {
+    switch (self.state) {
+        case SBReelsViewControllerStateAddClip: {
             // This is semi duplicated code since clips are uploaded in three places.
             SBClip *clip = [SBClip MR_createEntity];
             SBReel *reel = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -112,7 +119,7 @@
             [SBLongRunningTaskManager addBlockToQueue:^{
                 [clip create];
             }];
-            [self setCellState:SBReelTableViewCellStateNormal];
+            [self setState:SBReelsViewControllerStateNormal animated:YES];
         }
             break;
         default:
@@ -137,29 +144,39 @@
 
 #pragma mark - Setters / Getters
 
-- (void)setCellState:(SBReelTableViewCellState)cellState {
-    switch (cellState) {
-        case SBReelTableViewCellStateAddClip:
-            [self showCameraPreview];
-            [self showNewSnowballView];
-            break;
-        default:
+- (void)setState:(SBReelsViewControllerState)state animated:(BOOL)animated {
+    switch (state) {
+        case SBReelsViewControllerStateNormal: {
             [self hideCameraPreview];
             [self hideNewSnowballView];
+        }
+            break;
+        case SBReelsViewControllerStateAddClip: {
+            [self showCameraPreview];
+            [self showNewSnowballView];
+        }
+            break;
+        case SBReelsViewControllerStatePlaying: {
+            NSAssert(false, @"TODO");
+            // TODO: show player vc
+        }
             break;
     }
+
+    _state = state;
+
     for (SBReelTableViewCell *cell in [self.tableView visibleCells]) {
-        SBReel *reel = [self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
-        [cell setState:cellState forReel:reel animated:YES];
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        SBReelTableViewCellState cellState = [self cellStateForCellAtIndexPath:indexPath];
+        [cell setState:cellState animated:animated];
     }
-    _cellState = cellState;
 }
 
 #pragma mark - View Actions
 
 // TODO: refactor to -cancelNewClipCreation
 - (IBAction)hideCameraPreview:(id)sender {
-    [self setCellState:SBReelTableViewCellStateNormal];
+    [self setState:SBReelsViewControllerStateNormal animated:YES];
 }
 
 - (IBAction)switchToPeopleStoryboard:(id)sender {
@@ -168,7 +185,29 @@
 
 #pragma mark - Private Actions
 
-// Do not call any of these directly. They should be called via -setCellState
+- (SBReelTableViewCellState)cellStateForCellAtIndexPath:(NSIndexPath *)indexPath {
+    SBReel *reel = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    if (self.state == SBReelsViewControllerStateAddClip) {
+        return SBReelTableViewCellStateAddClip;
+    }
+    if (self.state == SBReelsViewControllerStatePlaying) {
+        //TODO: if reel is playing, return SBReelTableViewCellStatePlaying;
+        // else continue....
+    }
+    if (self.state == SBReelsViewControllerStateNormal || self.state == SBReelsViewControllerStatePlaying) {
+        if (reel.hasPendingUpload) {
+            return SBReelTableViewCellStateUploading;
+        } else if (reel.hasNewClip) {
+            return SBReelTableViewCellStateHasNewClip;
+        } else {
+            return SBReelTableViewCellStateNormal;
+        }
+    }
+    NSAssert(false, @"Handle translation of SBReelsViewControllerState to SBReelTableViewCellState");
+    return SBReelTableViewCellStateNormal;
+}
+
+// Do not call any of these directly. They should be called via -setState
 
 - (void)hideCameraPreview {
     [self.playerView setHidden:YES];
