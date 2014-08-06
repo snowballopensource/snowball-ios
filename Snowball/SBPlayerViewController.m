@@ -14,7 +14,6 @@
 @interface SBPlayerViewController ()
 
 @property (nonatomic, weak) IBOutlet SBPlayerView *playerView;
-@property (nonatomic, weak) IBOutlet UILabel *toGoCountLabel;
 
 @property (nonatomic, strong) NSArray *clips;
 @property (nonatomic, strong) SBClip *currentClip;
@@ -35,9 +34,6 @@
                               [self playReel];
                           }
                           failure:nil];
-
-    [self.toGoCountLabel setFont:[UIFont fontWithName:[UIFont snowballFontNameBold] size:self.toGoCountLabel.font.pointSize]];
-    [self.toGoCountLabel setText:@""];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -57,12 +53,6 @@
     }
     NSFetchRequest *fetchRequest = [SBClip MR_requestAllSortedBy:@"createdAt" ascending:YES withPredicate:predicate];
     [self setClips:[SBClip MR_executeFetchRequest:fetchRequest]];
-    NSUInteger toGo = [self.clips count]-1;
-    if (toGo > 0) {
-        [self.toGoCountLabel setText:[NSString stringWithFormat:@"%zd more to go...", toGo]];
-    } else {
-        [self.toGoCountLabel setText:@"Last one..."];
-    }
     [self setCurrentClip:[self.clips firstObject]];
     AVQueuePlayer *player = [[AVQueuePlayer alloc] initWithItems:[self createPlayerItems]];
     [self.playerView setPlayer:player];
@@ -93,17 +83,8 @@
 
     NSUInteger nextClipIndex = currentClipIndex+1;
     if (nextClipIndex < [self.clips count]) {
-        NSUInteger toGo = [self.clips count]-1-nextClipIndex;
-        if (toGo > 0) {
-            [self.toGoCountLabel setText:[NSString stringWithFormat:@"%zd more to go...", toGo]];
-        } else {
-            [self.toGoCountLabel setText:@"Last one..."];
-        }
-        
         SBClip *nextClip = self.clips[nextClipIndex];
         [self setCurrentClip:nextClip];
-    } else {
-        [self.toGoCountLabel setText:@"All caught up!"];
     }
     if (nextClipIndex == [self.clips count]-1) {
         // Last clip coming up next
