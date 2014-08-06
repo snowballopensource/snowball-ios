@@ -12,4 +12,6 @@
 
 + (NSString *)identifier;
 
+- (void)switchToStoryboardWithName:(NSString *)name;
+
 @end

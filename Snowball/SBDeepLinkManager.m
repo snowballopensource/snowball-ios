@@ -20,7 +20,7 @@
     }
 
     if ([[url host] isEqualToString:@"reel"] && [remoteID length] > 1) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Reels" bundle:nil];
         // ECSlidingViewController *slidingVC = [storyboard instantiateInitialViewController];
         // UINavigationController *nc = (UINavigationController *)slidingVC.topViewController;
         SBReelClipsViewController *vc = [storyboard instantiateViewControllerWithIdentifier:[SBReelClipsViewController identifier]];

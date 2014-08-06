@@ -8,6 +8,7 @@
 
 #import "SBAddressBookManager.h"
 #import "SBFindFriendsViewController.h"
+#import "SBNavigationController.h"
 #import "SBUser.h"
 #import "SBUserTableViewCell.h"
 
@@ -82,6 +83,10 @@
 - (IBAction)findFriendsViaContacts:(id)sender {
     [self showSpinner];
     [self getContactsFromAddressBook];
+}
+
+- (IBAction)switchToReelsStoryboard:(id)sender {
+    [(SBNavigationController *)self.navigationController switchToStoryboardWithName:@"Reels"];
 }
 
 #pragma mark - Private

@@ -10,6 +10,7 @@
 #import "SBCreateReelViewController.h"
 #import "SBClip.h"
 #import "SBLongRunningTaskManager.h"
+#import "SBNavigationController.h"
 #import "SBPlayerView.h"
 #import "SBReel.h"
 #import "SBReelClipsViewController.h"
@@ -51,7 +52,13 @@
     }];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [super viewWillAppear:animated];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
     [self setCellState:SBReelTableViewCellStateNormal];
     [self.playerView.player pause];
     [super viewWillDisappear:animated];
@@ -153,6 +160,10 @@
 // TODO: refactor to -cancelNewClipCreation
 - (IBAction)hideCameraPreview:(id)sender {
     [self setCellState:SBReelTableViewCellStateNormal];
+}
+
+- (IBAction)switchToPeopleStoryboard:(id)sender {
+    [(SBNavigationController *)self.navigationController switchToStoryboardWithName:@"People"];
 }
 
 #pragma mark - Private Actions

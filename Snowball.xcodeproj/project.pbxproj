@@ -11,7 +11,7 @@
 		BA048DEC191AF6730083B0DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA048DEA191AF6730083B0DC /* InfoPlist.strings */; };
 		BA048DEE191AF6730083B0DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048DED191AF6730083B0DC /* main.m */; };
 		BA048DF2191AF6730083B0DC /* SBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048DF1191AF6730083B0DC /* SBAppDelegate.m */; };
-		BA048DF5191AF6730083B0DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA048DF3191AF6730083B0DC /* Main.storyboard */; };
+		BA048DF5191AF6730083B0DC /* Reels.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA048DF3191AF6730083B0DC /* Reels.storyboard */; };
 		BA048DF8191AF6730083B0DC /* SBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048DF7191AF6730083B0DC /* SBViewController.m */; };
 		BA048DFA191AF6730083B0DC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA048DF9191AF6730083B0DC /* Images.xcassets */; };
 		BA048E0B191AF6730083B0DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA048E09191AF6730083B0DC /* InfoPlist.strings */; };
@@ -32,7 +32,6 @@
 		BA40CBDA196F54020001C44C /* UIButton+TintColorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BA40CBD9196F54020001C44C /* UIButton+TintColorImage.m */; };
 		BA5238A51920B9630088A730 /* SBPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5238A41920B9630088A730 /* SBPlayerView.m */; };
 		BA53F16B1952397400DFD7B9 /* SBMeUserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA53F16A1952397400DFD7B9 /* SBMeUserImageView.m */; };
-		BA5CD67F192689430087D3A2 /* SBMainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD67E192689430087D3A2 /* SBMainMenuViewController.m */; };
 		BA5CD68819269A530087D3A2 /* SBJSONResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD68719269A530087D3A2 /* SBJSONResponseSerializer.m */; };
 		BA5CD68B19269B170087D3A2 /* NSError+Snowball.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD68A19269B170087D3A2 /* NSError+Snowball.m */; };
 		BA5CD6921926CEDA0087D3A2 /* SBFadeOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5CD6911926CEDA0087D3A2 /* SBFadeOverlayView.m */; };
@@ -88,6 +87,7 @@
 		BAE8960C193FAB8C00E96E6B /* SBCreateReelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE8960B193FAB8C00E96E6B /* SBCreateReelViewController.m */; };
 		BAEC7C10193DE528003FAE13 /* SBWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAEC7C0F193DE528003FAE13 /* SBWebViewController.m */; };
 		BAEE3B36199200730064A16F /* SBTransparentNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BAEE3B35199200730064A16F /* SBTransparentNavigationBar.m */; };
+		BAEE3B38199202400064A16F /* People.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAEE3B37199202400064A16F /* People.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,7 +110,7 @@
 		BA048DEF191AF6730083B0DC /* Snowball-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snowball-Prefix.pch"; sourceTree = "<group>"; };
 		BA048DF0191AF6730083B0DC /* SBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBAppDelegate.h; sourceTree = "<group>"; };
 		BA048DF1191AF6730083B0DC /* SBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBAppDelegate.m; sourceTree = "<group>"; };
-		BA048DF4191AF6730083B0DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BA048DF4191AF6730083B0DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Reels.storyboard; sourceTree = "<group>"; };
 		BA048DF6191AF6730083B0DC /* SBViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBViewController.h; sourceTree = "<group>"; };
 		BA048DF7191AF6730083B0DC /* SBViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBViewController.m; sourceTree = "<group>"; };
 		BA048DF9191AF6730083B0DC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -149,8 +149,6 @@
 		BA5238A41920B9630088A730 /* SBPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBPlayerView.m; sourceTree = "<group>"; };
 		BA53F1691952397400DFD7B9 /* SBMeUserImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBMeUserImageView.h; sourceTree = "<group>"; };
 		BA53F16A1952397400DFD7B9 /* SBMeUserImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBMeUserImageView.m; sourceTree = "<group>"; };
-		BA5CD67D192689430087D3A2 /* SBMainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBMainMenuViewController.h; sourceTree = "<group>"; };
-		BA5CD67E192689430087D3A2 /* SBMainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBMainMenuViewController.m; sourceTree = "<group>"; };
 		BA5CD68619269A530087D3A2 /* SBJSONResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSONResponseSerializer.h; sourceTree = "<group>"; };
 		BA5CD68719269A530087D3A2 /* SBJSONResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSONResponseSerializer.m; sourceTree = "<group>"; };
 		BA5CD68919269B170087D3A2 /* NSError+Snowball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Snowball.h"; sourceTree = "<group>"; };
@@ -255,6 +253,7 @@
 		BAEC7C0F193DE528003FAE13 /* SBWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBWebViewController.m; sourceTree = "<group>"; };
 		BAEE3B34199200730064A16F /* SBTransparentNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBTransparentNavigationBar.h; sourceTree = "<group>"; };
 		BAEE3B35199200730064A16F /* SBTransparentNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBTransparentNavigationBar.m; sourceTree = "<group>"; };
+		BAEE3B37199202400064A16F /* People.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = People.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -355,17 +354,12 @@
 		BA048E19191AF84B0083B0DC /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				BA048DF6191AF6730083B0DC /* SBViewController.h */,
-				BA048DF7191AF6730083B0DC /* SBViewController.m */,
-				BAE1FF1219401B38000A9D80 /* SBNavigationController.h */,
-				BAE1FF1319401B38000A9D80 /* SBNavigationController.m */,
-				BA5CD68519268B6C0087D3A2 /* Main Menu */,
-				BA936FF4192312CF00D3CAFB /* Managed */,
-				BAE8960E193FACD200E96E6B /* Reel */,
-				BAE17A781987FFC90019BDA1 /* Partials */,
+				BAEE3B3C1992045D0064A16F /* Super */,
+				BAE8960E193FACD200E96E6B /* Reels */,
 				BA8E994C1953802100DCECD9 /* Friends */,
 				BAE8960D193FACCC00E96E6B /* Profile */,
 				BAC9FB371924138B008742EE /* Authentication */,
+				BAE17A781987FFC90019BDA1 /* Partials */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -373,8 +367,9 @@
 		BA048E1A191AF85D0083B0DC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BA048DF3191AF6730083B0DC /* Main.storyboard */,
 				BAC9FB3219241296008742EE /* Authentication.storyboard */,
+				BAEE3B37199202400064A16F /* People.storyboard */,
+				BA048DF3191AF6730083B0DC /* Reels.storyboard */,
 				BA5238A31920B9630088A730 /* SBPlayerView.h */,
 				BA5238A41920B9630088A730 /* SBPlayerView.m */,
 				BA5CD6901926CEDA0087D3A2 /* SBFadeOverlayView.h */,
@@ -456,15 +451,6 @@
 			children = (
 			);
 			name = Camera;
-			sourceTree = "<group>";
-		};
-		BA5CD68519268B6C0087D3A2 /* Main Menu */ = {
-			isa = PBXGroup;
-			children = (
-				BA5CD67D192689430087D3A2 /* SBMainMenuViewController.h */,
-				BA5CD67E192689430087D3A2 /* SBMainMenuViewController.m */,
-			);
-			name = "Main Menu";
 			sourceTree = "<group>";
 		};
 		BA5CD68C19269B1A0087D3A2 /* Categories */ = {
@@ -623,7 +609,7 @@
 			name = Profile;
 			sourceTree = "<group>";
 		};
-		BAE8960E193FACD200E96E6B /* Reel */ = {
+		BAE8960E193FACD200E96E6B /* Reels */ = {
 			isa = PBXGroup;
 			children = (
 				BA936FF5192312DF00D3CAFB /* SBReelsViewController.h */,
@@ -633,7 +619,19 @@
 				BA632026195CED6D00BA6B75 /* Participants */,
 				BAE1FF1819401B60000A9D80 /* Camera */,
 			);
-			name = Reel;
+			name = Reels;
+			sourceTree = "<group>";
+		};
+		BAEE3B3C1992045D0064A16F /* Super */ = {
+			isa = PBXGroup;
+			children = (
+				BA048DF6191AF6730083B0DC /* SBViewController.h */,
+				BA048DF7191AF6730083B0DC /* SBViewController.m */,
+				BAE1FF1219401B38000A9D80 /* SBNavigationController.h */,
+				BAE1FF1319401B38000A9D80 /* SBNavigationController.m */,
+				BA936FF4192312CF00D3CAFB /* Managed */,
+			);
+			name = Super;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -720,9 +718,10 @@
 				BA937006192317F600D3CAFB /* SBReelTableViewCell.xib in Resources */,
 				BA048DFA191AF6730083B0DC /* Images.xcassets in Resources */,
 				BAA19C471946902F0034D439 /* MuseoSans-700.otf in Resources */,
+				BAEE3B38199202400064A16F /* People.storyboard in Resources */,
 				BA048DEC191AF6730083B0DC /* InfoPlist.strings in Resources */,
 				BA29C7EE192FDAE400F59684 /* AirshipConfig.plist in Resources */,
-				BA048DF5191AF6730083B0DC /* Main.storyboard in Resources */,
+				BA048DF5191AF6730083B0DC /* Reels.storyboard in Resources */,
 				BAC9FB3319241296008742EE /* Authentication.storyboard in Resources */,
 				BA7DEC521981F8B000943BFF /* MuseoSans-500.otf in Resources */,
 				BAA19C3F19468F580034D439 /* MuseoSans-300.otf in Resources */,
@@ -829,7 +828,6 @@
 				BA15B9ED192AD9AD00453F8F /* UINavigationBar+CustomHeight.m in Sources */,
 				BA5CD6921926CEDA0087D3A2 /* SBFadeOverlayView.m in Sources */,
 				BAC9FB3A192413C6008742EE /* SBAuthenticationMenuViewController.m in Sources */,
-				BA5CD67F192689430087D3A2 /* SBMainMenuViewController.m in Sources */,
 				BAEC7C10193DE528003FAE13 /* SBWebViewController.m in Sources */,
 				BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */,
 				BA670C9A198933F000E2D536 /* SBUploadingIndicatorView.m in Sources */,
@@ -889,12 +887,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		BA048DF3191AF6730083B0DC /* Main.storyboard */ = {
+		BA048DF3191AF6730083B0DC /* Reels.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				BA048DF4191AF6730083B0DC /* Base */,
 			);
-			name = Main.storyboard;
+			name = Reels.storyboard;
 			sourceTree = "<group>";
 		};
 		BA048E09191AF6730083B0DC /* InfoPlist.strings */ = {
