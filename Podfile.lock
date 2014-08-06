@@ -37,7 +37,6 @@ PODS:
     - BlocksKit/DynamicDelegate
   - Bolts (1.1.1)
   - CrittercismSDK (4.3.4)
-  - ECSlidingViewController (2.0.2)
   - Facebook-iOS-SDK (3.15.0):
     - Bolts
   - MagicalRecord (2.3.0-beta.2):
@@ -55,7 +54,6 @@ DEPENDENCIES:
   - AFNetworking
   - BlocksKit
   - CrittercismSDK
-  - ECSlidingViewController
   - Facebook-iOS-SDK
   - MagicalRecord (from `https://github.com/magicalpanda/MagicalRecord.git`, commit `cd73e277d486982d3817375fc1635838413f4409`)
   - MBProgressHUD
@@ -74,7 +72,6 @@ SPEC CHECKSUMS:
   BlocksKit: 07c8a80f04275efac6a5f8b973782489c083a182
   Bolts: 0ca796081c3e7c139bd86d6903c27f1b83036a5d
   CrittercismSDK: d32f9f730158e3e646c445b752d7851710a1fed2
-  ECSlidingViewController: 6c11fadb10d720c2d48bc577962332bdd4264c9f
   Facebook-iOS-SDK: d67a9aa373f28b581e00cefdfd5a1ab8f883ac14
   MagicalRecord: b7d8943e180dbd5c1dd48a807885e0059ce0bc82
   MBProgressHUD: c356980b0cd097f19acec959b49dca5eb8ec31be
