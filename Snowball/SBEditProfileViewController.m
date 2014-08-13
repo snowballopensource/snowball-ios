@@ -29,8 +29,6 @@
 
     [self.tableView setBackgroundColor:[UIColor whiteColor]];
 
-    [self setBackButtonStyle:UIViewControllerBackButtonStyleDark];
-
     SBUser *user = [SBUser currentUser];
     [self showSpinner];
     [user getWithSuccess:^{

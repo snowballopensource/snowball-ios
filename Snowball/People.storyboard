@@ -259,7 +259,7 @@
         <scene sceneID="FXD-oZ-2u9">
             <objects>
                 <navigationController definesPresentationContext="YES" id="29c-TI-35W" customClass="SBNavigationController" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eRZ-d0-KyH" customClass="SBTransparentNavigationBar">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eRZ-d0-KyH">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>

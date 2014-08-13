@@ -24,8 +24,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setBackButtonStyle:UIViewControllerBackButtonStyleDark];
-    
     [SBUserTableViewCell registerNibToTableView:self.tableView];
     
     [self setEntityClass:[SBParticipation class]];

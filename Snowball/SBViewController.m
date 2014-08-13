@@ -18,14 +18,6 @@
     return NSStringFromClass(self);
 }
 
-#pragma mark - UIViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    [self setBackButtonStyle:UIViewControllerBackButtonStyleLight];
-}
-
 #pragma mark - Actions
 
 - (IBAction)dismissModal:(id)sender {

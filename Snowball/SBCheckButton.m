@@ -11,15 +11,7 @@
 @implementation SBCheckButton
 
 - (void)setParticipating:(BOOL)participating {
-    if (participating) {
-        [self setImage:[UIImage imageNamed:@"button-check-highlighted"] forState:UIControlStateNormal];
-        [self setImage:[UIImage imageNamed:@"button-check-normal"] forState:UIControlStateHighlighted];
-    } else {
-        // TODO: figure out a better asset for this, for now just switching assets
-        // also, switch this if/else since the normal flow should be above (e.g. normal -> normal, etc.)
-        [self setImage:[UIImage imageNamed:@"button-check-normal"] forState:UIControlStateNormal];
-        [self setImage:[UIImage imageNamed:@"button-check-highlighted"] forState:UIControlStateHighlighted];
-    }
+    [self setHidden:!participating];
 }
 
 @end

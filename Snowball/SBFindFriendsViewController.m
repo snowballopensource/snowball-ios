@@ -26,8 +26,6 @@
 
     [SBUserTableViewCell registerNibToTableView:self.tableView];
 
-    [self setBackButtonStyle:UIViewControllerBackButtonStyleDark];
-
     if ([SBAddressBookManager authorized]) {
         [self showSpinner];
         [self getContactsFromAddressBook];
