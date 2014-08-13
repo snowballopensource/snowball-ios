@@ -24,7 +24,7 @@
     [SBUserTableViewCell registerNibToTableView:self.tableView];
     
     [self setEntityClass:[SBUser class]];
-    [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:NO]]];
+    [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
     [self setPredicate:[NSPredicate predicateWithFormat:@"following == true"]];
 }
 
