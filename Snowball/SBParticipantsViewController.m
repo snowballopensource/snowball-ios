@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self setBackButtonStyle:UIViewControllerBackButtonStyleDark];
     
     [SBUserTableViewCell registerNibToTableView:self.tableView];
@@ -78,14 +78,13 @@
 #pragma mark - SBManagedTableViewController
 
 - (void)getRemoteObjects {
-    [SBReel getParticipantsForReel:self.reel
-                            onPage:self.currentPage
-                           success:^(BOOL canLoadMore) {
-                               [self setIsLoading:!canLoadMore];
-                               [self.refreshControl endRefreshing];
-                           } failure:^(NSError *error) {
-                               [self.refreshControl endRefreshing];
-                           }];
+    [self.reel getParticipantsOnPage:self.currentPage
+                             success:^(BOOL canLoadMore) {
+                                 [self setIsLoading:!canLoadMore];
+                                 [self.refreshControl endRefreshing];
+                             } failure:^(NSError *error) {
+                                 [self.refreshControl endRefreshing];
+                             }];
 }
 
 @end

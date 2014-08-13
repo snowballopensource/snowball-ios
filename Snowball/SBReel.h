@@ -19,8 +19,7 @@
                        success:(void (^)(BOOL canLoadMore))success
                        failure:(void (^)(NSError *error))failure;
 
-+ (void)getParticipantsForReel:(SBReel *)reel
-                        onPage:(NSUInteger)page
+- (void)getParticipantsOnPage:(NSUInteger)page
                        success:(void (^)(BOOL canLoadMore))success
                        failure:(void (^)(NSError *error))failure;
 
