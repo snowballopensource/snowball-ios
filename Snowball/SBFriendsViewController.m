@@ -12,11 +12,18 @@
 #import "SBUser.h"
 #import "SBUserTableViewCell.h"
 
-@interface SBFriendsViewController ()
+@interface SBFriendsViewController () <SBUserTableViewCellDelegate>
 
 @end
 
 @implementation SBFriendsViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    NSPredicate *currentUserPredicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [SBUser currentUser].remoteID];
+    [self setPredicate:[NSCompoundPredicate orPredicateWithSubpredicates:@[self.predicate, currentUserPredicate]]];
+    [self setSectionNameKeyPath:@"isCurrentUser"];
+}
 
 #pragma mark - Actions
 
@@ -24,18 +31,26 @@
     [(SBNavigationController *)self.navigationController switchToStoryboardWithName:@"Reels"];
 }
 
-#pragma mark - SBFollowingViewController
 
-- (void)configureCell:(SBUserTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    [super configureCell:cell atIndexPath:indexPath];
-    
-    [cell setStyle:SBUserTableViewCellStyleFollowable];
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    if ([view isKindOfClass:[UITableViewHeaderFooterView class]]) {
+        UITableViewHeaderFooterView *headerView = (UITableViewHeaderFooterView *)view;
+        [headerView.backgroundView setBackgroundColor:[UIColor whiteColor]];
+        [headerView.textLabel setFont:[UIFont fontWithName:[UIFont snowballFontNameBook] size:headerView.textLabel.font.pointSize]];
+    }
 }
 
-#pragma mark - SBUserTableViewCellDelegate
+#pragma mark - UITableViewDataSource
 
-- (void)checkUserButtonPressedInCell:(SBUserTableViewCell *)cell {
-    NSLog(@"User checked.");
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return @"Me";
+            break;
+    }
+    return @"My Friends";
 }
 
 @end

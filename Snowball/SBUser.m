@@ -65,6 +65,11 @@ static SBUser *_currentUser = nil;
     [self setCurrentUser:nil];
 }
 
+- (BOOL)isCurrentUser {
+    if (self == [SBUser currentUser]) return YES;
+    return NO;
+}
+
 #pragma mark - Participation
 
 - (BOOL)isParticipatingInReel:(SBReel *)reel {

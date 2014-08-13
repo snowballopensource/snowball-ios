@@ -158,6 +158,17 @@
                     <view key="view" contentMode="scaleToFill" id="nX8-vp-8Tl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView appearanceType="aqua" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="a2U-a1-cvo">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Tql-XQ-ZAu" id="m2p-WE-0JJ"/>
+                                    <outlet property="delegate" destination="Tql-XQ-ZAu" id="0X7-Vl-qP7"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="My Friends" id="sTh-y1-Cp6">
@@ -187,6 +198,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="tableView" destination="a2U-a1-cvo" id="46V-NT-vOv"/>
                         <segue destination="KPc-AK-0v6" kind="push" identifier="SBEditProfileViewController" id="OJq-ef-uax"/>
                     </connections>
                 </viewController>
