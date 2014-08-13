@@ -25,6 +25,13 @@
     [self setSectionNameKeyPath:@"isCurrentUser"];
 }
 
+#pragma mark - SBFollowingViewController
+
+- (void)configureCell:(SBUserTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    [super configureCell:cell atIndexPath:indexPath];
+    [cell setStyle:SBUserTableViewCellStyleNone];
+}
+
 #pragma mark - Actions
 
 - (IBAction)switchToReelsStoryboard:(id)sender {
@@ -39,6 +46,7 @@
         UITableViewHeaderFooterView *headerView = (UITableViewHeaderFooterView *)view;
         [headerView.backgroundView setBackgroundColor:[UIColor whiteColor]];
         [headerView.textLabel setFont:[UIFont fontWithName:[UIFont snowballFontNameBook] size:headerView.textLabel.font.pointSize]];
+        [headerView.textLabel setTextColor:[UIColor colorWithRed:114/255.0 green:214/255.0 blue:235/255.0 alpha:1.0]];
     }
 }
 
