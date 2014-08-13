@@ -12,26 +12,25 @@
 
 - (void)setBackButtonStyle:(UIViewControllerBackButtonStyle)style {
     unless ([self.navigationController.viewControllers firstObject] == self) {
-        UIImage *backButtonImage = nil;
-        switch (style) {
-            case UIViewControllerBackButtonStyleDark:
-                backButtonImage = [UIImage imageNamed:@"button-back-black-normal"];
-                break;
-            default:
-                backButtonImage = [UIImage imageNamed:@"button-back-normal"] ;
-                break;
-        }
+        UIImage *backButtonImage = [UIImage imageNamed:@"button-back-normal"];
+
         [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-        
-        UIImage *backButtonHighlightedImage = [UIImage imageNamed:@"button-back-highlighted"] ;
-        [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonHighlightedImage forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
         
         UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [backButton setImage:backButtonImage forState:UIControlStateNormal];
-        [backButton setImage:backButtonHighlightedImage forState:UIControlStateHighlighted];
         [backButton setFrame:CGRectMake(0, 0, backButtonImage.size.width, backButtonImage.size.height)];
         [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-        
+
+        // TODO: remove this when done removing all dark bar buttons
+        switch (style) {
+            case UIViewControllerBackButtonStyleDark:
+                [backButton setImageTintColor:[UIColor blackColor]];
+                break;
+            default:
+                [backButton setImageTintColor:[UIColor whiteColor]];
+                break;
+        }
+
         UIBarButtonItem *barBackButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         [self.navigationItem setLeftBarButtonItem:barBackButton];
     }
