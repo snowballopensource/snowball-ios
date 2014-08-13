@@ -44,6 +44,7 @@
 		BA7DEC4B1981F3DC00943BFF /* UIImageView+TintColor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7DEC4A1981F3DC00943BFF /* UIImageView+TintColor.m */; };
 		BA7DEC4E1981F4A400943BFF /* UIColor+RandomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7DEC4D1981F4A400943BFF /* UIColor+RandomColor.m */; };
 		BA7DEC521981F8B000943BFF /* MuseoSans-500.otf in Resources */ = {isa = PBXBuildFile; fileRef = BA7DEC511981F88B00943BFF /* MuseoSans-500.otf */; };
+		BA8782C7199BE9F70084CDD9 /* SBFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8782C6199BE9F70084CDD9 /* SBFriendsViewController.m */; };
 		BA8E994519536EE700DCECD9 /* UIButton+CustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E994419536EE700DCECD9 /* UIButton+CustomFont.m */; };
 		BA8E994B1953801600DCECD9 /* SBFindFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E994A1953801600DCECD9 /* SBFindFriendsViewController.m */; };
 		BA8E994F195382FE00DCECD9 /* SBAddressBookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8E994E195382FE00DCECD9 /* SBAddressBookManager.m */; };
@@ -174,6 +175,8 @@
 		BA7DEC4C1981F4A400943BFF /* UIColor+RandomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+RandomColor.h"; sourceTree = "<group>"; };
 		BA7DEC4D1981F4A400943BFF /* UIColor+RandomColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RandomColor.m"; sourceTree = "<group>"; };
 		BA7DEC511981F88B00943BFF /* MuseoSans-500.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MuseoSans-500.otf"; sourceTree = "<group>"; };
+		BA8782C5199BE9F70084CDD9 /* SBFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFriendsViewController.h; sourceTree = "<group>"; };
+		BA8782C6199BE9F70084CDD9 /* SBFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFriendsViewController.m; sourceTree = "<group>"; };
 		BA8E994319536EE700DCECD9 /* UIButton+CustomFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+CustomFont.h"; sourceTree = "<group>"; };
 		BA8E994419536EE700DCECD9 /* UIButton+CustomFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CustomFont.m"; sourceTree = "<group>"; };
 		BA8E99491953801600DCECD9 /* SBFindFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFindFriendsViewController.h; sourceTree = "<group>"; };
@@ -531,6 +534,8 @@
 		BA8E994C1953802100DCECD9 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
+				BA8782C5199BE9F70084CDD9 /* SBFriendsViewController.h */,
+				BA8782C6199BE9F70084CDD9 /* SBFriendsViewController.m */,
 				BA8E99491953801600DCECD9 /* SBFindFriendsViewController.h */,
 				BA8E994A1953801600DCECD9 /* SBFindFriendsViewController.m */,
 			);
@@ -857,6 +862,7 @@
 				BA048DF2191AF6730083B0DC /* SBAppDelegate.m in Sources */,
 				BA5CD68819269A530087D3A2 /* SBJSONResponseSerializer.m in Sources */,
 				BA8E996A1953C81100DCECD9 /* SBAnalyticsManager.m in Sources */,
+				BA8782C7199BE9F70084CDD9 /* SBFriendsViewController.m in Sources */,
 				BA8E994B1953801600DCECD9 /* SBFindFriendsViewController.m in Sources */,
 				BACD812F19477D51009A70B6 /* UIBarButtonItem+Hidden.m in Sources */,
 				BAE1FF1419401B38000A9D80 /* SBNavigationController.m in Sources */,

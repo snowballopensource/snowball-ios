@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="14A314h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="29c-TI-35W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A314h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="29c-TI-35W">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Edit Profile-->
+        <!--Edit Profile View Controller - Edit Profile-->
         <scene sceneID="Vbj-sR-J43">
             <objects>
                 <tableViewController id="KPc-AK-0v6" customClass="SBEditProfileViewController" sceneMemberID="viewController">
@@ -47,7 +47,7 @@
                                                     <rect key="frame" x="20" y="20" width="25" height="25"/>
                                                 </imageView>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sJw-NO-PvR">
-                                                    <rect key="frame" x="55" y="1" width="245" height="65"/>
+                                                    <rect key="frame" x="55" y="0.0" width="245" height="65"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
@@ -65,7 +65,7 @@
                                                     <rect key="frame" x="20" y="20" width="25" height="25"/>
                                                 </imageView>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="full name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cZy-io-L1g">
-                                                    <rect key="frame" x="55" y="1" width="245" height="65"/>
+                                                    <rect key="frame" x="55" y="0.0" width="245" height="65"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
@@ -87,7 +87,7 @@
                                                     <rect key="frame" x="20" y="20" width="25" height="25"/>
                                                 </imageView>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LcC-xx-Cjn">
-                                                    <rect key="frame" x="55" y="1" width="245" height="65"/>
+                                                    <rect key="frame" x="55" y="0.0" width="245" height="65"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
@@ -147,7 +147,54 @@
             </objects>
             <point key="canvasLocation" x="60" y="790"/>
         </scene>
-        <!--Find Friends-->
+        <!--Friends View Controller - My Friends-->
+        <scene sceneID="91a-5f-4Ir">
+            <objects>
+                <viewController id="Tql-XQ-ZAu" customClass="SBFriendsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fK9-vh-v1S"/>
+                        <viewControllerLayoutGuide type="bottom" id="1Da-IY-S1S"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nX8-vp-8Tl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="My Friends" id="sTh-y1-Cp6">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="RC3-N0-SYR">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZTa-a6-qBT">
+                                <rect key="frame" x="16" y="11" width="33" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="button-camera-blue">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="switchToReelsStoryboard:" destination="Tql-XQ-ZAu" eventType="touchUpInside" id="5Fb-Ef-bwS"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="GjJ-hl-BiN">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jef-3c-Ifc">
+                                <rect key="frame" x="244" y="9" width="60" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="button-follow-normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Yhg-Nx-MYx" kind="push" id="cBH-Df-ZfX"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="KPc-AK-0v6" kind="push" identifier="SBEditProfileViewController" id="OJq-ef-uax"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DD1-ic-19D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-473" y="116"/>
+        </scene>
+        <!--Find Friends View Controller - Find Friends-->
         <scene sceneID="jXV-G4-vht">
             <objects>
                 <viewController id="Yhg-Nx-MYx" customClass="SBFindFriendsViewController" sceneMemberID="viewController">
@@ -187,39 +234,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Find Friends" id="xt0-Qp-4n2">
-                        <barButtonItem key="leftBarButtonItem" id="9BN-d0-A75">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yTu-Fb-k7d">
-                                <rect key="frame" x="16" y="11" width="33" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="button-camera-blue">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="switchToReelsStoryboard:" destination="Yhg-Nx-MYx" eventType="touchUpInside" id="Xxm-Yj-aWu"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" id="1sy-ii-hkn">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tpw-Gc-eDp">
-                                <rect key="frame" x="269" y="4" width="35" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="button-settings-normal">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="KPc-AK-0v6" kind="push" id="UMU-rL-Ijw"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Find Friends" id="xt0-Qp-4n2"/>
                     <connections>
                         <outlet property="tableView" destination="HMh-em-G7G" id="5vO-xT-Cul"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WrX-fj-rha" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-455" y="790"/>
+            <point key="canvasLocation" x="60" y="116"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FXD-oZ-2u9">
@@ -229,12 +251,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Yhg-Nx-MYx" kind="relationship" relationship="rootViewController" id="NXi-ag-dKC"/>
+                        <segue destination="Tql-XQ-ZAu" kind="relationship" relationship="rootViewController" id="YfD-j5-FEe"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l9L-GA-fA6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1010" y="790"/>
+            <point key="canvasLocation" x="-1008" y="116"/>
         </scene>
     </scenes>
     <resources>
@@ -243,7 +265,7 @@
         <image name="button-check-normal" width="35" height="25"/>
         <image name="button-editprofile-editphoto-highlighted" width="35" height="35"/>
         <image name="button-editprofile-editphoto-normal" width="35" height="35"/>
-        <image name="button-settings-normal" width="30" height="30"/>
+        <image name="button-follow-normal" width="60" height="25"/>
         <image name="icon-editprofile-email" width="25" height="25"/>
         <image name="icon-editprofile-phone" width="25" height="25"/>
         <image name="icon-editprofile-realname" width="25" height="25"/>
@@ -252,9 +274,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4">
-            <size key="portraitSize" width="320" height="568"/>
-            <size key="landscapeSize" width="568" height="320"/>
-        </simulatedScreenMetrics>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
 </document>
