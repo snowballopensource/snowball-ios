@@ -8,6 +8,7 @@
 
 #import "SBAPIManager.h"
 #import "SBClip.h"
+#import "SBParticipation.h"
 #import "SBReel.h"
 #import "SBSessionManager.h"
 #import "SBUser.h"
@@ -42,6 +43,21 @@
     return [SBClip MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"reel == %@", self] sortedBy:@"createdAt" ascending:NO];
 }
 
+#pragma mark - Participation
+
+- (void)addParticipants:(NSArray *)users {
+    for (SBUser *user in users) {
+        [SBParticipation createParticipationForUser:user andReel:self inContext:self.managedObjectContext];
+    }
+}
+
+- (void)removeAllParticipants {
+    NSArray *participations = [SBParticipation MR_findByAttribute:@"reel" withValue:self inContext:self.managedObjectContext];
+    for (SBParticipation *participation in participations) {
+        [participation MR_deleteEntityInContext:self.managedObjectContext];
+    }
+}
+
 #pragma mark - Remote
 
 + (void)getHomeFeedReelsOnPage:(NSUInteger)page
@@ -58,7 +74,7 @@
                                                                                withValue:object[@"id"]
                                                                                inContext:localContext];
                                           if (reel) {
-                                              [reel setParticipants:nil];
+                                              [reel removeAllParticipants];
                                               [reel MR_importValuesForKeysWithObject:object];
                                           } else {
                                               [SBReel MR_importFromObject:object inContext:localContext];
@@ -82,11 +98,10 @@
                                   [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                                       NSArray *users = [SBUser MR_importFromArray:_users inContext:localContext];
                                       SBReel *reel = [self MR_inContext:localContext];
-                                      if (page > 1) {
-                                          [reel addParticipants:[NSSet setWithArray:users]];
-                                      } else {
-                                          [reel setParticipants:[NSSet setWithArray:users]];
+                                      unless (page > 1) {
+                                          [reel removeAllParticipants];
                                       }
+                                      [reel addParticipants:users];
                                   }];
                                   if (success) { success([_users count]); };
                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -99,8 +114,7 @@
 - (void)addParticipant:(SBUser *)user
                success:(void (^)(void))success
                failure:(void (^)(NSError *error))failure {
-    [user addReelsObject:self];
-    [self save];
+    [SBParticipation createParticipationForUser:user andReel:self];
     [self postParticipant:user
                   success:^{
                       if (success) { success(); }
@@ -112,8 +126,7 @@
 - (void)removeParticipant:(SBUser *)user
                   success:(void (^)(void))success
                   failure:(void (^)(NSError *error))failure {
-    [user removeReelsObject:self];
-    [self save];
+    [SBParticipation deleteParticipationForUser:user andReel:self];
     [self deleteParticipant:user
                     success:^{
                         if (success) { success(); }
@@ -132,8 +145,7 @@
                                    if (success) { success(); }
                                } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-                                       SBUser *_user = [user MR_inContext:localContext];
-                                       [_user removeReelsObject:self];
+                                       [SBParticipation deleteParticipationForUser:user andReel:self inContext:localContext];
                                    }];
                                    if (failure) { failure(error); };
                                }];
@@ -149,8 +161,7 @@
                                      if (success) { success(); }
                                  } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                      [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-                                         SBUser *_user = [user MR_inContext:localContext];
-                                         [_user addReelsObject:self];
+                                         [SBParticipation createParticipationForUser:user andReel:self inContext:localContext];
                                      }];
                                      if (failure) { failure(error); };
                                  }];

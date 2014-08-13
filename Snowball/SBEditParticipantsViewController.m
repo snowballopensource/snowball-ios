@@ -31,7 +31,7 @@
     [cell setStyle:SBUserTableViewCellStyleSelectable];
 
     SBUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [cell.checkButton setParticipating:[self.reel.participants containsObject:user]];
+    [cell.checkButton setParticipating:[user isParticipatingInReel:self.reel]];
 }
 
 #pragma mark - SBUserTableViewCellDelegate
@@ -40,7 +40,7 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     SBUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
-    BOOL participating = [self.reel.participants containsObject:user];
+    BOOL participating = [user isParticipatingInReel:self.reel];
     [cell.checkButton setParticipating:!participating];
     if (participating) {
         [self.reel removeParticipant:user success:nil failure:nil];

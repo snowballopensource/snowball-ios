@@ -8,12 +8,16 @@
 
 #import "_SBUser.h"
 
+@class SBReel;
+
 @interface SBUser : _SBUser
 
 @property (nonatomic, strong) NSString *authToken;
 
 + (SBUser *)currentUser;
 + (void)removeCurrentUser;
+
+- (BOOL)isParticipatingInReel:(SBReel *)reel;
 
 + (void)facebookAuthWithAccessToken:(NSString *)accessToken
                             success:(void (^)(void))success

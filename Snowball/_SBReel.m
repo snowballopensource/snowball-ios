@@ -14,7 +14,7 @@ const struct SBReelAttributes SBReelAttributes = {
 const struct SBReelRelationships SBReelRelationships = {
 	.clips = @"clips",
 	.lastWatchedClip = @"lastWatchedClip",
-	.participants = @"participants",
+	.participations = @"participations",
 };
 
 const struct SBReelFetchedProperties SBReelFetchedProperties = {
@@ -105,15 +105,15 @@ const struct SBReelFetchedProperties SBReelFetchedProperties = {
 
 	
 
-@dynamic participants;
+@dynamic participations;
 
 	
-- (NSMutableSet*)participantsSet {
-	[self willAccessValueForKey:@"participants"];
+- (NSMutableSet*)participationsSet {
+	[self willAccessValueForKey:@"participations"];
   
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"participants"];
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"participations"];
   
-	[self didAccessValueForKey:@"participants"];
+	[self didAccessValueForKey:@"participations"];
 	return result;
 }
 	

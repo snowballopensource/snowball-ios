@@ -8,6 +8,7 @@
 
 #import "SBEditParticipantsViewController.h"
 #import "SBParticipantsViewController.h"
+#import "SBParticipation.h"
 #import "SBReel.h"
 #import "SBUser.h"
 #import "SBUserTableViewCell.h"
@@ -27,9 +28,9 @@
     
     [SBUserTableViewCell registerNibToTableView:self.tableView];
     
-    [self setEntityClass:[SBUser class]];
-    [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:NO]]];
-    [self setPredicate:[NSPredicate predicateWithFormat:@"ANY reels == %@", self.reel]];
+    [self setEntityClass:[SBParticipation class]];
+    [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"user.name" ascending:YES]]];
+    [self setPredicate:[NSPredicate predicateWithFormat:@"reel == %@", self.reel]];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -50,7 +51,8 @@
 
 - (void)configureCell:(SBUserTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     [cell setDelegate:self];
-    SBUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    SBParticipation *participation = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    SBUser *user = participation.user;
     [cell.nameLabel setText:user.name];
     [cell.userImageView setImageWithURL:[NSURL URLWithString:user.avatarURL]
                        placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:cell.userImageView.frame.size]];
@@ -66,7 +68,8 @@
 
 - (void)followUserButtonPressedInCell:(SBUserTableViewCell *)cell {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    SBUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    SBParticipation *participation = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    SBUser *user = participation.user;
     [cell.followButton setFollowing:!user.followingValue];
     if (user.followingValue) {
         [user unfollowWithSuccess:nil failure:nil];

@@ -9,11 +9,15 @@
 #import "_SBReel.h"
 
 @class SBClip;
+@class SBUser;
 
 @interface SBReel : _SBReel
 
 - (BOOL)hasNewClip;
 - (BOOL)hasPendingUpload;
+
+- (void)addParticipants:(NSArray *)users;
+- (void)removeAllParticipants;
 
 + (void)getHomeFeedReelsOnPage:(NSUInteger)page
                        success:(void (^)(BOOL canLoadMore))success

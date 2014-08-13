@@ -22,6 +22,8 @@
 		BA048E26191AFAD90083B0DC /* _SBClip.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E23191AFAD90083B0DC /* _SBClip.m */; };
 		BA048E2B191AFB110083B0DC /* SBClip.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E2A191AFB110083B0DC /* SBClip.m */; };
 		BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E2D191AFDA50083B0DC /* SBManagedObject.m */; };
+		BA0C2916199AFF1000A243C0 /* _SBParticipation.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0C2915199AFF1000A243C0 /* _SBParticipation.m */; };
+		BA0C2919199AFF2100A243C0 /* SBParticipation.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0C2918199AFF2100A243C0 /* SBParticipation.m */; };
 		BA15B9E5192AC9EF00453F8F /* UIViewController+StatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BA15B9E4192AC9EF00453F8F /* UIViewController+StatusBar.m */; };
 		BA15B9ED192AD9AD00453F8F /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = BA15B9EC192AD9AD00453F8F /* UINavigationBar+CustomHeight.m */; };
 		BA1DB1C519864F8D0078609B /* NSDate+TimeAgoString.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1DB1C419864F8D0078609B /* NSDate+TimeAgoString.m */; };
@@ -130,6 +132,10 @@
 		BA048E2C191AFDA50083B0DC /* SBManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedObject.h; sourceTree = "<group>"; };
 		BA048E2D191AFDA50083B0DC /* SBManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBManagedObject.m; sourceTree = "<group>"; };
 		BA048E2F191AFE9A0083B0DC /* SBDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBDefines.h; sourceTree = "<group>"; };
+		BA0C2914199AFF1000A243C0 /* _SBParticipation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SBParticipation.h; sourceTree = "<group>"; };
+		BA0C2915199AFF1000A243C0 /* _SBParticipation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SBParticipation.m; sourceTree = "<group>"; };
+		BA0C2917199AFF2100A243C0 /* SBParticipation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBParticipation.h; sourceTree = "<group>"; };
+		BA0C2918199AFF2100A243C0 /* SBParticipation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBParticipation.m; sourceTree = "<group>"; };
 		BA15B9E3192AC9EF00453F8F /* UIViewController+StatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+StatusBar.h"; sourceTree = "<group>"; };
 		BA15B9E4192AC9EF00453F8F /* UIViewController+StatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+StatusBar.m"; sourceTree = "<group>"; };
 		BA15B9EB192AD9AD00453F8F /* UINavigationBar+CustomHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+CustomHeight.h"; sourceTree = "<group>"; };
@@ -404,6 +410,8 @@
 				BA9370021923153D00D3CAFB /* SBReel.m */,
 				BAC9FB4919241858008742EE /* SBUser.h */,
 				BAC9FB4A19241858008742EE /* SBUser.m */,
+				BA0C2917199AFF2100A243C0 /* SBParticipation.h */,
+				BA0C2918199AFF2100A243C0 /* SBParticipation.m */,
 				BA048E28191AFAE10083B0DC /* Generated */,
 			);
 			name = Models;
@@ -412,6 +420,8 @@
 		BA048E28191AFAE10083B0DC /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				BA0C2914199AFF1000A243C0 /* _SBParticipation.h */,
+				BA0C2915199AFF1000A243C0 /* _SBParticipation.m */,
 				BAC9FB441924183E008742EE /* _SBUser.h */,
 				BAC9FB451924183E008742EE /* _SBUser.m */,
 				BA936FFE1923153100D3CAFB /* _SBReel.h */,
@@ -821,7 +831,9 @@
 				BA9370031923153D00D3CAFB /* SBReel.m in Sources */,
 				BA8E995A1953A0CB00DCECD9 /* SBFollowButton.m in Sources */,
 				BAA19C4A1946945C0034D439 /* UILabel+CustomFont.m in Sources */,
+				BA0C2919199AFF2100A243C0 /* SBParticipation.m in Sources */,
 				BAEE3B36199200730064A16F /* SBTransparentNavigationBar.m in Sources */,
+				BA0C2916199AFF1000A243C0 /* _SBParticipation.m in Sources */,
 				BA048DF8191AF6730083B0DC /* SBViewController.m in Sources */,
 				BA29C7EC192FD9C900F59684 /* SBPushNotificationManager.m in Sources */,
 				BAD86C2F193553BC0046EE22 /* SBFacebookManager.m in Sources */,
