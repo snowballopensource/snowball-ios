@@ -57,6 +57,8 @@
     
     [cell setChecked:[user isParticipatingInReel:self.reel]];
     [cell setTintColor:self.reel.color];
+
+    [cell setStyle:SBUserTableViewCellStyleNone];
 }
 
 #pragma mark - SBUserTableViewCellDelegate
