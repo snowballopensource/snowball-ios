@@ -29,6 +29,7 @@
 		BA217C9A192A4DF500F04D03 /* SBLongRunningTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA217C99192A4DF500F04D03 /* SBLongRunningTaskManager.m */; };
 		BA29C7EC192FD9C900F59684 /* SBPushNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA29C7EB192FD9C900F59684 /* SBPushNotificationManager.m */; };
 		BA29C7EE192FDAE400F59684 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA29C7ED192FDAE400F59684 /* AirshipConfig.plist */; };
+		BA36305B199D32FD00D13768 /* UIColor+Snowball.m in Sources */ = {isa = PBXBuildFile; fileRef = BA36305A199D32FD00D13768 /* UIColor+Snowball.m */; };
 		BA3660EB1986C6A700AEB03E /* UIViewController+ModalDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3660EA1986C6A700AEB03E /* UIViewController+ModalDetection.m */; };
 		BA40CBDA196F54020001C44C /* UIButton+TintColorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BA40CBD9196F54020001C44C /* UIButton+TintColorImage.m */; };
 		BA5238A51920B9630088A730 /* SBPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5238A41920B9630088A730 /* SBPlayerView.m */; };
@@ -143,6 +144,8 @@
 		BA29C7EA192FD9C900F59684 /* SBPushNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBPushNotificationManager.h; sourceTree = "<group>"; };
 		BA29C7EB192FD9C900F59684 /* SBPushNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBPushNotificationManager.m; sourceTree = "<group>"; };
 		BA29C7ED192FDAE400F59684 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AirshipConfig.plist; sourceTree = "<group>"; };
+		BA363059199D32FD00D13768 /* UIColor+Snowball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Snowball.h"; sourceTree = "<group>"; };
+		BA36305A199D32FD00D13768 /* UIColor+Snowball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Snowball.m"; sourceTree = "<group>"; };
 		BA3660E91986C6A700AEB03E /* UIViewController+ModalDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ModalDetection.h"; sourceTree = "<group>"; };
 		BA3660EA1986C6A700AEB03E /* UIViewController+ModalDetection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ModalDetection.m"; sourceTree = "<group>"; };
 		BA40CBD8196F54020001C44C /* UIButton+TintColorImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+TintColorImage.h"; sourceTree = "<group>"; };
@@ -460,6 +463,8 @@
 				BA40CBD9196F54020001C44C /* UIButton+TintColorImage.m */,
 				BA7DEC4C1981F4A400943BFF /* UIColor+RandomColor.h */,
 				BA7DEC4D1981F4A400943BFF /* UIColor+RandomColor.m */,
+				BA363059199D32FD00D13768 /* UIColor+Snowball.h */,
+				BA36305A199D32FD00D13768 /* UIColor+Snowball.m */,
 				BAA19C4B194694770034D439 /* UIFont+Snowball.h */,
 				BAA19C4C194694770034D439 /* UIFont+Snowball.m */,
 				BA7DEC491981F3DC00943BFF /* UIImageView+TintColor.h */,
@@ -793,6 +798,7 @@
 				BA048E2B191AFB110083B0DC /* SBClip.m in Sources */,
 				BAA19C4D194694770034D439 /* UIFont+Snowball.m in Sources */,
 				BA048E26191AFAD90083B0DC /* _SBClip.m in Sources */,
+				BA36305B199D32FD00D13768 /* UIColor+Snowball.m in Sources */,
 				BA936FF3192310B200D3CAFB /* SBManagedTableViewController.m in Sources */,
 				BA936FFD1923143400D3CAFB /* SBReelTableViewCell.m in Sources */,
 				BA5238A51920B9630088A730 /* SBPlayerView.m in Sources */,

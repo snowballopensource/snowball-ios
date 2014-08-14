@@ -17,6 +17,7 @@
 #import "NSString+Initials.h"
 #import "UIButton+TintColorImage.h"
 #import "UIColor+RandomColor.h"
+#import "UIColor+Snowball.h"
 #import "UIFont+Snowball.h"
 #import "UIImageView+TintColor.h"
 #import "UILabel+CustomFont.h"

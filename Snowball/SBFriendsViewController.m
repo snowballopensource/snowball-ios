@@ -23,6 +23,8 @@
     NSPredicate *currentUserPredicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [SBUser currentUser].remoteID];
     [self setPredicate:[NSCompoundPredicate orPredicateWithSubpredicates:@[self.predicate, currentUserPredicate]]];
     [self setSectionNameKeyPath:@"isCurrentUser"];
+
+    [self setNavBarColor:[UIColor snowballColorBlue]];
 }
 
 #pragma mark - SBFollowingViewController
@@ -46,7 +48,7 @@
         UITableViewHeaderFooterView *headerView = (UITableViewHeaderFooterView *)view;
         [headerView.backgroundView setBackgroundColor:[UIColor whiteColor]];
         [headerView.textLabel setFont:[UIFont fontWithName:[UIFont snowballFontNameBook] size:headerView.textLabel.font.pointSize]];
-        [headerView.textLabel setTextColor:[UIColor colorWithRed:114/255.0 green:214/255.0 blue:235/255.0 alpha:1.0]];
+        [headerView.textLabel setTextColor:[UIColor snowballColorBlue]];
     }
 }
 

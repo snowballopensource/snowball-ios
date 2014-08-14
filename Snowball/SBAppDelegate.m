@@ -37,12 +37,20 @@
 #pragma mark - Private
 
 - (void)setupAppearance {
-    NSDictionary *navigationBarTitleTextAttributes = @{ NSFontAttributeName: [UIFont fontWithName:[UIFont snowballFontNameBook] size:20]};
+    NSDictionary *navigationBarTitleTextAttributes = @{ NSFontAttributeName: [UIFont fontWithName:[UIFont snowballFontNameBook] size:20],
+                                                        NSForegroundColorAttributeName: [UIColor whiteColor]};
     [[UINavigationBar appearance] setTitleTextAttributes:navigationBarTitleTextAttributes];
+
+    // New status bar height: 64
+    // Old status bar height: 44
+    // 64-24 = 20
+    // 20/2 = 10
+    // yay math!
+    [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:-10.0f forBarMetrics:UIBarMetricsDefault];
+    [[UIButton appearanceWhenContainedIn:[UINavigationBar class], nil] setContentEdgeInsets:UIEdgeInsetsMake(-20.0f, 0, 0, 0)];
 
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setFont:[UIFont fontWithName:[UIFont snowballFontNameBold] size:12]];
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setTextColor:[UIColor blackColor]];
-
 }
 
 @end
