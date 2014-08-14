@@ -4,6 +4,7 @@
 #import "_SBReel.h"
 
 const struct SBReelAttributes SBReelAttributes = {
+	.color = @"color",
 	.lastClipCreatedAt = @"lastClipCreatedAt",
 	.lastClipThumbnailURL = @"lastClipThumbnailURL",
 	.name = @"name",
@@ -49,6 +50,13 @@ const struct SBReelFetchedProperties SBReelFetchedProperties = {
 
 	return keyPaths;
 }
+
+
+
+
+@dynamic color;
+
+
 
 
 

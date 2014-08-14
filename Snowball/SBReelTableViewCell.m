@@ -70,7 +70,7 @@
     }
     [self.nameLabel setFont:[UIFont fontWithName:[UIFont snowballFontNameMedium] size:12]];
 
-    [self setTintColor:[UIColor randomColor]];
+    [self setTintColor:reel.color];
 
     [self.unwatchedClipTimestamp setText:[reel.lastClipCreatedAt shortTimeAgoString]];
 

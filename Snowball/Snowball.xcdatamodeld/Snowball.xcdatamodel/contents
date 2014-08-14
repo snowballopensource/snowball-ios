@@ -41,6 +41,7 @@
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="participations" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="Reel" representedClassName="SBReel" syncable="YES">
+        <attribute name="color" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="lastClipCreatedAt" optional="YES" attributeType="Date" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="last_clip_created_at"/>
@@ -103,7 +104,7 @@
     <elements>
         <element name="Clip" positionX="-63" positionY="-18" width="128" height="150"/>
         <element name="Participation" positionX="-54" positionY="81" width="128" height="73"/>
-        <element name="Reel" positionX="-63" positionY="0" width="128" height="165"/>
+        <element name="Reel" positionX="-63" positionY="0" width="128" height="180"/>
         <element name="User" positionX="-54" positionY="18" width="128" height="195"/>
     </elements>
 </model>

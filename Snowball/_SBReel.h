@@ -5,6 +5,7 @@
 #import "SBManagedObject.h"
 
 extern const struct SBReelAttributes {
+	__unsafe_unretained NSString *color;
 	__unsafe_unretained NSString *lastClipCreatedAt;
 	__unsafe_unretained NSString *lastClipThumbnailURL;
 	__unsafe_unretained NSString *name;
@@ -25,6 +26,7 @@ extern const struct SBReelFetchedProperties {
 @class SBClip;
 @class SBParticipation;
 
+@class NSObject;
 
 
 
@@ -39,6 +41,16 @@ extern const struct SBReelFetchedProperties {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (SBReelID*)objectID;
+
+
+
+
+
+@property (nonatomic, strong) id color;
+
+
+
+//- (BOOL)validateColor:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -133,6 +145,12 @@ extern const struct SBReelFetchedProperties {
 @end
 
 @interface _SBReel (CoreDataGeneratedPrimitiveAccessors)
+
+
+- (id)primitiveColor;
+- (void)setPrimitiveColor:(id)value;
+
+
 
 
 - (NSDate*)primitiveLastClipCreatedAt;

@@ -43,6 +43,12 @@
     return [SBClip MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"reel == %@", self] sortedBy:@"createdAt" ascending:NO];
 }
 
+#pragma mark - NSManagedObject
+
+- (void)willSave {
+    unless (self.color) [self setColor:[UIColor randomColor]];
+}
+
 #pragma mark - Participation
 
 - (void)addParticipants:(NSArray *)users {
