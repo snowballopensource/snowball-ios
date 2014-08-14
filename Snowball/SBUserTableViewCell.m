@@ -20,15 +20,9 @@
 
 #pragma mark - Actions
 
-- (IBAction)followUserButtonPressed:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(followUserButtonPressedInCell:)]) {
-        [self.delegate followUserButtonPressedInCell:self];
-    }
-}
-
-- (IBAction)checkUserButtonPressed:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(checkUserButtonPressedInCell:)]) {
-        [self.delegate checkUserButtonPressedInCell:self];
+- (IBAction)cellSelected:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(userCellSelected:)]) {
+        [self.delegate userCellSelected:self];
     }
 }
 
@@ -37,16 +31,10 @@
 - (void)setStyle:(SBUserTableViewCellStyle)style {
     switch (style) {
         case SBUserTableViewCellStyleSelectable:
-            [self.followButton setHidden:YES];
-            [self.checkButton setHidden:NO];
-            break;
-        case SBUserTableViewCellStyleFollowable:
-            [self.followButton setHidden:NO];
-            [self.checkButton setHidden:YES];
+            [self.addButton setHidden:NO];
             break;
         default:
-            [self.followButton setHidden:YES];
-            [self.checkButton setHidden:YES];
+            [self.addButton setHidden:YES];
             break;
     }
 }

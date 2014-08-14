@@ -21,8 +21,8 @@
                                     <rect key="frame" x="123" y="22" width="75" height="75"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUW-x2-pV5">
-                                    <rect key="frame" x="173" y="10" width="35" height="35"/>
-                                    <state key="normal" image="button-editprofile-editphoto-normal">
+                                    <rect key="frame" x="168" y="8" width="44" height="44"/>
+                                    <state key="normal" image="profile-photo-edit">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <state key="highlighted" image="button-editprofile-editphoto-highlighted"/>
@@ -43,8 +43,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-editprofile-username" translatesAutoresizingMaskIntoConstraints="NO" id="Ucp-SB-4vu">
-                                                    <rect key="frame" x="20" y="20" width="25" height="25"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profile-username" translatesAutoresizingMaskIntoConstraints="NO" id="Ucp-SB-4vu">
+                                                    <rect key="frame" x="20" y="20" width="24" height="25"/>
                                                 </imageView>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sJw-NO-PvR">
                                                     <rect key="frame" x="55" y="0.0" width="245" height="65"/>
@@ -61,8 +61,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-editprofile-realname" translatesAutoresizingMaskIntoConstraints="NO" id="ejY-OE-ERr">
-                                                    <rect key="frame" x="20" y="20" width="25" height="25"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profile-name" translatesAutoresizingMaskIntoConstraints="NO" id="ejY-OE-ERr">
+                                                    <rect key="frame" x="20" y="20" width="24" height="25"/>
                                                 </imageView>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="full name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cZy-io-L1g">
                                                     <rect key="frame" x="55" y="0.0" width="245" height="65"/>
@@ -83,8 +83,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-editprofile-email" translatesAutoresizingMaskIntoConstraints="NO" id="n18-qH-Xbq">
-                                                    <rect key="frame" x="20" y="20" width="25" height="25"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profile-envelope" translatesAutoresizingMaskIntoConstraints="NO" id="n18-qH-Xbq">
+                                                    <rect key="frame" x="20" y="24" width="25" height="17"/>
                                                 </imageView>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LcC-xx-Cjn">
                                                     <rect key="frame" x="55" y="0.0" width="245" height="65"/>
@@ -101,8 +101,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-editprofile-phone" translatesAutoresizingMaskIntoConstraints="NO" id="Z0S-0o-Dxv">
-                                                    <rect key="frame" x="20" y="20" width="25" height="25"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profile-phone" translatesAutoresizingMaskIntoConstraints="NO" id="Z0S-0o-Dxv">
+                                                    <rect key="frame" x="20" y="19" width="24" height="28"/>
                                                 </imageView>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="phone number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SD6-df-4gT">
                                                     <rect key="frame" x="55" y="0.0" width="245" height="65"/>
@@ -121,16 +121,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Edit Profile" id="vb0-fz-LT7">
-                        <barButtonItem key="rightBarButtonItem" id="H2C-Y1-d5z">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fWd-r8-AZl">
-                                <rect key="frame" x="269" y="9" width="35" height="25"/>
+                        <barButtonItem key="rightBarButtonItem" id="y4l-kF-LAZ">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gdv-vu-1ne">
+                                <rect key="frame" x="276" y="9" width="28" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="button-check-normal">
+                                <state key="normal" image="top-check">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="button-check-highlighted"/>
                                 <connections>
-                                    <action selector="save:" destination="KPc-AK-0v6" eventType="touchUpInside" id="1IO-Dg-bPl"/>
+                                    <action selector="save:" destination="KPc-AK-0v6" eventType="touchUpInside" id="YlC-WP-fA6"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -172,27 +171,27 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="My Friends" id="sTh-y1-Cp6">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="RC3-N0-SYR">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZTa-a6-qBT">
+                        <barButtonItem key="leftBarButtonItem" id="SxQ-7R-bc3">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MiP-1V-qzG">
                                 <rect key="frame" x="16" y="11" width="33" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="button-camera-blue">
+                                <state key="normal" image="top-camera">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="switchToReelsStoryboard:" destination="Tql-XQ-ZAu" eventType="touchUpInside" id="5Fb-Ef-bwS"/>
+                                    <action selector="switchToReelsStoryboard:" destination="Tql-XQ-ZAu" eventType="touchUpInside" id="iex-Iq-yjN"/>
                                 </connections>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="GjJ-hl-BiN">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jef-3c-Ifc">
-                                <rect key="frame" x="244" y="9" width="60" height="25"/>
+                        <barButtonItem key="rightBarButtonItem" id="IrV-Kl-oUy">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ikm-em-Ndv">
+                                <rect key="frame" x="269" y="8" width="35" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="button-follow-normal">
+                                <state key="normal" image="top-user-add">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Yhg-Nx-MYx" kind="push" id="cBH-Df-ZfX"/>
+                                    <segue destination="Yhg-Nx-MYx" kind="push" id="px1-FR-jfm"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -272,16 +271,15 @@
         </scene>
     </scenes>
     <resources>
-        <image name="button-camera-blue" width="33" height="20"/>
-        <image name="button-check-highlighted" width="35" height="25"/>
-        <image name="button-check-normal" width="35" height="25"/>
         <image name="button-editprofile-editphoto-highlighted" width="35" height="35"/>
-        <image name="button-editprofile-editphoto-normal" width="35" height="35"/>
-        <image name="button-follow-normal" width="60" height="25"/>
-        <image name="icon-editprofile-email" width="25" height="25"/>
-        <image name="icon-editprofile-phone" width="25" height="25"/>
-        <image name="icon-editprofile-realname" width="25" height="25"/>
-        <image name="icon-editprofile-username" width="25" height="25"/>
+        <image name="profile-envelope" width="25" height="17"/>
+        <image name="profile-name" width="24" height="25"/>
+        <image name="profile-phone" width="24" height="28"/>
+        <image name="profile-photo-edit" width="30" height="30"/>
+        <image name="profile-username" width="24" height="25"/>
+        <image name="top-camera" width="33" height="20"/>
+        <image name="top-check" width="28" height="25"/>
+        <image name="top-user-add" width="35" height="28"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

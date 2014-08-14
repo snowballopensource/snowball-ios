@@ -57,18 +57,18 @@
     if (user == [SBUser currentUser]) {
         [cell setStyle:SBUserTableViewCellStyleNone];
     } else {
-        [cell setStyle:SBUserTableViewCellStyleFollowable];
-        [cell.followButton setFollowing:user.followingValue];
+        [cell setStyle:SBUserTableViewCellStyleSelectable];
+        [cell.addButton setChecked:user.followingValue];
     }
 }
 
 #pragma mark - SBUserTableViewCellDelegate
 
-- (void)followUserButtonPressedInCell:(SBUserTableViewCell *)cell {
+- (void)userCellSelected:(SBUserTableViewCell *)cell {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     SBParticipation *participation = [self.fetchedResultsController objectAtIndexPath:indexPath];
     SBUser *user = participation.user;
-    [cell.followButton setFollowing:!user.followingValue];
+    [cell.addButton setChecked:!user.followingValue];
     if (user.followingValue) {
         [user unfollowWithSuccess:nil failure:nil];
     } else {

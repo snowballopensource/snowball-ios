@@ -23,6 +23,7 @@
 #import "UINavigationBar+CustomHeight.h"
 #import "UITextField+CustomFont.h"
 #import "UIView+ImageRepresentation.h"
+#import "UIViewController+BackButton.h"
 #import "UIViewController+ModalDetection.h"
 #import "UIViewController+Spinner.h"
 #import "UIViewController+StatusBar.h"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="14A261i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="14A314h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -24,42 +24,26 @@
                         <rect key="frame" x="20" y="10" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwk-l4-ghr" customClass="SBFollowButton">
-                        <rect key="frame" x="240" y="17" width="60" height="25"/>
+                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwk-l4-ghr" customClass="SBUserAddButton">
+                        <rect key="frame" x="265" y="12" width="35" height="35"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="button-follow-normal">
+                        <state key="normal" image="user-add">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
-                        <state key="highlighted" image="button-follow-highlighted"/>
                         <connections>
-                            <action selector="followUserButtonPressed:" destination="xsA-6h-miA" eventType="touchUpInside" id="0Ht-Bw-6GU"/>
-                        </connections>
-                    </button>
-                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yh4-bD-rcG" customClass="SBCheckButton">
-                        <rect key="frame" x="265" y="17" width="35" height="25"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="button-check-normal">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <state key="highlighted" image="button-check-highlighted"/>
-                        <connections>
-                            <action selector="checkUserButtonPressed:" destination="xsA-6h-miA" eventType="touchUpInside" id="h9O-pI-7N1"/>
+                            <action selector="cellSelected:" destination="xsA-6h-miA" eventType="touchUpInside" id="5Zm-Vv-roZ"/>
                         </connections>
                     </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
-                <outlet property="checkButton" destination="yh4-bD-rcG" id="apO-1Q-QX2"/>
-                <outlet property="followButton" destination="gwk-l4-ghr" id="VT5-O4-5Fg"/>
+                <outlet property="addButton" destination="gwk-l4-ghr" id="GE3-To-IZF"/>
                 <outlet property="nameLabel" destination="cXN-zx-Fsp" id="WE7-2X-7X2"/>
                 <outlet property="userImageView" destination="zzV-LD-vgH" id="KSB-5L-Wu5"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="button-check-highlighted" width="35" height="25"/>
-        <image name="button-check-normal" width="35" height="25"/>
-        <image name="button-follow-highlighted" width="60" height="25"/>
-        <image name="button-follow-normal" width="60" height="25"/>
+        <image name="user-add" width="35" height="35"/>
     </resources>
 </document>

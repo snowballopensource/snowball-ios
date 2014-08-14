@@ -21,7 +21,7 @@
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        UIImage *image = [UIImage imageNamed:@"icon-airplane"];
+        UIImage *image = [UIImage imageNamed:@"reel-plane"];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
         [self setUploadingImageView:imageView];
         [self addSubview:self.uploadingImageView];

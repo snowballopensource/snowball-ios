@@ -25,7 +25,7 @@
     [cell setStyle:SBUserTableViewCellStyleSelectable];
 
     SBUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [cell.checkButton setParticipating:[user isParticipatingInReel:self.reel]];
+    [cell.addButton setChecked:[user isParticipatingInReel:self.reel]];
 }
 
 #pragma mark - SBUserTableViewCellDelegate
@@ -35,7 +35,7 @@
     SBUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
     BOOL participating = [user isParticipatingInReel:self.reel];
-    [cell.checkButton setParticipating:!participating];
+    [cell.addButton setChecked:!participating];
     if (participating) {
         [self.reel removeParticipant:user success:nil failure:nil];
 

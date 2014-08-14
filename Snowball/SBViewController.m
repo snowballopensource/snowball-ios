@@ -18,6 +18,11 @@
     return NSStringFromClass(self);
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupBackButton];
+}
+
 #pragma mark - Actions
 
 - (IBAction)dismissModal:(id)sender {
