@@ -27,12 +27,9 @@ typedef NS_ENUM(NSInteger, SBUserTableViewCellStyle) {
     SBUserTableViewCellStyleSelectable
 };
 
-@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
-@property (nonatomic, weak) IBOutlet SBUserImageView *userImageView;
-@property (nonatomic, weak) IBOutlet SBUserAddButton *addButton;
-
-@property (nonatomic, weak) id<SBUserTableViewCellDelegate> delegate;
-
 - (void)setStyle:(SBUserTableViewCellStyle)style;
+- (void)setChecked:(BOOL)checked;
+
+- (void)configureForObject:(id)object delegate:(id<SBUserTableViewCellDelegate>)delegate;
 
 @end

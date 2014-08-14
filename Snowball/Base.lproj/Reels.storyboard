@@ -269,7 +269,7 @@
             </objects>
             <point key="canvasLocation" x="614" y="22"/>
         </scene>
-        <!--Participants View Controller - Participants-->
+        <!--Participants View Controller - Edit Group-->
         <scene sceneID="b93-0L-fht">
             <objects>
                 <viewController id="stb-kS-ZGX" customClass="SBParticipantsViewController" sceneMemberID="viewController">
@@ -294,7 +294,7 @@
                                 <rect key="frame" x="0.0" y="444" width="320" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
-                                <state key="normal" title="Change Participants">
+                                <state key="normal" title="Add participants...">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -305,7 +305,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Participants" id="gE8-XY-1CP">
+                    <navigationItem key="navigationItem" title="Edit Group" id="gE8-XY-1CP">
                         <barButtonItem key="leftBarButtonItem" id="qZu-E7-QaE">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hwz-6U-lLz">
                                 <rect key="frame" x="16" y="11" width="21" height="22"/>
@@ -342,7 +342,7 @@
             </objects>
             <point key="canvasLocation" x="60" y="790"/>
         </scene>
-        <!--Edit Participants View Controller - Change Participants-->
+        <!--Edit Participants View Controller - Add Participants-->
         <scene sceneID="4CV-fF-26D">
             <objects>
                 <viewController id="iTl-hG-DBa" customClass="SBEditParticipantsViewController" sceneMemberID="viewController">
@@ -366,7 +366,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Change Participants" id="aBu-qO-L1w"/>
+                    <navigationItem key="navigationItem" title="Add Participants" id="aBu-qO-L1w"/>
                     <connections>
                         <outlet property="tableView" destination="Hdl-Tq-CsB" id="5uN-K8-H8H"/>
                     </connections>

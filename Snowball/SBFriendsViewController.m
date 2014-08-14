@@ -30,15 +30,10 @@
 #pragma mark - SBFollowingViewController
 
 - (void)configureCell:(SBUserTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    [super configureCell:cell atIndexPath:indexPath];
-    [cell setStyle:SBUserTableViewCellStyleNone];
-
     SBUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    UIColor *color = user.color;
-    if (user == [SBUser currentUser]) {
-        color = [UIColor snowballColorBlue];
-    }
-    [cell setTintColor:color];
+    [cell configureForObject:user delegate:nil];
+
+    [cell setStyle:SBUserTableViewCellStyleNone];
 }
 
 #pragma mark - Actions

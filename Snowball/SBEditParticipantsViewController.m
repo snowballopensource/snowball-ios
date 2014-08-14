@@ -11,7 +11,7 @@
 #import "SBUser.h"
 #import "SBUserTableViewCell.h"
 
-@interface SBEditParticipantsViewController ()
+@interface SBEditParticipantsViewController () <SBUserTableViewCellDelegate>
 
 @end
 
@@ -20,25 +20,22 @@
 #pragma mark - SBFollowingViewController
 
 - (void)configureCell:(SBUserTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    [super configureCell:cell atIndexPath:indexPath];
-    
-    [cell setStyle:SBUserTableViewCellStyleSelectable];
-
     SBUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [cell.addButton setChecked:[user isParticipatingInReel:self.reel]];
+    [cell configureForObject:user delegate:self];
+    
+    [cell setChecked:[user isParticipatingInReel:self.reel]];
+    [cell setTintColor:self.reel.color];
 }
 
 #pragma mark - SBUserTableViewCellDelegate
 
-- (void)checkUserButtonPressedInCell:(SBUserTableViewCell *)cell {
+- (void)userCellSelected:(SBUserTableViewCell *)cell {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     SBUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
-
     BOOL participating = [user isParticipatingInReel:self.reel];
-    [cell.addButton setChecked:!participating];
+    [cell setChecked:!participating];
     if (participating) {
         [self.reel removeParticipant:user success:nil failure:nil];
-
     } else {
         [self.reel addParticipant:user success:nil failure:nil];
     }

@@ -51,17 +51,8 @@
 }
 
 - (void)configureCell:(SBUserTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    [cell setDelegate:self];
     SBUser *user = self.users[indexPath.row];
-    [cell.nameLabel setText:user.name];
-    [cell.userImageView setImageWithURL:[NSURL URLWithString:user.avatarURL]
-                       placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:cell.userImageView.frame.size]];
-    if (user == [SBUser currentUser]) {
-        [cell setStyle:SBUserTableViewCellStyleNone];
-    } else {
-        [cell setStyle:SBUserTableViewCellStyleSelectable];
-        [cell.addButton setChecked:user.followingValue];
-    }
+    [cell configureForObject:user delegate:self];
 }
 
 #pragma mark - SBUserTableViewCellDelegate
@@ -69,7 +60,7 @@
 - (void)userCellSelected:(SBUserTableViewCell *)cell {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     SBUser *user = self.users[indexPath.row];
-    [cell.addButton setChecked:!user.followingValue];
+    [cell setChecked:!user.followingValue];
     if (user.followingValue) {
         [user unfollowWithSuccess:nil failure:nil];
     } else {

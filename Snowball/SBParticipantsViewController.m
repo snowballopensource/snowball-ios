@@ -30,7 +30,7 @@
     [self setEntityClass:[SBParticipation class]];
     [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"user.name" ascending:YES]]];
     [self setPredicate:[NSPredicate predicateWithFormat:@"reel == %@", self.reel]];
-
+    
     [self setNavBarColor:self.reel.color];
 }
 
@@ -51,18 +51,12 @@
 }
 
 - (void)configureCell:(SBUserTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    [cell setDelegate:self];
     SBParticipation *participation = [self.fetchedResultsController objectAtIndexPath:indexPath];
     SBUser *user = participation.user;
-    [cell.nameLabel setText:user.name];
-    [cell.userImageView setImageWithURL:[NSURL URLWithString:user.avatarURL]
-                       placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:cell.userImageView.frame.size]];
-    if (user == [SBUser currentUser]) {
-        [cell setStyle:SBUserTableViewCellStyleNone];
-    } else {
-        [cell setStyle:SBUserTableViewCellStyleSelectable];
-        [cell.addButton setChecked:user.followingValue];
-    }
+    [cell configureForObject:user delegate:self];
+    
+    [cell setChecked:[user isParticipatingInReel:self.reel]];
+    [cell setTintColor:self.reel.color];
 }
 
 #pragma mark - SBUserTableViewCellDelegate
@@ -71,7 +65,7 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     SBParticipation *participation = [self.fetchedResultsController objectAtIndexPath:indexPath];
     SBUser *user = participation.user;
-    [cell.addButton setChecked:!user.followingValue];
+    [cell setChecked:!user.followingValue];
     if (user.followingValue) {
         [user unfollowWithSuccess:nil failure:nil];
     } else {
