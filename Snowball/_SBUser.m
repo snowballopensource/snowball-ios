@@ -6,6 +6,7 @@
 const struct SBUserAttributes SBUserAttributes = {
 	.avatarURL = @"avatarURL",
 	.bio = @"bio",
+	.color = @"color",
 	.email = @"email",
 	.following = @"following",
 	.name = @"name",
@@ -68,6 +69,13 @@ const struct SBUserFetchedProperties SBUserFetchedProperties = {
 
 
 @dynamic bio;
+
+
+
+
+
+
+@dynamic color;
 
 
 

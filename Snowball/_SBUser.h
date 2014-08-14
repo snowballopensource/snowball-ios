@@ -7,6 +7,7 @@
 extern const struct SBUserAttributes {
 	__unsafe_unretained NSString *avatarURL;
 	__unsafe_unretained NSString *bio;
+	__unsafe_unretained NSString *color;
 	__unsafe_unretained NSString *email;
 	__unsafe_unretained NSString *following;
 	__unsafe_unretained NSString *name;
@@ -28,6 +29,7 @@ extern const struct SBUserFetchedProperties {
 
 
 
+@class NSObject;
 
 
 
@@ -63,6 +65,16 @@ extern const struct SBUserFetchedProperties {
 
 
 //- (BOOL)validateBio:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) id color;
+
+
+
+//- (BOOL)validateColor:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -174,6 +186,12 @@ extern const struct SBUserFetchedProperties {
 
 - (NSString*)primitiveBio;
 - (void)setPrimitiveBio:(NSString*)value;
+
+
+
+
+- (id)primitiveColor;
+- (void)setPrimitiveColor:(id)value;
 
 
 

@@ -18,6 +18,13 @@
     return self;
 }
 
+- (void)setTintColor:(UIColor *)tintColor {
+    [super setTintColor:tintColor];
+    
+    [self.nameLabel setTextColor:tintColor];
+    [self.addButton setImageTintColor:tintColor];
+}
+
 #pragma mark - Actions
 
 - (IBAction)cellSelected:(id)sender {

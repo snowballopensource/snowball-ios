@@ -21,6 +21,12 @@ static SBUser *_currentUser = nil;
 
 @synthesize authToken;
 
+#pragma mark - NSManagedObject
+
+- (void)willSave {
+    unless (self.color) [self setColor:[UIColor randomColor]];
+}
+
 #pragma mark - Current User
 
 + (SBUser *)currentUser {
