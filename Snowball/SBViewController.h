@@ -10,6 +10,8 @@
 
 @interface SBViewController : UIViewController
 
+@property (nonatomic, strong) UIColor *navBarColor;
+
 + (NSString *)identifier;
 
 @end

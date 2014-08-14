@@ -25,7 +25,6 @@
 		BA0C2916199AFF1000A243C0 /* _SBParticipation.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0C2915199AFF1000A243C0 /* _SBParticipation.m */; };
 		BA0C2919199AFF2100A243C0 /* SBParticipation.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0C2918199AFF2100A243C0 /* SBParticipation.m */; };
 		BA15B9E5192AC9EF00453F8F /* UIViewController+StatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BA15B9E4192AC9EF00453F8F /* UIViewController+StatusBar.m */; };
-		BA15B9ED192AD9AD00453F8F /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = BA15B9EC192AD9AD00453F8F /* UINavigationBar+CustomHeight.m */; };
 		BA1DB1C519864F8D0078609B /* NSDate+TimeAgoString.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1DB1C419864F8D0078609B /* NSDate+TimeAgoString.m */; };
 		BA217C9A192A4DF500F04D03 /* SBLongRunningTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA217C99192A4DF500F04D03 /* SBLongRunningTaskManager.m */; };
 		BA29C7EC192FD9C900F59684 /* SBPushNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA29C7EB192FD9C900F59684 /* SBPushNotificationManager.m */; };
@@ -40,6 +39,8 @@
 		BA63202C195CEE4B00BA6B75 /* SBFollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA63202B195CEE4B00BA6B75 /* SBFollowingViewController.m */; };
 		BA670C9A198933F000E2D536 /* SBUploadingIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA670C99198933F000E2D536 /* SBUploadingIndicatorView.m */; };
 		BA6AD8EF1964C66100FEADB2 /* UITextField+CustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6AD8EE1964C66100FEADB2 /* UITextField+CustomFont.m */; };
+		BA70FC83199D2284004437B3 /* SBNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BA70FC82199D2284004437B3 /* SBNavigationBar.m */; };
+		BA70FC86199D2EC6004437B3 /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = BA70FC85199D2EC6004437B3 /* UINavigationBar+CustomHeight.m */; };
 		BA7DEC4B1981F3DC00943BFF /* UIImageView+TintColor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7DEC4A1981F3DC00943BFF /* UIImageView+TintColor.m */; };
 		BA7DEC4E1981F4A400943BFF /* UIColor+RandomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7DEC4D1981F4A400943BFF /* UIColor+RandomColor.m */; };
 		BA7DEC521981F8B000943BFF /* MuseoSans-500.otf in Resources */ = {isa = PBXBuildFile; fileRef = BA7DEC511981F88B00943BFF /* MuseoSans-500.otf */; };
@@ -135,8 +136,6 @@
 		BA0C2918199AFF2100A243C0 /* SBParticipation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBParticipation.m; sourceTree = "<group>"; };
 		BA15B9E3192AC9EF00453F8F /* UIViewController+StatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+StatusBar.h"; sourceTree = "<group>"; };
 		BA15B9E4192AC9EF00453F8F /* UIViewController+StatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+StatusBar.m"; sourceTree = "<group>"; };
-		BA15B9EB192AD9AD00453F8F /* UINavigationBar+CustomHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+CustomHeight.h"; sourceTree = "<group>"; };
-		BA15B9EC192AD9AD00453F8F /* UINavigationBar+CustomHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+CustomHeight.m"; sourceTree = "<group>"; };
 		BA1DB1C319864F8D0078609B /* NSDate+TimeAgoString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgoString.h"; sourceTree = "<group>"; };
 		BA1DB1C419864F8D0078609B /* NSDate+TimeAgoString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeAgoString.m"; sourceTree = "<group>"; };
 		BA217C98192A4DF500F04D03 /* SBLongRunningTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBLongRunningTaskManager.h; sourceTree = "<group>"; };
@@ -164,6 +163,10 @@
 		BA670C99198933F000E2D536 /* SBUploadingIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUploadingIndicatorView.m; sourceTree = "<group>"; };
 		BA6AD8ED1964C66100FEADB2 /* UITextField+CustomFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+CustomFont.h"; sourceTree = "<group>"; };
 		BA6AD8EE1964C66100FEADB2 /* UITextField+CustomFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+CustomFont.m"; sourceTree = "<group>"; };
+		BA70FC81199D2284004437B3 /* SBNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBNavigationBar.h; sourceTree = "<group>"; };
+		BA70FC82199D2284004437B3 /* SBNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBNavigationBar.m; sourceTree = "<group>"; };
+		BA70FC84199D2EC6004437B3 /* UINavigationBar+CustomHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+CustomHeight.h"; sourceTree = "<group>"; };
+		BA70FC85199D2EC6004437B3 /* UINavigationBar+CustomHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+CustomHeight.m"; sourceTree = "<group>"; };
 		BA7DEC491981F3DC00943BFF /* UIImageView+TintColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+TintColor.h"; sourceTree = "<group>"; };
 		BA7DEC4A1981F3DC00943BFF /* UIImageView+TintColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+TintColor.m"; sourceTree = "<group>"; };
 		BA7DEC4C1981F4A400943BFF /* UIColor+RandomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+RandomColor.h"; sourceTree = "<group>"; };
@@ -373,6 +376,8 @@
 				BAA19C4F19469B370034D439 /* SBUserImageView.m */,
 				BA53F1691952397400DFD7B9 /* SBMeUserImageView.h */,
 				BA53F16A1952397400DFD7B9 /* SBMeUserImageView.m */,
+				BA70FC81199D2284004437B3 /* SBNavigationBar.h */,
+				BA70FC82199D2284004437B3 /* SBNavigationBar.m */,
 				BA8782C8199C3DC00084CDD9 /* SBUserAddButton.h */,
 				BA8782C9199C3DC00084CDD9 /* SBUserAddButton.m */,
 				BA670C98198933F000E2D536 /* SBUploadingIndicatorView.h */,
@@ -461,8 +466,8 @@
 				BA7DEC4A1981F3DC00943BFF /* UIImageView+TintColor.m */,
 				BAA19C481946945C0034D439 /* UILabel+CustomFont.h */,
 				BAA19C491946945C0034D439 /* UILabel+CustomFont.m */,
-				BA15B9EB192AD9AD00453F8F /* UINavigationBar+CustomHeight.h */,
-				BA15B9EC192AD9AD00453F8F /* UINavigationBar+CustomHeight.m */,
+				BA70FC84199D2EC6004437B3 /* UINavigationBar+CustomHeight.h */,
+				BA70FC85199D2EC6004437B3 /* UINavigationBar+CustomHeight.m */,
 				BA6AD8ED1964C66100FEADB2 /* UITextField+CustomFont.h */,
 				BA6AD8EE1964C66100FEADB2 /* UITextField+CustomFont.m */,
 				BA8E99611953A8B700DCECD9 /* UIView+ImageRepresentation.h */,
@@ -811,7 +816,6 @@
 				BA048DF8191AF6730083B0DC /* SBViewController.m in Sources */,
 				BA29C7EC192FD9C900F59684 /* SBPushNotificationManager.m in Sources */,
 				BAD86C2F193553BC0046EE22 /* SBFacebookManager.m in Sources */,
-				BA15B9ED192AD9AD00453F8F /* UINavigationBar+CustomHeight.m in Sources */,
 				BAC9FB3A192413C6008742EE /* SBAuthenticationMenuViewController.m in Sources */,
 				BAEC7C10193DE528003FAE13 /* SBWebViewController.m in Sources */,
 				BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */,
@@ -820,6 +824,7 @@
 				BA8E994F195382FE00DCECD9 /* SBAddressBookManager.m in Sources */,
 				BA217C9A192A4DF500F04D03 /* SBLongRunningTaskManager.m in Sources */,
 				BA1DB1C519864F8D0078609B /* NSDate+TimeAgoString.m in Sources */,
+				BA70FC86199D2EC6004437B3 /* UINavigationBar+CustomHeight.m in Sources */,
 				BA8E99631953A8B700DCECD9 /* UIView+ImageRepresentation.m in Sources */,
 				BAC9FB4019241536008742EE /* SBSignInViewController.m in Sources */,
 				BA15B9E5192AC9EF00453F8F /* UIViewController+StatusBar.m in Sources */,
@@ -840,6 +845,7 @@
 				BAE17A771987FFAF0019BDA1 /* SBPlayerViewController.m in Sources */,
 				BAA19C5019469B370034D439 /* SBUserImageView.m in Sources */,
 				BA936FF7192312DF00D3CAFB /* SBReelsViewController.m in Sources */,
+				BA70FC83199D2284004437B3 /* SBNavigationBar.m in Sources */,
 				BA7DEC4E1981F4A400943BFF /* UIColor+RandomColor.m in Sources */,
 				BACEC3AA19835F390032FCFE /* SBDeepLinkManager.m in Sources */,
 				BAB0A72F1962024D00BF5C92 /* SBEditProfileViewController.m in Sources */,

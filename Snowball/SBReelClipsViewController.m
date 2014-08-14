@@ -46,9 +46,12 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.destinationViewController isKindOfClass:[SBParticipantsViewController class]]) {
-        SBParticipantsViewController *vc = segue.destinationViewController;
-        [vc setReel:self.reel];
+    if ([segue.destinationViewController isKindOfClass:[UINavigationController class]]) {
+        id rootViewController = [(UINavigationController *)segue.destinationViewController viewControllers][0];
+        if ([rootViewController isKindOfClass:[SBParticipantsViewController class]]) {
+            SBParticipantsViewController *vc = rootViewController;
+            [vc setReel:self.reel];
+        }
     } else if ([segue.destinationViewController isKindOfClass:[SBPlayerViewController class]]) {
         SBPlayerViewController *vc = segue.destinationViewController;
         [vc setClipChangedBlock:^(SBClip *newClip) {

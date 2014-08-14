@@ -23,6 +23,15 @@
     [self setupBackButton];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    if (self.navBarColor && self.navigationController.navigationBar.barTintColor != self.navBarColor) {
+        [self.navigationController.navigationBar setTranslucent:NO];
+        [self.navigationController.navigationBar setBarTintColor:self.navBarColor];
+    }
+}
+
 #pragma mark - Actions
 
 - (IBAction)dismissModal:(id)sender {

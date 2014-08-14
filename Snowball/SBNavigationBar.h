@@ -1,5 +1,5 @@
 //
-//  UINavigationBar+CustomHeight.h
+//  SBNavigationBar.h
 //  Snowball
 //
 //  Created by James Martinez on 8/14/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UINavigationBar (CustomHeight)
+@interface SBNavigationBar : UINavigationBar
 
 @end
