@@ -13,6 +13,7 @@
 #import "SBUser.h"
 #import "SBUserTableViewCell.h"
 
+// TODO: rename this to SBReelDetailsViewController
 @interface SBParticipantsViewController () <SBUserTableViewCellDelegate>
 
 @end
@@ -29,6 +30,8 @@
     [self setEntityClass:[SBParticipation class]];
     [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"user.name" ascending:YES]]];
     [self setPredicate:[NSPredicate predicateWithFormat:@"reel == %@", self.reel]];
+
+    [self setNavBarColor:self.reel.color];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
