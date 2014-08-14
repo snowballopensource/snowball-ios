@@ -11,11 +11,13 @@
 @implementation SBUserAddButton
 
 - (void)setChecked:(BOOL)checked {
+    UIImage *image = nil;
     if (checked) {
-        [self setImage:[UIImage imageNamed:@"user-check"] forState:UIControlStateNormal];
+        image = [UIImage imageNamed:@"user-check"];
     } else {
-        [self setImage:[UIImage imageNamed:@"user-add"] forState:UIControlStateNormal];
+        image = [UIImage imageNamed:@"user-add"];
     }
+    [self setImage:image forState:UIControlStateNormal];
 }
 
 @end

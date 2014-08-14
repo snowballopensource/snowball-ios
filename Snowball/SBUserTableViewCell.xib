@@ -24,20 +24,20 @@
                         <rect key="frame" x="20" y="10" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwk-l4-ghr" customClass="SBUserAddButton">
+                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pik-HJ-n1c" customClass="SBUserAddButton">
                         <rect key="frame" x="265" y="12" width="35" height="35"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <state key="normal" image="user-add">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
-                            <action selector="cellSelected:" destination="xsA-6h-miA" eventType="touchUpInside" id="5Zm-Vv-roZ"/>
+                            <action selector="cellSelected:" destination="xsA-6h-miA" eventType="touchUpInside" id="QUR-zF-mSA"/>
                         </connections>
                     </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
-                <outlet property="addButton" destination="gwk-l4-ghr" id="GE3-To-IZF"/>
+                <outlet property="addButton" destination="pik-HJ-n1c" id="9Uw-Nf-YkR"/>
                 <outlet property="nameLabel" destination="cXN-zx-Fsp" id="WE7-2X-7X2"/>
                 <outlet property="userImageView" destination="zzV-LD-vgH" id="KSB-5L-Wu5"/>
             </connections>

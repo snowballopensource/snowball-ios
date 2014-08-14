@@ -58,7 +58,7 @@
 
     } else {
         [self setStyle:SBUserTableViewCellStyleSelectable];
-        [self.addButton setChecked:user.followingValue];
+        [self setChecked:user.followingValue];
     }
     [self setTintColor:color];
 }
@@ -86,7 +86,6 @@
 
 - (void)setChecked:(BOOL)checked {
     [self.addButton setChecked:checked];
-    [self.addButton setImageTintColor:self.tintColor];
 }
 
 @end
