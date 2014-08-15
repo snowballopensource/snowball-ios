@@ -41,4 +41,22 @@
     }
 }
 
+#pragma mark - UITableViewDataSource
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return @"My friends";
+            break;
+    }
+    return nil;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    if ([view isKindOfClass:[UITableViewHeaderFooterView class]]) {
+        UITableViewHeaderFooterView *headerView = (UITableViewHeaderFooterView *)view;
+        [headerView.textLabel setTextColor:self.reel.color];
+    }
+}
+
 @end
