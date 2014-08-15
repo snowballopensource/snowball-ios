@@ -62,13 +62,13 @@
     SBReel *reel = (SBReel *)object;
 
     [self.recentParticipantsNamesLabel setText:reel.recentParticipantsNames];
-    [self.nameLabel setFont:[UIFont fontWithName:[UIFont snowballFontNameMedium] size:24]];
+    [self.nameLabel setFont:[UIFont fontWithName:[UIFont snowballFontNameMedium] size:self.nameLabel.font.pointSize]];
     if (reel.name) {
         [self.nameLabel setText:reel.name];
     } else {
         [self.nameLabel setText:@""];
     }
-    [self.nameLabel setFont:[UIFont fontWithName:[UIFont snowballFontNameMedium] size:12]];
+    [self.nameLabel setFont:[UIFont fontWithName:[UIFont snowballFontNameMedium] size:self.nameLabel.font.pointSize]];
 
     [self setTintColor:reel.color];
 

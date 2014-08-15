@@ -16,8 +16,9 @@
 
 @interface SBReelClipsViewController ()
 
-@property (nonatomic, weak) IBOutlet UIButton *userButton;
+@property (nonatomic, weak) IBOutlet UILabel *userName;
 @property (nonatomic, weak) IBOutlet UIImageView *userImageView;
+@property (nonatomic, weak) IBOutlet UIButton *editReelButton;
 
 @property (nonatomic, weak) IBOutlet UIButton *modalXButton;
 
@@ -37,12 +38,17 @@
     } else {
         [self.modalXButton setHidden:YES];
     }
+    
+    [self.userName setFont:[UIFont fontWithName:[UIFont snowballFontNameBook]
+                                           size:self.userName.font.pointSize]];
+    [self setTintColor:self.reel.color];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    [self.userButton setTitle:@"" forState:UIControlStateNormal];
+    [self.userImageView setImage:nil];
+    [self.userName setText:@""];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -79,9 +85,16 @@
 #pragma mark - Video Player
 
 - (void)updateClipUI {
-    [self.userButton setTitle:self.currentClip.user.username forState:UIControlStateNormal];
+    [self.userName setText:self.currentClip.user.username];
     [self.userImageView setImageWithURL:[NSURL URLWithString:self.currentClip.user.avatarURL]
                        placeholderImage:[SBUserImageView placeholderImageWithInitials:[self.currentClip.user.name initials] withSize:self.userImageView.frame.size]];
+}
+
+#pragma mark - Private
+
+- (void)setTintColor:(UIColor *)tintColor {
+    [self.userName setTextColor:tintColor];
+    [self.editReelButton setImageTintColor:tintColor];
 }
 
 @end

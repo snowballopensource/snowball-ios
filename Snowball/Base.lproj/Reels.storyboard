@@ -149,15 +149,6 @@
                                     <segue destination="B8k-Ng-gTy" kind="embed" id="syO-ma-gJs"/>
                                 </connections>
                             </containerView>
-                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N36-Oy-i29">
-                                <rect key="frame" x="80" y="345" width="220" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="jamescmartinez">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jUC-WR-fBN" customClass="SBUserImageView">
                                 <rect key="frame" x="20" y="340" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -182,15 +173,23 @@
                                     <action selector="dismissModal:" destination="D54-9P-BdS" eventType="touchUpInside" id="2Da-02-eSZ"/>
                                 </connections>
                             </button>
+                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ovs-NZ-sFC">
+                                <rect key="frame" x="80" y="345" width="220" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="vhB-DJ-slf"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="editReelButton" destination="Tir-XE-yFw" id="fqB-JO-LGV"/>
                         <outlet property="modalXButton" destination="Dq5-d0-kQF" id="Nuc-7Q-QrT"/>
-                        <outlet property="userButton" destination="N36-Oy-i29" id="oWF-di-HY1"/>
                         <outlet property="userImageView" destination="jUC-WR-fBN" id="0F6-gd-BlE"/>
+                        <outlet property="userName" destination="Ovs-NZ-sFC" id="eMN-q7-iAh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fe9-26-Sr0" userLabel="First Responder" sceneMemberID="firstResponder"/>
