@@ -31,7 +31,7 @@
 
 - (void)configureCell:(SBUserTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     SBUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [cell configureForObject:user delegate:nil];
+    [cell configureForObject:user delegate:self];
 
     [cell setStyle:SBUserTableViewCellStyleNone];
 }
@@ -40,18 +40,6 @@
 
 - (IBAction)switchToReelsStoryboard:(id)sender {
     [(SBNavigationController *)self.navigationController switchToStoryboardWithName:@"Reels"];
-}
-
-
-#pragma mark - UITableViewDelegate
-
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    if ([view isKindOfClass:[UITableViewHeaderFooterView class]]) {
-        UITableViewHeaderFooterView *headerView = (UITableViewHeaderFooterView *)view;
-        [headerView.backgroundView setBackgroundColor:[UIColor whiteColor]];
-        [headerView.textLabel setFont:[UIFont fontWithName:[UIFont snowballFontNameBook] size:headerView.textLabel.font.pointSize]];
-        [headerView.textLabel setTextColor:[UIColor snowballColorBlue]];
-    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -63,6 +51,12 @@
             break;
     }
     return @"My Friends";
+}
+
+#pragma mark - SBUserTableViewCellDelegate
+
+- (void)editProfileButtonTapped {
+    [self performSegueWithIdentifier:@"SBEditProfileViewController" sender:self];
 }
 
 @end

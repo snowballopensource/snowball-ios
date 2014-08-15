@@ -15,6 +15,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet SBUserImageView *userImageView;
 @property (nonatomic, weak) IBOutlet SBUserAddButton *addButton;
+@property (nonatomic, weak) IBOutlet UIButton *editProfileButton;
 
 @property (nonatomic, weak) id<SBUserTableViewCellDelegate> delegate;
 
@@ -35,6 +36,7 @@
     
     [self.nameLabel setTextColor:tintColor];
     [self.addButton setImageTintColor:tintColor];
+    [self.editProfileButton setImageTintColor:tintColor];
 }
 
 #pragma mark - SBTableViewCell
@@ -51,11 +53,14 @@
     [self.userImageView setImageWithURL:[NSURL URLWithString:user.avatarURL]
                        placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:self.userImageView.frame.size]];
 
+    [self.editProfileButton setHidden:YES];
     UIColor *color = user.color;
     if (user == [SBUser currentUser]) {
         [self setStyle:SBUserTableViewCellStyleNone];
         color = [UIColor snowballColorBlue];
-
+        if ([self.delegate respondsToSelector:@selector(editProfileButtonTapped)]) {
+            [self.editProfileButton setHidden:NO];
+        }
     } else {
         [self setStyle:SBUserTableViewCellStyleSelectable];
         [self setChecked:user.followingValue];
@@ -68,6 +73,12 @@
 - (IBAction)cellSelected:(id)sender {
     if ([self.delegate respondsToSelector:@selector(userCellSelected:)]) {
         [self.delegate userCellSelected:self];
+    }
+}
+
+- (IBAction)editProfileButtonTapped:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(editProfileButtonTapped)]) {
+        [self.delegate editProfileButtonTapped];
     }
 }
 

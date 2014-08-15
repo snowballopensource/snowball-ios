@@ -17,6 +17,7 @@
 @optional
 
 - (void)userCellSelected:(SBUserTableViewCell *)cell;
+- (void)editProfileButtonTapped;
 
 @end
 

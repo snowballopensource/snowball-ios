@@ -19,6 +19,7 @@
 @property (nonatomic, weak) IBOutlet UITextField *emailTextField;
 @property (nonatomic, weak) IBOutlet UITextField *phoneTextField;
 
+@property (nonatomic, strong) IBOutletCollection(UIView) NSArray *tintableViews;
 
 @end
 
@@ -26,6 +27,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    [self setupBackButton];
+
+    [self setTintColor:[UIColor snowballColorBlue]];
 
     [self.tableView setBackgroundColor:[UIColor whiteColor]];
 
@@ -45,6 +50,20 @@
         [self hideSpinner];
         [error displayInView:self.view];
     }];
+}
+
+- (void)setTintColor:(UIColor *)tintColor {
+    for (UIView *view in self.tintableViews) {
+        if ([view isKindOfClass:[UIButton class]]) {
+            [(UIButton *)view setImageTintColor:tintColor];
+        } else {
+            [(UIImageView *)view setImageTintColor:tintColor];
+        }
+    }
+    [self.usernameTextField setTextColor:tintColor];
+    [self.nameTextField setTextColor:tintColor];
+    [self.emailTextField setTextColor:tintColor];
+    [self.phoneTextField setTextColor:tintColor];
 }
 
 #pragma mark - View Actions

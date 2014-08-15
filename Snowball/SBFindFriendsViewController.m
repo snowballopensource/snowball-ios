@@ -11,7 +11,7 @@
 #import "SBUser.h"
 #import "SBUserTableViewCell.h"
 
-@interface SBFindFriendsViewController () <SBUserTableViewCellDelegate>
+@interface SBFindFriendsViewController () <SBUserTableViewCellDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) NSArray *users;
 
@@ -53,6 +53,15 @@
 - (void)configureCell:(SBUserTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     SBUser *user = self.users[indexPath.row];
     [cell configureForObject:user delegate:self];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return @"People in my contacts on Snowball";
+            break;
+    }
+    return nil;
 }
 
 #pragma mark - SBUserTableViewCellDelegate

@@ -34,10 +34,21 @@
                             <action selector="cellSelected:" destination="xsA-6h-miA" eventType="touchUpInside" id="QUR-zF-mSA"/>
                         </connections>
                     </button>
+                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xe8-gg-4eK">
+                        <rect key="frame" x="267" y="15" width="30" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" image="user-settings">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="editProfileButtonTapped:" destination="xsA-6h-miA" eventType="touchUpInside" id="nzS-MD-eIz"/>
+                        </connections>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="addButton" destination="pik-HJ-n1c" id="9Uw-Nf-YkR"/>
+                <outlet property="editProfileButton" destination="Xe8-gg-4eK" id="htr-bE-aHg"/>
                 <outlet property="nameLabel" destination="cXN-zx-Fsp" id="WE7-2X-7X2"/>
                 <outlet property="userImageView" destination="zzV-LD-vgH" id="KSB-5L-Wu5"/>
             </connections>
@@ -45,5 +56,6 @@
     </objects>
     <resources>
         <image name="user-add" width="35" height="35"/>
+        <image name="user-settings" width="30" height="30"/>
     </resources>
 </document>
