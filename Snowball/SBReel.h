@@ -16,8 +16,8 @@
 - (BOOL)hasNewClip;
 - (BOOL)hasPendingUpload;
 
+- (void)setParticipants:(NSArray *)users;
 - (void)addParticipants:(NSArray *)users;
-- (void)removeAllParticipants;
 
 + (void)getHomeFeedReelsOnPage:(NSUInteger)page
                        success:(void (^)(BOOL canLoadMore))success

@@ -51,16 +51,18 @@
 
 #pragma mark - Participation
 
+- (void)setParticipants:(NSArray *)users {
+    NSMutableArray *participations = [@[] mutableCopy];
+    for (SBUser *user in users) {
+        SBParticipation *participation = [SBParticipation createParticipationForUser:user andReel:self inContext:self.managedObjectContext];
+        [participations addObject:participation];
+    }
+    [self setParticipations:[NSSet setWithArray:[participations copy]]];
+}
+
 - (void)addParticipants:(NSArray *)users {
     for (SBUser *user in users) {
         [SBParticipation createParticipationForUser:user andReel:self inContext:self.managedObjectContext];
-    }
-}
-
-- (void)removeAllParticipants {
-    NSArray *participations = [SBParticipation MR_findByAttribute:@"reel" withValue:self inContext:self.managedObjectContext];
-    for (SBParticipation *participation in participations) {
-        [participation MR_deleteEntityInContext:self.managedObjectContext];
     }
 }
 
@@ -80,7 +82,6 @@
                                                                                withValue:object[@"id"]
                                                                                inContext:localContext];
                                           if (reel) {
-                                              [reel removeAllParticipants];
                                               [reel MR_importValuesForKeysWithObject:object];
                                           } else {
                                               [SBReel MR_importFromObject:object inContext:localContext];
@@ -104,10 +105,11 @@
                                   [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                                       NSArray *users = [SBUser MR_importFromArray:_users inContext:localContext];
                                       SBReel *reel = [self MR_inContext:localContext];
-                                      unless (page > 1) {
-                                          [reel removeAllParticipants];
+                                      if (page > 1) {
+                                          [reel addParticipants:users];
+                                      } else {
+                                          [reel setParticipants:users];
                                       }
-                                      [reel addParticipants:users];
                                   }];
                                   if (success) { success([_users count]); };
                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
