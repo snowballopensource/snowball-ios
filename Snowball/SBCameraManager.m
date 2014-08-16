@@ -145,8 +145,17 @@
 }
 
 - (void)subjectAreaDidChange:(NSNotification *)notification {
+    [self turnOnAutoFocusAndAutoExposure];
+}
+
+- (void)turnOnAutoFocusAndAutoExposure {
     CGPoint devicePoint = CGPointMake(.5, .5);
     [self focusWithMode:AVCaptureFocusModeContinuousAutoFocus exposeWithMode:AVCaptureExposureModeContinuousAutoExposure atDevicePoint:devicePoint monitorSubjectAreaChange:NO];
+}
+
+- (void)turnOffAutoFocusAndAutoExposure {
+    CGPoint devicePoint = self.videoDeviceInput.device.focusPointOfInterest;
+    [self focusWithMode:AVCaptureFocusModeLocked exposeWithMode:AVCaptureExposureModeLocked atDevicePoint:devicePoint monitorSubjectAreaChange:NO];
 }
 
 - (void)focusWithMode:(AVCaptureFocusMode)focusMode exposeWithMode:(AVCaptureExposureMode)exposureMode atDevicePoint:(CGPoint)point monitorSubjectAreaChange:(BOOL)monitorSubjectAreaChange {
@@ -224,6 +233,8 @@
         
         // Turning OFF flash for video recording
         [SBCameraManager setFlashMode:AVCaptureFlashModeOff forDevice:[[self videoDeviceInput] device]];
+    
+        [self turnOffAutoFocusAndAutoExposure];
         
         // Start recording to a temporary file.
         NSString *outputFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[@"movie" stringByAppendingPathExtension:@"mov"]];
@@ -238,6 +249,7 @@
     [self setRecordingCompletionBlock:completion];
     dispatch_async(self.captureSessionQueue, ^{
         [[self movieFileOutput] stopRecording];
+        [self turnOnAutoFocusAndAutoExposure];
     });
 }
 
