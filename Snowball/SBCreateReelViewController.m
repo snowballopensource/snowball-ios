@@ -27,6 +27,8 @@
     AVPlayer *player = [[AVPlayer alloc] initWithURL:self.initialRecordingURL];
     [self.playerView setPlayer:player];
     [(AVPlayerLayer *)self.playerView.layer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+
+    [self.finishButton setImageTintColor:[UIColor whiteColor]];
 }
 
 - (IBAction)finish:(id)sender {

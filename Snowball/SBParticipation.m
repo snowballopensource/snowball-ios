@@ -15,7 +15,7 @@
 + (SBParticipation *)createParticipationForUser:(SBUser *)user andReel:(SBReel *)reel inContext:(NSManagedObjectContext *)context {
     SBParticipation *participation = [self participationForUser:user andReel:reel inContext:context];
     unless (participation) {
-        SBParticipation *participation = [SBParticipation MR_createEntityInContext:context];
+        participation = [SBParticipation MR_createEntityInContext:context];
         [user MR_inContext:context];
         [participation setUser:[user MR_inContext:context]];
         [participation setReel:[reel MR_inContext:context]];
