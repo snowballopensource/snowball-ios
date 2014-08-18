@@ -107,7 +107,7 @@ typedef NS_ENUM(NSInteger, SBReelsViewControllerState) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (self.state) {
         case SBReelsViewControllerStateAddClip: {
-            // This is semi duplicated code since clips are uploaded in three places.
+            // This is semi duplicated code since clips are uploaded in two places.
             SBClip *clip = [SBClip MR_createEntity];
             SBReel *reel = [self.fetchedResultsController objectAtIndexPath:indexPath];
             [clip setReel:reel];
