@@ -11,7 +11,7 @@
 #import "SBClip.h"
 #import "SBLongRunningTaskManager.h"
 #import "SBNavigationController.h"
-#import "SBPlayerView.h"
+#import "SBPlayerViewController.h"
 #import "SBReel.h"
 #import "SBReelClipsViewController.h"
 #import "SBReelsViewController.h"
@@ -31,7 +31,8 @@ typedef NS_ENUM(NSInteger, SBReelsViewControllerState) {
 @property (nonatomic, readonly) SBReelsViewControllerState state;
 @property (nonatomic, strong) NSURL *recordingURL;
 
-@property (nonatomic, weak) IBOutlet SBPlayerView *playerView;
+@property (nonatomic, weak) IBOutlet UIView *playerContainerView;
+@property (nonatomic, weak) SBPlayerViewController *playerViewController;
 @property (nonatomic, weak) IBOutlet UIView *createNewSnowballView;
 
 @end
@@ -66,7 +67,6 @@ typedef NS_ENUM(NSInteger, SBReelsViewControllerState) {
 - (void)viewWillDisappear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     [self setState:SBReelsViewControllerStateNormal animated:animated];
-    [self.playerView.player pause];
     [super viewWillDisappear:animated];
 }
 
@@ -83,6 +83,8 @@ typedef NS_ENUM(NSInteger, SBReelsViewControllerState) {
         }];
     } else if ([destinationViewController isKindOfClass:[SBCreateReelViewController class]]) {
         [(SBCreateReelViewController *)destinationViewController setInitialRecordingURL:self.recordingURL];
+    } else if ([destinationViewController isKindOfClass:[SBPlayerViewController class]]) {
+        [self setPlayerViewController:(SBPlayerViewController *)destinationViewController];
     }
     [self setRecordingURL:nil];
 }
@@ -210,23 +212,14 @@ typedef NS_ENUM(NSInteger, SBReelsViewControllerState) {
 // Do not call any of these directly. They should be called via -setState
 
 - (void)hideCameraPreview {
-    [self.playerView setHidden:YES];
-    [self.playerView setPlayer:nil];
+    [self.playerViewController stop];
+    [self.playerContainerView setHidden:YES];
 }
 
 - (void)showCameraPreview {
-    AVPlayer *player = [[AVPlayer alloc] initWithURL:self.recordingURL];
-    [self.playerView setPlayer:player];
-    [(AVPlayerLayer *)self.playerView.layer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-    [self.playerView setHidden:NO];
-    [player play];
-    [[NSNotificationCenter defaultCenter] addObserverForName:AVPlayerItemDidPlayToEndTimeNotification
-                                                      object:[player currentItem]
-                                                       queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:^(NSNotification *note) {
-                                                      [self.playerView.player seekToTime:kCMTimeZero];
-                                                      [self.playerView.player play];
-                                                  }];
+    [self.playerViewController setLocalVideoURL:self.recordingURL];
+    [self.playerContainerView setHidden:NO];
+    [self.playerViewController play];
 }
 
 - (void)hideNewSnowballView {

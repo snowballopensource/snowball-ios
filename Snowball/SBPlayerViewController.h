@@ -15,4 +15,8 @@
 @property (nonatomic, strong) SBReel *reel;
 @property (nonatomic, strong) NSURL *localVideoURL;
 
+- (void)pause;
+- (void)play;
+- (void)stop;
+
 @end

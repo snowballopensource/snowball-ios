@@ -23,33 +23,57 @@
 @property (nonatomic, weak) IBOutlet UILabel *userName;
 @property (nonatomic, weak) IBOutlet UIImageView *userImageView;
 
+@property (nonatomic) BOOL playing;
+
 @end
 
 @implementation SBPlayerViewController
 
-#pragma mark - UIViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self showSpinner];
-    [SBClip getRecentClipsForReel:self.reel
-                            since:self.reel.lastWatchedClip.createdAt
-                          success:^(BOOL canLoadMore) {
-                              dispatch_async(dispatch_get_main_queue(), ^{
-                                  [self playReel];
-                              });
-                          }
-                          failure:nil];
+
+    [self.userName setText:@""];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+#pragma mark - Public
+
+- (void)pause {
+    [self setPlaying:NO];
+    [self.playerView.player pause];
+}
+
+- (void)play {
+    [self setPlaying:YES];
+    AVQueuePlayer *player = (AVQueuePlayer *)self.playerView.player;
+    if ([player.items count] > 0) {
+        [self resume];
+    } else if (self.localVideoURL) {
+        [self playLocalVideo];
+    } else if (self.reel) {
+        [self showSpinner];
+        [SBClip getRecentClipsForReel:self.reel
+                                since:self.reel.lastWatchedClip.createdAt
+                              success:^(BOOL canLoadMore) {
+                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                      [self playReel];
+                                  });
+                              }
+                              failure:nil];
+    }
+}
+
+- (void)stop {
+    [self setPlaying:NO];
     AVQueuePlayer *player = (AVQueuePlayer *)self.playerView.player;
     [player removeAllItems];
-    [super viewWillDisappear:animated];
+    self.playerView.player = nil;
 }
 
-#pragma mark - Video Player
+#pragma mark - Private
+
+- (void)resume {
+    [self.playerView.player play];
+}
 
 - (void)playReel {
     NSPredicate *predicate;
@@ -79,7 +103,20 @@
     AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:self.localVideoURL];
     AVQueuePlayer *player = [[AVQueuePlayer alloc] initWithItems:@[playerItem]];
     [self.playerView setPlayer:player];
-    [self.playerView.player play];
+    
+    [player setActionAtItemEnd:AVPlayerActionAtItemEndPause];
+
+    [self setupPlayerIssueHandling];
+    
+    [player play];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:AVPlayerItemDidPlayToEndTimeNotification
+                                                      object:[player currentItem]
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      [self.playerView.player seekToTime:kCMTimeZero];
+                                                      [self.playerView.player play];
+                                                  }];
 }
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
@@ -98,8 +135,6 @@
         [self.playerView.player setActionAtItemEnd:AVPlayerActionAtItemEndPause];
     }
 }
-
-#pragma mark - Private
 
 - (NSArray *)createPlayerItems {
     NSMutableArray *playerItems = [@[] mutableCopy];
@@ -129,7 +164,7 @@
         if (player.rate == 1) {
             [self hideSpinner];
         }
-        if (player.rate == 0 && CMTimeGetSeconds(player.currentItem.currentTime) != CMTimeGetSeconds(player.currentItem.duration)) {
+        if (player.rate == 0 && CMTimeGetSeconds(player.currentItem.currentTime) != CMTimeGetSeconds(player.currentItem.duration) && self.playing) {
             [self showSpinner];
             [player.currentItem bk_addObserverForKeyPath:@"playbackLikelyToKeepUp" task:^(id target) {
                 if (player.currentItem.playbackLikelyToKeepUp) {

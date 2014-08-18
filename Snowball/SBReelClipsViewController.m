@@ -19,6 +19,8 @@
 @property (nonatomic, weak) IBOutlet UIButton *editReelButton;
 @property (nonatomic, weak) IBOutlet UIButton *modalXButton;
 
+@property (nonatomic, weak) SBPlayerViewController *playerViewController;
+
 @end
 
 @implementation SBReelClipsViewController
@@ -35,6 +37,34 @@
     }
 
     [self setTintColor:self.reel.color];
+
+    if (self.localVideoURL) {
+        [self.playerViewController setLocalVideoURL:self.localVideoURL];
+    } else {
+        // This ensures we have a reel before showing video player
+        unless (self.reel) {
+            SBReel *reel = [SBReel MR_findFirstByAttribute:@"remoteID" withValue:self.reelID];
+            unless (reel) {
+                reel = [SBReel MR_createEntity];
+                [reel setRemoteID:self.reelID];
+                [reel save];
+            }
+            [self setReel:reel];
+        }
+        [self.playerViewController setReel:self.reel];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    [self.playerViewController play];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+
+    [self.playerViewController pause];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -45,22 +75,7 @@
             [vc setReel:self.reel];
         }
     } else if ([segue.destinationViewController isKindOfClass:[SBPlayerViewController class]]) {
-        SBPlayerViewController *vc = segue.destinationViewController;
-        if (self.localVideoURL) {
-            [vc setLocalVideoURL:self.localVideoURL];
-        } else {
-            // This ensures we have a reel before showing video player
-            unless (self.reel) {
-                SBReel *reel = [SBReel MR_findFirstByAttribute:@"remoteID" withValue:self.reelID];
-                unless (reel) {
-                    reel = [SBReel MR_createEntity];
-                    [reel setRemoteID:self.reelID];
-                    [reel save];
-                }
-                [self setReel:reel];
-            }
-            [vc setReel:self.reel];
-        }
+        [self setPlayerViewController:(SBPlayerViewController *)segue.destinationViewController];
     }
 }
 
