@@ -149,10 +149,6 @@
                                     <segue destination="B8k-Ng-gTy" kind="embed" id="syO-ma-gJs"/>
                                 </connections>
                             </containerView>
-                            <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jUC-WR-fBN" customClass="SBUserImageView">
-                                <rect key="frame" x="20" y="340" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tir-XE-yFw">
                                 <rect key="frame" x="256" y="504" width="44" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -173,13 +169,6 @@
                                     <action selector="dismissModal:" destination="D54-9P-BdS" eventType="touchUpInside" id="2Da-02-eSZ"/>
                                 </connections>
                             </button>
-                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ovs-NZ-sFC">
-                                <rect key="frame" x="80" y="345" width="220" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -188,8 +177,6 @@
                     <connections>
                         <outlet property="editReelButton" destination="Tir-XE-yFw" id="fqB-JO-LGV"/>
                         <outlet property="modalXButton" destination="Dq5-d0-kQF" id="Nuc-7Q-QrT"/>
-                        <outlet property="userImageView" destination="jUC-WR-fBN" id="0F6-gd-BlE"/>
-                        <outlet property="userName" destination="Ovs-NZ-sFC" id="eMN-q7-iAh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fe9-26-Sr0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -436,6 +423,19 @@
                             <view appearanceType="aqua" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qme-N4-b5m" customClass="SBPlayerView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eIA-Mr-XYL" customClass="SBUserImageView">
+                                        <rect key="frame" x="20" y="260" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="joa-Wu-pnO">
+                                        <rect key="frame" x="68" y="265" width="232" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -444,6 +444,8 @@
                     <toolbarItems/>
                     <connections>
                         <outlet property="playerView" destination="qme-N4-b5m" id="b3H-6S-Bqy"/>
+                        <outlet property="userImageView" destination="eIA-Mr-XYL" id="VmE-CB-D2r"/>
+                        <outlet property="userName" destination="joa-Wu-pnO" id="GVS-9s-1st"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EBe-NC-F0w" userLabel="First Responder" sceneMemberID="firstResponder"/>

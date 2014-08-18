@@ -16,13 +16,8 @@
 
 @interface SBReelClipsViewController ()
 
-@property (nonatomic, weak) IBOutlet UILabel *userName;
-@property (nonatomic, weak) IBOutlet UIImageView *userImageView;
 @property (nonatomic, weak) IBOutlet UIButton *editReelButton;
-
 @property (nonatomic, weak) IBOutlet UIButton *modalXButton;
-
-@property (nonatomic, strong) SBClip *currentClip;
 
 @end
 
@@ -38,17 +33,8 @@
     } else {
         [self.modalXButton setHidden:YES];
     }
-    
-    [self.userName setFont:[UIFont fontWithName:[UIFont snowballFontNameBook]
-                                           size:self.userName.font.pointSize]];
+
     [self setTintColor:self.reel.color];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-
-    [self.userImageView setImage:nil];
-    [self.userName setText:@""];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -60,10 +46,6 @@
         }
     } else if ([segue.destinationViewController isKindOfClass:[SBPlayerViewController class]]) {
         SBPlayerViewController *vc = segue.destinationViewController;
-        [vc setClipChangedBlock:^(SBClip *newClip) {
-            [self setCurrentClip:newClip];
-            [self updateClipUI];
-        }];
         if (self.localVideoURL) {
             [vc setLocalVideoURL:self.localVideoURL];
         } else {
@@ -82,18 +64,9 @@
     }
 }
 
-#pragma mark - Video Player
-
-- (void)updateClipUI {
-    [self.userName setText:self.currentClip.user.username];
-    [self.userImageView setImageWithURL:[NSURL URLWithString:self.currentClip.user.avatarURL]
-                       placeholderImage:[SBUserImageView placeholderImageWithInitials:[self.currentClip.user.name initials] withSize:self.userImageView.frame.size]];
-}
-
 #pragma mark - Private
 
 - (void)setTintColor:(UIColor *)tintColor {
-    [self.userName setTextColor:tintColor];
     [self.editReelButton setImageTintColor:tintColor];
 }
 

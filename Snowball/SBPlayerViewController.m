@@ -10,6 +10,8 @@
 #import "SBPlayerView.h"
 #import "SBPlayerViewController.h"
 #import "SBReel.h"
+#import "SBUser.h"
+#import "SBUserImageView.h"
 
 @interface SBPlayerViewController ()
 
@@ -17,6 +19,9 @@
 
 @property (nonatomic, strong) NSArray *clips;
 @property (nonatomic, strong) SBClip *currentClip;
+
+@property (nonatomic, weak) IBOutlet UILabel *userName;
+@property (nonatomic, weak) IBOutlet UIImageView *userImageView;
 
 @end
 
@@ -133,10 +138,16 @@
     }];
 }
 
+- (void)updateClipUIForClip:(SBClip *)clip {
+    [self.userName setText:self.currentClip.user.username];
+    [self.userImageView setImageWithURL:[NSURL URLWithString:self.currentClip.user.avatarURL]
+                       placeholderImage:[SBUserImageView placeholderImageWithInitials:[self.currentClip.user.name initials] withSize:self.userImageView.frame.size]];
+}
+
 #pragma mark - Setters / Getters
 
 - (void)setCurrentClip:(SBClip *)currentClip {
-    self.clipChangedBlock(currentClip);
+    [self updateClipUIForClip:currentClip];
     _currentClip = currentClip;
 }
 

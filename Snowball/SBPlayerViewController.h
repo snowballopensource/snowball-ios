@@ -15,6 +15,4 @@
 @property (nonatomic, strong) SBReel *reel;
 @property (nonatomic, strong) NSURL *localVideoURL;
 
-@property (nonatomic, copy) void(^clipChangedBlock)(SBClip *newClip);
-
 @end
