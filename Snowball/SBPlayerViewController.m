@@ -31,12 +31,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self showSpinner];
     [SBClip getRecentClipsForReel:self.reel
                             since:self.reel.lastWatchedClip.createdAt
                           success:^(BOOL canLoadMore) {
-                              [self playReel];
+                              dispatch_async(dispatch_get_main_queue(), ^{
+                                  [self playReel];
+                              });
                           }
                           failure:nil];
 }
@@ -67,9 +69,9 @@
     } else {
         [player setActionAtItemEnd:AVPlayerActionAtItemEndAdvance];
     }
-
+    
     [self setupPlayerIssueHandling];
-
+    
     [player play];
 }
 
@@ -85,7 +87,7 @@
     SBClip *previousClip = self.clips[currentClipIndex];
     [self.reel setLastWatchedClip:previousClip];
     [self.reel save];
-
+    
     NSUInteger nextClipIndex = currentClipIndex+1;
     if (nextClipIndex < [self.clips count]) {
         SBClip *nextClip = self.clips[nextClipIndex];
@@ -114,14 +116,14 @@
 
 - (void)setupPlayerIssueHandling {
     AVQueuePlayer *player = (AVQueuePlayer *)self.playerView.player;
-
+    
     // Handle player errors
     [player bk_addObserverForKeyPath:@"status" task:^(id target) {
         if (player.status == AVPlayerStatusFailed) {
             NSLog(@"Player Error: %@", player.error);
         }
     }];
-
+    
     // Handle buffering during clip playback
     [player bk_addObserverForKeyPath:@"rate" task:^(id target) {
         if (player.rate == 1) {
@@ -139,9 +141,9 @@
 }
 
 - (void)updateClipUIForClip:(SBClip *)clip {
-    [self.userName setText:self.currentClip.user.username];
-    [self.userImageView setImageWithURL:[NSURL URLWithString:self.currentClip.user.avatarURL]
-                       placeholderImage:[SBUserImageView placeholderImageWithInitials:[self.currentClip.user.name initials] withSize:self.userImageView.frame.size]];
+    [self.userName setText:clip.user.username];
+    [self.userImageView setImageWithURL:[NSURL URLWithString:clip.user.avatarURL]
+                       placeholderImage:[SBUserImageView placeholderImageWithInitials:[clip.user.name initials] withSize:self.userImageView.frame.size]];
 }
 
 #pragma mark - Setters / Getters
