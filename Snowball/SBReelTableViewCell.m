@@ -47,7 +47,7 @@
     [self.disclosureIndicator setImageTintColor:tintColor];
     [self.hasNewClipIndicator setImageTintColor:tintColor];
     [self.addClipIndicator setImageTintColor:tintColor];
-    [self.uploadingIndicator setBackgroundColor:tintColor];
+    [self.uploadingIndicator setTintColor:tintColor];
 
     [self.unwatchedClipTimestamp setFont:[UIFont fontWithName:[UIFont snowballFontNameMedium] size:self.unwatchedClipTimestamp.font.pointSize]];
 }

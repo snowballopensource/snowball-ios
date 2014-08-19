@@ -21,6 +21,7 @@
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
+        [self setClipsToBounds:YES];
         UIImage *image = [UIImage imageNamed:@"reel-plane"];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
         [self setUploadingImageView:imageView];
@@ -54,6 +55,11 @@
     [self.layer removeAllAnimations];
     [self.uploadingImageView.layer removeAllAnimations];
     [self setAnimating:NO];
+}
+
+- (void)setTintColor:(UIColor *)tintColor {
+    [super setTintColor:tintColor];
+    [self.uploadingImageView setImageTintColor:tintColor];
 }
 
 @end
