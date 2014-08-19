@@ -21,7 +21,7 @@
                                     <rect key="frame" x="123" y="22" width="75" height="75"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUW-x2-pV5">
-                                    <rect key="frame" x="168" y="8" width="44" height="44"/>
+                                    <rect key="frame" x="169" y="7" width="44" height="44"/>
                                     <state key="normal" image="profile-photo-edit">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
