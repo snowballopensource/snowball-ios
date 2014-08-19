@@ -83,8 +83,8 @@
         <attribute name="bio" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="color" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="following" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="isCurrentUser" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="following" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="isCurrentUser" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phoneNumber" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
@@ -107,6 +107,6 @@
         <element name="Clip" positionX="-63" positionY="-18" width="128" height="150"/>
         <element name="Participation" positionX="-54" positionY="81" width="128" height="73"/>
         <element name="Reel" positionX="-63" positionY="0" width="128" height="180"/>
-        <element name="User" positionX="-54" positionY="18" width="128" height="225"/>
+        <element name="User" positionX="-54" positionY="18" width="128" height="223"/>
     </elements>
 </model>
