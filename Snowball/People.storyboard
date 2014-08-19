@@ -212,7 +212,7 @@
         <!--Find Friends View Controller - Find Friends-->
         <scene sceneID="jXV-G4-vht">
             <objects>
-                <viewController id="Yhg-Nx-MYx" customClass="SBFindFriendsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SBFindFriendsViewController" id="Yhg-Nx-MYx" customClass="SBFindFriendsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oDc-9n-O8g"/>
                         <viewControllerLayoutGuide type="bottom" id="aer-hs-iER"/>

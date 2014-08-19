@@ -7,6 +7,7 @@
 //
 
 #import "SBEditParticipantsViewController.h"
+#import "SBFindFriendsViewController.h"
 #import "SBReel.h"
 #import "SBUser.h"
 #import "SBUserTableViewCell.h"
@@ -16,6 +17,14 @@
 @end
 
 @implementation SBEditParticipantsViewController
+
+#pragma mark - View Actions
+
+- (IBAction)findFriends:(id)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"People" bundle:nil];
+    SBFindFriendsViewController *vc = [storyboard instantiateViewControllerWithIdentifier:[SBFindFriendsViewController identifier]];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 #pragma mark - SBFollowingViewController
 
@@ -50,13 +59,6 @@
             break;
     }
     return nil;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    if ([view isKindOfClass:[UITableViewHeaderFooterView class]]) {
-        UITableViewHeaderFooterView *headerView = (UITableViewHeaderFooterView *)view;
-        [headerView.textLabel setTextColor:self.reel.color];
-    }
 }
 
 @end
