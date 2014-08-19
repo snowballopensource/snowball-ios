@@ -30,13 +30,11 @@ static SBUser *_currentUser = nil;
 
 + (SBUser *)currentUser {
     unless (_currentUser) {
-        _currentUser = [SBUser MR_findFirstByAttribute:@"isCurrentUser" withValue:@(YES)];
-
         NSString *currentUserAuthToken = [[NSUserDefaults standardUserDefaults] objectForKey:kSBCurrentUserAuthToken];
         unless (currentUserAuthToken) {
-            [self setCurrentUser:nil];
             return nil;
         }
+        _currentUser = [SBUser MR_findFirstByAttribute:@"isCurrentUser" withValue:@(YES)];
         [_currentUser setAuthToken:currentUserAuthToken];
 
         [SBPushNotificationManager enablePushWithUserID:_currentUser.remoteID];
@@ -53,6 +51,7 @@ static SBUser *_currentUser = nil;
         [[NSUserDefaults standardUserDefaults] setObject:user.authToken
                                                   forKey:kSBCurrentUserAuthToken];
     } else {
+        [SBPushNotificationManager disablePush];
         NSArray *currentUsers = [SBUser MR_findByAttribute:@"isCurrentUser" withValue:@(YES)];
         for (SBUser *currentUser in currentUsers) {
             [currentUser setIsCurrentUserValue:NO];
@@ -63,11 +62,6 @@ static SBUser *_currentUser = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
     _currentUser = user;
     [[SBAPIManager sharedManager] loadAuthToken];
-}
-
-+ (void)removeCurrentUser {
-    [SBPushNotificationManager disablePush];
-    [self setCurrentUser:nil];
 }
 
 #pragma mark - Participation

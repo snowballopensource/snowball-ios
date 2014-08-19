@@ -15,7 +15,7 @@
 @property (nonatomic, strong) NSString *authToken;
 
 + (SBUser *)currentUser;
-+ (void)removeCurrentUser;
++ (void)setCurrentUser:(SBUser *)currentUser;
 
 - (BOOL)isParticipatingInReel:(SBReel *)reel;
 

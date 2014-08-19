@@ -20,7 +20,7 @@
 }
 
 + (void)signOut {
-    [SBUser removeCurrentUser];
+    [SBUser setCurrentUser:nil];
     [SBFacebookManager signOut];
     [self requestUserAuthenticationIfNecessary:YES];
 }
