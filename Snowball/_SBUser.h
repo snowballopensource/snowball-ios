@@ -10,6 +10,7 @@ extern const struct SBUserAttributes {
 	__unsafe_unretained NSString *color;
 	__unsafe_unretained NSString *email;
 	__unsafe_unretained NSString *following;
+	__unsafe_unretained NSString *isCurrentUser;
 	__unsafe_unretained NSString *name;
 	__unsafe_unretained NSString *phoneNumber;
 	__unsafe_unretained NSString *remoteID;
@@ -30,6 +31,7 @@ extern const struct SBUserFetchedProperties {
 
 
 @class NSObject;
+
 
 
 
@@ -99,6 +101,20 @@ extern const struct SBUserFetchedProperties {
 - (void)setFollowingValue:(BOOL)value_;
 
 //- (BOOL)validateFollowing:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSNumber* isCurrentUser;
+
+
+
+@property BOOL isCurrentUserValue;
+- (BOOL)isCurrentUserValue;
+- (void)setIsCurrentUserValue:(BOOL)value_;
+
+//- (BOOL)validateIsCurrentUser:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -207,6 +223,15 @@ extern const struct SBUserFetchedProperties {
 
 - (BOOL)primitiveFollowingValue;
 - (void)setPrimitiveFollowingValue:(BOOL)value_;
+
+
+
+
+- (NSNumber*)primitiveIsCurrentUser;
+- (void)setPrimitiveIsCurrentUser:(NSNumber*)value;
+
+- (BOOL)primitiveIsCurrentUserValue;
+- (void)setPrimitiveIsCurrentUserValue:(BOOL)value_;
 
 
 

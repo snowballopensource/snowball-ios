@@ -12,7 +12,6 @@
 #import "SBReel.h"
 #import "SBUser.h"
 
-static NSString *const kSBCurrentUserRemoteID = @"SBCurrentUserRemoteID";
 static NSString *const kSBCurrentUserAuthToken = @"SBCurrentUserAuthToken";
 
 static SBUser *_currentUser = nil;
@@ -31,14 +30,11 @@ static SBUser *_currentUser = nil;
 
 + (SBUser *)currentUser {
     unless (_currentUser) {
-        NSString *currentUserRemoteID = [[NSUserDefaults standardUserDefaults] objectForKey:kSBCurrentUserRemoteID];
-        unless(currentUserRemoteID) {
-            return nil;
-        }
-        _currentUser = [SBUser MR_findFirstByAttribute:@"remoteID" withValue:currentUserRemoteID];
-        
+        _currentUser = [SBUser MR_findFirstByAttribute:@"isCurrentUser" withValue:@(YES)];
+
         NSString *currentUserAuthToken = [[NSUserDefaults standardUserDefaults] objectForKey:kSBCurrentUserAuthToken];
         unless (currentUserAuthToken) {
+            [self setCurrentUser:nil];
             return nil;
         }
         [_currentUser setAuthToken:currentUserAuthToken];
@@ -50,15 +46,18 @@ static SBUser *_currentUser = nil;
 
 + (void)setCurrentUser:(SBUser *)currentUser {
     SBUser *user = [currentUser MR_inContext:[NSManagedObjectContext MR_defaultContext]];
-    [user setAuthToken:currentUser.authToken];
     if (user) {
-        [[NSUserDefaults standardUserDefaults] setObject:user.remoteID
-                                                  forKey:kSBCurrentUserRemoteID];
+        [user setAuthToken:currentUser.authToken];
+        [user setIsCurrentUserValue:YES];
+        [user save];
         [[NSUserDefaults standardUserDefaults] setObject:user.authToken
                                                   forKey:kSBCurrentUserAuthToken];
-    }
-    else {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBCurrentUserRemoteID];
+    } else {
+        NSArray *currentUsers = [SBUser MR_findByAttribute:@"isCurrentUser" withValue:@(YES)];
+        for (SBUser *currentUser in currentUsers) {
+            [currentUser setIsCurrentUserValue:NO];
+        }
+        [[NSManagedObjectContext MR_defaultContext] save:nil];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBCurrentUserAuthToken];
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -69,11 +68,6 @@ static SBUser *_currentUser = nil;
 + (void)removeCurrentUser {
     [SBPushNotificationManager disablePush];
     [self setCurrentUser:nil];
-}
-
-- (BOOL)isCurrentUser {
-    if (self == [SBUser currentUser]) return YES;
-    return NO;
 }
 
 #pragma mark - Participation

@@ -24,6 +24,11 @@
     [self setPredicate:[NSCompoundPredicate orPredicateWithSubpredicates:@[self.predicate, currentUserPredicate]]];
     [self setSectionNameKeyPath:@"isCurrentUser"];
 
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"isCurrentUser" ascending:NO];
+    NSMutableArray *sortDescriptors = [@[sortDescriptor] mutableCopy];
+    [sortDescriptors addObjectsFromArray:self.sortDescriptors];
+    [self setSortDescriptors:sortDescriptors];
+
     [self setNavBarColor:[UIColor snowballColorBlue]];
 }
 

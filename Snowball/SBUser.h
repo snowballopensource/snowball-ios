@@ -16,7 +16,6 @@
 
 + (SBUser *)currentUser;
 + (void)removeCurrentUser;
-- (BOOL)isCurrentUser;
 
 - (BOOL)isParticipatingInReel:(SBReel *)reel;
 

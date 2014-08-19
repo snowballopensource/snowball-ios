@@ -9,6 +9,7 @@ const struct SBUserAttributes SBUserAttributes = {
 	.color = @"color",
 	.email = @"email",
 	.following = @"following",
+	.isCurrentUser = @"isCurrentUser",
 	.name = @"name",
 	.phoneNumber = @"phoneNumber",
 	.remoteID = @"remoteID",
@@ -51,6 +52,11 @@ const struct SBUserFetchedProperties SBUserFetchedProperties = {
 	
 	if ([key isEqualToString:@"followingValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"following"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"isCurrentUserValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"isCurrentUser"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -109,6 +115,32 @@ const struct SBUserFetchedProperties SBUserFetchedProperties = {
 
 - (void)setPrimitiveFollowingValue:(BOOL)value_ {
 	[self setPrimitiveFollowing:[NSNumber numberWithBool:value_]];
+}
+
+
+
+
+
+@dynamic isCurrentUser;
+
+
+
+- (BOOL)isCurrentUserValue {
+	NSNumber *result = [self isCurrentUser];
+	return [result boolValue];
+}
+
+- (void)setIsCurrentUserValue:(BOOL)value_ {
+	[self setIsCurrentUser:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveIsCurrentUserValue {
+	NSNumber *result = [self primitiveIsCurrentUser];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveIsCurrentUserValue:(BOOL)value_ {
+	[self setPrimitiveIsCurrentUser:[NSNumber numberWithBool:value_]];
 }
 
 
