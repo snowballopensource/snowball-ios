@@ -472,7 +472,7 @@
         <image name="reel-plane" width="33" height="28"/>
         <image name="reel-plus" width="28" height="28"/>
         <image name="top-camera-flip" width="33" height="20"/>
-        <image name="top-user" width="22" height="23"/>
+        <image name="top-user" width="27" height="28"/>
         <image name="top-user-add" width="35" height="28"/>
         <image name="top-x" width="21" height="21"/>
     </resources>
