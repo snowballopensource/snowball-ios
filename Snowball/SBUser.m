@@ -85,6 +85,7 @@ static SBUser *_currentUser = nil;
                                    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                                        SBUser *user = [SBUser MR_importFromObject:_user inContext:localContext];
                                        [user setAuthToken:[_user objectForKey:@"auth_token"]];
+                                       [user save];
                                        [SBUser setCurrentUser:user];
                                    }];
                                    if (success) { success(); }
@@ -105,6 +106,7 @@ static SBUser *_currentUser = nil;
                                    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                                        SBUser *user = [SBUser MR_importFromObject:_user inContext:localContext];
                                        [user setAuthToken:[_user objectForKey:@"auth_token"]];
+                                       [user save];
                                        [SBUser setCurrentUser:user];
                                    }];
                                    if (success) { success(); }
@@ -127,6 +129,7 @@ static SBUser *_currentUser = nil;
                                    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                                        SBUser *user = [SBUser MR_importFromObject:_user inContext:localContext];
                                        [user setAuthToken:[_user objectForKey:@"auth_token"]];
+                                       [user save];
                                        [SBUser setCurrentUser:user];
                                    }];
                                    if (success) { success(); }
