@@ -312,6 +312,7 @@
     [self setBackgroundRecordingID:UIBackgroundTaskInvalid];
 
     [self cropVideoAtURL:outputFileURL completion:^(NSURL *croppedFileURL) {
+        // Save to album
         [[[ALAssetsLibrary alloc] init] writeVideoAtPathToSavedPhotosAlbum:croppedFileURL completionBlock:^(NSURL *assetURL, NSError *error) {
             if (error) NSLog(@"%@", error);
             
@@ -326,17 +327,16 @@
 }
 
 - (void)cropVideoAtURL:(NSURL *)fileURL completion:(void(^)(NSURL *croppedFileURL))completion; {
-    // Crop video, then save to album.
+    // Crop video
     // http://stackoverflow.com/a/5231713/801858
     AVAsset *asset = [AVAsset assetWithURL:fileURL];
     AVAssetTrack *videoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] firstObject];
 
     // When thinking about the following code, think of capturing video in landscape!
     // e.g. videoTrack.naturalSize.height is the width if you are holding the phone portrait
-    
     AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
     [videoComposition setRenderSize:CGSizeMake(videoTrack.naturalSize.height, videoTrack.naturalSize.height)];
-    [videoComposition setFrameDuration:CMTimeMake(1, 30)];
+    [videoComposition setFrameDuration:CMTimeMake(1, 30)]; // 30FPS
     
     AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
     [instruction setTimeRange:CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(60, 30))];
@@ -357,7 +357,7 @@
     // Remove previous file if one exists.
     [[NSFileManager defaultManager] removeItemAtURL:outputFileURL error:nil];
     
-    //Export
+    // Export
     [self setExporter:[[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetHighestQuality]];
     [self.exporter setVideoComposition:videoComposition];
     [self.exporter setOutputURL:outputFileURL];
