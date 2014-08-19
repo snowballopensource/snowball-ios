@@ -92,7 +92,8 @@
             [SBUser findUsersByPhoneNumbers:phoneNumbers
                                        page:0  // TODO: make this paginated
                                     success:^(NSArray *users) {
-                                        [self setUsers:users];
+                                        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"following == FALSE"];
+                                        [self setUsers:[users filteredArrayUsingPredicate:predicate]];
                                         [self hideSpinner];
                                         [self showTableView];
                                     } failure:^(NSError *error) {
