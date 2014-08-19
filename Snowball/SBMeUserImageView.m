@@ -14,8 +14,7 @@
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        [self setImageWithURL:[NSURL URLWithString:[SBUser currentUser].avatarURL]
-             placeholderImage:[SBUserImageView placeholderImageWithInitials:[[SBUser currentUser].name initials] withSize:self.frame.size]];
+        [self setImageWithUser:[SBUser currentUser]];
     }
     return self;
 }

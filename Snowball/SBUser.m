@@ -20,6 +20,14 @@ static SBUser *_currentUser = nil;
 
 @synthesize authToken;
 
+- (NSString *)initials {
+    if (self.name) {
+        return [self.name initials];
+    } else {
+        return [self.username initials];
+    }
+}
+
 #pragma mark - NSManagedObject
 
 - (void)willSave {

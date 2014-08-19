@@ -19,6 +19,8 @@
 
 - (BOOL)isParticipatingInReel:(SBReel *)reel;
 
+- (NSString *)initials;
+
 + (void)facebookAuthWithAccessToken:(NSString *)accessToken
                             success:(void (^)(void))success
                             failure:(void (^)(NSError *error))failure;

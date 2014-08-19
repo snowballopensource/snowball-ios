@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class SBUser;
+
 @interface SBUserImageView : UIImageView
 
-+ (UIImage *)placeholderImageWithInitials:(NSString *)initials withSize:(CGSize)size;
+- (void)setImageWithUser:(SBUser *)user;
 
 @end

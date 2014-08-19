@@ -27,20 +27,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self setupBackButton];
-
+    
     [self setTintColor:[UIColor snowballColorBlue]];
-
+    
     [self.tableView setBackgroundColor:[UIColor whiteColor]];
-
+    
     SBUser *user = [SBUser currentUser];
     [self showSpinner];
     [user getWithSuccess:^{
-        UIImage *placeholderImage = [SBUserImageView placeholderImageWithInitials:user.name.initials
-                                                                         withSize:self.userImageView.bounds.size];
-        [self.userImageView setImageWithURL:[NSURL URLWithString:user.avatarURL]
-                           placeholderImage:placeholderImage];
+        [self.userImageView setImageWithUser:user];
         [self.usernameTextField setText:user.username];
         [self.nameTextField setText:user.name];
         [self.emailTextField setText:user.email];

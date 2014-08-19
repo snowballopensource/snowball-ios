@@ -50,9 +50,7 @@
     
     [self setDelegate:delegate];
     [self.nameLabel setText:user.name];
-    [self.userImageView setImageWithURL:[NSURL URLWithString:user.avatarURL]
-                       placeholderImage:[SBUserImageView placeholderImageWithInitials:[user.name initials] withSize:self.userImageView.frame.size]];
-
+    [self.userImageView setImageWithUser:user];
     [self.editProfileButton setHidden:YES];
     UIColor *color = user.color;
     if (user == [SBUser currentUser]) {

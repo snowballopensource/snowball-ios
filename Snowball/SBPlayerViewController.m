@@ -21,7 +21,7 @@
 @property (nonatomic, strong) SBClip *currentClip;
 
 @property (nonatomic, weak) IBOutlet UILabel *userName;
-@property (nonatomic, weak) IBOutlet UIImageView *userImageView;
+@property (nonatomic, weak) IBOutlet SBUserImageView *userImageView;
 
 @property (nonatomic) BOOL playing;
 
@@ -177,8 +177,7 @@
 
 - (void)updateClipUIForClip:(SBClip *)clip {
     [self.userName setText:clip.user.username];
-    [self.userImageView setImageWithURL:[NSURL URLWithString:clip.user.avatarURL]
-                       placeholderImage:[SBUserImageView placeholderImageWithInitials:[clip.user.name initials] withSize:self.userImageView.frame.size]];
+    [self.userImageView setImageWithUser:clip.user];
 }
 
 #pragma mark - Setters / Getters
