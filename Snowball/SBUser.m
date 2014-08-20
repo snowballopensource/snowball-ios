@@ -39,10 +39,11 @@ static SBUser *_currentUser = nil;
 + (SBUser *)currentUser {
     unless (_currentUser) {
         NSString *currentUserAuthToken = [[NSUserDefaults standardUserDefaults] objectForKey:kSBCurrentUserAuthToken];
-        unless (currentUserAuthToken) {
+        SBUser *user = [SBUser MR_findFirstByAttribute:@"isCurrentUser" withValue:@(YES)];
+        unless (currentUserAuthToken && user) {
             return nil;
         }
-        _currentUser = [SBUser MR_findFirstByAttribute:@"isCurrentUser" withValue:@(YES)];
+        _currentUser = user;
         [_currentUser setAuthToken:currentUserAuthToken];
 
         [SBPushNotificationManager enablePushWithUserID:_currentUser.remoteID];
