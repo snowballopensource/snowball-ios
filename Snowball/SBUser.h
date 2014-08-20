@@ -12,14 +12,15 @@
 
 @interface SBUser : _SBUser
 
-@property (nonatomic, strong) NSString *authToken;
+- (NSString *)initials;
 
 + (SBUser *)currentUser;
 + (void)setCurrentUser:(SBUser *)currentUser;
 
-- (BOOL)isParticipatingInReel:(SBReel *)reel;
++ (NSString *)currentUserAuthToken;
++ (void)setCurrentUserAuthToken:(NSString *)currentUserAuthToken;
 
-- (NSString *)initials;
+- (BOOL)isParticipatingInReel:(SBReel *)reel;
 
 + (void)facebookAuthWithAccessToken:(NSString *)accessToken
                             success:(void (^)(void))success

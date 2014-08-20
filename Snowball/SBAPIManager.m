@@ -29,7 +29,7 @@ static NSString * const SBBaseURL = @"http://snowball-production.herokuapp.com/a
 #pragma mark - Authentication Token
 
 - (void)loadAuthToken {
-    [self.requestSerializer setAuthorizationHeaderFieldWithUsername:[SBUser currentUser].authToken
+    [self.requestSerializer setAuthorizationHeaderFieldWithUsername:[SBUser currentUserAuthToken]
                                                            password:@""];
 }
 
