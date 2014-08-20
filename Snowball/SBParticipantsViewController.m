@@ -28,7 +28,7 @@
     [SBUserTableViewCell registerNibToTableView:self.tableView];
     
     [self setEntityClass:[SBParticipation class]];
-    [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"user.name" ascending:YES]]];
+    [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"user.username" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]]];
     [self setPredicate:[NSPredicate predicateWithFormat:@"reel == %@", self.reel]];
     
     [self setNavBarColor:self.reel.color];

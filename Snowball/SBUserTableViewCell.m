@@ -12,7 +12,9 @@
 
 @interface SBUserTableViewCell ()
 
+@property (nonatomic, weak) IBOutlet UILabel *usernameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *centeredUsernameLabel;
 @property (nonatomic, weak) IBOutlet SBUserImageView *userImageView;
 @property (nonatomic, weak) IBOutlet SBUserAddButton *addButton;
 @property (nonatomic, weak) IBOutlet UIButton *editProfileButton;
@@ -33,8 +35,10 @@
 
 - (void)setTintColor:(UIColor *)tintColor {
     [super setTintColor:tintColor];
-    
+
+    [self.usernameLabel setTextColor:tintColor];
     [self.nameLabel setTextColor:tintColor];
+    [self.centeredUsernameLabel setTextColor:tintColor];
     [self.addButton setImageTintColor:tintColor];
     [self.editProfileButton setImageTintColor:tintColor];
 }
@@ -49,7 +53,15 @@
     SBUser *user = (SBUser *)object;
     
     [self setDelegate:delegate];
-    [self.nameLabel setText:user.name];
+    [self.usernameLabel setText:@""];
+    [self.nameLabel setText:@""];
+    [self.centeredUsernameLabel setText:@""];
+    if ([user.name length] > 0) {
+        [self.usernameLabel setText:user.username];
+        [self.nameLabel setText:user.name];
+    } else {
+        [self.centeredUsernameLabel setText:user.username];
+    }
     [self.userImageView setImageWithUser:user];
     [self.editProfileButton setHidden:YES];
     UIColor *color = user.color;

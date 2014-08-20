@@ -107,6 +107,6 @@
         <element name="Clip" positionX="-63" positionY="-18" width="128" height="150"/>
         <element name="Participation" positionX="-54" positionY="81" width="128" height="73"/>
         <element name="Reel" positionX="-63" positionY="0" width="128" height="180"/>
-        <element name="User" positionX="-54" positionY="18" width="128" height="223"/>
+        <element name="User" positionX="-54" positionY="18" width="128" height="225"/>
     </elements>
 </model>
