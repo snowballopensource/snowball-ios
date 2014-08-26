@@ -6,6 +6,8 @@
                 <entry key="mappedKeyName" value="created_at"/>
             </userInfo>
         </attribute>
+        <attribute name="localThumbnailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="localVideoURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="remoteID" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="id"/>
@@ -104,7 +106,7 @@
         </userInfo>
     </entity>
     <elements>
-        <element name="Clip" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="Clip" positionX="-63" positionY="-18" width="128" height="180"/>
         <element name="Participation" positionX="-54" positionY="81" width="128" height="73"/>
         <element name="Reel" positionX="-63" positionY="0" width="128" height="180"/>
         <element name="User" positionX="-54" positionY="18" width="128" height="225"/>

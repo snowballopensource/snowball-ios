@@ -12,8 +12,6 @@
 
 @implementation SBClip
 
-@synthesize videoToSubmit;
-
 #pragma mark - Remote
 
 + (void)getRecentClipsForReel:(SBReel *)reel
@@ -54,7 +52,7 @@
     [[SBAPIManager sharedManager] POST:path
                             parameters:parameters
              constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                 [formData appendPartWithFileData:self.videoToSubmit
+                 [formData appendPartWithFileData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.localVideoURL]]
                                              name:@"clip[video]"
                                          fileName:@"video.mp4"
                                          mimeType:@"video/mp4"];

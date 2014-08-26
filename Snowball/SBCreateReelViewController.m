@@ -11,6 +11,7 @@
 #import "SBLongRunningTaskManager.h"
 #import "SBPlayerView.h"
 #import "SBReel.h"
+#import "SBUser.h"
 
 @interface SBCreateReelViewController ()
 
@@ -36,8 +37,8 @@
     SBClip *clip = [SBClip MR_createEntity];
     SBReel *reel = [SBReel MR_createEntity];
     [clip setReel:reel];
-    NSData *data = [NSData dataWithContentsOfURL:self.initialRecordingURL];
-    [clip setVideoToSubmit:data];
+    [clip setLocalVideoURL:[self.initialRecordingURL absoluteString]];
+    [clip setUser:[SBUser currentUser]];
     [reel save];
     [clip setCreatedAt:[NSDate date]];
     [clip save];

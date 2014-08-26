@@ -78,9 +78,9 @@
 - (void)playReel {
     NSPredicate *predicate;
     if (self.reel.lastWatchedClip.createdAt) {
-        predicate = [NSPredicate predicateWithFormat:@"remoteID != nil && reel == %@ && videoURL != nil && createdAt >= %@", self.reel, self.reel.lastWatchedClip.createdAt];
+        predicate = [NSPredicate predicateWithFormat:@"reel == %@ && createdAt >= %@", self.reel, self.reel.lastWatchedClip.createdAt];
     } else {
-        predicate = [NSPredicate predicateWithFormat:@"remoteID != nil && reel == %@ && videoURL != nil", self.reel];
+        predicate = [NSPredicate predicateWithFormat:@"reel == %@", self.reel];
     }
     NSFetchRequest *fetchRequest = [SBClip MR_requestAllSortedBy:@"createdAt" ascending:YES withPredicate:predicate];
     [self setClips:[SBClip MR_executeFetchRequest:fetchRequest]];
@@ -139,7 +139,12 @@
 - (NSArray *)createPlayerItems {
     NSMutableArray *playerItems = [@[] mutableCopy];
     for (SBClip *clip in self.clips) {
-        AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:clip.videoURL]];
+        AVPlayerItem *playerItem;
+        if (clip.videoURL) {
+            playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:clip.videoURL]];
+        } else {
+            playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:clip.localVideoURL]];
+        }
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(playerItemDidReachEnd:)
                                                      name:AVPlayerItemDidPlayToEndTimeNotification

@@ -113,8 +113,8 @@ typedef NS_ENUM(NSInteger, SBReelsViewControllerState) {
             SBClip *clip = [SBClip MR_createEntity];
             SBReel *reel = [self.fetchedResultsController objectAtIndexPath:indexPath];
             [clip setReel:reel];
-            NSData *data = [NSData dataWithContentsOfURL:self.recordingURL];
-            [clip setVideoToSubmit:data];
+            [clip setLocalVideoURL:[self.recordingURL absoluteString]];
+            [clip setUser:[SBUser currentUser]];
             [reel save];
             [clip setCreatedAt:[NSDate date]];
             [clip save];
