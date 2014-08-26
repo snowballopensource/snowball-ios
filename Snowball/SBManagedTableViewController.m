@@ -31,15 +31,21 @@
     [self setInfiniteScrollEnabled:YES];
     
     [self setupPullToRefresh];
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
     // Start loading remote objects on first page immediately.
     [self.refreshControl beginRefreshing];
     [self.refreshControl sendActionsForControlEvents:UIControlEventValueChanged];
-    [self.tableView setContentOffset:CGPointMake(0, -self.refreshControl.frame.size.height) animated:YES];
+    [self.tableView setContentOffset:CGPointMake(0, -self.refreshControl.frame.size.height) animated:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+
+    [super viewDidDisappear:animated];
 }
 
 #pragma mark - Pull to Refresh
