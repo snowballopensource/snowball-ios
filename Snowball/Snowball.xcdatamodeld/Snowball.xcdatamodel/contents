@@ -62,6 +62,7 @@
         <relationship name="clips" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Clip" inverseName="reel" inverseEntity="Clip" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="last_clip"/>
+                <entry key="relatedByAttribute" value="remoteID"/>
             </userInfo>
         </relationship>
         <relationship name="lastWatchedClip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Clip" inverseName="lastWatchedForReel" inverseEntity="Clip" syncable="YES"/>

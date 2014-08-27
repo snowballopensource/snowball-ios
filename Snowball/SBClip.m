@@ -12,6 +12,22 @@
 
 @implementation SBClip
 
+#pragma mark - MagicalRecord Import Helpers
+
+- (BOOL)importVideoURL:(NSString *)videoURL {
+    if ([videoURL length] > 0) {
+        [self setVideoURL:videoURL];
+    }
+    return YES;
+}
+
+- (BOOL)importThumbnailURL:(NSString *)thumbnailURL {
+    if ([thumbnailURL length] > 0) {
+        [self setThumbnailURL:thumbnailURL];
+    }
+    return YES;
+}
+
 #pragma mark - Remote
 
 + (void)getRecentClipsForReel:(SBReel *)reel
