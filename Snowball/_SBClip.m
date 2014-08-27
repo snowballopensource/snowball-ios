@@ -5,14 +5,13 @@
 
 const struct SBClipAttributes SBClipAttributes = {
 	.createdAt = @"createdAt",
-	.localThumbnailURL = @"localThumbnailURL",
-	.localVideoURL = @"localVideoURL",
 	.remoteID = @"remoteID",
 	.thumbnailURL = @"thumbnailURL",
 	.videoURL = @"videoURL",
 };
 
 const struct SBClipRelationships SBClipRelationships = {
+	.lastForReel = @"lastForReel",
 	.lastWatchedForReel = @"lastWatchedForReel",
 	.reel = @"reel",
 	.user = @"user",
@@ -61,20 +60,6 @@ const struct SBClipFetchedProperties SBClipFetchedProperties = {
 
 
 
-@dynamic localThumbnailURL;
-
-
-
-
-
-
-@dynamic localVideoURL;
-
-
-
-
-
-
 @dynamic remoteID;
 
 
@@ -95,6 +80,10 @@ const struct SBClipFetchedProperties SBClipFetchedProperties = {
 
 
 
+
+@dynamic lastForReel;
+
+	
 
 @dynamic lastWatchedForReel;
 

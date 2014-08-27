@@ -6,15 +6,14 @@
 
 extern const struct SBReelAttributes {
 	__unsafe_unretained NSString *color;
-	__unsafe_unretained NSString *lastClipCreatedAt;
 	__unsafe_unretained NSString *name;
 	__unsafe_unretained NSString *recentParticipantsNames;
 	__unsafe_unretained NSString *remoteID;
-	__unsafe_unretained NSString *thumbnailURL;
 } SBReelAttributes;
 
 extern const struct SBReelRelationships {
 	__unsafe_unretained NSString *clips;
+	__unsafe_unretained NSString *lastClip;
 	__unsafe_unretained NSString *lastWatchedClip;
 	__unsafe_unretained NSString *participations;
 } SBReelRelationships;
@@ -24,11 +23,10 @@ extern const struct SBReelFetchedProperties {
 
 @class SBClip;
 @class SBClip;
+@class SBClip;
 @class SBParticipation;
 
 @class NSObject;
-
-
 
 
 
@@ -51,16 +49,6 @@ extern const struct SBReelFetchedProperties {
 
 
 //- (BOOL)validateColor:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
-@property (nonatomic, strong) NSDate* lastClipCreatedAt;
-
-
-
-//- (BOOL)validateLastClipCreatedAt:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -96,19 +84,16 @@ extern const struct SBReelFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString* thumbnailURL;
-
-
-
-//- (BOOL)validateThumbnailURL:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
 @property (nonatomic, strong) NSSet *clips;
 
 - (NSMutableSet*)clipsSet;
+
+
+
+
+@property (nonatomic, strong) SBClip *lastClip;
+
+//- (BOOL)validateLastClip:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -153,12 +138,6 @@ extern const struct SBReelFetchedProperties {
 
 
 
-- (NSDate*)primitiveLastClipCreatedAt;
-- (void)setPrimitiveLastClipCreatedAt:(NSDate*)value;
-
-
-
-
 - (NSString*)primitiveName;
 - (void)setPrimitiveName:(NSString*)value;
 
@@ -177,15 +156,14 @@ extern const struct SBReelFetchedProperties {
 
 
 
-- (NSString*)primitiveThumbnailURL;
-- (void)setPrimitiveThumbnailURL:(NSString*)value;
-
-
-
-
 
 - (NSMutableSet*)primitiveClips;
 - (void)setPrimitiveClips:(NSMutableSet*)value;
+
+
+
+- (SBClip*)primitiveLastClip;
+- (void)setPrimitiveLastClip:(SBClip*)value;
 
 
 

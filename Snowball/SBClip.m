@@ -12,20 +12,6 @@
 
 @implementation SBClip
 
-- (NSString *)videoURL {
-    if ([self.primitiveVideoURL length] == 0) {
-        return self.localVideoURL;
-    }
-    return self.primitiveVideoURL;
-}
-
-- (NSString *)thumbnailURL {
-    if ([self.primitiveThumbnailURL length] == 0) {
-        return self.localThumbnailURL;
-    }
-    return self.primitiveThumbnailURL;
-}
-
 #pragma mark - Remote
 
 + (void)getRecentClipsForReel:(SBReel *)reel
@@ -66,7 +52,7 @@
     [[SBAPIManager sharedManager] POST:path
                             parameters:parameters
              constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                 [formData appendPartWithFileData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.localVideoURL]]
+                 [formData appendPartWithFileData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.videoURL]]
                                              name:@"clip[video]"
                                          fileName:@"video.mp4"
                                          mimeType:@"video/mp4"];

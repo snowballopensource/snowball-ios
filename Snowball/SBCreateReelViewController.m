@@ -37,7 +37,7 @@
     SBClip *clip = [SBClip MR_createEntity];
     SBReel *reel = [SBReel MR_createEntity];
     [clip setReel:reel];
-    [clip setLocalVideoURL:[self.initialRecordingURL absoluteString]];
+    [clip setVideoURL:[self.initialRecordingURL absoluteString]];
     [clip setUser:[SBUser currentUser]];
     [clip setCreatedAt:[NSDate date]];
     [reel save];

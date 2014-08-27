@@ -47,7 +47,7 @@ typedef NS_ENUM(NSInteger, SBReelsViewControllerState) {
     [SBReelTableViewCell registerNibToTableView:self.tableView];
     
     [self setEntityClass:[SBReel class]];
-    [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"lastClipCreatedAt" ascending:NO]]];
+    [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"lastClip.createdAt" ascending:NO]]];
 
     [self setState:SBReelsViewControllerStateNormal animated:NO];
 
@@ -113,7 +113,7 @@ typedef NS_ENUM(NSInteger, SBReelsViewControllerState) {
             SBClip *clip = [SBClip MR_createEntity];
             SBReel *reel = [self.fetchedResultsController objectAtIndexPath:indexPath];
             [clip setReel:reel];
-            [clip setLocalVideoURL:[self.recordingURL absoluteString]];
+            [clip setVideoURL:[self.recordingURL absoluteString]];
             [clip setUser:[SBUser currentUser]];
             [clip setCreatedAt:[NSDate date]];
             [reel save];

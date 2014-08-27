@@ -5,15 +5,14 @@
 
 const struct SBReelAttributes SBReelAttributes = {
 	.color = @"color",
-	.lastClipCreatedAt = @"lastClipCreatedAt",
 	.name = @"name",
 	.recentParticipantsNames = @"recentParticipantsNames",
 	.remoteID = @"remoteID",
-	.thumbnailURL = @"thumbnailURL",
 };
 
 const struct SBReelRelationships SBReelRelationships = {
 	.clips = @"clips",
+	.lastClip = @"lastClip",
 	.lastWatchedClip = @"lastWatchedClip",
 	.participations = @"participations",
 };
@@ -61,13 +60,6 @@ const struct SBReelFetchedProperties SBReelFetchedProperties = {
 
 
 
-@dynamic lastClipCreatedAt;
-
-
-
-
-
-
 @dynamic name;
 
 
@@ -89,13 +81,6 @@ const struct SBReelFetchedProperties SBReelFetchedProperties = {
 
 
 
-@dynamic thumbnailURL;
-
-
-
-
-
-
 @dynamic clips;
 
 	
@@ -107,6 +92,10 @@ const struct SBReelFetchedProperties SBReelFetchedProperties = {
 	[self didAccessValueForKey:@"clips"];
 	return result;
 }
+	
+
+@dynamic lastClip;
+
 	
 
 @dynamic lastWatchedClip;

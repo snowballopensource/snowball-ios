@@ -33,24 +33,20 @@
     }
 }
 
-- (NSArray *)unwatchedAndLastClips {
-    NSMutableArray *unwatchedAndLastClips = [[self unwatchedClips] mutableCopy];
-    [unwatchedAndLastClips addObject:[self lastClip]];
-    return [unwatchedAndLastClips copy];
+- (NSArray *)playerClips {
+    NSMutableArray *playerClips = [[self unwatchedClips] mutableCopy];
+    [playerClips addObject:self.lastClip];
+    return [playerClips copy];
 }
 
 - (BOOL)hasPendingUpload {
-    SBClip *lastClip = [self lastClip];
+    SBClip *lastClip = self.lastClip;
     if (lastClip) {
         if ([lastClip.remoteID length] == 0) {
             return YES;
         }
     }
     return NO;
-}
-
-- (SBClip *)lastClip {
-    return [SBClip MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"reel == %@", self] sortedBy:@"createdAt" ascending:NO];
 }
 
 #pragma mark - NSManagedObject

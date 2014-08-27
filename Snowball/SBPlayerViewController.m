@@ -76,7 +76,7 @@
 }
 
 - (void)playReel {
-    [self setClips:[self.reel unwatchedAndLastClips]];
+    [self setClips:[self.reel playerClips]];
     [self setCurrentClip:[self.clips firstObject]];
     AVQueuePlayer *player = [[AVQueuePlayer alloc] initWithItems:[self createPlayerItems]];
     [self.playerView setPlayer:player];

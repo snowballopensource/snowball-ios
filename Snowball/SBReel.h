@@ -14,7 +14,7 @@
 @interface SBReel : _SBReel
 
 - (BOOL)hasNewClip;
-- (NSArray *)unwatchedAndLastClips;
+- (NSArray *)playerClips;
 - (BOOL)hasPendingUpload;
 
 - (void)setParticipants:(NSArray *)users;
