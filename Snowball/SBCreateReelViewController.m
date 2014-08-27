@@ -39,8 +39,8 @@
     [clip setReel:reel];
     [clip setLocalVideoURL:[self.initialRecordingURL absoluteString]];
     [clip setUser:[SBUser currentUser]];
-    [reel save];
     [clip setCreatedAt:[NSDate date]];
+    [reel save];
     [clip save];
     [SBLongRunningTaskManager addBlockToQueue:^{
         [clip create];

@@ -76,19 +76,12 @@
 }
 
 - (void)playReel {
-    NSPredicate *predicate;
-    if (self.reel.lastWatchedClip.createdAt) {
-        predicate = [NSPredicate predicateWithFormat:@"reel == %@ && createdAt >= %@", self.reel, self.reel.lastWatchedClip.createdAt];
-    } else {
-        predicate = [NSPredicate predicateWithFormat:@"reel == %@", self.reel];
-    }
-    NSFetchRequest *fetchRequest = [SBClip MR_requestAllSortedBy:@"createdAt" ascending:YES withPredicate:predicate];
-    [self setClips:[SBClip MR_executeFetchRequest:fetchRequest]];
+    [self setClips:[self.reel unwatchedAndLastClips]];
     [self setCurrentClip:[self.clips firstObject]];
     AVQueuePlayer *player = [[AVQueuePlayer alloc] initWithItems:[self createPlayerItems]];
     [self.playerView setPlayer:player];
     if (self.clips.count == 1) {
-        // This prevents it from tring to advance to nothing so that it freezes on last frame
+        // This prevents it from trying to advance to nothing so that it freezes on last frame
         [player setActionAtItemEnd:AVPlayerActionAtItemEndPause];
     } else {
         [player setActionAtItemEnd:AVPlayerActionAtItemEndAdvance];
@@ -139,12 +132,7 @@
 - (NSArray *)createPlayerItems {
     NSMutableArray *playerItems = [@[] mutableCopy];
     for (SBClip *clip in self.clips) {
-        AVPlayerItem *playerItem;
-        if (clip.videoURL) {
-            playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:clip.videoURL]];
-        } else {
-            playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:clip.localVideoURL]];
-        }
+        AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:clip.videoURL]];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(playerItemDidReachEnd:)
                                                      name:AVPlayerItemDidPlayToEndTimeNotification

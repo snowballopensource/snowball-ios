@@ -49,11 +49,6 @@
                 <entry key="mappedKeyName" value="last_clip_created_at"/>
             </userInfo>
         </attribute>
-        <attribute name="lastClipThumbnailURL" optional="YES" attributeType="String" syncable="YES">
-            <userInfo>
-                <entry key="mappedKeyName" value="last_clip_thumbnail_url"/>
-            </userInfo>
-        </attribute>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recentParticipantsNames" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
@@ -63,6 +58,11 @@
         <attribute name="remoteID" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="thumbnailURL" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="thumbnail_url"/>
             </userInfo>
         </attribute>
         <relationship name="clips" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Clip" inverseName="reel" inverseEntity="Clip" syncable="YES">

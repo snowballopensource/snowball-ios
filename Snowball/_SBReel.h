@@ -7,10 +7,10 @@
 extern const struct SBReelAttributes {
 	__unsafe_unretained NSString *color;
 	__unsafe_unretained NSString *lastClipCreatedAt;
-	__unsafe_unretained NSString *lastClipThumbnailURL;
 	__unsafe_unretained NSString *name;
 	__unsafe_unretained NSString *recentParticipantsNames;
 	__unsafe_unretained NSString *remoteID;
+	__unsafe_unretained NSString *thumbnailURL;
 } SBReelAttributes;
 
 extern const struct SBReelRelationships {
@@ -66,16 +66,6 @@ extern const struct SBReelFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString* lastClipThumbnailURL;
-
-
-
-//- (BOOL)validateLastClipThumbnailURL:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
 @property (nonatomic, strong) NSString* name;
 
 
@@ -101,6 +91,16 @@ extern const struct SBReelFetchedProperties {
 
 
 //- (BOOL)validateRemoteID:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSString* thumbnailURL;
+
+
+
+//- (BOOL)validateThumbnailURL:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -159,12 +159,6 @@ extern const struct SBReelFetchedProperties {
 
 
 
-- (NSString*)primitiveLastClipThumbnailURL;
-- (void)setPrimitiveLastClipThumbnailURL:(NSString*)value;
-
-
-
-
 - (NSString*)primitiveName;
 - (void)setPrimitiveName:(NSString*)value;
 
@@ -179,6 +173,12 @@ extern const struct SBReelFetchedProperties {
 
 - (NSString*)primitiveRemoteID;
 - (void)setPrimitiveRemoteID:(NSString*)value;
+
+
+
+
+- (NSString*)primitiveThumbnailURL;
+- (void)setPrimitiveThumbnailURL:(NSString*)value;
 
 
 

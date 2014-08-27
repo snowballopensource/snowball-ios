@@ -115,8 +115,8 @@ typedef NS_ENUM(NSInteger, SBReelsViewControllerState) {
             [clip setReel:reel];
             [clip setLocalVideoURL:[self.recordingURL absoluteString]];
             [clip setUser:[SBUser currentUser]];
-            [reel save];
             [clip setCreatedAt:[NSDate date]];
+            [reel save];
             [clip save];
             [SBLongRunningTaskManager addBlockToQueue:^{
                 [clip create];

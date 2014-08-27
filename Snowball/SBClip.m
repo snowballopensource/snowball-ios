@@ -12,6 +12,20 @@
 
 @implementation SBClip
 
+- (NSString *)videoURL {
+    if ([self.primitiveVideoURL length] == 0) {
+        return self.localVideoURL;
+    }
+    return self.primitiveVideoURL;
+}
+
+- (NSString *)thumbnailURL {
+    if ([self.primitiveThumbnailURL length] == 0) {
+        return self.localThumbnailURL;
+    }
+    return self.primitiveThumbnailURL;
+}
+
 #pragma mark - Remote
 
 + (void)getRecentClipsForReel:(SBReel *)reel

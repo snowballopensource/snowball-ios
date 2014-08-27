@@ -16,24 +16,34 @@
 @implementation SBReel
 
 - (BOOL)hasNewClip {
-    if (self.lastClipCreatedAt && self.lastWatchedClip.createdAt) {
-        NSComparisonResult result = [self.lastClipCreatedAt compare:self.lastWatchedClip.createdAt];
-        if (result == NSOrderedDescending) {
-            return YES;
-        }
-        return NO;
-    } else {
+    if ([self.clips count] == 0) return YES;
+    if ([[self unwatchedClips] count] > 0) {
         return YES;
     }
+    return NO;
+}
+
+- (NSArray *)unwatchedClips {
+    if (self.lastWatchedClip) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"reel == %@ && createdAt > %@", self, self.lastWatchedClip.createdAt];
+        return [SBClip MR_findAllSortedBy:@"createdAt" ascending:YES withPredicate:predicate];
+    } else {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"reel == %@", self];
+        return [SBClip MR_findAllSortedBy:@"createdAt" ascending:YES withPredicate:predicate];
+    }
+}
+
+- (NSArray *)unwatchedAndLastClips {
+    NSMutableArray *unwatchedAndLastClips = [[self unwatchedClips] mutableCopy];
+    [unwatchedAndLastClips addObject:[self lastClip]];
+    return [unwatchedAndLastClips copy];
 }
 
 - (BOOL)hasPendingUpload {
     SBClip *lastClip = [self lastClip];
     if (lastClip) {
-        static NSUInteger timeout = 300;
-        NSUInteger timeSince = [lastClip.createdAt timeIntervalSinceNow]*-1;
-        if (timeSince < timeout) {
-            return (lastClip.videoURL.length < 1) ? YES : NO;
+        if ([lastClip.remoteID length] == 0) {
+            return YES;
         }
     }
     return NO;
