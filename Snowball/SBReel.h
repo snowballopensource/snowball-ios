@@ -16,6 +16,7 @@
 - (BOOL)hasNewClip;
 - (NSArray *)playerClips;
 - (BOOL)hasPendingUpload;
+- (SBClip *)lastClip;
 
 - (void)setParticipants:(NSArray *)users;
 - (void)addParticipants:(NSArray *)users;

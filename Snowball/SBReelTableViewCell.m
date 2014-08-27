@@ -72,8 +72,8 @@
 
     [self setTintColor:reel.color];
 
-    [self.unwatchedClipTimestamp setText:[reel.lastClipCreatedAt shortTimeAgoString]];
-    [self.unwatchedClipThumbnail setImageWithURL:[NSURL URLWithString:reel.lastClipThumbnailURL]];
+    [self.unwatchedClipTimestamp setText:[[reel lastClip].createdAt shortTimeAgoString]];
+    [self.unwatchedClipThumbnail setImageWithURL:[NSURL URLWithString:[reel lastClip].thumbnailURL]];
 
     [self setState:state animated:NO];
 }

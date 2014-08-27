@@ -48,11 +48,6 @@
                 <entry key="mappedKeyName" value="last_clip.created_at"/>
             </userInfo>
         </attribute>
-        <attribute name="lastClipThumbnailURL" optional="YES" attributeType="String" syncable="YES">
-            <userInfo>
-                <entry key="mappedKeyName" value="last_clip.thumbnail_url"/>
-            </userInfo>
-        </attribute>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recentParticipantsNames" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
@@ -64,7 +59,11 @@
                 <entry key="mappedKeyName" value="id"/>
             </userInfo>
         </attribute>
-        <relationship name="clips" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Clip" inverseName="reel" inverseEntity="Clip" syncable="YES"/>
+        <relationship name="clips" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Clip" inverseName="reel" inverseEntity="Clip" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="last_clip"/>
+            </userInfo>
+        </relationship>
         <relationship name="lastWatchedClip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Clip" inverseName="lastWatchedForReel" inverseEntity="Clip" syncable="YES"/>
         <relationship name="participations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Participation" inverseName="reel" inverseEntity="Participation" syncable="YES"/>
         <userInfo>
@@ -103,7 +102,7 @@
     <elements>
         <element name="Clip" positionX="-63" positionY="-18" width="128" height="148"/>
         <element name="Participation" positionX="-54" positionY="81" width="128" height="73"/>
-        <element name="Reel" positionX="-63" positionY="0" width="128" height="178"/>
+        <element name="Reel" positionX="-63" positionY="0" width="128" height="163"/>
         <element name="User" positionX="-54" positionY="18" width="128" height="223"/>
     </elements>
 </model>

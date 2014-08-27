@@ -35,7 +35,7 @@ PODS:
   - BlocksKit/UIKit (2.2.3):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
-  - Bolts (1.1.1)
+  - Bolts (1.1.2)
   - CrittercismSDK (4.3.4)
   - Facebook-iOS-SDK (3.15.0):
     - Bolts
@@ -55,7 +55,7 @@ DEPENDENCIES:
   - BlocksKit
   - CrittercismSDK
   - Facebook-iOS-SDK
-  - MagicalRecord (from `https://github.com/magicalpanda/MagicalRecord.git`, commit `cd73e277d486982d3817375fc1635838413f4409`)
+  - MagicalRecord (from `https://github.com/magicalpanda/MagicalRecord.git`, commit `cd73e27`)
   - MBProgressHUD
   - ObjectiveSugar
   - SDWebImage
@@ -64,13 +64,13 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   MagicalRecord:
-    :commit: cd73e277d486982d3817375fc1635838413f4409
+    :commit: cd73e27
     :git: https://github.com/magicalpanda/MagicalRecord.git
 
 SPEC CHECKSUMS:
   AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
   BlocksKit: 07c8a80f04275efac6a5f8b973782489c083a182
-  Bolts: 0ca796081c3e7c139bd86d6903c27f1b83036a5d
+  Bolts: 2635e8698a630774689441047f3465d78c48d485
   CrittercismSDK: d32f9f730158e3e646c445b752d7851710a1fed2
   Facebook-iOS-SDK: d67a9aa373f28b581e00cefdfd5a1ab8f883ac14
   MagicalRecord: b7d8943e180dbd5c1dd48a807885e0059ce0bc82
