@@ -25,18 +25,20 @@
 
 - (NSArray *)unwatchedClips {
     if (self.lastWatchedClip) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"reel == %@ && createdAt > %@", self, self.lastWatchedClip.createdAt];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"videoURL != nil && reel == %@ && createdAt > %@", self, self.lastWatchedClip.createdAt];
         return [SBClip MR_findAllSortedBy:@"createdAt" ascending:YES withPredicate:predicate];
     } else {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"reel == %@", self];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"videoURL != nil && reel == %@", self];
         return [SBClip MR_findAllSortedBy:@"createdAt" ascending:YES withPredicate:predicate];
     }
 }
 
 - (NSArray *)playerClips {
-    NSMutableArray *playerClips = [[self unwatchedClips] mutableCopy];
-    [playerClips addObject:self.lastClip];
-    return [playerClips copy];
+    NSArray *unwatchedClips = [self unwatchedClips];
+    if ([unwatchedClips count] > 0) {
+        return unwatchedClips;
+    }
+    return @[self.lastClip];
 }
 
 - (BOOL)hasPendingUpload {
