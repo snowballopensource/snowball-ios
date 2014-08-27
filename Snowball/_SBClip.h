@@ -12,7 +12,6 @@ extern const struct SBClipAttributes {
 } SBClipAttributes;
 
 extern const struct SBClipRelationships {
-	__unsafe_unretained NSString *lastForReel;
 	__unsafe_unretained NSString *lastWatchedForReel;
 	__unsafe_unretained NSString *reel;
 	__unsafe_unretained NSString *user;
@@ -21,7 +20,6 @@ extern const struct SBClipRelationships {
 extern const struct SBClipFetchedProperties {
 } SBClipFetchedProperties;
 
-@class SBReel;
 @class SBReel;
 @class SBReel;
 @class SBUser;
@@ -84,13 +82,6 @@ extern const struct SBClipFetchedProperties {
 
 
 
-@property (nonatomic, strong) SBReel *lastForReel;
-
-//- (BOOL)validateLastForReel:(id*)value_ error:(NSError**)error_;
-
-
-
-
 @property (nonatomic, strong) SBReel *lastWatchedForReel;
 
 //- (BOOL)validateLastWatchedForReel:(id*)value_ error:(NSError**)error_;
@@ -144,11 +135,6 @@ extern const struct SBClipFetchedProperties {
 - (void)setPrimitiveVideoURL:(NSString*)value;
 
 
-
-
-
-- (SBReel*)primitiveLastForReel;
-- (void)setPrimitiveLastForReel:(SBReel*)value;
 
 
 

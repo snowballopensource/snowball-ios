@@ -11,7 +11,6 @@ const struct SBClipAttributes SBClipAttributes = {
 };
 
 const struct SBClipRelationships SBClipRelationships = {
-	.lastForReel = @"lastForReel",
 	.lastWatchedForReel = @"lastWatchedForReel",
 	.reel = @"reel",
 	.user = @"user",
@@ -80,10 +79,6 @@ const struct SBClipFetchedProperties SBClipFetchedProperties = {
 
 
 
-
-@dynamic lastForReel;
-
-	
 
 @dynamic lastWatchedForReel;
 

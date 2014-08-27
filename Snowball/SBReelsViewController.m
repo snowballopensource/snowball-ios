@@ -47,7 +47,7 @@ typedef NS_ENUM(NSInteger, SBReelsViewControllerState) {
     [SBReelTableViewCell registerNibToTableView:self.tableView];
     
     [self setEntityClass:[SBReel class]];
-    [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"lastClip.createdAt" ascending:NO]]];
+    [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"lastClipCreatedAt" ascending:NO]]];
 
     [self setState:SBReelsViewControllerStateNormal animated:NO];
 

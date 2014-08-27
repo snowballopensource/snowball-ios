@@ -38,17 +38,21 @@
     if ([unwatchedClips count] > 0) {
         return unwatchedClips;
     }
-    return @[self.lastClip];
+    return @[[self lastClip]];
 }
 
 - (BOOL)hasPendingUpload {
-    SBClip *lastClip = self.lastClip;
+    SBClip *lastClip = [self lastClip];
     if (lastClip) {
         if ([lastClip.remoteID length] == 0) {
             return YES;
         }
     }
     return NO;
+}
+
+- (SBClip *)lastClip {
+    return [SBClip MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"reel == %@", self] sortedBy:@"createdAt" ascending:NO];
 }
 
 #pragma mark - NSManagedObject

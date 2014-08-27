@@ -6,6 +6,8 @@
 
 extern const struct SBReelAttributes {
 	__unsafe_unretained NSString *color;
+	__unsafe_unretained NSString *lastClipCreatedAt;
+	__unsafe_unretained NSString *lastClipThumbnailURL;
 	__unsafe_unretained NSString *name;
 	__unsafe_unretained NSString *recentParticipantsNames;
 	__unsafe_unretained NSString *remoteID;
@@ -13,7 +15,6 @@ extern const struct SBReelAttributes {
 
 extern const struct SBReelRelationships {
 	__unsafe_unretained NSString *clips;
-	__unsafe_unretained NSString *lastClip;
 	__unsafe_unretained NSString *lastWatchedClip;
 	__unsafe_unretained NSString *participations;
 } SBReelRelationships;
@@ -23,10 +24,11 @@ extern const struct SBReelFetchedProperties {
 
 @class SBClip;
 @class SBClip;
-@class SBClip;
 @class SBParticipation;
 
 @class NSObject;
+
+
 
 
 
@@ -49,6 +51,26 @@ extern const struct SBReelFetchedProperties {
 
 
 //- (BOOL)validateColor:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSDate* lastClipCreatedAt;
+
+
+
+//- (BOOL)validateLastClipCreatedAt:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSString* lastClipThumbnailURL;
+
+
+
+//- (BOOL)validateLastClipThumbnailURL:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -87,13 +109,6 @@ extern const struct SBReelFetchedProperties {
 @property (nonatomic, strong) NSSet *clips;
 
 - (NSMutableSet*)clipsSet;
-
-
-
-
-@property (nonatomic, strong) SBClip *lastClip;
-
-//- (BOOL)validateLastClip:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -138,6 +153,18 @@ extern const struct SBReelFetchedProperties {
 
 
 
+- (NSDate*)primitiveLastClipCreatedAt;
+- (void)setPrimitiveLastClipCreatedAt:(NSDate*)value;
+
+
+
+
+- (NSString*)primitiveLastClipThumbnailURL;
+- (void)setPrimitiveLastClipThumbnailURL:(NSString*)value;
+
+
+
+
 - (NSString*)primitiveName;
 - (void)setPrimitiveName:(NSString*)value;
 
@@ -159,11 +186,6 @@ extern const struct SBReelFetchedProperties {
 
 - (NSMutableSet*)primitiveClips;
 - (void)setPrimitiveClips:(NSMutableSet*)value;
-
-
-
-- (SBClip*)primitiveLastClip;
-- (void)setPrimitiveLastClip:(SBClip*)value;
 
 
 
