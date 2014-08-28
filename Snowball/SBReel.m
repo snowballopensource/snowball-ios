@@ -89,16 +89,7 @@
                               success:^(NSURLSessionDataTask *task, id responseObject) {
                                   NSArray *_reels = responseObject[@"reels"];
                                   [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-                                      [_reels each:^(id object) {
-                                          SBReel *reel = [SBReel MR_findFirstByAttribute:@"remoteID"
-                                                                               withValue:object[@"id"]
-                                                                               inContext:localContext];
-                                          if (reel) {
-                                              [reel MR_importValuesForKeysWithObject:object];
-                                          } else {
-                                              [SBReel MR_importFromObject:object inContext:localContext];
-                                          }
-                                      }];
+                                      [SBReel MR_importFromArray:_reels inContext:localContext];
                                   }];
                                   if (success) { success([_reels count]); };
                               } failure:^(NSURLSessionDataTask *task, NSError *error) {

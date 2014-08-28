@@ -75,8 +75,7 @@
              } success:^(NSURLSessionDataTask *task, id responseObject) {
                  NSDictionary *_clip = responseObject[@"clip"];
                  [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-                     SBClip *clip = [self MR_inContext:localContext];
-                     [clip MR_importValuesForKeysWithObject:_clip];
+                     SBClip *clip = [SBClip MR_importFromObject:_clip inContext:localContext];
                      [clip.reel setLastClipCreatedAt:clip.createdAt];
                  }];
                  if (success) { success(); }

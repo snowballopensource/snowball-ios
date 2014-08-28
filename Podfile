@@ -6,7 +6,7 @@ pod 'AFNetworking'
 pod 'BlocksKit'
 pod 'CrittercismSDK'
 pod 'Facebook-iOS-SDK'
-pod 'MagicalRecord', git: 'https://github.com/magicalpanda/MagicalRecord.git', commit: 'cd73e27'
+pod 'MagicalRecord', git: 'https://github.com/magicalpanda/MagicalRecord.git', branch: :develop
 pod 'MBProgressHUD'
 pod 'ObjectiveSugar'
 pod 'SDWebImage'

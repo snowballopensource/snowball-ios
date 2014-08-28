@@ -302,8 +302,7 @@ static SBUser *_currentUser = nil;
                               success:^(NSURLSessionDataTask *task, id responseObject) {
                                   NSDictionary *_user = responseObject[@"user"];
                                   [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-                                      SBUser *user = [self MR_inContext:localContext];
-                                      [user MR_importValuesForKeysWithObject:_user];
+                                      [SBUser MR_importFromObject:_user inContext:localContext];
                                   }];
                                   if (success) { success(); }
                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
