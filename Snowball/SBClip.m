@@ -77,6 +77,7 @@
                  [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                      SBClip *clip = [self MR_inContext:localContext];
                      [clip MR_importValuesForKeysWithObject:_clip];
+                     [clip.reel setLastClipCreatedAt:clip.createdAt];
                  }];
                  if (success) { success(); }
              } failure:^(NSURLSessionDataTask *task, NSError *error) {
