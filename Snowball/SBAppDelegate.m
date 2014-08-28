@@ -37,8 +37,8 @@
 #pragma mark - Private
 
 - (void)setupCoreData {
-    AutoMigratingMagicalRecordStack *stack = (AutoMigratingMagicalRecordStack *)[MagicalRecord setupAutoMigratingStack];
-    [stack setShouldDeletePersistentStoreOnModelMismatch:YES];
+    [MagicalRecord setupAutoMigratingCoreDataStack];
+    [MagicalRecord setShouldDeleteStoreOnModelMismatch:YES];
 }
 
 - (void)setupAppearance {

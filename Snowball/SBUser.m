@@ -178,7 +178,7 @@ static SBUser *_currentUser = nil;
                                    }];
                                    NSMutableArray *mainContextUsers = [@[] mutableCopy];
                                    for (SBUser *user in users) {
-                                       [mainContextUsers addObject:[user MR_inContext:[MagicalRecordStack defaultStack].context]];
+                                       [mainContextUsers addObject:[user MR_inContext:[NSManagedObjectContext MR_defaultContext]]];
                                    }
                                    if (success) { success(mainContextUsers); }
                                } failure:^(NSURLSessionDataTask *task, NSError *error) {
