@@ -14,8 +14,7 @@
 @implementation SBAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [MagicalRecord setShouldDeleteStoreOnModelMismatch:YES];
-    [MagicalRecord setupAutoMigratingCoreDataStack];
+    [self setupCoreData];
     [SBSessionManager startSession];
     [SBPushNotificationManager setup];
     [SBAnalyticsManager start];
@@ -36,6 +35,11 @@
 }
 
 #pragma mark - Private
+
+- (void)setupCoreData {
+    AutoMigratingMagicalRecordStack *stack = (AutoMigratingMagicalRecordStack *)[MagicalRecord setupAutoMigratingStack];
+    [stack setShouldDeletePersistentStoreOnModelMismatch:YES];
+}
 
 - (void)setupAppearance {
     // UINavigationBar

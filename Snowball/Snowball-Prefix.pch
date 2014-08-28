@@ -35,7 +35,8 @@
 #import <BlocksKit/BlocksKit+UIKit.h>
 #import <CrittercismSDK/Crittercism.h>
 #import <Facebook-iOS-SDK/FacebookSDK/Facebook.h>
-#import <MagicalRecord/CoreData+MagicalRecord.h>
+#import <MagicalRecord/MagicalRecord.h>
+#import <MagicalRecord/MagicalRecord+Actions.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <ObjectiveSugar/ObjectiveSugar.h>
 #import <SDWebImage/UIImageView+WebCache.h>

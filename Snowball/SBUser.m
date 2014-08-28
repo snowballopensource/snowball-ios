@@ -64,7 +64,7 @@ static SBUser *_currentUser = nil;
             [user setIsCurrentUserValue:YES];
         }];
     }
-    _currentUser = [currentUser MR_inContext:[NSManagedObjectContext MR_defaultContext]];
+    _currentUser = [currentUser MR_inContext:[NSManagedObjectContext MR_mainQueueContext]];
     [self refreshCurrentUser];
 }
 
@@ -202,7 +202,7 @@ static SBUser *_currentUser = nil;
                                    }];
                                    NSMutableArray *mainContextUsers = [@[] mutableCopy];
                                    for (SBUser *user in users) {
-                                       [mainContextUsers addObject:[user MR_inContext:[NSManagedObjectContext MR_defaultContext]]];
+                                       [mainContextUsers addObject:[user MR_inContext:[NSManagedObjectContext MR_mainQueueContext]]];
                                    }
                                    if (success) { success(mainContextUsers); }
                                } failure:^(NSURLSessionDataTask *task, NSError *error) {

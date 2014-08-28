@@ -25,7 +25,7 @@
 }
 
 + (SBParticipation *)createParticipationForUser:(SBUser *)user andReel:(SBReel *)reel {
-    return [self createParticipationForUser:user andReel:reel inContext:[NSManagedObjectContext MR_defaultContext]];
+    return [self createParticipationForUser:user andReel:reel inContext:[NSManagedObjectContext MR_mainQueueContext]];
 }
 
 + (void)deleteParticipationForUser:(SBUser *)user andReel:(SBReel *)reel inContext:(NSManagedObjectContext *)context {
@@ -37,7 +37,7 @@
 }
 
 + (void)deleteParticipationForUser:(SBUser *)user andReel:(SBReel *)reel {
-    [self deleteParticipationForUser:user andReel:reel inContext:[NSManagedObjectContext MR_defaultContext]];
+    [self deleteParticipationForUser:user andReel:reel inContext:[NSManagedObjectContext MR_mainQueueContext]];
 }
 
 + (SBParticipation *)participationForUser:(SBUser *)user andReel:(SBReel *)reel inContext:(NSManagedObjectContext *)context {
@@ -46,7 +46,7 @@
 }
 
 + (SBParticipation *)participationForUser:(SBUser *)user andReel:(SBReel *)reel {
-    return [self participationForUser:user andReel:reel inContext:[NSManagedObjectContext MR_defaultContext]];
+    return [self participationForUser:user andReel:reel inContext:[NSManagedObjectContext MR_mainQueueContext]];
 }
 
 @end

@@ -19,7 +19,7 @@
 - (NSFetchedResultsController *)fetchedResultsController {
 	if (!_fetchedResultsController) {
         _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:[self fetchRequest]
-                                                                        managedObjectContext:[NSManagedObjectContext MR_defaultContext]
+                                                                        managedObjectContext:[NSManagedObjectContext MR_mainQueueContext]
                                                                           sectionNameKeyPath:self.sectionNameKeyPath
                                                                                    cacheName:nil];
         [_fetchedResultsController setDelegate:self];
@@ -38,7 +38,7 @@
     NSString *entityName = [self.entityClass entityName];
 #pragma GCC diagnostic pop
     [fetchRequest setEntity:[NSEntityDescription entityForName:entityName
-                                        inManagedObjectContext:[NSManagedObjectContext MR_defaultContext]]];
+                                        inManagedObjectContext:[NSManagedObjectContext MR_mainQueueContext]]];
     [fetchRequest setSortDescriptors:self.sortDescriptors];
     [fetchRequest setPredicate:self.predicate];
 	return fetchRequest;
