@@ -72,6 +72,11 @@
         </userInfo>
     </entity>
     <entity name="User" representedClassName="SBUser" syncable="YES">
+        <attribute name="authToken" optional="YES" transient="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="auth_token"/>
+            </userInfo>
+        </attribute>
         <attribute name="avatarURL" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="avatar_url"/>
@@ -81,7 +86,6 @@
         <attribute name="color" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="following" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
-        <attribute name="isCurrentUser" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phoneNumber" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
@@ -104,6 +108,6 @@
         <element name="Clip" positionX="-63" positionY="-18" width="128" height="148"/>
         <element name="Participation" positionX="-54" positionY="81" width="128" height="73"/>
         <element name="Reel" positionX="-63" positionY="0" width="128" height="163"/>
-        <element name="User" positionX="-54" positionY="18" width="128" height="223"/>
+        <element name="User" positionX="-54" positionY="18" width="128" height="225"/>
     </elements>
 </model>

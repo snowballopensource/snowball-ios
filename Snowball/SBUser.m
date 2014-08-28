@@ -12,6 +12,7 @@
 #import "SBReel.h"
 #import "SBUser.h"
 
+static NSString *const kSBCurrentUserRemoteID = @"SBCurrentUserRemoteID";
 static NSString *const kSBCurrentUserAuthToken = @"SBCurrentUserAuthToken";
 
 static SBUser *_currentUser = nil;
@@ -36,9 +37,8 @@ static SBUser *_currentUser = nil;
 
 + (SBUser *)currentUser {
     if (_currentUser) return _currentUser;
-    SBUser *user = [SBUser MR_findFirstByAttribute:@"isCurrentUser" withValue:@(YES)];
+    SBUser *user = [SBUser MR_findFirstByAttribute:@"remoteID" withValue:[self currentUserRemoteID]];
     if ([self currentUserAuthToken] && user) {
-        [self setCurrentUser:user];
         return user;
     } else {
         [self setCurrentUser:nil];
@@ -47,48 +47,30 @@ static SBUser *_currentUser = nil;
 }
 
 + (void)setCurrentUser:(SBUser *)currentUser {
-    // Clear out existing current user
-    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-        NSArray *currentUsers = [SBUser MR_findByAttribute:@"isCurrentUser"
-                                                 withValue:@(YES)
-                                                 inContext:localContext];
-        for (SBUser *user in currentUsers) {
-            [user setIsCurrentUserValue:NO];
-        }
-    }];
-
-    // Set current user
     if (currentUser) {
-        [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-            SBUser *user = [currentUser MR_inContext:localContext];
-            [user setIsCurrentUserValue:YES];
-        }];
-    }
-    _currentUser = [currentUser MR_inContext:[NSManagedObjectContext MR_mainQueueContext]];
-    [self refreshCurrentUser];
-}
-
-+ (void)refreshCurrentUser {
-    if (_currentUser) {
-        [SBPushNotificationManager enablePushWithUserID:_currentUser.remoteID];
+        [[NSUserDefaults standardUserDefaults] setObject:currentUser.authToken
+                                                  forKey:kSBCurrentUserAuthToken];
+        [[NSUserDefaults standardUserDefaults] setObject:currentUser.remoteID
+                                                  forKey:kSBCurrentUserRemoteID];
+        [SBPushNotificationManager enablePushWithUserID:currentUser.remoteID];
     } else {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBCurrentUserRemoteID];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBCurrentUserAuthToken];
         [SBPushNotificationManager disablePush];
     }
+
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    _currentUser = currentUser;
+    
     [[SBAPIManager sharedManager] loadAuthToken];
+}
+
++ (NSString *)currentUserRemoteID {
+    return (NSString *)[[NSUserDefaults standardUserDefaults] objectForKey:kSBCurrentUserRemoteID];
 }
 
 + (NSString *)currentUserAuthToken {
     return (NSString *)[[NSUserDefaults standardUserDefaults] objectForKey:kSBCurrentUserAuthToken];
-}
-
-+ (void)setCurrentUserAuthToken:(NSString *)currentUserAuthToken {
-    if ([currentUserAuthToken length] > 0) {
-        [[NSUserDefaults standardUserDefaults] setObject:currentUserAuthToken
-                                                  forKey:kSBCurrentUserAuthToken];
-    } else {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBCurrentUserAuthToken];
-    }
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark - Participation
@@ -111,8 +93,6 @@ static SBUser *_currentUser = nil;
                                    NSDictionary *_user = responseObject[@"user"];
                                    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                                        SBUser *user = [SBUser MR_importFromObject:_user inContext:localContext];
-                                       [SBUser setCurrentUserAuthToken:[_user objectForKey:@"auth_token"]];
-                                       [user save];
                                        [SBUser setCurrentUser:user];
                                    }];
                                    if (success) { success(); }
@@ -132,8 +112,6 @@ static SBUser *_currentUser = nil;
                                    NSDictionary *_user = responseObject[@"user"];
                                    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                                        SBUser *user = [SBUser MR_importFromObject:_user inContext:localContext];
-                                       [SBUser setCurrentUserAuthToken:[_user objectForKey:@"auth_token"]];
-                                       [user save];
                                        [SBUser setCurrentUser:user];
                                    }];
                                    if (success) { success(); }
@@ -155,8 +133,6 @@ static SBUser *_currentUser = nil;
                                    NSDictionary *_user = responseObject[@"user"];
                                    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                                        SBUser *user = [SBUser MR_importFromObject:_user inContext:localContext];
-                                       [SBUser setCurrentUserAuthToken:[_user objectForKey:@"auth_token"]];
-                                       [user save];
                                        [SBUser setCurrentUser:user];
                                    }];
                                    if (success) { success(); }

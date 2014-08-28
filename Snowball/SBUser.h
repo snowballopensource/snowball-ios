@@ -18,7 +18,6 @@
 + (void)setCurrentUser:(SBUser *)currentUser;
 
 + (NSString *)currentUserAuthToken;
-+ (void)setCurrentUserAuthToken:(NSString *)currentUserAuthToken;
 
 - (BOOL)isParticipatingInReel:(SBReel *)reel;
 
