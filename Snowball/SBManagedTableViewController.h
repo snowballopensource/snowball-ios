@@ -8,7 +8,7 @@
 
 #import "SBManagedViewController.h"
 
-@interface SBManagedTableViewController : SBManagedViewController
+@interface SBManagedTableViewController : SBManagedViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -17,7 +17,5 @@
 @property (nonatomic) BOOL infiniteScrollEnabled;
 @property (nonatomic) BOOL isLoading;
 @property (nonatomic, readonly) NSUInteger currentPage;
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 
 @end

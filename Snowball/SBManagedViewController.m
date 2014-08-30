@@ -8,7 +8,7 @@
 
 #import "SBManagedViewController.h"
 
-@interface SBManagedViewController () <NSFetchedResultsControllerDelegate>
+@interface SBManagedViewController ()
 
 @end
 

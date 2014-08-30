@@ -8,7 +8,7 @@
 
 #import "SBViewController.h"
 
-@interface SBManagedViewController : SBViewController
+@interface SBManagedViewController : SBViewController <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) Class entityClass;
