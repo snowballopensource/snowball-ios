@@ -18,6 +18,7 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *editReelButton;
 @property (nonatomic, weak) IBOutlet UIButton *modalXButton;
+@property (nonatomic, weak) IBOutlet UIButton *backButton;
 
 @property (nonatomic, weak) SBPlayerViewController *playerViewController;
 
@@ -30,11 +31,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    if ([self isModal]) {
-        [self.modalXButton setHidden:NO];
-    } else {
-        [self.modalXButton setHidden:YES];
-    }
+    [self.modalXButton setHidden:![self isModal]];
+    [self.backButton setHidden:[self isModal]];
 
     [self setTintColor:self.reel.color];
 
@@ -58,25 +56,33 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+
     [self.playerViewController play];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-
     [self.playerViewController pause];
+
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+
+    [super viewWillDisappear:animated];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.destinationViewController isKindOfClass:[UINavigationController class]]) {
-        id rootViewController = [(UINavigationController *)segue.destinationViewController viewControllers][0];
-        if ([rootViewController isKindOfClass:[SBParticipantsViewController class]]) {
-            SBParticipantsViewController *vc = rootViewController;
-            [vc setReel:self.reel];
-        }
-    } else if ([segue.destinationViewController isKindOfClass:[SBPlayerViewController class]]) {
+    if ([segue.destinationViewController isKindOfClass:[SBParticipantsViewController class]]) {
+        SBParticipantsViewController *vc = (SBParticipantsViewController *)segue.destinationViewController;
+        [vc setReel:self.reel];
+    }
+    if ([segue.destinationViewController isKindOfClass:[SBPlayerViewController class]]) {
         [self setPlayerViewController:(SBPlayerViewController *)segue.destinationViewController];
     }
+}
+
+#pragma mark - View Actions
+
+- (IBAction)back:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Private

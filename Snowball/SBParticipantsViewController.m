@@ -172,7 +172,13 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
             UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"Are you sure you want to leave?"];
             [alertView bk_setCancelButtonWithTitle:@"Cancel" handler:nil];
             [alertView bk_addButtonWithTitle:@"Leave" handler:^{
-                // TODO: leave the conversation
+                [self showSpinner];
+                [self.reel removeParticipant:[SBUser currentUser]
+                                     success:^{
+                                         [self.navigationController popToRootViewControllerAnimated:YES];
+                                     } failure:^(NSError *error) {
+                                         [error displayInView:self.view];
+                                     }];
             }];
             [alertView show];
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
