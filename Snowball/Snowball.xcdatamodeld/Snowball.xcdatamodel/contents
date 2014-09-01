@@ -37,10 +37,6 @@
             <entry key="relatedByAttribute" value="remoteID"/>
         </userInfo>
     </entity>
-    <entity name="Participation" representedClassName="SBParticipation" syncable="YES">
-        <relationship name="reel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reel" inverseName="participations" inverseEntity="Reel" syncable="YES"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="participations" inverseEntity="User" syncable="YES"/>
-    </entity>
     <entity name="Reel" representedClassName="SBReel" syncable="YES">
         <attribute name="color" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="lastClipCreatedAt" optional="YES" attributeType="Date" syncable="YES">
@@ -66,7 +62,7 @@
             </userInfo>
         </relationship>
         <relationship name="lastWatchedClip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Clip" inverseName="lastWatchedForReel" inverseEntity="Clip" syncable="YES"/>
-        <relationship name="participations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Participation" inverseName="reel" inverseEntity="Participation" syncable="YES"/>
+        <relationship name="participants" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="reels" inverseEntity="User" syncable="YES"/>
         <userInfo>
             <entry key="relatedByAttribute" value="remoteID"/>
         </userInfo>
@@ -99,15 +95,14 @@
         </attribute>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="clips" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Clip" inverseName="user" inverseEntity="Clip" syncable="YES"/>
-        <relationship name="participations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Participation" inverseName="user" inverseEntity="Participation" syncable="YES"/>
+        <relationship name="reels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Reel" inverseName="participants" inverseEntity="Reel" syncable="YES"/>
         <userInfo>
             <entry key="relatedByAttribute" value="remoteID"/>
         </userInfo>
     </entity>
     <elements>
-        <element name="Clip" positionX="-63" positionY="-18" width="128" height="148"/>
-        <element name="Participation" positionX="-54" positionY="81" width="128" height="73"/>
-        <element name="Reel" positionX="-63" positionY="0" width="128" height="163"/>
-        <element name="User" positionX="-54" positionY="18" width="128" height="225"/>
+        <element name="Clip" positionX="-558" positionY="-153" width="128" height="148"/>
+        <element name="Reel" positionX="-207" positionY="-90" width="128" height="163"/>
+        <element name="User" positionX="-389" positionY="99" width="128" height="225"/>
     </elements>
 </model>

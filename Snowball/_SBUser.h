@@ -19,14 +19,14 @@ extern const struct SBUserAttributes {
 
 extern const struct SBUserRelationships {
 	__unsafe_unretained NSString *clips;
-	__unsafe_unretained NSString *participations;
+	__unsafe_unretained NSString *reels;
 } SBUserRelationships;
 
 extern const struct SBUserFetchedProperties {
 } SBUserFetchedProperties;
 
 @class SBClip;
-@class SBParticipation;
+@class SBReel;
 
 
 
@@ -163,9 +163,9 @@ extern const struct SBUserFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSSet *participations;
+@property (nonatomic, strong) NSSet *reels;
 
-- (NSMutableSet*)participationsSet;
+- (NSMutableSet*)reelsSet;
 
 
 
@@ -180,10 +180,10 @@ extern const struct SBUserFetchedProperties {
 - (void)addClipsObject:(SBClip*)value_;
 - (void)removeClipsObject:(SBClip*)value_;
 
-- (void)addParticipations:(NSSet*)value_;
-- (void)removeParticipations:(NSSet*)value_;
-- (void)addParticipationsObject:(SBParticipation*)value_;
-- (void)removeParticipationsObject:(SBParticipation*)value_;
+- (void)addReels:(NSSet*)value_;
+- (void)removeReels:(NSSet*)value_;
+- (void)addReelsObject:(SBReel*)value_;
+- (void)removeReelsObject:(SBReel*)value_;
 
 @end
 
@@ -259,8 +259,8 @@ extern const struct SBUserFetchedProperties {
 
 
 
-- (NSMutableSet*)primitiveParticipations;
-- (void)setPrimitiveParticipations:(NSMutableSet*)value;
+- (NSMutableSet*)primitiveReels;
+- (void)setPrimitiveReels:(NSMutableSet*)value;
 
 
 @end

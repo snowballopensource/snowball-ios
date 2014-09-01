@@ -9,7 +9,6 @@
 #import "SBEditReelNameViewController.h"
 #import "SBEditParticipantsViewController.h"
 #import "SBParticipantsViewController.h"
-#import "SBParticipation.h"
 #import "SBReel.h"
 #import "SBUser.h"
 #import "SBUserTableViewCell.h"
@@ -35,9 +34,9 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
     [SBUserTableViewCell registerNibToTableView:self.tableView];
     [SBTableViewCell registerClassToTableView:self.tableView];
     
-    [self setEntityClass:[SBParticipation class]];
-    [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"user.username" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]]];
-    [self setPredicate:[NSPredicate predicateWithFormat:@"reel == %@", self.reel]];
+    [self setEntityClass:[SBUser class]];
+    [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"username" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]]];
+    [self setPredicate:[NSPredicate predicateWithFormat:@"reels CONTAINS[cd] %@", self.reel]];
     
     [self setNavBarColor:self.reel.color];
 }
@@ -135,8 +134,7 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
             } else {
                 SBUserTableViewCell *_cell = (SBUserTableViewCell *)cell;
                 NSIndexPath *offsetIndexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
-                SBParticipation *participation = [self.fetchedResultsController objectAtIndexPath:offsetIndexPath];
-                SBUser *user = participation.user;
+                SBUser *user = [self.fetchedResultsController objectAtIndexPath:offsetIndexPath];
                 [_cell configureForObject:user delegate:self];
 
                 [_cell setTintColor:self.reel.color];
@@ -199,8 +197,7 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
 
 - (void)userCellSelected:(SBUserTableViewCell *)cell {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    SBParticipation *participation = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    SBUser *user = participation.user;
+    SBUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [cell setChecked:!user.followingValue];
     if (user.followingValue) {
         [user unfollowWithSuccess:nil failure:nil];

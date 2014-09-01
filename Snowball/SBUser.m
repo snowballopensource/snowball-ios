@@ -7,7 +7,6 @@
 //
 
 #import "SBAPIManager.h"
-#import "SBParticipation.h"
 #import "SBPushNotificationManager.h"
 #import "SBReel.h"
 #import "SBUser.h"
@@ -76,10 +75,7 @@ static SBUser *_currentUser = nil;
 #pragma mark - Participation
 
 - (BOOL)isParticipatingInReel:(SBReel *)reel {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"user == %@ && reel == %@", self, reel];
-    SBParticipation *participation = [SBParticipation MR_findFirstWithPredicate:predicate inContext:self.managedObjectContext];
-    if (participation) return YES;
-    return NO;
+    return [self.reels containsObject:reel];
 }
 
 #pragma mark - Authentication

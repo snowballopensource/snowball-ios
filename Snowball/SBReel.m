@@ -8,7 +8,6 @@
 
 #import "SBAPIManager.h"
 #import "SBClip.h"
-#import "SBParticipation.h"
 #import "SBReel.h"
 #import "SBSessionManager.h"
 #import "SBUser.h"
@@ -85,27 +84,6 @@
                               }];
 }
 
-#pragma mark - Participation
-
-- (void)setParticipants:(NSArray *)users {
-    NSMutableArray *participations = [@[] mutableCopy];
-    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-        for (SBUser *user in users) {
-            SBParticipation *participation = [SBParticipation newParticipationForUser:user andReel:self inContext:localContext];
-            [participations addObject:participation];
-        }
-        [[self MR_inContext:localContext] setParticipations:[NSSet setWithArray:[participations copy]]];
-    }];
-}
-
-- (void)addParticipants:(NSArray *)users {
-    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-        for (SBUser *user in users) {
-            [SBParticipation newParticipationForUser:user andReel:self inContext:localContext];
-        }
-    }];
-}
-
 #pragma mark - Remote
 
 + (void)getHomeFeedReelsOnPage:(NSUInteger)page
@@ -137,9 +115,9 @@
                                       NSArray *users = [SBUser MR_importFromArray:_users inContext:localContext];
                                       SBReel *reel = [self MR_inContext:localContext];
                                       if (page > 1) {
-                                          [reel addParticipants:users];
+                                          [reel addParticipants:[NSSet setWithArray:users]];
                                       } else {
-                                          [reel setParticipants:users];
+                                          [reel setParticipants:[NSSet setWithArray:users]];
                                       }
                                   }];
                                   if (success) { success([_users count]); };
@@ -153,7 +131,7 @@
 - (void)addParticipant:(SBUser *)user
                success:(void (^)(void))success
                failure:(void (^)(NSError *error))failure {
-    [SBParticipation createParticipationForUser:user andReel:self];
+    [self addParticipantsObject:user];
     [self postParticipant:user
                   success:^{
                       if (success) { success(); }
@@ -165,7 +143,7 @@
 - (void)removeParticipant:(SBUser *)user
                   success:(void (^)(void))success
                   failure:(void (^)(NSError *error))failure {
-    [SBParticipation deleteParticipationForUser:user andReel:self];
+    [self removeParticipantsObject:user];
     [self deleteParticipant:user
                     success:^{
                         if (success) { success(); }
@@ -194,7 +172,9 @@
                                success:^(NSURLSessionDataTask *task, id responseObject) {
                                    if (success) { success(); }
                                } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                   [SBParticipation deleteParticipationForUser:user andReel:self];
+                                   [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                                       [self removeParticipantsObject:user];
+                                   }];
                                    if (failure) { failure(error); };
                                }];
 }
@@ -208,7 +188,9 @@
                                  success:^(NSURLSessionDataTask *task, id responseObject) {
                                      if (success) { success(); }
                                  } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                     [SBParticipation createParticipationForUser:user andReel:self];
+                                     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                                         [self addParticipantsObject:user];
+                                     }];
                                      if (failure) { failure(error); };
                                  }];
 }
