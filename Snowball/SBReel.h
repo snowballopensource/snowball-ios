@@ -37,4 +37,7 @@
                   success:(void (^)(void))success
                   failure:(void (^)(NSError *error))failure;
 
+- (void)leaveGroupWithSuccess:(void (^)(void))success
+                      failure:(void (^)(NSError *error))failure;
+
 @end

@@ -173,12 +173,11 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
             [alertView bk_setCancelButtonWithTitle:@"Cancel" handler:nil];
             [alertView bk_addButtonWithTitle:@"Leave" handler:^{
                 [self showSpinner];
-                [self.reel removeParticipant:[SBUser currentUser]
-                                     success:^{
-                                         [self.navigationController popToRootViewControllerAnimated:YES];
-                                     } failure:^(NSError *error) {
-                                         [error displayInView:self.view];
-                                     }];
+                [self.reel leaveGroupWithSuccess:^{
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                } failure:^(NSError *error) {
+                    [error displayInView:self.view];
+                }];
             }];
             [alertView show];
             [tableView deselectRowAtIndexPath:indexPath animated:YES];

@@ -153,6 +153,17 @@
                     }];
 }
 
+- (void)leaveGroupWithSuccess:(void (^)(void))success
+                      failure:(void (^)(NSError *error))failure {
+    [self removeParticipant:[SBUser currentUser] success:^{
+        [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+            SBReel *reel = [self MR_inContext:localContext];
+            [reel delete];
+        }];
+        success();
+    } failure:failure];
+}
+
 - (void)postParticipant:(SBUser *)user
                 success:(void (^)(void))success
                 failure:(void (^)(NSError *error))failure {
