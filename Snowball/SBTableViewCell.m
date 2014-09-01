@@ -14,6 +14,10 @@
     return NSStringFromClass(self);
 }
 
++ (void)registerClassToTableView:(UITableView *)tableView {
+    [tableView registerClass:[self class] forCellReuseIdentifier:[self identifier]];
+}
+
 + (void)registerNibToTableView:(UITableView *)tableView {
     [tableView registerNib:[UINib nibWithNibName:[self identifier] bundle:nil]
     forCellReuseIdentifier:[self identifier]];
@@ -21,6 +25,12 @@
 
 - (void)configureForObject:(id)object {
     REQUIRE_SUBCLASS
+}
+
+- (void)setTintColor:(UIColor *)tintColor {
+    [super setTintColor:tintColor];
+    
+    [self.textLabel setTextColor:tintColor];
 }
 
 @end

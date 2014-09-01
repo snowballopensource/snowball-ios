@@ -12,6 +12,7 @@
 
 + (NSString *)identifier;
 
++ (void)registerClassToTableView:(UITableView *)tableView;
 + (void)registerNibToTableView:(UITableView *)tableView;
 
 - (void)configureForObject:(id)object;

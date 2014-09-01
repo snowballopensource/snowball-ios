@@ -32,6 +32,7 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
     [super viewDidLoad];
 
     [SBUserTableViewCell registerNibToTableView:self.tableView];
+    [SBTableViewCell registerClassToTableView:self.tableView];
     
     [self setEntityClass:[SBParticipation class]];
     [self setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"user.username" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]]];
@@ -60,7 +61,7 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
             break;
         case SBReelDetailsTableViewSectionParticipants: {
             id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController.sections firstObject];
-            return [sectionInfo numberOfObjects];
+            return [sectionInfo numberOfObjects] + 1;
         }
             break;
         case SBReelDetailsTableViewSectionOtherOptions:
@@ -73,22 +74,27 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case SBReelDetailsTableViewSectionName: {
-#warning This is the incorrect cell. Finish this.
-            SBUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[SBUserTableViewCell identifier] forIndexPath:indexPath];
+            SBTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[SBTableViewCell identifier] forIndexPath:indexPath];
             [self configureCell:cell atIndexPath:indexPath];
             return cell;
         }
             break;
         case SBReelDetailsTableViewSectionParticipants: {
-            SBUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[SBUserTableViewCell identifier]
-                                                                        forIndexPath:indexPath];
-            [self configureCell:cell atIndexPath:indexPath];
-            return cell;
+            id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController.sections firstObject];
+            if (indexPath.row == [sectionInfo numberOfObjects]) {
+                SBTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[SBTableViewCell identifier] forIndexPath:indexPath];
+                [self configureCell:cell atIndexPath:indexPath];
+                return cell;
+            } else {
+                SBUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[SBUserTableViewCell identifier]
+                                                                            forIndexPath:indexPath];
+                [self configureCell:cell atIndexPath:indexPath];
+                return cell;
+            }
         }
             break;
         case SBReelDetailsTableViewSectionOtherOptions: {
-#warning This is the incorrect cell. Finish this.
-            SBUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[SBUserTableViewCell identifier] forIndexPath:indexPath];
+            SBTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[SBTableViewCell identifier] forIndexPath:indexPath];
             [self configureCell:cell atIndexPath:indexPath];
             return cell;
         }
@@ -97,30 +103,56 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
     return nil;
 }
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(SBTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    [cell.textLabel setFont:[UIFont fontWithName:[UIFont snowballFontNameBook] size:20]];
+    [cell setTintColor:self.reel.color];
+
     switch (indexPath.section) {
         case SBReelDetailsTableViewSectionName: {
-#warning This is the incomplete. Finish this.
+            [cell.textLabel setText:self.reel.name];
         }
             break;
         case SBReelDetailsTableViewSectionParticipants: {
-            SBUserTableViewCell *_cell = (SBUserTableViewCell *)cell;
-            NSIndexPath *offsetIndexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
-            SBParticipation *participation = [self.fetchedResultsController objectAtIndexPath:offsetIndexPath];
-            SBUser *user = participation.user;
-            [_cell configureForObject:user delegate:self];
-            
-            [_cell setChecked:[user isParticipatingInReel:self.reel]];
-            [_cell setTintColor:self.reel.color];
-            
-            [_cell setStyle:SBUserTableViewCellStyleNone];
+            id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController.sections firstObject];
+            if (indexPath.row == [sectionInfo numberOfObjects]) {
+                [cell.textLabel setText:@"Add friends..."];
+                UIImage *image = [UIImage imageNamed:@"cell-plus"];
+                UIImageView *accessoryView = [[UIImageView alloc] initWithImage:image];
+                [accessoryView setImageTintColor:self.reel.color];
+                [cell setAccessoryView:accessoryView];
+            } else {
+                SBUserTableViewCell *_cell = (SBUserTableViewCell *)cell;
+                NSIndexPath *offsetIndexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
+                SBParticipation *participation = [self.fetchedResultsController objectAtIndexPath:offsetIndexPath];
+                SBUser *user = participation.user;
+                [_cell configureForObject:user delegate:self];
+
+                [_cell setTintColor:self.reel.color];
+                
+                [_cell setChecked:[user isParticipatingInReel:self.reel]];
+                
+                [_cell setStyle:SBUserTableViewCellStyleNone];
+            }
         }
             break;
         case SBReelDetailsTableViewSectionOtherOptions: {
-#warning This is the incomplete. Finish this.
+            [cell setTintColor:[UIColor redColor]];
+            [cell.textLabel setText:@"Exit group"];
         }
             break;
     }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return @"Subject";
+            break;
+        case 1:
+            return @"Participants";
+            break;
+    }
+    return nil;
 }
 
 #pragma mark - SBUserTableViewCellDelegate
