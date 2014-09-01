@@ -63,9 +63,26 @@
 
 #pragma mark - SBManagedObject
 
-- (void)updateWithSuccess:(void (^)(void))success failure:(void (^)(NSError *))failure {
-    // TODO: update this reel
-    success();
+- (void)updateWithSuccess:(void(^)(void))success failure:(void(^)(NSError *error))failure {
+    NSMutableDictionary *reelParameters = [@{} mutableCopy];
+    if (self.name) {
+        reelParameters[@"name"] = self.name;
+    } else {
+        reelParameters[@"name"] = @"";
+    }
+    NSDictionary *parameters = @{ @"reel": [reelParameters copy] };
+    NSString *path = [NSString stringWithFormat:@"reels/%@", self.remoteID];
+    [[SBAPIManager sharedManager] PUT:path
+                           parameters:parameters
+                              success:^(NSURLSessionDataTask *task, id responseObject) {
+                                  NSDictionary *_reel = responseObject[@"reel"];
+                                  [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                                      [SBReel MR_importFromObject:_reel inContext:localContext];
+                                  }];
+                                  if (success) { success(); }
+                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                  if (failure) { failure(error); };
+                              }];
 }
 
 #pragma mark - Participation

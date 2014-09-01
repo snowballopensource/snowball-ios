@@ -31,9 +31,13 @@
 }
 
 - (IBAction)save:(id)sender {
+    [self showSpinner];
+    [self.reel setName:self.reelNameTextField.text];
     [self.reel updateWithSuccess:^{
+        [self hideSpinner];
         [self.navigationController popViewControllerAnimated:YES];
     } failure:^(NSError *error) {
+        [self hideSpinner];
         [error displayInView:self.view];
     }];
 }
