@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
+#import "SBEditReelNameViewController.h"
 #import "SBEditParticipantsViewController.h"
 #import "SBParticipantsViewController.h"
 #import "SBParticipation.h"
@@ -44,6 +45,10 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[SBEditParticipantsViewController class]]) {
         SBEditParticipantsViewController *vc = segue.destinationViewController;
+        [vc setReel:self.reel];
+    }
+    if ([segue.destinationViewController isKindOfClass:[SBEditReelNameViewController class]]) {
+        SBEditReelNameViewController *vc = segue.destinationViewController;
         [vc setReel:self.reel];
     }
 }
@@ -153,6 +158,29 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
             break;
     }
     return nil;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case SBReelDetailsTableViewSectionName:
+            [self performSegueWithIdentifier:[SBEditReelNameViewController identifier] sender:self];
+            break;
+        case SBReelDetailsTableViewSectionParticipants:
+            [self performSegueWithIdentifier:[SBEditParticipantsViewController identifier] sender:self];
+            break;
+        case SBReelDetailsTableViewSectionOtherOptions: {
+            UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"Are you sure you want to leave?"];
+            [alertView bk_setCancelButtonWithTitle:@"Cancel" handler:nil];
+            [alertView bk_addButtonWithTitle:@"Leave" handler:^{
+                // TODO: leave the conversation
+            }];
+            [alertView show];
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - SBUserTableViewCellDelegate

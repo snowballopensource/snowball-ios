@@ -265,7 +265,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView appearanceType="aqua" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Vtr-fw-SXs">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="440"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -273,18 +273,6 @@
                                     <outlet property="delegate" destination="stb-kS-ZGX" id="QLg-fc-GfQ"/>
                                 </connections>
                             </tableView>
-                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mui-g5-N82">
-                                <rect key="frame" x="0.0" y="440" width="320" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.44705882352941179" green="0.83921568627450982" blue="0.92156862745098034" alpha="1" colorSpace="deviceRGB"/>
-                                <state key="normal" title="Add participants...">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="iTl-hG-DBa" kind="push" id="jWA-Cp-pbP"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -304,6 +292,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Vtr-fw-SXs" id="1Bz-qa-ZRr"/>
+                        <segue destination="dD7-q7-sPI" kind="push" identifier="SBEditReelNameViewController" id="TWh-Rf-1W3"/>
+                        <segue destination="iTl-hG-DBa" kind="push" identifier="SBEditParticipantsViewController" id="Ssy-Lf-Wls"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cub-wm-yW5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -370,6 +360,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IZI-pg-YqL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1124" y="790"/>
+        </scene>
+        <!--Edit Reel Name View Controller - Subject-->
+        <scene sceneID="8yc-r0-aOy">
+            <objects>
+                <viewController id="dD7-q7-sPI" customClass="SBEditReelNameViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="173-Ny-Krq"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ezb-ID-kgi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5gR-zj-egB">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField appearanceType="aqua" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V6C-ZV-a0c">
+                                <rect key="frame" x="20" y="20" width="280" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Subject" id="tKx-la-kOV">
+                        <barButtonItem key="rightBarButtonItem" id="xHV-5m-TuK">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tJT-a9-hlY">
+                                <rect key="frame" x="276" y="9" width="28" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="top-check">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="save:" destination="dD7-q7-sPI" eventType="touchUpInside" id="G1s-77-LK2"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="reelNameTextField" destination="V6C-ZV-a0c" id="XYb-hd-35w"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cpf-dM-dYC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1124" y="1512"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="gYd-dP-Hjh">
@@ -472,6 +505,7 @@
         <image name="reel-plane" width="33" height="28"/>
         <image name="reel-plus" width="28" height="28"/>
         <image name="top-camera-flip" width="33" height="20"/>
+        <image name="top-check" width="28" height="25"/>
         <image name="top-user" width="27" height="28"/>
         <image name="top-user-add" width="35" height="28"/>
         <image name="top-x" width="21" height="21"/>

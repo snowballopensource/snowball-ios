@@ -61,6 +61,13 @@
     unless (self.color) [self setColor:[UIColor randomColor]];
 }
 
+#pragma mark - SBManagedObject
+
+- (void)updateWithSuccess:(void (^)(void))success failure:(void (^)(NSError *))failure {
+    // TODO: update this reel
+    success();
+}
+
 #pragma mark - Participation
 
 - (void)setParticipants:(NSArray *)users {
