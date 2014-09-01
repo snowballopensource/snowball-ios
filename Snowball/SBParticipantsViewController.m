@@ -56,7 +56,7 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
     [super viewWillAppear:animated];
 
     // Reload row name
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:SBReelDetailsTableViewSectionName]] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - UITableViewDataSource
@@ -155,10 +155,10 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
-        case 0:
+        case SBReelDetailsTableViewSectionName:
             return @"Subject";
             break;
-        case 1:
+        case SBReelDetailsTableViewSectionParticipants:
             return @"Participants";
             break;
     }
