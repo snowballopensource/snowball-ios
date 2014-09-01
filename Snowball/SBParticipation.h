@@ -10,11 +10,11 @@
 
 @interface SBParticipation : _SBParticipation
 
-+ (SBParticipation *)createParticipationForUser:(SBUser *)user andReel:(SBReel *)reel inContext:(NSManagedObjectContext *)context;
-+ (void)deleteParticipationForUser:(SBUser *)user andReel:(SBReel *)reel inContext:(NSManagedObjectContext *)context;
 + (SBParticipation *)participationForUser:(SBUser *)user andReel:(SBReel *)reel inContext:(NSManagedObjectContext *)context;
-+ (SBParticipation *)createParticipationForUser:(SBUser *)user andReel:(SBReel *)reel;
+
++ (SBParticipation *)newParticipationForUser:(SBUser *)user andReel:(SBReel *)reel inContext:(NSManagedObjectContext *)context;
+
++ (void)createParticipationForUser:(SBUser *)user andReel:(SBReel *)reel;
 + (void)deleteParticipationForUser:(SBUser *)user andReel:(SBReel *)reel;
-+ (SBParticipation *)participationForUser:(SBUser *)user andReel:(SBReel *)reel;
 
 @end

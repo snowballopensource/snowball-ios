@@ -89,17 +89,21 @@
 
 - (void)setParticipants:(NSArray *)users {
     NSMutableArray *participations = [@[] mutableCopy];
-    for (SBUser *user in users) {
-        SBParticipation *participation = [SBParticipation createParticipationForUser:user andReel:self inContext:self.managedObjectContext];
-        [participations addObject:participation];
-    }
-    [self setParticipations:[NSSet setWithArray:[participations copy]]];
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+        for (SBUser *user in users) {
+            SBParticipation *participation = [SBParticipation newParticipationForUser:user andReel:self inContext:localContext];
+            [participations addObject:participation];
+        }
+        [[self MR_inContext:localContext] setParticipations:[NSSet setWithArray:[participations copy]]];
+    }];
 }
 
 - (void)addParticipants:(NSArray *)users {
-    for (SBUser *user in users) {
-        [SBParticipation createParticipationForUser:user andReel:self inContext:self.managedObjectContext];
-    }
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+        for (SBUser *user in users) {
+            [SBParticipation newParticipationForUser:user andReel:self inContext:localContext];
+        }
+    }];
 }
 
 #pragma mark - Remote
@@ -190,9 +194,7 @@
                                success:^(NSURLSessionDataTask *task, id responseObject) {
                                    if (success) { success(); }
                                } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                   [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-                                       [SBParticipation deleteParticipationForUser:user andReel:self inContext:localContext];
-                                   }];
+                                   [SBParticipation deleteParticipationForUser:user andReel:self];
                                    if (failure) { failure(error); };
                                }];
 }
@@ -206,9 +208,7 @@
                                  success:^(NSURLSessionDataTask *task, id responseObject) {
                                      if (success) { success(); }
                                  } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-                                         [SBParticipation createParticipationForUser:user andReel:self inContext:localContext];
-                                     }];
+                                     [SBParticipation createParticipationForUser:user andReel:self];
                                      if (failure) { failure(error); };
                                  }];
 }
