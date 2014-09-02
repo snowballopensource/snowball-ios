@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
 };
 
 // TODO: rename this to SBReelDetailsViewController
-@interface SBParticipantsViewController () <SBUserTableViewCellDelegate>
+@interface SBParticipantsViewController () <SBUserTableViewCellDelegate, UIAlertViewDelegate>
 
 @end
 
@@ -174,22 +174,26 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
             [self performSegueWithIdentifier:[SBEditParticipantsViewController identifier] sender:self];
             break;
         case SBReelDetailsTableViewSectionOtherOptions: {
-            UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"Are you sure you want to leave?"];
-            [alertView bk_setCancelButtonWithTitle:@"Cancel" handler:nil];
-            [alertView bk_addButtonWithTitle:@"Leave" handler:^{
-                [self showSpinner];
-                [self.reel leaveGroupWithSuccess:^{
-                    [self.navigationController popToRootViewControllerAnimated:YES];
-                } failure:^(NSError *error) {
-                    [error displayInView:self.view];
-                }];
-            }];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to leave?" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Leave", nil];
             [alertView show];
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
             break;
         default:
             break;
+    }
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    unless (buttonIndex == [alertView cancelButtonIndex]) {
+        [self showSpinner];
+        [self.reel leaveGroupWithSuccess:^{
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        } failure:^(NSError *error) {
+            [error displayInView:self.view];
+        }];
     }
 }
 
