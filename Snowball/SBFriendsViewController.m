@@ -12,6 +12,11 @@
 #import "SBUser.h"
 #import "SBUserTableViewCell.h"
 
+typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
+    SBFriendsTableViewSectionMe,
+    SBFriendsTableViewSectionFriends
+};
+
 @interface SBFriendsViewController () <SBUserTableViewCellDelegate>
 
 @end
@@ -20,14 +25,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSPredicate *currentUserPredicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [SBUser currentUser].remoteID];
-    [self setPredicate:[NSCompoundPredicate orPredicateWithSubpredicates:@[self.predicate, currentUserPredicate]]];
-    [self setSectionNameKeyPath:@"isCurrentUser"];
-
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"isCurrentUser" ascending:NO];
-    NSMutableArray *sortDescriptors = [@[sortDescriptor] mutableCopy];
-    [sortDescriptors addObjectsFromArray:self.sortDescriptors];
-    [self setSortDescriptors:sortDescriptors];
 
     [self setNavBarColor:[UIColor snowballColorBlue]];
 }
@@ -35,9 +32,19 @@
 #pragma mark - SBFollowingViewController
 
 - (void)configureCell:(SBUserTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    SBUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [cell configureForObject:user delegate:self];
+    SBUser *user = nil;
+    switch (indexPath.section) {
+        case SBFriendsTableViewSectionMe:
+            user = [SBUser currentUser];
+            break;
+        case SBFriendsTableViewSectionFriends: {
+            NSIndexPath *offsetIndexPath = [self controller:self.fetchedResultsController originalIndexPathFromMappedIndexPath:indexPath];
+            user = [self.fetchedResultsController objectAtIndexPath:offsetIndexPath];
+        }
+            break;
+    }
 
+    [cell configureForObject:user delegate:self];
     [cell setStyle:SBUserTableViewCellStyleNone];
 }
 
@@ -49,13 +56,52 @@
 
 #pragma mark - UITableViewDataSource
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
-        case 0:
-            return @"Me";
+        case SBFriendsTableViewSectionMe:
+            return 1;
+            break;
+        case SBFriendsTableViewSectionFriends: {
+            id <NSFetchedResultsSectionInfo> sectionInfo = self.fetchedResultsController.sections[[self controller:self.fetchedResultsController originalSectionIndexFromMappedSectionIndex:section]];
+            return [sectionInfo numberOfObjects];
+        }
             break;
     }
-    return @"My Friends";
+    return 0;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case SBFriendsTableViewSectionMe:
+            return @"Me";
+            break;
+        case SBFriendsTableViewSectionFriends:
+            return @"My Friends";
+            break;
+    }
+    return nil;
+}
+
+#pragma mark - NSFetchedResultsController Custom Mapping
+
+- (NSUInteger)controller:(NSFetchedResultsController *)controller mappedSectionIndexFromOriginalSectionIndex:(NSUInteger)originalSectionIndex {
+    return SBFriendsTableViewSectionFriends;
+}
+
+- (NSUInteger)controller:(NSFetchedResultsController *)controller originalSectionIndexFromMappedSectionIndex:(NSUInteger)mappedSectionIndex {
+    return 0;
+}
+
+- (NSIndexPath *)controller:(NSFetchedResultsController *)controller mappedIndexPathFromOriginalIndexPath:(NSIndexPath *)originalIndexPath {
+    return [NSIndexPath indexPathForRow:originalIndexPath.row inSection:SBFriendsTableViewSectionFriends];
+}
+
+- (NSIndexPath *)controller:(NSFetchedResultsController *)controller originalIndexPathFromMappedIndexPath:(NSIndexPath *)mappedIndexPath {
+    return [NSIndexPath indexPathForRow:mappedIndexPath.row inSection:0];
 }
 
 #pragma mark - SBUserTableViewCellDelegate
