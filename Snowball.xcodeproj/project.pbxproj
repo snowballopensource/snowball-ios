@@ -22,6 +22,8 @@
 		BA048E26191AFAD90083B0DC /* _SBClip.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E23191AFAD90083B0DC /* _SBClip.m */; };
 		BA048E2B191AFB110083B0DC /* SBClip.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E2A191AFB110083B0DC /* SBClip.m */; };
 		BA048E2E191AFDA50083B0DC /* SBManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BA048E2D191AFDA50083B0DC /* SBManagedObject.m */; };
+		BA130F6D19B64CD0000DC968 /* SBTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA130F6C19B64CD0000DC968 /* SBTextFieldTableViewCell.m */; };
+		BA130F6F19B64DF1000DC968 /* SBTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA130F6E19B64DF1000DC968 /* SBTextFieldTableViewCell.xib */; };
 		BA15B9E5192AC9EF00453F8F /* UIViewController+StatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BA15B9E4192AC9EF00453F8F /* UIViewController+StatusBar.m */; };
 		BA1DB1C519864F8D0078609B /* NSDate+TimeAgoString.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1DB1C419864F8D0078609B /* NSDate+TimeAgoString.m */; };
 		BA217C9A192A4DF500F04D03 /* SBLongRunningTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA217C99192A4DF500F04D03 /* SBLongRunningTaskManager.m */; };
@@ -130,6 +132,9 @@
 		BA048E2C191AFDA50083B0DC /* SBManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManagedObject.h; sourceTree = "<group>"; };
 		BA048E2D191AFDA50083B0DC /* SBManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBManagedObject.m; sourceTree = "<group>"; };
 		BA048E2F191AFE9A0083B0DC /* SBDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBDefines.h; sourceTree = "<group>"; };
+		BA130F6B19B64CD0000DC968 /* SBTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBTextFieldTableViewCell.h; sourceTree = "<group>"; };
+		BA130F6C19B64CD0000DC968 /* SBTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBTextFieldTableViewCell.m; sourceTree = "<group>"; };
+		BA130F6E19B64DF1000DC968 /* SBTextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBTextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		BA15B9E3192AC9EF00453F8F /* UIViewController+StatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+StatusBar.h"; sourceTree = "<group>"; };
 		BA15B9E4192AC9EF00453F8F /* UIViewController+StatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+StatusBar.m"; sourceTree = "<group>"; };
 		BA1DB1C319864F8D0078609B /* NSDate+TimeAgoString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgoString.h"; sourceTree = "<group>"; };
@@ -539,6 +544,9 @@
 				BA8E995319539A9200DCECD9 /* SBUserTableViewCell.h */,
 				BA8E995419539A9200DCECD9 /* SBUserTableViewCell.m */,
 				BA8E995619539A9F00DCECD9 /* SBUserTableViewCell.xib */,
+				BA130F6B19B64CD0000DC968 /* SBTextFieldTableViewCell.h */,
+				BA130F6C19B64CD0000DC968 /* SBTextFieldTableViewCell.m */,
+				BA130F6E19B64DF1000DC968 /* SBTextFieldTableViewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -712,6 +720,7 @@
 				BAA19C471946902F0034D439 /* MuseoSans-700.otf in Resources */,
 				BAEE3B38199202400064A16F /* People.storyboard in Resources */,
 				BA048DEC191AF6730083B0DC /* InfoPlist.strings in Resources */,
+				BA130F6F19B64DF1000DC968 /* SBTextFieldTableViewCell.xib in Resources */,
 				BA29C7EE192FDAE400F59684 /* AirshipConfig.plist in Resources */,
 				BA048DF5191AF6730083B0DC /* Reels.storyboard in Resources */,
 				BAC9FB3319241296008742EE /* Authentication.storyboard in Resources */,
@@ -848,6 +857,7 @@
 				BA70FC83199D2284004437B3 /* SBNavigationBar.m in Sources */,
 				BA7DEC4E1981F4A400943BFF /* UIColor+RandomColor.m in Sources */,
 				BACEC3AA19835F390032FCFE /* SBDeepLinkManager.m in Sources */,
+				BA130F6D19B64CD0000DC968 /* SBTextFieldTableViewCell.m in Sources */,
 				BAB0A72F1962024D00BF5C92 /* SBEditProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

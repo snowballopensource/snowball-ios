@@ -11,6 +11,7 @@
 #import "SBFindFriendsViewController.h"
 #import "SBLongRunningTaskManager.h"
 #import "SBPlayerView.h"
+#import "SBTextFieldTableViewCell.h"
 #import "SBUserTableViewCell.h"
 #import "SBReel.h"
 #import "SBUser.h"
@@ -36,7 +37,7 @@ typedef NS_ENUM(NSInteger, SBCreateReelTableViewSection) {
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [SBTableViewCell registerClassToTableView:self.tableView];
+    [SBTextFieldTableViewCell registerNibToTableView:self.tableView];
 
     [self setParticipants:[NSSet new]];
     
@@ -61,6 +62,8 @@ typedef NS_ENUM(NSInteger, SBCreateReelTableViewSection) {
 #pragma mark - View Actions
 
 - (IBAction)finish:(id)sender {
+    SBTextFieldTableViewCell *cell = (SBTextFieldTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:SBCreateReelTableViewSectionName]];
+    NSString *reelName = cell.textField.text;
     // This is semi duplicated code since clips are uploaded in two places.
     SBReel *reel = [SBReel MR_createEntity];
     SBClip *clip = [SBClip MR_createEntity];
@@ -68,6 +71,7 @@ typedef NS_ENUM(NSInteger, SBCreateReelTableViewSection) {
     [clip setVideoURL:[self.initialRecordingURL absoluteString]];
     [clip setUser:[SBUser currentUser]];
     [clip setCreatedAt:[NSDate date]];
+    [reel setName:reelName];
     [reel setParticipants:self.participants];
     [reel save];
     [clip save];
@@ -110,7 +114,7 @@ typedef NS_ENUM(NSInteger, SBCreateReelTableViewSection) {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case SBCreateReelTableViewSectionName: {
-            SBTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[SBTableViewCell identifier] forIndexPath:indexPath];
+            SBTextFieldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[SBTextFieldTableViewCell identifier] forIndexPath:indexPath];
             [self configureCell:cell atIndexPath:indexPath];
             return cell;
         }
@@ -127,8 +131,11 @@ typedef NS_ENUM(NSInteger, SBCreateReelTableViewSection) {
     [cell setTintColor:[UIColor snowballColorBlue]];
 
     switch (indexPath.section) {
-        case SBCreateReelTableViewSectionName:
-            [cell.textLabel setText:@"Add subject..."];
+        case SBCreateReelTableViewSectionName: {
+            SBTextFieldTableViewCell *_cell = (SBTextFieldTableViewCell *)cell;
+            [_cell.textField setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"Add subject..." attributes:@{NSForegroundColorAttributeName: [UIColor snowballColorBlue]}]];
+            [_cell.textField setTextColor:[UIColor snowballColorBlue]];
+        }
             break;
         case SBCreateReelTableViewSectionParticipants: {
             SBUserTableViewCell *_cell = (SBUserTableViewCell *)cell;
