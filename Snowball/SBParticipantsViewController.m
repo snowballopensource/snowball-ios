@@ -71,7 +71,7 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
             return 1;
             break;
         case SBReelDetailsTableViewSectionParticipants: {
-            id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController.sections firstObject];
+            id <NSFetchedResultsSectionInfo> sectionInfo = self.fetchedResultsController.sections[[self controller:self.fetchedResultsController originalSectionIndexFromMappedSectionIndex:section]];
             return [sectionInfo numberOfObjects] + 1;
         }
             break;
@@ -91,7 +91,7 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
         }
             break;
         case SBReelDetailsTableViewSectionParticipants: {
-            id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController.sections firstObject];
+            id <NSFetchedResultsSectionInfo> sectionInfo = self.fetchedResultsController.sections[[self controller:self.fetchedResultsController originalSectionIndexFromMappedSectionIndex:indexPath.section]];
             if (indexPath.row == [sectionInfo numberOfObjects]) {
                 SBTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[SBTableViewCell identifier] forIndexPath:indexPath];
                 [self configureCell:cell atIndexPath:indexPath];
@@ -124,7 +124,7 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
         }
             break;
         case SBReelDetailsTableViewSectionParticipants: {
-            id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController.sections firstObject];
+            id <NSFetchedResultsSectionInfo> sectionInfo = self.fetchedResultsController.sections[[self controller:self.fetchedResultsController originalSectionIndexFromMappedSectionIndex:indexPath.section]];
             if (indexPath.row == [sectionInfo numberOfObjects]) {
                 [cell.textLabel setText:@"Add friends..."];
                 UIImage *image = [UIImage imageNamed:@"cell-plus"];
@@ -133,7 +133,7 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
                 [cell setAccessoryView:accessoryView];
             } else {
                 SBUserTableViewCell *_cell = (SBUserTableViewCell *)cell;
-                NSIndexPath *offsetIndexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
+                NSIndexPath *offsetIndexPath = [self controller:self.fetchedResultsController originalIndexPathFromMappedIndexPath:indexPath];
                 SBUser *user = [self.fetchedResultsController objectAtIndexPath:offsetIndexPath];
                 [_cell configureForObject:user delegate:self];
 
@@ -193,17 +193,22 @@ typedef NS_ENUM(NSInteger, SBReelDetailsTableViewSection) {
     }
 }
 
-#pragma mark - SBUserTableViewCellDelegate
+#pragma mark - NSFetchedResultsController Custom Mapping
 
-- (void)userCellSelected:(SBUserTableViewCell *)cell {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    SBUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [cell setChecked:!user.followingValue];
-    if (user.followingValue) {
-        [user unfollowWithSuccess:nil failure:nil];
-    } else {
-        [user followWithSuccess:nil failure:nil];
-    }
+- (NSUInteger)controller:(NSFetchedResultsController *)controller mappedSectionIndexFromOriginalSectionIndex:(NSUInteger)originalSectionIndex {
+    return SBReelDetailsTableViewSectionParticipants;
+}
+
+- (NSUInteger)controller:(NSFetchedResultsController *)controller originalSectionIndexFromMappedSectionIndex:(NSUInteger)mappedSectionIndex {
+    return 0;
+}
+
+- (NSIndexPath *)controller:(NSFetchedResultsController *)controller mappedIndexPathFromOriginalIndexPath:(NSIndexPath *)originalIndexPath {
+    return [NSIndexPath indexPathForRow:originalIndexPath.row inSection:SBReelDetailsTableViewSectionParticipants];
+}
+
+- (NSIndexPath *)controller:(NSFetchedResultsController *)controller originalIndexPathFromMappedIndexPath:(NSIndexPath *)mappedIndexPath {
+    return [NSIndexPath indexPathForRow:mappedIndexPath.row inSection:0];
 }
 
 #pragma mark - SBManagedTableViewController
