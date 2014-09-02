@@ -96,7 +96,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="reel-plus" translatesAutoresizingMaskIntoConstraints="NO" id="Hg7-iV-SVG">
+                                    <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cell-plus" translatesAutoresizingMaskIntoConstraints="NO" id="Hg7-iV-SVG">
                                         <rect key="frame" x="272" y="21" width="28" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -484,9 +484,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="cell-plus" width="28" height="28"/>
         <image name="reel-chevron" width="13" height="24"/>
         <image name="reel-plane" width="33" height="28"/>
-        <image name="reel-plus" width="28" height="28"/>
         <image name="top-back" width="13" height="24"/>
         <image name="top-camera-flip" width="33" height="20"/>
         <image name="top-check" width="28" height="25"/>
@@ -500,6 +500,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="syO-ma-gJs"/>
+        <segue reference="kxD-Xf-CIi"/>
     </inferredMetricsTieBreakers>
 </document>
