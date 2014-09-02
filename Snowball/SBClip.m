@@ -9,6 +9,7 @@
 #import "SBAPIManager.h"
 #import "SBClip.h"
 #import "SBReel.h"
+#import "SBUser.h"
 
 @implementation SBClip
 
@@ -63,7 +64,20 @@
     } else {
         // reel does not exist on server, nesting it so that it is created
         path = [NSString stringWithFormat:@"clips"];
-        // parameters = @{ @"clip": @{ @"reel_attributes": @{ @"name": @"Reel" } } };
+        NSMutableDictionary *reelParameters = [@{} mutableCopy];
+        if (self.reel.name) {
+            reelParameters[@"name"] = self.reel.name;
+        } else {
+            reelParameters[@"name"] = @"";
+        }
+        if ([self.reel.participants count] > 0) {
+            NSMutableArray *participantIDs = [@[] mutableCopy];
+            for (SBUser *participant in self.reel.participants) {
+                [participantIDs addObject:participant.remoteID];
+            }
+            reelParameters[@"participant_ids"] = [participantIDs copy];;
+        }
+        parameters = @{ @"clip": @{ @"reel_attributes": reelParameters } };
     }
     [[SBAPIManager sharedManager] POST:path
                             parameters:parameters

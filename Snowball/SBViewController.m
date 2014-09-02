@@ -43,8 +43,10 @@
 // If the child VC is a table view controller, these methods will be used
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     if ([view isKindOfClass:[UITableViewHeaderFooterView class]]) {
-        UITableViewHeaderFooterView *headerView = (UITableViewHeaderFooterView *)view;
-        [headerView.textLabel setTextColor:self.navigationController.navigationBar.barTintColor];
+        if (self.navigationController.navigationBar.barTintColor) {
+            UITableViewHeaderFooterView *headerView = (UITableViewHeaderFooterView *)view;
+            [headerView.textLabel setTextColor:self.navigationController.navigationBar.barTintColor];
+        }
     }
 }
 

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
-#import "SBViewController.h"
+#import "SBFollowingViewController.h"
 
-@interface SBCreateReelViewController : SBViewController
+@interface SBCreateReelViewController : SBFollowingViewController
 
 @property (nonatomic, strong) NSURL *initialRecordingURL;
 

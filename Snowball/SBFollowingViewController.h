@@ -8,12 +8,12 @@
 
 #import "SBManagedTableViewController.h"
 
-@class SBUserTableViewCell;
+@class SBTableViewCell;
 
 @interface SBFollowingViewController : SBManagedTableViewController
 
 // For subclasses, such as SBEditParticipantsViewController
 
-- (void)configureCell:(SBUserTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)configureCell:(SBTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 @end

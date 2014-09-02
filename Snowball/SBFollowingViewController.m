@@ -37,7 +37,7 @@
     return cell;
 }
 
-- (void)configureCell:(SBUserTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(SBTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     REQUIRE_SUBCLASS
 }
 
