@@ -88,6 +88,13 @@
                                          mimeType:@"video/mp4"];
              } success:^(NSURLSessionDataTask *task, id responseObject) {
                  NSDictionary *_clip = responseObject[@"clip"];
+                 if (self.reel.remoteID == nil) {
+                     // New reel just created, import reel ID to prevent duplicates showing up
+                     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                         SBReel *reel = [self.reel MR_inContext:localContext];
+                         [reel setRemoteID:_clip[@"reel_id"]];
+                     }];
+                 }
                  [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                      SBClip *clip = [SBClip MR_importFromObject:_clip inContext:localContext];
                      [clip.reel setLastClipCreatedAt:clip.createdAt];
