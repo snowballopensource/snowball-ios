@@ -38,6 +38,7 @@ static SBUser *_currentUser = nil;
     if (_currentUser) return _currentUser;
     SBUser *user = [SBUser MR_findFirstByAttribute:@"remoteID" withValue:[self currentUserRemoteID]];
     if ([self currentUserAuthToken] && user) {
+        _currentUser = user;
         return user;
     } else {
         [self setCurrentUser:nil];
@@ -59,8 +60,7 @@ static SBUser *_currentUser = nil;
     }
 
     [[NSUserDefaults standardUserDefaults] synchronize];
-    _currentUser = currentUser;
-    
+
     [[SBAPIManager sharedManager] loadAuthToken];
 }
 
