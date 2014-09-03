@@ -96,6 +96,10 @@
                      }];
                  }
                  [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                     SBClip *clip = [self MR_inContext:localContext];
+                     [clip setRemoteID:_clip[@"id"]];
+                 }];
+                 [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                      SBClip *clip = [SBClip MR_importFromObject:_clip inContext:localContext];
                      [clip.reel setLastClipCreatedAt:clip.createdAt];
                  }];
