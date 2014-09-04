@@ -9,6 +9,7 @@
 #import "SBAnalyticsManager.h"
 
 typedef NS_ENUM(NSInteger, SBAnalyticsEvent) {
+    SBAnalyticsEventAppLaunched,
     SBAnalyticsEventClipCreated
 };
 
@@ -44,12 +45,20 @@ typedef NS_ENUM(NSInteger, SBAnalyticsEvent) {
 
 #pragma mark - Events
 
++ (void)sendAppLaunchedEventWithLaunchOptions:(NSDictionary *)launchOptions {
+    NSDictionary *properties = nil;
+    if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
+        properties = @{@"Source": @"Push Notification"};
+    }
+    [self sendEvent:SBAnalyticsEventAppLaunched properties:properties];
+}
+
 + (void)sendClipCreatedEventWithReelID:(NSString *)reelID {
+    NSMutableDictionary *properties = [NSMutableDictionary dictionary];
     NSString *source = [self clipSource];
-    unless (source) source = @"";
-    unless (reelID) reelID = @"";
-    [self sendEvent:SBAnalyticsEventClipCreated properties:@{@"source": source,
-                                                             @"reel_id": reelID}];
+    if (source) properties[@"Source"] = source;
+    if (reelID) properties[@"Reel ID"] = reelID;
+    [self sendEvent:SBAnalyticsEventClipCreated properties:[properties copy]];
 }
 
 #pragma mark - Private
@@ -57,14 +66,20 @@ typedef NS_ENUM(NSInteger, SBAnalyticsEvent) {
 + (void)sendEvent:(SBAnalyticsEvent)event properties:(NSDictionary *)properties {
     NSString *eventName = @"";
     switch (event) {
+        case SBAnalyticsEventAppLaunched:
+            eventName = @"App Launched";
+            break;
         case SBAnalyticsEventClipCreated:
-            eventName = @"clip created";
+            eventName = @"Clip Created";
             break;
         default:
             break;
     }
     NSAssert(eventName, @"SBAnalyticsEvent must be mapped to a string.");
-    NSLog(@"TODO: send event: %@ %@", eventName, properties);
+    NSLog(@"EVENT: %@, %@", eventName, properties);
+#ifndef DEBUG
+    // TODO: send event
+#endif
 }
 
 @end

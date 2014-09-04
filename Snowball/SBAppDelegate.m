@@ -19,6 +19,8 @@
     [SBPushNotificationManager setup];
     [SBAnalyticsManager start];
     [self setupAppearance];
+
+    [SBAnalyticsManager sendAppLaunchedEventWithLaunchOptions:launchOptions];
     return YES;
 }
 

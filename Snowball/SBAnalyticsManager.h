@@ -13,6 +13,7 @@
 
 + (void)start;
 
++ (void)sendAppLaunchedEventWithLaunchOptions:(NSDictionary *)launchOptions;
 + (void)setClipSourceFromCameraPosition:(AVCaptureDevicePosition)position;
 
 + (void)sendClipCreatedEventWithReelID:(NSString *)reelID;
