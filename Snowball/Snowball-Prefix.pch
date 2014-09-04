@@ -29,6 +29,8 @@
 #import "UIViewController+Spinner.h"
 #import "UIViewController+StatusBar.h"
 
+#import "SBAnalyticsManager.h"
+
 #import <AVFoundation/AVFoundation.h>
 
 #import <AFNetworking/AFNetworking.h>

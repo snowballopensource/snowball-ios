@@ -7,9 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVCaptureDevice.h>
 
 @interface SBAnalyticsManager : NSObject
 
 + (void)start;
+
++ (void)setClipSourceFromCameraPosition:(AVCaptureDevicePosition)position;
+
++ (void)sendClipCreatedEventWithReelID:(NSString *)reelID;
 
 @end

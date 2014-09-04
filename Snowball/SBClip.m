@@ -87,6 +87,8 @@
                                          fileName:@"video.mp4"
                                          mimeType:@"video/mp4"];
              } success:^(NSURLSessionDataTask *task, id responseObject) {
+                 [SBAnalyticsManager sendClipCreatedEventWithReelID:self.reel.remoteID];
+
                  NSDictionary *_clip = responseObject[@"clip"];
                  if (self.reel.remoteID == nil) {
                      // New reel just created, import reel ID to prevent duplicates showing up

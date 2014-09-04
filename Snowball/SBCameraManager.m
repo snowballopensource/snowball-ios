@@ -233,7 +233,7 @@
         
         // Turning OFF flash for video recording
         [SBCameraManager setFlashMode:AVCaptureFlashModeOff forDevice:[[self videoDeviceInput] device]];
-    
+
         [self turnOffAutoFocusAndAutoExposure];
         
         // Start recording to a temporary file.
@@ -251,6 +251,8 @@
         [[self movieFileOutput] stopRecording];
         [self turnOnAutoFocusAndAutoExposure];
     });
+
+    [SBAnalyticsManager setClipSourceFromCameraPosition:self.videoDeviceInput.device.position];
 }
 
 - (BOOL)isRecording {
