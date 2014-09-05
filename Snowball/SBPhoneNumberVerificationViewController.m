@@ -8,6 +8,7 @@
 
 #import "SBAuthenticationNavigationController.h"
 #import "SBEditProfileViewController.h"
+#import "SBFindFriendsViewController.h"
 #import "SBPhoneNumberVerificationViewController.h"
 
 @interface SBPhoneNumberVerificationViewController ()
@@ -17,15 +18,17 @@
 @implementation SBPhoneNumberVerificationViewController
 
 - (IBAction)verify:(id)sender {
-    [self.navigationController.viewControllers each:^(UIViewController *viewController) {
-        if ([viewController isKindOfClass:[SBEditProfileViewController class]]) {
-            [self.navigationController popToViewController:viewController animated:YES];
-            return;
-        }
-    }];
-    // Didn't pop, so should be in authentication nc flow
     if ([self.navigationController isKindOfClass:[SBAuthenticationNavigationController class]]) {
-        [(SBAuthenticationNavigationController *)self.navigationController dismiss];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"People" bundle:nil];
+        SBFindFriendsViewController *vc = [storyboard instantiateViewControllerWithIdentifier:[SBFindFriendsViewController identifier]];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        [self.navigationController.viewControllers each:^(UIViewController *viewController) {
+            if ([viewController isKindOfClass:[SBEditProfileViewController class]]) {
+                [self.navigationController popToViewController:viewController animated:YES];
+                return;
+            }
+        }];
     }
 }
 

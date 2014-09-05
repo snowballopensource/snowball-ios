@@ -7,6 +7,7 @@
 //
 
 #import "SBAddressBookManager.h"
+#import "SBAuthenticationNavigationController.h"
 #import "SBFindFriendsViewController.h"
 #import "SBUser.h"
 #import "SBUserTableViewCell.h"
@@ -16,6 +17,7 @@
 @property (nonatomic, strong) NSArray *users;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UIButton *doneButton;
 
 @end
 
@@ -25,6 +27,8 @@
     [super viewDidLoad];
 
     [SBUserTableViewCell registerNibToTableView:self.tableView];
+
+    [self.doneButton setHidden:YES];
 
     if ([SBAddressBookManager authorized]) {
         [self showSpinner];
@@ -84,6 +88,12 @@
     [self getContactsFromAddressBook];
 }
 
+- (IBAction)done:(id)sender {
+    if ([self.navigationController isKindOfClass:[SBAuthenticationNavigationController class]]) {
+        [(SBAuthenticationNavigationController *)self.navigationController dismiss];
+    }
+}
+
 #pragma mark - Private
 
 - (void)getContactsFromAddressBook {
@@ -95,7 +105,7 @@
                                         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"following == FALSE"];
                                         [self setUsers:[users filteredArrayUsingPredicate:predicate]];
                                         [self hideSpinner];
-                                        [self showTableView];
+                                        [self showContacts];
                                     } failure:^(NSError *error) {
                                         [self hideSpinner];
                                         [error displayInView:self.view];
@@ -106,9 +116,13 @@
     }];
 }
 
-- (void)showTableView {
+- (void)showContacts {
     [self.tableView setHidden:NO];
     [self.tableView reloadData];
+    
+    if ([self.navigationController isKindOfClass:[SBAuthenticationNavigationController class]]) {
+        [self.doneButton setHidden:NO];
+    }
 }
 
 @end
