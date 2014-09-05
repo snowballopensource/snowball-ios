@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A314h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="LdU-hE-2hh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A329f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="LdU-hE-2hh">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -236,11 +236,50 @@
                         <outlet property="nameTextField" destination="d4i-uM-GbA" id="W6C-wP-z6w"/>
                         <outlet property="passwordTextField" destination="qCM-EE-KUn" id="NyD-gX-Nhm"/>
                         <outlet property="usernameTextField" destination="ABW-hl-0Qe" id="dBb-pT-F8K"/>
+                        <segue destination="8Cb-SP-2Mb" kind="push" identifier="SBWelcomeViewController" id="5ag-42-nDp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ob-lc-rxe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="878" y="825"/>
+        </scene>
+        <!--Welcome View Controller-->
+        <scene sceneID="sCi-J6-l20">
+            <objects>
+                <viewController id="8Cb-SP-2Mb" customClass="SBWelcomeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qtP-PX-ayV"/>
+                        <viewControllerLayoutGuide type="bottom" id="Pix-sy-77p"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3Zb-U8-GkX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hi there." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byj-Mi-MsL">
+                                <rect key="frame" x="128" y="109" width="65" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KSI-Cb-l5j">
+                                <rect key="frame" x="129" y="399" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Continue">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="continueOnboarding:" destination="8Cb-SP-2Mb" eventType="touchUpInside" id="Nv3-tP-Vyn"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="cbN-XC-pAd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5bb-b1-8d8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1368" y="825"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="1tK-JY-gNx">

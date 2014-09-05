@@ -26,6 +26,7 @@
 		BA130F6F19B64DF1000DC968 /* SBTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA130F6E19B64DF1000DC968 /* SBTextFieldTableViewCell.xib */; };
 		BA15B9E5192AC9EF00453F8F /* UIViewController+StatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BA15B9E4192AC9EF00453F8F /* UIViewController+StatusBar.m */; };
 		BA1DB1C519864F8D0078609B /* NSDate+TimeAgoString.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1DB1C419864F8D0078609B /* NSDate+TimeAgoString.m */; };
+		BA1F822E19B937140086CD91 /* SBWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1F822D19B937140086CD91 /* SBWelcomeViewController.m */; };
 		BA217C9A192A4DF500F04D03 /* SBLongRunningTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA217C99192A4DF500F04D03 /* SBLongRunningTaskManager.m */; };
 		BA29C7EC192FD9C900F59684 /* SBPushNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA29C7EB192FD9C900F59684 /* SBPushNotificationManager.m */; };
 		BA29C7EE192FDAE400F59684 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA29C7ED192FDAE400F59684 /* AirshipConfig.plist */; };
@@ -139,6 +140,8 @@
 		BA15B9E4192AC9EF00453F8F /* UIViewController+StatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+StatusBar.m"; sourceTree = "<group>"; };
 		BA1DB1C319864F8D0078609B /* NSDate+TimeAgoString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgoString.h"; sourceTree = "<group>"; };
 		BA1DB1C419864F8D0078609B /* NSDate+TimeAgoString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeAgoString.m"; sourceTree = "<group>"; };
+		BA1F822C19B937140086CD91 /* SBWelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBWelcomeViewController.h; sourceTree = "<group>"; };
+		BA1F822D19B937140086CD91 /* SBWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBWelcomeViewController.m; sourceTree = "<group>"; };
 		BA217C98192A4DF500F04D03 /* SBLongRunningTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBLongRunningTaskManager.h; sourceTree = "<group>"; };
 		BA217C99192A4DF500F04D03 /* SBLongRunningTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBLongRunningTaskManager.m; sourceTree = "<group>"; };
 		BA29C7EA192FD9C900F59684 /* SBPushNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBPushNotificationManager.h; sourceTree = "<group>"; };
@@ -574,6 +577,8 @@
 				BAC9FB3F19241536008742EE /* SBSignInViewController.m */,
 				BAEC7C0E193DE528003FAE13 /* SBWebViewController.h */,
 				BAEC7C0F193DE528003FAE13 /* SBWebViewController.m */,
+				BA1F822C19B937140086CD91 /* SBWelcomeViewController.h */,
+				BA1F822D19B937140086CD91 /* SBWelcomeViewController.m */,
 			);
 			name = Authentication;
 			sourceTree = "<group>";
@@ -796,6 +801,7 @@
 				BAE89609193F6E6600E96E6B /* SBCameraViewController.m in Sources */,
 				BA98D0021936B85200753E1B /* SBCameraManager.m in Sources */,
 				BA8E995519539A9200DCECD9 /* SBUserTableViewCell.m in Sources */,
+				BA1F822E19B937140086CD91 /* SBWelcomeViewController.m in Sources */,
 				BADB9AB81958B52D00AB8C5C /* SBParticipantsViewController.m in Sources */,
 				BA9370001923153100D3CAFB /* _SBReel.m in Sources */,
 				BA632029195CED8500BA6B75 /* SBEditParticipantsViewController.m in Sources */,

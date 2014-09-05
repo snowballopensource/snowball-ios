@@ -9,6 +9,7 @@
 #import "SBAuthenticationNavigationController.h"
 #import "SBSignUpViewController.h"
 #import "SBUser.h"
+#import "SBWelcomeViewController.h"
 
 @interface SBSignUpViewController ()
 
@@ -54,7 +55,7 @@
                   password:self.passwordTextField.text
                    success:^{
                        [self hideSpinner];
-                       [(SBAuthenticationNavigationController *)self.navigationController dismiss];
+                       [self performSegueWithIdentifier:[SBWelcomeViewController identifier] sender:self];
                    }
                    failure:^(NSError *error) {
                        [self hideSpinner];
