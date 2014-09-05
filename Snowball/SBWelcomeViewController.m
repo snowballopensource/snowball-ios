@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
-#import "SBAuthenticationNavigationController.h"
+#import "SBNewPhoneNumberViewController.h"
 #import "SBWelcomeViewController.h"
 
 @interface SBWelcomeViewController ()
@@ -16,7 +16,9 @@
 @implementation SBWelcomeViewController
 
 - (IBAction)continueOnboarding:(id)sender {
-    [(SBAuthenticationNavigationController *)self.navigationController dismiss];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"People" bundle:nil];
+    SBNewPhoneNumberViewController *vc = [storyboard instantiateViewControllerWithIdentifier:[SBNewPhoneNumberViewController identifier]];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

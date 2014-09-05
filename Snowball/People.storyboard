@@ -157,7 +157,7 @@
         <!--New Phone Number View Controller - Phone Number-->
         <scene sceneID="13I-43-bdf">
             <objects>
-                <viewController id="hba-ur-YXc" customClass="SBNewPhoneNumberViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SBNewPhoneNumberViewController" id="hba-ur-YXc" customClass="SBNewPhoneNumberViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2br-9l-bua"/>
                         <viewControllerLayoutGuide type="bottom" id="HSh-tb-PgW"/>
