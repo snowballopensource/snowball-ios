@@ -27,6 +27,8 @@
 		BA15B9E5192AC9EF00453F8F /* UIViewController+StatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BA15B9E4192AC9EF00453F8F /* UIViewController+StatusBar.m */; };
 		BA1DB1C519864F8D0078609B /* NSDate+TimeAgoString.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1DB1C419864F8D0078609B /* NSDate+TimeAgoString.m */; };
 		BA1F822E19B937140086CD91 /* SBWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1F822D19B937140086CD91 /* SBWelcomeViewController.m */; };
+		BA1F823119B93CD60086CD91 /* SBNewPhoneNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1F823019B93CD60086CD91 /* SBNewPhoneNumberViewController.m */; };
+		BA1F823419B93CEA0086CD91 /* SBPhoneNumberVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1F823319B93CEA0086CD91 /* SBPhoneNumberVerificationViewController.m */; };
 		BA217C9A192A4DF500F04D03 /* SBLongRunningTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA217C99192A4DF500F04D03 /* SBLongRunningTaskManager.m */; };
 		BA29C7EC192FD9C900F59684 /* SBPushNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA29C7EB192FD9C900F59684 /* SBPushNotificationManager.m */; };
 		BA29C7EE192FDAE400F59684 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA29C7ED192FDAE400F59684 /* AirshipConfig.plist */; };
@@ -142,6 +144,10 @@
 		BA1DB1C419864F8D0078609B /* NSDate+TimeAgoString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeAgoString.m"; sourceTree = "<group>"; };
 		BA1F822C19B937140086CD91 /* SBWelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBWelcomeViewController.h; sourceTree = "<group>"; };
 		BA1F822D19B937140086CD91 /* SBWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBWelcomeViewController.m; sourceTree = "<group>"; };
+		BA1F822F19B93CD60086CD91 /* SBNewPhoneNumberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBNewPhoneNumberViewController.h; sourceTree = "<group>"; };
+		BA1F823019B93CD60086CD91 /* SBNewPhoneNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBNewPhoneNumberViewController.m; sourceTree = "<group>"; };
+		BA1F823219B93CEA0086CD91 /* SBPhoneNumberVerificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBPhoneNumberVerificationViewController.h; sourceTree = "<group>"; };
+		BA1F823319B93CEA0086CD91 /* SBPhoneNumberVerificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBPhoneNumberVerificationViewController.m; sourceTree = "<group>"; };
 		BA217C98192A4DF500F04D03 /* SBLongRunningTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBLongRunningTaskManager.h; sourceTree = "<group>"; };
 		BA217C99192A4DF500F04D03 /* SBLongRunningTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBLongRunningTaskManager.m; sourceTree = "<group>"; };
 		BA29C7EA192FD9C900F59684 /* SBPushNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBPushNotificationManager.h; sourceTree = "<group>"; };
@@ -608,6 +614,10 @@
 			children = (
 				BAB0A72D1962024D00BF5C92 /* SBEditProfileViewController.h */,
 				BAB0A72E1962024D00BF5C92 /* SBEditProfileViewController.m */,
+				BA1F822F19B93CD60086CD91 /* SBNewPhoneNumberViewController.h */,
+				BA1F823019B93CD60086CD91 /* SBNewPhoneNumberViewController.m */,
+				BA1F823219B93CEA0086CD91 /* SBPhoneNumberVerificationViewController.h */,
+				BA1F823319B93CEA0086CD91 /* SBPhoneNumberVerificationViewController.m */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -816,6 +826,7 @@
 				BAC9FB471924183E008742EE /* _SBUser.m in Sources */,
 				BA048DEE191AF6730083B0DC /* main.m in Sources */,
 				BAC9FB4B19241858008742EE /* SBUser.m in Sources */,
+				BA1F823119B93CD60086CD91 /* SBNewPhoneNumberViewController.m in Sources */,
 				BA8E995D1953A76300DCECD9 /* NSString+Initials.m in Sources */,
 				BA63202C195CEE4B00BA6B75 /* SBFollowingViewController.m in Sources */,
 				BA048E20191AF9A70083B0DC /* Snowball.xcdatamodeld in Sources */,
@@ -829,6 +840,7 @@
 				BAA19C4A1946945C0034D439 /* UILabel+CustomFont.m in Sources */,
 				BA048DF8191AF6730083B0DC /* SBViewController.m in Sources */,
 				BA29C7EC192FD9C900F59684 /* SBPushNotificationManager.m in Sources */,
+				BA1F823419B93CEA0086CD91 /* SBPhoneNumberVerificationViewController.m in Sources */,
 				BAD86C2F193553BC0046EE22 /* SBFacebookManager.m in Sources */,
 				BAC9FB3A192413C6008742EE /* SBAuthenticationMenuViewController.m in Sources */,
 				BAEC7C10193DE528003FAE13 /* SBWebViewController.m in Sources */,

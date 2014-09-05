@@ -20,7 +20,7 @@
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r0y-kW-2u1" customClass="SBUserImageView">
                                     <rect key="frame" x="123" y="22" width="75" height="75"/>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUW-x2-pV5">
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUW-x2-pV5">
                                     <rect key="frame" x="169" y="7" width="44" height="44"/>
                                     <state key="normal" image="profile-photo-edit">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -103,13 +103,17 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profile-phone" translatesAutoresizingMaskIntoConstraints="NO" id="Z0S-0o-Dxv">
                                                     <rect key="frame" x="20" y="19" width="24" height="28"/>
                                                 </imageView>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="phone number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SD6-df-4gT">
-                                                    <rect key="frame" x="55" y="0.0" width="245" height="65"/>
+                                                <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Euh-PC-jAs">
+                                                    <rect key="frame" x="54" y="22" width="213" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
-                                                </textField>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="hba-ur-YXc" kind="push" id="3FZ-Vs-RRH"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -136,7 +140,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="LcC-xx-Cjn" id="hiC-5P-zxD"/>
                         <outlet property="nameTextField" destination="cZy-io-L1g" id="ecX-IC-y1z"/>
-                        <outlet property="phoneTextField" destination="SD6-df-4gT" id="m3P-lG-3Gq"/>
+                        <outlet property="phoneNumberLabel" destination="Euh-PC-jAs" id="a9O-yN-bPq"/>
                         <outlet property="userImageView" destination="r0y-kW-2u1" id="Prz-Dj-IYr"/>
                         <outlet property="usernameTextField" destination="sJw-NO-PvR" id="rvy-dn-Rk4"/>
                         <outletCollection property="tintableViews" destination="rUW-x2-pV5" id="LUf-mf-p83"/>
@@ -149,6 +153,68 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ugJ-vx-mfh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="60" y="790"/>
+        </scene>
+        <!--New Phone Number View Controller - Phone Number-->
+        <scene sceneID="13I-43-bdf">
+            <objects>
+                <viewController id="hba-ur-YXc" customClass="SBNewPhoneNumberViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2br-9l-bua"/>
+                        <viewControllerLayoutGuide type="bottom" id="HSh-tb-PgW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="U4b-hG-i49">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfP-Bs-F9M">
+                                <rect key="frame" x="141" y="325" width="38" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Verify">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="oh6-sA-HsI" kind="push" id="jsl-p7-AyL"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Phone Number" id="boa-t3-Ini"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UYc-oQ-g5P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="569" y="790"/>
+        </scene>
+        <!--Phone Number Verification View Controller - Verify Phone Number-->
+        <scene sceneID="onS-vV-Y9w">
+            <objects>
+                <viewController id="oh6-sA-HsI" customClass="SBPhoneNumberVerificationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aFV-Bc-dk4"/>
+                        <viewControllerLayoutGuide type="bottom" id="VAz-0y-GCl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xQf-QI-buJ">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="st3-dD-AdD">
+                                <rect key="frame" x="142" y="324" width="37" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="verify:" destination="oh6-sA-HsI" eventType="touchUpInside" id="tXC-jD-yX6"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Verify Phone Number" id="QoS-lV-Ag2"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="brV-yr-yYA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1086" y="790"/>
         </scene>
         <!--Friends View Controller - My Friends-->
         <scene sceneID="91a-5f-4Ir">

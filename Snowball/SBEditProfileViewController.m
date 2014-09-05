@@ -17,7 +17,7 @@
 @property (nonatomic, weak) IBOutlet UITextField *usernameTextField;
 @property (nonatomic, weak) IBOutlet UITextField *nameTextField;
 @property (nonatomic, weak) IBOutlet UITextField *emailTextField;
-@property (nonatomic, weak) IBOutlet UITextField *phoneTextField;
+@property (nonatomic, weak) IBOutlet UILabel *phoneNumberLabel;
 
 @property (nonatomic, strong) IBOutletCollection(UIView) NSArray *tintableViews;
 
@@ -41,7 +41,7 @@
         [self.usernameTextField setText:user.username];
         [self.nameTextField setText:user.name];
         [self.emailTextField setText:user.email];
-        [self.phoneTextField setText:user.phoneNumber];
+        [self.phoneNumberLabel setText:user.phoneNumber];
         [self hideSpinner];
     } failure:^(NSError *error) {
         [self hideSpinner];
@@ -60,7 +60,7 @@
     [self.usernameTextField setTextColor:tintColor];
     [self.nameTextField setTextColor:tintColor];
     [self.emailTextField setTextColor:tintColor];
-    [self.phoneTextField setTextColor:tintColor];
+    [self.phoneNumberLabel setTextColor:tintColor];
 }
 
 #pragma mark - View Actions
@@ -89,7 +89,6 @@
         [user setName:self.nameTextField.text];
         [user setUsername:self.usernameTextField.text];
         [user setEmail:self.emailTextField.text];
-        [user setPhoneNumber:self.phoneTextField.text];
         [user updateWithSuccess:^{
             [self hideSpinner];
             [self.navigationController popViewControllerAnimated:YES];
