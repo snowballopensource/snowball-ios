@@ -15,6 +15,8 @@
 @property (nonatomic, strong) SBReel *reel;
 @property (nonatomic, strong) NSURL *localVideoURL;
 
+@property (nonatomic, copy) void(^playbackEndedBlock)(void);
+
 - (void)pause;
 - (void)play;
 - (void)stop;

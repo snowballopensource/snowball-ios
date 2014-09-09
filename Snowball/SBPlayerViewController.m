@@ -123,9 +123,14 @@
         SBClip *nextClip = self.clips[nextClipIndex];
         [self setCurrentClip:nextClip];
     }
-    if (nextClipIndex == [self.clips count]-1) {
+    BOOL nextClipLastClip = (nextClipIndex == [self.clips count]-1) ? YES : NO;
+    if (nextClipLastClip) {
         // Last clip coming up next
         [self.playerView.player setActionAtItemEnd:AVPlayerActionAtItemEndPause];
+    }
+    BOOL lastClipJustPlayed = (nextClipIndex == [self.clips count]) ? YES : NO;
+    if (lastClipJustPlayed) {
+        if (self.playbackEndedBlock) self.playbackEndedBlock();
     }
 }
 

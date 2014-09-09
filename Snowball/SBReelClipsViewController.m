@@ -51,6 +51,10 @@
         }
         [self.playerViewController setReel:self.reel];
     }
+
+    [self.playerViewController setPlaybackEndedBlock:^{
+        [self back:self];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
