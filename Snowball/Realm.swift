@@ -10,8 +10,7 @@ import Foundation
 
 class Realm: RLMRealm {
   class func saveInBackground(closure: (realm: RLMRealm) -> ()) {
-    let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-    dispatch_async(queue) {
+    Async.userInitiated {
       let realm = RLMRealm.defaultRealm()
       realm.beginWriteTransaction()
       closure(realm: realm)
