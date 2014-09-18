@@ -1,1 +1,0 @@
-mogenerator --template-var arc=true -m Snowball/Snowball.xcdatamodeld/Snowball.xcdatamodel/ --output-dir Snowball --base-class SBManagedObject
