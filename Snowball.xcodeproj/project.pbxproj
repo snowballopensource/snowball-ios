@@ -1,0 +1,524 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BA4E5B3419CAAAAB00DC5ECF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3319CAAAAB00DC5ECF /* User.swift */; };
+		BA4E5B3C19CAAEDE00DC5ECF /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3B19CAAEDE00DC5ECF /* Realm.swift */; };
+		BAFDBC5819CA9DF100D5CD4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDBC5719CA9DF100D5CD4B /* AppDelegate.swift */; };
+		BAFDBC5A19CA9DF100D5CD4B /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDBC5919CA9DF100D5CD4B /* MasterViewController.swift */; };
+		BAFDBC5C19CA9DF100D5CD4B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDBC5B19CA9DF100D5CD4B /* DetailViewController.swift */; };
+		BAFDBC5F19CA9DF100D5CD4B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAFDBC5D19CA9DF100D5CD4B /* Main.storyboard */; };
+		BAFDBC6119CA9DF100D5CD4B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAFDBC6019CA9DF100D5CD4B /* Images.xcassets */; };
+		BAFDBC6419CA9DF100D5CD4B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAFDBC6219CA9DF100D5CD4B /* LaunchScreen.xib */; };
+		BAFDBC7019CA9DF100D5CD4B /* SnowballTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDBC6F19CA9DF100D5CD4B /* SnowballTests.swift */; };
+		EDE5469609554F71A99F63F8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFA09D82E7944A5AF6E9DFE /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BAFDBC6A19CA9DF100D5CD4B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BAFDBC4A19CA9DF100D5CD4B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BAFDBC5119CA9DF100D5CD4B;
+			remoteInfo = Snowball;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2EFA09D82E7944A5AF6E9DFE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3223A00F9C9F4924A8810592 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		BA4E5B3319CAAAAB00DC5ECF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BA4E5B3719CAAC0000DC5ECF /* Snowball-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snowball-Bridging-Header.h"; sourceTree = "<group>"; };
+		BA4E5B3B19CAAEDE00DC5ECF /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
+		BAFDBC5219CA9DF100D5CD4B /* Snowball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snowball.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAFDBC5619CA9DF100D5CD4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BAFDBC5719CA9DF100D5CD4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BAFDBC5919CA9DF100D5CD4B /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		BAFDBC5B19CA9DF100D5CD4B /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		BAFDBC5E19CA9DF100D5CD4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BAFDBC6019CA9DF100D5CD4B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		BAFDBC6319CA9DF100D5CD4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		BAFDBC6919CA9DF100D5CD4B /* SnowballTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnowballTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAFDBC6E19CA9DF100D5CD4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BAFDBC6F19CA9DF100D5CD4B /* SnowballTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowballTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BAFDBC4F19CA9DF100D5CD4B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDE5469609554F71A99F63F8 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BAFDBC6619CA9DF100D5CD4B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3118CCB147D84EAC84715373 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2EFA09D82E7944A5AF6E9DFE /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BA4E5B3519CAAAAF00DC5ECF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BA4E5B3D19CABA0200DC5ECF /* Utility */,
+				BA4E5B3319CAAAAB00DC5ECF /* User.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		BA4E5B3D19CABA0200DC5ECF /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				BA4E5B3B19CAAEDE00DC5ECF /* Realm.swift */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+		BA62C2D119CAA57D00ECC469 /* Apple */ = {
+			isa = PBXGroup;
+			children = (
+				BAFDBC5919CA9DF100D5CD4B /* MasterViewController.swift */,
+				BAFDBC5B19CA9DF100D5CD4B /* DetailViewController.swift */,
+			);
+			name = Apple;
+			sourceTree = "<group>";
+		};
+		BA62C2D219CAA58C00ECC469 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BAFDBC5D19CA9DF100D5CD4B /* Main.storyboard */,
+				BAFDBC6219CA9DF100D5CD4B /* LaunchScreen.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		BAFDBC4919CA9DF100D5CD4B = {
+			isa = PBXGroup;
+			children = (
+				BAFDBC5419CA9DF100D5CD4B /* Snowball */,
+				BAFDBC6C19CA9DF100D5CD4B /* SnowballTests */,
+				BAFDBC5319CA9DF100D5CD4B /* Products */,
+				3223A00F9C9F4924A8810592 /* Pods.xcconfig */,
+				3118CCB147D84EAC84715373 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		BAFDBC5319CA9DF100D5CD4B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BAFDBC5219CA9DF100D5CD4B /* Snowball.app */,
+				BAFDBC6919CA9DF100D5CD4B /* SnowballTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BAFDBC5419CA9DF100D5CD4B /* Snowball */ = {
+			isa = PBXGroup;
+			children = (
+				BAFDBC5719CA9DF100D5CD4B /* AppDelegate.swift */,
+				BA4E5B3519CAAAAF00DC5ECF /* Model */,
+				BA62C2D219CAA58C00ECC469 /* View */,
+				BA62C2D119CAA57D00ECC469 /* Apple */,
+				BAFDBC5519CA9DF100D5CD4B /* Supporting Files */,
+			);
+			path = Snowball;
+			sourceTree = "<group>";
+		};
+		BAFDBC5519CA9DF100D5CD4B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BAFDBC6019CA9DF100D5CD4B /* Images.xcassets */,
+				BAFDBC5619CA9DF100D5CD4B /* Info.plist */,
+				BA4E5B3719CAAC0000DC5ECF /* Snowball-Bridging-Header.h */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BAFDBC6C19CA9DF100D5CD4B /* SnowballTests */ = {
+			isa = PBXGroup;
+			children = (
+				BAFDBC6F19CA9DF100D5CD4B /* SnowballTests.swift */,
+				BAFDBC6D19CA9DF100D5CD4B /* Supporting Files */,
+			);
+			path = SnowballTests;
+			sourceTree = "<group>";
+		};
+		BAFDBC6D19CA9DF100D5CD4B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BAFDBC6E19CA9DF100D5CD4B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BAFDBC5119CA9DF100D5CD4B /* Snowball */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BAFDBC7319CA9DF100D5CD4B /* Build configuration list for PBXNativeTarget "Snowball" */;
+			buildPhases = (
+				032ECD08E77042808A7CB17B /* Check Pods Manifest.lock */,
+				BAFDBC4E19CA9DF100D5CD4B /* Sources */,
+				BAFDBC4F19CA9DF100D5CD4B /* Frameworks */,
+				BAFDBC5019CA9DF100D5CD4B /* Resources */,
+				E969F3D169024EDABEDA8382 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Snowball;
+			productName = Snowball;
+			productReference = BAFDBC5219CA9DF100D5CD4B /* Snowball.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BAFDBC6819CA9DF100D5CD4B /* SnowballTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BAFDBC7619CA9DF100D5CD4B /* Build configuration list for PBXNativeTarget "SnowballTests" */;
+			buildPhases = (
+				BAFDBC6519CA9DF100D5CD4B /* Sources */,
+				BAFDBC6619CA9DF100D5CD4B /* Frameworks */,
+				BAFDBC6719CA9DF100D5CD4B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BAFDBC6B19CA9DF100D5CD4B /* PBXTargetDependency */,
+			);
+			name = SnowballTests;
+			productName = SnowballTests;
+			productReference = BAFDBC6919CA9DF100D5CD4B /* SnowballTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BAFDBC4A19CA9DF100D5CD4B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Snowball, Inc.";
+				TargetAttributes = {
+					BAFDBC5119CA9DF100D5CD4B = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
+					BAFDBC6819CA9DF100D5CD4B = {
+						CreatedOnToolsVersion = 6.0.1;
+						TestTargetID = BAFDBC5119CA9DF100D5CD4B;
+					};
+				};
+			};
+			buildConfigurationList = BAFDBC4D19CA9DF100D5CD4B /* Build configuration list for PBXProject "Snowball" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BAFDBC4919CA9DF100D5CD4B;
+			productRefGroup = BAFDBC5319CA9DF100D5CD4B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BAFDBC5119CA9DF100D5CD4B /* Snowball */,
+				BAFDBC6819CA9DF100D5CD4B /* SnowballTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BAFDBC5019CA9DF100D5CD4B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BAFDBC5F19CA9DF100D5CD4B /* Main.storyboard in Resources */,
+				BAFDBC6419CA9DF100D5CD4B /* LaunchScreen.xib in Resources */,
+				BAFDBC6119CA9DF100D5CD4B /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BAFDBC6719CA9DF100D5CD4B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		032ECD08E77042808A7CB17B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E969F3D169024EDABEDA8382 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BAFDBC4E19CA9DF100D5CD4B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA4E5B3C19CAAEDE00DC5ECF /* Realm.swift in Sources */,
+				BA4E5B3419CAAAAB00DC5ECF /* User.swift in Sources */,
+				BAFDBC5C19CA9DF100D5CD4B /* DetailViewController.swift in Sources */,
+				BAFDBC5A19CA9DF100D5CD4B /* MasterViewController.swift in Sources */,
+				BAFDBC5819CA9DF100D5CD4B /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BAFDBC6519CA9DF100D5CD4B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BAFDBC7019CA9DF100D5CD4B /* SnowballTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BAFDBC6B19CA9DF100D5CD4B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BAFDBC5119CA9DF100D5CD4B /* Snowball */;
+			targetProxy = BAFDBC6A19CA9DF100D5CD4B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BAFDBC5D19CA9DF100D5CD4B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BAFDBC5E19CA9DF100D5CD4B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BAFDBC6219CA9DF100D5CD4B /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BAFDBC6319CA9DF100D5CD4B /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BAFDBC7119CA9DF100D5CD4B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BAFDBC7219CA9DF100D5CD4B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BAFDBC7419CA9DF100D5CD4B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3223A00F9C9F4924A8810592 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = Snowball/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Snowball/Snowball-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BAFDBC7519CA9DF100D5CD4B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3223A00F9C9F4924A8810592 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = Snowball/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Snowball/Snowball-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		BAFDBC7719CA9DF100D5CD4B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SnowballTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Snowball.app/Snowball";
+			};
+			name = Debug;
+		};
+		BAFDBC7819CA9DF100D5CD4B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SnowballTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Snowball.app/Snowball";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BAFDBC4D19CA9DF100D5CD4B /* Build configuration list for PBXProject "Snowball" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BAFDBC7119CA9DF100D5CD4B /* Debug */,
+				BAFDBC7219CA9DF100D5CD4B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BAFDBC7319CA9DF100D5CD4B /* Build configuration list for PBXNativeTarget "Snowball" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BAFDBC7419CA9DF100D5CD4B /* Debug */,
+				BAFDBC7519CA9DF100D5CD4B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BAFDBC7619CA9DF100D5CD4B /* Build configuration list for PBXNativeTarget "SnowballTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BAFDBC7719CA9DF100D5CD4B /* Debug */,
+				BAFDBC7819CA9DF100D5CD4B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BAFDBC4A19CA9DF100D5CD4B /* Project object */;
+}
