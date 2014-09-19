@@ -9,12 +9,14 @@
 import Foundation
 
 class Realm: RLMRealm {
-  class func saveInBackground(closure: (realm: RLMRealm) -> ()) {
+  class func saveInBackground(saveClosure: (realm: RLMRealm) -> (), completionClosure: () -> ()) {
     Async.userInitiated {
       let realm = RLMRealm.defaultRealm()
       realm.beginWriteTransaction()
-      closure(realm: realm)
+      saveClosure(realm: realm)
       realm.commitWriteTransaction()
+    }.main {
+      completionClosure()
     }
   }
 }

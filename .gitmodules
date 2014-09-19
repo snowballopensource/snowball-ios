@@ -1,0 +1,6 @@
+[submodule "Vendor/Alamofire"]
+	path = Vendor/Alamofire
+	url = https://github.com/Alamofire/Alamofire.git
+[submodule "Vendor/Async"]
+	path = Vendor/Async
+	url = https://github.com/duemunk/Async.git

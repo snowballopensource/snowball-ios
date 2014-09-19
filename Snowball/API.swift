@@ -9,4 +9,4 @@
 import Foundation
 
 typealias successClosure = () -> ()
-typealias failureClosure = (NSError) -> ()
+typealias failureClosure = (NSError?) -> ()
