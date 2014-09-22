@@ -131,9 +131,18 @@ class API {
     performRequest(request, importer: importer, completionHandler: completionHandler)
   }
 
-  class func updateCurrentUser(completionHandler: CompletionHandler? = nil) {
-    // TODO: allow real parameters to be passed in
-    let parameters = ["user": ["email": "example@example.com"]]
+  class func updateCurrentUser(username: String? = nil, email: String? = nil, name: String? = nil, completionHandler: CompletionHandler? = nil) {
+    var changes = [String: String]()
+    if let newUsername = username {
+      changes["username"] = newUsername
+    }
+    if let newEmail = email {
+      changes["email"] = newEmail
+    }
+    if let newName = name {
+      changes["name"] = newName
+    }
+    let parameters = ["user": changes]
     let request = AlamofireRequest(.PATCH, snowballURLString("users/me"), parameters: parameters)
     let importer = Importer(type: User.self, JSONImportKey: "user")
     performRequest(request, importer: importer, completionHandler: completionHandler)
