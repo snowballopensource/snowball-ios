@@ -108,7 +108,15 @@ class API {
   }
 
   class func signIn(#email: String, password: String, completionHandler: CompletionHandler?) {
-
+    let parameters = ["user": ["email": email, "password": password]]
+    let request = AlamofireRequest(.POST, snowballURLString("users/sign_in"))
+    let importer = Importer { (dict) in
+      if let authToken = dict["auth_token"] as AnyObject? as? String {
+        // TODO: do something with the auth token
+        println(authToken)
+      }
+    }
+    performRequest(request, importer: importer, completionHandler: completionHandler)
   }
 
   // MARK: User
