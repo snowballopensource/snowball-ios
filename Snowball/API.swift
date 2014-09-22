@@ -25,8 +25,48 @@ class API {
   }
 
   struct Importer {
-    let type: RLMObject.Type
-    let JSONImportKey: String
+    let type: RLMObject.Type?
+    let JSONImportKey: String?
+    typealias ManualImportHandler = ([String: AnyObject]) -> ()
+    let manualImportHandler: ManualImportHandler?
+
+    init(type: RLMObject.Type, JSONImportKey: String) {
+      self.type = type
+      self.JSONImportKey = JSONImportKey
+    }
+
+    init(manualImportHandler: ManualImportHandler) {
+      self.manualImportHandler = manualImportHandler
+    }
+
+    func importJSON(JSON: AnyObject?, completionHandler: CompletionHandler?) {
+      if let dict = JSON as? [String: AnyObject] {
+        if let manualImportHandler = manualImportHandler {
+          manualImportHandler(dict)
+          if let completion = completionHandler { completion(nil) }
+        } else {
+          if let importKey = JSONImportKey {
+            if let importType = type {
+              if let objectDict = dict[importKey] as AnyObject? as? [String: AnyObject] {
+                Realm.saveInBackground({ (realm) in
+                  importType.importFromDictionary(objectDict, inRealm: realm)
+                  return
+                  }, completionHandler: {
+                    if let completion = completionHandler { completion(nil) }
+                })
+              } else if let objectArray = dict[importKey] as AnyObject? as? [AnyObject] {
+                Realm.saveInBackground({ (realm) in
+                  importType.importFromArray(objectArray, inRealm: realm)
+                  return
+                  }, completionHandler: {
+                    if let completion = completionHandler { completion(nil) }
+                })
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   // MARK: Helpers
@@ -42,28 +82,12 @@ class API {
   }
 
   class func handleResponse(#JSON: AnyObject?, requestError: NSError?, importer: Importer, completionHandler: CompletionHandler?) {
-    if let completion = completionHandler {
-      if let error = requestError {
+    if let error = requestError {
+      if let completion = completionHandler {
         completion(error)
-      } else {
-        if let dict = JSON as? [String: AnyObject] {
-          if let objectDict = dict[importer.JSONImportKey] as AnyObject? as? [String: AnyObject] {
-            Realm.saveInBackground({ (realm) in
-              importer.type.importFromDictionary(objectDict, inRealm: realm)
-              return
-              }, completionHandler: {
-                completion(nil)
-            })
-          } else if let objectArray = dict[importer.JSONImportKey] as AnyObject? as? [AnyObject] {
-            Realm.saveInBackground({ (realm) in
-              importer.type.importFromArray(objectArray, inRealm: realm)
-              return
-              }, completionHandler: {
-                completion(nil)
-            })
-          }
-        }
       }
+    } else {
+      importer.importJSON(JSON, completionHandler: completionHandler)
     }
   }
 
@@ -72,7 +96,15 @@ class API {
   // MARK: Authentication
 
   class func signUp(#username: String, email: String, password: String, completionHandler: CompletionHandler?) {
-
+    let parameters = ["user": ["username": username, "email": email, "password": password]]
+    let request = AlamofireRequest(.POST, snowballURLString("users/sign_up"))
+    let importer = Importer { (dict) in
+      if let authToken = dict["auth_token"] as AnyObject? as? String {
+        // TODO: do something with the auth token
+        println(authToken)
+      }
+    }
+    performRequest(request, importer: importer, completionHandler: completionHandler)
   }
 
   class func signIn(#email: String, password: String, completionHandler: CompletionHandler?) {
