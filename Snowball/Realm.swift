@@ -9,14 +9,17 @@
 import Foundation
 
 class Realm: RLMRealm {
-  class func saveInBackground(saveClosure: (realm: RLMRealm) -> (), completionClosure: () -> ()) {
+  typealias SaveHandler = (realm: RLMRealm) -> ()
+  typealias CompletionHandler = () -> ()
+
+  class func saveInBackground(saveHandler: SaveHandler, completionHandler: CompletionHandler?) {
     Async.userInitiated {
       let realm = RLMRealm.defaultRealm()
       realm.beginWriteTransaction()
-      saveClosure(realm: realm)
+      saveHandler(realm: realm)
       realm.commitWriteTransaction()
     }.main {
-      completionClosure()
+      if let completion = completionHandler { completion() }
     }
   }
 }

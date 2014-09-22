@@ -9,8 +9,8 @@
 import Foundation
 
 extension RLMObject {
-  class func findByID(id: String) -> AnyObject? {
-    let objects = objectsWithPredicate(NSPredicate(format: "id == %@", id))
+  class func findByID(id: String, inRealm realm: RLMRealm) -> AnyObject? {
+    let objects = objectsInRealm(realm, withPredicate: NSPredicate(format: "id = %@", id))
     return objects.firstObject()
   }
 
@@ -21,16 +21,17 @@ extension RLMObject {
     return object
   }
 
-  func updateFromDictionary(dictionary: [String: AnyObject]) {}
-
-  class func createOrUpdateFromDictionary(dictionary: [String: AnyObject], inRealm realm: RLMRealm) -> AnyObject? {
-    let id = dictionary["id"] as AnyObject? as? String
-    var object: AnyObject? = findByID(id!)
-    if (object != nil) {
-      object?.updateFromDictionary(dictionary)
-      return object
+  class func importFromDictionary(dictionary: [String: AnyObject], inRealm realm: RLMRealm) -> AnyObject? {
+    if let id = dictionary["id"] as AnyObject? as? String {
+      if var object: AnyObject = findByID(id, inRealm: realm) {
+        object.updateFromDictionary(dictionary)
+        return object
+      } else {
+        return createFromDictionary(dictionary, inRealm: realm)
+      }
     }
-    object = createFromDictionary(dictionary, inRealm: realm)
-    return object
+    return nil
   }
+
+  func updateFromDictionary(dictionary: [String: AnyObject]) {}
 }

@@ -16,13 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   // MARK: - UIApplicationDelegate
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    // Override point for customization after application launch.
-    println(User.allObjects().count)
-    UserAPI.getCurrentUser({ () -> () in
-      println(User.allObjects().count)
-    }, failure: { (error) -> () in
-      println(error)
-    })
     return true
   }
 

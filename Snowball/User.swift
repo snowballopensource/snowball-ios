@@ -8,8 +8,6 @@
 
 import Foundation
 
-import Alamofire
-
 class User: RLMObject {
   dynamic var id = ""
   dynamic var name = ""
@@ -38,50 +36,4 @@ class User: RLMObject {
       self.phoneNumber = phoneNumber
     }
   }
-}
-
-class UserAPI {
-  class func signUp(#username: String, email: String, password: String, success: successClosure?, failure: failureClosure?) {
-  }
-
-  class func signIn(#email: String, password: String, success: successClosure?, failure: failureClosure?) {
-
-  }
-
-  class func getCurrentUser(success: successClosure?, failure: failureClosure?) {
-    Alamofire.request(.GET, "http://private-78d57-snowballapi.apiary-mock.com/api/v1/users/me").responseJSON { (request, response, data, error) in
-      if (error != nil) { failure!(error!); return }
-      if let JSON = data as? [String: AnyObject] {
-        if let _user = JSON["user"] as AnyObject? as? [String: AnyObject] {
-          Realm.saveInBackground({ (realm) in
-            User.createOrUpdateFromDictionary(_user, inRealm: realm)
-            return
-          }, completionClosure: {
-            if (success != nil) { success!(); return }
-          })
-        }
-      }
-    }
-  }
-
-  class func updateCurrentUser(success: successClosure?, failure: failureClosure?) {
-
-  }
-
-  class func getCurrentUserFollowing(success: successClosure?, failure: failureClosure?) {
-
-  }
-
-  class func followUser(user: User, success: successClosure?, failure: failureClosure?) {
-
-  }
-
-  class func unfollowUser(user: User, success: successClosure?, failure: failureClosure?) {
-
-  }
-
-  class func findUsersByPhoneNumbers(phoneNumbers: [String], success: successClosure?, failure: failureClosure?) {
-
-  }
-
 }
