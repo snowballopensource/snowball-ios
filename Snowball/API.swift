@@ -75,13 +75,17 @@ class API {
     return "http://private-78d57-snowballapi.apiary-mock.com/api/v1/" + path
   }
 
-  class func performRequest(request: AlamofireRequest, importer: Importer, completionHandler: CompletionHandler?) {
-    Alamofire.request(request.method, request.URLString, parameters: request.parameters).responseJSON { (request, response, JSON, error) in
+  class func performRequest(request: AlamofireRequest, importer: Importer, completionHandler: CompletionHandler? = nil) {
+    var parameterEncoding = Alamofire.ParameterEncoding.JSON
+    if (request.method == Alamofire.Method.GET) {
+      parameterEncoding = Alamofire.ParameterEncoding.URL
+    }
+    Alamofire.request(request.method, request.URLString, parameters: request.parameters, encoding: parameterEncoding).responseJSON { (request, response, JSON, error) in
       self.handleResponse(JSON: JSON, requestError: error, importer: importer, completionHandler: completionHandler)
     }
   }
 
-  class func handleResponse(#JSON: AnyObject?, requestError: NSError?, importer: Importer, completionHandler: CompletionHandler?) {
+  class func handleResponse(#JSON: AnyObject?, requestError: NSError?, importer: Importer, completionHandler: CompletionHandler? = nil) {
     if let error = requestError {
       if let completion = completionHandler {
         completion(error)
@@ -95,9 +99,9 @@ class API {
 
   // MARK: Authentication
 
-  class func signUp(#username: String, email: String, password: String, completionHandler: CompletionHandler?) {
+  class func signUp(#username: String, email: String, password: String, completionHandler: CompletionHandler? = nil) {
     let parameters = ["user": ["username": username, "email": email, "password": password]]
-    let request = AlamofireRequest(.POST, snowballURLString("users/sign_up"))
+    let request = AlamofireRequest(.POST, snowballURLString("users/sign_up"), parameters: parameters)
     let importer = Importer { (dict) in
       if let authToken = dict["auth_token"] as AnyObject? as? String {
         // TODO: do something with the auth token
@@ -107,9 +111,9 @@ class API {
     performRequest(request, importer: importer, completionHandler: completionHandler)
   }
 
-  class func signIn(#email: String, password: String, completionHandler: CompletionHandler?) {
+  class func signIn(#email: String, password: String, completionHandler: CompletionHandler? = nil) {
     let parameters = ["user": ["email": email, "password": password]]
-    let request = AlamofireRequest(.POST, snowballURLString("users/sign_in"))
+    let request = AlamofireRequest(.POST, snowballURLString("users/sign_in"), parameters: parameters)
     let importer = Importer { (dict) in
       if let authToken = dict["auth_token"] as AnyObject? as? String {
         // TODO: do something with the auth token
@@ -121,32 +125,47 @@ class API {
 
   // MARK: User
 
-  class func getCurrentUser(completionHandler: CompletionHandler?) {
+  class func getCurrentUser(completionHandler: CompletionHandler? = nil) {
     let request = AlamofireRequest(.GET, snowballURLString("users/me"))
     let importer = Importer(type: User.self, JSONImportKey: "user")
     performRequest(request, importer: importer, completionHandler: completionHandler)
   }
 
-  class func updateCurrentUser(completionHandler: CompletionHandler?) {
-
+  class func updateCurrentUser(completionHandler: CompletionHandler? = nil) {
+    // TODO: allow real parameters to be passed in
+    let parameters = ["user": ["email": "example@example.com"]]
+    let request = AlamofireRequest(.PATCH, snowballURLString("users/me"), parameters: parameters)
+    let importer = Importer(type: User.self, JSONImportKey: "user")
+    performRequest(request, importer: importer, completionHandler: completionHandler)
   }
 
-  class func getCurrentUserFollowing(completionHandler: CompletionHandler?) {
+  class func getCurrentUserFollowing(completionHandler: CompletionHandler? = nil) {
     let request = AlamofireRequest(.GET, snowballURLString("users/me/following"))
     let importer = Importer(type: User.self, JSONImportKey: "users")
     performRequest(request, importer: importer, completionHandler: completionHandler)
   }
 
-  class func followUser(user: User, completionHandler: CompletionHandler?) {
-
+  class func followUserID(userID: String, completionHandler: CompletionHandler? = nil) {
+    let request = AlamofireRequest(.POST, snowballURLString("users/\(userID)/follow"))
+    let importer = Importer(type: User.self, JSONImportKey: "user")
+    performRequest(request, importer: importer, completionHandler: completionHandler)
   }
 
-  class func unfollowUser(user: User, completionHandler: CompletionHandler?) {
-
+  class func unfollowUserID(userID: String, completionHandler: CompletionHandler? = nil) {
+    let request = AlamofireRequest(.DELETE, snowballURLString("users/\(userID)/follow"))
+    let importer = Importer(type: User.self, JSONImportKey: "user")
+    performRequest(request, importer: importer, completionHandler: completionHandler)
   }
 
-  class func findUsersByPhoneNumbers(phoneNumbers: [String], completionHandler: CompletionHandler?) {
-
+  class func findUsersByPhoneNumbers(phoneNumbers: [String], completionHandler: CompletionHandler? = nil) {
+    var contacts: [AnyObject] = []
+    for phoneNumber in phoneNumbers {
+      contacts.append(["phone_number": phoneNumber])
+    }
+    let parameters = ["contacts": contacts]
+    let request = AlamofireRequest(.POST, snowballURLString("users/find_by_contacts"), parameters: parameters)
+    let importer = Importer(type: User.self, JSONImportKey: "user")
+    performRequest(request, importer: importer, completionHandler: completionHandler)
   }
   
   // MARK: Reel
