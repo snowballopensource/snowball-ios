@@ -17,6 +17,8 @@ class User: RLMObject {
   dynamic var email = ""
   dynamic var phoneNumber = ""
 
+  // MARK: RLMObject
+
   override func updateFromDictionary(dictionary: [String: AnyObject]) {
     if let id = dictionary["id"] as AnyObject? as? String {
       self.id = id

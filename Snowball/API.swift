@@ -12,7 +12,23 @@ import Foundation
 class API {
   typealias CompletionHandler = (NSError?) -> ()
 
-  struct AlamofireRequest {
+  struct Credential {
+    static let kCurrentUserAuthTokenKey = "CurrentUserAuthToken"
+    static var authToken: String? {
+      get {
+      return NSUserDefaults.standardUserDefaults().objectForKey(kCurrentUserAuthTokenKey) as String?
+      }
+      set {
+        if let authToken = newValue {
+          NSUserDefaults.standardUserDefaults().setObject(authToken, forKey: kCurrentUserAuthTokenKey)
+        } else {
+          NSUserDefaults.standardUserDefaults().removeObjectForKey(kCurrentUserAuthTokenKey)
+        }
+      }
+    }
+  }
+
+  struct Request {
     let method: Alamofire.Method
     let URLString: Alamofire.URLStringConvertible
     let parameters: [String: AnyObject]?
@@ -69,19 +85,28 @@ class API {
     }
   }
 
+  // MARK: -
+
   // MARK: Helpers
 
   class func snowballURLString(path: String) -> String {
     return "http://private-78d57-snowballapi.apiary-mock.com/api/v1/" + path
   }
 
-  class func performRequest(request: AlamofireRequest, importer: Importer, completionHandler: CompletionHandler? = nil) {
+  class func performRequest(request: Request, importer: Importer, completionHandler: CompletionHandler? = nil) {
     var parameterEncoding = Alamofire.ParameterEncoding.JSON
     if (request.method == Alamofire.Method.GET) {
       parameterEncoding = Alamofire.ParameterEncoding.URL
     }
-    Alamofire.request(request.method, request.URLString, parameters: request.parameters, encoding: parameterEncoding).responseJSON { (request, response, JSON, error) in
-      self.handleResponse(JSON: JSON, requestError: error, importer: importer, completionHandler: completionHandler)
+    var authToken = ""
+    if let token = Credential.authToken {
+      authToken = token
+    }
+    Alamofire
+      .request(request.method, request.URLString, parameters: request.parameters, encoding: parameterEncoding)
+      .authenticate(user: authToken, password: "")
+      .responseJSON { (request, response, JSON, error) in
+        self.handleResponse(JSON: JSON, requestError: error, importer: importer, completionHandler: completionHandler)
     }
   }
 
@@ -101,24 +126,18 @@ class API {
 
   class func signUp(#username: String, email: String, password: String, completionHandler: CompletionHandler? = nil) {
     let parameters = ["user": ["username": username, "email": email, "password": password]]
-    let request = AlamofireRequest(.POST, snowballURLString("users/sign_up"), parameters: parameters)
+    let request = Request(.POST, snowballURLString("users/sign_up"), parameters: parameters)
     let importer = Importer { (dict) in
-      if let authToken = dict["auth_token"] as AnyObject? as? String {
-        // TODO: do something with the auth token
-        println(authToken)
-      }
+      Credential.authToken = dict["auth_token"] as AnyObject? as String?
     }
     performRequest(request, importer: importer, completionHandler: completionHandler)
   }
 
   class func signIn(#email: String, password: String, completionHandler: CompletionHandler? = nil) {
     let parameters = ["user": ["email": email, "password": password]]
-    let request = AlamofireRequest(.POST, snowballURLString("users/sign_in"), parameters: parameters)
+    let request = Request(.POST, snowballURLString("users/sign_in"), parameters: parameters)
     let importer = Importer { (dict) in
-      if let authToken = dict["auth_token"] as AnyObject? as? String {
-        // TODO: do something with the auth token
-        println(authToken)
-      }
+      Credential.authToken = dict["auth_token"] as AnyObject? as String?
     }
     performRequest(request, importer: importer, completionHandler: completionHandler)
   }
@@ -126,7 +145,7 @@ class API {
   // MARK: User
 
   class func getCurrentUser(completionHandler: CompletionHandler? = nil) {
-    let request = AlamofireRequest(.GET, snowballURLString("users/me"))
+    let request = Request(.GET, snowballURLString("users/me"))
     let importer = Importer(type: User.self, JSONImportKey: "user")
     performRequest(request, importer: importer, completionHandler: completionHandler)
   }
@@ -143,25 +162,25 @@ class API {
       changes["name"] = newName
     }
     let parameters = ["user": changes]
-    let request = AlamofireRequest(.PATCH, snowballURLString("users/me"), parameters: parameters)
+    let request = Request(.PATCH, snowballURLString("users/me"), parameters: parameters)
     let importer = Importer(type: User.self, JSONImportKey: "user")
     performRequest(request, importer: importer, completionHandler: completionHandler)
   }
 
   class func getCurrentUserFollowing(completionHandler: CompletionHandler? = nil) {
-    let request = AlamofireRequest(.GET, snowballURLString("users/me/following"))
+    let request = Request(.GET, snowballURLString("users/me/following"))
     let importer = Importer(type: User.self, JSONImportKey: "users")
     performRequest(request, importer: importer, completionHandler: completionHandler)
   }
 
   class func followUserID(userID: String, completionHandler: CompletionHandler? = nil) {
-    let request = AlamofireRequest(.POST, snowballURLString("users/\(userID)/follow"))
+    let request = Request(.POST, snowballURLString("users/\(userID)/follow"))
     let importer = Importer(type: User.self, JSONImportKey: "user")
     performRequest(request, importer: importer, completionHandler: completionHandler)
   }
 
   class func unfollowUserID(userID: String, completionHandler: CompletionHandler? = nil) {
-    let request = AlamofireRequest(.DELETE, snowballURLString("users/\(userID)/follow"))
+    let request = Request(.DELETE, snowballURLString("users/\(userID)/follow"))
     let importer = Importer(type: User.self, JSONImportKey: "user")
     performRequest(request, importer: importer, completionHandler: completionHandler)
   }
@@ -172,7 +191,7 @@ class API {
       contacts.append(["phone_number": phoneNumber])
     }
     let parameters = ["contacts": contacts]
-    let request = AlamofireRequest(.POST, snowballURLString("users/find_by_contacts"), parameters: parameters)
+    let request = Request(.POST, snowballURLString("users/find_by_contacts"), parameters: parameters)
     let importer = Importer(type: User.self, JSONImportKey: "user")
     performRequest(request, importer: importer, completionHandler: completionHandler)
   }
