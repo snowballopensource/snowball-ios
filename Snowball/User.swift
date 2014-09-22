@@ -13,6 +13,7 @@ class User: RLMObject {
   dynamic var name = ""
   dynamic var username = ""
   dynamic var avatarURL = ""
+  dynamic var youFollow = false
   dynamic var email = ""
   dynamic var phoneNumber = ""
 
@@ -28,6 +29,9 @@ class User: RLMObject {
     }
     if let avatarURL = dictionary["avatar_url"] as AnyObject? as? String {
       self.avatarURL = avatarURL
+    }
+    if let youFollow = dictionary["you_follow"] as AnyObject? as? Bool {
+      self.youFollow = youFollow
     }
     if let email = dictionary["email"] as AnyObject? as? String {
       self.email = email
