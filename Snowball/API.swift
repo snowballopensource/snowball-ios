@@ -55,7 +55,12 @@ class API {
                 completion(nil)
             })
           } else if let objectArray = dict[importer.JSONImportKey] as AnyObject? as? [AnyObject] {
-            // TODO: import the array
+            Realm.saveInBackground({ (realm) in
+              importer.type.importFromArray(objectArray, inRealm: realm)
+              return
+              }, completionHandler: {
+                completion(nil)
+            })
           }
         }
       }

@@ -33,5 +33,13 @@ extension RLMObject {
     return nil
   }
 
+  class func importFromArray(array: [AnyObject], inRealm realm: RLMRealm) {
+    for object in array {
+      if let dictionary = object as? [String: AnyObject] {
+        importFromDictionary(dictionary, inRealm: realm)
+      }
+    }
+  }
+
   func updateFromDictionary(dictionary: [String: AnyObject]) {}
 }
