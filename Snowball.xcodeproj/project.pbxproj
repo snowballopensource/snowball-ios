@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BA19B71119CAD26600DF56A5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA19B71019CAD26600DF56A5 /* API.swift */; };
+		BA21531F19D1E7D2000EB138 /* TopOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21531E19D1E7D2000EB138 /* TopOptionsView.swift */; };
 		BA4E5B3419CAAAAB00DC5ECF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3319CAAAAB00DC5ECF /* User.swift */; };
 		BA4E5B3C19CAAEDE00DC5ECF /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3B19CAAEDE00DC5ECF /* Realm.swift */; };
 		BA74C10119D1374200393633 /* ReelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74C10019D1374200393633 /* ReelTableViewCell.swift */; };
@@ -43,6 +44,48 @@
 			remoteGlobalIDString = F8111E3E19A95C8B0040E7D1;
 			remoteInfo = AlamofireTests;
 		};
+		BA1B2DFF19D1F5540095042E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA19B71719CB3A9B00DF56A5 /* Alamofire.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
+			remoteInfo = Alamofire;
+		};
+		BA1B2E0A19D200000095042E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA1B2E0319D200000095042E /* Cartography.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 54C96A11195063CD000CDD27;
+			remoteInfo = "Cartography-iOS";
+		};
+		BA1B2E0C19D200000095042E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA1B2E0319D200000095042E /* Cartography.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 54C96A1C195063CD000CDD27;
+			remoteInfo = "Cartography-iOS-Tests";
+		};
+		BA1B2E0E19D200000095042E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA1B2E0319D200000095042E /* Cartography.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 54F6A838195C20C100313D24;
+			remoteInfo = "Cartography-Mac";
+		};
+		BA1B2E1019D200000095042E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA1B2E0319D200000095042E /* Cartography.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 54F6A842195C20C200313D24;
+			remoteInfo = "Cartography-Mac-Tests";
+		};
+		BA1B2E1219D2004A0095042E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA1B2E0319D200000095042E /* Cartography.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 54C96A10195063CD000CDD27;
+			remoteInfo = "Cartography-iOS";
+		};
 		BAFDBC6A19CA9DF100D5CD4B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BAFDBC4A19CA9DF100D5CD4B /* Project object */;
@@ -57,6 +100,8 @@
 		3223A00F9C9F4924A8810592 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		BA19B71019CAD26600DF56A5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BA19B71719CB3A9B00DF56A5 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Vendor/Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
+		BA1B2E0319D200000095042E /* Cartography.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cartography.xcodeproj; path = Vendor/Cartography/Cartography.xcodeproj; sourceTree = SOURCE_ROOT; };
+		BA21531E19D1E7D2000EB138 /* TopOptionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopOptionsView.swift; sourceTree = "<group>"; };
 		BA4E5B3319CAAAAB00DC5ECF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BA4E5B3719CAAC0000DC5ECF /* Snowball-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snowball-Bridging-Header.h"; sourceTree = "<group>"; };
 		BA4E5B3B19CAAEDE00DC5ECF /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
@@ -113,6 +158,7 @@
 			children = (
 				BAAEA10519CBC03F00DB5182 /* Async.swift */,
 				BA19B71719CB3A9B00DF56A5 /* Alamofire.xcodeproj */,
+				BA1B2E0319D200000095042E /* Cartography.xcodeproj */,
 			);
 			name = Vendor;
 			sourceTree = "<group>";
@@ -122,6 +168,17 @@
 			children = (
 				BA19B71D19CB3A9B00DF56A5 /* Alamofire.framework */,
 				BA19B71F19CB3A9B00DF56A5 /* AlamofireTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BA1B2E0419D200000095042E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BA1B2E0B19D200000095042E /* Cartography.framework */,
+				BA1B2E0D19D200000095042E /* Cartography-iOS-Tests.xctest */,
+				BA1B2E0F19D200000095042E /* Cartography.framework */,
+				BA1B2E1119D200000095042E /* Cartography-Mac-Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,6 +209,7 @@
 				BAFDBC6219CA9DF100D5CD4B /* LaunchScreen.xib */,
 				BA74C10819D14A8700393633 /* UITableViewCell.swift */,
 				BA74C10019D1374200393633 /* ReelTableViewCell.swift */,
+				BA21531E19D1E7D2000EB138 /* TopOptionsView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -253,6 +311,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				BA1B2E1319D2004A0095042E /* PBXTargetDependency */,
+				BA1B2E0019D1F5540095042E /* PBXTargetDependency */,
 			);
 			name = Snowball;
 			productName = Snowball;
@@ -311,6 +371,10 @@
 					ProductGroup = BA19B71819CB3A9B00DF56A5 /* Products */;
 					ProjectRef = BA19B71719CB3A9B00DF56A5 /* Alamofire.xcodeproj */;
 				},
+				{
+					ProductGroup = BA1B2E0419D200000095042E /* Products */;
+					ProjectRef = BA1B2E0319D200000095042E /* Cartography.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -333,6 +397,34 @@
 			fileType = wrapper.cfbundle;
 			path = AlamofireTests.xctest;
 			remoteRef = BA19B71E19CB3A9B00DF56A5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BA1B2E0B19D200000095042E /* Cartography.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Cartography.framework;
+			remoteRef = BA1B2E0A19D200000095042E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BA1B2E0D19D200000095042E /* Cartography-iOS-Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Cartography-iOS-Tests.xctest";
+			remoteRef = BA1B2E0C19D200000095042E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BA1B2E0F19D200000095042E /* Cartography.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Cartography.framework;
+			remoteRef = BA1B2E0E19D200000095042E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BA1B2E1119D200000095042E /* Cartography-Mac-Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Cartography-Mac-Tests.xctest";
+			remoteRef = BA1B2E1019D200000095042E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -394,6 +486,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA21531F19D1E7D2000EB138 /* TopOptionsView.swift in Sources */,
 				BAAEA10419CB73D900DB5182 /* RLMObject.swift in Sources */,
 				BAB5F02B19D0FA4800D49796 /* Reel.swift in Sources */,
 				BA4E5B3C19CAAEDE00DC5ECF /* Realm.swift in Sources */,
@@ -423,6 +516,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		BA1B2E0019D1F5540095042E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Alamofire;
+			targetProxy = BA1B2DFF19D1F5540095042E /* PBXContainerItemProxy */;
+		};
+		BA1B2E1319D2004A0095042E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Cartography-iOS";
+			targetProxy = BA1B2E1219D2004A0095042E /* PBXContainerItemProxy */;
+		};
 		BAFDBC6B19CA9DF100D5CD4B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BAFDBC5119CA9DF100D5CD4B /* Snowball */;

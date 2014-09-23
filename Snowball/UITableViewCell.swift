@@ -12,4 +12,8 @@ extension UITableViewCell {
   class var identifier: String {
     return NSStringFromClass(self)
   }
+
+  func configureForObject(object: AnyObject) {
+    requireSubclass()
+  }
 }

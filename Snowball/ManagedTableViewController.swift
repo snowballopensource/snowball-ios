@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ManagedTableViewController: ManagedViewController, UITableViewDataSource {
-  let tableView = UITableView(frame: CGRectZero, style: UITableViewStyle.Plain)
+class ManagedTableViewController: ManagedViewController, UITableViewDataSource, UITableViewDelegate {
+  let tableView = UITableView()
 
   func cellType() -> UITableViewCell.Type {
     requireSubclass()
@@ -29,6 +29,7 @@ class ManagedTableViewController: ManagedViewController, UITableViewDataSource {
     tableView.frame = view.bounds
     view.addSubview(tableView)
     tableView.dataSource = self
+    tableView.delegate = self
   }
 
   // MARK: UITableViewDataSource

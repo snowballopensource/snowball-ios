@@ -4,3 +4,6 @@
 [submodule "Vendor/Async"]
 	path = Vendor/Async
 	url = https://github.com/duemunk/Async.git
+[submodule "Vendor/Cartography"]
+	path = Vendor/Cartography
+	url = https://github.com/robb/Cartography.git
