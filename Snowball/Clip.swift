@@ -14,6 +14,9 @@ class Clip: RLMObject {
   dynamic var videoURL = ""
   dynamic var createdAt = NSDate(timeIntervalSince1970: 0)
 
+  dynamic var user = User()
+  dynamic var reel = Reel()
+
   // MARK: RLMObject
 
   override func updateFromDictionary(dictionary: [String: AnyObject]) {

@@ -17,6 +17,9 @@ class User: RLMObject {
   dynamic var email = ""
   dynamic var phoneNumber = ""
 
+  dynamic var clips = RLMArray(objectClassName: Clip.className())
+  dynamic var reels = RLMArray(objectClassName: Reel.className())
+
   // MARK: RLMObject
 
   override func updateFromDictionary(dictionary: [String: AnyObject]) {

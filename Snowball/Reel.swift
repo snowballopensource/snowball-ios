@@ -13,6 +13,9 @@ class Reel: RLMObject {
   dynamic var title = ""
   dynamic var participantsTitle = ""
 
+  dynamic var clips = RLMArray(objectClassName: Clip.className())
+  dynamic var participants = RLMArray(objectClassName: User.className())
+
   // MARK: RLMObject
 
   override func updateFromDictionary(dictionary: [String: AnyObject]) {
@@ -25,5 +28,8 @@ class Reel: RLMObject {
     if let participantsTitle = dictionary["participants_title"] as AnyObject? as? String {
       self.participantsTitle = participantsTitle
     }
+//    if let lastClipDictionary = dictionary["last_clip"] as AnyObject? as [String: AnyObject]? {
+//      Clip.importFromDictionary(lastClipDictionary, inRealm: self.realm)
+//    }
   }
 }
