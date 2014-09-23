@@ -10,10 +10,17 @@
 		BA19B71119CAD26600DF56A5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA19B71019CAD26600DF56A5 /* API.swift */; };
 		BA4E5B3419CAAAAB00DC5ECF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3319CAAAAB00DC5ECF /* User.swift */; };
 		BA4E5B3C19CAAEDE00DC5ECF /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3B19CAAEDE00DC5ECF /* Realm.swift */; };
+		BA74C10119D1374200393633 /* ReelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74C10019D1374200393633 /* ReelTableViewCell.swift */; };
+		BA74C10319D13B8B00393633 /* ManagedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74C10219D13B8B00393633 /* ManagedViewController.swift */; };
+		BA74C10919D14A8700393633 /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74C10819D14A8700393633 /* UITableViewCell.swift */; };
 		BAAEA10419CB73D900DB5182 /* RLMObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAEA10319CB73D900DB5182 /* RLMObject.swift */; };
 		BAAEA10619CBC03F00DB5182 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAEA10519CBC03F00DB5182 /* Async.swift */; };
 		BAB5F02B19D0FA4800D49796 /* Reel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5F02A19D0FA4800D49796 /* Reel.swift */; };
 		BAB5F02F19D0FA4F00D49796 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5F02E19D0FA4F00D49796 /* Clip.swift */; };
+		BAB5F03519D111F000D49796 /* ReelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5F03419D111F000D49796 /* ReelsViewController.swift */; };
+		BAB5F03819D1140A00D49796 /* ManagedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5F03719D1140A00D49796 /* ManagedTableViewController.swift */; };
+		BAB5F03F19D115DE00D49796 /* NSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5F03E19D115DE00D49796 /* NSError.swift */; };
+		BAB5F04119D118B800D49796 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5F04019D118B800D49796 /* Util.swift */; };
 		BAFDBC5819CA9DF100D5CD4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDBC5719CA9DF100D5CD4B /* AppDelegate.swift */; };
 		BAFDBC5A19CA9DF100D5CD4B /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDBC5919CA9DF100D5CD4B /* MasterViewController.swift */; };
 		BAFDBC5C19CA9DF100D5CD4B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDBC5B19CA9DF100D5CD4B /* DetailViewController.swift */; };
@@ -56,10 +63,17 @@
 		BA4E5B3319CAAAAB00DC5ECF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BA4E5B3719CAAC0000DC5ECF /* Snowball-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snowball-Bridging-Header.h"; sourceTree = "<group>"; };
 		BA4E5B3B19CAAEDE00DC5ECF /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
+		BA74C10019D1374200393633 /* ReelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReelTableViewCell.swift; sourceTree = "<group>"; };
+		BA74C10219D13B8B00393633 /* ManagedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedViewController.swift; sourceTree = "<group>"; };
+		BA74C10819D14A8700393633 /* UITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		BAAEA10319CB73D900DB5182 /* RLMObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMObject.swift; sourceTree = "<group>"; };
 		BAAEA10519CBC03F00DB5182 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Async.swift; path = Vendor/Async/Async.swift; sourceTree = SOURCE_ROOT; };
 		BAB5F02A19D0FA4800D49796 /* Reel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reel.swift; sourceTree = "<group>"; };
 		BAB5F02E19D0FA4F00D49796 /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
+		BAB5F03419D111F000D49796 /* ReelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReelsViewController.swift; sourceTree = "<group>"; };
+		BAB5F03719D1140A00D49796 /* ManagedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedTableViewController.swift; sourceTree = "<group>"; };
+		BAB5F03E19D115DE00D49796 /* NSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSError.swift; sourceTree = "<group>"; };
+		BAB5F04019D118B800D49796 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		BAFDBC5219CA9DF100D5CD4B /* Snowball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snowball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAFDBC5619CA9DF100D5CD4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAFDBC5719CA9DF100D5CD4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +117,7 @@
 		BA19B71619CB3A9000DF56A5 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				BA62C2D119CAA57D00ECC469 /* Apple */,
 				BAAEA10519CBC03F00DB5182 /* Async.swift */,
 				BA19B71719CB3A9B00DF56A5 /* Alamofire.xcodeproj */,
 			);
@@ -121,7 +136,6 @@
 		BA4E5B3519CAAAAF00DC5ECF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BAAEA10319CB73D900DB5182 /* RLMObject.swift */,
 				BA4E5B3319CAAAAB00DC5ECF /* User.swift */,
 				BAB5F02A19D0FA4800D49796 /* Reel.swift */,
 				BAB5F02E19D0FA4F00D49796 /* Clip.swift */,
@@ -134,6 +148,7 @@
 			children = (
 				BA19B71019CAD26600DF56A5 /* API.swift */,
 				BA4E5B3B19CAAEDE00DC5ECF /* Realm.swift */,
+				BAB5F04019D118B800D49796 /* Util.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -152,8 +167,29 @@
 			children = (
 				BAFDBC5D19CA9DF100D5CD4B /* Main.storyboard */,
 				BAFDBC6219CA9DF100D5CD4B /* LaunchScreen.xib */,
+				BA74C10819D14A8700393633 /* UITableViewCell.swift */,
+				BA74C10019D1374200393633 /* ReelTableViewCell.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		BAB5F03619D111F400D49796 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BA74C10219D13B8B00393633 /* ManagedViewController.swift */,
+				BAB5F03719D1140A00D49796 /* ManagedTableViewController.swift */,
+				BAB5F03419D111F000D49796 /* ReelsViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		BAB5F03B19D114D700D49796 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BAAEA10319CB73D900DB5182 /* RLMObject.swift */,
+				BAB5F03E19D115DE00D49796 /* NSError.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		BAFDBC4919CA9DF100D5CD4B = {
@@ -180,9 +216,10 @@
 			isa = PBXGroup;
 			children = (
 				BAFDBC5719CA9DF100D5CD4B /* AppDelegate.swift */,
-				BA4E5B3519CAAAAF00DC5ECF /* Model */,
+				BAB5F03619D111F400D49796 /* View Controllers */,
 				BA62C2D219CAA58C00ECC469 /* View */,
-				BA62C2D119CAA57D00ECC469 /* Apple */,
+				BA4E5B3519CAAAAF00DC5ECF /* Model */,
+				BAB5F03B19D114D700D49796 /* Extensions */,
 				BA4E5B3D19CABA0200DC5ECF /* Utility */,
 				BA19B71619CB3A9000DF56A5 /* Vendor */,
 				BAFDBC5519CA9DF100D5CD4B /* Supporting Files */,
@@ -378,13 +415,20 @@
 				BAAEA10419CB73D900DB5182 /* RLMObject.swift in Sources */,
 				BAB5F02B19D0FA4800D49796 /* Reel.swift in Sources */,
 				BA4E5B3C19CAAEDE00DC5ECF /* Realm.swift in Sources */,
+				BAB5F03519D111F000D49796 /* ReelsViewController.swift in Sources */,
 				BA4E5B3419CAAAAB00DC5ECF /* User.swift in Sources */,
 				BAFDBC5C19CA9DF100D5CD4B /* DetailViewController.swift in Sources */,
 				BAAEA10619CBC03F00DB5182 /* Async.swift in Sources */,
+				BAB5F03819D1140A00D49796 /* ManagedTableViewController.swift in Sources */,
 				BAFDBC5A19CA9DF100D5CD4B /* MasterViewController.swift in Sources */,
+				BAB5F03F19D115DE00D49796 /* NSError.swift in Sources */,
 				BAB5F02F19D0FA4F00D49796 /* Clip.swift in Sources */,
+				BAB5F04119D118B800D49796 /* Util.swift in Sources */,
+				BA74C10319D13B8B00393633 /* ManagedViewController.swift in Sources */,
+				BA74C10119D1374200393633 /* ReelTableViewCell.swift in Sources */,
 				BAFDBC5819CA9DF100D5CD4B /* AppDelegate.swift in Sources */,
 				BA19B71119CAD26600DF56A5 /* API.swift in Sources */,
+				BA74C10919D14A8700393633 /* UITableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
