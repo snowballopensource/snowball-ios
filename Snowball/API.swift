@@ -187,7 +187,7 @@ class API {
   }
 
   class func findUsersByPhoneNumbers(phoneNumbers: [String], completionHandler: CompletionHandler? = nil) {
-    var contacts: [AnyObject] = []
+    var contacts = [AnyObject]()
     for phoneNumber in phoneNumbers {
       contacts.append(["phone_number": phoneNumber])
     }
@@ -198,5 +198,71 @@ class API {
   }
   
   // MARK: Reel
+
+  class func getReelStream(completionHandler: CompletionHandler? = nil) {
+    let request = Request(.GET, snowballURLString("reels/stream"))
+    let importer = Importer(type: Reel.self, JSONImportKey: "reels")
+    performRequest(request, importer: importer, completionHandler: completionHandler)
+  }
+
+  class func createReel(title: String? = nil, participantIDs: [String]? = nil, completionHandler: CompletionHandler? = nil) {
+    var reelParameters = [String: AnyObject]()
+    if let newTitle = title {
+      reelParameters["title"] = newTitle
+    }
+    if let newParticipantIDs = participantIDs {
+      reelParameters["participant_ids"] = newParticipantIDs
+    }
+    let parameters = ["reel": reelParameters]
+    let request = Request(.POST, snowballURLString("reels"), parameters: parameters)
+    let importer = Importer(type: Reel.self, JSONImportKey: "reel")
+    performRequest(request, importer: importer, completionHandler: completionHandler)
+  }
+
+  class func updateReel(#reelID: String, title: String, completionHandler: CompletionHandler? = nil) {
+    var reelParameters = [String: AnyObject]()
+    reelParameters["title"] = title
+    let parameters = ["reel": reelParameters]
+    let request = Request(.PATCH, snowballURLString("reels/\(reelID)"), parameters: parameters)
+    let importer = Importer(type: Reel.self, JSONImportKey: "reel")
+    performRequest(request, importer: importer, completionHandler: completionHandler)
+  }
+
+  class func getReelParticipants(#reelID: String, completionHandler: CompletionHandler? = nil) {
+    let request = Request(.GET, snowballURLString("reels/\(reelID)/participants"))
+    let importer = Importer(type: User.self, JSONImportKey: "users")
+    performRequest(request, importer: importer, completionHandler: completionHandler)
+  }
+
+  class func addParticipantToReel(#reelID: String, userID: String, completionHandler: CompletionHandler? = nil) {
+    let request = Request(.POST, snowballURLString("reels/\(reelID)/participants/\(userID)"))
+    let importer = Importer(type: User.self, JSONImportKey: "user")
+    performRequest(request, importer: importer, completionHandler: completionHandler)
+  }
+
+  class func removeCurrentUserAsParticipantInReel(#reelID: String, completionHandler: CompletionHandler? = nil) {
+    let request = Request(.DELETE, snowballURLString("reels/\(reelID)/participants/me"))
+    let importer = Importer(type: User.self, JSONImportKey: "user")
+    performRequest(request, importer: importer, completionHandler: completionHandler)
+  }
+
   // MARK: Clip
+
+  class func getUnwatchedClipsInReel(#reelID: String, since: NSDate?, completionHandler: CompletionHandler? = nil) {
+    var parameters = [String: AnyObject]()
+    if let sinceDate = since {
+      parameters["since"] = Int(sinceDate.timeIntervalSince1970)
+    }
+    let request = Request(.GET, snowballURLString("reels/\(reelID)/clips"), parameters: parameters)
+    let importer = Importer(type: Clip.self, JSONImportKey: "clips")
+    performRequest(request, importer: importer, completionHandler: completionHandler)
+  }
+
+  class func createClip(#reelID: String, videoData: NSData, completionHandler: CompletionHandler? = nil) {
+    let clipParameters = ["video": NSString(data:videoData, encoding:NSUTF8StringEncoding)]
+    let parameters = ["clip": clipParameters]
+    let request = Request(.POST, snowballURLString("reels/\(reelID)/clips"), parameters: parameters)
+    let importer = Importer(type: Clip.self, JSONImportKey: "clip")
+    performRequest(request, importer: importer, completionHandler: completionHandler)
+  }
 }
