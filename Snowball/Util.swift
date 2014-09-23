@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias CompletionHandler = (NSError?) -> ()
+
 func NSLocalizedString(key: String) -> String {
   return NSLocalizedString(key, comment: "")
 }

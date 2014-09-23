@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BA19B71119CAD26600DF56A5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA19B71019CAD26600DF56A5 /* API.swift */; };
+		BA1B2E2419D215760095042E /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E2319D215760095042E /* UIImageView.swift */; };
 		BA21531F19D1E7D2000EB138 /* TopOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21531E19D1E7D2000EB138 /* TopOptionsView.swift */; };
 		BA4E5B3419CAAAAB00DC5ECF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3319CAAAAB00DC5ECF /* User.swift */; };
 		BA4E5B3C19CAAEDE00DC5ECF /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3B19CAAEDE00DC5ECF /* Realm.swift */; };
@@ -86,6 +87,34 @@
 			remoteGlobalIDString = 54C96A10195063CD000CDD27;
 			remoteInfo = "Cartography-iOS";
 		};
+		BA1B2E1B19D2153E0095042E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA1B2E1419D2153E0095042E /* Haneke.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A095C9561980418C00CD0F4C;
+			remoteInfo = Haneke;
+		};
+		BA1B2E1D19D2153E0095042E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA1B2E1419D2153E0095042E /* Haneke.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A095C9611980418C00CD0F4C;
+			remoteInfo = HanekeTests;
+		};
+		BA1B2E1F19D2153E0095042E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA1B2E1419D2153E0095042E /* Haneke.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A0026E9A19C9BFBC004DE0C6;
+			remoteInfo = HanekeDemo;
+		};
+		BA1B2E2119D215450095042E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA1B2E1419D2153E0095042E /* Haneke.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A095C9551980418C00CD0F4C;
+			remoteInfo = Haneke;
+		};
 		BAFDBC6A19CA9DF100D5CD4B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BAFDBC4A19CA9DF100D5CD4B /* Project object */;
@@ -101,6 +130,8 @@
 		BA19B71019CAD26600DF56A5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BA19B71719CB3A9B00DF56A5 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Vendor/Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
 		BA1B2E0319D200000095042E /* Cartography.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cartography.xcodeproj; path = Vendor/Cartography/Cartography.xcodeproj; sourceTree = SOURCE_ROOT; };
+		BA1B2E1419D2153E0095042E /* Haneke.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Haneke.xcodeproj; path = Vendor/HanekeSwift/Haneke.xcodeproj; sourceTree = SOURCE_ROOT; };
+		BA1B2E2319D215760095042E /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		BA21531E19D1E7D2000EB138 /* TopOptionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopOptionsView.swift; sourceTree = "<group>"; };
 		BA4E5B3319CAAAAB00DC5ECF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BA4E5B3719CAAC0000DC5ECF /* Snowball-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snowball-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -159,6 +190,7 @@
 				BAAEA10519CBC03F00DB5182 /* Async.swift */,
 				BA19B71719CB3A9B00DF56A5 /* Alamofire.xcodeproj */,
 				BA1B2E0319D200000095042E /* Cartography.xcodeproj */,
+				BA1B2E1419D2153E0095042E /* Haneke.xcodeproj */,
 			);
 			name = Vendor;
 			sourceTree = "<group>";
@@ -179,6 +211,16 @@
 				BA1B2E0D19D200000095042E /* Cartography-iOS-Tests.xctest */,
 				BA1B2E0F19D200000095042E /* Cartography.framework */,
 				BA1B2E1119D200000095042E /* Cartography-Mac-Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BA1B2E1519D2153E0095042E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BA1B2E1C19D2153E0095042E /* Haneke.framework */,
+				BA1B2E1E19D2153E0095042E /* HanekeTests.xctest */,
+				BA1B2E2019D2153E0095042E /* HanekeDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -229,6 +271,7 @@
 			children = (
 				BAAEA10319CB73D900DB5182 /* RLMObject.swift */,
 				BAB5F03E19D115DE00D49796 /* NSError.swift */,
+				BA1B2E2319D215760095042E /* UIImageView.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -311,6 +354,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				BA1B2E2219D215450095042E /* PBXTargetDependency */,
 				BA1B2E1319D2004A0095042E /* PBXTargetDependency */,
 				BA1B2E0019D1F5540095042E /* PBXTargetDependency */,
 			);
@@ -375,6 +419,10 @@
 					ProductGroup = BA1B2E0419D200000095042E /* Products */;
 					ProjectRef = BA1B2E0319D200000095042E /* Cartography.xcodeproj */;
 				},
+				{
+					ProductGroup = BA1B2E1519D2153E0095042E /* Products */;
+					ProjectRef = BA1B2E1419D2153E0095042E /* Haneke.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -425,6 +473,27 @@
 			fileType = wrapper.cfbundle;
 			path = "Cartography-Mac-Tests.xctest";
 			remoteRef = BA1B2E1019D200000095042E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BA1B2E1C19D2153E0095042E /* Haneke.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Haneke.framework;
+			remoteRef = BA1B2E1B19D2153E0095042E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BA1B2E1E19D2153E0095042E /* HanekeTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = HanekeTests.xctest;
+			remoteRef = BA1B2E1D19D2153E0095042E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BA1B2E2019D2153E0095042E /* HanekeDemo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = HanekeDemo.app;
+			remoteRef = BA1B2E1F19D2153E0095042E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -501,6 +570,7 @@
 				BA74C10119D1374200393633 /* ReelTableViewCell.swift in Sources */,
 				BAFDBC5819CA9DF100D5CD4B /* AppDelegate.swift in Sources */,
 				BA19B71119CAD26600DF56A5 /* API.swift in Sources */,
+				BA1B2E2419D215760095042E /* UIImageView.swift in Sources */,
 				BA74C10919D14A8700393633 /* UITableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -525,6 +595,11 @@
 			isa = PBXTargetDependency;
 			name = "Cartography-iOS";
 			targetProxy = BA1B2E1219D2004A0095042E /* PBXContainerItemProxy */;
+		};
+		BA1B2E2219D215450095042E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Haneke;
+			targetProxy = BA1B2E2119D215450095042E /* PBXContainerItemProxy */;
 		};
 		BAFDBC6B19CA9DF100D5CD4B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

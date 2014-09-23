@@ -50,6 +50,10 @@ class ReelTableViewCell: UITableViewCell {
     let reel = object as Reel
     titleLabel.text = reel.title
     participantsTitleLabel.text = reel.participantsTitle
+    lastClipThumbnailImageView.image = nil
+    if let lastClip = reel.clips.lastObject() as? Clip {
+      lastClipThumbnailImageView.setImageFromURL(NSURL(string: lastClip.thumbnailURL))
+    }
   }
 
   // MARK: UIView
