@@ -24,6 +24,7 @@ class API {
         } else {
           NSUserDefaults.standardUserDefaults().removeObjectForKey(kCurrentUserAuthTokenKey)
         }
+        NSUserDefaults.standardUserDefaults().synchronize()
       }
     }
   }
