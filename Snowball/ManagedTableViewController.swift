@@ -9,7 +9,7 @@
 import UIKit
 
 class ManagedTableViewController: ManagedViewController, UITableViewDataSource {
-  let tableView: UITableView
+  let tableView = UITableView(frame: CGRectZero, style: UITableViewStyle.Plain)
 
   func cellType() -> UITableViewCell.Type {
     requireSubclass()
@@ -20,23 +20,15 @@ class ManagedTableViewController: ManagedViewController, UITableViewDataSource {
     requireSubclass()
   }
 
+  // MARK: -
+
   // MARK: UIViewController
 
-  override init(nibName: String?, bundle: NSBundle?) {
-    tableView = UITableView(frame: CGRectZero, style: UITableViewStyle.Plain)
-    super.init(nibName: nibName, bundle: bundle)
-    tableView.dataSource = self
-  }
-
-  required init(coder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
-  }
-
-  override func loadView() {
-    super.loadView()
-
+  override func viewDidLoad() {
+    super.viewDidLoad()
     tableView.frame = view.bounds
     view.addSubview(tableView)
+    tableView.dataSource = self
   }
 
   // MARK: UITableViewDataSource

@@ -10,15 +10,13 @@ import UIKit
 
 class ReelsViewController: ManagedTableViewController {
 
+  // MARK: -
+
   // MARK: UIViewController
 
-  override init(nibName: String?, bundle: NSBundle?) {
-    super.init(nibName: nibName, bundle: bundle)
+  override func viewDidLoad() {
+    super.viewDidLoad()
     tableView.registerClass(ReelTableViewCell.self, forCellReuseIdentifier: ReelTableViewCell.identifier)
-  }
-
-  required init(coder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
   }
 
   // MARK: ManagedViewController
