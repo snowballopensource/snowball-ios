@@ -11,6 +11,7 @@
 		BA01CBBD19D34A70004F170D /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBBC19D34A70004F170D /* UIView+.swift */; };
 		BA01CBC119D36E44004F170D /* TopMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBC019D36E44004F170D /* TopMediaView.swift */; };
 		BA01CBC319D37204004F170D /* DisappearingPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBC219D37204004F170D /* DisappearingPlayerView.swift */; };
+		BA01CBEE19D3833B004F170D /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBED19D3833B004F170D /* RLMSupport.swift */; };
 		BA19B71119CAD26600DF56A5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA19B71019CAD26600DF56A5 /* API.swift */; };
 		BA1B2E2419D215760095042E /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E2319D215760095042E /* UIImageView+.swift */; };
 		BA1B2E2819D254430095042E /* CaptureSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E2719D254430095042E /* CaptureSessionController.swift */; };
@@ -158,6 +159,7 @@
 		BA01CBBC19D34A70004F170D /* UIView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		BA01CBC019D36E44004F170D /* TopMediaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopMediaView.swift; sourceTree = "<group>"; };
 		BA01CBC219D37204004F170D /* DisappearingPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisappearingPlayerView.swift; sourceTree = "<group>"; };
+		BA01CBED19D3833B004F170D /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
 		BA19B71019CAD26600DF56A5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BA19B71719CB3A9B00DF56A5 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Vendor/Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
 		BA1B2E0319D200000095042E /* Cartography.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cartography.xcodeproj; path = Vendor/Cartography/Cartography.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -223,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				BAAEA10519CBC03F00DB5182 /* Async.swift */,
+				BA01CBED19D3833B004F170D /* RLMSupport.swift */,
 				BA19B71719CB3A9B00DF56A5 /* Alamofire.xcodeproj */,
 				BA1B2E0319D200000095042E /* Cartography.xcodeproj */,
 				BA1B2E1419D2153E0095042E /* Haneke.xcodeproj */,
@@ -630,6 +633,7 @@
 				BA1B2E2B19D2686A0095042E /* CameraViewController.swift in Sources */,
 				BA1B2E2419D215760095042E /* UIImageView+.swift in Sources */,
 				BA01CBB519D3476F004F170D /* LoopingPlayerView.swift in Sources */,
+				BA01CBEE19D3833B004F170D /* RLMSupport.swift in Sources */,
 				BA74C10919D14A8700393633 /* UITableViewCell+.swift in Sources */,
 				BA01CBBD19D34A70004F170D /* UIView+.swift in Sources */,
 			);
