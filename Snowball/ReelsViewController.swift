@@ -64,6 +64,7 @@ class ReelsViewController: ManagedTableViewController {
 
   override func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
     let reelCell = cell as ReelTableViewCell
+    reelCell.selectionStyle = UITableViewCellSelectionStyle.None
     reelCell.configureForObject(objects().objectAtIndex(UInt(indexPath.row)))
   }
 
@@ -76,9 +77,13 @@ class ReelsViewController: ManagedTableViewController {
   // MARK: UITableViewDelegate
 
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    let reelCell = tableView.cellForRowAtIndexPath(indexPath) as ReelTableViewCell
     let reel = objects().objectAtIndex(UInt(indexPath.row)) as Reel
     let recentClipVideoURL = reel.recentClip()!.videoURL
     let loopingPlayerView = LoopingPlayerView()
+    reelCell.showPlaybackIndicatorView()
+    // TODO: make topView its own class with the camera view and the player view
+    // this will allow for reuse instead of this mess
     topView.addFullViewSubview(loopingPlayerView)
     loopingPlayerView.playVideoURL(NSURL(string: recentClipVideoURL))
   }

@@ -28,6 +28,12 @@ class LoopingPlayerView: PlayerView {
     player.insertItem(duplicatePlayerItem, afterItem: player.items().last as AVPlayerItem)
   }
 
+  // MARK: UIView
+
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+
   // MARK: AVPlayerItem
 
   func playerItemDidReachEnd(notification: NSNotification) {

@@ -14,7 +14,7 @@ class ReelTableViewCell: UITableViewCell {
   private let titleLabel = UILabel()
   private let participantsTitleLabel = UILabel()
   private let recentClipLoopingPlayerView = LoopingPlayerView()
-  private let playbackIndicatorView = UIImageView()
+  private let playbackIndicatorView = UIView()
 
   // Can't use class let yet, so doing a computed property to hold over
   // class let height: CGFloat = UIScreen.mainScreen().bounds.width/2
@@ -22,6 +22,14 @@ class ReelTableViewCell: UITableViewCell {
     get {
       return 65.0
     }
+  }
+
+  func showPlaybackIndicatorView() {
+    playbackIndicatorView.hidden = false
+  }
+
+  func hidePlaybackIndicatorView() {
+    playbackIndicatorView.hidden = true
   }
 
   // MARK: -
@@ -35,7 +43,6 @@ class ReelTableViewCell: UITableViewCell {
     recentClipLoopingPlayerView.backgroundColor = UIColor.darkGrayColor()
     contentView.addSubview(recentClipLoopingPlayerView)
     playbackIndicatorView.backgroundColor = UIColor.blueColor()
-    playbackIndicatorView.hidden = true
     contentView.addSubview(playbackIndicatorView)
   }
 
@@ -47,8 +54,8 @@ class ReelTableViewCell: UITableViewCell {
     let reel = object as Reel
     titleLabel.text = reel.title
     participantsTitleLabel.text = reel.participantsTitle
+    hidePlaybackIndicatorView()
     if let recentClip = reel.recentClip() {
-      println("playing...")
       recentClipLoopingPlayerView.playVideoURL(NSURL(string: recentClip.videoURL))
     }
   }
@@ -66,6 +73,7 @@ class ReelTableViewCell: UITableViewCell {
       recentClipLoopingPlayerView.width == recentClipLoopingPlayerView.superview!.height
       recentClipLoopingPlayerView.height == recentClipLoopingPlayerView.superview!.height
     }
+    playbackIndicatorView.frame = recentClipLoopingPlayerView.frame
     layout(titleLabel, recentClipLoopingPlayerView) { (titleLabel, recentClipLoopingPlayerView) in
       titleLabel.top == titleLabel.superview!.top + margin
       titleLabel.left == titleLabel.superview!.left + margin
@@ -75,12 +83,6 @@ class ReelTableViewCell: UITableViewCell {
       participantsTitleLabel.bottom == participantsTitleLabel.superview!.bottom - margin
       participantsTitleLabel.left == titleLabel.left
       participantsTitleLabel.right == titleLabel.right
-    }
-    layout(playbackIndicatorView, titleLabel, participantsTitleLabel) { (playbackIndicatorView, titleLabel, participantsTitleLabel) in
-      playbackIndicatorView.top == titleLabel.bottom
-      playbackIndicatorView.bottom == participantsTitleLabel.top
-      playbackIndicatorView.left == titleLabel.left
-      playbackIndicatorView.right == titleLabel.right
     }
   }
 }
