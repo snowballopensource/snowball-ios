@@ -1,5 +1,5 @@
 //
-//  NSError.swift
+//  NSError+.swift
 //  Snowball
 //
 //  Created by James Martinez on 9/22/14.

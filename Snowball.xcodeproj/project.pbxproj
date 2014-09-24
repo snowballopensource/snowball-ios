@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BA19B71119CAD26600DF56A5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA19B71019CAD26600DF56A5 /* API.swift */; };
 		BA1B2E2419D215760095042E /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E2319D215760095042E /* UIImageView+.swift */; };
+		BA1B2E2819D254430095042E /* CaptureSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E2719D254430095042E /* CaptureSessionController.swift */; };
 		BA21531F19D1E7D2000EB138 /* TopOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21531E19D1E7D2000EB138 /* TopOptionsView.swift */; };
 		BA4E5B3419CAAAAB00DC5ECF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3319CAAAAB00DC5ECF /* User.swift */; };
 		BA4E5B3C19CAAEDE00DC5ECF /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3B19CAAEDE00DC5ECF /* Realm.swift */; };
@@ -132,6 +133,7 @@
 		BA1B2E0319D200000095042E /* Cartography.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cartography.xcodeproj; path = Vendor/Cartography/Cartography.xcodeproj; sourceTree = SOURCE_ROOT; };
 		BA1B2E1419D2153E0095042E /* Haneke.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Haneke.xcodeproj; path = Vendor/HanekeSwift/Haneke.xcodeproj; sourceTree = SOURCE_ROOT; };
 		BA1B2E2319D215760095042E /* UIImageView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
+		BA1B2E2719D254430095042E /* CaptureSessionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureSessionController.swift; sourceTree = "<group>"; };
 		BA21531E19D1E7D2000EB138 /* TopOptionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopOptionsView.swift; sourceTree = "<group>"; };
 		BA4E5B3319CAAAAB00DC5ECF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BA4E5B3719CAAC0000DC5ECF /* Snowball-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snowball-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -225,34 +227,42 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BA4E5B3519CAAAAF00DC5ECF /* Model */ = {
+		BA1B2E2919D254460095042E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BA19B71019CAD26600DF56A5 /* API.swift */,
+				BA1B2E2719D254430095042E /* CaptureSessionController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		BA4E5B3519CAAAAF00DC5ECF /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				BA4E5B3319CAAAAB00DC5ECF /* User.swift */,
 				BAB5F02A19D0FA4800D49796 /* Reel.swift */,
 				BAB5F02E19D0FA4F00D49796 /* Clip.swift */,
 			);
-			name = Model;
+			name = Models;
 			sourceTree = "<group>";
 		};
-		BA4E5B3D19CABA0200DC5ECF /* Utility */ = {
+		BA4E5B3D19CABA0200DC5ECF /* Misc */ = {
 			isa = PBXGroup;
 			children = (
-				BA19B71019CAD26600DF56A5 /* API.swift */,
 				BA4E5B3B19CAAEDE00DC5ECF /* Realm.swift */,
 				BAB5F04019D118B800D49796 /* Util.swift */,
 			);
-			name = Utility;
+			name = Misc;
 			sourceTree = "<group>";
 		};
-		BA62C2D219CAA58C00ECC469 /* View */ = {
+		BA62C2D219CAA58C00ECC469 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				BAFDBC6219CA9DF100D5CD4B /* LaunchScreen.xib */,
 				BA74C10019D1374200393633 /* ReelTableViewCell.swift */,
 				BA21531E19D1E7D2000EB138 /* TopOptionsView.swift */,
 			);
-			name = View;
+			name = Views;
 			sourceTree = "<group>";
 		};
 		BAB5F03619D111F400D49796 /* View Controllers */ = {
@@ -301,10 +311,11 @@
 			children = (
 				BAFDBC5719CA9DF100D5CD4B /* AppDelegate.swift */,
 				BAB5F03619D111F400D49796 /* View Controllers */,
-				BA62C2D219CAA58C00ECC469 /* View */,
-				BA4E5B3519CAAAAF00DC5ECF /* Model */,
+				BA62C2D219CAA58C00ECC469 /* Views */,
+				BA1B2E2919D254460095042E /* Controllers */,
+				BA4E5B3519CAAAAF00DC5ECF /* Models */,
 				BAB5F03B19D114D700D49796 /* Extensions */,
-				BA4E5B3D19CABA0200DC5ECF /* Utility */,
+				BA4E5B3D19CABA0200DC5ECF /* Misc */,
 				BA19B71619CB3A9000DF56A5 /* Vendor */,
 				BAFDBC5519CA9DF100D5CD4B /* Supporting Files */,
 			);
@@ -560,6 +571,7 @@
 				BAB5F02B19D0FA4800D49796 /* Reel.swift in Sources */,
 				BA4E5B3C19CAAEDE00DC5ECF /* Realm.swift in Sources */,
 				BAB5F03519D111F000D49796 /* ReelsViewController.swift in Sources */,
+				BA1B2E2819D254430095042E /* CaptureSessionController.swift in Sources */,
 				BA4E5B3419CAAAAB00DC5ECF /* User.swift in Sources */,
 				BAAEA10619CBC03F00DB5182 /* Async.swift in Sources */,
 				BAB5F03819D1140A00D49796 /* ManagedTableViewController.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  UIImageView.swift
+//  UIImageView+.swift
 //  Snowball
 //
 //  Created by James Martinez on 9/23/14.
