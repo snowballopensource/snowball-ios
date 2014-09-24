@@ -13,8 +13,13 @@ class Reel: RLMObject {
   dynamic var title = ""
   dynamic var participantsTitle = ""
 
-  dynamic var clips = RLMArray(objectClassName: Clip.className())
-  dynamic var participants = RLMArray(objectClassName: User.className())
+  func clips() -> RLMArray {
+    return Clip.objectsInRealm(realm, withPredicate: NSPredicate(format: "reel == %@", self))
+  }
+
+  func recentClip() -> Clip? {
+    return clips().arraySortedByProperty("createdAt", ascending: false).firstObject() as Clip?
+  }
 
   // MARK: RLMObject
 
@@ -28,8 +33,8 @@ class Reel: RLMObject {
     if let participantsTitle = dictionary["participants_title"] as AnyObject? as? String {
       self.participantsTitle = participantsTitle
     }
-//    if let lastClipDictionary = dictionary["last_clip"] as AnyObject? as [String: AnyObject]? {
-//      Clip.importFromDictionary(lastClipDictionary, inRealm: self.realm)
-//    }
+    if let recentClipDictionary = dictionary["recent_clip"] as AnyObject? as [String: AnyObject]? {
+      Clip.importFromDictionary(recentClipDictionary, inRealm: self.realm)
+    }
   }
 }

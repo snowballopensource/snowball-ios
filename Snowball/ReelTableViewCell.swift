@@ -12,7 +12,7 @@ import UIKit
 class ReelTableViewCell: UITableViewCell {
   private let titleLabel = UILabel()
   private let participantsTitleLabel = UILabel()
-  private let lastClipThumbnailImageView = UIImageView()
+  private let recentClipThumbnailImageView = UIImageView()
   private let playbackIndicatorView = UIImageView()
 
   // Can't use class let yet, so doing a computed property to hold over
@@ -35,8 +35,8 @@ class ReelTableViewCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     contentView.addSubview(titleLabel)
     contentView.addSubview(participantsTitleLabel)
-    lastClipThumbnailImageView.backgroundColor = UIColor.darkGrayColor()
-    contentView.addSubview(lastClipThumbnailImageView)
+    recentClipThumbnailImageView.backgroundColor = UIColor.darkGrayColor()
+    contentView.addSubview(recentClipThumbnailImageView)
     playbackIndicatorView.backgroundColor = UIColor.blueColor()
     playbackIndicatorView.hidden = true
     contentView.addSubview(playbackIndicatorView)
@@ -50,9 +50,9 @@ class ReelTableViewCell: UITableViewCell {
     let reel = object as Reel
     titleLabel.text = reel.title
     participantsTitleLabel.text = reel.participantsTitle
-    lastClipThumbnailImageView.image = nil
-    if let lastClip = reel.clips.lastObject() as? Clip {
-      lastClipThumbnailImageView.setImageFromURL(NSURL(string: lastClip.thumbnailURL))
+    recentClipThumbnailImageView.image = nil
+    if let recentClip = reel.recentClip() {
+      recentClipThumbnailImageView.setImageFromURL(NSURL(string: recentClip.thumbnailURL))
     }
   }
 
@@ -63,16 +63,16 @@ class ReelTableViewCell: UITableViewCell {
 
     let margin: Float = 20.0
 
-    layout(lastClipThumbnailImageView) { (lastClipThumbnailImageView) in
-      lastClipThumbnailImageView.top == lastClipThumbnailImageView.superview!.top
-      lastClipThumbnailImageView.right == lastClipThumbnailImageView.superview!.right
-      lastClipThumbnailImageView.width == lastClipThumbnailImageView.superview!.height
-      lastClipThumbnailImageView.height == lastClipThumbnailImageView.superview!.height
+    layout(recentClipThumbnailImageView) { (recentClipThumbnailImageView) in
+      recentClipThumbnailImageView.top == recentClipThumbnailImageView.superview!.top
+      recentClipThumbnailImageView.right == recentClipThumbnailImageView.superview!.right
+      recentClipThumbnailImageView.width == recentClipThumbnailImageView.superview!.height
+      recentClipThumbnailImageView.height == recentClipThumbnailImageView.superview!.height
     }
-    layout(titleLabel, lastClipThumbnailImageView) { (titleLabel, lastClipThumbnailImageView) in
+    layout(titleLabel, recentClipThumbnailImageView) { (titleLabel, recentClipThumbnailImageView) in
       titleLabel.top == titleLabel.superview!.top + margin
       titleLabel.left == titleLabel.superview!.left + margin
-      titleLabel.right == lastClipThumbnailImageView.left - margin
+      titleLabel.right == recentClipThumbnailImageView.left - margin
     }
     layout(participantsTitleLabel, titleLabel) { (participantsTitleLabel, titleLabel) in
       participantsTitleLabel.bottom == participantsTitleLabel.superview!.bottom - margin

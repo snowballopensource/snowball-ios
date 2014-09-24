@@ -14,8 +14,8 @@ class Clip: RLMObject {
   dynamic var videoURL = ""
   dynamic var createdAt = NSDate(timeIntervalSince1970: 0)
 
-  dynamic var user = User()
-  dynamic var reel = Reel()
+  dynamic var user: User?
+  dynamic var reel: Reel?
 
   // MARK: RLMObject
 
@@ -31,6 +31,9 @@ class Clip: RLMObject {
     }
     if let createdAt = dictionary["created_at"] as AnyObject? as? Double  {
       self.createdAt = NSDate(timeIntervalSince1970: createdAt)
+    }
+    if let reelID = dictionary["reel_id"] as AnyObject? as? String {
+      self.reel = Reel.importFromDictionary(["id": reelID], inRealm: self.realm) as Reel?
     }
   }
 }

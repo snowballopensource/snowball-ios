@@ -16,8 +16,8 @@ extension RLMObject {
 
   class func createFromDictionary(dictionary: [String: AnyObject], inRealm realm: RLMRealm) -> AnyObject? {
     let object = self()
-    object.updateFromDictionary(dictionary)
     realm.addObject(object)
+    object.updateFromDictionary(dictionary)
     return object
   }
 
