@@ -11,6 +11,9 @@
 		BA1B2E2419D215760095042E /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E2319D215760095042E /* UIImageView+.swift */; };
 		BA1B2E2819D254430095042E /* CaptureSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E2719D254430095042E /* CaptureSessionController.swift */; };
 		BA1B2E2B19D2686A0095042E /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E2A19D2686A0095042E /* CameraViewController.swift */; };
+		BA1B2E2D19D28E780095042E /* Alamofire.framework in Git Submodule Frameworks */ = {isa = PBXBuildFile; fileRef = BA19B71D19CB3A9B00DF56A5 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BA1B2E2E19D28E910095042E /* Cartography.framework in Git Submodule Frameworks */ = {isa = PBXBuildFile; fileRef = BA1B2E0B19D200000095042E /* Cartography.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BA1B2E3019D28E9D0095042E /* Haneke.framework in Git Submodule Frameworks */ = {isa = PBXBuildFile; fileRef = BA1B2E1C19D2153E0095042E /* Haneke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA21531F19D1E7D2000EB138 /* TopOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21531E19D1E7D2000EB138 /* TopOptionsView.swift */; };
 		BA4E5B3419CAAAAB00DC5ECF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3319CAAAAB00DC5ECF /* User.swift */; };
 		BA4E5B3C19CAAEDE00DC5ECF /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3B19CAAEDE00DC5ECF /* Realm.swift */; };
@@ -125,6 +128,22 @@
 			remoteInfo = Snowball;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BA1B2E2C19D28E500095042E /* Git Submodule Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BA1B2E3019D28E9D0095042E /* Haneke.framework in Git Submodule Frameworks */,
+				BA1B2E2E19D28E910095042E /* Cartography.framework in Git Submodule Frameworks */,
+				BA1B2E2D19D28E780095042E /* Alamofire.framework in Git Submodule Frameworks */,
+			);
+			name = "Git Submodule Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2EFA09D82E7944A5AF6E9DFE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -364,6 +383,7 @@
 				BAFDBC4F19CA9DF100D5CD4B /* Frameworks */,
 				BAFDBC5019CA9DF100D5CD4B /* Resources */,
 				E969F3D169024EDABEDA8382 /* Copy Pods Resources */,
+				BA1B2E2C19D28E500095042E /* Git Submodule Frameworks */,
 			);
 			buildRules = (
 			);
