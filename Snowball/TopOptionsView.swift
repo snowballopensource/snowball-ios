@@ -24,9 +24,11 @@ class TopOptionsView: UIView {
 
   override init(frame: CGRect) {
     super.init(frame: frame)
-    cameraView.backgroundColor = UIColor.lightGrayColor()
     addSubview(cameraView)
-    addButton.backgroundColor = UIColor.darkGrayColor()
+    addButton.setTitle("+", forState: UIControlState.Normal)
+    addButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+    addButton.titleLabel?.font = addButton.titleLabel!.font.fontWithSize(40)
+    addButton.backgroundColor = UIColor.whiteColor()
     addSubview(addButton)
     videoPreviewView.backgroundColor = UIColor.lightGrayColor()
     addSubview(videoPreviewView)
