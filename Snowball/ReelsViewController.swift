@@ -22,7 +22,7 @@ class ReelsViewController: ManagedTableViewController {
 
     let cameraViewController = CameraViewController()
     addChildViewController(cameraViewController)
-    topView.cameraView = cameraViewController.view as CameraView
+    topView.cameraView = cameraViewController.view as? CameraView
     view.addSubview(topView)
   }
 

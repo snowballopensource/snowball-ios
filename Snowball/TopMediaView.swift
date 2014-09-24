@@ -10,12 +10,15 @@ import UIKit
 
 class TopMediaView: UIView {
   let playerView = DisappearingPlayerView()
-  var cameraView = CameraView()
+  var cameraView: CameraView? {
+    didSet {
+      self.insertFullViewSubview(cameraView!, belowSubview: playerView)
+    }
+  }
 
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.addFullViewSubview(playerView)
-    self.addFullViewSubview(cameraView)
   }
 
   required init(coder aDecoder: NSCoder) {
