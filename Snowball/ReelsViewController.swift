@@ -10,7 +10,7 @@ import Cartography
 import UIKit
 
 class ReelsViewController: ManagedTableViewController {
-  private let topOptionsView = TopOptionsView()
+  private let topView = UIView()
 
   // MARK: -
 
@@ -23,22 +23,20 @@ class ReelsViewController: ManagedTableViewController {
     let cameraViewController = CameraViewController()
     addChildViewController(cameraViewController)
     let cameraView = cameraViewController.view
-    cameraView.frame = topOptionsView.cameraView.frame
-    cameraView.autoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth
-    topOptionsView.cameraView.addSubview(cameraView)
-    view.addSubview(topOptionsView)
+    topView.addFullViewSubview(cameraView)
+    view.addSubview(topView)
   }
 
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
-    layout(topOptionsView) { (topOptionsView) in
-      topOptionsView.top == topOptionsView.superview!.top
-      topOptionsView.bottom == topOptionsView.top + Float(ReelTableViewCell.height)
-      topOptionsView.left == topOptionsView.superview!.left
-      topOptionsView.right == topOptionsView.superview!.right
+    layout(topView) { (topView) in
+      topView.top == topView.superview!.top
+      topView.bottom == topView.top + Float(UIScreen.mainScreen().bounds.width)
+      topView.left == topView.superview!.left
+      topView.right == topView.superview!.right
     }
-    layout(tableView, topOptionsView) { (tableView, topOptionsView) in
-      tableView.top == topOptionsView.bottom
+    layout(tableView, topView) { (tableView, topView) in
+      tableView.top == topView.bottom
       tableView.bottom == tableView.superview!.bottom
       tableView.left == tableView.superview!.left
       tableView.right == tableView.superview!.right
@@ -73,5 +71,15 @@ class ReelsViewController: ManagedTableViewController {
 
   func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
     return ReelTableViewCell.height
+  }
+
+  // MARK: UITableViewDelegate
+
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    let reel = objects().objectAtIndex(UInt(indexPath.row)) as Reel
+    let recentClipVideoURL = reel.recentClip()!.videoURL
+    let loopingPlayerView = LoopingPlayerView()
+    topView.addFullViewSubview(loopingPlayerView)
+    loopingPlayerView.playVideoURL(NSURL(string: recentClipVideoURL))
   }
 }

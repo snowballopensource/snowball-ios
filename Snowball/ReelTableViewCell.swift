@@ -13,30 +13,15 @@ import UIKit
 class ReelTableViewCell: UITableViewCell {
   private let titleLabel = UILabel()
   private let participantsTitleLabel = UILabel()
-  private let recentClipPlayerView = PlayerView()
+  private let recentClipLoopingPlayerView = LoopingPlayerView()
   private let playbackIndicatorView = UIImageView()
 
   // Can't use class let yet, so doing a computed property to hold over
   // class let height: CGFloat = UIScreen.mainScreen().bounds.width/2
   class var height: CGFloat {
     get {
-      return UIScreen.mainScreen().bounds.width/2
+      return 65.0
     }
-  }
-
-  func playVideoURL(URL: NSURL) {
-    let player = AVQueuePlayer(URL: URL)
-    self.recentClipPlayerView.player = player
-    duplicateAndQueuePlayerItem(player.currentItem)
-    player.muted = true
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidReachEnd:", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
-    player.play()
-  }
-
-  func duplicateAndQueuePlayerItem(playerItem: AVPlayerItem) {
-    let player = recentClipPlayerView.player!
-    let duplicatePlayerItem = player.currentItem.copy() as AVPlayerItem
-    player.insertItem(duplicatePlayerItem, afterItem: player.items().last as AVPlayerItem)
   }
 
   // MARK: -
@@ -47,8 +32,8 @@ class ReelTableViewCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     contentView.addSubview(titleLabel)
     contentView.addSubview(participantsTitleLabel)
-    recentClipPlayerView.backgroundColor = UIColor.darkGrayColor()
-    contentView.addSubview(recentClipPlayerView)
+    recentClipLoopingPlayerView.backgroundColor = UIColor.darkGrayColor()
+    contentView.addSubview(recentClipLoopingPlayerView)
     playbackIndicatorView.backgroundColor = UIColor.blueColor()
     playbackIndicatorView.hidden = true
     contentView.addSubview(playbackIndicatorView)
@@ -63,7 +48,8 @@ class ReelTableViewCell: UITableViewCell {
     titleLabel.text = reel.title
     participantsTitleLabel.text = reel.participantsTitle
     if let recentClip = reel.recentClip() {
-      playVideoURL(NSURL(string: recentClip.videoURL))
+      println("playing...")
+      recentClipLoopingPlayerView.playVideoURL(NSURL(string: recentClip.videoURL))
     }
   }
 
@@ -72,18 +58,18 @@ class ReelTableViewCell: UITableViewCell {
   override func layoutSubviews() {
     super.layoutSubviews()
 
-    let margin: Float = 20.0
+    let margin: Float = 10.0
 
-    layout(recentClipPlayerView) { (recentClipPlayerView) in
-      recentClipPlayerView.top == recentClipPlayerView.superview!.top
-      recentClipPlayerView.right == recentClipPlayerView.superview!.right
-      recentClipPlayerView.width == recentClipPlayerView.superview!.height
-      recentClipPlayerView.height == recentClipPlayerView.superview!.height
+    layout(recentClipLoopingPlayerView) { (recentClipLoopingPlayerView) in
+      recentClipLoopingPlayerView.top == recentClipLoopingPlayerView.superview!.top
+      recentClipLoopingPlayerView.right == recentClipLoopingPlayerView.superview!.right
+      recentClipLoopingPlayerView.width == recentClipLoopingPlayerView.superview!.height
+      recentClipLoopingPlayerView.height == recentClipLoopingPlayerView.superview!.height
     }
-    layout(titleLabel, recentClipPlayerView) { (titleLabel, recentClipPlayerView) in
+    layout(titleLabel, recentClipLoopingPlayerView) { (titleLabel, recentClipLoopingPlayerView) in
       titleLabel.top == titleLabel.superview!.top + margin
       titleLabel.left == titleLabel.superview!.left + margin
-      titleLabel.right == recentClipPlayerView.left - margin
+      titleLabel.right == recentClipLoopingPlayerView.left - margin
     }
     layout(participantsTitleLabel, titleLabel) { (participantsTitleLabel, titleLabel) in
       participantsTitleLabel.bottom == participantsTitleLabel.superview!.bottom - margin
@@ -97,11 +83,4 @@ class ReelTableViewCell: UITableViewCell {
       playbackIndicatorView.right == titleLabel.right
     }
   }
-
-  // MARK: AVPlayerItem
-
-  func playerItemDidReachEnd(notification: NSNotification) {
-    duplicateAndQueuePlayerItem(notification.object as AVPlayerItem)
-  }
-
 }
