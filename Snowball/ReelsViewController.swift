@@ -79,7 +79,12 @@ class ReelsViewController: ManagedTableViewController {
     let reelCell = tableView.cellForRowAtIndexPath(indexPath) as ReelTableViewCell
     let reel = objects().objectAtIndex(UInt(indexPath.row)) as Reel
     reelCell.showPlaybackIndicatorView()
-    topView.playerView.playVideoURL(NSURL(string: reel.recentClip()!.videoURL)) {
+    var videoURLs: [NSURL] = []
+    for clip in reel.clips() {
+      let clipToPlay = clip as Clip
+      videoURLs.append(NSURL(string: clipToPlay.videoURL))
+    }
+    topView.playerView.playVideoURLs(videoURLs) { () in
       reelCell.hidePlaybackIndicatorView()
     }
   }

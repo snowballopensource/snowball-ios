@@ -14,10 +14,18 @@ class DisappearingPlayerView: PlayerView {
   var completionHandler: CompletionHandler?
 
   func playVideoURL(URL: NSURL, completionHandler: CompletionHandler? = nil) {
-    let player = AVQueuePlayer(URL: URL)
+    playVideoURLs([URL], completionHandler: completionHandler)
+  }
+
+  func playVideoURLs(URLs: [NSURL], completionHandler: CompletionHandler? = nil) {
+    var playerItems: [AVPlayerItem] = []
+    for URL in URLs {
+      let playerItem = AVPlayerItem(URL: URL)
+      playerItems.append(playerItem)
+    }
+    let player = AVQueuePlayer(items: playerItems)
     self.player = player
-    player.muted = true
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidReachEnd:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "lastPlayerItemDidReachEnd:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
     self.completionHandler = completionHandler
     player.play()
   }
@@ -30,7 +38,7 @@ class DisappearingPlayerView: PlayerView {
 
   // MARK: AVPlayerItem
 
-  func playerItemDidReachEnd(notification: NSNotification) {
+  func lastPlayerItemDidReachEnd(notification: NSNotification) {
     if let completion = completionHandler {
       completion()
     }

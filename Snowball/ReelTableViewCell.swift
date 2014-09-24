@@ -56,7 +56,7 @@ class ReelTableViewCell: UITableViewCell {
     participantsTitleLabel.text = reel.participantsTitle
     hidePlaybackIndicatorView()
     if let recentClip = reel.recentClip() {
-      recentClipLoopingPlayerView.playVideoURL(NSURL(string: recentClip.videoURL))
+      recentClipLoopingPlayerView.playVideoURL(NSURL(string: recentClip.videoURL), muted: true)
     }
   }
 
