@@ -33,7 +33,7 @@ class TopOptionsView: UIView {
     videoPreviewView.backgroundColor = UIColor.lightGrayColor()
     addSubview(videoPreviewView)
 
-    addButton.addTarget(self, action: Selector("animate"), forControlEvents: UIControlEvents.TouchUpInside)
+    addButton.addTarget(self, action: "animate", forControlEvents: UIControlEvents.TouchUpInside)
   }
 
   required init(coder aDecoder: NSCoder) {

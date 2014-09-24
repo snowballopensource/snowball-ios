@@ -6,13 +6,14 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
+import AVFoundation
 import Cartography
 import UIKit
 
 class ReelTableViewCell: UITableViewCell {
   private let titleLabel = UILabel()
   private let participantsTitleLabel = UILabel()
-  private let recentClipThumbnailImageView = UIImageView()
+  private let recentClipPlayerView = PlayerView()
   private let playbackIndicatorView = UIImageView()
 
   // Can't use class let yet, so doing a computed property to hold over
@@ -23,8 +24,19 @@ class ReelTableViewCell: UITableViewCell {
     }
   }
 
-  func beginPlayback(url: NSURL) {
-    self.playbackIndicatorView.hidden = false
+  func playVideoURL(URL: NSURL) {
+    let player = AVQueuePlayer(URL: URL)
+    self.recentClipPlayerView.player = player
+    duplicateAndQueuePlayerItem(player.currentItem)
+    player.muted = true
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidReachEnd:", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+    player.play()
+  }
+
+  func duplicateAndQueuePlayerItem(playerItem: AVPlayerItem) {
+    let player = recentClipPlayerView.player!
+    let duplicatePlayerItem = player.currentItem.copy() as AVPlayerItem
+    player.insertItem(duplicatePlayerItem, afterItem: player.items().last as AVPlayerItem)
   }
 
   // MARK: -
@@ -35,8 +47,8 @@ class ReelTableViewCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     contentView.addSubview(titleLabel)
     contentView.addSubview(participantsTitleLabel)
-    recentClipThumbnailImageView.backgroundColor = UIColor.darkGrayColor()
-    contentView.addSubview(recentClipThumbnailImageView)
+    recentClipPlayerView.backgroundColor = UIColor.darkGrayColor()
+    contentView.addSubview(recentClipPlayerView)
     playbackIndicatorView.backgroundColor = UIColor.blueColor()
     playbackIndicatorView.hidden = true
     contentView.addSubview(playbackIndicatorView)
@@ -50,9 +62,8 @@ class ReelTableViewCell: UITableViewCell {
     let reel = object as Reel
     titleLabel.text = reel.title
     participantsTitleLabel.text = reel.participantsTitle
-    recentClipThumbnailImageView.image = nil
     if let recentClip = reel.recentClip() {
-      recentClipThumbnailImageView.setImageFromURL(NSURL(string: recentClip.thumbnailURL))
+      playVideoURL(NSURL(string: recentClip.videoURL))
     }
   }
 
@@ -63,16 +74,16 @@ class ReelTableViewCell: UITableViewCell {
 
     let margin: Float = 20.0
 
-    layout(recentClipThumbnailImageView) { (recentClipThumbnailImageView) in
-      recentClipThumbnailImageView.top == recentClipThumbnailImageView.superview!.top
-      recentClipThumbnailImageView.right == recentClipThumbnailImageView.superview!.right
-      recentClipThumbnailImageView.width == recentClipThumbnailImageView.superview!.height
-      recentClipThumbnailImageView.height == recentClipThumbnailImageView.superview!.height
+    layout(recentClipPlayerView) { (recentClipPlayerView) in
+      recentClipPlayerView.top == recentClipPlayerView.superview!.top
+      recentClipPlayerView.right == recentClipPlayerView.superview!.right
+      recentClipPlayerView.width == recentClipPlayerView.superview!.height
+      recentClipPlayerView.height == recentClipPlayerView.superview!.height
     }
-    layout(titleLabel, recentClipThumbnailImageView) { (titleLabel, recentClipThumbnailImageView) in
+    layout(titleLabel, recentClipPlayerView) { (titleLabel, recentClipPlayerView) in
       titleLabel.top == titleLabel.superview!.top + margin
       titleLabel.left == titleLabel.superview!.left + margin
-      titleLabel.right == recentClipThumbnailImageView.left - margin
+      titleLabel.right == recentClipPlayerView.left - margin
     }
     layout(participantsTitleLabel, titleLabel) { (participantsTitleLabel, titleLabel) in
       participantsTitleLabel.bottom == participantsTitleLabel.superview!.bottom - margin
@@ -85,6 +96,12 @@ class ReelTableViewCell: UITableViewCell {
       playbackIndicatorView.left == titleLabel.left
       playbackIndicatorView.right == titleLabel.right
     }
+  }
+
+  // MARK: AVPlayerItem
+
+  func playerItemDidReachEnd(notification: NSNotification) {
+    duplicateAndQueuePlayerItem(notification.object as AVPlayerItem)
   }
 
 }
