@@ -10,7 +10,7 @@ import Cartography
 import UIKit
 
 class ReelsViewController: ManagedTableViewController {
-  private let topView = UIView()
+  private let topView = TopMediaView()
 
   // MARK: -
 
@@ -22,8 +22,7 @@ class ReelsViewController: ManagedTableViewController {
 
     let cameraViewController = CameraViewController()
     addChildViewController(cameraViewController)
-    let cameraView = cameraViewController.view
-    topView.addFullViewSubview(cameraView)
+    topView.cameraView = cameraViewController.view as CameraView
     view.addSubview(topView)
   }
 
@@ -79,12 +78,9 @@ class ReelsViewController: ManagedTableViewController {
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     let reelCell = tableView.cellForRowAtIndexPath(indexPath) as ReelTableViewCell
     let reel = objects().objectAtIndex(UInt(indexPath.row)) as Reel
-    let recentClipVideoURL = reel.recentClip()!.videoURL
-    let loopingPlayerView = LoopingPlayerView()
     reelCell.showPlaybackIndicatorView()
-    // TODO: make topView its own class with the camera view and the player view
-    // this will allow for reuse instead of this mess
-    topView.addFullViewSubview(loopingPlayerView)
-    loopingPlayerView.playVideoURL(NSURL(string: recentClipVideoURL))
+    topView.playerView.playVideoURL(NSURL(string: reel.recentClip()!.videoURL)) {
+      reelCell.hidePlaybackIndicatorView()
+    }
   }
 }
