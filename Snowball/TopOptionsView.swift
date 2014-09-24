@@ -10,7 +10,7 @@ import Cartography
 import UIKit
 
 class TopOptionsView: UIView {
-  private let cameraView = UIView()
+  let cameraView = UIView()
   private let addButton = UIButton()
   private let videoPreviewView = UIView()
   private var showPreviewView = false

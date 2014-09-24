@@ -10,7 +10,7 @@ import Cartography
 import UIKit
 
 class ReelsViewController: ManagedTableViewController {
-  let topOptionsView = TopOptionsView()
+  private let topOptionsView = TopOptionsView()
 
   // MARK: -
 
@@ -19,6 +19,11 @@ class ReelsViewController: ManagedTableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.registerClass(ReelTableViewCell.self, forCellReuseIdentifier: ReelTableViewCell.identifier)
+
+    let cameraViewController = CameraViewController()
+    addChildViewController(cameraViewController)
+    cameraViewController.view.frame = topOptionsView.cameraView.frame
+    topOptionsView.cameraView.addSubview(cameraViewController.view)
     view.addSubview(topOptionsView)
   }
 

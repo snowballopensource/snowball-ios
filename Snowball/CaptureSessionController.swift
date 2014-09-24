@@ -10,10 +10,9 @@ import AVFoundation
 import Foundation
 
 class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
-  private let captureSession = AVCaptureSession()
+  let captureSession = AVCaptureSession()
   private var currentVideoDeviceInput: AVCaptureDeviceInput?
   private var movieFileOutput: AVCaptureMovieFileOutput?
-  private var previewLayer: AVCaptureVideoPreviewLayer?
 
   override init() {
     super.init()
