@@ -22,8 +22,10 @@ class ReelsViewController: ManagedTableViewController {
 
     let cameraViewController = CameraViewController()
     addChildViewController(cameraViewController)
-    cameraViewController.view.frame = topOptionsView.cameraView.frame
-    topOptionsView.cameraView.addSubview(cameraViewController.view)
+    let cameraView = cameraViewController.view
+    cameraView.frame = topOptionsView.cameraView.frame
+    cameraView.autoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth
+    topOptionsView.cameraView.addSubview(cameraView)
     view.addSubview(topOptionsView)
   }
 

@@ -14,6 +14,7 @@
 		BA1B2E2D19D28E780095042E /* Alamofire.framework in Git Submodule Frameworks */ = {isa = PBXBuildFile; fileRef = BA19B71D19CB3A9B00DF56A5 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA1B2E2E19D28E910095042E /* Cartography.framework in Git Submodule Frameworks */ = {isa = PBXBuildFile; fileRef = BA1B2E0B19D200000095042E /* Cartography.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA1B2E3019D28E9D0095042E /* Haneke.framework in Git Submodule Frameworks */ = {isa = PBXBuildFile; fileRef = BA1B2E1C19D2153E0095042E /* Haneke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BA1B2E3219D290C30095042E /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E3119D290C30095042E /* CameraView.swift */; };
 		BA21531F19D1E7D2000EB138 /* TopOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21531E19D1E7D2000EB138 /* TopOptionsView.swift */; };
 		BA4E5B3419CAAAAB00DC5ECF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3319CAAAAB00DC5ECF /* User.swift */; };
 		BA4E5B3C19CAAEDE00DC5ECF /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3B19CAAEDE00DC5ECF /* Realm.swift */; };
@@ -155,6 +156,7 @@
 		BA1B2E2319D215760095042E /* UIImageView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		BA1B2E2719D254430095042E /* CaptureSessionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureSessionController.swift; sourceTree = "<group>"; };
 		BA1B2E2A19D2686A0095042E /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		BA1B2E3119D290C30095042E /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		BA21531E19D1E7D2000EB138 /* TopOptionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopOptionsView.swift; sourceTree = "<group>"; };
 		BA4E5B3319CAAAAB00DC5ECF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BA4E5B3719CAAC0000DC5ECF /* Snowball-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snowball-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				BAFDBC6219CA9DF100D5CD4B /* LaunchScreen.xib */,
 				BA74C10019D1374200393633 /* ReelTableViewCell.swift */,
 				BA21531E19D1E7D2000EB138 /* TopOptionsView.swift */,
+				BA1B2E3119D290C30095042E /* CameraView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -592,6 +595,7 @@
 				BA21531F19D1E7D2000EB138 /* TopOptionsView.swift in Sources */,
 				BAAEA10419CB73D900DB5182 /* RLMObject+.swift in Sources */,
 				BAB5F02B19D0FA4800D49796 /* Reel.swift in Sources */,
+				BA1B2E3219D290C30095042E /* CameraView.swift in Sources */,
 				BA4E5B3C19CAAEDE00DC5ECF /* Realm.swift in Sources */,
 				BAB5F03519D111F000D49796 /* ReelsViewController.swift in Sources */,
 				BA1B2E2819D254430095042E /* CaptureSessionController.swift in Sources */,
