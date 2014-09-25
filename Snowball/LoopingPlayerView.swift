@@ -19,11 +19,9 @@ class LoopingPlayerView: PlayerView {
   }
 
   func queueVideoURL(URL: NSURL, muted: Bool = false) {
-    let player = AVQueuePlayer(URL: URL)
-    self.player = player
-    player.actionAtItemEnd = AVPlayerActionAtItemEnd.None
-    player.muted = muted
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidReachEnd:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
+    super.queueVideoURLs([URL])
+    player?.actionAtItemEnd = AVPlayerActionAtItemEnd.None
+    player?.muted = muted
   }
 
   // MARK: UIView
@@ -32,9 +30,9 @@ class LoopingPlayerView: PlayerView {
     NSNotificationCenter.defaultCenter().removeObserver(self)
   }
 
-  // MARK: AVPlayerItem
+  // MARK: PlayerView
 
-  func playerItemDidReachEnd(notification: NSNotification) {
+  override func playbackEnded(notification: NSNotification) {
     player?.currentItem.seekToTime(kCMTimeZero)
   }
 }
