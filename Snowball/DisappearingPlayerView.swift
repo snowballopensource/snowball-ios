@@ -25,7 +25,7 @@ class DisappearingPlayerView: PlayerView {
     }
     let player = AVQueuePlayer(items: playerItems)
     self.player = player
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "lastPlayerItemDidReachEnd:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "lastPlayerItemDidReachEnd:", name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItems.last)
     self.completionHandler = completionHandler
     player.play()
   }
