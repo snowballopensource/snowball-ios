@@ -9,7 +9,7 @@
 import UIKit
 
 class ManagedCollectionViewController: ManagedViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-  let collectionView = UICollectionView()
+  let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
 
   func cellType() -> UICollectionViewCell.Type {
     requireSubclass()
@@ -26,6 +26,7 @@ class ManagedCollectionViewController: ManagedViewController, UICollectionViewDa
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    collectionView.backgroundColor = UIColor.whiteColor()
     view.addSubview(collectionView)
     collectionView.dataSource = self
     collectionView.delegate = self
