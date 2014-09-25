@@ -17,7 +17,7 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
   override init() {
     super.init()
     captureSession.sessionPreset = AVCaptureSessionPresetHigh
-    checkDeviceAuthorizationStatus { (granted) -> () in
+    checkDeviceAuthorizationStatus { (granted) in
       var error: NSError?
       let videoDevice = self.captureDevice(mediaType: AVMediaTypeVideo, position: AVCaptureDevicePosition.Front)
       let videoDeviceInput = AVCaptureDeviceInput(device: videoDevice, error: &error)
@@ -92,19 +92,19 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
   }
 
   func startSession() {
-    Async.userInitiated { () in
+    Async.userInitiated {
       self.captureSession.startRunning()
     }
   }
 
   func stopSession() {
-    Async.userInitiated { () in
+    Async.userInitiated {
       self.captureSession.stopRunning()
     }
   }
 
   func toggleRecording() {
-    Async.userInitiated { () in
+    Async.userInitiated {
       if let recording = self.movieFileOutput?.recording {
         if recording {
           self.movieFileOutput?.stopRecording()

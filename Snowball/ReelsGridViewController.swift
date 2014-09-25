@@ -48,7 +48,7 @@ class ReelsGridViewController: ManagedCollectionViewController {
   }
 
   override func reloadData() {
-    API.getReelStream { (error) -> () in
+    API.getReelStream { (error) in
       if error != nil { error?.display(); return }
       self.collectionView.reloadData()
     }
@@ -86,7 +86,7 @@ class ReelsGridViewController: ManagedCollectionViewController {
       let clipToPlay = clip as Clip
       videoURLs.append(NSURL(string: clipToPlay.videoURL))
     }
-    topView.playerView.playVideoURLs(videoURLs) { () in
+    topView.playerView.playVideoURLs(videoURLs) {
       reelCell.hidePlaybackIndicatorView()
     }
   }
