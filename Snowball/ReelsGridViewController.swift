@@ -11,6 +11,7 @@ import UIKit
 
 class ReelsGridViewController: ManagedCollectionViewController {
   private let topView = TopMediaView()
+  private var scrolling = false
 
   // MARK: -
 
@@ -63,6 +64,9 @@ class ReelsGridViewController: ManagedCollectionViewController {
   override func configureCell(cell: UICollectionViewCell, atIndexPath indexPath: NSIndexPath) {
     let reelCell = cell as ReelCollectionViewCell
     reelCell.configureForObject(objects().objectAtIndex(UInt(indexPath.row)))
+    if !scrolling {
+      reelCell.startPlayback()
+    }
   }
 
   // MARK: UICollectionViewDelegateFlowLayout
@@ -88,6 +92,24 @@ class ReelsGridViewController: ManagedCollectionViewController {
     }
     topView.playerView.playVideoURLs(videoURLs) {
       reelCell.hidePlaybackIndicatorView()
+    }
+  }
+
+  // MARK: UIScrollViewDelegate
+
+  func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    scrolling = true
+    for cell in collectionView.visibleCells() {
+      let reelCell = cell as ReelCollectionViewCell
+      reelCell.pausePlayback()
+    }
+  }
+
+  func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    scrolling = false
+    for cell in collectionView.visibleCells() {
+      let reelCell = cell as ReelCollectionViewCell
+      reelCell.startPlayback()
     }
   }
 }

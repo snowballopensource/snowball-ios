@@ -231,6 +231,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BA01CC0D19D497F5004F170D /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				BA74C10019D1374200393633 /* ReelTableViewCell.swift */,
+				BA21531E19D1E7D2000EB138 /* TopOptionsView.swift */,
+				BAB5F03419D111F000D49796 /* ReelsViewController.swift */,
+			);
+			name = Unused;
+			sourceTree = "<group>";
+		};
 		BA19B71619CB3A9000DF56A5 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,8 +316,6 @@
 			isa = PBXGroup;
 			children = (
 				BAFDBC6219CA9DF100D5CD4B /* LaunchScreen.xib */,
-				BA74C10019D1374200393633 /* ReelTableViewCell.swift */,
-				BA21531E19D1E7D2000EB138 /* TopOptionsView.swift */,
 				BA1B2E3119D290C30095042E /* CameraView.swift */,
 				BA1B2E3319D2B90F0095042E /* PlayerView.swift */,
 				BA01CBB419D3476F004F170D /* LoopingPlayerView.swift */,
@@ -324,7 +332,6 @@
 				BA74C10219D13B8B00393633 /* ManagedViewController.swift */,
 				BAB5F03719D1140A00D49796 /* ManagedTableViewController.swift */,
 				BA01CBF519D39B54004F170D /* ManagedCollectionViewController.swift */,
-				BAB5F03419D111F000D49796 /* ReelsViewController.swift */,
 				BA01CBF919D39EAF004F170D /* ReelsGridViewController.swift */,
 				BA1B2E2A19D2686A0095042E /* CameraViewController.swift */,
 			);
@@ -368,6 +375,7 @@
 			isa = PBXGroup;
 			children = (
 				BAFDBC5719CA9DF100D5CD4B /* AppDelegate.swift */,
+				BA01CC0D19D497F5004F170D /* Unused */,
 				BAB5F03619D111F400D49796 /* View Controllers */,
 				BA62C2D219CAA58C00ECC469 /* Views */,
 				BA1B2E2919D254460095042E /* Controllers */,

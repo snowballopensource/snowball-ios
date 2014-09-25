@@ -31,6 +31,14 @@ class ReelCollectionViewCell: UICollectionViewCell {
     playbackIndicatorView.hidden = true
   }
 
+  func startPlayback() {
+    recentClipLoopingPlayerView.player?.play()
+  }
+
+  func pausePlayback() {
+    recentClipLoopingPlayerView.player?.pause()
+  }
+
   // MARK: -
 
   // MARK: UITableViewCell
@@ -59,7 +67,7 @@ class ReelCollectionViewCell: UICollectionViewCell {
       let recentClipVideoURL = NSURL(string: recentClip.videoURL)
       VideoCache.fetchVideoAtRemoteURL(recentClipVideoURL) { (URL, error) in
         if let videoURL = URL {
-          self.recentClipLoopingPlayerView.playVideoURL(videoURL, muted: true)
+          self.recentClipLoopingPlayerView.queueVideoURL(videoURL, muted: true)
         }
       }
     }
