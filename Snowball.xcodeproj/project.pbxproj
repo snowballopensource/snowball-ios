@@ -16,6 +16,7 @@
 		BA01CBF819D39CF5004F170D /* UICollectionViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBF719D39CF5004F170D /* UICollectionViewCell+.swift */; };
 		BA01CBFA19D39EAF004F170D /* ReelsGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBF919D39EAF004F170D /* ReelsGridViewController.swift */; };
 		BA01CBFC19D39F2C004F170D /* ReelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBFB19D39F2C004F170D /* ReelCollectionViewCell.swift */; };
+		BA01CC0619D3EFB1004F170D /* VideoCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CC0519D3EFB1004F170D /* VideoCache.swift */; };
 		BA19B71119CAD26600DF56A5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA19B71019CAD26600DF56A5 /* API.swift */; };
 		BA1B2E2419D215760095042E /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E2319D215760095042E /* UIImageView+.swift */; };
 		BA1B2E2819D254430095042E /* CaptureSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E2719D254430095042E /* CaptureSessionController.swift */; };
@@ -168,6 +169,7 @@
 		BA01CBF719D39CF5004F170D /* UICollectionViewCell+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+.swift"; sourceTree = "<group>"; };
 		BA01CBF919D39EAF004F170D /* ReelsGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReelsGridViewController.swift; sourceTree = "<group>"; };
 		BA01CBFB19D39F2C004F170D /* ReelCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReelCollectionViewCell.swift; sourceTree = "<group>"; };
+		BA01CC0519D3EFB1004F170D /* VideoCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCache.swift; sourceTree = "<group>"; };
 		BA19B71019CAD26600DF56A5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BA19B71719CB3A9B00DF56A5 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Vendor/Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
 		BA1B2E0319D200000095042E /* Cartography.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cartography.xcodeproj; path = Vendor/Cartography/Cartography.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -293,6 +295,7 @@
 		BA4E5B3D19CABA0200DC5ECF /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				BA01CC0519D3EFB1004F170D /* VideoCache.swift */,
 				BA4E5B3B19CAAEDE00DC5ECF /* Realm.swift */,
 				BAB5F04019D118B800D49796 /* Util.swift */,
 			);
@@ -637,6 +640,7 @@
 				BAB5F03819D1140A00D49796 /* ManagedTableViewController.swift in Sources */,
 				BA01CBFA19D39EAF004F170D /* ReelsGridViewController.swift in Sources */,
 				BAB5F03F19D115DE00D49796 /* NSError+.swift in Sources */,
+				BA01CC0619D3EFB1004F170D /* VideoCache.swift in Sources */,
 				BAB5F02F19D0FA4F00D49796 /* Clip.swift in Sources */,
 				BA01CBFC19D39F2C004F170D /* ReelCollectionViewCell.swift in Sources */,
 				BAB5F04119D118B800D49796 /* Util.swift in Sources */,

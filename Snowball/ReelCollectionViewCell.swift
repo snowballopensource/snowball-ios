@@ -56,7 +56,12 @@ class ReelCollectionViewCell: UICollectionViewCell {
     participantsTitleLabel.text = reel.participantsTitle
     hidePlaybackIndicatorView()
     if let recentClip = reel.recentClip() {
-      recentClipLoopingPlayerView.playVideoURL(NSURL(string: recentClip.videoURL), muted: true)
+      let recentClipVideoURL = NSURL(string: recentClip.videoURL)
+      VideoCache.fetchVideoAtRemoteURL(recentClipVideoURL) { (URL, error) in
+        if let videoURL = URL {
+          self.recentClipLoopingPlayerView.playVideoURL(videoURL, muted: true)
+        }
+      }
     }
   }
 
