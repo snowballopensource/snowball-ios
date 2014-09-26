@@ -84,8 +84,8 @@ class ReelsViewController: ManagedTableViewController {
       let clipToPlay = clip as Clip
       videoURLs.append(NSURL(string: clipToPlay.videoURL))
     }
-    topView.playerView.playVideoURLs(videoURLs) {
-      reelCell.hidePlaybackIndicatorView()
-    }
+//    topView.playerView.playVideoURLs(videoURLs) {
+//      reelCell.hidePlaybackIndicatorView()
+//    }
   }
 }

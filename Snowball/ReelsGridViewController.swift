@@ -12,6 +12,16 @@ import UIKit
 class ReelsGridViewController: ManagedCollectionViewController {
   private let topView = TopMediaView()
   private var scrolling = false
+  private var reelPlayerViewController: ReelPlayerViewController? {
+    get {
+      for childViewController in childViewControllers {
+        if childViewController is ReelPlayerViewController {
+          return childViewController as? ReelPlayerViewController
+        }
+      }
+      return nil
+    }
+  }
 
   // MARK: -
 
@@ -23,6 +33,11 @@ class ReelsGridViewController: ManagedCollectionViewController {
     let cameraViewController = CameraViewController()
     addChildViewController(cameraViewController)
     topView.cameraView = cameraViewController.view as? CameraView
+    topView.addFullViewSubview(topView.cameraView!)
+    let reelPlayerViewController = ReelPlayerViewController()
+    addChildViewController(reelPlayerViewController)
+    topView.playerView = reelPlayerViewController.view as? PlayerView
+    topView.addFullViewSubview(topView.playerView!)
     view.addSubview(topView)
   }
 
@@ -85,12 +100,7 @@ class ReelsGridViewController: ManagedCollectionViewController {
     let reelCell = collectionView.cellForItemAtIndexPath(indexPath) as ReelCollectionViewCell
     let reel = objects().objectAtIndex(UInt(indexPath.row)) as Reel
     reelCell.showPlaybackIndicatorView()
-    var videoURLs: [NSURL] = []
-    for clip in reel.clips() {
-      let clipToPlay = clip as Clip
-      videoURLs.append(NSURL(string: clipToPlay.videoURL))
-    }
-    topView.playerView.playVideoURLs(videoURLs) {
+    reelPlayerViewController?.playReel(reel) {
       reelCell.hidePlaybackIndicatorView()
     }
   }
