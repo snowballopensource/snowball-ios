@@ -22,6 +22,17 @@ class ReelPlayerViewController: UIViewController, ReelPlayerDelegate {
     player.play()
   }
 
+  private func playerItems() -> [AVPlayerItem] {
+    let playerView = view as PlayerView
+    var items = playerView.player?.items()
+    var playerItems = [AVPlayerItem]()
+    for item in items! {
+      let playerItem = item as AVPlayerItem
+      playerItems.append(playerItem)
+    }
+    return playerItems
+  }
+
   // MARK: UIViewController
 
   override func loadView() {
@@ -30,7 +41,16 @@ class ReelPlayerViewController: UIViewController, ReelPlayerDelegate {
 
   // MARK: ReelPlayerDelegate
 
-  func playerItemDidPlayToEndTime(playerItem: AVPlayerItem) {}
+  func playerItemDidPlayToEndTime(playerItem: AVPlayerItem) {
+    let URLAsset = playerItem.asset as AVURLAsset
+    let URL = URLAsset.URL
+    Realm.save { (realm) in
+      let clips = Clip.objectsInRealm(realm, withPredicate: NSPredicate(format: "videoURL == %@", URL.absoluteString!))
+      let clip = clips.firstObject() as Clip
+      let reel = clip.reel
+      reel?.lastWatchedClip = clip
+    }
+  }
 
   func playerDidFinishPlaying() {
     if let completion = completionHandler { completion() }

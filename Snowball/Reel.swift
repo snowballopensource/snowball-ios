@@ -12,6 +12,7 @@ class Reel: RLMObject {
   dynamic var id = ""
   dynamic var title = ""
   dynamic var participantsTitle = ""
+  dynamic var lastWatchedClip: Clip?
 
   func clips() -> RLMArray {
     return Clip.objectsInRealm(realm, withPredicate: NSPredicate(format: "reel == %@", self))
@@ -19,6 +20,13 @@ class Reel: RLMObject {
 
   func recentClip() -> Clip? {
     return clips().arraySortedByProperty("createdAt", ascending: false).firstObject() as Clip?
+  }
+
+  func playableClips() -> RLMArray {
+    if let clip = lastWatchedClip {
+      return clips().objectsWithPredicate(NSPredicate(format: "createdAt >= %@", clip.createdAt))
+    }
+    return clips()
   }
 
   // MARK: RLMObject

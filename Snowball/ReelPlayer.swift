@@ -22,9 +22,8 @@ class ReelPlayer: AVQueuePlayer {
   }
 
   convenience init(reel: Reel) {
-    // TODO: only watch unwatched clips
     var playerItems: [AVPlayerItem] = []
-    for clip in reel.clips() {
+    for clip in reel.playableClips() {
       let clip = clip as Clip
       let playerItem = AVPlayerItem(URL: NSURL(string: clip.videoURL))
       playerItems.append(playerItem)

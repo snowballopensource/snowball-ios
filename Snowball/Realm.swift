@@ -22,4 +22,9 @@ class Realm: RLMRealm {
       if let completion = completionHandler { completion() }
     }
   }
+
+  class func save(saveHandler: SaveHandler) {
+    saveInBackground(saveHandler, completionHandler: nil)
+  }
+
 }
