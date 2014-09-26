@@ -6,9 +6,8 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
-import Foundation
-
 import AVFoundation
+import Foundation
 import UIKit
 
 class LoopingPlayerView: PlayerView {
@@ -19,20 +18,20 @@ class LoopingPlayerView: PlayerView {
   }
 
   func queueVideoURL(URL: NSURL, muted: Bool = false) {
-    super.queueVideoURLs([URL])
-    player?.actionAtItemEnd = AVPlayerActionAtItemEnd.None
-    player?.muted = muted
+    let player = AVQueuePlayer(URL: URL)
+    player.actionAtItemEnd = AVPlayerActionAtItemEnd.None
+    player.muted = muted
+    self.player = player
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "playbackEnded:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
+  }
+
+  func playbackEnded(notification: NSNotification) {
+    player?.currentItem.seekToTime(kCMTimeZero)
   }
 
   // MARK: UIView
 
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
-  }
-
-  // MARK: PlayerView
-
-  override func playbackEnded(notification: NSNotification) {
-    player?.currentItem.seekToTime(kCMTimeZero)
   }
 }

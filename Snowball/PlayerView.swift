@@ -22,21 +22,6 @@ class PlayerView: UIView {
     }
   }
 
-  func queueVideoURLs(URLs: [NSURL]) {
-    var playerItems: [AVPlayerItem] = []
-    for URL in URLs {
-      let playerItem = AVPlayerItem(URL: URL)
-      playerItems.append(playerItem)
-    }
-    let player = AVQueuePlayer(items: playerItems)
-    self.player = player
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "playbackEnded:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
-  }
-
-  func playbackEnded(notification: NSNotification) {
-    requireSubclass()
-  }
-
   // MARK: UIView
 
   override class func layerClass() -> AnyClass {
