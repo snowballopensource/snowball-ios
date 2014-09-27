@@ -25,6 +25,16 @@ class API {
         NSUserDefaults.standardUserDefaults().synchronize()
       }
     }
+    static var base64EncodedString: String? {
+      get {
+        var encodedString = ""
+        if let token = authToken {
+          let credentialData = "\(token):".dataUsingEncoding(NSUTF8StringEncoding)
+          encodedString = credentialData!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.fromRaw(0)!)
+        }
+        return encodedString
+      }
+    }
   }
 
   struct Request {
@@ -36,6 +46,17 @@ class API {
       self.method = method
       self.URLString = URLString
       self.parameters = parameters
+      prepareAuthorizationHeader()
+    }
+
+    private func prepareAuthorizationHeader() {
+      var defaultHeaders = Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders ?? [:]
+      var authorizationHeaderValue: String?
+      if let base64EncodedCredential = Credential.base64EncodedString {
+        authorizationHeaderValue = "Basic \(base64EncodedCredential)"
+      }
+      defaultHeaders["Authorization"] = authorizationHeaderValue
+      Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders = defaultHeaders
     }
   }
 
@@ -97,13 +118,8 @@ class API {
     if (request.method == Alamofire.Method.GET) {
       parameterEncoding = Alamofire.ParameterEncoding.URL
     }
-    var authToken = ""
-    if let token = Credential.authToken {
-      authToken = token
-    }
     Alamofire
       .request(request.method, request.URLString, parameters: request.parameters, encoding: parameterEncoding)
-      .authenticate(user: authToken, password: "")
       .responseJSON { (request, response, JSON, error) in
         self.handleResponse(JSON: JSON, requestError: error, importer: importer, completionHandler: completionHandler)
     }
