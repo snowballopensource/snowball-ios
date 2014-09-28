@@ -39,6 +39,8 @@
 		BAB5F03F19D115DE00D49796 /* NSError+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5F03E19D115DE00D49796 /* NSError+.swift */; };
 		BAB5F04119D118B800D49796 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5F04019D118B800D49796 /* Util.swift */; };
 		BADF9CF019D78EB400A50568 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF9CEF19D78EB400A50568 /* AuthenticationViewController.swift */; };
+		BADF9CF819D79AAA00A50568 /* AuthenticationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF9CF719D79AAA00A50568 /* AuthenticationNavigationController.swift */; };
+		BADF9CFB19D79C0300A50568 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF9CFA19D79C0300A50568 /* MainNavigationController.swift */; };
 		BAFDBC5819CA9DF100D5CD4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDBC5719CA9DF100D5CD4B /* AppDelegate.swift */; };
 		BAFDBC6119CA9DF100D5CD4B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAFDBC6019CA9DF100D5CD4B /* Images.xcassets */; };
 		BAFDBC6419CA9DF100D5CD4B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAFDBC6219CA9DF100D5CD4B /* LaunchScreen.xib */; };
@@ -192,6 +194,8 @@
 		BAB5F03E19D115DE00D49796 /* NSError+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+.swift"; sourceTree = "<group>"; };
 		BAB5F04019D118B800D49796 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		BADF9CEF19D78EB400A50568 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
+		BADF9CF719D79AAA00A50568 /* AuthenticationNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationNavigationController.swift; sourceTree = "<group>"; };
+		BADF9CFA19D79C0300A50568 /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		BAFDBC5219CA9DF100D5CD4B /* Snowball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snowball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAFDBC5619CA9DF100D5CD4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAFDBC5719CA9DF100D5CD4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -320,10 +324,8 @@
 				BA74C10219D13B8B00393633 /* ManagedViewController.swift */,
 				BAB5F03719D1140A00D49796 /* ManagedTableViewController.swift */,
 				BA01CBF519D39B54004F170D /* ManagedCollectionViewController.swift */,
-				BA01CBF919D39EAF004F170D /* ReelsGridViewController.swift */,
-				BA1B2E2A19D2686A0095042E /* CameraViewController.swift */,
-				BAAD512819D4D35300087176 /* ReelPlayerViewController.swift */,
-				BADF9CEF19D78EB400A50568 /* AuthenticationViewController.swift */,
+				BADF9CFC19D79C0800A50568 /* Main */,
+				BADF9CF919D79BBD00A50568 /* Authentication */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -339,6 +341,26 @@
 				BA01CBF719D39CF5004F170D /* UICollectionViewCell+.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		BADF9CF919D79BBD00A50568 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				BADF9CF719D79AAA00A50568 /* AuthenticationNavigationController.swift */,
+				BADF9CEF19D78EB400A50568 /* AuthenticationViewController.swift */,
+			);
+			name = Authentication;
+			sourceTree = "<group>";
+		};
+		BADF9CFC19D79C0800A50568 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				BADF9CFA19D79C0300A50568 /* MainNavigationController.swift */,
+				BA01CBF919D39EAF004F170D /* ReelsGridViewController.swift */,
+				BA1B2E2A19D2686A0095042E /* CameraViewController.swift */,
+				BAAD512819D4D35300087176 /* ReelPlayerViewController.swift */,
+			);
+			name = Main;
 			sourceTree = "<group>";
 		};
 		BAFDBC4919CA9DF100D5CD4B = {
@@ -640,6 +662,7 @@
 				BA01CBFC19D39F2C004F170D /* ReelCollectionViewCell.swift in Sources */,
 				BAB5F04119D118B800D49796 /* Util.swift in Sources */,
 				BA74C10319D13B8B00393633 /* ManagedViewController.swift in Sources */,
+				BADF9CFB19D79C0300A50568 /* MainNavigationController.swift in Sources */,
 				BAFDBC5819CA9DF100D5CD4B /* AppDelegate.swift in Sources */,
 				BA01CBF619D39B54004F170D /* ManagedCollectionViewController.swift in Sources */,
 				BA19B71119CAD26600DF56A5 /* API.swift in Sources */,
@@ -649,6 +672,7 @@
 				BA01CBF819D39CF5004F170D /* UICollectionViewCell+.swift in Sources */,
 				BA1B2E2419D215760095042E /* UIImageView+.swift in Sources */,
 				BA01CBB519D3476F004F170D /* LoopingPlayerView.swift in Sources */,
+				BADF9CF819D79AAA00A50568 /* AuthenticationNavigationController.swift in Sources */,
 				BA01CBEE19D3833B004F170D /* RLMSupport.swift in Sources */,
 				BA74C10919D14A8700393633 /* UITableViewCell+.swift in Sources */,
 				BA01CBBD19D34A70004F170D /* UIView+.swift in Sources */,

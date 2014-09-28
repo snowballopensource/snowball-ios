@@ -13,12 +13,23 @@ class AuthenticationViewController: UIViewController {
   let emailTextField = UITextField()
   let passwordTextField = UITextField()
 
+  func authenticate() {
+    API.signIn(email: emailTextField.text, password: passwordTextField.text) { (error) in
+      if error != nil { error?.display(); return }
+      switchToNavigationController(MainNavigationController())
+    }
+  }
+
   // MARK: UIViewController
 
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = UIColor.whiteColor()
     navigationController?.navigationBar.translucent = false
+
+    let rightBarButton = UIBarButtonItem(title: NSLocalizedString("✓"), style: UIBarButtonItemStyle.Bordered, target: self, action: "authenticate")
+    navigationItem.rightBarButtonItem = rightBarButton
+
     emailTextField.placeholder = NSLocalizedString("Email Address")
     emailTextField.borderStyle = UITextBorderStyle.RoundedRect
     view.addSubview(emailTextField)
