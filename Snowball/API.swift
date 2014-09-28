@@ -21,6 +21,7 @@ class API {
           NSUserDefaults.standardUserDefaults().setObject(authToken, forKey: kCurrentUserAuthTokenKey)
         } else {
           NSUserDefaults.standardUserDefaults().removeObjectForKey(kCurrentUserAuthTokenKey)
+          switchToNavigationController(AuthenticationNavigationController())
         }
         NSUserDefaults.standardUserDefaults().synchronize()
       }
@@ -121,12 +122,17 @@ class API {
     Alamofire
       .request(request.method, request.URLString, parameters: request.parameters, encoding: parameterEncoding)
       .responseJSON { (request, response, JSON, error) in
-        self.handleResponse(JSON: JSON, requestError: error, importer: importer, completionHandler: completionHandler)
+        self.handleResponse(response, JSON: JSON, error: error, importer: importer, completionHandler: completionHandler)
     }
   }
 
-  class func handleResponse(#JSON: AnyObject?, requestError: NSError?, importer: Importer, completionHandler: CompletionHandler? = nil) {
-    if let error = requestError {
+  class func handleResponse(response: NSHTTPURLResponse?, JSON: AnyObject?, error: NSError?, importer: Importer, completionHandler: CompletionHandler? = nil) {
+    if response?.statusCode == 401 {
+      Credential.authToken = nil
+      if let completion = completionHandler {
+        completion(error)
+      }
+    } else if let error = error {
       if let completion = completionHandler {
         completion(error)
       }
