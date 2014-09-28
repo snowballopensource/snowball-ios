@@ -111,7 +111,8 @@ class API {
   // MARK: Helpers
 
   class func snowballURLString(path: String) -> String {
-    return "http://private-78d57-snowballapi.apiary-mock.com/api/v1/" + path
+    // return "http://private-78d57-snowballapi.apiary-mock.com/api/v1/" + path
+    return "http://snowball-staging.herokuapp.com/api/v1/" + path
   }
 
   class func performRequest(request: Request, importer: Importer, completionHandler: CompletionHandler? = nil) {
