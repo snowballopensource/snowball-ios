@@ -38,6 +38,7 @@
 		BAB5F03819D1140A00D49796 /* ManagedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5F03719D1140A00D49796 /* ManagedTableViewController.swift */; };
 		BAB5F03F19D115DE00D49796 /* NSError+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5F03E19D115DE00D49796 /* NSError+.swift */; };
 		BAB5F04119D118B800D49796 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5F04019D118B800D49796 /* Util.swift */; };
+		BADF9CF019D78EB400A50568 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF9CEF19D78EB400A50568 /* AuthenticationViewController.swift */; };
 		BAFDBC5819CA9DF100D5CD4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDBC5719CA9DF100D5CD4B /* AppDelegate.swift */; };
 		BAFDBC6119CA9DF100D5CD4B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAFDBC6019CA9DF100D5CD4B /* Images.xcassets */; };
 		BAFDBC6419CA9DF100D5CD4B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAFDBC6219CA9DF100D5CD4B /* LaunchScreen.xib */; };
@@ -190,6 +191,7 @@
 		BAB5F03719D1140A00D49796 /* ManagedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedTableViewController.swift; sourceTree = "<group>"; };
 		BAB5F03E19D115DE00D49796 /* NSError+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+.swift"; sourceTree = "<group>"; };
 		BAB5F04019D118B800D49796 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		BADF9CEF19D78EB400A50568 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		BAFDBC5219CA9DF100D5CD4B /* Snowball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snowball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAFDBC5619CA9DF100D5CD4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAFDBC5719CA9DF100D5CD4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				BA01CBF919D39EAF004F170D /* ReelsGridViewController.swift */,
 				BA1B2E2A19D2686A0095042E /* CameraViewController.swift */,
 				BAAD512819D4D35300087176 /* ReelPlayerViewController.swift */,
+				BADF9CEF19D78EB400A50568 /* AuthenticationViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -641,6 +644,7 @@
 				BA01CBF619D39B54004F170D /* ManagedCollectionViewController.swift in Sources */,
 				BA19B71119CAD26600DF56A5 /* API.swift in Sources */,
 				BAAD513319D4DB0300087176 /* ReelPlayer.swift in Sources */,
+				BADF9CF019D78EB400A50568 /* AuthenticationViewController.swift in Sources */,
 				BA1B2E2B19D2686A0095042E /* CameraViewController.swift in Sources */,
 				BA01CBF819D39CF5004F170D /* UICollectionViewCell+.swift in Sources */,
 				BA1B2E2419D215760095042E /* UIImageView+.swift in Sources */,

@@ -17,9 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    // let viewController = ReelsViewController()
-    let viewController = ReelsGridViewController()
-    window?.rootViewController = viewController
+    let authenticationViewController = AuthenticationViewController()
+    let authenticationNavigationController = UINavigationController(rootViewController: authenticationViewController)
+    window?.rootViewController = authenticationNavigationController
     window?.makeKeyAndVisible()
     return true
   }
