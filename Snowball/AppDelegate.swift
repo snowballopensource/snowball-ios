@@ -13,11 +13,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
 
+  func initialViewController() -> UIViewController {
+    if let authToken = API.Credential.authToken {
+      return MainNavigationController()
+    } else {
+      return AuthenticationNavigationController()
+    }
+  }
+
   // MARK: - UIApplicationDelegate
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    window?.rootViewController = AuthenticationNavigationController()
+    window?.rootViewController = initialViewController()
     window?.makeKeyAndVisible()
     return true
   }
