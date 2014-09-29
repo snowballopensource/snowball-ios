@@ -39,7 +39,7 @@ class ManagedCollectionViewController: ManagedViewController, UICollectionViewDa
   // MARK: UICollectionViewDataSource
 
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return Int(objects().count)
+    return Int(objectsInSection(section).count)
   }
 
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

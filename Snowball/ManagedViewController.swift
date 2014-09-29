@@ -10,7 +10,7 @@ import UIKit
 
 class ManagedViewController: UIViewController {
 
-  func objects() -> RLMArray {
+  func objectsInSection(section: Int) -> RLMArray {
     requireSubclass()
     return RLMArray(objectClassName: RLMObject.className())
   }

@@ -38,7 +38,7 @@ class ManagedTableViewController: ManagedViewController, UITableViewDataSource, 
   // MARK: UITableViewDataSource
 
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return Int(objects().count)
+    return Int(objectsInSection(section).count)
   }
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

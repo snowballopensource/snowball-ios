@@ -16,6 +16,7 @@
 		BA01CBFA19D39EAF004F170D /* ReelsGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBF919D39EAF004F170D /* ReelsGridViewController.swift */; };
 		BA01CBFC19D39F2C004F170D /* ReelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBFB19D39F2C004F170D /* ReelCollectionViewCell.swift */; };
 		BA01CC0619D3EFB1004F170D /* VideoCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CC0519D3EFB1004F170D /* VideoCache.swift */; };
+		BA0F24E019D9FE5E00DF8B75 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0F24DF19D9FE5E00DF8B75 /* UserTableViewCell.swift */; };
 		BA19B71119CAD26600DF56A5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA19B71019CAD26600DF56A5 /* API.swift */; };
 		BA1B2E2419D215760095042E /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E2319D215760095042E /* UIImageView+.swift */; };
 		BA1B2E2819D254430095042E /* CaptureSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E2719D254430095042E /* CaptureSessionController.swift */; };
@@ -172,6 +173,7 @@
 		BA01CBF919D39EAF004F170D /* ReelsGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReelsGridViewController.swift; sourceTree = "<group>"; };
 		BA01CBFB19D39F2C004F170D /* ReelCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReelCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA01CC0519D3EFB1004F170D /* VideoCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCache.swift; sourceTree = "<group>"; };
+		BA0F24DF19D9FE5E00DF8B75 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		BA19B71019CAD26600DF56A5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BA19B71719CB3A9B00DF56A5 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Vendor/Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
 		BA1B2E0319D200000095042E /* Cartography.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cartography.xcodeproj; path = Vendor/Cartography/Cartography.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -235,6 +237,15 @@
 				2EFA09D82E7944A5AF6E9DFE /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BA0F24D819D9FE5000DF8B75 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BA01CBFB19D39F2C004F170D /* ReelCollectionViewCell.swift */,
+				BA0F24DF19D9FE5E00DF8B75 /* UserTableViewCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		BA19B71619CB3A9000DF56A5 /* Vendor */ = {
@@ -326,7 +337,7 @@
 				BA1B2E3319D2B90F0095042E /* PlayerView.swift */,
 				BA01CBB419D3476F004F170D /* LoopingPlayerView.swift */,
 				BA01CBC019D36E44004F170D /* TopMediaView.swift */,
-				BA01CBFB19D39F2C004F170D /* ReelCollectionViewCell.swift */,
+				BA0F24D819D9FE5000DF8B75 /* Cells */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -667,6 +678,7 @@
 				BA1B2E2819D254430095042E /* CaptureSessionController.swift in Sources */,
 				BA4E5B3419CAAAAB00DC5ECF /* User.swift in Sources */,
 				BAAEA10619CBC03F00DB5182 /* Async.swift in Sources */,
+				BA0F24E019D9FE5E00DF8B75 /* UserTableViewCell.swift in Sources */,
 				BA1B2E3419D2B90F0095042E /* PlayerView.swift in Sources */,
 				BAB5F03819D1140A00D49796 /* ManagedTableViewController.swift in Sources */,
 				BAAD512919D4D35300087176 /* ReelPlayerViewController.swift in Sources */,

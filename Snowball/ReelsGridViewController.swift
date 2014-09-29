@@ -84,7 +84,7 @@ class ReelsGridViewController: ManagedCollectionViewController {
 
   // MARK: ManagedViewController
 
-  override func objects() -> RLMArray {
+  override func objectsInSection(section: Int) -> RLMArray {
     return Reel.allObjects()
   }
 
@@ -103,7 +103,7 @@ class ReelsGridViewController: ManagedCollectionViewController {
 
   override func configureCell(cell: UICollectionViewCell, atIndexPath indexPath: NSIndexPath) {
     let reelCell = cell as ReelCollectionViewCell
-    reelCell.configureForObject(objects().objectAtIndex(UInt(indexPath.row)))
+    reelCell.configureForObject(objectsInSection(indexPath.section).objectAtIndex(UInt(indexPath.row)))
     if !scrolling {
       reelCell.startPlayback()
     }
@@ -123,7 +123,7 @@ class ReelsGridViewController: ManagedCollectionViewController {
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     let reelCell = collectionView.cellForItemAtIndexPath(indexPath) as ReelCollectionViewCell
-    let reel = objects().objectAtIndex(UInt(indexPath.row)) as Reel
+    let reel = objectsInSection(indexPath.section).objectAtIndex(UInt(indexPath.row)) as Reel
     reelCell.showPlaybackIndicatorView()
     reelPlayerViewController?.playReel(reel) {
       reelCell.hidePlaybackIndicatorView()
