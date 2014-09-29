@@ -25,6 +25,8 @@
 		BA1B2E3019D28E9D0095042E /* Haneke.framework in Git Submodule Frameworks */ = {isa = PBXBuildFile; fileRef = BA1B2E1C19D2153E0095042E /* Haneke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA1B2E3219D290C30095042E /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E3119D290C30095042E /* CameraView.swift */; };
 		BA1B2E3419D2B90F0095042E /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E3319D2B90F0095042E /* PlayerView.swift */; };
+		BA3B49BD19D8FD180084BB4F /* FriendsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3B49BC19D8FD180084BB4F /* FriendsNavigationController.swift */; };
+		BA3B49C619D8FD660084BB4F /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3B49C519D8FD660084BB4F /* FriendsViewController.swift */; };
 		BA4E5B3419CAAAAB00DC5ECF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3319CAAAAB00DC5ECF /* User.swift */; };
 		BA4E5B3C19CAAEDE00DC5ECF /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3B19CAAEDE00DC5ECF /* Realm.swift */; };
 		BA74C10319D13B8B00393633 /* ManagedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74C10219D13B8B00393633 /* ManagedViewController.swift */; };
@@ -179,6 +181,8 @@
 		BA1B2E2A19D2686A0095042E /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BA1B2E3119D290C30095042E /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		BA1B2E3319D2B90F0095042E /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		BA3B49BC19D8FD180084BB4F /* FriendsNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsNavigationController.swift; sourceTree = "<group>"; };
+		BA3B49C519D8FD660084BB4F /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		BA4E5B3319CAAAAB00DC5ECF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BA4E5B3719CAAC0000DC5ECF /* Snowball-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snowball-Bridging-Header.h"; sourceTree = "<group>"; };
 		BA4E5B3B19CAAEDE00DC5ECF /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
@@ -284,6 +288,15 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		BA3B49C419D8FD310084BB4F /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				BA3B49BC19D8FD180084BB4F /* FriendsNavigationController.swift */,
+				BA3B49C519D8FD660084BB4F /* FriendsViewController.swift */,
+			);
+			name = Friends;
+			sourceTree = "<group>";
+		};
 		BA4E5B3519CAAAAF00DC5ECF /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,6 +338,7 @@
 				BAB5F03719D1140A00D49796 /* ManagedTableViewController.swift */,
 				BA01CBF519D39B54004F170D /* ManagedCollectionViewController.swift */,
 				BADF9CFC19D79C0800A50568 /* Main */,
+				BA3B49C419D8FD310084BB4F /* Friends */,
 				BADF9CF919D79BBD00A50568 /* Authentication */,
 			);
 			name = "View Controllers";
@@ -648,6 +662,7 @@
 				BAB5F02B19D0FA4800D49796 /* Reel.swift in Sources */,
 				BA01CBC119D36E44004F170D /* TopMediaView.swift in Sources */,
 				BA1B2E3219D290C30095042E /* CameraView.swift in Sources */,
+				BA3B49C619D8FD660084BB4F /* FriendsViewController.swift in Sources */,
 				BA4E5B3C19CAAEDE00DC5ECF /* Realm.swift in Sources */,
 				BA1B2E2819D254430095042E /* CaptureSessionController.swift in Sources */,
 				BA4E5B3419CAAAAB00DC5ECF /* User.swift in Sources */,
@@ -673,6 +688,7 @@
 				BA1B2E2419D215760095042E /* UIImageView+.swift in Sources */,
 				BA01CBB519D3476F004F170D /* LoopingPlayerView.swift in Sources */,
 				BADF9CF819D79AAA00A50568 /* AuthenticationNavigationController.swift in Sources */,
+				BA3B49BD19D8FD180084BB4F /* FriendsNavigationController.swift in Sources */,
 				BA01CBEE19D3833B004F170D /* RLMSupport.swift in Sources */,
 				BA74C10919D14A8700393633 /* UITableViewCell+.swift in Sources */,
 				BA01CBBD19D34A70004F170D /* UIView+.swift in Sources */,

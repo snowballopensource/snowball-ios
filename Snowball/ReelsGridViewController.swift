@@ -11,6 +11,7 @@ import UIKit
 
 class ReelsGridViewController: ManagedCollectionViewController {
   private let topView = TopMediaView()
+  private let friendsButton = UIButton()
   private var scrolling = false
   private var reelPlayerViewController: ReelPlayerViewController? {
     get {
@@ -21,6 +22,10 @@ class ReelsGridViewController: ManagedCollectionViewController {
       }
       return nil
     }
+  }
+
+  func switchToFriendsNavigationController() {
+    switchToNavigationController(FriendsNavigationController())
   }
 
   // MARK: -
@@ -39,6 +44,10 @@ class ReelsGridViewController: ManagedCollectionViewController {
     topView.playerView = reelPlayerViewController.view as? PlayerView
     topView.addFullViewSubview(topView.playerView!)
     view.addSubview(topView)
+
+    friendsButton.backgroundColor = UIColor.purpleColor()
+    friendsButton.addTarget(self, action: "switchToFriendsNavigationController", forControlEvents: UIControlEvents.TouchUpInside)
+    topView.addSubview(friendsButton)
   }
 
   override func viewWillLayoutSubviews() {
@@ -48,6 +57,12 @@ class ReelsGridViewController: ManagedCollectionViewController {
       topView.bottom == topView.top + Float(UIScreen.mainScreen().bounds.width)
       topView.left == topView.superview!.left
       topView.right == topView.superview!.right
+    }
+    layout(friendsButton) { (friendsButton) in
+      friendsButton.top == friendsButton.superview!.top + 10
+      friendsButton.left == friendsButton.superview!.left + 10
+      friendsButton.width == 44
+      friendsButton.height == 44
     }
     layout(collectionView, topView) { (collectionView, topView) in
       collectionView.top == topView.bottom
