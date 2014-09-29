@@ -9,6 +9,10 @@
 import Foundation
 
 extension RLMObject {
+  class func findByID(id: String) -> AnyObject? {
+    return findByID(id, inRealm: RLMRealm.defaultRealm())
+  }
+
   class func findByID(id: String, inRealm realm: RLMRealm) -> AnyObject? {
     let objects = objectsInRealm(realm, withPredicate: NSPredicate(format: "id = %@", id))
     return objects.firstObject()

@@ -21,7 +21,6 @@ class API {
           NSUserDefaults.standardUserDefaults().setObject(authToken, forKey: kCurrentUserAuthTokenKey)
         } else {
           NSUserDefaults.standardUserDefaults().removeObjectForKey(kCurrentUserAuthTokenKey)
-          switchToNavigationController(AuthenticationNavigationController())
         }
         NSUserDefaults.standardUserDefaults().synchronize()
       }
@@ -129,7 +128,7 @@ class API {
 
   class func handleResponse(response: NSHTTPURLResponse?, JSON: AnyObject?, error: NSError?, importer: Importer, completionHandler: CompletionHandler? = nil) {
     if response?.statusCode == 401 {
-      Credential.authToken = nil
+      User.currentUser = nil
       if let completion = completionHandler {
         completion(error)
       }

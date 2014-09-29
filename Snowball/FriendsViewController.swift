@@ -22,9 +22,8 @@ class FriendsViewController: ManagedTableViewController {
 
   override func objectsInSection(section: Int) -> RLMArray {
     switch section {
-      // TODO: return current user
-    case 0: return User.allObjects()
-    default: return User.allObjects()
+      case 0: return User.currentUserManagedArray()
+      default: return User.allObjects()
     }
   }
 

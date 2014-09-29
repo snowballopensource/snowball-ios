@@ -17,6 +17,44 @@ class User: RLMObject {
   dynamic var email = ""
   dynamic var phoneNumber = ""
 
+  private class var currentUserID: String? {
+    get {
+      let kCurrentUserIDKey = "CurrentUserID"
+      return NSUserDefaults.standardUserDefaults().objectForKey(kCurrentUserIDKey) as String?
+    }
+    set {
+      let kCurrentUserIDKey = "CurrentUserID"
+      if let id = newValue {
+        NSUserDefaults.standardUserDefaults().setObject(id, forKey: kCurrentUserIDKey)
+      } else {
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(kCurrentUserIDKey)
+        API.Credential.authToken = nil
+        switchToNavigationController(AuthenticationNavigationController())
+      }
+      NSUserDefaults.standardUserDefaults().synchronize()
+    }
+  }
+
+  class var currentUser: User? {
+    get {
+      if let id = currentUserID {
+        return User.findByID(id) as User?
+      }
+      return nil
+    }
+    set {
+      currentUserID = newValue?.id
+    }
+  }
+
+  class func currentUserManagedArray() -> RLMArray {
+    var id = ""
+    if let currentUserID = User.currentUserID {
+      id = currentUserID
+    }
+    return User.objectsWithPredicate(NSPredicate(format: "id == %@", id))
+  }
+
   // MARK: RLMObject
 
   override func updateFromDictionary(dictionary: [String: AnyObject]) {
