@@ -10,6 +10,8 @@ import Foundation
 import Haneke
 
 extension UIImageView {
+  typealias CompletionHandler = (NSError?) -> ()
+
   func setImageFromURL(URL: NSURL, placeholder: UIImage? = nil, completionHandler: CompletionHandler? = nil) {
     let cache = Haneke.sharedDataCache
     let fetcher = NetworkFetcher<NSData>(URL: URL)

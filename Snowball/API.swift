@@ -10,6 +10,8 @@ import Alamofire
 import Foundation
 
 class API {
+  typealias CompletionHandler = (NSError?) -> ()
+
   struct Credential {
     static let kCurrentUserAuthTokenKey = "CurrentUserAuthToken"
     static var authToken: String? {
