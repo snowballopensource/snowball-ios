@@ -8,7 +8,7 @@
 
 import Foundation
 
-class User: RLMObject {
+class User: RLMObject, JSONObjectSerializable {
   dynamic var id = ""
   dynamic var name = ""
   dynamic var username = ""
@@ -55,32 +55,6 @@ class User: RLMObject {
     return User.objectsWithPredicate(NSPredicate(format: "id == %@", id))
   }
 
-  // MARK: RLMObject
-
-  override func updateFromDictionary(dictionary: [String: AnyObject]) {
-    if let id = dictionary["id"] as AnyObject? as? String {
-      self.id = id
-    }
-    if let name = dictionary["name"] as AnyObject? as? String {
-      self.name = name
-    }
-    if let username = dictionary["username"] as AnyObject? as? String {
-      self.username = username
-    }
-    if let avatarURL = dictionary["avatar_url"] as AnyObject? as? String {
-      self.avatarURL = avatarURL
-    }
-    if let youFollow = dictionary["you_follow"] as AnyObject? as? Bool {
-      self.youFollow = youFollow
-    }
-    if let email = dictionary["email"] as AnyObject? as? String {
-      self.email = email
-    }
-    if let phoneNumber = dictionary["phone_number"] as AnyObject? as? String {
-      self.phoneNumber = phoneNumber
-    }
-  }
-
   // MARK: JSONObjectSerializable
 
   class func objectFromJSON(JSON: [String: AnyObject]) -> AnyObject {
@@ -112,8 +86,6 @@ class User: RLMObject {
     }
     return user!
   }
-
-  // MARK: JSONArraySerializable
 
   class func arrayFromJSON(JSON: [String: AnyObject]) -> [AnyObject] {
     var users = [AnyObject]()

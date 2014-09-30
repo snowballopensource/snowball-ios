@@ -176,9 +176,6 @@ struct APICredential {
 
 protocol JSONObjectSerializable: class {
   class func objectFromJSON(JSON: [String: AnyObject]) -> AnyObject
-}
-
-protocol JSONArraySerializable: class {
   class func arrayFromJSON(JSON: [String: AnyObject]) -> [AnyObject]
 }
 
@@ -188,7 +185,6 @@ extension Alamofire.Request {
       let JSONSerializer = Request.JSONResponseSerializer()
       let (JSON: AnyObject?, serializationError) = JSONSerializer(request, response, data)
       if response != nil && JSON != nil {
-        // TODO: handle import from both { "reel": { "id": "12345" } } and { "id": "12345" }
         let object: AnyObject = T.objectFromJSON(JSON as [String: AnyObject])
         RLMRealm.defaultRealm().beginWriteTransaction()
         RLMRealm.defaultRealm().addObject(object as RLMObject)
@@ -202,7 +198,7 @@ extension Alamofire.Request {
     }
   }
 
-  func responseObjects<T: JSONArraySerializable>(completionHandler: ([T]?, NSError?) -> Void) -> Self {
+  func responseObjects<T: JSONObjectSerializable>(completionHandler: ([T]?, NSError?) -> Void) -> Self {
     let serializer: Serializer = { (request, response, data) in
       let JSONSerializer = Request.JSONResponseSerializer()
       let (JSON: AnyObject?, serializationError) = JSONSerializer(request, response, data)

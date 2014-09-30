@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Clip: RLMObject, JSONObjectSerializable, JSONArraySerializable {
+class Clip: RLMObject, JSONObjectSerializable {
   dynamic var id = ""
   dynamic var videoURL = ""
   dynamic var createdAt = NSDate(timeIntervalSince1970: 0)
@@ -38,8 +38,6 @@ class Clip: RLMObject, JSONObjectSerializable, JSONArraySerializable {
     }
     return clip!
   }
-
-  // MARK: JSONArraySerializable
 
   class func arrayFromJSON(JSON: [String: AnyObject]) -> [AnyObject] {
     var clips = [AnyObject]()

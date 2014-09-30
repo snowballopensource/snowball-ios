@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Reel: RLMObject, JSONObjectSerializable, JSONArraySerializable {
+class Reel: RLMObject, JSONObjectSerializable {
   dynamic var id = ""
   dynamic var title = ""
   dynamic var participantsTitle = ""
@@ -51,8 +51,6 @@ class Reel: RLMObject, JSONObjectSerializable, JSONArraySerializable {
     }
     return reel!
   }
-
-  // MARK: JSONArraySerializable
 
   class func arrayFromJSON(JSON: [String: AnyObject]) -> [AnyObject] {
     var reels = [AnyObject]()
