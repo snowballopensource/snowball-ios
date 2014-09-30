@@ -24,3 +24,14 @@ func switchToNavigationController(navigationController: UINavigationController) 
     UIView.setAnimationsEnabled(oldState)
   }, completion: nil)
 }
+
+func JSONForPossibleKeys(possibleKeys: [String], inJSON JSON: [String: AnyObject]) -> [String: AnyObject] {
+  var objectJSON = JSON
+  for possibleKey in possibleKeys {
+    if let objectForKey = objectJSON[possibleKey] as AnyObject? as? [String: AnyObject] {
+      objectJSON = objectForKey
+      break
+    }
+  }
+  return JSON
+}

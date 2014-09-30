@@ -44,8 +44,8 @@ class ReelPlayerViewController: UIViewController, ReelPlayerDelegate {
   func playerItemDidPlayToEndTime(playerItem: AVPlayerItem) {
     let URLAsset = playerItem.asset as AVURLAsset
     let URL = URLAsset.URL
-    Realm.save { (realm) in
-      let clips = Clip.objectsInRealm(realm, withPredicate: NSPredicate(format: "videoURL == %@", URL.absoluteString!))
+    Async.background {
+      let clips = Clip.objectsWithPredicate(NSPredicate(format: "videoURL == %@", URL.absoluteString!))
       let clip = clips.firstObject() as Clip
       let reel = clip.reel
       reel?.lastWatchedClip = clip

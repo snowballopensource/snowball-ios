@@ -19,27 +19,30 @@ class Clip: RLMObject, JSONObjectSerializable {
   // MARK: JSONObjectSerializable
 
   class func objectFromJSON(JSON: [String: AnyObject]) -> AnyObject {
+    let objectJSON = JSONForPossibleKeys(["clip"], inJSON: JSON)
     var clip: Clip? = nil
-    if let id = JSON["id"] as AnyObject? as? String {
-      if let existingClip = Clip.findByID(id) as? Clip{
+    if let id = objectJSON["id"] as AnyObject? as? String {
+      if let existingClip = Clip.findByID(id) as? Clip {
         clip = existingClip
       } else {
+        clip = Clip()
+        RLMRealm.defaultRealm().addObject(clip)
         clip!.id = id
       }
     }
-    if let videoURL = JSON["video_url"] as AnyObject? as? String {
+    if let videoURL = objectJSON["video_url"] as AnyObject? as? String {
       clip!.videoURL = videoURL
     }
-    if let createdAt = JSON["created_at"] as AnyObject? as? Double  {
+    if let createdAt = objectJSON["created_at"] as AnyObject? as? Double  {
       clip!.createdAt = NSDate(timeIntervalSince1970: createdAt)
     }
-    if let reelID = JSON["reel_id"] as AnyObject? as? String {
+    if let reelID = objectJSON["reel_id"] as AnyObject? as? String {
       clip!.reel = Reel.objectFromJSON(["id": reelID]) as? Reel
     }
     return clip!
   }
 
-  class func arrayFromJSON(JSON: [String: AnyObject]) -> [AnyObject] {
+  class func objectsFromJSON(JSON: [String: AnyObject]) -> [AnyObject] {
     var clips = [AnyObject]()
     if let clipsJSON = JSON["clips"] as AnyObject? as? [AnyObject] {
       for JSONObject in clipsJSON {

@@ -176,7 +176,7 @@ struct APICredential {
 
 protocol JSONObjectSerializable: class {
   class func objectFromJSON(JSON: [String: AnyObject]) -> AnyObject
-  class func arrayFromJSON(JSON: [String: AnyObject]) -> [AnyObject]
+  class func objectsFromJSON(JSON: [String: AnyObject]) -> [AnyObject]
 }
 
 extension Alamofire.Request {
@@ -185,9 +185,8 @@ extension Alamofire.Request {
       let JSONSerializer = Request.JSONResponseSerializer()
       let (JSON: AnyObject?, serializationError) = JSONSerializer(request, response, data)
       if response != nil && JSON != nil {
-        let object: AnyObject = T.objectFromJSON(JSON as [String: AnyObject])
         RLMRealm.defaultRealm().beginWriteTransaction()
-        RLMRealm.defaultRealm().addObject(object as RLMObject)
+        let object = T.objectFromJSON(JSON as [String: AnyObject]) as RLMObject
         RLMRealm.defaultRealm().commitWriteTransaction()
         return (object, nil)
       }
@@ -203,9 +202,8 @@ extension Alamofire.Request {
       let JSONSerializer = Request.JSONResponseSerializer()
       let (JSON: AnyObject?, serializationError) = JSONSerializer(request, response, data)
       if response != nil && JSON != nil {
-        let objects = T.arrayFromJSON(JSON as [String: AnyObject])
         RLMRealm.defaultRealm().beginWriteTransaction()
-        RLMRealm.defaultRealm().addObjectsFromArray(objects)
+        let objects = T.objectsFromJSON(JSON as [String: AnyObject])
         RLMRealm.defaultRealm().commitWriteTransaction()
         return (objects, nil)
       }

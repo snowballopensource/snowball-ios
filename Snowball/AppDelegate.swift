@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
 
   func initialViewController() -> UIViewController {
-    if let authToken = API.Credential.authToken {
+    if let authToken = APICredential.authToken {
       return MainNavigationController()
     } else {
       return AuthenticationNavigationController()
