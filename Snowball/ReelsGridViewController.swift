@@ -89,7 +89,7 @@ class ReelsGridViewController: ManagedCollectionViewController {
   }
 
   override func reloadData() {
-    API.getReelStream { (error) in
+    APIRequest(Router.GetReelStream).responseObjects { (request, response, reels: [Reel]?, error) -> Void in
       if error != nil { error?.display(); return }
       self.collectionView.reloadData()
     }

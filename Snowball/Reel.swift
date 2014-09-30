@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Reel: RLMObject {
+class Reel: RLMObject, JSONObjectSerializable, JSONArraySerializable {
   dynamic var id = ""
   dynamic var title = ""
   dynamic var participantsTitle = ""
@@ -27,6 +27,35 @@ class Reel: RLMObject {
       return clips().objectsWithPredicate(NSPredicate(format: "createdAt >= %@", clip.createdAt))
     }
     return clips()
+  }
+
+  // MARK: JSONObjectSerializable
+
+  required convenience init(JSON: [String : AnyObject]) {
+    self.init()
+    if let id = JSON["id"] as AnyObject? as? String {
+      self.id = id
+    }
+    if let title = JSON["title"] as AnyObject? as? String {
+      self.title = title
+    }
+    if let participantsTitle = JSON["participants_title"] as AnyObject? as? String {
+      self.participantsTitle = participantsTitle
+    }
+  }
+
+  // MARK: JSONArraySerializable
+
+  class func arrayFromJSON(JSON: [String: AnyObject]) -> [AnyObject] {
+    var reels = [AnyObject]()
+    if let reelsJSON = JSON["reels"] as AnyObject? as? [AnyObject] {
+      for JSONObject in reelsJSON {
+        if let reelJSON = JSONObject as AnyObject? as? [String: AnyObject] {
+          reels.append(Reel(JSON: reelJSON))
+        }
+      }
+    }
+    return reels
   }
 
   // MARK: RLMObject
