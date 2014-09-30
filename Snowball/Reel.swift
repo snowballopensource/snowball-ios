@@ -31,17 +31,25 @@ class Reel: RLMObject, JSONObjectSerializable, JSONArraySerializable {
 
   // MARK: JSONObjectSerializable
 
-  required convenience init(JSON: [String : AnyObject]) {
-    self.init()
+  class func objectFromJSON(JSON: [String: AnyObject]) -> AnyObject {
+    var reel: Reel? = nil
     if let id = JSON["id"] as AnyObject? as? String {
-      self.id = id
+      if let existingReel = Reel.findByID(id) as? Reel{
+        reel = existingReel
+      } else {
+        reel!.id = id
+      }
     }
     if let title = JSON["title"] as AnyObject? as? String {
-      self.title = title
+      reel!.title = title
     }
     if let participantsTitle = JSON["participants_title"] as AnyObject? as? String {
-      self.participantsTitle = participantsTitle
+      reel!.participantsTitle = participantsTitle
     }
+    if let recentClipJSON = JSON["recent_clip"] as AnyObject? as [String: AnyObject]? {
+      Clip.objectFromJSON(recentClipJSON)
+    }
+    return reel!
   }
 
   // MARK: JSONArraySerializable
@@ -51,27 +59,10 @@ class Reel: RLMObject, JSONObjectSerializable, JSONArraySerializable {
     if let reelsJSON = JSON["reels"] as AnyObject? as? [AnyObject] {
       for JSONObject in reelsJSON {
         if let reelJSON = JSONObject as AnyObject? as? [String: AnyObject] {
-          reels.append(Reel(JSON: reelJSON))
+          reels.append(Reel.objectFromJSON(reelJSON))
         }
       }
     }
     return reels
-  }
-
-  // MARK: RLMObject
-
-  override func updateFromDictionary(dictionary: [String: AnyObject]) {
-    if let id = dictionary["id"] as AnyObject? as? String {
-      self.id = id
-    }
-    if let title = dictionary["title"] as AnyObject? as? String {
-      self.title = title
-    }
-    if let participantsTitle = dictionary["participants_title"] as AnyObject? as? String {
-      self.participantsTitle = participantsTitle
-    }
-    if let recentClipDictionary = dictionary["recent_clip"] as AnyObject? as [String: AnyObject]? {
-      Clip.importFromDictionary(recentClipDictionary, inRealm: self.realm)
-    }
   }
 }

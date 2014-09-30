@@ -80,4 +80,50 @@ class User: RLMObject {
       self.phoneNumber = phoneNumber
     }
   }
+
+  // MARK: JSONObjectSerializable
+
+  class func objectFromJSON(JSON: [String: AnyObject]) -> AnyObject {
+    var user: User? = nil
+    if let id = JSON["id"] as AnyObject? as? String {
+      if let existingUser = User.findByID(id) as? User{
+        user = existingUser
+      } else {
+        user!.id = id
+      }
+    }
+    if let name = JSON["name"] as AnyObject? as? String {
+      user!.name = name
+    }
+    if let username = JSON["username"] as AnyObject? as? String {
+      user!.username = username
+    }
+    if let avatarURL = JSON["avatar_url"] as AnyObject? as? String {
+      user!.avatarURL = avatarURL
+    }
+    if let youFollow = JSON["you_follow"] as AnyObject? as? Bool {
+      user!.youFollow = youFollow
+    }
+    if let email = JSON["email"] as AnyObject? as? String {
+      user!.email = email
+    }
+    if let phoneNumber = JSON["phone_number"] as AnyObject? as? String {
+      user!.phoneNumber = phoneNumber
+    }
+    return user!
+  }
+
+  // MARK: JSONArraySerializable
+
+  class func arrayFromJSON(JSON: [String: AnyObject]) -> [AnyObject] {
+    var users = [AnyObject]()
+    if let usersJSON = JSON["users"] as AnyObject? as? [AnyObject] {
+      for JSONObject in usersJSON {
+        if let userJSON = JSONObject as AnyObject? as? [String: AnyObject] {
+          users.append(User.objectFromJSON(userJSON))
+        }
+      }
+    }
+    return users
+  }
 }

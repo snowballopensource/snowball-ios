@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Clip: RLMObject {
+class Clip: RLMObject, JSONObjectSerializable, JSONArraySerializable {
   dynamic var id = ""
   dynamic var videoURL = ""
   dynamic var createdAt = NSDate(timeIntervalSince1970: 0)
@@ -16,20 +16,40 @@ class Clip: RLMObject {
   dynamic var user: User?
   dynamic var reel: Reel?
 
-  // MARK: RLMObject
+  // MARK: JSONObjectSerializable
 
-  override func updateFromDictionary(dictionary: [String: AnyObject]) {
-    if let id = dictionary["id"] as AnyObject? as? String {
-      self.id = id
+  class func objectFromJSON(JSON: [String: AnyObject]) -> AnyObject {
+    var clip: Clip? = nil
+    if let id = JSON["id"] as AnyObject? as? String {
+      if let existingClip = Clip.findByID(id) as? Clip{
+        clip = existingClip
+      } else {
+        clip!.id = id
+      }
     }
-    if let videoURL = dictionary["video_url"] as AnyObject? as? String {
-      self.videoURL = videoURL
+    if let videoURL = JSON["video_url"] as AnyObject? as? String {
+      clip!.videoURL = videoURL
     }
-    if let createdAt = dictionary["created_at"] as AnyObject? as? Double  {
-      self.createdAt = NSDate(timeIntervalSince1970: createdAt)
+    if let createdAt = JSON["created_at"] as AnyObject? as? Double  {
+      clip!.createdAt = NSDate(timeIntervalSince1970: createdAt)
     }
-    if let reelID = dictionary["reel_id"] as AnyObject? as? String {
-      self.reel = Reel.importFromDictionary(["id": reelID], inRealm: self.realm) as Reel?
+    if let reelID = JSON["reel_id"] as AnyObject? as? String {
+      clip!.reel = Reel.objectFromJSON(["id": reelID]) as? Reel
     }
+    return clip!
+  }
+
+  // MARK: JSONArraySerializable
+
+  class func arrayFromJSON(JSON: [String: AnyObject]) -> [AnyObject] {
+    var clips = [AnyObject]()
+    if let clipsJSON = JSON["clips"] as AnyObject? as? [AnyObject] {
+      for JSONObject in clipsJSON {
+        if let clipJSON = JSONObject as AnyObject? as? [String: AnyObject] {
+          clips.append(Clip.objectFromJSON(clipJSON))
+        }
+      }
+    }
+    return clips
   }
 }

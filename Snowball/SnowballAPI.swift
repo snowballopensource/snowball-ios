@@ -175,7 +175,7 @@ struct APICredential {
 // https://github.com/Alamofire/Alamofire#generic-response-object-serialization
 
 protocol JSONObjectSerializable: class {
-  init(JSON: [String: AnyObject])
+  class func objectFromJSON(JSON: [String: AnyObject]) -> AnyObject
 }
 
 protocol JSONArraySerializable: class {
@@ -183,12 +183,13 @@ protocol JSONArraySerializable: class {
 }
 
 extension Alamofire.Request {
-  func responseObject<T: JSONObjectSerializable>(completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, NSError?) -> Void) -> Self {
+  func responseObject<T: JSONObjectSerializable>(completionHandler: (T?, NSError?) -> Void) -> Self {
     let serializer: Serializer = { (request, response, data) in
       let JSONSerializer = Request.JSONResponseSerializer()
       let (JSON: AnyObject?, serializationError) = JSONSerializer(request, response, data)
       if response != nil && JSON != nil {
-        let object: AnyObject = T(JSON: JSON as [String: AnyObject]) as AnyObject
+        // TODO: handle import from both { "reel": { "id": "12345" } } and { "id": "12345" }
+        let object: AnyObject = T.objectFromJSON(JSON as [String: AnyObject])
         RLMRealm.defaultRealm().beginWriteTransaction()
         RLMRealm.defaultRealm().addObject(object as RLMObject)
         RLMRealm.defaultRealm().commitWriteTransaction()
@@ -197,11 +198,11 @@ extension Alamofire.Request {
       return (nil, serializationError)
     }
     return response(serializer: serializer) { (request, response, object, error) in
-      completionHandler(request, response, object as? T, error)
+      completionHandler(object as? T, error)
     }
   }
 
-  func responseObjects<T: JSONArraySerializable>(completionHandler: (NSURLRequest, NSHTTPURLResponse?, [T]?, NSError?) -> Void) -> Self {
+  func responseObjects<T: JSONArraySerializable>(completionHandler: ([T]?, NSError?) -> Void) -> Self {
     let serializer: Serializer = { (request, response, data) in
       let JSONSerializer = Request.JSONResponseSerializer()
       let (JSON: AnyObject?, serializationError) = JSONSerializer(request, response, data)
@@ -215,7 +216,7 @@ extension Alamofire.Request {
       return (nil, serializationError)
     }
     return response(serializer: serializer) { (request, response, objects, error) in
-      completionHandler(request, response, objects as? [T], error)
+      completionHandler(objects as? [T], error)
     }
   }
 }
