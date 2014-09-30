@@ -17,6 +17,8 @@
 		BA01CBFC19D39F2C004F170D /* ReelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBFB19D39F2C004F170D /* ReelCollectionViewCell.swift */; };
 		BA01CC0619D3EFB1004F170D /* VideoCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CC0519D3EFB1004F170D /* VideoCache.swift */; };
 		BA0F24E019D9FE5E00DF8B75 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0F24DF19D9FE5E00DF8B75 /* UserTableViewCell.swift */; };
+		BA0F24E219DA255600DF8B75 /* SnowballAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0F24E119DA255600DF8B75 /* SnowballAPI.swift */; };
+		BA0F24E419DA5B7100DF8B75 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0F24E319DA5B7100DF8B75 /* String+.swift */; };
 		BA19B71119CAD26600DF56A5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA19B71019CAD26600DF56A5 /* API.swift */; };
 		BA1B2E2419D215760095042E /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E2319D215760095042E /* UIImageView+.swift */; };
 		BA1B2E2819D254430095042E /* CaptureSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E2719D254430095042E /* CaptureSessionController.swift */; };
@@ -174,6 +176,8 @@
 		BA01CBFB19D39F2C004F170D /* ReelCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReelCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA01CC0519D3EFB1004F170D /* VideoCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCache.swift; sourceTree = "<group>"; };
 		BA0F24DF19D9FE5E00DF8B75 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		BA0F24E119DA255600DF8B75 /* SnowballAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballAPI.swift; sourceTree = "<group>"; };
+		BA0F24E319DA5B7100DF8B75 /* String+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		BA19B71019CAD26600DF56A5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BA19B71719CB3A9B00DF56A5 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Vendor/Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
 		BA1B2E0319D200000095042E /* Cartography.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cartography.xcodeproj; path = Vendor/Cartography/Cartography.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -294,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				BA19B71019CAD26600DF56A5 /* API.swift */,
+				BA0F24E119DA255600DF8B75 /* SnowballAPI.swift */,
 				BA1B2E2719D254430095042E /* CaptureSessionController.swift */,
 			);
 			name = Controllers;
@@ -364,6 +369,7 @@
 				BA74C10819D14A8700393633 /* UITableViewCell+.swift */,
 				BA01CBBC19D34A70004F170D /* UIView+.swift */,
 				BA01CBF719D39CF5004F170D /* UICollectionViewCell+.swift */,
+				BA0F24E319DA5B7100DF8B75 /* String+.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -674,9 +680,11 @@
 				BA01CBC119D36E44004F170D /* TopMediaView.swift in Sources */,
 				BA1B2E3219D290C30095042E /* CameraView.swift in Sources */,
 				BA3B49C619D8FD660084BB4F /* FriendsViewController.swift in Sources */,
+				BA0F24E419DA5B7100DF8B75 /* String+.swift in Sources */,
 				BA4E5B3C19CAAEDE00DC5ECF /* Realm.swift in Sources */,
 				BA1B2E2819D254430095042E /* CaptureSessionController.swift in Sources */,
 				BA4E5B3419CAAAAB00DC5ECF /* User.swift in Sources */,
+				BA0F24E219DA255600DF8B75 /* SnowballAPI.swift in Sources */,
 				BAAEA10619CBC03F00DB5182 /* Async.swift in Sources */,
 				BA0F24E019D9FE5E00DF8B75 /* UserTableViewCell.swift in Sources */,
 				BA1B2E3419D2B90F0095042E /* PlayerView.swift in Sources */,
