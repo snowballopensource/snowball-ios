@@ -8,7 +8,7 @@
 
 import Foundation
 
-class User: RLMObject, JSONObjectSerializable {
+class User: RLMObject, JSONImportable {
   dynamic var id = ""
   dynamic var name = ""
   dynamic var username = ""
@@ -90,7 +90,7 @@ class User: RLMObject, JSONObjectSerializable {
     return user!
   }
 
-  class func objectsFromJSON(JSON: [String: AnyObject]) -> [AnyObject] {
+  class func arrayFromJSON(JSON: [String: AnyObject]) -> [AnyObject] {
     var users = [AnyObject]()
     if let usersJSON = JSON["users"] as AnyObject? as? [AnyObject] {
       for JSONObject in usersJSON {

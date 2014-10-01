@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Reel: RLMObject, JSONObjectSerializable {
+class Reel: RLMObject, JSONImportable {
   dynamic var id = ""
   dynamic var title = ""
   dynamic var participantsTitle = ""
@@ -55,7 +55,7 @@ class Reel: RLMObject, JSONObjectSerializable {
     return reel!
   }
 
-  class func objectsFromJSON(JSON: [String: AnyObject]) -> [AnyObject] {
+  class func arrayFromJSON(JSON: [String: AnyObject]) -> [AnyObject] {
     var reels = [AnyObject]()
     if let reelsJSON = JSON["reels"] as AnyObject? as? [AnyObject] {
       for JSONObject in reelsJSON {
