@@ -89,10 +89,10 @@ class ReelsGridViewController: ManagedCollectionViewController {
   }
 
   override func reloadData() {
-    APIRequest(Router.GetReelStream).responseObjects { (reels: [Reel]?, error) -> Void in
-      if error != nil { error?.display(); return }
-      self.collectionView.reloadData()
-    }
+//    APIRequest(APIRouter.GetReelStream).responseObjects { (reels: [Reel]?, error) -> Void in
+//      if error != nil { error?.display(); return }
+//      self.collectionView.reloadData()
+//    }
   }
 
   // MARK: ManagedCollectionViewController

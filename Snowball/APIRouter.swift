@@ -1,5 +1,5 @@
 //
-//  SnowballAPI.swift
+//  APIRouter.swift
 //  Snowball
 //
 //  Created by James Martinez on 9/29/14.
@@ -9,11 +9,7 @@
 import Alamofire
 import Foundation
 
-func APIRequest(URLRequest: URLRequestConvertible) -> Request {
-  return Alamofire.request(URLRequest)
-}
-
-enum Router: URLRequestConvertible {
+enum APIRouter: URLRequestConvertible {
   static let baseURLString = "http://snowball-staging.herokuapp.com/api/v1/"
 
   // Authentication
@@ -139,7 +135,7 @@ enum Router: URLRequestConvertible {
   // MARK: URLRequestConvertible
 
   var URLRequest: NSURLRequest {
-    let URL = NSURL(string: Router.baseURLString)
+    let URL = NSURL(string: APIRouter.baseURLString)
     let mutableURLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(path))
     mutableURLRequest.HTTPMethod = method.toRaw()
 
@@ -151,66 +147,5 @@ enum Router: URLRequestConvertible {
       return encoding.encode(mutableURLRequest, parameters: parameters).0
     }
     return mutableURLRequest
-  }
-}
-
-struct APICredential {
-  static let kCurrentUserAuthTokenKey = "CurrentUserAuthToken"
-  static var authToken: String? {
-    get {
-    return NSUserDefaults.standardUserDefaults().objectForKey(kCurrentUserAuthTokenKey) as String?
-    }
-    set {
-      if let authToken = newValue {
-        NSUserDefaults.standardUserDefaults().setObject(authToken, forKey: kCurrentUserAuthTokenKey)
-      } else {
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(kCurrentUserAuthTokenKey)
-      }
-      NSUserDefaults.standardUserDefaults().synchronize()
-    }
-  }
-}
-
-// MARK: Serialization
-// https://github.com/Alamofire/Alamofire#generic-response-object-serialization
-
-protocol JSONObjectSerializable: class {
-  class func objectFromJSON(JSON: [String: AnyObject]) -> AnyObject
-  class func objectsFromJSON(JSON: [String: AnyObject]) -> [AnyObject]
-}
-
-extension Alamofire.Request {
-  func responseObject<T: JSONObjectSerializable>(completionHandler: (T?, NSError?) -> Void) -> Self {
-    let serializer: Serializer = { (request, response, data) in
-      let JSONSerializer = Request.JSONResponseSerializer()
-      let (JSON: AnyObject?, serializationError) = JSONSerializer(request, response, data)
-      if response != nil && JSON != nil {
-        RLMRealm.defaultRealm().beginWriteTransaction()
-        let object = T.objectFromJSON(JSON as [String: AnyObject]) as RLMObject
-        RLMRealm.defaultRealm().commitWriteTransaction()
-        return (object, nil)
-      }
-      return (nil, serializationError)
-    }
-    return response(serializer: serializer) { (request, response, object, error) in
-      completionHandler(object as? T, error)
-    }
-  }
-
-  func responseObjects<T: JSONObjectSerializable>(completionHandler: ([T]?, NSError?) -> Void) -> Self {
-    let serializer: Serializer = { (request, response, data) in
-      let JSONSerializer = Request.JSONResponseSerializer()
-      let (JSON: AnyObject?, serializationError) = JSONSerializer(request, response, data)
-      if response != nil && JSON != nil {
-        RLMRealm.defaultRealm().beginWriteTransaction()
-        let objects = T.objectsFromJSON(JSON as [String: AnyObject])
-        RLMRealm.defaultRealm().commitWriteTransaction()
-        return (objects, nil)
-      }
-      return (nil, serializationError)
-    }
-    return response(serializer: serializer) { (request, response, objects, error) in
-      completionHandler(objects as? [T], error)
-    }
   }
 }
