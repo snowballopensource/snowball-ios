@@ -258,6 +258,7 @@
 				BA1B2E1419D2153E0095042E /* Haneke.xcodeproj */,
 			);
 			name = Vendor;
+			path = Snowball;
 			sourceTree = "<group>";
 		};
 		BA19B71819CB3A9B00DF56A5 /* Products */ = {
@@ -393,6 +394,7 @@
 			children = (
 				BAFDBC5419CA9DF100D5CD4B /* Snowball */,
 				BAFDBC6C19CA9DF100D5CD4B /* SnowballTests */,
+				BA19B71619CB3A9000DF56A5 /* Vendor */,
 				BAFDBC5319CA9DF100D5CD4B /* Products */,
 				3223A00F9C9F4924A8810592 /* Pods.xcconfig */,
 				3118CCB147D84EAC84715373 /* Frameworks */,
@@ -418,7 +420,6 @@
 				BA4E5B3519CAAAAF00DC5ECF /* Models */,
 				BAB5F03B19D114D700D49796 /* Extensions */,
 				BA4E5B3D19CABA0200DC5ECF /* Misc */,
-				BA19B71619CB3A9000DF56A5 /* Vendor */,
 				BAFDBC5519CA9DF100D5CD4B /* Supporting Files */,
 			);
 			path = Snowball;

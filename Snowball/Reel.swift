@@ -29,12 +29,15 @@ class Reel: RLMObject, JSONImportable {
     return clips()
   }
 
-  // MARK: JSONObjectSerializable
+  // MARK: JSONImportable
 
-  class func objectFromJSON(JSON: [String: AnyObject]) -> AnyObject {
-    let objectJSON = JSONForPossibleKeys(["reel"], inJSON: JSON)
+  class func possibleJSONKeys() -> [String] {
+    return ["reel", "reels"]
+  }
+
+  class func importFromJSONObject(JSON: JSONObject) -> AnyObject {
     var reel: Reel? = nil
-    if let id = objectJSON["id"] as AnyObject? as? String {
+    if let id = JSON["id"] as JSONData? as? String {
       if let existingReel = Reel.findByID(id) as? Reel {
         reel = existingReel
       } else {
@@ -43,27 +46,15 @@ class Reel: RLMObject, JSONImportable {
         reel!.id = id
       }
     }
-    if let title = objectJSON["title"] as AnyObject? as? String {
+    if let title = JSON["title"] as JSONData? as? String {
       reel!.title = title
     }
-    if let participantsTitle = objectJSON["participants_title"] as AnyObject? as? String {
+    if let participantsTitle = JSON["participants_title"] as JSONData? as? String {
       reel!.participantsTitle = participantsTitle
     }
-    if let recentClipJSON = objectJSON["recent_clip"] as AnyObject? as [String: AnyObject]? {
-      Clip.objectFromJSON(recentClipJSON)
+    if let recentClipJSON = JSON["recent_clip"] as JSONData? as JSONObject? {
+      Clip.importFromJSONObject(recentClipJSON)
     }
     return reel!
-  }
-
-  class func arrayFromJSON(JSON: [String: AnyObject]) -> [AnyObject] {
-    var reels = [AnyObject]()
-    if let reelsJSON = JSON["reels"] as AnyObject? as? [AnyObject] {
-      for JSONObject in reelsJSON {
-        if let reelJSON = JSONObject as AnyObject? as? [String: AnyObject] {
-          reels.append(Reel.objectFromJSON(reelJSON))
-        }
-      }
-    }
-    return reels
   }
 }

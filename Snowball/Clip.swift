@@ -16,12 +16,15 @@ class Clip: RLMObject, JSONImportable {
   dynamic var user: User?
   dynamic var reel: Reel?
 
-  // MARK: JSONObjectSerializable
+  // MARK: JSONImportable
 
-  class func objectFromJSON(JSON: [String: AnyObject]) -> AnyObject {
-    let objectJSON = JSONForPossibleKeys(["clip"], inJSON: JSON)
+  class func possibleJSONKeys() -> [String] {
+    return ["clip", "clips"]
+  }
+
+  class func importFromJSONObject(JSON: JSONObject) -> AnyObject {
     var clip: Clip? = nil
-    if let id = objectJSON["id"] as AnyObject? as? String {
+    if let id = JSON["id"] as JSONData? as? String {
       if let existingClip = Clip.findByID(id) as? Clip {
         clip = existingClip
       } else {
@@ -30,27 +33,15 @@ class Clip: RLMObject, JSONImportable {
         clip!.id = id
       }
     }
-    if let videoURL = objectJSON["video_url"] as AnyObject? as? String {
+    if let videoURL = JSON["video_url"] as JSONData? as? String {
       clip!.videoURL = videoURL
     }
-    if let createdAt = objectJSON["created_at"] as AnyObject? as? Double  {
+    if let createdAt = JSON["created_at"] as JSONData? as? Double  {
       clip!.createdAt = NSDate(timeIntervalSince1970: createdAt)
     }
-    if let reelID = objectJSON["reel_id"] as AnyObject? as? String {
-      clip!.reel = Reel.objectFromJSON(["id": reelID]) as? Reel
+    if let reelID = JSON["reel_id"] as JSONData? as? String {
+      clip!.reel = Reel.importFromJSONObject(["id": reelID]) as? Reel
     }
     return clip!
-  }
-
-  class func arrayFromJSON(JSON: [String: AnyObject]) -> [AnyObject] {
-    var clips = [AnyObject]()
-    if let clipsJSON = JSON["clips"] as AnyObject? as? [AnyObject] {
-      for JSONObject in clipsJSON {
-        if let clipJSON = JSONObject as AnyObject? as? [String: AnyObject] {
-          clips.append(Clip.objectFromJSON(clipJSON))
-        }
-      }
-    }
-    return clips
   }
 }

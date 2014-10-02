@@ -55,12 +55,15 @@ class User: RLMObject, JSONImportable {
     return User.objectsWithPredicate(NSPredicate(format: "id == %@", id))
   }
 
-  // MARK: JSONObjectSerializable
+  // MARK: JSONImportable
 
-  class func objectFromJSON(JSON: [String: AnyObject]) -> AnyObject {
-    let objectJSON = JSONForPossibleKeys(["user"], inJSON: JSON)
+  class func possibleJSONKeys() -> [String] {
+    return ["user", "users"]
+  }
+
+  class func importFromJSONObject(JSON: JSONObject) -> AnyObject {
     var user: User? = nil
-    if let id = objectJSON["id"] as AnyObject? as? String {
+    if let id = JSON["id"] as JSONData? as? String {
       if let existingUser = User.findByID(id) as? User {
         user = existingUser
       } else {
@@ -69,36 +72,24 @@ class User: RLMObject, JSONImportable {
         user!.id = id
       }
     }
-    if let name = objectJSON["name"] as AnyObject? as? String {
+    if let name = JSON["name"] as AnyObject? as? String {
       user!.name = name
     }
-    if let username = objectJSON["username"] as AnyObject? as? String {
+    if let username = JSON["username"] as AnyObject? as? String {
       user!.username = username
     }
-    if let avatarURL = objectJSON["avatar_url"] as AnyObject? as? String {
+    if let avatarURL = JSON["avatar_url"] as AnyObject? as? String {
       user!.avatarURL = avatarURL
     }
-    if let youFollow = objectJSON["you_follow"] as AnyObject? as? Bool {
+    if let youFollow = JSON["you_follow"] as AnyObject? as? Bool {
       user!.youFollow = youFollow
     }
-    if let email = objectJSON["email"] as AnyObject? as? String {
+    if let email = JSON["email"] as AnyObject? as? String {
       user!.email = email
     }
-    if let phoneNumber = objectJSON["phone_number"] as AnyObject? as? String {
+    if let phoneNumber = JSON["phone_number"] as AnyObject? as? String {
       user!.phoneNumber = phoneNumber
     }
     return user!
-  }
-
-  class func arrayFromJSON(JSON: [String: AnyObject]) -> [AnyObject] {
-    var users = [AnyObject]()
-    if let usersJSON = JSON["users"] as AnyObject? as? [AnyObject] {
-      for JSONObject in usersJSON {
-        if let userJSON = JSONObject as AnyObject? as? [String: AnyObject] {
-          users.append(User.objectFromJSON(userJSON))
-        }
-      }
-    }
-    return users
   }
 }

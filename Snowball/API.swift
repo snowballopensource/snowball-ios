@@ -10,11 +10,12 @@ import Alamofire
 import Foundation
 
 struct API {
-  func request(endpoint: APIRoute) {
-    Alamofire.request(endpoint).responsePersisted(User.self, completionHandler: { (error) in
-      // TODO: read this:
-      // http://www.reddit.com/r/iOSProgramming/comments/28ger6/core_data_serverclient_api_design_patterns/
-    })
+  typealias CompletionHandler = (NSError?) -> ()
+
+  // TODO: add something for credential
+
+  static func request<T: JSONImportable>(endpoint: APIRoute, importable: T.Type, completionHandler: CompletionHandler) {
+    Alamofire.request(endpoint).responseImportable(importable, completionHandler: completionHandler)
   }
 }
 
@@ -177,28 +178,44 @@ enum APIRoute: URLRequestConvertible {
 }
 
 protocol JSONImportable: class {
-  class func importFromJSON(JSON: AnyObject)
+  class func possibleJSONKeys() -> [String]
+  class func importFromJSONObject(JSON: JSONObject) -> AnyObject
 }
 
 extension Alamofire.Request {
-  typealias CompletionHandler = (NSError?) -> ()
-
   // https://github.com/Alamofire/Alamofire#generic-response-object-serialization
 
-  func responsePersisted(importable: JSONImportable.Type, completionHandler: CompletionHandler) -> Self {
+  func responseImportable<T: JSONImportable>(importable: T.Type, completionHandler: API.CompletionHandler) -> Self {
     let serializer: Serializer = { (request, response, data) in
       let JSONSerializer = Request.JSONResponseSerializer()
-      let (JSON: AnyObject?, serializationError) = JSONSerializer(request, response, data)
-      if response != nil && JSON != nil {
-        RLMRealm.defaultRealm().beginWriteTransaction()
-        importable.importFromJSON(JSON!)
-        RLMRealm.defaultRealm().commitWriteTransaction()
+      let (JSON: JSONData?, serializationError) = JSONSerializer(request, response, data)
+      if let JSONObject = JSON as JSONData? as? JSONObject {
+        self.importFromJSON(importable, JSON: JSONObject)
         return (JSON, nil)
       }
       return (nil, serializationError)
     }
     return response(serializer: serializer) { (request, response, object, error) in
       completionHandler(error)
+    }
+  }
+
+  private func importFromJSON<T: JSONImportable>(importable: T.Type, JSON: JSONObject) {
+    for JSONKey in importable.possibleJSONKeys() {
+      if let JSONData: JSONData = JSON[JSONKey] as JSONData? {
+        RLMRealm.defaultRealm().beginWriteTransaction()
+        if let JSONObject = JSONData as? JSONObject {
+          importable.importFromJSONObject(JSONObject)
+        } else if let JSONArray = JSONData as? JSONArray {
+          for JSON in JSONArray {
+            if let JSONObject = JSON as? JSONObject {
+              importable.importFromJSONObject(JSONObject)
+            }
+          }
+        }
+        RLMRealm.defaultRealm().commitWriteTransaction()
+        break
+      }
     }
   }
 }
