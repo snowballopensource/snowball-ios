@@ -12,7 +12,20 @@ import Foundation
 struct API {
   typealias CompletionHandler = (NSError?) -> ()
 
-  // TODO: add something for credential
+  static func authenticate(endpoint: APIRoute, completionHandler: CompletionHandler) {
+    Alamofire.request(endpoint).responseJSON { (request, response, JSON, error) in
+      if let error = error {
+        completionHandler(error)
+        return
+      }
+      if let JSONObject = JSON as? JSONObject {
+        if let authToken = JSONObject["auth_token"] as JSONData? as? String {
+          APICredential.authToken = authToken
+          completionHandler(nil)
+        }
+      }
+    }
+  }
 
   static func request<T: JSONImportable>(endpoint: APIRoute, importable: T.Type, completionHandler: CompletionHandler) {
     Alamofire.request(endpoint).responseImportable(importable, completionHandler: completionHandler)

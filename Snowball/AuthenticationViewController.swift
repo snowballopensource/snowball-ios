@@ -14,10 +14,10 @@ class AuthenticationViewController: UIViewController {
   let passwordTextField = UITextField()
 
   func authenticate() {
-//    API.signIn(email: emailTextField.text, password: passwordTextField.text) { (error) in
-//      if error != nil { error?.display(); return }
-//      switchToNavigationController(MainNavigationController())
-//    }
+    API.authenticate(APIRoute.SignIn(email: emailTextField.text, password: passwordTextField.text)) { (error) in
+      if error != nil { error?.display(); return }
+      switchToNavigationController(MainNavigationController())
+    }
   }
 
   // MARK: UIViewController
