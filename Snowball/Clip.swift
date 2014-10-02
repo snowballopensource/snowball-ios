@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Clip: RLMObject, JSONImportable {
+class Clip: RLMObject, JSONPersistable {
   dynamic var id = ""
   dynamic var videoURL = ""
   dynamic var createdAt = NSDate(timeIntervalSince1970: 0)
@@ -16,13 +16,13 @@ class Clip: RLMObject, JSONImportable {
   dynamic var user: User?
   dynamic var reel: Reel?
 
-  // MARK: JSONImportable
+  // MARK: JSONPersistable
 
   class func possibleJSONKeys() -> [String] {
     return ["clip", "clips"]
   }
 
-  class func importFromJSONObject(JSON: JSONObject) -> AnyObject {
+  class func objectFromJSONObject(JSON: JSONObject) -> AnyObject {
     var clip: Clip? = nil
     if let id = JSON["id"] as JSONData? as? String {
       if let existingClip = Clip.findByID(id) as? Clip {
@@ -40,7 +40,7 @@ class Clip: RLMObject, JSONImportable {
       clip!.createdAt = NSDate(timeIntervalSince1970: createdAt)
     }
     if let reelID = JSON["reel_id"] as JSONData? as? String {
-      clip!.reel = Reel.importFromJSONObject(["id": reelID]) as? Reel
+      clip!.reel = Reel.objectFromJSONObject(["id": reelID]) as? Reel
     }
     return clip!
   }

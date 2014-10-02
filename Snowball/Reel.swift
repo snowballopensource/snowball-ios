@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Reel: RLMObject, JSONImportable {
+class Reel: RLMObject, JSONPersistable {
   dynamic var id = ""
   dynamic var title = ""
   dynamic var participantsTitle = ""
@@ -29,13 +29,13 @@ class Reel: RLMObject, JSONImportable {
     return clips()
   }
 
-  // MARK: JSONImportable
+  // MARK: JSONPersistable
 
   class func possibleJSONKeys() -> [String] {
     return ["reel", "reels"]
   }
 
-  class func importFromJSONObject(JSON: JSONObject) -> AnyObject {
+  class func objectFromJSONObject(JSON: JSONObject) -> AnyObject {
     var reel: Reel? = nil
     if let id = JSON["id"] as JSONData? as? String {
       if let existingReel = Reel.findByID(id) as? Reel {
@@ -53,7 +53,7 @@ class Reel: RLMObject, JSONImportable {
       reel!.participantsTitle = participantsTitle
     }
     if let recentClipJSON = JSON["recent_clip"] as JSONData? as JSONObject? {
-      Clip.importFromJSONObject(recentClipJSON)
+      Clip.objectFromJSONObject(recentClipJSON)
     }
     return reel!
   }

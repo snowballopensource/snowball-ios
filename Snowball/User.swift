@@ -8,7 +8,7 @@
 
 import Foundation
 
-class User: RLMObject, JSONImportable {
+class User: RLMObject, JSONPersistable {
   dynamic var id = ""
   dynamic var name = ""
   dynamic var username = ""
@@ -55,13 +55,13 @@ class User: RLMObject, JSONImportable {
     return User.objectsWithPredicate(NSPredicate(format: "id == %@", id))
   }
 
-  // MARK: JSONImportable
+  // MARK: JSONPersistable
 
   class func possibleJSONKeys() -> [String] {
     return ["user", "users"]
   }
 
-  class func importFromJSONObject(JSON: JSONObject) -> AnyObject {
+  class func objectFromJSONObject(JSON: JSONObject) -> AnyObject {
     var user: User? = nil
     if let id = JSON["id"] as JSONData? as? String {
       if let existingUser = User.findByID(id) as? User {

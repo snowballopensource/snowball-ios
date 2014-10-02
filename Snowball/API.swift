@@ -27,8 +27,8 @@ struct API {
     }
   }
 
-  static func request<T: JSONImportable>(endpoint: APIRoute, importable: T.Type, completionHandler: CompletionHandler) {
-    Alamofire.request(endpoint).responseImportable(importable, completionHandler: completionHandler)
+  static func request<T: JSONPersistable>(endpoint: APIRoute, persistable: T.Type, completionHandler: CompletionHandler) {
+    Alamofire.request(endpoint).responsePersistable(persistable, completionHandler: completionHandler)
   }
 }
 
@@ -190,20 +190,20 @@ enum APIRoute: URLRequestConvertible {
   }
 }
 
-protocol JSONImportable: class {
+protocol JSONPersistable: class {
   class func possibleJSONKeys() -> [String]
-  class func importFromJSONObject(JSON: JSONObject) -> AnyObject
+  class func objectFromJSONObject(JSON: JSONObject) -> AnyObject
 }
 
 extension Alamofire.Request {
   // https://github.com/Alamofire/Alamofire#generic-response-object-serialization
 
-  func responseImportable<T: JSONImportable>(importable: T.Type, completionHandler: API.CompletionHandler) -> Self {
+  func responsePersistable<T: JSONPersistable>(persistable: T.Type, completionHandler: API.CompletionHandler) -> Self {
     let serializer: Serializer = { (request, response, data) in
       let JSONSerializer = Request.JSONResponseSerializer()
       let (JSON: JSONData?, serializationError) = JSONSerializer(request, response, data)
       if let JSONObject = JSON as JSONData? as? JSONObject {
-        self.importFromJSON(importable, JSON: JSONObject)
+        self.importFromJSON(persistable, JSON: JSONObject)
         return (JSON, nil)
       }
       return (nil, serializationError)
@@ -213,16 +213,16 @@ extension Alamofire.Request {
     }
   }
 
-  private func importFromJSON<T: JSONImportable>(importable: T.Type, JSON: JSONObject) {
-    for JSONKey in importable.possibleJSONKeys() {
+  private func importFromJSON<T: JSONPersistable>(persistable: T.Type, JSON: JSONObject) {
+    for JSONKey in persistable.possibleJSONKeys() {
       if let JSONData: JSONData = JSON[JSONKey] as JSONData? {
         RLMRealm.defaultRealm().beginWriteTransaction()
         if let JSONObject = JSONData as? JSONObject {
-          importable.importFromJSONObject(JSONObject)
+          persistable.objectFromJSONObject(JSONObject)
         } else if let JSONArray = JSONData as? JSONArray {
           for JSON in JSONArray {
             if let JSONObject = JSON as? JSONObject {
-              importable.importFromJSONObject(JSONObject)
+              persistable.objectFromJSONObject(JSONObject)
             }
           }
         }
