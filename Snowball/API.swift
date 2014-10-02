@@ -13,7 +13,7 @@ struct API {
   typealias CompletionHandler = (NSError?) -> ()
 
   static func request(URLRequest: URLRequestConvertible) -> Alamofire.Request {
-    return Alamofire.request(URLRequest).validate()
+    return Alamofire.request(URLRequest)
   }
 }
 
@@ -188,6 +188,9 @@ extension Alamofire.Request {
       let JSONSerializer = Request.JSONResponseSerializer()
       let (JSON: JSONData?, serializationError) = JSONSerializer(request, response, data)
       if let JSONObject = JSON as JSONData? as? JSONObject {
+        if let serverError = self.errorFromJSON(JSONObject) {
+          return (nil, serverError)
+        }
         self.importFromJSON(persistable, JSON: JSONObject)
         return (JSON, nil)
       }
@@ -197,6 +200,28 @@ extension Alamofire.Request {
       completionHandler(error)
     }
   }
+
+  func responseAuthenticable(completionHandler: API.CompletionHandler) -> Self {
+    let serializer: Serializer = { (request, response, data) in
+      let JSONSerializer = Request.JSONResponseSerializer()
+      let (JSON: JSONData?, serializationError) = JSONSerializer(request, response, data)
+      if let JSONObject = JSON as JSONData? as? JSONObject {
+        if let serverError = self.errorFromJSON(JSONObject) {
+          return (nil, serverError)
+        }
+        if let authToken = JSONObject["auth_token"] as JSONData? as? String {
+          APICredential.authToken = authToken
+          return (JSON, nil)
+        }
+      }
+      return (nil, serializationError)
+    }
+    return response(serializer: serializer) { (request, response, object, error) in
+      completionHandler(error)
+    }
+  }
+
+  // Helpers
 
   private func importFromJSON<T: JSONPersistable>(persistable: T.Type, JSON: JSONObject) {
     for JSONKey in persistable.possibleJSONKeys() {
@@ -216,23 +241,11 @@ extension Alamofire.Request {
       }
     }
   }
-}
 
-extension Alamofire.Request {
-  func responseAuthenticable(completionHandler: API.CompletionHandler) -> Self {
-    let serializer: Serializer = { (request, response, data) in
-      let JSONSerializer = Request.JSONResponseSerializer()
-      let (JSON: JSONData?, serializationError) = JSONSerializer(request, response, data)
-      if let JSONObject = JSON as JSONData? as? JSONObject {
-        if let authToken = JSONObject["auth_token"] as JSONData? as? String {
-          APICredential.authToken = authToken
-          return (JSON, nil)
-        }
-      }
-      return (nil, serializationError)
+  private func errorFromJSON(JSON: JSONObject) -> NSError? {
+    if let message = JSON["message"] as JSONData? as? String {
+      return NSError(domain: NSBundle.mainBundle().bundleIdentifier!, code: 0, userInfo: [NSError.kSnowballAPIErrorMessage(): message])
     }
-    return response(serializer: serializer) { (request, response, object, error) in
-      completionHandler(error)
-    }
+    return nil
   }
 }
