@@ -10,7 +10,7 @@ import UIKit
 
 class MainNavigationController: UINavigationController {
   override init() {
-    super.init(rootViewController: ReelsGridViewController())
+    super.init(rootViewController: ReelsViewController())
   }
 
   required init(coder aDecoder: NSCoder) {

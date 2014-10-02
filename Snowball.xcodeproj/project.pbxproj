@@ -13,7 +13,7 @@
 		BA01CBEE19D3833B004F170D /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBED19D3833B004F170D /* RLMSupport.swift */; };
 		BA01CBF619D39B54004F170D /* ManagedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBF519D39B54004F170D /* ManagedCollectionViewController.swift */; };
 		BA01CBF819D39CF5004F170D /* UICollectionViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBF719D39CF5004F170D /* UICollectionViewCell+.swift */; };
-		BA01CBFA19D39EAF004F170D /* ReelsGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBF919D39EAF004F170D /* ReelsGridViewController.swift */; };
+		BA01CBFA19D39EAF004F170D /* ReelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBF919D39EAF004F170D /* ReelsViewController.swift */; };
 		BA01CBFC19D39F2C004F170D /* ReelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBFB19D39F2C004F170D /* ReelCollectionViewCell.swift */; };
 		BA01CC0619D3EFB1004F170D /* VideoCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CC0519D3EFB1004F170D /* VideoCache.swift */; };
 		BA0F24E019D9FE5E00DF8B75 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0F24DF19D9FE5E00DF8B75 /* UserTableViewCell.swift */; };
@@ -170,7 +170,7 @@
 		BA01CBED19D3833B004F170D /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
 		BA01CBF519D39B54004F170D /* ManagedCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedCollectionViewController.swift; sourceTree = "<group>"; };
 		BA01CBF719D39CF5004F170D /* UICollectionViewCell+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+.swift"; sourceTree = "<group>"; };
-		BA01CBF919D39EAF004F170D /* ReelsGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReelsGridViewController.swift; sourceTree = "<group>"; };
+		BA01CBF919D39EAF004F170D /* ReelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReelsViewController.swift; sourceTree = "<group>"; };
 		BA01CBFB19D39F2C004F170D /* ReelCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReelCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA01CC0519D3EFB1004F170D /* VideoCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCache.swift; sourceTree = "<group>"; };
 		BA0F24DF19D9FE5E00DF8B75 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
@@ -382,7 +382,7 @@
 			isa = PBXGroup;
 			children = (
 				BADF9CFA19D79C0300A50568 /* MainNavigationController.swift */,
-				BA01CBF919D39EAF004F170D /* ReelsGridViewController.swift */,
+				BA01CBF919D39EAF004F170D /* ReelsViewController.swift */,
 				BA1B2E2A19D2686A0095042E /* CameraViewController.swift */,
 				BAAD512819D4D35300087176 /* ReelPlayerViewController.swift */,
 			);
@@ -683,7 +683,7 @@
 				BA1B2E3419D2B90F0095042E /* PlayerView.swift in Sources */,
 				BAB5F03819D1140A00D49796 /* ManagedTableViewController.swift in Sources */,
 				BAAD512919D4D35300087176 /* ReelPlayerViewController.swift in Sources */,
-				BA01CBFA19D39EAF004F170D /* ReelsGridViewController.swift in Sources */,
+				BA01CBFA19D39EAF004F170D /* ReelsViewController.swift in Sources */,
 				BAB5F03F19D115DE00D49796 /* NSError+.swift in Sources */,
 				BA01CC0619D3EFB1004F170D /* VideoCache.swift in Sources */,
 				BAB5F02F19D0FA4F00D49796 /* Clip.swift in Sources */,

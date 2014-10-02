@@ -1,5 +1,5 @@
 //
-//  ReelsGridViewController.swift
+//  ReelViewController.swift
 //  Snowball
 //
 //  Created by James Martinez on 9/24/14.
@@ -9,7 +9,7 @@
 import Cartography
 import UIKit
 
-class ReelsGridViewController: ManagedCollectionViewController {
+class ReelsViewController: ManagedCollectionViewController {
   private let topView = TopMediaView()
   private let friendsButton = UIButton()
   private var scrolling = false
