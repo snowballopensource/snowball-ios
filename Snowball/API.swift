@@ -13,7 +13,7 @@ struct API {
   typealias CompletionHandler = (NSError?) -> ()
 
   static func request(URLRequest: URLRequestConvertible) -> Alamofire.Request {
-    return Alamofire.request(URLRequest)
+    return Alamofire.request(URLRequest).validate()
   }
 }
 
