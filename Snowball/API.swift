@@ -248,8 +248,10 @@ extension Alamofire.Request {
   }
 
   private func errorFromJSON(JSON: JSONObject) -> NSError? {
-    if let message = JSON["message"] as JSONData? as? String {
-      return NSError(domain: NSBundle.mainBundle().bundleIdentifier!, code: 0, userInfo: [NSError.kSnowballAPIErrorMessage(): message])
+    if let error = JSON["error"] as JSONData? as? JSONObject {
+      if let message = error["message"] as JSONData? as? String {
+        return NSError(domain: NSBundle.mainBundle().bundleIdentifier!, code: 0, userInfo: [NSError.kSnowballAPIErrorMessage(): message])
+      }
     }
     return nil
   }
