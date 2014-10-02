@@ -28,3 +28,7 @@ func switchToNavigationController(navigationController: UINavigationController) 
     UIView.setAnimationsEnabled(oldState)
   }, completion: nil)
 }
+
+func deleteAllStores() {
+  NSUserDefaults.standardUserDefaults().removePersistentDomainForName(NSBundle.mainBundle().bundleIdentifier!)
+}
