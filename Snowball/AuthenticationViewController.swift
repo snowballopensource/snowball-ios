@@ -14,7 +14,7 @@ class AuthenticationViewController: UIViewController {
   let passwordTextField = UITextField()
 
   func authenticate() {
-    API.authenticate(APIRoute.SignIn(email: emailTextField.text, password: passwordTextField.text)) { (error) in
+    API.request(APIRoute.SignIn(email: emailTextField.text, password: passwordTextField.text)).responseAuthenticable { (error) in
       if error != nil { error?.display(); return }
       switchToNavigationController(MainNavigationController())
     }

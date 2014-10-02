@@ -12,23 +12,8 @@ import Foundation
 struct API {
   typealias CompletionHandler = (NSError?) -> ()
 
-  static func authenticate(endpoint: APIRoute, completionHandler: CompletionHandler) {
-    Alamofire.request(endpoint).responseJSON { (request, response, JSON, error) in
-      if let error = error {
-        completionHandler(error)
-        return
-      }
-      if let JSONObject = JSON as? JSONObject {
-        if let authToken = JSONObject["auth_token"] as JSONData? as? String {
-          APICredential.authToken = authToken
-          completionHandler(nil)
-        }
-      }
-    }
-  }
-
-  static func request<T: JSONPersistable>(endpoint: APIRoute, persistable: T.Type, completionHandler: CompletionHandler) {
-    Alamofire.request(endpoint).responsePersistable(persistable, completionHandler: completionHandler)
+  static func request(URLRequest: URLRequestConvertible) -> Alamofire.Request {
+    return Alamofire.request(URLRequest)
   }
 }
 
@@ -229,6 +214,25 @@ extension Alamofire.Request {
         RLMRealm.defaultRealm().commitWriteTransaction()
         break
       }
+    }
+  }
+}
+
+extension Alamofire.Request {
+  func responseAuthenticable(completionHandler: API.CompletionHandler) -> Self {
+    let serializer: Serializer = { (request, response, data) in
+      let JSONSerializer = Request.JSONResponseSerializer()
+      let (JSON: JSONData?, serializationError) = JSONSerializer(request, response, data)
+      if let JSONObject = JSON as JSONData? as? JSONObject {
+        if let authToken = JSONObject["auth_token"] as JSONData? as? String {
+          APICredential.authToken = authToken
+          return (JSON, nil)
+        }
+      }
+      return (nil, serializationError)
+    }
+    return response(serializer: serializer) { (request, response, object, error) in
+      completionHandler(error)
     }
   }
 }
