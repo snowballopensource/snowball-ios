@@ -12,6 +12,11 @@ import Foundation
 struct API {
   typealias CompletionHandler = (NSError?) -> ()
 
+  // The only types of response blocks that should be used are the blocks
+  // that were added in the Alamofire.Request extension at the bottom of
+  // this file. These blocks provide special handling such as parsing the
+  // Snowball API error into an NSError.
+
   static func request(URLRequest: URLRequestConvertible) -> Alamofire.Request {
     return Alamofire.request(URLRequest)
   }
