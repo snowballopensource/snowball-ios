@@ -16,6 +16,23 @@ class User: RemoteManagedObject, JSONPersistable {
   dynamic var email = ""
   dynamic var phoneNumber = ""
 
+  var initials: String {
+    get {
+      func initials(string: String) -> String {
+        let words = string.componentsSeparatedByString(" ")
+        var initials = [String]()
+        for word in words {
+          initials.append(word.substringToIndex(advance(word.startIndex, 1)))
+        }
+        return "".join(initials)
+      }
+      if countElements(name) > 0 {
+        return initials(name)
+      }
+      return initials(username)
+    }
+  }
+
   private class var currentUserID: String? {
     get {
       let kCurrentUserIDKey = "CurrentUserID"
