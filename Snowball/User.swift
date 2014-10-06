@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class User: RemoteManagedObject, JSONPersistable {
   dynamic var name = ""
@@ -15,6 +16,13 @@ class User: RemoteManagedObject, JSONPersistable {
   dynamic var youFollow = false
   dynamic var email = ""
   dynamic var phoneNumber = ""
+  dynamic var colorHex = UIColor.randomColor().hex()
+
+  var color: UIColor {
+    get {
+      return UIColor(hex: colorHex)
+    }
+  }
 
   var initials: String {
     get {

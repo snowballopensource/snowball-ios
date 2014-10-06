@@ -33,6 +33,7 @@
 		BA74C10319D13B8B00393633 /* ManagedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74C10219D13B8B00393633 /* ManagedViewController.swift */; };
 		BA74C10919D14A8700393633 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74C10819D14A8700393633 /* UITableViewCell+.swift */; };
 		BA88814419E25A24006CF338 /* UserImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA88814319E25A24006CF338 /* UserImageView.swift */; };
+		BA88814C19E28109006CF338 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA88814B19E28109006CF338 /* UIColor+.swift */; };
 		BAAD512919D4D35300087176 /* ReelPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD512819D4D35300087176 /* ReelPlayerViewController.swift */; };
 		BAAD513319D4DB0300087176 /* ReelPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD513219D4DB0300087176 /* ReelPlayer.swift */; };
 		BAAEA10619CBC03F00DB5182 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAEA10519CBC03F00DB5182 /* Async.swift */; };
@@ -193,6 +194,7 @@
 		BA74C10219D13B8B00393633 /* ManagedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedViewController.swift; sourceTree = "<group>"; };
 		BA74C10819D14A8700393633 /* UITableViewCell+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
 		BA88814319E25A24006CF338 /* UserImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageView.swift; sourceTree = "<group>"; };
+		BA88814B19E28109006CF338 /* UIColor+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		BAAD512819D4D35300087176 /* ReelPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReelPlayerViewController.swift; sourceTree = "<group>"; };
 		BAAD513219D4DB0300087176 /* ReelPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReelPlayer.swift; sourceTree = "<group>"; };
 		BAAEA10519CBC03F00DB5182 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Async.swift; path = Vendor/Async/Async.swift; sourceTree = SOURCE_ROOT; };
@@ -378,6 +380,7 @@
 				BA01CBBC19D34A70004F170D /* UIView+.swift */,
 				BA01CBF719D39CF5004F170D /* UICollectionViewCell+.swift */,
 				BA0F24E319DA5B7100DF8B75 /* String+.swift */,
+				BA88814B19E28109006CF338 /* UIColor+.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -715,6 +718,7 @@
 				BA1B2E2419D215760095042E /* UIImageView+.swift in Sources */,
 				BA01CBB519D3476F004F170D /* LoopingPlayerView.swift in Sources */,
 				BADF9CF819D79AAA00A50568 /* AuthenticationNavigationController.swift in Sources */,
+				BA88814C19E28109006CF338 /* UIColor+.swift in Sources */,
 				BA3B49BD19D8FD180084BB4F /* FriendsNavigationController.swift in Sources */,
 				BA01CBEE19D3833B004F170D /* RLMSupport.swift in Sources */,
 				BA74C10919D14A8700393633 /* UITableViewCell+.swift in Sources */,

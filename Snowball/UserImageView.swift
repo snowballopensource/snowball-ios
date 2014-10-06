@@ -36,7 +36,7 @@ class UserImageView: UIView {
   }
 
   func setUser(user: User) {
-    backgroundColor = UIColor.lightGrayColor() // TODO: user.color
+    backgroundColor = user.color
     initialsLabel.text = user.initials
     imageView.image = nil
     if countElements(user.avatarURL) > 0 {
