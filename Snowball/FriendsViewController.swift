@@ -28,9 +28,21 @@ class FriendsViewController: ManagedTableViewController {
   }
 
   override func reloadData() {
+    var requestOneInProgress = true
+    var requestTwoInProgress = true
+    API.request(APIRoute.GetCurrentUser).responseCurrentUser { (error) in
+      requestOneInProgress = false
+      if !requestOneInProgress && !requestTwoInProgress {
+        if error != nil { error?.display(); return }
+        self.tableView.reloadData()
+      }
+    }
     API.request(APIRoute.GetCurrentUserFollowing).responsePersistable(User.self) { (error) in
-      if error != nil { error?.display(); return }
-      self.tableView.reloadData()
+      requestTwoInProgress = false
+      if !requestOneInProgress && !requestTwoInProgress {
+        if error != nil { error?.display(); return }
+        self.tableView.reloadData()
+      }
     }
   }
 

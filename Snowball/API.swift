@@ -189,24 +189,44 @@ extension Alamofire.Request {
   // https://github.com/Alamofire/Alamofire#generic-response-object-serialization
 
   func responsePersistable<T: JSONPersistable>(persistable: T.Type, completionHandler: API.CompletionHandler) -> Self {
-    let serializer: Serializer = { (request, response, data) in
-      let JSONSerializer = Request.JSONResponseSerializer()
-      let (JSON: JSONData?, serializationError) = JSONSerializer(request, response, data)
-      if let JSONObject = JSON as JSONData? as? JSONObject {
-        if let serverError = self.errorFromJSON(JSONObject) {
-          return (nil, serverError)
-        }
-        self.importFromJSON(persistable, JSON: JSONObject)
-        return (JSON, nil)
-      }
-      return (nil, serializationError)
+    let serializer = responseSerializer { (JSON) in
+      self.importFromJSON(persistable, JSON: JSON)
     }
-    return response(serializer: serializer) { (request, response, object, error) in
+    return response(serializer: serializer) { (_, _, _, error) in
       completionHandler(error)
     }
   }
 
   func responseAuthenticable(completionHandler: API.CompletionHandler) -> Self {
+    let serializer = responseSerializer { (JSON) in
+      if let authToken = JSON["auth_token"] as JSONData? as? String {
+        APICredential.authToken = authToken
+      }
+    }
+    return response(serializer: serializer) { (_, _, _, error) in
+      completionHandler(error)
+    }
+  }
+
+  func responseCurrentUser(completionHandler: API.CompletionHandler) -> Self {
+    let serializer = responseSerializer { (JSON) in
+      self.importFromJSON(User.self, JSON: JSON)
+      if let user = JSON["user"] as JSONData? as? JSONObject {
+        if let id = user["id"] as JSONData? as? String {
+          User.currentUser = User.findByID(id)
+        }
+      }
+    }
+    return response(serializer: serializer) { (_, _, _, error) in
+      completionHandler(error)
+    }
+  }
+
+  // Helpers
+
+  typealias AdditionHandler = (JSONObject) -> ()
+
+  private func responseSerializer(addition: AdditionHandler?) -> Serializer {
     let serializer: Serializer = { (request, response, data) in
       let JSONSerializer = Request.JSONResponseSerializer()
       let (JSON: JSONData?, serializationError) = JSONSerializer(request, response, data)
@@ -214,19 +234,15 @@ extension Alamofire.Request {
         if let serverError = self.errorFromJSON(JSONObject) {
           return (nil, serverError)
         }
-        if let authToken = JSONObject["auth_token"] as JSONData? as? String {
-          APICredential.authToken = authToken
-          return (JSON, nil)
+        if let addition = addition {
+          addition(JSONObject)
         }
+        return (JSON, nil)
       }
       return (nil, serializationError)
     }
-    return response(serializer: serializer) { (request, response, object, error) in
-      completionHandler(error)
-    }
+    return serializer
   }
-
-  // Helpers
 
   private func importFromJSON<T: JSONPersistable>(persistable: T.Type, JSON: JSONObject) {
     for JSONKey in persistable.possibleJSONKeys() {
