@@ -32,6 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // 64-44 = 20; 20/2 = 10
     // yay math!
     UINavigationBar.appearance().setTitleVerticalPositionAdjustment(-10.0, forBarMetrics: UIBarMetrics.Default)
+    UINavigationBar.appearance().titleTextAttributes = [
+      NSFontAttributeName: UIFont.systemFontOfSize(20.0),
+      NSForegroundColorAttributeName: UIColor.whiteColor()
+    ]
   }
 
   // MARK: UIApplicationDelegate
