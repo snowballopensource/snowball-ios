@@ -3,3 +3,5 @@
 //
 
 #import <Realm/Realm.h>
+
+#import "AppearanceBridger.h"

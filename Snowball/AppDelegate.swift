@@ -36,6 +36,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       NSFontAttributeName: UIFont.systemFontOfSize(20.0),
       NSForegroundColorAttributeName: UIColor.whiteColor()
     ]
+
+    // Bridged Appearance
+    // Solves the lack of appearanceWhenContainedIn in Swift
+    // http://stackoverflow.com/q/24136874/801858
+    AppearanceBridger.setAppearance()
   }
 
   // MARK: UIApplicationDelegate
