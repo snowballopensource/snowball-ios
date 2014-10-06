@@ -8,8 +8,7 @@
 
 import Foundation
 
-class User: RLMObject, JSONPersistable {
-  dynamic var id = ""
+class User: RemoteManagedObject, JSONPersistable {
   dynamic var name = ""
   dynamic var username = ""
   dynamic var avatarURL = ""
@@ -38,7 +37,7 @@ class User: RLMObject, JSONPersistable {
   class var currentUser: User? {
     get {
       if let id = currentUserID {
-        return User.findByID(id) as User?
+        return User.findByID(id)
       }
       return nil
     }
@@ -61,35 +60,31 @@ class User: RLMObject, JSONPersistable {
     return ["user", "users"]
   }
 
-  class func objectFromJSONObject(JSON: JSONObject) -> AnyObject {
-    var user: User? = nil
+  class func objectFromJSONObject(JSON: JSONObject) -> Self? {
     if let id = JSON["id"] as JSONData? as? String {
-      if let existingUser = User.findByID(id) as? User {
-        user = existingUser
-      } else {
-        user = User()
-        RLMRealm.defaultRealm().addObject(user)
-        user!.id = id
+      var user = findOrInitializeByID(id)
+
+      if let name = JSON["name"] as JSONData? as? String {
+        user.name = name
       }
+      if let username = JSON["username"] as AnyObject? as? String {
+        user.username = username
+      }
+      if let avatarURL = JSON["avatar_url"] as AnyObject? as? String {
+        user.avatarURL = avatarURL
+      }
+      if let youFollow = JSON["you_follow"] as AnyObject? as? Bool {
+        user.youFollow = youFollow
+      }
+      if let email = JSON["email"] as AnyObject? as? String {
+        user.email = email
+      }
+      if let phoneNumber = JSON["phone_number"] as AnyObject? as? String {
+        user.phoneNumber = phoneNumber
+      }
+
+      return user
     }
-    if let name = JSON["name"] as AnyObject? as? String {
-      user!.name = name
-    }
-    if let username = JSON["username"] as AnyObject? as? String {
-      user!.username = username
-    }
-    if let avatarURL = JSON["avatar_url"] as AnyObject? as? String {
-      user!.avatarURL = avatarURL
-    }
-    if let youFollow = JSON["you_follow"] as AnyObject? as? Bool {
-      user!.youFollow = youFollow
-    }
-    if let email = JSON["email"] as AnyObject? as? String {
-      user!.email = email
-    }
-    if let phoneNumber = JSON["phone_number"] as AnyObject? as? String {
-      user!.phoneNumber = phoneNumber
-    }
-    return user!
+    return nil
   }
 }

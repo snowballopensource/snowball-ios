@@ -8,8 +8,7 @@
 
 import Foundation
 
-class Reel: RLMObject, JSONPersistable {
-  dynamic var id = ""
+class Reel: RemoteManagedObject, JSONPersistable {
   dynamic var title = ""
   dynamic var participantsTitle = ""
   dynamic var lastWatchedClip: Clip?
@@ -35,26 +34,22 @@ class Reel: RLMObject, JSONPersistable {
     return ["reel", "reels"]
   }
 
-  class func objectFromJSONObject(JSON: JSONObject) -> AnyObject {
-    var reel: Reel? = nil
+  class func objectFromJSONObject(JSON: JSONObject) -> Self? {
     if let id = JSON["id"] as JSONData? as? String {
-      if let existingReel = Reel.findByID(id) as? Reel {
-        reel = existingReel
-      } else {
-        reel = Reel()
-        RLMRealm.defaultRealm().addObject(reel)
-        reel!.id = id
+      var reel = findOrInitializeByID(id)
+
+      if let title = JSON["title"] as JSONData? as? String {
+        reel.title = title
       }
+      if let participantsTitle = JSON["participants_title"] as JSONData? as? String {
+        reel.participantsTitle = participantsTitle
+      }
+      if let recentClipJSON = JSON["recent_clip"] as JSONData? as JSONObject? {
+        Clip.objectFromJSONObject(recentClipJSON)
+      }
+
+      return reel
     }
-    if let title = JSON["title"] as JSONData? as? String {
-      reel!.title = title
-    }
-    if let participantsTitle = JSON["participants_title"] as JSONData? as? String {
-      reel!.participantsTitle = participantsTitle
-    }
-    if let recentClipJSON = JSON["recent_clip"] as JSONData? as JSONObject? {
-      Clip.objectFromJSONObject(recentClipJSON)
-    }
-    return reel!
+    return nil
   }
 }

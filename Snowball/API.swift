@@ -182,7 +182,7 @@ enum APIRoute: URLRequestConvertible {
 
 protocol JSONPersistable: class {
   class func possibleJSONKeys() -> [String]
-  class func objectFromJSONObject(JSON: JSONObject) -> AnyObject
+  class func objectFromJSONObject(JSON: JSONObject) -> Self?
 }
 
 extension Alamofire.Request {

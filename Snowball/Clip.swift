@@ -8,8 +8,7 @@
 
 import Foundation
 
-class Clip: RLMObject, JSONPersistable {
-  dynamic var id = ""
+class Clip: RemoteManagedObject, JSONPersistable {
   dynamic var videoURL = ""
   dynamic var createdAt = NSDate(timeIntervalSince1970: 0)
 
@@ -22,26 +21,22 @@ class Clip: RLMObject, JSONPersistable {
     return ["clip", "clips"]
   }
 
-  class func objectFromJSONObject(JSON: JSONObject) -> AnyObject {
-    var clip: Clip? = nil
+  class func objectFromJSONObject(JSON: JSONObject) -> Self? {
     if let id = JSON["id"] as JSONData? as? String {
-      if let existingClip = Clip.findByID(id) as? Clip {
-        clip = existingClip
-      } else {
-        clip = Clip()
-        RLMRealm.defaultRealm().addObject(clip)
-        clip!.id = id
+      var clip = findOrInitializeByID(id)
+
+      if let videoURL = JSON["video_url"] as JSONData? as? String {
+        clip.videoURL = videoURL
       }
+      if let createdAt = JSON["created_at"] as JSONData? as? Double  {
+        clip.createdAt = NSDate(timeIntervalSince1970: createdAt)
+      }
+      if let reelID = JSON["reel_id"] as JSONData? as? String {
+        clip.reel = Reel.objectFromJSONObject(["id": reelID])
+      }
+
+      return clip
     }
-    if let videoURL = JSON["video_url"] as JSONData? as? String {
-      clip!.videoURL = videoURL
-    }
-    if let createdAt = JSON["created_at"] as JSONData? as? Double  {
-      clip!.createdAt = NSDate(timeIntervalSince1970: createdAt)
-    }
-    if let reelID = JSON["reel_id"] as JSONData? as? String {
-      clip!.reel = Reel.objectFromJSONObject(["id": reelID]) as? Reel
-    }
-    return clip!
+    return nil
   }
 }
