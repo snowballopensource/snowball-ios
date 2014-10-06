@@ -28,10 +28,10 @@ class FriendsViewController: ManagedTableViewController {
   }
 
   override func reloadData() {
-//    API.getCurrentUserFollowing { (error) in
-//      if error != nil { error?.display(); return }
-//      self.tableView.reloadData()
-//    }
+    API.request(APIRoute.GetCurrentUserFollowing).responsePersistable(User.self) { (error) in
+      if error != nil { error?.display(); return }
+      self.tableView.reloadData()
+    }
   }
 
   // MARK: ManagedTableViewController

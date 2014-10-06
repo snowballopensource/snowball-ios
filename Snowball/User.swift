@@ -67,19 +67,19 @@ class User: RemoteManagedObject, JSONPersistable {
       if let name = JSON["name"] as JSONData? as? String {
         user.name = name
       }
-      if let username = JSON["username"] as AnyObject? as? String {
+      if let username = JSON["username"] as JSONData? as? String {
         user.username = username
       }
-      if let avatarURL = JSON["avatar_url"] as AnyObject? as? String {
+      if let avatarURL = JSON["avatar_url"] as JSONData? as? String {
         user.avatarURL = avatarURL
       }
-      if let youFollow = JSON["you_follow"] as AnyObject? as? Bool {
+      if let youFollow = JSON["you_follow"] as JSONData? as? Bool {
         user.youFollow = youFollow
       }
-      if let email = JSON["email"] as AnyObject? as? String {
+      if let email = JSON["email"] as JSONData? as? String {
         user.email = email
       }
-      if let phoneNumber = JSON["phone_number"] as AnyObject? as? String {
+      if let phoneNumber = JSON["phone_number"] as JSONData? as? String {
         user.phoneNumber = phoneNumber
       }
 
