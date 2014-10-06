@@ -61,7 +61,7 @@ class ReelsViewController: ManagedCollectionViewController {
     }
     layout(friendsButton) { (friendsButton) in
       friendsButton.top == friendsButton.superview!.top + 10
-      friendsButton.left == friendsButton.superview!.left + 10
+      friendsButton.left == friendsButton.superview!.left + 16
       friendsButton.height == 44
     }
     layout(collectionView, topView) { (collectionView, topView) in
