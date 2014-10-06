@@ -9,10 +9,16 @@
 import Cartography
 import UIKit
 
+protocol UserTableViewCellDelegate: class {
+  func settingsButtonTapped()
+}
+
 class UserTableViewCell: UITableViewCell {
   private let nameLabel = UILabel()
   private let usernameLabel = UILabel()
   private let avatarImageView = UserImageView()
+  private let settingsButton = UIButton()
+  var delegate: UserTableViewCellDelegate?
 
   // MARK: -
 
@@ -27,6 +33,10 @@ class UserTableViewCell: UITableViewCell {
     usernameLabel.font = usernameLabel.font.fontWithSize(12.0)
     contentView.addSubview(usernameLabel)
     contentView.addSubview(avatarImageView)
+    settingsButton.setTitle(NSLocalizedString("Settings"), forState: UIControlState.Normal)
+    settingsButton.setTitleColorWithAutomaticHighlightColor(color: UIColor.SnowballColor.blue())
+    settingsButton.addTarget(delegate, action: "settingsButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    contentView.addSubview(settingsButton)
   }
 
   required init(coder aDecoder: NSCoder) {
@@ -44,6 +54,10 @@ class UserTableViewCell: UITableViewCell {
     usernameLabel.text = user.username
     usernameLabel.textColor = user.color
     avatarImageView.setUser(user)
+    settingsButton.hidden = true
+    if user == User.currentUser {
+      settingsButton.hidden = false
+    }
   }
 
   // MARK: UIView
@@ -65,6 +79,10 @@ class UserTableViewCell: UITableViewCell {
     layout(usernameLabel, avatarImageView) { (usernameLabel, avatarImageView) in
       usernameLabel.bottom == avatarImageView.bottom
       usernameLabel.left == avatarImageView.right + 12
+    }
+    layout(settingsButton) { (settingsButton) in
+      settingsButton.centerY == settingsButton.superview!.centerY
+      settingsButton.right == settingsButton.superview!.right - 16
     }
   }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FriendsViewController: ManagedTableViewController {
+class FriendsViewController: ManagedTableViewController, UserTableViewCellDelegate {
 
   func switchToMainNavigationController() {
     switchToNavigationController(MainNavigationController())
@@ -67,6 +67,12 @@ class FriendsViewController: ManagedTableViewController {
     return UserTableViewCell.self
   }
 
+  override func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+    super.configureCell(cell, atIndexPath: indexPath)
+    let userCell = cell as UserTableViewCell
+    userCell.delegate = self
+  }
+
   // MARK: UITableViewDataSource
 
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -79,5 +85,12 @@ class FriendsViewController: ManagedTableViewController {
       case 1: return NSLocalizedString("My Friends")
       default: return nil
     }
+  }
+
+  // MARK: UserTableViewCellDelegate
+
+  func settingsButtonTapped() {
+    println("woohoo")
+    // TODO: go to settings vc
   }
 }
