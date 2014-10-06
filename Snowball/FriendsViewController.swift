@@ -15,6 +15,8 @@ class FriendsViewController: ManagedTableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    title = NSLocalizedString("My Friends")
+
     tableView.registerClass(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.identifier)
   }
 

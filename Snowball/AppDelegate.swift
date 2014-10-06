@@ -28,6 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UINavigationBar.appearance().shadowImage = UIImage()
     UINavigationBar.appearance().translucent = false
     UINavigationBar.appearance().barTintColor = UIColor.SnowballColor.blue()
+    // new navigation bar height: 64; old navigation bar height: 44
+    // 64-44 = 20; 20/2 = 10
+    // yay math!
+    UINavigationBar.appearance().setTitleVerticalPositionAdjustment(-10.0, forBarMetrics: UIBarMetrics.Default)
   }
 
   // MARK: UIApplicationDelegate
