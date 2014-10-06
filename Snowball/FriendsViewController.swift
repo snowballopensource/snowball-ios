@@ -24,6 +24,7 @@ class FriendsViewController: ManagedTableViewController {
     let leftBarButton = UIButton(frame: CGRectMake(0, 0, 44.0, 44.0))
     leftBarButton.setTitle(NSLocalizedString("Back"), forState: UIControlState.Normal)
     leftBarButton.addTarget(self, action: "switchToMainNavigationController", forControlEvents: UIControlEvents.TouchUpInside)
+    leftBarButton.setTitleColorWithAutomaticHighlightColor()
     navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftBarButton)
 
     tableView.registerClass(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.identifier)
