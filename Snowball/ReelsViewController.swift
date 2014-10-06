@@ -45,7 +45,8 @@ class ReelsViewController: ManagedCollectionViewController {
     topView.addFullViewSubview(topView.playerView!)
     view.addSubview(topView)
 
-    friendsButton.backgroundColor = UIColor.purpleColor()
+    friendsButton.setTitle(NSLocalizedString("Friends"), forState: UIControlState.Normal)
+    friendsButton.setTitleColorWithAutomaticHighlightColor()
     friendsButton.addTarget(self, action: "switchToFriendsNavigationController", forControlEvents: UIControlEvents.TouchUpInside)
     topView.addSubview(friendsButton)
   }
@@ -61,7 +62,6 @@ class ReelsViewController: ManagedCollectionViewController {
     layout(friendsButton) { (friendsButton) in
       friendsButton.top == friendsButton.superview!.top + 10
       friendsButton.left == friendsButton.superview!.left + 10
-      friendsButton.width == 44
       friendsButton.height == 44
     }
     layout(collectionView, topView) { (collectionView, topView) in
