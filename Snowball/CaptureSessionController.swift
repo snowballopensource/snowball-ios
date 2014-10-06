@@ -18,26 +18,24 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
     super.init()
     captureSession.sessionPreset = AVCaptureSessionPresetHigh
     checkDeviceAuthorizationStatus { (granted) in
-      var error: NSError?
       let videoDevice = self.captureDevice(mediaType: AVMediaTypeVideo, position: AVCaptureDevicePosition.Front)
-      let videoDeviceInput = AVCaptureDeviceInput(device: videoDevice, error: &error)
-      if error != nil { error?.display(); return }
+      let videoDeviceInput = AVCaptureDeviceInput(device: videoDevice, error: nil)
       if self.captureSession.canAddInput(videoDeviceInput) {
         self.captureSession.addInput(videoDeviceInput)
         self.currentVideoDeviceInput = videoDeviceInput
       }
       let audioDevice = self.captureDevice(mediaType: AVMediaTypeAudio)
-      let audioDeviceInput = AVCaptureDeviceInput(device: audioDevice, error: &error)
-      if error != nil { error?.display(); return }
+      let audioDeviceInput = AVCaptureDeviceInput(device: audioDevice, error: nil)
       if self.captureSession.canAddInput(audioDeviceInput) {
         self.captureSession.addInput(audioDeviceInput)
       }
       let movieFileOutput = AVCaptureMovieFileOutput()
       if self.captureSession.canAddOutput(movieFileOutput) {
         self.captureSession.addOutput(movieFileOutput)
-        let connection = movieFileOutput.connectionWithMediaType(AVMediaTypeVideo)
-        if connection.supportsVideoStabilization {
-          connection.enablesVideoStabilizationWhenAvailable = true
+        if let connection = movieFileOutput.connectionWithMediaType(AVMediaTypeVideo) {
+          if connection.supportsVideoStabilization {
+            connection.enablesVideoStabilizationWhenAvailable = true
+          }
         }
       }
     }
