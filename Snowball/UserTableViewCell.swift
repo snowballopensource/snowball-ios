@@ -39,7 +39,9 @@ class UserTableViewCell: UITableViewCell {
   override func configureForObject(object: AnyObject) {
     let user = object as User
     nameLabel.text = user.name
+    nameLabel.textColor = user.color
     usernameLabel.text = user.username
+    usernameLabel.textColor = user.color
     avatarImageView.setUser(user)
   }
 
