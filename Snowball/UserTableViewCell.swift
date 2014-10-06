@@ -20,6 +20,7 @@ class UserTableViewCell: UITableViewCell {
 
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+    selectionStyle = UITableViewCellSelectionStyle.None
     contentView.backgroundColor = UIColor.whiteColor()
     nameLabel.font = nameLabel.font.fontWithSize(19.0)
     contentView.addSubview(nameLabel)
