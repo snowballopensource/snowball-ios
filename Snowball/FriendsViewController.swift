@@ -60,4 +60,12 @@ class FriendsViewController: ManagedTableViewController {
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     return 2
   }
+
+  func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    switch(section) {
+      case 0: return NSLocalizedString("Me")
+      case 1: return NSLocalizedString("My Friends")
+      default: return nil
+    }
+  }
 }
