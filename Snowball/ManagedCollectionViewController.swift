@@ -47,4 +47,14 @@ class ManagedCollectionViewController: ManagedViewController, UICollectionViewDa
     configureCell(cell, atIndexPath: indexPath)
     return cell
   }
+
+  // MARK: UICollectionViewDelegateFlowLayout
+
+  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    return cellType().size()
+  }
+
+  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    return 0
+  }
 }

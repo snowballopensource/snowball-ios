@@ -13,6 +13,11 @@ extension UITableViewCell {
     return NSStringFromClass(self)
   }
 
+  class func height() -> CGFloat {
+    requireSubclass()
+    return 0.0
+  }
+
   func configureForObject(object: AnyObject) {
     requireSubclass()
   }

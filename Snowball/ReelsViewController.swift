@@ -109,16 +109,6 @@ class ReelsViewController: ManagedCollectionViewController {
     }
   }
 
-  // MARK: UICollectionViewDelegateFlowLayout
-
-  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-    return ReelCollectionViewCell.size
-  }
-
-  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-    return 0
-  }
-
   // MARK: UICollectionViewDelegate
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {

@@ -16,13 +16,6 @@ class ReelCollectionViewCell: UICollectionViewCell {
   private let recentClipLoopingPlayerView = LoopingPlayerView()
   private let playbackIndicatorView = UIView()
 
-  class var size: CGSize {
-    get {
-      let sideLength = UIScreen.mainScreen().bounds.width/2
-      return CGSizeMake(sideLength, sideLength)
-    }
-  }
-
   func showPlaybackIndicatorView() {
     playbackIndicatorView.hidden = false
   }
@@ -56,6 +49,11 @@ class ReelCollectionViewCell: UICollectionViewCell {
 
   required init(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+
+  override class func size() -> CGSize {
+    let sideLength = UIScreen.mainScreen().bounds.width/2
+    return CGSizeMake(sideLength, sideLength)
   }
 
   override func configureForObject(object: AnyObject) {

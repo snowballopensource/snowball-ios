@@ -46,4 +46,10 @@ class ManagedTableViewController: ManagedViewController, UITableViewDataSource, 
     configureCell(cell, atIndexPath: indexPath)
     return cell
   }
+
+  // MARK: UITableViewDelegate
+
+  func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    return cellType().height()
+  }
 }

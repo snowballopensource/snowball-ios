@@ -13,6 +13,11 @@ extension UICollectionViewCell {
     return NSStringFromClass(self)
   }
 
+  class func size() -> CGSize {
+    requireSubclass()
+    return CGSizeMake(0.0, 0.0)
+  }
+
   func configureForObject(object: AnyObject) {
     requireSubclass()
   }
