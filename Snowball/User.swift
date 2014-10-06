@@ -71,6 +71,10 @@ class User: RemoteManagedObject, JSONPersistable {
     return User.objectsWithPredicate(NSPredicate(format: "id == %@", id))
   }
 
+  class func following() -> RLMArray {
+    return User.objectsWithPredicate(NSPredicate(format: "youFollow == true"))
+  }
+
   // MARK: JSONPersistable
 
   class func possibleJSONKeys() -> [String] {
