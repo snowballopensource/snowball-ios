@@ -15,6 +15,10 @@
   [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor whiteColor]];
   [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setFont:[UIFont systemFontOfSize:14.0f]];
   [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setTextColor:[UIColor colorWithRed:114/255.0 green:214/255.0 blue:235/255.0 alpha:1.0]];
+
+  // UIBarButtonItem
+  [[UIButton appearanceWhenContainedIn:[UINavigationBar class], nil] setContentEdgeInsets:UIEdgeInsetsMake(-20.0f, 0, 0, 0)];
+
 }
 
 @end

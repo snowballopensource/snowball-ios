@@ -10,12 +10,21 @@ import UIKit
 
 class FriendsViewController: ManagedTableViewController {
 
+  func switchToMainNavigationController() {
+    switchToNavigationController(MainNavigationController())
+  }
+
   // MARK: UIViewController
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     title = NSLocalizedString("My Friends")
+
+    let leftBarButton = UIButton(frame: CGRectMake(0, 0, 44.0, 44.0))
+    leftBarButton.setTitle(NSLocalizedString("Back"), forState: UIControlState.Normal)
+    leftBarButton.addTarget(self, action: "switchToMainNavigationController", forControlEvents: UIControlEvents.TouchUpInside)
+    navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftBarButton)
 
     tableView.registerClass(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.identifier)
   }
