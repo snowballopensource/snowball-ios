@@ -38,6 +38,9 @@ class UserImageView: UIView {
   func setUser(user: User) {
     backgroundColor = UIColor.lightGrayColor() // TODO: user.color
     initialsLabel.text = user.initials
-    imageView.setImageFromURL(NSURL(string: user.avatarURL), placeholder: nil, completionHandler: nil)
+    imageView.image = nil
+    if countElements(user.avatarURL) > 0 {
+      imageView.setImageFromURL(NSURL(string: user.avatarURL), placeholder: nil, completionHandler: nil)
+    }
   }
 }
