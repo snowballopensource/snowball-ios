@@ -21,7 +21,7 @@ func requireSubclass() {
 }
 
 func switchToNavigationController(navigationController: UINavigationController) {
-  UIView.transitionWithView(UIApplication.sharedApplication().delegate!.window!!, duration: 0.8, options: UIViewAnimationOptions.TransitionFlipFromLeft, animations: { () in
+  UIView.transitionWithView(UIApplication.sharedApplication().delegate!.window!!, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, animations: { () in
     let oldState = UIView.areAnimationsEnabled()
     UIView.setAnimationsEnabled(false)
     UIApplication.sharedApplication().delegate!.window!!.rootViewController = navigationController
