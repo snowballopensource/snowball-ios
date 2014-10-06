@@ -102,9 +102,9 @@ class ReelsViewController: ManagedCollectionViewController {
   }
 
   override func configureCell(cell: UICollectionViewCell, atIndexPath indexPath: NSIndexPath) {
-    let reelCell = cell as ReelCollectionViewCell
-    reelCell.configureForObject(objectsInSection(indexPath.section).objectAtIndex(UInt(indexPath.row)))
+    super.configureCell(cell, atIndexPath: indexPath)
     if !scrolling {
+      let reelCell = cell as ReelCollectionViewCell
       reelCell.startPlayback()
     }
   }

@@ -40,11 +40,6 @@ class FriendsViewController: ManagedTableViewController {
     return UserTableViewCell.self
   }
 
-  override func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-    let user = objectsInSection(indexPath.section).objectAtIndex(UInt(indexPath.row)) as User
-    cell.textLabel!.text = user.name
-  }
-
   // MARK: UITableViewDataSource
 
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {

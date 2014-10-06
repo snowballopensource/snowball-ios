@@ -17,7 +17,7 @@ class ManagedTableViewController: ManagedViewController, UITableViewDataSource, 
   }
 
   func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-    requireSubclass()
+    cell.configureForObject(objectsInSection(indexPath.section).objectAtIndex(UInt(indexPath.row)))
   }
 
   // MARK: -

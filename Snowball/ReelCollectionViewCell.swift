@@ -41,7 +41,7 @@ class ReelCollectionViewCell: UICollectionViewCell {
 
   // MARK: -
 
-  // MARK: UITableViewCell
+  // MARK: UICollectionViewCell
 
   override init(frame: CGRect) {
     super.init(frame: frame)

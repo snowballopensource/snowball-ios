@@ -17,7 +17,7 @@ class ManagedCollectionViewController: ManagedViewController, UICollectionViewDa
   }
 
   func configureCell(cell: UICollectionViewCell, atIndexPath indexPath: NSIndexPath) {
-    requireSubclass()
+    cell.configureForObject(objectsInSection(indexPath.section).objectAtIndex(UInt(indexPath.row)))
   }
 
   // MARK: -
