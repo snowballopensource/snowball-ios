@@ -338,7 +338,6 @@
 				BAAD513219D4DB0300087176 /* ReelPlayer.swift */,
 				BA01CC0519D3EFB1004F170D /* VideoCache.swift */,
 				BAB5F04019D118B800D49796 /* Util.swift */,
-				BA88814319E25A24006CF338 /* UserImageView.swift */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -351,6 +350,7 @@
 				BA1B2E3319D2B90F0095042E /* PlayerView.swift */,
 				BA01CBB419D3476F004F170D /* LoopingPlayerView.swift */,
 				BA01CBC019D36E44004F170D /* TopMediaView.swift */,
+				BA88814319E25A24006CF338 /* UserImageView.swift */,
 				BA0F24D819D9FE5000DF8B75 /* Cells */,
 			);
 			name = Views;

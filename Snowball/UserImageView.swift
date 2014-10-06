@@ -32,7 +32,7 @@ class UserImageView: UIView {
 
   override func layoutSubviews() {
     layer.cornerRadius = frame.size.width/2
-    initialsLabel.font = initialsLabel.font.fontWithSize(frame.size.height/3)
+    initialsLabel.font = initialsLabel.font.fontWithSize(frame.size.height/2.5)
   }
 
   func setUser(user: User) {
