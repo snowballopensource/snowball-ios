@@ -36,6 +36,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       NSFontAttributeName: UIFont.systemFontOfSize(20.0),
       NSForegroundColorAttributeName: UIColor.whiteColor()
     ]
+    UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(-1000.0, 0), forBarMetrics: UIBarMetrics.Default)
+    UINavigationBar.appearance().backIndicatorImage = UIImage()
+    UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage()
+    // TODO: add a real back button image
+    // UIBarButtonItem.appearance().setBackButtonBackgroundImage(UIImage(), forState: UIControlState.Normal, barMetrics: UIBarMetrics.Default)
 
     // Bridged Appearance
     // Solves the lack of appearanceWhenContainedIn in Swift

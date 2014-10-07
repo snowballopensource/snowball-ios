@@ -25,7 +25,6 @@ class AuthenticationViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = UIColor.whiteColor()
-    navigationController?.navigationBar.translucent = false
 
     let rightBarButton = UIBarButtonItem(title: NSLocalizedString("✓"), style: UIBarButtonItemStyle.Bordered, target: self, action: "authenticate")
     navigationItem.rightBarButtonItem = rightBarButton

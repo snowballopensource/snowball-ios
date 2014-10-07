@@ -34,6 +34,7 @@
 		BA6579E919E3104F0046A409 /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6579E819E3104F0046A409 /* UIColor+Snowball.swift */; };
 		BA6579EE19E337240046A409 /* AppearanceBridger.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6579ED19E337240046A409 /* AppearanceBridger.m */; };
 		BA6579F319E3501B0046A409 /* UIButton+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6579F219E3501B0046A409 /* UIButton+Color.swift */; };
+		BA6579F519E35D540046A409 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6579F419E35D540046A409 /* EditProfileViewController.swift */; };
 		BA74C10319D13B8B00393633 /* ManagedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74C10219D13B8B00393633 /* ManagedViewController.swift */; };
 		BA74C10919D14A8700393633 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74C10819D14A8700393633 /* UITableViewCell+.swift */; };
 		BA88814419E25A24006CF338 /* UserImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA88814319E25A24006CF338 /* UserImageView.swift */; };
@@ -200,6 +201,7 @@
 		BA6579EC19E337240046A409 /* AppearanceBridger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppearanceBridger.h; sourceTree = "<group>"; };
 		BA6579ED19E337240046A409 /* AppearanceBridger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearanceBridger.m; sourceTree = "<group>"; };
 		BA6579F219E3501B0046A409 /* UIButton+Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Color.swift"; sourceTree = "<group>"; };
+		BA6579F419E35D540046A409 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		BA74C10219D13B8B00393633 /* ManagedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedViewController.swift; sourceTree = "<group>"; };
 		BA74C10819D14A8700393633 /* UITableViewCell+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
 		BA88814319E25A24006CF338 /* UserImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageView.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 			children = (
 				BA3B49BC19D8FD180084BB4F /* FriendsNavigationController.swift */,
 				BA3B49C519D8FD660084BB4F /* FriendsViewController.swift */,
+				BA6579F419E35D540046A409 /* EditProfileViewController.swift */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -383,9 +386,9 @@
 				BA74C10219D13B8B00393633 /* ManagedViewController.swift */,
 				BAB5F03719D1140A00D49796 /* ManagedTableViewController.swift */,
 				BA01CBF519D39B54004F170D /* ManagedCollectionViewController.swift */,
+				BADF9CF919D79BBD00A50568 /* Authentication */,
 				BADF9CFC19D79C0800A50568 /* Main */,
 				BA3B49C419D8FD310084BB4F /* Friends */,
-				BADF9CF919D79BBD00A50568 /* Authentication */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -728,6 +731,7 @@
 				BA01CBFC19D39F2C004F170D /* ReelCollectionViewCell.swift in Sources */,
 				BADF63CE19DCB8F100379A6D /* API.swift in Sources */,
 				BA6579E919E3104F0046A409 /* UIColor+Snowball.swift in Sources */,
+				BA6579F519E35D540046A409 /* EditProfileViewController.swift in Sources */,
 				BA6579F319E3501B0046A409 /* UIButton+Color.swift in Sources */,
 				BAB5F04119D118B800D49796 /* Util.swift in Sources */,
 				BA74C10319D13B8B00393633 /* ManagedViewController.swift in Sources */,

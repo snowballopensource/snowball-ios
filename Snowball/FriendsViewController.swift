@@ -90,7 +90,6 @@ class FriendsViewController: ManagedTableViewController, UserTableViewCellDelega
   // MARK: UserTableViewCellDelegate
 
   func settingsButtonTapped() {
-    println("woohoo")
-    // TODO: go to settings vc
+    navigationController?.pushViewController(EditProfileViewController(), animated: true)
   }
 }
