@@ -10,13 +10,28 @@ import Cartography
 import UIKit
 
 class EditProfileViewController: UIViewController {
-  let nameTextField = UITextField()
-  let usernameTextField = UITextField()
-  let emailTextField = UITextField()
+  private let currentUser = User.currentUser!
+  private let nameTextField = UITextField()
+  private let usernameTextField = UITextField()
+  private let emailTextField = UITextField()
 
   func save() {
-    // TODO: push the changes to the API
-    navigationController?.popViewControllerAnimated(true)
+    var newName: String?
+    var newUsername: String?
+    var newEmail: String?
+    if nameTextField.text != currentUser.name {
+      newName = nameTextField.text
+    }
+    if usernameTextField.text != currentUser.username {
+      newUsername = usernameTextField.text
+    }
+    if emailTextField.text != currentUser.email {
+      newEmail = emailTextField.text
+    }
+    API.request(APIRoute.UpdateCurrentUser(username: newUsername, email: newEmail, name: newName)).responsePersistable(User.self) { (error) in
+      if error != nil { error?.display(); return }
+      self.navigationController?.popViewControllerAnimated(true)
+    }
   }
 
   // MARK: -
@@ -32,8 +47,6 @@ class EditProfileViewController: UIViewController {
     rightBarButton.addTarget(self, action: "save", forControlEvents: UIControlEvents.TouchUpInside)
     rightBarButton.setTitleColorWithAutomaticHighlightColor()
     navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton)
-
-    let currentUser = User.currentUser!
 
     nameTextField.text = currentUser.name
     nameTextField.borderStyle = UITextBorderStyle.RoundedRect
