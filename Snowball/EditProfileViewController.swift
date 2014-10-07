@@ -28,8 +28,12 @@ class EditProfileViewController: UIViewController {
     if emailTextField.text != currentUser.email {
       newEmail = emailTextField.text
     }
-    API.request(APIRoute.UpdateCurrentUser(username: newUsername, email: newEmail, name: newName)).responsePersistable(User.self) { (error) in
-      if error != nil { error?.display(); return }
+    if newName != nil || newUsername != nil || newEmail != nil {
+      API.request(APIRoute.UpdateCurrentUser(username: newUsername, email: newEmail, name: newName)).responsePersistable(User.self) { (error) in
+        if error != nil { error?.display(); return }
+        self.navigationController?.popViewControllerAnimated(true)
+      }
+    } else {
       self.navigationController?.popViewControllerAnimated(true)
     }
   }
