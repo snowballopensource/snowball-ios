@@ -46,6 +46,8 @@ class EditProfileViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = UIColor.whiteColor()
 
+    title = NSLocalizedString("Edit Profile")
+
     let rightBarButton = UIButton(frame: CGRectMake(0, 0, 44.0, 44.0))
     rightBarButton.setTitle(NSLocalizedString("✓"), forState: UIControlState.Normal)
     rightBarButton.addTarget(self, action: "save", forControlEvents: UIControlEvents.TouchUpInside)
