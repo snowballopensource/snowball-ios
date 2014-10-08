@@ -186,17 +186,49 @@ protocol JSONPersistable: class {
 }
 
 extension Alamofire.Request {
-  // https://github.com/Alamofire/Alamofire#generic-response-object-serialization
+  typealias ObjectCompletionHandler = (AnyObject?, NSError?) -> ()
+  typealias ObjectsCompletionHandler = ([AnyObject]?, NSError?) -> ()
 
+  func responseObject(completionHandler: ObjectCompletionHandler) -> Self {
+    return responseJSON { (_, _, JSON, error) in
+      self.handleResponse(JSON, error: error) { (objects, error) in
+        completionHandler(objects?.first, error)
+      }
+    }
+  }
+
+  func responseObjects(completionHandler: ObjectsCompletionHandler) -> Self {
+    return responseJSON { (_, _, JSON, error) in
+      self.handleResponse(JSON, error: error, completionHandler: completionHandler)
+    }
+  }
+
+  private func handleResponse(JSON: JSONData?, error: NSError?, completionHandler: ObjectsCompletionHandler) {
+    if let error = error {
+      completionHandler(nil, error)
+    } else {
+      if let JSONObject = JSON as JSONData? as? JSONObject {
+        if let serverError = self.errorFromJSON(JSONObject) {
+          completionHandler(nil, serverError)
+        } else {
+          let objects = self.importFromJSON(User.self, JSON: JSONObject)
+          completionHandler(objects, nil)
+        }
+      }
+    }
+  }
+
+  // TODO: REMOVE
   func responsePersistable<T: JSONPersistable>(persistable: T.Type, completionHandler: API.CompletionHandler) -> Self {
     let serializer = responseSerializer { (JSON) in
-      self.importFromJSON(persistable, JSON: JSON)
+      let objects = self.importFromJSON(persistable, JSON: JSON)
     }
     return response(serializer: serializer) { (_, _, _, error) in
       completionHandler(error)
     }
   }
 
+  // TODO: REMOVE
   func responseAuthenticable(completionHandler: API.CompletionHandler) -> Self {
     let serializer = responseSerializer { (JSON) in
       if let authToken = JSON["auth_token"] as JSONData? as? String {
@@ -208,6 +240,7 @@ extension Alamofire.Request {
     }
   }
 
+  // TODO: REMOVE
   func responseCurrentUser(completionHandler: API.CompletionHandler) -> Self {
     let serializer = responseSerializer { (JSON) in
       self.importFromJSON(User.self, JSON: JSON)
@@ -224,8 +257,10 @@ extension Alamofire.Request {
 
   // Helpers
 
+  // TODO: REMOVE
   typealias AdditionHandler = (JSONObject) -> ()
 
+  // TODO: REMOVE
   private func responseSerializer(addition: AdditionHandler?) -> Serializer {
     let serializer: Serializer = { (request, response, data) in
       let JSONSerializer = Request.JSONResponseSerializer()
@@ -244,16 +279,22 @@ extension Alamofire.Request {
     return serializer
   }
 
-  private func importFromJSON<T: JSONPersistable>(persistable: T.Type, JSON: JSONObject) {
+
+  private func importFromJSON<T: JSONPersistable>(persistable: T.Type, JSON: JSONObject) -> [T] {
+    var objects = [T]()
     for JSONKey in persistable.possibleJSONKeys() {
       if let JSONData: JSONData = JSON[JSONKey] as JSONData? {
         RLMRealm.defaultRealm().beginWriteTransaction()
         if let JSONObject = JSONData as? JSONObject {
-          persistable.objectFromJSONObject(JSONObject)
+          if let object = persistable.objectFromJSONObject(JSONObject) {
+            objects.append(object)
+          }
         } else if let JSONArray = JSONData as? JSONArray {
           for JSON in JSONArray {
             if let JSONObject = JSON as? JSONObject {
-              persistable.objectFromJSONObject(JSONObject)
+              if let object = persistable.objectFromJSONObject(JSONObject) {
+                objects.append(object)
+              }
             }
           }
         }
@@ -261,6 +302,7 @@ extension Alamofire.Request {
         break
       }
     }
+    return objects
   }
 
   private func errorFromJSON(JSON: JSONObject) -> NSError? {

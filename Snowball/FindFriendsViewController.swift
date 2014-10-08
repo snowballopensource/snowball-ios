@@ -20,9 +20,12 @@ class FindFriendsViewController: UIViewController, UITableViewDataSource, UITabl
     AddressBookController.getAllPhoneNumbersWithCompletion { (granted, phoneNumbers) in
       if (granted) {
         if let phoneNumbers = phoneNumbers {
-          API.request(APIRoute.FindUsersByPhoneNumbers(phoneNumbers: phoneNumbers)).responsePersistable(User.self) { (error) in
+          API.request(APIRoute.FindUsersByPhoneNumbers(phoneNumbers: phoneNumbers)).responseObjects { (objects, error) in
             if error != nil { error?.display(); return }
-            // TODO: show users in table view
+            if let users = objects as? [User] {
+              self.users = users
+              self.tableView.reloadData()
+            }
           }
         }
       } else {
@@ -42,9 +45,10 @@ class FindFriendsViewController: UIViewController, UITableViewDataSource, UITabl
     tableView.delegate = self
     tableView.registerClass(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.identifier)
 
+    title = NSLocalizedString("Find Friends")
+
     if AddressBookController.authorized {
-      // TODO: get contacts from address book and then send to server
-      println("authorized")
+      getUsersFromAddressBook()
     } else {
       // TODO: user needs to allow us, so present button
       println("unauthorized")
