@@ -31,6 +31,7 @@
 		BA4E5B3419CAAAAB00DC5ECF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3319CAAAAB00DC5ECF /* User.swift */; };
 		BA593D0419E20A3700F29A29 /* RemoteManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA593D0319E20A3700F29A29 /* RemoteManagedObject.swift */; };
 		BA622F5A19E4AFDB00A8AFD5 /* AddressBookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA622F5919E4AFDB00A8AFD5 /* AddressBookController.swift */; };
+		BA622F6219E4C03500A8AFD5 /* FindFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA622F6119E4C03500A8AFD5 /* FindFriendsViewController.swift */; };
 		BA6579E119E30DFD0046A409 /* UINavigationBar+CustomHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6579E019E30DFD0046A409 /* UINavigationBar+CustomHeight.swift */; };
 		BA6579E919E3104F0046A409 /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6579E819E3104F0046A409 /* UIColor+Snowball.swift */; };
 		BA6579EE19E337240046A409 /* AppearanceBridger.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6579ED19E337240046A409 /* AppearanceBridger.m */; };
@@ -198,6 +199,7 @@
 		BA4E5B3719CAAC0000DC5ECF /* Snowball-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snowball-Bridging-Header.h"; sourceTree = "<group>"; };
 		BA593D0319E20A3700F29A29 /* RemoteManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteManagedObject.swift; sourceTree = "<group>"; };
 		BA622F5919E4AFDB00A8AFD5 /* AddressBookController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressBookController.swift; sourceTree = "<group>"; };
+		BA622F6119E4C03500A8AFD5 /* FindFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFriendsViewController.swift; sourceTree = "<group>"; };
 		BA6579E019E30DFD0046A409 /* UINavigationBar+CustomHeight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+CustomHeight.swift"; sourceTree = "<group>"; };
 		BA6579E819E3104F0046A409 /* UIColor+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Snowball.swift"; sourceTree = "<group>"; };
 		BA6579EC19E337240046A409 /* AppearanceBridger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppearanceBridger.h; sourceTree = "<group>"; };
@@ -334,6 +336,7 @@
 				BA3B49BC19D8FD180084BB4F /* FriendsNavigationController.swift */,
 				BA3B49C519D8FD660084BB4F /* FriendsViewController.swift */,
 				BA6579F419E35D540046A409 /* EditProfileViewController.swift */,
+				BA622F6119E4C03500A8AFD5 /* FindFriendsViewController.swift */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -719,6 +722,7 @@
 				BA1B2E3219D290C30095042E /* CameraView.swift in Sources */,
 				BA6579E119E30DFD0046A409 /* UINavigationBar+CustomHeight.swift in Sources */,
 				BA3B49C619D8FD660084BB4F /* FriendsViewController.swift in Sources */,
+				BA622F6219E4C03500A8AFD5 /* FindFriendsViewController.swift in Sources */,
 				BA0F24E419DA5B7100DF8B75 /* String+.swift in Sources */,
 				BA1B2E2819D254430095042E /* CaptureSessionController.swift in Sources */,
 				BA4E5B3419CAAAAB00DC5ECF /* User.swift in Sources */,

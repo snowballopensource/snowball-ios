@@ -14,6 +14,10 @@ class FriendsViewController: ManagedTableViewController, UserTableViewCellDelega
     switchToNavigationController(MainNavigationController())
   }
 
+  func pushFindFriendsViewController() {
+    navigationController?.pushViewController(FindFriendsViewController(), animated: true)
+  }
+
   // MARK: UIViewController
 
   override func viewDidLoad() {
@@ -26,6 +30,11 @@ class FriendsViewController: ManagedTableViewController, UserTableViewCellDelega
     leftBarButton.addTarget(self, action: "switchToMainNavigationController", forControlEvents: UIControlEvents.TouchUpInside)
     leftBarButton.setTitleColorWithAutomaticHighlightColor()
     navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftBarButton)
+    let rightBarButton = UIButton(frame: CGRectMake(0, 0, 44.0, 44.0))
+    rightBarButton.setTitle(NSLocalizedString("Find Friends"), forState: UIControlState.Normal)
+    rightBarButton.addTarget(self, action: "pushFindFriendsViewController", forControlEvents: UIControlEvents.TouchUpInside)
+    rightBarButton.setTitleColorWithAutomaticHighlightColor()
+    navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton)
   }
 
   // MARK: ManagedViewController
