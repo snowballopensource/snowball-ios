@@ -30,6 +30,7 @@
 		BA3B49C619D8FD660084BB4F /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3B49C519D8FD660084BB4F /* FriendsViewController.swift */; };
 		BA4E5B3419CAAAAB00DC5ECF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3319CAAAAB00DC5ECF /* User.swift */; };
 		BA593D0419E20A3700F29A29 /* RemoteManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA593D0319E20A3700F29A29 /* RemoteManagedObject.swift */; };
+		BA622F5A19E4AFDB00A8AFD5 /* AddressBookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA622F5919E4AFDB00A8AFD5 /* AddressBookController.swift */; };
 		BA6579E119E30DFD0046A409 /* UINavigationBar+CustomHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6579E019E30DFD0046A409 /* UINavigationBar+CustomHeight.swift */; };
 		BA6579E919E3104F0046A409 /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6579E819E3104F0046A409 /* UIColor+Snowball.swift */; };
 		BA6579EE19E337240046A409 /* AppearanceBridger.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6579ED19E337240046A409 /* AppearanceBridger.m */; };
@@ -196,6 +197,7 @@
 		BA4E5B3319CAAAAB00DC5ECF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BA4E5B3719CAAC0000DC5ECF /* Snowball-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snowball-Bridging-Header.h"; sourceTree = "<group>"; };
 		BA593D0319E20A3700F29A29 /* RemoteManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteManagedObject.swift; sourceTree = "<group>"; };
+		BA622F5919E4AFDB00A8AFD5 /* AddressBookController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressBookController.swift; sourceTree = "<group>"; };
 		BA6579E019E30DFD0046A409 /* UINavigationBar+CustomHeight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+CustomHeight.swift"; sourceTree = "<group>"; };
 		BA6579E819E3104F0046A409 /* UIColor+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Snowball.swift"; sourceTree = "<group>"; };
 		BA6579EC19E337240046A409 /* AppearanceBridger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppearanceBridger.h; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 		BA1B2E2919D254460095042E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BA622F5919E4AFDB00A8AFD5 /* AddressBookController.swift */,
 				BADF63CD19DCB8F100379A6D /* API.swift */,
 				BA1B2E2719D254430095042E /* CaptureSessionController.swift */,
 			);
@@ -726,6 +729,7 @@
 				BAAD512919D4D35300087176 /* ReelPlayerViewController.swift in Sources */,
 				BA01CBFA19D39EAF004F170D /* ReelsViewController.swift in Sources */,
 				BAB5F03F19D115DE00D49796 /* NSError+.swift in Sources */,
+				BA622F5A19E4AFDB00A8AFD5 /* AddressBookController.swift in Sources */,
 				BA01CC0619D3EFB1004F170D /* VideoCache.swift in Sources */,
 				BAB5F02F19D0FA4F00D49796 /* Clip.swift in Sources */,
 				BA01CBFC19D39F2C004F170D /* ReelCollectionViewCell.swift in Sources */,
