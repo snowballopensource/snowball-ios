@@ -30,6 +30,7 @@ class ManagedCollectionViewController: ManagedViewController, UICollectionViewDa
     view.addSubview(collectionView)
     collectionView.dataSource = self
     collectionView.delegate = self
+    collectionView.registerClass(cellType(), forCellWithReuseIdentifier: cellType().identifier)
   }
 
   override func viewWillLayoutSubviews() {

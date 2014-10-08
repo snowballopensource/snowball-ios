@@ -29,6 +29,7 @@ class ManagedTableViewController: ManagedViewController, UITableViewDataSource, 
     view.addSubview(tableView)
     tableView.dataSource = self
     tableView.delegate = self
+    tableView.registerClass(cellType(), forCellReuseIdentifier: cellType().identifier)
   }
 
   override func viewWillLayoutSubviews() {

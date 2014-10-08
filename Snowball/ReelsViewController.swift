@@ -34,7 +34,6 @@ class ReelsViewController: ManagedCollectionViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    collectionView.registerClass(ReelCollectionViewCell.self, forCellWithReuseIdentifier: ReelCollectionViewCell.identifier)
     let cameraViewController = CameraViewController()
     addChildViewController(cameraViewController)
     topView.cameraView = cameraViewController.view as? CameraView

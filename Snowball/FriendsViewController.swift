@@ -26,8 +26,6 @@ class FriendsViewController: ManagedTableViewController, UserTableViewCellDelega
     leftBarButton.addTarget(self, action: "switchToMainNavigationController", forControlEvents: UIControlEvents.TouchUpInside)
     leftBarButton.setTitleColorWithAutomaticHighlightColor()
     navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftBarButton)
-
-    tableView.registerClass(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.identifier)
   }
 
   // MARK: ManagedViewController
