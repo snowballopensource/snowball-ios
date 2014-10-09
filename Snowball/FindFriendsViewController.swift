@@ -8,12 +8,14 @@
 
 import Foundation
 
-class FindFriendsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class FindFriendsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FollowableUserTableViewCellDelegate {
   let tableView = UITableView()
   var users = [User]()
 
   func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
     cell.configureForObject(users[indexPath.row])
+    let followableUserCell = cell as FollowableUserTableViewCell
+    followableUserCell.delegate = self
   }
 
   private func getUsersFromAddressBook() {
@@ -75,5 +77,18 @@ class FindFriendsViewController: UIViewController, UITableViewDataSource, UITabl
 
   func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
     return FollowableUserTableViewCell.height()
+  }
+
+  // MARK: FollowableUserTableViewCell
+
+  func followButtonTappedForCell(cell: FollowableUserTableViewCell) {
+    if let indexPath = tableView.indexPathForCell(cell) {
+      let user = users[indexPath.row]
+      if user.youFollow {
+        // TODO: unfollow user
+      } else {
+        // TODO: follow user
+      }
+    }
   }
 }

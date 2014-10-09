@@ -12,7 +12,7 @@ import Cartography
 import Foundation
 
 protocol FollowableUserTableViewCellDelegate: class {
-  func followButtonTapped()
+  func followButtonTappedForCell(cell: FollowableUserTableViewCell)
 }
 
 class FollowableUserTableViewCell: UserTableViewCell {
@@ -21,7 +21,7 @@ class FollowableUserTableViewCell: UserTableViewCell {
 
   func followButtonTapped() {
     followButton.selected = !followButton.selected
-    delegate?.followButtonTapped()
+    delegate?.followButtonTappedForCell(self)
   }
 
   // MARK: -
