@@ -85,9 +85,13 @@ class FindFriendsViewController: UIViewController, UITableViewDataSource, UITabl
     if let indexPath = tableView.indexPathForCell(cell) {
       let user = users[indexPath.row]
       if user.youFollow {
-        // TODO: unfollow user
+        API.request(APIRoute.UnfollowUser(userID: user.id)).responseObject { (object, error) in
+          if error != nil { error?.display(); return }
+        }
       } else {
-        // TODO: follow user
+        API.request(APIRoute.FollowUser(userID: user.id)).responseObject { (object, error) in
+          if error != nil { error?.display(); return }
+        }
       }
     }
   }
