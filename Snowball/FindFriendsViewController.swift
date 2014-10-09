@@ -73,6 +73,10 @@ class FindFriendsViewController: UIViewController, UITableViewDataSource, UITabl
     return cell
   }
 
+  func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    return NSLocalizedString("Contacts who aren't yet my friends")
+  }
+
   // MARK: UITableViewDelegate
 
   func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
