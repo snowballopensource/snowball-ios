@@ -11,13 +11,19 @@ import UIKit
 class ManagedCollectionViewController: ManagedViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
   let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
 
-  func cellType() -> UICollectionViewCell.Type {
+  func cellTypeInSection(section: Int) -> UICollectionViewCell.Type {
     requireSubclass()
     return UICollectionViewCell.self
   }
 
   func configureCell(cell: UICollectionViewCell, atIndexPath indexPath: NSIndexPath) {
     cell.configureForObject(objectsInSection(indexPath.section).objectAtIndex(UInt(indexPath.row)))
+  }
+
+  private func registerCells() {
+    for i in 0...collectionView.numberOfSections() {
+      collectionView.registerClass(cellTypeInSection(i), forCellWithReuseIdentifier: cellTypeInSection(i).identifier)
+    }
   }
 
   // MARK: -
@@ -30,7 +36,7 @@ class ManagedCollectionViewController: ManagedViewController, UICollectionViewDa
     view.addSubview(collectionView)
     collectionView.dataSource = self
     collectionView.delegate = self
-    collectionView.registerClass(cellType(), forCellWithReuseIdentifier: cellType().identifier)
+    registerCells()
   }
 
   override func viewWillLayoutSubviews() {
@@ -44,7 +50,7 @@ class ManagedCollectionViewController: ManagedViewController, UICollectionViewDa
   }
 
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellType().identifier, forIndexPath: indexPath) as UICollectionViewCell
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellTypeInSection(indexPath.section).identifier, forIndexPath: indexPath) as UICollectionViewCell
     configureCell(cell, atIndexPath: indexPath)
     return cell
   }
@@ -52,7 +58,7 @@ class ManagedCollectionViewController: ManagedViewController, UICollectionViewDa
   // MARK: UICollectionViewDelegateFlowLayout
 
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-    return cellType().size()
+    return cellTypeInSection(indexPath.section).size()
   }
 
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {

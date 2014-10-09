@@ -96,7 +96,7 @@ class ReelsViewController: ManagedCollectionViewController {
 
   // MARK: ManagedCollectionViewController
 
-  override func cellType() -> UICollectionViewCell.Type {
+  override func cellTypeInSection(section: Int) -> UICollectionViewCell.Type {
     return ReelCollectionViewCell.self
   }
 

@@ -11,13 +11,19 @@ import UIKit
 class ManagedTableViewController: ManagedViewController, UITableViewDataSource, UITableViewDelegate {
   let tableView = UITableView()
 
-  func cellType() -> UITableViewCell.Type {
+  func cellTypeInSection(section: Int) -> UITableViewCell.Type {
     requireSubclass()
     return UITableViewCell.self
   }
 
   func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
     cell.configureForObject(objectsInSection(indexPath.section).objectAtIndex(UInt(indexPath.row)))
+  }
+
+  private func registerCells() {
+    for i in 0...tableView.numberOfSections() {
+      tableView.registerClass(cellTypeInSection(i), forCellReuseIdentifier: cellTypeInSection(i).identifier)
+    }
   }
 
   // MARK: -
@@ -29,7 +35,7 @@ class ManagedTableViewController: ManagedViewController, UITableViewDataSource, 
     view.addSubview(tableView)
     tableView.dataSource = self
     tableView.delegate = self
-    tableView.registerClass(cellType(), forCellReuseIdentifier: cellType().identifier)
+    registerCells()
   }
 
   override func viewWillLayoutSubviews() {
@@ -43,7 +49,7 @@ class ManagedTableViewController: ManagedViewController, UITableViewDataSource, 
   }
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier(cellType().identifier, forIndexPath: indexPath) as UITableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier(cellTypeInSection(indexPath.section).identifier, forIndexPath: indexPath) as UITableViewCell
     configureCell(cell, atIndexPath: indexPath)
     return cell
   }
@@ -51,6 +57,6 @@ class ManagedTableViewController: ManagedViewController, UITableViewDataSource, 
   // MARK: UITableViewDelegate
 
   func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-    return cellType().height()
+    return cellTypeInSection(indexPath.section).height()
   }
 }

@@ -70,14 +70,18 @@ class FriendsViewController: ManagedTableViewController, CurrentUserTableViewCel
 
   // MARK: ManagedTableViewController
 
-  override func cellType() -> UITableViewCell.Type {
-    return CurrentUserTableViewCell.self
+  override func cellTypeInSection(section: Int) -> UITableViewCell.Type {
+    switch section {
+      case 0: return CurrentUserTableViewCell.self
+      default: return UserTableViewCell.self
+    }
   }
 
   override func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
     super.configureCell(cell, atIndexPath: indexPath)
-    let currentUserCell = cell as CurrentUserTableViewCell
-    currentUserCell.delegate = self
+    if let currentUserCell = cell as? CurrentUserTableViewCell {
+      currentUserCell.delegate = self
+    }
   }
 
   // MARK: UITableViewDataSource
