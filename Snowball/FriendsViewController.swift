@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FriendsViewController: ManagedTableViewController, UserTableViewCellDelegate {
+class FriendsViewController: ManagedTableViewController, CurrentUserTableViewCellDelegate {
 
   func switchToMainNavigationController() {
     switchToNavigationController(MainNavigationController())
@@ -71,13 +71,13 @@ class FriendsViewController: ManagedTableViewController, UserTableViewCellDelega
   // MARK: ManagedTableViewController
 
   override func cellType() -> UITableViewCell.Type {
-    return UserTableViewCell.self
+    return CurrentUserTableViewCell.self
   }
 
   override func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
     super.configureCell(cell, atIndexPath: indexPath)
-    let userCell = cell as UserTableViewCell
-    userCell.delegate = self
+    let currentUserCell = cell as CurrentUserTableViewCell
+    currentUserCell.delegate = self
   }
 
   // MARK: UITableViewDataSource

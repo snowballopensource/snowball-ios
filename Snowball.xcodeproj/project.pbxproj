@@ -37,6 +37,7 @@
 		BA6579EE19E337240046A409 /* AppearanceBridger.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6579ED19E337240046A409 /* AppearanceBridger.m */; };
 		BA6579F319E3501B0046A409 /* UIButton+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6579F219E3501B0046A409 /* UIButton+Color.swift */; };
 		BA6579F519E35D540046A409 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6579F419E35D540046A409 /* EditProfileViewController.swift */; };
+		BA69688819E6792000FDFB91 /* CurrentUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA69688719E6792000FDFB91 /* CurrentUserTableViewCell.swift */; };
 		BA74C10319D13B8B00393633 /* ManagedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74C10219D13B8B00393633 /* ManagedViewController.swift */; };
 		BA74C10919D14A8700393633 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA74C10819D14A8700393633 /* UITableViewCell+.swift */; };
 		BA88814419E25A24006CF338 /* UserImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA88814319E25A24006CF338 /* UserImageView.swift */; };
@@ -206,6 +207,7 @@
 		BA6579ED19E337240046A409 /* AppearanceBridger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearanceBridger.m; sourceTree = "<group>"; };
 		BA6579F219E3501B0046A409 /* UIButton+Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Color.swift"; sourceTree = "<group>"; };
 		BA6579F419E35D540046A409 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		BA69688719E6792000FDFB91 /* CurrentUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserTableViewCell.swift; sourceTree = "<group>"; };
 		BA74C10219D13B8B00393633 /* ManagedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedViewController.swift; sourceTree = "<group>"; };
 		BA74C10819D14A8700393633 /* UITableViewCell+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
 		BA88814319E25A24006CF338 /* UserImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageView.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 			children = (
 				BA01CBFB19D39F2C004F170D /* ReelCollectionViewCell.swift */,
 				BA0F24DF19D9FE5E00DF8B75 /* UserTableViewCell.swift */,
+				BA69688719E6792000FDFB91 /* CurrentUserTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -717,6 +720,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA69688819E6792000FDFB91 /* CurrentUserTableViewCell.swift in Sources */,
 				BAB5F02B19D0FA4800D49796 /* Reel.swift in Sources */,
 				BA01CBC119D36E44004F170D /* TopMediaView.swift in Sources */,
 				BA1B2E3219D290C30095042E /* CameraView.swift in Sources */,
