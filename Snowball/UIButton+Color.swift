@@ -13,6 +13,7 @@ extension UIButton {
     if let color = color {
       setTitleColor(color, forState: UIControlState.Normal)
       setTitleColor(color.colorWithOffset(0.3), forState: UIControlState.Highlighted)
+      setTitleColor(color.colorWithOffset(0.3), forState: UIControlState.Highlighted | UIControlState.Selected)
     }
   }
 }

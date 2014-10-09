@@ -19,6 +19,11 @@ class FollowableUserTableViewCell: UserTableViewCell {
   private let followButton = UIButton()
   var delegate: FollowableUserTableViewCellDelegate?
 
+  func followButtonTapped() {
+    followButton.selected = !followButton.selected
+    delegate?.followButtonTapped()
+  }
+
   // MARK: -
 
   // MARK: UserTableViewCell
@@ -27,8 +32,9 @@ class FollowableUserTableViewCell: UserTableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     followButton.setTitle(NSLocalizedString("Follow"), forState: UIControlState.Normal)
     followButton.setTitle(NSLocalizedString("Unfollow"), forState: UIControlState.Selected)
+    followButton.setTitle(NSLocalizedString("Unfollow"), forState: UIControlState.Highlighted | UIControlState.Selected)
     followButton.setTitleColorWithAutomaticHighlightColor(color: UIColor.SnowballColor.blue())
-    followButton.addTarget(delegate, action: "followButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    followButton.addTarget(self, action: "followButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     contentView.addSubview(followButton)
   }
 
