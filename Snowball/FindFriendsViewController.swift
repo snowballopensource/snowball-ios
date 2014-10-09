@@ -25,7 +25,7 @@ class FindFriendsViewController: UIViewController, UITableViewDataSource, UITabl
           API.request(APIRoute.FindUsersByPhoneNumbers(phoneNumbers: phoneNumbers)).responseObjects { (objects, error) in
             if error != nil { error?.display(); return }
             if let users = objects as? [User] {
-              self.users = users
+              self.users = users.filter() { $0.youFollow == false }
               self.tableView.reloadData()
             }
           }
@@ -84,13 +84,14 @@ class FindFriendsViewController: UIViewController, UITableViewDataSource, UITabl
   func followButtonTappedForCell(cell: FollowableUserTableViewCell) {
     if let indexPath = tableView.indexPathForCell(cell) {
       let user = users[indexPath.row]
-      if user.youFollow {
-        API.request(APIRoute.UnfollowUser(userID: user.id)).responseObject { (object, error) in
-          if error != nil { error?.display(); return }
-        }
-      } else {
-        API.request(APIRoute.FollowUser(userID: user.id)).responseObject { (object, error) in
-          if error != nil { error?.display(); return }
+      users.removeAtIndex(indexPath.row)
+      tableView.reloadData()
+      API.request(APIRoute.FollowUser(userID: user.id)).responseObject { (object, error) in
+        if error != nil {
+          error?.display()
+          self.users.insert(user, atIndex: indexPath.row)
+          self.tableView.reloadData()
+          return
         }
       }
     }
