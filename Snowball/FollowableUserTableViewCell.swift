@@ -26,6 +26,7 @@ class FollowableUserTableViewCell: UserTableViewCell {
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     followButton.setTitle(NSLocalizedString("Follow"), forState: UIControlState.Normal)
+    followButton.setTitle(NSLocalizedString("Unfollow"), forState: UIControlState.Selected)
     followButton.setTitleColorWithAutomaticHighlightColor(color: UIColor.SnowballColor.blue())
     followButton.addTarget(delegate, action: "followButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     contentView.addSubview(followButton)
@@ -33,6 +34,12 @@ class FollowableUserTableViewCell: UserTableViewCell {
 
   required init(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+
+  override func configureForObject(object: AnyObject) {
+    super.configureForObject(object)
+    let user = object as User
+    followButton.selected = user.youFollow
   }
 
   // MARK: UIView
