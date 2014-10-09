@@ -43,7 +43,7 @@ class FindFriendsViewController: UIViewController, UITableViewDataSource, UITabl
     view.addSubview(tableView)
     tableView.dataSource = self
     tableView.delegate = self
-    tableView.registerClass(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.identifier)
+    tableView.registerClass(FollowableUserTableViewCell.self, forCellReuseIdentifier: FollowableUserTableViewCell.identifier)
 
     title = NSLocalizedString("Find Friends")
 
@@ -66,7 +66,7 @@ class FindFriendsViewController: UIViewController, UITableViewDataSource, UITabl
   }
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier(UserTableViewCell.identifier, forIndexPath: indexPath) as UITableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier(FollowableUserTableViewCell.identifier, forIndexPath: indexPath) as UITableViewCell
     configureCell(cell, atIndexPath: indexPath)
     return cell
   }
@@ -74,6 +74,6 @@ class FindFriendsViewController: UIViewController, UITableViewDataSource, UITabl
   // MARK: UITableViewDelegate
 
   func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-    return UserTableViewCell.height()
+    return FollowableUserTableViewCell.height()
   }
 }
