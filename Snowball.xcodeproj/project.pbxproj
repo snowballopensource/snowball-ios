@@ -51,6 +51,8 @@
 		BAB5F03819D1140A00D49796 /* ManagedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5F03719D1140A00D49796 /* ManagedTableViewController.swift */; };
 		BAB5F03F19D115DE00D49796 /* NSError+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5F03E19D115DE00D49796 /* NSError+.swift */; };
 		BAB5F04119D118B800D49796 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5F04019D118B800D49796 /* Util.swift */; };
+		BAD01FAF19E8555E003A6735 /* PhoneNumberVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD01FAE19E8555E003A6735 /* PhoneNumberVerificationViewController.swift */; };
+		BAD01FB119E85569003A6735 /* PhoneNumberChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD01FB019E85569003A6735 /* PhoneNumberChangeViewController.swift */; };
 		BADF63CE19DCB8F100379A6D /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF63CD19DCB8F100379A6D /* API.swift */; };
 		BADF9CF019D78EB400A50568 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF9CEF19D78EB400A50568 /* AuthenticationViewController.swift */; };
 		BADF9CF819D79AAA00A50568 /* AuthenticationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF9CF719D79AAA00A50568 /* AuthenticationNavigationController.swift */; };
@@ -222,6 +224,8 @@
 		BAB5F03719D1140A00D49796 /* ManagedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedTableViewController.swift; sourceTree = "<group>"; };
 		BAB5F03E19D115DE00D49796 /* NSError+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+.swift"; sourceTree = "<group>"; };
 		BAB5F04019D118B800D49796 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		BAD01FAE19E8555E003A6735 /* PhoneNumberVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberVerificationViewController.swift; sourceTree = "<group>"; };
+		BAD01FB019E85569003A6735 /* PhoneNumberChangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberChangeViewController.swift; sourceTree = "<group>"; };
 		BADF63CD19DCB8F100379A6D /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BADF9CEF19D78EB400A50568 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		BADF9CF719D79AAA00A50568 /* AuthenticationNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationNavigationController.swift; sourceTree = "<group>"; };
@@ -343,6 +347,7 @@
 				BA3B49C519D8FD660084BB4F /* FriendsViewController.swift */,
 				BA6579F419E35D540046A409 /* EditProfileViewController.swift */,
 				BA622F6119E4C03500A8AFD5 /* FindFriendsViewController.swift */,
+				BAD01FB219E85589003A6735 /* Phone Number */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -420,6 +425,15 @@
 				BA6579F219E3501B0046A409 /* UIButton+Color.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		BAD01FB219E85589003A6735 /* Phone Number */ = {
+			isa = PBXGroup;
+			children = (
+				BAD01FB019E85569003A6735 /* PhoneNumberChangeViewController.swift */,
+				BAD01FAE19E8555E003A6735 /* PhoneNumberVerificationViewController.swift */,
+			);
+			name = "Phone Number";
 			sourceTree = "<group>";
 		};
 		BADF9CF919D79BBD00A50568 /* Authentication */ = {
@@ -725,6 +739,7 @@
 			files = (
 				BA69688819E6792000FDFB91 /* CurrentUserTableViewCell.swift in Sources */,
 				BAB5F02B19D0FA4800D49796 /* Reel.swift in Sources */,
+				BAD01FB119E85569003A6735 /* PhoneNumberChangeViewController.swift in Sources */,
 				BA01CBC119D36E44004F170D /* TopMediaView.swift in Sources */,
 				BA1B2E3219D290C30095042E /* CameraView.swift in Sources */,
 				BA6579E119E30DFD0046A409 /* UINavigationBar+CustomHeight.swift in Sources */,
@@ -749,6 +764,7 @@
 				BA6579E919E3104F0046A409 /* UIColor+Snowball.swift in Sources */,
 				BA6579F519E35D540046A409 /* EditProfileViewController.swift in Sources */,
 				BA6579F319E3501B0046A409 /* UIButton+Color.swift in Sources */,
+				BAD01FAF19E8555E003A6735 /* PhoneNumberVerificationViewController.swift in Sources */,
 				BAB5F04119D118B800D49796 /* Util.swift in Sources */,
 				BA74C10319D13B8B00393633 /* ManagedViewController.swift in Sources */,
 				BADF9CFB19D79C0300A50568 /* MainNavigationController.swift in Sources */,

@@ -14,6 +14,7 @@ class EditProfileViewController: UIViewController {
   private let nameTextField = UITextField()
   private let usernameTextField = UITextField()
   private let emailTextField = UITextField()
+  private let changePhoneNumberButton = UIButton()
 
   func save() {
     var newName: String?
@@ -36,6 +37,10 @@ class EditProfileViewController: UIViewController {
     } else {
       self.navigationController?.popViewControllerAnimated(true)
     }
+  }
+
+  func changePhoneNumber() {
+    navigationController?.pushViewController(PhoneNumberChangeViewController(), animated: true)
   }
 
   // MARK: -
@@ -63,6 +68,10 @@ class EditProfileViewController: UIViewController {
     emailTextField.text = currentUser.email
     emailTextField.borderStyle = UITextBorderStyle.RoundedRect
     view.addSubview(emailTextField)
+    changePhoneNumberButton.setTitle(NSLocalizedString("Change Phone Number"), forState: UIControlState.Normal)
+    changePhoneNumberButton.setTitleColorWithAutomaticHighlightColor(color: UIColor.blackColor())
+    changePhoneNumberButton.addTarget(self, action: "changePhoneNumber", forControlEvents: UIControlEvents.TouchUpInside)
+    view.addSubview(changePhoneNumberButton)
   }
 
   override func viewWillLayoutSubviews() {
@@ -88,6 +97,13 @@ class EditProfileViewController: UIViewController {
       emailTextField.right == usernameTextField.right
       emailTextField.top == usernameTextField.bottom + margin
       emailTextField.height == usernameTextField.height
+    }
+
+    layout(changePhoneNumberButton, emailTextField) { (changePhoneNumberButton, emailTextField) in
+      changePhoneNumberButton.left == emailTextField.left
+      changePhoneNumberButton.right == emailTextField.right
+      changePhoneNumberButton.top == emailTextField.bottom + margin
+      changePhoneNumberButton.height == emailTextField.height
     }
   }
 }

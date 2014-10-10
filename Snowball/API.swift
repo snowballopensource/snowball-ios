@@ -48,6 +48,8 @@ enum APIRoute: URLRequestConvertible {
   // User
   case GetCurrentUser
   case UpdateCurrentUser(username: String?, email: String?, name: String?)
+  case ChangePhoneNumber(phoneNumber: String)
+  case VerifyPhoneNumber(phoneNumberVerificationCode: String)
   case GetCurrentUserFollowing
   case FollowUser(userID: String)
   case UnfollowUser(userID: String)
@@ -69,6 +71,8 @@ enum APIRoute: URLRequestConvertible {
     case .SignIn: return .POST
     case .GetCurrentUser: return .GET
     case .UpdateCurrentUser: return .PATCH
+    case .ChangePhoneNumber: return .POST
+    case .VerifyPhoneNumber: return .POST
     case .GetCurrentUserFollowing: return .GET
     case .FollowUser: return .POST
     case .UnfollowUser: return .DELETE
@@ -90,6 +94,8 @@ enum APIRoute: URLRequestConvertible {
     case .SignIn: return "users/sign_in"
     case .GetCurrentUser: return "users/me"
     case .UpdateCurrentUser: return "users/me"
+    case .ChangePhoneNumber: return "users/me/phone_number_change"
+    case .VerifyPhoneNumber: return "users/me/phone_number_verification"
     case .GetCurrentUserFollowing: return "users/me/following"
     case .FollowUser(let userID): return "users/\(userID)/follow"
     case .UnfollowUser(let userID): return "users/\(userID)/follow"
@@ -110,6 +116,8 @@ enum APIRoute: URLRequestConvertible {
     case .SignUp: return ParameterEncoding.JSON
     case .SignIn: return ParameterEncoding.JSON
     case .UpdateCurrentUser: return ParameterEncoding.JSON
+    case .ChangePhoneNumber: return ParameterEncoding.JSON
+    case .VerifyPhoneNumber: return ParameterEncoding.JSON
     case .FindUsersByPhoneNumbers: return ParameterEncoding.JSON
     case .CreateReel: return ParameterEncoding.JSON
     case .UpdateReelTitle: return ParameterEncoding.JSON
@@ -135,6 +143,8 @@ enum APIRoute: URLRequestConvertible {
         userParameters["name"] = newName
       }
       return ["user": userParameters]
+    case .ChangePhoneNumber(let phoneNumber): return ["user": ["phone_number": phoneNumber]]
+    case .VerifyPhoneNumber(let phoneNumberVerificationCode): return ["user": ["phone_number_verification_code": phoneNumberVerificationCode]]
     case .FindUsersByPhoneNumbers(let phoneNumbers):
       var contacts = [AnyObject]()
       for phoneNumber in phoneNumbers as [String] {
@@ -211,6 +221,7 @@ extension Alamofire.Request {
         if let serverError = self.errorFromJSON(JSONObject) {
           completionHandler(nil, serverError)
         } else {
+          // TODO: handle more than a user
           let objects = self.importFromJSON(User.self, JSON: JSONObject)
           completionHandler(objects, nil)
         }
