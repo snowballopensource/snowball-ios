@@ -9,22 +9,26 @@
 import Cartography
 import UIKit
 
-class PhoneNumberChangeViewController: UIViewController {
+class PhoneNumberChangeViewController: UIViewController, UITextFieldDelegate {
   private let currentUser = User.currentUser!
+  private let countryCodeTextField = UITextField()
   private let phoneNumberTextField = UITextField()
 
   func changePhoneNumber() {
-    var newPhoneNumber: String?
-    if phoneNumberTextField.text != currentUser.phoneNumber {
-      newPhoneNumber = phoneNumberTextField.text
-    }
-    if newPhoneNumber != nil {
-      API.request(APIRoute.ChangePhoneNumber(phoneNumber: newPhoneNumber!)).responseObject{ (object, error) in
-        if error != nil { error?.display(); return }
-        self.navigationController?.pushViewController(PhoneNumberVerificationViewController(), animated: true)
-      }
-    } else {
+    let phoneNumberString = countryCodeTextField.text + phoneNumberTextField.text
+    let newPhoneNumber = PhoneNumber(string: phoneNumberString)
+    if newPhoneNumber.matchesPhoneNumberString(currentUser.phoneNumber) {
       self.navigationController?.popViewControllerAnimated(true)
+    } else {
+      if newPhoneNumber.isPlausible() {
+        API.request(APIRoute.ChangePhoneNumber(phoneNumber: newPhoneNumber.E164String)).responseObject{ (object, error) in
+          if error != nil { error?.display(); return }
+          self.navigationController?.pushViewController(PhoneNumberVerificationViewController(), animated: true)
+        }
+      } else {
+        // TODO: display invalid phone number error
+        println("Invalid phone number.")
+      }
     }
   }
 
@@ -44,9 +48,20 @@ class PhoneNumberChangeViewController: UIViewController {
     rightBarButton.setTitleColorWithAutomaticHighlightColor()
     navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton)
 
-    phoneNumberTextField.placeholder = currentUser.phoneNumber
+    let phoneNumber = PhoneNumber(string: currentUser.phoneNumber)
+
+    countryCodeTextField.text = "+"
+    if let countryCode = phoneNumber.countryCode {
+      countryCodeTextField.text = "+" + countryCode
+    }
+    countryCodeTextField.keyboardType = UIKeyboardType.PhonePad
+    countryCodeTextField.borderStyle = UITextBorderStyle.RoundedRect
+    countryCodeTextField.delegate = self
+    view.addSubview(countryCodeTextField)
+    phoneNumberTextField.text = phoneNumber.nationalNumber
     phoneNumberTextField.keyboardType = UIKeyboardType.PhonePad
     phoneNumberTextField.borderStyle = UITextBorderStyle.RoundedRect
+    phoneNumberTextField.delegate = self
     view.addSubview(phoneNumberTextField)
   }
 
@@ -54,11 +69,31 @@ class PhoneNumberChangeViewController: UIViewController {
     super.viewWillLayoutSubviews()
     let margin: Float = 20.0
 
-    layout(phoneNumberTextField) { (phoneNumberTextField) in
-      phoneNumberTextField.left == phoneNumberTextField.superview!.left + margin
-      phoneNumberTextField.right == phoneNumberTextField.superview!.right - margin
-      phoneNumberTextField.top == phoneNumberTextField.superview!.top + margin
-      phoneNumberTextField.height == 50
+    layout(countryCodeTextField) { (countryCodeTextField) in
+      countryCodeTextField.left == countryCodeTextField.superview!.left + margin
+      countryCodeTextField.width == 100
+      countryCodeTextField.top == countryCodeTextField.superview!.top + margin
+      countryCodeTextField.height == 50
     }
+    layout(phoneNumberTextField, countryCodeTextField) { (phoneNumberTextField, countryCodeTextField) in
+      phoneNumberTextField.left == countryCodeTextField.right
+      phoneNumberTextField.right == phoneNumberTextField.superview!.right - margin
+      phoneNumberTextField.top == countryCodeTextField.top
+      phoneNumberTextField.height == countryCodeTextField.height
+    }
+  }
+
+  // MARK: UITextFieldDelegate
+
+  func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    if textField == countryCodeTextField {
+      let textFieldText = countryCodeTextField.text as NSString
+      let resultString = textFieldText.stringByReplacingCharactersInRange(range, withString: string) as NSString
+      if resultString.rangeOfString("+").location == 0 {
+        return true
+      }
+      return false
+    }
+    return true
   }
 }

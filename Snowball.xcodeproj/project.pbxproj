@@ -28,6 +28,7 @@
 		BA1B2E3419D2B90F0095042E /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E3319D2B90F0095042E /* PlayerView.swift */; };
 		BA3B49BD19D8FD180084BB4F /* FriendsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3B49BC19D8FD180084BB4F /* FriendsNavigationController.swift */; };
 		BA3B49C619D8FD660084BB4F /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3B49C519D8FD660084BB4F /* FriendsViewController.swift */; };
+		BA4A378519EA01CE006D5F59 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4A378419EA01CE006D5F59 /* PhoneNumber.swift */; };
 		BA4E5B3419CAAAAB00DC5ECF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3319CAAAAB00DC5ECF /* User.swift */; };
 		BA593D0419E20A3700F29A29 /* RemoteManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA593D0319E20A3700F29A29 /* RemoteManagedObject.swift */; };
 		BA622F5A19E4AFDB00A8AFD5 /* AddressBookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA622F5919E4AFDB00A8AFD5 /* AddressBookController.swift */; };
@@ -199,6 +200,7 @@
 		BA1B2E3319D2B90F0095042E /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		BA3B49BC19D8FD180084BB4F /* FriendsNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsNavigationController.swift; sourceTree = "<group>"; };
 		BA3B49C519D8FD660084BB4F /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		BA4A378419EA01CE006D5F59 /* PhoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
 		BA4E5B3319CAAAAB00DC5ECF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BA4E5B3719CAAC0000DC5ECF /* Snowball-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snowball-Bridging-Header.h"; sourceTree = "<group>"; };
 		BA593D0319E20A3700F29A29 /* RemoteManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteManagedObject.swift; sourceTree = "<group>"; };
@@ -352,6 +354,14 @@
 			name = Friends;
 			sourceTree = "<group>";
 		};
+		BA4A378C19EA1B4D006D5F59 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				BA4A378419EA01CE006D5F59 /* PhoneNumber.swift */,
+			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
 		BA4E5B3519CAAAAF00DC5ECF /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +369,7 @@
 				BA4E5B3319CAAAAB00DC5ECF /* User.swift */,
 				BAB5F02A19D0FA4800D49796 /* Reel.swift */,
 				BAB5F02E19D0FA4F00D49796 /* Clip.swift */,
+				BA4A378C19EA1B4D006D5F59 /* Misc */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -759,6 +770,7 @@
 				BA622F5A19E4AFDB00A8AFD5 /* AddressBookController.swift in Sources */,
 				BA01CC0619D3EFB1004F170D /* VideoCache.swift in Sources */,
 				BAB5F02F19D0FA4F00D49796 /* Clip.swift in Sources */,
+				BA4A378519EA01CE006D5F59 /* PhoneNumber.swift in Sources */,
 				BA01CBFC19D39F2C004F170D /* ReelCollectionViewCell.swift in Sources */,
 				BADF63CE19DCB8F100379A6D /* API.swift in Sources */,
 				BA6579E919E3104F0046A409 /* UIColor+Snowball.swift in Sources */,

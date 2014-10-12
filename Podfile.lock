@@ -1,9 +1,11 @@
 PODS:
+  - libPhoneNumber-iOS (0.7.3)
   - Realm:
     - Realm/Headers
   - Realm/Headers
 
 DEPENDENCIES:
+  - libPhoneNumber-iOS
   - Realm (from `https://github.com/realm/realm-cocoa.git`, commit `a035a47`)
 
 EXTERNAL SOURCES:
@@ -12,6 +14,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/realm/realm-cocoa.git
 
 SPEC CHECKSUMS:
+  libPhoneNumber-iOS: 98fc07d70c8fdb5e6a8e3442c37e97353065c20e
   Realm: e618caeba3cfa2ca44b243be1367ea551a403658
 
 COCOAPODS: 0.34.1
