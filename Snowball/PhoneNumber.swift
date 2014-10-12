@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
+import CoreTelephony
 import Foundation
 
 struct PhoneNumber {
@@ -22,14 +23,21 @@ struct PhoneNumber {
     return ""
   }
   private var defaultRegion: String {
+    let networkInfo = CTTelephonyNetworkInfo()
+    if let carrier = networkInfo.subscriberCellularProvider {
+      return carrier.isoCountryCode
+    }
     return "US"
   }
 
   init(string: String) {
-    let phoneNumber = NBPhoneNumberUtil.sharedInstance().parse(string, defaultRegion: defaultRegion, error: nil)
+    let phoneUtil = NBPhoneNumberUtil.sharedInstance()
+    let phoneNumber = phoneUtil.parse(string, defaultRegion: defaultRegion, error: nil)
     if let phoneNumber = phoneNumber {
       countryCode = phoneNumber.countryCode.stringValue
       nationalNumber = phoneNumber.nationalNumber.stringValue
+    } else {
+      countryCode = phoneUtil.countryCodeFromRegionCode(defaultRegion)
     }
   }
 
