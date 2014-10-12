@@ -1,5 +1,5 @@
 //
-//  ReelCollectionViewCell.swift
+//  ReelTableViewCell.swift
 //  Snowball
 //
 //  Created by James Martinez on 9/24/14.
@@ -10,7 +10,7 @@ import AVFoundation
 import Cartography
 import UIKit
 
-class ReelCollectionViewCell: UICollectionViewCell {
+class ReelTableViewCell: UITableViewCell {
   private let titleLabel = UILabel()
   private let participantsTitleLabel = UILabel()
   private let recentClipLoopingPlayerView = LoopingPlayerView()
@@ -34,10 +34,10 @@ class ReelCollectionViewCell: UICollectionViewCell {
 
   // MARK: -
 
-  // MARK: UICollectionViewCell
+  // MARK: UITableViewCell
 
-  override init(frame: CGRect) {
-    super.init(frame: frame)
+  override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
     contentView.backgroundColor = UIColor.whiteColor()
     contentView.addSubview(titleLabel)
     contentView.addSubview(participantsTitleLabel)
@@ -51,9 +51,8 @@ class ReelCollectionViewCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
 
-  override class func size() -> CGSize {
-    let sideLength = UIScreen.mainScreen().bounds.width/2
-    return CGSizeMake(sideLength, sideLength)
+  override class func height() -> CGFloat {
+    return UIScreen.mainScreen().bounds.width/2
   }
 
   override func configureForObject(object: AnyObject) {
@@ -83,19 +82,17 @@ class ReelCollectionViewCell: UICollectionViewCell {
       titleLabel.left == titleLabel.superview!.left + margin
       titleLabel.right == titleLabel.superview!.right - margin
     }
-
     layout(participantsTitleLabel) { (participantsTitleLabel) in
       participantsTitleLabel.bottom == participantsTitleLabel.superview!.bottom - margin
       participantsTitleLabel.left == participantsTitleLabel.superview!.left + margin
       participantsTitleLabel.right == participantsTitleLabel.superview!.right - margin
     }
-
     layout(recentClipLoopingPlayerView) { (recentClipLoopingPlayerView) in
-      let sideLength: Float = 64.0
-      recentClipLoopingPlayerView.centerY == recentClipLoopingPlayerView.superview!.centerY
-      recentClipLoopingPlayerView.left == recentClipLoopingPlayerView.superview!.left + margin
-      recentClipLoopingPlayerView.width == sideLength
+      let sideLength = Float(ReelTableViewCell.height())
+      recentClipLoopingPlayerView.top == recentClipLoopingPlayerView.superview!.top
+      recentClipLoopingPlayerView.right == recentClipLoopingPlayerView.superview!.right
       recentClipLoopingPlayerView.height == sideLength
+      recentClipLoopingPlayerView.width == sideLength
     }
     playbackIndicatorView.frame = recentClipLoopingPlayerView.frame
   }

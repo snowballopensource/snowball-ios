@@ -9,7 +9,7 @@
 import Cartography
 import UIKit
 
-class ReelsViewController: ManagedCollectionViewController {
+class ReelsViewController: ManagedTableViewController {
   private let topView = TopMediaView()
   private let friendsButton = UIButton()
   private var scrolling = false
@@ -63,11 +63,11 @@ class ReelsViewController: ManagedCollectionViewController {
       friendsButton.left == friendsButton.superview!.left + 16
       friendsButton.height == 44
     }
-    layout(collectionView, topView) { (collectionView, topView) in
-      collectionView.top == topView.bottom
-      collectionView.bottom == collectionView.superview!.bottom
-      collectionView.left == collectionView.superview!.left
-      collectionView.right == collectionView.superview!.right
+    layout(tableView, topView) { (tableView, topView) in
+      tableView.top == topView.bottom
+      tableView.bottom == tableView.superview!.bottom
+      tableView.left == tableView.superview!.left
+      tableView.right == tableView.superview!.right
     }
   }
 
@@ -90,28 +90,28 @@ class ReelsViewController: ManagedCollectionViewController {
   override func reloadData() {
     API.request(APIRoute.GetReelStream).responsePersistable(Reel.self) { (error) in
       if error != nil { error?.display(); return }
-      self.collectionView.reloadData()
+      self.tableView.reloadData()
     }
   }
 
-  // MARK: ManagedCollectionViewController
+  // MARK: ManagedTableViewController
 
-  override func cellTypeInSection(section: Int) -> UICollectionViewCell.Type {
-    return ReelCollectionViewCell.self
+  override func cellTypeInSection(section: Int) -> UITableViewCell.Type {
+    return ReelTableViewCell.self
   }
 
-  override func configureCell(cell: UICollectionViewCell, atIndexPath indexPath: NSIndexPath) {
+  override func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
     super.configureCell(cell, atIndexPath: indexPath)
     if !scrolling {
-      let reelCell = cell as ReelCollectionViewCell
+      let reelCell = cell as ReelTableViewCell
       reelCell.startPlayback()
     }
   }
 
-  // MARK: UICollectionViewDelegate
+  // MARK: UITableViewDelegate
 
-  func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    let reelCell = collectionView.cellForItemAtIndexPath(indexPath) as ReelCollectionViewCell
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    let reelCell = tableView.cellForRowAtIndexPath(indexPath) as ReelTableViewCell
     let reel = objectsInSection(indexPath.section).objectAtIndex(UInt(indexPath.row)) as Reel
     reelCell.showPlaybackIndicatorView()
     reelPlayerViewController?.playReel(reel) {
@@ -123,16 +123,16 @@ class ReelsViewController: ManagedCollectionViewController {
 
   func scrollViewWillBeginDragging(scrollView: UIScrollView) {
     scrolling = true
-    for cell in collectionView.visibleCells() {
-      let reelCell = cell as ReelCollectionViewCell
+    for cell in tableView.visibleCells() {
+      let reelCell = cell as ReelTableViewCell
       reelCell.pausePlayback()
     }
   }
 
   func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
     scrolling = false
-    for cell in collectionView.visibleCells() {
-      let reelCell = cell as ReelCollectionViewCell
+    for cell in tableView.visibleCells() {
+      let reelCell = cell as ReelTableViewCell
       reelCell.startPlayback()
     }
   }

@@ -11,10 +11,8 @@
 		BA01CBBD19D34A70004F170D /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBBC19D34A70004F170D /* UIView+.swift */; };
 		BA01CBC119D36E44004F170D /* TopMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBC019D36E44004F170D /* TopMediaView.swift */; };
 		BA01CBEE19D3833B004F170D /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBED19D3833B004F170D /* RLMSupport.swift */; };
-		BA01CBF619D39B54004F170D /* ManagedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBF519D39B54004F170D /* ManagedCollectionViewController.swift */; };
-		BA01CBF819D39CF5004F170D /* UICollectionViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBF719D39CF5004F170D /* UICollectionViewCell+.swift */; };
 		BA01CBFA19D39EAF004F170D /* ReelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBF919D39EAF004F170D /* ReelsViewController.swift */; };
-		BA01CBFC19D39F2C004F170D /* ReelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBFB19D39F2C004F170D /* ReelCollectionViewCell.swift */; };
+		BA01CBFC19D39F2C004F170D /* ReelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBFB19D39F2C004F170D /* ReelTableViewCell.swift */; };
 		BA01CC0619D3EFB1004F170D /* VideoCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CC0519D3EFB1004F170D /* VideoCache.swift */; };
 		BA0F24E019D9FE5E00DF8B75 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0F24DF19D9FE5E00DF8B75 /* UserTableViewCell.swift */; };
 		BA0F24E419DA5B7100DF8B75 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0F24E319DA5B7100DF8B75 /* String+.swift */; };
@@ -183,10 +181,8 @@
 		BA01CBBC19D34A70004F170D /* UIView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		BA01CBC019D36E44004F170D /* TopMediaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopMediaView.swift; sourceTree = "<group>"; };
 		BA01CBED19D3833B004F170D /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
-		BA01CBF519D39B54004F170D /* ManagedCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedCollectionViewController.swift; sourceTree = "<group>"; };
-		BA01CBF719D39CF5004F170D /* UICollectionViewCell+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+.swift"; sourceTree = "<group>"; };
 		BA01CBF919D39EAF004F170D /* ReelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReelsViewController.swift; sourceTree = "<group>"; };
-		BA01CBFB19D39F2C004F170D /* ReelCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReelCollectionViewCell.swift; sourceTree = "<group>"; };
+		BA01CBFB19D39F2C004F170D /* ReelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReelTableViewCell.swift; sourceTree = "<group>"; };
 		BA01CC0519D3EFB1004F170D /* VideoCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCache.swift; sourceTree = "<group>"; };
 		BA0F24DF19D9FE5E00DF8B75 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		BA0F24E319DA5B7100DF8B75 /* String+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
@@ -281,7 +277,7 @@
 		BA0F24D819D9FE5000DF8B75 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				BA01CBFB19D39F2C004F170D /* ReelCollectionViewCell.swift */,
+				BA01CBFB19D39F2C004F170D /* ReelTableViewCell.swift */,
 				BA0F24DF19D9FE5E00DF8B75 /* UserTableViewCell.swift */,
 				BA69688719E6792000FDFB91 /* CurrentUserTableViewCell.swift */,
 				BA69688F19E67EAD00FDFB91 /* FollowableUserTableViewCell.swift */,
@@ -413,7 +409,6 @@
 			children = (
 				BA74C10219D13B8B00393633 /* ManagedViewController.swift */,
 				BAB5F03719D1140A00D49796 /* ManagedTableViewController.swift */,
-				BA01CBF519D39B54004F170D /* ManagedCollectionViewController.swift */,
 				BADF9CF919D79BBD00A50568 /* Authentication */,
 				BADF9CFC19D79C0800A50568 /* Main */,
 				BA3B49C419D8FD310084BB4F /* Friends */,
@@ -428,7 +423,6 @@
 				BA1B2E2319D215760095042E /* UIImageView+.swift */,
 				BA74C10819D14A8700393633 /* UITableViewCell+.swift */,
 				BA01CBBC19D34A70004F170D /* UIView+.swift */,
-				BA01CBF719D39CF5004F170D /* UICollectionViewCell+.swift */,
 				BA0F24E319DA5B7100DF8B75 /* String+.swift */,
 				BA88814B19E28109006CF338 /* UIColor+.swift */,
 				BA6579E019E30DFD0046A409 /* UINavigationBar+CustomHeight.swift */,
@@ -771,7 +765,7 @@
 				BA01CC0619D3EFB1004F170D /* VideoCache.swift in Sources */,
 				BAB5F02F19D0FA4F00D49796 /* Clip.swift in Sources */,
 				BA4A378519EA01CE006D5F59 /* PhoneNumber.swift in Sources */,
-				BA01CBFC19D39F2C004F170D /* ReelCollectionViewCell.swift in Sources */,
+				BA01CBFC19D39F2C004F170D /* ReelTableViewCell.swift in Sources */,
 				BADF63CE19DCB8F100379A6D /* API.swift in Sources */,
 				BA6579E919E3104F0046A409 /* UIColor+Snowball.swift in Sources */,
 				BA6579F519E35D540046A409 /* EditProfileViewController.swift in Sources */,
@@ -781,14 +775,12 @@
 				BA74C10319D13B8B00393633 /* ManagedViewController.swift in Sources */,
 				BADF9CFB19D79C0300A50568 /* MainNavigationController.swift in Sources */,
 				BAFDBC5819CA9DF100D5CD4B /* AppDelegate.swift in Sources */,
-				BA01CBF619D39B54004F170D /* ManagedCollectionViewController.swift in Sources */,
 				BAAD513319D4DB0300087176 /* ReelPlayer.swift in Sources */,
 				BADF9CF019D78EB400A50568 /* AuthenticationViewController.swift in Sources */,
 				BA6579EE19E337240046A409 /* AppearanceBridger.m in Sources */,
 				BA593D0419E20A3700F29A29 /* RemoteManagedObject.swift in Sources */,
 				BA1B2E2B19D2686A0095042E /* CameraViewController.swift in Sources */,
 				BA88814419E25A24006CF338 /* UserImageView.swift in Sources */,
-				BA01CBF819D39CF5004F170D /* UICollectionViewCell+.swift in Sources */,
 				BA1B2E2419D215760095042E /* UIImageView+.swift in Sources */,
 				BA01CBB519D3476F004F170D /* LoopingPlayerView.swift in Sources */,
 				BADF9CF819D79AAA00A50568 /* AuthenticationNavigationController.swift in Sources */,
