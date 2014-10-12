@@ -54,12 +54,12 @@ class PhoneNumberChangeViewController: UIViewController, UITextFieldDelegate {
     if let countryCode = phoneNumber.countryCode {
       countryCodeTextField.text = "+" + countryCode
     }
-    countryCodeTextField.keyboardType = UIKeyboardType.PhonePad
+    countryCodeTextField.keyboardType = UIKeyboardType.NumberPad
     countryCodeTextField.borderStyle = UITextBorderStyle.RoundedRect
     countryCodeTextField.delegate = self
     view.addSubview(countryCodeTextField)
     phoneNumberTextField.text = phoneNumber.nationalNumber
-    phoneNumberTextField.keyboardType = UIKeyboardType.PhonePad
+    phoneNumberTextField.keyboardType = UIKeyboardType.NumberPad
     phoneNumberTextField.borderStyle = UITextBorderStyle.RoundedRect
     phoneNumberTextField.delegate = self
     view.addSubview(phoneNumberTextField)
