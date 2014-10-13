@@ -21,6 +21,7 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
     player.delegate = self
     playerView.player = player
     playerCompletionHandler = completionHandler
+    view.bringSubviewToFront(playerView)
     player.play()
   }
 
@@ -32,9 +33,10 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
     super.viewDidLoad()
     cameraView.session = captureSessionController.captureSession
     captureSessionController.startSession()
-    view.addFullViewSubview(cameraView)
+    playerView.backgroundColor = UIColor.blueColor()
     view.addFullViewSubview(playerView)
-    playerView.hidden = false
+    cameraView.backgroundColor = UIColor.lightGrayColor()
+    view.addFullViewSubview(cameraView)
   }
 
   // MARK: PlayerDelegate
@@ -53,7 +55,7 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
   }
 
   func playerDidFinishPlaying() {
-    playerView.hidden = true
+    view.bringSubviewToFront(cameraView)
     if let completion = playerCompletionHandler { completion() }
   }
 }

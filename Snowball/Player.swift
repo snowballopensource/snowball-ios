@@ -25,21 +25,17 @@ class Player: AVQueuePlayer {
       playerItem.seekToTime(kCMTimeZero)
     } else {
       let lastPlayerItem = items().last as AVPlayerItem
-      if lastPlayerItem == playerItem {
+      if lastPlayerItem == currentItem {
         delegate?.playerDidFinishPlaying()
       }
     }
   }
 
-  private func setupPlayerIssueHandling() {
-    // Handle buffering issues
-    bk_addObserverForKeyPath("rate") { (_) in
-      if self.rate == 0 && CMTimeGetSeconds(self.currentItem.currentTime()) != CMTimeGetSeconds(self.currentItem.duration) {
-        self.currentItem.bk_addObserverForKeyPath("playbackLikelyToKeepUp") { (_) in
-          if self.currentItem.playbackLikelyToKeepUp {
-            self.play()
-          }
-        }
+  func playerItemPlaybackStalled(notification: NSNotification) {
+    let playerItem = notification.object! as AVPlayerItem
+    playerItem.bk_addObserverForKeyPath("playbackLikelyToKeepUp") { (_) in
+      if playerItem.playbackLikelyToKeepUp {
+        self.play()
       }
     }
   }
@@ -51,9 +47,9 @@ class Player: AVQueuePlayer {
   override init(items: [AnyObject]!) {
     super.init(items: items)
     actionAtItemEnd = AVPlayerActionAtItemEnd.None
-    setupPlayerIssueHandling()
     for playerItem in items {
       NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidPlayToEndTime:", name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemPlaybackStalled:", name: AVPlayerItemPlaybackStalledNotification, object: playerItem)
     }
   }
 
