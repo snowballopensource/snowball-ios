@@ -15,14 +15,19 @@ protocol PlayerDelegate {
 }
 
 class Player: AVQueuePlayer {
+  var loop = false
   var delegate: PlayerDelegate?
 
   func playerItemDidPlayToEndTime(notification: NSNotification) {
     let playerItem = notification.object! as AVPlayerItem
     delegate?.playerItemDidPlayToEndTime(playerItem)
-    let lastPlayerItem = items().last as AVPlayerItem
-    if lastPlayerItem == playerItem {
-      delegate?.playerDidFinishPlaying()
+    if loop {
+      playerItem.seekToTime(kCMTimeZero)
+    } else {
+      let lastPlayerItem = items().last as AVPlayerItem
+      if lastPlayerItem == playerItem {
+        delegate?.playerDidFinishPlaying()
+      }
     }
   }
 
@@ -32,6 +37,7 @@ class Player: AVQueuePlayer {
 
   override init(items: [AnyObject]!) {
     super.init(items: items)
+    actionAtItemEnd = AVPlayerActionAtItemEnd.None
     for playerItem in items {
       NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidPlayToEndTime:", name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
     }
@@ -47,12 +53,9 @@ class Player: AVQueuePlayer {
     self.init(items: playerItems)
   }
 
-  override init(URL: NSURL) {
-    super.init(URL: URL)
-  }
-
-  override init(playerItem item: AVPlayerItem!) {
-    super.init(playerItem: item)
+  convenience init(videoURL: NSURL) {
+    let playerItem = AVPlayerItem(URL: videoURL)
+    self.init(items: [playerItem])
   }
 
   override init() {

@@ -13,7 +13,7 @@ import UIKit
 class ReelTableViewCell: UITableViewCell {
   private let titleLabel = UILabel()
   private let participantsTitleLabel = UILabel()
-  private let recentClipLoopingPlayerView = LoopingPlayerView()
+  private let recentClipPlayerView = PlayerView()
   private let playbackIndicatorView = UIView()
 
   func showPlaybackIndicatorView() {
@@ -25,11 +25,11 @@ class ReelTableViewCell: UITableViewCell {
   }
 
   func startPlayback() {
-    recentClipLoopingPlayerView.player?.play()
+    recentClipPlayerView.player?.play()
   }
 
   func pausePlayback() {
-    recentClipLoopingPlayerView.player?.pause()
+    recentClipPlayerView.player?.pause()
   }
 
   // MARK: -
@@ -41,8 +41,8 @@ class ReelTableViewCell: UITableViewCell {
     contentView.backgroundColor = UIColor.whiteColor()
     contentView.addSubview(titleLabel)
     contentView.addSubview(participantsTitleLabel)
-    recentClipLoopingPlayerView.backgroundColor = UIColor.darkGrayColor()
-    contentView.addSubview(recentClipLoopingPlayerView)
+    recentClipPlayerView.backgroundColor = UIColor.darkGrayColor()
+    contentView.addSubview(recentClipPlayerView)
     playbackIndicatorView.backgroundColor = UIColor.blueColor()
     contentView.addSubview(playbackIndicatorView)
   }
@@ -64,7 +64,10 @@ class ReelTableViewCell: UITableViewCell {
       let recentClipVideoURL = NSURL(string: recentClip.videoURL)
       VideoCache.fetchVideoAtRemoteURL(recentClipVideoURL) { (URL, error) in
         if let videoURL = URL {
-          self.recentClipLoopingPlayerView.queueVideoURL(videoURL, muted: true)
+          let player = Player(videoURL: videoURL)
+          player.loop = true
+          player.muted = true
+          self.recentClipPlayerView.player = player
         }
       }
     }
@@ -87,13 +90,13 @@ class ReelTableViewCell: UITableViewCell {
       participantsTitleLabel.left == participantsTitleLabel.superview!.left + margin
       participantsTitleLabel.right == participantsTitleLabel.superview!.right - margin
     }
-    layout(recentClipLoopingPlayerView) { (recentClipLoopingPlayerView) in
+    layout(recentClipPlayerView) { (recentClipPlayerView) in
       let sideLength = Float(ReelTableViewCell.height())
-      recentClipLoopingPlayerView.top == recentClipLoopingPlayerView.superview!.top
-      recentClipLoopingPlayerView.right == recentClipLoopingPlayerView.superview!.right
-      recentClipLoopingPlayerView.height == sideLength
-      recentClipLoopingPlayerView.width == sideLength
+      recentClipPlayerView.top == recentClipPlayerView.superview!.top
+      recentClipPlayerView.right == recentClipPlayerView.superview!.right
+      recentClipPlayerView.height == sideLength
+      recentClipPlayerView.width == sideLength
     }
-    playbackIndicatorView.frame = recentClipLoopingPlayerView.frame
+    playbackIndicatorView.frame = recentClipPlayerView.frame
   }
 }

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA01CBB519D3476F004F170D /* LoopingPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBB419D3476F004F170D /* LoopingPlayerView.swift */; };
 		BA01CBBD19D34A70004F170D /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBBC19D34A70004F170D /* UIView+.swift */; };
 		BA01CBC119D36E44004F170D /* TopMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBC019D36E44004F170D /* TopMediaViewController.swift */; };
 		BA01CBEE19D3833B004F170D /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01CBED19D3833B004F170D /* RLMSupport.swift */; };
@@ -177,7 +176,6 @@
 		2EFA09D82E7944A5AF6E9DFE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D1002057683EE6CC605CCFF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		776B01D21BE996F929334AA7 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		BA01CBB419D3476F004F170D /* LoopingPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopingPlayerView.swift; sourceTree = "<group>"; };
 		BA01CBBC19D34A70004F170D /* UIView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		BA01CBC019D36E44004F170D /* TopMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopMediaViewController.swift; sourceTree = "<group>"; };
 		BA01CBED19D3833B004F170D /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
@@ -387,7 +385,6 @@
 				BAFDBC6219CA9DF100D5CD4B /* LaunchScreen.xib */,
 				BA1B2E3119D290C30095042E /* CameraView.swift */,
 				BA1B2E3319D2B90F0095042E /* PlayerView.swift */,
-				BA01CBB419D3476F004F170D /* LoopingPlayerView.swift */,
 				BA88814319E25A24006CF338 /* UserImageView.swift */,
 				BA0F24D819D9FE5000DF8B75 /* Cells */,
 			);
@@ -408,8 +405,6 @@
 			children = (
 				BA74C10219D13B8B00393633 /* ManagedViewController.swift */,
 				BAB5F03719D1140A00D49796 /* ManagedTableViewController.swift */,
-				BA01CBC019D36E44004F170D /* TopMediaViewController.swift */,
-				BAC8999719EB520300685397 /* PlayerViewController.swift */,
 				BADF9CF919D79BBD00A50568 /* Authentication */,
 				BADF9CFC19D79C0800A50568 /* Main */,
 				BA3B49C419D8FD310084BB4F /* Friends */,
@@ -431,6 +426,16 @@
 				BA6579F219E3501B0046A409 /* UIButton+Color.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		BAC8999919EB5EED00685397 /* Top Media View */ = {
+			isa = PBXGroup;
+			children = (
+				BA01CBC019D36E44004F170D /* TopMediaViewController.swift */,
+				BAC8999719EB520300685397 /* PlayerViewController.swift */,
+				BA1B2E2A19D2686A0095042E /* CameraViewController.swift */,
+			);
+			name = "Top Media View";
 			sourceTree = "<group>";
 		};
 		BAD01FB219E85589003A6735 /* Phone Number */ = {
@@ -456,7 +461,7 @@
 			children = (
 				BADF9CFA19D79C0300A50568 /* MainNavigationController.swift */,
 				BA01CBF919D39EAF004F170D /* ReelsViewController.swift */,
-				BA1B2E2A19D2686A0095042E /* CameraViewController.swift */,
+				BAC8999919EB5EED00685397 /* Top Media View */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -782,7 +787,6 @@
 				BA1B2E2B19D2686A0095042E /* CameraViewController.swift in Sources */,
 				BA88814419E25A24006CF338 /* UserImageView.swift in Sources */,
 				BA1B2E2419D215760095042E /* UIImageView+.swift in Sources */,
-				BA01CBB519D3476F004F170D /* LoopingPlayerView.swift in Sources */,
 				BADF9CF819D79AAA00A50568 /* AuthenticationNavigationController.swift in Sources */,
 				BA88814C19E28109006CF338 /* UIColor+.swift in Sources */,
 				BA3B49BD19D8FD180084BB4F /* FriendsNavigationController.swift in Sources */,
