@@ -11,10 +11,10 @@ import UIKit
 
 class PlayerView: UIView {
 
-  var player: AVQueuePlayer? {
+  var player: Player? {
     get {
       let playerLayer = self.layer as AVPlayerLayer
-      return playerLayer.player as? AVQueuePlayer
+      return playerLayer.player as? Player
     }
     set {
       let playerLayer = self.layer as AVPlayerLayer

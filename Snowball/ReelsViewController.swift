@@ -10,14 +10,16 @@ import Cartography
 import UIKit
 
 class ReelsViewController: ManagedTableViewController {
-  private let topView = TopMediaView()
   private let friendsButton = UIButton()
   private var scrolling = false
-  private var reelPlayerViewController: ReelPlayerViewController? {
+  private var topMediaView: UIView? {
+    return topMediaViewController?.view
+  }
+  private var topMediaViewController: TopMediaViewController? {
     get {
       for childViewController in childViewControllers {
-        if childViewController is ReelPlayerViewController {
-          return childViewController as? ReelPlayerViewController
+        if childViewController is TopMediaViewController {
+          return childViewController as? TopMediaViewController
         }
       }
       return nil
@@ -34,37 +36,31 @@ class ReelsViewController: ManagedTableViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    let cameraViewController = CameraViewController()
-    addChildViewController(cameraViewController)
-    topView.cameraView = cameraViewController.view as? CameraView
-    topView.addFullViewSubview(topView.cameraView!)
-    let reelPlayerViewController = ReelPlayerViewController()
-    addChildViewController(reelPlayerViewController)
-    topView.playerView = reelPlayerViewController.view as? PlayerView
-    topView.addFullViewSubview(topView.playerView!)
-    view.addSubview(topView)
+    let topMediaViewController = TopMediaViewController()
+    addChildViewController(topMediaViewController)
+    view.addSubview(topMediaViewController.view)
 
     friendsButton.setTitle(NSLocalizedString("Friends"), forState: UIControlState.Normal)
     friendsButton.setTitleColorWithAutomaticHighlightColor()
     friendsButton.addTarget(self, action: "switchToFriendsNavigationController", forControlEvents: UIControlEvents.TouchUpInside)
-    topView.addSubview(friendsButton)
+    view.addSubview(friendsButton)
   }
 
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
-    layout(topView) { (topView) in
-      topView.top == topView.superview!.top
-      topView.bottom == topView.top + Float(UIScreen.mainScreen().bounds.width)
-      topView.left == topView.superview!.left
-      topView.right == topView.superview!.right
+    layout(topMediaView!) { (topMediaView) in
+      topMediaView.top == topMediaView.superview!.top
+      topMediaView.bottom == topMediaView.top + Float(UIScreen.mainScreen().bounds.width)
+      topMediaView.left == topMediaView.superview!.left
+      topMediaView.right == topMediaView.superview!.right
     }
     layout(friendsButton) { (friendsButton) in
       friendsButton.top == friendsButton.superview!.top + 10
       friendsButton.left == friendsButton.superview!.left + 16
       friendsButton.height == 44
     }
-    layout(tableView, topView) { (tableView, topView) in
-      tableView.top == topView.bottom
+    layout(tableView, topMediaView!) { (tableView, topMediaView) in
+      tableView.top == topMediaView.bottom
       tableView.bottom == tableView.superview!.bottom
       tableView.left == tableView.superview!.left
       tableView.right == tableView.superview!.right
@@ -114,7 +110,7 @@ class ReelsViewController: ManagedTableViewController {
     let reelCell = tableView.cellForRowAtIndexPath(indexPath) as ReelTableViewCell
     let reel = objectsInSection(indexPath.section).objectAtIndex(UInt(indexPath.row)) as Reel
     reelCell.showPlaybackIndicatorView()
-    reelPlayerViewController?.playReel(reel) {
+    topMediaViewController?.playReel(reel) {
       reelCell.hidePlaybackIndicatorView()
     }
   }

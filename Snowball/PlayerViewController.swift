@@ -1,20 +1,20 @@
 //
-//  ReelPlayerViewController.swift
+//  PlayerViewController.swift
 //  Snowball
 //
-//  Created by James Martinez on 9/25/14.
+//  Created by James Martinez on 10/12/14.
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
 import AVFoundation
 import UIKit
 
-class ReelPlayerViewController: UIViewController, ReelPlayerDelegate {
+class PlayerViewController: UIViewController, PlayerDelegate {
   typealias CompletionHandler = () -> ()
   private var completionHandler: CompletionHandler?
 
   func playReel(reel: Reel, completionHandler: CompletionHandler? = nil) {
-    let player = ReelPlayer(reel: reel)
+    let player = Player(reel: reel)
     player.delegate = self
     let playerView = view as PlayerView
     playerView.player = player
@@ -22,24 +22,16 @@ class ReelPlayerViewController: UIViewController, ReelPlayerDelegate {
     player.play()
   }
 
-  private func playerItems() -> [AVPlayerItem] {
-    let playerView = view as PlayerView
-    var items = playerView.player?.items()
-    var playerItems = [AVPlayerItem]()
-    for item in items! {
-      let playerItem = item as AVPlayerItem
-      playerItems.append(playerItem)
-    }
-    return playerItems
-  }
+  // MARK: -
 
   // MARK: UIViewController
 
   override func loadView() {
+    super.loadView()
     view = PlayerView()
   }
 
-  // MARK: ReelPlayerDelegate
+  // MARK: PlayerDelegate
 
   func playerItemDidPlayToEndTime(playerItem: AVPlayerItem) {
     let URLAsset = playerItem.asset as AVURLAsset

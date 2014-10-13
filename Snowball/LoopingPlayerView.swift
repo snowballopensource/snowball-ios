@@ -18,7 +18,7 @@ class LoopingPlayerView: PlayerView {
   }
 
   func queueVideoURL(URL: NSURL, muted: Bool = false) {
-    let player = AVQueuePlayer(URL: URL)
+    let player = Player(URL: URL)
     player.actionAtItemEnd = AVPlayerActionAtItemEnd.None
     player.muted = muted
     self.player = player
