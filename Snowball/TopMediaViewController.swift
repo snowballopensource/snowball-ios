@@ -46,7 +46,9 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
       let clips = Clip.objectsWithPredicate(NSPredicate(format: "videoURL == %@", URL.absoluteString!))
       let clip = clips.firstObject() as Clip
       let reel = clip.reel
+      RLMRealm.defaultRealm().beginWriteTransaction()
       reel?.lastWatchedClip = clip
+      RLMRealm.defaultRealm().commitWriteTransaction()
     }
   }
 
