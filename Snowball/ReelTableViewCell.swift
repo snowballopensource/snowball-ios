@@ -18,10 +18,12 @@ class ReelTableViewCell: UITableViewCell {
 
   func showPlaybackIndicatorView() {
     playbackIndicatorView.hidden = false
+    pausePlayback()
   }
 
   func hidePlaybackIndicatorView() {
     playbackIndicatorView.hidden = true
+    startPlayback()
   }
 
   func startPlayback() {
@@ -38,6 +40,7 @@ class ReelTableViewCell: UITableViewCell {
 
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+    selectionStyle = UITableViewCellSelectionStyle.None
     contentView.backgroundColor = UIColor.whiteColor()
     contentView.addSubview(titleLabel)
     contentView.addSubview(participantsTitleLabel)
