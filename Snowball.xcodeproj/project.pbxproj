@@ -17,7 +17,6 @@
 		BA0F24E419DA5B7100DF8B75 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0F24E319DA5B7100DF8B75 /* String+.swift */; };
 		BA1B2E2419D215760095042E /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E2319D215760095042E /* UIImageView+.swift */; };
 		BA1B2E2819D254430095042E /* CaptureSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E2719D254430095042E /* CaptureSessionController.swift */; };
-		BA1B2E2B19D2686A0095042E /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E2A19D2686A0095042E /* CameraViewController.swift */; };
 		BA1B2E2D19D28E780095042E /* Alamofire.framework in Git Submodule Frameworks */ = {isa = PBXBuildFile; fileRef = BA19B71D19CB3A9B00DF56A5 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA1B2E2E19D28E910095042E /* Cartography.framework in Git Submodule Frameworks */ = {isa = PBXBuildFile; fileRef = BA1B2E0B19D200000095042E /* Cartography.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA1B2E3019D28E9D0095042E /* Haneke.framework in Git Submodule Frameworks */ = {isa = PBXBuildFile; fileRef = BA1B2E1C19D2153E0095042E /* Haneke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -48,7 +47,6 @@
 		BAB5F03819D1140A00D49796 /* ManagedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5F03719D1140A00D49796 /* ManagedTableViewController.swift */; };
 		BAB5F03F19D115DE00D49796 /* NSError+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5F03E19D115DE00D49796 /* NSError+.swift */; };
 		BAB5F04119D118B800D49796 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5F04019D118B800D49796 /* Util.swift */; };
-		BAC8999819EB520300685397 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC8999719EB520300685397 /* PlayerViewController.swift */; };
 		BAD01FAF19E8555E003A6735 /* PhoneNumberVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD01FAE19E8555E003A6735 /* PhoneNumberVerificationViewController.swift */; };
 		BAD01FB119E85569003A6735 /* PhoneNumberChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD01FB019E85569003A6735 /* PhoneNumberChangeViewController.swift */; };
 		BADF63CE19DCB8F100379A6D /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF63CD19DCB8F100379A6D /* API.swift */; };
@@ -189,7 +187,6 @@
 		BA1B2E1419D2153E0095042E /* Haneke.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Haneke.xcodeproj; path = Vendor/HanekeSwift/Haneke.xcodeproj; sourceTree = SOURCE_ROOT; };
 		BA1B2E2319D215760095042E /* UIImageView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		BA1B2E2719D254430095042E /* CaptureSessionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureSessionController.swift; sourceTree = "<group>"; };
-		BA1B2E2A19D2686A0095042E /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BA1B2E3119D290C30095042E /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		BA1B2E3319D2B90F0095042E /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		BA3B49BC19D8FD180084BB4F /* FriendsNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsNavigationController.swift; sourceTree = "<group>"; };
@@ -219,7 +216,6 @@
 		BAB5F03719D1140A00D49796 /* ManagedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedTableViewController.swift; sourceTree = "<group>"; };
 		BAB5F03E19D115DE00D49796 /* NSError+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+.swift"; sourceTree = "<group>"; };
 		BAB5F04019D118B800D49796 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
-		BAC8999719EB520300685397 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		BAD01FAE19E8555E003A6735 /* PhoneNumberVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberVerificationViewController.swift; sourceTree = "<group>"; };
 		BAD01FB019E85569003A6735 /* PhoneNumberChangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberChangeViewController.swift; sourceTree = "<group>"; };
 		BADF63CD19DCB8F100379A6D /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -371,10 +367,10 @@
 		BA4E5B3D19CABA0200DC5ECF /* Misc */ = {
 			isa = PBXGroup;
 			children = (
-				BA6579EF19E33CA50046A409 /* Bridgers */,
 				BAAD513219D4DB0300087176 /* Player.swift */,
 				BA01CC0519D3EFB1004F170D /* VideoCache.swift */,
 				BAB5F04019D118B800D49796 /* Util.swift */,
+				BA6579EF19E33CA50046A409 /* Bridgers */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -432,8 +428,6 @@
 			isa = PBXGroup;
 			children = (
 				BA01CBC019D36E44004F170D /* TopMediaViewController.swift */,
-				BAC8999719EB520300685397 /* PlayerViewController.swift */,
-				BA1B2E2A19D2686A0095042E /* CameraViewController.swift */,
 			);
 			name = "Top Media View";
 			sourceTree = "<group>";
@@ -763,7 +757,6 @@
 				BA0F24E019D9FE5E00DF8B75 /* UserTableViewCell.swift in Sources */,
 				BA1B2E3419D2B90F0095042E /* PlayerView.swift in Sources */,
 				BAB5F03819D1140A00D49796 /* ManagedTableViewController.swift in Sources */,
-				BAC8999819EB520300685397 /* PlayerViewController.swift in Sources */,
 				BA01CBFA19D39EAF004F170D /* ReelsViewController.swift in Sources */,
 				BAB5F03F19D115DE00D49796 /* NSError+.swift in Sources */,
 				BA622F5A19E4AFDB00A8AFD5 /* AddressBookController.swift in Sources */,
@@ -784,7 +777,6 @@
 				BADF9CF019D78EB400A50568 /* AuthenticationViewController.swift in Sources */,
 				BA6579EE19E337240046A409 /* AppearanceBridger.m in Sources */,
 				BA593D0419E20A3700F29A29 /* RemoteManagedObject.swift in Sources */,
-				BA1B2E2B19D2686A0095042E /* CameraViewController.swift in Sources */,
 				BA88814419E25A24006CF338 /* UserImageView.swift in Sources */,
 				BA1B2E2419D215760095042E /* UIImageView+.swift in Sources */,
 				BADF9CF819D79AAA00A50568 /* AuthenticationNavigationController.swift in Sources */,

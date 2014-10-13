@@ -6,32 +6,22 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
+import AVFoundation
 import UIKit
 
-class TopMediaViewController: UIViewController {
-  private var cameraViewController: CameraViewController? {
-    get {
-      for childViewController in childViewControllers {
-        if childViewController is CameraViewController {
-          return childViewController as? CameraViewController
-        }
-      }
-      return nil
-    }
-  }
-  private var playerViewController: PlayerViewController? {
-    get {
-      for childViewController in childViewControllers {
-        if childViewController is PlayerViewController {
-          return childViewController as? PlayerViewController
-        }
-      }
-      return nil
-    }
-  }
+class TopMediaViewController: UIViewController, PlayerDelegate {
+  private let cameraView = CameraView()
+  private let captureSessionController = CaptureSessionController()
+  private let playerView = PlayerView()
+  typealias PlayerCompletionHandler = () -> ()
+  private var playerCompletionHandler: PlayerCompletionHandler?
 
-  func playReel(reel: Reel, completionHandler: PlayerViewController.CompletionHandler? = nil) {
-    playerViewController?.playReel(reel, completionHandler: completionHandler)
+  func playReel(reel: Reel, completionHandler: PlayerCompletionHandler? = nil) {
+    let player = Player(reel: reel)
+    player.delegate = self
+    playerView.player = player
+    playerCompletionHandler = completionHandler
+    player.play()
   }
 
   // MARK: -
@@ -40,11 +30,28 @@ class TopMediaViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    let cameraViewController = CameraViewController()
-    addChildViewController(cameraViewController)
-    view.addFullViewSubview(cameraViewController.view)
-    let playerViewController = PlayerViewController()
-    addChildViewController(playerViewController)
-    view.addFullViewSubview(playerViewController.view)
+    cameraView.session = captureSessionController.captureSession
+    captureSessionController.startSession()
+    view.addFullViewSubview(cameraView)
+    view.addFullViewSubview(playerView)
+    playerView.hidden = false
+  }
+
+  // MARK: PlayerDelegate
+
+  func playerItemDidPlayToEndTime(playerItem: AVPlayerItem) {
+    let URLAsset = playerItem.asset as AVURLAsset
+    let URL = URLAsset.URL
+    Async.background {
+      let clips = Clip.objectsWithPredicate(NSPredicate(format: "videoURL == %@", URL.absoluteString!))
+      let clip = clips.firstObject() as Clip
+      let reel = clip.reel
+      reel?.lastWatchedClip = clip
+    }
+  }
+
+  func playerDidFinishPlaying() {
+    playerView.hidden = true
+    if let completion = playerCompletionHandler { completion() }
   }
 }
