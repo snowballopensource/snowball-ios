@@ -26,8 +26,15 @@ class ReelsViewController: ManagedTableViewController {
     }
   }
 
-  func switchToFriendsNavigationController() {
+  private func switchToFriendsNavigationController() {
     switchToNavigationController(FriendsNavigationController())
+  }
+
+  private func startPlaybackForVisibleReelCells() {
+    for cell in tableView.visibleCells() {
+      let reelCell = cell as ReelTableViewCell
+      reelCell.startPlayback()
+    }
   }
 
   // MARK: -
@@ -125,11 +132,15 @@ class ReelsViewController: ManagedTableViewController {
     }
   }
 
+  func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    if velocity.y == 0 {
+      scrolling = false
+      startPlaybackForVisibleReelCells()
+    }
+  }
+
   func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
     scrolling = false
-    for cell in tableView.visibleCells() {
-      let reelCell = cell as ReelTableViewCell
-      reelCell.startPlayback()
-    }
+    startPlaybackForVisibleReelCells()
   }
 }
