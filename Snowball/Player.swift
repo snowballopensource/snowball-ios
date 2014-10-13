@@ -34,10 +34,8 @@ class Player: AVQueuePlayer {
   private func setupPlayerIssueHandling() {
     // Handle buffering issues
     bk_addObserverForKeyPath("rate") { (_) in
-      println("rate change to: \(self.rate)")
       if self.rate == 0 && CMTimeGetSeconds(self.currentItem.currentTime()) != CMTimeGetSeconds(self.currentItem.duration) {
         self.currentItem.bk_addObserverForKeyPath("playbackLikelyToKeepUp") { (_) in
-          println("playbackLikelyToKeepUp change to: \(self.currentItem.playbackLikelyToKeepUp)")
           if self.currentItem.playbackLikelyToKeepUp {
             self.play()
           }
