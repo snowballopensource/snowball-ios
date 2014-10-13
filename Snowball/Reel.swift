@@ -22,10 +22,11 @@ class Reel: RemoteManagedObject, JSONPersistable {
   }
 
   func playableClips() -> RLMArray {
+    let sortedClips = clips().arraySortedByProperty("createdAt", ascending: true)
     if let clip = lastWatchedClip {
-      return clips().objectsWithPredicate(NSPredicate(format: "createdAt >= %@", clip.createdAt))
+      return sortedClips.objectsWithPredicate(NSPredicate(format: "createdAt >= %@", clip.createdAt))
     }
-    return clips()
+    return sortedClips
   }
 
   // MARK: JSONPersistable

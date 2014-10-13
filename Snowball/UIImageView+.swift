@@ -14,12 +14,11 @@ extension UIImageView {
 
   func setImageFromURL(URL: NSURL, placeholder: UIImage? = nil, completionHandler: CompletionHandler? = nil) {
     let cache = Haneke.sharedDataCache
-    let fetcher = NetworkFetcher<NSData>(URL: URL)
-    cache.fetchValueForFetcher(fetcher, success: { (data) in
+    cache.fetch(URL: URL).onSuccess { (data) in
       self.image = UIImage(data: data)
       if let completion = completionHandler { completion(nil) }
-      }, failure: { (error) in
+      }.onFailure { (error) in
         if let completion = completionHandler { completion(error) }
-    })
+    }
   }
 }

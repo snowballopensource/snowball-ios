@@ -40,25 +40,49 @@ class Player: AVQueuePlayer {
     }
   }
 
-  private func prebufferVideoURLs(videoURLs: [NSURL]) {
+  private func prebufferAndQueueVideoURLs(videoURLs: [NSURL]) {
     if videoURLs.count > 0 {
-      prebufferVideoURL(videoURLs.first!) {
+      prebufferAndQueueVideoURL(videoURLs.first!) {
         var videoURLs = videoURLs
         videoURLs.removeAtIndex(0)
-        self.prebufferVideoURLs(videoURLs)
+        self.prebufferAndQueueVideoURLs(videoURLs)
       }
     }
   }
 
-  private func prebufferVideoURL(videoURL: NSURL, completionHandler: (() -> ())? = nil) {
-    VideoCache.fetchVideoAtRemoteURL(videoURL) { (URL, error) in
-      if let videoURL = URL {
-        let playerItem = AVPlayerItem(URL: videoURL)
+  private func prebufferAndQueueVideoURL(videoURL: NSURL, completionHandler: (() -> ())? = nil) {
+    AVURLAsset.createAssetFromURL(videoURL){ (asset, error) in
+      if let asset = asset {
+        self.prepareToPlayAsset(asset)
+        if let completion = completionHandler { completion() }
+      }
+    }
+  }
+
+  private func prepareToPlayAsset(asset: AVURLAsset) {
+    let requestedKeys = ["tracks" as NSString, "playable" as NSString] as [AnyObject]
+    asset.loadValuesAsynchronouslyForKeys(requestedKeys) {
+      Async.main {
+        for key in requestedKeys {
+          if let key = key as? String {
+            var error: NSError?
+            let keyStatus = asset.statusOfValueForKey(key, error: &error)
+            if keyStatus == AVKeyValueStatus.Failed {
+              println("Error with AVAsset: \(error)")
+              return
+            }
+          }
+        }
+        if !asset.playable {
+          println("Asset not playable.")
+          return
+        }
+        let playerItem = AVPlayerItem(asset: asset)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidPlayToEndTime:", name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemPlaybackStalled:", name: AVPlayerItemPlaybackStalledNotification, object: playerItem)
         self.insertItem(playerItem, afterItem: self.items().last as AVPlayerItem?)
-        if let completion = completionHandler { completion() }
       }
+      return
     }
   }
 
@@ -68,19 +92,19 @@ class Player: AVQueuePlayer {
 
   init(reel: Reel) {
     super.init()
-    actionAtItemEnd = AVPlayerActionAtItemEnd.None
+    actionAtItemEnd = AVPlayerActionAtItemEnd.Advance
     var videoURLs = [NSURL]()
     for clip in reel.playableClips() {
       let clip = clip as Clip
       videoURLs.append(NSURL(string: clip.videoURL))
     }
-    prebufferVideoURLs(videoURLs)
+    prebufferAndQueueVideoURLs(videoURLs)
   }
 
   init(videoURL: NSURL) {
     super.init()
     actionAtItemEnd = AVPlayerActionAtItemEnd.None
-    prebufferVideoURL(videoURL)
+    prebufferAndQueueVideoURL(videoURL)
   }
 
   deinit {

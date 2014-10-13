@@ -17,12 +17,14 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
   private var playerCompletionHandler: PlayerCompletionHandler?
 
   func playReel(reel: Reel, completionHandler: PlayerCompletionHandler? = nil) {
-    let player = Player(reel: reel)
-    player.delegate = self
-    playerView.player = player
     playerCompletionHandler = completionHandler
-    view.bringSubviewToFront(playerView)
-    player.play()
+    API.request(APIRoute.GetUnwatchedClipsInReel(reelID: reel.id, since: nil)).responsePersistable(Clip.self) { (error) in
+      let player = Player(reel: reel)
+      player.delegate = self
+      self.playerView.player = player
+      self.view.bringSubviewToFront(self.playerView)
+      player.play()
+    }
   }
 
   // MARK: -
@@ -42,16 +44,16 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
   // MARK: PlayerDelegate
 
   func playerItemDidPlayToEndTime(playerItem: AVPlayerItem) {
-    let URLAsset = playerItem.asset as AVURLAsset
-    let URL = URLAsset.URL
-    Async.background {
-      let clips = Clip.objectsWithPredicate(NSPredicate(format: "videoURL == %@", URL.absoluteString!))
-      let clip = clips.firstObject() as Clip
-      let reel = clip.reel
-      RLMRealm.defaultRealm().beginWriteTransaction()
-      reel?.lastWatchedClip = clip
-      RLMRealm.defaultRealm().commitWriteTransaction()
-    }
+//    let URLAsset = playerItem.asset as AVURLAsset
+//    let URL = URLAsset.URL
+//    Async.background {
+//      let clips = Clip.objectsWithPredicate(NSPredicate(format: "videoURL == %@", URL.absoluteString!))
+//      let clip = clips.firstObject() as Clip
+//      let reel = clip.reel
+//      RLMRealm.defaultRealm().beginWriteTransaction()
+//      reel?.lastWatchedClip = clip
+//      RLMRealm.defaultRealm().commitWriteTransaction()
+//    }
   }
 
   func playerDidFinishPlaying() {
