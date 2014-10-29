@@ -149,134 +149,58 @@ enum APIRoute: URLRequestConvertible {
 }
 
 protocol JSONPersistable: class {
-  class func possibleJSONKeys() -> [String]
   class func objectFromJSONObject(JSON: JSONObject) -> Self?
 }
 
 extension Alamofire.Request {
-  typealias ObjectCompletionHandler = (AnyObject?, NSError?) -> ()
-  typealias ObjectsCompletionHandler = ([AnyObject]?, NSError?) -> ()
+  typealias CompletionHandler = (AnyObject?, NSError?) -> ()
 
-  func responseObject(completionHandler: ObjectCompletionHandler) -> Self {
+  func responsePersistable<T: JSONPersistable>(persistable: T.Type, completionHandler: CompletionHandler) -> Self {
     return responseJSON { (_, _, JSON, error) in
-      self.handleResponse(JSON, error: error) { (objects, error) in
-        completionHandler(objects?.first, error)
+      self.mapResponseJSONToPersistable(persistable: persistable, JSON: JSON, error: error) { (object, error) in
+        completionHandler(object, error)
       }
     }
   }
 
-  func responseObjects(completionHandler: ObjectsCompletionHandler) -> Self {
-    return responseJSON { (_, _, JSON, error) in
-      self.handleResponse(JSON, error: error, completionHandler: completionHandler)
-    }
-  }
-
-  private func handleResponse(JSON: JSONData?, error: NSError?, completionHandler: ObjectsCompletionHandler) {
+  private func mapResponseJSONToPersistable<T: JSONPersistable>(#persistable: T.Type, JSON: JSONData?, error: NSError?, completionHandler: CompletionHandler) {
     if let error = error {
       completionHandler(nil, error)
     } else {
-      if let JSONObject = JSON as JSONData? as? JSONObject {
-        if let serverError = self.errorFromJSON(JSONObject) {
+      if let JSONData: JSONData = JSON {
+        if let serverError = self.errorFromJSON(JSONData) {
           completionHandler(nil, serverError)
         } else {
-          // TODO: handle more than a user
-          let objects = self.importFromJSON(User.self, JSON: JSONObject)
-          completionHandler(objects, nil)
+          let object = self.importJSONToPersistable(persistable: persistable, JSON: JSONData)
+          completionHandler(object, nil)
         }
       }
     }
   }
 
-  // TODO: REMOVE
-  func responsePersistable<T: JSONPersistable>(persistable: T.Type, completionHandler: API.CompletionHandler) -> Self {
-    let serializer = responseSerializer { (JSON) in
-      let objects = self.importFromJSON(persistable, JSON: JSON)
-    }
-    return response(serializer: serializer) { (_, _, _, error) in
-      completionHandler(error)
-    }
-  }
-
-  // TODO: REMOVE
-  func responseAuthenticable(completionHandler: API.CompletionHandler) -> Self {
-    let serializer = responseSerializer { (JSON) in
-      if let authToken = JSON["auth_token"] as JSONData? as? String {
-        APICredential.authToken = authToken
-      }
-    }
-    return response(serializer: serializer) { (_, _, _, error) in
-      completionHandler(error)
-    }
-  }
-
-  // TODO: REMOVE
-  func responseCurrentUser(completionHandler: API.CompletionHandler) -> Self {
-    let serializer = responseSerializer { (JSON) in
-      self.importFromJSON(User.self, JSON: JSON)
-      if let user = JSON["user"] as JSONData? as? JSONObject {
-        if let id = user["id"] as JSONData? as? String {
-          User.currentUser = User.findByID(id)
-        }
-      }
-    }
-    return response(serializer: serializer) { (_, _, _, error) in
-      completionHandler(error)
-    }
-  }
-
-  // Helpers
-
-  // TODO: REMOVE
-  typealias AdditionHandler = (JSONObject) -> ()
-
-  // TODO: REMOVE
-  private func responseSerializer(addition: AdditionHandler?) -> Serializer {
-    let serializer: Serializer = { (request, response, data) in
-      let JSONSerializer = Request.JSONResponseSerializer()
-      let (JSON: JSONData?, serializationError) = JSONSerializer(request, response, data)
-      if let JSONObject = JSON as JSONData? as? JSONObject {
-        if let serverError = self.errorFromJSON(JSONObject) {
-          return (nil, serverError)
-        }
-        if let addition = addition {
-          addition(JSONObject)
-        }
-        return (JSON, nil)
-      }
-      return (nil, serializationError)
-    }
-    return serializer
-  }
-
-
-  private func importFromJSON<T: JSONPersistable>(persistable: T.Type, JSON: JSONObject) -> [T] {
+  private func importJSONToPersistable<T: JSONPersistable>(#persistable: T.Type, JSON: JSONData) -> [T] {
     var objects = [T]()
-    for JSONKey in persistable.possibleJSONKeys() {
-      if let JSONData: JSONData = JSON[JSONKey] as JSONData? {
-        RLMRealm.defaultRealm().beginWriteTransaction()
-        if let JSONObject = JSONData as? JSONObject {
+    RLMRealm.defaultRealm().beginWriteTransaction()
+    if let JSONObject = JSON as? JSONObject {
+      if let object = persistable.objectFromJSONObject(JSONObject) {
+        objects.append(object)
+      }
+    } else if let JSONArray = JSON as? JSONArray {
+      for JSON in JSONArray {
+        if let JSONObject = JSON as? JSONObject {
           if let object = persistable.objectFromJSONObject(JSONObject) {
             objects.append(object)
           }
-        } else if let JSONArray = JSONData as? JSONArray {
-          for JSON in JSONArray {
-            if let JSONObject = JSON as? JSONObject {
-              if let object = persistable.objectFromJSONObject(JSONObject) {
-                objects.append(object)
-              }
-            }
-          }
         }
-        RLMRealm.defaultRealm().commitWriteTransaction()
-        break
       }
     }
+    RLMRealm.defaultRealm().commitWriteTransaction()
     return objects
   }
 
-  private func errorFromJSON(JSON: JSONObject) -> NSError? {
-    if let error = JSON["error"] as JSONData? as? JSONObject {
-      if let message = error["message"] as JSONData? as? String {
+  private func errorFromJSON(JSON: JSONData) -> NSError? {
+    if let JSONObject = JSON as? JSONObject {
+      if let message = JSONObject["message"] as JSONData? as? String {
         return NSError(domain: NSBundle.mainBundle().bundleIdentifier!, code: 0, userInfo: [NSError.kSnowballAPIErrorMessage(): message])
       }
     }
