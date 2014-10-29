@@ -15,7 +15,8 @@ struct API {
   // The only types of response blocks that should be used are the blocks
   // that were added in the Alamofire.Request extension at the bottom of
   // this file. These blocks provide special handling such as parsing the
-  // Snowball API error into an NSError.
+  // Snowball API error into an NSError and importing any changed auth
+  // tokens.
 
   static func request(URLRequest: URLRequestConvertible) -> Alamofire.Request {
     return Alamofire.request(URLRequest)
@@ -174,6 +175,11 @@ extension Alamofire.Request {
         if let serverError = self.errorFromJSON(JSONData) {
           completionHandler(nil, serverError)
         } else {
+          if let JSONObject = JSONData as? JSONObject {
+            if let authToken = JSONObject["auth_token"] as? String {
+              APICredential.authToken = authToken
+            }
+          }
           let object = self.importJSONToPersistable(persistable: persistable, JSON: JSONData)
           completionHandler(object, nil)
         }

@@ -10,12 +10,18 @@ import Cartography
 import UIKit
 
 class PhoneNumberVerificationViewController: UIViewController {
-  private let currentUser = User.currentUser!
   private let verificationCodeTextField = UITextField()
 
   func verifyPhoneNumber() {
     if countElements(verificationCodeTextField.text) == 4 {
-      API.request(APIRoute.PhoneVerification(userID: currentUser.id, phoneNumberVerificationCode: verificationCodeTextField.text)).responsePersistable(User.self) { (object, error) in
+      var userID = ""
+      if let currentUser = User.currentUser {
+        userID = currentUser.id
+      } else {
+        let user = User.allObjects().firstObject() as User
+        userID = user.id
+      }
+      API.request(APIRoute.PhoneVerification(userID: userID, phoneNumberVerificationCode: verificationCodeTextField.text)).responsePersistable(User.self) { (object, error) in
         if error != nil { error?.display(); return }
         self.navigationController?.popToRootViewControllerAnimated(true)
       }

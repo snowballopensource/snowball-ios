@@ -30,6 +30,7 @@ class PhoneNumberInputViewController: UIViewController, UITextFieldDelegate {
       } else {
         API.request(APIRoute.PhoneAuthentication(phoneNumber: phoneNumber.E164String)).responsePersistable(User.self) { (object, error) in
           if error != nil { error?.display(); return }
+          self.navigationController?.pushViewController(PhoneNumberVerificationViewController(), animated: true)
         }
       }
     }
