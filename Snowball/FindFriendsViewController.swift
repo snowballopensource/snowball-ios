@@ -22,9 +22,9 @@ class FindFriendsViewController: UIViewController, UITableViewDataSource, UITabl
     AddressBookController.getAllPhoneNumbersWithCompletion { (granted, phoneNumbers) in
       if (granted) {
         if let phoneNumbers = phoneNumbers {
-          API.request(APIRoute.FindUsersByPhoneNumbers(phoneNumbers: phoneNumbers)).responseObjects { (objects, error) in
+          API.request(APIRoute.FindUsersByPhoneNumbers(phoneNumbers: phoneNumbers)).responsePersistable(User.self) { (object, error) in
             if error != nil { error?.display(); return }
-            if let users = objects as? [User] {
+            if let users = object as? [User] {
               self.users = users.filter() { $0.youFollow == false }
               self.tableView.reloadData()
             }
@@ -90,7 +90,7 @@ class FindFriendsViewController: UIViewController, UITableViewDataSource, UITabl
       let user = users[indexPath.row]
       users.removeAtIndex(indexPath.row)
       tableView.reloadData()
-      API.request(APIRoute.FollowUser(userID: user.id)).responseObject { (object, error) in
+      API.request(APIRoute.FollowUser(userID: user.id)).responsePersistable(User.self) { (object, error) in
         if error != nil {
           error?.display()
           self.users.insert(user, atIndex: indexPath.row)

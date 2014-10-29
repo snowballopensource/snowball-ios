@@ -1,5 +1,5 @@
 //
-//  ReelViewController.swift
+//  MainViewController.swift
 //  Snowball
 //
 //  Created by James Martinez on 9/24/14.
@@ -9,7 +9,7 @@
 import Cartography
 import UIKit
 
-class ReelsViewController: ManagedTableViewController {
+class MainViewController: ManagedCollectionViewController {
   private let friendsButton = UIButton()
   private var scrolling = false
   private var topMediaView: UIView? {
@@ -28,13 +28,6 @@ class ReelsViewController: ManagedTableViewController {
 
   private func switchToFriendsNavigationController() {
     switchToNavigationController(FriendsNavigationController())
-  }
-
-  private func startPlaybackForVisibleReelCells() {
-    for cell in tableView.visibleCells() {
-      let reelCell = cell as ReelTableViewCell
-      reelCell.startPlayback()
-    }
   }
 
   // MARK: -
@@ -66,11 +59,11 @@ class ReelsViewController: ManagedTableViewController {
       friendsButton.left == friendsButton.superview!.left + 16
       friendsButton.height == 44
     }
-    layout(tableView, topMediaView!) { (tableView, topMediaView) in
-      tableView.top == topMediaView.bottom
-      tableView.bottom == tableView.superview!.bottom
-      tableView.left == tableView.superview!.left
-      tableView.right == tableView.superview!.right
+    layout(collectionView, topMediaView!) { (collectionView, topMediaView) in
+      collectionView.top == topMediaView.bottom
+      collectionView.bottom == collectionView.superview!.bottom
+      collectionView.left == collectionView.superview!.left
+      collectionView.right == collectionView.superview!.right
     }
   }
 
@@ -87,60 +80,40 @@ class ReelsViewController: ManagedTableViewController {
   // MARK: ManagedViewController
 
   override func objectsInSection(section: Int) -> RLMArray {
-    return Reel.allObjects()
+    return Clip.allObjects()
   }
 
   override func reloadData() {
-    API.request(APIRoute.GetReelStream).responsePersistable(Reel.self) { (error) in
+    API.request(APIRoute.GetClipFeed).responsePersistable(Clip.self) { (object, error) in
       if error != nil { error?.display(); return }
-      self.tableView.reloadData()
+      self.collectionView.reloadData()
     }
   }
 
   // MARK: ManagedTableViewController
 
-  override func cellTypeInSection(section: Int) -> UITableViewCell.Type {
-    return ReelTableViewCell.self
+  override func cellTypeInSection(section: Int) -> UICollectionViewCell.Type {
+    return ClipCollectionViewCell.self
   }
 
-  override func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+  override func configureCell(cell: UICollectionViewCell, atIndexPath indexPath: NSIndexPath) {
     super.configureCell(cell, atIndexPath: indexPath)
     if !scrolling {
-      let reelCell = cell as ReelTableViewCell
-      reelCell.startPlayback()
+      let clipCell = cell as ClipCollectionViewCell
+      // TODO: do this again
+      // clipCell.startPlayback()
     }
   }
 
-  // MARK: UITableViewDelegate
+  // MARK: UICollectionViewDelegate
 
-  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    let reelCell = tableView.cellForRowAtIndexPath(indexPath) as ReelTableViewCell
-    let reel = objectsInSection(indexPath.section).objectAtIndex(UInt(indexPath.row)) as Reel
-    reelCell.showPlaybackIndicatorView()
-    topMediaViewController?.playReel(reel) {
-      reelCell.hidePlaybackIndicatorView()
-    }
-  }
-
-  // MARK: UIScrollViewDelegate
-
-  func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-    scrolling = true
-    for cell in tableView.visibleCells() {
-      let reelCell = cell as ReelTableViewCell
-      reelCell.pausePlayback()
-    }
-  }
-
-  func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-    if velocity.y == 0 {
-      scrolling = false
-      startPlaybackForVisibleReelCells()
-    }
-  }
-
-  func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-    scrolling = false
-    startPlaybackForVisibleReelCells()
+  func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    let clipCell = collectionView.cellForItemAtIndexPath(indexPath) as ClipCollectionViewCell
+    let clip = objectsInSection(indexPath.section).objectAtIndex(UInt(indexPath.row)) as Clip
+    // TODO: add back
+//    clipCell.showPlaybackIndicatorView()
+//    topMediaViewController?.playReel(reel) {
+//      reelCell.hidePlaybackIndicatorView()
+//    }
   }
 }

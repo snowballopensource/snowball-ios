@@ -85,10 +85,6 @@ class User: RemoteManagedObject, JSONPersistable {
 
   // MARK: JSONPersistable
 
-  class func possibleJSONKeys() -> [String] {
-    return ["user", "users"]
-  }
-
   class func objectFromJSONObject(JSON: JSONObject) -> Self? {
     if let id = JSON["id"] as JSONData? as? String {
       var user = findOrInitializeByID(id)

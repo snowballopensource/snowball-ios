@@ -47,7 +47,7 @@ enum APIRoute: URLRequestConvertible {
   case PhoneVerification(userID: String, phoneNumberVerificationCode: String)
   // User
   case GetCurrentUser
-  case UpdateCurrentUser(name: String?, username: String?, email: String?)
+  case UpdateCurrentUser(name: String?, username: String?, email: String?, phoneNumber: String?)
   case GetCurrentUserFollowing
   case FollowUser(userID: String)
   case UnfollowUser(userID: String)
@@ -111,7 +111,7 @@ enum APIRoute: URLRequestConvertible {
     switch self {
       case .PhoneAuthentication(let phoneNumber): return ["phone_number": phoneNumber]
       case .PhoneVerification(_, let phoneNumberVerificationCode): return ["phone_number_verification_code": phoneNumberVerificationCode]
-      case .UpdateCurrentUser(let username, let email, let name):
+      case .UpdateCurrentUser(let username, let email, let name, let phoneNumber):
         var userParameters = [String: String]()
         if let newUsername = username {
           userParameters["username"] = newUsername
@@ -121,6 +121,9 @@ enum APIRoute: URLRequestConvertible {
         }
         if let newName = name {
           userParameters["name"] = newName
+        }
+        if let newPhoneNumber = phoneNumber {
+          userParameters["phone_number"] = newPhoneNumber
         }
         return userParameters
       case .FindUsersByPhoneNumbers(let phoneNumbers): return ["phone_number": ", ".join(phoneNumbers)]

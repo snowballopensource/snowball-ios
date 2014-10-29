@@ -1,8 +1,8 @@
 //
-//  ReelTableViewCell.swift
+//  ClipCollectionViewCell.swift
 //  Snowball
 //
-//  Created by James Martinez on 9/24/14.
+//  Created by James Martinez on 10/29/14.
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
@@ -10,37 +10,36 @@ import AVFoundation
 import Cartography
 import UIKit
 
-class ReelTableViewCell: UITableViewCell {
+class ClipCollectionViewCell: UICollectionViewCell {
   private let titleLabel = UILabel()
   private let participantsTitleLabel = UILabel()
   private let recentClipPlayerView = PlayerView()
   private let playbackIndicatorView = UIView()
 
-  func showPlaybackIndicatorView() {
-    playbackIndicatorView.hidden = false
-    pausePlayback()
-  }
-
-  func hidePlaybackIndicatorView() {
-    playbackIndicatorView.hidden = true
-    startPlayback()
-  }
-
-  func startPlayback() {
-    recentClipPlayerView.player?.play()
-  }
-
-  func pausePlayback() {
-    recentClipPlayerView.player?.pause()
-  }
+//  func showPlaybackIndicatorView() {
+//    playbackIndicatorView.hidden = false
+//    pausePlayback()
+//  }
+//
+//  func hidePlaybackIndicatorView() {
+//    playbackIndicatorView.hidden = true
+//    startPlayback()
+//  }
+//
+//  func startPlayback() {
+//    recentClipPlayerView.player?.play()
+//  }
+//
+//  func pausePlayback() {
+//    recentClipPlayerView.player?.pause()
+//  }
 
   // MARK: -
 
-  // MARK: UITableViewCell
+  // MARK: UICollectionViewCell
 
-  override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-    super.init(style: style, reuseIdentifier: reuseIdentifier)
-    selectionStyle = UITableViewCellSelectionStyle.None
+  override init() {
+    super.init()
     contentView.backgroundColor = UIColor.whiteColor()
     contentView.addSubview(titleLabel)
     contentView.addSubview(participantsTitleLabel)
@@ -54,22 +53,22 @@ class ReelTableViewCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
 
-  override class func height() -> CGFloat {
-    return UIScreen.mainScreen().bounds.width/2
+  override class func size() -> CGSize {
+    return CGSizeMake(UIScreen.mainScreen().bounds.width/2, UIScreen.mainScreen().bounds.width/2)
   }
 
   override func configureForObject(object: AnyObject) {
-    let reel = object as Reel
-    titleLabel.text = reel.title
-    participantsTitleLabel.text = reel.participantsTitle
-    hidePlaybackIndicatorView()
-    if let recentClip = reel.recentClip() {
-      let recentClipVideoURL = NSURL(string: recentClip.videoURL)
-      let player = Player(videoURL: recentClipVideoURL!)
-      player.loop = true
-      player.muted = true
-      self.recentClipPlayerView.player = player
-    }
+//    let reel = object as Reel
+//    titleLabel.text = reel.title
+//    participantsTitleLabel.text = reel.participantsTitle
+//    hidePlaybackIndicatorView()
+//    if let recentClip = reel.recentClip() {
+//      let recentClipVideoURL = NSURL(string: recentClip.videoURL)
+//      let player = Player(videoURL: recentClipVideoURL!)
+//      player.loop = true
+//      player.muted = true
+//      self.recentClipPlayerView.player = player
+//    }
   }
 
   // MARK: UIView
@@ -90,7 +89,7 @@ class ReelTableViewCell: UITableViewCell {
       participantsTitleLabel.right == participantsTitleLabel.superview!.right - margin
     }
     layout(recentClipPlayerView) { (recentClipPlayerView) in
-      let sideLength = Float(ReelTableViewCell.height())
+      let sideLength = Float(ClipCollectionViewCell.size().width)
       recentClipPlayerView.top == recentClipPlayerView.superview!.top
       recentClipPlayerView.right == recentClipPlayerView.superview!.right
       recentClipPlayerView.height == sideLength

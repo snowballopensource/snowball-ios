@@ -91,16 +91,16 @@ class Player: AVQueuePlayer {
 
   // MARK: AVQueuePlayer
 
-  init(reel: Reel) {
-    super.init()
-    actionAtItemEnd = AVPlayerActionAtItemEnd.Advance
-    var videoURLs = [NSURL]()
-    for clip in reel.playableClips() {
-      let clip = clip as Clip
-      videoURLs.append(NSURL(string: clip.videoURL)!)
-    }
-    prebufferAndQueueVideoURLs(videoURLs)
-  }
+//  init(reel: Reel) {
+//    super.init()
+//    actionAtItemEnd = AVPlayerActionAtItemEnd.Advance
+//    var videoURLs = [NSURL]()
+//    for clip in reel.playableClips() {
+//      let clip = clip as Clip
+//      videoURLs.append(NSURL(string: clip.videoURL)!)
+//    }
+//    prebufferAndQueueVideoURLs(videoURLs)
+//  }
 
   init(videoURL: NSURL) {
     super.init()

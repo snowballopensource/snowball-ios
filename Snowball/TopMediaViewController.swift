@@ -16,16 +16,16 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
   typealias PlayerCompletionHandler = () -> ()
   private var playerCompletionHandler: PlayerCompletionHandler?
 
-  func playReel(reel: Reel, completionHandler: PlayerCompletionHandler? = nil) {
-    playerCompletionHandler = completionHandler
-    API.request(APIRoute.GetUnwatchedClipsInReel(reelID: reel.id, since: nil)).responsePersistable(Clip.self) { (error) in
-      let player = Player(reel: reel)
-      player.delegate = self
-      self.playerView.player = player
-      self.view.bringSubviewToFront(self.playerView)
-      player.play()
-    }
-  }
+//  func playReel(reel: Reel, completionHandler: PlayerCompletionHandler? = nil) {
+//    playerCompletionHandler = completionHandler
+//    API.request(APIRoute.GetUnwatchedClipsInReel(reelID: reel.id, since: nil)).responsePersistable(Clip.self) { (error) in
+//      let player = Player(reel: reel)
+//      player.delegate = self
+//      self.playerView.player = player
+//      self.view.bringSubviewToFront(self.playerView)
+//      player.play()
+//    }
+//  }
 
   // MARK: -
 

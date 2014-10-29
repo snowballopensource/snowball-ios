@@ -30,7 +30,7 @@ class EditProfileViewController: UIViewController {
       newEmail = emailTextField.text
     }
     if newName != nil || newUsername != nil || newEmail != nil {
-      API.request(APIRoute.UpdateCurrentUser(username: newUsername, email: newEmail, name: newName)).responsePersistable(User.self) { (error) in
+      API.request(APIRoute.UpdateCurrentUser(name: newName, username: newUsername, email: newEmail, phoneNumber: nil)).responsePersistable(User.self) { (object, error) in
         if error != nil { error?.display(); return }
         self.navigationController?.popViewControllerAnimated(true)
       }
@@ -40,7 +40,7 @@ class EditProfileViewController: UIViewController {
   }
 
   func changePhoneNumber() {
-    navigationController?.pushViewController(PhoneNumberChangeViewController(), animated: true)
+    navigationController?.pushViewController(PhoneNumberInputViewController(), animated: true)
   }
 
   // MARK: -

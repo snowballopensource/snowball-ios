@@ -15,7 +15,7 @@ class PhoneNumberVerificationViewController: UIViewController {
 
   func verifyPhoneNumber() {
     if countElements(verificationCodeTextField.text) == 4 {
-      API.request(APIRoute.VerifyPhoneNumber(phoneNumberVerificationCode: verificationCodeTextField.text)).responseObject{ (object, error) in
+      API.request(APIRoute.PhoneVerification(userID: currentUser.id, phoneNumberVerificationCode: verificationCodeTextField.text)).responsePersistable(User.self) { (object, error) in
         if error != nil { error?.display(); return }
         self.navigationController?.popToRootViewControllerAnimated(true)
       }

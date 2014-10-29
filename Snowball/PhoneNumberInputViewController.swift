@@ -1,5 +1,5 @@
 //
-//  PhoneNumberChangeViewController.swift
+//  PhoneNumberInputViewController.swift
 //  Snowball
 //
 //  Created by James Martinez on 10/10/14.
@@ -9,25 +9,28 @@
 import Cartography
 import UIKit
 
-class PhoneNumberChangeViewController: UIViewController, UITextFieldDelegate {
-  private let currentUser = User.currentUser!
+class PhoneNumberInputViewController: UIViewController, UITextFieldDelegate {
+  private let currentUser = User.currentUser
   private let countryCodeTextField = UITextField()
   private let phoneNumberTextField = UITextField()
 
-  func changePhoneNumber() {
+  func sendPhoneNumber() {
     let phoneNumberString = countryCodeTextField.text + phoneNumberTextField.text
-    let newPhoneNumber = PhoneNumber(string: phoneNumberString)
-    if newPhoneNumber.matchesPhoneNumberString(currentUser.phoneNumber) {
-      self.navigationController?.popViewControllerAnimated(true)
-    } else {
-      if newPhoneNumber.isPlausible() {
-        API.request(APIRoute.ChangePhoneNumber(phoneNumber: newPhoneNumber.E164String)).responseObject{ (object, error) in
+    let phoneNumber = PhoneNumber(string: phoneNumberString)
+    if phoneNumber.isPlausible() {
+      if let currentUser = currentUser {
+        if phoneNumber.matchesPhoneNumberString(currentUser.phoneNumber) {
+          self.navigationController?.popViewControllerAnimated(true)
+          return
+        }
+        API.request(APIRoute.UpdateCurrentUser(name: nil, username: nil, email: nil, phoneNumber: phoneNumber.E164String)).responsePersistable(User.self) { (object, error) in
           if error != nil { error?.display(); return }
           self.navigationController?.pushViewController(PhoneNumberVerificationViewController(), animated: true)
         }
       } else {
-        // TODO: display invalid phone number error
-        println("Invalid phone number.")
+        API.request(APIRoute.PhoneAuthentication(phoneNumber: phoneNumber.E164String)).responsePersistable(User.self) { (object, error) in
+          if error != nil { error?.display(); return }
+        }
       }
     }
   }
@@ -44,25 +47,27 @@ class PhoneNumberChangeViewController: UIViewController, UITextFieldDelegate {
 
     let rightBarButton = UIButton(frame: CGRectMake(0, 0, 44.0, 44.0))
     rightBarButton.setTitle(NSLocalizedString("✓"), forState: UIControlState.Normal)
-    rightBarButton.addTarget(self, action: "changePhoneNumber", forControlEvents: UIControlEvents.TouchUpInside)
+    rightBarButton.addTarget(self, action: "sendPhoneNumber", forControlEvents: UIControlEvents.TouchUpInside)
     rightBarButton.setTitleColorWithAutomaticHighlightColor()
     navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton)
 
-    let phoneNumber = PhoneNumber(string: currentUser.phoneNumber)
+    if let currentUser = currentUser {
+      let phoneNumber = PhoneNumber(string: currentUser.phoneNumber)
 
-    countryCodeTextField.text = "+"
-    if let countryCode = phoneNumber.countryCode {
-      countryCodeTextField.text = "+" + countryCode
+      countryCodeTextField.text = "+"
+      if let countryCode = phoneNumber.countryCode {
+        countryCodeTextField.text = "+" + countryCode
+      }
+      countryCodeTextField.keyboardType = UIKeyboardType.NumberPad
+      countryCodeTextField.borderStyle = UITextBorderStyle.RoundedRect
+      countryCodeTextField.delegate = self
+      view.addSubview(countryCodeTextField)
+      phoneNumberTextField.text = phoneNumber.nationalNumber
+      phoneNumberTextField.keyboardType = UIKeyboardType.NumberPad
+      phoneNumberTextField.borderStyle = UITextBorderStyle.RoundedRect
+      phoneNumberTextField.delegate = self
+      view.addSubview(phoneNumberTextField)
     }
-    countryCodeTextField.keyboardType = UIKeyboardType.NumberPad
-    countryCodeTextField.borderStyle = UITextBorderStyle.RoundedRect
-    countryCodeTextField.delegate = self
-    view.addSubview(countryCodeTextField)
-    phoneNumberTextField.text = phoneNumber.nationalNumber
-    phoneNumberTextField.keyboardType = UIKeyboardType.NumberPad
-    phoneNumberTextField.borderStyle = UITextBorderStyle.RoundedRect
-    phoneNumberTextField.delegate = self
-    view.addSubview(phoneNumberTextField)
   }
 
   override func viewWillLayoutSubviews() {

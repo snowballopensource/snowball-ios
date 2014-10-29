@@ -50,7 +50,7 @@ class FriendsViewController: ManagedTableViewController, CurrentUserTableViewCel
     var requestOneInProgress = true
     var requestTwoInProgress = true
     var requestsError: NSError? = nil
-    API.request(APIRoute.GetCurrentUser).responseCurrentUser { (error) in
+    API.request(APIRoute.GetCurrentUser).responsePersistable(User.self) { (object, error) in
       requestOneInProgress = false
       if requestsError == nil { requestsError = error }
       if !requestOneInProgress && !requestTwoInProgress {
@@ -58,7 +58,7 @@ class FriendsViewController: ManagedTableViewController, CurrentUserTableViewCel
         self.tableView.reloadData()
       }
     }
-    API.request(APIRoute.GetCurrentUserFollowing).responsePersistable(User.self) { (error) in
+    API.request(APIRoute.GetCurrentUserFollowing).responsePersistable(User.self) { (object, error) in
       requestTwoInProgress = false
       if requestsError == nil { requestsError = error }
       if !requestOneInProgress && !requestTwoInProgress {

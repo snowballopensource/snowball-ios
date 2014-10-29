@@ -13,13 +13,8 @@ class Clip: RemoteManagedObject, JSONPersistable {
   dynamic var createdAt = NSDate(timeIntervalSince1970: 0)
 
   dynamic var user: User?
-  dynamic var reel: Reel?
 
   // MARK: JSONPersistable
-
-  class func possibleJSONKeys() -> [String] {
-    return ["clip", "clips"]
-  }
 
   class func objectFromJSONObject(JSON: JSONObject) -> Self? {
     if let id = JSON["id"] as JSONData? as? String {
@@ -30,9 +25,6 @@ class Clip: RemoteManagedObject, JSONPersistable {
       }
       if let createdAt = JSON["created_at"] as JSONData? as? Double  {
         clip.createdAt = NSDate(timeIntervalSince1970: createdAt)
-      }
-      if let reelID = JSON["reel_id"] as JSONData? as? String {
-        clip.reel = Reel.objectFromJSONObject(["id": reelID])
       }
 
       return clip
