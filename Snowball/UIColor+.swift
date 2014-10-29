@@ -13,7 +13,7 @@ extension UIColor {
     var red: CGFloat = 0.0
     var green: CGFloat = 0.0
     var blue: CGFloat = 0.0
-    let scanner = NSScanner.scannerWithString(hex)
+    let scanner = NSScanner(string: hex)
     var hexValue: CUnsignedLongLong = 0
     if scanner.scanHexLongLong(&hexValue) {
       red = CGFloat((hexValue & 0xFF0000) >> 16) / 255.0

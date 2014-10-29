@@ -11,6 +11,6 @@ import Foundation
 extension String {
   func encodedAsBase64() -> String {
     let encodedData = dataUsingEncoding(NSUTF8StringEncoding)
-    return encodedData!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.fromRaw(0)!)
+    return encodedData!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
   }
 }

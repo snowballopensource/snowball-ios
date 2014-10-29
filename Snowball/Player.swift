@@ -51,12 +51,13 @@ class Player: AVQueuePlayer {
   }
 
   private func prebufferAndQueueVideoURL(videoURL: NSURL, completionHandler: (() -> ())? = nil) {
-    AVURLAsset.createAssetFromURL(videoURL){ (asset, error) in
-      if let asset = asset {
-        self.prepareToPlayAsset(asset)
-        if let completion = completionHandler { completion() }
-      }
-    }
+    // TODO: use better cache code
+//    AVURLAsset.createAssetFromURL(videoURL){ (asset, error) in
+//      if let asset = asset {
+//        self.prepareToPlayAsset(asset)
+//        if let completion = completionHandler { completion() }
+//      }
+//    }
   }
 
   private func prepareToPlayAsset(asset: AVURLAsset) {
@@ -96,7 +97,7 @@ class Player: AVQueuePlayer {
     var videoURLs = [NSURL]()
     for clip in reel.playableClips() {
       let clip = clip as Clip
-      videoURLs.append(NSURL(string: clip.videoURL))
+      videoURLs.append(NSURL(string: clip.videoURL)!)
     }
     prebufferAndQueueVideoURLs(videoURLs)
   }

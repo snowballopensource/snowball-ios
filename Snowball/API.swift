@@ -167,7 +167,7 @@ enum APIRoute: URLRequestConvertible {
         parameters["since"] = Int(sinceDate.timeIntervalSince1970)
       }
       return parameters
-    case .CreateClipInReel(let reelID, let videoData): return ["clip": ["video": NSString(data: videoData, encoding: NSUTF8StringEncoding)]]
+    case .CreateClipInReel(let reelID, let videoData): return ["clip": ["video": NSString(data: videoData, encoding: NSUTF8StringEncoding)!]]
     default: return nil
       }
   }
@@ -176,8 +176,8 @@ enum APIRoute: URLRequestConvertible {
 
   var URLRequest: NSURLRequest {
     let URL = NSURL(string: APIRoute.baseURLString)
-      let mutableURLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(path))
-      mutableURLRequest.HTTPMethod = method.toRaw()
+      let mutableURLRequest = NSMutableURLRequest(URL: URL!.URLByAppendingPathComponent(path))
+      mutableURLRequest.HTTPMethod = method.rawValue
 
       if let authToken = APICredential.authToken {
         let encodedAuthToken = "\(authToken):".encodedAsBase64()

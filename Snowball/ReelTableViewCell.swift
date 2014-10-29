@@ -65,7 +65,7 @@ class ReelTableViewCell: UITableViewCell {
     hidePlaybackIndicatorView()
     if let recentClip = reel.recentClip() {
       let recentClipVideoURL = NSURL(string: recentClip.videoURL)
-      let player = Player(videoURL: recentClipVideoURL)
+      let player = Player(videoURL: recentClipVideoURL!)
       player.loop = true
       player.muted = true
       self.recentClipPlayerView.player = player

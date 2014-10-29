@@ -40,7 +40,7 @@ class UserImageView: UIView {
     initialsLabel.text = user.initials
     imageView.image = nil
     if countElements(user.avatarURL) > 0 {
-      imageView.setImageFromURL(NSURL(string: user.avatarURL), placeholder: nil, completionHandler: nil)
+      imageView.setImageFromURL(NSURL(string: user.avatarURL)!, placeholder: nil, completionHandler: nil)
     }
   }
 }
