@@ -51,6 +51,15 @@ class PhoneNumberInputViewController: UIViewController, UITextFieldDelegate {
     rightBarButton.setTitleColorWithAutomaticHighlightColor()
     navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton)
 
+    countryCodeTextField.keyboardType = UIKeyboardType.NumberPad
+    countryCodeTextField.borderStyle = UITextBorderStyle.RoundedRect
+    countryCodeTextField.delegate = self
+    view.addSubview(countryCodeTextField)
+    phoneNumberTextField.keyboardType = UIKeyboardType.NumberPad
+    phoneNumberTextField.borderStyle = UITextBorderStyle.RoundedRect
+    phoneNumberTextField.delegate = self
+    view.addSubview(phoneNumberTextField)
+
     if let currentUser = currentUser {
       let phoneNumber = PhoneNumber(string: currentUser.phoneNumber)
 
@@ -58,15 +67,7 @@ class PhoneNumberInputViewController: UIViewController, UITextFieldDelegate {
       if let countryCode = phoneNumber.countryCode {
         countryCodeTextField.text = "+" + countryCode
       }
-      countryCodeTextField.keyboardType = UIKeyboardType.NumberPad
-      countryCodeTextField.borderStyle = UITextBorderStyle.RoundedRect
-      countryCodeTextField.delegate = self
-      view.addSubview(countryCodeTextField)
       phoneNumberTextField.text = phoneNumber.nationalNumber
-      phoneNumberTextField.keyboardType = UIKeyboardType.NumberPad
-      phoneNumberTextField.borderStyle = UITextBorderStyle.RoundedRect
-      phoneNumberTextField.delegate = self
-      view.addSubview(phoneNumberTextField)
     }
   }
 

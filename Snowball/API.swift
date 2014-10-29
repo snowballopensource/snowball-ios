@@ -79,8 +79,8 @@ enum APIRoute: URLRequestConvertible {
 
   var path: String {
     switch self {
-      case .PhoneAuthentication: return "users/sign_up"
-      case .PhoneVerification: return "users/sign_in"
+      case .PhoneAuthentication: return "users/phone-auth"
+      case .PhoneVerification: return "users/phone-verification"
       case .GetCurrentUser: return "users/me"
       case .UpdateCurrentUser: return "users/me"
       case .GetCurrentUserFollowing: return "users/me/following"
@@ -144,8 +144,8 @@ enum APIRoute: URLRequestConvertible {
         let encodedAuthToken = "\(authToken):".encodedAsBase64()
         mutableURLRequest.setValue("Basic \(encodedAuthToken)", forHTTPHeaderField: "Authorization")
       }
-      if let encoding = parameterEncoding {
-        return encoding.encode(mutableURLRequest, parameters: parameters).0
+      if let params = parameters {
+        return parameterEncoding!.encode(mutableURLRequest, parameters: params).0
       }
       return mutableURLRequest
   }
