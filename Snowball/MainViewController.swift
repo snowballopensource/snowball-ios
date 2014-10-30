@@ -79,7 +79,7 @@ class MainViewController: ManagedCollectionViewController {
 
   // MARK: ManagedViewController
 
-  override func objectsInSection(section: Int) -> RLMArray {
+  override func objectsInSection(section: Int) -> RLMResults {
     return Clip.allObjects()
   }
 

@@ -71,7 +71,7 @@ class User: RemoteManagedObject, JSONPersistable {
     }
   }
 
-  class func currentUserManagedArray() -> RLMArray {
+  class func currentUserManagedResults() -> RLMResults {
     var id = ""
     if let currentUserID = User.currentUserID {
       id = currentUserID
@@ -79,7 +79,7 @@ class User: RemoteManagedObject, JSONPersistable {
     return User.objectsWithPredicate(NSPredicate(format: "id == %@", id))
   }
 
-  class func following() -> RLMArray {
+  class func following() -> RLMResults {
     return User.objectsWithPredicate(NSPredicate(format: "youFollow == true"))
   }
 

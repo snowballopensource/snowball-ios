@@ -15,23 +15,18 @@ PODS:
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
   - libPhoneNumber-iOS (0.7.3)
-  - Realm:
+  - Realm (0.87.1):
     - Realm/Headers
-  - Realm/Headers
+  - Realm/Headers (0.87.1)
 
 DEPENDENCIES:
   - BlocksKit
   - libPhoneNumber-iOS
-  - Realm (from `https://github.com/realm/realm-cocoa.git`, commit `a035a47`)
-
-EXTERNAL SOURCES:
-  Realm:
-    :commit: a035a47
-    :git: https://github.com/realm/realm-cocoa.git
+  - Realm
 
 SPEC CHECKSUMS:
   BlocksKit: 4439e7f30a9f90743462ca63545a15c1f4304cef
   libPhoneNumber-iOS: 98fc07d70c8fdb5e6a8e3442c37e97353065c20e
-  Realm: e618caeba3cfa2ca44b243be1367ea551a403658
+  Realm: d2a10a60bbbd66c64ae8d839a378b88c68cf79bb
 
-COCOAPODS: 0.34.1
+COCOAPODS: 0.34.4

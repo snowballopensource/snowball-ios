@@ -39,9 +39,9 @@ class FriendsViewController: ManagedTableViewController, CurrentUserTableViewCel
 
   // MARK: ManagedViewController
 
-  override func objectsInSection(section: Int) -> RLMArray {
+  override func objectsInSection(section: Int) -> RLMResults {
     switch section {
-      case 0: return User.currentUserManagedArray()
+      case 0: return User.currentUserManagedResults()
       default: return User.following()
     }
   }

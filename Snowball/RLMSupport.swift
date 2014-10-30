@@ -1,3 +1,6 @@
+// 10/30/2014, commit: be44e722f81b18ff90b9985bb83d6201705f7c30 for this file
+
+
 ////////////////////////////////////////////////////////////////////////////
 //
 // Copyright 2014 Realm Inc.
@@ -17,36 +20,60 @@
 ////////////////////////////////////////////////////////////////////////////
 
 extension RLMObject {
-    // Swift query convenience functions
-    public class func objectsWhere(predicateFormat: String, _ args: CVarArgType...) -> RLMArray {
-        return objectsWhere(predicateFormat, args: getVaList(args))
-    }
+  // Swift query convenience functions
+  public class func objectsWhere(predicateFormat: String, _ args: CVarArgType...) -> RLMResults {
+    return objectsWhere(predicateFormat, args: getVaList(args))
+  }
 
-    public class func objectsInRealm(realm: RLMRealm, _ predicateFormat: String, _ args: CVarArgType...) -> RLMArray {
-        return objectsInRealm(realm, `where`: predicateFormat, args: getVaList(args))
-    }
+  public class func objectsInRealm(realm: RLMRealm, _ predicateFormat: String, _ args: CVarArgType...) -> RLMResults {
+    return objectsInRealm(realm, `where`: predicateFormat, args: getVaList(args))
+  }
 }
 
 extension RLMArray: SequenceType {
-    // Support Sequence-style enumeration
-    public func generate() -> GeneratorOf<RLMObject> {
-        var i: UInt  = 0
+  // Support Sequence-style enumeration
+  public func generate() -> GeneratorOf<RLMObject> {
+    var i: UInt  = 0
 
-        return GeneratorOf<RLMObject> {
-            if (i >= self.count) {
-                return .None
-            } else {
-                return self[i++] as? RLMObject
-            }
-        }
+    return GeneratorOf<RLMObject> {
+      if (i >= self.count) {
+        return .None
+      } else {
+        return self[i++] as? RLMObject
+      }
     }
+  }
 
-    // Swift query convenience functions
-    public func indexOfObjectWhere(predicateFormat: String, _ args: CVarArgType...) -> UInt {
-        return indexOfObjectWhere(predicateFormat, args: getVaList(args))
-    }
+  // Swift query convenience functions
+  public func indexOfObjectWhere(predicateFormat: String, _ args: CVarArgType...) -> UInt {
+    return indexOfObjectWhere(predicateFormat, args: getVaList(args))
+  }
 
-    public func objectsWhere(predicateFormat: String, _ args: CVarArgType...) -> RLMArray {
-        return objectsWhere(predicateFormat, args: getVaList(args))
+  public func objectsWhere(predicateFormat: String, _ args: CVarArgType...) -> RLMResults {
+    return objectsWhere(predicateFormat, args: getVaList(args))
+  }
+}
+
+extension RLMResults: SequenceType {
+  // Support Sequence-style enumeration
+  public func generate() -> GeneratorOf<RLMObject> {
+    var i: UInt  = 0
+
+    return GeneratorOf<RLMObject> {
+      if (i >= self.count) {
+        return .None
+      } else {
+        return self[i++] as? RLMObject
+      }
     }
+  }
+
+  // Swift query convenience functions
+  public func indexOfObjectWhere(predicateFormat: String, _ args: CVarArgType...) -> UInt {
+    return indexOfObjectWhere(predicateFormat, args: getVaList(args))
+  }
+
+  public func objectsWhere(predicateFormat: String, _ args: CVarArgType...) -> RLMResults {
+    return objectsWhere(predicateFormat, args: getVaList(args))
+  }
 }

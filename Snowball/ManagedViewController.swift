@@ -10,9 +10,9 @@ import UIKit
 
 class ManagedViewController: UIViewController {
 
-  func objectsInSection(section: Int) -> RLMArray {
+  func objectsInSection(section: Int) -> RLMResults {
     requireSubclass()
-    return RLMArray(objectClassName: RLMObject.className())
+    return User.currentUserManagedResults()
   }
 
   func reloadData() {
