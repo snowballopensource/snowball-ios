@@ -81,7 +81,7 @@ enum APIRoute: URLRequestConvertible {
   var path: String {
     switch self {
       case .PhoneAuthentication: return "users/phone-auth"
-      case .PhoneVerification(let userID): return "users/\(userID)/phone-verification"
+      case .PhoneVerification(let userID, _): return "users/\(userID)/phone-verification"
       case .GetCurrentUser: return "users/me"
       case .UpdateCurrentUser: return "users/me"
       case .GetCurrentUserFollowing: return "users/me/following"
