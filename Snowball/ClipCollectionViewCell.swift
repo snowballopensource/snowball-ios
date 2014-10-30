@@ -55,7 +55,11 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   override func configureForObject(object: AnyObject) {
     let clip = object as Clip
-    clipDetailsLabel.text = "test1234"
+    var clipDetailsString = ""
+    if let user = clip.user {
+      clipDetailsString = "\(user.username), \(clip.createdAt)"
+    }
+    clipDetailsLabel.text = clipDetailsString
     let clipVideoURL = NSURL(string: clip.videoURL)
     self.recentClipPlayerView.player = Player(videoURL: clipVideoURL!)
 
