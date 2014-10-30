@@ -32,14 +32,11 @@ class ManagedTableViewController: ManagedViewController, UITableViewDataSource, 
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    tableView.frame = view.bounds
     view.addSubview(tableView)
     tableView.dataSource = self
     tableView.delegate = self
     registerCells()
-  }
-
-  override func viewWillLayoutSubviews() {
-    tableView.frame = view.bounds
   }
 
   // MARK: UITableViewDataSource

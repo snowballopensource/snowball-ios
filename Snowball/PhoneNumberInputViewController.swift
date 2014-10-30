@@ -52,14 +52,29 @@ class PhoneNumberInputViewController: UIViewController, UITextFieldDelegate {
     rightBarButton.setTitleColorWithAutomaticHighlightColor()
     navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton)
 
+    let margin: Float = 20.0
+
     countryCodeTextField.keyboardType = UIKeyboardType.NumberPad
     countryCodeTextField.borderStyle = UITextBorderStyle.RoundedRect
     countryCodeTextField.delegate = self
     view.addSubview(countryCodeTextField)
+    layout(countryCodeTextField) { (countryCodeTextField) in
+      countryCodeTextField.left == countryCodeTextField.superview!.left + margin
+      countryCodeTextField.width == 100
+      countryCodeTextField.top == countryCodeTextField.superview!.top + margin
+      countryCodeTextField.height == 50
+    }
+
     phoneNumberTextField.keyboardType = UIKeyboardType.NumberPad
     phoneNumberTextField.borderStyle = UITextBorderStyle.RoundedRect
     phoneNumberTextField.delegate = self
     view.addSubview(phoneNumberTextField)
+    layout(phoneNumberTextField, countryCodeTextField) { (phoneNumberTextField, countryCodeTextField) in
+      phoneNumberTextField.left == countryCodeTextField.right
+      phoneNumberTextField.right == phoneNumberTextField.superview!.right - margin
+      phoneNumberTextField.top == countryCodeTextField.top
+      phoneNumberTextField.height == countryCodeTextField.height
+    }
 
     if let currentUser = currentUser {
       let phoneNumber = PhoneNumber(string: currentUser.phoneNumber)
@@ -69,24 +84,6 @@ class PhoneNumberInputViewController: UIViewController, UITextFieldDelegate {
         countryCodeTextField.text = "+" + countryCode
       }
       phoneNumberTextField.text = phoneNumber.nationalNumber
-    }
-  }
-
-  override func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
-    let margin: Float = 20.0
-
-    layout(countryCodeTextField) { (countryCodeTextField) in
-      countryCodeTextField.left == countryCodeTextField.superview!.left + margin
-      countryCodeTextField.width == 100
-      countryCodeTextField.top == countryCodeTextField.superview!.top + margin
-      countryCodeTextField.height == 50
-    }
-    layout(phoneNumberTextField, countryCodeTextField) { (phoneNumberTextField, countryCodeTextField) in
-      phoneNumberTextField.left == countryCodeTextField.right
-      phoneNumberTextField.right == phoneNumberTextField.superview!.right - margin
-      phoneNumberTextField.top == countryCodeTextField.top
-      phoneNumberTextField.height == countryCodeTextField.height
     }
   }
 

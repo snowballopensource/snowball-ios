@@ -42,10 +42,6 @@ class FindFriendsViewController: UIViewController, UITableViewDataSource, UITabl
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.addSubview(tableView)
-    tableView.dataSource = self
-    tableView.delegate = self
-    tableView.registerClass(FollowableUserTableViewCell.self, forCellReuseIdentifier: FollowableUserTableViewCell.identifier)
 
     title = NSLocalizedString("Find Friends")
 
@@ -55,9 +51,11 @@ class FindFriendsViewController: UIViewController, UITableViewDataSource, UITabl
       // TODO: user needs to allow us, so present button
       println("unauthorized")
     }
-  }
 
-  override func viewWillLayoutSubviews() {
+    view.addSubview(tableView)
+    tableView.dataSource = self
+    tableView.delegate = self
+    tableView.registerClass(FollowableUserTableViewCell.self, forCellReuseIdentifier: FollowableUserTableViewCell.identifier)
     tableView.frame = view.bounds
   }
 

@@ -32,15 +32,12 @@ class ManagedCollectionViewController: ManagedViewController, UICollectionViewDa
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    collectionView.frame = view.bounds
     collectionView.backgroundColor = UIColor.whiteColor()
     view.addSubview(collectionView)
     collectionView.dataSource = self
     collectionView.delegate = self
     registerCells()
-  }
-
-  override func viewWillLayoutSubviews() {
-    collectionView.frame = view.bounds
   }
 
   // MARK: UICollectionViewDataSource

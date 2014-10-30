@@ -26,7 +26,7 @@ class MainViewController: ManagedCollectionViewController {
     }
   }
 
-  private func switchToFriendsNavigationController() {
+  func switchToFriendsNavigationController() {
     switchToNavigationController(FriendsNavigationController())
   }
 
@@ -36,29 +36,27 @@ class MainViewController: ManagedCollectionViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
     let topMediaViewController = TopMediaViewController()
     addChildViewController(topMediaViewController)
     view.addSubview(topMediaViewController.view)
-
-    friendsButton.setTitle(NSLocalizedString("Friends"), forState: UIControlState.Normal)
-    friendsButton.setTitleColorWithAutomaticHighlightColor()
-    friendsButton.addTarget(self, action: "switchToFriendsNavigationController", forControlEvents: UIControlEvents.TouchUpInside)
-    view.addSubview(friendsButton)
-  }
-
-  override func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
     layout(topMediaView!) { (topMediaView) in
       topMediaView.top == topMediaView.superview!.top
       topMediaView.bottom == topMediaView.top + Float(UIScreen.mainScreen().bounds.width)
       topMediaView.left == topMediaView.superview!.left
       topMediaView.right == topMediaView.superview!.right
     }
+
+    friendsButton.setTitle(NSLocalizedString("Friends"), forState: UIControlState.Normal)
+    friendsButton.setTitleColorWithAutomaticHighlightColor()
+    friendsButton.addTarget(self, action: "switchToFriendsNavigationController", forControlEvents: UIControlEvents.TouchUpInside)
+    view.addSubview(friendsButton)
     layout(friendsButton) { (friendsButton) in
       friendsButton.top == friendsButton.superview!.top + 10
       friendsButton.left == friendsButton.superview!.left + 16
       friendsButton.height == 44
     }
+
     layout(collectionView, topMediaView!) { (collectionView, topMediaView) in
       collectionView.top == topMediaView.bottom
       collectionView.bottom == collectionView.superview!.bottom

@@ -49,6 +49,7 @@ class EditProfileViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
     view.backgroundColor = UIColor.whiteColor()
 
     title = NSLocalizedString("Edit Profile")
@@ -59,25 +60,11 @@ class EditProfileViewController: UIViewController {
     rightBarButton.setTitleColorWithAutomaticHighlightColor()
     navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton)
 
+    let margin: Float = 20.0
+
     nameTextField.text = currentUser.name
     nameTextField.borderStyle = UITextBorderStyle.RoundedRect
     view.addSubview(nameTextField)
-    usernameTextField.text = currentUser.username
-    usernameTextField.borderStyle = UITextBorderStyle.RoundedRect
-    view.addSubview(usernameTextField)
-    emailTextField.text = currentUser.email
-    emailTextField.borderStyle = UITextBorderStyle.RoundedRect
-    view.addSubview(emailTextField)
-    changePhoneNumberButton.setTitle(NSLocalizedString("Change Phone Number"), forState: UIControlState.Normal)
-    changePhoneNumberButton.setTitleColorWithAutomaticHighlightColor(color: UIColor.blackColor())
-    changePhoneNumberButton.addTarget(self, action: "changePhoneNumber", forControlEvents: UIControlEvents.TouchUpInside)
-    view.addSubview(changePhoneNumberButton)
-  }
-
-  override func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
-    let margin: Float = 20.0
-
     layout(nameTextField) { (nameTextField) in
       nameTextField.left == nameTextField.superview!.left + margin
       nameTextField.right == nameTextField.superview!.right - margin
@@ -85,6 +72,9 @@ class EditProfileViewController: UIViewController {
       nameTextField.height == 50
     }
 
+    usernameTextField.text = currentUser.username
+    usernameTextField.borderStyle = UITextBorderStyle.RoundedRect
+    view.addSubview(usernameTextField)
     layout(usernameTextField, nameTextField) { (usernameTextField, nameTextField) in
       usernameTextField.left == nameTextField.left
       usernameTextField.right == nameTextField.right
@@ -92,6 +82,9 @@ class EditProfileViewController: UIViewController {
       usernameTextField.height == nameTextField.height
     }
 
+    emailTextField.text = currentUser.email
+    emailTextField.borderStyle = UITextBorderStyle.RoundedRect
+    view.addSubview(emailTextField)
     layout(emailTextField, usernameTextField) { (emailTextField, usernameTextField) in
       emailTextField.left == usernameTextField.left
       emailTextField.right == usernameTextField.right
@@ -99,6 +92,10 @@ class EditProfileViewController: UIViewController {
       emailTextField.height == usernameTextField.height
     }
 
+    changePhoneNumberButton.setTitle(NSLocalizedString("Change Phone Number"), forState: UIControlState.Normal)
+    changePhoneNumberButton.setTitleColorWithAutomaticHighlightColor(color: UIColor.blackColor())
+    changePhoneNumberButton.addTarget(self, action: "changePhoneNumber", forControlEvents: UIControlEvents.TouchUpInside)
+    view.addSubview(changePhoneNumberButton)
     layout(changePhoneNumberButton, emailTextField) { (changePhoneNumberButton, emailTextField) in
       changePhoneNumberButton.left == emailTextField.left
       changePhoneNumberButton.right == emailTextField.right

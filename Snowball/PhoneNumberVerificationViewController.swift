@@ -50,15 +50,11 @@ class PhoneNumberVerificationViewController: UIViewController {
     rightBarButton.setTitleColorWithAutomaticHighlightColor()
     navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton)
 
+    let margin: Float = 20.0
+
     verificationCodeTextField.keyboardType = UIKeyboardType.NumberPad
     verificationCodeTextField.borderStyle = UITextBorderStyle.RoundedRect
     view.addSubview(verificationCodeTextField)
-  }
-
-  override func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
-    let margin: Float = 20.0
-
     layout(verificationCodeTextField) { (verificationCodeTextField) in
       verificationCodeTextField.left == verificationCodeTextField.superview!.left + margin
       verificationCodeTextField.right == verificationCodeTextField.superview!.right - margin
