@@ -26,6 +26,9 @@ class Clip: RemoteManagedObject, JSONPersistable {
       if let createdAt = JSON["created_at"] as JSONData? as? Double  {
         clip.createdAt = NSDate(timeIntervalSince1970: createdAt)
       }
+      if let user = JSON["user"] as? JSONObject {
+        clip.user = User.objectFromJSONObject(user)!
+      }
 
       return clip
     }
