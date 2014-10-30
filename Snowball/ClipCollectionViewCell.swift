@@ -57,7 +57,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let clip = object as Clip
     var clipDetailsString = ""
     if let user = clip.user {
-      clipDetailsString = "\(user.username), \(clip.createdAt)"
+      clipDetailsString = "\(user.username), \(clip.createdAt.shortTimeSinceString())"
     }
     clipDetailsLabel.text = clipDetailsString
     let clipVideoURL = NSURL(string: clip.videoURL)
