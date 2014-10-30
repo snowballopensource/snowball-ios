@@ -9,7 +9,7 @@
 import UIKit
 
 class ManagedCollectionViewController: ManagedViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-  let collectionView = UICollectionView()
+  let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
 
   func cellTypeInSection(section: Int) -> UICollectionViewCell.Type {
     requireSubclass()
@@ -32,6 +32,7 @@ class ManagedCollectionViewController: ManagedViewController, UICollectionViewDa
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    collectionView.backgroundColor = UIColor.whiteColor()
     view.addSubview(collectionView)
     collectionView.dataSource = self
     collectionView.delegate = self
@@ -58,5 +59,9 @@ class ManagedCollectionViewController: ManagedViewController, UICollectionViewDa
 
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
     return cellTypeInSection(indexPath.section).size()
+  }
+
+  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    return 0
   }
 }
