@@ -23,7 +23,11 @@ class PhoneNumberVerificationViewController: UIViewController {
       }
       API.request(APIRoute.PhoneVerification(userID: userID, phoneNumberVerificationCode: verificationCodeTextField.text)).responsePersistable(User.self) { (object, error) in
         if error != nil { error?.display(); return }
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        if let navigationController = self.navigationController as? AuthenticationNavigationController {
+          switchToNavigationController(MainNavigationController())
+        } else {
+          self.navigationController?.popToRootViewControllerAnimated(true)
+        }
       }
     } else {
       // TODO: don't go forward, figure out ux for that
