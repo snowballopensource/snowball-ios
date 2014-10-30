@@ -11,40 +11,31 @@ import Cartography
 import UIKit
 
 class ClipCollectionViewCell: UICollectionViewCell {
-  private let titleLabel = UILabel()
-  private let participantsTitleLabel = UILabel()
+  private let clipDetailsLabel = UILabel()
   private let recentClipPlayerView = PlayerView()
   private let playbackIndicatorView = UIView()
 
-//  func showPlaybackIndicatorView() {
-//    playbackIndicatorView.hidden = false
-//    pausePlayback()
-//  }
-//
-//  func hidePlaybackIndicatorView() {
-//    playbackIndicatorView.hidden = true
-//    startPlayback()
-//  }
-//
-//  func startPlayback() {
-//    recentClipPlayerView.player?.play()
-//  }
-//
-//  func pausePlayback() {
-//    recentClipPlayerView.player?.pause()
-//  }
+  func showPlaybackIndicatorView() {
+    playbackIndicatorView.hidden = false
+  }
+
+  func hidePlaybackIndicatorView() {
+    playbackIndicatorView.hidden = true
+  }
 
   // MARK: -
 
   // MARK: UICollectionViewCell
 
-  override init() {
-    super.init()
-    contentView.backgroundColor = UIColor.whiteColor()
-    contentView.addSubview(titleLabel)
-    contentView.addSubview(participantsTitleLabel)
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    contentView.backgroundColor = UIColor.purpleColor()
+
+    contentView.addSubview(clipDetailsLabel)
+
     recentClipPlayerView.backgroundColor = UIColor.darkGrayColor()
     contentView.addSubview(recentClipPlayerView)
+
     playbackIndicatorView.backgroundColor = UIColor.blueColor()
     contentView.addSubview(playbackIndicatorView)
   }
@@ -54,21 +45,21 @@ class ClipCollectionViewCell: UICollectionViewCell {
   }
 
   override class func size() -> CGSize {
-    return CGSizeMake(UIScreen.mainScreen().bounds.width/2, UIScreen.mainScreen().bounds.width/2)
+    // From the bottom of the camera/player to the bottom of the screen
+    // Camera/player is screen width x screen width, so...
+    let screenHeight = UIScreen.mainScreen().bounds.height
+    let screenWidth = UIScreen.mainScreen().bounds.width
+    let cellHeight = screenHeight - screenWidth
+    return CGSizeMake(screenWidth/3, cellHeight)
   }
 
   override func configureForObject(object: AnyObject) {
-//    let reel = object as Reel
-//    titleLabel.text = reel.title
-//    participantsTitleLabel.text = reel.participantsTitle
-//    hidePlaybackIndicatorView()
-//    if let recentClip = reel.recentClip() {
-//      let recentClipVideoURL = NSURL(string: recentClip.videoURL)
-//      let player = Player(videoURL: recentClipVideoURL!)
-//      player.loop = true
-//      player.muted = true
-//      self.recentClipPlayerView.player = player
-//    }
+    let clip = object as Clip
+    clipDetailsLabel.text = "test1234"
+    let clipVideoURL = NSURL(string: clip.videoURL)
+    self.recentClipPlayerView.player = Player(videoURL: clipVideoURL!)
+
+    hidePlaybackIndicatorView()
   }
 
   // MARK: UIView
@@ -78,23 +69,20 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     let margin: Float = 13.0
 
-    layout(titleLabel) { (titleLabel) in
-      titleLabel.top == titleLabel.superview!.top + margin
-      titleLabel.left == titleLabel.superview!.left + margin
-      titleLabel.right == titleLabel.superview!.right - margin
-    }
-    layout(participantsTitleLabel) { (participantsTitleLabel) in
-      participantsTitleLabel.bottom == participantsTitleLabel.superview!.bottom - margin
-      participantsTitleLabel.left == participantsTitleLabel.superview!.left + margin
-      participantsTitleLabel.right == participantsTitleLabel.superview!.right - margin
-    }
     layout(recentClipPlayerView) { (recentClipPlayerView) in
       let sideLength = Float(ClipCollectionViewCell.size().width)
       recentClipPlayerView.top == recentClipPlayerView.superview!.top
-      recentClipPlayerView.right == recentClipPlayerView.superview!.right
+      recentClipPlayerView.left == recentClipPlayerView.superview!.left
       recentClipPlayerView.height == sideLength
       recentClipPlayerView.width == sideLength
     }
+
+    layout(clipDetailsLabel, recentClipPlayerView) { (clipDetailsLabel, recentClipPlayerView) in
+      clipDetailsLabel.top == recentClipPlayerView.bottom + margin
+      clipDetailsLabel.left == recentClipPlayerView.left + margin
+      clipDetailsLabel.right == recentClipPlayerView.right - margin
+    }
+
     playbackIndicatorView.frame = recentClipPlayerView.frame
   }
 }
