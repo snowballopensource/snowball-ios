@@ -169,21 +169,23 @@ extension Alamofire.Request {
 
   private func mapResponseJSONToPersistable<T: JSONPersistable>(#persistable: T.Type, JSON: JSONData?, error: NSError?, completionHandler: CompletionHandler) {
     if let error = error {
-      completionHandler(nil, error)
-    } else {
       if let JSONData: JSONData = JSON {
         if let serverError = self.errorFromJSON(JSONData) {
           completionHandler(nil, serverError)
         } else {
-          if let JSONObject = JSONData as? JSONObject {
-            if let authToken = JSONObject["auth_token"] as? String {
-              APICredential.authToken = authToken
-            }
-          }
-          let object = self.importJSONToPersistable(persistable: persistable, JSON: JSONData)
-          completionHandler(object, nil)
+          completionHandler(nil, error)
+        }
+      } else {
+        completionHandler(nil, error)
+      }
+    } else if let JSONData: JSONData = JSON {
+      if let JSONObject = JSONData as? JSONObject {
+        if let authToken = JSONObject["auth_token"] as? String {
+          APICredential.authToken = authToken
         }
       }
+      let object = self.importJSONToPersistable(persistable: persistable, JSON: JSONData)
+      completionHandler(object, nil)
     }
   }
 
