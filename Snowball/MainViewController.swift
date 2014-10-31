@@ -72,7 +72,9 @@ class MainViewController: ManagedCollectionViewController {
     navigationController?.setNavigationBarHidden(true, animated: animated)
 
     let lastItem = collectionView.numberOfItemsInSection(0) - 1
-    collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: lastItem, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Right, animated: false)
+    if lastItem > 0 {
+      collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: lastItem, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Right, animated: false)
+    }
   }
 
   override func viewWillDisappear(animated: Bool) {
