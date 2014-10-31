@@ -24,19 +24,19 @@ class ClipCollectionViewCell: UICollectionViewCell {
   }
 
   func setThumbnailImageFromURL(URL: NSURL) {
-    // TODO: cache this somehow
     Async.userInitiated {
-      let asset = AVURLAsset(URL: URL, options: nil)
-      let imageGenerator = AVAssetImageGenerator(asset: asset)
-      imageGenerator.appliesPreferredTrackTransform = true
+      AVURLAsset.createAssetFromURL(URL) { (asset, error) in
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        imageGenerator.appliesPreferredTrackTransform = true
 
-      imageGenerator.generateCGImagesAsynchronouslyForTimes([NSValue(CMTime: kCMTimeZero)]) { (requestedTime, image, actualTime, result, error) in
-        if error != nil || result != AVAssetImageGeneratorResult.Succeeded {
-          println("error generating thumbnail")
-          return
-        }
-        Async.main {
-          self.clipThumbnailImageView.image = UIImage(CGImage: image)
+        imageGenerator.generateCGImagesAsynchronouslyForTimes([NSValue(CMTime: kCMTimeZero)]) { (requestedTime, image, actualTime, result, error) in
+          if error != nil || result != AVAssetImageGeneratorResult.Succeeded {
+            println("error generating thumbnail")
+            return
+          }
+          Async.main {
+            self.clipThumbnailImageView.image = UIImage(CGImage: image)
+          }
         }
       }
     }

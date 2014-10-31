@@ -10,22 +10,19 @@ import AVFoundation
 import Foundation
 import Haneke
 
-//extension AVURLAsset {
-//  typealias CompletionHandler = (AVURLAsset?, NSError?) -> ()
-//
-//  class func createAssetFromURL(URL: NSURL, completionHandler: CompletionHandler? = nil) {
-//    let cache = Haneke.sharedDataCache
-//    cache.fetch(URL: URL).onSuccess { (data) in
-//      // Hacky way of getting cache URL from Haneke
-//      let path = DiskCache(name: "shared-data", capacity: UINT64_MAX).pathForKey(URL.absoluteString!)
-//      let cacheURL = NSURL(fileURLWithPath: path)
-//      if let completion = completionHandler { completion(AVURLAsset(URL: cacheURL, options: nil), nil) }
-//      }.onFailure { (error) in
-//        if let completion = completionHandler { completion(nil, error) }
-//    }
-//  }
-//
-////  func setVideoFromURL(URL: NSURL, completionHandler: CompletionHandler? = nil) {
-////
-////  }
-//}
+extension AVURLAsset {
+  typealias CompletionHandler = (AVURLAsset?, NSError?) -> ()
+
+  class func createAssetFromURL(URL: NSURL, completionHandler: CompletionHandler? = nil) {
+    let cache = Haneke.sharedDataCache
+    cache.fetch(URL: URL).onSuccess { (_) in
+      // Hacky way of getting cache URL from Haneke
+      let basePath = DiskCache.basePath().stringByAppendingPathComponent("shared-data/original/")
+      let path = DiskCache(path: basePath, capacity: UINT64_MAX).pathForKey(URL.absoluteString!)
+      let cacheURL = NSURL(fileURLWithPath: path)
+      if let completion = completionHandler { completion(AVURLAsset(URL: cacheURL, options: nil), nil) }
+      }.onFailure { (error) in
+        if let completion = completionHandler { completion(nil, error) }
+    }
+  }
+}
