@@ -24,6 +24,7 @@ class MainViewController: ManagedCollectionViewController {
       return nil
     }
   }
+  private var playbackIndexOffset = 0
 
   func switchToFriendsNavigationController() {
     switchToNavigationController(FriendsNavigationController())
@@ -104,11 +105,24 @@ class MainViewController: ManagedCollectionViewController {
   // MARK: UICollectionViewDelegate
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    let clipCell = collectionView.cellForItemAtIndexPath(indexPath) as ClipCollectionViewCell
+    // Scroll clip to center when playback started, then add offset every time a clip is playing and scroll to that
+    collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: true)
+    playbackIndexOffset = 0
     let clips = objectsInSection(indexPath.section)
-    topMediaViewController?.playClips(clips) {
-      // TODO: do something when done playing
-    }
+    topMediaViewController?.playClips(clips,
+      clipCompletionHandler: { () -> () in
+        self.playbackIndexOffset++
+        let newItemIndex = indexPath.item + self.playbackIndexOffset
+        if newItemIndex < Int(clips.count) {
+          let newIndexPath = NSIndexPath(forItem: newItemIndex, inSection: indexPath.section)
+          Async.main {
+            collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: true)
+          }
+        }
+      }, playerCompletionHandler: { () -> () in
+        // TODO: do something here
+    })
+    // let clipCell = collectionView.cellForItemAtIndexPath(indexPath) as ClipCollectionViewCell
     // let clip = clips.objectAtIndex(UInt(indexPath.row)) as Clip
   }
 }

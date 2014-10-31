@@ -13,11 +13,14 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
   private let cameraView = CameraView()
   private let captureSessionController = CaptureSessionController()
   private let playerView = PlayerView()
-  typealias PlayerCompletionHandler = () -> ()
+  typealias ClipCompletionHandler = () -> ()
+  private var clipCompletionHandler: ClipCompletionHandler?
+  typealias PlayerCompletionHandler = ClipCompletionHandler
   private var playerCompletionHandler: PlayerCompletionHandler?
 
-  func playClips(clips: RLMResults, completionHandler: PlayerCompletionHandler? = nil) {
-    playerCompletionHandler = completionHandler
+  func playClips(clips: RLMResults, clipCompletionHandler: ClipCompletionHandler? = nil, playerCompletionHandler: PlayerCompletionHandler? = nil) {
+    self.clipCompletionHandler = clipCompletionHandler
+    self.playerCompletionHandler = playerCompletionHandler
     var videoURLs = [NSURL]()
     for object in clips {
       let clip = object as Clip
@@ -47,6 +50,7 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
   // MARK: PlayerDelegate
 
   func playerItemDidPlayToEndTime(playerItem: AVPlayerItem) {
+    if let completion = clipCompletionHandler { completion () }
     // TODO: bring this back?
 //    let URLAsset = playerItem.asset as AVURLAsset
 //    let URL = URLAsset.URL
