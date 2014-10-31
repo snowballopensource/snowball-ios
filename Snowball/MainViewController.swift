@@ -85,7 +85,7 @@ class MainViewController: ManagedCollectionViewController {
   // MARK: ManagedViewController
 
   override func objectsInSection(section: Int) -> RLMResults {
-    return Clip.allObjects()
+    return Clip.allObjects().sortedResultsUsingProperty("createdAt", ascending: true)
   }
 
   override func reloadData() {
@@ -105,11 +105,10 @@ class MainViewController: ManagedCollectionViewController {
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     let clipCell = collectionView.cellForItemAtIndexPath(indexPath) as ClipCollectionViewCell
-    let clip = objectsInSection(indexPath.section).objectAtIndex(UInt(indexPath.row)) as Clip
-    // TODO: add back
-//    clipCell.showPlaybackIndicatorView()
-//    topMediaViewController?.playReel(reel) {
-//      reelCell.hidePlaybackIndicatorView()
-//    }
+    let clips = objectsInSection(indexPath.section)
+    topMediaViewController?.playClips(clips) {
+      // TODO: do something when done playing
+    }
+    // let clip = clips.objectAtIndex(UInt(indexPath.row)) as Clip
   }
 }

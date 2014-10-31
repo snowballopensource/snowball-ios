@@ -51,19 +51,14 @@ class Player: AVQueuePlayer {
   }
 
   private func prebufferAndQueueVideoURL(videoURL: NSURL, completionHandler: (() -> ())? = nil) {
-    let asset = AVURLAsset(URL: videoURL, options: nil)
-    prepareToPlayAsset(asset)
-    if let completion = completionHandler { completion() }
-    // TODO: use better cache code
-//    AVURLAsset.createAssetFromURL(videoURL){ (asset, error) in
-//      if let asset = asset {
-//        self.prepareToPlayAsset(asset)
-//        if let completion = completionHandler { completion() }
-//      }
-//    }
+    AVURLAsset.createAssetFromURL(videoURL){ (asset, error) in
+      if let asset = asset {
+        self.prepareToPlayAsset(asset, completionHandler: completionHandler)
+      }
+    }
   }
 
-  private func prepareToPlayAsset(asset: AVURLAsset) {
+  private func prepareToPlayAsset(asset: AVURLAsset, completionHandler: (() -> ())? = nil) {
     let requestedKeys = ["tracks" as NSString, "playable" as NSString] as [AnyObject]
     asset.loadValuesAsynchronouslyForKeys(requestedKeys) {
       Async.main {
@@ -85,6 +80,7 @@ class Player: AVQueuePlayer {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidPlayToEndTime:", name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemPlaybackStalled:", name: AVPlayerItemPlaybackStalledNotification, object: playerItem)
         self.insertItem(playerItem, afterItem: self.items().last as AVPlayerItem?)
+        if let completion = completionHandler { completion() }
       }
       return
     }
@@ -98,6 +94,12 @@ class Player: AVQueuePlayer {
     super.init()
     actionAtItemEnd = AVPlayerActionAtItemEnd.None
     prebufferAndQueueVideoURL(videoURL)
+  }
+
+  init(videoURLs: [NSURL]) {
+    super.init()
+    actionAtItemEnd = AVPlayerActionAtItemEnd.Advance
+    prebufferAndQueueVideoURLs(videoURLs)
   }
 
   deinit {

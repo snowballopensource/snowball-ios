@@ -16,16 +16,19 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
   typealias PlayerCompletionHandler = () -> ()
   private var playerCompletionHandler: PlayerCompletionHandler?
 
-//  func playReel(reel: Reel, completionHandler: PlayerCompletionHandler? = nil) {
-//    playerCompletionHandler = completionHandler
-//    API.request(APIRoute.GetUnwatchedClipsInReel(reelID: reel.id, since: nil)).responsePersistable(Clip.self) { (error) in
-//      let player = Player(reel: reel)
-//      player.delegate = self
-//      self.playerView.player = player
-//      self.view.bringSubviewToFront(self.playerView)
-//      player.play()
-//    }
-//  }
+  func playClips(clips: RLMResults, completionHandler: PlayerCompletionHandler? = nil) {
+    playerCompletionHandler = completionHandler
+    var videoURLs = [NSURL]()
+    for object in clips {
+      let clip = object as Clip
+      videoURLs.append(NSURL(string: clip.videoURL)!)
+    }
+    let player = Player(videoURLs: videoURLs)
+    player.delegate = self
+    playerView.player = player
+    view.bringSubviewToFront(playerView)
+    player.play()
+  }
 
   // MARK: -
 
@@ -44,6 +47,7 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
   // MARK: PlayerDelegate
 
   func playerItemDidPlayToEndTime(playerItem: AVPlayerItem) {
+    // TODO: bring this back?
 //    let URLAsset = playerItem.asset as AVURLAsset
 //    let URL = URLAsset.URL
 //    Async.background {
