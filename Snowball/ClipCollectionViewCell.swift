@@ -12,7 +12,7 @@ import UIKit
 
 class ClipCollectionViewCell: UICollectionViewCell {
   private let clipDetailsLabel = UILabel()
-  private let recentClipPlayerView = PlayerView()
+  private let clipThumbnailImageView = UIImageView()
   private let playbackIndicatorView = UIView()
 
   func showPlaybackIndicatorView() {
@@ -21,6 +21,25 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   func hidePlaybackIndicatorView() {
     playbackIndicatorView.hidden = true
+  }
+
+  func setThumbnailImageFromURL(URL: NSURL) {
+    // TODO: cache this somehow
+    Async.userInitiated {
+      let asset = AVURLAsset(URL: URL, options: nil)
+      let imageGenerator = AVAssetImageGenerator(asset: asset)
+      imageGenerator.appliesPreferredTrackTransform = true
+
+      imageGenerator.generateCGImagesAsynchronouslyForTimes([NSValue(CMTime: kCMTimeZero)]) { (requestedTime, image, actualTime, result, error) in
+        if error != nil || result != AVAssetImageGeneratorResult.Succeeded {
+          println("error generating thumbnail")
+          return
+        }
+        Async.main {
+          self.clipThumbnailImageView.image = UIImage(CGImage: image)
+        }
+      }
+    }
   }
 
   // MARK: -
@@ -32,8 +51,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     contentView.addSubview(clipDetailsLabel)
 
-    recentClipPlayerView.backgroundColor = UIColor.darkGrayColor()
-    contentView.addSubview(recentClipPlayerView)
+    clipThumbnailImageView.backgroundColor = UIColor.darkGrayColor()
+    contentView.addSubview(clipThumbnailImageView)
 
     playbackIndicatorView.backgroundColor = UIColor.blueColor()
     contentView.addSubview(playbackIndicatorView)
@@ -59,8 +78,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipDetailsString = "\(user.username), \(clip.createdAt.shortTimeSinceString())"
     }
     clipDetailsLabel.text = clipDetailsString
+
+    clipThumbnailImageView.image = nil
     let clipVideoURL = NSURL(string: clip.videoURL)
-    self.recentClipPlayerView.player = Player(videoURL: clipVideoURL!)
+    setThumbnailImageFromURL(clipVideoURL!)
 
     hidePlaybackIndicatorView()
   }
@@ -72,20 +93,20 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     let margin: Float = 13.0
 
-    layout(recentClipPlayerView) { (recentClipPlayerView) in
+    layout(clipThumbnailImageView) { (clipThumbnailImageView) in
       let sideLength = Float(ClipCollectionViewCell.size().width)
-      recentClipPlayerView.top == recentClipPlayerView.superview!.top
-      recentClipPlayerView.left == recentClipPlayerView.superview!.left
-      recentClipPlayerView.height == sideLength
-      recentClipPlayerView.width == sideLength
+      clipThumbnailImageView.top == clipThumbnailImageView.superview!.top
+      clipThumbnailImageView.left == clipThumbnailImageView.superview!.left
+      clipThumbnailImageView.height == sideLength
+      clipThumbnailImageView.width == sideLength
     }
 
-    layout(clipDetailsLabel, recentClipPlayerView) { (clipDetailsLabel, recentClipPlayerView) in
-      clipDetailsLabel.top == recentClipPlayerView.bottom + margin
-      clipDetailsLabel.left == recentClipPlayerView.left + margin
-      clipDetailsLabel.right == recentClipPlayerView.right - margin
+    layout(clipDetailsLabel, clipThumbnailImageView) { (clipDetailsLabel, clipThumbnailImageView) in
+      clipDetailsLabel.top == clipThumbnailImageView.bottom + margin
+      clipDetailsLabel.left == clipThumbnailImageView.left + margin
+      clipDetailsLabel.right == clipThumbnailImageView.right - margin
     }
 
-    playbackIndicatorView.frame = recentClipPlayerView.frame
+    playbackIndicatorView.frame = clipThumbnailImageView.frame
   }
 }
