@@ -29,7 +29,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   override init(frame: CGRect) {
     super.init(frame: frame)
-    contentView.backgroundColor = UIColor.purpleColor()
 
     contentView.addSubview(clipDetailsLabel)
 

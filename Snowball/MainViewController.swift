@@ -11,7 +11,6 @@ import UIKit
 
 class MainViewController: ManagedCollectionViewController {
   private let friendsButton = UIButton()
-  private var scrolling = false
   private var topMediaView: UIView? {
     return topMediaViewController?.view
   }
@@ -94,19 +93,10 @@ class MainViewController: ManagedCollectionViewController {
     }
   }
 
-  // MARK: ManagedTableViewController
+  // MARK: ManagedCollectionViewController
 
   override func cellTypeInSection(section: Int) -> UICollectionViewCell.Type {
     return ClipCollectionViewCell.self
-  }
-
-  override func configureCell(cell: UICollectionViewCell, atIndexPath indexPath: NSIndexPath) {
-    super.configureCell(cell, atIndexPath: indexPath)
-    if !scrolling {
-      let clipCell = cell as ClipCollectionViewCell
-      // TODO: do this again
-      // clipCell.startPlayback()
-    }
   }
 
   // MARK: UICollectionViewDelegate
