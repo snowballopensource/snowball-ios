@@ -18,12 +18,16 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
   typealias PlayerCompletionHandler = ClipCompletionHandler
   private var playerCompletionHandler: PlayerCompletionHandler?
 
-  func playClips(clipCompletionHandler: ClipCompletionHandler? = nil, playerCompletionHandler: PlayerCompletionHandler? = nil) {
+  func playClips(#since: NSDate?, clipCompletionHandler: ClipCompletionHandler? = nil, playerCompletionHandler: PlayerCompletionHandler? = nil) {
     self.clipCompletionHandler = clipCompletionHandler
     self.playerCompletionHandler = playerCompletionHandler
     Async.userInitiated {
       var videoURLs = [NSURL]()
-      for object in Clip.playableClips {
+      var clips = Clip.playableClips
+      if let since = since {
+        let filteredClips = clips.objectsWhere("createdAt >= %@", since)
+      }
+      for object in clips {
         let clip = object as Clip
         videoURLs.append(NSURL(string: clip.videoURL)!)
       }
@@ -55,17 +59,6 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
 
   func playerItemDidPlayToEndTime(playerItem: AVPlayerItem) {
     if let completion = clipCompletionHandler { completion () }
-    // TODO: bring this back?
-//    let URLAsset = playerItem.asset as AVURLAsset
-//    let URL = URLAsset.URL
-//    Async.background {
-//      let clips = Clip.objectsWithPredicate(NSPredicate(format: "videoURL == %@", URL.absoluteString!))
-//      let clip = clips.firstObject() as Clip
-//      let reel = clip.reel
-//      RLMRealm.defaultRealm().beginWriteTransaction()
-//      reel?.lastWatchedClip = clip
-//      RLMRealm.defaultRealm().commitWriteTransaction()
-//    }
   }
 
   func playerDidFinishPlaying() {

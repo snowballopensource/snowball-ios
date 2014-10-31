@@ -17,7 +17,7 @@ class RemoteManagedObject: RLMObject {
   }
 
   class func findByID(id: String) -> Self? {
-    return self(forPrimaryKey: id as NSString)
+    return self(forPrimaryKey: id)
   }
 
   class func findOrInitializeByID(id: String) -> Self {

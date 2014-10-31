@@ -18,6 +18,27 @@ class Clip: RemoteManagedObject, JSONPersistable {
     return Clip.allObjects().sortedResultsUsingProperty("createdAt", ascending: true)
   }
 
+  class var kLastWatchedClipIDKey: String {
+    return "LastWatchedClipID"
+  }
+  class var lastWatchedClip: Clip? {
+    get {
+      let lastWatchedClipID = NSUserDefaults.standardUserDefaults().objectForKey(kLastWatchedClipIDKey) as String?
+      if let clipID = lastWatchedClipID {
+        return Clip.findByID(clipID)
+      }
+      return nil
+    }
+    set {
+      if let clip = newValue {
+        NSUserDefaults.standardUserDefaults().setObject(clip.id, forKey: kLastWatchedClipIDKey)
+      } else {
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(kLastWatchedClipIDKey)
+      }
+      NSUserDefaults.standardUserDefaults().synchronize()
+    }
+  }
+
   // MARK: JSONPersistable
 
   class func objectFromJSONObject(JSON: JSONObject) -> Self? {

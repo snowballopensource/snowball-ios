@@ -72,9 +72,10 @@ class MainViewController: ManagedCollectionViewController {
     super.viewWillAppear(animated)
     navigationController?.setNavigationBarHidden(true, animated: animated)
 
-    let lastItem = collectionView.numberOfItemsInSection(0) - 1
-    if lastItem > 0 {
-      collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: lastItem, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Right, animated: false)
+    if let clip = Clip.lastWatchedClip {
+      let itemIndex = objectsInSection(0).indexOfObject(clip)
+      let clipIndexPath = NSIndexPath(forItem: Int(itemIndex), inSection: 0)
+      collectionView.scrollToItemAtIndexPath(clipIndexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
     }
   }
 
@@ -109,8 +110,15 @@ class MainViewController: ManagedCollectionViewController {
     collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: true)
     playbackIndexOffset = 0
     let clips = objectsInSection(indexPath.section)
-    topMediaViewController?.playClips(
+    let clip = clips.objectAtIndex(UInt(indexPath.item)) as Clip
+    topMediaViewController?.playClips(since: clip.createdAt,
       clipCompletionHandler: { () -> () in
+        // Mark last clip as most recently watched
+        let itemIndex = indexPath.item + self.playbackIndexOffset
+        let clip = clips.objectAtIndex(UInt(itemIndex)) as Clip
+        Clip.lastWatchedClip = clip
+
+        // Scroll next clip to center
         self.playbackIndexOffset++
         let newItemIndex = indexPath.item + self.playbackIndexOffset
         if newItemIndex < Int(clips.count) {
@@ -123,7 +131,7 @@ class MainViewController: ManagedCollectionViewController {
         // TODO: do something here
     })
     // let clipCell = collectionView.cellForItemAtIndexPath(indexPath) as ClipCollectionViewCell
-    // let clip = clips.objectAtIndex(UInt(indexPath.row)) as Clip
+
   }
 
   // MARK: UICollectionViewDelegateFlowLayout
