@@ -37,6 +37,9 @@ class MainViewController: ManagedCollectionViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    let flowLayout = collectionView.collectionViewLayout as UICollectionViewFlowLayout
+    flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
+
     let topMediaViewController = TopMediaViewController()
     addChildViewController(topMediaViewController)
     view.addSubview(topMediaViewController.view)
@@ -68,6 +71,9 @@ class MainViewController: ManagedCollectionViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     navigationController?.setNavigationBarHidden(true, animated: animated)
+
+    let lastItem = collectionView.numberOfItemsInSection(0) - 1
+    collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: lastItem, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Right, animated: false)
   }
 
   override func viewWillDisappear(animated: Bool) {
