@@ -125,4 +125,13 @@ class MainViewController: ManagedCollectionViewController {
     // let clipCell = collectionView.cellForItemAtIndexPath(indexPath) as ClipCollectionViewCell
     // let clip = clips.objectAtIndex(UInt(indexPath.row)) as Clip
   }
+
+  // MARK: UICollectionViewDelegateFlowLayout
+
+  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    if section == 0 {
+      return UIEdgeInsetsMake(0, ClipCollectionViewCell.size().width, 0, 0)
+    }
+    return UIEdgeInsetsZero
+  }
 }
