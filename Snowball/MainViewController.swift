@@ -86,7 +86,7 @@ class MainViewController: ManagedCollectionViewController {
   // MARK: ManagedViewController
 
   override func objectsInSection(section: Int) -> RLMResults {
-    return Clip.allObjects().sortedResultsUsingProperty("createdAt", ascending: true)
+    return Clip.playableClips
   }
 
   override func reloadData() {
@@ -109,7 +109,7 @@ class MainViewController: ManagedCollectionViewController {
     collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: true)
     playbackIndexOffset = 0
     let clips = objectsInSection(indexPath.section)
-    topMediaViewController?.playClips(clips,
+    topMediaViewController?.playClips(
       clipCompletionHandler: { () -> () in
         self.playbackIndexOffset++
         let newItemIndex = indexPath.item + self.playbackIndexOffset

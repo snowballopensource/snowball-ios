@@ -18,19 +18,23 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
   typealias PlayerCompletionHandler = ClipCompletionHandler
   private var playerCompletionHandler: PlayerCompletionHandler?
 
-  func playClips(clips: RLMResults, clipCompletionHandler: ClipCompletionHandler? = nil, playerCompletionHandler: PlayerCompletionHandler? = nil) {
+  func playClips(clipCompletionHandler: ClipCompletionHandler? = nil, playerCompletionHandler: PlayerCompletionHandler? = nil) {
     self.clipCompletionHandler = clipCompletionHandler
     self.playerCompletionHandler = playerCompletionHandler
-    var videoURLs = [NSURL]()
-    for object in clips {
-      let clip = object as Clip
-      videoURLs.append(NSURL(string: clip.videoURL)!)
+    Async.userInitiated {
+      var videoURLs = [NSURL]()
+      for object in Clip.playableClips {
+        let clip = object as Clip
+        videoURLs.append(NSURL(string: clip.videoURL)!)
+      }
+      Async.main {
+        let player = Player(videoURLs: videoURLs)
+        player.delegate = self
+        self.playerView.player = player
+        self.view.bringSubviewToFront(self.playerView)
+        player.play()
+      }
     }
-    let player = Player(videoURLs: videoURLs)
-    player.delegate = self
-    playerView.player = player
-    view.bringSubviewToFront(playerView)
-    player.play()
   }
 
   // MARK: -

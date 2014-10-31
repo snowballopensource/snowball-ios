@@ -14,6 +14,10 @@ class Clip: RemoteManagedObject, JSONPersistable {
 
   dynamic var user: User?
 
+  class var playableClips: RLMResults {
+    return Clip.allObjects().sortedResultsUsingProperty("createdAt", ascending: true)
+  }
+
   // MARK: JSONPersistable
 
   class func objectFromJSONObject(JSON: JSONObject) -> Self? {
