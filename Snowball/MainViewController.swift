@@ -138,7 +138,7 @@ class MainViewController: ManagedCollectionViewController {
 
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
     if section == 0 {
-      return UIEdgeInsetsMake(0, ClipCollectionViewCell.size().width, 0, 0)
+      return UIEdgeInsetsMake(0, ClipCollectionViewCell.size().width, 0, ClipCollectionViewCell.size().width)
     }
     return UIEdgeInsetsZero
   }
