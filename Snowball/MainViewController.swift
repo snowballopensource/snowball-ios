@@ -32,6 +32,11 @@ class MainViewController: ManagedCollectionViewController {
   }
 
   private func beginPlaybackAtClipsIndex(index: Int) {
+    // Scroll to selected clip cell
+    let lastClipCellIndexPath = NSIndexPath(forItem: index, inSection: clipsSectionIndex)
+    collectionView.scrollToItemAtIndexPath(lastClipCellIndexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: true)
+
+    // Start playing clips
     playbackIndexOffset = 0
     let clips = objectsInSection(clipsSectionIndex)
     let clip = clips.objectAtIndex(UInt(index)) as Clip
@@ -133,7 +138,6 @@ class MainViewController: ManagedCollectionViewController {
   // MARK: UICollectionViewDelegate
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: true)
     beginPlaybackAtClipsIndex(indexPath.item)
   }
 

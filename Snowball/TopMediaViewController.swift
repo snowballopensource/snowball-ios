@@ -31,10 +31,10 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
         let clip = object as Clip
         videoURLs.append(NSURL(string: clip.videoURL)!)
       }
+      let player = Player(videoURLs: videoURLs)
+      player.delegate = self
+      self.playerView.player = player
       Async.main {
-        let player = Player(videoURLs: videoURLs)
-        player.delegate = self
-        self.playerView.player = player
         self.view.bringSubviewToFront(self.playerView)
         player.play()
       }
