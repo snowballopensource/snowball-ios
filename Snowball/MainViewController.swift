@@ -26,16 +26,13 @@ class MainViewController: ManagedCollectionViewController {
   }
   private var playbackIndexOffset = 0
   private var clipsSectionIndex: Int { get { return 0 } } // Readonly
+  private var scrollingBeforePlayback = false
 
   private func switchToFriendsNavigationController() {
     switchToNavigationController(FriendsNavigationController())
   }
 
   private func beginPlaybackAtClipsIndex(index: Int) {
-    // Scroll to selected clip cell
-    let lastClipCellIndexPath = NSIndexPath(forItem: index, inSection: clipsSectionIndex)
-    collectionView.scrollToItemAtIndexPath(lastClipCellIndexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: true)
-
     // Start playing clips
     playbackIndexOffset = 0
     let clips = objectsInSection(clipsSectionIndex)
@@ -138,7 +135,10 @@ class MainViewController: ManagedCollectionViewController {
   // MARK: UICollectionViewDelegate
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    beginPlaybackAtClipsIndex(indexPath.item)
+    // Scroll to selected clip cell
+    // When done scrolling, the scroll view delegate method will start playing the clip.
+    scrollingBeforePlayback = true
+    collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: true)
   }
 
   // MARK: UICollectionViewDelegateFlowLayout
@@ -148,5 +148,15 @@ class MainViewController: ManagedCollectionViewController {
       return UIEdgeInsetsMake(0, ClipCollectionViewCell.size().width, 0, ClipCollectionViewCell.size().width)
     }
     return UIEdgeInsetsZero
+  }
+
+  // MARK: UIScrollViewDelegate
+
+  func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+    if scrollingBeforePlayback == true {
+      scrollingBeforePlayback = false
+      let clipCellIndexPath = self.collectionView.indexPathsForSelectedItems()?.first as NSIndexPath
+      beginPlaybackAtClipsIndex(clipCellIndexPath.item)
+    }
   }
 }
