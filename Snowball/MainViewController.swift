@@ -91,7 +91,7 @@ class MainViewController: ManagedCollectionViewController {
   }
 
   override func reloadData() {
-    API.request(APIRoute.GetClipFeed).responsePersistable(Clip.self) { (object, error) in
+    API.request(APIRoute.GetClipStream).responsePersistable(Clip.self) { (object, error) in
       if error != nil { error?.display(); return }
       self.collectionView.reloadData()
     }

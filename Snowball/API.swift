@@ -55,7 +55,7 @@ enum APIRoute: URLRequestConvertible {
   case FindUsersByPhoneNumbers(phoneNumbers: [String])
   case FindUsersByUsername(username: String)
   // Clip
-  case GetClipFeed
+  case GetClipStream
   case CreateClip(videoData: NSData)
   case DeleteClip(clipID: String)
   case FlagClip(clipID: String)
@@ -71,7 +71,7 @@ enum APIRoute: URLRequestConvertible {
       case .UnfollowUser: return .DELETE
       case .FindUsersByPhoneNumbers: return .GET
       case .FindUsersByUsername: return .GET
-      case .GetClipFeed: return .GET
+      case .GetClipStream: return .GET
       case .CreateClip: return .POST
       case .DeleteClip: return .DELETE
       case .FlagClip: return .POST
@@ -89,7 +89,7 @@ enum APIRoute: URLRequestConvertible {
       case .UnfollowUser(let userID): return "users/\(userID)/follow"
       case .FindUsersByPhoneNumbers: return "users"
       case .FindUsersByUsername: return "users"
-      case .GetClipFeed: return "clips/feed"
+      case .GetClipStream: return "clips/stream"
       case .CreateClip: return "clips"
       case .DeleteClip(let clipID): return "clips/\(clipID)"
       case .FlagClip(let clipID): return "clips/\(clipID)"
