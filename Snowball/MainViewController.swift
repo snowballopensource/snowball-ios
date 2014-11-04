@@ -25,9 +25,36 @@ class MainViewController: ManagedCollectionViewController {
     }
   }
   private var playbackIndexOffset = 0
+  private var clipsSectionIndex: Int { get { return 0 } } // Readonly
 
-  func switchToFriendsNavigationController() {
+  private func switchToFriendsNavigationController() {
     switchToNavigationController(FriendsNavigationController())
+  }
+
+  private func beginPlaybackAtClipsIndex(index: Int) {
+    playbackIndexOffset = 0
+    let clips = objectsInSection(clipsSectionIndex)
+    let clip = clips.objectAtIndex(UInt(index)) as Clip
+    topMediaViewController?.playClips(since: clip.createdAt,
+      clipCompletionHandler: { () -> () in
+        // Mark last clip as most recently watched
+        let lastClipIndex = index + self.playbackIndexOffset
+        let lastWatchedClip = clips.objectAtIndex(UInt(lastClipIndex)) as Clip
+        Clip.lastWatchedClip = lastWatchedClip
+
+        // Scroll next clip to center
+        self.playbackIndexOffset++
+        let nextClipIndex = index + self.playbackIndexOffset
+        if nextClipIndex < Int(clips.count) {
+          let nextClipCellIndexPath = NSIndexPath(forItem: nextClipIndex, inSection: self.clipsSectionIndex)
+          Async.main {
+            self.collectionView.scrollToItemAtIndexPath(nextClipCellIndexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: true)
+          }
+        }
+      }, playerCompletionHandler: { () -> () in
+        // TODO: do something here
+        // All clips are done playing, whether by user or by no more clips. :)
+    })
   }
 
   // MARK: -
@@ -73,8 +100,8 @@ class MainViewController: ManagedCollectionViewController {
     navigationController?.setNavigationBarHidden(true, animated: animated)
 
     if let clip = Clip.lastWatchedClip {
-      let itemIndex = objectsInSection(0).indexOfObject(clip)
-      let clipIndexPath = NSIndexPath(forItem: Int(itemIndex), inSection: 0)
+      let clipIndex = objectsInSection(clipsSectionIndex).indexOfObject(clip)
+      let clipIndexPath = NSIndexPath(forItem: Int(clipIndex), inSection: clipsSectionIndex)
       collectionView.scrollToItemAtIndexPath(clipIndexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: false)
     }
   }
@@ -106,38 +133,14 @@ class MainViewController: ManagedCollectionViewController {
   // MARK: UICollectionViewDelegate
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    // Scroll clip to center when playback started, then add offset every time a clip is playing and scroll to that
     collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: true)
-    playbackIndexOffset = 0
-    let clips = objectsInSection(indexPath.section)
-    let clip = clips.objectAtIndex(UInt(indexPath.item)) as Clip
-    topMediaViewController?.playClips(since: clip.createdAt,
-      clipCompletionHandler: { () -> () in
-        // Mark last clip as most recently watched
-        let itemIndex = indexPath.item + self.playbackIndexOffset
-        let clip = clips.objectAtIndex(UInt(itemIndex)) as Clip
-        Clip.lastWatchedClip = clip
-
-        // Scroll next clip to center
-        self.playbackIndexOffset++
-        let newItemIndex = indexPath.item + self.playbackIndexOffset
-        if newItemIndex < Int(clips.count) {
-          let newIndexPath = NSIndexPath(forItem: newItemIndex, inSection: indexPath.section)
-          Async.main {
-            collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: true)
-          }
-        }
-      }, playerCompletionHandler: { () -> () in
-        // TODO: do something here
-    })
-    // let clipCell = collectionView.cellForItemAtIndexPath(indexPath) as ClipCollectionViewCell
-
+    beginPlaybackAtClipsIndex(indexPath.item)
   }
 
   // MARK: UICollectionViewDelegateFlowLayout
 
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-    if section == 0 {
+    if section == clipsSectionIndex {
       return UIEdgeInsetsMake(0, ClipCollectionViewCell.size().width, 0, ClipCollectionViewCell.size().width)
     }
     return UIEdgeInsetsZero

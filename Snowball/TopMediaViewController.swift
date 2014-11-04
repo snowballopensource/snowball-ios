@@ -25,7 +25,7 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
       var videoURLs = [NSURL]()
       var clips = Clip.playableClips
       if let since = since {
-        let filteredClips = clips.objectsWhere("createdAt >= %@", since)
+        clips = clips.objectsWhere("createdAt >= %@", since)
       }
       for object in clips {
         let clip = object as Clip
