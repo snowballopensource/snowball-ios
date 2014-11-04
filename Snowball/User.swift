@@ -30,7 +30,9 @@ class User: RemoteManagedObject, JSONPersistable {
         let words = string.componentsSeparatedByString(" ")
         var initials = [String]()
         for word in words {
-          initials.append(word.substringToIndex(advance(word.startIndex, 1)))
+          if countElements(word) > 0 {
+            initials.append(word.substringToIndex(advance(word.startIndex, 1)))
+          }
         }
         return "".join(initials)
       }
