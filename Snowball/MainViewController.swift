@@ -28,7 +28,7 @@ class MainViewController: ManagedCollectionViewController {
   private var clipsSectionIndex: Int { get { return 0 } } // Readonly
   private var scrollingBeforePlayback = false
 
-  private func switchToFriendsNavigationController() {
+  func switchToFriendsNavigationController() {
     switchToNavigationController(FriendsNavigationController())
   }
 
