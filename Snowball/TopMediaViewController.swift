@@ -49,7 +49,7 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
     super.viewDidLoad()
     cameraView.session = captureSessionController.captureSession
     captureSessionController.startSession()
-    playerView.backgroundColor = UIColor.blueColor()
+    playerView.backgroundColor = UIColor.blackColor()
     view.addFullViewSubview(playerView)
     cameraView.backgroundColor = UIColor.lightGrayColor()
     view.addFullViewSubview(cameraView)
