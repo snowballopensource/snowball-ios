@@ -43,7 +43,7 @@ class User: RemoteManagedObject, JSONPersistable {
     }
   }
 
-  private class var currentUserID: String? {
+  class var currentUserID: String? {
     get {
       let kCurrentUserIDKey = "CurrentUserID"
       return NSUserDefaults.standardUserDefaults().objectForKey(kCurrentUserIDKey) as String?

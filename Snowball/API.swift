@@ -180,6 +180,9 @@ extension Alamofire.Request {
       }
     } else if let JSONData: JSONData = JSON {
       if let JSONObject = JSONData as? JSONObject {
+        if let userID = JSONObject["id"] as? String {
+          User.currentUserID = userID
+        }
         if let authToken = JSONObject["auth_token"] as? String {
           APICredential.authToken = authToken
         }
