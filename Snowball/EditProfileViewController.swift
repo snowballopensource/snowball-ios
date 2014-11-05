@@ -62,6 +62,7 @@ class EditProfileViewController: UIViewController {
 
     let margin: Float = 20.0
 
+    nameTextField.placeholder = NSLocalizedString("Name")
     nameTextField.text = currentUser.name
     nameTextField.borderStyle = UITextBorderStyle.RoundedRect
     view.addSubview(nameTextField)
@@ -72,6 +73,7 @@ class EditProfileViewController: UIViewController {
       nameTextField.height == 50
     }
 
+    usernameTextField.placeholder = NSLocalizedString("Username")
     usernameTextField.text = currentUser.username
     usernameTextField.borderStyle = UITextBorderStyle.RoundedRect
     view.addSubview(usernameTextField)
@@ -82,6 +84,7 @@ class EditProfileViewController: UIViewController {
       usernameTextField.height == nameTextField.height
     }
 
+    emailTextField.placeholder = NSLocalizedString("Email")
     emailTextField.text = currentUser.email
     emailTextField.borderStyle = UITextBorderStyle.RoundedRect
     view.addSubview(emailTextField)
