@@ -19,7 +19,7 @@ struct API {
   // tokens.
 
   static func request(URLRequest: URLRequestConvertible) -> Alamofire.Request {
-    return Alamofire.request(URLRequest).validate()
+    return Alamofire.request(URLRequest).validate(statusCode: 200..<300)
   }
 }
 
