@@ -83,7 +83,7 @@ class FindFriendsViewController: UIViewController, UITableViewDataSource, UITabl
     return FollowableUserTableViewCell.height()
   }
 
-  // MARK: FollowableUserTableViewCell
+  // MARK: FollowableUserTableViewCellDelegate
 
   func followButtonTappedForCell(cell: FollowableUserTableViewCell) {
     if let indexPath = tableView.indexPathForCell(cell) {

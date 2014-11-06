@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FriendsViewController: ManagedTableViewController, CurrentUserTableViewCellDelegate {
+class FriendsViewController: ManagedTableViewController, CurrentUserTableViewCellDelegate, FollowableUserTableViewCellDelegate {
 
   func switchToMainNavigationController() {
     switchToNavigationController(MainNavigationController())
@@ -73,7 +73,7 @@ class FriendsViewController: ManagedTableViewController, CurrentUserTableViewCel
   override func cellTypeInSection(section: Int) -> UITableViewCell.Type {
     switch section {
       case 0: return CurrentUserTableViewCell.self
-      default: return UserTableViewCell.self
+      default: return FollowableUserTableViewCell.self
     }
   }
 
@@ -81,6 +81,8 @@ class FriendsViewController: ManagedTableViewController, CurrentUserTableViewCel
     super.configureCell(cell, atIndexPath: indexPath)
     if let currentUserCell = cell as? CurrentUserTableViewCell {
       currentUserCell.delegate = self
+    } else if let followableUserCell = cell as? FollowableUserTableViewCell {
+      followableUserCell.delegate = self
     }
   }
 
@@ -98,9 +100,33 @@ class FriendsViewController: ManagedTableViewController, CurrentUserTableViewCel
     }
   }
 
-  // MARK: UserTableViewCellDelegate
+  // MARK: CurrentUserTableViewCellDelegate
 
   func settingsButtonTapped() {
     navigationController?.pushViewController(EditProfileViewController(), animated: true)
+  }
+
+  // MARK: FollowableUserTableViewCellDelegate
+
+  func followButtonTappedForCell(cell: FollowableUserTableViewCell) {
+    if let indexPath = tableView.indexPathForCell(cell) {
+      let user = objectsInSection(indexPath.section).objectAtIndex(UInt(indexPath.row)) as User
+      if user.youFollow == true {
+        RLMRealm.defaultRealm().beginWriteTransaction()
+        user.youFollow = false
+        RLMRealm.defaultRealm().commitWriteTransaction()
+        tableView.reloadData()
+        API.request(APIRoute.UnfollowUser(userID: user.id)).responseNoContent { (error) in
+          if error != nil {
+            error?.display()
+            RLMRealm.defaultRealm().beginWriteTransaction()
+            user.youFollow = true
+            RLMRealm.defaultRealm().commitWriteTransaction()
+            self.tableView.reloadData()
+            return
+          }
+        }
+      }
+    }
   }
 }
