@@ -159,6 +159,12 @@ protocol JSONPersistable: class {
 extension Alamofire.Request {
   typealias CompletionHandler = (AnyObject?, NSError?) -> ()
 
+  func responseNoContent(completionHandler: (NSError?) -> ()) -> Self {
+    return response { (_, _, _, error) in
+      completionHandler(error)
+    }
+  }
+
   func responsePersistable<T: JSONPersistable>(persistable: T.Type, completionHandler: CompletionHandler) -> Self {
     return responseJSON { (request, response, JSON, error) in
       self.mapResponseJSONToPersistable(persistable: persistable, JSON: JSON, error: error) { (object, error) in

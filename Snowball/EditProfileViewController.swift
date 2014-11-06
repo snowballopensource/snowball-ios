@@ -30,7 +30,7 @@ class EditProfileViewController: UIViewController {
       newEmail = emailTextField.text
     }
     if newName != nil || newUsername != nil || newEmail != nil {
-      API.request(APIRoute.UpdateCurrentUser(name: newName, username: newUsername, email: newEmail, phoneNumber: nil)).responsePersistable(User.self) { (object, error) in
+      API.request(APIRoute.UpdateCurrentUser(name: newName, username: newUsername, email: newEmail, phoneNumber: nil)).responseNoContent { (error) in
         if error != nil { error?.display(); return }
         self.navigationController?.popViewControllerAnimated(true)
       }
