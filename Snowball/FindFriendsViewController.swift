@@ -90,7 +90,7 @@ class FindFriendsViewController: UIViewController, UITableViewDataSource, UITabl
       let user = users[indexPath.row]
       users.removeAtIndex(indexPath.row)
       tableView.reloadData()
-      API.request(APIRoute.FollowUser(userID: user.id)).responsePersistable(User.self) { (object, error) in
+      API.request(APIRoute.FollowUser(userID: user.id)).responseNoContent { (error) in
         if error != nil {
           error?.display()
           self.users.insert(user, atIndex: indexPath.row)
