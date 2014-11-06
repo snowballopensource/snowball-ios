@@ -49,6 +49,8 @@ class FindFriendsViewController: UIViewController, UITableViewDataSource, UITabl
       getUsersFromAddressBook()
     } else {
       // TODO: user needs to allow us, so present button
+      // on completion, getUsersFromAddressBook() which will ask for permissions and then go to server.
+      getUsersFromAddressBook()
       println("unauthorized")
     }
 
