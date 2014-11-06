@@ -112,7 +112,7 @@ enum APIRoute: URLRequestConvertible {
     switch self {
       case .PhoneAuthentication(let phoneNumber): return ["phone_number": phoneNumber]
       case .PhoneVerification(_, let phoneNumberVerificationCode): return ["phone_number_verification_code": phoneNumberVerificationCode]
-      case .UpdateCurrentUser(let username, let email, let name, let phoneNumber):
+      case .UpdateCurrentUser(let name, let username, let email, let phoneNumber):
         var userParameters = [String: String]()
         if let newUsername = username {
           userParameters["username"] = newUsername
@@ -160,7 +160,7 @@ extension Alamofire.Request {
   typealias CompletionHandler = (AnyObject?, NSError?) -> ()
 
   func responsePersistable<T: JSONPersistable>(persistable: T.Type, completionHandler: CompletionHandler) -> Self {
-    return responseJSON { (_, _, JSON, error) in
+    return responseJSON { (request, response, JSON, error) in
       self.mapResponseJSONToPersistable(persistable: persistable, JSON: JSON, error: error) { (object, error) in
         completionHandler(object, error)
       }
