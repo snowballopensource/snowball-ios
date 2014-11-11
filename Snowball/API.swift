@@ -44,6 +44,8 @@ enum APIRoute: URLRequestConvertible {
   static let baseURLString = "http://snowball-staging.herokuapp.com/api/v1/"
 
   // Authentication
+  case SignUp(username: String, password: String)
+  case SignIn(username: String, password: String)
   case PhoneAuthentication(phoneNumber: String)
   case PhoneVerification(userID: String, phoneNumberVerificationCode: String)
   // User
@@ -62,6 +64,8 @@ enum APIRoute: URLRequestConvertible {
 
   var method: Alamofire.Method {
     switch self {
+      case .SignUp: return .POST
+      case .SignIn: return .POST
       case .PhoneAuthentication: return .POST
       case .PhoneVerification: return .POST
       case .GetCurrentUser: return .GET
@@ -80,6 +84,8 @@ enum APIRoute: URLRequestConvertible {
 
   var path: String {
     switch self {
+      case .SignUp: return "users/sign-up"
+      case .SignIn: return "users/sign-in"
       case .PhoneAuthentication: return "users/phone-auth"
       case .PhoneVerification(let userID, _): return "users/\(userID)/phone-verification"
       case .GetCurrentUser: return "users/me"
@@ -98,6 +104,8 @@ enum APIRoute: URLRequestConvertible {
 
   var parameterEncoding: ParameterEncoding? {
     switch self {
+      case .SignUp: return ParameterEncoding.JSON
+      case .SignIn: return ParameterEncoding.JSON
       case .PhoneAuthentication: return ParameterEncoding.JSON
       case .PhoneVerification: return ParameterEncoding.JSON
       case .UpdateCurrentUser: return ParameterEncoding.JSON
@@ -110,6 +118,8 @@ enum APIRoute: URLRequestConvertible {
 
   var parameters: [String: AnyObject]? {
     switch self {
+      case .SignUp(let username, let password): return ["username": username, "password": password]
+      case .SignIn(let username, let password): return ["username": username, "password": password]
       case .PhoneAuthentication(let phoneNumber): return ["phone_number": phoneNumber]
       case .PhoneVerification(_, let phoneNumberVerificationCode): return ["phone_number_verification_code": phoneNumberVerificationCode]
       case .UpdateCurrentUser(let name, let username, let email, let phoneNumber):
