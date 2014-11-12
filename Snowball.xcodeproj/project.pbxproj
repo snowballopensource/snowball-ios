@@ -26,6 +26,8 @@
 		BA3B49BD19D8FD180084BB4F /* FriendsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3B49BC19D8FD180084BB4F /* FriendsNavigationController.swift */; };
 		BA3B49C619D8FD660084BB4F /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3B49C519D8FD660084BB4F /* FriendsViewController.swift */; };
 		BA438E6819EC819E007EBDD7 /* Haneke.framework in Git Submodule Frameworks */ = {isa = PBXBuildFile; fileRef = BA438E6119EC8194007EBDD7 /* Haneke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BA45A7711A13D0F3007ECC1A /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45A7701A13D0F3007ECC1A /* SignInViewController.swift */; };
+		BA45A7731A13D763007ECC1A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45A7721A13D763007ECC1A /* SignUpViewController.swift */; };
 		BA4A378519EA01CE006D5F59 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4A378419EA01CE006D5F59 /* PhoneNumber.swift */; };
 		BA4E5B3419CAAAAB00DC5ECF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E5B3319CAAAAB00DC5ECF /* User.swift */; };
 		BA593D0419E20A3700F29A29 /* RemoteManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA593D0319E20A3700F29A29 /* RemoteManagedObject.swift */; };
@@ -195,6 +197,8 @@
 		BA3B49BC19D8FD180084BB4F /* FriendsNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsNavigationController.swift; sourceTree = "<group>"; };
 		BA3B49C519D8FD660084BB4F /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		BA438E5919EC8194007EBDD7 /* Haneke.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Haneke.xcodeproj; path = Vendor/HanekeSwift/Haneke.xcodeproj; sourceTree = SOURCE_ROOT; };
+		BA45A7701A13D0F3007ECC1A /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		BA45A7721A13D763007ECC1A /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		BA4A378419EA01CE006D5F59 /* PhoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
 		BA4E5B3319CAAAAB00DC5ECF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BA4E5B3719CAAC0000DC5ECF /* Snowball-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snowball-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -452,6 +456,8 @@
 			children = (
 				BADF9CF719D79AAA00A50568 /* AuthenticationNavigationController.swift */,
 				BADF9CEF19D78EB400A50568 /* AuthenticationViewController.swift */,
+				BA45A7701A13D0F3007ECC1A /* SignInViewController.swift */,
+				BA45A7721A13D763007ECC1A /* SignUpViewController.swift */,
 			);
 			name = Authentication;
 			sourceTree = "<group>";
@@ -782,12 +788,14 @@
 				BAAD513319D4DB0300087176 /* Player.swift in Sources */,
 				BA05F24F1A017A6100EF061F /* UICollectionViewCell+.swift in Sources */,
 				BADF9CF019D78EB400A50568 /* AuthenticationViewController.swift in Sources */,
+				BA45A7711A13D0F3007ECC1A /* SignInViewController.swift in Sources */,
 				BA6579EE19E337240046A409 /* AppearanceBridger.m in Sources */,
 				BA593D0419E20A3700F29A29 /* RemoteManagedObject.swift in Sources */,
 				BA27B7DA1A02A4490093AE6E /* RLMSupport.swift in Sources */,
 				BA88814419E25A24006CF338 /* UserImageView.swift in Sources */,
 				BA2AB6741A02DB60006DC2AA /* NSDate+TimeSinceString.swift in Sources */,
 				BA1B2E2419D215760095042E /* UIImageView+.swift in Sources */,
+				BA45A7731A13D763007ECC1A /* SignUpViewController.swift in Sources */,
 				BADF9CF819D79AAA00A50568 /* AuthenticationNavigationController.swift in Sources */,
 				BA88814C19E28109006CF338 /* UIColor+.swift in Sources */,
 				BA3B49BD19D8FD180084BB4F /* FriendsNavigationController.swift in Sources */,
