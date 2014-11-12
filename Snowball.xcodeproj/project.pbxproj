@@ -333,7 +333,6 @@
 				BA3B49C519D8FD660084BB4F /* FriendsViewController.swift */,
 				BA6579F419E35D540046A409 /* EditProfileViewController.swift */,
 				BA622F6119E4C03500A8AFD5 /* FindFriendsViewController.swift */,
-				BAD01FB219E85589003A6735 /* Phone Number */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -407,6 +406,7 @@
 				BADF9CF919D79BBD00A50568 /* Authentication */,
 				BADF9CFC19D79C0800A50568 /* Main */,
 				BA3B49C419D8FD310084BB4F /* Friends */,
+				BAD01FB219E85589003A6735 /* Phone Number */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
