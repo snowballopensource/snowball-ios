@@ -13,8 +13,10 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
   let captureSession = AVCaptureSession()
   private var currentVideoDeviceInput: AVCaptureDeviceInput?
   private var movieFileOutput: AVCaptureMovieFileOutput?
+  private var sessionQueue: dispatch_queue_t
 
   override init() {
+    sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL)
     super.init()
     captureSession.sessionPreset = AVCaptureSessionPresetHigh
     checkDeviceAuthorizationStatus { (granted) in
@@ -90,19 +92,19 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
   }
 
   func startSession() {
-    Async.userInitiated {
+    Async.customQueue(sessionQueue) {
       self.captureSession.startRunning()
     }
   }
 
   func stopSession() {
-    Async.userInitiated {
+    Async.customQueue(sessionQueue) {
       self.captureSession.stopRunning()
     }
   }
 
   func toggleRecording() {
-    Async.userInitiated {
+    Async.customQueue(sessionQueue) {
       if let recording = self.movieFileOutput?.recording {
         if recording {
           self.movieFileOutput?.stopRecording()
