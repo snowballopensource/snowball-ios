@@ -9,8 +9,13 @@
 import AVFoundation
 import Foundation
 
+protocol CaptureSessionControllerDelegate: class {
+  func movieRecordedToFileAtURL(fileURL: NSURL, error: NSError?)
+}
+
 class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
   let captureSession = AVCaptureSession()
+  var delegate: CaptureSessionControllerDelegate?
   private var currentVideoDeviceInput: AVCaptureDeviceInput?
   private var movieFileOutput: AVCaptureMovieFileOutput?
   private var sessionQueue: dispatch_queue_t
@@ -32,6 +37,7 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
         self.captureSession.addInput(audioDeviceInput)
       }
       let movieFileOutput = AVCaptureMovieFileOutput()
+      self.movieFileOutput = movieFileOutput
       if self.captureSession.canAddOutput(movieFileOutput) {
         self.captureSession.addOutput(movieFileOutput)
         if let connection = movieFileOutput.connectionWithMediaType(AVMediaTypeVideo) {
@@ -103,12 +109,10 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
     }
   }
 
-  func toggleRecording() {
+  func beginRecording() {
     Async.customQueue(sessionQueue) {
       if let recording = self.movieFileOutput?.recording {
-        if recording {
-          self.movieFileOutput?.stopRecording()
-        } else {
+        if !recording {
           let outputFileName = "movie".stringByAppendingPathExtension("mov")!
           let outputFilePath = NSTemporaryDirectory().stringByAppendingPathComponent(outputFileName)
           self.movieFileOutput?.startRecordingToOutputFileURL(NSURL(fileURLWithPath: outputFilePath), recordingDelegate: self)
@@ -117,11 +121,21 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
     }
   }
 
+  func endRecording() {
+    Async.customQueue(sessionQueue) {
+      if let recording = self.movieFileOutput?.recording {
+        if recording {
+          self.movieFileOutput?.stopRecording()
+        }
+      }
+    }
+  }
+
   // MARK: AVCaptureFileOutputRecordingDelegate
 
   func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!) {
-    if error != nil { error?.display(); return }
-    // TODO: let owner know
-    println("recording has ended!")
+    if let delegate = delegate {
+      delegate.movieRecordedToFileAtURL(outputFileURL, error: error)
+    }
   }
 }

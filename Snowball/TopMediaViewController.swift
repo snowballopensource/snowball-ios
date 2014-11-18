@@ -9,8 +9,9 @@
 import AVFoundation
 import UIKit
 
-class TopMediaViewController: UIViewController, PlayerDelegate {
+class TopMediaViewController: UIViewController, PlayerDelegate, CaptureSessionControllerDelegate {
   private let cameraView = CameraView()
+  private let recordingGestureRecognizer = UILongPressGestureRecognizer()
   private let captureSessionController = CaptureSessionController()
   private let playerView = PlayerView()
   typealias ClipCompletionHandler = () -> ()
@@ -41,6 +42,14 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
     }
   }
 
+  func toggleRecording() {
+    switch (recordingGestureRecognizer.state) {
+      case UIGestureRecognizerState.Began: captureSessionController.beginRecording()
+      case UIGestureRecognizerState.Ended: captureSessionController.endRecording()
+      default: return
+    }
+  }
+
   // MARK: -
 
   // MARK: UIViewController
@@ -48,10 +57,14 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     cameraView.session = captureSessionController.captureSession
+    captureSessionController.delegate = self
     captureSessionController.startSession()
     playerView.backgroundColor = UIColor.blackColor()
     view.addFullViewSubview(playerView)
     cameraView.backgroundColor = UIColor.lightGrayColor()
+    recordingGestureRecognizer.addTarget(self, action: "toggleRecording")
+    recordingGestureRecognizer.minimumPressDuration = 0.2
+    cameraView.addGestureRecognizer(recordingGestureRecognizer)
     view.addFullViewSubview(cameraView)
   }
 
@@ -64,5 +77,12 @@ class TopMediaViewController: UIViewController, PlayerDelegate {
   func playerDidFinishPlaying() {
     view.bringSubviewToFront(cameraView)
     if let completion = playerCompletionHandler { completion() }
+  }
+
+  // MARK: CaptureSessionControllerDelegate
+
+  func movieRecordedToFileAtURL(fileURL: NSURL, error: NSError?) {
+    if error != nil { error?.display(); return }
+    println("recording ended at file url: \(fileURL)")
   }
 }
