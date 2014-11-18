@@ -14,6 +14,13 @@ class SignInViewController: UIViewController {
   let passwordTextField = UITextField()
   let signInButton = UIButton()
 
+  func signInButtonTapped() {
+    API.request(APIRoute.SignIn(username: usernameTextField.text, password: passwordTextField.text)).responsePersistable(User.self) { (object, error) in
+      if error != nil { error?.display(); return }
+      switchToNavigationController(MainNavigationController())
+    }
+  }
+
   // MARK: -
 
   // MARK: UIViewController
