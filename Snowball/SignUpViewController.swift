@@ -15,6 +15,13 @@ class SignUpViewController: UIViewController {
   let passwordTextField = UITextField()
   let signUpButton = UIButton()
 
+  func signUpButtonTapped() {
+    API.request(APIRoute.SignUp(username: usernameTextField.text, email: emailTextField.text, password: passwordTextField.text)).responsePersistable(User.self) { (object, error) in
+      if error != nil { error?.display(); return }
+      switchToNavigationController(MainNavigationController())
+    }
+  }
+
   // MARK: -
 
   // MARK: UIViewController

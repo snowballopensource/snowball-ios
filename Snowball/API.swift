@@ -44,7 +44,7 @@ enum APIRoute: URLRequestConvertible {
   static let baseURLString = "http://snowball-staging.herokuapp.com/api/v1/"
 
   // Authentication
-  case SignUp(username: String, password: String)
+  case SignUp(username: String, email: String, password: String)
   case SignIn(username: String, password: String)
   case PhoneAuthentication(phoneNumber: String)
   case PhoneVerification(userID: String, phoneNumberVerificationCode: String)
@@ -118,7 +118,7 @@ enum APIRoute: URLRequestConvertible {
 
   var parameters: [String: AnyObject]? {
     switch self {
-      case .SignUp(let username, let password): return ["username": username, "password": password]
+      case .SignUp(let username, let email, let password): return ["username": username, "email": email, "password": password]
       case .SignIn(let username, let password): return ["username": username, "password": password]
       case .PhoneAuthentication(let phoneNumber): return ["phone_number": phoneNumber]
       case .PhoneVerification(_, let phoneNumberVerificationCode): return ["phone_number_verification_code": phoneNumberVerificationCode]
