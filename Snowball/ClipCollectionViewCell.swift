@@ -25,7 +25,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   func setThumbnailImageFromURL(URL: NSURL) {
     Async.userInitiated {
-      AVURLAsset.createAssetFromURL(URL) { (asset, error) in
+      AVURLAsset.createAssetFromRemoteURL(URL) { (asset, error) in
         let imageGenerator = AVAssetImageGenerator(asset: asset)
         imageGenerator.appliesPreferredTrackTransform = true
 

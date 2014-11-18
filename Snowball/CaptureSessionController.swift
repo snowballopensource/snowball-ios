@@ -134,6 +134,7 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
   // MARK: AVCaptureFileOutputRecordingDelegate
 
   func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!) {
+    // TODO: process video, turn into square, flip
     if let delegate = delegate {
       delegate.movieRecordedToFileAtURL(outputFileURL, error: error)
     }

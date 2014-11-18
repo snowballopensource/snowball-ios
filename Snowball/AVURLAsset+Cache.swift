@@ -13,7 +13,7 @@ import Haneke
 extension AVURLAsset {
   typealias CompletionHandler = (AVURLAsset?, NSError?) -> ()
 
-  class func createAssetFromURL(URL: NSURL, completionHandler: CompletionHandler? = nil) {
+  class func createAssetFromRemoteURL(URL: NSURL, completionHandler: CompletionHandler? = nil) {
     let cache = Haneke.sharedDataCache
     cache.fetch(URL: URL).onSuccess { (_) in
       // Hacky way of getting cache URL from Haneke

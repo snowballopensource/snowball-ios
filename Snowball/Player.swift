@@ -40,18 +40,18 @@ class Player: AVQueuePlayer {
     }
   }
 
-  private func prebufferAndQueueVideoURLs(videoURLs: [NSURL]) {
+  private func prebufferAndQueueRemoteVideoURLs(videoURLs: [NSURL]) {
     if videoURLs.count > 0 {
-      prebufferAndQueueVideoURL(videoURLs.first!) {
+      prebufferAndQueueRemoteVideoURL(videoURLs.first!) {
         var videoURLs = videoURLs
         videoURLs.removeAtIndex(0)
-        self.prebufferAndQueueVideoURLs(videoURLs)
+        self.prebufferAndQueueRemoteVideoURLs(videoURLs)
       }
     }
   }
 
-  private func prebufferAndQueueVideoURL(videoURL: NSURL, completionHandler: (() -> ())? = nil) {
-    AVURLAsset.createAssetFromURL(videoURL){ (asset, error) in
+  private func prebufferAndQueueRemoteVideoURL(videoURL: NSURL, completionHandler: (() -> ())? = nil) {
+    AVURLAsset.createAssetFromRemoteURL(videoURL){ (asset, error) in
       if let asset = asset {
         self.prepareToPlayAsset(asset, completionHandler: completionHandler)
       }
@@ -90,16 +90,23 @@ class Player: AVQueuePlayer {
 
   // MARK: AVQueuePlayer
 
-  init(videoURL: NSURL) {
+  init(localVideoURL: NSURL) {
     super.init()
     actionAtItemEnd = AVPlayerActionAtItemEnd.None
-    prebufferAndQueueVideoURL(videoURL)
+    let asset = AVURLAsset(URL: localVideoURL, options: nil)
+    prepareToPlayAsset(asset)
   }
 
-  init(videoURLs: [NSURL]) {
+  init(remoteVideoURL: NSURL) {
+    super.init()
+    actionAtItemEnd = AVPlayerActionAtItemEnd.None
+    prebufferAndQueueRemoteVideoURL(remoteVideoURL)
+  }
+
+  init(remoteVideoURLs: [NSURL]) {
     super.init()
     actionAtItemEnd = AVPlayerActionAtItemEnd.Advance
-    prebufferAndQueueVideoURLs(videoURLs)
+    prebufferAndQueueRemoteVideoURLs(remoteVideoURLs)
   }
 
   deinit {

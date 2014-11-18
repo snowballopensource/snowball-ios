@@ -32,7 +32,7 @@ class TopMediaViewController: UIViewController, PlayerDelegate, CaptureSessionCo
         let clip = object as Clip
         videoURLs.append(NSURL(string: clip.videoURL)!)
       }
-      let player = Player(videoURLs: videoURLs)
+      let player = Player(remoteVideoURLs: videoURLs)
       player.delegate = self
       self.playerView.player = player
       Async.main {
@@ -40,6 +40,18 @@ class TopMediaViewController: UIViewController, PlayerDelegate, CaptureSessionCo
         player.play()
       }
     }
+  }
+
+  func showRecordingPreview(URL: NSURL) {
+    let player = Player(localVideoURL: URL)
+    playerView.player = player
+    view.bringSubviewToFront(playerView)
+    player.play()
+  }
+
+  func endRecordingPreview() {
+    view.bringSubviewToFront(cameraView)
+    playerView.player?.pause()
   }
 
   func toggleRecording() {
@@ -83,6 +95,6 @@ class TopMediaViewController: UIViewController, PlayerDelegate, CaptureSessionCo
 
   func movieRecordedToFileAtURL(fileURL: NSURL, error: NSError?) {
     if error != nil { error?.display(); return }
-    println("recording ended at file url: \(fileURL)")
+    showRecordingPreview(fileURL)
   }
 }
