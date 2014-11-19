@@ -134,9 +134,46 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
   // MARK: AVCaptureFileOutputRecordingDelegate
 
   func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!) {
-    // TODO: process video, turn into square, flip
-    if let delegate = delegate {
-      delegate.movieRecordedToFileAtURL(outputFileURL, error: error)
+    // Crop video
+    // http://stackoverflow.com/a/5231713/801858
+    let asset = AVAsset.assetWithURL(outputFileURL) as AVAsset
+    let videoTrack = asset.tracksWithMediaType(AVMediaTypeVideo).first as AVAssetTrack
+
+    // When thinking about the following code, think of capturing video in landscape!
+    // e.g. videoTrack.naturalSize.height is the width if you are holding the phone portrait
+    let videoComposition = AVMutableVideoComposition()
+    videoComposition.renderSize = CGSizeMake(videoTrack.naturalSize.height, videoTrack.naturalSize.height)
+    let FPS: Int32 = 24
+    videoComposition.frameDuration = CMTimeMake(1, FPS) // 24 FPS
+
+    let instruction = AVMutableVideoCompositionInstruction()
+    instruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(10, FPS)) // 10 seconds
+
+    let transformer = AVMutableVideoCompositionLayerInstruction(assetTrack: videoTrack)
+
+    // Crop to middle of the view
+    // http://www.one-dreamer.com/cropping-video-square-like-vine-instagram-xcode/
+    let initialTransform = CGAffineTransformMakeTranslation(videoTrack.naturalSize.height, -(videoTrack.naturalSize.width - videoTrack.naturalSize.height) / 2 )
+    let transform = CGAffineTransformRotate(initialTransform, CGFloat(M_PI_2))
+
+    transformer.setTransform(transform, atTime: kCMTimeZero)
+    instruction.layerInstructions = [transformer]
+    videoComposition.instructions = [instruction]
+
+    // Remove existing file (to be replaced with transformed file during export)
+    NSFileManager.defaultManager().removeItemAtURL(outputFileURL, error: nil)
+
+    // Export
+    let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetHighestQuality)
+    exporter.videoComposition = videoComposition
+    exporter.outputURL = outputFileURL
+    exporter.outputFileType = AVFileTypeMPEG4
+    exporter.exportAsynchronouslyWithCompletionHandler { () -> Void in
+      if let delegate = self.delegate {
+        Async.main {
+          delegate.movieRecordedToFileAtURL(outputFileURL, error: error)
+        }
+      }
     }
   }
 }
