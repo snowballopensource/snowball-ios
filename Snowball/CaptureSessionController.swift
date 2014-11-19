@@ -23,7 +23,7 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
   override init() {
     sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL)
     super.init()
-    captureSession.sessionPreset = AVCaptureSessionPresetHigh
+    captureSession.sessionPreset = AVCaptureSessionPreset640x480
     checkDeviceAuthorizationStatus { (granted) in
       let videoDevice = self.captureDevice(mediaType: AVMediaTypeVideo, position: AVCaptureDevicePosition.Front)
       let videoDeviceInput = AVCaptureDeviceInput(device: videoDevice, error: nil)
