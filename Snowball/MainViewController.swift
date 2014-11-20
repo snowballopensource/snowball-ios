@@ -9,7 +9,7 @@
 import Cartography
 import UIKit
 
-class MainViewController: ManagedCollectionViewController {
+class MainViewController: ManagedCollectionViewController, TopMediaViewControllerDelegate {
   private let friendsButton = UIButton()
   private var topMediaView: UIView? {
     return topMediaViewController?.view
@@ -70,6 +70,7 @@ class MainViewController: ManagedCollectionViewController {
     flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
 
     let topMediaViewController = TopMediaViewController()
+    topMediaViewController.delegate = self
     addChildViewController(topMediaViewController)
     view.addSubview(topMediaViewController.view)
     layout(topMediaView!) { (topMediaView) in
@@ -158,5 +159,15 @@ class MainViewController: ManagedCollectionViewController {
       let clipCellIndexPath = self.collectionView.indexPathsForSelectedItems()?.first as NSIndexPath
       beginPlaybackAtClipsIndex(clipCellIndexPath.item)
     }
+  }
+
+  // MARK: TopMediaViewControllerDelegate
+
+  func capturedClipPreviewWillStart() {
+    println("capturedClipPreviewWillStart")
+  }
+
+  func capturedClipPreviewDidEnd() {
+    println("capturedClipPreviewDidEnd")
   }
 }

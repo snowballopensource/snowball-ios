@@ -9,7 +9,13 @@
 import AVFoundation
 import UIKit
 
+protocol TopMediaViewControllerDelegate: class {
+  func capturedClipPreviewWillStart()
+  func capturedClipPreviewDidEnd()
+}
+
 class TopMediaViewController: UIViewController, PlayerDelegate, CaptureSessionControllerDelegate {
+  var delegate: TopMediaViewControllerDelegate?
   private let cameraView = CameraView()
   private let recordingGestureRecognizer = UILongPressGestureRecognizer()
   private var captureSessionController: CaptureSessionController? // This cannot be initialized twice, as UIViewController subclasses sometimes do (see: http://stackoverflow.com/q/26084583/801858 ), so we initialize it in viewDidLoad
@@ -43,6 +49,7 @@ class TopMediaViewController: UIViewController, PlayerDelegate, CaptureSessionCo
   }
 
   func showRecordingPreview(URL: NSURL) {
+    delegate?.capturedClipPreviewWillStart()
     let player = Player(localVideoURL: URL)
     playerView.player = player
     view.bringSubviewToFront(playerView)
@@ -52,6 +59,7 @@ class TopMediaViewController: UIViewController, PlayerDelegate, CaptureSessionCo
   func endRecordingPreview() {
     view.bringSubviewToFront(cameraView)
     playerView.player?.pause()
+    delegate?.capturedClipPreviewDidEnd()
   }
 
   func toggleRecording() {
