@@ -12,7 +12,7 @@ import UIKit
 class TopMediaViewController: UIViewController, PlayerDelegate, CaptureSessionControllerDelegate {
   private let cameraView = CameraView()
   private let recordingGestureRecognizer = UILongPressGestureRecognizer()
-  private let captureSessionController = CaptureSessionController()
+  private var captureSessionController: CaptureSessionController? // This cannot be initialized twice, as UIViewController subclasses sometimes do (see: http://stackoverflow.com/q/26084583/801858 ), so we initialize it in viewDidLoad
   private let playerView = PlayerView()
   typealias ClipCompletionHandler = () -> ()
   private var clipCompletionHandler: ClipCompletionHandler?
@@ -56,8 +56,8 @@ class TopMediaViewController: UIViewController, PlayerDelegate, CaptureSessionCo
 
   func toggleRecording() {
     switch (recordingGestureRecognizer.state) {
-      case UIGestureRecognizerState.Began: captureSessionController.beginRecording()
-      case UIGestureRecognizerState.Ended: captureSessionController.endRecording()
+      case UIGestureRecognizerState.Began: captureSessionController?.beginRecording()
+      case UIGestureRecognizerState.Ended: captureSessionController?.endRecording()
       default: return
     }
   }
@@ -68,9 +68,10 @@ class TopMediaViewController: UIViewController, PlayerDelegate, CaptureSessionCo
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    cameraView.session = captureSessionController.captureSession
-    captureSessionController.delegate = self
-    captureSessionController.startSession()
+    captureSessionController = CaptureSessionController()
+    cameraView.session = captureSessionController!.captureSession
+    captureSessionController!.delegate = self
+    captureSessionController!.startSession()
     playerView.backgroundColor = UIColor.blackColor()
     view.addFullViewSubview(playerView)
     cameraView.backgroundColor = UIColor.lightGrayColor()
