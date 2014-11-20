@@ -11,6 +11,7 @@ import UIKit
 
 class MainViewController: ManagedCollectionViewController, TopMediaViewControllerDelegate {
   private let friendsButton = UIButton()
+  private let previewCancelButton = UIButton()
   private var topMediaView: UIView? {
     return topMediaViewController?.view
   }
@@ -59,6 +60,46 @@ class MainViewController: ManagedCollectionViewController, TopMediaViewControlle
     })
   }
 
+  func cancelPreview() {
+    topMediaViewController?.endRecordingPreview()
+    hidePreviewCancelButton()
+    showTopMenu()
+  }
+
+  private func showPreviewCancelButton() {
+    UIView.animateWithDuration(0.2) {
+      var origin = self.previewCancelButton.frame.origin
+      origin = CGPointMake(origin.x, 10)
+      self.previewCancelButton.frame.origin = origin
+    }
+  }
+
+  private func hidePreviewCancelButton() {
+    UIView.animateWithDuration(0.2) {
+      var size = self.previewCancelButton.frame.size
+      var origin = self.previewCancelButton.frame.origin
+      origin = CGPointMake(origin.x, -size.height)
+      self.previewCancelButton.frame.origin = origin
+    }
+  }
+
+  private func showTopMenu() {
+    UIView.animateWithDuration(0.2) {
+      var origin = self.friendsButton.frame.origin
+      origin = CGPointMake(origin.x, 10)
+      self.friendsButton.frame.origin = origin
+    }
+  }
+
+  private func hideTopMenu() {
+    UIView.animateWithDuration(0.2) {
+      var size = self.friendsButton.frame.size
+      var origin = self.friendsButton.frame.origin
+      origin = CGPointMake(origin.x, -size.height)
+      self.friendsButton.frame.origin = origin
+    }
+  }
+
   // MARK: -
 
   // MARK: UIViewController
@@ -88,6 +129,16 @@ class MainViewController: ManagedCollectionViewController, TopMediaViewControlle
       friendsButton.top == friendsButton.superview!.top + 10
       friendsButton.left == friendsButton.superview!.left + 16
       friendsButton.height == 44
+    }
+
+    previewCancelButton.setTitle(NSLocalizedString("Cancel"), forState: UIControlState.Normal)
+    previewCancelButton.setTitleColorWithAutomaticHighlightColor()
+    previewCancelButton.addTarget(self, action: "cancelPreview", forControlEvents: UIControlEvents.TouchUpInside)
+    view.addSubview(previewCancelButton)
+    layout(previewCancelButton) { (previewCancelButton) in
+      previewCancelButton.bottom == previewCancelButton.superview!.top
+      previewCancelButton.centerX == previewCancelButton.superview!.centerX
+      previewCancelButton.height == 44
     }
 
     layout(collectionView, topMediaView!) { (collectionView, topMediaView) in
@@ -164,10 +215,12 @@ class MainViewController: ManagedCollectionViewController, TopMediaViewControlle
   // MARK: TopMediaViewControllerDelegate
 
   func capturedClipPreviewWillStart() {
-    println("capturedClipPreviewWillStart")
+    hideTopMenu()
+    showPreviewCancelButton()
   }
 
   func capturedClipPreviewDidEnd() {
-    println("capturedClipPreviewDidEnd")
+    hidePreviewCancelButton()
+    showTopMenu()
   }
 }
