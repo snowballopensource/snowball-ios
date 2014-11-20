@@ -23,8 +23,9 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
   override init() {
     sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL)
     super.init()
-    captureSession.sessionPreset = AVCaptureSessionPreset640x480
-    checkDeviceAuthorizationStatus { (granted) in
+    checkDeviceAuthorizationStatus()
+    Async.customQueue(sessionQueue) {
+      self.captureSession.sessionPreset = AVCaptureSessionPreset640x480
       let videoDevice = self.captureDevice(mediaType: AVMediaTypeVideo, position: AVCaptureDevicePosition.Front)
       let videoDeviceInput = AVCaptureDeviceInput(device: videoDevice, error: nil)
       if self.captureSession.canAddInput(videoDeviceInput) {
@@ -64,10 +65,8 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
     return nil
   }
 
-  func checkDeviceAuthorizationStatus(completionHandler: (Bool) -> ()) {
-    AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: { (granted) in
-      completionHandler(granted)
-    })
+  func checkDeviceAuthorizationStatus() {
+    AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: nil)
   }
 
   func changeCamera() {
