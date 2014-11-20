@@ -27,6 +27,12 @@ class TopMediaViewController: UIViewController, PlayerDelegate, CaptureSessionCo
 
   func playClips(#since: NSDate?, clipCompletionHandler: ClipCompletionHandler? = nil, playerCompletionHandler: PlayerCompletionHandler? = nil) {
     self.clipCompletionHandler = clipCompletionHandler
+    self.playerCompletionHandler = {
+      self.view.bringSubviewToFront(self.cameraView)
+      if let playerCompletionHandler = playerCompletionHandler {
+        playerCompletionHandler()
+      }
+    }
     self.playerCompletionHandler = playerCompletionHandler
     Async.userInitiated {
       var videoURLs = [NSURL]()
@@ -51,8 +57,12 @@ class TopMediaViewController: UIViewController, PlayerDelegate, CaptureSessionCo
   func showRecordingPreview(URL: NSURL) {
     delegate?.capturedClipPreviewWillStart()
     let player = Player(localVideoURL: URL)
+    player.delegate = self
     playerView.player = player
     view.bringSubviewToFront(playerView)
+    clipCompletionHandler = {
+      player.seekToTime(kCMTimeZero)
+    }
     player.play()
   }
 
@@ -96,7 +106,6 @@ class TopMediaViewController: UIViewController, PlayerDelegate, CaptureSessionCo
   }
 
   func playerDidFinishPlaying() {
-    view.bringSubviewToFront(cameraView)
     if let completion = playerCompletionHandler { completion() }
   }
 
