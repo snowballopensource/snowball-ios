@@ -12,6 +12,7 @@ import UIKit
 class MainViewController: ManagedCollectionViewController, TopMediaViewControllerDelegate {
   private let friendsButton = UIButton()
   private let previewCancelButton = UIButton()
+  private let addClipButton = UIButton()
   private var topMediaView: UIView? {
     return topMediaViewController?.view
   }
@@ -63,7 +64,13 @@ class MainViewController: ManagedCollectionViewController, TopMediaViewControlle
   func cancelPreview() {
     topMediaViewController?.endRecordingPreview()
     hidePreviewCancelButton()
+    hideAddClipButton()
     showTopMenu()
+  }
+
+  func addClip() {
+    // TODO: submit clip
+    cancelPreview()
   }
 
   private func showPreviewCancelButton() {
@@ -100,6 +107,23 @@ class MainViewController: ManagedCollectionViewController, TopMediaViewControlle
     }
   }
 
+  private func showAddClipButton() {
+    UIView.animateWithDuration(0.2) {
+      var origin = self.addClipButton.frame.origin
+      origin = CGPointMake(origin.x, 10)
+      self.addClipButton.frame.origin = origin
+    }
+  }
+
+  private func hideAddClipButton() {
+    UIView.animateWithDuration(0.2) {
+      var size = self.addClipButton.frame.size
+      var origin = self.addClipButton.frame.origin
+      origin = CGPointMake(origin.x, -size.height)
+      self.addClipButton.frame.origin = origin
+    }
+  }
+
   // MARK: -
 
   // MARK: UIViewController
@@ -129,6 +153,16 @@ class MainViewController: ManagedCollectionViewController, TopMediaViewControlle
       friendsButton.top == friendsButton.superview!.top + 10
       friendsButton.left == friendsButton.superview!.left + 16
       friendsButton.height == 44
+    }
+
+    addClipButton.setTitle(NSLocalizedString("Add Clip"), forState: UIControlState.Normal)
+    addClipButton.setTitleColorWithAutomaticHighlightColor()
+    addClipButton.addTarget(self, action: "addClip", forControlEvents: UIControlEvents.TouchUpInside)
+    view.addSubview(addClipButton)
+    layout(addClipButton) { (addClipButton) in
+      addClipButton.bottom == addClipButton.superview!.top
+      addClipButton.right == addClipButton.superview!.right - 16
+      addClipButton.height == 44
     }
 
     previewCancelButton.setTitle(NSLocalizedString("Cancel"), forState: UIControlState.Normal)
@@ -217,6 +251,7 @@ class MainViewController: ManagedCollectionViewController, TopMediaViewControlle
   func capturedClipPreviewWillStart() {
     hideTopMenu()
     showPreviewCancelButton()
+    showAddClipButton()
   }
 
   func capturedClipPreviewDidEnd() {
