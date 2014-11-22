@@ -139,7 +139,9 @@ enum APIRoute: URLRequestConvertible {
         return userParameters
       case .FindUsersByPhoneNumbers(let phoneNumbers): return ["phone_number": ", ".join(phoneNumbers)]
       case .FindUsersByUsername(let username): return ["username": username]
-      case .CreateClip(let videoData): return ["video": NSString(data: videoData, encoding: NSUTF8StringEncoding)!]
+      case .CreateClip(let videoData):
+        let data = videoData as NSData
+        return ["video": data.base64EncodedStringWithOptions(.allZeros)]
       default: return nil
     }
   }

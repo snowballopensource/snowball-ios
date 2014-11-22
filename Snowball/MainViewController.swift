@@ -69,7 +69,17 @@ class MainViewController: ManagedCollectionViewController, TopMediaViewControlle
   }
 
   func addClip() {
-    // TODO: submit clip
+    if let fileURL = topMediaViewController?.recordedClipFileURL {
+      Async.userInitiated {
+        // TODO: USE MILTIPART
+        if let data = NSData(contentsOfURL: fileURL) {
+          API.request(APIRoute.CreateClip(videoData: data)).responsePersistable(Clip.self) { (objects, error) in
+            println(objects)
+            println(error)
+          }
+        }
+      }
+    }
     cancelPreview()
   }
 

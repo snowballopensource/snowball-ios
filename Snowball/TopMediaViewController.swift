@@ -24,6 +24,7 @@ class TopMediaViewController: UIViewController, PlayerDelegate, CaptureSessionCo
   private var clipCompletionHandler: ClipCompletionHandler?
   typealias PlayerCompletionHandler = ClipCompletionHandler
   private var playerCompletionHandler: PlayerCompletionHandler?
+  var recordedClipFileURL: NSURL?
 
   func playClips(#since: NSDate?, clipCompletionHandler: ClipCompletionHandler? = nil, playerCompletionHandler: PlayerCompletionHandler? = nil) {
     self.clipCompletionHandler = clipCompletionHandler
@@ -113,6 +114,7 @@ class TopMediaViewController: UIViewController, PlayerDelegate, CaptureSessionCo
 
   func movieRecordedToFileAtURL(fileURL: NSURL, error: NSError?) {
     if error != nil { error?.display(); return }
+    recordedClipFileURL = fileURL
     showRecordingPreview(fileURL)
   }
 }
