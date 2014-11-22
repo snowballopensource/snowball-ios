@@ -26,6 +26,7 @@ struct API {
   // brought back in to handle it.
   static func uploadClip(fileURL: NSURL) {
     let manager = AFHTTPRequestOperationManager()
+    manager.requestSerializer.setAuthorizationHeaderFieldWithUsername(APICredential.authToken, password: "")
     let URL = APIRoute.baseURLString.stringByAppendingPathComponent("clips")
     manager.POST(URL, parameters: nil, constructingBodyWithBlock: { (formData) in
         formData.appendPartWithFileURL(fileURL, name: "video", error: nil)

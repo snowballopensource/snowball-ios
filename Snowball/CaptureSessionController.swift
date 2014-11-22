@@ -159,18 +159,19 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
     instruction.layerInstructions = [transformer]
     videoComposition.instructions = [instruction]
 
-    // Remove existing file (to be replaced with transformed file during export)
-    NSFileManager.defaultManager().removeItemAtURL(outputFileURL, error: nil)
+    let exportedFileURL = outputFileURL.URLByDeletingPathExtension!.URLByAppendingPathExtension("mp4")
 
     // Export
     let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetHighestQuality)
     exporter.videoComposition = videoComposition
-    exporter.outputURL = outputFileURL
+    exporter.outputURL = exportedFileURL
     exporter.outputFileType = AVFileTypeMPEG4
-    exporter.exportAsynchronouslyWithCompletionHandler { () -> Void in
+    NSFileManager.defaultManager().removeItemAtURL(outputFileURL, error: nil)
+    NSFileManager.defaultManager().removeItemAtURL(exportedFileURL, error: nil)
+    exporter.exportAsynchronouslyWithCompletionHandler {
       if let delegate = self.delegate {
         Async.main {
-          delegate.movieRecordedToFileAtURL(outputFileURL, error: error)
+          delegate.movieRecordedToFileAtURL(exporter.outputURL, error: error)
         }
       }
     }
