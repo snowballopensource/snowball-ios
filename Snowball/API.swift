@@ -21,6 +21,29 @@ struct API {
   static func request(URLRequest: URLRequestConvertible) -> Alamofire.Request {
     return Alamofire.request(URLRequest).validate(statusCode: 200..<300)
   }
+
+  // Since Alamofire doesn't have multipart uploads yet, AFNetworking was
+  // brought back in to handle it.
+  static func uploadClip(fileURL: NSURL) {
+    let manager = AFHTTPRequestOperationManager()
+    let URL = APIRoute.baseURLString.stringByAppendingPathComponent("clips")
+    manager.POST(URL, parameters: nil, constructingBodyWithBlock: { (formData) in
+        formData.appendPartWithFileURL(fileURL, name: "video", error: nil)
+        return
+      }, success: { (_, responseObject) in
+        Importer.mapResponseJSONToPersistable(persistable: Clip.self, JSON: responseObject, error: nil) { (object, error) in
+          println(object)
+          println(error)
+        }
+        return
+      }, failure: { (operation, error) in
+        Importer.mapResponseJSONToPersistable(persistable: Clip.self, JSON: operation.responseObject, error: error) { (object, error) in
+          println(object)
+          println(error)
+        }
+        return
+    })
+  }
 }
 
 struct APICredential {
@@ -58,7 +81,6 @@ enum APIRoute: URLRequestConvertible {
   case FindUsersByUsername(username: String)
   // Clip
   case GetClipStream
-  case CreateClip(videoData: NSData)
   case DeleteClip(clipID: String)
   case FlagClip(clipID: String)
 
@@ -76,7 +98,6 @@ enum APIRoute: URLRequestConvertible {
       case .FindUsersByPhoneNumbers: return .GET
       case .FindUsersByUsername: return .GET
       case .GetClipStream: return .GET
-      case .CreateClip: return .POST
       case .DeleteClip: return .DELETE
       case .FlagClip: return .POST
     }
@@ -96,7 +117,6 @@ enum APIRoute: URLRequestConvertible {
       case .FindUsersByPhoneNumbers: return "users"
       case .FindUsersByUsername: return "users"
       case .GetClipStream: return "clips/stream"
-      case .CreateClip: return "clips"
       case .DeleteClip(let clipID): return "clips/\(clipID)"
       case .FlagClip(let clipID): return "clips/\(clipID)"
     }
@@ -111,7 +131,6 @@ enum APIRoute: URLRequestConvertible {
       case .UpdateCurrentUser: return ParameterEncoding.JSON
       case .FindUsersByPhoneNumbers: return ParameterEncoding.URL
       case .FindUsersByUsername: return ParameterEncoding.URL
-      case .CreateClip: return ParameterEncoding.JSON
       default: return nil
     }
   }
@@ -139,9 +158,6 @@ enum APIRoute: URLRequestConvertible {
         return userParameters
       case .FindUsersByPhoneNumbers(let phoneNumbers): return ["phone_number": ", ".join(phoneNumbers)]
       case .FindUsersByUsername(let username): return ["username": username]
-      case .CreateClip(let videoData):
-        let data = videoData as NSData
-        return ["video": data.base64EncodedStringWithOptions(.allZeros)]
       default: return nil
     }
   }
@@ -179,13 +195,15 @@ extension Alamofire.Request {
 
   func responsePersistable<T: JSONPersistable>(persistable: T.Type, completionHandler: CompletionHandler) -> Self {
     return responseJSON { (request, response, JSON, error) in
-      self.mapResponseJSONToPersistable(persistable: persistable, JSON: JSON, error: error) { (object, error) in
+      Importer.mapResponseJSONToPersistable(persistable: persistable, JSON: JSON, error: error) { (object, error) in
         completionHandler(object, error)
       }
     }
   }
+}
 
-  private func mapResponseJSONToPersistable<T: JSONPersistable>(#persistable: T.Type, JSON: JSONData?, error: NSError?, completionHandler: CompletionHandler) {
+struct Importer {
+  static func mapResponseJSONToPersistable<T: JSONPersistable>(#persistable: T.Type, JSON: JSONData?, error: NSError?, completionHandler: Alamofire.Request.CompletionHandler) {
     if let error = error {
       if let JSONData: JSONData = JSON {
         if let serverError = self.errorFromJSON(JSONData) {
@@ -210,7 +228,7 @@ extension Alamofire.Request {
     }
   }
 
-  private func importJSONToPersistable<T: JSONPersistable>(#persistable: T.Type, JSON: JSONData) -> [T] {
+  private static func importJSONToPersistable<T: JSONPersistable>(#persistable: T.Type, JSON: JSONData) -> [T] {
     var objects = [T]()
     RLMRealm.defaultRealm().beginWriteTransaction()
     if let JSONObject = JSON as? JSONObject {
@@ -230,7 +248,7 @@ extension Alamofire.Request {
     return objects
   }
 
-  private func errorFromJSON(JSON: JSONData) -> NSError? {
+  private static func errorFromJSON(JSON: JSONData) -> NSError? {
     if let JSONObject = JSON as? JSONObject {
       if let message = JSONObject["message"] as JSONData? as? String {
         return NSError(domain: NSBundle.mainBundle().bundleIdentifier!, code: 0, userInfo: [NSError.kSnowballAPIErrorMessage(): message])
