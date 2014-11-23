@@ -28,7 +28,6 @@ class MainViewController: ManagedCollectionViewController, TopMediaViewControlle
   }
   private var playbackIndexOffset = 0
   private var clipsSectionIndex: Int { get { return 0 } } // Readonly
-  private var scrollingBeforePlayback = false
 
   func switchToFriendsNavigationController() {
     switchToNavigationController(FriendsNavigationController())
@@ -225,10 +224,8 @@ class MainViewController: ManagedCollectionViewController, TopMediaViewControlle
   // MARK: UICollectionViewDelegate
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    // Scroll to selected clip cell
-    // When done scrolling, the scroll view delegate method will start playing the clip.
-    scrollingBeforePlayback = true
     collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: true)
+    beginPlaybackAtClipsIndex(indexPath.item)
   }
 
   // MARK: UICollectionViewDelegateFlowLayout
@@ -238,16 +235,6 @@ class MainViewController: ManagedCollectionViewController, TopMediaViewControlle
       return UIEdgeInsetsMake(0, ClipCollectionViewCell.size().width, 0, ClipCollectionViewCell.size().width)
     }
     return UIEdgeInsetsZero
-  }
-
-  // MARK: UIScrollViewDelegate
-
-  func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
-    if scrollingBeforePlayback == true {
-      scrollingBeforePlayback = false
-      let clipCellIndexPath = self.collectionView.indexPathsForSelectedItems()?.first as NSIndexPath
-      beginPlaybackAtClipsIndex(clipCellIndexPath.item)
-    }
   }
 
   // MARK: TopMediaViewControllerDelegate
