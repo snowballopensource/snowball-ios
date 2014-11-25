@@ -148,14 +148,15 @@ class MainViewController: ManagedCollectionViewController, TopMediaViewControlle
       topMediaView.right == topMediaView.superview!.right
     }
 
-    friendsButton.setTitle(NSLocalizedString("Friends"), forState: UIControlState.Normal)
-    friendsButton.setTitleColorWithAutomaticHighlightColor()
+    friendsButton.setImage(UIImage(named: "friends-normal"), forState: UIControlState.Normal)
+    friendsButton.imageView?.contentMode = UIViewContentMode.Center
     friendsButton.addTarget(self, action: "switchToFriendsNavigationController", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(friendsButton)
     layout(friendsButton) { (friendsButton) in
       friendsButton.top == friendsButton.superview!.top + 10
-      friendsButton.left == friendsButton.superview!.left + 16
+      friendsButton.left == friendsButton.superview!.left + 15
       friendsButton.height == 44
+      friendsButton.width == 44
     }
 
     addClipButton.setTitle(NSLocalizedString("Add Clip"), forState: UIControlState.Normal)
