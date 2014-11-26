@@ -34,7 +34,6 @@ class TopMediaViewController: UIViewController, PlayerDelegate, CaptureSessionCo
         playerCompletionHandler()
       }
     }
-    self.playerCompletionHandler = playerCompletionHandler
     Async.userInitiated {
       var videoURLs = [NSURL]()
       var clips = Clip.playableClips
