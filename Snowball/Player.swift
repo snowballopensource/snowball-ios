@@ -18,12 +18,28 @@ class Player: AVQueuePlayer {
   var loop = false
   var delegate: PlayerDelegate?
 
+  private func ensureLastClipWillPause() {
+    // Call this after every player item is played.
+    if actionAtItemEnd != AVPlayerActionAtItemEnd.Pause {
+      if items().count > 1 {
+        let itemsObject = items() as NSArray
+        let secondToLastPlayerItem = itemsObject.objectAtIndex(itemsObject.count - 2) as AVPlayerItem
+        if currentItem == secondToLastPlayerItem {
+          actionAtItemEnd = AVPlayerActionAtItemEnd.Pause
+        }
+      } else {
+        actionAtItemEnd = AVPlayerActionAtItemEnd.Pause
+      }
+    }
+  }
+
   func playerItemDidPlayToEndTime(notification: NSNotification) {
     let playerItem = notification.object! as AVPlayerItem
     delegate?.playerItemDidPlayToEndTime(playerItem)
     if loop {
       playerItem.seekToTime(kCMTimeZero)
     } else {
+      ensureLastClipWillPause()
       let lastPlayerItem = items().last as AVPlayerItem
       if lastPlayerItem == currentItem {
         delegate?.playerDidFinishPlaying()
@@ -99,13 +115,17 @@ class Player: AVQueuePlayer {
 
   init(remoteVideoURL: NSURL) {
     super.init()
-    actionAtItemEnd = AVPlayerActionAtItemEnd.None
+    actionAtItemEnd = AVPlayerActionAtItemEnd.Pause
     prebufferAndQueueRemoteVideoURL(remoteVideoURL)
   }
 
   init(remoteVideoURLs: [NSURL]) {
     super.init()
-    actionAtItemEnd = AVPlayerActionAtItemEnd.Advance
+    if (remoteVideoURLs.count == 1) {
+      actionAtItemEnd = AVPlayerActionAtItemEnd.Pause
+    } else {
+      actionAtItemEnd = AVPlayerActionAtItemEnd.Advance
+    }
     prebufferAndQueueRemoteVideoURLs(remoteVideoURLs)
   }
 
