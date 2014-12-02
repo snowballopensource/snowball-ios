@@ -80,6 +80,10 @@ class TopMediaViewController: UIViewController, PlayerDelegate, CaptureSessionCo
     }
   }
 
+  func flipCamera() {
+    captureSessionController?.changeCamera()
+  }
+
   // MARK: -
 
   // MARK: UIViewController

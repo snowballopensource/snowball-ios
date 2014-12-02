@@ -11,6 +11,7 @@ import UIKit
 
 class MainViewController: ManagedCollectionViewController, TopMediaViewControllerDelegate {
   private let friendsButton = UIButton()
+  private let flipCameraButton = UIButton()
   private let previewCancelButton = UIButton()
   private let addClipButton = UIButton()
   private var topMediaView: UIView? {
@@ -31,6 +32,10 @@ class MainViewController: ManagedCollectionViewController, TopMediaViewControlle
 
   func switchToFriendsNavigationController() {
     switchToNavigationController(FriendsNavigationController())
+  }
+
+  func flipCamera() {
+    topMediaViewController?.flipCamera()
   }
 
   private func beginPlaybackAtClipsIndex(index: Int) {
@@ -95,18 +100,27 @@ class MainViewController: ManagedCollectionViewController, TopMediaViewControlle
 
   private func showTopMenu() {
     UIView.animateWithDuration(0.2) {
-      var origin = self.friendsButton.frame.origin
-      origin = CGPointMake(origin.x, 10)
-      self.friendsButton.frame.origin = origin
+      var friendsButtonOrigin = self.friendsButton.frame.origin
+      friendsButtonOrigin = CGPointMake(friendsButtonOrigin.x, 10)
+      self.friendsButton.frame.origin = friendsButtonOrigin
+
+      var flipCameraButtonOrigin = self.flipCameraButton.frame.origin
+      flipCameraButtonOrigin = CGPointMake(flipCameraButtonOrigin.x, 10)
+      self.flipCameraButton.frame.origin = flipCameraButtonOrigin
     }
   }
 
   private func hideTopMenu() {
     UIView.animateWithDuration(0.2) {
-      var size = self.friendsButton.frame.size
-      var origin = self.friendsButton.frame.origin
-      origin = CGPointMake(origin.x, -size.height)
-      self.friendsButton.frame.origin = origin
+      var friendsButtonSize = self.friendsButton.frame.size
+      var friendsButtonOrigin = self.friendsButton.frame.origin
+      friendsButtonOrigin = CGPointMake(friendsButtonOrigin.x, -friendsButtonSize.height)
+      self.friendsButton.frame.origin = friendsButtonOrigin
+
+      var flipCameraButtonSize = self.flipCameraButton.frame.size
+      var flipCameraButtonOrigin = self.flipCameraButton.frame.origin
+      flipCameraButtonOrigin = CGPointMake(flipCameraButtonOrigin.x, -flipCameraButtonSize.height)
+      self.flipCameraButton.frame.origin = flipCameraButtonOrigin
     }
   }
 
@@ -157,6 +171,17 @@ class MainViewController: ManagedCollectionViewController, TopMediaViewControlle
       friendsButton.left == friendsButton.superview!.left + 15
       friendsButton.height == 44
       friendsButton.width == 44
+    }
+
+    flipCameraButton.setImage(UIImage(named: "cameraflip-normal"), forState: UIControlState.Normal)
+    flipCameraButton.imageView?.contentMode = UIViewContentMode.Center
+    flipCameraButton.addTarget(self, action: "flipCamera", forControlEvents: UIControlEvents.TouchUpInside)
+    view.addSubview(flipCameraButton)
+    layout(flipCameraButton) { (flipCameraButton) in
+      flipCameraButton.top == flipCameraButton.superview!.top + 10
+      flipCameraButton.right == flipCameraButton.superview!.right - 15
+      flipCameraButton.height == 44
+      flipCameraButton.width == 44
     }
 
     addClipButton.setTitle(NSLocalizedString("Add Clip"), forState: UIControlState.Normal)
