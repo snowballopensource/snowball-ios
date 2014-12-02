@@ -68,7 +68,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let screenHeight = UIScreen.mainScreen().bounds.height
     let screenWidth = UIScreen.mainScreen().bounds.width
     let cellHeight = screenHeight - screenWidth
-    return CGSizeMake(screenWidth/3, cellHeight)
+    return CGSizeMake((screenWidth/2) - (screenWidth/20), cellHeight)
   }
 
   override func configureForObject(object: AnyObject) {
