@@ -92,6 +92,7 @@ class CaptureSessionController: NSObject, AVCaptureFileOutputRecordingDelegate {
           captureSession.addInput(newDeviceInput)
           currentVideoDeviceInput = newDeviceInput
         }
+        captureSession.commitConfiguration()
       }
     }
   }
