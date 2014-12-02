@@ -31,16 +31,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // new navigation bar height: 64; old navigation bar height: 44
     // 64-44 = 20; 20/2 = 10
     // yay math!
-    UINavigationBar.appearance().setTitleVerticalPositionAdjustment(-10.0, forBarMetrics: UIBarMetrics.Default)
+    let verticalPositionOffset = -10.0 as CGFloat
+    UINavigationBar.appearance().setTitleVerticalPositionAdjustment(verticalPositionOffset, forBarMetrics: UIBarMetrics.Default)
     UINavigationBar.appearance().titleTextAttributes = [
       NSFontAttributeName: UIFont.systemFontOfSize(20.0),
       NSForegroundColorAttributeName: UIColor.whiteColor()
     ]
     UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(-1000.0, 0), forBarMetrics: UIBarMetrics.Default)
+    // Blank back indicator since our image takes care of it
     UINavigationBar.appearance().backIndicatorImage = UIImage()
     UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage()
-    // TODO: add a real back button image
-    // UIBarButtonItem.appearance().setBackButtonBackgroundImage(UIImage(), forState: UIControlState.Normal, barMetrics: UIBarMetrics.Default)
+    // Our image goes here!
+    var backImage = UIImage(named: "back-normal")
+    // Use the width for the cap resets so it doesn't do the auto resize.
+    backImage = backImage!.resizableImageWithCapInsets(UIEdgeInsetsMake(0, backImage!.size.width, 0, 0))
+    UIBarButtonItem.appearance().setBackButtonBackgroundVerticalPositionAdjustment(verticalPositionOffset, forBarMetrics: UIBarMetrics.Default)
+    UIBarButtonItem.appearance().setBackButtonBackgroundImage(backImage, forState: UIControlState.Normal, barMetrics: UIBarMetrics.Default)
 
     // Bridged Appearance
     // Solves the lack of appearanceWhenContainedIn in Swift
