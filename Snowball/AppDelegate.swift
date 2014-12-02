@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UINavigationBar.appearance().setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
     UINavigationBar.appearance().shadowImage = UIImage()
     UINavigationBar.appearance().translucent = false
-    UINavigationBar.appearance().barTintColor = UIColor.SnowballColor.blue()
+    UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
     // new navigation bar height: 64; old navigation bar height: 44
     // 64-44 = 20; 20/2 = 10
     // yay math!
@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UINavigationBar.appearance().setTitleVerticalPositionAdjustment(verticalPositionOffset, forBarMetrics: UIBarMetrics.Default)
     UINavigationBar.appearance().titleTextAttributes = [
       NSFontAttributeName: UIFont.systemFontOfSize(20.0),
-      NSForegroundColorAttributeName: UIColor.whiteColor()
+      NSForegroundColorAttributeName: UIColor.blackColor()
     ]
     UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(-1000.0, 0), forBarMetrics: UIBarMetrics.Default)
     // Blank back indicator since our image takes care of it

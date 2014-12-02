@@ -26,9 +26,9 @@ class FriendsViewController: ManagedTableViewController, CurrentUserTableViewCel
     title = NSLocalizedString("My Friends")
 
     let leftBarButton = UIButton(frame: CGRectMake(0, 0, 44.0, 44.0))
-    leftBarButton.setTitle(NSLocalizedString("Back"), forState: UIControlState.Normal)
+    leftBarButton.setImage(UIImage(named: "camera-black-normal"), forState: UIControlState.Normal)
+    leftBarButton.setImageTintColorWithAutomaticHighlightColor(color: UIColor.blackColor())
     leftBarButton.addTarget(self, action: "switchToMainNavigationController", forControlEvents: UIControlEvents.TouchUpInside)
-    leftBarButton.setTitleColorWithAutomaticHighlightColor()
     navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftBarButton)
     let rightBarButton = UIButton(frame: CGRectMake(0, 0, 44.0, 44.0))
     rightBarButton.setTitle(NSLocalizedString("Find Friends"), forState: UIControlState.Normal)
