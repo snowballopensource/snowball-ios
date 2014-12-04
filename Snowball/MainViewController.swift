@@ -14,19 +14,7 @@ class MainViewController: ManagedCollectionViewController, TopMediaViewControlle
   private let flipCameraButton = UIButton()
   private let previewCancelButton = UIButton()
   private let addClipButton = UIButton()
-  private var topMediaView: UIView? {
-    return topMediaViewController?.view
-  }
-  private var topMediaViewController: TopMediaViewController? {
-    get {
-      for childViewController in childViewControllers {
-        if childViewController is TopMediaViewController {
-          return childViewController as? TopMediaViewController
-        }
-      }
-      return nil
-    }
-  }
+  private var topMediaViewController: TopMediaViewController?
   private var playbackIndexOffset = 0
   private let clipsSectionIndex = 0
 
@@ -151,11 +139,11 @@ class MainViewController: ManagedCollectionViewController, TopMediaViewControlle
     let flowLayout = collectionView.collectionViewLayout as UICollectionViewFlowLayout
     flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
 
-    let topMediaViewController = TopMediaViewController()
-    topMediaViewController.delegate = self
-    addChildViewController(topMediaViewController)
-    view.addSubview(topMediaViewController.view)
-    layout(topMediaView!) { (topMediaView) in
+    topMediaViewController = TopMediaViewController()
+    topMediaViewController!.delegate = self
+    addChildViewController(topMediaViewController!)
+    view.addSubview(topMediaViewController!.view)
+    layout(topMediaViewController!.view) { (topMediaView) in
       topMediaView.top == topMediaView.superview!.top
       topMediaView.bottom == topMediaView.top + Float(UIScreen.mainScreen().bounds.width)
       topMediaView.left == topMediaView.superview!.left
@@ -204,7 +192,7 @@ class MainViewController: ManagedCollectionViewController, TopMediaViewControlle
       previewCancelButton.height == 44
     }
 
-    layout(collectionView, topMediaView!) { (collectionView, topMediaView) in
+    layout(collectionView, topMediaViewController!.view) { (collectionView, topMediaView) in
       collectionView.top == topMediaView.bottom
       collectionView.bottom == collectionView.superview!.bottom
       collectionView.left == collectionView.superview!.left
