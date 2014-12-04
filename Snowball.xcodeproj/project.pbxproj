@@ -15,6 +15,8 @@
 		BA38C1811A30272700A2F2AE /* ClipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38C1801A30272700A2F2AE /* ClipsViewController.swift */; };
 		BAE10A0F1A30400100CCFA25 /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAE10A081A303F5F00CCFA25 /* Cartography.framework */; };
 		BAE10A101A30400100CCFA25 /* Cartography.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAE10A081A303F5F00CCFA25 /* Cartography.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */; };
+		BAF3DDBB1A3043F10062C068 /* UIViewController+ChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3DDBA1A3043F10062C068 /* UIViewController+ChildViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,8 @@
 		BA38C1761A30228700A2F2AE /* SnowballTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowballTests.swift; sourceTree = "<group>"; };
 		BA38C1801A30272700A2F2AE /* ClipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipsViewController.swift; sourceTree = "<group>"; };
 		BAE10A001A303F5F00CCFA25 /* Cartography.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cartography.xcodeproj; path = Carthage.checkout/Cartography/Cartography.xcodeproj; sourceTree = SOURCE_ROOT; };
+		BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		BAF3DDBA1A3043F10062C068 /* UIViewController+ChildViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ChildViewController.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,7 +136,9 @@
 			isa = PBXGroup;
 			children = (
 				BA38C15D1A30228700A2F2AE /* AppDelegate.swift */,
+				BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */,
 				BA38C1801A30272700A2F2AE /* ClipsViewController.swift */,
+				BAF3DDBF1A3048440062C068 /* Extensions */,
 				BA38C1671A30228700A2F2AE /* Images.xcassets */,
 				BA38C1691A30228700A2F2AE /* LaunchScreen.xib */,
 				BA38C15F1A30228700A2F2AE /* Snowball.xcdatamodeld */,
@@ -184,6 +190,14 @@
 				BAE10A0E1A303F5F00CCFA25 /* Cartography-Mac-Tests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		BAF3DDBF1A3048440062C068 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BAF3DDBA1A3043F10062C068 /* UIViewController+ChildViewController.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,8 +339,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA38C15E1A30228700A2F2AE /* AppDelegate.swift in Sources */,
+				BAF3DDBB1A3043F10062C068 /* UIViewController+ChildViewController.swift in Sources */,
 				BA38C1811A30272700A2F2AE /* ClipsViewController.swift in Sources */,
 				BA38C1611A30228700A2F2AE /* Snowball.xcdatamodeld in Sources */,
+				BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

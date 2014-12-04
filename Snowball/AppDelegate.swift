@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   // MARK: - Properties
 
   class var initialViewController: UIViewController {
-    return ClipsViewController()
+    return HomeViewController()
   }
 
   var window: UIWindow = {
