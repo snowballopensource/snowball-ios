@@ -29,8 +29,6 @@ class ClipsViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    collectionView.dataSource = managedCollectionViewManager
-    collectionView.delegate = managedCollectionViewManager
 
     managedCollectionViewManager.objects = [
       [NSObject(), NSObject(), NSObject()]
@@ -39,5 +37,7 @@ class ClipsViewController: UIViewController {
       ClipCollectionViewCell.self
     ]
     collectionView.registerCellClass(ClipCollectionViewCell.self)
+    collectionView.dataSource = managedCollectionViewManager
+    collectionView.delegate = managedCollectionViewManager
   }
 }
