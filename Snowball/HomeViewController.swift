@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
   // MARK: - Properties
 
   let playerViewController = UIViewController() // TODO: use real vc
+  let cameraViewController = UIViewController() // TODO: use real vc
   let clipsViewController = ClipsViewController()
 
   // MARK: - UIViewController
@@ -28,6 +29,10 @@ class HomeViewController: UIViewController {
         playerViewControllerView.right == playerViewControllerView.superview!.right
         playerViewControllerView.height == playerViewControllerView.superview!.width
       }
+    }
+
+    addChildViewController(cameraViewController) {
+      self.cameraViewController.view.frame = self.playerViewController.view.frame
     }
 
     addChildViewController(clipsViewController) {
