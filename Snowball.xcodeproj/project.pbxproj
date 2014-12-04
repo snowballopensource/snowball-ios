@@ -13,6 +13,8 @@
 		BA38C16B1A30228700A2F2AE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA38C1691A30228700A2F2AE /* LaunchScreen.xib */; };
 		BA38C1771A30228700A2F2AE /* SnowballTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38C1761A30228700A2F2AE /* SnowballTests.swift */; };
 		BA38C1811A30272700A2F2AE /* ClipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38C1801A30272700A2F2AE /* ClipsViewController.swift */; };
+		BAE10A0F1A30400100CCFA25 /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAE10A081A303F5F00CCFA25 /* Cartography.framework */; };
+		BAE10A101A30400100CCFA25 /* Cartography.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAE10A081A303F5F00CCFA25 /* Cartography.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,7 +25,56 @@
 			remoteGlobalIDString = BA38C1571A30228700A2F2AE;
 			remoteInfo = Snowball;
 		};
+		BAE10A071A303F5F00CCFA25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BAE10A001A303F5F00CCFA25 /* Cartography.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 54C96A11195063CD000CDD27;
+			remoteInfo = "Cartography-iOS";
+		};
+		BAE10A091A303F5F00CCFA25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BAE10A001A303F5F00CCFA25 /* Cartography.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 54C96A1C195063CD000CDD27;
+			remoteInfo = "Cartography-iOS-Tests";
+		};
+		BAE10A0B1A303F5F00CCFA25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BAE10A001A303F5F00CCFA25 /* Cartography.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 54F6A838195C20C100313D24;
+			remoteInfo = "Cartography-Mac";
+		};
+		BAE10A0D1A303F5F00CCFA25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BAE10A001A303F5F00CCFA25 /* Cartography.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 54F6A842195C20C200313D24;
+			remoteInfo = "Cartography-Mac-Tests";
+		};
+		BAE10A111A30400100CCFA25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BAE10A001A303F5F00CCFA25 /* Cartography.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 54C96A10195063CD000CDD27;
+			remoteInfo = "Cartography-iOS";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BAE10A171A30400100CCFA25 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BAE10A101A30400100CCFA25 /* Cartography.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		BA38C1581A30228700A2F2AE /* Snowball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snowball.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,6 +87,7 @@
 		BA38C1751A30228700A2F2AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA38C1761A30228700A2F2AE /* SnowballTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowballTests.swift; sourceTree = "<group>"; };
 		BA38C1801A30272700A2F2AE /* ClipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipsViewController.swift; sourceTree = "<group>"; };
+		BAE10A001A303F5F00CCFA25 /* Cartography.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cartography.xcodeproj; path = Carthage.checkout/Cartography/Cartography.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAE10A0F1A30400100CCFA25 /* Cartography.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +115,7 @@
 				BA38C15A1A30228700A2F2AE /* Snowball */,
 				BA38C1731A30228700A2F2AE /* SnowballTests */,
 				BA38C1591A30228700A2F2AE /* Products */,
+				BAE109FF1A303F3500CCFA25 /* Carthage */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,6 +166,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		BAE109FF1A303F3500CCFA25 /* Carthage */ = {
+			isa = PBXGroup;
+			children = (
+				BAE10A001A303F5F00CCFA25 /* Cartography.xcodeproj */,
+			);
+			name = Carthage;
+			path = Snowball;
+			sourceTree = "<group>";
+		};
+		BAE10A011A303F5F00CCFA25 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BAE10A081A303F5F00CCFA25 /* Cartography.framework */,
+				BAE10A0A1A303F5F00CCFA25 /* Cartography-iOS-Tests.xctest */,
+				BAE10A0C1A303F5F00CCFA25 /* Cartography.framework */,
+				BAE10A0E1A303F5F00CCFA25 /* Cartography-Mac-Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -122,10 +196,12 @@
 				BA38C1541A30228700A2F2AE /* Sources */,
 				BA38C1551A30228700A2F2AE /* Frameworks */,
 				BA38C1561A30228700A2F2AE /* Resources */,
+				BAE10A171A30400100CCFA25 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				BAE10A121A30400100CCFA25 /* PBXTargetDependency */,
 			);
 			name = Snowball;
 			productName = Snowball;
@@ -179,6 +255,12 @@
 			mainGroup = BA38C14F1A30228700A2F2AE;
 			productRefGroup = BA38C1591A30228700A2F2AE /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = BAE10A011A303F5F00CCFA25 /* Products */;
+					ProjectRef = BAE10A001A303F5F00CCFA25 /* Cartography.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				BA38C1571A30228700A2F2AE /* Snowball */,
@@ -186,6 +268,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		BAE10A081A303F5F00CCFA25 /* Cartography.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Cartography.framework;
+			remoteRef = BAE10A071A303F5F00CCFA25 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BAE10A0A1A303F5F00CCFA25 /* Cartography-iOS-Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Cartography-iOS-Tests.xctest";
+			remoteRef = BAE10A091A303F5F00CCFA25 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BAE10A0C1A303F5F00CCFA25 /* Cartography.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Cartography.framework;
+			remoteRef = BAE10A0B1A303F5F00CCFA25 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BAE10A0E1A303F5F00CCFA25 /* Cartography-Mac-Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Cartography-Mac-Tests.xctest";
+			remoteRef = BAE10A0D1A303F5F00CCFA25 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		BA38C1561A30228700A2F2AE /* Resources */ = {
@@ -232,6 +345,11 @@
 			isa = PBXTargetDependency;
 			target = BA38C1571A30228700A2F2AE /* Snowball */;
 			targetProxy = BA38C1711A30228700A2F2AE /* PBXContainerItemProxy */;
+		};
+		BAE10A121A30400100CCFA25 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Cartography-iOS";
+			targetProxy = BAE10A111A30400100CCFA25 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -328,6 +446,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Snowball/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -338,6 +457,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Snowball/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
