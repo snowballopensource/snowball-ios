@@ -10,7 +10,22 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-  var window: UIWindow?
+
+  // MARK: - Properties
+
+  class var initialViewController: UIViewController {
+    return ClipsViewController()
+  }
+
+  var window: UIWindow = {
+    let window = UIWindow(frame: UIScreen.mainScreen().bounds)
+    window.backgroundColor = UIColor.whiteColor()
+    window.rootViewController = AppDelegate.initialViewController
+    window.makeKeyAndVisible()
+    return window
+  }()
+
+  // MARK: - UIApplicationDelegate
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     return true
