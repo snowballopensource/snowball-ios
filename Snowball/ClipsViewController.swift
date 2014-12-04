@@ -16,7 +16,9 @@ class ClipsViewController: UIViewController {
     let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
     let flowLayout = collectionView.collectionViewLayout as UICollectionViewFlowLayout
     flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
-    collectionView.backgroundColor = UIColor.blueColor()
+    flowLayout.minimumInteritemSpacing = 0
+    flowLayout.minimumLineSpacing = 0
+    collectionView.backgroundColor = UIColor.whiteColor()
     return collectionView
   }()
   var managedCollectionViewManager = ManagedCollectionViewManager()

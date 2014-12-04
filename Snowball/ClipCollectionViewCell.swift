@@ -19,7 +19,5 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return CGSizeMake((screenWidth/2) - (screenWidth/20), cellHeight)
   }
 
-  override func configureForObject(object: AnyObject) {
-    contentView.backgroundColor = UIColor.redColor()
-  }
+  override func configureForObject(object: AnyObject) {}
 }

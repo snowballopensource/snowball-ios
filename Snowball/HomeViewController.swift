@@ -13,6 +13,7 @@ class HomeViewController: UIViewController {
 
   // MARK: - Properties
 
+  let playerViewController = UIViewController() // TODO: use real vc
   let clipsViewController = ClipsViewController()
 
   // MARK: - UIViewController
@@ -20,10 +21,19 @@ class HomeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    addChildViewController(playerViewController) {
+      layout(self.playerViewController.view) { (playerViewControllerView) in
+        playerViewControllerView.left == playerViewControllerView.superview!.left
+        playerViewControllerView.top == playerViewControllerView.superview!.top
+        playerViewControllerView.right == playerViewControllerView.superview!.right
+        playerViewControllerView.height == playerViewControllerView.superview!.width
+      }
+    }
+
     addChildViewController(clipsViewController) {
-      layout(self.clipsViewController.view) { (clipsViewControllerView) in
+      layout(self.clipsViewController.view, self.playerViewController.view) { (clipsViewControllerView, playerViewControllerView) in
         clipsViewControllerView.left == clipsViewControllerView.superview!.left
-        clipsViewControllerView.top == clipsViewControllerView.superview!.centerY
+        clipsViewControllerView.top == playerViewControllerView.bottom
         clipsViewControllerView.right == clipsViewControllerView.superview!.right
         clipsViewControllerView.bottom == clipsViewControllerView.superview!.bottom
       }

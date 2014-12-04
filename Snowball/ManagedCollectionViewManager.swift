@@ -38,14 +38,4 @@ class ManagedCollectionViewManager: NSObject, UICollectionViewDataSource, UIColl
     sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
     return cellTypes[indexPath.section].size()
   }
-
-  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-    minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-    return 0
-  }
-
-  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-    minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-    return 0
-  }
 }
