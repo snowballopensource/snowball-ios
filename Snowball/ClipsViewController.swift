@@ -9,20 +9,33 @@
 import UIKit
 
 class ClipsViewController: UIViewController {
-  let collectionView: UICollectionView = {
+
+  // MARK: - Properties
+
+  var collectionView: UICollectionView = {
     let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
-    collectionView.backgroundColor = UIColor.whiteColor()
-    // TODO: data source and delegate
+    collectionView.backgroundColor = UIColor.blueColor()
     return collectionView
   }()
+  var managedCollectionViewManager = ManagedCollectionViewManager()
 
   // MARK: - UIViewController
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
-    collectionView.frame = view.frame
-    view.addSubview(collectionView)
+  override func loadView() {
+    view = collectionView
   }
 
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    collectionView.dataSource = managedCollectionViewManager
+    collectionView.delegate = managedCollectionViewManager
+
+    managedCollectionViewManager.objects = [
+      [NSObject(), NSObject(), NSObject()]
+    ]
+    managedCollectionViewManager.cellTypes = [
+      ClipCollectionViewCell.self
+    ]
+    collectionView.registerCellClass(ClipCollectionViewCell.self)
+  }
 }

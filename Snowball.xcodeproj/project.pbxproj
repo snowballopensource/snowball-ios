@@ -13,10 +13,15 @@
 		BA38C16B1A30228700A2F2AE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA38C1691A30228700A2F2AE /* LaunchScreen.xib */; };
 		BA38C1771A30228700A2F2AE /* SnowballTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38C1761A30228700A2F2AE /* SnowballTests.swift */; };
 		BA38C1811A30272700A2F2AE /* ClipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38C1801A30272700A2F2AE /* ClipsViewController.swift */; };
+		BA3A28701A3051E300A85C29 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A286F1A3051E300A85C29 /* Util.swift */; };
+		BA3A28771A305AF600A85C29 /* ClipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A28761A305AF600A85C29 /* ClipCollectionViewCell.swift */; };
+		BA3A287B1A305B9F00A85C29 /* UICollectionViewCell+Required.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A287A1A305B9F00A85C29 /* UICollectionViewCell+Required.swift */; };
+		BA3A28841A305C6F00A85C29 /* UICollectionView+CellRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A28831A305C6F00A85C29 /* UICollectionView+CellRegistration.swift */; };
 		BAE10A0F1A30400100CCFA25 /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAE10A081A303F5F00CCFA25 /* Cartography.framework */; };
 		BAE10A101A30400100CCFA25 /* Cartography.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAE10A081A303F5F00CCFA25 /* Cartography.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */; };
 		BAF3DDBB1A3043F10062C068 /* UIViewController+ChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3DDBA1A3043F10062C068 /* UIViewController+ChildViewController.swift */; };
+		BAF3DDC11A3048E70062C068 /* ManagedCollectionViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3DDC01A3048E70062C068 /* ManagedCollectionViewManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,9 +94,14 @@
 		BA38C1751A30228700A2F2AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA38C1761A30228700A2F2AE /* SnowballTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowballTests.swift; sourceTree = "<group>"; };
 		BA38C1801A30272700A2F2AE /* ClipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipsViewController.swift; sourceTree = "<group>"; };
+		BA3A286F1A3051E300A85C29 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		BA3A28761A305AF600A85C29 /* ClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCollectionViewCell.swift; sourceTree = "<group>"; };
+		BA3A287A1A305B9F00A85C29 /* UICollectionViewCell+Required.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Required.swift"; sourceTree = "<group>"; };
+		BA3A28831A305C6F00A85C29 /* UICollectionView+CellRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+CellRegistration.swift"; sourceTree = "<group>"; };
 		BAE10A001A303F5F00CCFA25 /* Cartography.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cartography.xcodeproj; path = Carthage.checkout/Cartography/Cartography.xcodeproj; sourceTree = SOURCE_ROOT; };
 		BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BAF3DDBA1A3043F10062C068 /* UIViewController+ChildViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ChildViewController.swift"; sourceTree = "<group>"; };
+		BAF3DDC01A3048E70062C068 /* ManagedCollectionViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedCollectionViewManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,10 +148,13 @@
 				BA38C15D1A30228700A2F2AE /* AppDelegate.swift */,
 				BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */,
 				BA38C1801A30272700A2F2AE /* ClipsViewController.swift */,
+				BA3A28851A30615800A85C29 /* Cells */,
+				BA3A287C1A305BC000A85C29 /* Managers */,
 				BAF3DDBF1A3048440062C068 /* Extensions */,
 				BA38C1671A30228700A2F2AE /* Images.xcassets */,
 				BA38C1691A30228700A2F2AE /* LaunchScreen.xib */,
 				BA38C15F1A30228700A2F2AE /* Snowball.xcdatamodeld */,
+				BA3A286F1A3051E300A85C29 /* Util.swift */,
 				BA38C15B1A30228700A2F2AE /* Supporting Files */,
 			);
 			path = Snowball;
@@ -172,6 +185,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		BA3A287C1A305BC000A85C29 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				BAF3DDC01A3048E70062C068 /* ManagedCollectionViewManager.swift */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		BA3A28851A30615800A85C29 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BA3A28761A305AF600A85C29 /* ClipCollectionViewCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		BAE109FF1A303F3500CCFA25 /* Carthage */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +225,8 @@
 			isa = PBXGroup;
 			children = (
 				BAF3DDBA1A3043F10062C068 /* UIViewController+ChildViewController.swift */,
+				BA3A28831A305C6F00A85C29 /* UICollectionView+CellRegistration.swift */,
+				BA3A287A1A305B9F00A85C29 /* UICollectionViewCell+Required.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -339,9 +370,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA38C15E1A30228700A2F2AE /* AppDelegate.swift in Sources */,
+				BA3A28841A305C6F00A85C29 /* UICollectionView+CellRegistration.swift in Sources */,
 				BAF3DDBB1A3043F10062C068 /* UIViewController+ChildViewController.swift in Sources */,
+				BAF3DDC11A3048E70062C068 /* ManagedCollectionViewManager.swift in Sources */,
 				BA38C1811A30272700A2F2AE /* ClipsViewController.swift in Sources */,
+				BA3A28701A3051E300A85C29 /* Util.swift in Sources */,
 				BA38C1611A30228700A2F2AE /* Snowball.xcdatamodeld in Sources */,
+				BA3A28771A305AF600A85C29 /* ClipCollectionViewCell.swift in Sources */,
+				BA3A287B1A305B9F00A85C29 /* UICollectionViewCell+Required.swift in Sources */,
 				BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

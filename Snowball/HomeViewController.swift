@@ -10,6 +10,9 @@ import Cartography
 import UIKit
 
 class HomeViewController: UIViewController {
+
+  // MARK: - Properties
+
   let clipsViewController = ClipsViewController()
 
   // MARK: - UIViewController
