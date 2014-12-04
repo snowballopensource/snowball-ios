@@ -28,7 +28,7 @@ class MainViewController: ManagedCollectionViewController, TopMediaViewControlle
     }
   }
   private var playbackIndexOffset = 0
-  private var clipsSectionIndex: Int { get { return 0 } } // Readonly
+  private let clipsSectionIndex = 0
 
   func switchToFriendsNavigationController() {
     switchToNavigationController(FriendsNavigationController())
