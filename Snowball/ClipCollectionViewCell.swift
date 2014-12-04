@@ -13,15 +13,6 @@ import UIKit
 class ClipCollectionViewCell: UICollectionViewCell {
   private let clipDetailsLabel = UILabel()
   private let clipThumbnailImageView = UIImageView()
-  private let playbackIndicatorView = UIView()
-
-  func showPlaybackIndicatorView() {
-    playbackIndicatorView.hidden = false
-  }
-
-  func hidePlaybackIndicatorView() {
-    playbackIndicatorView.hidden = true
-  }
 
   func setThumbnailImageFromURL(URL: NSURL) {
     Async.userInitiated {
@@ -53,9 +44,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     clipThumbnailImageView.backgroundColor = UIColor.darkGrayColor()
     contentView.addSubview(clipThumbnailImageView)
-
-    playbackIndicatorView.backgroundColor = UIColor.blueColor()
-    contentView.addSubview(playbackIndicatorView)
   }
 
   required init(coder aDecoder: NSCoder) {
@@ -82,8 +70,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
     clipThumbnailImageView.image = nil
     let clipVideoURL = NSURL(string: clip.videoURL)
     setThumbnailImageFromURL(clipVideoURL!)
-
-    hidePlaybackIndicatorView()
   }
 
   // MARK: UIView
@@ -106,7 +92,5 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipDetailsLabel.left == clipThumbnailImageView.left + margin
       clipDetailsLabel.right == clipThumbnailImageView.right - margin
     }
-
-    playbackIndicatorView.frame = clipThumbnailImageView.frame
   }
 }
