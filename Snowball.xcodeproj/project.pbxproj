@@ -23,6 +23,8 @@
 		BA1B2E3419D2B90F0095042E /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B2E3319D2B90F0095042E /* PlayerView.swift */; };
 		BA27B7DA1A02A4490093AE6E /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA27B7D91A02A4490093AE6E /* RLMSupport.swift */; };
 		BA2AB6741A02DB60006DC2AA /* NSDate+TimeSinceString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AB6731A02DB60006DC2AA /* NSDate+TimeSinceString.swift */; };
+		BA38C1461A2FF82D00A2F2AE /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38C1451A2FF82D00A2F2AE /* PlayerViewController.swift */; };
+		BA38C14E1A2FF84E00A2F2AE /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38C14D1A2FF84E00A2F2AE /* CameraViewController.swift */; };
 		BA3B49BD19D8FD180084BB4F /* FriendsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3B49BC19D8FD180084BB4F /* FriendsNavigationController.swift */; };
 		BA3B49C619D8FD660084BB4F /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3B49C519D8FD660084BB4F /* FriendsViewController.swift */; };
 		BA438E6819EC819E007EBDD7 /* Haneke.framework in Git Submodule Frameworks */ = {isa = PBXBuildFile; fileRef = BA438E6119EC8194007EBDD7 /* Haneke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -194,6 +196,8 @@
 		BA1B2E3319D2B90F0095042E /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		BA27B7D91A02A4490093AE6E /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
 		BA2AB6731A02DB60006DC2AA /* NSDate+TimeSinceString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeSinceString.swift"; sourceTree = "<group>"; };
+		BA38C1451A2FF82D00A2F2AE /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		BA38C14D1A2FF84E00A2F2AE /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BA3B49BC19D8FD180084BB4F /* FriendsNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsNavigationController.swift; sourceTree = "<group>"; };
 		BA3B49C519D8FD660084BB4F /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		BA438E5919EC8194007EBDD7 /* Haneke.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Haneke.xcodeproj; path = Vendor/HanekeSwift/Haneke.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -438,6 +442,8 @@
 			isa = PBXGroup;
 			children = (
 				BA01CBC019D36E44004F170D /* TopMediaViewController.swift */,
+				BA38C1451A2FF82D00A2F2AE /* PlayerViewController.swift */,
+				BA38C14D1A2FF84E00A2F2AE /* CameraViewController.swift */,
 			);
 			name = "Top Media View";
 			sourceTree = "<group>";
@@ -770,6 +776,7 @@
 				BA1B2E3419D2B90F0095042E /* PlayerView.swift in Sources */,
 				BAB5F03819D1140A00D49796 /* ManagedTableViewController.swift in Sources */,
 				BA01CBFA19D39EAF004F170D /* MainViewController.swift in Sources */,
+				BA38C1461A2FF82D00A2F2AE /* PlayerViewController.swift in Sources */,
 				BAB5F03F19D115DE00D49796 /* NSError+.swift in Sources */,
 				BA622F5A19E4AFDB00A8AFD5 /* AddressBookController.swift in Sources */,
 				BAB5F02F19D0FA4F00D49796 /* Clip.swift in Sources */,
@@ -793,6 +800,7 @@
 				BA593D0419E20A3700F29A29 /* RemoteManagedObject.swift in Sources */,
 				BA27B7DA1A02A4490093AE6E /* RLMSupport.swift in Sources */,
 				BA88814419E25A24006CF338 /* UserImageView.swift in Sources */,
+				BA38C14E1A2FF84E00A2F2AE /* CameraViewController.swift in Sources */,
 				BA2AB6741A02DB60006DC2AA /* NSDate+TimeSinceString.swift in Sources */,
 				BA1B2E2419D215760095042E /* UIImageView+.swift in Sources */,
 				BA45A7731A13D763007ECC1A /* SignUpViewController.swift in Sources */,

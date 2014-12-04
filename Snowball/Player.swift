@@ -102,6 +102,8 @@ class Player: AVQueuePlayer {
     }
   }
 
+  // TODO: HEY JAMES, YOU'RE AWESOME. NOW FINISH REFACTORING THE TOPMEDIAVC AND THIS PLAYER!
+
   // MARK: -
 
   // MARK: AVQueuePlayer
