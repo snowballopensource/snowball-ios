@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		BA38C15E1A30228700A2F2AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38C15D1A30228700A2F2AE /* AppDelegate.swift */; };
 		BA38C1611A30228700A2F2AE /* Snowball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA38C15F1A30228700A2F2AE /* Snowball.xcdatamodeld */; };
-		BA38C1631A30228700A2F2AE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38C1621A30228700A2F2AE /* ViewController.swift */; };
-		BA38C1661A30228700A2F2AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA38C1641A30228700A2F2AE /* Main.storyboard */; };
 		BA38C1681A30228700A2F2AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA38C1671A30228700A2F2AE /* Images.xcassets */; };
 		BA38C16B1A30228700A2F2AE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA38C1691A30228700A2F2AE /* LaunchScreen.xib */; };
 		BA38C1771A30228700A2F2AE /* SnowballTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38C1761A30228700A2F2AE /* SnowballTests.swift */; };
@@ -31,8 +29,6 @@
 		BA38C15C1A30228700A2F2AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA38C15D1A30228700A2F2AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA38C1601A30228700A2F2AE /* Snowball.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Snowball.xcdatamodel; sourceTree = "<group>"; };
-		BA38C1621A30228700A2F2AE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		BA38C1651A30228700A2F2AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BA38C1671A30228700A2F2AE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BA38C16A1A30228700A2F2AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		BA38C1701A30228700A2F2AE /* SnowballTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnowballTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,8 +76,6 @@
 			isa = PBXGroup;
 			children = (
 				BA38C15D1A30228700A2F2AE /* AppDelegate.swift */,
-				BA38C1621A30228700A2F2AE /* ViewController.swift */,
-				BA38C1641A30228700A2F2AE /* Main.storyboard */,
 				BA38C1671A30228700A2F2AE /* Images.xcassets */,
 				BA38C1691A30228700A2F2AE /* LaunchScreen.xib */,
 				BA38C15F1A30228700A2F2AE /* Snowball.xcdatamodeld */,
@@ -195,7 +189,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA38C1661A30228700A2F2AE /* Main.storyboard in Resources */,
 				BA38C16B1A30228700A2F2AE /* LaunchScreen.xib in Resources */,
 				BA38C1681A30228700A2F2AE /* Images.xcassets in Resources */,
 			);
@@ -215,7 +208,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA38C1631A30228700A2F2AE /* ViewController.swift in Sources */,
 				BA38C15E1A30228700A2F2AE /* AppDelegate.swift in Sources */,
 				BA38C1611A30228700A2F2AE /* Snowball.xcdatamodeld in Sources */,
 			);
@@ -240,14 +232,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		BA38C1641A30228700A2F2AE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BA38C1651A30228700A2F2AE /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		BA38C1691A30228700A2F2AE /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -409,6 +393,7 @@
 				BA38C17C1A30228700A2F2AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BA38C17D1A30228700A2F2AE /* Build configuration list for PBXNativeTarget "SnowballTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +402,7 @@
 				BA38C17F1A30228700A2F2AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
