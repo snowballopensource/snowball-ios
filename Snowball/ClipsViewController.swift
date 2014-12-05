@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ClipsViewController: UIViewController {
+class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout {
 
   // MARK: - Properties
 
@@ -46,6 +46,13 @@ class ClipsViewController: UIViewController {
 
     collectionView.registerCellClass(ClipCollectionViewCell.self)
     collectionView.dataSource = arrayDataSource
-    collectionView.delegate = arrayDataSource
+    collectionView.delegate = self
+  }
+
+  // MARK: - UICollectionViewDelegateFlowLayout
+
+  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+    sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+      return arrayDataSource.cellTypes[indexPath.section].size()
   }
 }

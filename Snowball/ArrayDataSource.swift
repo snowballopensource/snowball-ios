@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ArrayDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class ArrayDataSource: NSObject, UICollectionViewDataSource {
 
   // MARK: - Properties
 
@@ -44,12 +44,5 @@ class ArrayDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDel
       forIndexPath: indexPath) as UICollectionViewCell
     cell.configureForObject(objects[indexPath.section][indexPath.row])
     return cell
-  }
-
-  // MARK: - UICollectionViewDelegateFlowLayout
-
-  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-    sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-    return cellTypes[indexPath.section].size()
   }
 }
