@@ -10,7 +10,7 @@ import UIKit
 
 class ClipCollectionViewCell: UICollectionViewCell {
 
-  // MARK: - UICollectionViewCell+Required
+  // MARK: - UICollectionReuseableView+Required
 
   override class func size() -> CGSize {
     let screenHeight = UIScreen.mainScreen().bounds.height

@@ -13,4 +13,8 @@ extension UICollectionReusableView {
     requireSubclass()
     return CGSizeZero
   }
+
+  func configureForObject(object: AnyObject) {
+    requireSubclass()
+  }
 }
