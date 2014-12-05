@@ -9,9 +9,12 @@
 import UIKit
 
 extension UICollectionViewCell {
-  class func size() -> CGSize {
-    requireSubclass()
-    return CGSizeZero
+
+  // Since UICollectionViewCell is a subclass of UICollectionReuseableView,
+  // this method is taken care of in that extension.
+  // TODO: turn these methods into a protocol
+  override class func size() -> CGSize {
+    return super.size()
   }
 
   func configureForObject(object: AnyObject) {

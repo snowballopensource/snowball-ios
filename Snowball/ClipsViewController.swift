@@ -18,6 +18,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout 
     flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
     flowLayout.minimumInteritemSpacing = 0
     flowLayout.minimumLineSpacing = 0
+    flowLayout.footerReferenceSize = AddClipCollectionReuseableView.size()
     collectionView.backgroundColor = UIColor.whiteColor()
     return collectionView
   }()
@@ -32,7 +33,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout 
     let cellTypes: [UICollectionViewCell.Type] = [
       ClipCollectionViewCell.self
     ]
-    return ArrayDataSource(objects: objects, cellTypes: cellTypes)
+    return ClipsDataSource(objects: objects, cellTypes: cellTypes)
   }()
 
   // MARK: - UIViewController
@@ -45,6 +46,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout 
     super.viewDidLoad()
 
     collectionView.registerCellClass(ClipCollectionViewCell.self)
+    collectionView.registerFooterClass(AddClipCollectionReuseableView.self)
     collectionView.dataSource = arrayDataSource
     collectionView.delegate = self
   }
@@ -55,4 +57,17 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout 
     sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
       return arrayDataSource.cellTypes[indexPath.section].size()
   }
+}
+
+class ClipsDataSource: ArrayDataSource {
+
+  // MARK: - UICollectionViewDataSource
+
+  func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
+    atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    let supplementaryView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter,
+      withReuseIdentifier: NSStringFromClass(AddClipCollectionReuseableView), forIndexPath: indexPath) as AddClipCollectionReuseableView
+    return supplementaryView
+  }
+
 }

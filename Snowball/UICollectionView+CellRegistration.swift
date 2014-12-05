@@ -12,4 +12,8 @@ extension UICollectionView {
   func registerCellClass(cellClass: UICollectionViewCell.Type) {
     registerClass(cellClass, forCellWithReuseIdentifier: NSStringFromClass(cellClass))
   }
+
+  func registerFooterClass(footerClass: UICollectionReusableView.Type) {
+    registerClass(footerClass, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: NSStringFromClass(footerClass))
+  }
 }
