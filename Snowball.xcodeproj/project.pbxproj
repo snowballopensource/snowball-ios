@@ -151,7 +151,7 @@
 				BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */,
 				BA38C1801A30272700A2F2AE /* ClipsViewController.swift */,
 				BA3A28851A30615800A85C29 /* Cells */,
-				BA3A287C1A305BC000A85C29 /* Managers */,
+				BA3A287C1A305BC000A85C29 /* Data Source */,
 				BAF3DDBF1A3048440062C068 /* Extensions */,
 				BA38C1671A30228700A2F2AE /* Images.xcassets */,
 				BA38C1691A30228700A2F2AE /* LaunchScreen.xib */,
@@ -187,12 +187,12 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BA3A287C1A305BC000A85C29 /* Managers */ = {
+		BA3A287C1A305BC000A85C29 /* Data Source */ = {
 			isa = PBXGroup;
 			children = (
 				BAF3DDC01A3048E70062C068 /* ArrayDataSource.swift */,
 			);
-			name = Managers;
+			name = "Data Source";
 			sourceTree = "<group>";
 		};
 		BA3A28851A30615800A85C29 /* Cells */ = {
