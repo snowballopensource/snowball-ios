@@ -15,7 +15,7 @@ class AddClipCollectionReuseableView: UICollectionReusableView {
   override init(frame: CGRect) {
     super.init(frame: frame)
 
-    backgroundColor = UIColor.greenColor()
+    addSubview(UIImageView(image: UIImage(named: "add-clip")))
   }
 
   required init(coder: NSCoder) {
