@@ -21,7 +21,19 @@ class ClipsViewController: UIViewController {
     collectionView.backgroundColor = UIColor.whiteColor()
     return collectionView
   }()
-  var managedCollectionViewManager = ManagedCollectionViewManager()
+  let arrayDataSource: ArrayDataSource = {
+    let objects: [[AnyObject]] = [
+      [
+        "",
+        "",
+        ""
+      ]
+    ]
+    let cellTypes: [UICollectionViewCell.Type] = [
+      ClipCollectionViewCell.self
+    ]
+    return ArrayDataSource(objects: objects, cellTypes: cellTypes)
+  }()
 
   // MARK: - UIViewController
 
@@ -32,14 +44,8 @@ class ClipsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    managedCollectionViewManager.objects = [
-      [NSObject(), NSObject(), NSObject()]
-    ]
-    managedCollectionViewManager.cellTypes = [
-      ClipCollectionViewCell.self
-    ]
     collectionView.registerCellClass(ClipCollectionViewCell.self)
-    collectionView.dataSource = managedCollectionViewManager
-    collectionView.delegate = managedCollectionViewManager
+    collectionView.dataSource = arrayDataSource
+    collectionView.delegate = arrayDataSource
   }
 }

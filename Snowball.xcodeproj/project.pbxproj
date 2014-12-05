@@ -21,7 +21,7 @@
 		BAE10A101A30400100CCFA25 /* Cartography.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAE10A081A303F5F00CCFA25 /* Cartography.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */; };
 		BAF3DDBB1A3043F10062C068 /* UIViewController+ChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3DDBA1A3043F10062C068 /* UIViewController+ChildViewController.swift */; };
-		BAF3DDC11A3048E70062C068 /* ManagedCollectionViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3DDC01A3048E70062C068 /* ManagedCollectionViewManager.swift */; };
+		BAF3DDC11A3048E70062C068 /* ArrayDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3DDC01A3048E70062C068 /* ArrayDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,7 +101,7 @@
 		BAE10A001A303F5F00CCFA25 /* Cartography.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cartography.xcodeproj; path = Carthage.checkout/Cartography/Cartography.xcodeproj; sourceTree = SOURCE_ROOT; };
 		BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BAF3DDBA1A3043F10062C068 /* UIViewController+ChildViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ChildViewController.swift"; sourceTree = "<group>"; };
-		BAF3DDC01A3048E70062C068 /* ManagedCollectionViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedCollectionViewManager.swift; sourceTree = "<group>"; };
+		BAF3DDC01A3048E70062C068 /* ArrayDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,7 +188,7 @@
 		BA3A287C1A305BC000A85C29 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				BAF3DDC01A3048E70062C068 /* ManagedCollectionViewManager.swift */,
+				BAF3DDC01A3048E70062C068 /* ArrayDataSource.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -372,7 +372,7 @@
 				BA38C15E1A30228700A2F2AE /* AppDelegate.swift in Sources */,
 				BA3A28841A305C6F00A85C29 /* UICollectionView+CellRegistration.swift in Sources */,
 				BAF3DDBB1A3043F10062C068 /* UIViewController+ChildViewController.swift in Sources */,
-				BAF3DDC11A3048E70062C068 /* ManagedCollectionViewManager.swift in Sources */,
+				BAF3DDC11A3048E70062C068 /* ArrayDataSource.swift in Sources */,
 				BA38C1811A30272700A2F2AE /* ClipsViewController.swift in Sources */,
 				BA3A28701A3051E300A85C29 /* Util.swift in Sources */,
 				BA38C1611A30228700A2F2AE /* Snowball.xcdatamodeld in Sources */,

@@ -1,5 +1,5 @@
 //
-//  ManagedCollectionViewManager.swift
+//  ArrayDataSource.swift
 //  Snowball
 //
 //  Created by James Martinez on 12/3/14.
@@ -8,12 +8,26 @@
 
 import UIKit
 
-class ManagedCollectionViewManager: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class ArrayDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
   // MARK: - Properties
 
   var objects = [[AnyObject]]()
   var cellTypes = [UICollectionViewCell.Type]()
+
+  // MARK: - Initializers
+
+  init(objects: [[AnyObject]], cellTypes: [UICollectionViewCell.Type]) {
+    self.objects = objects
+    self.cellTypes = cellTypes
+  }
+
+  // MARK: - UITableView
+
+  // MARK: - UITableViewDataSource
+  // TODO: write table view data source code
+
+  // MARK: - UICollectionView
 
   // MARK: - UICollectionViewDataSource
 
