@@ -30,6 +30,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     clipTimeLabel.textColor = UIColor(red: 210/255.0, green: 210/255.0, blue: 210/255.0, alpha: 1.0)
     contentView.addSubview(clipTimeLabel)
     playButton.setImage(UIImage(named: "play"), forState: UIControlState.Normal)
+    playButton.addTarget(self, action: "animateClipThumbnailScaleChange", forControlEvents: UIControlEvents.TouchDown)
     contentView.addSubview(playButton)
     pauseButton.setImage(UIImage(named: "pause"), forState: UIControlState.Normal)
     contentView.addSubview(pauseButton)
@@ -92,7 +93,19 @@ class ClipCollectionViewCell: UICollectionViewCell {
     userNameLabel.textColor = userColor
     clipTimeLabel.text = "1h"
 
-    playButton.hidden = true
+    // playButton.hidden = true
     pauseButton.hidden = true
+  }
+
+  // MARK: - Actions
+
+  func animateClipThumbnailScaleChange() {
+    UIView.animateWithDuration(0.1, animations: {
+      self.clipThumbnailImageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9)
+    }) { (completed) in
+      UIView.animateWithDuration(0.1) {
+        self.clipThumbnailImageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0)
+      }
+    }
   }
 }
