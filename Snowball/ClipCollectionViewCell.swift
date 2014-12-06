@@ -14,15 +14,25 @@ class ClipCollectionViewCell: UICollectionViewCell {
   let userAvatarImageView = UserAvatarImageView()
   let userNameLabel = UILabel()
   let clipTimeLabel = UILabel()
+  let playButton = UIButton()
+  let pauseButton = UIButton()
 
   override init(frame: CGRect) {
     super.init(frame: frame)
     clipThumbnailImageView.backgroundColor = UIColor.blackColor()
+    contentView.addSubview(clipThumbnailImageView)
+    contentView.addSubview(userAvatarImageView)
     userNameLabel.font = UIFont(name: "Karla-Bold", size: 18)
     userNameLabel.textAlignment = NSTextAlignment.Center
+    contentView.addSubview(userNameLabel)
     clipTimeLabel.font = UIFont(name: "Helvetica-Bold", size: 16)
     clipTimeLabel.textAlignment = NSTextAlignment.Center
     clipTimeLabel.textColor = UIColor(red: 210/255.0, green: 210/255.0, blue: 210/255.0, alpha: 1.0)
+    contentView.addSubview(clipTimeLabel)
+    playButton.setImage(UIImage(named: "play"), forState: UIControlState.Normal)
+    contentView.addSubview(playButton)
+    pauseButton.setImage(UIImage(named: "pause"), forState: UIControlState.Normal)
+    contentView.addSubview(pauseButton)
   }
 
   required init(coder: NSCoder) {
@@ -34,7 +44,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
   override func layoutSubviews() {
     super.layoutSubviews()
 
-    contentView.addSubview(clipThumbnailImageView)
     layout(clipThumbnailImageView) { (clipThumbnailImageView) in
       clipThumbnailImageView.left == clipThumbnailImageView.superview!.left
       clipThumbnailImageView.top == clipThumbnailImageView.superview!.top
@@ -42,7 +51,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipThumbnailImageView.height == clipThumbnailImageView.superview!.width
     }
 
-    contentView.addSubview(userAvatarImageView)
     layout(userAvatarImageView, clipThumbnailImageView) { (userAvatarImageView, clipThumbnailImageView) in
       userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
       userAvatarImageView.top == clipThumbnailImageView.bottom + 10
@@ -50,19 +58,21 @@ class ClipCollectionViewCell: UICollectionViewCell {
       userAvatarImageView.height == userAvatarImageView.width
     }
 
-    contentView.addSubview(userNameLabel)
     layout(userNameLabel, userAvatarImageView) { (userNameLabel, userAvatarImageView) in
       userNameLabel.left == userNameLabel.superview!.left
       userNameLabel.top == userAvatarImageView.bottom + 5
       userNameLabel.right == userNameLabel.superview!.right
     }
 
-    contentView.addSubview(clipTimeLabel)
     layout(clipTimeLabel, userNameLabel) { (clipTimeLabel, userNameLabel) in
       clipTimeLabel.left == clipTimeLabel.superview!.left
       clipTimeLabel.top == userNameLabel.bottom + 2
       clipTimeLabel.right == clipTimeLabel.superview!.right
     }
+
+    playButton.frame = clipThumbnailImageView.frame
+
+    pauseButton.frame = clipThumbnailImageView.frame
   }
 
   // MARK: - UICollectionReuseableView+Required
@@ -81,5 +91,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     userAvatarImageView.backgroundColor = userColor
     userNameLabel.textColor = userColor
     clipTimeLabel.text = "1h"
+
+    playButton.hidden = true
+    pauseButton.hidden = true
   }
 }
