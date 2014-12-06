@@ -9,9 +9,6 @@
 import UIKit
 
 class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout {
-
-  // MARK: - Properties
-
   var collectionView: UICollectionView = {
     let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
     let flowLayout = collectionView.collectionViewLayout as UICollectionViewFlowLayout

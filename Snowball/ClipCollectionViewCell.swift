@@ -11,17 +11,16 @@ import UIKit
 
 class ClipCollectionViewCell: UICollectionViewCell {
   let clipThumbnailImageView = UIImageView()
-  let userAvatarImageView = UIImageView()
+  let userAvatarImageView = UserAvatarImageView()
   let userNameLabel = UILabel()
   let clipTimeLabel = UILabel()
 
   override init(frame: CGRect) {
     super.init(frame: frame)
     clipThumbnailImageView.backgroundColor = UIColor.blackColor()
-    userAvatarImageView.backgroundColor = UIColor.blackColor()
     userNameLabel.font = UIFont(name: "Karla-Bold", size: 18)
     userNameLabel.textAlignment = NSTextAlignment.Center
-    clipTimeLabel.font = UIFont(name: "Helvetica-Medium", size: 12)
+    clipTimeLabel.font = UIFont(name: "Helvetica-Bold", size: 12)
     clipTimeLabel.textAlignment = NSTextAlignment.Center
     clipTimeLabel.textColor = UIColor(red: 210/255.0, green: 210/255.0, blue: 210/255.0, alpha: 1.0)
   }

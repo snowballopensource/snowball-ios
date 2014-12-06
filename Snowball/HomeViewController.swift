@@ -10,9 +10,6 @@ import Cartography
 import UIKit
 
 class HomeViewController: UIViewController {
-
-  // MARK: - Properties
-
   let playerViewController = UIViewController() // TODO: use real vc
   let cameraViewController = UIViewController() // TODO: use real vc
   let clipsViewController = ClipsViewController()

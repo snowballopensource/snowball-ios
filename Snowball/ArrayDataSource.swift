@@ -9,9 +9,6 @@
 import UIKit
 
 class ArrayDataSource: NSObject, UICollectionViewDataSource {
-
-  // MARK: - Properties
-
   var objects = [[AnyObject]]()
   var cellTypes = [UICollectionViewCell.Type]()
 

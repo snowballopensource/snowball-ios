@@ -10,16 +10,13 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-  // MARK: - Properties
-
   var window: UIWindow?
 
-  class var initialViewController: UIViewController {
+  // MARK: - Private
+
+  private class var initialViewController: UIViewController {
     return HomeViewController()
   }
-
-  // MARK: - Private
 
   // This is not a property since UIScreen.mainScreen().bounds is not set
   // until application(_:didFinishLaunchingWithOptions:) is called.
