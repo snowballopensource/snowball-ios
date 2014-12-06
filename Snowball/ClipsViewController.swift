@@ -21,11 +21,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout 
   }()
   let arrayDataSource: ArrayDataSource = {
     let objects: [[AnyObject]] = [
-      [
-        "",
-        "",
-        ""
-      ]
+      Clip.findAll()
     ]
     let cellTypes: [UICollectionViewCell.Type] = [
       ClipCollectionViewCell.self

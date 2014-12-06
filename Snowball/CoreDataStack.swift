@@ -12,7 +12,7 @@ import CoreData
 // with a little bit of cleanup. Cool, huh?
 
 class CoreDataStack {
-  private let stackName = NSBundle.mainBundle().infoDictionary!["CFBundleName"] as String
+  let stackName = appName
 
   private lazy var applicationDocumentsDirectory: NSURL = {
     let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
