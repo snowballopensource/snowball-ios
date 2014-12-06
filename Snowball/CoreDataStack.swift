@@ -40,7 +40,7 @@ class CoreDataStack {
     return coordinator
     }()
 
-  lazy var managedObjectContext: NSManagedObjectContext? = {
+  lazy var managedObjectContext: NSManagedObjectContext = {
     let coordinator = self.persistentStoreCoordinator
     var managedObjectContext = NSManagedObjectContext()
     managedObjectContext.persistentStoreCoordinator = coordinator
