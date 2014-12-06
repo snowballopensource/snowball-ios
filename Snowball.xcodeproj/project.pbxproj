@@ -28,6 +28,7 @@
 		BAA8C07A1A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0791A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift */; };
 		BAA8C0801A32F8F300AAB9F4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C07F1A32F8F300AAB9F4 /* User.swift */; };
 		BAA8C0841A32FA2B00AAB9F4 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0831A32FA2B00AAB9F4 /* Clip.swift */; };
+		BAA8C0971A333A8B00AAB9F4 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0961A333A8B00AAB9F4 /* CollectionViewDataSource.swift */; };
 		BAE10A0F1A30400100CCFA25 /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAE10A081A303F5F00CCFA25 /* Cartography.framework */; };
 		BAE10A101A30400100CCFA25 /* Cartography.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAE10A081A303F5F00CCFA25 /* Cartography.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */; };
@@ -120,6 +121,7 @@
 		BAA8C0791A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+CoreRecord.swift"; sourceTree = "<group>"; };
 		BAA8C07F1A32F8F300AAB9F4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BAA8C0831A32FA2B00AAB9F4 /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
+		BAA8C0961A333A8B00AAB9F4 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 		BAE10A001A303F5F00CCFA25 /* Cartography.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cartography.xcodeproj; path = Carthage.checkout/Cartography/Cartography.xcodeproj; sourceTree = SOURCE_ROOT; };
 		BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BAF3DDBA1A3043F10062C068 /* UIViewController+ChildViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ChildViewController.swift"; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 		BA3A287C1A305BC000A85C29 /* Data Source */ = {
 			isa = PBXGroup;
 			children = (
+				BAA8C0961A333A8B00AAB9F4 /* CollectionViewDataSource.swift */,
 				BAF3DDC01A3048E70062C068 /* ArrayCollectionViewDataSource.swift */,
 			);
 			name = "Data Source";
@@ -459,6 +462,7 @@
 				BAA8C07A1A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift in Sources */,
 				BA32C7921A3286250052F4CA /* UIColor+Snowball.swift in Sources */,
 				BA3A28771A305AF600A85C29 /* ClipCollectionViewCell.swift in Sources */,
+				BAA8C0971A333A8B00AAB9F4 /* CollectionViewDataSource.swift in Sources */,
 				BAA8C0801A32F8F300AAB9F4 /* User.swift in Sources */,
 				BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */,
 				BA52474B1A31A1FC003BD269 /* UICollectionReusableView+Required.swift in Sources */,

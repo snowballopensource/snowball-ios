@@ -8,33 +8,27 @@
 
 import UIKit
 
-class ArrayCollectionViewDataSource: NSObject, UICollectionViewDataSource {
-  var objects = [[AnyObject]]()
-  var cellTypes = [UICollectionViewCell.Type]()
+class ArrayCollectionViewDataSource: CollectionViewDataSource {
+  var objects: [[AnyObject]]
 
   // MARK: - Initializers
 
   init(objects: [[AnyObject]], cellTypes: [UICollectionViewCell.Type]) {
     self.objects = objects
-    self.cellTypes = cellTypes
+    super.init(cellTypes: cellTypes)
   }
 
-  // MARK: - UICollectionView
+  // MARK: CollectionViewDataSource
 
-  // MARK: - UICollectionViewDataSource
-
-  func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+  override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
     return objects.count
   }
 
-  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return objects[section].count
   }
 
-  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(cellTypes[indexPath.section]),
-      forIndexPath: indexPath) as UICollectionViewCell
+  override func configureCell(cell: UICollectionViewCell, atIndexPath indexPath: NSIndexPath) {
     cell.configureForObject(objects[indexPath.section][indexPath.row])
-    return cell
   }
 }
