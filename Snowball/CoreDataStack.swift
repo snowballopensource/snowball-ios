@@ -40,10 +40,46 @@ class CoreDataStack {
     return coordinator
     }()
 
-  lazy var managedObjectContext: NSManagedObjectContext = {
-    let coordinator = self.persistentStoreCoordinator
-    var managedObjectContext = NSManagedObjectContext()
-    managedObjectContext.persistentStoreCoordinator = coordinator
-    return managedObjectContext
+  lazy var mainQueueManagedObjectContext: NSManagedObjectContext = {
+    return CoreDataStack.newManagedObjectContextWithCoordinator(self.persistentStoreCoordinator, concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
+  }()
+
+  lazy var privateQueueManagedObjectContext: NSManagedObjectContext = {
+    return CoreDataStack.newManagedObjectContextWithCoordinator(self.persistentStoreCoordinator, concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
     }()
+
+  // MARK: - Initializers
+
+  init() {
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "contextDidSaveMainQueueManagedObjectContext:", name: NSManagedObjectContextDidSaveNotification, object: self.mainQueueManagedObjectContext)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "contextDidSavePrivateQueueManagedObjectContext:", name: NSManagedObjectContextDidSaveNotification, object: self.privateQueueManagedObjectContext)
+  }
+
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+
+  // MARK: - Notifications
+  // Since this class is not an NSObject, we add @objc to allow this to work.
+  // http://stackoverflow.com/a/24416671
+
+  @objc private func contextDidSaveMainQueueManagedObjectContext(notification: NSNotification) {
+    privateQueueManagedObjectContext.performBlock {
+      self.privateQueueManagedObjectContext.mergeChangesFromContextDidSaveNotification(notification)
+    }
+  }
+
+  @objc private func contextDidSavePrivateQueueManagedObjectContext(notification: NSNotification) {
+    mainQueueManagedObjectContext.performBlock {
+      self.mainQueueManagedObjectContext.mergeChangesFromContextDidSaveNotification(notification)
+    }
+  }
+
+  // MARK: - Private
+
+  private class func newManagedObjectContextWithCoordinator(persistentStoreCoordinator: NSPersistentStoreCoordinator, concurrencyType: NSManagedObjectContextConcurrencyType) -> NSManagedObjectContext {
+    let managedObjectContext = NSManagedObjectContext(concurrencyType: concurrencyType)
+    managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
+    return managedObjectContext
+  }
 }

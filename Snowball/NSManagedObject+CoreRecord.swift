@@ -18,8 +18,8 @@ extension NSManagedObject {
 
   // MARK: - Object Creation
 
-  class func newInDefaultContext() -> NSManagedObject {
-    return NSEntityDescription.insertNewObjectForEntityForName(entityName(), inManagedObjectContext: CoreDataStack.defaultStack.managedObjectContext) as NSManagedObject
+  class func newInContext(context: NSManagedObjectContext) -> NSManagedObject {
+    return NSEntityDescription.insertNewObjectForEntityForName(entityName(), inManagedObjectContext: context) as NSManagedObject
   }
 
   // MARK: - Savers
@@ -33,8 +33,7 @@ extension NSManagedObject {
   // TODO: should this be in a background context?
   // TODO: should I be calling .executeFetchRequest inside of context.performBlockAndWait?
 
-  class func findAll(predicate: NSPredicate? = nil) -> [NSManagedObject] {
-    let context = CoreDataStack.defaultStack.managedObjectContext
+  class func findAll(predicate: NSPredicate? = nil, context: NSManagedObjectContext) -> [NSManagedObject] {
     let entityDescription = NSEntityDescription.entityForName(entityName(), inManagedObjectContext: context)
     let fetchRequest = NSFetchRequest(entityName: entityName())
     fetchRequest.predicate = predicate

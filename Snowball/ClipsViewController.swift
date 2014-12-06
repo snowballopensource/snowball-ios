@@ -21,7 +21,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout 
   }()
   let collectionViewDataSource: ClipsDataSource = {
     let objects: [[AnyObject]] = [
-      Clip.findAll()
+      Clip.findAll(context: CoreDataStack.defaultStack.mainQueueManagedObjectContext)
     ]
     let cellTypes: [UICollectionViewCell.Type] = [
       ClipCollectionViewCell.self
