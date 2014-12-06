@@ -9,5 +9,8 @@
 import CoreData
 
 class Clip: NSManagedObject {
-  @NSManaged var id: String?
+  @NSManaged var id: String
+  @NSManaged var videoURL: String
+  @NSManaged var createdAt: NSDate
+  @NSManaged var user: User
 }

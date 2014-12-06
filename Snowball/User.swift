@@ -9,5 +9,10 @@
 import CoreData
 
 class User: NSManagedObject {
-  @NSManaged var name: String?
+  @NSManaged var id: String
+  @NSManaged var name: String
+  @NSManaged var username: String
+  @NSManaged var avatarURL: String
+  @NSManaged var following: NSNumber
+  @NSManaged var clips: NSSet
 }
