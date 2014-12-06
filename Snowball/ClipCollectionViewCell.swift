@@ -77,7 +77,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
   override func configureForObject(object: AnyObject) {
     userNameLabel.text = "Name"
     // TODO: replace with user color
-    userNameLabel.textColor = UIColor.SnowballColor.randomColor()
+    let userColor = UIColor.SnowballColor.randomColor()
+    userAvatarImageView.backgroundColor = userColor
+    userNameLabel.textColor = userColor
     clipTimeLabel.text = "1h"
   }
 }
