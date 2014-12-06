@@ -60,7 +60,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     contentView.addSubview(clipTimeLabel)
     layout(clipTimeLabel, userNameLabel) { (clipTimeLabel, userNameLabel) in
       clipTimeLabel.left == clipTimeLabel.superview!.left
-      clipTimeLabel.top == userNameLabel.bottom + 5
+      clipTimeLabel.top == userNameLabel.bottom + 2
       clipTimeLabel.right == clipTimeLabel.superview!.right
     }
   }
