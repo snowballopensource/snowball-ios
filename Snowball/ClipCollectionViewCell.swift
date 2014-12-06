@@ -19,6 +19,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     clipThumbnailImageView.backgroundColor = UIColor.blackColor()
     userAvatarImageView.backgroundColor = UIColor.blackColor()
     detailLabel.textAlignment = NSTextAlignment.Center
+    detailLabel.font = UIFont(name: "Karla-Bold", size: 18)
   }
 
   required init(coder: NSCoder) {
@@ -64,7 +65,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return CGSizeMake(140.0, cellHeight)
   }
 
-  override func configureForObject(object: AnyObject) {
+  override func configureForObject(object: AnyObject {
     detailLabel.text = "Name, 1h"
   }
 }

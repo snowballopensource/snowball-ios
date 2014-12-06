@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA32C7881A3283760052F4CA /* Karla-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA32C7841A32576B0052F4CA /* Karla-Bold.ttf */; };
+		BA32C7891A3283760052F4CA /* Karla-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA32C7851A32576B0052F4CA /* Karla-Regular.ttf */; };
 		BA38C15E1A30228700A2F2AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38C15D1A30228700A2F2AE /* AppDelegate.swift */; };
 		BA38C1611A30228700A2F2AE /* Snowball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA38C15F1A30228700A2F2AE /* Snowball.xcdatamodeld */; };
 		BA38C1681A30228700A2F2AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA38C1671A30228700A2F2AE /* Images.xcassets */; };
@@ -85,6 +87,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BA32C7841A32576B0052F4CA /* Karla-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Karla-Bold.ttf"; sourceTree = "<group>"; };
+		BA32C7851A32576B0052F4CA /* Karla-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Karla-Regular.ttf"; sourceTree = "<group>"; };
 		BA38C1581A30228700A2F2AE /* Snowball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snowball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA38C15C1A30228700A2F2AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA38C15D1A30228700A2F2AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +129,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA32C7801A3256CC0052F4CA /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				BA32C7811A3256D70052F4CA /* Fonts */,
+				BA38C1671A30228700A2F2AE /* Images.xcassets */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		BA32C7811A3256D70052F4CA /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				BA32C7841A32576B0052F4CA /* Karla-Bold.ttf */,
+				BA32C7851A32576B0052F4CA /* Karla-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		BA38C14F1A30228700A2F2AE = {
 			isa = PBXGroup;
 			children = (
@@ -153,7 +175,7 @@
 				BA3A28851A30615800A85C29 /* Cells */,
 				BA3A287C1A305BC000A85C29 /* Data Source */,
 				BAF3DDBF1A3048440062C068 /* Extensions */,
-				BA38C1671A30228700A2F2AE /* Images.xcassets */,
+				BA32C7801A3256CC0052F4CA /* Assets */,
 				BA38C1691A30228700A2F2AE /* LaunchScreen.xib */,
 				BA38C15F1A30228700A2F2AE /* Snowball.xcdatamodeld */,
 				BA3A286F1A3051E300A85C29 /* Util.swift */,
@@ -353,6 +375,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA32C7881A3283760052F4CA /* Karla-Bold.ttf in Resources */,
+				BA32C7891A3283760052F4CA /* Karla-Regular.ttf in Resources */,
 				BA38C16B1A30228700A2F2AE /* LaunchScreen.xib in Resources */,
 				BA38C1681A30228700A2F2AE /* Images.xcassets in Resources */,
 			);
