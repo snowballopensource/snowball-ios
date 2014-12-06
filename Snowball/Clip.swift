@@ -8,5 +8,6 @@
 
 import CoreData
 
-class Clip: RemoteManagedObject {
+class Clip: NSManagedObject {
+  @NSManaged var id: String?
 }
