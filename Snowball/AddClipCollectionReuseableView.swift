@@ -8,14 +8,22 @@
 
 import UIKit
 
+protocol AddClipCollectionReuseableViewDelegate: class {
+  func addClipButtonTapped()
+}
+
 class AddClipCollectionReuseableView: UICollectionReusableView {
+  var delegate: AddClipCollectionReuseableViewDelegate?
 
   // MARK: - Initializers
 
   override init(frame: CGRect) {
     super.init(frame: frame)
 
-    addSubview(UIImageView(image: UIImage(named: "add-clip")))
+    let addClipButton = UIButton(frame: bounds)
+    addClipButton.setImage(UIImage(named: "add-clip"), forState: UIControlState.Normal)
+    addClipButton.addTarget(delegate, action: "addClipButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    addSubview(addClipButton)
   }
 
   required init(coder: NSCoder) {

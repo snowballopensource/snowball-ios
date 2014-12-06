@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout {
+class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout, AddClipCollectionReuseableViewDelegate {
   var collectionView: UICollectionView = {
     let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
     let flowLayout = collectionView.collectionViewLayout as UICollectionViewFlowLayout
@@ -42,6 +42,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout 
     collectionView.registerFooterClass(AddClipCollectionReuseableView.self)
     collectionView.dataSource = collectionViewDataSource
     collectionView.delegate = self
+    collectionViewDataSource.addClipViewDelegate = self
   }
 
   // MARK: - UICollectionViewDelegateFlowLayout
@@ -50,17 +51,27 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout 
     sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
       return collectionViewDataSource.cellTypes[indexPath.section].size()
   }
+
+  // MARK: - AddClipCollectionReuseableViewDelegate
+
+  func addClipButtonTapped() {
+    // TODO: POST clip
+    println("add clip button")
+  }
 }
 
 class ClipsDataSource: ArrayDataSource {
+  var addClipViewDelegate: AddClipCollectionReuseableViewDelegate?
 
   // MARK: - UICollectionViewDataSource
 
   func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
     atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-    let supplementaryView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter,
+    let addClipView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter,
       withReuseIdentifier: NSStringFromClass(AddClipCollectionReuseableView), forIndexPath: indexPath) as AddClipCollectionReuseableView
-    return supplementaryView
+
+    addClipView.delegate = addClipViewDelegate
+    return addClipView
   }
 
 }
