@@ -11,22 +11,22 @@ import CoreData
 // This class is just Apple's sample code moved to a separate file
 // with a little bit of cleanup. Cool, huh?
 
-private let stackName = NSBundle.mainBundle().infoDictionary!["CFBundleName"] as String
-
 class CoreDataStack {
+  private let stackName = NSBundle.mainBundle().infoDictionary!["CFBundleName"] as String
+
   private lazy var applicationDocumentsDirectory: NSURL = {
     let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
     return urls[urls.count-1] as NSURL
     }()
 
   private lazy var managedObjectModel: NSManagedObjectModel = {
-    let modelURL = NSBundle.mainBundle().URLForResource(stackName, withExtension: "momd")!
+    let modelURL = NSBundle.mainBundle().URLForResource(self.stackName, withExtension: "momd")!
     return NSManagedObjectModel(contentsOfURL: modelURL)!
     }()
 
   private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
     var coordinator: NSPersistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-    let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("\(stackName).sqlite")
+    let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("\(self.stackName).sqlite")
     var error: NSError? = nil
     if coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
       let dict = NSMutableDictionary()
