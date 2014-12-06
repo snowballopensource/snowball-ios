@@ -22,6 +22,12 @@ extension NSManagedObject {
     return NSEntityDescription.insertNewObjectForEntityForName(entityName(), inManagedObjectContext: CoreDataStack.defaultStack.managedObjectContext) as NSManagedObject
   }
 
+  // MARK: - Savers
+
+  func save() -> Bool {
+    return managedObjectContext!.save(nil)
+  }
+
   // MARK: - Finders
 
   // TODO: should this be in a background context?

@@ -1,5 +1,5 @@
 //
-//  Clip.swift
+//  RemoteManagedObject.swift
 //  Snowball
 //
 //  Created by James Martinez on 12/6/14.
@@ -8,5 +8,6 @@
 
 import CoreData
 
-class Clip: RemoteManagedObject {
+class RemoteManagedObject: NSManagedObject {
+  @NSManaged var id: String?
 }

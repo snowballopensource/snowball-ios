@@ -8,6 +8,6 @@
 
 import CoreData
 
-class User: NSManagedObject {
+class User: RemoteManagedObject {
   @NSManaged var name: String?
 }
