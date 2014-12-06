@@ -19,10 +19,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
     super.init(frame: frame)
     clipThumbnailImageView.backgroundColor = UIColor.blackColor()
     userAvatarImageView.backgroundColor = UIColor.blackColor()
-    userNameLabel.textAlignment = NSTextAlignment.Center
     userNameLabel.font = UIFont(name: "Karla-Bold", size: 18)
-    clipTimeLabel.textAlignment = NSTextAlignment.Center
+    userNameLabel.textAlignment = NSTextAlignment.Center
     clipTimeLabel.font = UIFont(name: "Helvetica-Medium", size: 12)
+    clipTimeLabel.textAlignment = NSTextAlignment.Center
     clipTimeLabel.textColor = UIColor(red: 210/255.0, green: 210/255.0, blue: 210/255.0, alpha: 1.0)
   }
 
@@ -77,6 +77,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   override func configureForObject(object: AnyObject) {
     userNameLabel.text = "Name"
+    // TODO: replace with user color
+    userNameLabel.textColor = UIColor.SnowballColor.randomColor()
     clipTimeLabel.text = "1h"
   }
 }
