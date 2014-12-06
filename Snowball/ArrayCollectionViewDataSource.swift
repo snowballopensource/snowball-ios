@@ -1,5 +1,5 @@
 //
-//  ArrayDataSource.swift
+//  ArrayCollectionViewDataSource.swift
 //  Snowball
 //
 //  Created by James Martinez on 12/3/14.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ArrayDataSource: NSObject, UICollectionViewDataSource {
+class ArrayCollectionViewDataSource: NSObject, UICollectionViewDataSource {
   var objects = [[AnyObject]]()
   var cellTypes = [UICollectionViewCell.Type]()
 
@@ -18,11 +18,6 @@ class ArrayDataSource: NSObject, UICollectionViewDataSource {
     self.objects = objects
     self.cellTypes = cellTypes
   }
-
-  // MARK: - UITableView
-
-  // MARK: - UITableViewDataSource
-  // TODO: write table view data source code
 
   // MARK: - UICollectionView
 

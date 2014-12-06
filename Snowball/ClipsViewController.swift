@@ -60,7 +60,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
   }
 }
 
-class ClipsDataSource: ArrayDataSource {
+class ClipsDataSource: ArrayCollectionViewDataSource {
   var addClipViewDelegate: AddClipCollectionReuseableViewDelegate?
 
   // MARK: - UICollectionViewDataSource
