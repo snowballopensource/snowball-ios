@@ -19,7 +19,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout 
     collectionView.backgroundColor = UIColor.whiteColor()
     return collectionView
   }()
-  let arrayDataSource: ArrayDataSource = {
+  let collectionViewDataSource: ClipsDataSource = {
     let objects: [[AnyObject]] = [
       Clip.findAll()
     ]
@@ -40,7 +40,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout 
 
     collectionView.registerCellClass(ClipCollectionViewCell.self)
     collectionView.registerFooterClass(AddClipCollectionReuseableView.self)
-    collectionView.dataSource = arrayDataSource
+    collectionView.dataSource = collectionViewDataSource
     collectionView.delegate = self
   }
 
@@ -48,7 +48,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout 
 
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
     sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-      return arrayDataSource.cellTypes[indexPath.section].size()
+      return collectionViewDataSource.cellTypes[indexPath.section].size()
   }
 }
 
