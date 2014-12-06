@@ -20,7 +20,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     clipThumbnailImageView.backgroundColor = UIColor.blackColor()
     userNameLabel.font = UIFont(name: "Karla-Bold", size: 18)
     userNameLabel.textAlignment = NSTextAlignment.Center
-    clipTimeLabel.font = UIFont(name: "Helvetica-Bold", size: 12)
+    clipTimeLabel.font = UIFont(name: "Helvetica-Bold", size: 16)
     clipTimeLabel.textAlignment = NSTextAlignment.Center
     clipTimeLabel.textColor = UIColor(red: 210/255.0, green: 210/255.0, blue: 210/255.0, alpha: 1.0)
   }
