@@ -25,6 +25,7 @@
 		BAA8C0681A32E76D00AAB9F4 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0671A32E76D00AAB9F4 /* CoreDataStack.swift */; };
 		BAA8C06A1A32EAAA00AAB9F4 /* CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0691A32EAAA00AAB9F4 /* CoreRecord.swift */; };
 		BAA8C06C1A32EC4600AAB9F4 /* CoreDataStack+DefaultStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C06B1A32EC4600AAB9F4 /* CoreDataStack+DefaultStack.swift */; };
+		BAA8C07A1A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0791A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift */; };
 		BAE10A0F1A30400100CCFA25 /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAE10A081A303F5F00CCFA25 /* Cartography.framework */; };
 		BAE10A101A30400100CCFA25 /* Cartography.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAE10A081A303F5F00CCFA25 /* Cartography.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */; };
@@ -114,6 +115,7 @@
 		BAA8C0671A32E76D00AAB9F4 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		BAA8C0691A32EAAA00AAB9F4 /* CoreRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreRecord.swift; sourceTree = "<group>"; };
 		BAA8C06B1A32EC4600AAB9F4 /* CoreDataStack+DefaultStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreDataStack+DefaultStack.swift"; sourceTree = "<group>"; };
+		BAA8C0791A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+CoreRecord.swift"; sourceTree = "<group>"; };
 		BAE10A001A303F5F00CCFA25 /* Cartography.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cartography.xcodeproj; path = Carthage.checkout/Cartography/Cartography.xcodeproj; sourceTree = SOURCE_ROOT; };
 		BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BAF3DDBA1A3043F10062C068 /* UIViewController+ChildViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ChildViewController.swift"; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				BAA8C0691A32EAAA00AAB9F4 /* CoreRecord.swift */,
 				BAA8C0671A32E76D00AAB9F4 /* CoreDataStack.swift */,
 				BAA8C06B1A32EC4600AAB9F4 /* CoreDataStack+DefaultStack.swift */,
+				BAA8C0791A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -438,6 +441,7 @@
 				BA3A28701A3051E300A85C29 /* Util.swift in Sources */,
 				BAA8C0681A32E76D00AAB9F4 /* CoreDataStack.swift in Sources */,
 				BA38C1611A30228700A2F2AE /* Snowball.xcdatamodeld in Sources */,
+				BAA8C07A1A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift in Sources */,
 				BA32C7921A3286250052F4CA /* UIColor+Snowball.swift in Sources */,
 				BA3A28771A305AF600A85C29 /* ClipCollectionViewCell.swift in Sources */,
 				BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */,
