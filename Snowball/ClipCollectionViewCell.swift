@@ -30,7 +30,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     clipTimeLabel.textColor = UIColor(red: 210/255.0, green: 210/255.0, blue: 210/255.0, alpha: 1.0)
     contentView.addSubview(clipTimeLabel)
     playButton.setImage(UIImage(named: "play"), forState: UIControlState.Normal)
-    playButton.addTarget(self, action: "animateClipThumbnailScaleChange", forControlEvents: UIControlEvents.TouchDown)
+    playButton.addTarget(self, action: "animateClipThumbnailScaleDown", forControlEvents: UIControlEvents.TouchDown)
+    playButton.addTarget(self, action: "animateClipThumbnailScaleNormal", forControlEvents: UIControlEvents.TouchUpInside | UIControlEvents.TouchUpOutside | UIControlEvents.TouchCancel | UIControlEvents.TouchDragExit)
     contentView.addSubview(playButton)
     pauseButton.setImage(UIImage(named: "pause"), forState: UIControlState.Normal)
     contentView.addSubview(pauseButton)
@@ -99,13 +100,15 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   // MARK: - Actions
 
-  func animateClipThumbnailScaleChange() {
-    UIView.animateWithDuration(0.1, animations: {
+  func animateClipThumbnailScaleDown() {
+    UIView.animateWithDuration(0.1) {
       self.clipThumbnailImageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9)
-    }) { (completed) in
-      UIView.animateWithDuration(0.1) {
-        self.clipThumbnailImageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0)
-      }
+    }
+  }
+
+  func animateClipThumbnailScaleNormal() {
+    UIView.animateWithDuration(0.1) {
+      self.clipThumbnailImageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0)
     }
   }
 }
