@@ -12,14 +12,18 @@ import UIKit
 class ClipCollectionViewCell: UICollectionViewCell {
   let clipThumbnailImageView = UIImageView()
   let userAvatarImageView = UIImageView()
-  let detailLabel = UILabel()
+  let userNameLabel = UILabel()
+  let clipTimeLabel = UILabel()
 
   override init(frame: CGRect) {
     super.init(frame: frame)
     clipThumbnailImageView.backgroundColor = UIColor.blackColor()
     userAvatarImageView.backgroundColor = UIColor.blackColor()
-    detailLabel.textAlignment = NSTextAlignment.Center
-    detailLabel.font = UIFont(name: "Karla-Bold", size: 18)
+    userNameLabel.textAlignment = NSTextAlignment.Center
+    userNameLabel.font = UIFont(name: "Karla-Bold", size: 18)
+    clipTimeLabel.textAlignment = NSTextAlignment.Center
+    clipTimeLabel.font = UIFont(name: "Helvetica-Medium", size: 12)
+    clipTimeLabel.textColor = UIColor(red: 210/255.0, green: 210/255.0, blue: 210/255.0, alpha: 1.0)
   }
 
   required init(coder: NSCoder) {
@@ -47,12 +51,18 @@ class ClipCollectionViewCell: UICollectionViewCell {
       userAvatarImageView.height == userAvatarImageView.width
     }
 
-    contentView.addSubview(detailLabel)
-    layout(detailLabel, userAvatarImageView) { (detailLabel, userAvatarImageView) in
-      detailLabel.left == detailLabel.superview!.left
-      detailLabel.top == userAvatarImageView.bottom + 5
-      detailLabel.right == detailLabel.superview!.right
-      // detailLabel.height == detailLabel.superview!.width
+    contentView.addSubview(userNameLabel)
+    layout(userNameLabel, userAvatarImageView) { (userNameLabel, userAvatarImageView) in
+      userNameLabel.left == userNameLabel.superview!.left
+      userNameLabel.top == userAvatarImageView.bottom + 5
+      userNameLabel.right == userNameLabel.superview!.right
+    }
+
+    contentView.addSubview(clipTimeLabel)
+    layout(clipTimeLabel, userNameLabel) { (clipTimeLabel, userNameLabel) in
+      clipTimeLabel.left == clipTimeLabel.superview!.left
+      clipTimeLabel.top == userNameLabel.bottom + 5
+      clipTimeLabel.right == clipTimeLabel.superview!.right
     }
   }
 
@@ -65,7 +75,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return CGSizeMake(140.0, cellHeight)
   }
 
-  override func configureForObject(object: AnyObject {
-    detailLabel.text = "Name, 1h"
+  override func configureForObject(object: AnyObject) {
+    userNameLabel.text = "Name"
+    clipTimeLabel.text = "1h"
   }
 }
