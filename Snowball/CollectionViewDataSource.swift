@@ -36,7 +36,7 @@ class CollectionViewDataSource: NSObject, UICollectionViewDataSource {
     return cell
   }
 
-  // MARK: CollectionViewDataSource
+  // MARK: - CollectionViewDataSource
 
   func configureCell(cell: UICollectionViewCell, atIndexPath indexPath: NSIndexPath) {
     requireSubclass()

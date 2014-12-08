@@ -18,7 +18,7 @@ class ArrayCollectionViewDataSource: CollectionViewDataSource {
     super.init(cellTypes: cellTypes)
   }
 
-  // MARK: CollectionViewDataSource
+  // MARK: - CollectionViewDataSource
 
   override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
     return objects.count
