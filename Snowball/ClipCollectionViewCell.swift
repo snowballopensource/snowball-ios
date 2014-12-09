@@ -93,7 +93,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let userColor = user.color as UIColor
     userAvatarImageView.backgroundColor = userColor
     userNameLabel.textColor = userColor
-    clipTimeLabel.text = "1h"
+    clipTimeLabel.text = clip.createdAt.shortTimeSinceString()
 
     // playButton.hidden = true
     pauseButton.hidden = true

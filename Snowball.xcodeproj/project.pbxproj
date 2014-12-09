@@ -30,6 +30,7 @@
 		BAA8C0841A32FA2B00AAB9F4 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0831A32FA2B00AAB9F4 /* Clip.swift */; };
 		BAA8C0971A333A8B00AAB9F4 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0961A333A8B00AAB9F4 /* CollectionViewDataSource.swift */; };
 		BAA8C0991A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0981A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift */; };
+		BACA7A861A36E40900C34B6C /* NSDate+TimeSince.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */; };
 		BAE10A0F1A30400100CCFA25 /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAE10A081A303F5F00CCFA25 /* Cartography.framework */; };
 		BAE10A101A30400100CCFA25 /* Cartography.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAE10A081A303F5F00CCFA25 /* Cartography.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */; };
@@ -124,6 +125,7 @@
 		BAA8C0831A32FA2B00AAB9F4 /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
 		BAA8C0961A333A8B00AAB9F4 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 		BAA8C0981A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeSince.swift"; sourceTree = "<group>"; };
 		BAE10A001A303F5F00CCFA25 /* Cartography.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cartography.xcodeproj; path = Carthage.checkout/Cartography/Cartography.xcodeproj; sourceTree = SOURCE_ROOT; };
 		BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BAF3DDBA1A3043F10062C068 /* UIViewController+ChildViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ChildViewController.swift"; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				BA3A28831A305C6F00A85C29 /* UICollectionView+CellRegistration.swift */,
 				BA52474A1A31A1FC003BD269 /* UICollectionReusableView+Required.swift */,
 				BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */,
+				BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 				BA3A28701A3051E300A85C29 /* Util.swift in Sources */,
 				BAA8C0991A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift in Sources */,
 				BAA8C0681A32E76D00AAB9F4 /* CoreDataStack.swift in Sources */,
+				BACA7A861A36E40900C34B6C /* NSDate+TimeSince.swift in Sources */,
 				BA38C1611A30228700A2F2AE /* Snowball.xcdatamodeld in Sources */,
 				BAA8C07A1A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift in Sources */,
 				BA32C7921A3286250052F4CA /* UIColor+Snowball.swift in Sources */,
