@@ -23,7 +23,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     let cellTypes: [UICollectionViewCell.Type] = [
       ClipCollectionViewCell.self
     ]
-    return ClipsDataSource(collectionView: self.collectionView, entityName: Clip.entityName(), cellTypes: cellTypes)
+    return ClipsDataSource(collectionView: self.collectionView, entityName: Clip.entityName(), sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: true)], cellTypes: cellTypes)
   }()
 
   // MARK: - UIViewController
@@ -58,6 +58,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     let user = User.newEntity() as User
     user.name = "James"
     clip.user = user
+    clip.createdAt = NSDate()
     clip.save()
   }
 }
