@@ -18,7 +18,7 @@ extension NSManagedObject {
 
   // MARK: - Object Creation
 
-  class func newInContext(context: NSManagedObjectContext) -> NSManagedObject {
+  class func newEntity(context: NSManagedObjectContext = NSManagedObjectContext.mainQueueContext()) -> NSManagedObject {
     return NSEntityDescription.insertNewObjectForEntityForName(entityName(), inManagedObjectContext: context) as NSManagedObject
   }
 

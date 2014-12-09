@@ -54,6 +54,11 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
   func addClipButtonTapped() {
     // TODO: POST clip
     println("add clip button")
+    let clip = Clip.newEntity() as Clip
+    let user = User.newEntity() as User
+    user.name = "James"
+    clip.user = user
+    clip.save()
   }
 }
 

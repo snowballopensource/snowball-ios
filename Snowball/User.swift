@@ -7,6 +7,7 @@
 //
 
 import CoreData
+import UIKit
 
 class User: NSManagedObject {
   @NSManaged var id: String
@@ -15,4 +16,12 @@ class User: NSManagedObject {
   @NSManaged var avatarURL: String
   @NSManaged var following: NSNumber
   @NSManaged var clips: NSSet
+  @NSManaged var color: AnyObject
+
+  // MARK: - NSManageObject
+
+  override func awakeFromInsert() {
+    super.awakeFromInsert()
+    color = UIColor.SnowballColor.randomColor()
+  }
 }
