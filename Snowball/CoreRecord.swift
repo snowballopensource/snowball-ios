@@ -11,3 +11,13 @@ import CoreData
 // Here's where all of my Core Data addons go.
 
 let coreRecordAppName = NSBundle.mainBundle().infoDictionary!["CFBundleName"] as String
+
+struct CoreRecord {
+  static func saveWithBlock(block: (context: NSManagedObjectContext) -> ()) {
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
+      let context = NSManagedObjectContext.privateQueueContext()
+      block(context: context)
+      context.save(nil)
+    }
+  }
+}

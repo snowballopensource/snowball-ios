@@ -16,4 +16,8 @@ extension NSManagedObjectContext {
     return CoreDataStack.defaultStack.mainQueueManagedObjectContext
   }
 
+  class func privateQueueContext() -> NSManagedObjectContext {
+    return CoreDataStack.defaultStack.privateQueueManagedObjectContext
+  }
+
 }

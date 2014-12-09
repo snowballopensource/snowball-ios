@@ -42,8 +42,13 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     collectionView.delegate = self
     collectionViewDataSource.addClipViewDelegate = self
 
-    API.request(Router.GetClipStream).responseJSON { (request, response, object, error) in
-      
+    API.request(Router.GetClipStream).responseJSON { (request, response, JSON, error) in
+      if let JSON: AnyObject = JSON {
+        CoreRecord.saveWithBlock { (context) in
+          Clip.importFromJSON(JSON, context: context)
+          return
+        }
+      }
     }
   }
 
@@ -52,8 +57,10 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
 
     let lastSection = collectionViewDataSource.numberOfSectionsInCollectionView(collectionView) - 1
     let lastItem = collectionViewDataSource.collectionView(collectionView, numberOfItemsInSection: lastSection) - 1
-    let lastIndexPath = NSIndexPath(forItem: lastItem, inSection: lastSection)
-    collectionView.scrollToItemAtIndexPath(lastIndexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: false)
+    if lastItem > 0 {
+      let lastIndexPath = NSIndexPath(forItem: lastItem, inSection: lastSection)
+      collectionView.scrollToItemAtIndexPath(lastIndexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: false)
+    }
   }
 
   // MARK: - UICollectionViewDelegateFlowLayout
