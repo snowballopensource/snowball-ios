@@ -35,6 +35,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    collectionView.showsHorizontalScrollIndicator = false
     collectionView.registerCellClass(ClipCollectionViewCell.self)
     collectionView.registerFooterClass(AddClipCollectionReuseableView.self)
     collectionView.dataSource = collectionViewDataSource
