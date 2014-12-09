@@ -17,14 +17,14 @@ class FetchedResultsCollectionViewDataSource: CollectionViewDataSource, NSFetche
 
   // MARK: - Initializers
 
-  init(collectionView: UICollectionView, entityName: String, sectionNameKeyPath: String?, sortDescriptors: [NSSortDescriptor]?, predicate: NSPredicate?, context: NSManagedObjectContext, cellTypes: [UICollectionViewCell.Type]) {
+  init(collectionView: UICollectionView, entityName: String, sectionNameKeyPath: String? = nil, sortDescriptors: [NSSortDescriptor]? = nil, predicate: NSPredicate? = nil, cellTypes: [UICollectionViewCell.Type]) {
     self.collectionView = collectionView
     let fetchRequest = NSFetchRequest()
-    let entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: context)
+    let entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: NSManagedObjectContext.mainQueueContext())
     fetchRequest.entity = entity
     fetchRequest.fetchBatchSize = 20
-    fetchRequest.sortDescriptors = sortDescriptors
-    fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: sectionNameKeyPath, cacheName: nil)
+    fetchRequest.sortDescriptors = sortDescriptors ?? [NSSortDescriptor]()
+    fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: NSManagedObjectContext.mainQueueContext(), sectionNameKeyPath: sectionNameKeyPath, cacheName: nil)
     super.init(cellTypes: cellTypes)
     fetchedResultsController.delegate = self
     var error: NSError?

@@ -19,14 +19,11 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     collectionView.backgroundColor = UIColor.whiteColor()
     return collectionView
   }()
-  let collectionViewDataSource: ClipsDataSource = {
-    let objects: [[AnyObject]] = [
-      Clip.findAll(context: CoreDataStack.defaultStack.mainQueueManagedObjectContext)
-    ]
+  lazy var collectionViewDataSource: ClipsDataSource = {
     let cellTypes: [UICollectionViewCell.Type] = [
       ClipCollectionViewCell.self
     ]
-    return ClipsDataSource(objects: objects, cellTypes: cellTypes)
+    return ClipsDataSource(collectionView: self.collectionView, entityName: Clip.entityName(), cellTypes: cellTypes)
   }()
 
   // MARK: - UIViewController
@@ -60,7 +57,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
   }
 }
 
-class ClipsDataSource: ArrayCollectionViewDataSource {
+class ClipsDataSource: FetchedResultsCollectionViewDataSource {
   var addClipViewDelegate: AddClipCollectionReuseableViewDelegate?
 
   // MARK: - UICollectionViewDataSource
