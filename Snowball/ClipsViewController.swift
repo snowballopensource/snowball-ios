@@ -64,9 +64,7 @@ class ClipsDataSource: FetchedResultsCollectionViewDataSource {
 
   func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
     atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-    let addClipView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter,
-      withReuseIdentifier: NSStringFromClass(AddClipCollectionReuseableView), forIndexPath: indexPath) as AddClipCollectionReuseableView
-
+    let addClipView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter, withReuseIdentifier: NSStringFromClass(AddClipCollectionReuseableView), forIndexPath: indexPath) as AddClipCollectionReuseableView
     addClipView.delegate = addClipViewDelegate
     return addClipView
   }
