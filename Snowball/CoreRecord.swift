@@ -9,3 +9,5 @@
 import CoreData
 
 // Here's where all of my Core Data addons go.
+
+let coreRecordAppName = NSBundle.mainBundle().infoDictionary!["CFBundleName"] as String

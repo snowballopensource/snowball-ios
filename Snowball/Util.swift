@@ -8,8 +8,6 @@
 
 import Foundation
 
-let appName = NSBundle.mainBundle().infoDictionary!["CFBundleName"] as String
-
 func NSLocalizedString(key: String) -> String {
   return NSLocalizedString(key, comment: "")
 }

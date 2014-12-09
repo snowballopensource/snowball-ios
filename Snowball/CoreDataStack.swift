@@ -12,7 +12,14 @@ import CoreData
 // with a little bit of cleanup. Cool, huh?
 
 class CoreDataStack {
-  let stackName = appName
+  let stackName = coreRecordAppName
+
+  class var defaultStack: CoreDataStack {
+    struct Singleton {
+      static let defaultStack: CoreDataStack = CoreDataStack()
+    }
+    return Singleton.defaultStack
+  }
 
   private lazy var applicationDocumentsDirectory: NSURL = {
     let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)

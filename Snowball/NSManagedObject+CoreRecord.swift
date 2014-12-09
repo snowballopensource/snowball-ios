@@ -10,10 +10,10 @@ import CoreData
 
 extension NSManagedObject {
 
-  // MARK: - General
+  // MARK: - Misc
 
   class func entityName() -> String {
-    return NSStringFromClass(self).stringByReplacingOccurrencesOfString("\(appName).", withString: "", options: nil, range: nil)
+    return NSStringFromClass(self).stringByReplacingOccurrencesOfString("\(coreRecordAppName).", withString: "", options: nil, range: nil)
   }
 
   // MARK: - Object Creation

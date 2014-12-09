@@ -10,6 +10,8 @@ import CoreData
 
 extension NSManagedObjectContext {
 
+  // MARK: - Convenience Accessors
+
   class func mainQueueContext() -> NSManagedObjectContext {
     return CoreDataStack.defaultStack.mainQueueManagedObjectContext
   }
