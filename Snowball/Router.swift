@@ -120,7 +120,9 @@ private struct APICredential {
   private static let kCurrentUserAuthTokenKey = "CurrentUserAuthToken"
   static var authToken: String? {
     get {
-    return NSUserDefaults.standardUserDefaults().objectForKey(kCurrentUserAuthTokenKey) as String?
+      // Comment this next line out to hide warning. This is for staging development only.
+      if (true) { return "700e7ee1200001667997e5be009a96ca" }
+      return NSUserDefaults.standardUserDefaults().objectForKey(kCurrentUserAuthTokenKey) as String?
     }
     set {
       if let authToken = newValue {
