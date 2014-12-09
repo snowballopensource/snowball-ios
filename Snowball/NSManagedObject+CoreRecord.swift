@@ -10,17 +10,29 @@ import CoreData
 
 extension NSManagedObject {
 
-  // MARK: - Misc
+  // MARK: - Base
 
   class func entityName() -> String {
     return NSStringFromClass(self).stringByReplacingOccurrencesOfString("\(coreRecordAppName).", withString: "", options: nil, range: nil)
   }
 
+  class func primaryKey() -> String {
+    return "id"
+  }
+
   // MARK: - Object Creation
 
-  class func newEntity(context: NSManagedObjectContext = NSManagedObjectContext.mainQueueContext()) -> NSManagedObject {
-    return NSEntityDescription.insertNewObjectForEntityForName(entityName(), inManagedObjectContext: context) as NSManagedObject
+  class func newEntity(attributes: AnyObject? = nil, context: NSManagedObjectContext = NSManagedObjectContext.mainQueueContext()) -> NSManagedObject {
+    let object = NSEntityDescription.insertNewObjectForEntityForName(entityName(), inManagedObjectContext: context) as NSManagedObject
+    if attributes != nil {
+      object.assign(attributes!)
+    }
+    return object
   }
+
+  // MARK: - Attribute Assignment
+
+  func assign(attributes: AnyObject) {}
 
   // MARK: - Savers
 
@@ -30,10 +42,15 @@ extension NSManagedObject {
 
   // MARK: - Finders
 
-  // TODO: should this be in a background context?
-  // TODO: should I be calling .executeFetchRequest inside of context.performBlockAndWait?
+  class func find(primaryKey: String, context: NSManagedObjectContext = NSManagedObjectContext.mainQueueContext()) -> NSManagedObject? {
+    return findAll(predicate: NSPredicate(format: "%@ == %@", self.primaryKey(), primaryKey), context: context).first
+  }
 
-  class func findAll(predicate: NSPredicate? = nil, context: NSManagedObjectContext) -> [NSManagedObject] {
+  class func findOrInitialize(primaryKey: String, context: NSManagedObjectContext = NSManagedObjectContext.mainQueueContext()) -> NSManagedObject {
+    return find(primaryKey, context: context) ?? newEntity(context: context)
+  }
+
+  class func findAll(predicate: NSPredicate? = nil, context: NSManagedObjectContext = NSManagedObjectContext.mainQueueContext()) -> [NSManagedObject] {
     let entityDescription = NSEntityDescription.entityForName(entityName(), inManagedObjectContext: context)
     let fetchRequest = NSFetchRequest(entityName: entityName())
     fetchRequest.predicate = predicate

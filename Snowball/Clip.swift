@@ -8,7 +8,7 @@
 
 import CoreData
 
-class Clip: NSManagedObject {
+class Clip: RemoteObject {
   @NSManaged var id: String
   @NSManaged var videoURL: String
   @NSManaged var createdAt: NSDate

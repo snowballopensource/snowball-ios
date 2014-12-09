@@ -41,6 +41,10 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     collectionView.dataSource = collectionViewDataSource
     collectionView.delegate = self
     collectionViewDataSource.addClipViewDelegate = self
+
+    API.request(Router.GetClipStream).responseJSON { (request, response, object, error) in
+      
+    }
   }
 
   override func viewWillAppear(animated: Bool) {

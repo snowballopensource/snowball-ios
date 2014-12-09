@@ -9,7 +9,7 @@
 import CoreData
 import UIKit
 
-class User: NSManagedObject {
+class User: RemoteObject {
   @NSManaged var id: String
   @NSManaged var name: String
   @NSManaged var username: String
@@ -18,7 +18,7 @@ class User: NSManagedObject {
   @NSManaged var clips: NSSet
   @NSManaged var color: AnyObject
 
-  // MARK: - NSManageObject
+  // MARK: - NSManagedObject
 
   override func awakeFromInsert() {
     super.awakeFromInsert()

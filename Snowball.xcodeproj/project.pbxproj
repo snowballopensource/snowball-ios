@@ -26,6 +26,8 @@
 		BA7C27BC1A37A03000A9CFC5 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA7C27B51A37A02600A9CFC5 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA7C27C61A37A28F00A9CFC5 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27C51A37A28F00A9CFC5 /* Router.swift */; };
 		BA7C27CB1A37A64400A9CFC5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27CA1A37A64400A9CFC5 /* API.swift */; };
+		BA7C27CD1A37A8F200A9CFC5 /* JSONPersistable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27CC1A37A8F200A9CFC5 /* JSONPersistable.swift */; };
+		BA7C27D31A37ADA600A9CFC5 /* RemoteObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */; };
 		BA8450281A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8450271A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift */; };
 		BAA8C0681A32E76D00AAB9F4 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0671A32E76D00AAB9F4 /* CoreDataStack.swift */; };
 		BAA8C06A1A32EAAA00AAB9F4 /* CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0691A32EAAA00AAB9F4 /* CoreRecord.swift */; };
@@ -146,6 +148,8 @@
 		BA7C27AF1A37A02600A9CFC5 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Carthage.checkout/Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
 		BA7C27C51A37A28F00A9CFC5 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		BA7C27CA1A37A64400A9CFC5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		BA7C27CC1A37A8F200A9CFC5 /* JSONPersistable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONPersistable.swift; sourceTree = "<group>"; };
+		BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteObject.swift; sourceTree = "<group>"; };
 		BA8450271A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+CoreRecord.swift"; sourceTree = "<group>"; };
 		BAA8C0671A32E76D00AAB9F4 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		BAA8C0691A32EAAA00AAB9F4 /* CoreRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreRecord.swift; sourceTree = "<group>"; };
@@ -306,6 +310,7 @@
 			children = (
 				BA7C27CA1A37A64400A9CFC5 /* API.swift */,
 				BA7C27C51A37A28F00A9CFC5 /* Router.swift */,
+				BA7C27CC1A37A8F200A9CFC5 /* JSONPersistable.swift */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -324,6 +329,7 @@
 		BAA8C07E1A32F8EC00AAB9F4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */,
 				BAA8C07F1A32F8F300AAB9F4 /* User.swift */,
 				BAA8C0831A32FA2B00AAB9F4 /* Clip.swift */,
 			);
@@ -533,6 +539,8 @@
 				BA38C1811A30272700A2F2AE /* ClipsViewController.swift in Sources */,
 				BA3A28701A3051E300A85C29 /* Util.swift in Sources */,
 				BAA8C0991A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift in Sources */,
+				BA7C27CD1A37A8F200A9CFC5 /* JSONPersistable.swift in Sources */,
+				BA7C27D31A37ADA600A9CFC5 /* RemoteObject.swift in Sources */,
 				BAA8C0681A32E76D00AAB9F4 /* CoreDataStack.swift in Sources */,
 				BACA7A861A36E40900C34B6C /* NSDate+TimeSince.swift in Sources */,
 				BA38C1611A30228700A2F2AE /* Snowball.xcdatamodeld in Sources */,
