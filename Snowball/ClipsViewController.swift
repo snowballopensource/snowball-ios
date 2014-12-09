@@ -42,6 +42,15 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     collectionViewDataSource.addClipViewDelegate = self
   }
 
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+
+    let lastSection = collectionViewDataSource.numberOfSectionsInCollectionView(collectionView) - 1
+    let lastItem = collectionViewDataSource.collectionView(collectionView, numberOfItemsInSection: lastSection) - 1
+    let lastIndexPath = NSIndexPath(forItem: lastItem, inSection: lastSection)
+    collectionView.scrollToItemAtIndexPath(lastIndexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: false)
+  }
+
   // MARK: - UICollectionViewDelegateFlowLayout
 
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
