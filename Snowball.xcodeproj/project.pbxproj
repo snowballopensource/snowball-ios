@@ -25,6 +25,7 @@
 		BA7C27BB1A37A03000A9CFC5 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA7C27B51A37A02600A9CFC5 /* Alamofire.framework */; };
 		BA7C27BC1A37A03000A9CFC5 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA7C27B51A37A02600A9CFC5 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA7C27C61A37A28F00A9CFC5 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27C51A37A28F00A9CFC5 /* Router.swift */; };
+		BA7C27CB1A37A64400A9CFC5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27CA1A37A64400A9CFC5 /* API.swift */; };
 		BA8450281A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8450271A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift */; };
 		BAA8C0681A32E76D00AAB9F4 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0671A32E76D00AAB9F4 /* CoreDataStack.swift */; };
 		BAA8C06A1A32EAAA00AAB9F4 /* CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0691A32EAAA00AAB9F4 /* CoreRecord.swift */; };
@@ -144,6 +145,7 @@
 		BA52474A1A31A1FC003BD269 /* UICollectionReusableView+Required.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+Required.swift"; sourceTree = "<group>"; };
 		BA7C27AF1A37A02600A9CFC5 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Carthage.checkout/Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
 		BA7C27C51A37A28F00A9CFC5 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		BA7C27CA1A37A64400A9CFC5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BA8450271A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+CoreRecord.swift"; sourceTree = "<group>"; };
 		BAA8C0671A32E76D00AAB9F4 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		BAA8C0691A32EAAA00AAB9F4 /* CoreRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreRecord.swift; sourceTree = "<group>"; };
@@ -227,14 +229,14 @@
 		BA38C15A1A30228700A2F2AE /* Snowball */ = {
 			isa = PBXGroup;
 			children = (
-				BA7C27C71A37A32A00A9CFC5 /* Networking */,
 				BA38C15D1A30228700A2F2AE /* AppDelegate.swift */,
 				BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */,
 				BA38C1801A30272700A2F2AE /* ClipsViewController.swift */,
-				BAA8C07E1A32F8EC00AAB9F4 /* Models */,
-				BAA8C0631A32E75B00AAB9F4 /* Core Record */,
 				BA32C7931A3287AC0052F4CA /* Views */,
 				BA3A28851A30615800A85C29 /* Cells */,
+				BAA8C0631A32E75B00AAB9F4 /* Core Record */,
+				BAA8C07E1A32F8EC00AAB9F4 /* Models */,
+				BA7C27C71A37A32A00A9CFC5 /* Networking */,
 				BA3A287C1A305BC000A85C29 /* Data Source */,
 				BAF3DDBF1A3048440062C068 /* Extensions */,
 				BA32C7801A3256CC0052F4CA /* Assets */,
@@ -302,6 +304,7 @@
 		BA7C27C71A37A32A00A9CFC5 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				BA7C27CA1A37A64400A9CFC5 /* API.swift */,
 				BA7C27C51A37A28F00A9CFC5 /* Router.swift */,
 			);
 			name = Networking;
@@ -541,6 +544,7 @@
 				BAA8C0801A32F8F300AAB9F4 /* User.swift in Sources */,
 				BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */,
 				BA52474B1A31A1FC003BD269 /* UICollectionReusableView+Required.swift in Sources */,
+				BA7C27CB1A37A64400A9CFC5 /* API.swift in Sources */,
 				BA5247451A319E24003BD269 /* AddClipCollectionReuseableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
