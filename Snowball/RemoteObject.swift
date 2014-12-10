@@ -20,10 +20,11 @@ class RemoteObject: NSManagedObject {
     }
   }
 
-  class func objectFromJSON(JSON: AnyObject, context: NSManagedObjectContext) -> Self? {
+  class func objectFromJSON(JSON: AnyObject, context: NSManagedObjectContext) -> RemoteObject? {
     if let id = JSON["id"] as? String {
       let object = findOrInitialize(id, context: context)
       object.assign(JSON)
+      return object as RemoteObject
     }
     return nil
   }

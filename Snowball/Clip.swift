@@ -27,7 +27,7 @@ class Clip: RemoteObject {
     }
     if let userJSON: AnyObject = attributes["user"] {
       if let user = User.objectFromJSON(userJSON, context: managedObjectContext!) {
-        self.user = user
+        self.user = user as User
       }
     }
   }
