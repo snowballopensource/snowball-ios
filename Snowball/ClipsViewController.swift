@@ -77,6 +77,11 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     // TODO: play clips
   }
 
+  func shouldShowScaledDownThumbnail() -> Bool {
+    // TODO: return true if playing, else false.
+    return true
+  }
+
   // MARK: - AddClipCollectionReuseableViewDelegate
 
   func addClipButtonTapped() {

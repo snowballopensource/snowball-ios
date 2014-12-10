@@ -11,6 +11,7 @@ import UIKit
 
 protocol ClipCollectionViewCellDelegate: class {
   func playClipButtonTapped()
+  func shouldShowScaledDownThumbnail() -> Bool
 }
 
 class ClipCollectionViewCell: UICollectionViewCell {
@@ -106,6 +107,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipThumbnailImageView.alpha = 0.5
     }
 
+    let scaleDown = delegate?.shouldShowScaledDownThumbnail() ?? false
+    scaleClipThumbnail(scaleDown, animated: false)
+
     // playButton.hidden = true
     pauseButton.hidden = true
   }
@@ -116,15 +120,20 @@ class ClipCollectionViewCell: UICollectionViewCell {
     delegate?.playClipButtonTapped()
   }
 
-  func animateClipThumbnailScaleDown() {
-    UIView.animateWithDuration(0.1) {
-      self.clipThumbnailImageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9)
+  func scaleClipThumbnail(down: Bool, animated: Bool) {
+    let scaleBlock: () -> () = {
+      var scale: CGFloat = 1.0
+      if down {
+        scale = 0.9
+      }
+      self.clipThumbnailImageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, scale, scale)
     }
-  }
-
-  func animateClipThumbnailScaleNormal() {
-    UIView.animateWithDuration(0.1) {
-      self.clipThumbnailImageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0)
+    if animated {
+      UIView.animateWithDuration(0.1) {
+        scaleBlock()
+      }
+      return
     }
+    scaleBlock()
   }
 }
