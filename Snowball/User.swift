@@ -24,4 +24,22 @@ class User: RemoteObject {
     super.awakeFromInsert()
     color = UIColor.SnowballColor.randomColor()
   }
+
+  override func assign(attributes: AnyObject) {
+    if let id = attributes["id"] as? String {
+      self.id = id
+    }
+    if let name = attributes["name"] as? String {
+      self.name = name
+    }
+    if let username = attributes["username"] as? String {
+      self.username = username
+    }
+    if let avatarURL = attributes["avatar_url"] as? String {
+      self.avatarURL = avatarURL
+    }
+    if let following = attributes["following"] as? Bool {
+      self.following = following
+    }
+  }
 }

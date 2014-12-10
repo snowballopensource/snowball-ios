@@ -13,4 +13,22 @@ class Clip: RemoteObject {
   @NSManaged var videoURL: String
   @NSManaged var createdAt: NSDate
   @NSManaged var user: User
+
+
+  override func assign(attributes: AnyObject) {
+    if let id = attributes["id"] as? String {
+      self.id = id
+    }
+    if let videoURL = attributes["video_url"] as? String {
+      self.videoURL = videoURL
+    }
+    if let createdAt = attributes["created_at"] as? NSTimeInterval {
+      self.createdAt = NSDate(timeIntervalSince1970: createdAt)
+    }
+    if let userJSON: AnyObject = attributes["user"] {
+      if let user = User.objectFromJSON(userJSON, context: managedObjectContext!) {
+        self.user = user
+      }
+    }
+  }
 }
