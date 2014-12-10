@@ -9,11 +9,12 @@
 import CoreData
 
 class Clip: RemoteObject {
-  @NSManaged var id: String
+  @NSManaged var id: String?
   @NSManaged var videoURL: String
   @NSManaged var createdAt: NSDate
   @NSManaged var user: User
 
+  // MARK: - NSManagedObject
 
   override func assign(attributes: AnyObject) {
     if let id = attributes["id"] as? String {

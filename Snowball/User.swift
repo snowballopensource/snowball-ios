@@ -10,10 +10,10 @@ import CoreData
 import UIKit
 
 class User: RemoteObject {
-  @NSManaged var id: String
-  @NSManaged var name: String
-  @NSManaged var username: String
-  @NSManaged var avatarURL: String
+  @NSManaged var id: String?
+  @NSManaged var name: String?
+  @NSManaged var username: String?
+  @NSManaged var avatarURL: String?
   @NSManaged var following: NSNumber
   @NSManaged var clips: NSSet
   @NSManaged var color: AnyObject
