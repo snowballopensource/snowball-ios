@@ -10,10 +10,10 @@ import Cartography
 import UIKit
 
 class ClipCollectionViewCell: UICollectionViewCell {
-  let clipThumbnailImageView = UIImageView()
-  let userAvatarImageView = UserAvatarImageView()
-  let userNameLabel = UILabel()
-  let clipTimeLabel = UILabel()
+  private let clipThumbnailImageView = UIImageView()
+  private let userAvatarImageView = UserAvatarImageView()
+  private let userNameLabel = UILabel()
+  private let clipTimeLabel = UILabel()
   let playButton = UIButton()
   let pauseButton = UIButton()
 
@@ -89,13 +89,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
   override func configureForObject(object: AnyObject) {
     let clip = object as Clip
     let user = clip.user
-    userNameLabel.text = user.name
+    userNameLabel.text = user.username
     let userColor = user.color as UIColor
     userAvatarImageView.backgroundColor = userColor
     userNameLabel.textColor = userColor
     clipTimeLabel.text = clip.createdAt.shortTimeSinceString()
 
-    // playButton.hidden = true
+    playButton.hidden = true
     pauseButton.hidden = true
   }
 

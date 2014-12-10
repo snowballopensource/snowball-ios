@@ -15,7 +15,7 @@ protocol AddClipCollectionReuseableViewDelegate: class {
 
 class AddClipCollectionReuseableView: UICollectionReusableView {
   var delegate: AddClipCollectionReuseableViewDelegate?
-  var addClipButton = UIButton()
+  private var addClipButton = UIButton()
 
   // MARK: - Initializers
 
