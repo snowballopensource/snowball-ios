@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout, AddClipCollectionReuseableViewDelegate {
+class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout, ClipCollectionViewCellDelegate, AddClipCollectionReuseableViewDelegate {
   var collectionView: UICollectionView = {
     let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
     let flowLayout = collectionView.collectionViewLayout as UICollectionViewFlowLayout
@@ -68,6 +68,12 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
     sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
       return collectionViewDataSource.cellTypes[indexPath.section].size()
+  }
+
+  // MARK: - ClipCollectionViewCellDelegate
+
+  func playClipButtonTapped() {
+    println("play clip button tapped")
   }
 
   // MARK: - AddClipCollectionReuseableViewDelegate

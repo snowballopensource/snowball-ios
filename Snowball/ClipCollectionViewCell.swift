@@ -9,7 +9,12 @@
 import Cartography
 import UIKit
 
+protocol ClipCollectionViewCellDelegate: class {
+  func playClipButtonTapped()
+}
+
 class ClipCollectionViewCell: UICollectionViewCell {
+  var delegate: ClipCollectionViewCellDelegate?
   private let clipThumbnailImageView = UIImageView()
   private let userAvatarImageView = UserAvatarImageView()
   private let userNameLabel = UILabel()
@@ -30,8 +35,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     clipTimeLabel.textColor = UIColor(red: 210/255.0, green: 210/255.0, blue: 210/255.0, alpha: 1.0)
     contentView.addSubview(clipTimeLabel)
     playButton.setImage(UIImage(named: "play"), forState: UIControlState.Normal)
-    playButton.addTarget(self, action: "animateClipThumbnailScaleDown", forControlEvents: UIControlEvents.TouchDown)
-    playButton.addTarget(self, action: "animateClipThumbnailScaleNormal", forControlEvents: UIControlEvents.TouchUpInside | UIControlEvents.TouchUpOutside | UIControlEvents.TouchCancel | UIControlEvents.TouchDragExit)
+    playButton.addTarget(self, action: "playClip", forControlEvents: UIControlEvents.TouchUpInside)
     contentView.addSubview(playButton)
     pauseButton.setImage(UIImage(named: "pause"), forState: UIControlState.Normal)
     contentView.addSubview(pauseButton)
@@ -95,11 +99,22 @@ class ClipCollectionViewCell: UICollectionViewCell {
     userNameLabel.textColor = userColor
     clipTimeLabel.text = clip.createdAt.shortTimeSinceString()
 
-    playButton.hidden = true
+    // TODO: set played variable on clip
+    let played = NSNumber(unsignedInt: arc4random_uniform(2)).boolValue
+    clipThumbnailImageView.alpha = 1.0
+    if played {
+      clipThumbnailImageView.alpha = 0.5
+    }
+
+    // playButton.hidden = true
     pauseButton.hidden = true
   }
 
   // MARK: - Actions
+
+  func playClip() {
+    delegate?.playClipButtonTapped()
+  }
 
   func animateClipThumbnailScaleDown() {
     UIView.animateWithDuration(0.1) {
