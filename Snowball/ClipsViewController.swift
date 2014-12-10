@@ -77,11 +77,6 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     // TODO: play clips
   }
 
-  func shouldShowScaledDownThumbnail() -> Bool {
-    // TODO: return true if playing, else false.
-    return true
-  }
-
   // MARK: - AddClipCollectionReuseableViewDelegate
 
   func addClipButtonTapped() {
@@ -99,12 +94,14 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
 class ClipsDataSource: FetchedResultsCollectionViewDataSource {
   var clipCellDelegate: ClipCollectionViewCellDelegate?
   var addClipViewDelegate: AddClipCollectionReuseableViewDelegate?
+  var shouldShowScaledDownThumbnail = false
 
   // MARK: - CollectionViewDataSource
 
   override func configureCell(cell: UICollectionViewCell, atIndexPath indexPath: NSIndexPath) {
     let cell = cell as ClipCollectionViewCell
     cell.delegate = clipCellDelegate
+    cell.scaleClipThumbnail(shouldShowScaledDownThumbnail, animated: false)
     super.configureCell(cell, atIndexPath: indexPath)
   }
 
