@@ -41,6 +41,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     collectionView.dataSource = collectionViewDataSource
     collectionView.delegate = self
     collectionViewDataSource.addClipViewDelegate = self
+    collectionViewDataSource.clipCellDelegate = self
 
     API.request(Router.GetClipStream).responseJSON { (request, response, JSON, error) in
       if let JSON: AnyObject = JSON {
@@ -73,7 +74,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
   // MARK: - ClipCollectionViewCellDelegate
 
   func playClipButtonTapped() {
-    println("play clip button tapped")
+    // TODO: play clips
   }
 
   // MARK: - AddClipCollectionReuseableViewDelegate
@@ -91,7 +92,16 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
 }
 
 class ClipsDataSource: FetchedResultsCollectionViewDataSource {
+  var clipCellDelegate: ClipCollectionViewCellDelegate?
   var addClipViewDelegate: AddClipCollectionReuseableViewDelegate?
+
+  // MARK: - CollectionViewDataSource
+
+  override func configureCell(cell: UICollectionViewCell, atIndexPath indexPath: NSIndexPath) {
+    let cell = cell as ClipCollectionViewCell
+    cell.delegate = clipCellDelegate
+    super.configureCell(cell, atIndexPath: indexPath)
+  }
 
   // MARK: - UICollectionViewDataSource
 

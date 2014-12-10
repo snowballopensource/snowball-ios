@@ -106,7 +106,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipThumbnailImageView.alpha = 0.5
     }
 
-    playButton.hidden = true
+    // playButton.hidden = true
     pauseButton.hidden = true
   }
 
