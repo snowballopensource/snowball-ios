@@ -43,7 +43,7 @@ extension NSManagedObject {
   // MARK: - Finders
 
   class func find(primaryKey: String, context: NSManagedObjectContext = NSManagedObjectContext.mainQueueContext()) -> NSManagedObject? {
-    return findAll(predicate: NSPredicate(format: "%@ == %@", self.primaryKey(), primaryKey), context: context).first
+    return findAll(predicate: NSPredicate(format: "%K == %@", self.primaryKey(), primaryKey), context: context).first
   }
 
   class func findOrInitialize(primaryKey: String, context: NSManagedObjectContext = NSManagedObjectContext.mainQueueContext()) -> NSManagedObject {
