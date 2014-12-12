@@ -40,5 +40,9 @@ class HomeViewController: UIViewController {
         clipsViewControllerView.bottom == clipsViewControllerView.superview!.bottom
       }
     }
+
+    // TODO: remove this. This is just for testing.
+    let URL = NSURL(string: "http://techslides.com/demos/sample-videos/small.mp4")!
+    playerViewController.playURLs([URL, URL])
   }
 }

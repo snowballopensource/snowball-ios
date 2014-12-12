@@ -42,12 +42,23 @@ class PlayerViewController: UIViewController {
     super.viewDidLoad()
     playerView.player = player
     player.play()
-
-    // TODO: remove, this is just for testing.
-    prebufferAndQueueURL(NSURL(string: "http://techslides.com/demos/sample-videos/small.mp4")!)
   }
 
   // MARK: - PlayerViewController
+
+  func playURLs(URLs: [NSURL]) {
+    if URLs.count > 0 {
+      prebufferAndQueueURL(URLs.first!) {
+        var nextURLs = URLs
+        nextURLs.removeAtIndex(0)
+        self.playURLs(nextURLs)
+      }
+    }
+  }
+
+  func playURL(URL: NSURL) {
+    prebufferAndQueueURL(URL)
+  }
 
   // MARK: - Private
 
