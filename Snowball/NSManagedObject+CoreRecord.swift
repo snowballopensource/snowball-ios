@@ -50,11 +50,12 @@ extension NSManagedObject {
     return find(primaryKey, context: context) ?? newEntity(context: context)
   }
 
-  class func findAll(predicate: NSPredicate? = nil, context: NSManagedObjectContext = NSManagedObjectContext.mainQueueContext()) -> [NSManagedObject] {
+  class func findAll(predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil, context: NSManagedObjectContext = NSManagedObjectContext.mainQueueContext()) -> [NSManagedObject] {
     let entityDescription = NSEntityDescription.entityForName(entityName(), inManagedObjectContext: context)
     let fetchRequest = NSFetchRequest(entityName: entityName())
     fetchRequest.predicate = predicate
     fetchRequest.entity = entityDescription
+    fetchRequest.sortDescriptors = sortDescriptors
     var results = [NSManagedObject]()
     var error: NSError?
     results = context.executeFetchRequest(fetchRequest, error: &error)! as [NSManagedObject]

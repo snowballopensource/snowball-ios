@@ -47,7 +47,7 @@ class HomeViewController: UIViewController, ClipsViewControllerDelegate {
 
   func clipSelected(clip: Clip) {
     let predicate = NSPredicate(format: "createdAt >= %@", clip.createdAt)
-    let clips = Clip.findAll(predicate: predicate) as [Clip]
+    let clips = Clip.findAll(predicate: predicate, sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: true)]) as [Clip]
     let videoURLs = clips.map { clip -> NSURL in
       return NSURL(string: clip.videoURL)!
     }
