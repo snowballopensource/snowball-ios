@@ -47,6 +47,7 @@ class PlayerViewController: UIViewController {
   // MARK: - PlayerViewController
 
   func playURLs(URLs: [NSURL]) {
+    player.removeAllItems()
     if URLs.count > 0 {
       prebufferAndQueueURL(URLs.first!) {
         var nextURLs = URLs
@@ -57,6 +58,7 @@ class PlayerViewController: UIViewController {
   }
 
   func playURL(URL: NSURL) {
+    player.removeAllItems()
     prebufferAndQueueURL(URL)
   }
 

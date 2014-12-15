@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ClipsViewControllerDelegate {
+  func clipSelected(clip: Clip)
+}
+
 class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout, ClipCollectionViewCellDelegate, AddClipCollectionReuseableViewDelegate {
   var collectionView: UICollectionView = {
     let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -25,6 +29,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     ]
     return ClipsDataSource(collectionView: self.collectionView, entityName: Clip.entityName(), sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: true)], cellTypes: cellTypes)
   }()
+  var delegate: ClipsViewControllerDelegate?
 
   // MARK: - UIViewController
 
@@ -73,8 +78,10 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
 
   // MARK: - ClipCollectionViewCellDelegate
 
-  func playClipButtonTapped() {
-    // TODO: play clips
+  func playClipButtonTappedInCell(cell: ClipCollectionViewCell) {
+    let selectedIndexPath = collectionView.indexPathForCell(cell)!
+    let clip = collectionViewDataSource.fetchedResultsController.objectAtIndexPath(selectedIndexPath) as Clip
+    delegate?.clipSelected(clip)
   }
 
   // MARK: - AddClipCollectionReuseableViewDelegate

@@ -10,7 +10,7 @@ import Cartography
 import UIKit
 
 protocol ClipCollectionViewCellDelegate: class {
-  func playClipButtonTapped()
+  func playClipButtonTappedInCell(cell: ClipCollectionViewCell)
 }
 
 class ClipCollectionViewCell: UICollectionViewCell {
@@ -113,7 +113,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
   // MARK: - Actions
 
   func playClip() {
-    delegate?.playClipButtonTapped()
+    delegate?.playClipButtonTappedInCell(self)
   }
 
   // MARK: - Public

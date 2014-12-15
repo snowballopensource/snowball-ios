@@ -9,7 +9,7 @@
 import Cartography
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, ClipsViewControllerDelegate {
   let playerViewController = PlayerViewController()
   let cameraViewController = UIViewController() // TODO: use real vc
   let clipsViewController = ClipsViewController()
@@ -32,6 +32,7 @@ class HomeViewController: UIViewController {
       self.cameraViewController.view.frame = self.playerViewController.view.frame
     }
 
+    clipsViewController.delegate = self
     addChildViewController(clipsViewController) {
       layout(self.clipsViewController.view, self.playerViewController.view) { (clipsViewControllerView, playerViewControllerView) in
         clipsViewControllerView.left == clipsViewControllerView.superview!.left
@@ -40,9 +41,11 @@ class HomeViewController: UIViewController {
         clipsViewControllerView.bottom == clipsViewControllerView.superview!.bottom
       }
     }
+  }
 
-    // TODO: remove this. This is just for testing.
-    let URL = NSURL(string: "http://techslides.com/demos/sample-videos/small.mp4")!
-    playerViewController.playURLs([URL, URL])
+  // MARK: - ClipsViewControllerDelegate
+
+  func clipSelected(clip: Clip) {
+    playerViewController.playURL(NSURL(string: clip.videoURL)!)
   }
 }
