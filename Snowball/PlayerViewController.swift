@@ -48,13 +48,7 @@ class PlayerViewController: UIViewController {
 
   func playURLs(URLs: [NSURL]) {
     player.removeAllItems()
-    if URLs.count > 0 {
-      prebufferAndQueueURL(URLs.first!) {
-        var nextURLs = URLs
-        nextURLs.removeAtIndex(0)
-        self.playURLs(nextURLs)
-      }
-    }
+    prebufferAndQueueURLs(URLs)
   }
 
   func playURL(URL: NSURL) {
@@ -63,6 +57,16 @@ class PlayerViewController: UIViewController {
   }
 
   // MARK: - Private
+
+  private func prebufferAndQueueURLs(URLs: [NSURL]) {
+    if URLs.count > 0 {
+      prebufferAndQueueURL(URLs.first!) {
+        var nextURLs = URLs
+        nextURLs.removeAtIndex(0)
+        self.prebufferAndQueueURLs(nextURLs)
+      }
+    }
+  }
 
   private func prebufferAndQueueURL(URL: NSURL, completionHandler: (() -> ())? = nil) {
     let asset = AVURLAsset(URL: URL, options: nil)
