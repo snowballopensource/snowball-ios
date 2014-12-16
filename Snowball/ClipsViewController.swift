@@ -69,6 +69,19 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     }
   }
 
+  // MARK: - ClipsViewController
+
+  func scrollToClipWithVideoURL(videoURL: NSURL) {
+    let predicate = NSPredicate(format: "videoURL == %@", videoURL.absoluteString!)
+    let clip = Clip.findAll(predicate: predicate).first! as Clip
+    scrollToClip(clip)
+  }
+
+  private func scrollToClip(clip: Clip) {
+    let indexPath = collectionViewDataSource.fetchedResultsController.indexPathForObject(clip)!
+    collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: true)
+  }
+
   // MARK: - UICollectionViewDelegateFlowLayout
 
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
@@ -81,6 +94,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
   func playClipButtonTappedInCell(cell: ClipCollectionViewCell) {
     let selectedIndexPath = collectionView.indexPathForCell(cell)!
     let clip = collectionViewDataSource.fetchedResultsController.objectAtIndexPath(selectedIndexPath) as Clip
+    scrollToClip(clip)
     delegate?.clipSelected(clip)
   }
 

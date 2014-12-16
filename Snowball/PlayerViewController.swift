@@ -9,10 +9,15 @@
 import AVFoundation
 import UIKit
 
+protocol PlayerViewControllerDelegate {
+  func playerItemDidPlayToEndTime(playerItem: AVPlayerItem, nextPlayerItem: AVPlayerItem?)
+}
+
 class PlayerViewController: UIViewController {
   private let player = AVQueuePlayer()
   private let playerView = PlayerView()
   private var observingCurrentPlayerItem = false // Hack to check if observing current item for "playbackLikelyToKeepUp"
+  var delegate: PlayerViewControllerDelegate?
 
   // MARK: - Initialization
 
@@ -87,7 +92,15 @@ class PlayerViewController: UIViewController {
         }
         let playerItem = AVPlayerItem(asset: asset)
         NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: playerItem, queue: nil) { (notification) in
-          // TODO: player item ended. let delegate know it ended. if last video in queue, let it know appropriately.
+          let playerItems = self.player.items() as [AVPlayerItem]
+          var index = find(playerItems, playerItem) ?? 0
+          var nextPlayerItem: AVPlayerItem?
+          index++
+          if index < playerItems.count {
+            nextPlayerItem = playerItems[index]
+          }
+          self.delegate?.playerItemDidPlayToEndTime(playerItem, nextPlayerItem: nextPlayerItem)
+
           if self.observingCurrentPlayerItem {
             playerItem.removeObserver(self, forKeyPath: "playbackLikelyToKeepUp")
             self.observingCurrentPlayerItem = false
