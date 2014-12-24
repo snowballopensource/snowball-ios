@@ -79,7 +79,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
 
   private func scrollToClip(clip: Clip) {
     let indexPath = collectionViewDataSource.fetchedResultsController.indexPathForObject(clip)!
-    collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: true)
+    collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
   }
 
   // MARK: - UICollectionViewDelegateFlowLayout
