@@ -30,6 +30,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     return ClipsDataSource(collectionView: self.collectionView, entityName: Clip.entityName(), sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: true)], cellTypes: cellTypes)
   }()
   var delegate: ClipsViewControllerDelegate?
+  let currentCellScrollPosition = UICollectionViewScrollPosition.Right
 
   // MARK: - UIViewController
 
@@ -40,6 +41,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
     collectionView.showsHorizontalScrollIndicator = false
     collectionView.registerCellClass(ClipCollectionViewCell.self)
     collectionView.registerFooterClass(AddClipCollectionReuseableView.self)
@@ -65,7 +67,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     let lastItem = collectionViewDataSource.collectionView(collectionView, numberOfItemsInSection: lastSection) - 1
     if lastItem > 0 {
       let lastIndexPath = NSIndexPath(forItem: lastItem, inSection: lastSection)
-      collectionView.scrollToItemAtIndexPath(lastIndexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: false)
+      collectionView.scrollToItemAtIndexPath(lastIndexPath, atScrollPosition: currentCellScrollPosition, animated: false)
     }
   }
 
@@ -79,7 +81,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
 
   private func scrollToClip(clip: Clip) {
     let indexPath = collectionViewDataSource.fetchedResultsController.indexPathForObject(clip)!
-    collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
+    collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentCellScrollPosition, animated: true)
   }
 
   // MARK: - UICollectionViewDelegateFlowLayout
