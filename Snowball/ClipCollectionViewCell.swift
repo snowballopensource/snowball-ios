@@ -99,11 +99,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
     userNameLabel.textColor = userColor
     clipTimeLabel.text = clip.createdAt.shortTimeSinceString()
 
-    // TODO: set played variable on clip
-    let played = NSNumber(unsignedInt: arc4random_uniform(2)).boolValue
-    clipThumbnailImageView.alpha = 1.0
-    if played {
+    if clip.played.boolValue {
       clipThumbnailImageView.alpha = 0.5
+    } else {
+      clipThumbnailImageView.alpha = 1.0
     }
 
     // playButton.hidden = true

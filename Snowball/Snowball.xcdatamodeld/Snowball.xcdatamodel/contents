@@ -3,6 +3,7 @@
     <entity name="Clip" representedClassName="Snowball.Clip" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="played" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="videoURL" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="clips" inverseEntity="User" syncable="YES"/>
     </entity>
@@ -16,7 +17,7 @@
         <relationship name="clips" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Clip" inverseName="user" inverseEntity="Clip" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Clip" positionX="0" positionY="54" width="128" height="105"/>
+        <element name="Clip" positionX="0" positionY="54" width="128" height="120"/>
         <element name="User" positionX="-36" positionY="9" width="128" height="150"/>
     </elements>
 </model>

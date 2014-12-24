@@ -74,9 +74,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
   // MARK: - ClipsViewController
 
   func scrollToClipWithVideoURL(videoURL: NSURL) {
-    let predicate = NSPredicate(format: "videoURL == %@", videoURL.absoluteString!)
-    let clip = Clip.findAll(predicate: predicate).first! as Clip
-    scrollToClip(clip)
+    scrollToClip(Clip.clipWithVideoURL(videoURL))
   }
 
   private func scrollToClip(clip: Clip) {

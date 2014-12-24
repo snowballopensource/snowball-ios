@@ -48,6 +48,10 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, ClipsV
   // MARK: - PlayerViewControllerDelegate
 
   func playerItemDidPlayToEndTime(playerItem: AVPlayerItem, nextPlayerItem: AVPlayerItem?) {
+    let asset = playerItem.asset as AVURLAsset
+    let clip = Clip.clipWithVideoURL(asset.URL)
+    clip.played = true
+    clip.save()
     if let nextPlayerItem = nextPlayerItem {
       let asset = nextPlayerItem.asset as AVURLAsset
       clipsViewController.scrollToClipWithVideoURL(asset.URL)

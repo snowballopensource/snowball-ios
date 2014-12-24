@@ -12,6 +12,7 @@ class Clip: RemoteObject {
   @NSManaged var id: String?
   @NSManaged var videoURL: String
   @NSManaged var createdAt: NSDate
+  @NSManaged var played: NSNumber
   @NSManaged var user: User
 
   // MARK: - NSManagedObject
@@ -31,5 +32,13 @@ class Clip: RemoteObject {
         self.user = user as User
       }
     }
+  }
+
+  // MARK: - Clip
+
+  class func clipWithVideoURL(videoURL: NSURL) -> Clip {
+    let predicate = NSPredicate(format: "videoURL == %@", videoURL.absoluteString!)
+    let clip = Clip.findAll(predicate: predicate).first! as Clip
+    return clip
   }
 }
