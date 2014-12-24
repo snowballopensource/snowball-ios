@@ -17,12 +17,13 @@ class FetchedResultsCollectionViewDataSource: CollectionViewDataSource, NSFetche
 
   // MARK: - Initializers
 
-  init(collectionView: UICollectionView, entityName: String, sectionNameKeyPath: String? = nil, sortDescriptors: [NSSortDescriptor]? = nil, predicate: NSPredicate? = nil, cellTypes: [UICollectionViewCell.Type]) {
+  init(collectionView: UICollectionView, entityName: String, sectionNameKeyPath: String? = nil, sortDescriptors: [NSSortDescriptor]? = nil, predicate: NSPredicate? = nil, fetchLimit: Int? = 25, cellTypes: [UICollectionViewCell.Type]) {
     self.collectionView = collectionView
     let fetchRequest = NSFetchRequest()
     let entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: NSManagedObjectContext.mainQueueContext())
     fetchRequest.entity = entity
-    fetchRequest.fetchBatchSize = 20
+    fetchRequest.fetchBatchSize = 25
+    fetchRequest.fetchLimit = fetchLimit!
     fetchRequest.sortDescriptors = sortDescriptors ?? [NSSortDescriptor]()
     fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: NSManagedObjectContext.mainQueueContext(), sectionNameKeyPath: sectionNameKeyPath, cacheName: nil)
     super.init(cellTypes: cellTypes)
