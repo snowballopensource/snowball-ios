@@ -41,4 +41,11 @@ class Clip: RemoteObject {
     let clip = Clip.findAll(predicate: predicate).first! as Clip
     return clip
   }
+
+  class func firstUnplayedClip() -> Clip? {
+    let predicate = NSPredicate(format: "played == false")
+    let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
+    let clip = Clip.findAll(predicate: predicate, sortDescriptors: [sortDescriptor]).first as Clip?
+    return clip
+  }
 }

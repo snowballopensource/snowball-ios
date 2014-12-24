@@ -63,11 +63,8 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
 
-    let lastSection = collectionViewDataSource.numberOfSectionsInCollectionView(collectionView) - 1
-    let lastItem = collectionViewDataSource.collectionView(collectionView, numberOfItemsInSection: lastSection) - 1
-    if lastItem > 0 {
-      let lastIndexPath = NSIndexPath(forItem: lastItem, inSection: lastSection)
-      collectionView.scrollToItemAtIndexPath(lastIndexPath, atScrollPosition: currentCellScrollPosition, animated: false)
+    if let clip = Clip.firstUnplayedClip() {
+      scrollToClip(clip)
     }
   }
 
