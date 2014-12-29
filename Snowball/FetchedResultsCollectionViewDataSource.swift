@@ -17,7 +17,7 @@ class FetchedResultsCollectionViewDataSource: CollectionViewDataSource, NSFetche
 
   // MARK: - Initializers
 
-  init(collectionView: UICollectionView, entityName: String, sectionNameKeyPath: String? = nil, sortDescriptors: [NSSortDescriptor]? = nil, predicate: NSPredicate? = nil, fetchLimit: Int? = 25, cellTypes: [UICollectionViewCell.Type]) {
+  init(collectionView: UICollectionView, entityName: String, sectionNameKeyPath: String? = nil, sortDescriptors: [NSSortDescriptor]? = nil, predicate: NSPredicate? = nil, fetchLimit: Int? = 25, lastPageFirst: Bool = false, cellTypes: [UICollectionViewCell.Type]) {
     self.collectionView = collectionView
     let fetchRequest = NSFetchRequest()
     let entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: NSManagedObjectContext.mainQueueContext())
@@ -29,6 +29,10 @@ class FetchedResultsCollectionViewDataSource: CollectionViewDataSource, NSFetche
     super.init(cellTypes: cellTypes)
     fetchedResultsController.delegate = self
     var error: NSError?
+    if lastPageFirst {
+      let count = NSManagedObjectContext.mainQueueContext().countForFetchRequest(fetchRequest, error: &error)
+      fetchRequest.fetchOffset = (count > 0 ? count : 0)
+    }
     if !fetchedResultsController.performFetch(&error) {
       abort()
     }

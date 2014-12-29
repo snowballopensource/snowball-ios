@@ -27,7 +27,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     let cellTypes: [UICollectionViewCell.Type] = [
       ClipCollectionViewCell.self
     ]
-    return ClipsDataSource(collectionView: self.collectionView, entityName: Clip.entityName(), sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: true)], cellTypes: cellTypes)
+    return ClipsDataSource(collectionView: self.collectionView, entityName: Clip.entityName(), sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: true)], lastPageFirst: true, cellTypes: cellTypes)
   }()
   var delegate: ClipsViewControllerDelegate?
   let currentCellScrollPosition = UICollectionViewScrollPosition.Right
