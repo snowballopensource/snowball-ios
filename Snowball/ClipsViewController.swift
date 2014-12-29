@@ -41,7 +41,6 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
     collectionView.showsHorizontalScrollIndicator = false
     collectionView.registerCellClass(ClipCollectionViewCell.self)
     collectionView.registerFooterClass(AddClipCollectionReuseableView.self)
