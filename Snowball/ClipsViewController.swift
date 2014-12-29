@@ -89,23 +89,35 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
   // MARK: - ClipCollectionViewCellDelegate
 
   func playClipButtonTappedInCell(cell: ClipCollectionViewCell) {
-    let selectedIndexPath = collectionView.indexPathForCell(cell)!
-    let clip = collectionViewDataSource.fetchedResultsController.objectAtIndexPath(selectedIndexPath) as Clip
+    let clip = clipForCell(cell)
     scrollToClip(clip)
     delegate?.clipSelected(clip)
+  }
+
+  func addClipButtonTappedInCell(cell: ClipCollectionViewCell) {
+    let clip = clipForCell(cell)
+    // TODO: send clip to server
+    println("send clip to server")
   }
 
   // MARK: - AddClipCollectionReuseableViewDelegate
 
   func addClipButtonTapped() {
-    // TODO: POST clip
-    println("add clip button")
+    // TODO: move this to when capture vc is done capturing, then when addClipButtonTappedInCell post clip to server
+    println("add clip button (OLD)")
     let clip = Clip.newEntity() as Clip
     let user = User.newEntity() as User
     user.name = "James"
     clip.user = user
     clip.createdAt = NSDate()
     clip.save()
+  }
+
+  // MARK: - Private
+
+  func clipForCell(cell: ClipCollectionViewCell) -> Clip {
+    let indexPath = collectionView.indexPathForCell(cell)!
+    return collectionViewDataSource.fetchedResultsController.objectAtIndexPath(indexPath) as Clip
   }
 }
 

@@ -11,6 +11,7 @@ import UIKit
 
 protocol ClipCollectionViewCellDelegate: class {
   func playClipButtonTappedInCell(cell: ClipCollectionViewCell)
+  func addClipButtonTappedInCell(cell: ClipCollectionViewCell)
 }
 
 class ClipCollectionViewCell: UICollectionViewCell {
@@ -21,6 +22,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
   private let clipTimeLabel = UILabel()
   let playButton = UIButton()
   let pauseButton = UIButton()
+  let addButton = UIButton()
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -39,6 +41,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
     contentView.addSubview(playButton)
     pauseButton.setImage(UIImage(named: "pause"), forState: UIControlState.Normal)
     contentView.addSubview(pauseButton)
+    addButton.setImage(UIImage(named: "add-clip"), forState: UIControlState.Normal)
+    addButton.addTarget(delegate, action: "addClip", forControlEvents: UIControlEvents.TouchUpInside)
+    contentView.addSubview(addButton)
   }
 
   required init(coder: NSCoder) {
@@ -77,8 +82,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
 
     playButton.frame = clipThumbnailImageView.frame
-
     pauseButton.frame = clipThumbnailImageView.frame
+    addButton.frame = clipThumbnailImageView.frame
   }
 
   // MARK: - UICollectionReuseableView+Required
@@ -92,27 +97,37 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   override func configureForObject(object: AnyObject) {
     let clip = object as Clip
-    let user = clip.user
-    userNameLabel.text = user.username
-    let userColor = user.color as UIColor
-    userAvatarImageView.backgroundColor = userColor
-    userNameLabel.textColor = userColor
-    clipTimeLabel.text = clip.createdAt.shortTimeSinceString()
+    if clip.id != nil {
+      let user = clip.user
+      userNameLabel.text = user.username
+      let userColor = user.color as UIColor
+      userAvatarImageView.backgroundColor = userColor
+      userNameLabel.textColor = userColor
+      clipTimeLabel.text = clip.createdAt.shortTimeSinceString()
 
-    if clip.played.boolValue {
-      clipThumbnailImageView.alpha = 0.5
+      if clip.played.boolValue {
+        clipThumbnailImageView.alpha = 0.5
+      } else {
+        clipThumbnailImageView.alpha = 1.0
+      }
+      playButton.hidden = false
+      pauseButton.hidden = true
+      addButton.hidden = true
     } else {
-      clipThumbnailImageView.alpha = 1.0
+      playButton.hidden = true
+      pauseButton.hidden = true
+      addButton.hidden = false
     }
-
-    // playButton.hidden = true
-    pauseButton.hidden = true
   }
-
+  
   // MARK: - Actions
 
   func playClip() {
     delegate?.playClipButtonTappedInCell(self)
+  }
+
+  func addClip() {
+    delegate?.addClipButtonTappedInCell(self)
   }
 
   // MARK: - Public
