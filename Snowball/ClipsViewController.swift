@@ -24,10 +24,8 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     return collectionView
   }()
   lazy var collectionViewDataSource: ClipsDataSource = {
-    let cellTypes: [UICollectionViewCell.Type] = [
-      ClipCollectionViewCell.self
-    ]
-    return ClipsDataSource(collectionView: self.collectionView, entityName: Clip.entityName(), sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: true)], lastPageFirst: true, cellTypes: cellTypes)
+
+    return ClipsDataSource(collectionView: self.collectionView)
   }()
   var delegate: ClipsViewControllerDelegate?
   let currentCellScrollPosition = UICollectionViewScrollPosition.Right
@@ -121,10 +119,17 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
   }
 }
 
+// MARK: -
+
 class ClipsDataSource: FetchedResultsCollectionViewDataSource {
   var clipCellDelegate: ClipCollectionViewCellDelegate?
   var addClipViewDelegate: AddClipCollectionReuseableViewDelegate?
   var shouldShowScaledDownThumbnail = false
+
+  init(collectionView: UICollectionView) {
+    let cellTypes = [ClipCollectionViewCell.self] as [UICollectionViewCell.Type]
+    super.init(collectionView: collectionView, entityName: Clip.entityName(), sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: true)], ascending: true, cellTypes: cellTypes)
+  }
 
   // MARK: - CollectionViewDataSource
 
