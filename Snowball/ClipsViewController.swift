@@ -60,15 +60,24 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
 
-    if let clip = Clip.firstUnplayedClip() {
-      scrollToClip(clip)
-    }
+    scrollToUnplayedClip()
   }
 
   // MARK: - ClipsViewController
 
   func scrollToClipWithVideoURL(videoURL: NSURL) {
     scrollToClip(Clip.clipWithVideoURL(videoURL))
+  }
+
+  private func scrollToUnplayedClip() {
+    if let clip = Clip.lastPlayedClip() {
+      if let indexPath = collectionViewDataSource.fetchedResultsController.indexPathForObject(clip) {
+        let nextIndexPath = NSIndexPath(forItem: indexPath.item + 1, inSection: indexPath.section)
+        if nextIndexPath.item < collectionView.numberOfItemsInSection(nextIndexPath.section) {
+          collectionView.scrollToItemAtIndexPath(nextIndexPath, atScrollPosition: currentCellScrollPosition, animated: true)
+        }
+      }
+    }
   }
 
   private func scrollToClip(clip: Clip) {
