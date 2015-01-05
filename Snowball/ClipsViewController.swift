@@ -19,6 +19,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
     flowLayout.minimumInteritemSpacing = 0
     flowLayout.minimumLineSpacing = 0
+    flowLayout.headerReferenceSize = ClipTimelineBufferCollectionReuseableView.size()
     flowLayout.footerReferenceSize = AddClipCollectionReuseableView.size()
     collectionView.backgroundColor = UIColor.whiteColor()
     return collectionView
@@ -41,6 +42,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
 
     collectionView.showsHorizontalScrollIndicator = false
     collectionView.registerCellClass(ClipCollectionViewCell.self)
+    collectionView.registerHeaderClass(ClipTimelineBufferCollectionReuseableView.self)
     collectionView.registerFooterClass(AddClipCollectionReuseableView.self)
     collectionView.dataSource = collectionViewDataSource
     collectionView.delegate = self
@@ -151,11 +153,14 @@ class ClipsDataSource: FetchedResultsCollectionViewDataSource {
 
   // MARK: - UICollectionViewDataSource
 
-  func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
-    atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-    let addClipView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter, withReuseIdentifier: NSStringFromClass(AddClipCollectionReuseableView), forIndexPath: indexPath) as AddClipCollectionReuseableView
-    addClipView.delegate = addClipViewDelegate
-    return addClipView
+  func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    if kind == UICollectionElementKindSectionFooter {
+      let addClipView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: NSStringFromClass(AddClipCollectionReuseableView), forIndexPath: indexPath) as AddClipCollectionReuseableView
+      addClipView.delegate = addClipViewDelegate
+      return addClipView
+    } else {
+      return collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: NSStringFromClass(ClipTimelineBufferCollectionReuseableView), forIndexPath: indexPath) as ClipTimelineBufferCollectionReuseableView
+    }
   }
 
 }

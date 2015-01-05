@@ -13,6 +13,10 @@ extension UICollectionView {
     registerClass(cellClass, forCellWithReuseIdentifier: NSStringFromClass(cellClass))
   }
 
+  func registerHeaderClass(headerClass: UICollectionReusableView.Type) {
+    registerClass(headerClass, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: NSStringFromClass(headerClass))
+  }
+
   func registerFooterClass(footerClass: UICollectionReusableView.Type) {
     registerClass(footerClass, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: NSStringFromClass(footerClass))
   }
