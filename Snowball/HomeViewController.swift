@@ -61,8 +61,7 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, ClipsV
   // MARK: - ClipsViewControllerDelegate
 
   func clipSelected(clip: Clip) {
-    let predicate = NSPredicate(format: "createdAt >= %@", clip.createdAt)
-    let clips = Clip.findAll(predicate: predicate, sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: true)]) as [Clip]
+    let clips = Clip.playableClips(since: clip.createdAt)
     let videoURLs = clips.map { clip -> NSURL in
       return NSURL(string: clip.videoURL)!
     }

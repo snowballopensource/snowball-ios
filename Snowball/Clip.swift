@@ -48,4 +48,9 @@ class Clip: RemoteObject {
     let clip = Clip.findAll(predicate: predicate, sortDescriptors: [sortDescriptor]).first as Clip?
     return clip
   }
+
+  class func playableClips(since: NSDate = NSDate(timeIntervalSince1970: 0)) -> [Clip] {
+    let predicate = NSPredicate(format: "videoURL != nil && createdAt >= %@", since)
+    return Clip.findAll(predicate: predicate, sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: true)]) as [Clip]
+  }
 }
