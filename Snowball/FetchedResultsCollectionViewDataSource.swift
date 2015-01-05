@@ -31,7 +31,9 @@ class FetchedResultsCollectionViewDataSource: CollectionViewDataSource, NSFetche
     var error: NSError?
     if ascending {
       let count = NSManagedObjectContext.mainQueueContext().countForFetchRequest(fetchRequest, error: &error)
-      fetchRequest.fetchOffset = (count > 0 ? count : 0)
+      if error != nil {
+        fetchRequest.fetchOffset = (count > 0 ? count : 0)
+      }
     }
     if !fetchedResultsController.performFetch(&error) {
       abort()
