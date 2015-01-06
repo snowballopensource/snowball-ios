@@ -36,9 +36,9 @@ class Clip: RemoteObject {
 
   // MARK: - Clip
 
-  class func clipWithVideoURL(videoURL: NSURL) -> Clip {
+  class func clipWithVideoURL(videoURL: NSURL) -> Clip? {
     let predicate = NSPredicate(format: "videoURL == %@", videoURL.absoluteString!)
-    let clip = Clip.findAll(predicate: predicate).first! as Clip
+    let clip = Clip.findAll(predicate: predicate).first as Clip?
     return clip
   }
 

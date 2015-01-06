@@ -68,7 +68,9 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
   // MARK: - ClipsViewController
 
   func scrollToClipWithVideoURL(videoURL: NSURL) {
-    scrollToClip(Clip.clipWithVideoURL(videoURL))
+    if let clip = Clip.clipWithVideoURL(videoURL) {
+      scrollToClip(clip)
+    }
   }
 
   private func scrollToUnplayedClip() {

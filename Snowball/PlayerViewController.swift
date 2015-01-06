@@ -92,6 +92,7 @@ class PlayerViewController: UIViewController {
         }
         let playerItem = AVPlayerItem(asset: asset)
         NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: playerItem, queue: nil) { (notification) in
+          let playerItem = notification.object! as AVPlayerItem
           let playerItems = self.player.items() as [AVPlayerItem]
           var index = find(playerItems, playerItem) ?? 0
           var nextPlayerItem: AVPlayerItem?

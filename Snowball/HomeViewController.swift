@@ -50,20 +50,24 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
 
   func playerItemDidPlayToEndTime(playerItem: AVPlayerItem, nextPlayerItem: AVPlayerItem?) {
     let asset = playerItem.asset as AVURLAsset
-    let clip = Clip.clipWithVideoURL(asset.URL)
-    clip.played = true
-    clip.save()
+    if let clip = Clip.clipWithVideoURL(asset.URL) {
+      clip.played = true
+      clip.save()
+    }
     if let nextPlayerItem = nextPlayerItem {
       let asset = nextPlayerItem.asset as AVURLAsset
       clipsViewController.scrollToClipWithVideoURL(asset.URL)
+    } else {
+      cameraViewController.view.hidden = false
     }
   }
 
   // MARK: - CameraViewControllerDelegate
 
   func movieRecordedToFileAtURL(fileURL: NSURL, error: NSError?) {
-    // TODO: show preview
-    println("movie recorded")
+    if error != nil { return }
+    cameraViewController.view.hidden = true
+    playerViewController.playURL(fileURL)
   }
 
   // MARK: - ClipsViewControllerDelegate
@@ -73,6 +77,7 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
     let videoURLs = clips.map { clip -> NSURL in
       return NSURL(string: clip.videoURL)!
     }
+    cameraViewController.view.hidden = true
     playerViewController.playURLs(videoURLs)
   }
 }
