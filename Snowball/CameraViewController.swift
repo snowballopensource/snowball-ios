@@ -24,6 +24,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
   // MARK: - UIViewController
 
   override func loadView() {
+    let previewLayer = cameraView.layer as AVCaptureVideoPreviewLayer
+    previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
     view = cameraView
   }
 
