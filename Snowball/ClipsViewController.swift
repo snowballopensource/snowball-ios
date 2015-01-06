@@ -73,6 +73,15 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     }
   }
 
+  func scrollToEnd() {
+    let contentSize = collectionView.collectionViewLayout.collectionViewContentSize()
+    let width = collectionView.collectionViewLayout.collectionViewContentSize().width
+    if width > 0 {
+      let endRect = CGRect(x: width - 1, y: 0, width: 1, height: 1)
+      collectionView.scrollRectToVisible(endRect, animated: true)
+    }
+  }
+
   private func scrollToUnplayedClip() {
     if let clip = Clip.lastPlayedClip() {
       if let indexPath = collectionViewDataSource.fetchedResultsController.indexPathForObject(clip) {

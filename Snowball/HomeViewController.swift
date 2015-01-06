@@ -67,6 +67,7 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
   func movieRecordedToFileAtURL(fileURL: NSURL, error: NSError?) {
     if error != nil { return }
     cameraViewController.view.hidden = true
+    clipsViewController.scrollToEnd()
     playerViewController.playURL(fileURL)
   }
 
