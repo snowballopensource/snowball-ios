@@ -10,9 +10,9 @@ import AVFoundation
 import Cartography
 import UIKit
 
-class HomeViewController: UIViewController, PlayerViewControllerDelegate, ClipsViewControllerDelegate {
+class HomeViewController: UIViewController, PlayerViewControllerDelegate, CameraViewControllerDelegate, ClipsViewControllerDelegate {
   let playerViewController = PlayerViewController()
-  let cameraViewController = UIViewController() // TODO: use real vc
+  let cameraViewController = CameraViewController()
   let clipsViewController = ClipsViewController()
 
   // MARK: - UIViewController
@@ -30,6 +30,7 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, ClipsV
       }
     }
 
+    cameraViewController.delegate = self
     addChildViewController(cameraViewController) {
       self.cameraViewController.view.frame = self.playerViewController.view.frame
     }
@@ -56,6 +57,13 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, ClipsV
       let asset = nextPlayerItem.asset as AVURLAsset
       clipsViewController.scrollToClipWithVideoURL(asset.URL)
     }
+  }
+
+  // MARK: - CameraViewControllerDelegate
+
+  func movieRecordedToFileAtURL(fileURL: NSURL, error: NSError?) {
+    // TODO: show preview
+    println("movie recorded")
   }
 
   // MARK: - ClipsViewControllerDelegate
