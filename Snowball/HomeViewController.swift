@@ -59,6 +59,7 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
         let asset = nextPlayerItem.asset as AVURLAsset
         clipsViewController.scrollToClipWithVideoURL(asset.URL)
       } else {
+        clipsViewController.scrollToEnd()
         cameraViewController.view.hidden = false
       }
     }
