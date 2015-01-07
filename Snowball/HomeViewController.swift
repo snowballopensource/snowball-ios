@@ -48,17 +48,19 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
 
   // MARK: - PlayerViewControllerDelegate
 
-  func playerItemDidPlayToEndTime(playerItem: AVPlayerItem, nextPlayerItem: AVPlayerItem?) {
-    let asset = playerItem.asset as AVURLAsset
-    if let clip = Clip.clipWithVideoURL(asset.URL) {
-      clip.played = true
-      clip.save()
-    }
-    if let nextPlayerItem = nextPlayerItem {
-      let asset = nextPlayerItem.asset as AVURLAsset
-      clipsViewController.scrollToClipWithVideoURL(asset.URL)
-    } else {
-      cameraViewController.view.hidden = false
+  func playerItemDidPlayToEndTime(playerItem: AVPlayerItem, nextPlayerItem: AVPlayerItem?, willLoopPlayerItem: Bool) {
+    if !willLoopPlayerItem {
+      let asset = playerItem.asset as AVURLAsset
+      if let clip = Clip.clipWithVideoURL(asset.URL) {
+        clip.played = true
+        clip.save()
+      }
+      if let nextPlayerItem = nextPlayerItem {
+        let asset = nextPlayerItem.asset as AVURLAsset
+        clipsViewController.scrollToClipWithVideoURL(asset.URL)
+      } else {
+        cameraViewController.view.hidden = false
+      }
     }
   }
 

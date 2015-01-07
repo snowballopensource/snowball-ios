@@ -10,13 +10,14 @@ import AVFoundation
 import UIKit
 
 protocol PlayerViewControllerDelegate {
-  func playerItemDidPlayToEndTime(playerItem: AVPlayerItem, nextPlayerItem: AVPlayerItem?)
+  func playerItemDidPlayToEndTime(playerItem: AVPlayerItem, nextPlayerItem: AVPlayerItem?, willLoopPlayerItem: Bool)
 }
 
 class PlayerViewController: UIViewController {
   private let player = AVQueuePlayer()
   private let playerView = PlayerView()
   private var observingCurrentPlayerItem = false // Hack to check if observing current item for "playbackLikelyToKeepUp"
+  private var loopCurrentPlayerItem = false
   var delegate: PlayerViewControllerDelegate?
 
   // MARK: - Initialization
@@ -53,11 +54,15 @@ class PlayerViewController: UIViewController {
 
   func playURLs(URLs: [NSURL]) {
     player.removeAllItems()
+    player.actionAtItemEnd = AVPlayerActionAtItemEnd.Advance
+    loopCurrentPlayerItem = false
     prebufferAndQueueURLs(URLs)
   }
 
-  func playURL(URL: NSURL) {
+  func playURL(URL: NSURL, loop: Bool = true) {
     player.removeAllItems()
+    player.actionAtItemEnd = AVPlayerActionAtItemEnd.None
+    loopCurrentPlayerItem = loop
     prebufferAndQueueURL(URL)
   }
 
@@ -92,6 +97,14 @@ class PlayerViewController: UIViewController {
         }
         let playerItem = AVPlayerItem(asset: asset)
         NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: playerItem, queue: nil) { (notification) in
+          if self.loopCurrentPlayerItem {
+            playerItem.seekToTime(kCMTimeZero)
+          } else {
+            if self.observingCurrentPlayerItem {
+              playerItem.removeObserver(self, forKeyPath: "playbackLikelyToKeepUp")
+              self.observingCurrentPlayerItem = false
+            }
+          }
           let playerItem = notification.object! as AVPlayerItem
           let playerItems = self.player.items() as [AVPlayerItem]
           var index = find(playerItems, playerItem) ?? 0
@@ -100,12 +113,7 @@ class PlayerViewController: UIViewController {
           if index < playerItems.count {
             nextPlayerItem = playerItems[index]
           }
-          self.delegate?.playerItemDidPlayToEndTime(playerItem, nextPlayerItem: nextPlayerItem)
-
-          if self.observingCurrentPlayerItem {
-            playerItem.removeObserver(self, forKeyPath: "playbackLikelyToKeepUp")
-            self.observingCurrentPlayerItem = false
-          }
+          self.delegate?.playerItemDidPlayToEndTime(playerItem, nextPlayerItem: nextPlayerItem, willLoopPlayerItem: self.loopCurrentPlayerItem)
         }
         NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemPlaybackStalledNotification, object: playerItem, queue: nil) { (notification) in
           let playerItem = notification.object! as AVPlayerItem
