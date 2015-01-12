@@ -84,4 +84,15 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
     cameraViewController.view.hidden = true
     playerViewController.playURLs(videoURLs)
   }
+
+  func addClipButtonTapped() {
+    // TODO: finish this
+    println("Add clip button pressed.")
+//    let clip = Clip.newEntity() as Clip
+//    let user = User.newEntity() as User
+//    user.name = "James"
+//    clip.user = user
+//    clip.createdAt = NSDate()
+//    clip.save()
+  }
 }

@@ -10,6 +10,7 @@ import UIKit
 
 protocol ClipsViewControllerDelegate {
   func clipSelected(clip: Clip)
+  func addClipButtonTapped()
 }
 
 class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout, ClipCollectionViewCellDelegate, AddClipCollectionReuseableViewDelegate {
@@ -114,23 +115,10 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     delegate?.clipSelected(clip)
   }
 
-  func addClipButtonTappedInCell(cell: ClipCollectionViewCell) {
-    let clip = clipForCell(cell)
-    // TODO: send clip to server
-    println("send clip to server")
-  }
-
   // MARK: - AddClipCollectionReuseableViewDelegate
 
   func addClipButtonTapped() {
-    // TODO: move this to when capture vc is done capturing, then when addClipButtonTappedInCell post clip to server
-    println("add clip button (OLD)")
-    let clip = Clip.newEntity() as Clip
-    let user = User.newEntity() as User
-    user.name = "James"
-    clip.user = user
-    clip.createdAt = NSDate()
-    clip.save()
+    delegate?.addClipButtonTapped()
   }
 
   // MARK: - Private

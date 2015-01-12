@@ -11,7 +11,6 @@ import UIKit
 
 protocol ClipCollectionViewCellDelegate: class {
   func playClipButtonTappedInCell(cell: ClipCollectionViewCell)
-  func addClipButtonTappedInCell(cell: ClipCollectionViewCell)
 }
 
 class ClipCollectionViewCell: UICollectionViewCell {
@@ -41,9 +40,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
     contentView.addSubview(playButton)
     pauseButton.setImage(UIImage(named: "pause"), forState: UIControlState.Normal)
     contentView.addSubview(pauseButton)
-    addButton.setImage(UIImage(named: "add-clip"), forState: UIControlState.Normal)
-    addButton.addTarget(delegate, action: "addClip", forControlEvents: UIControlEvents.TouchUpInside)
-    contentView.addSubview(addButton)
   }
 
   required init(coder: NSCoder) {
@@ -124,10 +120,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   func playClip() {
     delegate?.playClipButtonTappedInCell(self)
-  }
-
-  func addClip() {
-    delegate?.addClipButtonTappedInCell(self)
   }
 
   // MARK: - Public
