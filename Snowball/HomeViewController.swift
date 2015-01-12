@@ -14,6 +14,7 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
   let playerViewController = PlayerViewController()
   let cameraViewController = CameraViewController()
   let clipsViewController = ClipsViewController()
+  var previewedVideoURL: NSURL?
 
   // MARK: - UIViewController
 
@@ -71,6 +72,7 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
     if error != nil { return }
     cameraViewController.view.hidden = true
     clipsViewController.scrollToEnd()
+    previewedVideoURL = fileURL
     playerViewController.playURL(fileURL)
   }
 
@@ -87,7 +89,9 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
 
   func addClipButtonTapped() {
     // TODO: finish this
-    println("Add clip button pressed.")
+    if let videoURL = previewedVideoURL {
+      println("Add clip button pressed.")
+    }
 //    let clip = Clip.newEntity() as Clip
 //    let user = User.newEntity() as User
 //    user.name = "James"
