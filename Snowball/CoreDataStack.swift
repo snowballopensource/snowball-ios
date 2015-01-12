@@ -15,6 +15,7 @@ class CoreDataStack {
   let stackName = coreRecordAppName
 
   class var defaultStack: CoreDataStack {
+    // https://github.com/hpique/SwiftSingleton#approach-b-nested-struct
     struct Singleton {
       static let defaultStack: CoreDataStack = CoreDataStack()
     }
