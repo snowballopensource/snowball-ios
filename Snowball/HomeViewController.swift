@@ -88,15 +88,17 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
   }
 
   func addClipButtonTapped() {
-    // TODO: finish this
-    if let videoURL = previewedVideoURL {
-      println("Add clip button pressed.")
+    // TODO: Use real current user
+    dispatch_async(dispatch_get_main_queue()) {
+      println("WARNING: REMOVE HARD CODED USER ID AND USE CURRENTUSER")
+      if let currentUser = User.find("493bf0cf-a2e3-4c0e-b551-317bdd3f2c40") as User? {// User.currentUser {
+        if let videoURL = self.previewedVideoURL {
+          let clip = Clip.newEntity() as Clip
+          clip.user = currentUser
+          clip.createdAt = NSDate()
+          clip.save()
+        }
+      }
     }
-//    let clip = Clip.newEntity() as Clip
-//    let user = User.newEntity() as User
-//    user.name = "James"
-//    clip.user = user
-//    clip.createdAt = NSDate()
-//    clip.save()
   }
 }
