@@ -68,7 +68,7 @@ class User: RemoteObject {
 
   override func awakeFromInsert() {
     super.awakeFromInsert()
-    color = UIColor.SnowballColor.randomColor()
+    color = UIColor.SnowballColor.randomColor
   }
 
   override func assign(attributes: AnyObject) {

@@ -10,7 +10,9 @@ import UIKit
 
 extension UIColor {
   struct SnowballColor {
-    static func randomColor() -> UIColor {
+    static var grayColor = UIColor(red: 210 / 255.0, green: 210 / 255.0, blue: 210 / 255.0, alpha: 1.0)
+    static var greenColor = UIColor(red: 126 / 255.0, green: 211 / 255.0, blue: 33 / 255.0, alpha: 1.0)
+    static var randomColor: UIColor {
       let hue = CGFloat(Float(arc4random_uniform(257)) / 256.0) // 0.0 to 1.0
       return UIColor(hue: hue, saturation: 0.5, brightness: 0.9, alpha: 1.0)
     }

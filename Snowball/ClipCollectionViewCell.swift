@@ -28,7 +28,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     clipThumbnailImageView.backgroundColor = UIColor.blackColor()
     contentView.addSubview(clipThumbnailImageView)
     contentView.addSubview(userAvatarImageView)
-    userNameLabel.font = UIFont(name: "Karla-Bold", size: 18)
+    userNameLabel.font = UIFont(name: UIFont.SnowballFont.bold, size: 18)
     userNameLabel.textAlignment = NSTextAlignment.Center
     contentView.addSubview(userNameLabel)
     clipTimeLabel.font = UIFont(name: "Helvetica-Bold", size: 16)
