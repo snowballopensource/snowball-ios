@@ -13,6 +13,7 @@ class OnboardingViewController: UIViewController {
   let topImage = UIView()
   let signUpButton = UIButton()
   let signInButton = UIButton()
+  let legalLabel = UILabel()
 
   // MARK: - UIViewController
 
@@ -30,7 +31,7 @@ class OnboardingViewController: UIViewController {
 
     let buttonMargin: Float = 25
 
-    signUpButton.setTitle("sign up", forState: UIControlState.Normal)
+    signUpButton.setTitle(NSLocalizedString("sign up"), forState: UIControlState.Normal)
     signUpButton.setTitleColor(UIColor.SnowballColor.greenColor, forState: UIControlState.Normal)
     signUpButton.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
     signUpButton.alignLeft()
@@ -44,11 +45,10 @@ class OnboardingViewController: UIViewController {
       signUpButton.height == 50
     }
 
-    signInButton.setTitle("sign in", forState: UIControlState.Normal)
+    signInButton.setTitle(NSLocalizedString("sign in"), forState: UIControlState.Normal)
     signInButton.setTitleColor(UIColor.SnowballColor.grayColor, forState: UIControlState.Normal)
     signInButton.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
     signInButton.alignLeft()
-    signInButton.showSnowballStyleBorderWithColor(UIColor.SnowballColor.grayColor)
     signInButton.addTarget(self, action: "signInButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(signInButton)
     layout(signInButton, signUpButton) { (signInButton, signUpButton) -> () in
@@ -56,6 +56,18 @@ class OnboardingViewController: UIViewController {
       signInButton.top == signUpButton.bottom + buttonMargin
       signInButton.right == signUpButton.right
       signInButton.height == signUpButton.height
+    }
+
+    legalLabel.text = NSLocalizedString("by continuing you are agreeing to the snowball terms of use and privacy policy")
+    legalLabel.textColor = UIColor.SnowballColor.grayColor
+    legalLabel.font = UIFont(name: UIFont.SnowballFont.bold, size: 10)
+    legalLabel.numberOfLines = 0
+    view.addSubview(legalLabel)
+    layout(legalLabel) { (legalLabel) in
+      let margin: Float = 45
+      legalLabel.left == legalLabel.superview!.left + margin
+      legalLabel.right == legalLabel.superview!.right - margin
+      legalLabel.bottom == legalLabel.superview!.bottom - 30
     }
   }
 
