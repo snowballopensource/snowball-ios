@@ -22,6 +22,8 @@ class OnboardingViewController: UIViewController {
     super.viewDidLoad()
 
     topImageView.image = UIImage(named: "onboarding-image")
+    topImageView.contentMode = UIViewContentMode.ScaleAspectFill
+    topImageView.clipsToBounds = true
     view.addSubview(topImageView)
     layout(topImageView) { (topImageView) in
       topImageView.left == topImageView.superview!.left
