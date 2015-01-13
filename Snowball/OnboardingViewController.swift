@@ -11,6 +11,7 @@ import UIKit
 
 class OnboardingViewController: UIViewController {
   let topImageView = UIImageView()
+  let topImageViewLogo = UIImageView()
   let signUpButton = UIButton()
   let signInButton = UIButton()
   let legalLabel = UILabel()
@@ -28,6 +29,11 @@ class OnboardingViewController: UIViewController {
       topImageView.right == topImageView.superview!.right
       topImageView.height == Float(UIScreen.mainScreen().bounds.size.height / 2)
     }
+
+    topImageViewLogo.image = UIImage(named: "snowball-logo")
+    topImageViewLogo.contentMode = UIViewContentMode.Center
+    topImageViewLogo.frame = topImageView.bounds
+    topImageView.addSubview(topImageViewLogo)
 
     let buttonMargin: Float = 25
 
