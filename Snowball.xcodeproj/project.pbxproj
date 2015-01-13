@@ -27,6 +27,7 @@
 		BA6385E91A65AD1300B002D9 /* OnboardingSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385E81A65AD1300B002D9 /* OnboardingSignInViewController.swift */; };
 		BA6385ED1A65B8FF00B002D9 /* UIView+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385EC1A65B8FF00B002D9 /* UIView+Snowball.swift */; };
 		BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */; };
+		BA7C0E481A65C315001B3B4C /* UIButton+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */; };
 		BA7C27BB1A37A03000A9CFC5 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA7C27B51A37A02600A9CFC5 /* Alamofire.framework */; };
 		BA7C27BC1A37A03000A9CFC5 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA7C27B51A37A02600A9CFC5 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA7C27C61A37A28F00A9CFC5 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27C51A37A28F00A9CFC5 /* Router.swift */; };
@@ -157,6 +158,7 @@
 		BA6385E81A65AD1300B002D9 /* OnboardingSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingSignInViewController.swift; sourceTree = "<group>"; };
 		BA6385EC1A65B8FF00B002D9 /* UIView+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Snowball.swift"; sourceTree = "<group>"; };
 		BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Snowball.swift"; sourceTree = "<group>"; };
+		BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Snowball.swift"; sourceTree = "<group>"; };
 		BA7C27AF1A37A02600A9CFC5 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Carthage.checkout/Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
 		BA7C27C51A37A28F00A9CFC5 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		BA7C27CA1A37A64400A9CFC5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */,
 				BA6385EC1A65B8FF00B002D9 /* UIView+Snowball.swift */,
 				BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */,
+				BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -560,6 +563,7 @@
 				BA32C7951A3287BE0052F4CA /* UserAvatarImageView.swift in Sources */,
 				BAA8C0841A32FA2B00AAB9F4 /* Clip.swift in Sources */,
 				BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */,
+				BA7C0E481A65C315001B3B4C /* UIButton+Snowball.swift in Sources */,
 				BA38C15E1A30228700A2F2AE /* AppDelegate.swift in Sources */,
 				BA3A28841A305C6F00A85C29 /* UICollectionView+CellRegistration.swift in Sources */,
 				BAF3DDBB1A3043F10062C068 /* UIViewController+ChildViewController.swift in Sources */,

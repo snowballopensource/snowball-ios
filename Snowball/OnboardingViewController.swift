@@ -33,8 +33,7 @@ class OnboardingViewController: UIViewController {
     signUpButton.setTitle("sign up", forState: UIControlState.Normal)
     signUpButton.setTitleColor(UIColor.SnowballColor.greenColor, forState: UIControlState.Normal)
     signUpButton.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    signUpButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
-    signUpButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+    signUpButton.alignLeft()
     signUpButton.showSnowballStyleBorderWithColor(UIColor.SnowballColor.greenColor)
     signUpButton.addTarget(self, action: "signUpButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(signUpButton)
@@ -48,8 +47,7 @@ class OnboardingViewController: UIViewController {
     signInButton.setTitle("sign in", forState: UIControlState.Normal)
     signInButton.setTitleColor(UIColor.SnowballColor.grayColor, forState: UIControlState.Normal)
     signInButton.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    signInButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
-    signInButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+    signInButton.alignLeft()
     signInButton.showSnowballStyleBorderWithColor(UIColor.SnowballColor.grayColor)
     signInButton.addTarget(self, action: "signInButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(signInButton)
