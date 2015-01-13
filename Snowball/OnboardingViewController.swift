@@ -10,7 +10,7 @@ import Cartography
 import UIKit
 
 class OnboardingViewController: UIViewController {
-  let topImage = UIView()
+  let topImageView = UIImageView()
   let signUpButton = UIButton()
   let signInButton = UIButton()
   let legalLabel = UILabel()
@@ -20,13 +20,13 @@ class OnboardingViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    topImage.backgroundColor = UIColor.SnowballColor.greenColor
-    view.addSubview(topImage)
-    layout(topImage) { (topImage) in
-      topImage.left == topImage.superview!.left
-      topImage.top == topImage.superview!.top
-      topImage.right == topImage.superview!.right
-      topImage.height == Float(UIScreen.mainScreen().bounds.size.height / 2)
+    topImageView.image = UIImage(named: "onboarding-image")
+    view.addSubview(topImageView)
+    layout(topImageView) { (topImageView) in
+      topImageView.left == topImageView.superview!.left
+      topImageView.top == topImageView.superview!.top
+      topImageView.right == topImageView.superview!.right
+      topImageView.height == Float(UIScreen.mainScreen().bounds.size.height / 2)
     }
 
     let buttonMargin: Float = 25
@@ -38,11 +38,21 @@ class OnboardingViewController: UIViewController {
     signUpButton.showSnowballStyleBorderWithColor(UIColor.SnowballColor.greenColor)
     signUpButton.addTarget(self, action: "signUpButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(signUpButton)
-    layout(signUpButton, topImage) { (signUpButton, topImage) in
+    layout(signUpButton, topImageView) { (signUpButton, topImageView) in
       signUpButton.left == signUpButton.superview!.left + buttonMargin
-      signUpButton.top == topImage.bottom + 40
+      signUpButton.top == topImageView.bottom + 40
       signUpButton.right == signUpButton.superview!.right - buttonMargin
       signUpButton.height == 50
+    }
+    let chevronImage = UIImage(named: "chevron")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+    let signUpChevron = UIImageView(image: chevronImage)
+    signUpChevron.tintColor = UIColor.SnowballColor.greenColor
+    signUpButton.addSubview(signUpChevron)
+    layout(signUpChevron) { (signUpChevron) in
+      signUpChevron.width == Float(chevronImage.size.width)
+      signUpChevron.centerY == signUpChevron.superview!.centerY
+      signUpChevron.right == signUpChevron.superview!.right - 25
+      signUpChevron.height == Float(chevronImage.size.height)
     }
 
     signInButton.setTitle(NSLocalizedString("sign in"), forState: UIControlState.Normal)
@@ -56,6 +66,15 @@ class OnboardingViewController: UIViewController {
       signInButton.top == signUpButton.bottom + buttonMargin
       signInButton.right == signUpButton.right
       signInButton.height == signUpButton.height
+    }
+    let signInChevron = UIImageView(image: chevronImage)
+    signInChevron.tintColor = UIColor.SnowballColor.grayColor
+    signInButton.addSubview(signInChevron)
+    layout(signInChevron) { (signInChevron) in
+      signInChevron.width == Float(chevronImage.size.width)
+      signInChevron.centerY == signInChevron.superview!.centerY
+      signInChevron.right == signInChevron.superview!.right - 25
+      signInChevron.height == Float(chevronImage.size.height)
     }
 
     legalLabel.text = NSLocalizedString("by continuing you are agreeing to the snowball terms of use and privacy policy")
