@@ -28,6 +28,8 @@ class OnboardingSignUpViewController: OnboardingAuthenticationViewController {
   // MARK: - OnboardingAuthenticationViewController
 
   override func goForward() {
-    println("sign up")
+    if validateFields() {
+      println("sign up")
+    }
   }
 }

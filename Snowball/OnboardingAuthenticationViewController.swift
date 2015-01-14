@@ -132,6 +132,19 @@ class OnboardingAuthenticationViewController: UIViewController, OnboardingTopVie
 
   // MARK: - OnboardingAuthenticationViewController
 
+  func validateFields() -> Bool {
+    if countElements(usernameTextField.text) < 2 {
+      if showUsernameTextField {
+        return false
+      }
+    } else if countElements(emailTextField.text) < 5 {
+      return false
+    } else if countElements(passwordTextField.text) < 4 {
+      return false
+    }
+    return true
+  }
+
   func goForward() {
     assert(false, "Implement `goForward` in subclass of OnboardingAuthenticationViewController")
   }
