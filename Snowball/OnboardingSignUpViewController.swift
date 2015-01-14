@@ -9,8 +9,8 @@
 import Cartography
 import UIKit
 
-class OnboardingSignUpViewController: UIViewController {
-  let topBar = UIView()
+class OnboardingSignUpViewController: UIViewController, OnboardingTopViewDelegate {
+  let topBar = OnboardingTopView()
   let messageLabel = UILabel()
   let usernameTextField = UITextField()
   let emailTextField = UITextField()
@@ -23,6 +23,7 @@ class OnboardingSignUpViewController: UIViewController {
 
     view.backgroundColor = UIColor.whiteColor()
 
+    topBar.setPage(0)
     view.addSubview(topBar)
     layout(topBar) { (topBar) in
       topBar.left == topBar.superview!.left
@@ -37,9 +38,9 @@ class OnboardingSignUpViewController: UIViewController {
     messageLabel.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
     messageLabel.numberOfLines = 2
     view.addSubview(messageLabel)
-    layout(messageLabel, topBar) { (messageLabel, topBar) in
+    layout(messageLabel) { (messageLabel) in
       messageLabel.left == messageLabel.superview!.left + sideMargin
-      messageLabel.top == topBar.bottom
+      messageLabel.top == messageLabel.superview!.top + 65
       messageLabel.right == messageLabel.superview!.right - sideMargin
     }
 
@@ -54,7 +55,7 @@ class OnboardingSignUpViewController: UIViewController {
     view.addSubview(usernameTextField)
     layout(usernameTextField, messageLabel) { (usernameTextField, messageLabel) in
       usernameTextField.left == messageLabel.left
-      usernameTextField.top == messageLabel.bottom + betweenMargin
+      usernameTextField.top == usernameTextField.superview!.top + 140
       usernameTextField.right == messageLabel.right
       usernameTextField.height == textFieldHeight
     }
@@ -89,5 +90,15 @@ class OnboardingSignUpViewController: UIViewController {
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     usernameTextField.becomeFirstResponder()
+  }
+
+  // MARK: - OnboardingTopViewDelegate
+
+  func onboardingTopViewBackButtonTapped() {
+    navigationController?.popViewControllerAnimated(true)
+  }
+
+  func onboardingTopViewForwardButtonTapped() {
+    println("forward button tapped")
   }
 }
