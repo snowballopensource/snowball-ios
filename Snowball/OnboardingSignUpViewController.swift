@@ -55,9 +55,12 @@ class OnboardingSignUpViewController: UIViewController, OnboardingTopViewDelegat
 
     usernameTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("username"), attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
     usernameTextField.textColor = UIColor.SnowballColor.greenColor
+    usernameTextField.tintColor = UIColor.SnowballColor.greenColor
     usernameTextField.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
     usernameTextField.alignLeft()
     usernameTextField.showSnowballStyleBorderWithColor(UIColor.SnowballColor.greenColor)
+    usernameTextField.autocorrectionType = UITextAutocorrectionType.No
+    usernameTextField.autocapitalizationType = UITextAutocapitalizationType.None
     view.addSubview(usernameTextField)
     layout(usernameTextField, messageLabel) { (usernameTextField, messageLabel) in
       usernameTextField.left == messageLabel.left
@@ -68,9 +71,13 @@ class OnboardingSignUpViewController: UIViewController, OnboardingTopViewDelegat
 
     emailTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("email"), attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
     emailTextField.textColor = UIColor.SnowballColor.greenColor
+    emailTextField.tintColor = UIColor.SnowballColor.greenColor
     emailTextField.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
     emailTextField.alignLeft()
     emailTextField.showSnowballStyleBorderWithColor(UIColor.SnowballColor.greenColor)
+    emailTextField.autocorrectionType = UITextAutocorrectionType.No
+    emailTextField.autocapitalizationType = UITextAutocapitalizationType.None
+    emailTextField.keyboardType = UIKeyboardType.EmailAddress
     view.addSubview(emailTextField)
     layout(emailTextField, usernameTextField) { (emailTextField, usernameTextField) in
       emailTextField.left == usernameTextField.left
@@ -81,9 +88,13 @@ class OnboardingSignUpViewController: UIViewController, OnboardingTopViewDelegat
 
     passwordTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("password"), attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
     passwordTextField.textColor = UIColor.SnowballColor.greenColor
+    passwordTextField.tintColor = UIColor.SnowballColor.greenColor
     passwordTextField.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
     passwordTextField.alignLeft()
     passwordTextField.showSnowballStyleBorderWithColor(UIColor.SnowballColor.greenColor)
+    passwordTextField.autocorrectionType = UITextAutocorrectionType.No
+    passwordTextField.autocapitalizationType = UITextAutocapitalizationType.None
+    passwordTextField.secureTextEntry = true
     view.addSubview(passwordTextField)
     layout(passwordTextField, emailTextField) { (passwordTextField, emailTextField) in
       passwordTextField.left == emailTextField.left
