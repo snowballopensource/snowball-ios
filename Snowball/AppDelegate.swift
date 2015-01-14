@@ -15,7 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   // MARK: - Private
 
   private class var initialViewController: UIViewController {
-    return OnboardingViewController()
+    if User.currentUser == nil {
+      return UINavigationController(rootViewController: OnboardingViewController())
+    }
+    return HomeViewController()
   }
 
   // This is not a property since UIScreen.mainScreen().bounds is not set
