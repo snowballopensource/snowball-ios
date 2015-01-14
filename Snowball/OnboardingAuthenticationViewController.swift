@@ -133,13 +133,21 @@ class OnboardingAuthenticationViewController: UIViewController, OnboardingTopVie
   // MARK: - OnboardingAuthenticationViewController
 
   func validateFields() -> Bool {
+    let alertController = UIAlertController(title: NSLocalizedString("Error"), message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+    alertController.addAction(UIAlertAction(title: NSLocalizedString("OK"), style: UIAlertActionStyle.Cancel, handler: nil))
     if countElements(usernameTextField.text) < 2 {
       if showUsernameTextField {
+        alertController.message = NSLocalizedString("Username needs to be longer. Please try again.")
+        presentViewController(alertController, animated: true, completion: nil)
         return false
       }
     } else if countElements(emailTextField.text) < 5 {
+      alertController.message = NSLocalizedString("Email invalid. Please try again.")
+      presentViewController(alertController, animated: true, completion: nil)
       return false
     } else if countElements(passwordTextField.text) < 4 {
+      alertController.message = NSLocalizedString("Password needs to be longer. Please try again.")
+      presentViewController(alertController, animated: true, completion: nil)
       return false
     }
     return true
