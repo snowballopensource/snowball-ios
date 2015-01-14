@@ -43,6 +43,7 @@
 		BAA8C0841A32FA2B00AAB9F4 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0831A32FA2B00AAB9F4 /* Clip.swift */; };
 		BAA8C0971A333A8B00AAB9F4 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0961A333A8B00AAB9F4 /* CollectionViewDataSource.swift */; };
 		BAA8C0991A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0981A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift */; };
+		BAC8CD3A1A6607550075B503 /* OnboardingAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC8CD391A6607550075B503 /* OnboardingAuthenticationViewController.swift */; };
 		BACA7A861A36E40900C34B6C /* NSDate+TimeSince.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */; };
 		BAD666EF1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD666EE1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift */; };
 		BAE10A0F1A30400100CCFA25 /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAE10A081A303F5F00CCFA25 /* Cartography.framework */; };
@@ -175,6 +176,7 @@
 		BAA8C0831A32FA2B00AAB9F4 /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
 		BAA8C0961A333A8B00AAB9F4 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 		BAA8C0981A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		BAC8CD391A6607550075B503 /* OnboardingAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingAuthenticationViewController.swift; sourceTree = "<group>"; };
 		BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeSince.swift"; sourceTree = "<group>"; };
 		BAD666EE1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipTimelineBufferCollectionReuseableView.swift; sourceTree = "<group>"; };
 		BAE10A001A303F5F00CCFA25 /* Cartography.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cartography.xcodeproj; path = Carthage.checkout/Cartography/Cartography.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -325,6 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				BA6385E21A65ACAF00B002D9 /* OnboardingViewController.swift */,
+				BAC8CD391A6607550075B503 /* OnboardingAuthenticationViewController.swift */,
 				BA6385E61A65ACF700B002D9 /* OnboardingSignUpViewController.swift */,
 				BA6385E81A65AD1300B002D9 /* OnboardingSignInViewController.swift */,
 			);
@@ -598,6 +601,7 @@
 				BAA8C0801A32F8F300AAB9F4 /* User.swift in Sources */,
 				BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */,
 				BA52474B1A31A1FC003BD269 /* UICollectionReusableView+Required.swift in Sources */,
+				BAC8CD3A1A6607550075B503 /* OnboardingAuthenticationViewController.swift in Sources */,
 				BA7C27CB1A37A64400A9CFC5 /* API.swift in Sources */,
 				BAE2EFD21A5C5A1D004B781C /* CameraViewController.swift in Sources */,
 				BAD666EF1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift in Sources */,
