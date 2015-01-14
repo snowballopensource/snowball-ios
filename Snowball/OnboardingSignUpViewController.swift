@@ -34,7 +34,13 @@ class OnboardingSignUpViewController: UIViewController, OnboardingTopViewDelegat
 
     let sideMargin: Float = 25
 
-    messageLabel.text = NSLocalizedString("Ok, let's get started with creating your account.")
+    let messageStringOne = NSAttributedString(string: "Ok, let's get started with\n", attributes: [NSForegroundColorAttributeName: UIColor.blackColor()])
+    let messageStringTwo = NSAttributedString(string: "creating ", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
+    let messageStringThree = NSAttributedString(string: "your account.", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor])
+    let messageString = NSMutableAttributedString(attributedString: messageStringOne)
+    messageString.appendAttributedString(messageStringTwo)
+    messageString.appendAttributedString(messageStringThree)
+    messageLabel.attributedText = messageString
     messageLabel.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
     messageLabel.numberOfLines = 2
     view.addSubview(messageLabel)
