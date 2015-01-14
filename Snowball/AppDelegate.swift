@@ -16,7 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   private class var initialViewController: UIViewController {
     if User.currentUser == nil {
-      return UINavigationController(rootViewController: OnboardingViewController())
+      let navigationController = UINavigationController(rootViewController: OnboardingViewController())
+      navigationController.navigationBarHidden = true
+      return navigationController
     }
     return HomeViewController()
   }

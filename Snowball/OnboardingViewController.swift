@@ -98,16 +98,6 @@ class OnboardingViewController: UIViewController {
     }
   }
 
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
-    navigationController?.setNavigationBarHidden(true, animated: animated)
-  }
-
-  override func viewWillDisappear(animated: Bool) {
-    navigationController?.setNavigationBarHidden(false, animated: animated)
-    super.viewWillDisappear(animated)
-  }
-
   // MARK: - Actions
 
   func signUpButtonTapped() {
