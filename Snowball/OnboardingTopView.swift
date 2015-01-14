@@ -24,13 +24,13 @@ class OnboardingTopView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
 
-    let backImage = UIImage(named: "back-button")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+    let backImage = UIImage(named: "back")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     backButton.setImage(backImage, forState: UIControlState.Normal)
     backButton.imageView?.tintColor = UIColor.SnowballColor.grayColor
     backButton.addTarget(delegate, action: "onboardingTopViewBackButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     addSubview(backButton)
 
-    let forwardImage = UIImage(named: "forward-button")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+    let forwardImage = UIImage(named: "forward")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     forwardButton.setImage(forwardImage, forState: UIControlState.Normal)
     forwardButton.imageView?.tintColor = UIColor.SnowballColor.greenColor
     forwardButton.addTarget(delegate, action: "onboardingTopViewForwardButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
