@@ -15,7 +15,6 @@ class OnboardingAuthenticationViewController: UIViewController, OnboardingTopVie
   let usernameTextField = UITextField()
   let emailTextField = UITextField()
   let passwordTextField = UITextField()
-  var showUsernameTextField = false
 
   // MARK: - UIViewController
 
@@ -47,7 +46,15 @@ class OnboardingAuthenticationViewController: UIViewController, OnboardingTopVie
     let betweenMargin: Float = 15
     let textFieldHeight: Float = 50
 
-    if showUsernameTextField {
+    if self.isKindOfClass(OnboardingSignUpViewController) {
+      let messageStringOne = NSAttributedString(string: "Ok, let's get started with\n", attributes: [NSForegroundColorAttributeName: UIColor.blackColor()])
+      let messageStringTwo = NSAttributedString(string: "creating ", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
+      let messageStringThree = NSAttributedString(string: "your account.", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor])
+      let messageString = NSMutableAttributedString(attributedString: messageStringOne)
+      messageString.appendAttributedString(messageStringTwo)
+      messageString.appendAttributedString(messageStringThree)
+      messageLabel.attributedText = messageString
+
       usernameTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("username"), attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
       usernameTextField.textColor = UIColor.SnowballColor.greenColor
       usernameTextField.tintColor = UIColor.SnowballColor.greenColor
@@ -63,6 +70,16 @@ class OnboardingAuthenticationViewController: UIViewController, OnboardingTopVie
         usernameTextField.right == messageLabel.right
         usernameTextField.height == textFieldHeight
       }
+    } else {
+      let messageStringOne = NSAttributedString(string: "Ok, let's get you ", attributes: [NSForegroundColorAttributeName: UIColor.blackColor()])
+      let messageStringTwo = NSAttributedString(string: "back into\n", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
+      let messageStringThree = NSAttributedString(string: "your account.", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor])
+      let messageString = NSMutableAttributedString(attributedString: messageStringOne)
+      messageString.appendAttributedString(messageStringTwo)
+      messageString.appendAttributedString(messageStringThree)
+      messageLabel.attributedText = messageString
+
+      topBar.pageControl.hidden = true
     }
 
     emailTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("email"), attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
@@ -75,7 +92,7 @@ class OnboardingAuthenticationViewController: UIViewController, OnboardingTopVie
     emailTextField.autocapitalizationType = UITextAutocapitalizationType.None
     emailTextField.keyboardType = UIKeyboardType.EmailAddress
     view.addSubview(emailTextField)
-    if showUsernameTextField {
+    if self.isKindOfClass(OnboardingSignUpViewController) {
       layout(emailTextField, usernameTextField) { (emailTextField, usernameTextField) in
         emailTextField.left == usernameTextField.left
         emailTextField.top == usernameTextField.bottom + betweenMargin
@@ -113,7 +130,7 @@ class OnboardingAuthenticationViewController: UIViewController, OnboardingTopVie
 
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
-    if showUsernameTextField {
+    if self.isKindOfClass(OnboardingSignUpViewController) {
       usernameTextField.becomeFirstResponder()
     } else {
       emailTextField.becomeFirstResponder()
@@ -135,7 +152,7 @@ class OnboardingAuthenticationViewController: UIViewController, OnboardingTopVie
   func validateFields() -> Bool {
     let alertController = UIAlertController(title: NSLocalizedString("Error"), message: nil, preferredStyle: UIAlertControllerStyle.Alert)
     alertController.addAction(UIAlertAction(title: NSLocalizedString("OK"), style: UIAlertActionStyle.Cancel, handler: nil))
-    if countElements(usernameTextField.text) < 2 && showUsernameTextField {
+    if countElements(usernameTextField.text) < 2 && self.isKindOfClass(OnboardingSignUpViewController) {
       alertController.message = NSLocalizedString("Username needs to be longer. Please try again.")
       presentViewController(alertController, animated: true, completion: nil)
       return false

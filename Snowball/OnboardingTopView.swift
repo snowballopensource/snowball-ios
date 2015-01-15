@@ -16,7 +16,7 @@ protocol OnboardingTopViewDelegate: class {
 class OnboardingTopView: UIView {
   private let backButton = UIButton()
   private let forwardButton = UIButton()
-  private let pageControl = UIPageControl()
+  let pageControl = UIPageControl()
   var delegate: OnboardingTopViewDelegate?
 
   // MARK: - UIView
