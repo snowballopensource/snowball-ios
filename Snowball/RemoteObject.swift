@@ -12,15 +12,7 @@ class RemoteObject: NSManagedObject {
 
   // MARK: - JSON Parsing
 
-  class func importFromJSON(JSON: AnyObject, context: NSManagedObjectContext) {
-    if JSON is [AnyObject] {
-      objectsFromJSON(JSON, context: context)
-    } else {
-      objectFromJSON(JSON, context: context)
-    }
-  }
-
-  class func objectFromJSON(JSON: AnyObject, context: NSManagedObjectContext) -> RemoteObject? {
+  class func objectFromJSON(JSON: AnyObject, context: NSManagedObjectContext = NSManagedObjectContext.mainQueueContext()) -> RemoteObject? {
     if let id = JSON["id"] as? String {
       let object = findOrInitialize(id, context: context)
       object.assign(JSON)
@@ -29,7 +21,7 @@ class RemoteObject: NSManagedObject {
     return nil
   }
 
-  class func objectsFromJSON(JSON: AnyObject, context: NSManagedObjectContext) -> [RemoteObject] {
+  class func objectsFromJSON(JSON: AnyObject, context: NSManagedObjectContext = NSManagedObjectContext.mainQueueContext()) -> [RemoteObject] {
     var objects = [RemoteObject]()
     if let JSONArray = JSON as? [AnyObject] {
       for JSONObject in JSONArray {

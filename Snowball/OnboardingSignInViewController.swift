@@ -28,7 +28,16 @@ class OnboardingSignInViewController: OnboardingAuthenticationViewController {
 
   override func goForward() {
     if validateFields() {
-      println("sign in")
+      let route = Router.SignIn(email: emailTextField.text, password: passwordTextField.text)
+      API.request(route).responseJSON { (request, response, JSON, error) in
+        if error != nil { displayAPIErrorToUser(JSON); return }
+        if let userJSON: AnyObject = JSON {
+          CoreRecord.saveWithBlock { (context) in
+            let user = User.objectFromJSON(userJSON, context: context) as User
+            User.currentUser = user
+          }
+        }
+      }
     }
   }
 }

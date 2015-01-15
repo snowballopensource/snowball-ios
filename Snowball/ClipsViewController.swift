@@ -53,7 +53,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     API.request(Router.GetClipStream).responseJSON { (request, response, JSON, error) in
       if let JSON: AnyObject = JSON {
         CoreRecord.saveWithBlock { (context) in
-          Clip.importFromJSON(JSON, context: context)
+          Clip.objectsFromJSON(JSON, context: context)
           return
         }
       }

@@ -19,51 +19,6 @@ class User: RemoteObject {
   @NSManaged var color: AnyObject
   var authToken: String?
 
-  // MARK: - Current User
-
-  // Since stored class variables are not yet supported,
-  // we create a struct that does support static vars.
-  // https://github.com/hpique/SwiftSingleton#approach-b-nested-struct
-
-  private struct CurrentUserStruct {
-    static var currentUser: User?
-    static let kCurrentUserAuthTokenKey = "CurrentUserAuthToken"
-    static let kCurrentUserIDKey = "CurrentUserID"
-    static let kCurrentUserChangedNotificationName = "CurrentUserChangedNotification"
-  }
-
-  class var currentUser: User? {
-    get {
-      if (CurrentUserStruct.currentUser == nil) {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let currentUserID = defaults.objectForKey(CurrentUserStruct.kCurrentUserIDKey) as String?
-        if currentUserID == nil {
-          return nil
-        }
-        let currentUserAuthToken = defaults.objectForKey(CurrentUserStruct.kCurrentUserAuthTokenKey) as String?
-        if currentUserAuthToken == nil {
-          return nil
-        }
-        CurrentUserStruct.currentUser = User.find(currentUserID!) as User?
-        CurrentUserStruct.currentUser?.authToken = currentUserAuthToken
-      }
-      return CurrentUserStruct.currentUser
-    }
-    set(user) {
-      let defaults = NSUserDefaults.standardUserDefaults()
-      if user?.id == nil || user?.authToken == nil {
-        CurrentUserStruct.currentUser = nil
-        defaults.removeObjectForKey(CurrentUserStruct.kCurrentUserIDKey)
-      } else {
-        defaults.setObject(user?.id, forKey: CurrentUserStruct.kCurrentUserIDKey)
-        defaults.setObject(user?.authToken, forKey: CurrentUserStruct.kCurrentUserAuthTokenKey)
-        CurrentUserStruct.currentUser = user
-      }
-      defaults.synchronize()
-      NSNotificationCenter.defaultCenter().postNotificationName(CurrentUserStruct.kCurrentUserChangedNotificationName, object: user)
-    }
-  }
-
   // MARK: - NSManagedObject
 
   override func awakeFromInsert() {
@@ -86,6 +41,54 @@ class User: RemoteObject {
     }
     if let following = attributes["following"] as? Bool {
       self.following = following
+    }
+    if let authToken = attributes["auth_token"] as? String {
+      self.authToken = authToken
+    }
+  }
+
+  // MARK: - Current User
+
+  // Since stored class variables are not yet supported,
+  // we create a struct that does support static vars.
+  // https://github.com/hpique/SwiftSingleton#approach-b-nested-struct
+
+  private struct CurrentUserStruct {
+    static var currentUser: User?
+    static let kCurrentUserAuthTokenKey = "CurrentUserAuthToken"
+    static let kCurrentUserIDKey = "CurrentUserID"
+    static let kCurrentUserChangedNotificationName = "CurrentUserChangedNotification"
+  }
+
+  class var currentUser: User? {
+    get {
+    if (CurrentUserStruct.currentUser == nil) {
+    let defaults = NSUserDefaults.standardUserDefaults()
+    let currentUserID = defaults.objectForKey(CurrentUserStruct.kCurrentUserIDKey) as String?
+    if currentUserID == nil {
+    return nil
+    }
+    let currentUserAuthToken = defaults.objectForKey(CurrentUserStruct.kCurrentUserAuthTokenKey) as String?
+    if currentUserAuthToken == nil {
+    return nil
+    }
+    CurrentUserStruct.currentUser = User.find(currentUserID!) as User?
+    CurrentUserStruct.currentUser?.authToken = currentUserAuthToken
+    }
+    return CurrentUserStruct.currentUser
+    }
+    set(user) {
+      let defaults = NSUserDefaults.standardUserDefaults()
+      if user?.id == nil || user?.authToken == nil {
+        CurrentUserStruct.currentUser = nil
+        defaults.removeObjectForKey(CurrentUserStruct.kCurrentUserIDKey)
+      } else {
+        defaults.setObject(user?.id, forKey: CurrentUserStruct.kCurrentUserIDKey)
+        defaults.setObject(user?.authToken, forKey: CurrentUserStruct.kCurrentUserAuthTokenKey)
+        CurrentUserStruct.currentUser = user
+      }
+      defaults.synchronize()
+      NSNotificationCenter.defaultCenter().postNotificationName(CurrentUserStruct.kCurrentUserChangedNotificationName, object: user)
     }
   }
 }

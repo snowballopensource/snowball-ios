@@ -14,7 +14,7 @@ enum Router: URLRequestConvertible {
 
   // Authentication
   case SignUp(username: String, email: String, password: String)
-  case SignIn(username: String, password: String)
+  case SignIn(email: String, password: String)
   // User
   case GetCurrentUser
   case UpdateCurrentUser(name: String?, username: String?, email: String?, phoneNumber: String?)
@@ -76,7 +76,7 @@ enum Router: URLRequestConvertible {
   var parameters: [String: AnyObject]? {
     switch self {
     case .SignUp(let username, let email, let password): return ["username": username, "email": email, "password": password]
-    case .SignIn(let username, let password): return ["username": username, "password": password]
+    case .SignIn(let email, let password): return ["email": email, "password": password]
     case .UpdateCurrentUser(let name, let username, let email, let phoneNumber):
       var userParameters = [String: String]()
       if let newUsername = username {
