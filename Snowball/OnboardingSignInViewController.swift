@@ -33,8 +33,13 @@ class OnboardingSignInViewController: OnboardingAuthenticationViewController {
         if error != nil { displayAPIErrorToUser(JSON); return }
         if let userJSON: AnyObject = JSON {
           CoreRecord.saveWithBlock { (context) in
-            let user = User.objectFromJSON(userJSON, context: context) as User
+            let user = User.objectFromJSON(userJSON, context: context) as User?
             User.currentUser = user
+            if let user = user {
+              dispatch_async(dispatch_get_main_queue()) {
+                AppDelegate.switchToNavigationController(MainNavigationController())
+              }
+            }
           }
         }
       }

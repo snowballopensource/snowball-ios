@@ -36,6 +36,8 @@
 		BA7C27CB1A37A64400A9CFC5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27CA1A37A64400A9CFC5 /* API.swift */; };
 		BA7C27D31A37ADA600A9CFC5 /* RemoteObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */; };
 		BA8450281A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8450271A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift */; };
+		BA9AA67C1A67465F002C4992 /* OnboardingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9AA67B1A67465F002C4992 /* OnboardingNavigationController.swift */; };
+		BA9AA6831A674804002C4992 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9AA6821A674804002C4992 /* MainNavigationController.swift */; };
 		BAA8C0681A32E76D00AAB9F4 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0671A32E76D00AAB9F4 /* CoreDataStack.swift */; };
 		BAA8C06A1A32EAAA00AAB9F4 /* CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0691A32EAAA00AAB9F4 /* CoreRecord.swift */; };
 		BAA8C07A1A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0791A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift */; };
@@ -169,6 +171,8 @@
 		BA7C27CA1A37A64400A9CFC5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteObject.swift; sourceTree = "<group>"; };
 		BA8450271A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+CoreRecord.swift"; sourceTree = "<group>"; };
+		BA9AA67B1A67465F002C4992 /* OnboardingNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingNavigationController.swift; sourceTree = "<group>"; };
+		BA9AA6821A674804002C4992 /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		BAA8C0671A32E76D00AAB9F4 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		BAA8C0691A32EAAA00AAB9F4 /* CoreRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreRecord.swift; sourceTree = "<group>"; };
 		BAA8C0791A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+CoreRecord.swift"; sourceTree = "<group>"; };
@@ -258,10 +262,7 @@
 			children = (
 				BA38C15D1A30228700A2F2AE /* AppDelegate.swift */,
 				BA6385DB1A65A90000B002D9 /* Onboarding */,
-				BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */,
-				BA38C1801A30272700A2F2AE /* ClipsViewController.swift */,
-				BAF7C0A01A3B969D00941DAB /* PlayerViewController.swift */,
-				BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */,
+				BA9AA6811A6747F0002C4992 /* Main */,
 				BA32C7931A3287AC0052F4CA /* Views */,
 				BA3A28851A30615800A85C29 /* Cells */,
 				BAA8C0631A32E75B00AAB9F4 /* Core Record */,
@@ -326,6 +327,7 @@
 		BA6385DB1A65A90000B002D9 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				BA9AA67B1A67465F002C4992 /* OnboardingNavigationController.swift */,
 				BA6385E21A65ACAF00B002D9 /* OnboardingViewController.swift */,
 				BAC8CD391A6607550075B503 /* OnboardingAuthenticationViewController.swift */,
 				BA6385E61A65ACF700B002D9 /* OnboardingSignUpViewController.swift */,
@@ -350,6 +352,18 @@
 				BA7C27C51A37A28F00A9CFC5 /* Router.swift */,
 			);
 			name = Networking;
+			sourceTree = "<group>";
+		};
+		BA9AA6811A6747F0002C4992 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				BA9AA6821A674804002C4992 /* MainNavigationController.swift */,
+				BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */,
+				BA38C1801A30272700A2F2AE /* ClipsViewController.swift */,
+				BAF7C0A01A3B969D00941DAB /* PlayerViewController.swift */,
+				BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */,
+			);
+			name = Main;
 			sourceTree = "<group>";
 		};
 		BAA8C0631A32E75B00AAB9F4 /* Core Record */ = {
@@ -581,6 +595,7 @@
 				BA8450281A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift in Sources */,
 				BAF7C0A11A3B969D00941DAB /* PlayerViewController.swift in Sources */,
 				BA7C0E4C1A65F395001B3B4C /* OnboardingTopView.swift in Sources */,
+				BA9AA67C1A67465F002C4992 /* OnboardingNavigationController.swift in Sources */,
 				BAF3DDC11A3048E70062C068 /* ArrayCollectionViewDataSource.swift in Sources */,
 				BA38C1811A30272700A2F2AE /* ClipsViewController.swift in Sources */,
 				BA3A28701A3051E300A85C29 /* Util.swift in Sources */,
@@ -592,6 +607,7 @@
 				BACA7A861A36E40900C34B6C /* NSDate+TimeSince.swift in Sources */,
 				BA38C1611A30228700A2F2AE /* Snowball.xcdatamodeld in Sources */,
 				BAA8C07A1A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift in Sources */,
+				BA9AA6831A674804002C4992 /* MainNavigationController.swift in Sources */,
 				BA7C27C61A37A28F00A9CFC5 /* Router.swift in Sources */,
 				BA32C7921A3286250052F4CA /* UIColor+Snowball.swift in Sources */,
 				BA3A28771A305AF600A85C29 /* ClipCollectionViewCell.swift in Sources */,

@@ -21,7 +21,7 @@ func displayAPIErrorToUser(errorJSON: AnyObject?) {
     if let message = errorJSON["message"] as? String {
       let alertController = UIAlertController(title: NSLocalizedString("Error"), message: message, preferredStyle: UIAlertControllerStyle.Alert)
       alertController.addAction(UIAlertAction(title: NSLocalizedString("OK"), style: UIAlertActionStyle.Cancel, handler: nil))
-      if let rootVC = UIApplication.sharedApplication().delegate?.window??.rootViewController {
+      if let rootVC = AppDelegate.getReference().window?.rootViewController {
         rootVC.presentViewController(alertController, animated: true, completion: nil)
       }
     }
