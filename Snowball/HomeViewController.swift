@@ -88,12 +88,11 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
   }
 
   func addClipButtonTapped() {
-    // TODO: Use real current user
     dispatch_async(dispatch_get_main_queue()) {
-      println("WARNING: REMOVE HARD CODED USER ID AND USE CURRENTUSER")
-      if let currentUser = User.find("493bf0cf-a2e3-4c0e-b551-317bdd3f2c40") as User? {// User.currentUser {
+      if let currentUser = User.currentUser {
         if let videoURL = self.previewedVideoURL {
           let clip = Clip.newEntity() as Clip
+          clip.videoURL = videoURL.absoluteString!
           clip.user = currentUser
           clip.createdAt = NSDate()
           clip.save()
