@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA145D081A687CE200D81E53 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA145D031A687CB300D81E53 /* Alamofire.framework */; };
-		BA145D091A687CE200D81E53 /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA145D041A687CB300D81E53 /* Cartography.framework */; };
 		BA32C7881A3283760052F4CA /* Karla-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA32C7841A32576B0052F4CA /* Karla-Bold.ttf */; };
 		BA32C7891A3283760052F4CA /* Karla-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA32C7851A32576B0052F4CA /* Karla-Regular.ttf */; };
 		BA32C7921A3286250052F4CA /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */; };
@@ -36,6 +34,8 @@
 		BA8450281A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8450271A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift */; };
 		BA9AA67C1A67465F002C4992 /* OnboardingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9AA67B1A67465F002C4992 /* OnboardingNavigationController.swift */; };
 		BA9AA6831A674804002C4992 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9AA6821A674804002C4992 /* MainNavigationController.swift */; };
+		BAA15E6B1A687E910055756E /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA145D031A687CB300D81E53 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BAA15E6C1A687E910055756E /* Cartography.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA145D041A687CB300D81E53 /* Cartography.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BAA8C0681A32E76D00AAB9F4 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0671A32E76D00AAB9F4 /* CoreDataStack.swift */; };
 		BAA8C06A1A32EAAA00AAB9F4 /* CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0691A32EAAA00AAB9F4 /* CoreRecord.swift */; };
 		BAA8C07A1A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0791A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift */; };
@@ -70,6 +70,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				BAA15E6B1A687E910055756E /* Alamofire.framework in Embed Frameworks */,
+				BAA15E6C1A687E910055756E /* Cartography.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -132,8 +134,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA145D081A687CE200D81E53 /* Alamofire.framework in Frameworks */,
-				BA145D091A687CE200D81E53 /* Cartography.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
