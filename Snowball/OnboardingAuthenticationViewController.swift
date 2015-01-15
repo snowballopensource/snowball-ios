@@ -9,6 +9,9 @@
 import Cartography
 import UIKit
 
+class OnboardingSignUpViewController: OnboardingAuthenticationViewController {}
+class OnboardingSignInViewController: OnboardingAuthenticationViewController {}
+
 class OnboardingAuthenticationViewController: UIViewController, OnboardingTopViewDelegate {
   let topBar = OnboardingTopView()
   let messageLabel = UILabel()
@@ -144,12 +147,14 @@ class OnboardingAuthenticationViewController: UIViewController, OnboardingTopVie
   }
 
   func onboardingTopViewForwardButtonTapped() {
-    goForward()
+    if validateFields() {
+      performAuthenticationRequest()
+    }
   }
 
-  // MARK: - OnboardingAuthenticationViewController
+  // MARK: - Private
 
-  func validateFields() -> Bool {
+  private func validateFields() -> Bool {
     let alertController = UIAlertController(title: NSLocalizedString("Error"), message: nil, preferredStyle: UIAlertControllerStyle.Alert)
     alertController.addAction(UIAlertAction(title: NSLocalizedString("OK"), style: UIAlertActionStyle.Cancel, handler: nil))
     if countElements(usernameTextField.text) < 2 && self.isKindOfClass(OnboardingSignUpViewController) {
@@ -168,8 +173,26 @@ class OnboardingAuthenticationViewController: UIViewController, OnboardingTopVie
     return true
   }
 
-  func goForward() {
-    assert(false, "Implement `goForward` in subclass of OnboardingAuthenticationViewController")
+  private func performAuthenticationRequest() {
+    var route: Router?
+    if self.isKindOfClass(OnboardingSignUpViewController) {
+      route = Router.SignUp(username: usernameTextField.text, email: emailTextField.text, password: passwordTextField.text)
+    } else {
+      route = Router.SignIn(email: emailTextField.text, password: passwordTextField.text)
+    }
+    API.request(route!).responseJSON { (request, response, JSON, error) in
+      if error != nil { displayAPIErrorToUser(JSON); return }
+      if let userJSON: AnyObject = JSON {
+        CoreRecord.saveWithBlock { (context) in
+          let user = User.objectFromJSON(userJSON, context: context) as User?
+          User.currentUser = user
+          if let user = user {
+            dispatch_async(dispatch_get_main_queue()) {
+              AppDelegate.switchToNavigationController(MainNavigationController())
+            }
+          }
+        }
+      }
+    }
   }
-
 }

@@ -23,8 +23,6 @@
 		BA5247451A319E24003BD269 /* AddClipCollectionReuseableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5247441A319E24003BD269 /* AddClipCollectionReuseableView.swift */; };
 		BA52474B1A31A1FC003BD269 /* UICollectionReusableView+Required.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA52474A1A31A1FC003BD269 /* UICollectionReusableView+Required.swift */; };
 		BA6385E31A65ACAF00B002D9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385E21A65ACAF00B002D9 /* OnboardingViewController.swift */; };
-		BA6385E71A65ACF700B002D9 /* OnboardingSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385E61A65ACF700B002D9 /* OnboardingSignUpViewController.swift */; };
-		BA6385E91A65AD1300B002D9 /* OnboardingSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385E81A65AD1300B002D9 /* OnboardingSignInViewController.swift */; };
 		BA6385ED1A65B8FF00B002D9 /* UIView+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385EC1A65B8FF00B002D9 /* UIView+Snowball.swift */; };
 		BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */; };
 		BA7C0E481A65C315001B3B4C /* UIButton+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */; };
@@ -159,8 +157,6 @@
 		BA5247441A319E24003BD269 /* AddClipCollectionReuseableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddClipCollectionReuseableView.swift; sourceTree = "<group>"; };
 		BA52474A1A31A1FC003BD269 /* UICollectionReusableView+Required.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+Required.swift"; sourceTree = "<group>"; };
 		BA6385E21A65ACAF00B002D9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		BA6385E61A65ACF700B002D9 /* OnboardingSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingSignUpViewController.swift; sourceTree = "<group>"; };
-		BA6385E81A65AD1300B002D9 /* OnboardingSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingSignInViewController.swift; sourceTree = "<group>"; };
 		BA6385EC1A65B8FF00B002D9 /* UIView+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Snowball.swift"; sourceTree = "<group>"; };
 		BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Snowball.swift"; sourceTree = "<group>"; };
 		BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Snowball.swift"; sourceTree = "<group>"; };
@@ -330,8 +326,6 @@
 				BA9AA67B1A67465F002C4992 /* OnboardingNavigationController.swift */,
 				BA6385E21A65ACAF00B002D9 /* OnboardingViewController.swift */,
 				BAC8CD391A6607550075B503 /* OnboardingAuthenticationViewController.swift */,
-				BA6385E61A65ACF700B002D9 /* OnboardingSignUpViewController.swift */,
-				BA6385E81A65AD1300B002D9 /* OnboardingSignInViewController.swift */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -599,7 +593,6 @@
 				BAF3DDC11A3048E70062C068 /* ArrayCollectionViewDataSource.swift in Sources */,
 				BA38C1811A30272700A2F2AE /* ClipsViewController.swift in Sources */,
 				BA3A28701A3051E300A85C29 /* Util.swift in Sources */,
-				BA6385E71A65ACF700B002D9 /* OnboardingSignUpViewController.swift in Sources */,
 				BAA8C0991A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift in Sources */,
 				BA7C27D31A37ADA600A9CFC5 /* RemoteObject.swift in Sources */,
 				BA6385E31A65ACAF00B002D9 /* OnboardingViewController.swift in Sources */,
@@ -613,7 +606,6 @@
 				BA3A28771A305AF600A85C29 /* ClipCollectionViewCell.swift in Sources */,
 				BA6385ED1A65B8FF00B002D9 /* UIView+Snowball.swift in Sources */,
 				BAA8C0971A333A8B00AAB9F4 /* CollectionViewDataSource.swift in Sources */,
-				BA6385E91A65AD1300B002D9 /* OnboardingSignInViewController.swift in Sources */,
 				BAA8C0801A32F8F300AAB9F4 /* User.swift in Sources */,
 				BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */,
 				BA52474B1A31A1FC003BD269 /* UICollectionReusableView+Required.swift in Sources */,
