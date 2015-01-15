@@ -16,7 +16,7 @@ class RemoteObject: NSManagedObject {
     if let id = JSON["id"] as? String {
       let object = findOrInitialize(id, context: context)
       object.assign(JSON)
-      return object as RemoteObject
+      return object as? RemoteObject
     }
     return nil
   }
