@@ -38,5 +38,4 @@ xcuserdata
 Pods
 
 # Carthage
-Carthage.build
-Carthage.checkout
+Carthage
