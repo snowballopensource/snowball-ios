@@ -66,6 +66,10 @@ class PlayerViewController: UIViewController {
     prebufferAndQueueURL(URL)
   }
 
+  func stopPlayback() {
+    player.removeAllItems()
+  }
+
   // MARK: - Private
 
   private func prebufferAndQueueURLs(URLs: [NSURL]) {

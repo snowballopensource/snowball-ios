@@ -116,7 +116,7 @@ enum Router: URLRequestConvertible {
   }
 }
 
-private struct APICredential {
+struct APICredential {
   private static let kCurrentUserAuthTokenKey = "CurrentUserAuthToken"
   static var authToken: String? {
     get {
