@@ -47,6 +47,13 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
     }
   }
 
+  // MARK: - Private
+
+  func stopPlaybackAndShowCamera() {
+    cameraViewController.view.hidden = false
+    playerViewController.stopPlayback()
+  }
+
   // MARK: - PlayerViewControllerDelegate
 
   func playerItemDidPlayToEndTime(playerItem: AVPlayerItem, nextPlayerItem: AVPlayerItem?, willLoopPlayerItem: Bool) {
@@ -64,6 +71,10 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
         cameraViewController.view.hidden = false
       }
     }
+  }
+
+  func userCancelledClipPreviewPlayback() {
+    stopPlaybackAndShowCamera()
   }
 
   // MARK: - CameraViewControllerDelegate
@@ -88,8 +99,7 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
   }
 
   func addClipButtonTapped() {
-    cameraViewController.view.hidden = false
-    playerViewController.stopPlayback()
+    stopPlaybackAndShowCamera()
     dispatch_async(dispatch_get_main_queue()) {
       if let currentUser = User.currentUser {
         if let videoURL = self.previewedVideoURL {

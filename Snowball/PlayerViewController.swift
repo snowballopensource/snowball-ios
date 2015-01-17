@@ -7,17 +7,20 @@
 //
 
 import AVFoundation
+import Cartography
 import UIKit
 
-protocol PlayerViewControllerDelegate {
+protocol PlayerViewControllerDelegate: class {
   func playerItemDidPlayToEndTime(playerItem: AVPlayerItem, nextPlayerItem: AVPlayerItem?, willLoopPlayerItem: Bool)
+  func userCancelledClipPreviewPlayback()
 }
 
 class PlayerViewController: UIViewController {
   private let player = AVQueuePlayer()
   private let playerView = PlayerView()
+  private let cancelPreviewButton = UIButton()
   private var observingCurrentPlayerItem = false // Hack to check if observing current item for "playbackLikelyToKeepUp"
-  private var loopCurrentPlayerItem = false
+  private var playbackIsPreview = false
   var delegate: PlayerViewControllerDelegate?
 
   // MARK: - Initialization
@@ -48,6 +51,19 @@ class PlayerViewController: UIViewController {
     super.viewDidLoad()
     playerView.player = player
     player.play()
+
+    cancelPreviewButton.setImage(UIImage(named: "x"), forState: UIControlState.Normal)
+    cancelPreviewButton.addTarget(delegate, action: "userCancelledClipPreviewPlayback", forControlEvents: UIControlEvents.TouchUpInside)
+    cancelPreviewButton.hidden = true
+    view.addSubview(cancelPreviewButton)
+    layout(cancelPreviewButton) { (cancelPreviewButton) in
+      let margin: Float = 10
+      let width: Float = 44
+      cancelPreviewButton.centerX == cancelPreviewButton.superview!.centerX
+      cancelPreviewButton.top == cancelPreviewButton.superview!.top + margin
+      cancelPreviewButton.width == width
+      cancelPreviewButton.height == width
+    }
   }
 
   // MARK: - PlayerViewController
@@ -55,14 +71,16 @@ class PlayerViewController: UIViewController {
   func playURLs(URLs: [NSURL]) {
     player.removeAllItems()
     player.actionAtItemEnd = AVPlayerActionAtItemEnd.Advance
-    loopCurrentPlayerItem = false
+    playbackIsPreview = false
+    cancelPreviewButton.hidden = !playbackIsPreview
     prebufferAndQueueURLs(URLs)
   }
 
   func playURL(URL: NSURL, loop: Bool = true) {
     player.removeAllItems()
     player.actionAtItemEnd = AVPlayerActionAtItemEnd.None
-    loopCurrentPlayerItem = loop
+    playbackIsPreview = loop
+    cancelPreviewButton.hidden = !playbackIsPreview
     prebufferAndQueueURL(URL)
   }
 
@@ -101,7 +119,7 @@ class PlayerViewController: UIViewController {
         }
         let playerItem = AVPlayerItem(asset: asset)
         NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: playerItem, queue: nil) { (notification) in
-          if self.loopCurrentPlayerItem {
+          if self.playbackIsPreview {
             playerItem.seekToTime(kCMTimeZero)
           } else {
             if self.observingCurrentPlayerItem {
@@ -117,7 +135,7 @@ class PlayerViewController: UIViewController {
           if index < playerItems.count {
             nextPlayerItem = playerItems[index]
           }
-          self.delegate?.playerItemDidPlayToEndTime(playerItem, nextPlayerItem: nextPlayerItem, willLoopPlayerItem: self.loopCurrentPlayerItem)
+          self.delegate?.playerItemDidPlayToEndTime(playerItem, nextPlayerItem: nextPlayerItem, willLoopPlayerItem: self.playbackIsPreview)
         }
         NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemPlaybackStalledNotification, object: playerItem, queue: nil) { (notification) in
           let playerItem = notification.object! as AVPlayerItem
