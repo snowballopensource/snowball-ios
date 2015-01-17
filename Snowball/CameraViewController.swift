@@ -7,6 +7,7 @@
 //
 
 import AVFoundation
+import Cartography
 import UIKit
 
 protocol CameraViewControllerDelegate {
@@ -16,6 +17,7 @@ protocol CameraViewControllerDelegate {
 class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate {
   private let captureSession = AVCaptureSession()
   private let cameraView = CameraView()
+  private let changeCameraButton = UIButton()
   private let sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL)
   private var currentVideoDeviceInput: AVCaptureDeviceInput?
   private var movieFileOutput: AVCaptureMovieFileOutput?
@@ -64,6 +66,18 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     recordingGestureRecognizer.minimumPressDuration = 0.2
     recordingGestureRecognizer.addTarget(self, action: "toggleRecording:")
     cameraView.addGestureRecognizer(recordingGestureRecognizer)
+
+    changeCameraButton.setImage(UIImage(named: "change-camera"), forState: UIControlState.Normal)
+    changeCameraButton.addTarget(self, action: "changeCamera", forControlEvents: UIControlEvents.TouchUpInside)
+    view.addSubview(changeCameraButton)
+    layout(changeCameraButton) { (changeCameraButton) in
+      let margin: Float = 10
+      let width: Float = 44
+      changeCameraButton.right == changeCameraButton.superview!.right - margin
+      changeCameraButton.top == changeCameraButton.superview!.top + margin
+      changeCameraButton.width == width
+      changeCameraButton.height == width
+    }
   }
 
   // MARK: - PlayerViewController
