@@ -122,7 +122,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     dispatch_async(sessionQueue) {
       if let recording = self.movieFileOutput?.recording {
         if !recording {
-          let outputFileName = "movie".stringByAppendingPathExtension("mov")!
+          let outputFileName = "video".stringByAppendingPathExtension("mov")!
           let outputFilePath = NSTemporaryDirectory().stringByAppendingPathComponent(outputFileName)
           self.movieFileOutput?.startRecordingToOutputFileURL(NSURL(fileURLWithPath: outputFilePath), recordingDelegate: self)
         }
