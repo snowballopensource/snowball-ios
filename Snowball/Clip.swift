@@ -25,6 +25,9 @@ class Clip: RemoteObject {
     if let videoURL = attributes["video_url"] as? String {
       self.videoURL = videoURL
     }
+    if let thumbnailURL = attributes["thumbnail_url"] as? String {
+      self.thumbnailURL = thumbnailURL
+    }
     if let createdAt = attributes["created_at"] as? NSTimeInterval {
       self.createdAt = NSDate(timeIntervalSince1970: createdAt)
     }

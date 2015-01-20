@@ -7,6 +7,7 @@
 //
 
 import Cartography
+import Haneke
 import UIKit
 
 protocol ClipCollectionViewCellDelegate: class {
@@ -100,6 +101,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
       userAvatarImageView.backgroundColor = userColor
       userNameLabel.textColor = userColor
       clipTimeLabel.text = clip.createdAt.shortTimeSinceString()
+
+      clipThumbnailImageView.hnk_setImageFromURL(NSURL(string: clip.thumbnailURL)!, format: Format<UIImage>(name: "original"))
 
       if clip.played.boolValue {
         clipThumbnailImageView.alpha = 0.5
