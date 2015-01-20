@@ -11,6 +11,7 @@ import CoreData
 class Clip: RemoteObject {
   @NSManaged var id: String?
   @NSManaged var videoURL: String
+  @NSManaged var thumbnailURL: String
   @NSManaged var createdAt: NSDate
   @NSManaged var played: NSNumber
   @NSManaged var user: User

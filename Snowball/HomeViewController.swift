@@ -15,6 +15,7 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
   let cameraViewController = CameraViewController()
   let clipsViewController = ClipsViewController()
   var previewedVideoURL: NSURL?
+  var previewedVideoThumbnailURL: NSURL?
 
   // MARK: - UIViewController
 
@@ -79,12 +80,13 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
 
   // MARK: - CameraViewControllerDelegate
 
-  func movieRecordedToFileAtURL(fileURL: NSURL, error: NSError?) {
+  func videoRecordedToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL, error: NSError?) {
     if error != nil { return }
     cameraViewController.view.hidden = true
     clipsViewController.scrollToEnd()
-    previewedVideoURL = fileURL
-    playerViewController.playURL(fileURL)
+    previewedVideoURL = videoURL
+    previewedVideoThumbnailURL = thumbnailURL
+    playerViewController.playURL(videoURL)
   }
 
   // MARK: - ClipsViewControllerDelegate
@@ -103,17 +105,20 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
     dispatch_async(dispatch_get_main_queue()) {
       if let currentUser = User.currentUser {
         if let videoURL = self.previewedVideoURL {
-          let clip = Clip.newEntity() as Clip
-          clip.videoURL = videoURL.absoluteString!
-          clip.user = currentUser
-          clip.createdAt = NSDate()
-          clip.save()
-          API.uploadClip(clip) { (request, response, JSON, error) in
-            if error != nil { displayAPIErrorToUser(JSON); return }
-            if let clipJSON: AnyObject = JSON {
-              CoreRecord.saveWithBlock { (context) in
-                Clip.objectFromJSON(clipJSON, context: context)
-                return
+          if let thumbnailURL = self.previewedVideoThumbnailURL {
+            let clip = Clip.newEntity() as Clip
+            clip.videoURL = videoURL.absoluteString!
+            clip.thumbnailURL = thumbnailURL.absoluteString!
+            clip.user = currentUser
+            clip.createdAt = NSDate()
+            clip.save()
+            API.uploadClip(clip) { (request, response, JSON, error) in
+              if error != nil { displayAPIErrorToUser(JSON); return }
+              if let clipJSON: AnyObject = JSON {
+                CoreRecord.saveWithBlock { (context) in
+                  Clip.objectFromJSON(clipJSON, context: context)
+                  return
+                }
               }
             }
           }

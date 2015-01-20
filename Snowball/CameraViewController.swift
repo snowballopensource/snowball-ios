@@ -11,7 +11,7 @@ import Cartography
 import UIKit
 
 protocol CameraViewControllerDelegate {
-  func movieRecordedToFileAtURL(fileURL: NSURL, error: NSError?)
+  func videoRecordedToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL, error: NSError?)
 }
 
 class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate {
@@ -200,19 +200,26 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     instruction.layerInstructions = [transformer]
     videoComposition.instructions = [instruction]
 
-    let exportedFileURL = outputFileURL.URLByDeletingPathExtension!.URLByAppendingPathExtension("mp4")
+    let exportedVideoURL = outputFileURL.URLByDeletingPathExtension!.URLByAppendingPathExtension("mp4")
+    let exportedThumbnailURL = exportedVideoURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent("image.png")
 
     // Export
+    NSFileManager.defaultManager().removeItemAtURL(outputFileURL, error: nil)
+    NSFileManager.defaultManager().removeItemAtURL(exportedVideoURL, error: nil)
+    NSFileManager.defaultManager().removeItemAtURL(exportedThumbnailURL, error: nil)
+
     let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetHighestQuality)
     exporter.videoComposition = videoComposition
-    exporter.outputURL = exportedFileURL
+    exporter.outputURL = exportedVideoURL
     exporter.outputFileType = AVFileTypeMPEG4
-    NSFileManager.defaultManager().removeItemAtURL(outputFileURL, error: nil)
-    NSFileManager.defaultManager().removeItemAtURL(exportedFileURL, error: nil)
     exporter.exportAsynchronouslyWithCompletionHandler {
+      let imageGenerator = AVAssetImageGenerator(asset: AVURLAsset(URL: exportedVideoURL, options: nil))
+      let imageRef = imageGenerator.copyCGImageAtTime(kCMTimeZero, actualTime: nil, error: nil)
+      let thumbnailData = UIImagePNGRepresentation(UIImage(CGImage: imageRef))
+      thumbnailData.writeToURL(exportedThumbnailURL, atomically: true)
       if let delegate = self.delegate {
         dispatch_async(dispatch_get_main_queue()) {
-          delegate.movieRecordedToFileAtURL(exporter.outputURL, error: error)
+          delegate.videoRecordedToFileAtURL(exporter.outputURL, thumbnailURL: exportedThumbnailURL, error: error)
         }
       }
     }
