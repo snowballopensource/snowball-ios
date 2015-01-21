@@ -101,7 +101,7 @@ class PlayerViewController: UIViewController {
   }
 
   private func prebufferAndQueueURL(URL: NSURL, completionHandler: (() -> ())? = nil) {
-    AVURLAsset.createAssetFromRemoteURL(URL){ (asset, error) in
+    CachedURLAsset.createAssetFromRemoteURL(URL){ (asset, error) in
       if let asset = asset {
         self.prepareToPlayAsset(asset, completionHandler: completionHandler)
       }

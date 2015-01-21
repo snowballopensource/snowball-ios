@@ -59,14 +59,14 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
 
   func playerItemDidPlayToEndTime(playerItem: AVPlayerItem, nextPlayerItem: AVPlayerItem?, willLoopPlayerItem: Bool) {
     if !willLoopPlayerItem {
-      let asset = playerItem.asset as AVURLAsset
-      if let clip = Clip.clipWithVideoURL(asset.URL) {
+      let asset = playerItem.asset as CachedURLAsset
+      if let clip = Clip.clipWithVideoURL(asset.originalURL) {
         clip.played = true
         clip.save()
       }
       if let nextPlayerItem = nextPlayerItem {
-        let asset = nextPlayerItem.asset as AVURLAsset
-        clipsViewController.scrollToClipWithVideoURL(asset.URL)
+        let asset = nextPlayerItem.asset as CachedURLAsset
+        clipsViewController.scrollToClipWithVideoURL(asset.originalURL)
       } else {
         clipsViewController.scrollToEnd()
         cameraViewController.view.hidden = false

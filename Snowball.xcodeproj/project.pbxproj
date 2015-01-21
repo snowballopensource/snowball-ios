@@ -24,7 +24,7 @@
 		BA52474B1A31A1FC003BD269 /* UICollectionReusableView+Required.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA52474A1A31A1FC003BD269 /* UICollectionReusableView+Required.swift */; };
 		BA6385E31A65ACAF00B002D9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385E21A65ACAF00B002D9 /* OnboardingViewController.swift */; };
 		BA6385ED1A65B8FF00B002D9 /* UIView+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385EC1A65B8FF00B002D9 /* UIView+Snowball.swift */; };
-		BA789E051A70490B00BA1611 /* AVURLAsset+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA789E041A70490B00BA1611 /* AVURLAsset+Cache.swift */; };
+		BA789E0B1A7052D000BA1611 /* CachedURLAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA789E0A1A7052D000BA1611 /* CachedURLAsset.swift */; };
 		BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */; };
 		BA7C0E481A65C315001B3B4C /* UIButton+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */; };
 		BA7C0E4A1A65EF94001B3B4C /* UITextField+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E491A65EF94001B3B4C /* UITextField+Snowball.swift */; };
@@ -123,7 +123,7 @@
 		BA52474A1A31A1FC003BD269 /* UICollectionReusableView+Required.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+Required.swift"; sourceTree = "<group>"; };
 		BA6385E21A65ACAF00B002D9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		BA6385EC1A65B8FF00B002D9 /* UIView+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Snowball.swift"; sourceTree = "<group>"; };
-		BA789E041A70490B00BA1611 /* AVURLAsset+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVURLAsset+Cache.swift"; sourceTree = "<group>"; };
+		BA789E0A1A7052D000BA1611 /* CachedURLAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedURLAsset.swift; sourceTree = "<group>"; };
 		BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Snowball.swift"; sourceTree = "<group>"; };
 		BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Snowball.swift"; sourceTree = "<group>"; };
 		BA7C0E491A65EF94001B3B4C /* UITextField+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Snowball.swift"; sourceTree = "<group>"; };
@@ -271,6 +271,7 @@
 				BA38C15D1A30228700A2F2AE /* AppDelegate.swift */,
 				BA6385DB1A65A90000B002D9 /* Onboarding */,
 				BA9AA6811A6747F0002C4992 /* Main */,
+				BA789E091A7052C500BA1611 /* Player */,
 				BA32C7931A3287AC0052F4CA /* Views */,
 				BA3A28851A30615800A85C29 /* Cells */,
 				BAA8C0631A32E75B00AAB9F4 /* Core Record */,
@@ -341,6 +342,14 @@
 				BAC8CD391A6607550075B503 /* OnboardingAuthenticationViewController.swift */,
 			);
 			name = Onboarding;
+			sourceTree = "<group>";
+		};
+		BA789E091A7052C500BA1611 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				BA789E0A1A7052D000BA1611 /* CachedURLAsset.swift */,
+			);
+			name = Player;
 			sourceTree = "<group>";
 		};
 		BA7C27C71A37A32A00A9CFC5 /* Networking */ = {
@@ -458,7 +467,6 @@
 				BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */,
 				BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */,
 				BA7C0E491A65EF94001B3B4C /* UITextField+Snowball.swift */,
-				BA789E041A70490B00BA1611 /* AVURLAsset+Cache.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -578,6 +586,7 @@
 				BAA15EA61A6889230055756E /* UIRefreshControl+AFNetworking.m in Sources */,
 				BAF3DDBB1A3043F10062C068 /* UIViewController+ChildViewController.swift in Sources */,
 				BAA8C06A1A32EAAA00AAB9F4 /* CoreRecord.swift in Sources */,
+				BA789E0B1A7052D000BA1611 /* CachedURLAsset.swift in Sources */,
 				BAA15EA51A6889230055756E /* UIProgressView+AFNetworking.m in Sources */,
 				BAA15E9C1A6889230055756E /* AFURLConnectionOperation.m in Sources */,
 				BA7C0E4A1A65EF94001B3B4C /* UITextField+Snowball.swift in Sources */,
@@ -603,7 +612,6 @@
 				BAA15EA11A6889230055756E /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				BA9AA6831A674804002C4992 /* MainNavigationController.swift in Sources */,
 				BA7C27C61A37A28F00A9CFC5 /* Router.swift in Sources */,
-				BA789E051A70490B00BA1611 /* AVURLAsset+Cache.swift in Sources */,
 				BAA15EA71A6889230055756E /* UIWebView+AFNetworking.m in Sources */,
 				BAA15E9B1A6889230055756E /* AFSecurityPolicy.m in Sources */,
 				BA32C7921A3286250052F4CA /* UIColor+Snowball.swift in Sources */,
