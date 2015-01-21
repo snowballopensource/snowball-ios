@@ -101,7 +101,14 @@ class PlayerViewController: UIViewController {
   }
 
   private func prebufferAndQueueURL(URL: NSURL, completionHandler: (() -> ())? = nil) {
-    let asset = AVURLAsset(URL: URL, options: nil)
+    AVURLAsset.createAssetFromRemoteURL(URL){ (asset, error) in
+      if let asset = asset {
+        self.prepareToPlayAsset(asset, completionHandler: completionHandler)
+      }
+    }
+  }
+
+  private func prepareToPlayAsset(asset: AVAsset, completionHandler: (() -> ())? = nil) {
     let requestedKeys = ["tracks", "playable"]
     asset.loadValuesAsynchronouslyForKeys(requestedKeys) {
       dispatch_async(dispatch_get_main_queue()) {
