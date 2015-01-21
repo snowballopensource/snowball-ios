@@ -76,12 +76,12 @@ class PlayerViewController: UIViewController {
     prebufferAndQueueURLs(URLs)
   }
 
-  func playURL(URL: NSURL, loop: Bool = true) {
+  func playLocalURL(URL: NSURL, loop: Bool = true) {
     player.removeAllItems()
     player.actionAtItemEnd = AVPlayerActionAtItemEnd.None
     playbackIsPreview = loop
     cancelPreviewButton.hidden = !playbackIsPreview
-    prebufferAndQueueURL(URL)
+    prepareToPlayAsset(AVURLAsset(URL: URL, options: nil))
   }
 
   func stopPlayback() {
