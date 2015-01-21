@@ -86,7 +86,7 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
     clipsViewController.scrollToEnd()
     previewedVideoURL = videoURL
     previewedVideoThumbnailURL = thumbnailURL
-    playerViewController.playURL(videoURL)
+    playerViewController.playLocalURL(videoURL)
   }
 
   // MARK: - ClipsViewControllerDelegate
@@ -115,9 +115,8 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
             API.uploadClip(clip) { (request, response, JSON, error) in
               if error != nil { displayAPIErrorToUser(JSON); return }
               if let clipJSON: AnyObject = JSON {
-                CoreRecord.saveWithBlock { (context) in
-                  Clip.objectFromJSON(clipJSON, context: context)
-                  return
+                dispatch_async(dispatch_get_main_queue()) {
+                  clip.assign(clipJSON)
                 }
               }
             }
