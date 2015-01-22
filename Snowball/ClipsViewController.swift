@@ -21,7 +21,6 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     flowLayout.minimumInteritemSpacing = 0
     flowLayout.minimumLineSpacing = 0
     flowLayout.headerReferenceSize = ClipTimelineBufferCollectionReuseableView.size()
-    flowLayout.footerReferenceSize = AddClipCollectionReuseableView.size()
     collectionView.backgroundColor = UIColor.whiteColor()
     return collectionView
   }()
@@ -74,7 +73,33 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     }
   }
 
-  func scrollToEnd() {
+  func showAddClipButton() {
+    UIView.animateWithDuration(1, animations: {
+      let flowLayout = self.collectionView.collectionViewLayout as UICollectionViewFlowLayout
+      flowLayout.footerReferenceSize = AddClipCollectionReuseableView.size()
+    }) { (completed) in
+      self.scrollToEnd()
+    }
+  }
+
+  func hideAddClipButton() {
+    let lastSection = collectionView.numberOfSections() - 1
+    if lastSection >= 0 {
+      let lastItem = collectionView.numberOfItemsInSection(lastSection) - 1
+      if lastItem >= 0 {
+        let indexPath = NSIndexPath(forItem: lastItem, inSection: lastSection)
+        collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentCellScrollPosition, animated: true)
+      }
+    }
+    let delay = Int64(NSEC_PER_MSEC * 250) // 0.25 seconds
+    let time = dispatch_time(DISPATCH_TIME_NOW, delay)
+    dispatch_after(time, dispatch_get_main_queue()) {
+      let flowLayout = self.collectionView.collectionViewLayout as UICollectionViewFlowLayout
+      flowLayout.footerReferenceSize = CGSizeZero
+    }
+  }
+
+  private func scrollToEnd() {
     let contentSize = collectionView.collectionViewLayout.collectionViewContentSize()
     let width = collectionView.collectionViewLayout.collectionViewContentSize().width
     if width > 0 {

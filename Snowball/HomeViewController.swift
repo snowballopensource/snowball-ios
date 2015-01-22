@@ -68,13 +68,13 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
         let asset = nextPlayerItem.asset as CachedURLAsset
         clipsViewController.scrollToClipWithVideoURL(asset.originalURL)
       } else {
-        clipsViewController.scrollToEnd()
         cameraViewController.view.hidden = false
       }
     }
   }
 
   func userCancelledClipPreviewPlayback() {
+    clipsViewController.hideAddClipButton()
     stopPlaybackAndShowCamera()
   }
 
@@ -83,7 +83,7 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
   func videoRecordedToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL, error: NSError?) {
     if error != nil { return }
     cameraViewController.view.hidden = true
-    clipsViewController.scrollToEnd()
+    clipsViewController.showAddClipButton()
     previewedVideoURL = videoURL
     previewedVideoThumbnailURL = thumbnailURL
     playerViewController.playLocalURL(videoURL)
@@ -102,6 +102,7 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
 
   func addClipButtonTapped() {
     stopPlaybackAndShowCamera()
+    clipsViewController.hideAddClipButton()
     dispatch_async(dispatch_get_main_queue()) {
       if let currentUser = User.currentUser {
         if let videoURL = self.previewedVideoURL {
