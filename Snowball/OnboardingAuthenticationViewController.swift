@@ -183,13 +183,11 @@ class OnboardingAuthenticationViewController: UIViewController, OnboardingTopVie
     API.request(route!).responseJSON { (request, response, JSON, error) in
       if error != nil { displayAPIErrorToUser(JSON); return }
       if let userJSON: AnyObject = JSON {
-        CoreRecord.saveWithBlock { (context) in
-          let user = User.objectFromJSON(userJSON, context: context) as User?
+        dispatch_async(dispatch_get_main_queue()) {
+          let user = User.objectFromJSON(userJSON) as User?
           User.currentUser = user
           if let user = user {
-            dispatch_async(dispatch_get_main_queue()) {
-              AppDelegate.switchToNavigationController(MainNavigationController())
-            }
+            AppDelegate.switchToNavigationController(MainNavigationController())
           }
         }
       }
