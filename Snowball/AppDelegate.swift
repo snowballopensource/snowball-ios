@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
+import Crashlytics
+import Fabric
 import UIKit
 
 @UIApplicationMain
@@ -16,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     setupWindow()
+    Fabric.with([Crashlytics()])
     return true
   }
 

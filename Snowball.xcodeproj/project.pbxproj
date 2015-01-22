@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA137C7E1A7199AA001F8FCF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA137C7C1A7199AA001F8FCF /* Crashlytics.framework */; };
+		BA137C7F1A7199AA001F8FCF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA137C7D1A7199AA001F8FCF /* Fabric.framework */; };
 		BA32C7881A3283760052F4CA /* Karla-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA32C7841A32576B0052F4CA /* Karla-Bold.ttf */; };
 		BA32C7891A3283760052F4CA /* Karla-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA32C7851A32576B0052F4CA /* Karla-Regular.ttf */; };
 		BA32C7921A3286250052F4CA /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */; };
@@ -100,6 +102,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BA137C7C1A7199AA001F8FCF /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		BA137C7D1A7199AA001F8FCF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		BA145D031A687CB300D81E53 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		BA145D041A687CB300D81E53 /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cartography.framework; path = Carthage/Build/iOS/Cartography.framework; sourceTree = "<group>"; };
 		BA32C7841A32576B0052F4CA /* Karla-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Karla-Bold.ttf"; sourceTree = "<group>"; };
@@ -194,7 +198,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA137C7E1A7199AA001F8FCF /* Crashlytics.framework in Frameworks */,
 				BAA8329D1A6E303600ADADDD /* Haneke.framework in Frameworks */,
+				BA137C7F1A7199AA001F8FCF /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +382,8 @@
 		BAA15E701A6888F70055756E /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				BA137C7C1A7199AA001F8FCF /* Crashlytics.framework */,
+				BA137C7D1A7199AA001F8FCF /* Fabric.framework */,
 				BAA15E711A6889230055756E /* AFNetworking */,
 				BAA15E851A6889230055756E /* UIKit+AFNetworking */,
 			);
@@ -482,6 +490,7 @@
 				BA38C1551A30228700A2F2AE /* Frameworks */,
 				BA38C1561A30228700A2F2AE /* Resources */,
 				BAE10A171A30400100CCFA25 /* Embed Frameworks */,
+				BA137C7B1A71996F001F8FCF /* Fabric Script */,
 			);
 			buildRules = (
 			);
@@ -567,6 +576,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BA137C7B1A71996F001F8FCF /* Fabric Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Fabric Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run aca77ecc1522f24945da76c0096c407ddca210da f9e391a55cc857d6f955aa12342065cbba179d2fe50046b8a4f2b0aeab0c69e4";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BA38C1541A30228700A2F2AE /* Sources */ = {
@@ -747,6 +773,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Snowball/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -765,6 +792,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Snowball/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -39,3 +39,7 @@ Pods
 
 # Carthage
 Carthage
+
+# Fabric
+Crashlytics.framework
+Fabric.framework
