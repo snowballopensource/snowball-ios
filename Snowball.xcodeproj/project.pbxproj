@@ -589,7 +589,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run aca77ecc1522f24945da76c0096c407ddca210da f9e391a55cc857d6f955aa12342065cbba179d2fe50046b8a4f2b0aeab0c69e4";
+			shellScript = "./Fabric.framework/run 3ad6062e840bc33bf27000e2eac426550ff9ddc5 027b542a5e7453d709fac8530608bfb4016d21c2389d342f4e4066c4cf4ff823";
 		};
 		BAE32F651A71CB6800B130EC /* Carthage Temporary Fix 1/22/2015 */ = {
 			isa = PBXShellScriptBuildPhase;
