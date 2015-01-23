@@ -56,7 +56,6 @@
 		BAA15EA51A6889230055756E /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA15E921A6889230055756E /* UIProgressView+AFNetworking.m */; };
 		BAA15EA61A6889230055756E /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA15E941A6889230055756E /* UIRefreshControl+AFNetworking.m */; };
 		BAA15EA71A6889230055756E /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA15E961A6889230055756E /* UIWebView+AFNetworking.m */; };
-		BAA8329D1A6E303600ADADDD /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAA8329C1A6E303600ADADDD /* Haneke.framework */; };
 		BAA8329E1A6E303600ADADDD /* Haneke.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAA8329C1A6E303600ADADDD /* Haneke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BAA8C0681A32E76D00AAB9F4 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0671A32E76D00AAB9F4 /* CoreDataStack.swift */; };
 		BAA8C06A1A32EAAA00AAB9F4 /* CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0691A32EAAA00AAB9F4 /* CoreRecord.swift */; };
@@ -199,7 +198,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA137C7E1A7199AA001F8FCF /* Crashlytics.framework in Frameworks */,
-				BAA8329D1A6E303600ADADDD /* Haneke.framework in Frameworks */,
 				BA137C7F1A7199AA001F8FCF /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -491,6 +489,7 @@
 				BA38C1561A30228700A2F2AE /* Resources */,
 				BAE10A171A30400100CCFA25 /* Embed Frameworks */,
 				BA137C7B1A71996F001F8FCF /* Fabric Script */,
+				BAE32F651A71CB6800B130EC /* Carthage Temporary Fix 1/22/2015 */,
 			);
 			buildRules = (
 			);
@@ -591,6 +590,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run aca77ecc1522f24945da76c0096c407ddca210da f9e391a55cc857d6f955aa12342065cbba179d2fe50046b8a4f2b0aeab0c69e4";
+		};
+		BAE32F651A71CB6800B130EC /* Carthage Temporary Fix 1/22/2015 */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Cartography.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Haneke.framework",
+			);
+			name = "Carthage Temporary Fix 1/22/2015";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
