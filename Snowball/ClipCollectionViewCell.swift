@@ -26,6 +26,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   override init(frame: CGRect) {
     super.init(frame: frame)
+    clipThumbnailImageView.contentMode = UIViewContentMode.ScaleAspectFill
     clipThumbnailImageView.backgroundColor = UIColor.blackColor()
     contentView.addSubview(clipThumbnailImageView)
     contentView.addSubview(userAvatarImageView)
@@ -102,7 +103,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
       userNameLabel.textColor = userColor
       clipTimeLabel.text = clip.createdAt.shortTimeSinceString()
 
-      clipThumbnailImageView.hnk_setImageFromURL(NSURL(string: clip.thumbnailURL)!, format: Format<UIImage>(name: "original"))
+      clipThumbnailImageView.hnk_setImageFromURL(NSURL(string: clip.thumbnailURL)!, placeholder: UIImage(), format: Format<UIImage>(name: "original"))
 
       if clip.played.boolValue {
         clipThumbnailImageView.alpha = 0.5
