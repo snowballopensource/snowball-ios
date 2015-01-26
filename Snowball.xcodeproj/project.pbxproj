@@ -68,6 +68,7 @@
 		BACA7A861A36E40900C34B6C /* NSDate+TimeSince.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */; };
 		BAD666EF1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD666EE1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift */; };
 		BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */; };
+		BAE26FB31A77090700A0977C /* SnowballTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE26FB21A77090700A0977C /* SnowballTopView.swift */; };
 		BAE2EFD21A5C5A1D004B781C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */; };
 		BAF3BC961A76E02A00AFD3E5 /* MoreNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */; };
 		BAF3BC9B1A76E06A00AFD3E5 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3BC9A1A76E06A00AFD3E5 /* FriendsViewController.swift */; };
@@ -188,6 +189,7 @@
 		BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeSince.swift"; sourceTree = "<group>"; };
 		BAD666EE1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipTimelineBufferCollectionReuseableView.swift; sourceTree = "<group>"; };
 		BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		BAE26FB21A77090700A0977C /* SnowballTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballTopView.swift; sourceTree = "<group>"; };
 		BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreNavigationController.swift; sourceTree = "<group>"; };
 		BAF3BC9A1A76E06A00AFD3E5 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 		BA32C7931A3287AC0052F4CA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BAE26FB21A77090700A0977C /* SnowballTopView.swift */,
 				BA7C0E4B1A65F395001B3B4C /* OnboardingTopView.swift */,
 				BA32C7941A3287BE0052F4CA /* UserAvatarImageView.swift */,
 			);
@@ -679,6 +682,7 @@
 				BAA8C0801A32F8F300AAB9F4 /* User.swift in Sources */,
 				BAA15E9A1A6889230055756E /* AFNetworkReachabilityManager.m in Sources */,
 				BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */,
+				BAE26FB31A77090700A0977C /* SnowballTopView.swift in Sources */,
 				BA52474B1A31A1FC003BD269 /* UICollectionReusableView+Required.swift in Sources */,
 				BAC8CD3A1A6607550075B503 /* OnboardingAuthenticationViewController.swift in Sources */,
 				BA7C27CB1A37A64400A9CFC5 /* API.swift in Sources */,

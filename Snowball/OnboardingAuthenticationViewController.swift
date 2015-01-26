@@ -12,7 +12,7 @@ import UIKit
 class OnboardingSignUpViewController: OnboardingAuthenticationViewController {}
 class OnboardingSignInViewController: OnboardingAuthenticationViewController {}
 
-class OnboardingAuthenticationViewController: UIViewController, OnboardingTopViewDelegate {
+class OnboardingAuthenticationViewController: UIViewController, SnowballTopViewDelegate {
   let topBar = OnboardingTopView()
   let messageLabel = UILabel()
   let usernameTextField = UITextField()
@@ -140,13 +140,13 @@ class OnboardingAuthenticationViewController: UIViewController, OnboardingTopVie
     }
   }
 
-  // MARK: - OnboardingTopViewDelegate
+  // MARK: - SnowballTopViewDelegate
 
-  func onboardingTopViewBackButtonTapped() {
+  func snowballTopViewBackButtonTapped() {
     navigationController?.popViewControllerAnimated(true)
   }
 
-  func onboardingTopViewForwardButtonTapped() {
+  func snowballTopViewForwardButtonTapped() {
     if validateFields() {
       performAuthenticationRequest()
     }

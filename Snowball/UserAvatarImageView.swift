@@ -32,6 +32,8 @@ class UserAvatarImageView: UIView {
   }
 
   override func layoutSubviews() {
+    super.layoutSubviews()
+
     layer.cornerRadius = frame.size.width/2
     initialsLabel.font = UIFont(name: UIFont.SnowballFont.regular, size: frame.size.height / 3)
 
