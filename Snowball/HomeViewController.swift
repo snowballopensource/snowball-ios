@@ -38,7 +38,7 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
       self.cameraViewController.view.frame = self.playerViewController.view.frame
     }
 
-    moreButton.backgroundColor = UIColor.purpleColor()
+    moreButton.setImage(UIImage(named: "friends"), forState: UIControlState.Normal)
     moreButton.addTarget(self, action: "moreButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(moreButton)
     layout(moreButton) { (moreButton) in
