@@ -103,23 +103,21 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
   func addClipButtonTapped() {
     stopPlaybackAndShowCamera()
     clipsViewController.hideAddClipButton()
-    dispatch_async(dispatch_get_main_queue()) {
-      if let currentUser = User.currentUser {
-        if let videoURL = self.previewedVideoURL {
-          if let thumbnailURL = self.previewedVideoThumbnailURL {
-            let clip = Clip.newEntity() as Clip
-            clip.videoURL = videoURL.absoluteString!
-            clip.thumbnailURL = thumbnailURL.absoluteString!
-            clip.user = currentUser
-            clip.createdAt = NSDate()
-            clip.save()
-            self.clipsViewController.scrollToClip(clip)
-            API.uploadClip(clip) { (request, response, JSON, error) in
-              if error != nil { displayAPIErrorToUser(JSON); return }
-              if let clipJSON: AnyObject = JSON {
-                dispatch_async(dispatch_get_main_queue()) {
-                  clip.assign(clipJSON)
-                }
+    if let currentUser = User.currentUser {
+      if let videoURL = self.previewedVideoURL {
+        if let thumbnailURL = self.previewedVideoThumbnailURL {
+          let clip = Clip.newEntity() as Clip
+          clip.videoURL = videoURL.absoluteString!
+          clip.thumbnailURL = thumbnailURL.absoluteString!
+          clip.user = currentUser
+          clip.createdAt = NSDate()
+          clip.save()
+          clipsViewController.scrollToClip(clip)
+          API.uploadClip(clip) { (request, response, JSON, error) in
+            if error != nil { displayAPIErrorToUser(JSON); return }
+            if let clipJSON: AnyObject = JSON {
+              dispatch_async(dispatch_get_main_queue()) {
+                clip.assign(clipJSON)
               }
             }
           }
