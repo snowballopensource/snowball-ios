@@ -16,6 +16,7 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
   let clipsViewController = ClipsViewController()
   var previewedVideoURL: NSURL?
   var previewedVideoThumbnailURL: NSURL?
+  let moreButton = UIButton()
 
   // MARK: - UIViewController
 
@@ -37,6 +38,18 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
       self.cameraViewController.view.frame = self.playerViewController.view.frame
     }
 
+    moreButton.backgroundColor = UIColor.purpleColor()
+    moreButton.addTarget(self, action: "moreButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+    view.addSubview(moreButton)
+    layout(moreButton) { (moreButton) in
+      let margin: Float = 10
+      let width: Float = 44
+      moreButton.left == moreButton.superview!.left + margin
+      moreButton.top == moreButton.superview!.top + margin
+      moreButton.width == width
+      moreButton.height == width
+    }
+
     clipsViewController.delegate = self
     addChildViewController(clipsViewController) {
       layout(self.clipsViewController.view, self.playerViewController.view) { (clipsViewControllerView, playerViewControllerView) in
@@ -49,6 +62,10 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
   }
 
   // MARK: - Private
+
+  func moreButtonPressed() {
+    AppDelegate.switchToNavigationController(MoreNavigationController())
+  }
 
   func stopPlaybackAndShowCamera() {
     cameraViewController.view.hidden = false

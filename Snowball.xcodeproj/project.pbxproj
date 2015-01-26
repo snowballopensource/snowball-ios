@@ -69,6 +69,8 @@
 		BAD666EF1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD666EE1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift */; };
 		BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */; };
 		BAE2EFD21A5C5A1D004B781C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */; };
+		BAF3BC961A76E02A00AFD3E5 /* MoreNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */; };
+		BAF3BC9B1A76E06A00AFD3E5 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3BC9A1A76E06A00AFD3E5 /* FriendsViewController.swift */; };
 		BAF3DDBB1A3043F10062C068 /* UIViewController+ChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3DDBA1A3043F10062C068 /* UIViewController+ChildViewController.swift */; };
 		BAF3DDC11A3048E70062C068 /* ArrayCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3DDC01A3048E70062C068 /* ArrayCollectionViewDataSource.swift */; };
 		BAF7C0A11A3B969D00941DAB /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF7C0A01A3B969D00941DAB /* PlayerViewController.swift */; };
@@ -187,6 +189,8 @@
 		BAD666EE1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipTimelineBufferCollectionReuseableView.swift; sourceTree = "<group>"; };
 		BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreNavigationController.swift; sourceTree = "<group>"; };
+		BAF3BC9A1A76E06A00AFD3E5 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		BAF3DDBA1A3043F10062C068 /* UIViewController+ChildViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ChildViewController.swift"; sourceTree = "<group>"; };
 		BAF3DDC01A3048E70062C068 /* ArrayCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		BAF7C0A01A3B969D00941DAB /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
@@ -275,6 +279,7 @@
 				BA38C15D1A30228700A2F2AE /* AppDelegate.swift */,
 				BA6385DB1A65A90000B002D9 /* Onboarding */,
 				BA9AA6811A6747F0002C4992 /* Main */,
+				BAF3BC971A76E03F00AFD3E5 /* More */,
 				BA789E091A7052C500BA1611 /* Player */,
 				BA32C7931A3287AC0052F4CA /* Views */,
 				BA3A28851A30615800A85C29 /* Cells */,
@@ -461,6 +466,15 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		BAF3BC971A76E03F00AFD3E5 /* More */ = {
+			isa = PBXGroup;
+			children = (
+				BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */,
+				BAF3BC9A1A76E06A00AFD3E5 /* FriendsViewController.swift */,
+			);
+			name = More;
+			sourceTree = "<group>";
+		};
 		BAF3DDBF1A3048440062C068 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -615,6 +629,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAF3BC961A76E02A00AFD3E5 /* MoreNavigationController.swift in Sources */,
 				BA32C7951A3287BE0052F4CA /* UserAvatarImageView.swift in Sources */,
 				BAA15EA41A6889230055756E /* UIImageView+AFNetworking.m in Sources */,
 				BAA8C0841A32FA2B00AAB9F4 /* Clip.swift in Sources */,
@@ -627,6 +642,7 @@
 				BAA15E991A6889230055756E /* AFHTTPSessionManager.m in Sources */,
 				BAA15EA61A6889230055756E /* UIRefreshControl+AFNetworking.m in Sources */,
 				BAF3DDBB1A3043F10062C068 /* UIViewController+ChildViewController.swift in Sources */,
+				BAF3BC9B1A76E06A00AFD3E5 /* FriendsViewController.swift in Sources */,
 				BAA8C06A1A32EAAA00AAB9F4 /* CoreRecord.swift in Sources */,
 				BA789E0B1A7052D000BA1611 /* CachedURLAsset.swift in Sources */,
 				BAA15EA51A6889230055756E /* UIProgressView+AFNetworking.m in Sources */,
