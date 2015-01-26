@@ -17,6 +17,7 @@ class SnowballTopView: UIView {
   private let backButton = UIButton()
   private let forwardButton = UIButton()
   var delegate: SnowballTopViewDelegate?
+  class var defaultHeight: Float { return 65 }
 
   // MARK: - UIView
 

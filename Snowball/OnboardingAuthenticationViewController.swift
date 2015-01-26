@@ -32,7 +32,7 @@ class OnboardingAuthenticationViewController: UIViewController, SnowballTopViewD
       topBar.left == topBar.superview!.left
       topBar.top == topBar.superview!.top
       topBar.right == topBar.superview!.right
-      topBar.height == 65
+      topBar.height == SnowballTopView.defaultHeight
     }
 
     let sideMargin: Float = 25
@@ -40,9 +40,9 @@ class OnboardingAuthenticationViewController: UIViewController, SnowballTopViewD
     messageLabel.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
     messageLabel.numberOfLines = 2
     view.addSubview(messageLabel)
-    layout(messageLabel) { (messageLabel) in
+    layout(messageLabel, topBar) { (messageLabel, topBar) in
       messageLabel.left == messageLabel.superview!.left + sideMargin
-      messageLabel.top == messageLabel.superview!.top + 65
+      messageLabel.top == topBar.bottom
       messageLabel.right == messageLabel.superview!.right - sideMargin
     }
 
