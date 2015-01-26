@@ -113,6 +113,7 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
             clip.user = currentUser
             clip.createdAt = NSDate()
             clip.save()
+            self.clipsViewController.scrollToClip(clip)
             API.uploadClip(clip) { (request, response, JSON, error) in
               if error != nil { displayAPIErrorToUser(JSON); return }
               if let clipJSON: AnyObject = JSON {

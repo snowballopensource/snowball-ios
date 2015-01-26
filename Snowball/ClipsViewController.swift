@@ -73,6 +73,12 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     }
   }
 
+  func scrollToClip(clip: Clip) {
+    if let indexPath = collectionViewDataSource.fetchedResultsController.indexPathForObject(clip) {
+      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentCellScrollPosition, animated: true)
+    }
+  }
+
   func showAddClipButton() {
     UIView.animateWithDuration(1, animations: {
       let flowLayout = self.collectionView.collectionViewLayout as UICollectionViewFlowLayout
@@ -116,12 +122,6 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
           collectionView.scrollToItemAtIndexPath(nextIndexPath, atScrollPosition: currentCellScrollPosition, animated: true)
         }
       }
-    }
-  }
-
-  private func scrollToClip(clip: Clip) {
-    if let indexPath = collectionViewDataSource.fetchedResultsController.indexPathForObject(clip) {
-      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentCellScrollPosition, animated: true)
     }
   }
 
