@@ -23,6 +23,7 @@ class FetchedResultsCollectionViewDataSource: CollectionViewDataSource, NSFetche
     let fetchRequest = NSFetchRequest()
     let entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: NSManagedObjectContext.mainQueueContext())
     fetchRequest.entity = entity
+    fetchRequest.predicate = predicate
     fetchRequest.fetchBatchSize = 25
     fetchRequest.fetchLimit = fetchLimit
     fetchRequest.sortDescriptors = sortDescriptors ?? [NSSortDescriptor]()
