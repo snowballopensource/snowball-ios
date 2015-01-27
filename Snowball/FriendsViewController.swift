@@ -9,7 +9,7 @@
 import Cartography
 import UIKit
 
-class FriendsViewController: UIViewController {
+class FriendsViewController: UIViewController, SnowballTopViewDelegate {
   let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Camera, rightButtonType: SnowballTopViewButtonType.AddFriends)
   let tableView = UITableView()
 
@@ -26,5 +26,15 @@ class FriendsViewController: UIViewController {
       tableView.right == tableView.superview!.right
       tableView.bottom == tableView.superview!.bottom
     }
+  }
+
+  // MARK: - SnowballTopViewDelegate
+
+  func snowballTopViewLeftButtonTapped() {
+    AppDelegate.switchToNavigationController(MainNavigationController())
+  }
+
+  func snowballTopViewRightButtonTapped() {
+    println("hi")
   }
 }
