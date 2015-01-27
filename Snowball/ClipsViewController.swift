@@ -25,7 +25,6 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     return collectionView
   }()
   lazy var collectionViewDataSource: ClipsDataSource = {
-
     return ClipsDataSource(collectionView: self.collectionView)
   }()
   var delegate: ClipsViewControllerDelegate?
@@ -41,7 +40,6 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     super.viewDidLoad()
 
     collectionView.showsHorizontalScrollIndicator = false
-    collectionView.registerCellClass(ClipCollectionViewCell.self)
     collectionView.registerHeaderClass(ClipTimelineBufferCollectionReuseableView.self)
     collectionView.registerFooterClass(AddClipCollectionReuseableView.self)
     collectionView.dataSource = collectionViewDataSource

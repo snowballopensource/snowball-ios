@@ -12,6 +12,10 @@ import UIKit
 class FriendsViewController: UIViewController, SnowballTopViewDelegate {
   let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Camera, rightButtonType: SnowballTopViewButtonType.AddFriends)
   let tableView = UITableView()
+  lazy var tableViewDataSource: FetchedResultsTableViewDataSource = {
+    let cellTypes = [UserTableViewCell.self] as [UITableViewCell.Type]
+    return FetchedResultsTableViewDataSource(tableView: self.tableView, entityName: User.entityName(), sortDescriptors: [NSSortDescriptor(key: "username", ascending: true)], cellTypes: cellTypes)
+  }()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -19,6 +23,7 @@ class FriendsViewController: UIViewController, SnowballTopViewDelegate {
     view.addSubview(topView)
     topView.setupDefaultLayout()
 
+    tableView.dataSource = tableViewDataSource
     view.addSubview(tableView)
     layout(tableView, topView) { (tableView, topView) in
       tableView.left == tableView.superview!.left

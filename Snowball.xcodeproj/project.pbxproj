@@ -35,6 +35,11 @@
 		BA7C27CB1A37A64400A9CFC5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27CA1A37A64400A9CFC5 /* API.swift */; };
 		BA7C27D31A37ADA600A9CFC5 /* RemoteObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */; };
 		BA8450281A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8450271A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift */; };
+		BA8812B11A7838E300B50651 /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812B01A7838E300B50651 /* TableViewDataSource.swift */; };
+		BA8812B31A78399A00B50651 /* UITableViewCell+Required.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812B21A78399A00B50651 /* UITableViewCell+Required.swift */; };
+		BA8812B51A783A4700B50651 /* FetchedResultsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812B41A783A4700B50651 /* FetchedResultsTableViewDataSource.swift */; };
+		BA8812EB1A783CD600B50651 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */; };
+		BA8812ED1A7841BE00B50651 /* UITableView+CellRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812EC1A7841BE00B50651 /* UITableView+CellRegistration.swift */; };
 		BA9AA67C1A67465F002C4992 /* OnboardingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9AA67B1A67465F002C4992 /* OnboardingNavigationController.swift */; };
 		BA9AA6831A674804002C4992 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9AA6821A674804002C4992 /* MainNavigationController.swift */; };
 		BAA15E6B1A687E910055756E /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA145D031A687CB300D81E53 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -138,6 +143,11 @@
 		BA7C27CA1A37A64400A9CFC5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteObject.swift; sourceTree = "<group>"; };
 		BA8450271A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+CoreRecord.swift"; sourceTree = "<group>"; };
+		BA8812B01A7838E300B50651 /* TableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSource.swift; sourceTree = "<group>"; };
+		BA8812B21A78399A00B50651 /* UITableViewCell+Required.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Required.swift"; sourceTree = "<group>"; };
+		BA8812B41A783A4700B50651 /* FetchedResultsTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsTableViewDataSource.swift; sourceTree = "<group>"; };
+		BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		BA8812EC1A7841BE00B50651 /* UITableView+CellRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+CellRegistration.swift"; sourceTree = "<group>"; };
 		BA9AA67B1A67465F002C4992 /* OnboardingNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingNavigationController.swift; sourceTree = "<group>"; };
 		BA9AA6821A674804002C4992 /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		BAA15E721A6889230055756E /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -249,6 +259,7 @@
 		BA32C7931A3287AC0052F4CA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BA3A28851A30615800A85C29 /* Cells */,
 				BAE26FB21A77090700A0977C /* SnowballTopView.swift */,
 				BA7C0E4B1A65F395001B3B4C /* OnboardingTopView.swift */,
 				BA32C7941A3287BE0052F4CA /* UserAvatarImageView.swift */,
@@ -285,7 +296,6 @@
 				BAF3BC971A76E03F00AFD3E5 /* More */,
 				BA789E091A7052C500BA1611 /* Player */,
 				BA32C7931A3287AC0052F4CA /* Views */,
-				BA3A28851A30615800A85C29 /* Cells */,
 				BAA8C0631A32E75B00AAB9F4 /* Core Record */,
 				BAA8C07E1A32F8EC00AAB9F4 /* Models */,
 				BA7C27C71A37A32A00A9CFC5 /* Networking */,
@@ -329,9 +339,8 @@
 		BA3A287C1A305BC000A85C29 /* Data Source */ = {
 			isa = PBXGroup;
 			children = (
-				BAA8C0961A333A8B00AAB9F4 /* CollectionViewDataSource.swift */,
-				BAF3DDC01A3048E70062C068 /* ArrayCollectionViewDataSource.swift */,
-				BAA8C0981A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift */,
+				BA8812E91A783BB500B50651 /* Table View */,
+				BA8812AF1A7838D700B50651 /* Collection View */,
 			);
 			name = "Data Source";
 			sourceTree = "<group>";
@@ -342,6 +351,7 @@
 				BA3A28761A305AF600A85C29 /* ClipCollectionViewCell.swift */,
 				BA5247441A319E24003BD269 /* AddClipCollectionReuseableView.swift */,
 				BAD666EE1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift */,
+				BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -371,6 +381,25 @@
 				BA7C27C51A37A28F00A9CFC5 /* Router.swift */,
 			);
 			name = Networking;
+			sourceTree = "<group>";
+		};
+		BA8812AF1A7838D700B50651 /* Collection View */ = {
+			isa = PBXGroup;
+			children = (
+				BAA8C0961A333A8B00AAB9F4 /* CollectionViewDataSource.swift */,
+				BAF3DDC01A3048E70062C068 /* ArrayCollectionViewDataSource.swift */,
+				BAA8C0981A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift */,
+			);
+			name = "Collection View";
+			sourceTree = "<group>";
+		};
+		BA8812E91A783BB500B50651 /* Table View */ = {
+			isa = PBXGroup;
+			children = (
+				BA8812B01A7838E300B50651 /* TableViewDataSource.swift */,
+				BA8812B41A783A4700B50651 /* FetchedResultsTableViewDataSource.swift */,
+			);
+			name = "Table View";
 			sourceTree = "<group>";
 		};
 		BA9AA6811A6747F0002C4992 /* Main */ = {
@@ -484,6 +513,8 @@
 				BAF3DDBA1A3043F10062C068 /* UIViewController+ChildViewController.swift */,
 				BA3A28831A305C6F00A85C29 /* UICollectionView+CellRegistration.swift */,
 				BA52474A1A31A1FC003BD269 /* UICollectionReusableView+Required.swift */,
+				BA8812EC1A7841BE00B50651 /* UITableView+CellRegistration.swift */,
+				BA8812B21A78399A00B50651 /* UITableViewCell+Required.swift */,
 				BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */,
 				BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */,
 				BA6385EC1A65B8FF00B002D9 /* UIView+Snowball.swift */,
@@ -646,6 +677,7 @@
 				BAA15EA61A6889230055756E /* UIRefreshControl+AFNetworking.m in Sources */,
 				BAF3DDBB1A3043F10062C068 /* UIViewController+ChildViewController.swift in Sources */,
 				BAF3BC9B1A76E06A00AFD3E5 /* FriendsViewController.swift in Sources */,
+				BA8812EB1A783CD600B50651 /* UserTableViewCell.swift in Sources */,
 				BAA8C06A1A32EAAA00AAB9F4 /* CoreRecord.swift in Sources */,
 				BA789E0B1A7052D000BA1611 /* CachedURLAsset.swift in Sources */,
 				BAA15EA51A6889230055756E /* UIProgressView+AFNetworking.m in Sources */,
@@ -656,7 +688,9 @@
 				BA7C0E4C1A65F395001B3B4C /* OnboardingTopView.swift in Sources */,
 				BA9AA67C1A67465F002C4992 /* OnboardingNavigationController.swift in Sources */,
 				BAF3DDC11A3048E70062C068 /* ArrayCollectionViewDataSource.swift in Sources */,
+				BA8812B51A783A4700B50651 /* FetchedResultsTableViewDataSource.swift in Sources */,
 				BA38C1811A30272700A2F2AE /* ClipsViewController.swift in Sources */,
+				BA8812B11A7838E300B50651 /* TableViewDataSource.swift in Sources */,
 				BAA15E9E1A6889230055756E /* AFURLResponseSerialization.m in Sources */,
 				BA3A28701A3051E300A85C29 /* Util.swift in Sources */,
 				BAA8C0991A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift in Sources */,
@@ -681,6 +715,8 @@
 				BAA8C0971A333A8B00AAB9F4 /* CollectionViewDataSource.swift in Sources */,
 				BAA8C0801A32F8F300AAB9F4 /* User.swift in Sources */,
 				BAA15E9A1A6889230055756E /* AFNetworkReachabilityManager.m in Sources */,
+				BA8812B31A78399A00B50651 /* UITableViewCell+Required.swift in Sources */,
+				BA8812ED1A7841BE00B50651 /* UITableView+CellRegistration.swift in Sources */,
 				BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */,
 				BAE26FB31A77090700A0977C /* SnowballTopView.swift in Sources */,
 				BA52474B1A31A1FC003BD269 /* UICollectionReusableView+Required.swift in Sources */,

@@ -13,8 +13,11 @@ class CollectionViewDataSource: NSObject, UICollectionViewDataSource {
 
   // MARK: - Initializers
 
-  init(cellTypes: [UICollectionViewCell.Type]) {
+  init(collectionView: UICollectionView, cellTypes: [UICollectionViewCell.Type]) {
     self.cellTypes = cellTypes
+    for cellType in cellTypes {
+      collectionView.registerCellClass(cellType)
+    }
   }
 
   // MARK: - UICollectionViewDataSource

@@ -13,9 +13,9 @@ class ArrayCollectionViewDataSource: CollectionViewDataSource {
 
   // MARK: - Initializers
 
-  init(objects: [[AnyObject]], cellTypes: [UICollectionViewCell.Type]) {
+  init(collectionView: UICollectionView, objects: [[AnyObject]], cellTypes: [UICollectionViewCell.Type]) {
     self.objects = objects
-    super.init(cellTypes: cellTypes)
+    super.init(collectionView: collectionView, cellTypes: cellTypes)
   }
 
   // MARK: - CollectionViewDataSource

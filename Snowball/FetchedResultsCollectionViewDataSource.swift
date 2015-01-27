@@ -17,6 +17,7 @@ class FetchedResultsCollectionViewDataSource: CollectionViewDataSource, NSFetche
 
   // MARK: - Initializers
 
+  // A duplicate of this next function is maintained in the table view counterpart to this class.
   init(collectionView: UICollectionView, entityName: String, sectionNameKeyPath: String? = nil, sortDescriptors: [NSSortDescriptor]? = nil, predicate: NSPredicate? = nil, fetchLimit: Int = 25, ascending: Bool = false, cellTypes: [UICollectionViewCell.Type]) {
     self.collectionView = collectionView
     let fetchRequest = NSFetchRequest()
@@ -26,7 +27,7 @@ class FetchedResultsCollectionViewDataSource: CollectionViewDataSource, NSFetche
     fetchRequest.fetchLimit = fetchLimit
     fetchRequest.sortDescriptors = sortDescriptors ?? [NSSortDescriptor]()
     fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: NSManagedObjectContext.mainQueueContext(), sectionNameKeyPath: sectionNameKeyPath, cacheName: nil)
-    super.init(cellTypes: cellTypes)
+    super.init(collectionView: collectionView, cellTypes: cellTypes)
     fetchedResultsController.delegate = self
     var error: NSError?
     if ascending {
