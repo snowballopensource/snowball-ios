@@ -125,7 +125,6 @@ class OnboardingAuthenticationViewController: UIViewController, SnowballTopViewD
     }
   }
 
-
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     if self.isKindOfClass(OnboardingSignUpViewController) {
@@ -137,11 +136,11 @@ class OnboardingAuthenticationViewController: UIViewController, SnowballTopViewD
 
   // MARK: - SnowballTopViewDelegate
 
-  func snowballTopViewBackButtonTapped() {
+  func snowballTopViewLeftButtonTapped() {
     navigationController?.popViewControllerAnimated(true)
   }
 
-  func snowballTopViewForwardButtonTapped() {
+  func snowballTopViewRightButtonTapped() {
     if validateFields() {
       performAuthenticationRequest()
     }
