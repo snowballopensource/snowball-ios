@@ -17,21 +17,32 @@ protocol SnowballTopViewDelegate: class {
 enum SnowballTopViewButtonType {
   case Back
   case Forward
+  case Camera
+  case AddFriends
 
   var button: UIButton {
+    let button = UIButton()
+    let image = UIImage(named: imageName)!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+    button.setImage(image, forState: UIControlState.Normal)
+    button.imageView?.tintColor = color
+    return button
+  }
+
+  private var imageName: String {
     switch self {
-    case .Back:
-      let backButton = UIButton()
-      let backImage = UIImage(named: "back")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-      backButton.setImage(backImage, forState: UIControlState.Normal)
-      backButton.imageView?.tintColor = UIColor.SnowballColor.grayColor
-      return backButton
-    case .Forward:
-      let forwardButton = UIButton()
-      let forwardImage = UIImage(named: "forward")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-      forwardButton.setImage(forwardImage, forState: UIControlState.Normal)
-      forwardButton.imageView?.tintColor = UIColor.SnowballColor.greenColor
-      return forwardButton
+    case .Back: return "back"
+    case .Forward: return "foward"
+    // case .Camera: return "camera"
+    // case .AddFriends: return "add-friends"
+    default: return "back"
+    }
+  }
+
+  private var color: UIColor {
+    switch self {
+    case .Back: return UIColor.SnowballColor.grayColor
+    case .Forward: return UIColor.SnowballColor.greenColor
+    default: return UIColor.blackColor()
     }
   }
 }
@@ -73,7 +84,7 @@ class SnowballTopView: UIView {
 
   // MARK: - Convenience
 
-  func setLayout() {
+  func setupDefaultLayout() {
     let height: Float = 65
 
     layout(self) { (topBar) in

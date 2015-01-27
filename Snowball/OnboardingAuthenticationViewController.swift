@@ -28,7 +28,7 @@ class OnboardingAuthenticationViewController: UIViewController, SnowballTopViewD
 
     topBar.setPage(0)
     view.addSubview(topBar)
-    topBar.setLayout()
+    topBar.setupDefaultLayout()
 
     let sideMargin: Float = 25
 
