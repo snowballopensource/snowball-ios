@@ -70,13 +70,14 @@ class SnowballTopView: UIView {
 
   override func layoutSubviews() {
     super.layoutSubviews()
-    // width = 25 on each side of centered image in image view
+    // width = 20 on each side of centered image in image view
+    let width: CGFloat = 20
     if let leftButton = leftButton {
-      let leftButtonWidth: CGFloat = (25 + leftButton.imageView!.image!.size.width / 2) * 2
+      let leftButtonWidth: CGFloat = (width + leftButton.imageView!.image!.size.width / 2) * 2
       leftButton.frame = CGRect(x: 0, y: 0, width: leftButtonWidth, height: bounds.height)
     }
     if let rightButton = rightButton {
-      let rightButtonWidth: CGFloat = (25 + rightButton.imageView!.image!.size.width / 2) * 2
+      let rightButtonWidth: CGFloat = (width + rightButton.imageView!.image!.size.width / 2) * 2
       rightButton.frame = CGRect(x: UIScreen.mainScreen().bounds.size.width - rightButtonWidth, y: 0, width: rightButtonWidth, height: bounds.height)
     }
   }

@@ -23,7 +23,6 @@ class UserTableViewCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     contentView.addSubview(avatarImageView)
     usernameLabel.font = UIFont(name: UIFont.SnowballFont.regular, size: 26)
-    usernameLabel.textAlignment = NSTextAlignment.Left
     contentView.addSubview(usernameLabel)  }
 
   required init(coder: NSCoder) {
@@ -35,7 +34,7 @@ class UserTableViewCell: UITableViewCell {
   override func layoutSubviews() {
     super.layoutSubviews()
 
-    let margin: Float = 25
+    let margin: Float = 20
     layout(avatarImageView) { (avatarImageView) in
       avatarImageView.left == avatarImageView.superview!.left + margin
       avatarImageView.centerY == avatarImageView.superview!.centerY
@@ -44,7 +43,7 @@ class UserTableViewCell: UITableViewCell {
     }
 
     layout(usernameLabel, avatarImageView) { (usernameLabel, avatarImageView) in
-      usernameLabel.left == avatarImageView.right + 20
+      usernameLabel.left == avatarImageView.right + margin
       usernameLabel.centerY == usernameLabel.superview!.centerY
       usernameLabel.right == usernameLabel.superview!.right
     }

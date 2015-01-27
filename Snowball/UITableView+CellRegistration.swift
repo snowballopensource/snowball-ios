@@ -12,4 +12,8 @@ extension UITableView {
   func registerCellClass(cellClass: UITableViewCell.Type) {
     registerClass(cellClass, forCellReuseIdentifier: NSStringFromClass(cellClass))
   }
+
+  func registerHeaderFooterClass(headerFooterClass: UITableViewHeaderFooterView.Type) {
+    registerClass(headerFooterClass, forHeaderFooterViewReuseIdentifier: NSStringFromClass(headerFooterClass))
+  }
 }
