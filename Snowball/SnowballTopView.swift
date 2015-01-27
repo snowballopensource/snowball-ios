@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Snowball, Inc. All rights reserved.
 //
 
+import Cartography
 import UIKit
 
 protocol SnowballTopViewDelegate: class {
@@ -17,7 +18,6 @@ class SnowballTopView: UIView {
   private let backButton = UIButton()
   private let forwardButton = UIButton()
   var delegate: SnowballTopViewDelegate?
-  class var defaultHeight: Float { return 65 }
 
   // MARK: - UIView
 
@@ -52,5 +52,18 @@ class SnowballTopView: UIView {
     backButton.frame = CGRect(x: 0, y: 0, width: backButtonWidth, height: bounds.height)
     let forwardButtonWidth: CGFloat = (25 + forwardButton.imageView!.image!.size.width / 2) * 2
     forwardButton.frame = CGRect(x: UIScreen.mainScreen().bounds.size.width - forwardButtonWidth, y: 0, width: forwardButtonWidth, height: bounds.height)
+  }
+
+  // MARK: - Convenience
+
+  func setLayout() {
+    let height: Float = 65
+
+    layout(self) { (topBar) in
+      topBar.left == topBar.superview!.left
+      topBar.top == topBar.superview!.top
+      topBar.right == topBar.superview!.right
+      topBar.height == height
+    }
   }
 }

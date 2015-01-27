@@ -6,12 +6,16 @@
 //  Copyright (c) 2015 Snowball, Inc. All rights reserved.
 //
 
+import Cartography
 import UIKit
 
 class FriendsViewController: UIViewController {
+  let topView = SnowballTopView()
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    title = "Friends"
+    view.addSubview(topView)
+    topView.setLayout()
   }
 }
