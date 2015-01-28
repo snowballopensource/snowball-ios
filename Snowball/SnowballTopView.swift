@@ -22,9 +22,12 @@ enum SnowballTopViewButtonType {
 
   var button: UIButton {
     let button = UIButton()
-    let image = UIImage(named: imageName)!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+    var image = UIImage(named: imageName)!
+    if let color = color {
+      image = image.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+      button.imageView?.tintColor = color
+    }
     button.setImage(image, forState: UIControlState.Normal)
-    button.imageView?.tintColor = color
     return button
   }
 
@@ -32,28 +35,31 @@ enum SnowballTopViewButtonType {
     switch self {
     case .Back: return "back"
     case .Forward: return "foward"
-    // case .Camera: return "camera"
-    // case .AddFriends: return "add-friends"
+    case .Camera: return "camera"
+    case .AddFriends: return "add-friends"
     default: return "back"
     }
   }
 
-  private var color: UIColor {
+  private var color: UIColor? {
     switch self {
     case .Back: return UIColor.SnowballColor.grayColor
-    default: return UIColor.SnowballColor.greenColor
+    case .Forward: return UIColor.SnowballColor.greenColor
+    case .AddFriends: return nil
+    default: return UIColor.blackColor()
     }
   }
 }
 
 class SnowballTopView: UIView {
+  private var titleLabel = UILabel()
   private var leftButton: UIButton?
   private var rightButton: UIButton?
   var delegate: SnowballTopViewDelegate?
 
   // MARK: - UIView
 
-  convenience init(leftButtonType: SnowballTopViewButtonType?, rightButtonType: SnowballTopViewButtonType?) {
+  convenience init(leftButtonType: SnowballTopViewButtonType?, rightButtonType: SnowballTopViewButtonType?, title: String = "") {
     self.init(frame: CGRectZero)
 
     if let leftButtonType = leftButtonType {
@@ -66,6 +72,9 @@ class SnowballTopView: UIView {
       rightButton!.addTarget(delegate, action: "snowballTopViewRightButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
       addSubview(rightButton!)
     }
+    titleLabel.text = NSLocalizedString(title)
+    titleLabel.font = UIFont(name: UIFont.SnowballFont.regular, size: 26)
+    addSubview(titleLabel)
   }
 
   override func layoutSubviews() {
@@ -79,6 +88,10 @@ class SnowballTopView: UIView {
     if let rightButton = rightButton {
       let rightButtonWidth: CGFloat = (width + rightButton.imageView!.image!.size.width / 2) * 2
       rightButton.frame = CGRect(x: UIScreen.mainScreen().bounds.size.width - rightButtonWidth, y: 0, width: rightButtonWidth, height: bounds.height)
+    }
+    layout(titleLabel) { (titleLabel) in
+      titleLabel.left == titleLabel.superview!.left + 75
+      titleLabel.centerY == titleLabel.superview!.centerY
     }
   }
 

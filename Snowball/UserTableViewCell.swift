@@ -43,7 +43,7 @@ class UserTableViewCell: UITableViewCell {
     }
 
     layout(usernameLabel, avatarImageView) { (usernameLabel, avatarImageView) in
-      usernameLabel.left == avatarImageView.right + 10
+      usernameLabel.left == avatarImageView.right + 15
       usernameLabel.centerY == usernameLabel.superview!.centerY
       usernameLabel.right == usernameLabel.superview!.right
     }

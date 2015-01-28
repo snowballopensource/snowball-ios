@@ -10,7 +10,7 @@ import Cartography
 import UIKit
 
 class FriendsViewController: UIViewController, SnowballTopViewDelegate, UITableViewDelegate {
-  let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Camera, rightButtonType: SnowballTopViewButtonType.AddFriends)
+  let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Camera, rightButtonType: SnowballTopViewButtonType.AddFriends, title: "Friends")
   let tableView = UITableView()
   lazy var tableViewDataSource: FriendsDataSource = {
     return FriendsDataSource(tableView: self.tableView)
