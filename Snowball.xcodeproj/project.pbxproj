@@ -42,6 +42,7 @@
 		BA8812ED1A7841BE00B50651 /* UITableView+CellRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812EC1A7841BE00B50651 /* UITableView+CellRegistration.swift */; };
 		BA8812EF1A78559900B50651 /* SnowballTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812EE1A78559900B50651 /* SnowballTableViewHeaderFooterView.swift */; };
 		BA8812F31A785B5E00B50651 /* UITableViewHeaderFooterView+Required.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812F21A785B5E00B50651 /* UITableViewHeaderFooterView+Required.swift */; };
+		BA8812F51A7868A200B50651 /* CurrentUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812F41A7868A200B50651 /* CurrentUserTableViewCell.swift */; };
 		BA9AA67C1A67465F002C4992 /* OnboardingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9AA67B1A67465F002C4992 /* OnboardingNavigationController.swift */; };
 		BA9AA6831A674804002C4992 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9AA6821A674804002C4992 /* MainNavigationController.swift */; };
 		BAA15E6B1A687E910055756E /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA145D031A687CB300D81E53 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -152,6 +153,7 @@
 		BA8812EC1A7841BE00B50651 /* UITableView+CellRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+CellRegistration.swift"; sourceTree = "<group>"; };
 		BA8812EE1A78559900B50651 /* SnowballTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		BA8812F21A785B5E00B50651 /* UITableViewHeaderFooterView+Required.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewHeaderFooterView+Required.swift"; sourceTree = "<group>"; };
+		BA8812F41A7868A200B50651 /* CurrentUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserTableViewCell.swift; sourceTree = "<group>"; };
 		BA9AA67B1A67465F002C4992 /* OnboardingNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingNavigationController.swift; sourceTree = "<group>"; };
 		BA9AA6821A674804002C4992 /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		BAA15E721A6889230055756E /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 				BA5247441A319E24003BD269 /* AddClipCollectionReuseableView.swift */,
 				BAD666EE1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift */,
 				BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */,
+				BA8812F41A7868A200B50651 /* CurrentUserTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -705,6 +708,7 @@
 				BA7C27D31A37ADA600A9CFC5 /* RemoteObject.swift in Sources */,
 				BAA15EA21A6889230055756E /* UIAlertView+AFNetworking.m in Sources */,
 				BA6385E31A65ACAF00B002D9 /* OnboardingViewController.swift in Sources */,
+				BA8812F51A7868A200B50651 /* CurrentUserTableViewCell.swift in Sources */,
 				BAA15EA01A6889230055756E /* AFNetworkActivityIndicatorManager.m in Sources */,
 				BAA15EA31A6889230055756E /* UIButton+AFNetworking.m in Sources */,
 				BAA15E981A6889230055756E /* AFHTTPRequestOperationManager.m in Sources */,

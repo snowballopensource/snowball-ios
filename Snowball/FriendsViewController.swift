@@ -71,7 +71,15 @@ class FriendsViewController: UIViewController, SnowballTopViewDelegate, UITableV
   }
 
   func snowballTopViewRightButtonTapped() {
-    println("hi")
+    // TODO: go to add friends
+    println("go to add friends")
+  }
+
+  // MARK: - CurrentUserTableViewCellDelegate
+
+  func settingsButtonTapped() {
+    // TODO: go to settings
+    println("go to settings")
   }
 }
 
@@ -85,9 +93,10 @@ enum FriendsTableViewSection: Int {
 // MARK: -
 
 class FriendsDataSource: FetchedResultsTableViewDataSource {
+  var currentUserCellDelegate: CurrentUserTableViewCellDelegate?
 
   init(tableView: UITableView) {
-    let cellTypes = [UserTableViewCell.self, UserTableViewCell.self] as [UITableViewCell.Type]
+    let cellTypes = [CurrentUserTableViewCell.self, UserTableViewCell.self] as [UITableViewCell.Type]
     let currentUserID = User.currentUser!.id ?? ""
     super.init(tableView: tableView, entityName: User.entityName(), sortDescriptors: [NSSortDescriptor(key: "username", ascending: true)], predicate: NSPredicate(format: "id != %@", currentUserID), cellTypes: cellTypes)
   }
@@ -97,6 +106,8 @@ class FriendsDataSource: FetchedResultsTableViewDataSource {
   override func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
     let cell = cell as UserTableViewCell
     if indexPath.section == FriendsTableViewSection.Me.rawValue {
+      let currentUserCell = cell as CurrentUserTableViewCell
+      currentUserCell.delegate = currentUserCellDelegate
       if let user = User.currentUser {
         cell.configureForObject(user)
       }
