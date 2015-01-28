@@ -150,6 +150,11 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
       for device in devices {
         let captureDevice = device as AVCaptureDevice
         if captureDevice.position == position {
+          if captureDevice.isFocusModeSupported(AVCaptureFocusMode.Locked) {
+            captureDevice.lockForConfiguration(nil)
+            captureDevice.focusMode = AVCaptureFocusMode.Locked
+            captureDevice.unlockForConfiguration()
+          }
           return captureDevice
         }
       }
