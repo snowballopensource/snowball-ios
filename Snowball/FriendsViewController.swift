@@ -56,6 +56,14 @@ class FriendsViewController: UIViewController, SnowballTopViewDelegate, UITableV
     return SnowballTableViewHeaderFooterView.height()
   }
 
+  func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    return UIView()
+  }
+
+  func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    return 20
+  }
+
   // MARK: - SnowballTopViewDelegate
 
   func snowballTopViewLeftButtonTapped() {

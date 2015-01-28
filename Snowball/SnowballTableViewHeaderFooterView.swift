@@ -18,7 +18,10 @@ class SnowballTableViewHeaderFooterView: UITableViewHeaderFooterView {
 
   override init(frame: CGRect) {
     super.init(frame: frame)
-    contentView.backgroundColor = UIColor.whiteColor()
+    let backgroundView = UIView()
+    backgroundView.backgroundColor = UIColor.clearColor()
+    self.backgroundView = backgroundView
+    contentView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
     titleLabel.font = UIFont(name: UIFont.SnowballFont.bold, size: 11)
     contentView.addSubview(titleLabel)
   }
@@ -34,13 +37,13 @@ class SnowballTableViewHeaderFooterView: UITableViewHeaderFooterView {
 
     layout(titleLabel) { (titleLabel) in
       titleLabel.left == titleLabel.superview!.left + margin
-      titleLabel.centerY == titleLabel.superview!.centerY
+      titleLabel.top == titleLabel.superview!.top
     }
   }
 
   // MARK: - Required
 
   override class func height() -> CGFloat {
-    return 25
+    return 20
   }
 }
