@@ -43,6 +43,7 @@
 		BA8812EF1A78559900B50651 /* SnowballTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812EE1A78559900B50651 /* SnowballTableViewHeaderFooterView.swift */; };
 		BA8812F31A785B5E00B50651 /* UITableViewHeaderFooterView+Required.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812F21A785B5E00B50651 /* UITableViewHeaderFooterView+Required.swift */; };
 		BA8812F51A7868A200B50651 /* CurrentUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812F41A7868A200B50651 /* CurrentUserTableViewCell.swift */; };
+		BA938A011A7B06C600857CF7 /* NSError+Print.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA938A001A7B06C600857CF7 /* NSError+Print.swift */; };
 		BA9AA67C1A67465F002C4992 /* OnboardingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9AA67B1A67465F002C4992 /* OnboardingNavigationController.swift */; };
 		BA9AA6831A674804002C4992 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9AA6821A674804002C4992 /* MainNavigationController.swift */; };
 		BAA15E6B1A687E910055756E /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA145D031A687CB300D81E53 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -154,6 +155,7 @@
 		BA8812EE1A78559900B50651 /* SnowballTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		BA8812F21A785B5E00B50651 /* UITableViewHeaderFooterView+Required.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewHeaderFooterView+Required.swift"; sourceTree = "<group>"; };
 		BA8812F41A7868A200B50651 /* CurrentUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserTableViewCell.swift; sourceTree = "<group>"; };
+		BA938A001A7B06C600857CF7 /* NSError+Print.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Print.swift"; sourceTree = "<group>"; };
 		BA9AA67B1A67465F002C4992 /* OnboardingNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingNavigationController.swift; sourceTree = "<group>"; };
 		BA9AA6821A674804002C4992 /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		BAA15E721A6889230055756E /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -530,6 +532,7 @@
 				BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */,
 				BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */,
 				BA7C0E491A65EF94001B3B4C /* UITextField+Snowball.swift */,
+				BA938A001A7B06C600857CF7 /* NSError+Print.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -711,6 +714,7 @@
 				BA8812F51A7868A200B50651 /* CurrentUserTableViewCell.swift in Sources */,
 				BAA15EA01A6889230055756E /* AFNetworkActivityIndicatorManager.m in Sources */,
 				BAA15EA31A6889230055756E /* UIButton+AFNetworking.m in Sources */,
+				BA938A011A7B06C600857CF7 /* NSError+Print.swift in Sources */,
 				BAA15E981A6889230055756E /* AFHTTPRequestOperationManager.m in Sources */,
 				BAA8C0681A32E76D00AAB9F4 /* CoreDataStack.swift in Sources */,
 				BACA7A861A36E40900C34B6C /* NSDate+TimeSince.swift in Sources */,

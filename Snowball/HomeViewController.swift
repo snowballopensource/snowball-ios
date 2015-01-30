@@ -98,7 +98,7 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
   // MARK: - CameraViewControllerDelegate
 
   func videoRecordedToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL, error: NSError?) {
-    if error != nil { return }
+    error?.print("recording")
     cameraViewController.view.hidden = true
     clipsViewController.showAddClipButton()
     previewedVideoURL = videoURL
