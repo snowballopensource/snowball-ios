@@ -126,6 +126,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         if !recording {
           let outputFileName = "video".stringByAppendingPathExtension("mov")!
           let outputFilePath = NSTemporaryDirectory().stringByAppendingPathComponent(outputFileName)
+          self.setFocusLocked(true)
           self.movieFileOutput?.startRecordingToOutputFileURL(NSURL(fileURLWithPath: outputFilePath), recordingDelegate: self)
         }
       }
@@ -133,10 +134,26 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
   }
 
   private func endRecording() {
+    // Since this is not always called (e.g. when a user hits the 10 second time limit,
+    // put any code (such as the focus lock) in the delegate `didFinishRecordingToOutputFileAtURL`
     dispatch_async(sessionQueue) {
       if let recording = self.movieFileOutput?.recording {
         if recording {
           self.movieFileOutput?.stopRecording()
+        }
+      }
+    }
+  }
+
+  private func setFocusLocked(locked: Bool) {
+    dispatch_async(sessionQueue) {
+      let captureDevice = self.currentVideoDeviceInput?.device
+      if let captureDevice = captureDevice {
+        let focusMode = locked ? AVCaptureFocusMode.Locked : AVCaptureFocusMode.ContinuousAutoFocus
+        if captureDevice.isFocusModeSupported(focusMode) {
+          captureDevice.lockForConfiguration(nil)
+          captureDevice.focusMode = focusMode
+          captureDevice.unlockForConfiguration()
         }
       }
     }
@@ -152,11 +169,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
       for device in devices {
         let captureDevice = device as AVCaptureDevice
         if captureDevice.position == position {
-          if captureDevice.isFocusModeSupported(AVCaptureFocusMode.Locked) {
-            captureDevice.lockForConfiguration(nil)
-            captureDevice.focusMode = AVCaptureFocusMode.Locked
-            captureDevice.unlockForConfiguration()
-          }
           return captureDevice
         }
       }
@@ -181,6 +193,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
   // MARK: - AVCaptureFileOutputRecordingDelegate
 
   func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!) {
+    setFocusLocked(false)
     // Crop video
     // http://stackoverflow.com/a/5231713/801858
     let asset = AVAsset.assetWithURL(outputFileURL) as AVAsset
