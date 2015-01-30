@@ -21,6 +21,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
   private let sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL)
   private var currentVideoDeviceInput: AVCaptureDeviceInput?
   private var movieFileOutput: AVCaptureMovieFileOutput?
+  private let FPS: Int32 = 24
   var delegate: CameraViewControllerDelegate?
 
   // MARK: - UIViewController
@@ -50,6 +51,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         self.captureSession.addInput(audioDeviceInput)
       }
       let movieFileOutput = AVCaptureMovieFileOutput()
+      movieFileOutput.maxRecordedDuration = CMTimeMakeWithSeconds(10, self.FPS) // 10 seconds
       self.movieFileOutput = movieFileOutput
       if self.captureSession.canAddOutput(movieFileOutput) {
         self.captureSession.addOutput(movieFileOutput)
@@ -188,11 +190,10 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     // e.g. videoTrack.naturalSize.height is the width if you are holding the phone portrait
     let videoComposition = AVMutableVideoComposition()
     videoComposition.renderSize = CGSizeMake(videoTrack.naturalSize.height, videoTrack.naturalSize.height)
-    let FPS: Int32 = 24
     videoComposition.frameDuration = CMTimeMake(1, FPS) // 24 FPS
 
     let instruction = AVMutableVideoCompositionInstruction()
-    instruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(10, FPS)) // 10 seconds
+    instruction.timeRange = CMTimeRangeMake(kCMTimeZero, asset.duration)
 
     let transformer = AVMutableVideoCompositionLayerInstruction(assetTrack: videoTrack)
 
@@ -218,7 +219,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     exporter.outputURL = exportedVideoURL
     exporter.outputFileType = AVFileTypeMPEG4
     exporter.exportAsynchronouslyWithCompletionHandler {
-      let imageGenerator = AVAssetImageGenerator(asset: AVURLAsset(URL: exportedVideoURL, options: nil))
+      let asset = AVURLAsset(URL: exportedVideoURL, options: nil)
+      let imageGenerator = AVAssetImageGenerator(asset: asset)
       let imageRef = imageGenerator.copyCGImageAtTime(kCMTimeZero, actualTime: nil, error: nil)
       let thumbnailData = UIImagePNGRepresentation(UIImage(CGImage: imageRef))
       thumbnailData.writeToURL(exportedThumbnailURL, atomically: true)
