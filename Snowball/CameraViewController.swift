@@ -18,9 +18,12 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
   private let captureSession = AVCaptureSession()
   private let cameraView = CameraView()
   private let changeCameraButton = UIButton()
+  private let progressView = UIProgressView()
+  private var progressViewTimer: NSTimer?
   private let sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL)
   private var currentVideoDeviceInput: AVCaptureDeviceInput?
   private var movieFileOutput: AVCaptureMovieFileOutput?
+  private let maxRecordingSeconds = 10.0
   private let FPS: Int32 = 24
   var delegate: CameraViewControllerDelegate?
 
@@ -51,7 +54,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         self.captureSession.addInput(audioDeviceInput)
       }
       let movieFileOutput = AVCaptureMovieFileOutput()
-      movieFileOutput.maxRecordedDuration = CMTimeMakeWithSeconds(10, self.FPS) // 10 seconds
+      movieFileOutput.maxRecordedDuration = CMTimeMakeWithSeconds(self.maxRecordingSeconds, self.FPS)
       self.movieFileOutput = movieFileOutput
       if self.captureSession.canAddOutput(movieFileOutput) {
         self.captureSession.addOutput(movieFileOutput)
@@ -79,6 +82,16 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
       changeCameraButton.top == changeCameraButton.superview!.top + margin
       changeCameraButton.width == width
       changeCameraButton.height == width
+    }
+
+    progressView.progressTintColor = UIColor.SnowballColor.greenColor
+    progressView.trackTintColor = UIColor.clearColor()
+    view.addSubview(progressView)
+    layout(progressView) { (progressView) in
+      progressView.left == progressView.superview!.left
+      progressView.top == progressView.superview!.top
+      progressView.right == progressView.superview!.right
+      progressView.height == 10
     }
   }
 
@@ -120,44 +133,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     }
   }
 
-  private func beginRecording() {
-    dispatch_async(sessionQueue) {
-      if let recording = self.movieFileOutput?.recording {
-        if !recording {
-          let outputFileName = "video".stringByAppendingPathExtension("mov")!
-          let outputFilePath = NSTemporaryDirectory().stringByAppendingPathComponent(outputFileName)
-          self.setFocusLocked(true)
-          self.movieFileOutput?.startRecordingToOutputFileURL(NSURL(fileURLWithPath: outputFilePath), recordingDelegate: self)
-        }
-      }
-    }
-  }
-
-  private func endRecording() {
-    // Since this is not always called (e.g. when a user hits the 10 second time limit,
-    // put any code (such as the focus lock) in the delegate `didFinishRecordingToOutputFileAtURL`
-    dispatch_async(sessionQueue) {
-      if let recording = self.movieFileOutput?.recording {
-        if recording {
-          self.movieFileOutput?.stopRecording()
-        }
-      }
-    }
-  }
-
-  private func setFocusLocked(locked: Bool) {
-    dispatch_async(sessionQueue) {
-      let captureDevice = self.currentVideoDeviceInput?.device
-      if let captureDevice = captureDevice {
-        let focusMode = locked ? AVCaptureFocusMode.Locked : AVCaptureFocusMode.ContinuousAutoFocus
-        if captureDevice.isFocusModeSupported(focusMode) {
-          captureDevice.lockForConfiguration(nil)
-          captureDevice.focusMode = focusMode
-          captureDevice.unlockForConfiguration()
-        }
-      }
-    }
-  }
+  // MARK: - Private
 
   private func checkDeviceAuthorizationStatus() {
     AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: nil)
@@ -190,7 +166,69 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     }
   }
 
+  private func beginRecording() {
+    dispatch_async(sessionQueue) {
+      if let recording = self.movieFileOutput?.recording {
+        if !recording {
+          let outputFileName = "video".stringByAppendingPathExtension("mov")!
+          let outputFilePath = NSTemporaryDirectory().stringByAppendingPathComponent(outputFileName)
+          self.movieFileOutput?.startRecordingToOutputFileURL(NSURL(fileURLWithPath: outputFilePath), recordingDelegate: self)
+        }
+      }
+    }
+  }
+
+  private func endRecording() {
+    dispatch_async(sessionQueue) {
+      if let recording = self.movieFileOutput?.recording {
+        if recording {
+          self.movieFileOutput?.stopRecording()
+        }
+      }
+    }
+  }
+
+  private func setFocusLocked(locked: Bool) {
+    dispatch_async(sessionQueue) {
+      let captureDevice = self.currentVideoDeviceInput?.device
+      if let captureDevice = captureDevice {
+        let focusMode = locked ? AVCaptureFocusMode.Locked : AVCaptureFocusMode.ContinuousAutoFocus
+        if captureDevice.isFocusModeSupported(focusMode) {
+          captureDevice.lockForConfiguration(nil)
+          captureDevice.focusMode = focusMode
+          captureDevice.unlockForConfiguration()
+        }
+      }
+    }
+  }
+
+  private func beginProgressViewAnimation() {
+    progressView.progress = 0
+    let timeInterval = 1.0/30.0 // 30 FPS
+    progressViewTimer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: "progressViewTimerDidFire:", userInfo: timeInterval, repeats: true)
+  }
+
+  private func endProgressViewAnimation() {
+    progressView.progress = 0
+    progressViewTimer?.invalidate()
+    progressViewTimer = nil
+  }
+
+  // MARK: - Actions
+
+  func progressViewTimerDidFire(timer: NSTimer) {
+    let timeInterval = timer.userInfo as Double
+    if progressView.progress <= 1 {
+      progressView.progress += Float(timeInterval / maxRecordingSeconds)
+    }
+  }
+
   // MARK: - AVCaptureFileOutputRecordingDelegate
+
+  func captureOutput(captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAtURL fileURL: NSURL!, fromConnections connections: [AnyObject]!) {
+    setFocusLocked(true)
+    beginProgressViewAnimation()
+  }
 
   func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!) {
     setFocusLocked(false)
@@ -239,6 +277,9 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
       thumbnailData.writeToURL(exportedThumbnailURL, atomically: true)
       if let delegate = self.delegate {
         dispatch_async(dispatch_get_main_queue()) {
+          // Removal of progress view animation is done here to make it happen
+          // after video processing/encoding.
+          self.endProgressViewAnimation()
           delegate.videoRecordedToFileAtURL(exporter.outputURL, thumbnailURL: exportedThumbnailURL, error: error)
         }
       }
