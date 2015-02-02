@@ -161,7 +161,7 @@ class ClipsDataSource: FetchedResultsCollectionViewDataSource {
 
   init(collectionView: UICollectionView) {
     let cellTypes = [ClipCollectionViewCell.self] as [UICollectionViewCell.Type]
-    super.init(collectionView: collectionView, entityName: Clip.entityName(), sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: true)], ascending: true, cellTypes: cellTypes)
+    super.init(collectionView: collectionView, entityName: Clip.entityName(), sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: true)], getLastPage: true, cellTypes: cellTypes)
   }
 
   // MARK: - CollectionViewDataSource

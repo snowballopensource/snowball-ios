@@ -18,7 +18,7 @@ class FetchedResultsCollectionViewDataSource: CollectionViewDataSource, NSFetche
   // MARK: - Initializers
 
   // A duplicate of this next function is maintained in the table view counterpart to this class.
-  init(collectionView: UICollectionView, entityName: String, sectionNameKeyPath: String? = nil, sortDescriptors: [NSSortDescriptor]? = nil, predicate: NSPredicate? = nil, fetchLimit: Int = 25, ascending: Bool = false, cellTypes: [UICollectionViewCell.Type]) {
+  init(collectionView: UICollectionView, entityName: String, sectionNameKeyPath: String? = nil, sortDescriptors: [NSSortDescriptor]? = nil, predicate: NSPredicate? = nil, fetchLimit: Int = 25, getLastPage: Bool = false, cellTypes: [UICollectionViewCell.Type]) {
     self.collectionView = collectionView
     let fetchRequest = NSFetchRequest()
     let entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: NSManagedObjectContext.mainQueueContext())
@@ -31,7 +31,7 @@ class FetchedResultsCollectionViewDataSource: CollectionViewDataSource, NSFetche
     super.init(collectionView: collectionView, cellTypes: cellTypes)
     fetchedResultsController.delegate = self
     var error: NSError?
-    if ascending {
+    if getLastPage {
       let count = NSManagedObjectContext.mainQueueContext().countForFetchRequest(fetchRequest, error: &error)
       if error != nil {
         fetchRequest.fetchOffset = (count > 0 ? count : 0)
