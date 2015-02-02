@@ -9,11 +9,11 @@
 import UIKit
 
 extension UITextField {
-  func alignLeft() {
+  func alignLeft(insetWidth: CGFloat = 20) {
     contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
     // Since a UITextField does not have `contentEdgeInsets`
     // like a button does, create a `UIView` of the inset width.
-    let insetView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: bounds.size.height))
+    let insetView = UIView(frame: CGRect(x: 0, y: 0, width: insetWidth, height: bounds.size.height))
     insetView.backgroundColor = UIColor.clearColor()
     leftViewMode = UITextFieldViewMode.Always
     leftView = insetView

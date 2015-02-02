@@ -9,9 +9,9 @@
 import Cartography
 import UIKit
 
-protocol SnowballTopViewDelegate: class {
-  func snowballTopViewLeftButtonTapped()
-  func snowballTopViewRightButtonTapped()
+@objc protocol SnowballTopViewDelegate: class {
+  optional func snowballTopViewLeftButtonTapped()
+  optional func snowballTopViewRightButtonTapped()
 }
 
 enum SnowballTopViewButtonType {
@@ -34,7 +34,7 @@ enum SnowballTopViewButtonType {
   private var imageName: String {
     switch self {
     case .Back: return "back"
-    case .Forward: return "foward"
+    case .Forward: return "forward"
     case .Camera: return "camera"
     case .AddFriends: return "add-friends"
     default: return "back"

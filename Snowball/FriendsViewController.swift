@@ -78,8 +78,7 @@ class FriendsViewController: UIViewController, SnowballTopViewDelegate, UITableV
   // MARK: - CurrentUserTableViewCellDelegate
 
   func settingsButtonTapped() {
-    // TODO: go to settings
-    println("go to settings")
+    navigationController?.pushViewController(EditProfileViewController(), animated: true)
   }
 }
 
