@@ -57,7 +57,7 @@ class OnboardingAuthenticationViewController: UIViewController, SnowballTopViewD
       usernameTextField.textColor = UIColor.SnowballColor.greenColor
       usernameTextField.tintColor = UIColor.SnowballColor.greenColor
       usernameTextField.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-      usernameTextField.alignLeft()
+      usernameTextField.alignLeft(insetWidth: 20)
       usernameTextField.showSnowballStyleBorderWithColor(UIColor.SnowballColor.greenColor)
       usernameTextField.autocorrectionType = UITextAutocorrectionType.No
       usernameTextField.autocapitalizationType = UITextAutocapitalizationType.None
@@ -84,7 +84,7 @@ class OnboardingAuthenticationViewController: UIViewController, SnowballTopViewD
     emailTextField.textColor = UIColor.SnowballColor.greenColor
     emailTextField.tintColor = UIColor.SnowballColor.greenColor
     emailTextField.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    emailTextField.alignLeft()
+    emailTextField.alignLeft(insetWidth: 20)
     emailTextField.showSnowballStyleBorderWithColor(UIColor.SnowballColor.greenColor)
     emailTextField.autocorrectionType = UITextAutocorrectionType.No
     emailTextField.autocapitalizationType = UITextAutocapitalizationType.None
@@ -111,7 +111,7 @@ class OnboardingAuthenticationViewController: UIViewController, SnowballTopViewD
     passwordTextField.textColor = UIColor.SnowballColor.greenColor
     passwordTextField.tintColor = UIColor.SnowballColor.greenColor
     passwordTextField.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    passwordTextField.alignLeft()
+    passwordTextField.alignLeft(insetWidth: 20)
     passwordTextField.showSnowballStyleBorderWithColor(UIColor.SnowballColor.greenColor)
     passwordTextField.autocorrectionType = UITextAutocorrectionType.No
     passwordTextField.autocapitalizationType = UITextAutocapitalizationType.None

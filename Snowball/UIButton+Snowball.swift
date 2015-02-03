@@ -9,8 +9,8 @@
 import UIKit
 
 extension UIButton {
-  func alignLeft() {
+  func alignLeft(insetWidth: CGFloat = 0) {
     contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
-    contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+    contentEdgeInsets = UIEdgeInsets(top: 0, left: insetWidth, bottom: 0, right: 0)
   }
 }
