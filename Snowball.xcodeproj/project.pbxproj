@@ -35,6 +35,8 @@
 		BA7C27CB1A37A64400A9CFC5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27CA1A37A64400A9CFC5 /* API.swift */; };
 		BA7C27D31A37ADA600A9CFC5 /* RemoteObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */; };
 		BA8450281A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8450271A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift */; };
+		BA87C1481A840C0400A58E64 /* Swifter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC90F3A1A8343C5005C9405 /* Swifter.framework */; };
+		BA87C1491A840C0400A58E64 /* Swifter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAC90F3A1A8343C5005C9405 /* Swifter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA8812B11A7838E300B50651 /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812B01A7838E300B50651 /* TableViewDataSource.swift */; };
 		BA8812B31A78399A00B50651 /* UITableViewCell+Required.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812B21A78399A00B50651 /* UITableViewCell+Required.swift */; };
 		BA8812B51A783A4700B50651 /* FetchedResultsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812B41A783A4700B50651 /* FetchedResultsTableViewDataSource.swift */; };
@@ -74,7 +76,6 @@
 		BAB4F0011A8183970052CBC0 /* FetchedResultsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB4F0001A8183970052CBC0 /* FetchedResultsControllerDelegate.swift */; };
 		BAB8F2C81A830F5500937407 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB8F2C71A830F5500937407 /* FriendsViewController.swift */; };
 		BAC8CD3A1A6607550075B503 /* OnboardingAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC8CD391A6607550075B503 /* OnboardingAuthenticationViewController.swift */; };
-		BAC90F3C1A8343C5005C9405 /* Swifter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAC90F3A1A8343C5005C9405 /* Swifter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BACA7A861A36E40900C34B6C /* NSDate+TimeSince.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */; };
 		BAD666EF1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD666EE1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift */; };
 		BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */; };
@@ -103,7 +104,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				BAA15E6B1A687E910055756E /* Alamofire.framework in Embed Frameworks */,
-				BAC90F3C1A8343C5005C9405 /* Swifter.framework in Embed Frameworks */,
+				BA87C1491A840C0400A58E64 /* Swifter.framework in Embed Frameworks */,
 				BAA15E6C1A687E910055756E /* Cartography.framework in Embed Frameworks */,
 				BAA8329E1A6E303600ADADDD /* Haneke.framework in Embed Frameworks */,
 			);
@@ -220,6 +221,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA87C1481A840C0400A58E64 /* Swifter.framework in Frameworks */,
 				BA137C7E1A7199AA001F8FCF /* Crashlytics.framework in Frameworks */,
 				BA137C7F1A7199AA001F8FCF /* Fabric.framework in Frameworks */,
 			);
@@ -854,7 +856,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -873,7 +874,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
