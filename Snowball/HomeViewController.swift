@@ -24,19 +24,21 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
     super.viewDidLoad()
 
     playerViewController.delegate = self
-    addChildViewController(playerViewController) {
-      layout(self.playerViewController.view) { (playerViewControllerView) in
-        playerViewControllerView.left == playerViewControllerView.superview!.left
-        playerViewControllerView.top == playerViewControllerView.superview!.top
-        playerViewControllerView.right == playerViewControllerView.superview!.right
-        playerViewControllerView.height == playerViewControllerView.superview!.width
-      }
+    addChildViewController(playerViewController)
+    view.addSubview(playerViewController.view)
+    playerViewController.didMoveToParentViewController(self)
+    layout(playerViewController.view) { (playerViewControllerView) in
+      playerViewControllerView.left == playerViewControllerView.superview!.left
+      playerViewControllerView.top == playerViewControllerView.superview!.top
+      playerViewControllerView.right == playerViewControllerView.superview!.right
+      playerViewControllerView.height == playerViewControllerView.superview!.width
     }
 
     cameraViewController.delegate = self
-    addChildViewController(cameraViewController) {
-      self.cameraViewController.view.frame = self.playerViewController.view.frame
-    }
+    addChildViewController(cameraViewController)
+    view.addSubview(cameraViewController.view)
+    cameraViewController.didMoveToParentViewController(self)
+    cameraViewController.view.frame = playerViewController.view.frame
 
     moreButton.setImage(UIImage(named: "friends"), forState: UIControlState.Normal)
     moreButton.addTarget(self, action: "moreButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
@@ -51,13 +53,14 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
     }
 
     clipsViewController.delegate = self
-    addChildViewController(clipsViewController) {
-      layout(self.clipsViewController.view, self.playerViewController.view) { (clipsViewControllerView, playerViewControllerView) in
-        clipsViewControllerView.left == clipsViewControllerView.superview!.left
-        clipsViewControllerView.top == playerViewControllerView.bottom
-        clipsViewControllerView.right == clipsViewControllerView.superview!.right
-        clipsViewControllerView.bottom == clipsViewControllerView.superview!.bottom
-      }
+    addChildViewController(clipsViewController)
+    view.addSubview(clipsViewController.view)
+    clipsViewController.didMoveToParentViewController(self)
+    layout(clipsViewController.view, playerViewController.view) { (clipsViewControllerView, playerViewControllerView) in
+      clipsViewControllerView.left == clipsViewControllerView.superview!.left
+      clipsViewControllerView.top == playerViewControllerView.bottom
+      clipsViewControllerView.right == clipsViewControllerView.superview!.right
+      clipsViewControllerView.bottom == clipsViewControllerView.superview!.bottom
     }
   }
 

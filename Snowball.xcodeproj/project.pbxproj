@@ -82,7 +82,6 @@
 		BAE2EFD21A5C5A1D004B781C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */; };
 		BAF2E45A1A800F1E00A093E5 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */; };
 		BAF3BC961A76E02A00AFD3E5 /* MoreNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */; };
-		BAF3DDBB1A3043F10062C068 /* UIViewController+ChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3DDBA1A3043F10062C068 /* UIViewController+ChildViewController.swift */; };
 		BAF7C0A11A3B969D00941DAB /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF7C0A01A3B969D00941DAB /* PlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -213,7 +212,6 @@
 		BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreNavigationController.swift; sourceTree = "<group>"; };
-		BAF3DDBA1A3043F10062C068 /* UIViewController+ChildViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ChildViewController.swift"; sourceTree = "<group>"; };
 		BAF7C0A01A3B969D00941DAB /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -521,7 +519,6 @@
 		BAF3DDBF1A3048440062C068 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				BAF3DDBA1A3043F10062C068 /* UIViewController+ChildViewController.swift */,
 				BA8812F21A785B5E00B50651 /* UITableViewHeaderFooterView+Required.swift */,
 				BA3A28831A305C6F00A85C29 /* UICollectionView+CellRegistration.swift */,
 				BA52474A1A31A1FC003BD269 /* UICollectionReusableView+Required.swift */,
@@ -690,7 +687,6 @@
 				BAA15E991A6889230055756E /* AFHTTPSessionManager.m in Sources */,
 				BA8812F31A785B5E00B50651 /* UITableViewHeaderFooterView+Required.swift in Sources */,
 				BAA15EA61A6889230055756E /* UIRefreshControl+AFNetworking.m in Sources */,
-				BAF3DDBB1A3043F10062C068 /* UIViewController+ChildViewController.swift in Sources */,
 				BA8812EB1A783CD600B50651 /* UserTableViewCell.swift in Sources */,
 				BAA8C06A1A32EAAA00AAB9F4 /* CoreRecord.swift in Sources */,
 				BA789E0B1A7052D000BA1611 /* CachedURLAsset.swift in Sources */,
