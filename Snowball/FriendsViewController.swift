@@ -54,8 +54,7 @@ class FriendsViewController: UIViewController {
   let tableView: UITableView = {
     let tableView = UITableView()
     tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-    // TODO: change height to a class variable
-    tableView.rowHeight = UserTableViewCell.height()
+    tableView.rowHeight = UserTableViewCell.height
     // TODO: use .identifier instead of NSStringFromClass (use search to find all)
     tableView.registerClass(UserTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UserTableViewCell))
     return tableView

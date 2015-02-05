@@ -13,8 +13,8 @@ class ClipTimelineBufferCollectionReuseableView: UICollectionReusableView {
 
   // MARK: - UICollectionReuseableView+Required
 
-  override class func size() -> CGSize {
-    let cellSize = ClipCollectionViewCell.size()
+  override class var size: CGSize {
+    let cellSize = ClipCollectionViewCell.size
     let width = UIScreen.mainScreen().bounds.width - cellSize.width
     let size = CGSize(width: width, height: cellSize.height)
     return size

@@ -9,7 +9,7 @@
 import UIKit
 
 extension UICollectionReusableView {
-  class func size() -> CGSize {
+  class var size: CGSize {
     requireSubclass()
     return CGSizeZero
   }

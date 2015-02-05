@@ -9,7 +9,7 @@
 import UIKit
 
 extension UITableViewCell {
-  class func height() -> CGFloat {
+  class var height: CGFloat {
     requireSubclass()
     return 0
   }

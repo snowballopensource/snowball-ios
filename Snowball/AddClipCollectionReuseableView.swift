@@ -46,8 +46,8 @@ class AddClipCollectionReuseableView: UICollectionReusableView {
 
   // MARK: - UICollectionReuseableView+Required
 
-  override class func size() -> CGSize {
-    return ClipCollectionViewCell.size()
+  override class var size: CGSize {
+    return ClipCollectionViewCell.size
   }
 
 }

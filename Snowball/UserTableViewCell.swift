@@ -52,7 +52,7 @@ class UserTableViewCell: UITableViewCell {
 
   // MARK: - UICollectionReuseableView+Required
 
-  override class func height() -> CGFloat {
+  override class var height: CGFloat {
     return 55
   }
 

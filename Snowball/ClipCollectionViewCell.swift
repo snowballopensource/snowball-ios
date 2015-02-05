@@ -86,7 +86,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   // MARK: - UICollectionReuseableView+Required
 
-  override class func size() -> CGSize {
+  override class var size: CGSize {
     let screenHeight = UIScreen.mainScreen().bounds.height
     let screenWidth = UIScreen.mainScreen().bounds.width
     let cellHeight = screenHeight - screenWidth

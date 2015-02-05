@@ -20,7 +20,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
     flowLayout.minimumInteritemSpacing = 0
     flowLayout.minimumLineSpacing = 0
-    flowLayout.headerReferenceSize = ClipTimelineBufferCollectionReuseableView.size()
+    flowLayout.headerReferenceSize = ClipTimelineBufferCollectionReuseableView.size
     collectionView.backgroundColor = UIColor.whiteColor()
     return collectionView
   }()
@@ -80,7 +80,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
   func showAddClipButton() {
     UIView.animateWithDuration(1, animations: {
       let flowLayout = self.collectionView.collectionViewLayout as UICollectionViewFlowLayout
-      flowLayout.footerReferenceSize = AddClipCollectionReuseableView.size()
+      flowLayout.footerReferenceSize = AddClipCollectionReuseableView.size
     }) { (completed) in
       self.scrollToEnd()
     }
@@ -127,7 +127,7 @@ class ClipsViewController: UIViewController, UICollectionViewDelegateFlowLayout,
 
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
     sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-      return collectionViewDataSource.cellTypes[indexPath.section].size()
+      return collectionViewDataSource.cellTypes[indexPath.section].size
   }
 
   // MARK: - ClipCollectionViewCellDelegate
