@@ -74,6 +74,7 @@
 		BAA8C0971A333A8B00AAB9F4 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0961A333A8B00AAB9F4 /* CollectionViewDataSource.swift */; };
 		BAA8C0991A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0981A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift */; };
 		BAB4F0011A8183970052CBC0 /* FetchedResultsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB4F0001A8183970052CBC0 /* FetchedResultsControllerDelegate.swift */; };
+		BAB8F2C81A830F5500937407 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB8F2C71A830F5500937407 /* FriendsViewController.swift */; };
 		BAC8CD3A1A6607550075B503 /* OnboardingAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC8CD391A6607550075B503 /* OnboardingAuthenticationViewController.swift */; };
 		BACA7A861A36E40900C34B6C /* NSDate+TimeSince.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */; };
 		BAD666EF1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD666EE1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift */; };
@@ -82,7 +83,7 @@
 		BAE2EFD21A5C5A1D004B781C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */; };
 		BAF2E45A1A800F1E00A093E5 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */; };
 		BAF3BC961A76E02A00AFD3E5 /* MoreNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */; };
-		BAF3BC9B1A76E06A00AFD3E5 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3BC9A1A76E06A00AFD3E5 /* FriendsViewController.swift */; };
+		BAF3BC9B1A76E06A00AFD3E5 /* FriendsOldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3BC9A1A76E06A00AFD3E5 /* FriendsOldViewController.swift */; };
 		BAF3DDBB1A3043F10062C068 /* UIViewController+ChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3DDBA1A3043F10062C068 /* UIViewController+ChildViewController.swift */; };
 		BAF7C0A11A3B969D00941DAB /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF7C0A01A3B969D00941DAB /* PlayerViewController.swift */; };
 /* End PBXBuildFile section */
@@ -205,6 +206,7 @@
 		BAA8C0961A333A8B00AAB9F4 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 		BAA8C0981A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		BAB4F0001A8183970052CBC0 /* FetchedResultsControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsControllerDelegate.swift; sourceTree = "<group>"; };
+		BAB8F2C71A830F5500937407 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		BAC8CD391A6607550075B503 /* OnboardingAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingAuthenticationViewController.swift; sourceTree = "<group>"; };
 		BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeSince.swift"; sourceTree = "<group>"; };
 		BAD666EE1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipTimelineBufferCollectionReuseableView.swift; sourceTree = "<group>"; };
@@ -213,7 +215,7 @@
 		BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreNavigationController.swift; sourceTree = "<group>"; };
-		BAF3BC9A1A76E06A00AFD3E5 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		BAF3BC9A1A76E06A00AFD3E5 /* FriendsOldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsOldViewController.swift; sourceTree = "<group>"; };
 		BAF3DDBA1A3043F10062C068 /* UIViewController+ChildViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ChildViewController.swift"; sourceTree = "<group>"; };
 		BAF7C0A01A3B969D00941DAB /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -514,7 +516,8 @@
 			isa = PBXGroup;
 			children = (
 				BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */,
-				BAF3BC9A1A76E06A00AFD3E5 /* FriendsViewController.swift */,
+				BAF3BC9A1A76E06A00AFD3E5 /* FriendsOldViewController.swift */,
+				BAB8F2C71A830F5500937407 /* FriendsViewController.swift */,
 				BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */,
 			);
 			name = More;
@@ -692,7 +695,7 @@
 				BA8812F31A785B5E00B50651 /* UITableViewHeaderFooterView+Required.swift in Sources */,
 				BAA15EA61A6889230055756E /* UIRefreshControl+AFNetworking.m in Sources */,
 				BAF3DDBB1A3043F10062C068 /* UIViewController+ChildViewController.swift in Sources */,
-				BAF3BC9B1A76E06A00AFD3E5 /* FriendsViewController.swift in Sources */,
+				BAF3BC9B1A76E06A00AFD3E5 /* FriendsOldViewController.swift in Sources */,
 				BA8812EB1A783CD600B50651 /* UserTableViewCell.swift in Sources */,
 				BAA8C06A1A32EAAA00AAB9F4 /* CoreRecord.swift in Sources */,
 				BA789E0B1A7052D000BA1611 /* CachedURLAsset.swift in Sources */,
@@ -739,6 +742,7 @@
 				BA8812ED1A7841BE00B50651 /* UITableView+CellRegistration.swift in Sources */,
 				BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */,
 				BAE26FB31A77090700A0977C /* SnowballTopView.swift in Sources */,
+				BAB8F2C81A830F5500937407 /* FriendsViewController.swift in Sources */,
 				BA52474B1A31A1FC003BD269 /* UICollectionReusableView+Required.swift in Sources */,
 				BAC8CD3A1A6607550075B503 /* OnboardingAuthenticationViewController.swift in Sources */,
 				BA7C27CB1A37A64400A9CFC5 /* API.swift in Sources */,
