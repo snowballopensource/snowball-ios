@@ -58,7 +58,6 @@ class FriendsViewController: UIViewController {
     tableView.rowHeight = UserTableViewCell.height()
     // TODO: use .identifier instead of NSStringFromClass (use search to find all)
     tableView.registerClass(UserTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UserTableViewCell))
-    tableView.registerClass(SnowballTableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: NSStringFromClass(SnowballTableViewHeaderFooterView))
     return tableView
   }()
 
