@@ -12,45 +12,43 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-  var window: UIWindow?
 
-  // MARK: - UIApplicationDelegate
+  // MARK: - Properties
 
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    setupWindow()
-    Fabric.with([Crashlytics()])
-    return true
-  }
-
-  // MARK: - Public
-
-  class func getReference() -> AppDelegate {
-    return UIApplication.sharedApplication().delegate! as AppDelegate
-  }
-
-  class func switchToNavigationController(navigationController: UINavigationController) {
-    if let window = getReference().window {
-      UIView.transitionWithView(window, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, animations: { () in
-        let oldState = UIView.areAnimationsEnabled()
-        UIView.setAnimationsEnabled(false)
-        window.rootViewController = navigationController
-        UIView.setAnimationsEnabled(oldState)
-        }, completion: nil)
-    }
-  }
-
-  // MARK: - Private
+  lazy var window: UIWindow = {
+    let window = UIWindow(frame: UIScreen.mainScreen().bounds)
+    window.backgroundColor = UIColor.whiteColor()
+    window.rootViewController = initialViewController
+    return window
+    }()
 
   private class var initialViewController: UIViewController {
     if User.currentUser == nil { return OnboardingNavigationController() }
     return MainNavigationController()
   }
 
-  private func setupWindow() {
-    window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    window?.backgroundColor = UIColor.whiteColor()
-    window?.rootViewController = AppDelegate.initialViewController
-    window?.makeKeyAndVisible()
+  // MARK: - UIApplicationDelegate
+
+  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    window.makeKeyAndVisible()
+    Fabric.with([Crashlytics()])
+    return true
+  }
+
+  // MARK: - Internal
+
+  class func getReference() -> AppDelegate {
+    return UIApplication.sharedApplication().delegate! as AppDelegate
+  }
+
+  class func switchToNavigationController(navigationController: UINavigationController) {
+    let window = getReference().window
+    UIView.transitionWithView(window, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, animations: { () in
+      let oldState = UIView.areAnimationsEnabled()
+      UIView.setAnimationsEnabled(false)
+      window.rootViewController = navigationController
+      UIView.setAnimationsEnabled(oldState)
+      }, completion: nil)
   }
 }
 
