@@ -130,6 +130,8 @@ class FriendsViewController: UIViewController {
   // MARK: - Private
 
   private func refresh() {
+    users = []
+    tableView.reloadData()
     // TODO: remove duplication
     switch(followersFollowingSegmentedControl.selectedSegmentIndex) {
     case FollowersFollowingSegmentedControlIndex.Following.rawValue:
