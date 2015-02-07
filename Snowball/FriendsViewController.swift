@@ -141,8 +141,7 @@ class FriendsViewController: UIViewController {
         }
       }
     case FollowersFollowingSegmentedControlIndex.Followers.rawValue:
-      // TODO: get followers
-      API.request(Router.GetCurrentUserFollowing).responseJSON { (request, response, JSON, error) in
+      API.request(Router.GetCurrentUserFollowers).responseJSON { (request, response, JSON, error) in
         error?.print("api get current user following/followers")
         if let JSON: AnyObject = JSON {
           self.users = User.objectsFromJSON(JSON) as [User]

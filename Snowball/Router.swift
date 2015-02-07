@@ -18,6 +18,7 @@ enum Router: URLRequestConvertible {
   // User
   case GetCurrentUser
   case UpdateCurrentUser(name: String?, username: String?, email: String?, phoneNumber: String?)
+  case GetCurrentUserFollowers
   case GetCurrentUserFollowing
   case FollowUser(userID: String)
   case UnfollowUser(userID: String)
@@ -34,6 +35,7 @@ enum Router: URLRequestConvertible {
     case .SignIn: return .POST
     case .GetCurrentUser: return .GET
     case .UpdateCurrentUser: return .PATCH
+    case .GetCurrentUserFollowers: return .GET
     case .GetCurrentUserFollowing: return .GET
     case .FollowUser: return .POST
     case .UnfollowUser: return .DELETE
@@ -51,6 +53,7 @@ enum Router: URLRequestConvertible {
     case .SignIn: return "users/sign-in"
     case .GetCurrentUser: return "users/me"
     case .UpdateCurrentUser: return "users/me"
+    case .GetCurrentUserFollowers: return "users/me/followers"
     case .GetCurrentUserFollowing: return "users/me/following"
     case .FollowUser(let userID): return "users/\(userID)/follow"
     case .UnfollowUser(let userID): return "users/\(userID)/follow"
