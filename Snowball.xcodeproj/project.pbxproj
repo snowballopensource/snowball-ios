@@ -13,6 +13,7 @@
 		BA32C7891A3283760052F4CA /* Karla-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA32C7851A32576B0052F4CA /* Karla-Regular.ttf */; };
 		BA32C7921A3286250052F4CA /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */; };
 		BA32C7951A3287BE0052F4CA /* UserAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32C7941A3287BE0052F4CA /* UserAvatarImageView.swift */; };
+		BA372D141A880C58004E58E9 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA372D131A880C58004E58E9 /* TextFieldTableViewCell.swift */; };
 		BA38C15E1A30228700A2F2AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38C15D1A30228700A2F2AE /* AppDelegate.swift */; };
 		BA38C1611A30228700A2F2AE /* Snowball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA38C15F1A30228700A2F2AE /* Snowball.xcdatamodeld */; };
 		BA38C1681A30228700A2F2AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA38C1671A30228700A2F2AE /* Images.xcassets */; };
@@ -123,6 +124,7 @@
 		BA32C7851A32576B0052F4CA /* Karla-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Karla-Regular.ttf"; sourceTree = "<group>"; };
 		BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Snowball.swift"; sourceTree = "<group>"; };
 		BA32C7941A3287BE0052F4CA /* UserAvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAvatarImageView.swift; sourceTree = "<group>"; };
+		BA372D131A880C58004E58E9 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		BA38C1581A30228700A2F2AE /* Snowball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snowball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA38C15C1A30228700A2F2AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA38C15D1A30228700A2F2AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 				BA5247441A319E24003BD269 /* AddClipCollectionReuseableView.swift */,
 				BAD666EE1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift */,
 				BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */,
+				BA372D131A880C58004E58E9 /* TextFieldTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -689,6 +692,7 @@
 				BA7C0E481A65C315001B3B4C /* UIButton+Snowball.swift in Sources */,
 				BA38C15E1A30228700A2F2AE /* AppDelegate.swift in Sources */,
 				BA3A28841A305C6F00A85C29 /* UICollectionView+CellRegistration.swift in Sources */,
+				BA372D141A880C58004E58E9 /* TextFieldTableViewCell.swift in Sources */,
 				BAA15E9D1A6889230055756E /* AFURLRequestSerialization.m in Sources */,
 				BAA15E991A6889230055756E /* AFHTTPSessionManager.m in Sources */,
 				BA8812F31A785B5E00B50651 /* UITableViewHeaderFooterView+Required.swift in Sources */,
