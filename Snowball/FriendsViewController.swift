@@ -53,6 +53,7 @@ class FriendsViewController: UIViewController {
 
   let tableView: UITableView = {
     let tableView = UITableView()
+    tableView.allowsSelection = false
     tableView.separatorStyle = UITableViewCellSeparatorStyle.None
     tableView.rowHeight = UserTableViewCell.height
     tableView.registerClass(UserTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UserTableViewCell))
