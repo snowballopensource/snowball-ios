@@ -15,6 +15,8 @@ class User: RemoteObject {
   @NSManaged var username: String?
   @NSManaged var avatarURL: String?
   @NSManaged var following: NSNumber
+  @NSManaged var email: String?
+  @NSManaged var phoneNumber: String?
   @NSManaged var clips: NSSet
   @NSManaged var color: AnyObject
   var authToken: String?
@@ -41,6 +43,12 @@ class User: RemoteObject {
     }
     if let following = attributes["following"] as? Bool {
       self.following = following
+    }
+    if let email = attributes["email"] as? String {
+      self.email = email
+    }
+    if let phoneNumber = attributes["phone_number"] as? String {
+      self.phoneNumber = phoneNumber
     }
     if let authToken = attributes["auth_token"] as? String {
       self.authToken = authToken

@@ -48,7 +48,7 @@ class EditProfileViewController: UIViewController, SnowballTopViewDelegate {
     let phoneTextField = UITextField()
     phoneTextField.font = UIFont(name: UIFont.SnowballFont.regular, size: 26)
     phoneTextField.textColor = UIColor.SnowballColor.greenColor
-    phoneTextField.text = "14151234567(t)"
+    phoneTextField.text = User.currentUser?.phoneNumber
     phoneTextField.alignLeft(insetWidth: 0)
     phoneTextField.autocorrectionType = UITextAutocorrectionType.No
     phoneTextField.autocapitalizationType = UITextAutocapitalizationType.None
@@ -64,7 +64,7 @@ class EditProfileViewController: UIViewController, SnowballTopViewDelegate {
     let emailTextField = UITextField()
     emailTextField.font = UIFont(name: UIFont.SnowballFont.regular, size: 26)
     emailTextField.textColor = UIColor.SnowballColor.greenColor
-    emailTextField.text = "wrong@gmail.com(t)"
+    emailTextField.text = User.currentUser?.email
     emailTextField.alignLeft(insetWidth: 0)
     emailTextField.autocorrectionType = UITextAutocorrectionType.No
     emailTextField.autocapitalizationType = UITextAutocapitalizationType.None
