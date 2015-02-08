@@ -176,6 +176,31 @@ class EditProfileViewController: UIViewController, SnowballTopViewDelegate {
   // MARK: - SnowballTopViewDelegate
 
   func snowballTopViewLeftButtonTapped() {
-    navigationController?.popViewControllerAnimated(true)
+    let user = User.currentUser!
+    var username: String?
+    if user.username != usernameTextField.text {
+      username = usernameTextField.text
+      user.username = username
+    }
+    var email: String?
+    if user.email != emailTextField.text {
+      email = emailTextField.text
+      user.email = email
+    }
+    var phoneNumber: String?
+    if user.phoneNumber != phoneTextField.text {
+      phoneNumber = phoneTextField.text
+      user.phoneNumber = phoneNumber
+    }
+    if user.hasChanges {
+      API.request(Router.UpdateCurrentUser(name: nil, username: username, email: email, phoneNumber: phoneNumber)).responseJSON { (request, response, JSON, error) in
+        error?.print("api update current user")
+        if error != nil { displayAPIErrorToUser(JSON); return }
+        user.save()
+        self.navigationController?.popViewControllerAnimated(true)
+      }
+    } else {
+      navigationController?.popViewControllerAnimated(true)
+    }
   }
 }
