@@ -55,7 +55,6 @@ class FriendsViewController: UIViewController {
     let tableView = UITableView()
     tableView.separatorStyle = UITableViewCellSeparatorStyle.None
     tableView.rowHeight = UserTableViewCell.height
-    // TODO: use .identifier instead of NSStringFromClass (use search to find all)
     tableView.registerClass(UserTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UserTableViewCell))
     return tableView
   }()
@@ -166,7 +165,7 @@ extension FriendsViewController: SnowballTopViewDelegate {
   }
 
   func snowballTopViewRightButtonTapped() {
-    // TODO: go to add friends
+    navigationController?.pushViewController(FindFriendsViewController(), animated: true)
   }
 }
 
