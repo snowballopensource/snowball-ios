@@ -75,7 +75,7 @@ class EditProfileViewController: UIViewController, SnowballTopViewDelegate {
     logOutButton.setTitle(NSLocalizedString("log out"), forState: UIControlState.Normal)
     logOutButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
     logOutButton.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    logOutButton.alignLeft()
+    logOutButton.alignLeft(insetWidth: 20)
     logOutButton.showSnowballStyleBorderWithColor(UIColor.redColor())
     return logOutButton
   }()
