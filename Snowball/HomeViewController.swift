@@ -138,6 +138,7 @@ class HomeViewController: UIViewController, PlayerViewControllerDelegate, Camera
             if let clipJSON: AnyObject = JSON {
               dispatch_async(dispatch_get_main_queue()) {
                 clip.assign(clipJSON)
+                clip.save()
               }
             }
           }
