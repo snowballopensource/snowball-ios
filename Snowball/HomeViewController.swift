@@ -13,7 +13,7 @@ import UIKit
 class HomeViewController: UIViewController, PlayerViewControllerDelegate, CameraViewControllerDelegate, ClipsViewControllerDelegate {
   let playerViewController = PlayerViewController()
   let cameraViewController = CameraViewController()
-  let clipsViewController = ClipsViewController()
+  let clipsViewController = ClipsOldViewController()
   var previewedVideoURL: NSURL?
   var previewedVideoThumbnailURL: NSURL?
   let moreButton = UIButton()
