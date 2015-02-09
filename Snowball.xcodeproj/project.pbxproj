@@ -77,6 +77,8 @@
 		BAA966BD1A87FEEC0032752F /* FindFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA966BC1A87FEEC0032752F /* FindFriendsViewController.swift */; };
 		BAB4F0011A8183970052CBC0 /* FetchedResultsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB4F0001A8183970052CBC0 /* FetchedResultsControllerDelegate.swift */; };
 		BAB8F2C81A830F5500937407 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB8F2C71A830F5500937407 /* FriendsViewController.swift */; };
+		BABE8FCB1A89574500B81DD1 /* ClipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABE8FCA1A89574500B81DD1 /* ClipsViewController.swift */; };
+		BABE8FCD1A8957D600B81DD1 /* NewClip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABE8FCC1A8957D600B81DD1 /* NewClip.swift */; };
 		BAC8CD3A1A6607550075B503 /* OnboardingAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC8CD391A6607550075B503 /* OnboardingAuthenticationViewController.swift */; };
 		BACA7A861A36E40900C34B6C /* NSDate+TimeSince.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */; };
 		BAD666EF1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD666EE1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift */; };
@@ -208,6 +210,8 @@
 		BAA966BC1A87FEEC0032752F /* FindFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFriendsViewController.swift; sourceTree = "<group>"; };
 		BAB4F0001A8183970052CBC0 /* FetchedResultsControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsControllerDelegate.swift; sourceTree = "<group>"; };
 		BAB8F2C71A830F5500937407 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		BABE8FCA1A89574500B81DD1 /* ClipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipsViewController.swift; sourceTree = "<group>"; };
+		BABE8FCC1A8957D600B81DD1 /* NewClip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewClip.swift; sourceTree = "<group>"; };
 		BAC8CD391A6607550075B503 /* OnboardingAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingAuthenticationViewController.swift; sourceTree = "<group>"; };
 		BAC90F3A1A8343C5005C9405 /* Swifter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swifter.framework; path = Carthage/Build/iOS/Swifter.framework; sourceTree = "<group>"; };
 		BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeSince.swift"; sourceTree = "<group>"; };
@@ -421,6 +425,7 @@
 			children = (
 				BA9AA6821A674804002C4992 /* MainNavigationController.swift */,
 				BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */,
+				BABE8FCA1A89574500B81DD1 /* ClipsViewController.swift */,
 				BA38C1801A30272700A2F2AE /* ClipsOldViewController.swift */,
 				BAF7C0A01A3B969D00941DAB /* PlayerViewController.swift */,
 				BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */,
@@ -509,6 +514,7 @@
 				BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */,
 				BAA8C07F1A32F8F300AAB9F4 /* User.swift */,
 				BAA8C0831A32FA2B00AAB9F4 /* Clip.swift */,
+				BABE8FCC1A8957D600B81DD1 /* NewClip.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -740,12 +746,14 @@
 				BA8812B31A78399A00B50651 /* UITableViewCell+Required.swift in Sources */,
 				BA8812ED1A7841BE00B50651 /* UITableView+CellRegistration.swift in Sources */,
 				BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */,
+				BABE8FCB1A89574500B81DD1 /* ClipsViewController.swift in Sources */,
 				BAE26FB31A77090700A0977C /* SnowballTopView.swift in Sources */,
 				BAB8F2C81A830F5500937407 /* FriendsViewController.swift in Sources */,
 				BA52474B1A31A1FC003BD269 /* UICollectionReusableView+Required.swift in Sources */,
 				BAC8CD3A1A6607550075B503 /* OnboardingAuthenticationViewController.swift in Sources */,
 				BA7C27CB1A37A64400A9CFC5 /* API.swift in Sources */,
 				BAE2EFD21A5C5A1D004B781C /* CameraViewController.swift in Sources */,
+				BABE8FCD1A8957D600B81DD1 /* NewClip.swift in Sources */,
 				BAD666EF1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift in Sources */,
 				BA5247451A319E24003BD269 /* AddClipCollectionReuseableView.swift in Sources */,
 				BAA15E9F1A6889230055756E /* AFURLSessionManager.m in Sources */,

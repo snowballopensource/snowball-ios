@@ -169,7 +169,6 @@ class ClipsDataSource: FetchedResultsCollectionViewDataSource {
   override func configureCell(cell: UICollectionViewCell, atIndexPath indexPath: NSIndexPath) {
     let cell = cell as ClipCollectionViewCell
     cell.delegate = clipCellDelegate
-    cell.scaleClipThumbnail(shouldShowScaledDownThumbnail, animated: false)
     super.configureCell(cell, atIndexPath: indexPath)
   }
 

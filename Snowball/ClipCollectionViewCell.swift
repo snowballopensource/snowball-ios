@@ -18,11 +18,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
   var delegate: ClipCollectionViewCellDelegate?
   private let clipThumbnailImageView = UIImageView()
   private let userAvatarImageView = UserAvatarImageView()
-  private let userNameLabel = UILabel()
+  private let usernameLabel = UILabel()
   private let clipTimeLabel = UILabel()
   let playButton = UIButton()
-  let pauseButton = UIButton()
-  let addButton = UIButton()
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -30,9 +28,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
     clipThumbnailImageView.backgroundColor = UIColor.blackColor()
     contentView.addSubview(clipThumbnailImageView)
     contentView.addSubview(userAvatarImageView)
-    userNameLabel.font = UIFont(name: UIFont.SnowballFont.bold, size: 18)
-    userNameLabel.textAlignment = NSTextAlignment.Center
-    contentView.addSubview(userNameLabel)
+    usernameLabel.font = UIFont(name: UIFont.SnowballFont.bold, size: 18)
+    usernameLabel.textAlignment = NSTextAlignment.Center
+    contentView.addSubview(usernameLabel)
     clipTimeLabel.font = UIFont(name: "Helvetica-Bold", size: 16)
     clipTimeLabel.textAlignment = NSTextAlignment.Center
     clipTimeLabel.textColor = UIColor(red: 210/255.0, green: 210/255.0, blue: 210/255.0, alpha: 1.0)
@@ -40,8 +38,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
     playButton.setImage(UIImage(named: "play"), forState: UIControlState.Normal)
     playButton.addTarget(self, action: "playClip", forControlEvents: UIControlEvents.TouchUpInside)
     contentView.addSubview(playButton)
-    pauseButton.setImage(UIImage(named: "pause"), forState: UIControlState.Normal)
-    contentView.addSubview(pauseButton)
   }
 
   required init(coder: NSCoder) {
@@ -67,21 +63,19 @@ class ClipCollectionViewCell: UICollectionViewCell {
       userAvatarImageView.height == userAvatarImageView.width
     }
 
-    layout(userNameLabel, userAvatarImageView) { (userNameLabel, userAvatarImageView) in
-      userNameLabel.left == userNameLabel.superview!.left
-      userNameLabel.top == userAvatarImageView.bottom + 5
-      userNameLabel.right == userNameLabel.superview!.right
+    layout(usernameLabel, userAvatarImageView) { (usernameLabel, userAvatarImageView) in
+      usernameLabel.left == usernameLabel.superview!.left
+      usernameLabel.top == userAvatarImageView.bottom + 5
+      usernameLabel.right == usernameLabel.superview!.right
     }
 
-    layout(clipTimeLabel, userNameLabel) { (clipTimeLabel, userNameLabel) in
+    layout(clipTimeLabel, usernameLabel) { (clipTimeLabel, usernameLabel) in
       clipTimeLabel.left == clipTimeLabel.superview!.left
-      clipTimeLabel.top == userNameLabel.bottom + 2
+      clipTimeLabel.top == usernameLabel.bottom + 2
       clipTimeLabel.right == clipTimeLabel.superview!.right
     }
 
     playButton.frame = clipThumbnailImageView.frame
-    pauseButton.frame = clipThumbnailImageView.frame
-    addButton.frame = clipThumbnailImageView.frame
   }
 
   // MARK: - UICollectionReuseableView+Required
@@ -97,10 +91,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let clip = object as Clip
     if clip.id != nil {
       let user = clip.user
-      userNameLabel.text = user.username
+      usernameLabel.text = user.username
       let userColor = user.color as UIColor
       userAvatarImageView.backgroundColor = userColor
-      userNameLabel.textColor = userColor
+      usernameLabel.textColor = userColor
       clipTimeLabel.text = clip.createdAt.shortTimeSinceString()
 
       clipThumbnailImageView.hnk_setImageFromURL(NSURL(string: clip.thumbnailURL)!, placeholder: UIImage(), format: Format<UIImage>(name: "original"))
@@ -111,37 +105,28 @@ class ClipCollectionViewCell: UICollectionViewCell {
         clipThumbnailImageView.alpha = 1.0
       }
       playButton.hidden = false
-      pauseButton.hidden = true
-      addButton.hidden = true
     } else {
       playButton.hidden = true
-      pauseButton.hidden = true
-      addButton.hidden = false
     }
   }
-  
-  // MARK: - Actions
 
-  func playClip() {
+  func configureForClip(clip: NewClip) {
+    usernameLabel.text = "TEST"
+    let userColor = UIColor.blackColor()
+    userAvatarImageView.backgroundColor = userColor
+    usernameLabel.textColor = userColor
+    clipTimeLabel.text = clip.createdAt?.shortTimeSinceString()
+
+    clipThumbnailImageView.image = UIImage()
+    if let thumbnailURL = clip.thumbnailURL {
+      clipThumbnailImageView.hnk_setImageFromURL(thumbnailURL, format: Format<UIImage>(name: "original"))
+    }
+    playButton.hidden = false
+  }
+
+  // MARK: - Private
+
+  @objc private func playClip() {
     delegate?.playClipButtonTappedInCell(self)
-  }
-
-  // MARK: - Public
-
-  func scaleClipThumbnail(down: Bool, animated: Bool) {
-    let scaleBlock: () -> () = {
-      var scale: CGFloat = 1.0
-      if down {
-        scale = 0.9
-      }
-      self.clipThumbnailImageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, scale, scale)
-    }
-    if animated {
-      UIView.animateWithDuration(0.1) {
-        scaleBlock()
-      }
-      return
-    }
-    scaleBlock()
   }
 }
