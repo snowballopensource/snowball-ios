@@ -283,10 +283,9 @@ extension ClipsViewController: AddClipCollectionReuseableViewDelegate {
         if let error = error {
           error.print("upload clip")
           displayAPIErrorToUser(JSON)
-        } else {
-          self.previewedClip = nil
         }
       }
+      previewedClip = nil
     }
   }
 }
