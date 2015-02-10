@@ -13,6 +13,7 @@ class NewClip {
   var videoURL: NSURL?
   var thumbnailURL: NSURL?
   var createdAt: NSDate?
+  var user: User?
 
   // MARK: - Initializers
 
@@ -42,6 +43,9 @@ class NewClip {
     }
     if let createdAt = attributes["created_at"] as? NSTimeInterval {
       self.createdAt = NSDate(timeIntervalSince1970: createdAt)
+    }
+    if let user: AnyObject = attributes["user"] {
+      self.user = User.objectFromJSON(user) as? User
     }
   }
 

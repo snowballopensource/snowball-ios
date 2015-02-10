@@ -111,15 +111,21 @@ class ClipCollectionViewCell: UICollectionViewCell {
   }
 
   func configureForClip(clip: NewClip) {
-    usernameLabel.text = "TEST"
-    let userColor = UIColor.blackColor()
+    usernameLabel.text = clip.user?.username
+    let userColor = UIColor.SnowballColor.greenColor
     userAvatarImageView.backgroundColor = userColor
     usernameLabel.textColor = userColor
     clipTimeLabel.text = clip.createdAt?.shortTimeSinceString()
 
     clipThumbnailImageView.image = UIImage()
     if let thumbnailURL = clip.thumbnailURL {
-      clipThumbnailImageView.hnk_setImageFromURL(thumbnailURL, format: Format<UIImage>(name: "original"))
+      if thumbnailURL.scheme == "file" {
+        let imageData = NSData(contentsOfURL: thumbnailURL)!
+        let image = UIImage(data: imageData)
+        clipThumbnailImageView.image = image
+      } else {
+        clipThumbnailImageView.hnk_setImageFromURL(thumbnailURL, format: Format<UIImage>(name: "original"))
+      }
     }
     playButton.hidden = false
   }

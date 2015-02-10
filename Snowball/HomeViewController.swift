@@ -91,6 +91,8 @@ extension HomeViewController: CameraViewControllerDelegate {
     let clip = NewClip()
     clip.videoURL = videoURL
     clip.thumbnailURL = thumbnailURL
+    clip.user = User.currentUser
+    clip.createdAt = NSDate()
     clipsViewController.previewClip(clip)
   }
 }
