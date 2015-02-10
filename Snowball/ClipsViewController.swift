@@ -95,14 +95,33 @@ class ClipsViewController: UIViewController {
             previousClip = clip
           } else {
             if let previousClip = previousClip {
-              let objcClips = clips as NSArray
-              let index = objcClips.indexOfObject(previousClip)
-              let indexPath = NSIndexPath(forItem: index, inSection: 0)
+              let indexPath = NSIndexPath(forItem: indexOfClip(previousClip), inSection: 0)
               collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Left, animated: false)
             }
           }
         }
       }
+    }
+  }
+
+  private func indexOfClip(clip: NewClip) -> Int {
+    let objcClips = clips as NSArray
+    return objcClips.indexOfObject(clip)
+  }
+
+  private func clipAfterClip(clip: NewClip) -> NewClip? {
+    let nextClipIndex = indexOfClip(clip) + 1
+    if nextClipIndex < clips.count {
+      return clips[nextClipIndex]
+    }
+    return nil
+  }
+
+  private func playClipAfterClip(clip: NewClip) {
+    if let nextClip = clipAfterClip(clip) {
+      playerViewController.playClip(nextClip)
+      let indexPath = NSIndexPath(forItem: indexOfClip(nextClip), inSection: 0)
+      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
     }
   }
 }
@@ -135,6 +154,7 @@ extension ClipsViewController: ClipCollectionViewCellDelegate {
     let indexPath = collectionView.indexPathForCell(cell)
     if let indexPath = indexPath {
       let clip = clips[indexPath.row]
+      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
       playerViewController.playClip(clip)
     }
   }
@@ -147,7 +167,7 @@ extension ClipsViewController: ClipPlayerViewControllerDelegate {
   // MARK: - ClipPlayerViewControllerDelegate
 
   func playerItemDidPlayToEndTime(playerItem: ClipPlayerItem) {
-    println(playerItem.clip.id)
+    playClipAfterClip(playerItem.clip)
   }
 
 }
