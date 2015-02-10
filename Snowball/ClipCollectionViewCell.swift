@@ -87,29 +87,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return CGSizeMake(140.0, cellHeight)
   }
 
-  override func configureForObject(object: AnyObject) {
-    let clip = object as Clip
-    if clip.id != nil {
-      let user = clip.user
-      usernameLabel.text = user.username
-      let userColor = user.color as UIColor
-      userAvatarImageView.backgroundColor = userColor
-      usernameLabel.textColor = userColor
-      clipTimeLabel.text = clip.createdAt.shortTimeSinceString()
-
-      clipThumbnailImageView.hnk_setImageFromURL(NSURL(string: clip.thumbnailURL)!, placeholder: UIImage(), format: Format<UIImage>(name: "original"))
-
-      if clip.played.boolValue {
-        clipThumbnailImageView.alpha = 0.5
-      } else {
-        clipThumbnailImageView.alpha = 1.0
-      }
-      playButton.hidden = false
-    } else {
-      playButton.hidden = true
-    }
-  }
-
   func configureForClip(clip: NewClip) {
     usernameLabel.text = clip.user?.username
     let userColor = UIColor.SnowballColor.greenColor

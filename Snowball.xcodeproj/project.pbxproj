@@ -19,7 +19,6 @@
 		BA38C1681A30228700A2F2AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA38C1671A30228700A2F2AE /* Images.xcassets */; };
 		BA38C16B1A30228700A2F2AE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA38C1691A30228700A2F2AE /* LaunchScreen.xib */; };
 		BA38C1771A30228700A2F2AE /* SnowballTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38C1761A30228700A2F2AE /* SnowballTests.swift */; };
-		BA38C1811A30272700A2F2AE /* ClipsOldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38C1801A30272700A2F2AE /* ClipsOldViewController.swift */; };
 		BA3A28701A3051E300A85C29 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A286F1A3051E300A85C29 /* Util.swift */; };
 		BA3A28771A305AF600A85C29 /* ClipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A28761A305AF600A85C29 /* ClipCollectionViewCell.swift */; };
 		BA3A28841A305C6F00A85C29 /* UICollectionView+CellRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A28831A305C6F00A85C29 /* UICollectionView+CellRegistration.swift */; };
@@ -73,7 +72,6 @@
 		BAA8C06A1A32EAAA00AAB9F4 /* CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0691A32EAAA00AAB9F4 /* CoreRecord.swift */; };
 		BAA8C07A1A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0791A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift */; };
 		BAA8C0801A32F8F300AAB9F4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C07F1A32F8F300AAB9F4 /* User.swift */; };
-		BAA8C0841A32FA2B00AAB9F4 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0831A32FA2B00AAB9F4 /* Clip.swift */; };
 		BAA8C0971A333A8B00AAB9F4 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0961A333A8B00AAB9F4 /* CollectionViewDataSource.swift */; };
 		BAA8C0991A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0981A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift */; };
 		BAA966BD1A87FEEC0032752F /* FindFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA966BC1A87FEEC0032752F /* FindFriendsViewController.swift */; };
@@ -85,12 +83,10 @@
 		BACA7A861A36E40900C34B6C /* NSDate+TimeSince.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */; };
 		BACC0D591A899B6D00BA7FEF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC0D581A899B6D00BA7FEF /* HomeViewController.swift */; };
 		BAD666EF1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD666EE1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift */; };
-		BAE10A1B1A30428600CCFA25 /* HomeOldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE10A1A1A30428600CCFA25 /* HomeOldViewController.swift */; };
 		BAE26FB31A77090700A0977C /* SnowballTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE26FB21A77090700A0977C /* SnowballTopView.swift */; };
 		BAE2EFD21A5C5A1D004B781C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */; };
 		BAF2E45A1A800F1E00A093E5 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */; };
 		BAF3BC961A76E02A00AFD3E5 /* MoreNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */; };
-		BAF7C0A11A3B969D00941DAB /* PlayerOldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF7C0A01A3B969D00941DAB /* PlayerOldViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,7 +135,6 @@
 		BA38C1701A30228700A2F2AE /* SnowballTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnowballTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA38C1751A30228700A2F2AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA38C1761A30228700A2F2AE /* SnowballTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowballTests.swift; sourceTree = "<group>"; };
-		BA38C1801A30272700A2F2AE /* ClipsOldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipsOldViewController.swift; sourceTree = "<group>"; };
 		BA3A286F1A3051E300A85C29 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		BA3A28761A305AF600A85C29 /* ClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA3A28831A305C6F00A85C29 /* UICollectionView+CellRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+CellRegistration.swift"; sourceTree = "<group>"; };
@@ -209,7 +204,6 @@
 		BAA8C0691A32EAAA00AAB9F4 /* CoreRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreRecord.swift; sourceTree = "<group>"; };
 		BAA8C0791A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+CoreRecord.swift"; sourceTree = "<group>"; };
 		BAA8C07F1A32F8F300AAB9F4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		BAA8C0831A32FA2B00AAB9F4 /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
 		BAA8C0961A333A8B00AAB9F4 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 		BAA8C0981A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		BAA966BC1A87FEEC0032752F /* FindFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFriendsViewController.swift; sourceTree = "<group>"; };
@@ -222,12 +216,10 @@
 		BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeSince.swift"; sourceTree = "<group>"; };
 		BACC0D581A899B6D00BA7FEF /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BAD666EE1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipTimelineBufferCollectionReuseableView.swift; sourceTree = "<group>"; };
-		BAE10A1A1A30428600CCFA25 /* HomeOldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeOldViewController.swift; sourceTree = "<group>"; };
 		BAE26FB21A77090700A0977C /* SnowballTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballTopView.swift; sourceTree = "<group>"; };
 		BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreNavigationController.swift; sourceTree = "<group>"; };
-		BAF7C0A01A3B969D00941DAB /* PlayerOldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerOldViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -391,16 +383,6 @@
 			name = Onboarding;
 			sourceTree = "<group>";
 		};
-		BA7198CC1A897AF8004BB840 /* OLD */ = {
-			isa = PBXGroup;
-			children = (
-				BAE10A1A1A30428600CCFA25 /* HomeOldViewController.swift */,
-				BA38C1801A30272700A2F2AE /* ClipsOldViewController.swift */,
-				BAF7C0A01A3B969D00941DAB /* PlayerOldViewController.swift */,
-			);
-			name = OLD;
-			sourceTree = "<group>";
-		};
 		BA789E091A7052C500BA1611 /* Player */ = {
 			isa = PBXGroup;
 			children = (
@@ -444,7 +426,6 @@
 				BACC0D581A899B6D00BA7FEF /* HomeViewController.swift */,
 				BABE8FCA1A89574500B81DD1 /* ClipsViewController.swift */,
 				BA7198CF1A897F3B004BB840 /* ClipPlayerViewController.swift */,
-				BA7198CC1A897AF8004BB840 /* OLD */,
 				BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */,
 			);
 			name = Main;
@@ -530,7 +511,6 @@
 			children = (
 				BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */,
 				BAA8C07F1A32F8F300AAB9F4 /* User.swift */,
-				BAA8C0831A32FA2B00AAB9F4 /* Clip.swift */,
 				BABE8FCC1A8957D600B81DD1 /* NewClip.swift */,
 			);
 			name = Models;
@@ -708,7 +688,6 @@
 				BAF3BC961A76E02A00AFD3E5 /* MoreNavigationController.swift in Sources */,
 				BA32C7951A3287BE0052F4CA /* UserAvatarImageView.swift in Sources */,
 				BAA15EA41A6889230055756E /* UIImageView+AFNetworking.m in Sources */,
-				BAA8C0841A32FA2B00AAB9F4 /* Clip.swift in Sources */,
 				BAA15E971A6889230055756E /* AFHTTPRequestOperation.m in Sources */,
 				BAA966BD1A87FEEC0032752F /* FindFriendsViewController.swift in Sources */,
 				BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */,
@@ -727,11 +706,9 @@
 				BAA15E9C1A6889230055756E /* AFURLConnectionOperation.m in Sources */,
 				BA7C0E4A1A65EF94001B3B4C /* UITextField+Snowball.swift in Sources */,
 				BA8450281A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift in Sources */,
-				BAF7C0A11A3B969D00941DAB /* PlayerOldViewController.swift in Sources */,
 				BA7C0E4C1A65F395001B3B4C /* OnboardingTopView.swift in Sources */,
 				BA9AA67C1A67465F002C4992 /* OnboardingNavigationController.swift in Sources */,
 				BA8812B51A783A4700B50651 /* FetchedResultsTableViewDataSource.swift in Sources */,
-				BA38C1811A30272700A2F2AE /* ClipsOldViewController.swift in Sources */,
 				BA8812B11A7838E300B50651 /* TableViewDataSource.swift in Sources */,
 				BAA15E9E1A6889230055756E /* AFURLResponseSerialization.m in Sources */,
 				BA3A28701A3051E300A85C29 /* Util.swift in Sources */,
@@ -763,7 +740,6 @@
 				BAA15E9A1A6889230055756E /* AFNetworkReachabilityManager.m in Sources */,
 				BA8812B31A78399A00B50651 /* UITableViewCell+Required.swift in Sources */,
 				BA8812ED1A7841BE00B50651 /* UITableView+CellRegistration.swift in Sources */,
-				BAE10A1B1A30428600CCFA25 /* HomeOldViewController.swift in Sources */,
 				BACC0D591A899B6D00BA7FEF /* HomeViewController.swift in Sources */,
 				BA7198D21A897F4A004BB840 /* ClipPlayerItem.swift in Sources */,
 				BABE8FCB1A89574500B81DD1 /* ClipsViewController.swift in Sources */,

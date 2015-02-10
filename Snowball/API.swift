@@ -16,14 +16,14 @@ struct API {
   }
 
   // Hack using AFNetworking since Alamofire does not support multipart uploads
-  static func uploadClip(clip: Clip, completion: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> ()) {
+  static func uploadClip(clip: NewClip, completion: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> ()) {
     let requestURL = NSURL(string: Router.baseURLString)!.URLByAppendingPathComponent("clips")
     let request = AFHTTPRequestSerializer().multipartFormRequestWithMethod("POST",
       URLString: requestURL.absoluteString!,
       parameters: nil,
       constructingBodyWithBlock: { (formData: AFMultipartFormData!) in
-        formData.appendPartWithFileURL(NSURL(string: clip.videoURL), name: "video", error: nil)
-        formData.appendPartWithFileURL(NSURL(string: clip.thumbnailURL), name: "thumbnail", error: nil)
+        formData.appendPartWithFileURL(clip.videoURL, name: "video", error: nil)
+        formData.appendPartWithFileURL(clip.thumbnailURL, name: "thumbnail", error: nil)
         return
     }, error: nil)
     let encodedAuthTokenData = "\(APICredential.authToken!):".dataUsingEncoding(NSUTF8StringEncoding)!

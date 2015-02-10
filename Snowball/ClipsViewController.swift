@@ -152,11 +152,6 @@ class ClipsViewController: UIViewController {
     }
   }
 
-  private func uploadClip(clip: NewClip) {
-    // TODO: upload clip
-    println("upload clip \(clip.videoURL)")
-  }
-
   private func scrollToEnd() {
     let contentSize = collectionView.collectionViewLayout.collectionViewContentSize()
     let width = collectionView.collectionViewLayout.collectionViewContentSize().width
@@ -284,8 +279,14 @@ extension ClipsViewController: AddClipCollectionReuseableViewDelegate {
       let indexPath = NSIndexPath(forItem: clips.count - 1, inSection: 0)
       collectionView.insertItemsAtIndexPaths([indexPath])
       collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
-      uploadClip(clip)
-      previewedClip = nil
+      API.uploadClip(clip) { (request, response, JSON, error) in
+        if let error = error {
+          error.print("upload clip")
+          displayAPIErrorToUser(JSON)
+        } else {
+          self.previewedClip = nil
+        }
+      }
     }
   }
 }
