@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ClipsViewControllerDelegate {
+protocol ClipsOldViewControllerDelegate {
   func clipSelected(clip: Clip)
   func addClipButtonTapped()
 }
@@ -27,7 +27,7 @@ class ClipsOldViewController: UIViewController, UICollectionViewDelegateFlowLayo
   lazy var collectionViewDataSource: ClipsDataSource = {
     return ClipsDataSource(collectionView: self.collectionView)
   }()
-  var delegate: ClipsViewControllerDelegate?
+  var delegate: ClipsOldViewControllerDelegate?
   let currentCellScrollPosition = UICollectionViewScrollPosition.Right
 
   // MARK: - UIViewController

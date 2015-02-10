@@ -10,7 +10,7 @@ import UIKit
 
 class MainNavigationController: UINavigationController {
   override init() {
-    super.init(rootViewController: ClipsViewController())
+    super.init(rootViewController: HomeViewController())
     navigationBarHidden = true
   }
 

@@ -21,6 +21,7 @@ class ClipsViewController: UIViewController {
     let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: flowLayout)
     collectionView.backgroundColor = UIColor.whiteColor()
     collectionView.registerClass(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell))
+    collectionView.registerClass(AddClipCollectionReuseableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: NSStringFromClass(AddClipCollectionReuseableView))
     flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
     flowLayout.minimumInteritemSpacing = 0
     flowLayout.minimumLineSpacing = 0
@@ -29,6 +30,8 @@ class ClipsViewController: UIViewController {
   }()
 
   var clips = [NewClip]()
+
+  private var previewedClip: NewClip?
 
   private let kClipBookmarkDateKey = "ClipBookmarkDate"
 
@@ -41,6 +44,8 @@ class ClipsViewController: UIViewController {
       NSUserDefaults.standardUserDefaults().synchronize()
     }
   }
+
+  var delegate: ClipsViewControllerDelegate?
 
   // MARK: - UIViewController
 
@@ -74,6 +79,15 @@ class ClipsViewController: UIViewController {
     refresh()
   }
 
+  // MARK: - Internal
+
+  func previewClip(clip: NewClip) {
+    previewedClip = clip
+    showAddClipButton()
+    delegate?.willBeginPlayback()
+    playerViewController.playClip(clip)
+  }
+
   // MARK: - Private
 
   private func refresh() {
@@ -83,6 +97,47 @@ class ClipsViewController: UIViewController {
         self.collectionView.reloadData()
         self.scrollToBookmark()
       }
+    }
+  }
+
+  private func showAddClipButton() {
+    UIView.animateWithDuration(1, animations: {
+      let flowLayout = self.collectionView.collectionViewLayout as UICollectionViewFlowLayout
+      flowLayout.footerReferenceSize = AddClipCollectionReuseableView.size
+      }) { (completed) in
+        self.scrollToEnd()
+    }
+  }
+
+  private func hideAddClipButton() {
+    let lastSection = collectionView.numberOfSections() - 1
+    if lastSection >= 0 {
+      let lastItem = collectionView.numberOfItemsInSection(lastSection) - 1
+      if lastItem >= 0 {
+        let indexPath = NSIndexPath(forItem: lastItem, inSection: lastSection)
+        collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
+      }
+    }
+    let delay = Int64(NSEC_PER_MSEC * 250) // 0.25 seconds
+    let time = dispatch_time(DISPATCH_TIME_NOW, delay)
+    dispatch_after(time, dispatch_get_main_queue()) {
+      let flowLayout = self.collectionView.collectionViewLayout as UICollectionViewFlowLayout
+      flowLayout.footerReferenceSize = CGSizeZero
+    }
+    delegate?.didEndPlayback()
+  }
+
+  private func uploadClip(clip: NewClip) {
+    // TODO: upload clip
+    println("upload clip \(clip.videoURL)")
+  }
+
+  private func scrollToEnd() {
+    let contentSize = collectionView.collectionViewLayout.collectionViewContentSize()
+    let width = collectionView.collectionViewLayout.collectionViewContentSize().width
+    if width > 0 {
+      let endRect = CGRect(x: width - 1, y: 0, width: 1, height: 1)
+      collectionView.scrollRectToVisible(endRect, animated: true)
     }
   }
 
@@ -142,9 +197,15 @@ extension ClipsViewController: UICollectionViewDataSource {
     cell.configureForClip(clips[indexPath.row])
     return cell
   }
+
+  func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    let addClipView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: NSStringFromClass(AddClipCollectionReuseableView), forIndexPath: indexPath) as AddClipCollectionReuseableView
+    addClipView.delegate = self
+    return addClipView
+  }
 }
 
-// MARK: - 
+// MARK: -
 
 extension ClipsViewController: ClipCollectionViewCellDelegate {
 
@@ -155,6 +216,7 @@ extension ClipsViewController: ClipCollectionViewCellDelegate {
     if let indexPath = indexPath {
       let clip = clips[indexPath.row]
       collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
+      delegate?.willBeginPlayback()
       playerViewController.playClip(clip)
     }
   }
@@ -167,7 +229,39 @@ extension ClipsViewController: ClipPlayerViewControllerDelegate {
   // MARK: - ClipPlayerViewControllerDelegate
 
   func playerItemDidPlayToEndTime(playerItem: ClipPlayerItem) {
+    if let previewedClip = previewedClip {
+      if playerItem.clip.videoURL == previewedClip.videoURL {
+        playerViewController.player.seekToTime(kCMTimeZero)
+        playerViewController.player.play()
+        return
+      }
+    }
     playClipAfterClip(playerItem.clip)
   }
+}
 
+// MARK: -
+
+extension ClipsViewController: AddClipCollectionReuseableViewDelegate {
+
+  // MARK: - AddClipCollectionReuseableViewDelegate
+
+  func addClipButtonTapped() {
+    hideAddClipButton()
+    if let clip = previewedClip {
+      clips.append(clip)
+      let indexPath = NSIndexPath(forItem: clips.count - 1, inSection: 0)
+      collectionView.insertItemsAtIndexPaths([indexPath])
+      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
+      uploadClip(clip)
+      previewedClip = nil
+    }
+  }
+}
+
+// MARK: - 
+
+protocol ClipsViewControllerDelegate: class {
+  func willBeginPlayback()
+  func didEndPlayback()
 }
