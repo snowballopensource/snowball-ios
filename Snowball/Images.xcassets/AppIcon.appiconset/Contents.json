@@ -3,37 +3,37 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "AppIcon-58px.png",
+      "filename" : "SnowballAppIcon-58px.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "AppIcon-87px.png",
+      "filename" : "SnowballAppIcon-87px.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "AppIcon-80px.png",
+      "filename" : "SnowballAppIcon-80px.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "AppIcon-120px.png",
+      "filename" : "SnowballAppIcon-120px-1.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "AppIcon-120px-1.png",
+      "filename" : "SnowballAppIcon-120px.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "AppIcon-180px.png",
+      "filename" : "SnowballAppIcon-180px.png",
       "scale" : "3x"
     }
   ],
