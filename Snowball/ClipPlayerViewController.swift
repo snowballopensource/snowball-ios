@@ -58,6 +58,10 @@ class ClipPlayerViewController: UIViewController {
     player.replaceCurrentItemWithPlayerItem(playerItem)
     player.play()
   }
+
+  func endPlayback() {
+    player.replaceCurrentItemWithPlayerItem(nil)
+  }
 }
 
 // MARK: -

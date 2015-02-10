@@ -29,6 +29,13 @@ class ClipsViewController: UIViewController {
     return collectionView
   }()
 
+  let cancelPreviewButton: UIButton = {
+    let cancelPreviewButton = UIButton()
+    cancelPreviewButton.setImage(UIImage(named: "x"), forState: UIControlState.Normal)
+    cancelPreviewButton.hidden = true
+    return cancelPreviewButton
+  }()
+
   var clips = [NewClip]()
 
   private var previewedClip: NewClip?
@@ -63,6 +70,17 @@ class ClipsViewController: UIViewController {
       playerView.height == playerView.superview!.width
     }
 
+    cancelPreviewButton.addTarget(self, action: "cancelPreviewButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    view.addSubview(cancelPreviewButton)
+    layout(cancelPreviewButton) { (cancelPreviewButton) in
+      let margin: Float = 10
+      let width: Float = 44
+      cancelPreviewButton.centerX == cancelPreviewButton.superview!.centerX
+      cancelPreviewButton.top == cancelPreviewButton.superview!.top + margin
+      cancelPreviewButton.width == width
+      cancelPreviewButton.height == width
+    }
+
     collectionView.dataSource = self
     view.addSubview(collectionView)
     layout(collectionView, playerViewController.view) { (collectionView, playerView) in
@@ -85,6 +103,7 @@ class ClipsViewController: UIViewController {
     previewedClip = clip
     showAddClipButton()
     delegate?.willBeginPlayback()
+    cancelPreviewButton.hidden = false
     playerViewController.playClip(clip)
   }
 
@@ -178,6 +197,12 @@ class ClipsViewController: UIViewController {
       let indexPath = NSIndexPath(forItem: indexOfClip(nextClip), inSection: 0)
       collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
     }
+  }
+
+  @objc private func cancelPreviewButtonTapped() {
+    playerViewController.endPlayback()
+    hideAddClipButton()
+    cancelPreviewButton.hidden = true
   }
 }
 
