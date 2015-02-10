@@ -10,7 +10,7 @@ import AVFoundation
 import Cartography
 import UIKit
 
-class HomeViewController: UIViewController, PlayerOldViewControllerDelegate, CameraViewControllerDelegate, ClipsViewControllerDelegate {
+class HomeOldViewController: UIViewController, PlayerOldViewControllerDelegate, CameraViewControllerDelegate, ClipsViewControllerDelegate {
   let playerViewController = PlayerOldViewController()
   let cameraViewController = CameraViewController()
   let clipsViewController = ClipsOldViewController()
