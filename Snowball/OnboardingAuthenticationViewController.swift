@@ -168,17 +168,18 @@ class OnboardingAuthenticationViewController: UIViewController, SnowballTopViewD
   }
 
   private func performAuthenticationRequest() {
-    var route: Router?
+    var route: Router
     if self.isKindOfClass(OnboardingSignUpViewController) {
       route = Router.SignUp(username: usernameTextField.text, email: emailTextField.text, password: passwordTextField.text)
     } else {
       route = Router.SignIn(email: emailTextField.text, password: passwordTextField.text)
     }
-    API.request(route!).responseJSON { (request, response, JSON, error) in
+    API.request(route).responseJSON { (request, response, JSON, error) in
       if error != nil { displayAPIErrorToUser(JSON); return }
       if let userJSON: AnyObject = JSON {
         dispatch_async(dispatch_get_main_queue()) {
           let user = User.objectFromJSON(userJSON) as User?
+          user?.save()
           User.currentUser = user
           if let user = user {
             AppDelegate.switchToNavigationController(MainNavigationController())
