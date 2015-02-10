@@ -10,8 +10,8 @@ import AVFoundation
 import Cartography
 import UIKit
 
-class HomeViewController: UIViewController, PlayerViewControllerDelegate, CameraViewControllerDelegate, ClipsViewControllerDelegate {
-  let playerViewController = PlayerViewController()
+class HomeViewController: UIViewController, PlayerOldViewControllerDelegate, CameraViewControllerDelegate, ClipsViewControllerDelegate {
+  let playerViewController = PlayerOldViewController()
   let cameraViewController = CameraViewController()
   let clipsViewController = ClipsOldViewController()
   var previewedVideoURL: NSURL?

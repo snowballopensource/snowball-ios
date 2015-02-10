@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Snowball, Inc. All rights reserved.
 //
 
+import AVFoundation
 import Cartography
 import UIKit
 
@@ -13,11 +14,7 @@ class ClipsViewController: UIViewController {
 
   // MARK: - Properties
 
-  let playerView: UIView = {
-    let playerView = UIView()
-    playerView.backgroundColor = UIColor.blackColor()
-    return playerView
-  }()
+  let playerViewController = ClipPlayerViewController()
 
   let collectionView: UICollectionView = {
     let flowLayout = UICollectionViewFlowLayout()
@@ -50,8 +47,11 @@ class ClipsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    view.addSubview(playerView)
-    layout(playerView) { (playerView) in
+    playerViewController.delegate = self
+    addChildViewController(playerViewController)
+    view.addSubview(playerViewController.view)
+    playerViewController.didMoveToParentViewController(self)
+    layout(playerViewController.view) { (playerView) in
       playerView.left == playerView.superview!.left
       playerView.top == playerView.superview!.top
       playerView.right == playerView.superview!.right
@@ -60,7 +60,7 @@ class ClipsViewController: UIViewController {
 
     collectionView.dataSource = self
     view.addSubview(collectionView)
-    layout(collectionView, playerView) { (collectionView, playerView) in
+    layout(collectionView, playerViewController.view) { (collectionView, playerView) in
       collectionView.left == collectionView.superview!.left
       collectionView.top == playerView.bottom
       collectionView.right == collectionView.superview!.right
@@ -132,6 +132,22 @@ extension ClipsViewController: ClipCollectionViewCellDelegate {
   // MARK: - ClipCollectionViewCellDelegate
 
   func playClipButtonTappedInCell(cell: ClipCollectionViewCell) {
-    println("play clip")
+    let indexPath = collectionView.indexPathForCell(cell)
+    if let indexPath = indexPath {
+      let clip = clips[indexPath.row]
+      playerViewController.playClip(clip)
+    }
   }
+}
+
+// MARK: -
+
+extension ClipsViewController: ClipPlayerViewControllerDelegate {
+
+  // MARK: - ClipPlayerViewControllerDelegate
+
+  func playerItemDidPlayToEndTime(playerItem: ClipPlayerItem) {
+    println(playerItem.clip.id)
+  }
+
 }

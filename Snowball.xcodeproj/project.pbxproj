@@ -27,6 +27,8 @@
 		BA52474B1A31A1FC003BD269 /* UICollectionReusableView+Required.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA52474A1A31A1FC003BD269 /* UICollectionReusableView+Required.swift */; };
 		BA6385E31A65ACAF00B002D9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385E21A65ACAF00B002D9 /* OnboardingViewController.swift */; };
 		BA6385ED1A65B8FF00B002D9 /* UIView+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385EC1A65B8FF00B002D9 /* UIView+Snowball.swift */; };
+		BA7198D01A897F3B004BB840 /* ClipPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7198CF1A897F3B004BB840 /* ClipPlayerViewController.swift */; };
+		BA7198D21A897F4A004BB840 /* ClipPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7198D11A897F4A004BB840 /* ClipPlayerItem.swift */; };
 		BA789E0B1A7052D000BA1611 /* CachedURLAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA789E0A1A7052D000BA1611 /* CachedURLAsset.swift */; };
 		BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */; };
 		BA7C0E481A65C315001B3B4C /* UIButton+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */; };
@@ -87,7 +89,7 @@
 		BAE2EFD21A5C5A1D004B781C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */; };
 		BAF2E45A1A800F1E00A093E5 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */; };
 		BAF3BC961A76E02A00AFD3E5 /* MoreNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */; };
-		BAF7C0A11A3B969D00941DAB /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF7C0A01A3B969D00941DAB /* PlayerViewController.swift */; };
+		BAF7C0A11A3B969D00941DAB /* PlayerOldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF7C0A01A3B969D00941DAB /* PlayerOldViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +146,8 @@
 		BA52474A1A31A1FC003BD269 /* UICollectionReusableView+Required.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+Required.swift"; sourceTree = "<group>"; };
 		BA6385E21A65ACAF00B002D9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		BA6385EC1A65B8FF00B002D9 /* UIView+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Snowball.swift"; sourceTree = "<group>"; };
+		BA7198CF1A897F3B004BB840 /* ClipPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPlayerViewController.swift; sourceTree = "<group>"; };
+		BA7198D11A897F4A004BB840 /* ClipPlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPlayerItem.swift; sourceTree = "<group>"; };
 		BA789E0A1A7052D000BA1611 /* CachedURLAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedURLAsset.swift; sourceTree = "<group>"; };
 		BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Snowball.swift"; sourceTree = "<group>"; };
 		BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Snowball.swift"; sourceTree = "<group>"; };
@@ -221,7 +225,7 @@
 		BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreNavigationController.swift; sourceTree = "<group>"; };
-		BAF7C0A01A3B969D00941DAB /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		BAF7C0A01A3B969D00941DAB /* PlayerOldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerOldViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -385,6 +389,16 @@
 			name = Onboarding;
 			sourceTree = "<group>";
 		};
+		BA7198CC1A897AF8004BB840 /* OLD */ = {
+			isa = PBXGroup;
+			children = (
+				BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */,
+				BA38C1801A30272700A2F2AE /* ClipsOldViewController.swift */,
+				BAF7C0A01A3B969D00941DAB /* PlayerOldViewController.swift */,
+			);
+			name = OLD;
+			sourceTree = "<group>";
+		};
 		BA789E091A7052C500BA1611 /* Player */ = {
 			isa = PBXGroup;
 			children = (
@@ -424,10 +438,10 @@
 			isa = PBXGroup;
 			children = (
 				BA9AA6821A674804002C4992 /* MainNavigationController.swift */,
-				BAE10A1A1A30428600CCFA25 /* HomeViewController.swift */,
 				BABE8FCA1A89574500B81DD1 /* ClipsViewController.swift */,
-				BA38C1801A30272700A2F2AE /* ClipsOldViewController.swift */,
-				BAF7C0A01A3B969D00941DAB /* PlayerViewController.swift */,
+				BA7198CF1A897F3B004BB840 /* ClipPlayerViewController.swift */,
+				BA7198D11A897F4A004BB840 /* ClipPlayerItem.swift */,
+				BA7198CC1A897AF8004BB840 /* OLD */,
 				BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */,
 			);
 			name = Main;
@@ -710,7 +724,7 @@
 				BAA15E9C1A6889230055756E /* AFURLConnectionOperation.m in Sources */,
 				BA7C0E4A1A65EF94001B3B4C /* UITextField+Snowball.swift in Sources */,
 				BA8450281A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift in Sources */,
-				BAF7C0A11A3B969D00941DAB /* PlayerViewController.swift in Sources */,
+				BAF7C0A11A3B969D00941DAB /* PlayerOldViewController.swift in Sources */,
 				BA7C0E4C1A65F395001B3B4C /* OnboardingTopView.swift in Sources */,
 				BA9AA67C1A67465F002C4992 /* OnboardingNavigationController.swift in Sources */,
 				BA8812B51A783A4700B50651 /* FetchedResultsTableViewDataSource.swift in Sources */,
@@ -730,6 +744,7 @@
 				BACA7A861A36E40900C34B6C /* NSDate+TimeSince.swift in Sources */,
 				BA38C1611A30228700A2F2AE /* Snowball.xcdatamodeld in Sources */,
 				BAF2E45A1A800F1E00A093E5 /* EditProfileViewController.swift in Sources */,
+				BA7198D01A897F3B004BB840 /* ClipPlayerViewController.swift in Sources */,
 				BAA8C07A1A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift in Sources */,
 				BAA15EA11A6889230055756E /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				BA9AA6831A674804002C4992 /* MainNavigationController.swift in Sources */,
@@ -746,6 +761,7 @@
 				BA8812B31A78399A00B50651 /* UITableViewCell+Required.swift in Sources */,
 				BA8812ED1A7841BE00B50651 /* UITableView+CellRegistration.swift in Sources */,
 				BAE10A1B1A30428600CCFA25 /* HomeViewController.swift in Sources */,
+				BA7198D21A897F4A004BB840 /* ClipPlayerItem.swift in Sources */,
 				BABE8FCB1A89574500B81DD1 /* ClipsViewController.swift in Sources */,
 				BAE26FB31A77090700A0977C /* SnowballTopView.swift in Sources */,
 				BAB8F2C81A830F5500937407 /* FriendsViewController.swift in Sources */,

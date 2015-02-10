@@ -10,18 +10,18 @@ import AVFoundation
 import Cartography
 import UIKit
 
-protocol PlayerViewControllerDelegate: class {
+protocol PlayerOldViewControllerDelegate: class {
   func playerItemDidPlayToEndTime(playerItem: AVPlayerItem, nextPlayerItem: AVPlayerItem?, willLoopPlayerItem: Bool)
   func userCancelledClipPreviewPlayback()
 }
 
-class PlayerViewController: UIViewController {
+class PlayerOldViewController: UIViewController {
   private let player = AVQueuePlayer()
   private let playerView = PlayerView()
   private let cancelPreviewButton = UIButton()
   private var observingCurrentPlayerItem = false // Hack to check if observing current item for "playbackLikelyToKeepUp"
   private var playbackIsPreview = false
-  var delegate: PlayerViewControllerDelegate?
+  var delegate: PlayerOldViewControllerDelegate?
 
   // MARK: - Initialization
 
@@ -157,21 +157,21 @@ class PlayerViewController: UIViewController {
   }
 }
 
-class PlayerView: UIView {
-  var player: AVPlayer {
-    get {
-      let playerLayer = layer as AVPlayerLayer
-      return playerLayer.player
-    }
-    set {
-      let playerLayer = layer as AVPlayerLayer
-      playerLayer.player = newValue
-    }
-  }
-
-  // MARK: UIView
-
-  override class func layerClass() -> AnyClass {
-    return AVPlayerLayer.self
-  }
-}
+//class PlayerView: UIView {
+//  var player: AVPlayer {
+//    get {
+//      let playerLayer = layer as AVPlayerLayer
+//      return playerLayer.player
+//    }
+//    set {
+//      let playerLayer = layer as AVPlayerLayer
+//      playerLayer.player = newValue
+//    }
+//  }
+//
+//  // MARK: UIView
+//
+//  override class func layerClass() -> AnyClass {
+//    return AVPlayerLayer.self
+//  }
+//}
