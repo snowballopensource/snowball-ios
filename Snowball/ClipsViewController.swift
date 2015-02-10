@@ -107,6 +107,13 @@ class ClipsViewController: UIViewController {
     playerViewController.playClip(clip)
   }
 
+  func endPlayback() {
+    playerViewController.endPlayback()
+    hideAddClipButton()
+    cancelPreviewButton.hidden = true
+    delegate?.didEndPlayback()
+  }
+
   // MARK: - Private
 
   private func refresh() {
@@ -143,7 +150,6 @@ class ClipsViewController: UIViewController {
       let flowLayout = self.collectionView.collectionViewLayout as UICollectionViewFlowLayout
       flowLayout.footerReferenceSize = CGSizeZero
     }
-    delegate?.didEndPlayback()
   }
 
   private func uploadClip(clip: NewClip) {
@@ -196,13 +202,13 @@ class ClipsViewController: UIViewController {
       playerViewController.playClip(nextClip)
       let indexPath = NSIndexPath(forItem: indexOfClip(nextClip), inSection: 0)
       collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
+    } else {
+      endPlayback()
     }
   }
 
   @objc private func cancelPreviewButtonTapped() {
-    playerViewController.endPlayback()
-    hideAddClipButton()
-    cancelPreviewButton.hidden = true
+    endPlayback()
   }
 }
 
