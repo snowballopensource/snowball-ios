@@ -323,7 +323,6 @@
 				BA7C27C71A37A32A00A9CFC5 /* Networking */,
 				BA3A287C1A305BC000A85C29 /* Data Source */,
 				BAF3DDBF1A3048440062C068 /* Extensions */,
-				BACC0D551A898D8200BA7FEF /* Misc */,
 				BA32C7801A3256CC0052F4CA /* Assets */,
 				BA38C1691A30228700A2F2AE /* LaunchScreen.xib */,
 				BA38C15F1A30228700A2F2AE /* Snowball.xcdatamodeld */,
@@ -403,6 +402,7 @@
 		BA789E091A7052C500BA1611 /* Player */ = {
 			isa = PBXGroup;
 			children = (
+				BA7198D11A897F4A004BB840 /* ClipPlayerItem.swift */,
 				BA789E0A1A7052D000BA1611 /* CachedURLAsset.swift */,
 			);
 			name = Player;
@@ -531,14 +531,6 @@
 				BABE8FCC1A8957D600B81DD1 /* NewClip.swift */,
 			);
 			name = Models;
-			sourceTree = "<group>";
-		};
-		BACC0D551A898D8200BA7FEF /* Misc */ = {
-			isa = PBXGroup;
-			children = (
-				BA7198D11A897F4A004BB840 /* ClipPlayerItem.swift */,
-			);
-			name = Misc;
 			sourceTree = "<group>";
 		};
 		BAF3BC971A76E03F00AFD3E5 /* More */ = {

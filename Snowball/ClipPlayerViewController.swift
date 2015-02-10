@@ -30,6 +30,18 @@ class ClipPlayerViewController: UIViewController {
     player.play()
   }
 
+  // MARK: - NSKeyValueObserving
+
+  override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    if keyPath == "playbackLikelyToKeepUp" {
+      if let playerItem = object as? AVPlayerItem {
+        if playerItem.playbackLikelyToKeepUp {
+          player.play()
+        }
+      }
+    }
+  }
+
   // MARK: - Internal
 
   func playClip(clip: NewClip) {
@@ -39,7 +51,12 @@ class ClipPlayerViewController: UIViewController {
       self.delegate?.playerItemDidPlayToEndTime(playerItem)
       NSNotificationCenter.defaultCenter().removeObserver(self)
     }
+    NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemPlaybackStalledNotification, object: playerItem, queue: nil) { (notification) in
+      let playerItem = notification.object! as AVPlayerItem
+      playerItem.addObserver(self, forKeyPath: "playbackLikelyToKeepUp", options: nil, context: nil)
+    }
     player.replaceCurrentItemWithPlayerItem(playerItem)
+    player.play()
   }
 }
 

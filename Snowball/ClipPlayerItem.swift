@@ -17,7 +17,7 @@ class ClipPlayerItem: AVPlayerItem {
   // MARK: - Initializers 
 
   convenience init(clip: NewClip) {
-    self.init(URL: clip.videoURL!)
+    self.init(asset: AVURLAsset(URL: clip.videoURL!, options: nil), automaticallyLoadedAssetKeys: ["tracks", "playable"])
     self.clip = clip
   }
 }
