@@ -274,7 +274,7 @@ extension ClipsViewController: AddClipCollectionReuseableViewDelegate {
   // MARK: - AddClipCollectionReuseableViewDelegate
 
   func addClipButtonTapped() {
-    hideAddClipButton()
+    endPlayback()
     if let clip = previewedClip {
       clips.append(clip)
       let indexPath = NSIndexPath(forItem: clips.count - 1, inSection: 0)
