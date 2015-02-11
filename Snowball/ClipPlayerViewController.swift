@@ -60,6 +60,7 @@ class ClipPlayerViewController: UIViewController {
   }
 
   func endPlayback() {
+    player.pause()
     player.replaceCurrentItemWithPlayerItem(nil)
   }
 }
