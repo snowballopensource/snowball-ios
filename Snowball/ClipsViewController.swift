@@ -108,6 +108,7 @@ class ClipsViewController: UIViewController {
   }
 
   func endPlayback() {
+    previewedClip = nil
     playerViewController.endPlayback()
     hideAddClipButton()
     cancelPreviewButton.hidden = true
@@ -285,7 +286,6 @@ extension ClipsViewController: AddClipCollectionReuseableViewDelegate {
           displayAPIErrorToUser(JSON)
         }
       }
-      previewedClip = nil
     }
   }
 }
