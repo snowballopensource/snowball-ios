@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Snowball, Inc. All rights reserved.
 //
 
+import AddressBook
 import Cartography
 import UIKit
 
@@ -25,7 +26,7 @@ class FindFriendsViewController: UIViewController {
     }()
 
   var users: [User] = []
-  var contactPhoneNumbers: [String] = ["+1 (415) 608-3256"] // TODO: get real contacts
+  let addressBook: ABAddressBook = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
 
   // MARK: - UIViewController
 
@@ -47,14 +48,38 @@ class FindFriendsViewController: UIViewController {
       tableView.right == tableView.superview!.right
       tableView.bottom == tableView.superview!.bottom
     }
+  }
 
-    refresh()
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+
+    let status = ABAddressBookGetAuthorizationStatus()
+//    if status == ABAuthorizationStatus.NotDetermined {
+//
+//    }
+    ABAddressBookRequestAccessWithCompletion(addressBook) { (granted, error) in
+      if granted {
+        self.refresh()
+      } else {
+        // TODO: show user error
+      }
+    }
   }
 
   // MARK: - Private
 
   private func refresh() {
-    API.request(Router.FindUsersByPhoneNumbers(phoneNumbers: contactPhoneNumbers)).responseJSON { (request, response, JSON, error) in
+    var phoneNumbers = [String]()
+    let contacts = ABAddressBookCopyArrayOfAllPeople(addressBook).takeRetainedValue() as NSArray
+    for contact in contacts {
+      let phoneNumberProperty: AnyObject = ABRecordCopyValue(contact, kABPersonPhoneProperty).takeRetainedValue()
+      for var i = 0; i < ABMultiValueGetCount(phoneNumberProperty); i++ {
+        let phoneNumber = ABMultiValueCopyValueAtIndex(phoneNumberProperty, i).takeRetainedValue() as String
+        phoneNumbers.append(phoneNumber)
+      }
+    }
+
+    API.request(Router.FindUsersByPhoneNumbers(phoneNumbers: phoneNumbers)).responseJSON { (request, response, JSON, error) in
       error?.print("api find friends")
       if let JSON: AnyObject = JSON {
         self.users = User.objectsFromJSON(JSON) as [User]
