@@ -119,7 +119,22 @@ extension FindFriendsViewController: UITableViewDataSource {
 
   func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
     let cell = cell as UserTableViewCell
+    cell.delegate = self
     let user = users[indexPath.row]
+    cell.configureForObject(user)
+  }
+}
+
+// MARK: -
+
+extension FindFriendsViewController: UserTableViewCellDelegate {
+
+  // MARK: - UserTableViewCellDelegate
+
+  func followUserButtonTappedInCell(cell: UserTableViewCell) {
+    let indexPath = tableView.indexPathForCell(cell)!
+    let user = users[indexPath.row]
+    user.toggleFollowing()
     cell.configureForObject(user)
   }
 }

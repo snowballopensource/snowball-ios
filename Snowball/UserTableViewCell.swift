@@ -10,20 +10,29 @@ import Cartography
 import Haneke
 import UIKit
 
-//protocol UserTableViewCellDelegate: class {
-//  func followUserButtonTappedInCell(cell: UserTableViewCell)
-//}
+protocol UserTableViewCellDelegate: class {
+  func followUserButtonTappedInCell(cell: UserTableViewCell)
+}
 
 class UserTableViewCell: UITableViewCell {
-  // var delegate: UserTableViewCellDelegate?
+  var delegate: UserTableViewCellDelegate?
   private let avatarImageView = UserAvatarImageView()
   private let usernameLabel = UILabel()
+  private let followButton: UIButton = {
+    let followButton = UIButton()
+    followButton.titleLabel?.font = UIFont(name: UIFont.SnowballFont.bold, size: 18)
+    followButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+    followButton.layer.cornerRadius = 20
+    return followButton
+  }()
 
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     contentView.addSubview(avatarImageView)
     usernameLabel.font = UIFont(name: UIFont.SnowballFont.regular, size: 26)
     contentView.addSubview(usernameLabel)
+    followButton.addTarget(self, action: "followButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    contentView.addSubview(followButton)
   }
 
   required init(coder: NSCoder) {
@@ -48,6 +57,13 @@ class UserTableViewCell: UITableViewCell {
       usernameLabel.centerY == usernameLabel.superview!.centerY
       usernameLabel.right == usernameLabel.superview!.right
     }
+
+    layout(followButton) { (followButton) in
+      followButton.width == 100
+      followButton.centerY == followButton.superview!.centerY
+      followButton.right == followButton.superview!.right - margin
+      followButton.height == 40
+    }
   }
 
   // MARK: - UICollectionReuseableView+Required
@@ -62,5 +78,20 @@ class UserTableViewCell: UITableViewCell {
     let userColor = user.color as UIColor
     avatarImageView.backgroundColor = userColor
     usernameLabel.textColor = userColor
+    var color: UIColor!
+    if user.following.boolValue {
+      color = UIColor.SnowballColor.grayColor
+      followButton.setTitle(NSLocalizedString("unfollow"), forState: UIControlState.Normal)
+    } else {
+      color = UIColor.SnowballColor.greenColor
+      followButton.setTitle(NSLocalizedString("follow"), forState: UIControlState.Normal)
+    }
+    followButton.backgroundColor = color
+  }
+
+  // MARK: - Private
+
+  @objc private func followButtonTapped() {
+    delegate?.followUserButtonTappedInCell(self)
   }
 }

@@ -98,4 +98,48 @@ class User: RemoteObject {
       NSNotificationCenter.defaultCenter().postNotificationName(CurrentUserStruct.kCurrentUserChangedNotificationName, object: user)
     }
   }
+
+  // MARK: - Internal
+
+  func toggleFollowing() {
+    if following.boolValue {
+      unfollow()
+    } else {
+      follow()
+    }
+  }
+
+  // MARK: - Private
+
+  private func follow() {
+    if let userID = id {
+      following = true
+      save()
+
+      API.request(Router.FollowUser(userID: userID)).responseJSON { (request, response, JSON, error) in
+        if let error = error {
+          error.print("follow")
+          displayAPIErrorToUser(JSON)
+          self.following = false
+          self.save()
+        }
+      }
+    }
+  }
+
+  private func unfollow() {
+    if let userID = id {
+      following = false
+      save()
+
+      API.request(Router.UnfollowUser(userID: userID)).responseJSON { (request, response, JSON, error) in
+        if let error = error {
+          error.print("unfollow")
+          displayAPIErrorToUser(JSON)
+          self.following = true
+          self.save()
+        }
+      }
+    }
+  }
 }
