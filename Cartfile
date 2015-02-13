@@ -1,4 +1,4 @@
-github "Alamofire/Alamofire"
+github "Alamofire/Alamofire" == 1.1.3
 github "robb/Cartography"
 github "Haneke/HanekeSwift"
 github "jamescmartinez/Swifter" "master"
