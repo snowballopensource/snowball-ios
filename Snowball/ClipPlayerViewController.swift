@@ -44,7 +44,7 @@ class ClipPlayerViewController: UIViewController {
 
   // MARK: - Internal
 
-  func playClip(clip: NewClip) {
+  func playClip(clip: Clip) {
     let playerItem = ClipPlayerItem(URL: clip.videoURL!)
     playerItem.clip = clip
     NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: playerItem, queue: nil) { (notification) in

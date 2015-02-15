@@ -87,7 +87,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return CGSizeMake(140.0, cellHeight)
   }
 
-  func configureForClip(clip: NewClip) {
+  func configureForClip(clip: Clip) {
     usernameLabel.text = clip.user?.username
     let userColor = UIColor.SnowballColor.greenColor
     userAvatarImageView.backgroundColor = userColor

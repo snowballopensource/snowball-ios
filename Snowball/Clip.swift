@@ -1,5 +1,5 @@
 //
-//  NewClip.swift
+//  Clip.swift
 //  Snowball
 //
 //  Created by James Martinez on 2/9/15.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NewClip {
+class Clip {
   var id: String?
   var videoURL: NSURL?
   var thumbnailURL: NSURL?
@@ -21,10 +21,10 @@ class NewClip {
 
   // MARK: - Internal
 
-  class func importJSON(JSON: [AnyObject]) -> [NewClip] {
-    var clips = [NewClip]()
+  class func importJSON(JSON: [AnyObject]) -> [Clip] {
+    var clips = [Clip]()
     for object in JSON {
-      let clip = NewClip()
+      let clip = Clip()
       clip.assignAttributes(object)
       clips.append(clip)
     }

@@ -36,9 +36,9 @@ class ClipsViewController: UIViewController {
     return cancelPreviewButton
   }()
 
-  var clips = [NewClip]()
+  var clips = [Clip]()
 
-  private var previewedClip: NewClip?
+  private var previewedClip: Clip?
 
   private let kClipBookmarkDateKey = "ClipBookmarkDate"
 
@@ -99,7 +99,7 @@ class ClipsViewController: UIViewController {
 
   // MARK: - Internal
 
-  func previewClip(clip: NewClip) {
+  func previewClip(clip: Clip) {
     previewedClip = clip
     showAddClipButton()
     delegate?.willBeginPlayback()
@@ -120,7 +120,7 @@ class ClipsViewController: UIViewController {
   private func refresh() {
     API.request(Router.GetClipStream).responseJSON { (request, response, JSON, error) in
       if let JSON = JSON as? [AnyObject] {
-        self.clips = NewClip.importJSON(JSON)
+        self.clips = Clip.importJSON(JSON)
         self.collectionView.reloadData()
         self.scrollToBookmark()
       }
@@ -164,7 +164,7 @@ class ClipsViewController: UIViewController {
 
   private func scrollToBookmark() {
     if let bookmarkDate = clipBookmarkDate {
-      var previousClip: NewClip?
+      var previousClip: Clip?
       for clip in clips {
         if let clipCreatedAt = clip.createdAt {
           if bookmarkDate.compare(clipCreatedAt) == NSComparisonResult.OrderedDescending {
@@ -180,12 +180,12 @@ class ClipsViewController: UIViewController {
     }
   }
 
-  private func indexOfClip(clip: NewClip) -> Int {
+  private func indexOfClip(clip: Clip) -> Int {
     let objcClips = clips as NSArray
     return objcClips.indexOfObject(clip)
   }
 
-  private func clipAfterClip(clip: NewClip) -> NewClip? {
+  private func clipAfterClip(clip: Clip) -> Clip? {
     let nextClipIndex = indexOfClip(clip) + 1
     if nextClipIndex < clips.count {
       return clips[nextClipIndex]
@@ -193,7 +193,7 @@ class ClipsViewController: UIViewController {
     return nil
   }
 
-  private func playClipAfterClip(clip: NewClip) {
+  private func playClipAfterClip(clip: Clip) {
     if let nextClip = clipAfterClip(clip) {
       playerViewController.playClip(nextClip)
       let indexPath = NSIndexPath(forItem: indexOfClip(nextClip), inSection: 0)

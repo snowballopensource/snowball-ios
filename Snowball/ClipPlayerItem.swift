@@ -12,11 +12,11 @@ class ClipPlayerItem: AVPlayerItem {
 
   // MARK: - Properties
 
-  var clip: NewClip!
+  var clip: Clip!
 
   // MARK: - Initializers 
 
-  convenience init(clip: NewClip) {
+  convenience init(clip: Clip) {
     self.init(asset: AVURLAsset(URL: clip.videoURL!, options: nil), automaticallyLoadedAssetKeys: ["tracks", "playable"])
     self.clip = clip
   }

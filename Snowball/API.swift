@@ -16,7 +16,7 @@ struct API {
   }
 
   // Hack using AFNetworking since Alamofire does not support multipart uploads
-  static func uploadClip(clip: NewClip, completion: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> ()) {
+  static func uploadClip(clip: Clip, completion: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> ()) {
     let requestURL = NSURL(string: Router.baseURLString)!.URLByAppendingPathComponent("clips")
     let request = AFHTTPRequestSerializer().multipartFormRequestWithMethod("POST",
       URLString: requestURL.absoluteString!,

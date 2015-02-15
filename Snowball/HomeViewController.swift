@@ -88,7 +88,7 @@ extension HomeViewController: CameraViewControllerDelegate {
 
   func videoRecordedToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL, error: NSError?) {
     error?.print("recording")
-    let clip = NewClip()
+    let clip = Clip()
     clip.videoURL = videoURL
     clip.thumbnailURL = thumbnailURL
     clip.user = User.currentUser
