@@ -27,7 +27,7 @@ class User: RemoteObject {
     color = UIColor.SnowballColor.randomColor
   }
 
-  override func assign(attributes: AnyObject) {
+  override func assignAttributes(attributes: [String: AnyObject]) {
     if let id = attributes["id"] as? String {
       self.id = id
     }
@@ -114,14 +114,14 @@ class User: RemoteObject {
   private func follow() {
     if let userID = id {
       following = true
-      save()
+      managedObjectContext?.save(nil)
 
       API.request(Router.FollowUser(userID: userID)).responseJSON { (request, response, JSON, error) in
         if let error = error {
           error.print("follow")
           displayAPIErrorToUser(JSON)
           self.following = false
-          self.save()
+          self.managedObjectContext?.save(nil)
         }
       }
     }
@@ -130,14 +130,14 @@ class User: RemoteObject {
   private func unfollow() {
     if let userID = id {
       following = false
-      save()
+      managedObjectContext?.save(nil)
 
       API.request(Router.UnfollowUser(userID: userID)).responseJSON { (request, response, JSON, error) in
         if let error = error {
           error.print("unfollow")
           displayAPIErrorToUser(JSON)
           self.following = true
-          self.save()
+          self.managedObjectContext?.save(nil)
         }
       }
     }

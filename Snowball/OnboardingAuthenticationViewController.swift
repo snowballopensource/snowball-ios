@@ -179,7 +179,7 @@ class OnboardingAuthenticationViewController: UIViewController, SnowballTopViewD
       if let userJSON: AnyObject = JSON {
         dispatch_async(dispatch_get_main_queue()) {
           let user = User.objectFromJSON(userJSON) as User?
-          user?.save()
+          user?.managedObjectContext?.save(nil)
           User.currentUser = user
           if let user = user {
             AppDelegate.switchToNavigationController(MainNavigationController())

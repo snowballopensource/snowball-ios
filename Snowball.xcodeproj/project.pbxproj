@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA042C251A90A10000D83B81 /* CoreRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA042C241A90A10000D83B81 /* CoreRecord.framework */; };
+		BA042C261A90A10000D83B81 /* CoreRecord.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA042C241A90A10000D83B81 /* CoreRecord.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA137C7E1A7199AA001F8FCF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA137C7C1A7199AA001F8FCF /* Crashlytics.framework */; };
 		BA137C7F1A7199AA001F8FCF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA137C7D1A7199AA001F8FCF /* Fabric.framework */; };
 		BA32C7881A3283760052F4CA /* Karla-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA32C7841A32576B0052F4CA /* Karla-Bold.ttf */; };
@@ -36,12 +38,9 @@
 		BA7C27C61A37A28F00A9CFC5 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27C51A37A28F00A9CFC5 /* Router.swift */; };
 		BA7C27CB1A37A64400A9CFC5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27CA1A37A64400A9CFC5 /* API.swift */; };
 		BA7C27D31A37ADA600A9CFC5 /* RemoteObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */; };
-		BA8450281A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8450271A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift */; };
 		BA87C1481A840C0400A58E64 /* Swifter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC90F3A1A8343C5005C9405 /* Swifter.framework */; };
 		BA87C1491A840C0400A58E64 /* Swifter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAC90F3A1A8343C5005C9405 /* Swifter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BA8812B11A7838E300B50651 /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812B01A7838E300B50651 /* TableViewDataSource.swift */; };
 		BA8812B31A78399A00B50651 /* UITableViewCell+Required.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812B21A78399A00B50651 /* UITableViewCell+Required.swift */; };
-		BA8812B51A783A4700B50651 /* FetchedResultsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812B41A783A4700B50651 /* FetchedResultsTableViewDataSource.swift */; };
 		BA8812EB1A783CD600B50651 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */; };
 		BA8812ED1A7841BE00B50651 /* UITableView+CellRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812EC1A7841BE00B50651 /* UITableView+CellRegistration.swift */; };
 		BA8812F31A785B5E00B50651 /* UITableViewHeaderFooterView+Required.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812F21A785B5E00B50651 /* UITableViewHeaderFooterView+Required.swift */; };
@@ -68,14 +67,8 @@
 		BAA15EA61A6889230055756E /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA15E941A6889230055756E /* UIRefreshControl+AFNetworking.m */; };
 		BAA15EA71A6889230055756E /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA15E961A6889230055756E /* UIWebView+AFNetworking.m */; };
 		BAA8329E1A6E303600ADADDD /* Haneke.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAA8329C1A6E303600ADADDD /* Haneke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BAA8C0681A32E76D00AAB9F4 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0671A32E76D00AAB9F4 /* CoreDataStack.swift */; };
-		BAA8C06A1A32EAAA00AAB9F4 /* CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0691A32EAAA00AAB9F4 /* CoreRecord.swift */; };
-		BAA8C07A1A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0791A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift */; };
 		BAA8C0801A32F8F300AAB9F4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C07F1A32F8F300AAB9F4 /* User.swift */; };
-		BAA8C0971A333A8B00AAB9F4 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0961A333A8B00AAB9F4 /* CollectionViewDataSource.swift */; };
-		BAA8C0991A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C0981A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift */; };
 		BAA966BD1A87FEEC0032752F /* FindFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA966BC1A87FEEC0032752F /* FindFriendsViewController.swift */; };
-		BAB4F0011A8183970052CBC0 /* FetchedResultsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB4F0001A8183970052CBC0 /* FetchedResultsControllerDelegate.swift */; };
 		BAB8F2C81A830F5500937407 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB8F2C71A830F5500937407 /* FriendsViewController.swift */; };
 		BABE8FCB1A89574500B81DD1 /* ClipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABE8FCA1A89574500B81DD1 /* ClipsViewController.swift */; };
 		BABE8FCD1A8957D600B81DD1 /* NewClip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABE8FCC1A8957D600B81DD1 /* NewClip.swift */; };
@@ -107,6 +100,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				BAA15E6B1A687E910055756E /* Alamofire.framework in Embed Frameworks */,
+				BA042C261A90A10000D83B81 /* CoreRecord.framework in Embed Frameworks */,
 				BA87C1491A840C0400A58E64 /* Swifter.framework in Embed Frameworks */,
 				BAA15E6C1A687E910055756E /* Cartography.framework in Embed Frameworks */,
 				BAA8329E1A6E303600ADADDD /* Haneke.framework in Embed Frameworks */,
@@ -117,6 +111,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BA042C241A90A10000D83B81 /* CoreRecord.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreRecord.framework; path = Carthage/Build/iOS/CoreRecord.framework; sourceTree = "<group>"; };
 		BA137C7C1A7199AA001F8FCF /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		BA137C7D1A7199AA001F8FCF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		BA145D031A687CB300D81E53 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
@@ -152,10 +147,7 @@
 		BA7C27C51A37A28F00A9CFC5 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		BA7C27CA1A37A64400A9CFC5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteObject.swift; sourceTree = "<group>"; };
-		BA8450271A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+CoreRecord.swift"; sourceTree = "<group>"; };
-		BA8812B01A7838E300B50651 /* TableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSource.swift; sourceTree = "<group>"; };
 		BA8812B21A78399A00B50651 /* UITableViewCell+Required.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Required.swift"; sourceTree = "<group>"; };
-		BA8812B41A783A4700B50651 /* FetchedResultsTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsTableViewDataSource.swift; sourceTree = "<group>"; };
 		BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		BA8812EC1A7841BE00B50651 /* UITableView+CellRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+CellRegistration.swift"; sourceTree = "<group>"; };
 		BA8812F21A785B5E00B50651 /* UITableViewHeaderFooterView+Required.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewHeaderFooterView+Required.swift"; sourceTree = "<group>"; };
@@ -200,14 +192,8 @@
 		BAA15E961A6889230055756E /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		BAA15EAE1A688AB80055756E /* Snowball-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snowball-Bridging-Header.h"; sourceTree = "<group>"; };
 		BAA8329C1A6E303600ADADDD /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = Carthage/Build/iOS/Haneke.framework; sourceTree = "<group>"; };
-		BAA8C0671A32E76D00AAB9F4 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		BAA8C0691A32EAAA00AAB9F4 /* CoreRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreRecord.swift; sourceTree = "<group>"; };
-		BAA8C0791A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+CoreRecord.swift"; sourceTree = "<group>"; };
 		BAA8C07F1A32F8F300AAB9F4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		BAA8C0961A333A8B00AAB9F4 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
-		BAA8C0981A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		BAA966BC1A87FEEC0032752F /* FindFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFriendsViewController.swift; sourceTree = "<group>"; };
-		BAB4F0001A8183970052CBC0 /* FetchedResultsControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsControllerDelegate.swift; sourceTree = "<group>"; };
 		BAB8F2C71A830F5500937407 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		BABE8FCA1A89574500B81DD1 /* ClipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipsViewController.swift; sourceTree = "<group>"; };
 		BABE8FCC1A8957D600B81DD1 /* NewClip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewClip.swift; sourceTree = "<group>"; };
@@ -227,6 +213,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA042C251A90A10000D83B81 /* CoreRecord.framework in Frameworks */,
 				BA87C1481A840C0400A58E64 /* Swifter.framework in Frameworks */,
 				BA137C7E1A7199AA001F8FCF /* Crashlytics.framework in Frameworks */,
 				BA137C7F1A7199AA001F8FCF /* Fabric.framework in Frameworks */,
@@ -248,6 +235,7 @@
 			children = (
 				BA145D031A687CB300D81E53 /* Alamofire.framework */,
 				BA145D041A687CB300D81E53 /* Cartography.framework */,
+				BA042C241A90A10000D83B81 /* CoreRecord.framework */,
 				BAA8329C1A6E303600ADADDD /* Haneke.framework */,
 				BAC90F3A1A8343C5005C9405 /* Swifter.framework */,
 			);
@@ -312,10 +300,8 @@
 				BAF3BC971A76E03F00AFD3E5 /* More */,
 				BA789E091A7052C500BA1611 /* Player */,
 				BA32C7931A3287AC0052F4CA /* Views */,
-				BAA8C0631A32E75B00AAB9F4 /* Core Record */,
 				BAA8C07E1A32F8EC00AAB9F4 /* Models */,
 				BA7C27C71A37A32A00A9CFC5 /* Networking */,
-				BA3A287C1A305BC000A85C29 /* Data Source */,
 				BAF3DDBF1A3048440062C068 /* Extensions */,
 				BA32C7801A3256CC0052F4CA /* Assets */,
 				BA38C1691A30228700A2F2AE /* LaunchScreen.xib */,
@@ -350,15 +336,6 @@
 				BA38C1751A30228700A2F2AE /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		BA3A287C1A305BC000A85C29 /* Data Source */ = {
-			isa = PBXGroup;
-			children = (
-				BA8812E91A783BB500B50651 /* Table View */,
-				BA8812AF1A7838D700B50651 /* Collection View */,
-			);
-			name = "Data Source";
 			sourceTree = "<group>";
 		};
 		BA3A28851A30615800A85C29 /* Cells */ = {
@@ -399,24 +376,6 @@
 				BA7C27C51A37A28F00A9CFC5 /* Router.swift */,
 			);
 			name = Networking;
-			sourceTree = "<group>";
-		};
-		BA8812AF1A7838D700B50651 /* Collection View */ = {
-			isa = PBXGroup;
-			children = (
-				BAA8C0961A333A8B00AAB9F4 /* CollectionViewDataSource.swift */,
-				BAA8C0981A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift */,
-			);
-			name = "Collection View";
-			sourceTree = "<group>";
-		};
-		BA8812E91A783BB500B50651 /* Table View */ = {
-			isa = PBXGroup;
-			children = (
-				BA8812B01A7838E300B50651 /* TableViewDataSource.swift */,
-				BA8812B41A783A4700B50651 /* FetchedResultsTableViewDataSource.swift */,
-			);
-			name = "Table View";
 			sourceTree = "<group>";
 		};
 		BA9AA6811A6747F0002C4992 /* Main */ = {
@@ -492,18 +451,6 @@
 			);
 			name = "UIKit+AFNetworking";
 			path = "Vendor/AFNetworking-2.5.0/UIKit+AFNetworking";
-			sourceTree = "<group>";
-		};
-		BAA8C0631A32E75B00AAB9F4 /* Core Record */ = {
-			isa = PBXGroup;
-			children = (
-				BAB4F0001A8183970052CBC0 /* FetchedResultsControllerDelegate.swift */,
-				BAA8C0691A32EAAA00AAB9F4 /* CoreRecord.swift */,
-				BAA8C0671A32E76D00AAB9F4 /* CoreDataStack.swift */,
-				BA8450271A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift */,
-				BAA8C0791A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift */,
-			);
-			name = "Core Record";
 			sourceTree = "<group>";
 		};
 		BAA8C07E1A32F8EC00AAB9F4 /* Models */ = {
@@ -700,19 +647,14 @@
 				BA8812F31A785B5E00B50651 /* UITableViewHeaderFooterView+Required.swift in Sources */,
 				BAA15EA61A6889230055756E /* UIRefreshControl+AFNetworking.m in Sources */,
 				BA8812EB1A783CD600B50651 /* UserTableViewCell.swift in Sources */,
-				BAA8C06A1A32EAAA00AAB9F4 /* CoreRecord.swift in Sources */,
 				BA789E0B1A7052D000BA1611 /* CachedURLAsset.swift in Sources */,
 				BAA15EA51A6889230055756E /* UIProgressView+AFNetworking.m in Sources */,
 				BAA15E9C1A6889230055756E /* AFURLConnectionOperation.m in Sources */,
 				BA7C0E4A1A65EF94001B3B4C /* UITextField+Snowball.swift in Sources */,
-				BA8450281A36646C009E3A5B /* NSManagedObjectContext+CoreRecord.swift in Sources */,
 				BA7C0E4C1A65F395001B3B4C /* OnboardingTopView.swift in Sources */,
 				BA9AA67C1A67465F002C4992 /* OnboardingNavigationController.swift in Sources */,
-				BA8812B51A783A4700B50651 /* FetchedResultsTableViewDataSource.swift in Sources */,
-				BA8812B11A7838E300B50651 /* TableViewDataSource.swift in Sources */,
 				BAA15E9E1A6889230055756E /* AFURLResponseSerialization.m in Sources */,
 				BA3A28701A3051E300A85C29 /* Util.swift in Sources */,
-				BAA8C0991A333C0100AAB9F4 /* FetchedResultsCollectionViewDataSource.swift in Sources */,
 				BA7C27D31A37ADA600A9CFC5 /* RemoteObject.swift in Sources */,
 				BAA15EA21A6889230055756E /* UIAlertView+AFNetworking.m in Sources */,
 				BA6385E31A65ACAF00B002D9 /* OnboardingViewController.swift in Sources */,
@@ -720,22 +662,18 @@
 				BAA15EA31A6889230055756E /* UIButton+AFNetworking.m in Sources */,
 				BA938A011A7B06C600857CF7 /* NSError+Print.swift in Sources */,
 				BAA15E981A6889230055756E /* AFHTTPRequestOperationManager.m in Sources */,
-				BAA8C0681A32E76D00AAB9F4 /* CoreDataStack.swift in Sources */,
 				BACA7A861A36E40900C34B6C /* NSDate+TimeSince.swift in Sources */,
 				BA38C1611A30228700A2F2AE /* Snowball.xcdatamodeld in Sources */,
 				BAF2E45A1A800F1E00A093E5 /* EditProfileViewController.swift in Sources */,
 				BA7198D01A897F3B004BB840 /* ClipPlayerViewController.swift in Sources */,
-				BAA8C07A1A32F6A900AAB9F4 /* NSManagedObject+CoreRecord.swift in Sources */,
 				BAA15EA11A6889230055756E /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				BA9AA6831A674804002C4992 /* MainNavigationController.swift in Sources */,
 				BA7C27C61A37A28F00A9CFC5 /* Router.swift in Sources */,
 				BAA15EA71A6889230055756E /* UIWebView+AFNetworking.m in Sources */,
-				BAB4F0011A8183970052CBC0 /* FetchedResultsControllerDelegate.swift in Sources */,
 				BAA15E9B1A6889230055756E /* AFSecurityPolicy.m in Sources */,
 				BA32C7921A3286250052F4CA /* UIColor+Snowball.swift in Sources */,
 				BA3A28771A305AF600A85C29 /* ClipCollectionViewCell.swift in Sources */,
 				BA6385ED1A65B8FF00B002D9 /* UIView+Snowball.swift in Sources */,
-				BAA8C0971A333A8B00AAB9F4 /* CollectionViewDataSource.swift in Sources */,
 				BAA8C0801A32F8F300AAB9F4 /* User.swift in Sources */,
 				BAA15E9A1A6889230055756E /* AFNetworkReachabilityManager.m in Sources */,
 				BA8812B31A78399A00B50651 /* UITableViewCell+Required.swift in Sources */,

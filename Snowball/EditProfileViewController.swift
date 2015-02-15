@@ -139,7 +139,7 @@ extension EditProfileViewController: SnowballTopViewDelegate {
       API.request(Router.UpdateCurrentUser(name: nil, username: username, email: email, phoneNumber: phoneNumber)).responseJSON { (request, response, JSON, error) in
         error?.print("api update current user")
         if error != nil { displayAPIErrorToUser(JSON); return }
-        user.save()
+        user.managedObjectContext?.save(nil)
         self.navigationController?.popViewControllerAnimated(true)
       }
     } else {
