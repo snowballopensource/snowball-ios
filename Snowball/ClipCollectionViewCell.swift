@@ -25,7 +25,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     clipThumbnailImageView.contentMode = UIViewContentMode.ScaleAspectFill
-    clipThumbnailImageView.backgroundColor = UIColor.blackColor()
     contentView.addSubview(clipThumbnailImageView)
     contentView.addSubview(userAvatarImageView)
     usernameLabel.font = UIFont(name: UIFont.SnowballFont.bold, size: 18)
