@@ -54,6 +54,8 @@ class ClipsViewController: UIViewController {
 
   var delegate: ClipsViewControllerDelegate?
 
+  private let currentClipScrollPosition = UICollectionViewScrollPosition.Right
+
   // MARK: - UIViewController
 
   override func viewDidLoad() {
@@ -142,7 +144,7 @@ class ClipsViewController: UIViewController {
       let lastItem = collectionView.numberOfItemsInSection(lastSection) - 1
       if lastItem >= 0 {
         let indexPath = NSIndexPath(forItem: lastItem, inSection: lastSection)
-        collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
+        collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: true)
       }
     }
     let delay = Int64(NSEC_PER_MSEC * 250) // 0.25 seconds
@@ -164,16 +166,12 @@ class ClipsViewController: UIViewController {
 
   private func scrollToBookmark() {
     if let bookmarkDate = clipBookmarkDate {
-      var previousClip: Clip?
       for clip in clips {
         if let clipCreatedAt = clip.createdAt {
-          if bookmarkDate.compare(clipCreatedAt) == NSComparisonResult.OrderedDescending {
-            previousClip = clip
-          } else {
-            if let previousClip = previousClip {
-              let indexPath = NSIndexPath(forItem: indexOfClip(previousClip), inSection: 0)
-              collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Left, animated: false)
-            }
+          if bookmarkDate.compare(clipCreatedAt) == NSComparisonResult.OrderedAscending {
+            let indexPath = NSIndexPath(forItem: indexOfClip(clip), inSection: 0)
+            collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: false)
+            break
           }
         }
       }
@@ -197,9 +195,21 @@ class ClipsViewController: UIViewController {
     if let nextClip = clipAfterClip(clip) {
       playerViewController.playClip(nextClip)
       let indexPath = NSIndexPath(forItem: indexOfClip(nextClip), inSection: 0)
-      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
+      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: true)
     } else {
       endPlayback()
+    }
+  }
+
+  private func updateBookmarkToClip(clip: Clip) {
+    if let bookmarkDate = clipBookmarkDate {
+      if let clipCreatedAt = clip.createdAt {
+        if bookmarkDate.compare(clipCreatedAt) == NSComparisonResult.OrderedAscending {
+          clipBookmarkDate = clip.createdAt
+        }
+      }
+    } else {
+      clipBookmarkDate = clip.createdAt
     }
   }
 
@@ -242,7 +252,7 @@ extension ClipsViewController: ClipCollectionViewCellDelegate {
     let indexPath = collectionView.indexPathForCell(cell)
     if let indexPath = indexPath {
       let clip = clips[indexPath.row]
-      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
+      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: true)
       delegate?.willBeginPlayback()
       playerViewController.playClip(clip)
     }
@@ -263,6 +273,7 @@ extension ClipsViewController: ClipPlayerViewControllerDelegate {
         return
       }
     }
+    updateBookmarkToClip(playerItem.clip)
     playClipAfterClip(playerItem.clip)
   }
 }
@@ -279,7 +290,7 @@ extension ClipsViewController: AddClipCollectionReuseableViewDelegate {
       clips.append(clip)
       let indexPath = NSIndexPath(forItem: clips.count - 1, inSection: 0)
       collectionView.insertItemsAtIndexPaths([indexPath])
-      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
+      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: true)
       API.uploadClip(clip) { (request, response, JSON, error) in
         if let error = error {
           error.print("upload clip")
