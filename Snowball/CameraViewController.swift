@@ -209,9 +209,12 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
   }
 
   private func endProgressViewAnimation() {
-    progressView.progress = 0
     progressViewTimer?.invalidate()
     progressViewTimer = nil
+  }
+
+  private func resetProgressViewAnimation() {
+    progressView.progress = 0
   }
 
   // MARK: - Actions
@@ -232,6 +235,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 
   func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!) {
     setFocusLocked(false)
+    endProgressViewAnimation()
     // Crop video
     // http://stackoverflow.com/a/5231713/801858
     let asset = AVAsset.assetWithURL(outputFileURL) as AVAsset
@@ -277,9 +281,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
       thumbnailData.writeToURL(exportedThumbnailURL, atomically: true)
       if let delegate = self.delegate {
         dispatch_async(dispatch_get_main_queue()) {
-          // Removal of progress view animation is done here to make it happen
-          // after video processing/encoding.
-          self.endProgressViewAnimation()
+          self.resetProgressViewAnimation()
           delegate.videoRecordedToFileAtURL(exporter.outputURL, thumbnailURL: exportedThumbnailURL, error: error)
         }
       }
