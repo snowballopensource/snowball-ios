@@ -15,16 +15,24 @@ class HomeViewController: UIViewController {
 
   let cameraViewController = CameraViewController()
   let clipsViewController = ClipsViewController()
+  let topMenuView = UIView()
   let moreButton: UIButton = {
     let moreButton = UIButton()
     moreButton.setImage(UIImage(named: "friends"), forState: UIControlState.Normal)
     return moreButton
+  }()
+  let changeCameraButton: UIButton = {
+    let changeCameraButton = UIButton()
+    changeCameraButton.setImage(UIImage(named: "change-camera"), forState: UIControlState.Normal)
+    return changeCameraButton
   }()
 
   // MARK: - UIViewController
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    view.backgroundColor = UIColor.blackColor()
 
     clipsViewController.delegate = self
     addChildViewController(clipsViewController)
@@ -43,8 +51,16 @@ class HomeViewController: UIViewController {
       cameraViewControllerView.height == cameraViewControllerView.superview!.width
     }
 
+    view.addSubview(topMenuView)
+    layout(topMenuView) { (topMenuView) in
+      topMenuView.left == topMenuView.superview!.left
+      topMenuView.top == topMenuView.superview!.top
+      topMenuView.width == topMenuView.superview!.width
+      topMenuView.height == 55
+    }
+
     moreButton.addTarget(self, action: "moreButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
-    view.addSubview(moreButton)
+    topMenuView.addSubview(moreButton)
     layout(moreButton) { (moreButton) in
       let margin: Float = 10
       let width: Float = 44
@@ -53,6 +69,17 @@ class HomeViewController: UIViewController {
       moreButton.width == width
       moreButton.height == width
     }
+
+    changeCameraButton.addTarget(self, action: "changeCameraButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    topMenuView.addSubview(changeCameraButton)
+    layout(changeCameraButton) { (changeCameraButton) in
+      let margin: Float = 10
+      let width: Float = 44
+      changeCameraButton.right == changeCameraButton.superview!.right - margin
+      changeCameraButton.top == changeCameraButton.superview!.top + margin
+      changeCameraButton.width == width
+      changeCameraButton.height == width
+    }
   }
 
   // MARK: - Private
@@ -60,6 +87,26 @@ class HomeViewController: UIViewController {
   @objc private func moreButtonTapped() {
     clipsViewController.playerViewController.endPlayback()
     AppDelegate.switchToNavigationController(MoreNavigationController())
+  }
+
+  @objc private func changeCameraButtonTapped() {
+    cameraViewController.changeCamera()
+  }
+
+  private func showTopMenuViewAnimated() {
+    UIView.animateWithDuration(0.4) {
+      let frame = self.topMenuView.frame
+      let newFrame = CGRect(x: frame.origin.x, y: 0, width: frame.width, height: frame.height)
+      self.topMenuView.frame = newFrame
+    }
+  }
+
+  private func hideTopMenuViewAnimated() {
+    UIView.animateWithDuration(0.4) {
+      let frame = self.topMenuView.frame
+      let newFrame = CGRect(x: frame.origin.x, y: -frame.height, width: frame.width, height: frame.height)
+      self.topMenuView.frame = newFrame
+    }
   }
 
 }
@@ -73,10 +120,12 @@ extension HomeViewController: ClipsViewControllerDelegate {
 
   func willBeginPlayback() {
     cameraViewController.view.hidden = true
+    hideTopMenuViewAnimated()
   }
 
   func didEndPlayback() {
     cameraViewController.view.hidden = false
+    showTopMenuViewAnimated()
   }
 }
 

@@ -17,7 +17,6 @@ protocol CameraViewControllerDelegate {
 class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate {
   private let captureSession = AVCaptureSession()
   private let cameraView = CameraView()
-  private let changeCameraButton = UIButton()
   private let progressView = UIProgressView()
   private var progressViewTimer: NSTimer?
   private let sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL)
@@ -71,18 +70,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     recordingGestureRecognizer.minimumPressDuration = 0.2
     recordingGestureRecognizer.addTarget(self, action: "toggleRecording:")
     cameraView.addGestureRecognizer(recordingGestureRecognizer)
-
-    changeCameraButton.setImage(UIImage(named: "change-camera"), forState: UIControlState.Normal)
-    changeCameraButton.addTarget(self, action: "changeCamera", forControlEvents: UIControlEvents.TouchUpInside)
-    view.addSubview(changeCameraButton)
-    layout(changeCameraButton) { (changeCameraButton) in
-      let margin: Float = 10
-      let width: Float = 44
-      changeCameraButton.right == changeCameraButton.superview!.right - margin
-      changeCameraButton.top == changeCameraButton.superview!.top + margin
-      changeCameraButton.width == width
-      changeCameraButton.height == width
-    }
 
     progressView.progressTintColor = UIColor.SnowballColor.greenColor
     progressView.trackTintColor = UIColor.clearColor()
