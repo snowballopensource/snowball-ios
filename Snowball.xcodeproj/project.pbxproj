@@ -617,6 +617,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Cartography.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Haneke.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Swifter.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CoreRecord.framework",
 			);
 			name = "Carthage Temporary Fix 1/22/2015";
 			outputPaths = (
