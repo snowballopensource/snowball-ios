@@ -43,7 +43,6 @@ enum SnowballTopViewButtonType {
 
   private var color: UIColor? {
     switch self {
-    case .Back: return UIColor.SnowballColor.grayColor
     case .Forward: return UIColor.SnowballColor.greenColor
     case .AddFriends: return nil
     default: return UIColor.blackColor()
