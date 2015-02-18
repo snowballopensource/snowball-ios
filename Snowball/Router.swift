@@ -10,7 +10,7 @@ import Alamofire
 import Foundation
 
 enum Router: URLRequestConvertible {
-  static let baseURLString = "http://snowball-staging.herokuapp.com/api/v1/"
+  static let baseURLString = "http://api.snowball.is/v1/"
 
   // Authentication
   case SignUp(username: String, email: String, password: String)
