@@ -253,6 +253,7 @@ extension ClipsViewController: UICollectionViewDataSource {
 
   func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
     let addClipView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: NSStringFromClass(AddClipCollectionReuseableView), forIndexPath: indexPath) as AddClipCollectionReuseableView
+    addClipView.scaleAddClipButton(true, animated: false)
     addClipView.delegate = self
     return addClipView
   }
@@ -301,9 +302,10 @@ extension ClipsViewController: AddClipCollectionReuseableViewDelegate {
 
   // MARK: - AddClipCollectionReuseableViewDelegate
 
-  func addClipButtonTapped() {
+  func addClipButtonTappedInView(view: AddClipCollectionReuseableView) {
     if let clip = previewedClip {
       endPlayback()
+      view.scaleAddClipButton(false, animated: true)
       clips.append(clip)
       let indexPath = NSIndexPath(forItem: clips.count - 1, inSection: 0)
       collectionView.insertItemsAtIndexPaths([indexPath])

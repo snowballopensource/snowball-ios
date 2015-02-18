@@ -10,7 +10,7 @@ import Cartography
 import UIKit
 
 protocol AddClipCollectionReuseableViewDelegate: class {
-  func addClipButtonTapped()
+  func addClipButtonTappedInView(view: AddClipCollectionReuseableView)
 }
 
 class AddClipCollectionReuseableView: UICollectionReusableView {
@@ -23,7 +23,7 @@ class AddClipCollectionReuseableView: UICollectionReusableView {
     super.init(frame: frame)
 
     addClipButton.setImage(UIImage(named: "add-clip"), forState: UIControlState.Normal)
-    addClipButton.addTarget(delegate, action: "addClipButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    addClipButton.addTarget(self, action: "addClipButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     addSubview(addClipButton)
   }
 
@@ -50,4 +50,25 @@ class AddClipCollectionReuseableView: UICollectionReusableView {
     return ClipCollectionViewCell.size
   }
 
+  // MARK: - Internal
+
+  func scaleAddClipButton(down: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.4) {
+        self.scaleAddClipButton(down, animated: false)
+      }
+    } else {
+      if down {
+        addClipButton.transform = CGAffineTransformMakeScale(0.85, 0.85)
+      } else {
+        addClipButton.transform = CGAffineTransformMakeScale(1.0, 1.0)
+      }
+    }
+  }
+
+  // MARK: - Private
+
+  @objc private func addClipButtonTapped() {
+    delegate?.addClipButtonTappedInView(self)
+  }
 }
