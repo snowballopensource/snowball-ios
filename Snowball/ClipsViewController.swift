@@ -56,6 +56,12 @@ class ClipsViewController: UIViewController {
 
   private let currentClipScrollPosition = UICollectionViewScrollPosition.Right
 
+  private var playing: Bool = false {
+    didSet {
+      scaleVisibleClipThumbnails(playing)
+    }
+  }
+
   // MARK: - UIViewController
 
   override func viewDidLoad() {
@@ -104,6 +110,7 @@ class ClipsViewController: UIViewController {
   func previewClip(clip: Clip) {
     previewedClip = clip
     showAddClipButton()
+    playing = true
     delegate?.willBeginPlayback()
     cancelPreviewButton.hidden = false
     playerViewController.playClip(clip)
@@ -114,6 +121,7 @@ class ClipsViewController: UIViewController {
     playerViewController.endPlayback()
     hideAddClipButton()
     cancelPreviewButton.hidden = true
+    playing = false
     delegate?.didEndPlayback()
   }
 
@@ -216,6 +224,13 @@ class ClipsViewController: UIViewController {
   @objc private func cancelPreviewButtonTapped() {
     endPlayback()
   }
+
+  private func scaleVisibleClipThumbnails(down: Bool) {
+    for cell in collectionView.visibleCells() {
+      let cell = cell as ClipCollectionViewCell
+      cell.scaleClipThumbnail(down, animated: true)
+    }
+  }
 }
 
 // MARK: -
@@ -231,6 +246,7 @@ extension ClipsViewController: UICollectionViewDataSource {
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(ClipCollectionViewCell), forIndexPath: indexPath) as ClipCollectionViewCell
     cell.delegate = self
+    cell.scaleClipThumbnail(playing, animated: false)
     cell.configureForClip(clips[indexPath.row])
     return cell
   }
@@ -253,6 +269,7 @@ extension ClipsViewController: ClipCollectionViewCellDelegate {
     if let indexPath = indexPath {
       let clip = clips[indexPath.row]
       collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: true)
+      playing = true
       delegate?.willBeginPlayback()
       playerViewController.playClip(clip)
     }

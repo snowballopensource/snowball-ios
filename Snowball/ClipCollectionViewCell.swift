@@ -106,6 +106,20 @@ class ClipCollectionViewCell: UICollectionViewCell {
     playButton.hidden = false
   }
 
+  func scaleClipThumbnail(down: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.4) {
+        self.scaleClipThumbnail(down, animated: false)
+      }
+    } else {
+      if down {
+        clipThumbnailImageView.transform = CGAffineTransformMakeScale(0.85, 0.85)
+      } else {
+        clipThumbnailImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+      }
+    }
+  }
+
   // MARK: - Private
 
   @objc private func playClip() {
