@@ -45,22 +45,28 @@ class ClipPlayerViewController: UIViewController {
   // MARK: - Internal
 
   func playClips(clips: [Clip]) {
+    player.actionAtItemEnd = AVPlayerActionAtItemEnd.Advance
     player.play()
     let clip = clips.first!
-    CachedURLAsset.createAssetFromRemoteURL(clip.videoURL!) { (asset, error) in
-      if let asset = asset {
-        let playerItem = ClipPlayerItem(clip: clip, asset: asset)
-        NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: playerItem, queue: nil) { (notification) in
-          let playerItem = notification.object as ClipPlayerItem
-          self.delegate?.playerItemDidPlayToEndTime(playerItem)
-          NSNotificationCenter.defaultCenter().removeObserver(self)
+    if clip.id == nil {
+      player.actionAtItemEnd = AVPlayerActionAtItemEnd.None
+      let asset = AVURLAsset(URL: clip.videoURL, options: nil)
+      let playerItem = ClipPlayerItem(clip: clip, asset: asset)
+      registerPlayerItemForNotifications(playerItem)
+      player.removeAllItems()
+      player.insertItem(playerItem, afterItem: self.player.items().last as? AVPlayerItem)
+    } else {
+      CachedURLAsset.createAssetFromRemoteURL(clip.videoURL!) { (asset, error) in
+        if let asset = asset {
+          let playerItem = ClipPlayerItem(clip: clip, asset: asset)
+          self.registerPlayerItemForNotifications(playerItem)
+          self.player.insertItem(playerItem, afterItem: self.player.items().last as? AVPlayerItem)
         }
-        self.player.insertItem(playerItem, afterItem: self.player.items().last as? AVPlayerItem)
-      }
-      var mutableClips = clips
-      mutableClips.removeAtIndex(0)
-      if mutableClips.count > 0 {
-        self.playClips(mutableClips)
+        var mutableClips = clips
+        mutableClips.removeAtIndex(0)
+        if mutableClips.count > 0 {
+          self.playClips(mutableClips)
+        }
       }
     }
   }
@@ -72,6 +78,16 @@ class ClipPlayerViewController: UIViewController {
   func endPlayback() {
     player.pause()
     player.removeAllItems()
+  }
+
+  // MARK: - Private
+
+  func registerPlayerItemForNotifications(playerItem: ClipPlayerItem) {
+    NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: playerItem, queue: nil) { (notification) in
+      let playerItem = notification.object as ClipPlayerItem
+      self.delegate?.playerItemDidPlayToEndTime(playerItem)
+      NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
   }
 }
 
