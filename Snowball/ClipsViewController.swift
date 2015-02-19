@@ -67,7 +67,8 @@ class ClipsViewController: UIViewController {
     if let bookmarkDate = clipBookmarkDate {
       for clip in clips {
         if let clipCreatedAt = clip.createdAt {
-          if bookmarkDate.compare(clipCreatedAt) == NSComparisonResult.OrderedAscending {
+          let comparisonResult = bookmarkDate.compare(clipCreatedAt)
+          if comparisonResult == NSComparisonResult.OrderedAscending || comparisonResult == NSComparisonResult.OrderedSame {
             return clip
           }
         }
