@@ -62,6 +62,19 @@ class ClipsViewController: UIViewController {
     }
   }
 
+  private var bookmarkedClip: Clip? {
+    if let bookmarkDate = clipBookmarkDate {
+      for clip in clips {
+        if let clipCreatedAt = clip.createdAt {
+          if bookmarkDate.compare(clipCreatedAt) == NSComparisonResult.OrderedAscending {
+            return clip
+          }
+        }
+      }
+    }
+    return clips.first
+  }
+
   // MARK: - UIViewController
 
   override func viewDidLoad() {
@@ -132,7 +145,7 @@ class ClipsViewController: UIViewController {
       if let JSON = JSON as? [AnyObject] {
         self.clips = Clip.importJSON(JSON)
         self.collectionView.reloadData()
-        self.scrollToBookmark()
+        self.scrollToBookmarkedClip()
       }
     }
   }
@@ -172,18 +185,15 @@ class ClipsViewController: UIViewController {
     }
   }
 
-  private func scrollToBookmark() {
-    if let bookmarkDate = clipBookmarkDate {
-      for clip in clips {
-        if let clipCreatedAt = clip.createdAt {
-          if bookmarkDate.compare(clipCreatedAt) == NSComparisonResult.OrderedAscending {
-            let indexPath = NSIndexPath(forItem: indexOfClip(clip), inSection: 0)
-            collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: false)
-            break
-          }
-        }
-      }
+  private func scrollToBookmarkedClip() {
+    if let bookmarkedClip = bookmarkedClip {
+      scrollToClip(bookmarkedClip)
     }
+  }
+
+  private func scrollToClip(clip: Clip) {
+    let indexPath = NSIndexPath(forItem: indexOfClip(clip), inSection: 0)
+    collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: false)
   }
 
   private func indexOfClip(clip: Clip) -> Int {
@@ -244,7 +254,16 @@ extension ClipsViewController: UICollectionViewDataSource {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(ClipCollectionViewCell), forIndexPath: indexPath) as ClipCollectionViewCell
     cell.delegate = self
     cell.scaleClipThumbnail(playing, animated: false)
-    cell.configureForClip(clips[indexPath.row])
+    let clip = clips[indexPath.row]
+    cell.configureForClip(clip)
+    if playing == true {
+      // TODO: show pause image
+      cell.hidePlayButtonImage()
+    } else if let bookmarkedClip = bookmarkedClip {
+      if clip.id == bookmarkedClip.id {
+        cell.showPlayButtonImage()
+      }
+    }
     return cell
   }
 
