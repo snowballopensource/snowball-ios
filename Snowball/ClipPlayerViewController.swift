@@ -8,7 +8,6 @@
 
 import AVFoundation
 import Cartography
-import Haneke
 import UIKit
 
 class ClipPlayerViewController: UIViewController {
@@ -16,31 +15,17 @@ class ClipPlayerViewController: UIViewController {
   // MARK: - Properties
 
   let player = AVQueuePlayer()
-  let playerBufferingImageView = UIImageView()
   let playerView = PlayerView()
   var delegate: ClipPlayerViewControllerDelegate?
 
   // MARK: - UIViewController
 
+  override func loadView() {
+    view = playerView
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    view.addSubview(playerBufferingImageView)
-    layout(playerBufferingImageView) { (playerBufferingImageView) in
-      playerBufferingImageView.left == playerBufferingImageView.superview!.left
-      playerBufferingImageView.top == playerBufferingImageView.superview!.top
-      playerBufferingImageView.right == playerBufferingImageView.superview!.right
-      playerBufferingImageView.bottom == playerBufferingImageView.superview!.bottom
-    }
-
-    view.addSubview(playerView)
-    layout(playerView) { (playerView) in
-      playerView.left == playerView.superview!.left
-      playerView.top == playerView.superview!.top
-      playerView.right == playerView.superview!.right
-      playerView.bottom == playerView.superview!.bottom
-    }
-
     playerView.player = player
     player.play()
   }
@@ -62,7 +47,6 @@ class ClipPlayerViewController: UIViewController {
   func playClips(clips: [Clip]) {
     player.play()
     let clip = clips.first!
-    playerBufferingImageView.hnk_setImageFromURL(clip.thumbnailURL!, placeholder: UIImage())
     CachedURLAsset.createAssetFromRemoteURL(clip.videoURL!) { (asset, error) in
       if let asset = asset {
         let playerItem = ClipPlayerItem(clip: clip, asset: asset)
