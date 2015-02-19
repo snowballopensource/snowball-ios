@@ -22,6 +22,7 @@ class ClipsViewController: UIViewController {
     collectionView.backgroundColor = UIColor.whiteColor()
     collectionView.registerClass(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell))
     collectionView.registerClass(AddClipCollectionReuseableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: NSStringFromClass(AddClipCollectionReuseableView))
+    collectionView.showsHorizontalScrollIndicator = false
     flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
     flowLayout.minimumInteritemSpacing = 0
     flowLayout.minimumLineSpacing = 0
