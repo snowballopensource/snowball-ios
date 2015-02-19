@@ -10,12 +10,7 @@ import Cartography
 import Haneke
 import UIKit
 
-protocol ClipCollectionViewCellDelegate: class {
-  func playClipButtonTappedInCell(cell: ClipCollectionViewCell)
-}
-
 class ClipCollectionViewCell: UICollectionViewCell {
-  var delegate: ClipCollectionViewCellDelegate?
   private let clipThumbnailImageView = UIImageView()
   private let userAvatarImageView = UserAvatarImageView()
   private let usernameLabel = UILabel()
@@ -113,11 +108,5 @@ class ClipCollectionViewCell: UICollectionViewCell {
         clipThumbnailImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
       }
     }
-  }
-
-  // MARK: - Private
-
-  @objc private func playClip() {
-    delegate?.playClipButtonTappedInCell(self)
   }
 }

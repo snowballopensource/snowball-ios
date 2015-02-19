@@ -103,6 +103,7 @@ class ClipsViewController: UIViewController {
     }
 
     collectionView.dataSource = self
+    collectionView.delegate = self
     view.addSubview(collectionView)
     layout(collectionView, playerViewController.view) { (collectionView, playerView) in
       collectionView.left == collectionView.superview!.left
@@ -252,7 +253,6 @@ extension ClipsViewController: UICollectionViewDataSource {
 
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(ClipCollectionViewCell), forIndexPath: indexPath) as ClipCollectionViewCell
-    cell.delegate = self
     cell.scaleClipThumbnail(playing, animated: false)
     let clip = clips[indexPath.row]
     cell.configureForClip(clip)
@@ -269,22 +269,18 @@ extension ClipsViewController: UICollectionViewDataSource {
 
 // MARK: -
 
-extension ClipsViewController: ClipCollectionViewCellDelegate {
+extension ClipsViewController: UICollectionViewDelegate {
 
-  // MARK: - ClipCollectionViewCellDelegate
+  // MARK: - UICollectionViewDelegate
 
-  func playClipButtonTappedInCell(cell: ClipCollectionViewCell) {
+  func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    let clip = clips[indexPath.row]
+    collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: true)
+    playing = true
+    delegate?.willBeginPlayback()
+
     playerViewController.endPlayback()
-
-    let indexPath = collectionView.indexPathForCell(cell)
-    if let indexPath = indexPath {
-      let clip = clips[indexPath.row]
-      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: true)
-      playing = true
-      delegate?.willBeginPlayback()
-
-      playerViewController.playClips(clipsToPlayWithClip(clip))
-    }
+    playerViewController.playClips(clipsToPlayWithClip(clip))
   }
 }
 
