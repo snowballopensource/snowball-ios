@@ -39,7 +39,7 @@ enum Router: URLRequestConvertible {
     case .GetCurrentUserFollowing: return .GET
     case .FollowUser: return .POST
     case .UnfollowUser: return .DELETE
-    case .FindUsersByPhoneNumbers: return .GET
+    case .FindUsersByPhoneNumbers: return .POST
     case .FindUsersByUsername: return .GET
     case .GetClipStream: return .GET
     case .DeleteClip: return .DELETE
@@ -57,7 +57,7 @@ enum Router: URLRequestConvertible {
     case .GetCurrentUserFollowing: return "users/me/following"
     case .FollowUser(let userID): return "users/\(userID)/follow"
     case .UnfollowUser(let userID): return "users/\(userID)/follow"
-    case .FindUsersByPhoneNumbers: return "users"
+    case .FindUsersByPhoneNumbers: return "users/phone-search"
     case .FindUsersByUsername: return "users"
     case .GetClipStream: return "clips/stream"
     case .DeleteClip(let clipID): return "clips/\(clipID)"
@@ -70,7 +70,7 @@ enum Router: URLRequestConvertible {
     case .SignUp: return ParameterEncoding.JSON
     case .SignIn: return ParameterEncoding.JSON
     case .UpdateCurrentUser: return ParameterEncoding.JSON
-    case .FindUsersByPhoneNumbers: return ParameterEncoding.URL
+    case .FindUsersByPhoneNumbers: return ParameterEncoding.JSON
     case .FindUsersByUsername: return ParameterEncoding.URL
     default: return nil
     }
@@ -95,7 +95,7 @@ enum Router: URLRequestConvertible {
         userParameters["phone_number"] = newPhoneNumber
       }
       return userParameters
-    case .FindUsersByPhoneNumbers(let phoneNumbers): return ["phone_number": ", ".join(phoneNumbers)]
+    case .FindUsersByPhoneNumbers(let phoneNumbers): return ["phone_numbers": phoneNumbers]
     case .FindUsersByUsername(let username): return ["username": username]
     default: return nil
     }
