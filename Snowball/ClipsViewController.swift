@@ -199,14 +199,11 @@ class ClipsViewController: UIViewController {
     return nil
   }
 
-  private func playClipAfterClip(clip: Clip) {
-    if let nextClip = clipAfterClip(clip) {
-      playerViewController.playClip(nextClip)
-      let indexPath = NSIndexPath(forItem: indexOfClip(nextClip), inSection: 0)
-      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: true)
-    } else {
-      endPlayback()
-    }
+  private func clipsToPlayWithClip(clip: Clip) -> [Clip] {
+    let clipIndex = indexOfClip(clip)
+    let slice = clips[clipIndex..<clips.count]
+    let clipsToPlay = Array(slice)
+    return clipsToPlay
   }
 
   private func updateBookmarkToClip(clip: Clip) {
@@ -266,13 +263,16 @@ extension ClipsViewController: ClipCollectionViewCellDelegate {
   // MARK: - ClipCollectionViewCellDelegate
 
   func playClipButtonTappedInCell(cell: ClipCollectionViewCell) {
+    playerViewController.endPlayback()
+
     let indexPath = collectionView.indexPathForCell(cell)
     if let indexPath = indexPath {
       let clip = clips[indexPath.row]
       collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: true)
       playing = true
       delegate?.willBeginPlayback()
-      playerViewController.playClip(clip)
+
+      playerViewController.playClips(clipsToPlayWithClip(clip))
     }
   }
 }
@@ -291,8 +291,14 @@ extension ClipsViewController: ClipPlayerViewControllerDelegate {
         return
       }
     }
+
+    if let nextClip = clipAfterClip(playerItem.clip) {
+      let indexPath = NSIndexPath(forItem: indexOfClip(nextClip), inSection: 0)
+      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: true)
+    } else {
+      endPlayback()
+    }
     updateBookmarkToClip(playerItem.clip)
-    playClipAfterClip(playerItem.clip)
   }
 }
 

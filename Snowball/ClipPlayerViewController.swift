@@ -14,7 +14,7 @@ class ClipPlayerViewController: UIViewController {
 
   // MARK: - Properties
 
-  let player = AVPlayer()
+  let player = AVQueuePlayer()
   let playerView = PlayerView()
   var delegate: ClipPlayerViewControllerDelegate?
 
@@ -44,24 +44,34 @@ class ClipPlayerViewController: UIViewController {
 
   // MARK: - Internal
 
-  func playClip(clip: Clip) {
-    let playerItem = ClipPlayerItem(URL: clip.videoURL!)
-    playerItem.clip = clip
-    NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: playerItem, queue: nil) { (notification) in
-      self.delegate?.playerItemDidPlayToEndTime(playerItem)
-      NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-    NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemPlaybackStalledNotification, object: playerItem, queue: nil) { (notification) in
-      let playerItem = notification.object! as AVPlayerItem
-      playerItem.addObserver(self, forKeyPath: "playbackLikelyToKeepUp", options: nil, context: nil)
-    }
-    player.replaceCurrentItemWithPlayerItem(playerItem)
+  func playClips(clips: [Clip]) {
     player.play()
+    let clip = clips.first!
+    CachedURLAsset.createAssetFromRemoteURL(clip.videoURL!) { (asset, error) in
+      if let asset = asset {
+        let playerItem = ClipPlayerItem(clip: clip, asset: asset)
+        NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: playerItem, queue: nil) { (notification) in
+          let playerItem = notification.object as ClipPlayerItem
+          self.delegate?.playerItemDidPlayToEndTime(playerItem)
+          NSNotificationCenter.defaultCenter().removeObserver(self)
+        }
+        self.player.insertItem(playerItem, afterItem: self.player.items().last as? AVPlayerItem)
+      }
+      var mutableClips = clips
+      mutableClips.removeAtIndex(0)
+      if mutableClips.count > 0 {
+        self.playClips(mutableClips)
+      }
+    }
+  }
+
+  func playClip(clip: Clip) {
+    playClips([clip])
   }
 
   func endPlayback() {
     player.pause()
-    player.replaceCurrentItemWithPlayerItem(nil)
+    player.removeAllItems()
   }
 }
 

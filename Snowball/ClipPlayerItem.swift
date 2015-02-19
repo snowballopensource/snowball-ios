@@ -20,4 +20,9 @@ class ClipPlayerItem: AVPlayerItem {
     self.init(asset: AVURLAsset(URL: clip.videoURL!, options: nil), automaticallyLoadedAssetKeys: ["tracks", "playable"])
     self.clip = clip
   }
+
+  convenience init(clip: Clip, asset: AVAsset) {
+    self.init(asset: asset)
+    self.clip = clip
+  }
 }
