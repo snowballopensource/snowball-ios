@@ -256,14 +256,6 @@ extension ClipsViewController: UICollectionViewDataSource {
     cell.scaleClipThumbnail(playing, animated: false)
     let clip = clips[indexPath.row]
     cell.configureForClip(clip)
-    if playing == true {
-      // TODO: show pause image
-      cell.hidePlayButtonImage()
-    } else if let bookmarkedClip = bookmarkedClip {
-      if clip.id == bookmarkedClip.id {
-        cell.showPlayButtonImage()
-      }
-    }
     return cell
   }
 

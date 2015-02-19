@@ -20,7 +20,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
   private let userAvatarImageView = UserAvatarImageView()
   private let usernameLabel = UILabel()
   private let clipTimeLabel = UILabel()
-  private let playButton = UIButton()
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -34,8 +33,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
     clipTimeLabel.textAlignment = NSTextAlignment.Center
     clipTimeLabel.textColor = UIColor(red: 210/255.0, green: 210/255.0, blue: 210/255.0, alpha: 1.0)
     contentView.addSubview(clipTimeLabel)
-    playButton.addTarget(self, action: "playClip", forControlEvents: UIControlEvents.TouchUpInside)
-    contentView.addSubview(playButton)
   }
 
   required init(coder: NSCoder) {
@@ -72,8 +69,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipTimeLabel.top == usernameLabel.bottom + 2
       clipTimeLabel.right == clipTimeLabel.superview!.right
     }
-
-    playButton.frame = clipThumbnailImageView.frame
   }
 
   // MARK: - UICollectionReuseableView+Required
@@ -102,18 +97,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
         clipThumbnailImageView.hnk_setImageFromURL(thumbnailURL, format: Format<UIImage>(name: "original"))
       }
     }
-    hidePlayButtonImage()
   }
 
   // MARK: - Internal
-
-  func showPlayButtonImage() {
-    playButton.setImage(UIImage(named: "play"), forState: UIControlState.Normal)
-  }
-
-  func hidePlayButtonImage() {
-    playButton.setImage(nil, forState: UIControlState.Normal)
-  }
 
   func scaleClipThumbnail(down: Bool, animated: Bool) {
     if animated {
