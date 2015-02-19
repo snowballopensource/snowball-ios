@@ -161,19 +161,22 @@ class ClipsViewController: UIViewController {
   }
 
   private func hideAddClipButton() {
-    let lastSection = collectionView.numberOfSections() - 1
-    if lastSection >= 0 {
-      let lastItem = collectionView.numberOfItemsInSection(lastSection) - 1
-      if lastItem >= 0 {
-        let indexPath = NSIndexPath(forItem: lastItem, inSection: lastSection)
-        collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: true)
+    let flowLayout = self.collectionView.collectionViewLayout as UICollectionViewFlowLayout
+    if flowLayout.footerReferenceSize.width > 0 {
+      let lastSection = collectionView.numberOfSections() - 1
+      if lastSection >= 0 {
+        let lastItem = collectionView.numberOfItemsInSection(lastSection) - 1
+        if lastItem >= 0 {
+          let indexPath = NSIndexPath(forItem: lastItem, inSection: lastSection)
+          collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: true)
+        }
       }
-    }
-    let delay = Int64(NSEC_PER_MSEC * 250) // 0.25 seconds
-    let time = dispatch_time(DISPATCH_TIME_NOW, delay)
-    dispatch_after(time, dispatch_get_main_queue()) {
-      let flowLayout = self.collectionView.collectionViewLayout as UICollectionViewFlowLayout
-      flowLayout.footerReferenceSize = CGSizeZero
+      let delay = Int64(NSEC_PER_MSEC * 250) // 0.25 seconds
+      let time = dispatch_time(DISPATCH_TIME_NOW, delay)
+      dispatch_after(time, dispatch_get_main_queue()) {
+        let flowLayout = self.collectionView.collectionViewLayout as UICollectionViewFlowLayout
+        flowLayout.footerReferenceSize = CGSizeZero
+      }
     }
   }
 
@@ -275,12 +278,16 @@ extension ClipsViewController: UICollectionViewDelegate {
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     let clip = clips[indexPath.row]
-    collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: true)
-    playing = true
-    delegate?.willBeginPlayback()
+    if playing {
+      endPlayback()
+    } else {
+      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: true)
+      playing = true
+      delegate?.willBeginPlayback()
 
-    playerViewController.endPlayback()
-    playerViewController.playClips(clipsToPlayWithClip(clip))
+      playerViewController.endPlayback()
+      playerViewController.playClips(clipsToPlayWithClip(clip))
+    }
   }
 }
 
