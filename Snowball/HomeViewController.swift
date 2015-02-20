@@ -82,6 +82,15 @@ class HomeViewController: UIViewController {
     }
   }
 
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+
+    // TODO: make this conditional
+    presentViewController(OnboardingPageViewController(), animated: true) {
+      // TODO: Set shown onboarding to True
+    }
+  }
+
   // MARK: - Private
 
   @objc private func moreButtonTapped() {

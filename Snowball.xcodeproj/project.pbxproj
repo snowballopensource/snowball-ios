@@ -79,6 +79,9 @@
 		BAE26FB31A77090700A0977C /* SnowballTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE26FB21A77090700A0977C /* SnowballTopView.swift */; };
 		BAE2EFD21A5C5A1D004B781C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */; };
 		BAE702461A96AFDF0040DA6F /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE702451A96AFDF0040DA6F /* OnboardingPageViewController.swift */; };
+		BAE702491A96C1130040DA6F /* OnboardingPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE702481A96C1130040DA6F /* OnboardingPlayViewController.swift */; };
+		BAE7024B1A96C1220040DA6F /* OnboardingCaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE7024A1A96C1220040DA6F /* OnboardingCaptureViewController.swift */; };
+		BAE7024D1A96C12E0040DA6F /* OnboardingAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE7024C1A96C12E0040DA6F /* OnboardingAddViewController.swift */; };
 		BAF2E45A1A800F1E00A093E5 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */; };
 		BAF3BC961A76E02A00AFD3E5 /* MoreNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */; };
 /* End PBXBuildFile section */
@@ -206,6 +209,9 @@
 		BAE26FB21A77090700A0977C /* SnowballTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballTopView.swift; sourceTree = "<group>"; };
 		BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BAE702451A96AFDF0040DA6F /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
+		BAE702481A96C1130040DA6F /* OnboardingPlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPlayViewController.swift; sourceTree = "<group>"; };
+		BAE7024A1A96C1220040DA6F /* OnboardingCaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCaptureViewController.swift; sourceTree = "<group>"; };
+		BAE7024C1A96C12E0040DA6F /* OnboardingAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingAddViewController.swift; sourceTree = "<group>"; };
 		BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreNavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -297,7 +303,8 @@
 			isa = PBXGroup;
 			children = (
 				BA38C15D1A30228700A2F2AE /* AppDelegate.swift */,
-				BA6385DB1A65A90000B002D9 /* Onboarding */,
+				BA6385DB1A65A90000B002D9 /* Authentication */,
+				BAE702471A96BF030040DA6F /* Onboarding */,
 				BA9AA6811A6747F0002C4992 /* Main */,
 				BAF3BC971A76E03F00AFD3E5 /* More */,
 				BA789E091A7052C500BA1611 /* Player */,
@@ -352,15 +359,14 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
-		BA6385DB1A65A90000B002D9 /* Onboarding */ = {
+		BA6385DB1A65A90000B002D9 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
 				BA9AA67B1A67465F002C4992 /* OnboardingNavigationController.swift */,
 				BA6385E21A65ACAF00B002D9 /* OnboardingViewController.swift */,
 				BAC8CD391A6607550075B503 /* OnboardingAuthenticationViewController.swift */,
-				BAE702451A96AFDF0040DA6F /* OnboardingPageViewController.swift */,
 			);
-			name = Onboarding;
+			name = Authentication;
 			sourceTree = "<group>";
 		};
 		BA789E091A7052C500BA1611 /* Player */ = {
@@ -464,6 +470,17 @@
 				BABE8FCC1A8957D600B81DD1 /* Clip.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		BAE702471A96BF030040DA6F /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				BAE702451A96AFDF0040DA6F /* OnboardingPageViewController.swift */,
+				BAE702481A96C1130040DA6F /* OnboardingPlayViewController.swift */,
+				BAE7024A1A96C1220040DA6F /* OnboardingCaptureViewController.swift */,
+				BAE7024C1A96C12E0040DA6F /* OnboardingAddViewController.swift */,
+			);
+			name = Onboarding;
 			sourceTree = "<group>";
 		};
 		BAF3BC971A76E03F00AFD3E5 /* More */ = {
@@ -643,6 +660,7 @@
 				BAA966BD1A87FEEC0032752F /* FindFriendsViewController.swift in Sources */,
 				BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */,
 				BA7C0E481A65C315001B3B4C /* UIButton+Snowball.swift in Sources */,
+				BAE702491A96C1130040DA6F /* OnboardingPlayViewController.swift in Sources */,
 				BA38C15E1A30228700A2F2AE /* AppDelegate.swift in Sources */,
 				BA3A28841A305C6F00A85C29 /* UICollectionView+CellRegistration.swift in Sources */,
 				BA372D141A880C58004E58E9 /* TextFieldTableViewCell.swift in Sources */,
@@ -685,6 +703,7 @@
 				BACC0D591A899B6D00BA7FEF /* HomeViewController.swift in Sources */,
 				BA7198D21A897F4A004BB840 /* ClipPlayerItem.swift in Sources */,
 				BABE8FCB1A89574500B81DD1 /* ClipsViewController.swift in Sources */,
+				BAE7024B1A96C1220040DA6F /* OnboardingCaptureViewController.swift in Sources */,
 				BAE26FB31A77090700A0977C /* SnowballTopView.swift in Sources */,
 				BAB8F2C81A830F5500937407 /* FriendsViewController.swift in Sources */,
 				BA52474B1A31A1FC003BD269 /* UICollectionReusableView+Required.swift in Sources */,
@@ -696,6 +715,7 @@
 				BAD666EF1A5B380A00DF38D3 /* ClipTimelineBufferCollectionReuseableView.swift in Sources */,
 				BA5247451A319E24003BD269 /* AddClipCollectionReuseableView.swift in Sources */,
 				BAA15E9F1A6889230055756E /* AFURLSessionManager.m in Sources */,
+				BAE7024D1A96C12E0040DA6F /* OnboardingAddViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

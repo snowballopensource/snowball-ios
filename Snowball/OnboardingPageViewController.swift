@@ -14,15 +14,12 @@ class OnboardingPageViewController: UIViewController {
 
   let pageViewController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
 
-  // TODO: use real view controllers
-  let viewControllerClasses: [UIViewController.Type] = [UITableViewController.self, UIViewController.self, UIPageViewController.self]
+  let viewControllerClasses: [UIViewController.Type] = [OnboardingPlayViewController.self, OnboardingCaptureViewController.self, OnboardingAddViewController.self]
 
   // MARK: - UIViewController
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    view.backgroundColor = UIColor.purpleColor()
 
     pageViewController.dataSource = self
 
