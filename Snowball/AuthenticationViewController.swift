@@ -13,7 +13,7 @@ class SignUpViewController: AuthenticationViewController {}
 class SignInViewController: AuthenticationViewController {}
 
 class AuthenticationViewController: UIViewController, SnowballTopViewDelegate {
-  let topBar = AuthenticationTopView()
+  let topBar = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Back, rightButtonType: SnowballTopViewButtonType.Forward)
   let messageLabel = UILabel()
   let usernameTextField = UITextField()
   let emailTextField = UITextField()
@@ -26,7 +26,6 @@ class AuthenticationViewController: UIViewController, SnowballTopViewDelegate {
 
     view.backgroundColor = UIColor.whiteColor()
 
-    topBar.setPage(0)
     view.addSubview(topBar)
     topBar.setupDefaultLayout()
 
@@ -76,8 +75,6 @@ class AuthenticationViewController: UIViewController, SnowballTopViewDelegate {
       messageString.appendAttributedString(messageStringTwo)
       messageString.appendAttributedString(messageStringThree)
       messageLabel.attributedText = messageString
-
-      topBar.pageControl.hidden = true
     }
 
     emailTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("email"), attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])

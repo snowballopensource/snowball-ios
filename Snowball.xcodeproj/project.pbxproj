@@ -35,7 +35,6 @@
 		BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */; };
 		BA7C0E481A65C315001B3B4C /* UIButton+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */; };
 		BA7C0E4A1A65EF94001B3B4C /* UITextField+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E491A65EF94001B3B4C /* UITextField+Snowball.swift */; };
-		BA7C0E4C1A65F395001B3B4C /* AuthenticationTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E4B1A65F395001B3B4C /* AuthenticationTopView.swift */; };
 		BA7C27C61A37A28F00A9CFC5 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27C51A37A28F00A9CFC5 /* Router.swift */; };
 		BA7C27CB1A37A64400A9CFC5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27CA1A37A64400A9CFC5 /* API.swift */; };
 		BA7C27D31A37ADA600A9CFC5 /* RemoteObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */; };
@@ -149,7 +148,6 @@
 		BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Snowball.swift"; sourceTree = "<group>"; };
 		BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Snowball.swift"; sourceTree = "<group>"; };
 		BA7C0E491A65EF94001B3B4C /* UITextField+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Snowball.swift"; sourceTree = "<group>"; };
-		BA7C0E4B1A65F395001B3B4C /* AuthenticationTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationTopView.swift; sourceTree = "<group>"; };
 		BA7C27C51A37A28F00A9CFC5 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		BA7C27CA1A37A64400A9CFC5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteObject.swift; sourceTree = "<group>"; };
@@ -275,7 +273,6 @@
 			children = (
 				BA3A28851A30615800A85C29 /* Cells */,
 				BAE26FB21A77090700A0977C /* SnowballTopView.swift */,
-				BA7C0E4B1A65F395001B3B4C /* AuthenticationTopView.swift */,
 				BA32C7941A3287BE0052F4CA /* UserAvatarImageView.swift */,
 			);
 			name = Views;
@@ -676,7 +673,6 @@
 				BAA15EA51A6889230055756E /* UIProgressView+AFNetworking.m in Sources */,
 				BAA15E9C1A6889230055756E /* AFURLConnectionOperation.m in Sources */,
 				BA7C0E4A1A65EF94001B3B4C /* UITextField+Snowball.swift in Sources */,
-				BA7C0E4C1A65F395001B3B4C /* AuthenticationTopView.swift in Sources */,
 				BA9AA67C1A67465F002C4992 /* AuthenticationNavigationController.swift in Sources */,
 				BAA15E9E1A6889230055756E /* AFURLResponseSerialization.m in Sources */,
 				BA3A28701A3051E300A85C29 /* Util.swift in Sources */,
