@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
 
   private class var initialViewController: UIViewController {
-    if User.currentUser == nil { return OnboardingNavigationController() }
+    if User.currentUser == nil { return AuthenticationNavigationController() }
     return MainNavigationController()
   }
 

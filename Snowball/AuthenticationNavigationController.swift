@@ -1,5 +1,5 @@
 //
-//  OnboardingNavigationController.swift
+//  AuthenticationNavigationController.swift
 //  Snowball
 //
 //  Created by James Martinez on 1/14/15.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class OnboardingNavigationController: UINavigationController {
+class AuthenticationNavigationController: UINavigationController {
   override init() {
-    super.init(rootViewController: OnboardingViewController())
+    super.init(rootViewController: WelcomeViewController())
     navigationBarHidden = true
   }
 

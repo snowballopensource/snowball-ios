@@ -1,5 +1,5 @@
 //
-//  OnboardingViewController.swift
+//  WelcomeViewController.swift
 //  Snowball
 //
 //  Created by James Martinez on 1/13/15.
@@ -9,7 +9,7 @@
 import Cartography
 import UIKit
 
-class OnboardingViewController: UIViewController {
+class WelcomeViewController: UIViewController {
   let topImageView = UIImageView()
   let topImageViewLogo = UIImageView()
   let signUpButton = UIButton()
@@ -21,7 +21,7 @@ class OnboardingViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    topImageView.image = UIImage(named: "onboarding-image")
+    topImageView.image = UIImage(named: "welcome-image")
     topImageView.contentMode = UIViewContentMode.ScaleAspectFill
     topImageView.clipsToBounds = true
     view.addSubview(topImageView)
@@ -101,10 +101,10 @@ class OnboardingViewController: UIViewController {
   // MARK: - Actions
 
   func signUpButtonTapped() {
-    navigationController?.pushViewController(OnboardingSignUpViewController(), animated: true)
+    navigationController?.pushViewController(SignUpViewController(), animated: true)
   }
 
   func signInButtonTapped() {
-    navigationController?.pushViewController(OnboardingSignInViewController(), animated: true)
+    navigationController?.pushViewController(SignInViewController(), animated: true)
   }
 }

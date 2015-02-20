@@ -1,5 +1,5 @@
 //
-//  OnboardingAuthenticationViewController.swift
+//  AuthenticationViewController.swift
 //  Snowball
 //
 //  Created by James Martinez on 1/13/15.
@@ -9,11 +9,11 @@
 import Cartography
 import UIKit
 
-class OnboardingSignUpViewController: OnboardingAuthenticationViewController {}
-class OnboardingSignInViewController: OnboardingAuthenticationViewController {}
+class SignUpViewController: AuthenticationViewController {}
+class SignInViewController: AuthenticationViewController {}
 
-class OnboardingAuthenticationViewController: UIViewController, SnowballTopViewDelegate {
-  let topBar = OnboardingTopView()
+class AuthenticationViewController: UIViewController, SnowballTopViewDelegate {
+  let topBar = AuthenticationTopView()
   let messageLabel = UILabel()
   let usernameTextField = UITextField()
   let emailTextField = UITextField()
@@ -44,7 +44,7 @@ class OnboardingAuthenticationViewController: UIViewController, SnowballTopViewD
     let betweenMargin: Float = 15
     let textFieldHeight: Float = 50
 
-    if self.isKindOfClass(OnboardingSignUpViewController) {
+    if self.isKindOfClass(SignUpViewController) {
       let messageStringOne = NSAttributedString(string: "Ok, let's get started with\n", attributes: [NSForegroundColorAttributeName: UIColor.blackColor()])
       let messageStringTwo = NSAttributedString(string: "creating ", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
       let messageStringThree = NSAttributedString(string: "your account.", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor])
@@ -90,7 +90,7 @@ class OnboardingAuthenticationViewController: UIViewController, SnowballTopViewD
     emailTextField.autocapitalizationType = UITextAutocapitalizationType.None
     emailTextField.keyboardType = UIKeyboardType.EmailAddress
     view.addSubview(emailTextField)
-    if self.isKindOfClass(OnboardingSignUpViewController) {
+    if self.isKindOfClass(SignUpViewController) {
       layout(emailTextField, usernameTextField) { (emailTextField, usernameTextField) in
         emailTextField.left == usernameTextField.left
         emailTextField.top == usernameTextField.bottom + betweenMargin
@@ -127,7 +127,7 @@ class OnboardingAuthenticationViewController: UIViewController, SnowballTopViewD
 
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
-    if self.isKindOfClass(OnboardingSignUpViewController) {
+    if self.isKindOfClass(SignUpViewController) {
       usernameTextField.becomeFirstResponder()
     } else {
       emailTextField.becomeFirstResponder()
@@ -151,7 +151,7 @@ class OnboardingAuthenticationViewController: UIViewController, SnowballTopViewD
   private func validateFields() -> Bool {
     let alertController = UIAlertController(title: NSLocalizedString("Error"), message: nil, preferredStyle: UIAlertControllerStyle.Alert)
     alertController.addAction(UIAlertAction(title: NSLocalizedString("OK"), style: UIAlertActionStyle.Cancel, handler: nil))
-    if countElements(usernameTextField.text) < 2 && self.isKindOfClass(OnboardingSignUpViewController) {
+    if countElements(usernameTextField.text) < 2 && self.isKindOfClass(SignUpViewController) {
       alertController.message = NSLocalizedString("Username needs to be longer. Please try again.")
       presentViewController(alertController, animated: true, completion: nil)
       return false
@@ -169,7 +169,7 @@ class OnboardingAuthenticationViewController: UIViewController, SnowballTopViewD
 
   private func performAuthenticationRequest() {
     var route: Router
-    if self.isKindOfClass(OnboardingSignUpViewController) {
+    if self.isKindOfClass(SignUpViewController) {
       route = Router.SignUp(username: usernameTextField.text, email: emailTextField.text, password: passwordTextField.text)
     } else {
       route = Router.SignIn(email: emailTextField.text, password: passwordTextField.text)

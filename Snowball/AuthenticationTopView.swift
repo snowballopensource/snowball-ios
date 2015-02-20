@@ -1,5 +1,5 @@
 //
-//  OnboardingTopView.swift
+//  AuthenticationTopView.swift
 //  Snowball
 //
 //  Created by James Martinez on 1/13/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OnboardingTopView: SnowballTopView {
+class AuthenticationTopView: SnowballTopView {
   let pageControl = UIPageControl()
 
   // MARK: - UIView
