@@ -45,15 +45,19 @@ class ClipPlayerViewController: UIViewController {
   // MARK: - Internal
 
   func playClips(clips: [Clip]) {
-    player.actionAtItemEnd = AVPlayerActionAtItemEnd.Advance
+    if player.items().count > 1 {
+      // At the end of recursion, there should be more than one 
+      // clip in items(), which will set this to .Advance if needed
+      player.actionAtItemEnd = AVPlayerActionAtItemEnd.Advance
+    } else {
+      player.actionAtItemEnd = AVPlayerActionAtItemEnd.None
+    }
     player.play()
     let clip = clips.first!
     if clip.id == nil {
-      player.actionAtItemEnd = AVPlayerActionAtItemEnd.None
       let asset = AVURLAsset(URL: clip.videoURL, options: nil)
       let playerItem = ClipPlayerItem(clip: clip, asset: asset)
       registerPlayerItemForNotifications(playerItem)
-      player.removeAllItems()
       player.insertItem(playerItem, afterItem: self.player.items().last as? AVPlayerItem)
     } else {
       CachedURLAsset.createAssetFromRemoteURL(clip.videoURL!) { (asset, error) in
