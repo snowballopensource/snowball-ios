@@ -21,6 +21,8 @@ class OnboardingPageViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    view.backgroundColor = UIColor.SnowballColor.greenColor
+
     pageViewController.dataSource = self
 
     pageViewController.setViewControllers([viewControllerAtIndex(0)!], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)

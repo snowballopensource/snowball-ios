@@ -42,7 +42,6 @@ class ClipsViewController: UIViewController {
   private var previewedClip: Clip?
 
   private let kClipBookmarkDateKey = "ClipBookmarkDate"
-
   var clipBookmarkDate: NSDate? {
     get {
       return NSUserDefaults.standardUserDefaults().objectForKey(kClipBookmarkDateKey) as? NSDate

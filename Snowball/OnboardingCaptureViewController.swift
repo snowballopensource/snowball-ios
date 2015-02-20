@@ -8,6 +8,14 @@
 
 import UIKit
 
-class OnboardingCaptureViewController: UIViewController {
+class OnboardingCaptureViewController: OnboardingViewController {
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+    titleLabel.text = NSLocalizedString("Capture")
+    detailLabel.text = NSLocalizedString("Simply tap-and-hold in the camera view to capture a clip.")
+    detailImageView.image = UIImage(named: "onboarding-capture")
+  }
 
 }

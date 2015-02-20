@@ -27,6 +27,17 @@ class HomeViewController: UIViewController {
     return changeCameraButton
   }()
 
+  private let kHasSeenOnboardingKey = "HasSeenOnboarding"
+  var hasSeenOnboarding: Bool {
+    get {
+      return NSUserDefaults.standardUserDefaults().objectForKey(kHasSeenOnboardingKey) as? Bool ?? false
+    }
+    set {
+      NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: kHasSeenOnboardingKey)
+      NSUserDefaults.standardUserDefaults().synchronize()
+    }
+  }
+
   // MARK: - UIViewController
 
   override func viewDidLoad() {
@@ -85,9 +96,10 @@ class HomeViewController: UIViewController {
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
 
-    // TODO: make this conditional
-    presentViewController(OnboardingPageViewController(), animated: true) {
-      // TODO: Set shown onboarding to True
+    if !hasSeenOnboarding {
+      presentViewController(OnboardingPageViewController(), animated: true) {
+        self.hasSeenOnboarding = true
+      }
     }
   }
 

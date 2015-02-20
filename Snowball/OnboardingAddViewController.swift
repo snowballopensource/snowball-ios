@@ -9,15 +9,15 @@
 import Cartography
 import UIKit
 
-class OnboardingAddViewController: UIViewController {
+class OnboardingAddViewController: OnboardingViewController {
 
   // MARK: - Properties
 
   let doneButton: UIButton = {
     let doneButton = UIButton()
     doneButton.setTitle(NSLocalizedString("Done"), forState: UIControlState.Normal)
-    doneButton.setTitleColor(UIColor.SnowballColor.greenColor, forState: UIControlState.Normal)
-    doneButton.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
+    doneButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+    doneButton.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 22)
     return doneButton
   }()
 
@@ -25,6 +25,10 @@ class OnboardingAddViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    titleLabel.text = NSLocalizedString("Add")
+    detailLabel.text = NSLocalizedString("Just tap + to add your clip to the timeline.\n\nNow your friends will see it in their film.")
+    detailImageView.image = UIImage(named: "onboarding-add")
 
     doneButton.addTarget(self, action: "doneButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(doneButton)
