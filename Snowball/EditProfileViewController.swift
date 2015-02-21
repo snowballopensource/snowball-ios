@@ -179,11 +179,11 @@ extension EditProfileViewController: UITableViewDataSource {
     case .PhoneNumber:
       cell.textFieldLabel.text = NSLocalizedString("PHONE NUMBER")
       cell.textField.text = User.currentUser?.phoneNumber
-      cell.textField.keyboardType = UIKeyboardType.EmailAddress
+      cell.textField.keyboardType = UIKeyboardType.PhonePad
     case .Email:
       cell.textFieldLabel.text = NSLocalizedString("EMAIL")
       cell.textField.text = User.currentUser?.email
-      cell.textField.keyboardType = UIKeyboardType.PhonePad
+      cell.textField.keyboardType = UIKeyboardType.EmailAddress
     }
   }
 }

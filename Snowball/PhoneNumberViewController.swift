@@ -25,7 +25,7 @@ class PhoneNumberViewController: UIViewController {
   let countryCodeTextField: UITextField = {
     let countryCodeTextField = UITextField()
     countryCodeTextField.backgroundColor = UIColor.SnowballColor.greenColor
-    countryCodeTextField.keyboardType = UIKeyboardType.NumberPad
+    countryCodeTextField.keyboardType = UIKeyboardType.PhonePad
     countryCodeTextField.showSnowballStyleBorderWithColor(UIColor.SnowballColor.greenColor)
     countryCodeTextField.text = "+1"
     countryCodeTextField.font = UIFont(name: "Helvetica", size: 24)
@@ -37,7 +37,7 @@ class PhoneNumberViewController: UIViewController {
 
   let phoneNumberTextField: UITextField = {
     let phoneNumberTextField = UITextField()
-    phoneNumberTextField.keyboardType = UIKeyboardType.NumberPad
+    phoneNumberTextField.keyboardType = UIKeyboardType.PhonePad
     phoneNumberTextField.showSnowballStyleBorderWithColor(UIColor.SnowballColor.greenColor)
     phoneNumberTextField.attributedPlaceholder = NSAttributedString(string: "4151234567", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor])
     phoneNumberTextField.font = UIFont(name: "Helvetica", size: 28)
