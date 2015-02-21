@@ -179,7 +179,11 @@ class AuthenticationViewController: UIViewController, SnowballTopViewDelegate {
           user?.managedObjectContext?.save(nil)
           User.currentUser = user
           if let user = user {
-            AppDelegate.switchToNavigationController(MainNavigationController())
+            if self.isKindOfClass(SignUpViewController) {
+              self.navigationController?.pushViewController(PhoneNumberViewController(), animated: true)
+            } else {
+              AppDelegate.switchToNavigationController(MainNavigationController())
+            }
           }
         }
       }
