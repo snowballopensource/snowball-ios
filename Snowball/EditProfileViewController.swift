@@ -131,7 +131,7 @@ extension EditProfileViewController: SnowballTopViewDelegate {
     }
     let emailCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: EditProfileTextFieldIndex.Email.rawValue, inSection: 0)) as TextFieldTableViewCell
     var email: String?
-    if user.email != emailCell.textField.text {
+    if user.email != emailCell.textField.text && countElements(emailCell.textField.text) > 0 {
       email = emailCell.textField.text
       user.email = email
     }
