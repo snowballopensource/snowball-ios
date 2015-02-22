@@ -45,7 +45,7 @@ class ClipPlayerViewController: UIViewController {
   // MARK: - Internal
 
   func playClips(clips: [Clip]) {
-    if player.items().count > 1 {
+    if player.items().count > 0 {
       // At the end of recursion, there should be more than one 
       // clip in items(), which will set this to .Advance if needed
       player.actionAtItemEnd = AVPlayerActionAtItemEnd.Advance
