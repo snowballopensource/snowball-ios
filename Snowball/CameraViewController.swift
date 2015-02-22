@@ -64,7 +64,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         }
       }
     }
-    beginSession()
 
     let recordingGestureRecognizer = UILongPressGestureRecognizer()
     recordingGestureRecognizer.minimumPressDuration = 0.2
@@ -79,6 +78,14 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
       progressView.top == progressView.superview!.top
       progressView.right == progressView.superview!.right
       progressView.height == 10
+    }
+  }
+
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+
+    if !captureSession.running {
+      beginSession()
     }
   }
 
