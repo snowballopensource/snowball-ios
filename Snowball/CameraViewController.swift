@@ -255,8 +255,9 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     instruction.layerInstructions = [transformer]
     videoComposition.instructions = [instruction]
 
-    let exportedVideoURL = outputFileURL.URLByDeletingPathExtension!.URLByAppendingPathExtension("mp4")
-    let exportedThumbnailURL = exportedVideoURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent("image.png")
+    let randomString = NSUUID().UUIDString
+    let exportedVideoURL = outputFileURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent("video_\(randomString).mp4")
+    let exportedThumbnailURL = exportedVideoURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent("image_\(randomString).png")
 
     // Export
     NSFileManager.defaultManager().removeItemAtURL(outputFileURL, error: nil)
