@@ -54,11 +54,17 @@ class ClipPlayerViewController: UIViewController {
     }
     player.play()
     let clip = clips.first!
+    // TODO: remove duplication
     if clip.id == nil {
       let asset = AVURLAsset(URL: clip.videoURL, options: nil)
       let playerItem = ClipPlayerItem(clip: clip, asset: asset)
       registerPlayerItemForNotifications(playerItem)
       player.insertItem(playerItem, afterItem: self.player.items().last as? AVPlayerItem)
+      var mutableClips = clips
+      mutableClips.removeAtIndex(0)
+      if mutableClips.count > 0 {
+        playClips(mutableClips)
+      }
     } else {
       CachedURLAsset.createAssetFromRemoteURL(clip.videoURL!) { (asset, error) in
         if let asset = asset {
