@@ -98,6 +98,18 @@ class EditProfileViewController: UIViewController {
 //    }
 
     view.backgroundColor = UIColor.whiteColor()
+
+    API.request(Router.GetCurrentUser).responseJSON { (request, response, JSON, error) in
+      error?.print("api get current user")
+      if error != nil { displayAPIErrorToUser(JSON); return }
+      if let JSON: AnyObject = JSON {
+        dispatch_async(dispatch_get_main_queue()) {
+          User.objectFromJSON(JSON)
+          self.tableView.reloadData()
+        }
+      }
+    }
+
   }
 }
 
