@@ -117,7 +117,14 @@ class ClipsViewController: UIViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
 
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "refresh", name: UIApplicationWillEnterForegroundNotification, object: nil)
+
     refresh()
+  }
+
+  override func viewWillDisappear(animated: Bool) {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+    super.viewWillDisappear(animated)
   }
 
   // MARK: - Internal
@@ -142,7 +149,7 @@ class ClipsViewController: UIViewController {
 
   // MARK: - Private
 
-  private func refresh() {
+  @objc private func refresh() {
     API.request(Router.GetClipStream).responseJSON { (request, response, JSON, error) in
       if let JSON = JSON as? [AnyObject] {
         self.clips = Clip.importJSON(JSON)
