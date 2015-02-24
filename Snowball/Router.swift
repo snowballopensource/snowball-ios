@@ -10,7 +10,14 @@ import Alamofire
 import Foundation
 
 enum Router: URLRequestConvertible {
-  static let baseURLString = "http://api.snowball.is/v1/"
+  static let baseURLString: String = {
+    if let bundleIdentifier = NSBundle.mainBundle().bundleIdentifier {
+      if bundleIdentifier == "is.snowball.snowball-staging" {
+        return "http://s.snowball.is/api/v1"
+      }
+    }
+    return "http://api.snowball.is/v1/"
+  }()
 
   // Authentication
   case SignUp(username: String, email: String, password: String)
