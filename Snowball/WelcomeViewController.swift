@@ -15,6 +15,8 @@ class WelcomeViewController: UIViewController {
   let signUpButton = UIButton()
   let signInButton = UIButton()
   let legalLabel = UILabel()
+  let termsButton = UIButton()
+  let privacyButton = UIButton()
 
   // MARK: - UIViewController
 
@@ -85,7 +87,8 @@ class WelcomeViewController: UIViewController {
       signInChevron.height == Float(chevronImage.size.height)
     }
 
-    legalLabel.text = NSLocalizedString("by continuing you are agreeing to the snowball terms of use and privacy policy")
+    legalLabel.text = NSLocalizedString("by continuing you are agreeing to the snowball\nterms of use and privacy policy")
+    legalLabel.textAlignment = NSTextAlignment.Center
     legalLabel.textColor = UIColor.SnowballColor.grayColor
     legalLabel.font = UIFont(name: UIFont.SnowballFont.bold, size: 10)
     legalLabel.numberOfLines = 0
@@ -95,6 +98,24 @@ class WelcomeViewController: UIViewController {
       legalLabel.left == legalLabel.superview!.left + margin
       legalLabel.right == legalLabel.superview!.right - margin
       legalLabel.bottom == legalLabel.superview!.bottom - 30
+    }
+
+    termsButton.addTarget(self, action: "termsButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    view.addSubview(termsButton)
+    layout(termsButton, legalLabel) { (termsButton, legalLabel) in
+      termsButton.left == legalLabel.left
+      termsButton.top == legalLabel.top
+      termsButton.right == termsButton.superview!.centerX
+      termsButton.bottom == legalLabel.bottom
+    }
+
+    privacyButton.addTarget(self, action: "privacyButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    view.addSubview(privacyButton)
+    layout(privacyButton, legalLabel) { (privacyButton, legalLabel) in
+      privacyButton.left == privacyButton.superview!.centerX
+      privacyButton.top == legalLabel.top
+      privacyButton.right == legalLabel.right
+      privacyButton.bottom == legalLabel.bottom
     }
   }
 
@@ -106,5 +127,13 @@ class WelcomeViewController: UIViewController {
 
   func signInButtonTapped() {
     navigationController?.pushViewController(SignInViewController(), animated: true)
+  }
+
+  func termsButtonTapped() {
+    navigationController?.pushViewController(TermsViewController(), animated: true)
+  }
+
+  func privacyButtonTapped() {
+    navigationController?.pushViewController(PrivacyPolicyViewController(), animated: true)
   }
 }

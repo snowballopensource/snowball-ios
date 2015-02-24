@@ -51,7 +51,7 @@ enum SnowballTopViewButtonType {
 }
 
 class SnowballTopView: UIView {
-  private var titleLabel = UILabel()
+  let titleLabel = UILabel()
   private var leftButton: UIButton?
   private var rightButton: UIButton?
   var delegate: SnowballTopViewDelegate?
