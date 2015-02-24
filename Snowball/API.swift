@@ -17,22 +17,31 @@ struct API {
 
   // Hack using AFNetworking since Alamofire does not support multipart uploads
   static func uploadClip(clip: Clip, completion: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> ()) {
-    let requestURL = NSURL(string: Router.baseURLString)!.URLByAppendingPathComponent("clips")
-    let request = AFHTTPRequestSerializer().multipartFormRequestWithMethod("POST",
-      URLString: requestURL.absoluteString!,
-      parameters: nil,
-      constructingBodyWithBlock: { (formData: AFMultipartFormData!) in
-        formData.appendPartWithFileURL(clip.videoURL, name: "video", error: nil)
-        formData.appendPartWithFileURL(clip.thumbnailURL, name: "thumbnail", error: nil)
-        return
-    }, error: nil)
-    let encodedAuthTokenData = "\(APICredential.authToken!):".dataUsingEncoding(NSUTF8StringEncoding)!
-    let encodedAuthToken = encodedAuthTokenData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
-    request.setValue("Basic \(encodedAuthToken)", forHTTPHeaderField: "Authorization")
+    UploadQueue.sharedQueue.addTask {
+      let requestURL = NSURL(string: Router.baseURLString)!.URLByAppendingPathComponent("clips")
+      let request = AFHTTPRequestSerializer().multipartFormRequestWithMethod("POST",
+        URLString: requestURL.absoluteString!,
+        parameters: nil,
+        constructingBodyWithBlock: { (formData: AFMultipartFormData!) in
+          formData.appendPartWithFileURL(clip.videoURL, name: "video", error: nil)
+          formData.appendPartWithFileURL(clip.thumbnailURL, name: "thumbnail", error: nil)
+          return
+        }, error: nil)
+      let encodedAuthTokenData = "\(APICredential.authToken!):".dataUsingEncoding(NSUTF8StringEncoding)!
+      let encodedAuthToken = encodedAuthTokenData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+      request.setValue("Basic \(encodedAuthToken)", forHTTPHeaderField: "Authorization")
+
+      self.tryUpload(request, retryCount: 3, completion: completion)
+    }
+  }
+
+  private static func tryUpload(request: NSURLRequest, retryCount: Int, completion: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> ()) {
     let manager = AFURLSessionManager(sessionConfiguration: NSURLSessionConfiguration.defaultSessionConfiguration())
     let uploadTask = manager.uploadTaskWithStreamedRequest(request, progress: nil) { (response, responseObject, error) in
+      if error != nil && retryCount > 1 {
+        self.tryUpload(request, retryCount: retryCount - 1, completion: completion)
+      }
       completion(request, response as NSHTTPURLResponse?, responseObject, error)
-      return
     }
     uploadTask.resume()
   }
