@@ -113,6 +113,10 @@ class FriendsViewController: UIViewController {
       tableView.right == tableView.superview!.right
       tableView.bottom == tableView.superview!.bottom
     }
+  }
+
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
 
     refresh()
   }
