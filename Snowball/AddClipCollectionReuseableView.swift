@@ -50,22 +50,6 @@ class AddClipCollectionReuseableView: UICollectionReusableView {
     return ClipCollectionViewCell.size
   }
 
-  // MARK: - Internal
-
-  func scaleAddClipButton(down: Bool, animated: Bool) {
-    if animated {
-      UIView.animateWithDuration(0.4) {
-        self.scaleAddClipButton(down, animated: false)
-      }
-    } else {
-      if down {
-        addClipButton.transform = CGAffineTransformMakeScale(0.85, 0.85)
-      } else {
-        addClipButton.transform = CGAffineTransformMakeScale(1.0, 1.0)
-      }
-    }
-  }
-
   // MARK: - Private
 
   @objc private func addClipButtonTapped() {
