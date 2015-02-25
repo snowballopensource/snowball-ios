@@ -77,7 +77,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
       progressView.left == progressView.superview!.left
       progressView.top == progressView.superview!.top
       progressView.right == progressView.superview!.right
-      progressView.height == 10
+      progressView.height == 20
     }
   }
 
