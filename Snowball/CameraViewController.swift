@@ -25,6 +25,28 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
   private var movieFileOutput: AVCaptureMovieFileOutput?
   private let maxRecordingSeconds = 10.0
   private let FPS: Int32 = 24
+
+  private let kDefaultCameraPositionKey = "DetaultCameraPosition"
+  private var defaultCameraPosition: AVCaptureDevicePosition {
+    get {
+      let lastCameraPositionString = NSUserDefaults.standardUserDefaults().objectForKey(kDefaultCameraPositionKey) as? String
+      if lastCameraPositionString == "back" {
+        return AVCaptureDevicePosition.Back
+      }
+      return AVCaptureDevicePosition.Front
+    }
+    set {
+      var lastCameraPositionString: String!
+      if newValue == AVCaptureDevicePosition.Back {
+        lastCameraPositionString = "back"
+      } else {
+        lastCameraPositionString = "front"
+      }
+      NSUserDefaults.standardUserDefaults().setObject(lastCameraPositionString, forKey: kDefaultCameraPositionKey)
+      NSUserDefaults.standardUserDefaults().synchronize()
+    }
+  }
+
   var delegate: CameraViewControllerDelegate?
 
   // MARK: - UIViewController
@@ -42,7 +64,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     dispatch_async(sessionQueue) {
       var error: NSError?
       self.captureSession.sessionPreset = AVCaptureSessionPreset640x480
-      let videoDevice = self.captureDeviceForMediaType(AVMediaTypeVideo, position: AVCaptureDevicePosition.Front)
+      let videoDevice = self.captureDeviceForMediaType(AVMediaTypeVideo, position: self.defaultCameraPosition)
       let videoDeviceInput = AVCaptureDeviceInput(device: videoDevice, error: nil)
       if self.captureSession.canAddInput(videoDeviceInput) {
         self.captureSession.addInput(videoDeviceInput)
@@ -114,6 +136,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         newPosition = AVCaptureDevicePosition.Back
         break
       }
+      defaultCameraPosition = newPosition
       if let newDevice = captureDeviceForMediaType(AVMediaTypeVideo, position: newPosition) {
         var error: NSError?
         let newDeviceInput = AVCaptureDeviceInput(device: newDevice, error: &error)
