@@ -82,7 +82,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         self.captureSession.addOutput(movieFileOutput)
         if let connection = movieFileOutput.connectionWithMediaType(AVMediaTypeVideo) {
           if connection.supportsVideoStabilization {
-            connection.enablesVideoStabilizationWhenAvailable = true
+            connection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationMode.Auto
           }
         }
       }
