@@ -15,6 +15,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
   private let userAvatarImageView = UserAvatarImageView()
   private let usernameLabel = UILabel()
   private let clipTimeLabel = UILabel()
+  private let dimView = UIView()
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -28,6 +29,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
     clipTimeLabel.textAlignment = NSTextAlignment.Center
     clipTimeLabel.textColor = UIColor(red: 210/255.0, green: 210/255.0, blue: 210/255.0, alpha: 1.0)
     contentView.addSubview(clipTimeLabel)
+    dimView.backgroundColor = UIColor.whiteColor()
+    dimView.alpha = 0.8
+    dimView.hidden = true
+    contentView.addSubview(dimView)
   }
 
   required init(coder: NSCoder) {
@@ -64,6 +69,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipTimeLabel.top == usernameLabel.bottom + 2
       clipTimeLabel.right == clipTimeLabel.superview!.right
     }
+
+    dimView.frame = contentView.bounds
   }
 
   // MARK: - UICollectionReuseableView+Required
@@ -92,6 +99,11 @@ class ClipCollectionViewCell: UICollectionViewCell {
         clipThumbnailImageView.hnk_setImageFromURL(thumbnailURL, format: Format<UIImage>(name: "original"))
       }
     }
+    dimContentView(false)
+  }
+
+  func dimContentView(dim: Bool) {
+    dimView.hidden = !dim
   }
 
   // MARK: - Internal

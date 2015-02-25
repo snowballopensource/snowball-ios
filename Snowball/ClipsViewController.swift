@@ -56,9 +56,34 @@ class ClipsViewController: UIViewController {
 
   private let currentClipScrollPosition = UICollectionViewScrollPosition.Right
 
+  private var playingClipIndexPath: NSIndexPath? {
+    didSet {
+      if let indexPath = playingClipIndexPath {
+        collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: true)
+      }
+    }
+  }
+
+  private var previewingClip = false
+
   private var playing: Bool = false {
     didSet {
-      scaleVisibleClipThumbnails(playing)
+      for cell in collectionView.visibleCells() {
+        let cell = cell as ClipCollectionViewCell
+        if playing && previewingClip {
+          // Don't scale, don't dim
+        } else {
+          cell.scaleClipThumbnail(playing, animated: true)
+          cell.dimContentView(playing)
+          if let indexPath = playingClipIndexPath {
+            if let cellIndexPath = collectionView.indexPathForCell(cell) {
+              if indexPath == cellIndexPath {
+                cell.dimContentView(false)
+              }
+            }
+          }
+        }
+      }
     }
   }
 
@@ -132,6 +157,7 @@ class ClipsViewController: UIViewController {
   func previewClip(clip: Clip) {
     previewedClip = clip
     showAddClipButton()
+    previewingClip = true
     playing = true
     delegate?.willBeginPlayback()
     cancelPreviewButton.hidden = false
@@ -143,7 +169,9 @@ class ClipsViewController: UIViewController {
     playerViewController.endPlayback()
     hideAddClipButton()
     cancelPreviewButton.hidden = true
+    previewingClip = false
     playing = false
+    playingClipIndexPath = nil
     delegate?.didEndPlayback()
   }
 
@@ -243,13 +271,6 @@ class ClipsViewController: UIViewController {
   @objc private func cancelPreviewButtonTapped() {
     endPlayback()
   }
-
-  private func scaleVisibleClipThumbnails(down: Bool) {
-    for cell in collectionView.visibleCells() {
-      let cell = cell as ClipCollectionViewCell
-      cell.scaleClipThumbnail(down, animated: true)
-    }
-  }
 }
 
 // MARK: -
@@ -264,9 +285,18 @@ extension ClipsViewController: UICollectionViewDataSource {
 
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(ClipCollectionViewCell), forIndexPath: indexPath) as ClipCollectionViewCell
-    cell.scaleClipThumbnail(playing, animated: false)
     let clip = clips[indexPath.row]
     cell.configureForClip(clip)
+    if playing && !previewingClip {
+      if let playingClipIndexPath = playingClipIndexPath {
+        cell.scaleClipThumbnail(true, animated: false)
+        if playingClipIndexPath == indexPath {
+          cell.dimContentView(false)
+        } else {
+          cell.dimContentView(true)
+        }
+      }
+    }
     return cell
   }
 
@@ -289,7 +319,7 @@ extension ClipsViewController: UICollectionViewDelegate {
     if playing {
       endPlayback()
     } else {
-      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: true)
+      playingClipIndexPath = indexPath
       playing = true
       delegate?.willBeginPlayback()
 
@@ -314,9 +344,13 @@ extension ClipsViewController: ClipPlayerViewControllerDelegate {
       }
     }
 
+    let indexPath = NSIndexPath(forItem: indexOfClip(playerItem.clip), inSection: 0)
+    let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ClipCollectionViewCell
+    cell?.dimContentView(true)
+
     if let nextClip = clipAfterClip(playerItem.clip) {
       let indexPath = NSIndexPath(forItem: indexOfClip(nextClip), inSection: 0)
-      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: true)
+      playingClipIndexPath = indexPath
     } else {
       endPlayback()
     }
