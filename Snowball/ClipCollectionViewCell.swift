@@ -30,7 +30,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     clipTimeLabel.textColor = UIColor(red: 210/255.0, green: 210/255.0, blue: 210/255.0, alpha: 1.0)
     contentView.addSubview(clipTimeLabel)
     dimView.backgroundColor = UIColor.whiteColor()
-    dimView.alpha = 0.8
+    dimView.alpha = 0.6
     dimView.hidden = true
     contentView.addSubview(dimView)
   }
