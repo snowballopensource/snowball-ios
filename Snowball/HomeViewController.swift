@@ -156,7 +156,12 @@ extension HomeViewController: CameraViewControllerDelegate {
 
   // MARK: - CameraViewControllerDelegate
 
+  func videoDidBeginRecording() {
+    hideTopMenuViewAnimated()
+  }
+
   func videoRecordedToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL, error: NSError?) {
+    showTopMenuViewAnimated()
     error?.print("recording")
     let clip = Clip()
     clip.videoURL = videoURL

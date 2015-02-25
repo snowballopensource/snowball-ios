@@ -11,6 +11,7 @@ import Cartography
 import UIKit
 
 protocol CameraViewControllerDelegate {
+  func videoDidBeginRecording()
   func videoRecordedToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL, error: NSError?)
 }
 
@@ -225,6 +226,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
   func captureOutput(captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAtURL fileURL: NSURL!, fromConnections connections: [AnyObject]!) {
     setFocusLocked(true)
     beginProgressViewAnimation()
+    delegate?.videoDidBeginRecording()
   }
 
   func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!) {
