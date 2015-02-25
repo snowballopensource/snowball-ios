@@ -99,6 +99,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
         clipThumbnailImageView.hnk_setImageFromURL(thumbnailURL, format: Format<UIImage>(name: "original"))
       }
     }
+    scaleClipThumbnail(false, animated: false)
     dimContentView(false)
   }
 
