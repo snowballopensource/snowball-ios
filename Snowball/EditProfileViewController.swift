@@ -10,7 +10,11 @@ import Cartography
 import Foundation
 
 class EditProfileViewController: UIViewController {
+
+  // MARK: - Properties
+
   private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Back, rightButtonType: nil, title: "Edit Profile")
+
   private let tableView: UITableView = {
     let tableView = UITableView()
     tableView.allowsSelection = false
@@ -86,6 +90,7 @@ class EditProfileViewController: UIViewController {
 //      logOutButton.height == 50
 //    }
 //
+//    // When bringing this back from uncomment, this bad boy can be a snowballroundedbutton
 //    let chevronImage = UIImage(named: "chevron")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
 //    let logOutChevron = UIImageView(image: chevronImage)
 //    logOutChevron.tintColor = UIColor.redColor()
@@ -99,6 +104,7 @@ class EditProfileViewController: UIViewController {
 
     view.backgroundColor = UIColor.whiteColor()
 
+    // TODO: prevent editing while loading this, but allow to go back
     API.request(Router.GetCurrentUser).responseJSON { (request, response, JSON, error) in
       error?.print("api get current user")
       if error != nil { displayAPIErrorToUser(JSON); return }
@@ -109,7 +115,6 @@ class EditProfileViewController: UIViewController {
         }
       }
     }
-
   }
 }
 
@@ -177,7 +182,9 @@ extension EditProfileViewController: UITableViewDataSource {
     return cell
   }
 
-  func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+  // MARK: - Private
+
+  private func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
     let cell = cell as TextFieldTableViewCell
 
     cell.textField.autocorrectionType = UITextAutocorrectionType.No
