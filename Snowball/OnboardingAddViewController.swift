@@ -14,11 +14,11 @@ class OnboardingAddViewController: OnboardingViewController {
   // MARK: - Properties
 
   let doneButton: UIButton = {
-    let doneButton = UIButton()
-    doneButton.setTitle(NSLocalizedString("Done"), forState: UIControlState.Normal)
-    doneButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-    doneButton.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 22)
-    return doneButton
+    let button = UIButton()
+    button.setTitle(NSLocalizedString("Done"), forState: UIControlState.Normal)
+    button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+    button.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 22)
+    return button
   }()
 
   // MARK: - UIViewController

@@ -10,6 +10,8 @@ import UIKit
 
 class OnboardingPlayViewController: OnboardingViewController {
 
+  // MARK: - UIViewController
+
   override func viewDidLoad() {
     super.viewDidLoad()
 

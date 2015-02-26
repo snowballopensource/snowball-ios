@@ -14,25 +14,25 @@ class OnboardingViewController: UIViewController {
   // MARK: - Properties
 
   let titleLabel: UILabel = {
-    let titleLabel = UILabel()
-    titleLabel.font = UIFont(name: UIFont.SnowballFont.regular, size: 32)
-    titleLabel.textColor = UIColor.whiteColor()
-    return titleLabel
+    let label = UILabel()
+    label.font = UIFont(name: UIFont.SnowballFont.regular, size: 32)
+    label.textColor = UIColor.whiteColor()
+    return label
   }()
 
   let detailLabel: UILabel = {
-    let detailLabel = UILabel()
-    detailLabel.numberOfLines = 0
-    detailLabel.textAlignment = NSTextAlignment.Center
-    detailLabel.font = UIFont(name: UIFont.SnowballFont.regular, size: 19)
-    detailLabel.textColor = UIColor.whiteColor()
-    return detailLabel
+    let label = UILabel()
+    label.numberOfLines = 0
+    label.textAlignment = NSTextAlignment.Center
+    label.font = UIFont(name: UIFont.SnowballFont.regular, size: 19)
+    label.textColor = UIColor.whiteColor()
+    return label
   }()
 
   let detailImageView: UIImageView = {
-    let detailImageView = UIImageView()
-    detailImageView.contentMode = UIViewContentMode.Top
-    return detailImageView
+    let imageView = UIImageView()
+    imageView.contentMode = UIViewContentMode.Top
+    return imageView
   }()
 
   // MARK: - UIViewController

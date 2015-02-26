@@ -10,6 +10,8 @@ import UIKit
 
 class OnboardingCaptureViewController: OnboardingViewController {
 
+  // MARK: - UIViewController
+
   override func viewDidLoad() {
     super.viewDidLoad()
 

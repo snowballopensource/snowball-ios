@@ -12,9 +12,9 @@ class OnboardingPageViewController: UIViewController {
 
   // MARK: - Properties
 
-  let pageViewController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
+  private let pageViewController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
 
-  let viewControllerClasses: [UIViewController.Type] = [OnboardingPlayViewController.self, OnboardingCaptureViewController.self, OnboardingAddViewController.self]
+  private let viewControllerClasses: [UIViewController.Type] = [OnboardingPlayViewController.self, OnboardingCaptureViewController.self, OnboardingAddViewController.self]
 
   // MARK: - UIViewController
 
@@ -33,9 +33,9 @@ class OnboardingPageViewController: UIViewController {
     pageViewController.didMoveToParentViewController(self)
   }
 
-  // MARK: - Internal
+  // MARK: - Private
 
-  func indexOfViewControllerClass(viewControllerClass: UIViewController.Type) -> Int {
+  private func indexOfViewControllerClass(viewControllerClass: UIViewController.Type) -> Int {
     for i in (0..<viewControllerClasses.count) {
       if NSStringFromClass(viewControllerClasses[i]) == NSStringFromClass(viewControllerClass) {
         return i
@@ -44,7 +44,7 @@ class OnboardingPageViewController: UIViewController {
     return 0
   }
 
-  func viewControllerAtIndex(index: Int) -> UIViewController? {
+  private func viewControllerAtIndex(index: Int) -> UIViewController? {
     if index >= viewControllerClasses.count || index < 0 {
       return nil
     }
