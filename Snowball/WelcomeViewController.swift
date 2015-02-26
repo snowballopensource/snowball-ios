@@ -28,22 +28,19 @@ class WelcomeViewController: UIViewController {
     return imageView
   }()
 
-  let signUpButton: UIButton = {
-    let button = UIButton()
+  let signUpButton: SnowballRoundedButton = {
+    let button = SnowballRoundedButton()
+    button.tintColor = UIColor.SnowballColor.greenColor
+    button.showChevron = true
     button.setTitle(NSLocalizedString("sign up"), forState: UIControlState.Normal)
-    button.setTitleColor(UIColor.SnowballColor.greenColor, forState: UIControlState.Normal)
-    button.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    button.alignLeft(insetWidth: 20)
-    button.showSnowballStyleBorderWithColor(UIColor.SnowballColor.greenColor)
     return button
   }()
 
-  let signInButton: UIButton = {
-    let button = UIButton()
+  let signInButton: SnowballRoundedButton = {
+    let button = SnowballRoundedButton()
+    button.tintColor = UIColor.SnowballColor.grayColor
+    button.showChevron = true
     button.setTitle(NSLocalizedString("sign in"), forState: UIControlState.Normal)
-    button.setTitleColor(UIColor.SnowballColor.grayColor, forState: UIControlState.Normal)
-    button.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    button.alignLeft(insetWidth: 20)
     return button
   }()
 
@@ -87,16 +84,6 @@ class WelcomeViewController: UIViewController {
       signUpButton.right == signUpButton.superview!.right - buttonMargin
       signUpButton.height == 50
     }
-    let chevronImage = UIImage(named: "chevron")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-    let signUpChevron = UIImageView(image: chevronImage)
-    signUpChevron.tintColor = UIColor.SnowballColor.greenColor
-    signUpButton.addSubview(signUpChevron)
-    layout(signUpChevron) { (signUpChevron) in
-      signUpChevron.width == Float(chevronImage.size.width)
-      signUpChevron.centerY == signUpChevron.superview!.centerY
-      signUpChevron.right == signUpChevron.superview!.right - 25
-      signUpChevron.height == Float(chevronImage.size.height)
-    }
 
     signInButton.addTarget(self, action: "signInButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(signInButton)
@@ -105,15 +92,6 @@ class WelcomeViewController: UIViewController {
       signInButton.top == signUpButton.bottom + buttonMargin
       signInButton.right == signUpButton.right
       signInButton.height == signUpButton.height
-    }
-    let signInChevron = UIImageView(image: chevronImage)
-    signInChevron.tintColor = UIColor.SnowballColor.grayColor
-    signInButton.addSubview(signInChevron)
-    layout(signInChevron) { (signInChevron) in
-      signInChevron.width == Float(chevronImage.size.width)
-      signInChevron.centerY == signInChevron.superview!.centerY
-      signInChevron.right == signInChevron.superview!.right - 25
-      signInChevron.height == Float(chevronImage.size.height)
     }
 
     view.addSubview(legalLabel)

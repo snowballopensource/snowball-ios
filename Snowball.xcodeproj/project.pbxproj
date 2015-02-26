@@ -24,6 +24,7 @@
 		BA3A28771A305AF600A85C29 /* ClipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A28761A305AF600A85C29 /* ClipCollectionViewCell.swift */; };
 		BA3A28841A305C6F00A85C29 /* UICollectionView+CellRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A28831A305C6F00A85C29 /* UICollectionView+CellRegistration.swift */; };
 		BA3DB8221A9EEA8B00378F6D /* UIViewController+NavigationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3DB8211A9EEA8B00378F6D /* UIViewController+NavigationTransition.swift */; };
+		BA3DB8241A9EEEFD00378F6D /* SnowballRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3DB8231A9EEEFD00378F6D /* SnowballRoundedButton.swift */; };
 		BA44E4541A9C0B7700B75DF3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4531A9C0B7700B75DF3 /* WebViewController.swift */; };
 		BA44E4561A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4551A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift */; };
 		BA44E4581A9C0EC600B75DF3 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */; };
@@ -214,6 +215,7 @@
 		BA3A28761A305AF600A85C29 /* ClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA3A28831A305C6F00A85C29 /* UICollectionView+CellRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+CellRegistration.swift"; sourceTree = "<group>"; };
 		BA3DB8211A9EEA8B00378F6D /* UIViewController+NavigationTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+NavigationTransition.swift"; sourceTree = "<group>"; };
+		BA3DB8231A9EEEFD00378F6D /* SnowballRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballRoundedButton.swift; sourceTree = "<group>"; };
 		BA44E4531A9C0B7700B75DF3 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		BA44E4551A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 				BA3A28851A30615800A85C29 /* Cells */,
 				BAE26FB21A77090700A0977C /* SnowballTopView.swift */,
 				BA32C7941A3287BE0052F4CA /* UserAvatarImageView.swift */,
+				BA3DB8231A9EEEFD00378F6D /* SnowballRoundedButton.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1033,6 +1036,7 @@
 				BAA15E9D1A6889230055756E /* AFURLRequestSerialization.m in Sources */,
 				BAFB06C51A9E906400EDA01B /* MPObjectSerializerConfig.m in Sources */,
 				BAA15E991A6889230055756E /* AFHTTPSessionManager.m in Sources */,
+				BA3DB8241A9EEEFD00378F6D /* SnowballRoundedButton.swift in Sources */,
 				BAFB06A01A9E906400EDA01B /* MPAbstractABTestDesignerMessage.m in Sources */,
 				BAFB06E41A9E915600EDA01B /* Analytics.swift in Sources */,
 				BAFB06AD1A9E906400EDA01B /* MPApplicationStateSerializer.m in Sources */,
