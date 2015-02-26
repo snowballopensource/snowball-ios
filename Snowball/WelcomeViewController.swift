@@ -10,12 +10,55 @@ import Cartography
 import UIKit
 
 class WelcomeViewController: UIViewController {
-  let topImageView = UIImageView()
-  let topImageViewLogo = UIImageView()
-  let signUpButton = UIButton()
-  let signInButton = UIButton()
-  let legalLabel = UILabel()
+
+  // MARK: - Properties
+
+  private let topImageView: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = UIImage(named: "welcome-image")
+    imageView.contentMode = UIViewContentMode.ScaleAspectFill
+    imageView.clipsToBounds = true
+    return imageView
+  }()
+
+  private let topImageViewLogo: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = UIImage(named: "snowball-logo")
+    imageView.contentMode = UIViewContentMode.Center
+    return imageView
+  }()
+
+  let signUpButton: UIButton = {
+    let button = UIButton()
+    button.setTitle(NSLocalizedString("sign up"), forState: UIControlState.Normal)
+    button.setTitleColor(UIColor.SnowballColor.greenColor, forState: UIControlState.Normal)
+    button.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
+    button.alignLeft(insetWidth: 20)
+    button.showSnowballStyleBorderWithColor(UIColor.SnowballColor.greenColor)
+    return button
+  }()
+
+  let signInButton: UIButton = {
+    let button = UIButton()
+    button.setTitle(NSLocalizedString("sign in"), forState: UIControlState.Normal)
+    button.setTitleColor(UIColor.SnowballColor.grayColor, forState: UIControlState.Normal)
+    button.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
+    button.alignLeft(insetWidth: 20)
+    return button
+  }()
+
+  let legalLabel: UILabel = {
+    let label = UILabel()
+    label.text = NSLocalizedString("by continuing you are agreeing to the snowball\nterms of use and privacy policy")
+    label.textAlignment = NSTextAlignment.Center
+    label.textColor = UIColor.SnowballColor.grayColor
+    label.font = UIFont(name: UIFont.SnowballFont.bold, size: 10)
+    label.numberOfLines = 0
+    return label
+  }()
+
   let termsButton = UIButton()
+
   let privacyButton = UIButton()
 
   // MARK: - UIViewController
@@ -23,9 +66,6 @@ class WelcomeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    topImageView.image = UIImage(named: "welcome-image")
-    topImageView.contentMode = UIViewContentMode.ScaleAspectFill
-    topImageView.clipsToBounds = true
     view.addSubview(topImageView)
     layout(topImageView) { (topImageView) in
       topImageView.left == topImageView.superview!.left
@@ -34,18 +74,11 @@ class WelcomeViewController: UIViewController {
       topImageView.height == Float(UIScreen.mainScreen().bounds.size.height / 2)
     }
 
-    topImageViewLogo.image = UIImage(named: "snowball-logo")
-    topImageViewLogo.contentMode = UIViewContentMode.Center
     topImageViewLogo.frame = topImageView.bounds
     topImageView.addSubview(topImageViewLogo)
 
     let buttonMargin: Float = 25
 
-    signUpButton.setTitle(NSLocalizedString("sign up"), forState: UIControlState.Normal)
-    signUpButton.setTitleColor(UIColor.SnowballColor.greenColor, forState: UIControlState.Normal)
-    signUpButton.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    signUpButton.alignLeft(insetWidth: 20)
-    signUpButton.showSnowballStyleBorderWithColor(UIColor.SnowballColor.greenColor)
     signUpButton.addTarget(self, action: "signUpButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(signUpButton)
     layout(signUpButton, topImageView) { (signUpButton, topImageView) in
@@ -65,10 +98,6 @@ class WelcomeViewController: UIViewController {
       signUpChevron.height == Float(chevronImage.size.height)
     }
 
-    signInButton.setTitle(NSLocalizedString("sign in"), forState: UIControlState.Normal)
-    signInButton.setTitleColor(UIColor.SnowballColor.grayColor, forState: UIControlState.Normal)
-    signInButton.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    signInButton.alignLeft(insetWidth: 20)
     signInButton.addTarget(self, action: "signInButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(signInButton)
     layout(signInButton, signUpButton) { (signInButton, signUpButton) -> () in
@@ -87,11 +116,6 @@ class WelcomeViewController: UIViewController {
       signInChevron.height == Float(chevronImage.size.height)
     }
 
-    legalLabel.text = NSLocalizedString("by continuing you are agreeing to the snowball\nterms of use and privacy policy")
-    legalLabel.textAlignment = NSTextAlignment.Center
-    legalLabel.textColor = UIColor.SnowballColor.grayColor
-    legalLabel.font = UIFont(name: UIFont.SnowballFont.bold, size: 10)
-    legalLabel.numberOfLines = 0
     view.addSubview(legalLabel)
     layout(legalLabel) { (legalLabel) in
       let margin: Float = 45
@@ -119,21 +143,21 @@ class WelcomeViewController: UIViewController {
     }
   }
 
-  // MARK: - Actions
+  // MARK: - Private
 
-  func signUpButtonTapped() {
+  @objc private func signUpButtonTapped() {
     navigationController?.pushViewController(SignUpViewController(), animated: true)
   }
 
-  func signInButtonTapped() {
+  @objc private func signInButtonTapped() {
     navigationController?.pushViewController(SignInViewController(), animated: true)
   }
 
-  func termsButtonTapped() {
+  @objc private func termsButtonTapped() {
     navigationController?.pushViewController(TermsViewController(), animated: true)
   }
 
-  func privacyButtonTapped() {
+  @objc private func privacyButtonTapped() {
     navigationController?.pushViewController(PrivacyPolicyViewController(), animated: true)
   }
 }
