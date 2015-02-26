@@ -13,7 +13,7 @@ class EditProfileViewController: UIViewController {
 
   // MARK: - Properties
 
-  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Back, rightButtonType: nil, title: "Edit Profile")
+  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Back, rightButtonType: SnowballTopViewButtonType.Save, title: "Edit Profile")
 
   private let tableView: UITableView = {
     let tableView = UITableView()
@@ -133,6 +133,10 @@ extension EditProfileViewController: SnowballTopViewDelegate {
   // MARK: - SnowballTopViewDelegate
 
   func snowballTopViewLeftButtonTapped() {
+    navigationController?.popViewControllerAnimated(true)
+  }
+
+  func snowballTopViewRightButtonTapped() {
     let user = User.currentUser!
     let usernameCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: EditProfileTextFieldIndex.Username.rawValue, inSection: 0)) as TextFieldTableViewCell
     var username: String?

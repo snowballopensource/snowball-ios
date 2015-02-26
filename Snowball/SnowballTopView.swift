@@ -19,6 +19,7 @@ enum SnowballTopViewButtonType {
   case Forward
   case Camera
   case AddFriends
+  case Save
 
   var button: UIButton {
     let button = UIButton()
@@ -37,6 +38,7 @@ enum SnowballTopViewButtonType {
     case .Forward: return "forward"
     case .Camera: return "camera"
     case .AddFriends: return "add-friends"
+    case .Save: return "forward"
     default: return "back"
     }
   }
@@ -45,6 +47,7 @@ enum SnowballTopViewButtonType {
     switch self {
     case .Forward: return UIColor.SnowballColor.greenColor
     case .AddFriends: return nil
+    case .Save: return UIColor.SnowballColor.greenColor
     default: return UIColor.blackColor()
     }
   }
