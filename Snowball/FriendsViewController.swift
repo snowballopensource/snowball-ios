@@ -13,45 +13,45 @@ class FriendsViewController: UIViewController {
 
   // MARK: - Properties
 
-  let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Camera, rightButtonType: SnowballTopViewButtonType.AddFriends, title: "Friends")
+  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Camera, rightButtonType: SnowballTopViewButtonType.AddFriends, title: "Friends")
 
-  let currentUserAvatarImageView: UserAvatarImageView = {
-    let currentUserAvatarImageView = UserAvatarImageView()
-    currentUserAvatarImageView.backgroundColor = User.currentUser?.color as? UIColor
-    return currentUserAvatarImageView
+  private let currentUserAvatarImageView: UserAvatarImageView = {
+    let imageView = UserAvatarImageView()
+    imageView.backgroundColor = User.currentUser?.color as? UIColor
+    return imageView
   }()
 
-  let currentUserUsernameLabel: UILabel = {
-    let currentUserUsernameLabel = UILabel()
-    currentUserUsernameLabel.textColor = User.currentUser?.color as? UIColor
-    currentUserUsernameLabel.font = UIFont(name: UIFont.SnowballFont.regular, size: 26)
-    currentUserUsernameLabel.text = User.currentUser?.username
-    return currentUserUsernameLabel
+  private let currentUserUsernameLabel: UILabel = {
+    let label = UILabel()
+    label.textColor = User.currentUser?.color as? UIColor
+    label.font = UIFont(name: UIFont.SnowballFont.regular, size: 26)
+    label.text = User.currentUser?.username
+    return label
   }()
 
-  let settingsButton: UIButton = {
-    let settingsButton = UIButton()
-    settingsButton.setImage(UIImage(named: "settings"), forState: UIControlState.Normal)
-    return settingsButton
+  private let settingsButton: UIButton = {
+    let button = UIButton()
+    button.setImage(UIImage(named: "settings"), forState: UIControlState.Normal)
+    return button
   }()
 
-  enum FollowersFollowingSegmentedControlIndex: Int {
+  private enum FollowersFollowingSegmentedControlIndex: Int {
     case Following
     case Followers
   }
 
-  let followersFollowingSegmentedControl: UISegmentedControl = {
-    let followersFollowingSegmentedControl = UISegmentedControl()
+  private let followersFollowingSegmentedControl: UISegmentedControl = {
+    let segmentedControl = UISegmentedControl()
     let segmentedControlFont = UIFont(name: UIFont.SnowballFont.bold, size: 17)!
-    followersFollowingSegmentedControl.setTitleTextAttributes([NSFontAttributeName: segmentedControlFont], forState: UIControlState.Normal)
-    followersFollowingSegmentedControl.insertSegmentWithTitle(NSLocalizedString("Following"), atIndex: FollowersFollowingSegmentedControlIndex.Following.rawValue, animated: false)
-    followersFollowingSegmentedControl.insertSegmentWithTitle(NSLocalizedString("Followers"), atIndex: FollowersFollowingSegmentedControlIndex.Followers.rawValue, animated: false)
-    followersFollowingSegmentedControl.selectedSegmentIndex = 0
-    followersFollowingSegmentedControl.tintColor = UIColor.blackColor()
-    return followersFollowingSegmentedControl
+    segmentedControl.setTitleTextAttributes([NSFontAttributeName: segmentedControlFont], forState: UIControlState.Normal)
+    segmentedControl.insertSegmentWithTitle(NSLocalizedString("Following"), atIndex: FollowersFollowingSegmentedControlIndex.Following.rawValue, animated: false)
+    segmentedControl.insertSegmentWithTitle(NSLocalizedString("Followers"), atIndex: FollowersFollowingSegmentedControlIndex.Followers.rawValue, animated: false)
+    segmentedControl.selectedSegmentIndex = 0
+    segmentedControl.tintColor = UIColor.blackColor()
+    return segmentedControl
   }()
 
-  let tableView: UITableView = {
+  private let tableView: UITableView = {
     let tableView = UITableView()
     tableView.allowsSelection = false
     tableView.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -60,7 +60,7 @@ class FriendsViewController: UIViewController {
     return tableView
   }()
 
-  var users: [User] = []
+  private var users: [User] = []
 
   // MARK: - UIViewController
 
@@ -71,7 +71,6 @@ class FriendsViewController: UIViewController {
     topView.setupDefaultLayout()
 
     let margin: Float = 20
-
 
     view.addSubview(currentUserAvatarImageView)
     layout(currentUserAvatarImageView, topView) { (currentUserAvatarImageView, topView) in
@@ -121,17 +120,15 @@ class FriendsViewController: UIViewController {
     refresh()
   }
 
-  // MARK: - Actions
+  // MARK: - Private
 
-  func settingsButtonTapped() {
+  @objc private func settingsButtonTapped() {
     navigationController?.pushViewController(EditProfileViewController(), animated: true)
   }
 
-  func followersFollowingSegmentedControlTapped() {
+  @objc private func followersFollowingSegmentedControlTapped() {
     refresh()
   }
-
-  // MARK: - Private
 
   private func refresh() {
     users = []
@@ -191,7 +188,9 @@ extension FriendsViewController: UITableViewDataSource {
     return cell
   }
 
-  func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+  // MARK: - Private
+
+  private func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
     let cell = cell as UserTableViewCell
     cell.delegate = self
     let user = users[indexPath.row]
