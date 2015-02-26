@@ -25,6 +25,7 @@
 		BA3A28841A305C6F00A85C29 /* UICollectionView+CellRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A28831A305C6F00A85C29 /* UICollectionView+CellRegistration.swift */; };
 		BA3DB8221A9EEA8B00378F6D /* UIViewController+NavigationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3DB8211A9EEA8B00378F6D /* UIViewController+NavigationTransition.swift */; };
 		BA3DB8241A9EEEFD00378F6D /* SnowballRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3DB8231A9EEEFD00378F6D /* SnowballRoundedButton.swift */; };
+		BA3DB8261A9EFD9A00378F6D /* SnowballRoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3DB8251A9EFD9A00378F6D /* SnowballRoundedTextField.swift */; };
 		BA44E4541A9C0B7700B75DF3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4531A9C0B7700B75DF3 /* WebViewController.swift */; };
 		BA44E4561A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4551A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift */; };
 		BA44E4581A9C0EC600B75DF3 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */; };
@@ -216,6 +217,7 @@
 		BA3A28831A305C6F00A85C29 /* UICollectionView+CellRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+CellRegistration.swift"; sourceTree = "<group>"; };
 		BA3DB8211A9EEA8B00378F6D /* UIViewController+NavigationTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+NavigationTransition.swift"; sourceTree = "<group>"; };
 		BA3DB8231A9EEEFD00378F6D /* SnowballRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballRoundedButton.swift; sourceTree = "<group>"; };
+		BA3DB8251A9EFD9A00378F6D /* SnowballRoundedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballRoundedTextField.swift; sourceTree = "<group>"; };
 		BA44E4531A9C0B7700B75DF3 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		BA44E4551A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 				BAE26FB21A77090700A0977C /* SnowballTopView.swift */,
 				BA32C7941A3287BE0052F4CA /* UserAvatarImageView.swift */,
 				BA3DB8231A9EEEFD00378F6D /* SnowballRoundedButton.swift */,
+				BA3DB8251A9EFD9A00378F6D /* SnowballRoundedTextField.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1044,6 +1047,7 @@
 				BAA15EA61A6889230055756E /* UIRefreshControl+AFNetworking.m in Sources */,
 				BA8812EB1A783CD600B50651 /* UserTableViewCell.swift in Sources */,
 				BA789E0B1A7052D000BA1611 /* CachedURLAsset.swift in Sources */,
+				BA3DB8261A9EFD9A00378F6D /* SnowballRoundedTextField.swift in Sources */,
 				BAA15EA51A6889230055756E /* UIProgressView+AFNetworking.m in Sources */,
 				BAA15E9C1A6889230055756E /* AFURLConnectionOperation.m in Sources */,
 				BA7C0E4A1A65EF94001B3B4C /* UITextField+Snowball.swift in Sources */,

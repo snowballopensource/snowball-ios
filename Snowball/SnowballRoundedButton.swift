@@ -10,6 +10,8 @@ import UIKit
 
 class SnowballRoundedButton: UIButton {
 
+  // MARK: - Properties
+
   private var chevronImageView: UIImageView = {
     let chevronImage = UIImage(named: "chevron")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     return UIImageView(image: chevronImage)

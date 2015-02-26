@@ -13,46 +13,47 @@ class PhoneNumberViewController: UIViewController {
 
   // MARK: - Properties
 
-  let topBar = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Back, rightButtonType: SnowballTopViewButtonType.Forward)
+  private let topBar = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Back, rightButtonType: SnowballTopViewButtonType.Forward)
 
-  let messageLabel: UILabel = {
-    let messageLabel = UILabel()
-    messageLabel.numberOfLines = 0
-    messageLabel.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    return messageLabel
+  private let messageLabel: UILabel = {
+    let label = UILabel()
+    label.numberOfLines = 0
+    label.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
+    let messageString = NSMutableAttributedString()
+    messageString.appendAttributedString(NSAttributedString(string: "Next, we need your ", attributes: [NSForegroundColorAttributeName: UIColor.blackColor()]))
+    messageString.appendAttributedString(NSAttributedString(string: "phone number, ", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor]))
+    messageString.appendAttributedString(NSAttributedString(string: "so we can help your friends find you.", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor]))
+    label.attributedText = messageString
+    return label
   }()
 
-  let countryCodeTextField: UITextField = {
-    let countryCodeTextField = UITextField()
-    countryCodeTextField.backgroundColor = UIColor.SnowballColor.greenColor
-    countryCodeTextField.keyboardType = UIKeyboardType.PhonePad
-    countryCodeTextField.showSnowballStyleBorderWithColor(UIColor.SnowballColor.greenColor)
-    countryCodeTextField.text = "+1"
-    countryCodeTextField.font = UIFont(name: "Helvetica", size: 24)
-    countryCodeTextField.textColor = UIColor.whiteColor()
-    countryCodeTextField.textAlignment = NSTextAlignment.Center
-    countryCodeTextField.tintColor = UIColor.whiteColor()
-    return countryCodeTextField
+  private let countryCodeTextField: SnowballRoundedTextField = {
+    let textField = SnowballRoundedTextField()
+    textField.backgroundColor = UIColor.SnowballColor.greenColor
+    textField.keyboardType = UIKeyboardType.PhonePad
+    textField.text = "+1"
+    textField.font = UIFont(name: "Helvetica", size: 24)
+    textField.textAlignment = NSTextAlignment.Center
+    textField.tintColor = UIColor.whiteColor()
+    return textField
   }()
 
-  let phoneNumberTextField: UITextField = {
-    let phoneNumberTextField = UITextField()
-    phoneNumberTextField.keyboardType = UIKeyboardType.PhonePad
-    phoneNumberTextField.showSnowballStyleBorderWithColor(UIColor.SnowballColor.greenColor)
-    phoneNumberTextField.attributedPlaceholder = NSAttributedString(string: "4151234567", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor])
-    phoneNumberTextField.font = UIFont(name: "Helvetica", size: 28)
-    phoneNumberTextField.textColor = UIColor.SnowballColor.greenColor
-    phoneNumberTextField.textAlignment = NSTextAlignment.Center
-    phoneNumberTextField.tintColor = UIColor.SnowballColor.greenColor
-    return phoneNumberTextField
+  private let phoneNumberTextField: SnowballRoundedTextField = {
+    let textField = SnowballRoundedTextField()
+    textField.keyboardType = UIKeyboardType.PhonePad
+    textField.attributedPlaceholder = NSAttributedString(string: "4151234567", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor])
+    textField.font = UIFont(name: "Helvetica", size: 28)
+    textField.textAlignment = NSTextAlignment.Center
+    textField.tintColor = UIColor.SnowballColor.greenColor
+    return textField
   }()
 
-  let disclaimerLabel: UILabel = {
-    let disclaimerLabel = UILabel()
-    disclaimerLabel.text = NSLocalizedString("No one will ever see your phone number on Snowball.")
-    disclaimerLabel.font = UIFont(name: UIFont.SnowballFont.bold, size: 10)
-    disclaimerLabel.textColor = UIColor.SnowballColor.greenColor
-    return disclaimerLabel
+  private let disclaimerLabel: UILabel = {
+    let label = UILabel()
+    label.text = NSLocalizedString("No one will ever see your phone number on Snowball.")
+    label.font = UIFont(name: UIFont.SnowballFont.bold, size: 10)
+    label.textColor = UIColor.SnowballColor.greenColor
+    return label
   }()
 
   // MARK: - UIViewController
@@ -65,13 +66,6 @@ class PhoneNumberViewController: UIViewController {
     view.addSubview(topBar)
     topBar.setupDefaultLayout()
 
-    let messageStringOne = NSAttributedString(string: "Next, we need your ", attributes: [NSForegroundColorAttributeName: UIColor.blackColor()])
-    let messageStringTwo = NSAttributedString(string: "phone number, ", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
-    let messageStringThree = NSAttributedString(string: "so we can help your friends find you.", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor])
-    let messageString = NSMutableAttributedString(attributedString: messageStringOne)
-    messageString.appendAttributedString(messageStringTwo)
-    messageString.appendAttributedString(messageStringThree)
-    messageLabel.attributedText = messageString
     view.addSubview(messageLabel)
     layout(messageLabel, topBar) { (messageLabel, topBar) in
       let sideMargin: Float = 40
