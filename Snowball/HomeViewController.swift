@@ -107,7 +107,7 @@ class HomeViewController: UIViewController {
 
   @objc private func moreButtonTapped() {
     clipsViewController.playerViewController.endPlayback()
-    AppDelegate.switchToNavigationController(MoreNavigationController())
+    switchToNavigationController(MoreNavigationController())
   }
 
   @objc private func changeCameraButtonTapped() {

@@ -186,7 +186,7 @@ class AuthenticationViewController: UIViewController, SnowballTopViewDelegate {
             } else {
               Analytics.identify(userID)
               Analytics.track("Sign In")
-              AppDelegate.switchToNavigationController(MainNavigationController())
+              self.switchToNavigationController(MainNavigationController())
             }
           }
         }

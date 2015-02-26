@@ -166,7 +166,7 @@ extension FriendsViewController: SnowballTopViewDelegate {
   // MARK: - SnowballTopViewDelegate
 
   func snowballTopViewLeftButtonTapped() {
-    AppDelegate.switchToNavigationController(MainNavigationController())
+    switchToNavigationController(MainNavigationController())
   }
 
   func snowballTopViewRightButtonTapped() {

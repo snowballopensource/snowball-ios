@@ -125,11 +125,11 @@ extension PhoneNumberViewController: SnowballTopViewDelegate {
           error.print("add phone number to new user")
         } else {
           Analytics.track("Add Phone Number During Onboarding")
-          AppDelegate.switchToNavigationController(MainNavigationController())
+          self.switchToNavigationController(MainNavigationController())
         }
       }
     } else {
-      AppDelegate.switchToNavigationController(MainNavigationController())
+      switchToNavigationController(MainNavigationController())
     }
   }
 }
