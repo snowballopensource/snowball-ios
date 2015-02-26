@@ -113,6 +113,7 @@ class User: RemoteObject {
 
   private func follow() {
     if let userID = id {
+      Analytics.track("Follow User")
       following = true
       managedObjectContext?.save(nil)
 

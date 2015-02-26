@@ -321,6 +321,7 @@ extension ClipsViewController: UICollectionViewDelegate {
       playingClipIndexPath = indexPath
       playing = true
       delegate?.willBeginPlayback()
+      Analytics.track("Watch Clip") // track event for first clip
 
       playerViewController.endPlayback()
       playerViewController.playClips(clipsToPlayWithClip(clip))
@@ -348,6 +349,7 @@ extension ClipsViewController: ClipPlayerViewControllerDelegate {
     cell?.dimContentView(true)
 
     if let nextClip = clipAfterClip(playerItem.clip) {
+      Analytics.track("Watch Clip") // track event for next clip start
       let indexPath = NSIndexPath(forItem: indexOfClip(nextClip), inSection: 0)
       playingClipIndexPath = indexPath
     } else {
@@ -370,6 +372,7 @@ extension ClipsViewController: AddClipCollectionReuseableViewDelegate {
       let indexPath = NSIndexPath(forItem: clips.count - 1, inSection: 0)
       collectionView.insertItemsAtIndexPaths([indexPath])
       collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: true)
+      Analytics.track("Create Clip")
       API.uploadClip(clip) { (request, response, JSON, error) in
         if let error = error {
           error.print("upload clip")

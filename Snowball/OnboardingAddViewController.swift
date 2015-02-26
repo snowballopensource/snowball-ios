@@ -44,6 +44,7 @@ class OnboardingAddViewController: OnboardingViewController {
   // MARK: - Private
 
   @objc private func doneButtonTapped() {
+    Analytics.track("Finish Onboarding")
     dismissViewControllerAnimated(true, completion: nil)
   }
 

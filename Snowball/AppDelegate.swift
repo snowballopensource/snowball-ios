@@ -35,6 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return true
   }
 
+  func applicationDidBecomeActive(application: UIApplication) {
+    Analytics.track("Session Start")
+  }
+
   // MARK: - Internal
 
   class func getReference() -> AppDelegate {
