@@ -82,6 +82,7 @@ class ClipPlayerViewController: UIViewController {
   }
 
   func playClip(clip: Clip) {
+    endPlayback()
     playClips([clip])
   }
 
