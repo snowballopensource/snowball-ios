@@ -29,7 +29,7 @@ class UserTableViewCell: UITableViewCell {
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     contentView.addSubview(avatarImageView)
-    usernameLabel.font = UIFont(name: UIFont.SnowballFont.regular, size: 26)
+    usernameLabel.font = UIFont(name: UIFont.SnowballFont.bold, size: 19)
     contentView.addSubview(usernameLabel)
     followButton.addTarget(self, action: "followButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     contentView.addSubview(followButton)

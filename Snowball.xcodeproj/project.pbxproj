@@ -12,8 +12,6 @@
 		BA137C7E1A7199AA001F8FCF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA137C7C1A7199AA001F8FCF /* Crashlytics.framework */; };
 		BA137C7F1A7199AA001F8FCF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA137C7D1A7199AA001F8FCF /* Fabric.framework */; };
 		BA20CCEE1A9D156C00D96A31 /* UploadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */; };
-		BA32C7881A3283760052F4CA /* Karla-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA32C7841A32576B0052F4CA /* Karla-Bold.ttf */; };
-		BA32C7891A3283760052F4CA /* Karla-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA32C7851A32576B0052F4CA /* Karla-Regular.ttf */; };
 		BA32C7921A3286250052F4CA /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */; };
 		BA32C7951A3287BE0052F4CA /* UserAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32C7941A3287BE0052F4CA /* UserAvatarImageView.swift */; };
 		BA372D141A880C58004E58E9 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA372D131A880C58004E58E9 /* TextFieldTableViewCell.swift */; };
@@ -199,8 +197,6 @@
 		BA145D031A687CB300D81E53 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		BA145D041A687CB300D81E53 /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cartography.framework; path = Carthage/Build/iOS/Cartography.framework; sourceTree = "<group>"; };
 		BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadQueue.swift; sourceTree = "<group>"; };
-		BA32C7841A32576B0052F4CA /* Karla-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Karla-Bold.ttf"; sourceTree = "<group>"; };
-		BA32C7851A32576B0052F4CA /* Karla-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Karla-Regular.ttf"; sourceTree = "<group>"; };
 		BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Snowball.swift"; sourceTree = "<group>"; };
 		BA32C7941A3287BE0052F4CA /* UserAvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAvatarImageView.swift; sourceTree = "<group>"; };
 		BA372D131A880C58004E58E9 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
@@ -465,19 +461,9 @@
 		BA32C7801A3256CC0052F4CA /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				BA32C7811A3256D70052F4CA /* Fonts */,
 				BA38C1671A30228700A2F2AE /* Images.xcassets */,
 			);
 			name = Assets;
-			sourceTree = "<group>";
-		};
-		BA32C7811A3256D70052F4CA /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				BA32C7841A32576B0052F4CA /* Karla-Bold.ttf */,
-				BA32C7851A32576B0052F4CA /* Karla-Regular.ttf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 		BA32C7931A3287AC0052F4CA /* Views */ = {
@@ -962,10 +948,8 @@
 				BAFB06DE1A9E906400EDA01B /* snapshot_config.json in Resources */,
 				BAFB06CB1A9E906400EDA01B /* MPSurvey.storyboard in Resources */,
 				BAFB06B71A9E906400EDA01B /* MPCloseBtn@2x.png in Resources */,
-				BA32C7881A3283760052F4CA /* Karla-Bold.ttf in Resources */,
 				BAFB06B61A9E906400EDA01B /* MPCloseBtn.png in Resources */,
 				BAFB06BE1A9E906400EDA01B /* MPNotification.storyboard in Resources */,
-				BA32C7891A3283760052F4CA /* Karla-Regular.ttf in Resources */,
 				BA38C16B1A30228700A2F2AE /* LaunchScreen.xib in Resources */,
 				BA38C1681A30228700A2F2AE /* Images.xcassets in Resources */,
 			);

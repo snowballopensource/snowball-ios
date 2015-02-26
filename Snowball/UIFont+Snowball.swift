@@ -10,7 +10,7 @@ import UIKit
 
 extension UIFont {
   struct SnowballFont {
-    static let regular = "Karla"
-    static let bold = "Karla-Bold"
+    static let regular = "AvenirNext-Regular"
+    static let bold = "AvenirNext-Medium"
   }
 }

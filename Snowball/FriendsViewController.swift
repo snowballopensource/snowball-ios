@@ -42,7 +42,7 @@ class FriendsViewController: UIViewController {
 
   let followersFollowingSegmentedControl: UISegmentedControl = {
     let followersFollowingSegmentedControl = UISegmentedControl()
-    let segmentedControlFont = UIFont(name: UIFont.SnowballFont.regular, size: 20)!
+    let segmentedControlFont = UIFont(name: UIFont.SnowballFont.bold, size: 17)!
     followersFollowingSegmentedControl.setTitleTextAttributes([NSFontAttributeName: segmentedControlFont], forState: UIControlState.Normal)
     followersFollowingSegmentedControl.insertSegmentWithTitle(NSLocalizedString("Following"), atIndex: FollowersFollowingSegmentedControlIndex.Following.rawValue, animated: false)
     followersFollowingSegmentedControl.insertSegmentWithTitle(NSLocalizedString("Followers"), atIndex: FollowersFollowingSegmentedControlIndex.Followers.rawValue, animated: false)
