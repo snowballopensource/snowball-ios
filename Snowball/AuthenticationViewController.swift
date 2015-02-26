@@ -180,14 +180,14 @@ class AuthenticationViewController: UIViewController, SnowballTopViewDelegate {
           User.currentUser = user
           if let userID = user?.id {
             if self.isKindOfClass(SignUpViewController) {
-              Analytics.createAlias(userID)
+              Analytics.createAliasAndIdentify(userID)
               Analytics.track("Sign Up")
               self.navigationController?.pushViewController(PhoneNumberViewController(), animated: true)
             } else {
+              Analytics.identify(userID)
               Analytics.track("Sign In")
               AppDelegate.switchToNavigationController(MainNavigationController())
             }
-            Analytics.identify(userID)
           }
         }
       }
