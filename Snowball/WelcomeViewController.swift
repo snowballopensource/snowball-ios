@@ -28,7 +28,7 @@ class WelcomeViewController: UIViewController {
     return imageView
   }()
 
-  let signUpButton: SnowballRoundedButton = {
+  private let signUpButton: SnowballRoundedButton = {
     let button = SnowballRoundedButton()
     button.tintColor = UIColor.SnowballColor.greenColor
     button.showChevron = true
@@ -36,7 +36,7 @@ class WelcomeViewController: UIViewController {
     return button
   }()
 
-  let signInButton: SnowballRoundedButton = {
+  private let signInButton: SnowballRoundedButton = {
     let button = SnowballRoundedButton()
     button.tintColor = UIColor.SnowballColor.grayColor
     button.showChevron = true
@@ -44,7 +44,7 @@ class WelcomeViewController: UIViewController {
     return button
   }()
 
-  let legalLabel: UILabel = {
+  private let legalLabel: UILabel = {
     let label = UILabel()
     label.text = NSLocalizedString("by continuing you are agreeing to the snowball\nterms of use and privacy policy")
     label.textAlignment = NSTextAlignment.Center
@@ -54,9 +54,9 @@ class WelcomeViewController: UIViewController {
     return label
   }()
 
-  let termsButton = UIButton()
+  private let termsButton = UIButton()
 
-  let privacyButton = UIButton()
+  private let privacyButton = UIButton()
 
   // MARK: - UIViewController
 
