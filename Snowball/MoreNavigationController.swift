@@ -9,6 +9,9 @@
 import UIKit
 
 class MoreNavigationController: UINavigationController {
+
+  // MARK: - Initializers
+
   override init() {
     super.init(rootViewController: FriendsViewController())
     navigationBarHidden = true
