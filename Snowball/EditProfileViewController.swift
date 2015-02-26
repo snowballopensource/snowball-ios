@@ -136,7 +136,7 @@ extension EditProfileViewController: SnowballTopViewDelegate {
     let user = User.currentUser!
     let usernameCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: EditProfileTextFieldIndex.Username.rawValue, inSection: 0)) as TextFieldTableViewCell
     var username: String?
-    if user.username != usernameCell.textField.text {
+    if user.username != usernameCell.textField.text && countElements(usernameCell.textField.text) > 0 {
       username = usernameCell.textField.text
       user.username = username
     }
