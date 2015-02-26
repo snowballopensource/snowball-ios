@@ -339,7 +339,6 @@ extension ClipsViewController: ClipPlayerViewControllerDelegate {
     if let previewedClip = previewedClip {
       if playerItem.clip.videoURL == previewedClip.videoURL {
         playerViewController.player.seekToTime(kCMTimeZero)
-        playerViewController.player.play()
         return
       }
     }
