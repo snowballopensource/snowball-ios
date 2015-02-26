@@ -15,6 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   // MARK: - Properties
 
+  class var sharedDelegate: AppDelegate {
+    return UIApplication.sharedApplication().delegate! as AppDelegate
+  }
+
   lazy var window: UIWindow = {
     let window = UIWindow(frame: UIScreen.mainScreen().bounds)
     window.backgroundColor = UIColor.whiteColor()
@@ -38,21 +42,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationDidBecomeActive(application: UIApplication) {
     Analytics.track("Session Start")
   }
-
-  // MARK: - Internal
-
-  class func getReference() -> AppDelegate {
-    return UIApplication.sharedApplication().delegate! as AppDelegate
-  }
-
-  class func switchToNavigationController(navigationController: UINavigationController) {
-    let window = getReference().window
-    UIView.transitionWithView(window, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, animations: { () in
-      let oldState = UIView.areAnimationsEnabled()
-      UIView.setAnimationsEnabled(false)
-      window.rootViewController = navigationController
-      UIView.setAnimationsEnabled(oldState)
-      }, completion: nil)
-  }
 }
-

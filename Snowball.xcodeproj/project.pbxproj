@@ -23,6 +23,7 @@
 		BA3A28701A3051E300A85C29 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A286F1A3051E300A85C29 /* Util.swift */; };
 		BA3A28771A305AF600A85C29 /* ClipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A28761A305AF600A85C29 /* ClipCollectionViewCell.swift */; };
 		BA3A28841A305C6F00A85C29 /* UICollectionView+CellRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A28831A305C6F00A85C29 /* UICollectionView+CellRegistration.swift */; };
+		BA3DB8221A9EEA8B00378F6D /* UIViewController+NavigationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3DB8211A9EEA8B00378F6D /* UIViewController+NavigationTransition.swift */; };
 		BA44E4541A9C0B7700B75DF3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4531A9C0B7700B75DF3 /* WebViewController.swift */; };
 		BA44E4561A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4551A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift */; };
 		BA44E4581A9C0EC600B75DF3 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */; };
@@ -212,6 +213,7 @@
 		BA3A286F1A3051E300A85C29 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		BA3A28761A305AF600A85C29 /* ClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA3A28831A305C6F00A85C29 /* UICollectionView+CellRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+CellRegistration.swift"; sourceTree = "<group>"; };
+		BA3DB8211A9EEA8B00378F6D /* UIViewController+NavigationTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+NavigationTransition.swift"; sourceTree = "<group>"; };
 		BA44E4531A9C0B7700B75DF3 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		BA44E4551A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
@@ -715,6 +717,7 @@
 				BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */,
 				BA7C0E491A65EF94001B3B4C /* UITextField+Snowball.swift */,
 				BA938A001A7B06C600857CF7 /* NSError+Print.swift */,
+				BA3DB8211A9EEA8B00378F6D /* UIViewController+NavigationTransition.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1099,6 +1102,7 @@
 				BAFB06E21A9E906400EDA01B /* UIImage+MPImageEffects.m in Sources */,
 				BAFB069C1A9E906400EDA01B /* _MPTweakBindObserver.m in Sources */,
 				BA7198D21A897F4A004BB840 /* ClipPlayerItem.swift in Sources */,
+				BA3DB8221A9EEA8B00378F6D /* UIViewController+NavigationTransition.swift in Sources */,
 				BABE8FCB1A89574500B81DD1 /* ClipsViewController.swift in Sources */,
 				BAFB06C61A9E906400EDA01B /* MPObjectSerializerContext.m in Sources */,
 				BAFB06CE1A9E906400EDA01B /* MPSurveyQuestionViewController.m in Sources */,
