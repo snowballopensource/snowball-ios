@@ -17,7 +17,9 @@ class FriendsViewController: UIViewController {
 
   private let currentUserAvatarImageView: UserAvatarImageView = {
     let imageView = UserAvatarImageView()
-    imageView.backgroundColor = User.currentUser?.color as? UIColor
+    if let user = User.currentUser {
+      imageView.configureForUser(user)
+    }
     return imageView
   }()
 

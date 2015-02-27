@@ -106,7 +106,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
   func configureForClip(clip: Clip) {
     usernameLabel.text = clip.user?.username
     let userColor = clip.user?.color as? UIColor ?? UIColor.SnowballColor.greenColor
-    userAvatarImageView.backgroundColor = userColor
+    if let user = clip.user {
+      userAvatarImageView.configureForUser(user)
+    }
     usernameLabel.textColor = userColor
     clipTimeLabel.text = clip.createdAt?.shortTimeSinceString()
 

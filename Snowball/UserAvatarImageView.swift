@@ -9,17 +9,17 @@
 import UIKit
 
 class UserAvatarImageView: UIView {
-  let imageView = UIImageView()
-  let initialsLabel = UILabel()
+
+  // MARK: - Properties
+
+  private let imageView = UIImageView()
 
   // MARK: - UIView
 
   override init(frame: CGRect) {
     super.init(frame: frame)
     clipsToBounds = true
-    initialsLabel.textColor = UIColor.blackColor()
-    initialsLabel.textAlignment = NSTextAlignment.Center
-    addSubview(initialsLabel)
+    backgroundColor = UIColor.SnowballColor.greenColor
     addSubview(imageView)
   }
 
@@ -35,12 +35,12 @@ class UserAvatarImageView: UIView {
     super.layoutSubviews()
 
     layer.cornerRadius = frame.size.width/2
-    initialsLabel.font = UIFont(name: UIFont.SnowballFont.regular, size: frame.size.height / 3)
-
-    initialsLabel.frame = bounds
     imageView.frame = bounds
   }
 
-  // MARK: - Configuration
-  // TODO: create method for setting user or something
+  // MARK: - Internal
+
+  func configureForUser(user: User) {
+    backgroundColor = user.color as? UIColor ?? UIColor.SnowballColor.greenColor
+  }
 }

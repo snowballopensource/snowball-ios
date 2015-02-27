@@ -86,7 +86,7 @@ class UserTableViewCell: UITableViewCell {
     let user = object as User
     usernameLabel.text = user.username
     let userColor = user.color as UIColor
-    avatarImageView.backgroundColor = userColor
+    avatarImageView.configureForUser(user)
     usernameLabel.textColor = userColor
     var color: UIColor!
     if user.following.boolValue {
