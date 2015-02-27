@@ -106,6 +106,7 @@ class FriendsViewController: UIViewController {
       followersFollowingSegmentedControl.height == 40
     }
 
+    tableView.addRefreshControl(self, action: "refresh")
     tableView.dataSource = self
     view.addSubview(tableView)
     layout(tableView, followersFollowingSegmentedControl) { (tableView, followersFollowingSegmentedControl) in
@@ -129,16 +130,19 @@ class FriendsViewController: UIViewController {
   }
 
   @objc private func followersFollowingSegmentedControlTapped() {
+    users = []
+    tableView.reloadData()
     refresh()
   }
 
-  private func refresh() {
-    users = []
-    tableView.reloadData()
-    // TODO: remove duplication
+  @objc private func refresh() {
+    tableView.refreshControl.beginRefreshing()
+    tableView.offsetContentForRefreshControl()
+
     switch(followersFollowingSegmentedControl.selectedSegmentIndex) {
     case FollowersFollowingSegmentedControlIndex.Following.rawValue:
       API.request(Router.GetCurrentUserFollowing).responseJSON { (request, response, JSON, error) in
+        self.tableView.refreshControl.endRefreshing()
         error?.print("api get current user following/followers")
         if let JSON: AnyObject = JSON {
           self.users = User.objectsFromJSON(JSON) as [User]
@@ -147,6 +151,7 @@ class FriendsViewController: UIViewController {
       }
     case FollowersFollowingSegmentedControlIndex.Followers.rawValue:
       API.request(Router.GetCurrentUserFollowers).responseJSON { (request, response, JSON, error) in
+        self.tableView.refreshControl.endRefreshing()
         error?.print("api get current user following/followers")
         if let JSON: AnyObject = JSON {
           self.users = User.objectsFromJSON(JSON) as [User]

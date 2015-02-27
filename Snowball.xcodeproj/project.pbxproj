@@ -68,6 +68,7 @@
 		BAA8329E1A6E303600ADADDD /* Haneke.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAA8329C1A6E303600ADADDD /* Haneke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BAA8C0801A32F8F300AAB9F4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C07F1A32F8F300AAB9F4 /* User.swift */; };
 		BAA966BD1A87FEEC0032752F /* FindFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA966BC1A87FEEC0032752F /* FindFriendsViewController.swift */; };
+		BAB1A3261AA0C9F400C2FB49 /* UITableView+RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB1A3251AA0C9F400C2FB49 /* UITableView+RefreshControl.swift */; };
 		BAB8F2C81A830F5500937407 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB8F2C71A830F5500937407 /* FriendsViewController.swift */; };
 		BABE8FCB1A89574500B81DD1 /* ClipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABE8FCA1A89574500B81DD1 /* ClipsViewController.swift */; };
 		BABE8FCD1A8957D600B81DD1 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABE8FCC1A8957D600B81DD1 /* Clip.swift */; };
@@ -269,6 +270,7 @@
 		BAA8329C1A6E303600ADADDD /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = Carthage/Build/iOS/Haneke.framework; sourceTree = "<group>"; };
 		BAA8C07F1A32F8F300AAB9F4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BAA966BC1A87FEEC0032752F /* FindFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFriendsViewController.swift; sourceTree = "<group>"; };
+		BAB1A3251AA0C9F400C2FB49 /* UITableView+RefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+RefreshControl.swift"; sourceTree = "<group>"; };
 		BAB8F2C71A830F5500937407 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		BABE8FCA1A89574500B81DD1 /* ClipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipsViewController.swift; sourceTree = "<group>"; };
 		BABE8FCC1A8957D600B81DD1 /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
@@ -703,6 +705,7 @@
 				BA7C0E491A65EF94001B3B4C /* UITextField+Snowball.swift */,
 				BA938A001A7B06C600857CF7 /* NSError+Print.swift */,
 				BA3DB8211A9EEA8B00378F6D /* UIViewController+NavigationTransition.swift */,
+				BAB1A3251AA0C9F400C2FB49 /* UITableView+RefreshControl.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1053,6 +1056,7 @@
 				BA38C1611A30228700A2F2AE /* Snowball.xcdatamodeld in Sources */,
 				BAF2E45A1A800F1E00A093E5 /* EditProfileViewController.swift in Sources */,
 				BAFB06E11A9E906400EDA01B /* UIImage+MPAverageColor.m in Sources */,
+				BAB1A3261AA0C9F400C2FB49 /* UITableView+RefreshControl.swift in Sources */,
 				BAFB06CF1A9E906400EDA01B /* MPSwizzler.m in Sources */,
 				BAFB06B51A9E906400EDA01B /* MPClassDescription.m in Sources */,
 				BA7198D01A897F3B004BB840 /* ClipPlayerViewController.swift in Sources */,
