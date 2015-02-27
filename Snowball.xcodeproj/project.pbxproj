@@ -44,7 +44,6 @@
 		BA7C27D31A37ADA600A9CFC5 /* RemoteObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */; };
 		BA87C1481A840C0400A58E64 /* Swifter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC90F3A1A8343C5005C9405 /* Swifter.framework */; };
 		BA87C1491A840C0400A58E64 /* Swifter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAC90F3A1A8343C5005C9405 /* Swifter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BA8812B31A78399A00B50651 /* UITableViewCell+Required.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812B21A78399A00B50651 /* UITableViewCell+Required.swift */; };
 		BA8812EB1A783CD600B50651 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */; };
 		BA8812ED1A7841BE00B50651 /* UITableView+CellRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812EC1A7841BE00B50651 /* UITableView+CellRegistration.swift */; };
 		BA8812F31A785B5E00B50651 /* UITableViewHeaderFooterView+Required.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812F21A785B5E00B50651 /* UITableViewHeaderFooterView+Required.swift */; };
@@ -232,7 +231,6 @@
 		BA7C27C51A37A28F00A9CFC5 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		BA7C27CA1A37A64400A9CFC5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteObject.swift; sourceTree = "<group>"; };
-		BA8812B21A78399A00B50651 /* UITableViewCell+Required.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Required.swift"; sourceTree = "<group>"; };
 		BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		BA8812EC1A7841BE00B50651 /* UITableView+CellRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+CellRegistration.swift"; sourceTree = "<group>"; };
 		BA8812F21A785B5E00B50651 /* UITableViewHeaderFooterView+Required.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewHeaderFooterView+Required.swift"; sourceTree = "<group>"; };
@@ -709,7 +707,6 @@
 				BA8812F21A785B5E00B50651 /* UITableViewHeaderFooterView+Required.swift */,
 				BA3A28831A305C6F00A85C29 /* UICollectionView+CellRegistration.swift */,
 				BA8812EC1A7841BE00B50651 /* UITableView+CellRegistration.swift */,
-				BA8812B21A78399A00B50651 /* UITableViewCell+Required.swift */,
 				BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */,
 				BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */,
 				BA6385EC1A65B8FF00B002D9 /* UIView+Snowball.swift */,
@@ -1097,7 +1094,6 @@
 				BAFB06B21A9E906400EDA01B /* MPCGPointToNSDictionaryValueTransformer.m in Sources */,
 				BA44E4561A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift in Sources */,
 				BAFB06D31A9E906400EDA01B /* MPTypeDescription.m in Sources */,
-				BA8812B31A78399A00B50651 /* UITableViewCell+Required.swift in Sources */,
 				BA8812ED1A7841BE00B50651 /* UITableView+CellRegistration.swift in Sources */,
 				BACC0D591A899B6D00BA7FEF /* HomeViewController.swift in Sources */,
 				BAFB06DB1A9E906400EDA01B /* MPWebSocket.m in Sources */,

@@ -10,6 +10,10 @@ import Cartography
 import UIKit
 
 class TextFieldTableViewCell: UITableViewCell {
+  class var height: CGFloat {
+    return 65
+  }
+
   let textFieldLabel: UILabel = {
     let usernameLabel = UILabel()
     usernameLabel.font = UIFont(name: UIFont.SnowballFont.bold, size: 11)
@@ -50,11 +54,5 @@ class TextFieldTableViewCell: UITableViewCell {
       textField.right == textField.superview!.right - margin
       textField.height == 30
     }
-  }
-
-  // MARK: - UICollectionReuseableView+Required
-
-  override class var height: CGFloat {
-    return 65
   }
 }

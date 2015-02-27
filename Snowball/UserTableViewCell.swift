@@ -15,6 +15,10 @@ protocol UserTableViewCellDelegate: class {
 }
 
 class UserTableViewCell: UITableViewCell {
+  class var height: CGFloat {
+    return 55
+  }
+
   var delegate: UserTableViewCellDelegate?
   private let avatarImageView = UserAvatarImageView()
   private let usernameLabel = UILabel()
@@ -66,13 +70,9 @@ class UserTableViewCell: UITableViewCell {
     }
   }
 
-  // MARK: - UICollectionReuseableView+Required
+  // MARK: - Internal
 
-  override class var height: CGFloat {
-    return 55
-  }
-
-  override func configureForObject(object: AnyObject) {
+  func configureForObject(object: AnyObject) {
     let user = object as User
     usernameLabel.text = user.username
     let userColor = user.color as UIColor
