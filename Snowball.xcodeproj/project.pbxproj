@@ -512,7 +512,6 @@
 				BAE702471A96BF030040DA6F /* Onboarding */,
 				BA9AA6811A6747F0002C4992 /* Main */,
 				BAF3BC971A76E03F00AFD3E5 /* More */,
-				BA789E091A7052C500BA1611 /* Player */,
 				BA32C7931A3287AC0052F4CA /* Views */,
 				BAA8C07E1A32F8EC00AAB9F4 /* Models */,
 				BA7C27C71A37A32A00A9CFC5 /* Networking */,
@@ -606,6 +605,7 @@
 				BABE8FCA1A89574500B81DD1 /* ClipsViewController.swift */,
 				BA7198CF1A897F3B004BB840 /* ClipPlayerViewController.swift */,
 				BAE2EFD11A5C5A1D004B781C /* CameraViewController.swift */,
+				BA789E091A7052C500BA1611 /* Player */,
 			);
 			name = Main;
 			sourceTree = "<group>";
