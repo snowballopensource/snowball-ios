@@ -21,6 +21,8 @@ class Analytics {
 
   let mixpanel = Mixpanel.sharedInstanceWithToken("38692cce5751bea6cc1628c3b66a915c")
 
+  // MARK: - Initializers
+
   init() {
     if let userID = User.currentUser?.id {
       identify(userID)
