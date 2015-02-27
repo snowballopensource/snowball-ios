@@ -115,7 +115,11 @@ class EditProfileViewController: UIViewController {
   // MARK: - Private
 
   @objc private func avatarButtonTapped() {
-    println("tapped")
+    let imagePickerController = UIImagePickerController()
+    imagePickerController.delegate = self
+    imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+    imagePickerController.allowsEditing = true
+    presentViewController(imagePickerController, animated: true, completion: nil)
   }
 }
 
@@ -210,4 +214,26 @@ extension EditProfileViewController: UITableViewDataSource {
       cell.textField.keyboardType = UIKeyboardType.EmailAddress
     }
   }
+}
+
+// MARK: - 
+
+extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+  // MARK: - UIImagePickerControllerDelegate
+
+  func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+    picker.dismissViewControllerAnimated(true) {
+      UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
+      let editedImage = editingInfo[UIImagePickerControllerEditedImage] as? UIImage
+      var finalImage: UIImage
+      if let editedImage = editedImage {
+        finalImage = editedImage
+      } else {
+        finalImage = image
+      }
+      self.avatarImageView.imageView.image = finalImage
+    }
+  }
+
 }

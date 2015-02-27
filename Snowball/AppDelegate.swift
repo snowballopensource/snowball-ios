@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
 
   private class var initialViewController: UIViewController {
+    return EditProfileViewController()
     if User.currentUser == nil { return AuthenticationNavigationController() }
     return MainNavigationController()
   }

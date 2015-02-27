@@ -12,7 +12,7 @@ class UserAvatarImageView: UIView {
 
   // MARK: - Properties
 
-  private let imageView = UIImageView()
+  let imageView = UIImageView()
 
   // MARK: - UIView
 
