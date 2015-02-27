@@ -31,7 +31,6 @@
 		BA5247451A319E24003BD269 /* AddClipCollectionReuseableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5247441A319E24003BD269 /* AddClipCollectionReuseableView.swift */; };
 		BA6314D11A97C8B100021E3F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6314D01A97C8B100021E3F /* OnboardingViewController.swift */; };
 		BA6385E31A65ACAF00B002D9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385E21A65ACAF00B002D9 /* WelcomeViewController.swift */; };
-		BA6385ED1A65B8FF00B002D9 /* UIView+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385EC1A65B8FF00B002D9 /* UIView+Snowball.swift */; };
 		BA7198D01A897F3B004BB840 /* ClipPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7198CF1A897F3B004BB840 /* ClipPlayerViewController.swift */; };
 		BA7198D21A897F4A004BB840 /* ClipPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7198D11A897F4A004BB840 /* ClipPlayerItem.swift */; };
 		BA789E0B1A7052D000BA1611 /* CachedURLAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA789E0A1A7052D000BA1611 /* CachedURLAsset.swift */; };
@@ -217,7 +216,6 @@
 		BA5247441A319E24003BD269 /* AddClipCollectionReuseableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddClipCollectionReuseableView.swift; sourceTree = "<group>"; };
 		BA6314D01A97C8B100021E3F /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		BA6385E21A65ACAF00B002D9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		BA6385EC1A65B8FF00B002D9 /* UIView+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Snowball.swift"; sourceTree = "<group>"; };
 		BA7198CF1A897F3B004BB840 /* ClipPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPlayerViewController.swift; sourceTree = "<group>"; };
 		BA7198D11A897F4A004BB840 /* ClipPlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPlayerItem.swift; sourceTree = "<group>"; };
 		BA789E0A1A7052D000BA1611 /* CachedURLAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedURLAsset.swift; sourceTree = "<group>"; };
@@ -700,7 +698,6 @@
 			children = (
 				BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */,
 				BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */,
-				BA6385EC1A65B8FF00B002D9 /* UIView+Snowball.swift */,
 				BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */,
 				BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */,
 				BA7C0E491A65EF94001B3B4C /* UITextField+Snowball.swift */,
@@ -1074,7 +1071,6 @@
 				BAFB06A41A9E906400EDA01B /* MPABTestDesignerClearResponseMessage.m in Sources */,
 				BA3A28771A305AF600A85C29 /* ClipCollectionViewCell.swift in Sources */,
 				BAFB06AA1A9E906400EDA01B /* MPABTestDesignerSnapshotResponseMessage.m in Sources */,
-				BA6385ED1A65B8FF00B002D9 /* UIView+Snowball.swift in Sources */,
 				BAFB06AB1A9E906400EDA01B /* MPABTestDesignerTweakRequestMessage.m in Sources */,
 				BAFB06C91A9E906400EDA01B /* MPSequenceGenerator.m in Sources */,
 				BAFB06A91A9E906400EDA01B /* MPABTestDesignerSnapshotRequestMessage.m in Sources */,
