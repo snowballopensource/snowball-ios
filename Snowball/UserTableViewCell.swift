@@ -7,7 +7,6 @@
 //
 
 import Cartography
-import Haneke
 import UIKit
 
 protocol UserTableViewCellDelegate: class {
@@ -15,25 +14,36 @@ protocol UserTableViewCellDelegate: class {
 }
 
 class UserTableViewCell: UITableViewCell {
+
+  // MARK: - Properties
+
   class var height: CGFloat {
     return 55
   }
 
   var delegate: UserTableViewCellDelegate?
+
   private let avatarImageView = UserAvatarImageView()
-  private let usernameLabel = UILabel()
-  private let followButton: UIButton = {
-    let followButton = UIButton()
-    followButton.titleLabel?.font = UIFont(name: UIFont.SnowballFont.bold, size: 18)
-    followButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-    followButton.layer.cornerRadius = 20
-    return followButton
+
+  private let usernameLabel: UILabel = {
+    let label = UILabel()
+    label.font = UIFont(name: UIFont.SnowballFont.bold, size: 19)
+    return label
   }()
+
+  private let followButton: UIButton = {
+    let button = UIButton()
+    button.titleLabel?.font = UIFont(name: UIFont.SnowballFont.bold, size: 18)
+    button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+    button.layer.cornerRadius = 20
+    return button
+  }()
+
+  // MARK: - Initializers
 
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     contentView.addSubview(avatarImageView)
-    usernameLabel.font = UIFont(name: UIFont.SnowballFont.bold, size: 19)
     contentView.addSubview(usernameLabel)
     followButton.addTarget(self, action: "followButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     contentView.addSubview(followButton)
