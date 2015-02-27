@@ -11,7 +11,7 @@ import CoreRecord
 
 class RemoteObject: NSManagedObject {
 
-  // MARK: - JSON Parsing
+  // MARK: - Internal
 
   class func objectFromJSON(JSON: AnyObject, context: NSManagedObjectContext = CoreDataStack.defaultStack.mainQueueManagedObjectContext) -> RemoteObject? {
     if let id = JSON["id"] as? String {

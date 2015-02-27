@@ -10,6 +10,9 @@ import CoreData
 import UIKit
 
 class User: RemoteObject {
+
+  // MARK: - Properties
+
   @NSManaged var id: String?
   @NSManaged var name: String?
   @NSManaged var username: String?
@@ -20,41 +23,7 @@ class User: RemoteObject {
   @NSManaged var color: AnyObject
   var authToken: String?
 
-  // MARK: - NSManagedObject
-
-  override func awakeFromInsert() {
-    super.awakeFromInsert()
-    color = UIColor.SnowballColor.randomColor
-  }
-
-  override func assignAttributes(attributes: [String: AnyObject]) {
-    if let id = attributes["id"] as? String {
-      self.id = id
-    }
-    if let name = attributes["name"] as? String {
-      self.name = name
-    }
-    if let username = attributes["username"] as? String {
-      self.username = username
-    }
-    if let avatarURL = attributes["avatar_url"] as? String {
-      self.avatarURL = avatarURL
-    }
-    if let following = attributes["following"] as? Bool {
-      self.following = following
-    }
-    if let email = attributes["email"] as? String {
-      self.email = email
-    }
-    if let phoneNumber = attributes["phone_number"] as? String {
-      self.phoneNumber = phoneNumber
-    }
-    if let authToken = attributes["auth_token"] as? String {
-      self.authToken = authToken
-    }
-  }
-
-  // MARK: - Current User
+  // MARK: Current User
 
   // Since stored class variables are not yet supported,
   // we create a struct that does support static vars.
@@ -96,6 +65,40 @@ class User: RemoteObject {
       }
       defaults.synchronize()
       NSNotificationCenter.defaultCenter().postNotificationName(CurrentUserStruct.kCurrentUserChangedNotificationName, object: user)
+    }
+  }
+
+  // MARK: - NSManagedObject
+
+  override func awakeFromInsert() {
+    super.awakeFromInsert()
+    color = UIColor.SnowballColor.randomColor
+  }
+
+  override func assignAttributes(attributes: [String: AnyObject]) {
+    if let id = attributes["id"] as? String {
+      self.id = id
+    }
+    if let name = attributes["name"] as? String {
+      self.name = name
+    }
+    if let username = attributes["username"] as? String {
+      self.username = username
+    }
+    if let avatarURL = attributes["avatar_url"] as? String {
+      self.avatarURL = avatarURL
+    }
+    if let following = attributes["following"] as? Bool {
+      self.following = following
+    }
+    if let email = attributes["email"] as? String {
+      self.email = email
+    }
+    if let phoneNumber = attributes["phone_number"] as? String {
+      self.phoneNumber = phoneNumber
+    }
+    if let authToken = attributes["auth_token"] as? String {
+      self.authToken = authToken
     }
   }
 
