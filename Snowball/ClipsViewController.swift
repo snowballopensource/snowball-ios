@@ -57,9 +57,15 @@ class ClipsViewController: UIViewController {
   private let currentClipScrollPosition = UICollectionViewScrollPosition.Right
 
   private var playingClipIndexPath: NSIndexPath? {
-    didSet {
-      if let indexPath = playingClipIndexPath {
-        collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: currentClipScrollPosition, animated: true)
+    willSet {
+      if let oldIndexPath = playingClipIndexPath {
+        let oldCell = collectionView.cellForItemAtIndexPath(oldIndexPath) as? ClipCollectionViewCell
+        oldCell?.dimContentView(true)
+      }
+      if let newIndexPath = newValue {
+        let newCell = collectionView.cellForItemAtIndexPath(newIndexPath) as? ClipCollectionViewCell
+        newCell?.dimContentView(false)
+        collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: currentClipScrollPosition, animated: true)
       }
     }
   }
@@ -356,11 +362,6 @@ extension ClipsViewController: ClipPlayerViewControllerDelegate {
         return
       }
     }
-
-    let indexPath = NSIndexPath(forItem: indexOfClip(playerItem.clip), inSection: 0)
-    let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ClipCollectionViewCell
-    cell?.dimContentView(true)
-
     if let nextClip = clipAfterClip(playerItem.clip) {
       Analytics.track("Watch Clip") // track event for next clip start
       let indexPath = NSIndexPath(forItem: indexOfClip(nextClip), inSection: 0)
