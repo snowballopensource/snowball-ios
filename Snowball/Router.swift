@@ -13,10 +13,10 @@ enum Router: URLRequestConvertible {
   static let baseURLString: String = {
     if let bundleIdentifier = NSBundle.mainBundle().bundleIdentifier {
       if bundleIdentifier == "is.snowball.snowball-staging" {
-        return "http://s.snowball.is/api/v1"
+        return "https://api-staging.snowball.is/v1"
       }
     }
-    return "http://api.snowball.is/v1/"
+    return "https://api.snowball.is/v1/"
   }()
 
   // Authentication
