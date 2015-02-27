@@ -14,19 +14,26 @@ protocol AddClipCollectionReuseableViewDelegate: class {
 }
 
 class AddClipCollectionReuseableView: UICollectionReusableView {
-  var delegate: AddClipCollectionReuseableViewDelegate?
-  private var addClipButton = UIButton()
+
+  // MARK: - Properties
 
   class var size: CGSize {
     return ClipCollectionViewCell.size
   }
+
+  var delegate: AddClipCollectionReuseableViewDelegate?
+
+  private var addClipButton: UIButton = {
+    let button = UIButton()
+    button.setImage(UIImage(named: "add-clip"), forState: UIControlState.Normal)
+    return button
+  }()
 
   // MARK: - Initializers
 
   override init(frame: CGRect) {
     super.init(frame: frame)
 
-    addClipButton.setImage(UIImage(named: "add-clip"), forState: UIControlState.Normal)
     addClipButton.addTarget(self, action: "addClipButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     addSubview(addClipButton)
   }
