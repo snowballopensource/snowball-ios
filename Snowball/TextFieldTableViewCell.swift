@@ -10,22 +10,28 @@ import Cartography
 import UIKit
 
 class TextFieldTableViewCell: UITableViewCell {
+
+  // MARK: - Properties
+
   class var height: CGFloat {
     return 65
   }
 
   let textFieldLabel: UILabel = {
-    let usernameLabel = UILabel()
-    usernameLabel.font = UIFont(name: UIFont.SnowballFont.bold, size: 11)
-    return usernameLabel
+    let label = UILabel()
+    label.font = UIFont(name: UIFont.SnowballFont.bold, size: 11)
+    return label
     }()
+
   let textField: UITextField = {
-    let usernameTextField = UITextField()
-    usernameTextField.font = UIFont(name: UIFont.SnowballFont.regular, size: 26)
-    usernameTextField.textColor = UIColor.SnowballColor.greenColor
-    usernameTextField.alignLeft(insetWidth: 0)
-    return usernameTextField
+    let textField = UITextField()
+    textField.font = UIFont(name: UIFont.SnowballFont.regular, size: 26)
+    textField.textColor = UIColor.SnowballColor.greenColor
+    textField.alignLeft(insetWidth: 0)
+    return textField
     }()
+
+  // MARK: - Initializers
 
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
