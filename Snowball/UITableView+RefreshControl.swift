@@ -30,7 +30,8 @@ extension UITableView {
   }
 
   func offsetContentForRefreshControl() {
-    // Fix for the animation sometimes not showing when calling refreshControl.startRefreshing()
+    // Hacky fix for the animation sometimes not showing when calling refreshControl.startRefreshing()
+    // This doesn't quite work all the time, so find a better solution.
     contentOffset = CGPoint(x: 0, y: -refreshControl.frame.height)
   }
 }

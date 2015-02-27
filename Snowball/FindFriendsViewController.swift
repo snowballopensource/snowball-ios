@@ -39,6 +39,7 @@ class FindFriendsViewController: UIViewController {
     view.addSubview(topView)
     topView.setupDefaultLayout()
 
+    tableView.addRefreshControl(self, action: "refresh")
     tableView.dataSource = self
     view.addSubview(tableView)
     layout(tableView, topView) { (tableView, topView) in
@@ -54,6 +55,7 @@ class FindFriendsViewController: UIViewController {
 
     ABAddressBookRequestAccessWithCompletion(addressBook) { (granted, error) in
       if granted {
+        self.tableView.offsetContentForRefreshControl()
         self.refresh()
       }
     }
@@ -61,7 +63,8 @@ class FindFriendsViewController: UIViewController {
 
   // MARK: - Private
 
-  private func refresh() {
+  @objc private func refresh() {
+    tableView.refreshControl.beginRefreshing()
     var phoneNumbers = [String]()
     let contacts = ABAddressBookCopyArrayOfAllPeople(addressBook).takeRetainedValue() as NSArray
     for contact in contacts {
@@ -73,6 +76,7 @@ class FindFriendsViewController: UIViewController {
     }
 
     API.request(Router.FindUsersByPhoneNumbers(phoneNumbers: phoneNumbers)).responseJSON { (request, response, JSON, error) in
+      self.tableView.refreshControl.endRefreshing()
       error?.print("api find friends")
       if let JSON: AnyObject = JSON {
         self.users = User.objectsFromJSON(JSON) as [User]
