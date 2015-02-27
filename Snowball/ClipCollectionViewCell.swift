@@ -11,27 +11,55 @@ import Haneke
 import UIKit
 
 class ClipCollectionViewCell: UICollectionViewCell {
-  private let clipThumbnailImageView = UIImageView()
+
+  // MARK: - Properties
+
+  class var size: CGSize {
+    let screenHeight = UIScreen.mainScreen().bounds.height
+    let screenWidth = UIScreen.mainScreen().bounds.width
+    let cellHeight = screenHeight - screenWidth
+    return CGSizeMake(140.0, cellHeight)
+  }
+
+  private let clipThumbnailImageView: UIImageView = {
+    let imageView = UIImageView()
+    imageView.contentMode = UIViewContentMode.ScaleAspectFill
+    return imageView
+  }()
+
   private let userAvatarImageView = UserAvatarImageView()
-  private let usernameLabel = UILabel()
-  private let clipTimeLabel = UILabel()
-  private let dimView = UIView()
+
+  private let usernameLabel: UILabel = {
+    let label = UILabel()
+    label.font = UIFont(name: UIFont.SnowballFont.bold, size: 17)
+    label.textAlignment = NSTextAlignment.Center
+    return label
+  }()
+
+  private let clipTimeLabel: UILabel = {
+    let label = UILabel()
+    label.font = UIFont(name: UIFont.SnowballFont.regular, size: 12)
+    label.textAlignment = NSTextAlignment.Center
+    label.textColor = UIColor(red: 210/255.0, green: 210/255.0, blue: 210/255.0, alpha: 1.0)
+    return label
+  }()
+
+  private let dimView: UIView = {
+    let view = UIView()
+    view.backgroundColor = UIColor.whiteColor()
+    view.alpha = 0.6
+    view.hidden = true
+    return view
+  }()
+
+  // MARK: - Initializers
 
   override init(frame: CGRect) {
     super.init(frame: frame)
-    clipThumbnailImageView.contentMode = UIViewContentMode.ScaleAspectFill
     contentView.addSubview(clipThumbnailImageView)
     contentView.addSubview(userAvatarImageView)
-    usernameLabel.font = UIFont(name: UIFont.SnowballFont.bold, size: 17)
-    usernameLabel.textAlignment = NSTextAlignment.Center
     contentView.addSubview(usernameLabel)
-    clipTimeLabel.font = UIFont(name: UIFont.SnowballFont.regular, size: 12)
-    clipTimeLabel.textAlignment = NSTextAlignment.Center
-    clipTimeLabel.textColor = UIColor(red: 210/255.0, green: 210/255.0, blue: 210/255.0, alpha: 1.0)
     contentView.addSubview(clipTimeLabel)
-    dimView.backgroundColor = UIColor.whiteColor()
-    dimView.alpha = 0.6
-    dimView.hidden = true
     contentView.addSubview(dimView)
   }
 
@@ -73,14 +101,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     dimView.frame = contentView.bounds
   }
 
-  // MARK: - UICollectionReuseableView+Required
-
-  override class var size: CGSize {
-    let screenHeight = UIScreen.mainScreen().bounds.height
-    let screenWidth = UIScreen.mainScreen().bounds.width
-    let cellHeight = screenHeight - screenWidth
-    return CGSizeMake(140.0, cellHeight)
-  }
+  // MARK: - Internal
 
   func configureForClip(clip: Clip) {
     usernameLabel.text = clip.user?.username

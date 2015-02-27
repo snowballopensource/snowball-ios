@@ -17,6 +17,10 @@ class AddClipCollectionReuseableView: UICollectionReusableView {
   var delegate: AddClipCollectionReuseableViewDelegate?
   private var addClipButton = UIButton()
 
+  class var size: CGSize {
+    return ClipCollectionViewCell.size
+  }
+
   // MARK: - Initializers
 
   override init(frame: CGRect) {
@@ -42,12 +46,6 @@ class AddClipCollectionReuseableView: UICollectionReusableView {
       addClipButton.width == addClipButton.superview!.width
       addClipButton.height == addClipButton.superview!.width
     }
-  }
-
-  // MARK: - UICollectionReuseableView+Required
-
-  override class var size: CGSize {
-    return ClipCollectionViewCell.size
   }
 
   // MARK: - Private

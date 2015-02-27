@@ -30,7 +30,6 @@
 		BA44E4561A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4551A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift */; };
 		BA44E4581A9C0EC600B75DF3 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */; };
 		BA5247451A319E24003BD269 /* AddClipCollectionReuseableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5247441A319E24003BD269 /* AddClipCollectionReuseableView.swift */; };
-		BA52474B1A31A1FC003BD269 /* UICollectionReusableView+Required.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA52474A1A31A1FC003BD269 /* UICollectionReusableView+Required.swift */; };
 		BA6314D11A97C8B100021E3F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6314D01A97C8B100021E3F /* OnboardingViewController.swift */; };
 		BA6385E31A65ACAF00B002D9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385E21A65ACAF00B002D9 /* WelcomeViewController.swift */; };
 		BA6385ED1A65B8FF00B002D9 /* UIView+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385EC1A65B8FF00B002D9 /* UIView+Snowball.swift */; };
@@ -222,7 +221,6 @@
 		BA44E4551A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		BA5247441A319E24003BD269 /* AddClipCollectionReuseableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddClipCollectionReuseableView.swift; sourceTree = "<group>"; };
-		BA52474A1A31A1FC003BD269 /* UICollectionReusableView+Required.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+Required.swift"; sourceTree = "<group>"; };
 		BA6314D01A97C8B100021E3F /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		BA6385E21A65ACAF00B002D9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		BA6385EC1A65B8FF00B002D9 /* UIView+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Snowball.swift"; sourceTree = "<group>"; };
@@ -713,7 +711,6 @@
 			children = (
 				BA8812F21A785B5E00B50651 /* UITableViewHeaderFooterView+Required.swift */,
 				BA3A28831A305C6F00A85C29 /* UICollectionView+CellRegistration.swift */,
-				BA52474A1A31A1FC003BD269 /* UICollectionReusableView+Required.swift */,
 				BA8812EC1A7841BE00B50651 /* UITableView+CellRegistration.swift */,
 				BA8812B21A78399A00B50651 /* UITableViewCell+Required.swift */,
 				BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */,
@@ -1120,7 +1117,6 @@
 				BAFB06AF1A9E906400EDA01B /* MPCATransform3DToNSDictionaryValueTransformer.m in Sources */,
 				BAFB06BC1A9E906400EDA01B /* MPEventBinding.m in Sources */,
 				BAFB06A61A9E906400EDA01B /* MPABTestDesignerDeviceInfoRequestMessage.m in Sources */,
-				BA52474B1A31A1FC003BD269 /* UICollectionReusableView+Required.swift in Sources */,
 				BAFB06B31A9E906400EDA01B /* MPCGRectToNSDictionaryValueTransformer.m in Sources */,
 				BAE702461A96AFDF0040DA6F /* OnboardingPageViewController.swift in Sources */,
 				BAFB06A81A9E906400EDA01B /* MPABTestDesignerDisconnectMessage.m in Sources */,
