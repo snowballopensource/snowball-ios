@@ -15,7 +15,8 @@ struct API {
     return Alamofire.request(URLRequest).validate(statusCode: 200..<300)
   }
 
-  // Hack using AFNetworking since Alamofire does not support multipart uploads
+  // MARK - Internal
+
   static func uploadClip(clip: Clip, completion: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> ()) {
     UploadQueue.sharedQueue.addTask {
       let requestURL = NSURL(string: Router.baseURLString)!.URLByAppendingPathComponent("clips")
@@ -35,6 +36,8 @@ struct API {
     }
   }
 
+  // MARK: - Private
+
   private static func tryUpload(request: NSURLRequest, retryCount: Int, completion: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> ()) {
     let manager = AFURLSessionManager(sessionConfiguration: NSURLSessionConfiguration.defaultSessionConfiguration())
     let uploadTask = manager.uploadTaskWithStreamedRequest(request, progress: nil) { (response, responseObject, error) in
@@ -46,6 +49,8 @@ struct API {
     uploadTask.resume()
   }
 }
+
+// MARK: - Global
 
 func displayAPIErrorToUser(errorJSON: AnyObject?) {
   if let errorJSON: AnyObject = errorJSON {
