@@ -26,6 +26,7 @@ class FindFriendsViewController: UIViewController {
     }()
 
   var users: [User] = []
+
   let addressBook: ABAddressBook = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
 
   // MARK: - UIViewController
@@ -37,8 +38,6 @@ class FindFriendsViewController: UIViewController {
 
     view.addSubview(topView)
     topView.setupDefaultLayout()
-
-    let margin: Float = 20
 
     tableView.dataSource = self
     view.addSubview(tableView)
@@ -53,15 +52,9 @@ class FindFriendsViewController: UIViewController {
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
 
-    let status = ABAddressBookGetAuthorizationStatus()
-//    if status == ABAuthorizationStatus.NotDetermined {
-//
-//    }
     ABAddressBookRequestAccessWithCompletion(addressBook) { (granted, error) in
       if granted {
         self.refresh()
-      } else {
-        // TODO: show user error
       }
     }
   }
@@ -117,7 +110,7 @@ extension FindFriendsViewController: UITableViewDataSource {
     return cell
   }
 
-  func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+  private func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
     let cell = cell as UserTableViewCell
     cell.delegate = self
     let user = users[indexPath.row]
