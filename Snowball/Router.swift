@@ -10,15 +10,6 @@ import Alamofire
 import Foundation
 
 enum Router: URLRequestConvertible {
-  static let baseURLString: String = {
-    if let bundleIdentifier = NSBundle.mainBundle().bundleIdentifier {
-      if bundleIdentifier == "is.snowball.snowball-staging" {
-        return "https://api-staging.snowball.is/v1"
-      }
-    }
-    return "https://api.snowball.is/v1/"
-  }()
-
   // Authentication
   case SignUp(username: String, email: String, password: String)
   case SignIn(email: String, password: String)
@@ -36,7 +27,18 @@ enum Router: URLRequestConvertible {
   case DeleteClip(clipID: String)
   case FlagClip(clipID: String)
 
-  var method: Alamofire.Method {
+  // MARK: - Properties
+
+  static let baseURLString: String = {
+    if let bundleIdentifier = NSBundle.mainBundle().bundleIdentifier {
+      if bundleIdentifier == "is.snowball.snowball-staging" {
+        return "https://api-staging.snowball.is/v1"
+      }
+    }
+    return "https://api.snowball.is/v1/"
+    }()
+
+  private var method: Alamofire.Method {
     switch self {
     case .SignUp: return .POST
     case .SignIn: return .POST
@@ -54,7 +56,7 @@ enum Router: URLRequestConvertible {
     }
   }
 
-  var path: String {
+  private var path: String {
     switch self {
     case .SignUp: return "users/sign-up"
     case .SignIn: return "users/sign-in"
@@ -72,7 +74,7 @@ enum Router: URLRequestConvertible {
     }
   }
 
-  var parameterEncoding: ParameterEncoding? {
+  private var parameterEncoding: ParameterEncoding? {
     switch self {
     case .SignUp: return ParameterEncoding.JSON
     case .SignIn: return ParameterEncoding.JSON
@@ -83,7 +85,7 @@ enum Router: URLRequestConvertible {
     }
   }
 
-  var parameters: [String: AnyObject]? {
+  private var parameters: [String: AnyObject]? {
     switch self {
     case .SignUp(let username, let email, let password): return ["username": username, "email": email, "password": password]
     case .SignIn(let email, let password): return ["email": email, "password": password]
