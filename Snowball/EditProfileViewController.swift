@@ -23,17 +23,18 @@ class EditProfileViewController: UIViewController {
     tableView.registerClass(TextFieldTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(TextFieldTableViewCell))
     return tableView
     }()
-//  private let avatarLabel: UILabel = {
-//    let avatarLabel = UILabel()
-//    avatarLabel.font = UIFont(name: UIFont.SnowballFont.bold, size: 11)
-//    avatarLabel.text = NSLocalizedString("AVATAR")
-//    return avatarLabel
-//  }()
-//  private let avatarImageView: UserAvatarImageView = {
-//    let avatarImageView = UserAvatarImageView()
-//    avatarImageView.backgroundColor = UIColor.SnowballColor.greenColor
-//    return avatarImageView
-//  }()
+
+  private let avatarButton = UIButton()
+
+  private let avatarImageView: UserAvatarImageView = {
+    let imageView = UserAvatarImageView()
+    imageView.userInteractionEnabled = false
+    if let user = User.currentUser {
+      imageView.configureForUser(user)
+    }
+    return imageView
+  }()
+
 //  private let logOutButton: UIButton = {
 //    let logOutButton = UIButton()
 //    logOutButton.setTitle(NSLocalizedString("log out"), forState: UIControlState.Normal)
@@ -52,34 +53,28 @@ class EditProfileViewController: UIViewController {
     view.addSubview(topView)
     topView.setupDefaultLayout()
 
+    avatarButton.addTarget(self, action: "avatarButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    view.addSubview(avatarButton)
+    layout(avatarButton, topView) { (avatarButton, topView) in
+      avatarButton.top == topView.bottom
+      avatarButton.centerX == avatarButton.superview!.centerX
+      let diameter: Float = 100
+      avatarButton.width == diameter
+      avatarButton.height == diameter
+    }
+
+    avatarImageView.frame = avatarButton.bounds
+    avatarButton.addSubview(avatarImageView)
+
     tableView.dataSource = self
     view.addSubview(tableView)
-    layout(tableView, topView) { (tableView, topView) in
+    layout(tableView, avatarImageView) { (tableView, avatarImageView) in
       tableView.left == tableView.superview!.left
-      tableView.top == topView.bottom
+      tableView.top == avatarImageView.bottom
       tableView.right == tableView.superview!.right
       tableView.bottom == tableView.superview!.bottom
     }
 
-//    let margin: Float = 20
-//    let textFieldHeight: Float = 35
-//    let afterLabelSpacing: Float = 7
-//    let afterTextFieldSpacing: Float = 20
-
-//    view.addSubview(avatarLabel)
-//    layout(avatarLabel, topView) { (avatarLabel, topView) in
-//      avatarLabel.left == avatarLabel.superview!.left + margin
-//      avatarLabel.top == topView.bottom + 5
-//    }
-//
-//    view.addSubview(avatarImageView)
-//    layout(avatarImageView, avatarLabel) { (avatarImageView, avatarLabel) in
-//      avatarImageView.top == avatarLabel.bottom + afterLabelSpacing
-//      avatarImageView.centerX == avatarImageView.superview!.centerX
-//      let diameter: Float = 110
-//      avatarImageView.width == diameter
-//      avatarImageView.height == diameter
-//    }
 //
 //    logOutButton.addTarget(self, action: "logOutButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
 //    view.addSubview(logOutButton)
@@ -115,6 +110,12 @@ class EditProfileViewController: UIViewController {
         }
       }
     }
+  }
+
+  // MARK: - Private
+
+  @objc private func avatarButtonTapped() {
+    println("tapped")
   }
 }
 
