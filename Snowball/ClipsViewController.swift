@@ -101,6 +101,12 @@ class ClipsViewController: UIViewController {
     return clips.first
   }
 
+  let activityIndicatorView: UIActivityIndicatorView = {
+    let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+    activityIndicatorView.color = UIColor.darkGrayColor()
+    return activityIndicatorView
+  }()
+
   // MARK: - UIViewController
 
   override func viewDidLoad() {
@@ -136,6 +142,12 @@ class ClipsViewController: UIViewController {
       collectionView.top == playerView.bottom
       collectionView.right == collectionView.superview!.right
       collectionView.bottom == collectionView.superview!.bottom
+    }
+
+    collectionView.addSubview(activityIndicatorView)
+    layout(activityIndicatorView) { (activityIndicatorView) in
+      activityIndicatorView.centerX == activityIndicatorView.superview!.centerX
+      activityIndicatorView.top == activityIndicatorView.superview!.top + 50
     }
   }
 
@@ -178,7 +190,9 @@ class ClipsViewController: UIViewController {
   // MARK: - Private
 
   @objc private func refresh() {
+    activityIndicatorView.startAnimating()
     API.request(Router.GetClipStream).responseJSON { (request, response, JSON, error) in
+      self.activityIndicatorView.stopAnimating()
       if let JSON = JSON as? [AnyObject] {
         self.clips = Clip.importJSON(JSON)
         self.collectionView.reloadData()
