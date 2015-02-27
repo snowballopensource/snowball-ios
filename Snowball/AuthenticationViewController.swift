@@ -13,11 +13,55 @@ class SignUpViewController: AuthenticationViewController {}
 class SignInViewController: AuthenticationViewController {}
 
 class AuthenticationViewController: UIViewController, SnowballTopViewDelegate {
-  let topBar = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Back, rightButtonType: SnowballTopViewButtonType.Forward)
-  let messageLabel = UILabel()
-  let usernameTextField = UITextField()
-  let emailTextField = UITextField()
-  let passwordTextField = UITextField()
+
+  // MARK: - Properties
+
+  private let topBar = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Back, rightButtonType: SnowballTopViewButtonType.Forward)
+
+  private let messageLabel: UILabel = {
+    let label = UILabel()
+    label.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
+    label.numberOfLines = 2
+    return label
+  }()
+
+  private let usernameTextField: SnowballRoundedTextField = {
+    let textField = SnowballRoundedTextField()
+    textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("username"), attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
+    textField.textColor = UIColor.SnowballColor.greenColor
+    textField.tintColor = UIColor.SnowballColor.greenColor
+    textField.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
+    textField.alignLeft(insetWidth: 20)
+    textField.autocorrectionType = UITextAutocorrectionType.No
+    textField.autocapitalizationType = UITextAutocapitalizationType.None
+    return textField
+  }()
+
+  private let emailTextField: SnowballRoundedTextField = {
+    let textField = SnowballRoundedTextField()
+    textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("email"), attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
+    textField.textColor = UIColor.SnowballColor.greenColor
+    textField.tintColor = UIColor.SnowballColor.greenColor
+    textField.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
+    textField.alignLeft(insetWidth: 20)
+    textField.autocorrectionType = UITextAutocorrectionType.No
+    textField.autocapitalizationType = UITextAutocapitalizationType.None
+    textField.keyboardType = UIKeyboardType.EmailAddress
+    return textField
+  }()
+
+  private let passwordTextField: SnowballRoundedTextField = {
+    let textField = SnowballRoundedTextField()
+    textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("password"), attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
+    textField.textColor = UIColor.SnowballColor.greenColor
+    textField.tintColor = UIColor.SnowballColor.greenColor
+    textField.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
+    textField.alignLeft(insetWidth: 20)
+    textField.autocorrectionType = UITextAutocorrectionType.No
+    textField.autocapitalizationType = UITextAutocapitalizationType.None
+    textField.secureTextEntry = true
+    return textField
+  }()
 
   // MARK: - UIViewController
 
@@ -31,8 +75,6 @@ class AuthenticationViewController: UIViewController, SnowballTopViewDelegate {
 
     let sideMargin: Float = 25
 
-    messageLabel.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    messageLabel.numberOfLines = 2
     view.addSubview(messageLabel)
     layout(messageLabel, topBar) { (messageLabel, topBar) in
       messageLabel.left == messageLabel.superview!.left + sideMargin
@@ -44,22 +86,12 @@ class AuthenticationViewController: UIViewController, SnowballTopViewDelegate {
     let textFieldHeight: Float = 50
 
     if self.isKindOfClass(SignUpViewController) {
-      let messageStringOne = NSAttributedString(string: "Ok, let's get started with\n", attributes: [NSForegroundColorAttributeName: UIColor.blackColor()])
-      let messageStringTwo = NSAttributedString(string: "creating ", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
-      let messageStringThree = NSAttributedString(string: "your account.", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor])
-      let messageString = NSMutableAttributedString(attributedString: messageStringOne)
-      messageString.appendAttributedString(messageStringTwo)
-      messageString.appendAttributedString(messageStringThree)
+      let messageString = NSMutableAttributedString()
+      messageString.appendAttributedString(NSAttributedString(string: "Ok, let's get started with\n", attributes: [NSForegroundColorAttributeName: UIColor.blackColor()]))
+      messageString.appendAttributedString(NSAttributedString(string: "creating ", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor]))
+      messageString.appendAttributedString(NSAttributedString(string: "your account.", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor]))
       messageLabel.attributedText = messageString
 
-      usernameTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("username"), attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
-      usernameTextField.textColor = UIColor.SnowballColor.greenColor
-      usernameTextField.tintColor = UIColor.SnowballColor.greenColor
-      usernameTextField.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-      usernameTextField.alignLeft(insetWidth: 20)
-      usernameTextField.showSnowballStyleBorderWithColor(UIColor.SnowballColor.greenColor)
-      usernameTextField.autocorrectionType = UITextAutocorrectionType.No
-      usernameTextField.autocapitalizationType = UITextAutocapitalizationType.None
       view.addSubview(usernameTextField)
       layout(usernameTextField, messageLabel) { (usernameTextField, messageLabel) in
         usernameTextField.left == messageLabel.left
@@ -68,24 +100,13 @@ class AuthenticationViewController: UIViewController, SnowballTopViewDelegate {
         usernameTextField.height == textFieldHeight
       }
     } else {
-      let messageStringOne = NSAttributedString(string: "Ok, let's get you ", attributes: [NSForegroundColorAttributeName: UIColor.blackColor()])
-      let messageStringTwo = NSAttributedString(string: "back into\n", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
-      let messageStringThree = NSAttributedString(string: "your account.", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor])
-      let messageString = NSMutableAttributedString(attributedString: messageStringOne)
-      messageString.appendAttributedString(messageStringTwo)
-      messageString.appendAttributedString(messageStringThree)
+      let messageString = NSMutableAttributedString()
+      messageString.appendAttributedString(NSAttributedString(string: "Ok, let's get you ", attributes: [NSForegroundColorAttributeName: UIColor.blackColor()]))
+      messageString.appendAttributedString(NSAttributedString(string: "back into\n", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor]))
+      messageString.appendAttributedString(NSAttributedString(string: "your account.", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor]))
       messageLabel.attributedText = messageString
     }
 
-    emailTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("email"), attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
-    emailTextField.textColor = UIColor.SnowballColor.greenColor
-    emailTextField.tintColor = UIColor.SnowballColor.greenColor
-    emailTextField.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    emailTextField.alignLeft(insetWidth: 20)
-    emailTextField.showSnowballStyleBorderWithColor(UIColor.SnowballColor.greenColor)
-    emailTextField.autocorrectionType = UITextAutocorrectionType.No
-    emailTextField.autocapitalizationType = UITextAutocapitalizationType.None
-    emailTextField.keyboardType = UIKeyboardType.EmailAddress
     view.addSubview(emailTextField)
     if self.isKindOfClass(SignUpViewController) {
       layout(emailTextField, usernameTextField) { (emailTextField, usernameTextField) in
@@ -103,16 +124,6 @@ class AuthenticationViewController: UIViewController, SnowballTopViewDelegate {
       }
     }
 
-
-    passwordTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("password"), attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
-    passwordTextField.textColor = UIColor.SnowballColor.greenColor
-    passwordTextField.tintColor = UIColor.SnowballColor.greenColor
-    passwordTextField.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    passwordTextField.alignLeft(insetWidth: 20)
-    passwordTextField.showSnowballStyleBorderWithColor(UIColor.SnowballColor.greenColor)
-    passwordTextField.autocorrectionType = UITextAutocorrectionType.No
-    passwordTextField.autocapitalizationType = UITextAutocapitalizationType.None
-    passwordTextField.secureTextEntry = true
     view.addSubview(passwordTextField)
     layout(passwordTextField, emailTextField) { (passwordTextField, emailTextField) in
       passwordTextField.left == emailTextField.left
@@ -128,18 +139,6 @@ class AuthenticationViewController: UIViewController, SnowballTopViewDelegate {
       usernameTextField.becomeFirstResponder()
     } else {
       emailTextField.becomeFirstResponder()
-    }
-  }
-
-  // MARK: - SnowballTopViewDelegate
-
-  func snowballTopViewLeftButtonTapped() {
-    navigationController?.popViewControllerAnimated(true)
-  }
-
-  func snowballTopViewRightButtonTapped() {
-    if validateFields() {
-      performAuthenticationRequest()
     }
   }
 
@@ -191,6 +190,23 @@ class AuthenticationViewController: UIViewController, SnowballTopViewDelegate {
           }
         }
       }
+    }
+  }
+}
+
+// MARK: -
+
+extension AuthenticationViewController: SnowballTopViewDelegate {
+
+  // MARK: - SnowballTopViewDelegate
+
+  func snowballTopViewLeftButtonTapped() {
+    navigationController?.popViewControllerAnimated(true)
+  }
+
+  func snowballTopViewRightButtonTapped() {
+    if validateFields() {
+      performAuthenticationRequest()
     }
   }
 }
