@@ -224,15 +224,25 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
 
   func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
     picker.dismissViewControllerAnimated(true) {
-      UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
-      let editedImage = editingInfo[UIImagePickerControllerEditedImage] as? UIImage
-      var finalImage: UIImage
-      if let editedImage = editedImage {
-        finalImage = editedImage
-      } else {
-        finalImage = image
+      dispatch_async(dispatch_get_main_queue()) {
+        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
+        let editedImage = editingInfo[UIImagePickerControllerEditedImage] as? UIImage
+        var finalImage: UIImage
+        if let editedImage = editedImage {
+          finalImage = editedImage
+        } else {
+          finalImage = image
+        }
+        // TODO: process and cut down the size
+        // TODO: show spinner while uploading, show final image when done
+        self.avatarImageView.imageView.image = finalImage
+        API.changeAvatarToImage(finalImage) { (request, response, JSON, error) in
+          if let error = error {
+            error.print("change avatar")
+            displayAPIErrorToUser(JSON)
+          }
+        }
       }
-      self.avatarImageView.imageView.image = finalImage
     }
   }
 

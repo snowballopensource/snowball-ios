@@ -36,6 +36,23 @@ struct API {
     }
   }
 
+  static func changeAvatarToImage(image: UIImage, completion: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> ()) {
+    UploadQueue.sharedQueue.addTask {
+      let requestURL = NSURL(string: Router.baseURLString)!.URLByAppendingPathComponent("users/me")
+      let request = AFHTTPRequestSerializer().multipartFormRequestWithMethod("PATCH",
+        URLString: requestURL.absoluteString!,
+        parameters: nil,
+        constructingBodyWithBlock: { (formData: AFMultipartFormData!) in
+          formData.appendPartWithFileData(UIImagePNGRepresentation(image), name: "avatar", fileName: "image.png", mimeType: "image/png")
+          return
+        }, error: nil)
+      let encodedAuthTokenData = "\(APICredential.authToken!):".dataUsingEncoding(NSUTF8StringEncoding)!
+      let encodedAuthToken = encodedAuthTokenData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+      request.setValue("Basic \(encodedAuthToken)", forHTTPHeaderField: "Authorization")
+
+      self.tryUpload(request, retryCount: 3, completion: completion)    }
+  }
+
   // MARK: - Private
 
   private static func tryUpload(request: NSURLRequest, retryCount: Int, completion: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> ()) {
