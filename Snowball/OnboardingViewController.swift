@@ -31,7 +31,7 @@ class OnboardingViewController: UIViewController {
 
   let detailImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.contentMode = UIViewContentMode.Top
+    imageView.contentMode = UIViewContentMode.ScaleAspectFit
     return imageView
   }()
 
@@ -55,9 +55,15 @@ class OnboardingViewController: UIViewController {
     }
 
     view.addSubview(detailImageView)
+    let viewHeight = view.bounds.height
+    var originY: CGFloat = 300
+    let isIphone4S = (viewHeight < 568)
+    if isIphone4S {
+      originY = 250
+    }
     layout(detailImageView) { (detailImageView) in
       detailImageView.left == detailImageView.superview!.left
-      detailImageView.top == detailImageView.superview!.top + 240
+      detailImageView.top == detailImageView.superview!.top + originY
       detailImageView.right == detailImageView.superview!.right
       detailImageView.bottom == detailImageView.superview!.bottom
     }
