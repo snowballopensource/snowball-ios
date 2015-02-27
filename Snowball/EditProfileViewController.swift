@@ -120,7 +120,7 @@ class EditProfileViewController: UIViewController {
 
 // MARK: -
 
-enum EditProfileTextFieldIndex: Int {
+private enum EditProfileTextFieldIndex: Int {
   case Username
   case PhoneNumber
   case Email
