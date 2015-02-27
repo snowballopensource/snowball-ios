@@ -22,7 +22,6 @@
 		BA38C1771A30228700A2F2AE /* SnowballTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA38C1761A30228700A2F2AE /* SnowballTests.swift */; };
 		BA3A28701A3051E300A85C29 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A286F1A3051E300A85C29 /* Util.swift */; };
 		BA3A28771A305AF600A85C29 /* ClipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A28761A305AF600A85C29 /* ClipCollectionViewCell.swift */; };
-		BA3A28841A305C6F00A85C29 /* UICollectionView+CellRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A28831A305C6F00A85C29 /* UICollectionView+CellRegistration.swift */; };
 		BA3DB8221A9EEA8B00378F6D /* UIViewController+NavigationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3DB8211A9EEA8B00378F6D /* UIViewController+NavigationTransition.swift */; };
 		BA3DB8241A9EEEFD00378F6D /* SnowballRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3DB8231A9EEEFD00378F6D /* SnowballRoundedButton.swift */; };
 		BA3DB8261A9EFD9A00378F6D /* SnowballRoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3DB8251A9EFD9A00378F6D /* SnowballRoundedTextField.swift */; };
@@ -45,7 +44,6 @@
 		BA87C1481A840C0400A58E64 /* Swifter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC90F3A1A8343C5005C9405 /* Swifter.framework */; };
 		BA87C1491A840C0400A58E64 /* Swifter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAC90F3A1A8343C5005C9405 /* Swifter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA8812EB1A783CD600B50651 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */; };
-		BA8812ED1A7841BE00B50651 /* UITableView+CellRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812EC1A7841BE00B50651 /* UITableView+CellRegistration.swift */; };
 		BA938A011A7B06C600857CF7 /* NSError+Print.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA938A001A7B06C600857CF7 /* NSError+Print.swift */; };
 		BA9AA67C1A67465F002C4992 /* AuthenticationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9AA67B1A67465F002C4992 /* AuthenticationNavigationController.swift */; };
 		BA9AA6831A674804002C4992 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9AA6821A674804002C4992 /* MainNavigationController.swift */; };
@@ -210,7 +208,6 @@
 		BA38C1761A30228700A2F2AE /* SnowballTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowballTests.swift; sourceTree = "<group>"; };
 		BA3A286F1A3051E300A85C29 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		BA3A28761A305AF600A85C29 /* ClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCollectionViewCell.swift; sourceTree = "<group>"; };
-		BA3A28831A305C6F00A85C29 /* UICollectionView+CellRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+CellRegistration.swift"; sourceTree = "<group>"; };
 		BA3DB8211A9EEA8B00378F6D /* UIViewController+NavigationTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+NavigationTransition.swift"; sourceTree = "<group>"; };
 		BA3DB8231A9EEEFD00378F6D /* SnowballRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballRoundedButton.swift; sourceTree = "<group>"; };
 		BA3DB8251A9EFD9A00378F6D /* SnowballRoundedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballRoundedTextField.swift; sourceTree = "<group>"; };
@@ -231,7 +228,6 @@
 		BA7C27CA1A37A64400A9CFC5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteObject.swift; sourceTree = "<group>"; };
 		BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
-		BA8812EC1A7841BE00B50651 /* UITableView+CellRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+CellRegistration.swift"; sourceTree = "<group>"; };
 		BA938A001A7B06C600857CF7 /* NSError+Print.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Print.swift"; sourceTree = "<group>"; };
 		BA9AA67B1A67465F002C4992 /* AuthenticationNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationNavigationController.swift; sourceTree = "<group>"; };
 		BA9AA6821A674804002C4992 /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
@@ -702,8 +698,6 @@
 		BAF3DDBF1A3048440062C068 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				BA3A28831A305C6F00A85C29 /* UICollectionView+CellRegistration.swift */,
-				BA8812EC1A7841BE00B50651 /* UITableView+CellRegistration.swift */,
 				BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */,
 				BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */,
 				BA6385EC1A65B8FF00B002D9 /* UIView+Snowball.swift */,
@@ -1022,7 +1016,6 @@
 				BA38C15E1A30228700A2F2AE /* AppDelegate.swift in Sources */,
 				BAFB06C41A9E906400EDA01B /* MPObjectSerializer.m in Sources */,
 				BAFB06E01A9E906400EDA01B /* UIColor+MPColor.m in Sources */,
-				BA3A28841A305C6F00A85C29 /* UICollectionView+CellRegistration.swift in Sources */,
 				BA372D141A880C58004E58E9 /* TextFieldTableViewCell.swift in Sources */,
 				BAA15E9D1A6889230055756E /* AFURLRequestSerialization.m in Sources */,
 				BAFB06C51A9E906400EDA01B /* MPObjectSerializerConfig.m in Sources */,
@@ -1090,7 +1083,6 @@
 				BAFB06B21A9E906400EDA01B /* MPCGPointToNSDictionaryValueTransformer.m in Sources */,
 				BA44E4561A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift in Sources */,
 				BAFB06D31A9E906400EDA01B /* MPTypeDescription.m in Sources */,
-				BA8812ED1A7841BE00B50651 /* UITableView+CellRegistration.swift in Sources */,
 				BACC0D591A899B6D00BA7FEF /* HomeViewController.swift in Sources */,
 				BAFB06DB1A9E906400EDA01B /* MPWebSocket.m in Sources */,
 				BAFB06E21A9E906400EDA01B /* UIImage+MPImageEffects.m in Sources */,
