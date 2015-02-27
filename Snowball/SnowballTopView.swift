@@ -23,23 +23,27 @@ enum SnowballTopViewButtonType {
 
   var button: UIButton {
     let button = UIButton()
-    var image = UIImage(named: imageName)!
+    var image: UIImage?
+    if let imageName = imageName {
+      image = UIImage(named: imageName)
+    }
     if let color = color {
-      image = image.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+      image = image?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
       button.imageView?.tintColor = color
+      button.setTitleColor(color, forState: UIControlState.Normal)
     }
     button.setImage(image, forState: UIControlState.Normal)
+    button.setTitle(title, forState: UIControlState.Normal)
     return button
   }
 
-  private var imageName: String {
+  private var imageName: String? {
     switch self {
     case .Back: return "back"
     case .Forward: return "forward"
     case .Camera: return "camera"
     case .AddFriends: return "add-friends"
-    case .Save: return "forward"
-    default: return "back"
+    default: return nil
     }
   }
 
@@ -49,6 +53,13 @@ enum SnowballTopViewButtonType {
     case .AddFriends: return nil
     case .Save: return UIColor.SnowballColor.greenColor
     default: return UIColor.blackColor()
+    }
+  }
+
+  private var title: String? {
+    switch self {
+    case .Save: return "Save"
+    default: return nil
     }
   }
 }
@@ -84,11 +95,21 @@ class SnowballTopView: UIView {
     // width = 20 on each side of centered image in image view
     let width: CGFloat = 20
     if let leftButton = leftButton {
-      let leftButtonWidth: CGFloat = (width + leftButton.imageView!.image!.size.width / 2) * 2
+      var leftButtonWidth: CGFloat
+      if let image = leftButton.imageView?.image {
+        leftButtonWidth = (width + image.size.width / 2) * 2
+      } else {
+        leftButtonWidth = 84
+      }
       leftButton.frame = CGRect(x: 0, y: 0, width: leftButtonWidth, height: bounds.height)
     }
     if let rightButton = rightButton {
-      let rightButtonWidth: CGFloat = (width + rightButton.imageView!.image!.size.width / 2) * 2
+      var rightButtonWidth: CGFloat
+      if let image = rightButton.imageView?.image {
+        rightButtonWidth = (width + rightButton.imageView!.image!.size.width / 2) * 2
+      } else {
+        rightButtonWidth = 84
+      }
       rightButton.frame = CGRect(x: UIScreen.mainScreen().bounds.size.width - rightButtonWidth, y: 0, width: rightButtonWidth, height: bounds.height)
     }
     layout(titleLabel) { (titleLabel) in
