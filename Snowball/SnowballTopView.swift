@@ -21,6 +21,8 @@ enum SnowballTopViewButtonType {
   case AddFriends
   case Save
 
+  // MARK: - Properties
+
   var button: UIButton {
     let button = UIButton()
     var image: UIImage?
@@ -65,9 +67,19 @@ enum SnowballTopViewButtonType {
 }
 
 class SnowballTopView: UIView {
-  let titleLabel = UILabel()
+
+  // MARK: - Properties
+
+  let titleLabel: UILabel = {
+    let label = UILabel()
+    label.font = UIFont(name: UIFont.SnowballFont.regular, size: 26)
+    return label
+  }()
+
   private var leftButton: UIButton?
+
   private var rightButton: UIButton?
+
   var delegate: SnowballTopViewDelegate?
 
   // MARK: - UIView
@@ -86,14 +98,12 @@ class SnowballTopView: UIView {
       addSubview(rightButton!)
     }
     titleLabel.text = NSLocalizedString(title)
-    titleLabel.font = UIFont(name: UIFont.SnowballFont.regular, size: 26)
     addSubview(titleLabel)
   }
 
   override func layoutSubviews() {
     super.layoutSubviews()
-    // width = 20 on each side of centered image in image view
-    let width: CGFloat = 20
+    let width: CGFloat = 20 // 20 on each side of centered image in image view
     if let leftButton = leftButton {
       var leftButtonWidth: CGFloat
       if let image = leftButton.imageView?.image {
@@ -118,7 +128,7 @@ class SnowballTopView: UIView {
     }
   }
 
-  // MARK: - Convenience
+  // MARK: - Internal
 
   func setupDefaultLayout() {
     let height: Float = 65
