@@ -107,9 +107,18 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
 
-    if !captureSession.running {
+    if captureSession.running {
+      endSession()
+      beginSession()
+    } else {
       beginSession()
     }
+  }
+
+  override func viewDidDisappear(animated: Bool) {
+    super.viewDidDisappear(animated)
+
+    endSession()
   }
 
   // MARK: - PlayerViewController
