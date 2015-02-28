@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
+import Haneke
 import UIKit
 
 class UserAvatarImageView: UIView {
@@ -42,5 +43,11 @@ class UserAvatarImageView: UIView {
 
   func configureForUser(user: User) {
     backgroundColor = user.color as? UIColor ?? UIColor.SnowballColor.greenColor
+    imageView.image = nil
+    if let imageURLString = user.avatarURL {
+      if let imageURL = NSURL(string: imageURLString) {
+        imageView.hnk_setImageFromURL(imageURL, format: Format<UIImage>(name: "original"))
+      }
+    }
   }
 }
