@@ -60,7 +60,9 @@ class ClipsViewController: UIViewController {
     willSet {
       if let oldIndexPath = playingClipIndexPath {
         let oldCell = collectionView.cellForItemAtIndexPath(oldIndexPath) as? ClipCollectionViewCell
-        oldCell?.dimContentView(true)
+        if newValue != nil {
+          oldCell?.dimContentView(true)
+        }
       }
       if let newIndexPath = newValue {
         let newCell = collectionView.cellForItemAtIndexPath(newIndexPath) as? ClipCollectionViewCell
