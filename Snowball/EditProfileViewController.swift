@@ -233,10 +233,15 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         } else {
           finalImage = image
         }
-        // TODO: process and cut down the size
+        let rect = CGRectMake(0, 0, 480, 480)
+        UIGraphicsBeginImageContext(rect.size)
+        finalImage.drawInRect(rect)
+        let processedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
         // TODO: show spinner while uploading, show final image when done
-        self.avatarImageView.imageView.image = finalImage
-        API.changeAvatarToImage(finalImage) { (request, response, JSON, error) in
+        self.avatarImageView.imageView.image = processedImage
+        API.changeAvatarToImage(processedImage) { (request, response, JSON, error) in
           if let error = error {
             error.print("change avatar")
             displayAPIErrorToUser(JSON)
