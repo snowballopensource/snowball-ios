@@ -67,15 +67,17 @@ class ClipPlayerViewController: UIViewController {
       }
     } else {
       CachedURLAsset.createAssetFromRemoteURL(clip.videoURL!) { (asset, error) in
-        if let asset = asset {
-          let playerItem = ClipPlayerItem(clip: clip, asset: asset)
-          self.registerPlayerItemForNotifications(playerItem)
-          self.player.insertItem(playerItem, afterItem: self.player.items().last as? AVPlayerItem)
-        }
-        var mutableClips = clips
-        mutableClips.removeAtIndex(0)
-        if mutableClips.count > 0 {
-          self.playClips(mutableClips)
+        if self.player.rate > 0 {
+          if let asset = asset {
+            let playerItem = ClipPlayerItem(clip: clip, asset: asset)
+            self.registerPlayerItemForNotifications(playerItem)
+            self.player.insertItem(playerItem, afterItem: self.player.items().last as? AVPlayerItem)
+          }
+          var mutableClips = clips
+          mutableClips.removeAtIndex(0)
+          if mutableClips.count > 0 {
+            self.playClips(mutableClips)
+          }
         }
       }
     }
