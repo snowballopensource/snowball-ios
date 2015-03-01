@@ -28,6 +28,8 @@
 		BA44E4541A9C0B7700B75DF3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4531A9C0B7700B75DF3 /* WebViewController.swift */; };
 		BA44E4561A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4551A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift */; };
 		BA44E4581A9C0EC600B75DF3 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */; };
+		BA4BD7201AA2D6820057380C /* ClipPreloadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4BD71F1AA2D6820057380C /* ClipPreloadQueue.swift */; };
+		BA4BD7221AA2E1F00057380C /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4BD7211AA2E1F00057380C /* Cache.swift */; };
 		BA5247451A319E24003BD269 /* AddClipCollectionReuseableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5247441A319E24003BD269 /* AddClipCollectionReuseableView.swift */; };
 		BA6314D11A97C8B100021E3F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6314D01A97C8B100021E3F /* OnboardingViewController.swift */; };
 		BA6385E31A65ACAF00B002D9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385E21A65ACAF00B002D9 /* WelcomeViewController.swift */; };
@@ -214,6 +216,8 @@
 		BA44E4531A9C0B7700B75DF3 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		BA44E4551A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
+		BA4BD71F1AA2D6820057380C /* ClipPreloadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPreloadQueue.swift; sourceTree = "<group>"; };
+		BA4BD7211AA2E1F00057380C /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		BA5247441A319E24003BD269 /* AddClipCollectionReuseableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddClipCollectionReuseableView.swift; sourceTree = "<group>"; };
 		BA6314D01A97C8B100021E3F /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		BA6385E21A65ACAF00B002D9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -550,6 +554,15 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		BA4D62D71AA385EB00690BD0 /* Cache (In Progress) */ = {
+			isa = PBXGroup;
+			children = (
+				BA4BD71F1AA2D6820057380C /* ClipPreloadQueue.swift */,
+				BA4BD7211AA2E1F00057380C /* Cache.swift */,
+			);
+			name = "Cache (In Progress)";
+			sourceTree = "<group>";
+		};
 		BA6385DB1A65A90000B002D9 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,6 +593,7 @@
 				BA7C27C51A37A28F00A9CFC5 /* Router.swift */,
 				BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */,
 				BAFB06E31A9E915600EDA01B /* Analytics.swift */,
+				BA4D62D71AA385EB00690BD0 /* Cache (In Progress) */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -1053,6 +1067,7 @@
 				BA938A011A7B06C600857CF7 /* NSError+Print.swift in Sources */,
 				BAA15E981A6889230055756E /* AFHTTPRequestOperationManager.m in Sources */,
 				BACA7A861A36E40900C34B6C /* NSDate+TimeSince.swift in Sources */,
+				BA4BD7201AA2D6820057380C /* ClipPreloadQueue.swift in Sources */,
 				BA38C1611A30228700A2F2AE /* Snowball.xcdatamodeld in Sources */,
 				BAF2E45A1A800F1E00A093E5 /* EditProfileViewController.swift in Sources */,
 				BAFB06E11A9E906400EDA01B /* UIImage+MPAverageColor.m in Sources */,
@@ -1124,6 +1139,7 @@
 				BAFB06C11A9E906400EDA01B /* MPNSNumberToCGFloatValueTransformer.m in Sources */,
 				BAE7024D1A96C12E0040DA6F /* OnboardingAddViewController.swift in Sources */,
 				BAFB06DC1A9E906400EDA01B /* NSData+MPBase64.m in Sources */,
+				BA4BD7221AA2E1F00057380C /* Cache.swift in Sources */,
 				BAFB06CC1A9E906400EDA01B /* MPSurveyNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
