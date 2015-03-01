@@ -27,6 +27,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return imageView
   }()
 
+  private let clipThumbnailLoadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+
   private let userAvatarImageView = UserAvatarImageView()
 
   private let usernameLabel: UILabel = {
@@ -57,6 +59,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     contentView.addSubview(clipThumbnailImageView)
+    clipThumbnailImageView.addSubview(clipThumbnailLoadingIndicator)
     contentView.addSubview(userAvatarImageView)
     contentView.addSubview(usernameLabel)
     contentView.addSubview(clipTimeLabel)
@@ -77,6 +80,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipThumbnailImageView.top == clipThumbnailImageView.superview!.top
       clipThumbnailImageView.right == clipThumbnailImageView.superview!.right
       clipThumbnailImageView.height == clipThumbnailImageView.superview!.width
+    }
+
+    layout(clipThumbnailLoadingIndicator) { (clipThumbnailLoadingIndicator) in
+      clipThumbnailLoadingIndicator.left == clipThumbnailLoadingIndicator.superview!.left
+      clipThumbnailLoadingIndicator.top == clipThumbnailLoadingIndicator.superview!.top
+      clipThumbnailLoadingIndicator.right == clipThumbnailLoadingIndicator.superview!.right
+      clipThumbnailLoadingIndicator.height == clipThumbnailLoadingIndicator.superview!.width
     }
 
     layout(userAvatarImageView, clipThumbnailImageView) { (userAvatarImageView, clipThumbnailImageView) in
@@ -119,7 +129,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
         let image = UIImage(data: imageData)
         clipThumbnailImageView.image = image
       } else {
-        clipThumbnailImageView.hnk_setImageFromURL(thumbnailURL, format: Format<UIImage>(name: "original"))
+        clipThumbnailLoadingIndicator.startAnimating()
+        clipThumbnailImageView.hnk_setImageFromURL(thumbnailURL, format: Format<UIImage>(name: "original"), failure: { _ in
+          self.clipThumbnailLoadingIndicator.stopAnimating()
+        }, success: { (image) in
+          self.clipThumbnailImageView.image = image
+          self.clipThumbnailLoadingIndicator.stopAnimating()
+        })
       }
     }
     scaleClipThumbnail(false, animated: false)
