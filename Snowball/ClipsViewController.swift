@@ -20,7 +20,7 @@ class ClipsViewController: UIViewController {
     return view
     }()
 
-  private let player = AVPlayer()
+  private let player = ClipPlayer()
 
   private let collectionView: UICollectionView = {
     let flowLayout = UICollectionViewFlowLayout()
@@ -48,6 +48,8 @@ class ClipsViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    player.delegate = self
 
     playerView.player = player
     view.addSubview(playerView)
@@ -104,6 +106,24 @@ class ClipsViewController: UIViewController {
       self.activityIndicatorView.stopAnimating()
     }
   }
+
+  private func indexOfClip(clip: Clip) -> Int {
+    let clips = self.clips as NSArray
+    return clips.indexOfObject(clip)
+  }
+
+  private func clipAfterClip(clip: Clip) -> Clip? {
+    let nextClipIndex = indexOfClip(clip) + 1
+    if nextClipIndex < clips.count {
+      return clips[nextClipIndex]
+    }
+    return nil
+  }
+
+  private func scrollToClip(clip: Clip, animated: Bool = true) {
+    let indexPath = NSIndexPath(forItem: indexOfClip(clip), inSection: 0)
+    collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: animated)
+  }
 }
 
 // MARK: -
@@ -131,16 +151,28 @@ extension ClipsViewController: UICollectionViewDelegate {
   // MARK: - UICollectionViewDelegate
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    let clip = clips[indexPath.row]
-    if let videoURL = clip.videoURL {
-      CachedURLAsset.createAssetFromRemoteURL(videoURL) { (asset, error) in
-        error?.print("creating cached asset")
-        if let asset = asset {
-          let playerItem = ClipPlayerItem(clip: clip, asset: asset)
-          self.player.replaceCurrentItemWithPlayerItem(playerItem)
-          self.player.play()
-        }
-      }
+    if player.playing {
+      player.stop()
+    } else {
+      let clip = clips[indexPath.row]
+      player.playClip(clip)
+    }
+  }
+}
+
+// MARK: -
+
+extension ClipsViewController: ClipPlayerDelegate {
+
+  // MARK: - ClipPlayerDelegate
+
+  func playerWillPlayClip(clip: Clip) {
+    scrollToClip(clip)
+  }
+
+  func clipDidPlayToEndTime(clip: Clip) {
+    if let nextClip = clipAfterClip(clip) {
+      player.playClip(nextClip)
     }
   }
 }

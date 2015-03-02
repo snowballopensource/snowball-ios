@@ -13,6 +13,7 @@
 		BA137C7F1A7199AA001F8FCF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA137C7D1A7199AA001F8FCF /* Fabric.framework */; };
 		BA1835511AA4FC5500D6A0BE /* ClipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1835501AA4FC5500D6A0BE /* ClipsViewController.swift */; };
 		BA1835531AA51C1D00D6A0BE /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1835521AA51C1D00D6A0BE /* PlayerView.swift */; };
+		BA1835551AA51F8500D6A0BE /* ClipPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1835541AA51F8500D6A0BE /* ClipPlayer.swift */; };
 		BA20CCEE1A9D156C00D96A31 /* UploadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */; };
 		BA32C7921A3286250052F4CA /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */; };
 		BA32C7951A3287BE0052F4CA /* UserAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32C7941A3287BE0052F4CA /* UserAvatarImageView.swift */; };
@@ -36,8 +37,6 @@
 		BA6314D11A97C8B100021E3F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6314D01A97C8B100021E3F /* OnboardingViewController.swift */; };
 		BA6385E31A65ACAF00B002D9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385E21A65ACAF00B002D9 /* WelcomeViewController.swift */; };
 		BA7198D01A897F3B004BB840 /* ClipOldPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7198CF1A897F3B004BB840 /* ClipOldPlayerViewController.swift */; };
-		BA7198D21A897F4A004BB840 /* ClipPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7198D11A897F4A004BB840 /* ClipPlayerItem.swift */; };
-		BA789E0B1A7052D000BA1611 /* CachedURLAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA789E0A1A7052D000BA1611 /* CachedURLAsset.swift */; };
 		BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */; };
 		BA7C0E481A65C315001B3B4C /* UIButton+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */; };
 		BA7C0E4A1A65EF94001B3B4C /* UITextField+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E491A65EF94001B3B4C /* UITextField+Snowball.swift */; };
@@ -199,6 +198,7 @@
 		BA145D041A687CB300D81E53 /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cartography.framework; path = Carthage/Build/iOS/Cartography.framework; sourceTree = "<group>"; };
 		BA1835501AA4FC5500D6A0BE /* ClipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipsViewController.swift; sourceTree = "<group>"; };
 		BA1835521AA51C1D00D6A0BE /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		BA1835541AA51F8500D6A0BE /* ClipPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPlayer.swift; sourceTree = "<group>"; };
 		BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadQueue.swift; sourceTree = "<group>"; };
 		BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Snowball.swift"; sourceTree = "<group>"; };
 		BA32C7941A3287BE0052F4CA /* UserAvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAvatarImageView.swift; sourceTree = "<group>"; };
@@ -226,8 +226,6 @@
 		BA6314D01A97C8B100021E3F /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		BA6385E21A65ACAF00B002D9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		BA7198CF1A897F3B004BB840 /* ClipOldPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipOldPlayerViewController.swift; sourceTree = "<group>"; };
-		BA7198D11A897F4A004BB840 /* ClipPlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPlayerItem.swift; sourceTree = "<group>"; };
-		BA789E0A1A7052D000BA1611 /* CachedURLAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedURLAsset.swift; sourceTree = "<group>"; };
 		BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Snowball.swift"; sourceTree = "<group>"; };
 		BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Snowball.swift"; sourceTree = "<group>"; };
 		BA7C0E491A65EF94001B3B4C /* UITextField+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Snowball.swift"; sourceTree = "<group>"; };
@@ -585,8 +583,7 @@
 		BA789E091A7052C500BA1611 /* Player */ = {
 			isa = PBXGroup;
 			children = (
-				BA7198D11A897F4A004BB840 /* ClipPlayerItem.swift */,
-				BA789E0A1A7052D000BA1611 /* CachedURLAsset.swift */,
+				BA1835541AA51F8500D6A0BE /* ClipPlayer.swift */,
 			);
 			name = Player;
 			sourceTree = "<group>";
@@ -1024,6 +1021,7 @@
 				BAA15EA41A6889230055756E /* UIImageView+AFNetworking.m in Sources */,
 				BAFB06D11A9E906400EDA01B /* MPTweakInline.m in Sources */,
 				BAFB069F1A9E906400EDA01B /* Mixpanel.m in Sources */,
+				BA1835551AA51F8500D6A0BE /* ClipPlayer.swift in Sources */,
 				BAA15E971A6889230055756E /* AFHTTPRequestOperation.m in Sources */,
 				BAFB06DD1A9E906400EDA01B /* NSInvocation+MPHelpers.m in Sources */,
 				BAA966BD1A87FEEC0032752F /* FindFriendsViewController.swift in Sources */,
@@ -1046,7 +1044,6 @@
 				BAFB06AD1A9E906400EDA01B /* MPApplicationStateSerializer.m in Sources */,
 				BAA15EA61A6889230055756E /* UIRefreshControl+AFNetworking.m in Sources */,
 				BA8812EB1A783CD600B50651 /* UserTableViewCell.swift in Sources */,
-				BA789E0B1A7052D000BA1611 /* CachedURLAsset.swift in Sources */,
 				BA3DB8261A9EFD9A00378F6D /* SnowballRoundedTextField.swift in Sources */,
 				BAA15EA51A6889230055756E /* UIProgressView+AFNetworking.m in Sources */,
 				BAA15E9C1A6889230055756E /* AFURLConnectionOperation.m in Sources */,
@@ -1108,7 +1105,6 @@
 				BAFB06DB1A9E906400EDA01B /* MPWebSocket.m in Sources */,
 				BAFB06E21A9E906400EDA01B /* UIImage+MPImageEffects.m in Sources */,
 				BAFB069C1A9E906400EDA01B /* _MPTweakBindObserver.m in Sources */,
-				BA7198D21A897F4A004BB840 /* ClipPlayerItem.swift in Sources */,
 				BA1835531AA51C1D00D6A0BE /* PlayerView.swift in Sources */,
 				BA3DB8221A9EEA8B00378F6D /* UIViewController+NavigationTransition.swift in Sources */,
 				BABE8FCB1A89574500B81DD1 /* ClipsOldViewController.swift in Sources */,

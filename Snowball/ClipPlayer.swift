@@ -1,14 +1,94 @@
 //
-//  CachedURLAsset.swift
+//  ClipPlayer.swift
 //  Snowball
 //
-//  Created by James Martinez on 1/21/15.
+//  Created by James Martinez on 3/2/15.
 //  Copyright (c) 2015 Snowball, Inc. All rights reserved.
 //
 
-import Alamofire
 import AVFoundation
 
+class ClipPlayer: AVPlayer {
+
+  // MARK: - Properties
+
+  var delegate: ClipPlayerDelegate?
+
+  var playing: Bool {
+    if rate > 0 && error == nil {
+      return true
+    }
+    return false
+  }
+
+  // MARK: - Internal
+
+  func playClip(clip: Clip) {
+    Analytics.track("Watch Clip")
+    delegate?.playerWillPlayClip(clip)
+    if let videoURL = clip.videoURL {
+      CachedURLAsset.createAssetFromRemoteURL(videoURL) { (asset, error) in
+        error?.print("creating cached asset")
+        if let asset = asset {
+          let playerItem = ClipPlayerItem(clip: clip, asset: asset)
+          self.registerPlayerItemForNotifications(playerItem)
+          self.replaceCurrentItemWithPlayerItem(playerItem)
+          self.play()
+        }
+      }
+    }
+  }
+
+  func stop() {
+    pause()
+    replaceCurrentItemWithPlayerItem(nil)
+  }
+
+  // MARK: - Private
+
+  private func registerPlayerItemForNotifications(playerItem: ClipPlayerItem) {
+    NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: playerItem, queue: nil) { (notification) in
+      let playerItem = notification.object as ClipPlayerItem
+      self.delegate?.clipDidPlayToEndTime(playerItem.clip)
+      NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+  }
+}
+
+// MARK: -
+
+protocol ClipPlayerDelegate {
+  func playerWillPlayClip(clip: Clip)
+  func clipDidPlayToEndTime(clip: Clip)
+}
+
+// MARK: -
+
+// TODO: make this private
+class ClipPlayerItem: AVPlayerItem {
+
+  // MARK: - Properties
+
+  var clip: Clip!
+
+  // MARK: - Initializers
+
+  convenience init(clip: Clip) {
+    self.init(asset: AVURLAsset(URL: clip.videoURL!, options: nil), automaticallyLoadedAssetKeys: ["tracks", "playable"])
+    self.clip = clip
+  }
+
+  convenience init(clip: Clip, asset: AVAsset) {
+    self.init(asset: asset)
+    self.clip = clip
+  }
+}
+
+// MARK: -
+
+import Alamofire
+
+// TODO: make this private
 class CachedURLAsset: AVURLAsset {
   var originalURL: NSURL
 
