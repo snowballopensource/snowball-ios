@@ -15,7 +15,7 @@ protocol CameraViewControllerDelegate {
   func videoRecordedToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL, error: NSError?)
 }
 
-class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate {
+class CameraOldViewController: UIViewController, AVCaptureFileOutputRecordingDelegate {
   private let captureSession = AVCaptureSession()
   private let cameraView = CameraView()
   private let progressView = UIProgressView()

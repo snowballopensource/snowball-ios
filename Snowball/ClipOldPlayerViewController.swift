@@ -10,7 +10,7 @@ import AVFoundation
 import Cartography
 import UIKit
 
-class ClipPlayerViewController: UIViewController {
+class ClipOldPlayerViewController: UIViewController {
 
   // MARK: - Properties
 

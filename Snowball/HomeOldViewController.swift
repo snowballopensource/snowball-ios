@@ -9,12 +9,12 @@
 import Cartography
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeOldViewController: UIViewController {
 
   // MARK: - Properties
 
-  let cameraViewController = CameraViewController()
-  let clipsViewController = ClipsViewController()
+  let cameraViewController = CameraOldViewController()
+  let clipsViewController = ClipsOldViewController()
   let topMenuView = UIView()
   let moreButton: UIButton = {
     let moreButton = UIButton()
@@ -135,7 +135,7 @@ class HomeViewController: UIViewController {
 
 // MARK: -
 
-extension HomeViewController: ClipsViewControllerDelegate {
+extension HomeOldViewController: ClipsViewControllerDelegate {
 
   // MARK: - ClipsViewControllerDelegate
 
@@ -152,7 +152,7 @@ extension HomeViewController: ClipsViewControllerDelegate {
 
 // MARK: - 
 
-extension HomeViewController: CameraViewControllerDelegate {
+extension HomeOldViewController: CameraViewControllerDelegate {
 
   // MARK: - CameraViewControllerDelegate
 

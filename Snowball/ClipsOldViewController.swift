@@ -10,11 +10,11 @@ import AVFoundation
 import Cartography
 import UIKit
 
-class ClipsViewController: UIViewController {
+class ClipsOldViewController: UIViewController {
 
   // MARK: - Properties
 
-  let playerViewController = ClipPlayerViewController()
+  let playerViewController = ClipOldPlayerViewController()
 
   let collectionView: UICollectionView = {
     let flowLayout = UICollectionViewFlowLayout()
@@ -300,7 +300,7 @@ class ClipsViewController: UIViewController {
 
 // MARK: -
 
-extension ClipsViewController: UICollectionViewDataSource {
+extension ClipsOldViewController: UICollectionViewDataSource {
 
   // MARK: - UICollectionViewDataSource
 
@@ -334,7 +334,7 @@ extension ClipsViewController: UICollectionViewDataSource {
 
 // MARK: -
 
-extension ClipsViewController: UICollectionViewDelegate {
+extension ClipsOldViewController: UICollectionViewDelegate {
 
   // MARK: - UICollectionViewDelegate
 
@@ -356,7 +356,7 @@ extension ClipsViewController: UICollectionViewDelegate {
 
 // MARK: -
 
-extension ClipsViewController: ClipPlayerViewControllerDelegate {
+extension ClipsOldViewController: ClipPlayerViewControllerDelegate {
 
   // MARK: - ClipPlayerViewControllerDelegate
 
@@ -380,7 +380,7 @@ extension ClipsViewController: ClipPlayerViewControllerDelegate {
 
 // MARK: -
 
-extension ClipsViewController: AddClipCollectionReuseableViewDelegate {
+extension ClipsOldViewController: AddClipCollectionReuseableViewDelegate {
 
   // MARK: - AddClipCollectionReuseableViewDelegate
 
