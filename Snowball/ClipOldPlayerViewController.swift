@@ -109,27 +109,3 @@ class ClipOldPlayerViewController: UIViewController {
 protocol ClipPlayerViewControllerDelegate: class {
   func playerItemDidPlayToEndTime(playerItem: ClipPlayerItem)
 }
-
-// MARK: -
-
-class PlayerView: UIView {
-
-  // MARK: - Properties
-
-  var player: AVPlayer {
-    get {
-      let playerLayer = layer as AVPlayerLayer
-      return playerLayer.player
-    }
-    set {
-      let playerLayer = layer as AVPlayerLayer
-      playerLayer.player = newValue
-    }
-  }
-
-  // MARK: - UIView
-
-  override class func layerClass() -> AnyClass {
-    return AVPlayerLayer.self
-  }
-}

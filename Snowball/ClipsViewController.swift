@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Snowball, Inc. All rights reserved.
 //
 
+import AVFoundation
 import Cartography
 import UIKit
 
@@ -13,11 +14,13 @@ class ClipsViewController: UIViewController {
 
   // MARK: - Properties
 
-  private let playerView: UIView = {
-    let view = UIView()
+  private let playerView: PlayerView = {
+    let view = PlayerView()
     view.backgroundColor = UIColor.blackColor()
     return view
     }()
+
+  private let player = AVPlayer()
 
   private let collectionView: UICollectionView = {
     let flowLayout = UICollectionViewFlowLayout()
@@ -33,19 +36,20 @@ class ClipsViewController: UIViewController {
     return collectionView
     }()
 
-  let activityIndicatorView: UIActivityIndicatorView = {
+  private let activityIndicatorView: UIActivityIndicatorView = {
     let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
     activityIndicatorView.color = UIColor.darkGrayColor()
     return activityIndicatorView
     }()
 
-  private var clips: [Clip] = [] // TODO: when set, insert into collection view and scroll to it
+  private var clips: [Clip] = []
 
   // MARK: - UIViewController
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    playerView.player = player
     view.addSubview(playerView)
     layout(playerView) { (playerView) in
       playerView.left == playerView.superview!.left
@@ -58,6 +62,7 @@ class ClipsViewController: UIViewController {
     let rightInset = view.bounds.width * collectionViewWidthPreloadMultiple - view.bounds.width
     collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: rightInset)
     collectionView.dataSource = self
+    collectionView.delegate = self
     view.addSubview(collectionView)
     layout(collectionView, playerView) { (collectionView, playerView) in
       collectionView.left == collectionView.superview!.left
@@ -116,5 +121,26 @@ extension ClipsViewController: UICollectionViewDataSource {
     let clip = clips[indexPath.row]
     cell.configureForClip(clip)
     return cell
+  }
+}
+
+// MARK: -
+
+extension ClipsViewController: UICollectionViewDelegate {
+
+  // MARK: - UICollectionViewDelegate
+
+  func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    let clip = clips[indexPath.row]
+    if let videoURL = clip.videoURL {
+      CachedURLAsset.createAssetFromRemoteURL(videoURL) { (asset, error) in
+        error?.print("creating cached asset")
+        if let asset = asset {
+          let playerItem = ClipPlayerItem(clip: clip, asset: asset)
+          self.player.replaceCurrentItemWithPlayerItem(playerItem)
+          self.player.play()
+        }
+      }
+    }
   }
 }
