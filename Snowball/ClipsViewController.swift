@@ -14,6 +14,8 @@ class ClipsViewController: UIViewController {
 
   // MARK: - Properties
 
+  var delegate: ClipsViewControllerDelegate?
+
   private let playerView: PlayerView = {
     let view = PlayerView()
     view.backgroundColor = UIColor.blackColor()
@@ -121,6 +123,27 @@ class ClipsViewController: UIViewController {
     NSNotificationCenter.defaultCenter().removeObserver(self)
   }
 
+  // MARK: - Internal
+
+  func addClipToTimeline(clip: Clip) {
+    clips.append(clip)
+    let index = indexOfClip(clip)
+    collectionView.insertItemsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)])
+  }
+
+  func reloadCellForClip(clip: Clip) {
+    let index = indexOfClip(clip)
+    collectionView.reloadItemsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)])
+  }
+
+  func removePendingClipFromTimeline() {
+    if let lastClip = clips.last {
+      if lastClip.state == ClipState.Pending {
+        removeClipFromTimeline(lastClip)
+      }
+    }
+  }
+
   // MARK: - Private
 
   @objc private func refresh() {
@@ -154,6 +177,12 @@ class ClipsViewController: UIViewController {
     let indexPath = NSIndexPath(forItem: indexOfClip(clip), inSection: 0)
     collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: animated)
   }
+
+  private func removeClipFromTimeline(clip: Clip) {
+    let index = indexOfClip(clip)
+    clips.removeAtIndex(index)
+    collectionView.deleteItemsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)])
+  }
 }
 
 // MARK: -
@@ -186,7 +215,11 @@ extension ClipsViewController: UICollectionViewDelegate {
       player.stop()
     } else {
       let clip = clips[indexPath.row]
-      player.playClip(clip)
+      if clip.state == ClipState.Pending {
+        delegate?.userDidAcceptPreviewClip(clip)
+      } else {
+        player.playClip(clip)
+      }
     }
   }
 }
@@ -202,6 +235,7 @@ extension ClipsViewController: ClipPlayerDelegate {
       let cell = cell as ClipCollectionViewCell
       cell.setInPlayState(true, animated: true)
     }
+    delegate?.playerWillBeginPlayback()
   }
 
   func playerDidEndPlayback() {
@@ -209,6 +243,7 @@ extension ClipsViewController: ClipPlayerDelegate {
       let cell = cell as ClipCollectionViewCell
       cell.setInPlayState(false, animated: true)
     }
+    delegate?.playerDidEndPlayback()
   }
 
   func playerWillPlayClip(clip: Clip) {
@@ -221,4 +256,12 @@ extension ClipsViewController: ClipPlayerDelegate {
       player.playClip(nextClip)
     }
   }
+}
+
+// MARK: -
+
+protocol ClipsViewControllerDelegate {
+  func playerWillBeginPlayback()
+  func playerDidEndPlayback()
+  func userDidAcceptPreviewClip(clip: Clip)
 }

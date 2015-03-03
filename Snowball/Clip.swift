@@ -9,11 +9,15 @@
 import Foundation
 
 class Clip {
+
+  // MARK: - Properties
+
   var id: String?
   var videoURL: NSURL?
   var thumbnailURL: NSURL?
   var createdAt: NSDate?
   var user: User?
+  var state = ClipState.Default
 
   // MARK: - Initializers
 
@@ -48,5 +52,8 @@ class Clip {
       self.user = User.objectFromJSON(user) as? User
     }
   }
+}
 
+enum ClipState {
+  case Default, Pending
 }
