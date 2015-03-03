@@ -254,6 +254,8 @@ extension ClipsViewController: ClipPlayerDelegate {
     bookmarkedClip = clip
     if let nextClip = clipAfterClip(clip) {
       player.playClip(nextClip)
+    } else {
+      player.stop()
     }
   }
 }
