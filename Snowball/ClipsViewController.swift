@@ -44,6 +44,33 @@ class ClipsViewController: UIViewController {
 
   private var clips: [Clip] = []
 
+  private let kClipBookmarkDateKey = "ClipBookmarkDate"
+  private var bookmarkedClip: Clip? {
+    get {
+      let clipBookmarkDate = NSUserDefaults.standardUserDefaults().objectForKey(kClipBookmarkDateKey) as? NSDate
+      if let bookmarkDate = clipBookmarkDate {
+        for clip in clips {
+          if let clipCreatedAt = clip.createdAt {
+            if bookmarkDate.compare(clipCreatedAt) == NSComparisonResult.OrderedAscending {
+              return clip
+            }
+          }
+        }
+      }
+      return clips.first
+    }
+    set {
+      if let newClipBookmarkDate = newValue?.createdAt {
+        if let oldClipBookmarkDate = self.bookmarkedClip?.createdAt {
+          if oldClipBookmarkDate.compare(newClipBookmarkDate) == NSComparisonResult.OrderedAscending {
+            NSUserDefaults.standardUserDefaults().setObject(newClipBookmarkDate, forKey: kClipBookmarkDateKey)
+            NSUserDefaults.standardUserDefaults().synchronize()
+          }
+        }
+      }
+    }
+  }
+
   // MARK: - UIViewController
 
   override func viewDidLoad() {
@@ -102,6 +129,9 @@ class ClipsViewController: UIViewController {
       if let JSON = JSON as? [AnyObject] {
         self.clips = Clip.importJSON(JSON)
         self.collectionView.reloadData()
+        if let bookmarkedClip = self.bookmarkedClip {
+          self.scrollToClip(bookmarkedClip, animated: false)
+        }
       }
       self.activityIndicatorView.stopAnimating()
     }
@@ -186,6 +216,7 @@ extension ClipsViewController: ClipPlayerDelegate {
   }
 
   func clipDidPlayToEndTime(clip: Clip) {
+    bookmarkedClip = clip
     if let nextClip = clipAfterClip(clip) {
       player.playClip(nextClip)
     }
