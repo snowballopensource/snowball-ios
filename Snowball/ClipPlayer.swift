@@ -24,6 +24,10 @@ class ClipPlayer: AVPlayer {
   // MARK: - Internal
 
   func playClip(clip: Clip) {
+    play()
+    if currentItem == nil {
+      delegate?.playerWillBeginPlayback()
+    }
     Analytics.track("Watch Clip")
     delegate?.playerWillPlayClip(clip)
     if let videoURL = clip.videoURL {
@@ -33,7 +37,6 @@ class ClipPlayer: AVPlayer {
           let playerItem = ClipPlayerItem(clip: clip, asset: asset)
           self.registerPlayerItemForNotifications(playerItem)
           self.replaceCurrentItemWithPlayerItem(playerItem)
-          self.play()
         }
       }
     }
@@ -42,6 +45,7 @@ class ClipPlayer: AVPlayer {
   func stop() {
     pause()
     replaceCurrentItemWithPlayerItem(nil)
+    delegate?.playerDidEndPlayback()
   }
 
   // MARK: - Private
@@ -58,6 +62,8 @@ class ClipPlayer: AVPlayer {
 // MARK: -
 
 protocol ClipPlayerDelegate {
+  func playerWillBeginPlayback()
+  func playerDidEndPlayback()
   func playerWillPlayClip(clip: Clip)
   func clipDidPlayToEndTime(clip: Clip)
 }

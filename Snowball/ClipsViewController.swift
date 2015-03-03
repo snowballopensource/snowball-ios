@@ -140,6 +140,7 @@ extension ClipsViewController: UICollectionViewDataSource {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(ClipCollectionViewCell), forIndexPath: indexPath) as ClipCollectionViewCell
     let clip = clips[indexPath.row]
     cell.configureForClip(clip)
+    cell.setInPlayState(player.playing, animated: false)
     return cell
   }
 }
@@ -165,6 +166,20 @@ extension ClipsViewController: UICollectionViewDelegate {
 extension ClipsViewController: ClipPlayerDelegate {
 
   // MARK: - ClipPlayerDelegate
+
+  func playerWillBeginPlayback() {
+    for cell in collectionView.visibleCells() {
+      let cell = cell as ClipCollectionViewCell
+      cell.setInPlayState(true, animated: true)
+    }
+  }
+
+  func playerDidEndPlayback() {
+    for cell in collectionView.visibleCells() {
+      let cell = cell as ClipCollectionViewCell
+      cell.setInPlayState(false, animated: true)
+    }
+  }
 
   func playerWillPlayClip(clip: Clip) {
     scrollToClip(clip)

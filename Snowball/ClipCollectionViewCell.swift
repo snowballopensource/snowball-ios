@@ -138,17 +138,21 @@ class ClipCollectionViewCell: UICollectionViewCell {
         })
       }
     }
-    scaleClipThumbnail(false, animated: false)
-    dimContentView(false)
+    setInPlayState(false, animated: false)
   }
 
-  func dimContentView(dim: Bool) {
+  func setInPlayState(inPlayState: Bool, animated: Bool = true) {
+    scaleClipThumbnail(inPlayState, animated: animated)
+    dimContentView(inPlayState)
+  }
+
+  // MARK: - Private
+
+  private func dimContentView(dim: Bool) {
     dimView.hidden = !dim
   }
 
-  // MARK: - Internal
-
-  func scaleClipThumbnail(down: Bool, animated: Bool) {
+  private func scaleClipThumbnail(down: Bool, animated: Bool) {
     if animated {
       UIView.animateWithDuration(0.4) {
         self.scaleClipThumbnail(down, animated: false)
