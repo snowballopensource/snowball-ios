@@ -87,6 +87,7 @@
 		BAEEA7391A97ED9500C83CF9 /* PhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEEA7381A97ED9500C83CF9 /* PhoneNumberViewController.swift */; };
 		BAF2E45A1A800F1E00A093E5 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */; };
 		BAF3BC961A76E02A00AFD3E5 /* MoreNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */; };
+		BAF50E721AA55C4400AB874E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF50E711AA55C4400AB874E /* HomeViewController.swift */; };
 		BAFB069C1A9E906400EDA01B /* _MPTweakBindObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = BAFB06201A9E906400EDA01B /* _MPTweakBindObserver.m */; };
 		BAFB069D1A9E906400EDA01B /* libMPCategoryHelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFB06211A9E906400EDA01B /* libMPCategoryHelpers.a */; };
 		BAFB069E1A9E906400EDA01B /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAFB06221A9E906400EDA01B /* Media.xcassets */; };
@@ -293,6 +294,7 @@
 		BAEEA7381A97ED9500C83CF9 /* PhoneNumberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberViewController.swift; sourceTree = "<group>"; };
 		BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreNavigationController.swift; sourceTree = "<group>"; };
+		BAF50E711AA55C4400AB874E /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BAFB061F1A9E906400EDA01B /* _MPTweakBindObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MPTweakBindObserver.h; sourceTree = "<group>"; };
 		BAFB06201A9E906400EDA01B /* _MPTweakBindObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MPTweakBindObserver.m; sourceTree = "<group>"; };
 		BAFB06211A9E906400EDA01B /* libMPCategoryHelpers.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMPCategoryHelpers.a; sourceTree = "<group>"; };
@@ -604,6 +606,7 @@
 			isa = PBXGroup;
 			children = (
 				BA9AA6821A674804002C4992 /* MainNavigationController.swift */,
+				BAF50E711AA55C4400AB874E /* HomeViewController.swift */,
 				BA1835501AA4FC5500D6A0BE /* ClipsViewController.swift */,
 				BACC0D581A899B6D00BA7FEF /* HomeOldViewController.swift */,
 				BABE8FCA1A89574500B81DD1 /* ClipsOldViewController.swift */,
@@ -1053,6 +1056,7 @@
 				BAFB06B01A9E906400EDA01B /* MPCGAffineTransformToNSDictionaryValueTransformer.m in Sources */,
 				BAEEA7391A97ED9500C83CF9 /* PhoneNumberViewController.swift in Sources */,
 				BAA15E9E1A6889230055756E /* AFURLResponseSerialization.m in Sources */,
+				BAF50E721AA55C4400AB874E /* HomeViewController.swift in Sources */,
 				BAFB06C31A9E906400EDA01B /* MPObjectSelector.m in Sources */,
 				BA3A28701A3051E300A85C29 /* Util.swift in Sources */,
 				BA7C27D31A37ADA600A9CFC5 /* RemoteObject.swift in Sources */,
