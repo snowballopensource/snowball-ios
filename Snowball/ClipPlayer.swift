@@ -84,8 +84,7 @@ protocol ClipPlayerDelegate {
 
 // MARK: -
 
-// TODO: make this private
-class ClipPlayerItem: AVPlayerItem {
+private class ClipPlayerItem: AVPlayerItem {
 
   // MARK: - Properties
 
@@ -93,14 +92,48 @@ class ClipPlayerItem: AVPlayerItem {
 
   // MARK: - Initializers
 
-  convenience init(clip: Clip) {
-    self.init(asset: AVURLAsset(URL: clip.videoURL!, options: nil), automaticallyLoadedAssetKeys: ["tracks", "playable"])
+  convenience init(clip: Clip, asset: AVAsset) {
+    self.init(asset: asset)
+    registerForNotifications()
     self.clip = clip
   }
 
-  convenience init(clip: Clip, asset: AVAsset) {
-    self.init(asset: asset)
-    self.clip = clip
+  deinit {
+    removeNotificationRegistration()
+  }
+
+  // MARK: - KVO
+
+  private override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    if keyPath == "playbackLikelyToKeepUp" {
+      if !playbackLikelyToKeepUp {
+        println("playback is unlikely to keep up")
+      }
+    }
+  }
+
+  // MARK: - Private
+
+  private func registerForNotifications() {
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemPlaybackStalled:", name: AVPlayerItemPlaybackStalledNotification, object: self)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemFailedToPlayToEndTime:", name: AVPlayerItemFailedToPlayToEndTimeNotification, object: self)
+    addObserver(self, forKeyPath: "playbackLikelyToKeepUp", options: NSKeyValueObservingOptions.New, context: nil)
+  }
+
+  private func removeNotificationRegistration() {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+    removeObserver(self, forKeyPath: "playbackLikelyToKeepUp")
+  }
+
+  @objc private func playerItemPlaybackStalled(notification: NSNotification) {
+    println("player item stalled")
+  }
+
+  @objc private func playerItemFailedToPlayToEndTime(notification: NSNotification) {
+    if let userInfo = notification.userInfo as? [String: AnyObject] {
+      let error = userInfo[AVPlayerItemFailedToPlayToEndTimeErrorKey] as? NSError
+      error?.print("player item failed to play to end time")
+    }
   }
 }
 
@@ -108,8 +141,7 @@ class ClipPlayerItem: AVPlayerItem {
 
 import Alamofire
 
-// TODO: make this private
-class CachedURLAsset: AVURLAsset {
+private class CachedURLAsset: AVURLAsset {
   var originalURL: NSURL
 
   override init!(URL: NSURL!, options: [NSObject : AnyObject]!) {

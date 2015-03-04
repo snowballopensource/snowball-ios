@@ -143,7 +143,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
         })
       }
     }
-    setInPlayState(false, isPlayingClip: false, animated: false)
+    setInPlayState(false, isCurrentPlayingClip: false, animated: false)
     if clip.state == ClipState.Pending {
       addClipImageView.hidden = false
     } else {
@@ -151,9 +151,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
   }
 
-  func setInPlayState(inPlayState: Bool, isPlayingClip: Bool, animated: Bool = true) {
+  func setInPlayState(inPlayState: Bool, isCurrentPlayingClip: Bool, animated: Bool = true) {
     scaleClipThumbnail(inPlayState, animated: animated)
-    let shouldDimContentView = (inPlayState && !isPlayingClip)
+    let shouldDimContentView = (inPlayState && !isCurrentPlayingClip)
     dimContentView(shouldDimContentView)
   }
 
