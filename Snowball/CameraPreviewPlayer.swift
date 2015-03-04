@@ -31,7 +31,6 @@ class CameraPreviewPlayer: AVPlayer {
       let playerItem = notification.object as AVPlayerItem
       playerItem.seekToTime(kCMTimeZero)
       self.play()
-      NSNotificationCenter.defaultCenter().removeObserver(self)
     }
   }
 }

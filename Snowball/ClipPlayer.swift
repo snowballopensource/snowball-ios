@@ -59,13 +59,15 @@ class ClipPlayer: AVPlayer {
   // MARK: - Private
 
   private func registerPlayerItemForNotifications(playerItem: ClipPlayerItem) {
-    NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: playerItem, queue: nil) { (notification) in
-      NSNotificationCenter.defaultCenter().removeObserver(self)
-      if let clip = self.clip {
-        let notificationPlayerItem = notification.object as ClipPlayerItem
-        if notificationPlayerItem.clip.id == clip.id {
-          self.delegate?.clipDidPlayToEndTime(notificationPlayerItem.clip)
-        }
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidPlayToEndTime:", name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
+  }
+
+  @objc private func playerItemDidPlayToEndTime(notification: NSNotification) {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+    if let clip = self.clip {
+      let notificationPlayerItem = notification.object as ClipPlayerItem
+      if notificationPlayerItem.clip.id == clip.id {
+        self.delegate?.clipDidPlayToEndTime(notificationPlayerItem.clip)
       }
     }
   }
