@@ -13,6 +13,7 @@ class HomeViewController: UIViewController {
 
   // MARK: - Properties
 
+  let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Friends, rightButtonType: SnowballTopViewButtonType.ChangeCamera)
   let clipsViewController = ClipsViewController()
   let cameraViewController = CameraViewController()
 
@@ -37,6 +38,9 @@ class HomeViewController: UIViewController {
       cameraView.right == cameraView.superview!.right
       cameraView.height == cameraView.width
     }
+
+    view.addSubview(topView)
+    topView.setupDefaultLayout()
   }
 }
 
@@ -100,5 +104,20 @@ extension HomeViewController: CameraViewControllerDelegate {
   func videoPreviewDidCancel() {
     clipsViewController.removePendingClipFromTimeline()
     // TODO: show navigation bar
+  }
+}
+
+// MARK: -
+
+extension HomeViewController: SnowballTopViewDelegate {
+
+  // MARK: - SnowballTopViewDelegate
+
+  func snowballTopViewLeftButtonTapped() {
+    switchToNavigationController(MoreNavigationController())
+  }
+
+  func snowballTopViewRightButtonTapped() {
+    cameraViewController.changeCamera()
   }
 }

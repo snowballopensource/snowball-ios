@@ -20,6 +20,8 @@ enum SnowballTopViewButtonType {
   case Camera
   case AddFriends
   case Save
+  case ChangeCamera
+  case Friends
 
   // MARK: - Properties
 
@@ -45,6 +47,8 @@ enum SnowballTopViewButtonType {
     case .Forward: return "forward"
     case .Camera: return "camera"
     case .AddFriends: return "add-friends"
+    case .ChangeCamera: return "change-camera"
+    case .Friends: return "friends"
     default: return nil
     }
   }
@@ -54,6 +58,8 @@ enum SnowballTopViewButtonType {
     case .Forward: return UIColor.SnowballColor.greenColor
     case .AddFriends: return nil
     case .Save: return UIColor.SnowballColor.greenColor
+    case .ChangeCamera: return UIColor.whiteColor()
+    case .Friends: return UIColor.whiteColor()
     default: return UIColor.blackColor()
     }
   }
@@ -82,7 +88,7 @@ class SnowballTopView: UIView {
 
   var delegate: SnowballTopViewDelegate?
 
-  // MARK: - UIView
+  // MARK: - Initializers
 
   convenience init(leftButtonType: SnowballTopViewButtonType?, rightButtonType: SnowballTopViewButtonType?, title: String = "") {
     self.init(frame: CGRectZero)
@@ -100,6 +106,8 @@ class SnowballTopView: UIView {
     titleLabel.text = NSLocalizedString(title)
     addSubview(titleLabel)
   }
+
+  // MARK: - UIView
 
   override func layoutSubviews() {
     super.layoutSubviews()
@@ -126,6 +134,20 @@ class SnowballTopView: UIView {
       titleLabel.left == titleLabel.superview!.left + 75
       titleLabel.centerY == titleLabel.superview!.centerY
     }
+  }
+
+  override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
+    if let leftButtonFrame = leftButton?.frame {
+      if CGRectContainsPoint(leftButtonFrame, point) {
+        return true
+      }
+    }
+    if let rightButtonFrame = rightButton?.frame {
+      if CGRectContainsPoint(rightButtonFrame, point) {
+        return true
+      }
+    }
+    return false
   }
 
   // MARK: - Internal
