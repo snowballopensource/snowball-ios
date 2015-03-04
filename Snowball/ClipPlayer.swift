@@ -21,12 +21,17 @@ class ClipPlayer: AVPlayer {
     return false
   }
 
-  var clip: Clip?
+  var clip: Clip? {
+    let playerItem = currentItem as? ClipPlayerItem
+    if let playerItem = playerItem {
+      return playerItem.clip
+    }
+    return nil
+  }
 
   // MARK: - Internal
 
   func playClip(clip: Clip) {
-    self.clip = clip
     play()
     if currentItem == nil {
       delegate?.playerWillBeginPlayback()
@@ -46,7 +51,6 @@ class ClipPlayer: AVPlayer {
   }
 
   func stop() {
-    self.clip = nil
     pause()
     replaceCurrentItemWithPlayerItem(nil)
     delegate?.playerDidEndPlayback()
@@ -56,9 +60,13 @@ class ClipPlayer: AVPlayer {
 
   private func registerPlayerItemForNotifications(playerItem: ClipPlayerItem) {
     NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: playerItem, queue: nil) { (notification) in
-      let playerItem = notification.object as ClipPlayerItem
-      self.delegate?.clipDidPlayToEndTime(playerItem.clip)
       NSNotificationCenter.defaultCenter().removeObserver(self)
+      if let clip = self.clip {
+        let notificationPlayerItem = notification.object as ClipPlayerItem
+        if notificationPlayerItem.clip.id == clip.id {
+          self.delegate?.clipDidPlayToEndTime(notificationPlayerItem.clip)
+        }
+      }
     }
   }
 }
