@@ -134,7 +134,9 @@ class ClipsViewController: UIViewController {
 
   func reloadCellForClip(clip: Clip) {
     let index = indexOfClip(clip)
-    collectionView.reloadItemsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)])
+    UIView.animateWithDuration(0.4) {
+      self.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)])
+    }
   }
 
   func removePendingClipFromTimeline() {

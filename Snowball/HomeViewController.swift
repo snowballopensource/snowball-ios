@@ -56,22 +56,22 @@ extension HomeViewController: ClipsViewControllerDelegate {
 
   func userDidAcceptPreviewClip(clip: Clip) {
     cameraViewController.view.hidden = false
-    uploadClip(clip)
+    if clip.id == nil {
+      clip.state = ClipState.Default
+      self.clipsViewController.reloadCellForClip(clip)
+      self.cameraViewController.endPreview()
+      self.uploadClip(clip)
+    }
   }
 
   // MARK: - Private
 
   private func uploadClip(clip: Clip) {
-    if clip.id == nil {
-      clip.state = ClipState.Default
-      self.clipsViewController.reloadCellForClip(clip)
-      self.cameraViewController.endPreview()
-      Analytics.track("Create Clip")
-      API.uploadClip(clip) { (request, response, JSON, error) in
-        if let error = error {
-          error.print("upload clip")
-          displayAPIErrorToUser(JSON)
-        }
+    Analytics.track("Create Clip")
+    API.uploadClip(clip) { (request, response, JSON, error) in
+      if let error = error {
+        error.print("upload clip")
+        displayAPIErrorToUser(JSON)
       }
     }
   }
