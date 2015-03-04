@@ -65,6 +65,7 @@ extension HomeViewController: ClipsViewControllerDelegate {
     if clip.id == nil {
       clip.state = ClipState.Default
       self.clipsViewController.reloadCellForClip(clip)
+      self.cameraViewController.endPreview()
       Analytics.track("Create Clip")
       API.uploadClip(clip) { (request, response, JSON, error) in
         if let error = error {

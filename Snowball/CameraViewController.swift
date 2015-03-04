@@ -167,15 +167,7 @@ class CameraViewController: UIViewController {
     endSession()
   }
 
-  // MARK: - PlayerViewController
-
-  func toggleRecording(sender: UILongPressGestureRecognizer) {
-    switch (sender.state) {
-    case UIGestureRecognizerState.Began: beginRecording()
-    case UIGestureRecognizerState.Ended: endRecording()
-    default: return
-    }
-  }
+  // MARK: - Internal
 
   func changeCamera() {
     if let currentCaptureDevice = currentVideoDeviceInput?.device {
@@ -206,7 +198,20 @@ class CameraViewController: UIViewController {
     }
   }
 
+  func endPreview() {
+    playerView.hidden = true
+    player.stop()
+  }
+
   // MARK: - Private
+
+  @objc private func toggleRecording(sender: UILongPressGestureRecognizer) {
+    switch (sender.state) {
+    case UIGestureRecognizerState.Began: beginRecording()
+    case UIGestureRecognizerState.Ended: endRecording()
+    default: return
+    }
+  }
 
   private func checkDeviceAuthorizationStatus() {
     AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: nil)
@@ -300,11 +305,6 @@ class CameraViewController: UIViewController {
   private func previewVideo(url: NSURL) {
     playerView.hidden = false
     player.playVideo(url)
-  }
-
-  private func endPreview() {
-    playerView.hidden = true
-    player.stop()
   }
 
   @objc private func cancelPreview() {

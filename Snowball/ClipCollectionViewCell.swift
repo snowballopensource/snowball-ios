@@ -29,6 +29,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   private let clipThumbnailLoadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
 
+  private let addClipImageView = UIImageView(image: UIImage(named: "add-clip"))
+
   private let userAvatarImageView = UserAvatarImageView()
 
   private let usernameLabel: UILabel = {
@@ -60,6 +62,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     super.init(frame: frame)
     contentView.addSubview(clipThumbnailImageView)
     clipThumbnailImageView.addSubview(clipThumbnailLoadingIndicator)
+    clipThumbnailImageView.addSubview(addClipImageView)
     contentView.addSubview(userAvatarImageView)
     contentView.addSubview(usernameLabel)
     contentView.addSubview(clipTimeLabel)
@@ -88,6 +91,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipThumbnailLoadingIndicator.right == clipThumbnailLoadingIndicator.superview!.right
       clipThumbnailLoadingIndicator.height == clipThumbnailLoadingIndicator.superview!.width
     }
+
+    addClipImageView.frame = clipThumbnailImageView.bounds
 
     layout(userAvatarImageView, clipThumbnailImageView) { (userAvatarImageView, clipThumbnailImageView) in
       userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
@@ -139,6 +144,11 @@ class ClipCollectionViewCell: UICollectionViewCell {
       }
     }
     setInPlayState(false, animated: false)
+    if clip.state == ClipState.Pending {
+      addClipImageView.hidden = false
+    } else {
+      addClipImageView.hidden = true
+    }
   }
 
   func setInPlayState(inPlayState: Bool, animated: Bool = true) {

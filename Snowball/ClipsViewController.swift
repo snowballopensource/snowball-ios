@@ -129,6 +129,7 @@ class ClipsViewController: UIViewController {
     clips.append(clip)
     let index = indexOfClip(clip)
     collectionView.insertItemsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)])
+    scrollToClip(clip, animated: true)
   }
 
   func reloadCellForClip(clip: Clip) {
