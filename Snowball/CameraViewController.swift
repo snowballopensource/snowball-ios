@@ -159,6 +159,8 @@ class CameraViewController: UIViewController {
     } else {
       beginSession()
     }
+
+    setCancelPreviewButtonHidden(true, animated: false)
   }
 
   override func viewDidDisappear(animated: Bool) {
@@ -199,6 +201,7 @@ class CameraViewController: UIViewController {
   }
 
   func endPreview() {
+    setCancelPreviewButtonHidden(true, animated: false)
     playerView.hidden = true
     player.stop()
   }
@@ -304,12 +307,32 @@ class CameraViewController: UIViewController {
 
   private func previewVideo(url: NSURL) {
     playerView.hidden = false
+    setCancelPreviewButtonHidden(false, animated: true)
     player.playVideo(url)
   }
 
   @objc private func cancelPreview() {
     endPreview()
     delegate?.videoPreviewDidCancel()
+  }
+
+  private func setCancelPreviewButtonHidden(hidden: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.4) {
+        self.setCancelPreviewButtonHidden(hidden, animated: false)
+      }
+    } else {
+      let frame = self.cancelPreviewButton.frame
+      if hidden {
+        if frame.origin.y >= 0 {
+          self.cancelPreviewButton.frame = CGRect(x: frame.origin.x, y: frame.origin.y - frame.size.height, width: frame.size.width, height: frame.size.height)
+        }
+      } else {
+        if frame.origin.y < 0 {
+          self.cancelPreviewButton.frame = CGRect(x: frame.origin.x, y: frame.origin.y + frame.size.height, width: frame.size.width, height: frame.size.height)
+        }
+      }
+    }
   }
 }
 
