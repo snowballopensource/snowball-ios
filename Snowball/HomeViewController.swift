@@ -88,7 +88,7 @@ extension HomeViewController: CameraViewControllerDelegate {
   // MARK: - CameraViewControllerDelegate
 
   func videoDidBeginRecording() {
-    // TODO: hide navigation bar
+    topView.setHidden(true, animated: true)
   }
 
   func videoDidEndRecordingToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL) {
@@ -103,7 +103,7 @@ extension HomeViewController: CameraViewControllerDelegate {
 
   func videoPreviewDidCancel() {
     clipsViewController.removePendingClipFromTimeline()
-    // TODO: show navigation bar
+    topView.setHidden(false, animated: true)
   }
 }
 

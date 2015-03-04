@@ -162,4 +162,22 @@ class SnowballTopView: UIView {
       topBar.height == height
     }
   }
+
+  func setHidden(hidden: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.4) {
+        self.setHidden(hidden, animated: false)
+      }
+    } else {
+      if hidden {
+        if frame.origin.y >= 0 {
+          frame = CGRect(x: frame.origin.x, y: frame.origin.y - frame.size.height, width: frame.size.width, height: frame.size.height)
+        }
+      } else {
+        if frame.origin.y < 0 {
+          frame = CGRect(x: frame.origin.x, y: frame.origin.y + frame.size.height, width: frame.size.width, height: frame.size.height)
+        }
+      }
+    }
+  }
 }
