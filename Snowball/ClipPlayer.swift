@@ -21,9 +21,12 @@ class ClipPlayer: AVPlayer {
     return false
   }
 
+  var clip: Clip?
+
   // MARK: - Internal
 
   func playClip(clip: Clip) {
+    self.clip = clip
     play()
     if currentItem == nil {
       delegate?.playerWillBeginPlayback()
@@ -43,6 +46,7 @@ class ClipPlayer: AVPlayer {
   }
 
   func stop() {
+    self.clip = nil
     pause()
     replaceCurrentItemWithPlayerItem(nil)
     delegate?.playerDidEndPlayback()

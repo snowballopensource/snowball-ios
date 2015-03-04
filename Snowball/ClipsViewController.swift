@@ -128,14 +128,14 @@ class ClipsViewController: UIViewController {
   func addClipToTimeline(clip: Clip) {
     clips.append(clip)
     let index = indexOfClip(clip)
-    collectionView.insertItemsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)])
+    collectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: index, inSection: 0)])
     scrollToClip(clip, animated: true)
   }
 
   func reloadCellForClip(clip: Clip) {
     let index = indexOfClip(clip)
     UIView.animateWithDuration(0.4) {
-      self.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)])
+      self.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forItem: index, inSection: 0)])
     }
   }
 
@@ -176,6 +176,43 @@ class ClipsViewController: UIViewController {
     return nil
   }
 
+  private func clipForCell(cell: ClipCollectionViewCell) -> Clip? {
+    let indexPath = collectionView.indexPathForCell(cell)
+    if let indexPath = indexPath {
+      if indexPath.item < clips.count {
+        return clips[indexPath.item]
+      }
+    }
+    return nil
+  }
+
+  private func cellForClip(clip: Clip) -> ClipCollectionViewCell? {
+    let indexPath = NSIndexPath(forItem: indexOfClip(clip), inSection: 0)
+    return collectionView.cellForItemAtIndexPath(indexPath) as? ClipCollectionViewCell
+  }
+
+  private func clipIsPlayingClip(clip: Clip) -> Bool {
+    if let playingClip = player.clip {
+      if clip.id == playingClip.id {
+        return true
+      }
+    }
+    return false
+  }
+
+  private func setCorrectStateForCell(cell: ClipCollectionViewCell, clip: Clip?, inPlayState: Bool) {
+    // TODO: this method signature is a mess. Clean this up.
+    if inPlayState {
+      var isPlayingClip = false
+      if let clip = clip {
+        isPlayingClip = clipIsPlayingClip(clip)
+      }
+      cell.setInPlayState(true, isPlayingClip: isPlayingClip, animated: true)
+    } else {
+      cell.setInPlayState(false, isPlayingClip: false, animated: true)
+    }
+  }
+
   private func scrollToClip(clip: Clip, animated: Bool = true) {
     let indexPath = NSIndexPath(forItem: indexOfClip(clip), inSection: 0)
     collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: animated)
@@ -184,7 +221,7 @@ class ClipsViewController: UIViewController {
   private func removeClipFromTimeline(clip: Clip) {
     let index = indexOfClip(clip)
     clips.removeAtIndex(index)
-    collectionView.deleteItemsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)])
+    collectionView.deleteItemsAtIndexPaths([NSIndexPath(forItem: index, inSection: 0)])
   }
 }
 
@@ -200,9 +237,9 @@ extension ClipsViewController: UICollectionViewDataSource {
 
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(ClipCollectionViewCell), forIndexPath: indexPath) as ClipCollectionViewCell
-    let clip = clips[indexPath.row]
+    let clip = clips[indexPath.item]
     cell.configureForClip(clip)
-    cell.setInPlayState(player.playing, animated: false)
+    setCorrectStateForCell(cell, clip: clip, inPlayState: player.playing)
     return cell
   }
 }
@@ -217,7 +254,7 @@ extension ClipsViewController: UICollectionViewDelegate {
     if player.playing {
       player.stop()
     } else {
-      let clip = clips[indexPath.row]
+      let clip = clips[indexPath.item]
       if clip.state == ClipState.Pending {
         delegate?.userDidAcceptPreviewClip(clip)
       } else {
@@ -236,7 +273,9 @@ extension ClipsViewController: ClipPlayerDelegate {
   func playerWillBeginPlayback() {
     for cell in collectionView.visibleCells() {
       let cell = cell as ClipCollectionViewCell
-      cell.setInPlayState(true, animated: true)
+      if let clip = clipForCell(cell) {
+        setCorrectStateForCell(cell, clip: clip, inPlayState: true)
+      }
     }
     delegate?.playerWillBeginPlayback()
   }
@@ -244,7 +283,7 @@ extension ClipsViewController: ClipPlayerDelegate {
   func playerDidEndPlayback() {
     for cell in collectionView.visibleCells() {
       let cell = cell as ClipCollectionViewCell
-      cell.setInPlayState(false, animated: true)
+      setCorrectStateForCell(cell, clip: nil, inPlayState: false)
     }
     delegate?.playerDidEndPlayback()
   }
@@ -255,7 +294,13 @@ extension ClipsViewController: ClipPlayerDelegate {
 
   func clipDidPlayToEndTime(clip: Clip) {
     bookmarkedClip = clip
+    if let cell = cellForClip(clip) {
+      setCorrectStateForCell(cell, clip: clip, inPlayState: true)
+    }
     if let nextClip = clipAfterClip(clip) {
+      if let nextCell = cellForClip(nextClip) {
+        setCorrectStateForCell(nextCell, clip: nextClip, inPlayState: true)
+      }
       player.playClip(nextClip)
     } else {
       player.stop()
