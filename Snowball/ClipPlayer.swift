@@ -8,7 +8,7 @@
 
 import AVFoundation
 
-class ClipPlayer: AVPlayer {
+class ClipPlayer: AVQueuePlayer {
 
   // MARK: - Properties
 
@@ -29,22 +29,34 @@ class ClipPlayer: AVPlayer {
     return nil
   }
 
+  // MARK: - Initializers
+
+  override init() {
+    super.init()
+    actionAtItemEnd = AVPlayerActionAtItemEnd.Advance
+  }
+
   // MARK: - Internal
 
-  func playClip(clip: Clip) {
+  func playClips(clips: [Clip]) {
     play()
     if currentItem == nil {
       delegate?.playerWillBeginPlayback()
     }
-    Analytics.track("Watch Clip")
-    delegate?.playerWillPlayClip(clip)
-    if let videoURL = clip.videoURL {
-      CachedURLAsset.createAssetFromRemoteURL(videoURL) { (asset, error) in
-        error?.print("creating cached asset")
-        if let asset = asset {
-          let playerItem = ClipPlayerItem(clip: clip, asset: asset)
-          self.registerPlayerItemForNotifications(playerItem)
-          self.replaceCurrentItemWithPlayerItem(playerItem)
+    if let clip = clips.first? {
+      if let videoURL = clip.videoURL {
+        CachedURLAsset.createAssetFromRemoteURL(videoURL) { (asset, error) in
+          error?.print("creating cached asset")
+          if let asset = asset {
+            let playerItem = ClipPlayerItem(clip: clip, asset: asset)
+            self.registerPlayerItemForNotifications(playerItem)
+            self.insertItem(playerItem, afterItem: self.items().last as? AVPlayerItem)
+          }
+          var mutableClips = clips
+          mutableClips.removeAtIndex(0)
+          if mutableClips.count > 0 {
+            self.playClips(mutableClips)
+          }
         }
       }
     }
@@ -52,7 +64,7 @@ class ClipPlayer: AVPlayer {
 
   func stop() {
     pause()
-    replaceCurrentItemWithPlayerItem(nil)
+    removeAllItems()
     delegate?.playerDidEndPlayback()
   }
 
@@ -69,7 +81,20 @@ class ClipPlayer: AVPlayer {
       if notificationPlayerItem.clip.id == clip.id {
         self.delegate?.clipDidPlayToEndTime(notificationPlayerItem.clip)
       }
+      if let nextItem = itemAfterItem(notificationPlayerItem) {
+        self.delegate?.playerWillPlayClip(nextItem.clip)
+      }
     }
+  }
+
+  private func itemAfterItem(item: ClipPlayerItem) -> ClipPlayerItem? {
+    let items = self.items() as NSArray
+    let itemIndex = items.indexOfObject(item)
+    let nextItemIndex = itemIndex + 1
+    if nextItemIndex < items.count {
+      return items[nextItemIndex] as? ClipPlayerItem
+    }
+    return nil
   }
 }
 

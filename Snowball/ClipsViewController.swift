@@ -168,12 +168,17 @@ class ClipsViewController: UIViewController {
     return clips.indexOfObject(clip)
   }
 
-  private func clipAfterClip(clip: Clip) -> Clip? {
+  private func allClipsAfterClip(clip: Clip) -> [Clip] {
     let nextClipIndex = indexOfClip(clip) + 1
     if nextClipIndex < clips.count {
-      return clips[nextClipIndex]
+      let clipsSlice = clips[nextClipIndex..<clips.count]
+      return Array(clipsSlice)
     }
-    return nil
+    return []
+  }
+
+  private func clipAfterClip(clip: Clip) -> Clip? {
+    return allClipsAfterClip(clip).first
   }
 
   private func clipForCell(cell: ClipCollectionViewCell) -> Clip? {
@@ -245,7 +250,7 @@ extension ClipsViewController: UICollectionViewDelegate {
       if clip.state == ClipState.Pending {
         delegate?.userDidAcceptPreviewClip(clip)
       } else {
-        player.playClip(clip)
+        player.playClips([clip] + allClipsAfterClip(clip))
       }
     }
   }
@@ -275,6 +280,7 @@ extension ClipsViewController: ClipPlayerDelegate {
 
   func playerWillPlayClip(clip: Clip) {
     scrollToClip(clip)
+    Analytics.track("Watch Clip")
   }
 
   func clipDidPlayToEndTime(clip: Clip) {
@@ -286,7 +292,6 @@ extension ClipsViewController: ClipPlayerDelegate {
       if let nextCell = cellForClip(nextClip) {
         nextCell.setInPlayState(true, isCurrentPlayingClip: true, animated: true)
       }
-      player.playClip(nextClip)
     } else {
       player.stop()
     }
