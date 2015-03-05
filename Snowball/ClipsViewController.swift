@@ -265,7 +265,15 @@ extension ClipsViewController: ClipPlayerDelegate {
   func playerWillBeginPlayback() {
     for cell in collectionView.visibleCells() {
       let cell = cell as ClipCollectionViewCell
-      cell.setInPlayState(true, isCurrentPlayingClip: false, animated: true)
+      if let cellClip = clipForCell(cell) {
+        if let playerClip = player.clip {
+          if playerClip.id == cellClip.id {
+            cell.setInPlayState(true, isCurrentPlayingClip: true, animated: true)
+          } else {
+            cell.setInPlayState(true, isCurrentPlayingClip: false, animated: true)
+          }
+        }
+      }
     }
     delegate?.playerWillBeginPlayback()
   }

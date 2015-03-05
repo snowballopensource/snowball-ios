@@ -21,13 +21,7 @@ class ClipPlayer: AVQueuePlayer {
     return false
   }
 
-  var clip: Clip? {
-    let playerItem = currentItem as? ClipPlayerItem
-    if let playerItem = playerItem {
-      return playerItem.clip
-    }
-    return nil
-  }
+  var clip: Clip?
 
   // MARK: - Initializers
 
@@ -42,6 +36,7 @@ class ClipPlayer: AVQueuePlayer {
     play()
     if let clip = clips.first? {
       if currentItem == nil {
+        self.clip = clip
         delegate?.playerWillBeginPlayback()
         delegate?.playerWillPlayClip(clip)
       }
@@ -66,6 +61,7 @@ class ClipPlayer: AVQueuePlayer {
   func stop() {
     pause()
     removeAllItems()
+    self.clip = nil
     delegate?.playerDidEndPlayback()
   }
 
@@ -83,6 +79,7 @@ class ClipPlayer: AVQueuePlayer {
         self.delegate?.clipDidPlayToEndTime(notificationPlayerItem.clip)
       }
       if let nextItem = itemAfterItem(notificationPlayerItem) {
+        self.clip = nextItem.clip
         self.delegate?.playerWillPlayClip(nextItem.clip)
       }
     }
