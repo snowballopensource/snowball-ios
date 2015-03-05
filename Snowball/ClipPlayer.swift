@@ -40,10 +40,11 @@ class ClipPlayer: AVQueuePlayer {
 
   func playClips(clips: [Clip]) {
     play()
-    if currentItem == nil {
-      delegate?.playerWillBeginPlayback()
-    }
     if let clip = clips.first? {
+      if currentItem == nil {
+        delegate?.playerWillBeginPlayback()
+        delegate?.playerWillPlayClip(clip)
+      }
       if let videoURL = clip.videoURL {
         CachedURLAsset.createAssetFromRemoteURL(videoURL) { (asset, error) in
           error?.print("creating cached asset")
@@ -75,7 +76,7 @@ class ClipPlayer: AVQueuePlayer {
   }
 
   @objc private func playerItemDidPlayToEndTime(notification: NSNotification) {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NSNotificationCenter.defaultCenter().removeObserver(self, name: notification.name, object: notification.object)
     if let clip = self.clip {
       let notificationPlayerItem = notification.object as ClipPlayerItem
       if notificationPlayerItem.clip.id == clip.id {
