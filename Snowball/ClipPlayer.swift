@@ -196,6 +196,16 @@ private class CachedURLAsset: AVURLAsset {
       }
     }
 
+    // If it's a clip that's already local (e.g. just captured)
+    if let urlScheme = URL.scheme {
+      if urlScheme == "file" {
+        if let completion = completionHandler {
+          completion(CachedURLAsset(URL: URL, originalURL: URL), nil)
+          return
+        }
+      }
+    }
+
     // Asset doesn't exist in cache, fetch it
     Alamofire.download(.GET, URL.absoluteString!) { (temporaryURL, response) in
       // Specify where to save download (to the cache URL created above)
