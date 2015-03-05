@@ -52,10 +52,12 @@ extension HomeViewController: ClipsViewControllerDelegate {
 
   func playerWillBeginPlayback() {
     cameraViewController.view.hidden = true
+    topView.setHidden(true, animated: true)
   }
 
   func playerDidEndPlayback() {
     cameraViewController.view.hidden = false
+    topView.setHidden(false, animated: true)
   }
 
   func userDidAcceptPreviewClip(clip: Clip) {
