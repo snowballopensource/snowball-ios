@@ -68,6 +68,7 @@ class Analytics {
   private func identify(userID: String) {
     if !isStaging() {
       mixpanel.identify(userID)
+      mixpanel.registerSuperProperties(["User ID": userID])
     }
   }
 }
