@@ -86,11 +86,13 @@ class ClipPlayer: AVQueuePlayer {
   }
 
   private func itemAfterItem(item: ClipPlayerItem) -> ClipPlayerItem? {
-    let items = self.items() as NSArray
-    let itemIndex = items.indexOfObject(item)
-    let nextItemIndex = itemIndex + 1
-    if nextItemIndex < items.count {
-      return items[nextItemIndex] as? ClipPlayerItem
+    if self.items().count > 0 {
+      let items = self.items() as NSArray
+      let itemIndex = items.indexOfObject(item)
+      let nextItemIndex = itemIndex + 1
+      if nextItemIndex < items.count {
+        return items[nextItemIndex] as? ClipPlayerItem
+      }
     }
     return nil
   }
