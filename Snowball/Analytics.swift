@@ -32,7 +32,6 @@ class Analytics {
   // MARK: - Internal
 
   class func track(eventName: String, properties: [String: String]? = nil) {
-    println("Tracking event: \(eventName)")
     Analytics.sharedAnalytics.track(eventName, properties: properties)
   }
 
@@ -47,19 +46,28 @@ class Analytics {
   // MARK: - Private
 
   private func track(eventName: String, properties: [String: String]? = nil) {
-    if let properties = properties {
-      mixpanel.track(eventName, properties: properties)
+    if isStaging() {
+      println("Received but not tracking event: \(eventName)")
     } else {
-      mixpanel.track(eventName)
+      println("Tracking event: \(eventName)")
+      if let properties = properties {
+        mixpanel.track(eventName, properties: properties)
+      } else {
+        mixpanel.track(eventName)
+      }
     }
   }
 
   private func createAliasAndIdentify(userID: String) {
-    mixpanel.createAlias(userID, forDistinctID: mixpanel.distinctId)
-    identify(userID)
+    if !isStaging() {
+      mixpanel.createAlias(userID, forDistinctID: mixpanel.distinctId)
+      identify(userID)
+    }
   }
 
   private func identify(userID: String) {
-    mixpanel.identify(userID)
+    if !isStaging() {
+      mixpanel.identify(userID)
+    }
   }
 }

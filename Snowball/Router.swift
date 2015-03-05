@@ -30,10 +30,8 @@ enum Router: URLRequestConvertible {
   // MARK: - Properties
 
   static let baseURLString: String = {
-    if let bundleIdentifier = NSBundle.mainBundle().bundleIdentifier {
-      if bundleIdentifier == "is.snowball.snowball-staging" {
-        return "https://api-staging.snowball.is/v1"
-      }
+    if isStaging() {
+      return "https://api-staging.snowball.is/v1"
     }
     return "https://api.snowball.is/v1/"
     }()
