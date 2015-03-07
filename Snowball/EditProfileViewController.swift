@@ -15,7 +15,11 @@ class EditProfileViewController: UIViewController {
 
   private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Back, rightButtonType: SnowballTopViewButtonType.Save, title: "Edit Profile")
 
-  private let tableView = FormTableView()
+  private let tableViewController = FormTableViewController()
+
+  var tableView: UITableView {
+    return tableViewController.tableView
+  }
 
   private let avatarButton = UIButton()
 
@@ -46,24 +50,29 @@ class EditProfileViewController: UIViewController {
     view.addSubview(topView)
     topView.setupDefaultLayout()
 
+    let avatarButtonDiameter: CGFloat = 100
+    let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: avatarButtonDiameter))
+    tableView.tableHeaderView = tableHeaderView
+
+    tableHeaderView.addSubview(avatarButton)
     avatarButton.addTarget(self, action: "avatarButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
-    view.addSubview(avatarButton)
-    layout(avatarButton, topView) { (avatarButton, topView) in
-      avatarButton.top == topView.bottom
+    layout(avatarButton) { (avatarButton) in
+      avatarButton.top == avatarButton.superview!.top
       avatarButton.centerX == avatarButton.superview!.centerX
-      let diameter: Float = 100
-      avatarButton.width == diameter
-      avatarButton.height == diameter
+      avatarButton.width == avatarButtonDiameter
+      avatarButton.height == avatarButtonDiameter
     }
 
     avatarImageView.frame = avatarButton.bounds
     avatarButton.addSubview(avatarImageView)
 
     tableView.dataSource = self
-    view.addSubview(tableView)
-    layout(tableView, avatarImageView) { (tableView, avatarImageView) in
+    addChildViewController(tableViewController)
+    view.addSubview(tableViewController.view)
+    tableViewController.didMoveToParentViewController(self)
+    layout(tableViewController.view, topView) { (tableView, topView) in
       tableView.left == tableView.superview!.left
-      tableView.top == avatarImageView.bottom
+      tableView.top == topView.bottom
       tableView.right == tableView.superview!.right
       tableView.bottom == tableView.superview!.bottom
     }

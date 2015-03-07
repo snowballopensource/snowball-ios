@@ -22,10 +22,10 @@ class AuthenticationViewController: UIViewController {
     return label
   }()
 
-  private let tableViewController = UITableViewController()
+  private let tableViewController = FormTableViewController()
 
   var tableView: UITableView {
-    return tableViewController.view as UITableView
+    return tableViewController.tableView
   }
 
   var authenticationRoute: Router! { return nil }
@@ -39,11 +39,6 @@ class AuthenticationViewController: UIViewController {
 
     view.addSubview(topBar)
     topBar.setupDefaultLayout()
-
-    tableView.allowsSelection = false
-    tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-    tableView.rowHeight = TextFieldTableViewCell.height
-    tableView.registerClass(TextFieldTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(TextFieldTableViewCell))
 
     let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 70))
     let sideMargin: CGFloat = 25

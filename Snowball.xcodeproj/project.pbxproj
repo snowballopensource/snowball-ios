@@ -48,7 +48,7 @@
 		BA938A011A7B06C600857CF7 /* NSError+Print.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA938A001A7B06C600857CF7 /* NSError+Print.swift */; };
 		BA9AA67C1A67465F002C4992 /* AuthenticationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9AA67B1A67465F002C4992 /* AuthenticationNavigationController.swift */; };
 		BA9AA6831A674804002C4992 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9AA6821A674804002C4992 /* MainNavigationController.swift */; };
-		BA9C8E801AAB779200CF05AB /* FormTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C8E7F1AAB779200CF05AB /* FormTableView.swift */; };
+		BA9C8E801AAB779200CF05AB /* FormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C8E7F1AAB779200CF05AB /* FormTableViewController.swift */; };
 		BA9C8E821AAB7EFC00CF05AB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C8E811AAB7EFC00CF05AB /* SignUpViewController.swift */; };
 		BA9C8E841AAB7F0400CF05AB /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C8E831AAB7F0400CF05AB /* SignInViewController.swift */; };
 		BAA15E6B1A687E910055756E /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA145D031A687CB300D81E53 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -238,7 +238,7 @@
 		BA938A001A7B06C600857CF7 /* NSError+Print.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Print.swift"; sourceTree = "<group>"; };
 		BA9AA67B1A67465F002C4992 /* AuthenticationNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationNavigationController.swift; sourceTree = "<group>"; };
 		BA9AA6821A674804002C4992 /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
-		BA9C8E7F1AAB779200CF05AB /* FormTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableView.swift; sourceTree = "<group>"; };
+		BA9C8E7F1AAB779200CF05AB /* FormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewController.swift; sourceTree = "<group>"; };
 		BA9C8E811AAB7EFC00CF05AB /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		BA9C8E831AAB7F0400CF05AB /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		BAA15E721A6889230055756E /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -482,7 +482,6 @@
 				BA3DB8251A9EFD9A00378F6D /* SnowballRoundedTextField.swift */,
 				BA1835521AA51C1D00D6A0BE /* PlayerView.swift */,
 				BAF50E751AA63E4B00AB874E /* CameraView.swift */,
-				BA9C8E7F1AAB779200CF05AB /* FormTableView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -713,6 +712,7 @@
 		BAF3BC971A76E03F00AFD3E5 /* More */ = {
 			isa = PBXGroup;
 			children = (
+				BA9C8E7F1AAB779200CF05AB /* FormTableViewController.swift */,
 				BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */,
 				BAB8F2C71A830F5500937407 /* FriendsViewController.swift */,
 				BAA966BC1A87FEEC0032752F /* FindFriendsViewController.swift */,
@@ -1110,7 +1110,7 @@
 				BAFB06C91A9E906400EDA01B /* MPSequenceGenerator.m in Sources */,
 				BAFB06A91A9E906400EDA01B /* MPABTestDesignerSnapshotRequestMessage.m in Sources */,
 				BAA8C0801A32F8F300AAB9F4 /* User.swift in Sources */,
-				BA9C8E801AAB779200CF05AB /* FormTableView.swift in Sources */,
+				BA9C8E801AAB779200CF05AB /* FormTableViewController.swift in Sources */,
 				BAA15E9A1A6889230055756E /* AFNetworkReachabilityManager.m in Sources */,
 				BAFB06B21A9E906400EDA01B /* MPCGPointToNSDictionaryValueTransformer.m in Sources */,
 				BA44E4561A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift in Sources */,
