@@ -42,6 +42,14 @@ class SignUpViewController: AuthenticationViewController {
     messageString.appendAttributedString(NSAttributedString(string: "your account.", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor]))
     messageLabel.attributedText = messageString
   }
+
+  // MARK: - AuthenticationViewController
+
+  override func authenticationCompletedSuccessfully(user: User) {
+    Analytics.createAliasAndIdentify(user.id!)
+    Analytics.track("Sign Up")
+    self.navigationController?.pushViewController(PhoneNumberViewController(), animated: true)
+  }
 }
 
 // MARK: -

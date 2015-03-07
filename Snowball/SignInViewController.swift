@@ -38,6 +38,14 @@ class SignInViewController: AuthenticationViewController {
     messageString.appendAttributedString(NSAttributedString(string: "your account.", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor]))
     messageLabel.attributedText = messageString
   }
+
+  // MARK: - AuthenticationViewController
+
+  override func authenticationCompletedSuccessfully(user: User) {
+    Analytics.identify(user.id!)
+    Analytics.track("Sign In")
+    self.switchToNavigationController(MainNavigationController())
+  }
 }
 
 // MARK: -

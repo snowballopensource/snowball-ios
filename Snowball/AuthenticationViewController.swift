@@ -61,6 +61,10 @@ class AuthenticationViewController: UIViewController {
     }
   }
 
+  // MARK: - Internal
+
+  func authenticationCompletedSuccessfully(user: User) {}
+
   // MARK: - Private
 
   private func performAuthenticationRequest() {
@@ -71,17 +75,8 @@ class AuthenticationViewController: UIViewController {
           let user = User.objectFromJSON(userJSON) as User?
           user?.managedObjectContext?.save(nil)
           User.currentUser = user
-          if let userID = user?.id {
-            // TODO: make this configurable by a block or something
-            if self.isKindOfClass(SignUpViewController) {
-              Analytics.createAliasAndIdentify(userID)
-              Analytics.track("Sign Up")
-              self.navigationController?.pushViewController(PhoneNumberViewController(), animated: true)
-            } else {
-              Analytics.identify(userID)
-              Analytics.track("Sign In")
-              self.switchToNavigationController(MainNavigationController())
-            }
+          if let user = user {
+            self.authenticationCompletedSuccessfully(user)
           }
         }
       }
