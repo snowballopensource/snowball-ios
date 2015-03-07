@@ -33,6 +33,7 @@ class PhoneNumberViewController: UIViewController {
     textField.keyboardType = UIKeyboardType.PhonePad
     textField.text = "+1"
     textField.font = UIFont(name: "Helvetica", size: 24)
+    textField.alignLeft(insetWidth: 0)
     textField.textAlignment = NSTextAlignment.Center
     textField.tintColor = UIColor.whiteColor()
     return textField
@@ -43,6 +44,7 @@ class PhoneNumberViewController: UIViewController {
     textField.keyboardType = UIKeyboardType.PhonePad
     textField.attributedPlaceholder = NSAttributedString(string: "4151234567", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor])
     textField.font = UIFont(name: "Helvetica", size: 28)
+    textField.alignLeft(insetWidth: 0)
     textField.textAlignment = NSTextAlignment.Center
     textField.tintColor = UIColor.SnowballColor.greenColor
     return textField
@@ -75,9 +77,9 @@ class PhoneNumberViewController: UIViewController {
     }
 
     view.addSubview(countryCodeTextField)
-    layout(countryCodeTextField) { (countryCodeTextField) in
+    layout(countryCodeTextField, messageLabel) { (countryCodeTextField, messageLabel) in
       countryCodeTextField.left == countryCodeTextField.superview!.left + 25
-      countryCodeTextField.top == countryCodeTextField.superview!.top + 180
+      countryCodeTextField.top == messageLabel.bottom + 15
       countryCodeTextField.width == 90
       countryCodeTextField.height == 50
     }
