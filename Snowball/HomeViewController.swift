@@ -17,6 +17,17 @@ class HomeViewController: UIViewController {
   let clipsViewController = ClipsViewController()
   let cameraViewController = CameraViewController()
 
+  private let kHasSeenOnboardingKey = "HasSeenOnboarding"
+  var hasSeenOnboarding: Bool {
+    get {
+      return NSUserDefaults.standardUserDefaults().objectForKey(kHasSeenOnboardingKey) as? Bool ?? false
+    }
+    set {
+      NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: kHasSeenOnboardingKey)
+      NSUserDefaults.standardUserDefaults().synchronize()
+    }
+  }
+
   // MARK: - UIViewController
 
   override func viewDidLoad() {
@@ -41,6 +52,16 @@ class HomeViewController: UIViewController {
 
     view.addSubview(topView)
     topView.setupDefaultLayout()
+  }
+
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+
+    if !hasSeenOnboarding {
+      presentViewController(OnboardingPageViewController(), animated: true) {
+        self.hasSeenOnboarding = true
+      }
+    }
   }
 }
 
