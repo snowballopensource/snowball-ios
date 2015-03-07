@@ -14,20 +14,13 @@ class TextFieldTableViewCell: UITableViewCell {
   // MARK: - Properties
 
   class var height: CGFloat {
-    return 65
+    return 60
   }
 
-  let textFieldLabel: UILabel = {
-    let label = UILabel()
-    label.font = UIFont(name: UIFont.SnowballFont.bold, size: 11)
-    return label
-    }()
-
-  let textField: UITextField = {
-    let textField = UITextField()
-    textField.font = UIFont(name: UIFont.SnowballFont.regular, size: 26)
-    textField.textColor = UIColor.SnowballColor.greenColor
-    textField.alignLeft(insetWidth: 0)
+  let textField: SnowballRoundedTextField = {
+    let textField = SnowballRoundedTextField()
+    textField.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
+    textField.tintColor = UIColor.SnowballColor.greenColor
     return textField
     }()
 
@@ -35,7 +28,6 @@ class TextFieldTableViewCell: UITableViewCell {
 
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    contentView.addSubview(textFieldLabel)
     contentView.addSubview(textField)
   }
 
@@ -49,16 +41,12 @@ class TextFieldTableViewCell: UITableViewCell {
     super.layoutSubviews()
 
     let margin: Float = 20
-    layout(textFieldLabel) { (textFieldLabel) in
-      textFieldLabel.left == textFieldLabel.superview!.left + margin
-      textFieldLabel.top == textFieldLabel.superview!.top + 10
-    }
 
-    layout(textField, textFieldLabel) { (textField, textFieldLabel) in
+    layout(textField) { (textField) in
       textField.left == textField.superview!.left + margin
-      textField.top == textFieldLabel.bottom + 10
+      textField.top == textField.superview!.top + 10
       textField.right == textField.superview!.right - margin
-      textField.height == 30
+      textField.height == 50
     }
   }
 }

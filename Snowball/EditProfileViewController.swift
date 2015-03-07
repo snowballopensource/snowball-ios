@@ -202,14 +202,14 @@ extension EditProfileViewController: UITableViewDataSource {
     let index = EditProfileTextFieldIndex(rawValue: indexPath.row)!
     switch(index) {
     case .Username:
-      cell.textFieldLabel.text = NSLocalizedString("USERNAME")
+      cell.textField.setPlaceholder(NSLocalizedString("username"), color: cell.textField.tintColor)
       cell.textField.text = User.currentUser?.username
     case .PhoneNumber:
-      cell.textFieldLabel.text = NSLocalizedString("PHONE NUMBER")
+      cell.textField.setPlaceholder(NSLocalizedString("phone number"), color: cell.textField.tintColor)
       cell.textField.text = User.currentUser?.phoneNumber
       cell.textField.keyboardType = UIKeyboardType.PhonePad
     case .Email:
-      cell.textFieldLabel.text = NSLocalizedString("EMAIL")
+      cell.textField.setPlaceholder(NSLocalizedString("email"), color: cell.textField.tintColor)
       cell.textField.text = User.currentUser?.email
       cell.textField.keyboardType = UIKeyboardType.EmailAddress
     }

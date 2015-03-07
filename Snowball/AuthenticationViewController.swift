@@ -27,11 +27,9 @@ class AuthenticationViewController: UIViewController, SnowballTopViewDelegate {
 
   private let usernameTextField: SnowballRoundedTextField = {
     let textField = SnowballRoundedTextField()
-    textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("username"), attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
-    textField.textColor = UIColor.SnowballColor.greenColor
+    textField.setPlaceholder(NSLocalizedString("username"), color: UIColor.SnowballColor.greenColor)
     textField.tintColor = UIColor.SnowballColor.greenColor
     textField.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    textField.alignLeft(insetWidth: 20)
     textField.autocorrectionType = UITextAutocorrectionType.No
     textField.autocapitalizationType = UITextAutocapitalizationType.None
     return textField
@@ -39,11 +37,9 @@ class AuthenticationViewController: UIViewController, SnowballTopViewDelegate {
 
   private let emailTextField: SnowballRoundedTextField = {
     let textField = SnowballRoundedTextField()
-    textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("email"), attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
-    textField.textColor = UIColor.SnowballColor.greenColor
+    textField.setPlaceholder(NSLocalizedString("email"), color: UIColor.SnowballColor.greenColor)
     textField.tintColor = UIColor.SnowballColor.greenColor
     textField.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    textField.alignLeft(insetWidth: 20)
     textField.autocorrectionType = UITextAutocorrectionType.No
     textField.autocapitalizationType = UITextAutocapitalizationType.None
     textField.keyboardType = UIKeyboardType.EmailAddress
@@ -52,11 +48,9 @@ class AuthenticationViewController: UIViewController, SnowballTopViewDelegate {
 
   private let passwordTextField: SnowballRoundedTextField = {
     let textField = SnowballRoundedTextField()
-    textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("password"), attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor])
-    textField.textColor = UIColor.SnowballColor.greenColor
+    textField.setPlaceholder(NSLocalizedString("password"), color: UIColor.SnowballColor.greenColor)
     textField.tintColor = UIColor.SnowballColor.greenColor
     textField.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    textField.alignLeft(insetWidth: 20)
     textField.autocorrectionType = UITextAutocorrectionType.No
     textField.autocapitalizationType = UITextAutocapitalizationType.None
     textField.secureTextEntry = true

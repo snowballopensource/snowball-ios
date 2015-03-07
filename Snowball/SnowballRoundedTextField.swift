@@ -16,6 +16,7 @@ class SnowballRoundedTextField: UITextField {
     super.init(frame: CGRectZero)
 
     layer.borderWidth = 2
+    alignLeft(insetWidth: 20)
   }
 
   required init(coder: NSCoder) {
@@ -35,5 +36,12 @@ class SnowballRoundedTextField: UITextField {
 
     layer.borderColor = tintColor?.CGColor
     textColor = tintColor
+  }
+
+
+  // MARK: - Internal
+
+  func setPlaceholder(placeholder: String, color: UIColor) {
+    attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: color])
   }
 }
