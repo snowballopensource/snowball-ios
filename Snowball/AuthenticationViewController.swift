@@ -22,7 +22,11 @@ class AuthenticationViewController: UIViewController {
     return label
   }()
 
-  let tableView = FormTableView()
+  private let tableViewController = UITableViewController()
+
+  var tableView: UITableView {
+    return tableViewController.view as UITableView
+  }
 
   var authenticationRoute: Router! { return nil }
 
@@ -36,19 +40,27 @@ class AuthenticationViewController: UIViewController {
     view.addSubview(topBar)
     topBar.setupDefaultLayout()
 
-    let sideMargin: Float = 25
+    tableView.allowsSelection = false
+    tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+    tableView.rowHeight = TextFieldTableViewCell.height
+    tableView.registerClass(TextFieldTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(TextFieldTableViewCell))
 
-    view.addSubview(messageLabel)
-    layout(messageLabel, topBar) { (messageLabel, topBar) in
+    let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 70))
+    let sideMargin: CGFloat = 25
+    tableHeaderView.addSubview(messageLabel)
+    layout(messageLabel) { (messageLabel) in
       messageLabel.left == messageLabel.superview!.left + sideMargin
-      messageLabel.top == topBar.bottom
+      messageLabel.top == messageLabel.superview!.top
       messageLabel.right == messageLabel.superview!.right - sideMargin
     }
+    tableView.tableHeaderView = tableHeaderView
 
-    view.addSubview(tableView)
-    layout(tableView, messageLabel) { (tableView, messageLabel) in
+    addChildViewController(tableViewController)
+    view.addSubview(tableViewController.view)
+    tableViewController.didMoveToParentViewController(self)
+    layout(tableViewController.view, topBar) { (tableView, topBar) in
       tableView.left == tableView.superview!.left
-      tableView.top == messageLabel.bottom
+      tableView.top == topBar.bottom
       tableView.right == tableView.superview!.right
       tableView.bottom == tableView.superview!.bottom
     }
