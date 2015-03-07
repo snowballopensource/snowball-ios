@@ -17,7 +17,7 @@ class EditProfileViewController: UIViewController {
 
   private let tableViewController = FormTableViewController()
 
-  var tableView: UITableView {
+  private var tableView: UITableView {
     return tableViewController.tableView
   }
 
