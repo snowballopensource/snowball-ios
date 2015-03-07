@@ -33,7 +33,6 @@
 		BA44E4581A9C0EC600B75DF3 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */; };
 		BA4BD7201AA2D6820057380C /* ClipPreloadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4BD71F1AA2D6820057380C /* ClipPreloadQueue.swift */; };
 		BA4BD7221AA2E1F00057380C /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4BD7211AA2E1F00057380C /* Cache.swift */; };
-		BA5247451A319E24003BD269 /* AddClipCollectionReuseableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5247441A319E24003BD269 /* AddClipCollectionReuseableView.swift */; };
 		BA6314D11A97C8B100021E3F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6314D01A97C8B100021E3F /* OnboardingViewController.swift */; };
 		BA6385E31A65ACAF00B002D9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385E21A65ACAF00B002D9 /* WelcomeViewController.swift */; };
 		BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */; };
@@ -225,7 +224,6 @@
 		BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		BA4BD71F1AA2D6820057380C /* ClipPreloadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPreloadQueue.swift; sourceTree = "<group>"; };
 		BA4BD7211AA2E1F00057380C /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
-		BA5247441A319E24003BD269 /* AddClipCollectionReuseableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddClipCollectionReuseableView.swift; sourceTree = "<group>"; };
 		BA6314D01A97C8B100021E3F /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		BA6385E21A65ACAF00B002D9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Snowball.swift"; sourceTree = "<group>"; };
@@ -557,7 +555,6 @@
 			isa = PBXGroup;
 			children = (
 				BA3A28761A305AF600A85C29 /* ClipCollectionViewCell.swift */,
-				BA5247441A319E24003BD269 /* AddClipCollectionReuseableView.swift */,
 				BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */,
 				BA372D131A880C58004E58E9 /* TextFieldTableViewCell.swift */,
 			);
@@ -1146,7 +1143,6 @@
 				BAFB06D71A9E906400EDA01B /* MPUIFontToNSDictionaryValueTransformer.m in Sources */,
 				BAFB06D51A9E906400EDA01B /* MPUIControlBinding.m in Sources */,
 				BAFB06C71A9E906400EDA01B /* MPPassThroughValueTransformer.m in Sources */,
-				BA5247451A319E24003BD269 /* AddClipCollectionReuseableView.swift in Sources */,
 				BAA15E9F1A6889230055756E /* AFURLSessionManager.m in Sources */,
 				BAF50E741AA63D3200AB874E /* CameraViewController.swift in Sources */,
 				BA44E4541A9C0B7700B75DF3 /* WebViewController.swift in Sources */,
