@@ -15,14 +15,7 @@ class EditProfileViewController: UIViewController {
 
   private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Back, rightButtonType: SnowballTopViewButtonType.Save, title: "Edit Profile")
 
-  private let tableView: UITableView = {
-    let tableView = UITableView()
-    tableView.allowsSelection = false
-    tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-    tableView.rowHeight = TextFieldTableViewCell.height
-    tableView.registerClass(TextFieldTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(TextFieldTableViewCell))
-    return tableView
-    }()
+  private let tableView = FormTableView()
 
   private let avatarButton = UIButton()
 
@@ -198,6 +191,7 @@ extension EditProfileViewController: UITableViewDataSource {
 
     cell.textField.autocorrectionType = UITextAutocorrectionType.No
     cell.textField.autocapitalizationType = UITextAutocapitalizationType.None
+    cell.textField.keyboardType = UIKeyboardType.Default
 
     let index = EditProfileTextFieldIndex(rawValue: indexPath.row)!
     switch(index) {
