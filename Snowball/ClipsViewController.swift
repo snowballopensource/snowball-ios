@@ -73,6 +73,12 @@ class ClipsViewController: UIViewController {
     }
   }
 
+  // MARK: - Initializers
+
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+
   // MARK: - UIViewController
 
   override func viewDidLoad() {
@@ -107,20 +113,10 @@ class ClipsViewController: UIViewController {
       activityIndicatorView.centerX == activityIndicatorView.superview!.centerX / collectionViewWidthPreloadMultiple
       activityIndicatorView.top == activityIndicatorView.superview!.top + 50
     }
-  }
-
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
 
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "refresh", name: UIApplicationWillEnterForegroundNotification, object: nil)
 
     refresh()
-  }
-
-  override func viewWillDisappear(animated: Bool) {
-    super.viewWillDisappear(animated)
-
-    NSNotificationCenter.defaultCenter().removeObserver(self)
   }
 
   // MARK: - Internal
