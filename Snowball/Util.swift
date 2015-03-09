@@ -8,6 +8,8 @@
 
 import Foundation
 
+let isIphone4S = (UIScreen.mainScreen().bounds.height < 568)
+
 func NSLocalizedString(key: String) -> String {
   return NSLocalizedString(key, comment: "")
 }

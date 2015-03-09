@@ -18,7 +18,11 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let screenHeight = UIScreen.mainScreen().bounds.height
     let screenWidth = UIScreen.mainScreen().bounds.width
     let cellHeight = screenHeight - screenWidth
-    return CGSizeMake(140.0, cellHeight)
+    var cellWidth: CGFloat = 140
+    if isIphone4S {
+      cellWidth = 90
+    }
+    return CGSizeMake(cellWidth, cellHeight)
   }
 
   private let clipThumbnailImageView: UIImageView = {
@@ -35,7 +39,11 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   private let usernameLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont(name: UIFont.SnowballFont.bold, size: 17)
+    var fontSize: CGFloat = 17
+    if isIphone4S {
+      fontSize = 15
+    }
+    label.font = UIFont(name: UIFont.SnowballFont.bold, size: fontSize)
     label.textAlignment = NSTextAlignment.Center
     return label
   }()
@@ -94,10 +102,14 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     addClipImageView.frame = clipThumbnailImageView.bounds
 
+    var avatarDiameter: CGFloat = 40
+    if isIphone4S {
+      avatarDiameter = 30
+    }
     layout(userAvatarImageView, clipThumbnailImageView) { (userAvatarImageView, clipThumbnailImageView) in
       userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
       userAvatarImageView.top == clipThumbnailImageView.bottom + 10
-      userAvatarImageView.width == 40
+      userAvatarImageView.width == avatarDiameter
       userAvatarImageView.height == userAvatarImageView.width
     }
 

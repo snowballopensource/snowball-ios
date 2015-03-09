@@ -55,9 +55,7 @@ class OnboardingViewController: UIViewController {
     }
 
     view.addSubview(detailImageView)
-    let viewHeight = view.bounds.height
     var originY: CGFloat = 300
-    let isIphone4S = (viewHeight < 568)
     if isIphone4S {
       originY = 250
     }
