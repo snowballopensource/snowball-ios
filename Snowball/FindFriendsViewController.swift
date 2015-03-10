@@ -14,9 +14,9 @@ class FindFriendsViewController: UIViewController {
 
   // MARK: - Properties
 
-  let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Back, rightButtonType: nil, title: "Find Friends")
+  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Back, rightButtonType: nil, title: "Find Friends")
 
-  let tableView: UITableView = {
+  private let tableView: UITableView = {
     let tableView = UITableView()
     tableView.allowsSelection = false
     tableView.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -25,9 +25,57 @@ class FindFriendsViewController: UIViewController {
     return tableView
     }()
 
-  var users: [User] = []
+  private let searchTextField: SnowballRoundedTextField = {
+    let textField = SnowballRoundedTextField()
+    textField.font = UIFont(name: UIFont.SnowballFont.regular, size: 19)
+    textField.tintColor = UIColor.blackColor()
+    textField.returnKeyType = UIReturnKeyType.Search
+    textField.autocapitalizationType = UITextAutocapitalizationType.None
+    textField.autocorrectionType = UITextAutocorrectionType.No
+    textField.rightViewMode = UITextFieldViewMode.Always
+    return textField
+    }()
 
-  let addressBook: ABAddressBook = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
+  private let tableViewLabel: UILabel = {
+    let label = UILabel()
+    label.font = UIFont(name: UIFont.SnowballFont.regular, size: 17)
+    return label
+    }()
+
+  private var searching: Bool = false {
+    didSet {
+      users = []
+      tableView.reloadData()
+      searchTextField.text = nil
+
+      if searching {
+        searchTextField.setPlaceholder("", color: UIColor.blackColor())
+        tableViewLabel.text = NSLocalizedString("Find by username")
+
+        let cancelImage = UIImage(named: "search-cancel")!
+        let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: cancelImage.size.width + 20, height: cancelImage.size.height))
+        cancelButton.setImage(cancelImage, forState: UIControlState.Normal)
+        cancelButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
+        cancelButton.addTarget(self, action: "searchCancelButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+        searchTextField.rightView = cancelButton
+      } else {
+        searchTextField.endEditing(true)
+
+        searchTextField.setPlaceholder(NSLocalizedString("Search by username"), color: UIColor.blackColor())
+        tableViewLabel.text = NSLocalizedString("Friends from my address book")
+
+        let searchImage = UIImage(named: "search")!
+        let searchImageView = UIImageView(image: searchImage)
+        searchImageView.contentMode = UIViewContentMode.Left
+        searchImageView.frame = CGRect(x: 0, y: 0, width: searchImage.size.width + 20, height: searchImage.size.height)
+        searchTextField.rightView = searchImageView
+      }
+    }
+  }
+
+  private var users: [User] = []
+
+  private let addressBook: ABAddressBook = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
 
   // MARK: - UIViewController
 
@@ -39,12 +87,31 @@ class FindFriendsViewController: UIViewController {
     view.addSubview(topView)
     topView.setupDefaultLayout()
 
+    searchTextField.delegate = self
+    view.addSubview(searchTextField)
+    let margin: CGFloat = 20
+    layout(searchTextField, topView) { (searchTextField, topView) in
+      searchTextField.left == searchTextField.superview!.left + margin
+      searchTextField.top == topView.bottom
+      searchTextField.right == searchTextField.superview!.right - margin
+      searchTextField.height == 50
+    }
+
+    view.addSubview(tableViewLabel)
+    layout(tableViewLabel, searchTextField) { (tableViewLabel, searchTextField) in
+      tableViewLabel.left == tableViewLabel.superview!.left + margin
+      tableViewLabel.top == searchTextField.bottom + 15
+      tableViewLabel.right == tableViewLabel.superview!.right - margin
+    }
+
+    searching = false // Sets tableViewLabel text
+
     tableView.addRefreshControl(self, action: "refresh")
     tableView.dataSource = self
     view.addSubview(tableView)
-    layout(tableView, topView) { (tableView, topView) in
+    layout(tableView, tableViewLabel) { (tableView, tableViewLabel) in
       tableView.left == tableView.superview!.left
-      tableView.top == topView.bottom
+      tableView.top == tableViewLabel.bottom + 5
       tableView.right == tableView.superview!.right
       tableView.bottom == tableView.superview!.bottom
     }
@@ -83,6 +150,27 @@ class FindFriendsViewController: UIViewController {
         self.tableView.reloadData()
       }
     }
+  }
+
+  private func searchForUserWithUsername(username: String) {
+    tableView.refreshControl.beginRefreshing()
+    API.request(Router.FindUsersByUsername(username: username)).responseJSON { (request, response, JSON, error) in
+      self.tableView.refreshControl.endRefreshing()
+      error?.print("api search for user by username")
+      if let JSON: AnyObject = JSON {
+        self.users = User.objectsFromJSON(JSON) as [User]
+        self.tableView.reloadData()
+      }
+    }
+  }
+
+  @objc private func searchCancelButtonTapped() {
+    cancelSearch()
+  }
+
+  private func cancelSearch() {
+    searching = false
+    refresh()
   }
 }
 
@@ -133,5 +221,25 @@ extension FindFriendsViewController: UserTableViewCellDelegate {
     let user = users[indexPath.row]
     user.toggleFollowing()
     cell.configureForObject(user)
+  }
+}
+
+// MARK: -
+
+extension FindFriendsViewController: UITextFieldDelegate {
+
+  // MARK: - UITextFieldDelegate
+
+  func textFieldDidBeginEditing(textField: UITextField) {
+    searching = true
+  }
+
+  func textFieldShouldReturn(textField: UITextField) -> Bool {
+    if countElements(textField.text) > 2 {
+      searchForUserWithUsername(textField.text)
+    } else {
+      cancelSearch()
+    }
+    return true
   }
 }
