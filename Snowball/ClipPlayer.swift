@@ -34,6 +34,19 @@ class ClipPlayer: AVQueuePlayer {
 
   func playClips(clips: [Clip]) {
     play()
+    queueClips(clips)
+  }
+
+  func stop() {
+    pause()
+    removeAllItems()
+    self.clip = nil
+    delegate?.playerDidEndPlayback()
+  }
+
+  // MARK: - Private
+
+  private func queueClips(clips: [Clip]) {
     if let clip = clips.first? {
       if currentItem == nil {
         self.clip = clip
@@ -51,21 +64,12 @@ class ClipPlayer: AVQueuePlayer {
           var mutableClips = clips
           mutableClips.removeAtIndex(0)
           if mutableClips.count > 0 {
-            self.playClips(mutableClips)
+            self.queueClips(mutableClips)
           }
         }
       }
     }
   }
-
-  func stop() {
-    pause()
-    removeAllItems()
-    self.clip = nil
-    delegate?.playerDidEndPlayback()
-  }
-
-  // MARK: - Private
 
   private func registerPlayerItemForNotifications(playerItem: ClipPlayerItem) {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidPlayToEndTime:", name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
