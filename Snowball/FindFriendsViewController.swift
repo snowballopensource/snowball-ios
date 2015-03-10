@@ -8,6 +8,7 @@
 
 import AddressBook
 import Cartography
+import MessageUI
 import UIKit
 
 class FindFriendsViewController: UIViewController {
@@ -77,6 +78,12 @@ class FindFriendsViewController: UIViewController {
 
   private let addressBook: ABAddressBook = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
 
+  private let footerButton: SnowballFooterButton = {
+    let button = SnowballFooterButton(rightImage: UIImage(named: "plane"))
+    button.setTitle(NSLocalizedString("Invite a friend"), forState: UIControlState.Normal)
+    return button
+    }()
+
   // MARK: - UIViewController
 
   override func viewDidLoad() {
@@ -106,14 +113,18 @@ class FindFriendsViewController: UIViewController {
 
     searching = false // Sets tableViewLabel text
 
+    view.addSubview(footerButton)
+    footerButton.setupDefaultLayout()
+    footerButton.addTarget(self, action: "footerButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+
     tableView.addRefreshControl(self, action: "refresh")
     tableView.dataSource = self
     view.addSubview(tableView)
-    layout(tableView, tableViewLabel) { (tableView, tableViewLabel) in
+    layout(tableView, tableViewLabel, footerButton) { (tableView, tableViewLabel, footerButton) in
       tableView.left == tableView.superview!.left
       tableView.top == tableViewLabel.bottom + 5
       tableView.right == tableView.superview!.right
-      tableView.bottom == tableView.superview!.bottom
+      tableView.bottom == footerButton.top
     }
   }
 
@@ -171,6 +182,19 @@ class FindFriendsViewController: UIViewController {
   private func cancelSearch() {
     searching = false
     refresh()
+  }
+
+  @objc private func footerButtonTapped() {
+    let messageComposeViewController = MFMessageComposeViewController()
+    messageComposeViewController.messageComposeDelegate = self
+    var body = NSLocalizedString("Download the Snowball app (http://bit.ly/snblapp) and follow me.")
+    if let username = User.currentUser?.username {
+      body += NSLocalizedString(" My username is \(username).")
+    }
+    messageComposeViewController.body = body
+    if MFMessageComposeViewController.canSendText() {
+      presentViewController(messageComposeViewController, animated: true, completion: nil)
+    }
   }
 }
 
@@ -241,5 +265,16 @@ extension FindFriendsViewController: UITextFieldDelegate {
       cancelSearch()
     }
     return true
+  }
+}
+
+// MARK: -
+
+extension FindFriendsViewController: MFMessageComposeViewControllerDelegate {
+
+  // MARK: - MFMessageComposeViewControllerDelegate
+
+  func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult) {
+    controller.dismissViewControllerAnimated(true, completion: nil)
   }
 }

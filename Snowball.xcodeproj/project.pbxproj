@@ -89,6 +89,7 @@
 		BAF50E741AA63D3200AB874E /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF50E731AA63D3200AB874E /* CameraViewController.swift */; };
 		BAF50E761AA63E4B00AB874E /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF50E751AA63E4B00AB874E /* CameraView.swift */; };
 		BAF50E781AA644DF00AB874E /* CameraPreviewPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF50E771AA644DF00AB874E /* CameraPreviewPlayer.swift */; };
+		BAF8CDC21AAF65CC00222872 /* SnowballFooterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8CDC11AAF65CC00222872 /* SnowballFooterButton.swift */; };
 		BAFB069C1A9E906400EDA01B /* _MPTweakBindObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = BAFB06201A9E906400EDA01B /* _MPTweakBindObserver.m */; };
 		BAFB069D1A9E906400EDA01B /* libMPCategoryHelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFB06211A9E906400EDA01B /* libMPCategoryHelpers.a */; };
 		BAFB069E1A9E906400EDA01B /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAFB06221A9E906400EDA01B /* Media.xcassets */; };
@@ -297,6 +298,7 @@
 		BAF50E731AA63D3200AB874E /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BAF50E751AA63E4B00AB874E /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		BAF50E771AA644DF00AB874E /* CameraPreviewPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPreviewPlayer.swift; sourceTree = "<group>"; };
+		BAF8CDC11AAF65CC00222872 /* SnowballFooterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballFooterButton.swift; sourceTree = "<group>"; };
 		BAFB061F1A9E906400EDA01B /* _MPTweakBindObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MPTweakBindObserver.h; sourceTree = "<group>"; };
 		BAFB06201A9E906400EDA01B /* _MPTweakBindObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MPTweakBindObserver.m; sourceTree = "<group>"; };
 		BAFB06211A9E906400EDA01B /* libMPCategoryHelpers.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMPCategoryHelpers.a; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 				BA3DB8251A9EFD9A00378F6D /* SnowballRoundedTextField.swift */,
 				BA1835521AA51C1D00D6A0BE /* PlayerView.swift */,
 				BAF50E751AA63E4B00AB874E /* CameraView.swift */,
+				BAF8CDC11AAF65CC00222872 /* SnowballFooterButton.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1090,6 +1093,7 @@
 				BA9C8E841AAB7F0400CF05AB /* SignInViewController.swift in Sources */,
 				BA9AA6831A674804002C4992 /* MainNavigationController.swift in Sources */,
 				BAFB06DA1A9E906400EDA01B /* MPVariant.m in Sources */,
+				BAF8CDC21AAF65CC00222872 /* SnowballFooterButton.swift in Sources */,
 				BAFB06C21A9E906400EDA01B /* MPObjectIdentityProvider.m in Sources */,
 				BAFB06D91A9E906400EDA01B /* MPUITableViewBinding.m in Sources */,
 				BA7C27C61A37A28F00A9CFC5 /* Router.swift in Sources */,
