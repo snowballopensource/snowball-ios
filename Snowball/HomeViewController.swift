@@ -83,6 +83,7 @@ extension HomeViewController: ClipsViewControllerDelegate {
 
   func userDidAcceptPreviewClip(clip: Clip) {
     cameraViewController.view.hidden = false
+    topView.setHidden(false, animated: true)
     if clip.id == nil {
       clip.state = ClipState.Default
       self.clipsViewController.reloadCellForClip(clip)
