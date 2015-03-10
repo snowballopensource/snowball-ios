@@ -80,10 +80,6 @@ class CameraViewController: UIViewController {
 
   // MARK: - UIViewController
 
-  override func loadView() {
-    view = cameraView
-  }
-
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -117,6 +113,19 @@ class CameraViewController: UIViewController {
       }
     }
 
+    view.addSubview(cameraView)
+    layout(cameraView) { (cameraView) in
+      cameraView.left == cameraView.superview!.left
+      cameraView.top == cameraView.superview!.top
+      cameraView.right == cameraView.superview!.right
+      cameraView.bottom == cameraView.superview!.bottom
+    }
+
+    let recordingGestureRecognizer = UILongPressGestureRecognizer()
+    recordingGestureRecognizer.minimumPressDuration = 0.2
+    recordingGestureRecognizer.addTarget(self, action: "toggleRecording:")
+    cameraView.addGestureRecognizer(recordingGestureRecognizer)
+
     playerView.player = CameraPreviewPlayer()
     playerView.hidden = true
     view.addSubview(playerView)
@@ -135,11 +144,6 @@ class CameraViewController: UIViewController {
       cancelPreviewButton.right == cancelPreviewButton.superview!.right
       cancelPreviewButton.height == 65
     }
-
-    let recordingGestureRecognizer = UILongPressGestureRecognizer()
-    recordingGestureRecognizer.minimumPressDuration = 0.2
-    recordingGestureRecognizer.addTarget(self, action: "toggleRecording:")
-    cameraView.addGestureRecognizer(recordingGestureRecognizer)
 
     view.addSubview(progressView)
     layout(progressView) { (progressView) in
