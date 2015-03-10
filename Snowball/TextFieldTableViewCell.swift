@@ -28,25 +28,18 @@ class TextFieldTableViewCell: UITableViewCell {
 
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    contentView.addSubview(textField)
-  }
-
-  required init(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-
-  // MARK: - UIView
-
-  override func layoutSubviews() {
-    super.layoutSubviews()
 
     let margin: Float = 20
-
+    contentView.addSubview(textField)
     layout(textField) { (textField) in
       textField.left == textField.superview!.left + margin
       textField.top == textField.superview!.top + 10
       textField.right == textField.superview!.right - margin
       textField.height == 50
     }
+  }
+
+  required init(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 }

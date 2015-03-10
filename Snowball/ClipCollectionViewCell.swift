@@ -68,12 +68,52 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   override init(frame: CGRect) {
     super.init(frame: frame)
+
     contentView.addSubview(clipThumbnailImageView)
+    layout(clipThumbnailImageView) { (clipThumbnailImageView) in
+      clipThumbnailImageView.left == clipThumbnailImageView.superview!.left
+      clipThumbnailImageView.top == clipThumbnailImageView.superview!.top
+      clipThumbnailImageView.right == clipThumbnailImageView.superview!.right
+      clipThumbnailImageView.height == clipThumbnailImageView.superview!.width
+    }
+
     clipThumbnailImageView.addSubview(clipThumbnailLoadingIndicator)
+    layout(clipThumbnailLoadingIndicator) { (clipThumbnailLoadingIndicator) in
+      clipThumbnailLoadingIndicator.left == clipThumbnailLoadingIndicator.superview!.left
+      clipThumbnailLoadingIndicator.top == clipThumbnailLoadingIndicator.superview!.top
+      clipThumbnailLoadingIndicator.right == clipThumbnailLoadingIndicator.superview!.right
+      clipThumbnailLoadingIndicator.height == clipThumbnailLoadingIndicator.superview!.width
+    }
+
     clipThumbnailImageView.addSubview(addClipImageView)
+
+    var avatarDiameter: CGFloat = 40
+    if isIphone4S {
+      avatarDiameter = 30
+    }
+
     contentView.addSubview(userAvatarImageView)
+    layout(userAvatarImageView, clipThumbnailImageView) { (userAvatarImageView, clipThumbnailImageView) in
+      userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
+      userAvatarImageView.top == clipThumbnailImageView.bottom + 10
+      userAvatarImageView.width == avatarDiameter
+      userAvatarImageView.height == userAvatarImageView.width
+    }
+
     contentView.addSubview(usernameLabel)
+    layout(usernameLabel, userAvatarImageView) { (usernameLabel, userAvatarImageView) in
+      usernameLabel.left == usernameLabel.superview!.left
+      usernameLabel.top == userAvatarImageView.bottom + 5
+      usernameLabel.right == usernameLabel.superview!.right
+    }
+
     contentView.addSubview(clipTimeLabel)
+    layout(clipTimeLabel, usernameLabel) { (clipTimeLabel, usernameLabel) in
+      clipTimeLabel.left == clipTimeLabel.superview!.left
+      clipTimeLabel.top == usernameLabel.bottom + 2
+      clipTimeLabel.right == clipTimeLabel.superview!.right
+    }
+
     contentView.addSubview(dimView)
   }
 
@@ -86,44 +126,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
   override func layoutSubviews() {
     super.layoutSubviews()
 
-    layout(clipThumbnailImageView) { (clipThumbnailImageView) in
-      clipThumbnailImageView.left == clipThumbnailImageView.superview!.left
-      clipThumbnailImageView.top == clipThumbnailImageView.superview!.top
-      clipThumbnailImageView.right == clipThumbnailImageView.superview!.right
-      clipThumbnailImageView.height == clipThumbnailImageView.superview!.width
-    }
-
-    layout(clipThumbnailLoadingIndicator) { (clipThumbnailLoadingIndicator) in
-      clipThumbnailLoadingIndicator.left == clipThumbnailLoadingIndicator.superview!.left
-      clipThumbnailLoadingIndicator.top == clipThumbnailLoadingIndicator.superview!.top
-      clipThumbnailLoadingIndicator.right == clipThumbnailLoadingIndicator.superview!.right
-      clipThumbnailLoadingIndicator.height == clipThumbnailLoadingIndicator.superview!.width
-    }
-
     addClipImageView.frame = clipThumbnailImageView.bounds
-
-    var avatarDiameter: CGFloat = 40
-    if isIphone4S {
-      avatarDiameter = 30
-    }
-    layout(userAvatarImageView, clipThumbnailImageView) { (userAvatarImageView, clipThumbnailImageView) in
-      userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
-      userAvatarImageView.top == clipThumbnailImageView.bottom + 10
-      userAvatarImageView.width == avatarDiameter
-      userAvatarImageView.height == userAvatarImageView.width
-    }
-
-    layout(usernameLabel, userAvatarImageView) { (usernameLabel, userAvatarImageView) in
-      usernameLabel.left == usernameLabel.superview!.left
-      usernameLabel.top == userAvatarImageView.bottom + 5
-      usernameLabel.right == usernameLabel.superview!.right
-    }
-
-    layout(clipTimeLabel, usernameLabel) { (clipTimeLabel, usernameLabel) in
-      clipTimeLabel.left == clipTimeLabel.superview!.left
-      clipTimeLabel.top == usernameLabel.bottom + 2
-      clipTimeLabel.right == clipTimeLabel.superview!.right
-    }
 
     dimView.frame = contentView.bounds
   }

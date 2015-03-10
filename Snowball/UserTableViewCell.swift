@@ -43,22 +43,10 @@ class UserTableViewCell: UITableViewCell {
 
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    contentView.addSubview(avatarImageView)
-    contentView.addSubview(usernameLabel)
-    followButton.addTarget(self, action: "followButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
-    contentView.addSubview(followButton)
-  }
-
-  required init(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-
-  // MARK: - UIView
-
-  override func layoutSubviews() {
-    super.layoutSubviews()
 
     let margin: Float = 20
+
+    contentView.addSubview(avatarImageView)
     layout(avatarImageView) { (avatarImageView) in
       avatarImageView.left == avatarImageView.superview!.left + margin
       avatarImageView.centerY == avatarImageView.superview!.centerY
@@ -66,18 +54,25 @@ class UserTableViewCell: UITableViewCell {
       avatarImageView.height == avatarImageView.width
     }
 
+    contentView.addSubview(usernameLabel)
     layout(usernameLabel, avatarImageView) { (usernameLabel, avatarImageView) in
       usernameLabel.left == avatarImageView.right + 15
       usernameLabel.centerY == usernameLabel.superview!.centerY
       usernameLabel.right == usernameLabel.superview!.right
     }
 
+    followButton.addTarget(self, action: "followButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    contentView.addSubview(followButton)
     layout(followButton) { (followButton) in
       followButton.width == 100
       followButton.centerY == followButton.superview!.centerY
       followButton.right == followButton.superview!.right - margin
       followButton.height == 40
     }
+  }
+
+  required init(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 
   // MARK: - Internal

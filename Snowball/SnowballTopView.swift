@@ -105,6 +105,10 @@ class SnowballTopView: UIView {
     }
     titleLabel.text = NSLocalizedString(title)
     addSubview(titleLabel)
+    layout(titleLabel) { (titleLabel) in
+      titleLabel.left == titleLabel.superview!.left + 75
+      titleLabel.centerY == titleLabel.superview!.centerY
+    }
   }
 
   // MARK: - UIView
@@ -129,10 +133,6 @@ class SnowballTopView: UIView {
         rightButtonWidth = 84
       }
       rightButton.frame = CGRect(x: UIScreen.mainScreen().bounds.size.width - rightButtonWidth, y: 0, width: rightButtonWidth, height: bounds.height)
-    }
-    layout(titleLabel) { (titleLabel) in
-      titleLabel.left == titleLabel.superview!.left + 75
-      titleLabel.centerY == titleLabel.superview!.centerY
     }
   }
 
