@@ -233,7 +233,13 @@ extension ClipsViewController: UICollectionViewDataSource {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(ClipCollectionViewCell), forIndexPath: indexPath) as ClipCollectionViewCell
     let clip = clips[indexPath.item]
     cell.configureForClip(clip)
-    cell.setInPlayState(player.playing, isCurrentPlayingClip: false, animated: false)
+    var isCurrentPlayingClip = false
+    if let playerClip = player.clip {
+      if playerClip.id == clip.id {
+        isCurrentPlayingClip = true
+      }
+    }
+    cell.setInPlayState(player.playing, isCurrentPlayingClip: isCurrentPlayingClip, animated: false)
     return cell
   }
 }
