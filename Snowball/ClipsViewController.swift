@@ -116,6 +116,8 @@ class ClipsViewController: UIViewController {
 
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "refresh", name: UIApplicationWillEnterForegroundNotification, object: nil)
 
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "appResigningActive", name: UIApplicationWillResignActiveNotification, object: nil)
+
     refresh()
   }
 
@@ -157,6 +159,10 @@ class ClipsViewController: UIViewController {
       }
       self.activityIndicatorView.stopAnimating()
     }
+  }
+
+  @objc private func appResigningActive() {
+    player.stop()
   }
 
   private func indexOfClip(clip: Clip) -> Int {
