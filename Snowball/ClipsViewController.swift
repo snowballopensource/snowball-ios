@@ -245,7 +245,7 @@ extension ClipsViewController: UICollectionViewDelegate {
       let clip = clips[indexPath.item]
       if clip.state == ClipState.Pending {
         delegate?.userDidAcceptPreviewClip(clip)
-      } else {
+      } else if delegate != nil && delegate!.playerShouldBeginPlayback() {
         player.playClips([clip] + allClipsAfterClip(clip))
       }
     }
@@ -305,6 +305,7 @@ extension ClipsViewController: ClipPlayerDelegate {
 // MARK: -
 
 protocol ClipsViewControllerDelegate {
+  func playerShouldBeginPlayback() -> Bool
   func playerWillBeginPlayback()
   func playerDidEndPlayback()
   func userDidAcceptPreviewClip(clip: Clip)

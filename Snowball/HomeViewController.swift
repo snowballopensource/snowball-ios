@@ -71,6 +71,10 @@ extension HomeViewController: ClipsViewControllerDelegate {
 
   // MARK: - ClipsViewControllerDelegate
 
+  func playerShouldBeginPlayback() -> Bool {
+    return cameraViewController.state == CameraViewControllerState.Default
+  }
+
   func playerWillBeginPlayback() {
     cameraViewController.view.hidden = true
     topView.setHidden(true, animated: true)

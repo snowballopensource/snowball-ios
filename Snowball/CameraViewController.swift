@@ -10,6 +10,12 @@ import AVFoundation
 import Cartography
 import UIKit
 
+enum CameraViewControllerState {
+  case Default, Previewing
+}
+
+// MARK: -
+
 class CameraViewController: UIViewController {
 
   // MARK: - Properties
@@ -77,6 +83,18 @@ class CameraViewController: UIViewController {
   private let maxRecordingSeconds = 10.0
 
   private let FPS: Int32 = 24
+
+  var state: CameraViewControllerState = CameraViewControllerState.Default {
+    didSet {
+      if state == CameraViewControllerState.Default {
+        setCancelPreviewButtonHidden(true, animated: false)
+        playerView.hidden = true
+      } else if state == CameraViewControllerState.Previewing {
+        playerView.hidden = false
+        setCancelPreviewButtonHidden(false, animated: true)
+      }
+    }
+  }
 
   // MARK: - UIViewController
 
@@ -205,8 +223,7 @@ class CameraViewController: UIViewController {
   }
 
   func endPreview() {
-    setCancelPreviewButtonHidden(true, animated: false)
-    playerView.hidden = true
+    state = CameraViewControllerState.Default
     player.stop()
   }
 
@@ -310,8 +327,7 @@ class CameraViewController: UIViewController {
   }
 
   private func previewVideo(url: NSURL) {
-    playerView.hidden = false
-    setCancelPreviewButtonHidden(false, animated: true)
+    state = CameraViewControllerState.Previewing
     player.playVideo(url)
   }
 
