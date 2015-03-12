@@ -8,6 +8,7 @@
 
 import AVFoundation
 import Cartography
+import Haneke
 import UIKit
 
 class ClipsViewController: UIViewController {
@@ -16,8 +17,15 @@ class ClipsViewController: UIViewController {
 
   var delegate: ClipsViewControllerDelegate?
 
-  private let playerView = PlayerView()
   private let player = ClipPlayer()
+
+  private let playerView = PlayerView()
+
+  private var playerLayer: AVPlayerLayer {
+    return playerView.layer as AVPlayerLayer
+  }
+
+  private let playerThumbnailImageView = UIImageView()
 
   private let collectionView: UICollectionView = {
     let flowLayout = UICollectionViewFlowLayout()
@@ -81,6 +89,14 @@ class ClipsViewController: UIViewController {
 
     player.delegate = self
 
+    view.addSubview(playerThumbnailImageView)
+    layout(playerThumbnailImageView) { (playerThumbnailImageView) in
+      playerThumbnailImageView.left == playerThumbnailImageView.superview!.left
+      playerThumbnailImageView.top == playerThumbnailImageView.superview!.top
+      playerThumbnailImageView.right == playerThumbnailImageView.superview!.right
+      playerThumbnailImageView.height == playerThumbnailImageView.width
+    }
+
     playerView.player = player
     view.addSubview(playerView)
     layout(playerView) { (playerView) in
@@ -114,6 +130,17 @@ class ClipsViewController: UIViewController {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "appResigningActive", name: UIApplicationWillResignActiveNotification, object: nil)
 
     refresh()
+  }
+
+  // MARK: - KVO
+
+  override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    if keyPath == "readyForDisplay" {
+      if playerLayer.readyForDisplay {
+        playerLayer.removeObserver(self, forKeyPath: "readyForDisplay")
+        playerView.hidden = false
+      }
+    }
   }
 
   // MARK: - Internal
@@ -253,6 +280,8 @@ extension ClipsViewController: UICollectionViewDelegate {
       if clip.state == ClipState.Pending {
         delegate?.userDidAcceptPreviewClip(clip)
       } else if delegate != nil && delegate!.playerShouldBeginPlayback() {
+        playerView.hidden = true
+        playerLayer.addObserver(self, forKeyPath: "readyForDisplay", options: nil, context: nil)
         player.playClips([clip] + allClipsAfterClip(clip))
       }
     }
@@ -291,6 +320,9 @@ extension ClipsViewController: ClipPlayerDelegate {
 
   func playerWillPlayClip(clip: Clip) {
     scrollToClip(clip)
+    if let thumbnailURL = clip.thumbnailURL {
+      playerThumbnailImageView.hnk_setImageFromURL(thumbnailURL, format: Format<UIImage>(name: "original"))
+    }
     Analytics.track("Watch Clip")
   }
 
