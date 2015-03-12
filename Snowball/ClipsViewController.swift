@@ -16,12 +16,7 @@ class ClipsViewController: UIViewController {
 
   var delegate: ClipsViewControllerDelegate?
 
-  private let playerView: PlayerView = {
-    let view = PlayerView()
-    view.backgroundColor = UIColor.blackColor()
-    return view
-    }()
-
+  private let playerView = PlayerView()
   private let player = ClipPlayer()
 
   private let collectionView: UICollectionView = {
