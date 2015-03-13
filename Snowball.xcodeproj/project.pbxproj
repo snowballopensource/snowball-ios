@@ -564,13 +564,13 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
-		BA4D62D71AA385EB00690BD0 /* Cache (In Progress) */ = {
+		BA4D62D71AA385EB00690BD0 /* Cache */ = {
 			isa = PBXGroup;
 			children = (
 				BA4BD71F1AA2D6820057380C /* ClipPreloadQueue.swift */,
 				BA4BD7211AA2E1F00057380C /* Cache.swift */,
 			);
-			name = "Cache (In Progress)";
+			name = Cache;
 			sourceTree = "<group>";
 		};
 		BA6385DB1A65A90000B002D9 /* Authentication */ = {
@@ -605,7 +605,7 @@
 				BA7C27C51A37A28F00A9CFC5 /* Router.swift */,
 				BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */,
 				BAFB06E31A9E915600EDA01B /* Analytics.swift */,
-				BA4D62D71AA385EB00690BD0 /* Cache (In Progress) */,
+				BA4D62D71AA385EB00690BD0 /* Cache */,
 			);
 			name = Networking;
 			sourceTree = "<group>";

@@ -14,44 +14,47 @@ struct Cache {
 
   static let sharedCache = Cache()
 
-  private let basePath: String = {
+  private static let basePath: String = {
     let cachePath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
-    let basePath = cachePath.stringByAppendingPathComponent("DataCache")
-    var error: NSError?
-    NSFileManager.defaultManager().createDirectoryAtPath(basePath, withIntermediateDirectories: true, attributes: nil, error: &error)
-    error?.print("creating cache directory")
-    return basePath
+    return cachePath.stringByAppendingPathComponent("DataCache")
   }()
+  // MARK: - Initializers
+
+  init() {
+    var error: NSError?
+    NSFileManager.defaultManager().createDirectoryAtPath(Cache.basePath, withIntermediateDirectories: true, attributes: nil, error: &error)
+    error?.print("creating cache directory")
+  }
 
   // MARK: - Internal
 
-  func fetchDataAtURL(url: NSURL) -> NSData? {
-    if let data = dataAtURL(url) {
-      return data
+  func fetchDataAtURL(url: NSURL) -> (NSData?, NSURL?) {
+    let (data, cacheURL) = localDataAtURL(url)
+    if let data = data {
+      return (data, cacheURL)
     }
     if let data = NSData(contentsOfURL: url) {
       setDataForKey(data: data, key: keyForURL(url))
-      return data
+      return (data, NSURL(fileURLWithPath: pathForKey(keyForURL(url))))
     }
-    return nil
+    return (nil, nil)
   }
 
-//  func removeAllData() {
-//    var error: NSError?
-//    NSFileManager.defaultManager().removeItemAtPath(basePath, error: &error)
-//    error?.print("clearing cache")
-//  }
+  static func removeAllData() {
+    var error: NSError?
+    NSFileManager.defaultManager().removeItemAtPath(basePath, error: &error)
+    error?.print("clearing cache")
+  }
 
   // MARK: - Private
 
-  private func dataAtURL(url: NSURL) -> NSData? {
+  private func localDataAtURL(url: NSURL) -> (NSData?, NSURL?) {
     let path = pathForKey(keyForURL(url))
     var error: NSError?
     if let data = NSData(contentsOfFile: path, options: NSDataReadingOptions.allZeros, error: &error) {
-      return data
+      return (data, NSURL(fileURLWithPath: path))
     }
-    // error?.print("fetching from cache")
-    return nil
+    return (nil, nil)
   }
 
   private func setDataForKey(#data: NSData, key: String) -> Bool {
@@ -68,7 +71,7 @@ struct Cache {
 
   private func pathForKey(key: String) -> String {
     let filename = escapedFilenameForKey(key)
-    let path = basePath.stringByAppendingPathComponent(filename)
+    let path = Cache.basePath.stringByAppendingPathComponent(filename)
     return path
   }
 

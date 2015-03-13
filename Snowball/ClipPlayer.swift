@@ -21,55 +21,41 @@ class ClipPlayer: AVQueuePlayer {
     return false
   }
 
-  var clip: Clip?
+  var currentClip: Clip?
+
+  private var preloadQueue = ClipPreloadQueue()
 
   // MARK: - Initializers
 
   override init() {
     super.init()
     actionAtItemEnd = AVPlayerActionAtItemEnd.Advance
+    preloadQueue.delegate = self
   }
 
   // MARK: - Internal
 
   func playClips(clips: [Clip]) {
-    play()
-    queueClips(clips)
+    if !playing {
+      if let clip = clips.first? {
+        play()
+        currentClip = clip
+        delegate?.playerWillBeginPlayback()
+        delegate?.playerWillPlayClip(clip)
+        preloadQueue.preloadClips(clips)
+      }
+    }
   }
 
   func stop() {
+    preloadQueue.cancelAllOperations()
     pause()
     removeAllItems()
-    self.clip = nil
+    currentClip = nil
     delegate?.playerDidEndPlayback()
   }
 
   // MARK: - Private
-
-  private func queueClips(clips: [Clip]) {
-    if let clip = clips.first? {
-      if currentItem == nil {
-        self.clip = clip
-        delegate?.playerWillBeginPlayback()
-        delegate?.playerWillPlayClip(clip)
-      }
-      if let videoURL = clip.videoURL {
-        CachedURLAsset.createAssetFromRemoteURL(videoURL) { (asset, error) in
-          error?.print("creating cached asset")
-          if let asset = asset {
-            let playerItem = ClipPlayerItem(clip: clip, asset: asset)
-            self.registerPlayerItemForNotifications(playerItem)
-            self.insertItem(playerItem, afterItem: self.items().last as? AVPlayerItem)
-          }
-          var mutableClips = clips
-          mutableClips.removeAtIndex(0)
-          if mutableClips.count > 0 {
-            self.queueClips(mutableClips)
-          }
-        }
-      }
-    }
-  }
 
   private func registerPlayerItemForNotifications(playerItem: ClipPlayerItem) {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidPlayToEndTime:", name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
@@ -77,13 +63,13 @@ class ClipPlayer: AVQueuePlayer {
 
   @objc private func playerItemDidPlayToEndTime(notification: NSNotification) {
     NSNotificationCenter.defaultCenter().removeObserver(self, name: notification.name, object: notification.object)
-    if let clip = self.clip {
+    if let clip = self.currentClip {
       let notificationPlayerItem = notification.object as ClipPlayerItem
       if notificationPlayerItem.clip.id == clip.id {
         self.delegate?.clipDidPlayToEndTime(notificationPlayerItem.clip)
       }
       if let nextItem = itemAfterItem(notificationPlayerItem) {
-        self.clip = nextItem.clip
+        self.currentClip = nextItem.clip
         self.delegate?.playerWillPlayClip(nextItem.clip)
       }
     }
@@ -99,6 +85,19 @@ class ClipPlayer: AVQueuePlayer {
       }
     }
     return nil
+  }
+}
+
+// MARK: -
+
+extension ClipPlayer: ClipPreloadQueueDelegate {
+
+  // MARK: - ClipPreloadQueueDelegate
+
+  func videoReadyForClip(clip: Clip, cacheURL: NSURL) {
+    let playerItem = ClipPlayerItem(clip: clip, asset: AVURLAsset(URL: cacheURL, options: nil))
+    registerPlayerItemForNotifications(playerItem)
+    insertItem(playerItem, afterItem: self.items().last as? AVPlayerItem)
   }
 }
 
@@ -162,68 +161,6 @@ private class ClipPlayerItem: AVPlayerItem {
     if let userInfo = notification.userInfo as? [String: AnyObject] {
       let error = userInfo[AVPlayerItemFailedToPlayToEndTimeErrorKey] as? NSError
       error?.print("player item failed to play to end time")
-    }
-  }
-}
-
-// MARK: -
-
-import Alamofire
-
-private class CachedURLAsset: AVURLAsset {
-  var originalURL: NSURL
-
-  override init!(URL: NSURL!, options: [NSObject : AnyObject]!) {
-    assert(false, "Do not use this initialization method for CachedURLAsset")
-    originalURL = NSURL()
-    super.init(URL: URL, options: options)
-  }
-
-  init(URL: NSURL, originalURL: NSURL) {
-    self.originalURL = originalURL
-    super.init(URL: URL, options: nil)
-  }
-
-  typealias CompletionHandler = (CachedURLAsset?, NSError?) -> ()
-
-  class func createAssetFromRemoteURL(URL: NSURL, completionHandler: CompletionHandler? = nil) {
-    // Create cache file URL using remote URL as key
-    var cacheURL = NSFileManager.defaultManager().URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask)[0] as? NSURL
-    let key = URL.absoluteString!.stringByReplacingOccurrencesOfString("/", withString: "").stringByReplacingOccurrencesOfString(":", withString: "")
-    cacheURL = cacheURL!.URLByAppendingPathComponent(key)
-
-    // Return asset immediately if it exists in the cache
-    if NSFileManager.defaultManager().fileExistsAtPath(cacheURL!.path!) {
-      if let completion = completionHandler {
-        completion(CachedURLAsset(URL: cacheURL!, originalURL: URL), nil)
-        return
-      }
-    }
-
-    // If it's a clip that's already local (e.g. just captured)
-    if let urlScheme = URL.scheme {
-      if urlScheme == "file" {
-        if let completion = completionHandler {
-          completion(CachedURLAsset(URL: URL, originalURL: URL), nil)
-          return
-        }
-      }
-    }
-
-    // Asset doesn't exist in cache, fetch it
-    Alamofire.download(.GET, URL.absoluteString!) { (temporaryURL, response) in
-      // Specify where to save download (to the cache URL created above)
-      if let cacheURL = cacheURL {
-        return cacheURL
-      }
-      cacheURL = temporaryURL
-      return cacheURL!
-      }.response { (_, response, _, error) in
-        if let error = error {
-          if let completion = completionHandler { completion(nil, error) }
-        } else {
-          if let completion = completionHandler { completion(CachedURLAsset(URL: cacheURL!, originalURL: URL), nil) }
-        }
     }
   }
 }

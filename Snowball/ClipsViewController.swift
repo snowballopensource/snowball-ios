@@ -221,7 +221,7 @@ class ClipsViewController: UIViewController {
   }
 
   private func clipIsPlayingClip(clip: Clip) -> Bool {
-    if let playingClip = player.clip {
+    if let playingClip = player.currentClip {
       if clip.id == playingClip.id {
         return true
       }
@@ -256,7 +256,7 @@ extension ClipsViewController: UICollectionViewDataSource {
     let clip = clips[indexPath.item]
     cell.configureForClip(clip)
     var isCurrentPlayingClip = false
-    if let playerClip = player.clip {
+    if let playerClip = player.currentClip {
       if playerClip.id == clip.id {
         isCurrentPlayingClip = true
       }
@@ -298,7 +298,7 @@ extension ClipsViewController: ClipPlayerDelegate {
     for cell in collectionView.visibleCells() {
       let cell = cell as ClipCollectionViewCell
       if let cellClip = clipForCell(cell) {
-        if let playerClip = player.clip {
+        if let playerClip = player.currentClip {
           if playerClip.id == cellClip.id {
             cell.setInPlayState(true, isCurrentPlayingClip: true, animated: true)
           } else {
