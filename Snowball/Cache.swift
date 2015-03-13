@@ -18,12 +18,11 @@ struct Cache {
     let cachePath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
     return cachePath.stringByAppendingPathComponent("DataCache")
   }()
+
   // MARK: - Initializers
 
   init() {
-    var error: NSError?
-    NSFileManager.defaultManager().createDirectoryAtPath(Cache.basePath, withIntermediateDirectories: true, attributes: nil, error: &error)
-    error?.print("creating cache directory")
+    Cache.createDirectory()
   }
 
   // MARK: - Internal
@@ -44,9 +43,16 @@ struct Cache {
     var error: NSError?
     NSFileManager.defaultManager().removeItemAtPath(basePath, error: &error)
     error?.print("clearing cache")
+    createDirectory()
   }
 
   // MARK: - Private
+
+  private static func createDirectory() {
+    var error: NSError?
+    NSFileManager.defaultManager().createDirectoryAtPath(basePath, withIntermediateDirectories: true, attributes: nil, error: &error)
+    error?.print("creating cache directory")
+  }
 
   private func localDataAtURL(url: NSURL) -> (NSData?, NSURL?) {
     let path = pathForKey(keyForURL(url))
