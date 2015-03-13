@@ -32,14 +32,16 @@ class ClipPreloadQueue: NSOperationQueue {
   func preloadClips(clips: [Clip]) {
     var videoOperations: [NSOperation] = []
     for clip in clips {
-      let videoOperation = NSBlockOperation {
+      let videoOperation = NSBlockOperation()
+      videoOperation.addExecutionBlock {
         if let videoURL = clip.videoURL {
           let (data, cacheURL) = Cache.sharedCache.fetchDataAtURL(videoURL)
           if let data = data {
             if let cacheURL = cacheURL {
               dispatch_async(dispatch_get_main_queue()) {
-                self.delegate?.videoReadyForClip(clip, cacheURL: cacheURL)
-                return
+                if !videoOperation.cancelled {
+                  self.delegate?.videoReadyForClip(clip, cacheURL: cacheURL)
+                }
               }
             }
           }
