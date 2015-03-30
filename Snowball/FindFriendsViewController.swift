@@ -142,6 +142,14 @@ class FindFriendsViewController: UIViewController {
   // MARK: - Private
 
   @objc private func refresh() {
+    let authorizationStatus = ABAddressBookGetAuthorizationStatus()
+    if authorizationStatus != ABAuthorizationStatus.Authorized {
+        tableView.refreshControl.endRefreshing()
+        let alertController = UIAlertController(title: NSLocalizedString("Couldn't load users"), message: NSLocalizedString("Please go to Settings > Snowball > Contacts to allow Snowball to access your Contacts."), preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("OK"), style: UIAlertActionStyle.Cancel, handler: nil))
+        presentViewController(alertController, animated: true, completion: nil)
+        return
+    }
     tableView.refreshControl.beginRefreshing()
     var phoneNumbers = [String]()
     let contacts = ABAddressBookCopyArrayOfAllPeople(addressBook).takeRetainedValue() as NSArray
