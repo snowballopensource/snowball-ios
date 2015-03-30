@@ -106,7 +106,7 @@ class ClipsViewController: UIViewController {
       playerView.height == playerView.width
     }
 
-    let collectionViewWidthPreloadMultiple: CGFloat = 3
+    let collectionViewWidthPreloadMultiple: CGFloat = 2
     let rightInset = view.bounds.width * collectionViewWidthPreloadMultiple - view.bounds.width
     collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: rightInset)
     collectionView.dataSource = self
