@@ -68,7 +68,7 @@ enum Router: URLRequestConvertible {
     case .FindUsersByUsername: return "users"
     case .GetClipStream: return "clips/stream"
     case .DeleteClip(let clipID): return "clips/\(clipID)"
-    case .FlagClip(let clipID): return "clips/\(clipID)"
+    case .FlagClip(let clipID): return "clips/\(clipID)/flags"
     }
   }
 

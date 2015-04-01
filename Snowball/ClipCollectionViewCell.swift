@@ -25,6 +25,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return CGSizeMake(cellWidth, cellHeight)
   }
 
+  var delegate: ClipCollectionViewCellDelegate?
+
   private let clipThumbnailImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.contentMode = UIViewContentMode.ScaleAspectFill
@@ -34,6 +36,18 @@ class ClipCollectionViewCell: UICollectionViewCell {
   private let clipThumbnailLoadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
 
   private let addClipImageView = UIImageView(image: UIImage(named: "add-clip"))
+
+  private let showOptionsGestureRecognizer: UISwipeGestureRecognizer = {
+    let swipeGestureRecognizer = UISwipeGestureRecognizer()
+    swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Down
+    return swipeGestureRecognizer
+    }()
+
+  private let hideOptionsGestureRecognizer: UISwipeGestureRecognizer = {
+    let swipeGestureRecognizer = UISwipeGestureRecognizer()
+    swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Up
+    return swipeGestureRecognizer
+    }()
 
   private let userAvatarImageView = UserAvatarImageView()
 
@@ -64,6 +78,14 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return view
   }()
 
+  private let optionsView = ClipOptionsView()
+
+  private let optionsViewOverlay: UIView = {
+    let view = UIView()
+    view.backgroundColor = UIColor.blackColor()
+    return view
+  }()
+
   // MARK: - Initializers
 
   override init(frame: CGRect) {
@@ -82,10 +104,16 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipThumbnailLoadingIndicator.left == clipThumbnailLoadingIndicator.superview!.left
       clipThumbnailLoadingIndicator.top == clipThumbnailLoadingIndicator.superview!.top
       clipThumbnailLoadingIndicator.right == clipThumbnailLoadingIndicator.superview!.right
-      clipThumbnailLoadingIndicator.height == clipThumbnailLoadingIndicator.superview!.width
+      clipThumbnailLoadingIndicator.height == clipThumbnailLoadingIndicator.superview!.height
     }
 
     clipThumbnailImageView.addSubview(addClipImageView)
+
+    showOptionsGestureRecognizer.addTarget(self, action: "showOptionsGestureRecognizerSwiped")
+    addGestureRecognizer(showOptionsGestureRecognizer)
+
+    hideOptionsGestureRecognizer.addTarget(self, action: "hideOptionsGestureRecognizerSwiped")
+    addGestureRecognizer(hideOptionsGestureRecognizer)
 
     var avatarDiameter: CGFloat = 40
     if isIphone4S {
@@ -115,6 +143,11 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
 
     contentView.addSubview(dimView)
+
+    contentView.addSubview(optionsView)
+    optionsView.delegate = self
+
+    clipThumbnailImageView.addSubview(optionsViewOverlay)
   }
 
   required init(coder: NSCoder) {
@@ -127,7 +160,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
     super.layoutSubviews()
 
     addClipImageView.frame = clipThumbnailImageView.bounds
-
+    optionsView.frame = clipThumbnailImageView.bounds
+    optionsViewOverlay.frame = clipThumbnailImageView.bounds
+    hideOptionsViewAnimated(false)
     dimView.frame = contentView.bounds
   }
 
@@ -164,6 +199,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
     } else {
       addClipImageView.hidden = true
     }
+
+    hideOptionsViewAnimated(false)
+    optionsView.configureForUser(clip.user)
   }
 
   func setInPlayState(inPlayState: Bool, isCurrentPlayingClip: Bool, animated: Bool = true) {
@@ -191,4 +229,144 @@ class ClipCollectionViewCell: UICollectionViewCell {
       }
     }
   }
+
+  private func hideOptionsViewAnimated(animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.2) {
+        self.hideOptionsViewAnimated(false)
+      }
+    } else {
+      optionsViewOverlay.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0)
+      let frame = self.optionsView.frame
+      let newOriginY: CGFloat = -frame.size.height
+      if frame.origin.y == newOriginY { return }
+      let newFrame = CGRectMake(frame.origin.x, newOriginY, frame.size.width, frame.size.height)
+      self.optionsView.frame = newFrame
+    }
+  }
+
+  private func showOptionsViewAnimated(animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.2) {
+        self.showOptionsViewAnimated(false)
+      }
+    } else {
+      optionsViewOverlay.backgroundColor = optionsViewOverlay.backgroundColor?.colorWithAlphaComponent(0.5)
+      let frame = self.optionsView.frame
+      let newOriginY: CGFloat = 0
+      if frame.origin.y == newOriginY { return }
+      let newFrame = CGRectMake(frame.origin.x, newOriginY, frame.size.width, frame.size.height)
+      self.optionsView.frame = newFrame
+    }
+  }
+
+  @objc private func showOptionsGestureRecognizerSwiped() {
+    showOptionsViewAnimated(true)
+  }
+
+  @objc private func hideOptionsGestureRecognizerSwiped() {
+    hideOptionsViewAnimated(true)
+  }
+}
+
+// MARK: -
+
+protocol ClipCollectionViewCellDelegate {
+  func userDidDeleteClipForCell(cell: ClipCollectionViewCell)
+  func userDidFlagClipForCell(cell: ClipCollectionViewCell)
+}
+
+// MARK: -
+
+extension ClipCollectionViewCell: ClipOptionsViewDelegate {
+
+  // MARK: - ClipOptionsViewDelegate
+
+  func userDidSelectFlagClipOption() {
+    delegate?.userDidFlagClipForCell(self)
+  }
+
+  func userDidSelectDeleteClipOption() {
+    delegate?.userDidDeleteClipForCell(self)
+  }
+}
+
+// MARK: -
+
+class ClipOptionsView: UIView {
+
+  // MARK: - Properties
+
+  private let flagButton: UIButton = {
+    let button = UIButton()
+    button.setImage(UIImage(named: "clip-flag"), forState: UIControlState.Normal)
+    return button
+  }()
+
+  private let deleteButton: UIButton = {
+    let button = UIButton()
+    button.setImage(UIImage(named: "clip-delete"), forState: UIControlState.Normal)
+    return button
+  }()
+
+  var delegate: ClipOptionsViewDelegate?
+
+  // MARK: - Initializers
+
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    addSubview(flagButton)
+    flagButton.addTarget(self, action: "flagButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    addSubview(deleteButton)
+    deleteButton.addTarget(self, action: "deleteButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+  }
+
+  required init(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  convenience override init() {
+    self.init(frame: CGRectZero)
+  }
+
+  // MARK: - UIView
+
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    flagButton.frame = bounds
+    deleteButton.frame = bounds
+  }
+
+  // MARK: - Internal
+
+  func configureForUser(user: User?) {
+    flagButton.hidden = true
+    deleteButton.hidden = true
+    if let user = user {
+      if let currentUser = User.currentUser {
+        if user.id == currentUser.id {
+          deleteButton.hidden = false
+        } else {
+          flagButton.hidden = false
+        }
+      }
+    }
+  }
+
+  // MARK: - Private
+
+  @objc private func flagButtonTapped() {
+    delegate?.userDidSelectFlagClipOption()
+  }
+
+  @objc private func deleteButtonTapped() {
+    delegate?.userDidSelectDeleteClipOption()
+  }
+}
+
+// MARK: -
+
+protocol ClipOptionsViewDelegate {
+  func userDidSelectFlagClipOption()
+  func userDidSelectDeleteClipOption()
 }
