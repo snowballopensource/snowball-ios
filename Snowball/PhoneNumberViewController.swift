@@ -13,7 +13,7 @@ class PhoneNumberViewController: UIViewController {
 
   // MARK: - Properties
 
-  private let topBar = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Back, rightButtonType: SnowballTopViewButtonType.Forward)
+  private let topBar = SnowballTopView(leftButtonType: nil, rightButtonType: SnowballTopViewButtonType.Forward)
 
   private let messageLabel: UILabel = {
     let label = UILabel()
@@ -107,10 +107,6 @@ class PhoneNumberViewController: UIViewController {
 extension PhoneNumberViewController: SnowballTopViewDelegate {
 
   // MARK: - SnowballTopViewDelegate
-
-  func snowballTopViewLeftButtonTapped() {
-    navigationController?.popViewControllerAnimated(true)
-  }
 
   func snowballTopViewRightButtonTapped() {
     let newPhoneNumber = "\(countryCodeTextField.text)\(phoneNumberTextField.text)"
