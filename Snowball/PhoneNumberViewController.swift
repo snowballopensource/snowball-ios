@@ -115,10 +115,12 @@ extension PhoneNumberViewController: SnowballTopViewDelegate {
   func snowballTopViewRightButtonTapped() {
     let newPhoneNumber = "\(countryCodeTextField.text)\(phoneNumberTextField.text)"
     if countElements(newPhoneNumber) > 5 {
+      topBar.spinRightButton(true)
       API.request(Router.UpdateCurrentUser(name: nil, username: nil, email: nil, phoneNumber: newPhoneNumber)).responseJSON { (request, response, JSON, error) in
         if let error = error {
           displayAPIErrorToUser(JSON)
           error.print("add phone number to new user")
+          self.topBar.spinRightButton(false)
         } else {
           Analytics.track("Add Phone Number During Onboarding")
           self.switchToNavigationController(MainNavigationController())
