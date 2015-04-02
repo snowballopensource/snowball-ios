@@ -86,6 +86,8 @@ class SnowballTopView: UIView {
 
   private var rightButton: UIButton?
 
+  private var rightButtonSpinner: UIActivityIndicatorView?
+
   var delegate: SnowballTopViewDelegate?
 
   // MARK: - Initializers
@@ -102,6 +104,9 @@ class SnowballTopView: UIView {
       rightButton = rightButtonType.button
       rightButton!.addTarget(delegate, action: "snowballTopViewRightButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
       addSubview(rightButton!)
+      rightButtonSpinner = UIActivityIndicatorView()
+      rightButtonSpinner?.color = UIColor.SnowballColor.greenColor
+      addSubview(rightButtonSpinner!)
     }
     titleLabel.text = NSLocalizedString(title)
     addSubview(titleLabel)
@@ -133,6 +138,7 @@ class SnowballTopView: UIView {
         rightButtonWidth = 84
       }
       rightButton.frame = CGRect(x: UIScreen.mainScreen().bounds.size.width - rightButtonWidth, y: 0, width: rightButtonWidth, height: bounds.height)
+      rightButtonSpinner?.center = rightButton.center
     }
   }
 
@@ -177,6 +183,30 @@ class SnowballTopView: UIView {
         if frame.origin.y < 0 {
           frame = CGRect(x: frame.origin.x, y: frame.origin.y + frame.size.height, width: frame.size.width, height: frame.size.height)
         }
+      }
+    }
+  }
+
+  func spinRightButton(spin: Bool) {
+    if spin {
+      rightButton?.enabled = false
+      rightButtonSpinner?.alpha = 0.0
+      rightButtonSpinner?.startAnimating()
+    }
+    UIView.animateWithDuration(0.4, animations: { () -> Void in
+      var rightButtonAlpha: CGFloat = 0.0
+      var rightButtonSpinnerAlpha: CGFloat = 0.0
+      if spin {
+        rightButtonSpinnerAlpha = 1.0
+      } else {
+        rightButtonAlpha = 1.0
+      }
+      self.rightButton?.alpha = rightButtonAlpha
+      self.rightButtonSpinner?.alpha = rightButtonSpinnerAlpha
+    }) { (completed) -> Void in
+      if !spin {
+        self.rightButton?.enabled = true
+        self.rightButtonSpinner?.stopAnimating()
       }
     }
   }
