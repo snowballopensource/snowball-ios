@@ -320,11 +320,13 @@ extension ClipsViewController: ClipCollectionViewCellDelegate {
         let alertController = UIAlertController(title: NSLocalizedString("Delete this clip?"), message: NSLocalizedString("Are you sure you want to delete this clip?"), preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Don't Delete"), style: UIAlertActionStyle.Cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Delete"), style: UIAlertActionStyle.Destructive) { (action) in
+          let index = self.indexOfClip(clip)
+          self.clips.removeAtIndex(index)
+          self.collectionView.deleteItemsAtIndexPaths([NSIndexPath(forItem: index, inSection: 0)])
           API.request(Router.DeleteClip(clipID: id)).response { (request, response, JSON, error) in
             if error != nil { displayAPIErrorToUser(JSON); return }
-            let index = self.indexOfClip(clip)
-            self.clips.removeAtIndex(index)
-            self.collectionView.deleteItemsAtIndexPaths([NSIndexPath(forItem: index, inSection: 0)])
+            // TODO: Remove clip from timeline in here (three lines above API)
+            // This should be done AFTER the new upload style is completed, so we have an ID to delete immediately.
           }
           return
           })
