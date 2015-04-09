@@ -12,16 +12,12 @@ class MoreNavigationController: UINavigationController {
 
   // MARK: - Initializers
 
-  override init() {
+  init() {
     super.init(rootViewController: FriendsViewController())
     navigationBarHidden = true
   }
 
   required init(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
-  }
-
-  override init(nibName: String?, bundle: NSBundle?) {
-    super.init(nibName: nibName, bundle: bundle)
   }
 }

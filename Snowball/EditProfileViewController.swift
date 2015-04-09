@@ -145,21 +145,21 @@ extension EditProfileViewController: SnowballTopViewDelegate {
 
   func snowballTopViewRightButtonTapped() {
     let user = User.currentUser!
-    let usernameCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: EditProfileTextFieldIndex.Username.rawValue, inSection: 0)) as TextFieldTableViewCell
+    let usernameCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: EditProfileTextFieldIndex.Username.rawValue, inSection: 0)) as! TextFieldTableViewCell
     var username: String?
-    if user.username != usernameCell.textField.text && countElements(usernameCell.textField.text) > 0 {
+    if user.username != usernameCell.textField.text && count(usernameCell.textField.text) > 0 {
       username = usernameCell.textField.text
       user.username = username
     }
-    let phoneNumberCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: EditProfileTextFieldIndex.PhoneNumber.rawValue, inSection: 0)) as TextFieldTableViewCell
+    let phoneNumberCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: EditProfileTextFieldIndex.PhoneNumber.rawValue, inSection: 0)) as! TextFieldTableViewCell
     var phoneNumber: String?
     if user.phoneNumber != phoneNumberCell.textField.text {
       phoneNumber = phoneNumberCell.textField.text
       user.phoneNumber = phoneNumber
     }
-    let emailCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: EditProfileTextFieldIndex.Email.rawValue, inSection: 0)) as TextFieldTableViewCell
+    let emailCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: EditProfileTextFieldIndex.Email.rawValue, inSection: 0)) as! TextFieldTableViewCell
     var email: String?
-    if user.email != emailCell.textField.text && countElements(emailCell.textField.text) > 0 {
+    if user.email != emailCell.textField.text && count(emailCell.textField.text) > 0 {
       email = emailCell.textField.text
       user.email = email
     }
@@ -188,7 +188,7 @@ extension EditProfileViewController: UITableViewDataSource {
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(TextFieldTableViewCell),
-      forIndexPath: indexPath) as UITableViewCell
+      forIndexPath: indexPath) as! UITableViewCell
     configureCell(cell, atIndexPath: indexPath)
     return cell
   }
@@ -196,7 +196,7 @@ extension EditProfileViewController: UITableViewDataSource {
   // MARK: - Private
 
   private func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-    let cell = cell as TextFieldTableViewCell
+    let cell = cell as! TextFieldTableViewCell
 
     cell.textField.autocorrectionType = UITextAutocorrectionType.No
     cell.textField.autocapitalizationType = UITextAutocapitalizationType.None
@@ -225,7 +225,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
 
   // MARK: - UIImagePickerControllerDelegate
 
-  func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+  func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
     picker.dismissViewControllerAnimated(true) {
       dispatch_async(dispatch_get_main_queue()) {
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)

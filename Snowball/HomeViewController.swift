@@ -7,7 +7,7 @@
 //
 
 import Cartography
-import UIKIt
+import UIKit
 
 class HomeViewController: UIViewController {
 

@@ -15,7 +15,7 @@ struct Cache {
   static let sharedCache = Cache()
 
   private static let basePath: String = {
-    let cachePath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
+    let cachePath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as! String
     return cachePath.stringByAppendingPathComponent("DataCache")
   }()
 

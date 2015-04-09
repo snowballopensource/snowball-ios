@@ -78,9 +78,9 @@ class UserTableViewCell: UITableViewCell {
   // MARK: - Internal
 
   func configureForObject(object: AnyObject) {
-    let user = object as User
+    let user = object as! User
     usernameLabel.text = user.username
-    let userColor = user.color as UIColor
+    let userColor = user.color as! UIColor
     avatarImageView.configureForUser(user)
     usernameLabel.textColor = userColor
     var color: UIColor!

@@ -77,7 +77,7 @@ class AuthenticationViewController: UIViewController {
       }
       if let userJSON: AnyObject = JSON {
         dispatch_async(dispatch_get_main_queue()) {
-          let user = User.objectFromJSON(userJSON) as User?
+          let user = User.objectFromJSON(userJSON) as! User?
           user?.managedObjectContext?.save(nil)
           User.currentUser = user
           if let user = user {

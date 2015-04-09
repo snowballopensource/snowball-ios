@@ -22,7 +22,7 @@ class ClipsViewController: UIViewController {
   private let playerView = PlayerView()
 
   private var playerLayer: AVPlayerLayer {
-    return playerView.layer as AVPlayerLayer
+    return playerView.layer as! AVPlayerLayer
   }
 
   private let playerThumbnailImageView = UIImageView()
@@ -252,7 +252,7 @@ extension ClipsViewController: UICollectionViewDataSource {
   }
 
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(ClipCollectionViewCell), forIndexPath: indexPath) as ClipCollectionViewCell
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(ClipCollectionViewCell), forIndexPath: indexPath) as! ClipCollectionViewCell
     let clip = clips[indexPath.item]
     cell.configureForClip(clip)
     cell.delegate = self
@@ -346,7 +346,7 @@ extension ClipsViewController: ClipPlayerDelegate {
 
   func playerWillBeginPlayback() {
     for cell in collectionView.visibleCells() {
-      let cell = cell as ClipCollectionViewCell
+      let cell = cell as! ClipCollectionViewCell
       if let cellClip = clipForCell(cell) {
         if let playerClip = player.currentClip {
           if playerClip.id == cellClip.id {
@@ -362,7 +362,7 @@ extension ClipsViewController: ClipPlayerDelegate {
 
   func playerDidEndPlayback() {
     for cell in collectionView.visibleCells() {
-      let cell = cell as ClipCollectionViewCell
+      let cell = cell as! ClipCollectionViewCell
       cell.setInPlayState(false, isCurrentPlayingClip: false, animated: true)
     }
     delegate?.playerDidEndPlayback()

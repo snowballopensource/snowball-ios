@@ -15,11 +15,11 @@ class PlayerView: UIView {
 
   var player: AVPlayer {
     get {
-      let playerLayer = layer as AVPlayerLayer
+      let playerLayer = layer as! AVPlayerLayer
       return playerLayer.player
     }
     set {
-      let playerLayer = layer as AVPlayerLayer
+      let playerLayer = layer as! AVPlayerLayer
       playerLayer.player = newValue
     }
   }

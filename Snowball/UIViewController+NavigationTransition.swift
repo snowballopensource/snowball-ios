@@ -11,7 +11,7 @@ import UIKit
 extension UIViewController {
 
   func switchToNavigationController(navigationController: UINavigationController) {
-    let window = AppDelegate.sharedDelegate.window
+    let window = AppDelegate.sharedDelegate.window!
     UIView.transitionWithView(window, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, animations: {
       let oldState = UIView.areAnimationsEnabled()
       UIView.setAnimationsEnabled(false)

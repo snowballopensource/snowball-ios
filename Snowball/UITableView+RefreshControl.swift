@@ -14,7 +14,7 @@ extension UITableView {
 
   var refreshControl: UIRefreshControl {
     get {
-      return objc_getAssociatedObject(self, &refreshControlAssociationKey) as UIRefreshControl
+      return objc_getAssociatedObject(self, &refreshControlAssociationKey) as! UIRefreshControl
     }
     set(newValue) {
       objc_setAssociatedObject(self, &refreshControlAssociationKey, newValue, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN))

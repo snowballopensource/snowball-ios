@@ -12,7 +12,7 @@ class AuthenticationNavigationController: UINavigationController {
 
   // MARK: - Initializers
 
-  override init() {
+  init() {
     super.init(rootViewController: WelcomeViewController())
     navigationBarHidden = true
   }

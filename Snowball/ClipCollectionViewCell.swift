@@ -325,10 +325,6 @@ class ClipOptionsView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
 
-  convenience override init() {
-    self.init(frame: CGRectZero)
-  }
-
   // MARK: - UIView
 
   override func layoutSubviews() {

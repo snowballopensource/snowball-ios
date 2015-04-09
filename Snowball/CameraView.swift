@@ -15,11 +15,11 @@ class CameraView: UIView {
 
   var captureSession: AVCaptureSession {
     get {
-      let captureLayer = layer as AVCaptureVideoPreviewLayer
+      let captureLayer = layer as! AVCaptureVideoPreviewLayer
       return captureLayer.session
     }
     set {
-      let captureLayer = layer as AVCaptureVideoPreviewLayer
+      let captureLayer = layer as! AVCaptureVideoPreviewLayer
       captureLayer.session = newValue
     }
   }

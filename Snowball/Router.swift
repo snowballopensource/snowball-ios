@@ -130,7 +130,7 @@ struct APICredential {
   private static let kCurrentUserAuthTokenKey = "CurrentUserAuthToken"
   static var authToken: String? {
     get {
-      return NSUserDefaults.standardUserDefaults().objectForKey(kCurrentUserAuthTokenKey) as String?
+      return NSUserDefaults.standardUserDefaults().objectForKey(kCurrentUserAuthTokenKey) as! String?
     }
     set {
       if let authToken = newValue {

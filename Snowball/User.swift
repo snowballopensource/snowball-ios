@@ -40,15 +40,15 @@ class User: RemoteObject {
     get {
     if (CurrentUserStruct.currentUser == nil) {
     let defaults = NSUserDefaults.standardUserDefaults()
-    let currentUserID = defaults.objectForKey(CurrentUserStruct.kCurrentUserIDKey) as String?
+    let currentUserID = defaults.objectForKey(CurrentUserStruct.kCurrentUserIDKey) as! String?
     if currentUserID == nil {
     return nil
     }
-    let currentUserAuthToken = defaults.objectForKey(CurrentUserStruct.kCurrentUserAuthTokenKey) as String?
+    let currentUserAuthToken = defaults.objectForKey(CurrentUserStruct.kCurrentUserAuthTokenKey) as! String?
     if currentUserAuthToken == nil {
     return nil
     }
-    CurrentUserStruct.currentUser = User.find(currentUserID!) as User?
+    CurrentUserStruct.currentUser = User.find(currentUserID!) as! User?
     CurrentUserStruct.currentUser?.authToken = currentUserAuthToken
     }
     return CurrentUserStruct.currentUser

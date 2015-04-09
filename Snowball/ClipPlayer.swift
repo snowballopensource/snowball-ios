@@ -37,7 +37,7 @@ class ClipPlayer: AVQueuePlayer {
 
   func playClips(clips: [Clip]) {
     if !playing {
-      if let clip = clips.first? {
+      if let clip = clips.first {
         play()
         currentClip = clip
         delegate?.playerWillBeginPlayback()
@@ -64,13 +64,15 @@ class ClipPlayer: AVQueuePlayer {
   @objc private func playerItemDidPlayToEndTime(notification: NSNotification) {
     NSNotificationCenter.defaultCenter().removeObserver(self, name: notification.name, object: notification.object)
     if let clip = self.currentClip {
-      let notificationPlayerItem = notification.object as ClipPlayerItem
-      if notificationPlayerItem.clip.id == clip.id {
-        self.delegate?.clipDidPlayToEndTime(notificationPlayerItem.clip)
-      }
-      if let nextItem = itemAfterItem(notificationPlayerItem) {
-        self.currentClip = nextItem.clip
-        self.delegate?.playerWillPlayClip(nextItem.clip)
+      let notificationPlayerItem = notification.object as! ClipPlayerItem
+      if let notificationPlayerItem = notification.object as? ClipPlayerItem {
+        if notificationPlayerItem.clip.id == clip.id {
+          self.delegate?.clipDidPlayToEndTime(notificationPlayerItem.clip)
+        }
+        if let nextItem = itemAfterItem(notificationPlayerItem) {
+          self.currentClip = nextItem.clip
+          self.delegate?.playerWillPlayClip(nextItem.clip)
+        }
       }
     }
   }

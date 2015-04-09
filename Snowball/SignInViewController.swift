@@ -20,8 +20,8 @@ class SignInViewController: AuthenticationViewController {
   // MARK: - Properties
 
   override var authenticationRoute: Router! {
-    let emailCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: SignInTextFieldIndex.Email.rawValue, inSection: 0))! as TextFieldTableViewCell
-    let passwordCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: SignInTextFieldIndex.Password.rawValue, inSection: 0))! as TextFieldTableViewCell
+    let emailCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: SignInTextFieldIndex.Email.rawValue, inSection: 0))! as! TextFieldTableViewCell
+    let passwordCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: SignInTextFieldIndex.Password.rawValue, inSection: 0))! as! TextFieldTableViewCell
     return Router.SignIn(email: emailCell.textField.text, password: passwordCell.textField.text)
   }
 
@@ -60,7 +60,7 @@ extension SignInViewController: UITableViewDataSource {
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(TextFieldTableViewCell),
-      forIndexPath: indexPath) as UITableViewCell
+      forIndexPath: indexPath) as! UITableViewCell
     configureCell(cell, atIndexPath: indexPath)
     return cell
   }
@@ -68,7 +68,7 @@ extension SignInViewController: UITableViewDataSource {
   // MARK: - Private
 
   private func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-    let cell = cell as TextFieldTableViewCell
+    let cell = cell as! TextFieldTableViewCell
 
     cell.textField.autocorrectionType = UITextAutocorrectionType.No
     cell.textField.autocapitalizationType = UITextAutocapitalizationType.None

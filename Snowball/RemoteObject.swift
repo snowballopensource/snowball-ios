@@ -16,7 +16,9 @@ class RemoteObject: NSManagedObject {
   class func objectFromJSON(JSON: AnyObject, context: NSManagedObjectContext = CoreDataStack.defaultStack.mainQueueManagedObjectContext) -> RemoteObject? {
     if let id = JSON["id"] as? String {
       let object = find(id, context: context) ?? newObject(context: context)
-      object.assignAttributes(JSON as [String: AnyObject])
+      if let object = object {
+        object.assignAttributes(JSON as! [String: AnyObject])
+      }
       return object as? RemoteObject
     }
     return nil

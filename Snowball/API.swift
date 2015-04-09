@@ -61,7 +61,7 @@ struct API {
       if error != nil && retryCount > 1 {
         self.tryUpload(request, retryCount: retryCount - 1, completion: completion)
       }
-      completion(request, response as NSHTTPURLResponse?, responseObject, error)
+      completion(request, response as! NSHTTPURLResponse?, responseObject, error)
     }
     uploadTask.resume()
   }
@@ -74,7 +74,7 @@ func displayAPIErrorToUser(errorJSON: AnyObject?) {
     if let message = errorJSON["message"] as? String {
       let alertController = UIAlertController(title: NSLocalizedString("Error"), message: message, preferredStyle: UIAlertControllerStyle.Alert)
       alertController.addAction(UIAlertAction(title: NSLocalizedString("OK"), style: UIAlertActionStyle.Cancel, handler: nil))
-      if let rootVC = AppDelegate.sharedDelegate.window.rootViewController {
+      if let rootVC = AppDelegate.sharedDelegate.window!.rootViewController {
         rootVC.presentViewController(alertController, animated: true, completion: nil)
       }
     }

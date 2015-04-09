@@ -110,7 +110,7 @@ extension PhoneNumberViewController: SnowballTopViewDelegate {
 
   func snowballTopViewRightButtonTapped() {
     let newPhoneNumber = "\(countryCodeTextField.text)\(phoneNumberTextField.text)"
-    if countElements(newPhoneNumber) > 5 {
+    if count(newPhoneNumber) > 5 {
       topBar.spinRightButton(true)
       API.request(Router.UpdateCurrentUser(name: nil, username: nil, email: nil, phoneNumber: newPhoneNumber)).responseJSON { (request, response, JSON, error) in
         if let error = error {

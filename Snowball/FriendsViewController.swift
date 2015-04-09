@@ -145,7 +145,7 @@ class FriendsViewController: UIViewController {
         self.tableView.refreshControl.endRefreshing()
         error?.print("api get current user following/followers")
         if let JSON: AnyObject = JSON {
-          self.users = User.objectsFromJSON(JSON) as [User]
+          self.users = User.objectsFromJSON(JSON) as! [User]
           self.tableView.reloadData()
         }
       }
@@ -154,7 +154,7 @@ class FriendsViewController: UIViewController {
         self.tableView.refreshControl.endRefreshing()
         error?.print("api get current user following/followers")
         if let JSON: AnyObject = JSON {
-          self.users = User.objectsFromJSON(JSON) as [User]
+          self.users = User.objectsFromJSON(JSON) as! [User]
           self.tableView.reloadData()
         }
       }
@@ -190,7 +190,7 @@ extension FriendsViewController: UITableViewDataSource {
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(UserTableViewCell),
-      forIndexPath: indexPath) as UITableViewCell
+      forIndexPath: indexPath) as! UITableViewCell
     configureCell(cell, atIndexPath: indexPath)
     return cell
   }
@@ -198,7 +198,7 @@ extension FriendsViewController: UITableViewDataSource {
   // MARK: - Private
 
   private func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-    let cell = cell as UserTableViewCell
+    let cell = cell as! UserTableViewCell
     cell.delegate = self
     let user = users[indexPath.row]
     cell.configureForObject(user)

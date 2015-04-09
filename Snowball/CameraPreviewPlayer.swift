@@ -28,9 +28,11 @@ class CameraPreviewPlayer: AVPlayer {
 
   private func registerPlayerItemForNotifications(playerItem: AVPlayerItem) {
     NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: playerItem, queue: nil) { (notification) in
-      let playerItem = notification.object as AVPlayerItem
-      playerItem.seekToTime(kCMTimeZero)
-      self.play()
+      if let playerItem = notification.object as? AVPlayerItem {
+        playerItem.seekToTime(kCMTimeZero)
+        self.play()
+      }
     }
   }
 }
+ 

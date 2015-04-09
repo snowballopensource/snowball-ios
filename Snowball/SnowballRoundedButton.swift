@@ -25,7 +25,7 @@ class SnowballRoundedButton: UIButton {
 
   // MARK: - Initializers
 
-  override init() {
+  init() {
     super.init(frame: CGRectZero)
 
     layer.borderWidth = 2

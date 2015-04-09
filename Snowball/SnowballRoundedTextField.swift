@@ -12,8 +12,8 @@ class SnowballRoundedTextField: UITextField {
 
   // MARK: - Initializers
 
-  override init() {
-    super.init(frame: CGRectZero)
+  override init(frame: CGRect) {
+    super.init(frame: frame)
 
     layer.borderWidth = 2
     alignLeft(insetWidth: 20)

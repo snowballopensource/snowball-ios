@@ -16,10 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   // MARK: - Properties
 
   class var sharedDelegate: AppDelegate {
-    return UIApplication.sharedApplication().delegate! as AppDelegate
+    return UIApplication.sharedApplication().delegate! as! AppDelegate
   }
 
-  lazy var window: UIWindow = {
+  lazy var window: UIWindow? = {
     let window = UIWindow(frame: UIScreen.mainScreen().bounds)
     window.backgroundColor = UIColor.whiteColor()
     window.rootViewController = initialViewController
@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   // MARK: - UIApplicationDelegate
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    window.makeKeyAndVisible()
+    window?.makeKeyAndVisible()
     Fabric.with([Crashlytics()])
     return true
   }

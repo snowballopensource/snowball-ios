@@ -12,7 +12,7 @@ class MainNavigationController: UINavigationController {
 
   // MARK: - Initializers
 
-  override init() {
+  init() {
     super.init(rootViewController: HomeViewController())
     navigationBarHidden = true
   }

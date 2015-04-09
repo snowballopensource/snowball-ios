@@ -25,7 +25,7 @@ class CameraViewController: UIViewController {
   private let cameraView: CameraView = {
     let view = CameraView()
     view.backgroundColor = UIColor.blackColor()
-    let previewLayer = view.layer as AVCaptureVideoPreviewLayer
+    let previewLayer = view.layer as! AVCaptureVideoPreviewLayer
     previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
     return view
     }()
@@ -62,7 +62,7 @@ class CameraViewController: UIViewController {
   private let playerView = PlayerView()
 
   private var player: CameraPreviewPlayer {
-    return playerView.player as CameraPreviewPlayer
+    return playerView.player as! CameraPreviewPlayer
   }
 
   private var cancelPreviewButton: UIButton = {
@@ -245,7 +245,7 @@ class CameraViewController: UIViewController {
     let devices = AVCaptureDevice.devicesWithMediaType(mediaType)
     if let captureDevicePosition = position {
       for device in devices {
-        let captureDevice = device as AVCaptureDevice
+        let captureDevice = device as! AVCaptureDevice
         if captureDevice.position == position {
           return captureDevice
         }
@@ -320,7 +320,7 @@ class CameraViewController: UIViewController {
   }
 
   @objc private func progressViewTimerDidFire(timer: NSTimer) {
-    let timeInterval = timer.userInfo as Double
+    let timeInterval = timer.userInfo as! Double
     if progressView.progress <= 1 {
       progressView.progress += Float(timeInterval / maxRecordingSeconds)
     }
@@ -373,8 +373,8 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     endProgressViewAnimation()
     // Crop video
     // http://stackoverflow.com/a/5231713/801858
-    let asset = AVAsset.assetWithURL(outputFileURL) as AVAsset
-    let videoTrack = asset.tracksWithMediaType(AVMediaTypeVideo).first as AVAssetTrack
+    let asset = AVAsset.assetWithURL(outputFileURL) as! AVAsset
+    let videoTrack = asset.tracksWithMediaType(AVMediaTypeVideo).first as! AVAssetTrack
 
     // When thinking about the following code, think of capturing video in landscape!
     // e.g. videoTrack.naturalSize.height is the width if you are holding the phone portrait
