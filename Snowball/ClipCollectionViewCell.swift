@@ -142,7 +142,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipTimeLabel.right == clipTimeLabel.superview!.right
     }
 
-    contentView.addSubview(dimView)
+    clipThumbnailImageView.addSubview(dimView)
 
     contentView.addSubview(optionsView)
     optionsView.delegate = self
@@ -163,7 +163,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     optionsView.frame = clipThumbnailImageView.bounds
     optionsViewOverlay.frame = clipThumbnailImageView.bounds
     hideOptionsViewAnimated(false)
-    dimView.frame = contentView.bounds
+    dimView.frame = clipThumbnailImageView.bounds
   }
 
   // MARK: - Internal
@@ -205,9 +205,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
   }
 
   func setInPlayState(inPlayState: Bool, isCurrentPlayingClip: Bool, animated: Bool = true) {
-    scaleClipThumbnail(inPlayState, animated: animated)
+    scaleClipThumbnail(inPlayState, isCurrentPlayingClip: isCurrentPlayingClip, animated: animated)
     let shouldDimContentView = (inPlayState && !isCurrentPlayingClip)
     dimContentView(shouldDimContentView)
+    dimUserInfo(shouldDimContentView, animated: animated)
   }
 
   // MARK: - Private
@@ -216,17 +217,34 @@ class ClipCollectionViewCell: UICollectionViewCell {
     dimView.hidden = !dim
   }
 
-  private func scaleClipThumbnail(down: Bool, animated: Bool) {
+  private func scaleClipThumbnail(down: Bool, isCurrentPlayingClip: Bool, animated: Bool) {
     if animated {
       UIView.animateWithDuration(0.4) {
-        self.scaleClipThumbnail(down, animated: false)
+        self.scaleClipThumbnail(down, isCurrentPlayingClip: isCurrentPlayingClip, animated: false)
       }
     } else {
       if down {
-        clipThumbnailImageView.transform = CGAffineTransformMakeScale(0.85, 0.85)
+        if isCurrentPlayingClip {
+          clipThumbnailImageView.transform = CGAffineTransformMakeScale(0.857, 0.857)
+        } else {
+          clipThumbnailImageView.transform = CGAffineTransformMakeScale(0.75, 0.75)
+        }
       } else {
         clipThumbnailImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
       }
+    }
+  }
+
+  private func dimUserInfo(dim: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.2) {
+        self.dimUserInfo(dim, animated: false)
+      }
+    } else {
+      let alpha = CGFloat(!dim)
+      userAvatarImageView.alpha = alpha
+      usernameLabel.alpha = alpha
+      clipTimeLabel.alpha = alpha
     }
   }
 
