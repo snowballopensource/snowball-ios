@@ -256,12 +256,7 @@ extension ClipsViewController: UICollectionViewDataSource {
     let clip = clips[indexPath.item]
     cell.configureForClip(clip)
     cell.delegate = self
-    var isCurrentPlayingClip = false
-    if let playerClip = player.currentClip {
-      if playerClip.id == clip.id {
-        isCurrentPlayingClip = true
-      }
-    }
+    var isCurrentPlayingClip = clipIsPlayingClip(clip)
     cell.setInPlayState(player.playing, isCurrentPlayingClip: isCurrentPlayingClip, animated: false)
     return cell
   }
