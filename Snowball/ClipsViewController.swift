@@ -231,7 +231,7 @@ class ClipsViewController: UIViewController {
 
   private func scrollToClip(clip: Clip, animated: Bool = true) {
     let indexPath = NSIndexPath(forItem: indexOfClip(clip), inSection: 0)
-    collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: animated)
+    collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: animated)
   }
 
   private func removeClipFromTimeline(clip: Clip) {
