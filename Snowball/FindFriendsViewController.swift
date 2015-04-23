@@ -19,7 +19,6 @@ class FindFriendsViewController: UIViewController {
 
   private let tableView: UITableView = {
     let tableView = UITableView()
-    tableView.allowsSelection = false
     tableView.separatorStyle = UITableViewCellSeparatorStyle.None
     tableView.rowHeight = UserTableViewCell.height
     tableView.registerClass(UserTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UserTableViewCell))
@@ -119,6 +118,7 @@ class FindFriendsViewController: UIViewController {
 
     tableView.addRefreshControl(self, action: "refresh")
     tableView.dataSource = self
+    tableView.delegate = self
     view.addSubview(tableView)
     layout(tableView, tableViewLabel, footerButton) { (tableView, tableViewLabel, footerButton) in
       tableView.left == tableView.superview!.left
@@ -240,9 +240,22 @@ extension FindFriendsViewController: UITableViewDataSource {
 
   private func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
     let cell = cell as! UserTableViewCell
+    cell.selectionStyle = UITableViewCellSelectionStyle.None
     cell.delegate = self
     let user = users[indexPath.row]
     cell.configureForObject(user)
+  }
+}
+
+// MARK: -
+
+extension FindFriendsViewController: UITableViewDelegate {
+
+  // MARK: - UITableViewDelegate
+
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    let user = users[indexPath.row]
+    navigationController?.pushViewController(ProfileViewController(user: user), animated: true)
   }
 }
 
