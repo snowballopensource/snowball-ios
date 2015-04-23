@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Snowball, Inc. All rights reserved.
 //
 
-import Cartography
 import UIKit
 
 @objc protocol SnowballTopViewDelegate: class {
@@ -82,6 +81,7 @@ class SnowballTopView: UIView {
   let titleLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont(name: UIFont.SnowballFont.regular, size: 26)
+    label.textAlignment = NSTextAlignment.Center
     return label
   }()
 
@@ -113,10 +113,6 @@ class SnowballTopView: UIView {
     }
     titleLabel.text = NSLocalizedString(title)
     addSubview(titleLabel)
-    layout(titleLabel) { (titleLabel) in
-      titleLabel.left == titleLabel.superview!.left + 75
-      titleLabel.centerY == titleLabel.superview!.centerY
-    }
   }
 
   // MARK: - UIView
@@ -143,6 +139,7 @@ class SnowballTopView: UIView {
       rightButton.frame = CGRect(x: UIScreen.mainScreen().bounds.size.width - rightButtonWidth, y: 0, width: rightButtonWidth, height: bounds.height)
       rightButtonSpinner?.center = rightButton.center
     }
+    titleLabel.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
   }
 
   override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
@@ -162,14 +159,7 @@ class SnowballTopView: UIView {
   // MARK: - Internal
 
   func setupDefaultLayout() {
-    let height: Float = 65
-
-    layout(self) { (topBar) in
-      topBar.left == topBar.superview!.left
-      topBar.top == topBar.superview!.top
-      topBar.right == topBar.superview!.right
-      topBar.height == height
-    }
+    frame = CGRect(x: superview!.bounds.origin.x, y: superview!.bounds.origin.y, width: superview!.bounds.size.width, height: 65)
   }
 
   func setHidden(hidden: Bool, animated: Bool) {
