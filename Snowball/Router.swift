@@ -24,6 +24,7 @@ enum Router: URLRequestConvertible {
   case FindUsersByUsername(username: String)
   // Clip
   case GetClipStream
+  case GetClipStreamForUser(userID: String)
   case DeleteClip(clipID: String)
   case FlagClip(clipID: String)
 
@@ -49,6 +50,7 @@ enum Router: URLRequestConvertible {
     case .FindUsersByPhoneNumbers: return .POST
     case .FindUsersByUsername: return .GET
     case .GetClipStream: return .GET
+    case .GetClipStreamForUser: return .GET
     case .DeleteClip: return .DELETE
     case .FlagClip: return .POST
     }
@@ -67,6 +69,7 @@ enum Router: URLRequestConvertible {
     case .FindUsersByPhoneNumbers: return "users/phone-search"
     case .FindUsersByUsername: return "users"
     case .GetClipStream: return "clips/stream"
+    case .GetClipStreamForUser(let userID): return "users/\(userID)/clips/stream"
     case .DeleteClip(let clipID): return "clips/\(clipID)"
     case .FlagClip(let clipID): return "clips/\(clipID)/flags"
     }

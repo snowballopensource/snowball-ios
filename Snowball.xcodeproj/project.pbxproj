@@ -15,6 +15,8 @@
 		BA1835531AA51C1D00D6A0BE /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1835521AA51C1D00D6A0BE /* PlayerView.swift */; };
 		BA1835551AA51F8500D6A0BE /* ClipPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1835541AA51F8500D6A0BE /* ClipPlayer.swift */; };
 		BA20CCEE1A9D156C00D96A31 /* UploadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */; };
+		BA2ABF441AE9917D00BD0861 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2ABF431AE9917D00BD0861 /* ProfileViewController.swift */; };
+		BA2ABF461AE9940200BD0861 /* ProfileClipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2ABF451AE9940200BD0861 /* ProfileClipsViewController.swift */; };
 		BA32C7921A3286250052F4CA /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */; };
 		BA32C7951A3287BE0052F4CA /* UserAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32C7941A3287BE0052F4CA /* UserAvatarImageView.swift */; };
 		BA372D141A880C58004E58E9 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA372D131A880C58004E58E9 /* TextFieldTableViewCell.swift */; };
@@ -203,6 +205,8 @@
 		BA1835521AA51C1D00D6A0BE /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		BA1835541AA51F8500D6A0BE /* ClipPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPlayer.swift; sourceTree = "<group>"; };
 		BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadQueue.swift; sourceTree = "<group>"; };
+		BA2ABF431AE9917D00BD0861 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		BA2ABF451AE9940200BD0861 /* ProfileClipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileClipsViewController.swift; sourceTree = "<group>"; };
 		BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Snowball.swift"; sourceTree = "<group>"; };
 		BA32C7941A3287BE0052F4CA /* UserAvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAvatarImageView.swift; sourceTree = "<group>"; };
 		BA372D131A880C58004E58E9 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
@@ -616,6 +620,8 @@
 				BA9AA6821A674804002C4992 /* MainNavigationController.swift */,
 				BAF50E711AA55C4400AB874E /* HomeViewController.swift */,
 				BA1835501AA4FC5500D6A0BE /* ClipsViewController.swift */,
+				BA2ABF431AE9917D00BD0861 /* ProfileViewController.swift */,
+				BA2ABF451AE9940200BD0861 /* ProfileClipsViewController.swift */,
 				BAF50E731AA63D3200AB874E /* CameraViewController.swift */,
 				BA789E091A7052C500BA1611 /* Player */,
 			);
@@ -1035,6 +1041,7 @@
 				BAFB06DD1A9E906400EDA01B /* NSInvocation+MPHelpers.m in Sources */,
 				BAA966BD1A87FEEC0032752F /* FindFriendsViewController.swift in Sources */,
 				BAFB06A11A9E906400EDA01B /* MPABTestDesignerChangeRequestMessage.m in Sources */,
+				BA2ABF461AE9940200BD0861 /* ProfileClipsViewController.swift in Sources */,
 				BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */,
 				BAFB06D61A9E906400EDA01B /* MPUIEdgeInsetsToNSDictionaryValueTransformer.m in Sources */,
 				BA7C0E481A65C315001B3B4C /* UIButton+Snowball.swift in Sources */,
@@ -1148,6 +1155,7 @@
 				BAFB06D51A9E906400EDA01B /* MPUIControlBinding.m in Sources */,
 				BAFB06C71A9E906400EDA01B /* MPPassThroughValueTransformer.m in Sources */,
 				BAA15E9F1A6889230055756E /* AFURLSessionManager.m in Sources */,
+				BA2ABF441AE9917D00BD0861 /* ProfileViewController.swift in Sources */,
 				BAF50E741AA63D3200AB874E /* CameraViewController.swift in Sources */,
 				BA44E4541A9C0B7700B75DF3 /* WebViewController.swift in Sources */,
 				BAFB06A21A9E906400EDA01B /* MPABTestDesignerChangeResponseMessage.m in Sources */,

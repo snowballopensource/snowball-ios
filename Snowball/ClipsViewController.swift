@@ -27,7 +27,7 @@ class ClipsViewController: UIViewController {
 
   private let playerThumbnailImageView = UIImageView()
 
-  private let collectionView: UICollectionView = {
+  let collectionView: UICollectionView = {
     let flowLayout = UICollectionViewFlowLayout()
     flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
     flowLayout.minimumInteritemSpacing = 0
@@ -41,13 +41,13 @@ class ClipsViewController: UIViewController {
     return collectionView
     }()
 
-  private let activityIndicatorView: UIActivityIndicatorView = {
+  let activityIndicatorView: UIActivityIndicatorView = {
     let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
     activityIndicatorView.color = UIColor.darkGrayColor()
     return activityIndicatorView
     }()
 
-  private var clips: [Clip] = []
+  var clips: [Clip] = []
 
   private let kClipBookmarkDateKey = "ClipBookmarkDate"
   private var bookmarkedClip: Clip? {
@@ -167,9 +167,7 @@ class ClipsViewController: UIViewController {
     }
   }
 
-  // MARK: - Private
-
-  @objc private func refresh() {
+  func refresh() {
     activityIndicatorView.startAnimating()
     API.request(Router.GetClipStream).responseJSON { (request, response, JSON, error) in
       if let JSON = JSON as? [AnyObject] {
@@ -182,6 +180,8 @@ class ClipsViewController: UIViewController {
       self.activityIndicatorView.stopAnimating()
     }
   }
+
+  // MARK: - Private
 
   @objc private func appResigningActive() {
     player.stop()
