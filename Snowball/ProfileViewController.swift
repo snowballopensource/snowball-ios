@@ -33,6 +33,8 @@ class ProfileViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    view.backgroundColor = UIColor.whiteColor()
+
     clipsViewController.delegate = self
     addChildViewController(clipsViewController)
     view.addSubview(clipsViewController.view)

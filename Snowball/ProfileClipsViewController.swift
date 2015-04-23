@@ -35,8 +35,21 @@ class ProfileClipsViewController: ClipsViewController {
           self.clips = Clip.importJSON(JSON)
           self.collectionView.reloadData()
         }
+        if let lastClip = self.clips.last {
+          self.scrollToClip(lastClip, animated: false)
+        }
         self.activityIndicatorView.stopAnimating()
       }
     }
   }
+}
+
+// MARK: -
+
+extension ProfileClipsViewController: ClipCollectionViewCellDelegate {
+
+  // MARK: - ClipCollectionViewCellDelegate
+
+  // Prevent user from tapping going to another user's profile over and over again
+  override func userDidTapUserButtonForCell(cell: ClipCollectionViewCell) {}
 }

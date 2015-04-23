@@ -181,6 +181,11 @@ class ClipsViewController: UIViewController {
     }
   }
 
+  func scrollToClip(clip: Clip, animated: Bool = true) {
+    let indexPath = NSIndexPath(forItem: indexOfClip(clip), inSection: 0)
+    collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: animated)
+  }
+
   // MARK: - Private
 
   @objc private func appResigningActive() {
@@ -227,11 +232,6 @@ class ClipsViewController: UIViewController {
       }
     }
     return false
-  }
-
-  private func scrollToClip(clip: Clip, animated: Bool = true) {
-    let indexPath = NSIndexPath(forItem: indexOfClip(clip), inSection: 0)
-    collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: animated)
   }
 
   private func removeClipFromTimeline(clip: Clip) {
@@ -329,6 +329,14 @@ extension ClipsViewController: ClipCollectionViewCellDelegate {
         }
         })
       presentViewController(alertController, animated: true, completion: nil)
+    }
+  }
+
+  func userDidTapUserButtonForCell(cell: ClipCollectionViewCell) {
+    if let clip = clipForCell(cell) {
+      if let user = clip.user {
+        navigationController?.pushViewController(ProfileViewController(user: user), animated: true)
+      }
     }
   }
 }

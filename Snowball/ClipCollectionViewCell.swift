@@ -70,6 +70,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return label
   }()
 
+  private let userButton = UIButton()
+
   private let dimView: UIView = {
     let view = UIView()
     view.backgroundColor = UIColor.whiteColor()
@@ -126,6 +128,15 @@ class ClipCollectionViewCell: UICollectionViewCell {
       userAvatarImageView.top == clipThumbnailImageView.bottom + 10
       userAvatarImageView.width == avatarDiameter
       userAvatarImageView.height == userAvatarImageView.width
+    }
+
+    userButton.addTarget(self, action: "userButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    contentView.addSubview(userButton)
+    layout(userButton, clipThumbnailImageView) { (userButton, clipThumbnailImageView) in
+      userButton.left == userButton.superview!.left
+      userButton.top == clipThumbnailImageView.bottom
+      userButton.right == userButton.superview!.right
+      userButton.bottom == userButton.superview!.bottom
     }
 
     contentView.addSubview(usernameLabel)
@@ -285,6 +296,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
   @objc private func hideOptionsGestureRecognizerSwiped() {
     hideOptionsViewAnimated(true)
   }
+
+  @objc private func userButtonTapped() {
+    delegate?.userDidTapUserButtonForCell(self)
+  }
 }
 
 // MARK: -
@@ -292,6 +307,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 protocol ClipCollectionViewCellDelegate {
   func userDidDeleteClipForCell(cell: ClipCollectionViewCell)
   func userDidFlagClipForCell(cell: ClipCollectionViewCell)
+  func userDidTapUserButtonForCell(cell: ClipCollectionViewCell)
 }
 
 // MARK: -
