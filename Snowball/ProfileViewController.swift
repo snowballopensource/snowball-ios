@@ -7,20 +7,64 @@
 //
 
 import Cartography
+import Haneke
 import UIKit
 
 class ProfileViewController: UIViewController {
 
   // MARK: - Properties
 
-  let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Back, rightButtonType: nil)
+  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.BackWhite, rightButtonType: nil)
 
-  let clipsViewController: ProfileClipsViewController
+  private let clipsViewController: ProfileClipsViewController
+
+  private var user: User {
+    get {
+      return clipsViewController.user
+    }
+  }
+
+  private let backgroundImageView = UIImageView()
+
+  private let userAvatarImageView = UserAvatarImageView()
+
+  private let usernameLabel: UILabel = {
+    let label = UILabel()
+    var fontSize: CGFloat = 28
+    label.font = UIFont(name: UIFont.SnowballFont.bold, size: fontSize)
+    label.textAlignment = NSTextAlignment.Center
+    return label
+  }()
+
+  private let followButton: UIButton = {
+    let button = UIButton()
+    button.titleLabel?.font = UIFont(name: UIFont.SnowballFont.bold, size: 18)
+    button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+    button.layer.cornerRadius = 20
+    button.layer.borderWidth = 2
+    button.layer.borderColor = UIColor.whiteColor().CGColor
+    return button
+  }()
 
   // MARK: - Initializers
 
   init(user: User) {
     clipsViewController = ProfileClipsViewController(user: user)
+
+    userAvatarImageView.configureForUser(user)
+
+    let userColor = user.color as? UIColor ?? UIColor.SnowballColor.greenColor
+
+    backgroundImageView.backgroundColor = userColor
+    if let imageURLString = user.avatarURL {
+      if let imageURL = NSURL(string: imageURLString) {
+        backgroundImageView.hnk_setImageFromURL(imageURL, format: Format<UIImage>(name: "original"))
+      }
+    }
+
+    usernameLabel.text = user.username
+    usernameLabel.textColor = userColor
+
     super.init(nibName: nil, bundle: nil)
   }
 
@@ -41,8 +85,60 @@ class ProfileViewController: UIViewController {
     clipsViewController.didMoveToParentViewController(self)
     clipsViewController.view.frame == view.bounds
 
+    view.addSubview(backgroundImageView)
+    layout(backgroundImageView, clipsViewController.collectionView) { (backgroundImageView, collectionView) in
+      backgroundImageView.left == backgroundImageView.superview!.left
+      backgroundImageView.top == backgroundImageView.superview!.top
+      backgroundImageView.right == backgroundImageView.superview!.right
+      backgroundImageView.bottom == collectionView.top
+    }
+
+    let backgroundBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Dark))
+    backgroundBlurView.frame = backgroundImageView.bounds
+    backgroundImageView.addSubview(backgroundBlurView)
+
+    view.addSubview(userAvatarImageView)
+    layout(userAvatarImageView) { (userAvatarImageView) in
+      userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
+      userAvatarImageView.top == userAvatarImageView.superview!.top + 50
+      userAvatarImageView.width == 140
+      userAvatarImageView.height == userAvatarImageView.width
+    }
+
+    view.addSubview(usernameLabel)
+    layout(usernameLabel, userAvatarImageView) { (usernameLabel, userAvatarImageView) in
+      usernameLabel.left == usernameLabel.superview!.left
+      usernameLabel.top == userAvatarImageView.bottom + 20
+      usernameLabel.right == usernameLabel.superview!.right
+    }
+
+    followButton.addTarget(self, action: "followButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    configureFollowButton()
+    view.addSubview(followButton)
+    layout(followButton, clipsViewController.collectionView) { (followButton, collectionView) in
+      followButton.centerX == followButton.superview!.centerX
+      followButton.width == 100
+      followButton.height == 40
+      followButton.bottom == collectionView.top - 20
+    }
+
     view.addSubview(topView)
     topView.setupDefaultLayout()
+  }
+
+  // MARK: - Private
+
+  private func configureFollowButton() {
+    if user.following.boolValue {
+      followButton.setTitle(NSLocalizedString("unfollow"), forState: UIControlState.Normal)
+    } else {
+      followButton.setTitle(NSLocalizedString("follow"), forState: UIControlState.Normal)
+    }
+  }
+
+  @objc private func followButtonTapped() {
+    user.toggleFollowing()
+    configureFollowButton()
   }
 }
 

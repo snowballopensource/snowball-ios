@@ -12,7 +12,7 @@ class ProfileClipsViewController: ClipsViewController {
 
   // MARK: - Properties
 
-  private let user: User
+  let user: User
 
   // MARK: - Initializers
 
