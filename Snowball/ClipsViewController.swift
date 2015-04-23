@@ -128,6 +128,10 @@ class ClipsViewController: UIViewController {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "refresh", name: UIApplicationWillEnterForegroundNotification, object: nil)
 
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "appResigningActive", name: UIApplicationWillResignActiveNotification, object: nil)
+  }
+
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
 
     refresh()
   }
@@ -172,7 +176,7 @@ class ClipsViewController: UIViewController {
     API.request(Router.GetClipStream).responseJSON { (request, response, JSON, error) in
       if let JSON = JSON as? [AnyObject] {
         self.clips = Clip.importJSON(JSON)
-        self.collectionView.reloadData()
+        self.collectionView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.collectionView.numberOfSections())))
         if let bookmarkedClip = self.bookmarkedClip {
           self.scrollToClip(bookmarkedClip, animated: false)
         }
