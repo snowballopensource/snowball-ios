@@ -24,6 +24,8 @@ class ProfileViewController: UIViewController {
     }
   }
 
+  private let topProfileView = UIView()
+
   private let backgroundImageView = UIImageView()
 
   private let userAvatarImageView = UserAvatarImageView()
@@ -85,19 +87,23 @@ class ProfileViewController: UIViewController {
     clipsViewController.didMoveToParentViewController(self)
     clipsViewController.view.frame == view.bounds
 
-    view.addSubview(backgroundImageView)
-    layout(backgroundImageView, clipsViewController.collectionView) { (backgroundImageView, collectionView) in
-      backgroundImageView.left == backgroundImageView.superview!.left
-      backgroundImageView.top == backgroundImageView.superview!.top
-      backgroundImageView.right == backgroundImageView.superview!.right
-      backgroundImageView.bottom == collectionView.top
+    view.addSubview(topProfileView)
+
+    layout(topProfileView, clipsViewController.collectionView) { (topProfileView, collectionView) in
+      topProfileView.left == topProfileView.superview!.left
+      topProfileView.top == topProfileView.superview!.top
+      topProfileView.right == topProfileView.superview!.right
+      topProfileView.bottom == collectionView.top
     }
+
+    topProfileView.addSubview(backgroundImageView)
+    backgroundImageView.frame = topProfileView.bounds
 
     let backgroundBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Dark))
     backgroundBlurView.frame = backgroundImageView.bounds
     backgroundImageView.addSubview(backgroundBlurView)
 
-    view.addSubview(userAvatarImageView)
+    topProfileView.addSubview(userAvatarImageView)
     layout(userAvatarImageView) { (userAvatarImageView) in
       userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
       userAvatarImageView.top == userAvatarImageView.superview!.top + 50
@@ -105,7 +111,7 @@ class ProfileViewController: UIViewController {
       userAvatarImageView.height == userAvatarImageView.width
     }
 
-    view.addSubview(usernameLabel)
+    topProfileView.addSubview(usernameLabel)
     layout(usernameLabel, userAvatarImageView) { (usernameLabel, userAvatarImageView) in
       usernameLabel.left == usernameLabel.superview!.left
       usernameLabel.top == userAvatarImageView.bottom + 20
@@ -114,12 +120,12 @@ class ProfileViewController: UIViewController {
 
     followButton.addTarget(self, action: "followButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     configureFollowButton()
-    view.addSubview(followButton)
-    layout(followButton, clipsViewController.collectionView) { (followButton, collectionView) in
+    topProfileView.addSubview(followButton)
+    layout(followButton) { (followButton) in
       followButton.centerX == followButton.superview!.centerX
       followButton.width == 100
       followButton.height == 40
-      followButton.bottom == collectionView.top - 20
+      followButton.bottom == followButton.superview!.bottom - 20
     }
 
     view.addSubview(topView)
@@ -153,10 +159,12 @@ extension ProfileViewController: ClipsViewControllerDelegate {
   }
 
   func playerWillBeginPlayback() {
+    topProfileView.hidden = true
     topView.setHidden(true, animated: true)
   }
 
   func playerDidEndPlayback() {
+    topProfileView.hidden = false
     topView.setHidden(false, animated: true)
   }
 
