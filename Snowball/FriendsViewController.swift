@@ -31,6 +31,8 @@ class FriendsViewController: UIViewController {
     return label
   }()
 
+  private let currentUserProfileButton = UIButton()
+
   private let settingsButton: UIButton = {
     let button = UIButton()
     button.setImage(UIImage(named: "settings"), forState: UIControlState.Normal)
@@ -87,6 +89,15 @@ class FriendsViewController: UIViewController {
       currentUserUsernameLabel.centerY == currentUserAvatarImageView.centerY
     }
 
+    currentUserProfileButton.addTarget(self, action: "currentUserProfileButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    view.addSubview(currentUserProfileButton)
+    layout(currentUserProfileButton, currentUserAvatarImageView) { (currentUserProfileButton, currentUserAvatarImageView) in
+      currentUserProfileButton.left == currentUserProfileButton.superview!.left
+      currentUserProfileButton.top == currentUserAvatarImageView.top
+      currentUserProfileButton.right == currentUserProfileButton.superview!.right
+      currentUserProfileButton.bottom == currentUserAvatarImageView.bottom
+    }
+
     settingsButton.addTarget(self, action: "settingsButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(settingsButton)
     layout(settingsButton, currentUserAvatarImageView) { (settingsButton, currentUserAvatarImageView) in
@@ -124,6 +135,12 @@ class FriendsViewController: UIViewController {
   }
 
   // MARK: - Private
+
+  @objc private func currentUserProfileButtonTapped() {
+    if let user = User.currentUser {
+      navigationController?.pushViewController(ProfileViewController(user: user), animated: true)
+    }
+  }
 
   @objc private func settingsButtonTapped() {
     navigationController?.pushViewController(EditProfileViewController(), animated: true)
