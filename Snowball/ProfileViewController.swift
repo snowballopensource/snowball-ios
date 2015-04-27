@@ -135,10 +135,17 @@ class ProfileViewController: UIViewController {
   // MARK: - Private
 
   private func configureFollowButton() {
-    if user.following.boolValue {
-      followButton.setTitle(NSLocalizedString("unfollow"), forState: UIControlState.Normal)
-    } else {
-      followButton.setTitle(NSLocalizedString("follow"), forState: UIControlState.Normal)
+    if let currentUser = User.currentUser {
+      if user == currentUser {
+        followButton.hidden = true
+      } else {
+        followButton.hidden = false
+        if user.following.boolValue {
+          followButton.setTitle(NSLocalizedString("unfollow"), forState: UIControlState.Normal)
+        } else {
+          followButton.setTitle(NSLocalizedString("follow"), forState: UIControlState.Normal)
+        }
+      }
     }
   }
 
