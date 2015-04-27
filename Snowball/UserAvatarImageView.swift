@@ -39,7 +39,7 @@ class UserAvatarImageView: UIView {
 
   func configureForUser(user: User) {
     backgroundColor = user.color as? UIColor ?? UIColor.SnowballColor.greenColor
-    imageView.image = nil
+    imageView.image = UIImage(named: "face")
     if let imageURLString = user.avatarURL {
       if let imageURL = NSURL(string: imageURLString) {
         imageView.hnk_setImageFromURL(imageURL, format: Format<UIImage>(name: "original"))
