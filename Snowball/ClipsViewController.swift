@@ -198,6 +198,10 @@ class ClipsViewController: UIViewController {
 
   private func indexOfClip(clip: Clip) -> Int {
     let clips = self.clips as NSArray
+    let index = clips.indexOfObject(clip)
+    if index == NSNotFound {
+      return 0
+    }
     return clips.indexOfObject(clip)
   }
 
