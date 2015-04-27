@@ -75,7 +75,15 @@ class FindFriendsViewController: UIViewController {
 
   private var users: [User] = []
 
-  private let addressBook: ABAddressBook = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
+  private let addressBook: ABAddressBook? = {
+    var error: Unmanaged<CFError>?
+    let addressBook = ABAddressBookCreateWithOptions(nil, &error)
+    if error != nil {
+      println("Address book creation error: \(error)")
+      return nil
+    }
+    return addressBook.takeRetainedValue()
+  }()
 
   private let footerButton: SnowballFooterButton = {
     let button = SnowballFooterButton(rightImage: UIImage(named: "plane"))
