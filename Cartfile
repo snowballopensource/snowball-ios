@@ -1,5 +1,2 @@
-github "Alamofire/Alamofire"
-github "robb/Cartography"
 github "jamescmartinez/CoreRecord" "master"
-github "Haneke/HanekeSwift"
 github "jamescmartinez/Swifter" "master"

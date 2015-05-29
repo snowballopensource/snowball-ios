@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 let isIphone4S = (UIScreen.mainScreen().bounds.height < 568)
 

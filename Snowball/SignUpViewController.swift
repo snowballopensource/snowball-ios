@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Snowball, Inc. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 // MARK: -
 
