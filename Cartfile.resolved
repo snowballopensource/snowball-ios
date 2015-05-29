@@ -1,5 +1,5 @@
-github "Alamofire/Alamofire" "1.2.0"
-github "robb/Cartography" "22609ba4526c7f6dbad4a2810209dc94a24b908a"
+github "Alamofire/Alamofire" "1.2.2"
+github "robb/Cartography" "0.5.0"
 github "jamescmartinez/CoreRecord" "0f6dd16442e351aff6ebf18b5e726bf5e2f50685"
-github "jmacmullin/HanekeSwift" "31b91ff1a069edf16191075e469b0650b8630802"
+github "Haneke/HanekeSwift" "v0.9.1"
 github "jamescmartinez/Swifter" "a6b2a6a3d8109ef035f8521dbbd6acc9bf8cf9af"

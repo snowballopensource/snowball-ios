@@ -1,5 +1,5 @@
 github "Alamofire/Alamofire"
-github "robb/Cartography" "xcode6-3"
+github "robb/Cartography"
 github "jamescmartinez/CoreRecord" "master"
-github "jmacmullin/HanekeSwift" "swift1.2"
+github "Haneke/HanekeSwift"
 github "jamescmartinez/Swifter" "master"
