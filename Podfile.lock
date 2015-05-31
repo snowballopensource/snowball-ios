@@ -20,50 +20,24 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - GGLInstanceID (1.0.0):
-    - GoogleNetworkingUtilities (~> 1.0)
-    - GoogleSymbolUtilities (~> 1.0)
-    - GoogleUtilities (~> 1.0)
-  - Google/CloudMessaging (1.0.7):
-    - GGLInstanceID (~> 1.0)
-    - Google/Core
-    - GoogleCloudMessaging (~> 1.0)
-  - Google/Core (1.0.7):
-    - GoogleNetworkingUtilities (~> 1.0)
-    - GoogleSymbolUtilities (~> 1.0)
-    - GoogleUtilities (~> 1.0)
-  - GoogleCloudMessaging (1.0.3):
-    - GoogleInterchangeUtilities (~> 1.0)
-    - GoogleNetworkingUtilities (~> 1.0)
-    - GoogleSymbolUtilities (~> 1.0)
-    - GoogleUtilities (~> 1.0)
-  - GoogleInterchangeUtilities (1.0.0):
-    - GoogleSymbolUtilities (~> 1.0)
-  - GoogleNetworkingUtilities (1.0.0):
-    - GoogleSymbolUtilities (~> 1.0)
-  - GoogleSymbolUtilities (1.0.0)
-  - GoogleUtilities (1.0.1):
-    - GoogleSymbolUtilities (~> 1.0)
+  - Bolts/Tasks (1.1.5)
   - Mixpanel (2.8.1):
     - Mixpanel/Mixpanel (= 2.8.1)
   - Mixpanel/Mixpanel (2.8.1):
     - Mixpanel/MPCategoryHelpers
   - Mixpanel/MPCategoryHelpers (2.8.1)
+  - Parse (1.7.4):
+    - Bolts/Tasks (>= 1.1.5)
 
 DEPENDENCIES:
   - AFNetworking
-  - Google/CloudMessaging
   - Mixpanel
+  - Parse
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
-  GGLInstanceID: 3f2a20acbb91408d45a5696b7722bf44cb410e0b
-  Google: 875f5a8ade86dd02e36586e4a54814843938c7f6
-  GoogleCloudMessaging: 0d64d357dd8db2b6f6a3bd63301b04dd556320f9
-  GoogleInterchangeUtilities: fe088bea8c936218e52324a004d279c4491b9d65
-  GoogleNetworkingUtilities: 292992ab31b7b4ba32809a0e8b40e324cdfb2c0c
-  GoogleSymbolUtilities: a7b0feed1fe667c8d5e647177938d0ecd62d6948
-  GoogleUtilities: e3475cd4d45134221d2f3f3626095a1c49b62041
+  Bolts: aac24961496d504aa56fc267cde95162a71bac39
   Mixpanel: 93c4825025e6380ced273ed7178496282e385077
+  Parse: 6ca512c6e860b66739c95151b2f76ac4712b7842
 
 COCOAPODS: 0.37.2

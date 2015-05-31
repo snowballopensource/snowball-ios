@@ -42,6 +42,7 @@ class SignInViewController: AuthenticationViewController {
   // MARK: - AuthenticationViewController
 
   override func authenticationCompletedSuccessfully(user: User) {
+    super.authenticationCompletedSuccessfully(user)
     Analytics.identify(user.id!)
     Analytics.track("Sign In")
     self.switchToNavigationController(MainNavigationController())

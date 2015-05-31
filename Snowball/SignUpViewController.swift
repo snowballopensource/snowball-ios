@@ -46,6 +46,7 @@ class SignUpViewController: AuthenticationViewController {
   // MARK: - AuthenticationViewController
 
   override func authenticationCompletedSuccessfully(user: User) {
+    super.authenticationCompletedSuccessfully(user)
     Analytics.createAliasAndIdentify(user.id!)
     Analytics.track("Sign Up")
     self.navigationController?.pushViewController(PhoneNumberViewController(), animated: true)

@@ -8,53 +8,33 @@
 
 import UIKit
 
-/*
-
-** Because you're awesome, this is the command for sending a push via cURL.
-** Get the device registration token from the logs and the api key from Googs.
-
-curl --header "Authorization: key=${API_KEY}" \
---header Content-Type:"application/json" \
-https://gcm-http.googleapis.com/gcm/send \
--d "{\"to\":\"${THIS_DEVICE_REGISTRATION_TOKEN}\",\"notification\":{\"body\":\"Hello\"}}"
-
-*/
-
-class PushManager: NSObject, GGLInstanceIDDelegate {
-
-  private class var sharedPushManager: PushManager {
-    struct Singleton {
-      static let sharedPushManager = PushManager()
-    }
-    return Singleton.sharedPushManager
-  }
-
-  private let gcmSenderID = "471712850615"
-  private var deviceToken: NSData?
+struct PushManager {
 
   // MARK: - Internal
 
-  class func registerForPushNotifications() {
-    let types = UIUserNotificationType.Alert | UIUserNotificationType.Sound
+  static func registerForPushNotifications() {
+    Parse.setApplicationId("XfkcX3ZtlbyMxbSgeblGLixNuJCkmdCVEFBDkf6J",
+      clientKey: "BW8JgNZNUvWG6lvcfQUGscEKkqtJUpTRRkhw13ze")
+
+    let types = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
     let settings = UIUserNotificationSettings(forTypes: types, categories: nil)
     let application = UIApplication.sharedApplication()
     application.registerUserNotificationSettings(settings)
     application.registerForRemoteNotifications()
   }
 
-  class func registrationSucceeded(#deviceToken: NSData) {
-    let config = GGLInstanceIDConfig.defaultConfig()
-    config.delegate = sharedPushManager
-    GGLInstanceID.sharedInstance().startWithConfig(config)
-    sharedPushManager.deviceToken = deviceToken
-    sharedPushManager.onTokenRefresh()
+  static func registrationSucceeded(#deviceToken: NSData) {
+    let installation = PFInstallation.currentInstallation()
+    installation.setDeviceTokenFromData(deviceToken)
+    associateCurrentInstallationWithCurrentUser()
+    installation.saveInBackgroundWithBlock(nil)
   }
 
-  class func registrationFailed(#error: NSError) {
+  static func registrationFailed(#error: NSError) {
     error.print("Push notification registration")
   }
 
-  class func handleRemoteNotification(#userInfo: [NSObject: AnyObject]) {
+  static func handleRemoteNotification(#userInfo: [NSObject: AnyObject]) {
     println("Push notification received: \(userInfo)")
 
     if let aps = userInfo["aps"] as? [String: AnyObject] {
@@ -69,23 +49,16 @@ class PushManager: NSObject, GGLInstanceIDDelegate {
     }
   }
 
-  // MARK: - GGLInstanceIDDelegate
-
-  func onTokenRefresh() {
-    if let deviceToken = deviceToken {
-      let registrationOptions = [
-        kGGLInstanceIDRegisterAPNSOption: deviceToken,
-        kGGLInstanceIDAPNSServerTypeSandboxOption: true
-      ]
-      GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(gcmSenderID, scope: kGGLInstanceIDScopeGCM, options: registrationOptions) { (token, error) -> Void in
-        if let error = error {
-          error.print("GCM push registration reponse")
-        } else {
-          println("Registered notification token: \(token)")
+  static func associateCurrentInstallationWithCurrentUser(saveImmediately: Bool = false) {
+    if let userID = User.currentUser?.id {
+      let installation = PFInstallation.currentInstallation()
+      let installationUserID = installation["user_id"] as? String
+      if installationUserID != userID {
+        installation["user_id"] = userID
+        if saveImmediately {
+          installation.saveInBackgroundWithBlock(nil)
         }
       }
-    } else {
-      println("The shared push notification manager does not have a device token set.")
     }
   }
 }

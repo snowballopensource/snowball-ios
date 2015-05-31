@@ -7,5 +7,5 @@
 //
 
 #import <AFNetworking/AFNetworking.h>
-#import <Google/CloudMessaging.h>
 #import <Mixpanel/Mixpanel.h>
+#import <Parse/Parse.h>
