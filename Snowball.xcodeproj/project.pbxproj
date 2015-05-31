@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E6543A119B316F89268239B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8693935F5F062259B01C3952 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		8DF0E3E6680E2FB7F9D9B73D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2855F299F88B0B69D9D1484C /* libPods.a */; };
 		BA042C251A90A10000D83B81 /* CoreRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA042C241A90A10000D83B81 /* CoreRecord.framework */; };
 		BA042C261A90A10000D83B81 /* CoreRecord.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA042C241A90A10000D83B81 /* CoreRecord.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BA061D8C1B1948CE00CEAFDB /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA061D891B1948CE00CEAFDB /* Alamofire.framework */; };
+		BA061D8D1B1948CE00CEAFDB /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA061D8A1B1948CE00CEAFDB /* Cartography.framework */; };
+		BA061D8E1B1948CE00CEAFDB /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA061D8B1B1948CE00CEAFDB /* Haneke.framework */; };
+		BA061D901B1948E200CEAFDB /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA061D891B1948CE00CEAFDB /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BA061D921B1948E200CEAFDB /* Cartography.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA061D8A1B1948CE00CEAFDB /* Cartography.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BA061D941B1948E200CEAFDB /* Haneke.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA061D8B1B1948CE00CEAFDB /* Haneke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA137C7E1A7199AA001F8FCF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA137C7C1A7199AA001F8FCF /* Crashlytics.framework */; };
 		BA137C7F1A7199AA001F8FCF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA137C7D1A7199AA001F8FCF /* Fabric.framework */; };
 		BA1835511AA4FC5500D6A0BE /* ClipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1835501AA4FC5500D6A0BE /* ClipsViewController.swift */; };
@@ -53,6 +59,7 @@
 		BA9C8E801AAB779200CF05AB /* FormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C8E7F1AAB779200CF05AB /* FormTableViewController.swift */; };
 		BA9C8E821AAB7EFC00CF05AB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C8E811AAB7EFC00CF05AB /* SignUpViewController.swift */; };
 		BA9C8E841AAB7F0400CF05AB /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C8E831AAB7F0400CF05AB /* SignInViewController.swift */; };
+		BAA6375A1B180181000F3359 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA637591B180181000F3359 /* PushManager.swift */; };
 		BAA8C0801A32F8F300AAB9F4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C07F1A32F8F300AAB9F4 /* User.swift */; };
 		BAA966BD1A87FEEC0032752F /* FindFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA966BC1A87FEEC0032752F /* FindFriendsViewController.swift */; };
 		BAB1A3261AA0C9F400C2FB49 /* UITableView+RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB1A3251AA0C9F400C2FB49 /* UITableView+RefreshControl.swift */; };
@@ -94,7 +101,10 @@
 			dstSubfolderSpec = 10;
 			files = (
 				BA042C261A90A10000D83B81 /* CoreRecord.framework in Embed Frameworks */,
+				BA061D921B1948E200CEAFDB /* Cartography.framework in Embed Frameworks */,
+				BA061D901B1948E200CEAFDB /* Alamofire.framework in Embed Frameworks */,
 				BA87C1491A840C0400A58E64 /* Swifter.framework in Embed Frameworks */,
+				BA061D941B1948E200CEAFDB /* Haneke.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,10 +112,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2855F299F88B0B69D9D1484C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		32713D4685D2B1201FD238E6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		8693935F5F062259B01C3952 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A6E3769866E85F9B3BF4ACB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		BA042C241A90A10000D83B81 /* CoreRecord.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreRecord.framework; path = Carthage/Build/iOS/CoreRecord.framework; sourceTree = "<group>"; };
+		BA061D891B1948CE00CEAFDB /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		BA061D8A1B1948CE00CEAFDB /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cartography.framework; path = Carthage/Build/iOS/Cartography.framework; sourceTree = "<group>"; };
+		BA061D8B1B1948CE00CEAFDB /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = Carthage/Build/iOS/Haneke.framework; sourceTree = "<group>"; };
 		BA137C7C1A7199AA001F8FCF /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		BA137C7D1A7199AA001F8FCF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		BA1835501AA4FC5500D6A0BE /* ClipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipsViewController.swift; sourceTree = "<group>"; };
@@ -152,6 +165,7 @@
 		BA9C8E811AAB7EFC00CF05AB /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		BA9C8E831AAB7F0400CF05AB /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		BAA15EAE1A688AB80055756E /* Snowball-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snowball-Bridging-Header.h"; sourceTree = "<group>"; };
+		BAA637591B180181000F3359 /* PushManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
 		BAA8C07F1A32F8F300AAB9F4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BAA966BC1A87FEEC0032752F /* FindFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFriendsViewController.swift; sourceTree = "<group>"; };
 		BAB1A3251AA0C9F400C2FB49 /* UITableView+RefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+RefreshControl.swift"; sourceTree = "<group>"; };
@@ -182,11 +196,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA061D8C1B1948CE00CEAFDB /* Alamofire.framework in Frameworks */,
+				BA061D8D1B1948CE00CEAFDB /* Cartography.framework in Frameworks */,
+				BA061D8E1B1948CE00CEAFDB /* Haneke.framework in Frameworks */,
 				BA042C251A90A10000D83B81 /* CoreRecord.framework in Frameworks */,
 				BA87C1481A840C0400A58E64 /* Swifter.framework in Frameworks */,
 				BA137C7E1A7199AA001F8FCF /* Crashlytics.framework in Frameworks */,
 				BA137C7F1A7199AA001F8FCF /* Fabric.framework in Frameworks */,
-				5E6543A119B316F89268239B /* Pods.framework in Frameworks */,
+				8DF0E3E6680E2FB7F9D9B73D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,7 +220,10 @@
 		04150CE1616CDA3B9208DA56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8693935F5F062259B01C3952 /* Pods.framework */,
+				BA061D891B1948CE00CEAFDB /* Alamofire.framework */,
+				BA061D8A1B1948CE00CEAFDB /* Cartography.framework */,
+				BA061D8B1B1948CE00CEAFDB /* Haneke.framework */,
+				2855F299F88B0B69D9D1484C /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -276,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				BA38C15D1A30228700A2F2AE /* AppDelegate.swift */,
+				BAA637591B180181000F3359 /* PushManager.swift */,
 				BA6385DB1A65A90000B002D9 /* Authentication */,
 				BAE702471A96BF030040DA6F /* Onboarding */,
 				BA9AA6811A6747F0002C4992 /* Main */,
@@ -461,7 +482,6 @@
 				BAE10A171A30400100CCFA25 /* Embed Frameworks */,
 				BA137C7B1A71996F001F8FCF /* Fabric Script */,
 				BAE32F651A71CB6800B130EC /* Carthage Temporary Fix 1/22/2015 */,
-				CC213646B077AFB193627B18 /* Embed Pods Frameworks */,
 				40A4A0A5F11886F0349A4D1E /* Copy Pods Resources */,
 			);
 			buildRules = (
@@ -600,6 +620,9 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Swifter.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/CoreRecord.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Cartography.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Haneke.framework",
 			);
 			name = "Carthage Temporary Fix 1/22/2015";
 			outputPaths = (
@@ -607,21 +630,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		CC213646B077AFB193627B18 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -664,6 +672,7 @@
 				BA9AA6831A674804002C4992 /* MainNavigationController.swift in Sources */,
 				BAF8CDC21AAF65CC00222872 /* SnowballFooterButton.swift in Sources */,
 				BA7C27C61A37A28F00A9CFC5 /* Router.swift in Sources */,
+				BAA6375A1B180181000F3359 /* PushManager.swift in Sources */,
 				BA9C8E821AAB7EFC00CF05AB /* SignUpViewController.swift in Sources */,
 				BA32C7921A3286250052F4CA /* UIColor+Snowball.swift in Sources */,
 				BA20CCEE1A9D156C00D96A31 /* UploadQueue.swift in Sources */,

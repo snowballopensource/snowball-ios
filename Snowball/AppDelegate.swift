@@ -36,10 +36,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     window?.makeKeyAndVisible()
     Fabric.with([Crashlytics()])
+    PushManager.registerForPushNotifications()
     return true
   }
 
   func applicationDidBecomeActive(application: UIApplication) {
     Analytics.track("Session Start")
+  }
+
+  func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    PushManager.registrationSucceeded(deviceToken: deviceToken)
+  }
+
+  func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    PushManager.registrationFailed(error: error)
+  }
+
+  func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    PushManager.handleRemoteNotification(userInfo: userInfo)
   }
 }
