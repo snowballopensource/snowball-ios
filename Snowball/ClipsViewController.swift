@@ -347,6 +347,16 @@ extension ClipsViewController: ClipCollectionViewCellDelegate {
       }
     }
   }
+
+  func userDidTapLikeButtonForCell(cell: ClipCollectionViewCell) {
+    if let clip = clipForCell(cell) {
+      if let user = clip.user {
+        // TODO: use opposite of current like state
+        cell.setClipLikedAnimated(liked: true)
+        // TODO: send request to server to like/unlike the clip
+      }
+    }
+  }
 }
 
 // MARK: -

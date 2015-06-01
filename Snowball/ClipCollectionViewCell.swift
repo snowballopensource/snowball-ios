@@ -72,6 +72,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   private let userButton = UIButton()
 
+  private let likeButton: UIButton = {
+    let button = UIButton()
+    button.setImage(UIImage(named: "heart"), forState: UIControlState.Normal)
+    button.setImage(UIImage(named: "heart-filled"), forState: UIControlState.Selected)
+    return button
+  }()
+
   private let dimView: UIView = {
     let view = UIView()
     view.backgroundColor = UIColor.whiteColor()
@@ -153,6 +160,15 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipTimeLabel.right == clipTimeLabel.superview!.right
     }
 
+    likeButton.addTarget(self, action: "likeButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    contentView.addSubview(likeButton)
+    layout(likeButton, clipTimeLabel) { (likeButton, clipTimeLabel) in
+      likeButton.centerX == likeButton.superview!.centerX
+      likeButton.top == clipTimeLabel.bottom + 2
+      likeButton.width == 44
+      likeButton.height == 44
+    }
+
     clipThumbnailImageView.addSubview(dimView)
 
     contentView.addSubview(optionsView)
@@ -188,6 +204,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
     usernameLabel.textColor = userColor
     clipTimeLabel.text = clip.createdAt?.shortTimeSinceString()
 
+    likeButton.selected = false // TODO: SET TO CLIP LIKED
+    let heartImage = UIImage(named: "heart")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+    let heartFilledImage = UIImage(named: "heart-filled")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+    likeButton.setImage(heartImage, forState: UIControlState.Normal)
+    likeButton.setImage(heartFilledImage, forState: UIControlState.Selected)
+    likeButton.tintColor = userColor
+
     clipThumbnailImageView.image = UIImage()
     if let thumbnailURL = clip.thumbnailURL {
       if thumbnailURL.scheme == "file" {
@@ -220,6 +243,25 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let shouldDimContentView = (inPlayState && !isCurrentPlayingClip)
     dimContentView(shouldDimContentView)
     dimUserInfo(shouldDimContentView, animated: animated)
+  }
+
+  func setClipLikedAnimated(#liked: Bool) {
+    likeButton.selected = liked
+    if liked {
+      let originFrame = likeButton.frame
+      let heartImage = likeButton.imageForState(UIControlState.Selected)
+      let animatingImageView = UIImageView(image: heartImage)
+      animatingImageView.tintColor = likeButton.tintColor
+      animatingImageView.frame = originFrame
+      contentView.addSubview(animatingImageView)
+      UIView.animateWithDuration(1.2, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+        animatingImageView.frame = CGRect(x: originFrame.origin.x, y: originFrame.origin.y - 180, width: originFrame.size.width, height: originFrame.size.height)
+        animatingImageView.alpha = 0
+        animatingImageView.transform = CGAffineTransformMakeScale(1.5, 1.5)
+      }, completion: { (completed) -> Void in
+        animatingImageView.removeFromSuperview()
+      })
+    }
   }
 
   // MARK: - Private
@@ -300,6 +342,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
   @objc private func userButtonTapped() {
     delegate?.userDidTapUserButtonForCell(self)
   }
+
+  @objc private func likeButtonTapped() {
+    delegate?.userDidTapLikeButtonForCell(self)
+  }
 }
 
 // MARK: -
@@ -308,6 +354,7 @@ protocol ClipCollectionViewCellDelegate {
   func userDidDeleteClipForCell(cell: ClipCollectionViewCell)
   func userDidFlagClipForCell(cell: ClipCollectionViewCell)
   func userDidTapUserButtonForCell(cell: ClipCollectionViewCell)
+  func userDidTapLikeButtonForCell(cell: ClipCollectionViewCell)
 }
 
 // MARK: -
