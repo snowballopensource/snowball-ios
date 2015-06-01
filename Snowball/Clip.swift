@@ -15,6 +15,7 @@ class Clip {
   var id: String?
   var videoURL: NSURL?
   var thumbnailURL: NSURL?
+  var liked = false
   var createdAt: NSDate?
   var user: User?
   var state = ClipState.Default
@@ -44,6 +45,9 @@ class Clip {
     }
     if let thumbnailURL = attributes["thumbnail_url"] as? String {
       self.thumbnailURL = NSURL(string: thumbnailURL)
+    }
+    if let liked = attributes["liked"] as? Bool {
+      self.liked = liked
     }
     if let createdAt = attributes["created_at"] as? NSTimeInterval {
       self.createdAt = NSDate(timeIntervalSince1970: createdAt)

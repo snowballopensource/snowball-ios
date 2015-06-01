@@ -26,6 +26,8 @@ enum Router: URLRequestConvertible {
   case GetClipStream
   case GetClipStreamForUser(userID: String)
   case DeleteClip(clipID: String)
+  case LikeClip(clipID: String)
+  case UnlikeClip(clipID: String)
   case FlagClip(clipID: String)
 
   // MARK: - Properties
@@ -52,6 +54,8 @@ enum Router: URLRequestConvertible {
     case .GetClipStream: return .GET
     case .GetClipStreamForUser: return .GET
     case .DeleteClip: return .DELETE
+    case .LikeClip: return .POST
+    case .UnlikeClip: return .DELETE
     case .FlagClip: return .POST
     }
   }
@@ -71,6 +75,8 @@ enum Router: URLRequestConvertible {
     case .GetClipStream: return "clips/stream"
     case .GetClipStreamForUser(let userID): return "users/\(userID)/clips/stream"
     case .DeleteClip(let clipID): return "clips/\(clipID)"
+    case .LikeClip(let clipID): return "clips/\(clipID)/likes"
+    case .UnlikeClip(let clipID): return "clips/\(clipID)/likes"
     case .FlagClip(let clipID): return "clips/\(clipID)/flags"
     }
   }

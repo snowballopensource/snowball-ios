@@ -351,9 +351,17 @@ extension ClipsViewController: ClipCollectionViewCellDelegate {
   func userDidTapLikeButtonForCell(cell: ClipCollectionViewCell) {
     if let clip = clipForCell(cell) {
       if let user = clip.user {
-        // TODO: use opposite of current like state
-        cell.setClipLikedAnimated(liked: true)
-        // TODO: send request to server to like/unlike the clip
+        clip.liked = !clip.liked
+        cell.setClipLikedAnimated(liked: clip.liked)
+        if let clipID = clip.id {
+          var route: Router!
+          if clip.liked {
+            route = Router.LikeClip(clipID: clipID)
+          } else {
+            route = Router.UnlikeClip(clipID: clipID)
+          }
+          API.request(route)
+        }
       }
     }
   }

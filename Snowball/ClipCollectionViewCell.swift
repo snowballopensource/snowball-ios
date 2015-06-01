@@ -204,7 +204,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     usernameLabel.textColor = userColor
     clipTimeLabel.text = clip.createdAt?.shortTimeSinceString()
 
-    likeButton.selected = false // TODO: SET TO CLIP LIKED
+    likeButton.selected = clip.liked
     let heartImage = UIImage(named: "heart")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     let heartFilledImage = UIImage(named: "heart-filled")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     likeButton.setImage(heartImage, forState: UIControlState.Normal)
