@@ -244,7 +244,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     scaleClipThumbnail(inPlayState, isCurrentPlayingClip: isCurrentPlayingClip, animated: animated)
     let shouldDimContentView = (inPlayState && !isCurrentPlayingClip)
     dimContentView(shouldDimContentView)
-    dimUserInfo(shouldDimContentView, animated: animated)
+    hideUserInfo(shouldDimContentView, animated: animated)
   }
 
   func setClipLikedAnimated(#liked: Bool) {
@@ -290,16 +290,17 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
   }
 
-  private func dimUserInfo(dim: Bool, animated: Bool) {
+  private func hideUserInfo(hidden: Bool, animated: Bool) {
     if animated {
       UIView.animateWithDuration(0.2) {
-        self.dimUserInfo(dim, animated: false)
+        self.hideUserInfo(hidden, animated: false)
       }
     } else {
-      let alpha = CGFloat(!dim)
+      let alpha = CGFloat(!hidden)
       userAvatarImageView.alpha = alpha
       usernameLabel.alpha = alpha
       clipTimeLabel.alpha = alpha
+      likeButton.alpha = alpha
     }
   }
 
