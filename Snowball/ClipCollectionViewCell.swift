@@ -230,8 +230,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
     setInPlayState(false, isCurrentPlayingClip: false, animated: false)
     if clip.state == ClipState.Pending {
       addClipImageView.hidden = false
+      likeButton.hidden = true
     } else {
       addClipImageView.hidden = true
+      likeButton.hidden = false
     }
 
     hideOptionsViewAnimated(false)
