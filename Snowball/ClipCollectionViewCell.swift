@@ -18,7 +18,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let screenHeight = UIScreen.mainScreen().bounds.height
     let screenWidth = UIScreen.mainScreen().bounds.width
     let cellHeight = screenHeight - screenWidth
-    var cellWidth: CGFloat = 140
+    var cellWidth: CGFloat = screenWidth / 2.5
     if isIphone4S {
       cellWidth = 90
     }
@@ -158,6 +158,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipTimeLabel.left == clipTimeLabel.superview!.left
       clipTimeLabel.top == usernameLabel.bottom + 2
       clipTimeLabel.right == clipTimeLabel.superview!.right
+      if isIphone4S {
+        clipTimeLabel.height == 0
+      }
     }
 
     likeButton.addTarget(self, action: "likeButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
@@ -165,8 +168,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
     layout(likeButton, clipTimeLabel) { (likeButton, clipTimeLabel) in
       likeButton.centerX == likeButton.superview!.centerX
       likeButton.top == clipTimeLabel.bottom + 2
-      likeButton.width == 44
-      likeButton.height == 44
+      if isIphone4S {
+        likeButton.width == 23
+        likeButton.height == 23
+      } else {
+        likeButton.width == 44
+        likeButton.height == 44
+      }
     }
 
     clipThumbnailImageView.addSubview(dimView)
