@@ -132,16 +132,16 @@ class ClipCollectionViewCell: UICollectionViewCell {
     contentView.addSubview(userAvatarImageView)
     layout(userAvatarImageView, clipThumbnailImageView) { (userAvatarImageView, clipThumbnailImageView) in
       userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
-      userAvatarImageView.top == clipThumbnailImageView.bottom + 10
+      userAvatarImageView.centerY == clipThumbnailImageView.bottom
       userAvatarImageView.width == avatarDiameter
       userAvatarImageView.height == userAvatarImageView.width
     }
 
     userButton.addTarget(self, action: "userButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     contentView.addSubview(userButton)
-    layout(userButton, clipThumbnailImageView) { (userButton, clipThumbnailImageView) in
+    layout(userButton, userAvatarImageView) { (userButton, userAvatarImageView) in
       userButton.left == userButton.superview!.left
-      userButton.top == clipThumbnailImageView.bottom
+      userButton.top == userAvatarImageView.top
       userButton.right == userButton.superview!.right
       userButton.bottom == userButton.superview!.bottom
     }
