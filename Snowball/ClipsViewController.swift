@@ -356,6 +356,7 @@ extension ClipsViewController: ClipCollectionViewCellDelegate {
         if let clipID = clip.id {
           var route: Router!
           if clip.liked {
+            Analytics.track("Like Clip")
             route = Router.LikeClip(clipID: clipID)
           } else {
             route = Router.UnlikeClip(clipID: clipID)
