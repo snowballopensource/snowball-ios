@@ -73,7 +73,7 @@ class CameraViewController: UIViewController {
 
   private let progressView: UIProgressView = {
     let progressView = UIProgressView()
-    progressView.progressTintColor = UIColor.SnowballColor.greenColor
+    progressView.progressTintColor = User.currentUser?.color as? UIColor ?? UIColor.SnowballColor.greenColor
     progressView.trackTintColor = UIColor.clearColor()
     return progressView
     }()
