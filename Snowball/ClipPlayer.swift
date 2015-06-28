@@ -48,11 +48,15 @@ class ClipPlayer: AVQueuePlayer {
   }
 
   func stop() {
+    stopWithoutNotifyingDelegate()
+    delegate?.playerDidEndPlayback()
+  }
+
+  func stopWithoutNotifyingDelegate() {
     preloadQueue.cancelAllOperations()
     pause()
     removeAllItems()
     currentClip = nil
-    delegate?.playerDidEndPlayback()
   }
 
   // MARK: - Private

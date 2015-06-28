@@ -264,7 +264,7 @@ extension ClipsViewController: UICollectionViewDataSource {
     let clip = clips[indexPath.item]
     cell.configureForClip(clip)
     cell.delegate = self
-    var isCurrentPlayingClip = clipIsPlayingClip(clip)
+    let isCurrentPlayingClip = clipIsPlayingClip(clip)
     cell.setInPlayState(player.playing, isCurrentPlayingClip: isCurrentPlayingClip, animated: false)
     return cell
   }
@@ -277,10 +277,16 @@ extension ClipsViewController: UICollectionViewDelegate {
   // MARK: - UICollectionViewDelegate
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    let clip = clips[indexPath.item]
     if player.playing {
-      player.stop()
+      let isCurrentPlayingClip = clipIsPlayingClip(clip)
+      if isCurrentPlayingClip {
+        player.stop()
+      } else {
+        player.stopWithoutNotifyingDelegate()
+        player.playClips([clip] + allClipsAfterClip(clip))
+      }
     } else {
-      let clip = clips[indexPath.item]
       if clip.state == ClipState.Pending {
         delegate?.userDidAcceptPreviewClip(clip)
       } else if delegate != nil && delegate!.playerShouldBeginPlayback() {
