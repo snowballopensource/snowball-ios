@@ -288,8 +288,7 @@ extension ClipsViewController: UICollectionViewDelegate {
       if isCurrentPlayingClip {
         player.stop()
       } else {
-        player.stopWithoutNotifyingDelegate()
-        player.playClips([clip] + allClipsAfterClip(clip))
+        player.restartPlaybackWithNewClips([clip] + allClipsAfterClip(clip))
       }
     } else {
       if clip.state == ClipState.Pending {

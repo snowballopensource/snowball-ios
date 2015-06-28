@@ -52,14 +52,19 @@ class ClipPlayer: AVQueuePlayer {
     delegate?.playerDidEndPlayback()
   }
 
-  func stopWithoutNotifyingDelegate() {
+  func restartPlaybackWithNewClips(clips: [Clip]) {
+    stopWithoutNotifyingDelegate()
+    playClips(clips)
+  }
+
+  // MARK: - Private
+
+  private func stopWithoutNotifyingDelegate() {
     preloadQueue.cancelAllOperations()
     pause()
     removeAllItems()
     currentClip = nil
   }
-
-  // MARK: - Private
 
   private func registerPlayerItemForNotifications(playerItem: ClipPlayerItem) {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidPlayToEndTime:", name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
