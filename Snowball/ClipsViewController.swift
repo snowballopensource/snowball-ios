@@ -384,6 +384,7 @@ extension ClipsViewController: ClipPlayerDelegate {
           } else {
             cell.setInPlayState(true, isCurrentPlayingClip: false, animated: true)
           }
+          collectionView.scrollEnabled = false
         }
       }
     }
@@ -395,6 +396,7 @@ extension ClipsViewController: ClipPlayerDelegate {
       let cell = cell as! ClipCollectionViewCell
       cell.setInPlayState(false, isCurrentPlayingClip: false, animated: true)
     }
+    collectionView.scrollEnabled = true
     delegate?.playerDidEndPlayback()
   }
 
