@@ -80,7 +80,7 @@ class CameraViewController: UIViewController {
 
   private var progressViewTimer: NSTimer?
 
-  private let maxRecordingSeconds = 10.0
+  private let maxRecordingSeconds = 5.0
 
   private let FPS: Int32 = 24
 
