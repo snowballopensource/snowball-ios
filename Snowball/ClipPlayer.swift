@@ -53,8 +53,10 @@ class ClipPlayer: AVQueuePlayer {
   }
 
   func restartPlaybackWithNewClips(clips: [Clip]) {
-    stopWithoutNotifyingDelegate()
-    playClips(clips)
+    if clips.count > 0 {
+      stopWithoutNotifyingDelegate()
+      playClips(clips)
+    }
   }
 
   // MARK: - Private

@@ -47,6 +47,18 @@ class ClipsViewController: UIViewController {
     return activityIndicatorView
     }()
 
+  let playerControlSwipeLeftGestureRecognizer: UISwipeGestureRecognizer = {
+    let gestureRecognizer = UISwipeGestureRecognizer()
+    gestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
+    return gestureRecognizer
+  }()
+
+  let playerControlSwipeRightGestureRecognizer: UISwipeGestureRecognizer = {
+    let gestureRecognizer = UISwipeGestureRecognizer()
+    gestureRecognizer.direction = UISwipeGestureRecognizerDirection.Right
+    return gestureRecognizer
+    }()
+
   var clips: [Clip] = []
 
   private let kClipBookmarkDateKey = "ClipBookmarkDate"
@@ -125,6 +137,11 @@ class ClipsViewController: UIViewController {
       activityIndicatorView.top == activityIndicatorView.superview!.top + 50
     }
 
+    playerControlSwipeLeftGestureRecognizer.addTarget(self, action: "userDidSwipePlayerControlGestureRecognizerLeft:")
+    view.addGestureRecognizer(playerControlSwipeLeftGestureRecognizer)
+    playerControlSwipeRightGestureRecognizer.addTarget(self, action: "userDidSwipePlayerControlGestureRecognizerRight:")
+    view.addGestureRecognizer(playerControlSwipeRightGestureRecognizer)
+
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "refresh", name: UIApplicationWillEnterForegroundNotification, object: nil)
 
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "appResigningActive", name: UIApplicationWillResignActiveNotification, object: nil)
@@ -197,6 +214,25 @@ class ClipsViewController: UIViewController {
 
   // MARK: - Private
 
+  @objc private func userDidSwipePlayerControlGestureRecognizerLeft(recognizer: UISwipeGestureRecognizer) {
+    if player.playing {
+      if let clip = player.currentClip {
+        let nextClips = allClipsAfterClip(clip)
+        player.restartPlaybackWithNewClips(nextClips)
+      }
+    }
+  }
+
+  @objc private func userDidSwipePlayerControlGestureRecognizerRight(recognizer: UISwipeGestureRecognizer) {
+    if player.playing {
+      if let clip = player.currentClip {
+        if let previousClip = clipBeforeClip(clip) {
+          player.restartPlaybackWithNewClips([previousClip] + allClipsAfterClip(previousClip))
+        }
+      }
+    }
+  }
+
   @objc private func appResigningActive() {
     player.stop()
   }
@@ -207,7 +243,7 @@ class ClipsViewController: UIViewController {
     if index == NSNotFound {
       return 0
     }
-    return clips.indexOfObject(clip)
+    return index
   }
 
   private func allClipsAfterClip(clip: Clip) -> [Clip] {
@@ -221,6 +257,14 @@ class ClipsViewController: UIViewController {
 
   private func clipAfterClip(clip: Clip) -> Clip? {
     return allClipsAfterClip(clip).first
+  }
+
+  private func clipBeforeClip(clip: Clip) -> Clip? {
+    let previousClipIndex = indexOfClip(clip) - 1
+    if previousClipIndex >= 0  && previousClipIndex < clips.count {
+      return clips[previousClipIndex]
+    }
+    return nil
   }
 
   private func clipForCell(cell: ClipCollectionViewCell) -> Clip? {
