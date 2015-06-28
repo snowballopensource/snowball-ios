@@ -47,6 +47,12 @@ class ClipsViewController: UIViewController {
     return activityIndicatorView
     }()
 
+  let playheadImageView: UIImageView = {
+    let imageView = UIImageView(image: UIImage(named: "play"))
+    imageView.contentMode = UIViewContentMode.Center
+    return imageView
+  }()
+
   let playerControlSwipeLeftGestureRecognizer: UISwipeGestureRecognizer = {
     let gestureRecognizer = UISwipeGestureRecognizer()
     gestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
@@ -131,10 +137,18 @@ class ClipsViewController: UIViewController {
       collectionView.bottom == collectionView.superview!.bottom
     }
 
-    collectionView.addSubview(activityIndicatorView)
-    layout(activityIndicatorView) { (activityIndicatorView) in
-      activityIndicatorView.centerX == activityIndicatorView.superview!.centerX / collectionViewWidthPreloadMultiple
-      activityIndicatorView.top == activityIndicatorView.superview!.top + 50
+    view.addSubview(playheadImageView)
+    layout(playheadImageView, collectionView) { (playheadImageView, collectionView) in
+      playheadImageView.left == playheadImageView.superview!.left
+      playheadImageView.top == collectionView.top
+      playheadImageView.right == playheadImageView.superview!.right
+      playheadImageView.height == ClipCollectionViewCell.size.width
+    }
+
+    view.addSubview(activityIndicatorView)
+    layout(activityIndicatorView, collectionView) { (activityIndicatorView, collectionView) in
+      activityIndicatorView.centerX == collectionView.centerX / collectionViewWidthPreloadMultiple
+      activityIndicatorView.top == collectionView.top + 50
     }
 
     playerControlSwipeLeftGestureRecognizer.addTarget(self, action: "userDidSwipePlayerControlGestureRecognizerLeft:")
