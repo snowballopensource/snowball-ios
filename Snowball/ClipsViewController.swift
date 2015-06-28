@@ -136,6 +136,11 @@ class ClipsViewController: UIViewController {
     refresh()
   }
 
+  override func viewWillDisappear(animated: Bool) {
+    player.stop()
+    super.viewWillDisappear(animated)
+  }
+
   // MARK: - KVO
 
   override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
