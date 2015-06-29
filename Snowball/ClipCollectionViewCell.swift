@@ -42,6 +42,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return imageView
   }()
 
+  private let playClipImageView: UIImageView = {
+    let imageView = UIImageView(image: UIImage(named: "play"))
+    imageView.contentMode = UIViewContentMode.Center
+    return imageView
+    }()
+
   private let showOptionsGestureRecognizer: UISwipeGestureRecognizer = {
     let swipeGestureRecognizer = UISwipeGestureRecognizer()
     swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Down
@@ -124,6 +130,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     addClipImageView.tintColor = User.currentUser?.color as? UIColor ?? UIColor.SnowballColor.greenColor
     clipThumbnailImageView.addSubview(addClipImageView)
 
+    clipThumbnailImageView.addSubview(playClipImageView)
+
     showOptionsGestureRecognizer.addTarget(self, action: "showOptionsGestureRecognizerSwiped")
     addGestureRecognizer(showOptionsGestureRecognizer)
 
@@ -201,6 +209,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     super.layoutSubviews()
 
     addClipImageView.frame = clipThumbnailImageView.bounds
+    playClipImageView.frame = clipThumbnailImageView.bounds
     optionsView.frame = clipThumbnailImageView.bounds
     optionsViewOverlay.frame = clipThumbnailImageView.bounds
     hideOptionsViewAnimated(false)
@@ -209,7 +218,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   // MARK: - Internal
 
-  func configureForClip(clip: Clip) {
+  func configureForClip(clip: Clip, showBookmarkPlayhead: Bool = false) {
     usernameLabel.text = clip.user?.username
     let userColor = clip.user?.color as? UIColor ?? UIColor.SnowballColor.greenColor
     if let user = clip.user {
@@ -250,6 +259,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
       likeButton.hidden = false
     }
 
+    playClipImageView.alpha = CGFloat(showBookmarkPlayhead)
+
     hideOptionsViewAnimated(false)
     optionsView.configureForUser(clip.user)
   }
@@ -277,6 +288,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
       }, completion: { (completed) -> Void in
         animatingImageView.removeFromSuperview()
       })
+    }
+  }
+
+  func hideBookmarkPlayhead() {
+    UIView.animateWithDuration(0.4) {
+      self.playClipImageView.alpha = 0
     }
   }
 

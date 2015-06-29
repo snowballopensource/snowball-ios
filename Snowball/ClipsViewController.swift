@@ -337,7 +337,13 @@ extension ClipsViewController: UICollectionViewDataSource {
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(ClipCollectionViewCell), forIndexPath: indexPath) as! ClipCollectionViewCell
     let clip = clips[indexPath.item]
-    cell.configureForClip(clip)
+    var showBookmark = false
+    if let bookmarkedClip = self.bookmarkedClip {
+      if clip.id == bookmarkedClip.id {
+        showBookmark = true
+      }
+    }
+    cell.configureForClip(clip, showBookmarkPlayhead: showBookmark)
     cell.delegate = self
     let isCurrentPlayingClip = clipIsPlayingClip(clip)
     cell.setInPlayState(player.playing, isCurrentPlayingClip: isCurrentPlayingClip, animated: false)
@@ -466,6 +472,11 @@ extension ClipsViewController: ClipPlayerDelegate {
           }
           collectionView.scrollEnabled = false
           setPauseImageViewHidden(false)
+          if let bookmarkedClip = bookmarkedClip {
+            if let cell = cellForClip(bookmarkedClip) {
+              cell.hideBookmarkPlayhead()
+            }
+          }
         }
       }
     }
