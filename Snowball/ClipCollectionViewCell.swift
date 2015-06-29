@@ -291,9 +291,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
   }
 
-  func hideBookmarkPlayhead() {
+  func setBookmarkPlayheadHidden(hidden: Bool) {
     UIView.animateWithDuration(0.4) {
-      self.playClipImageView.alpha = 0
+      self.playClipImageView.alpha = CGFloat(!hidden)
     }
   }
 

@@ -322,6 +322,14 @@ class ClipsViewController: UIViewController {
       pauseImageView.alpha = alpha
     }
   }
+
+  private func setBookmarkPlayheadHiddenForBookmarkedClip(hidden: Bool) {
+    if let bookmarkedClip = bookmarkedClip {
+      if let cell = cellForClip(bookmarkedClip) {
+        cell.setBookmarkPlayheadHidden(hidden)
+      }
+    }
+  }
 }
 
 // MARK: -
@@ -472,11 +480,7 @@ extension ClipsViewController: ClipPlayerDelegate {
           }
           collectionView.scrollEnabled = false
           setPauseImageViewHidden(false)
-          if let bookmarkedClip = bookmarkedClip {
-            if let cell = cellForClip(bookmarkedClip) {
-              cell.hideBookmarkPlayhead()
-            }
-          }
+          setBookmarkPlayheadHiddenForBookmarkedClip(true)
         }
       }
     }
@@ -490,6 +494,7 @@ extension ClipsViewController: ClipPlayerDelegate {
     }
     collectionView.scrollEnabled = true
     setPauseImageViewHidden(true)
+    setBookmarkPlayheadHiddenForBookmarkedClip(false)
     delegate?.playerDidEndPlayback()
   }
 
