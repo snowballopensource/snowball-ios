@@ -47,8 +47,8 @@ class ClipsViewController: UIViewController {
     return activityIndicatorView
     }()
 
-  let playheadImageView: UIImageView = {
-    let imageView = UIImageView(image: UIImage(named: "play"))
+  let pauseImageView: UIImageView = {
+    let imageView = UIImageView(image: UIImage(named: "pause"))
     imageView.contentMode = UIViewContentMode.Center
     return imageView
   }()
@@ -137,12 +137,13 @@ class ClipsViewController: UIViewController {
       collectionView.bottom == collectionView.superview!.bottom
     }
 
-    view.addSubview(playheadImageView)
-    layout(playheadImageView, collectionView) { (playheadImageView, collectionView) in
-      playheadImageView.left == playheadImageView.superview!.left
-      playheadImageView.top == collectionView.top
-      playheadImageView.right == playheadImageView.superview!.right
-      playheadImageView.height == ClipCollectionViewCell.size.width
+    setPauseImageViewHidden(true, animated: false)
+    view.addSubview(pauseImageView)
+    layout(pauseImageView, collectionView) { (pauseImageView, collectionView) in
+      pauseImageView.left == pauseImageView.superview!.left
+      pauseImageView.top == collectionView.top
+      pauseImageView.right == pauseImageView.superview!.right
+      pauseImageView.height == ClipCollectionViewCell.size.width
     }
 
     view.addSubview(activityIndicatorView)
@@ -310,6 +311,17 @@ class ClipsViewController: UIViewController {
     clips.removeAtIndex(index)
     collectionView.deleteItemsAtIndexPaths([NSIndexPath(forItem: index, inSection: 0)])
   }
+
+  private func setPauseImageViewHidden(hidden: Bool, animated: Bool = true) {
+    if animated {
+      UIView.animateWithDuration(0.2) {
+        self.setPauseImageViewHidden(hidden, animated: false)
+      }
+    } else {
+      let alpha = CGFloat(!hidden)
+      pauseImageView.alpha = alpha
+    }
+  }
 }
 
 // MARK: -
@@ -453,6 +465,7 @@ extension ClipsViewController: ClipPlayerDelegate {
             cell.setInPlayState(true, isCurrentPlayingClip: false, animated: true)
           }
           collectionView.scrollEnabled = false
+          setPauseImageViewHidden(false)
         }
       }
     }
@@ -465,6 +478,7 @@ extension ClipsViewController: ClipPlayerDelegate {
       cell.setInPlayState(false, isCurrentPlayingClip: false, animated: true)
     }
     collectionView.scrollEnabled = true
+    setPauseImageViewHidden(true)
     delegate?.playerDidEndPlayback()
   }
 
