@@ -35,7 +35,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   private let clipThumbnailLoadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
 
-  private let addClipImageView = UIImageView(image: UIImage(named: "add-clip"))
+  private let addClipImageView: UIImageView = {
+    let imageView = UIImageView(image: UIImage(named: "add-clip")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate))
+    imageView.backgroundColor = UIColor.whiteColor()
+    imageView.contentMode = UIViewContentMode.Center
+    return imageView
+  }()
 
   private let showOptionsGestureRecognizer: UISwipeGestureRecognizer = {
     let swipeGestureRecognizer = UISwipeGestureRecognizer()
@@ -116,6 +121,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipThumbnailLoadingIndicator.height == clipThumbnailLoadingIndicator.superview!.height
     }
 
+    addClipImageView.tintColor = User.currentUser?.color as? UIColor ?? UIColor.SnowballColor.greenColor
     clipThumbnailImageView.addSubview(addClipImageView)
 
     showOptionsGestureRecognizer.addTarget(self, action: "showOptionsGestureRecognizerSwiped")
