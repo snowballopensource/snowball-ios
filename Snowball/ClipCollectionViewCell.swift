@@ -257,6 +257,11 @@ class ClipCollectionViewCell: UICollectionViewCell {
     } else {
       addClipImageView.hidden = true
       likeButton.hidden = false
+      if let currentUser = User.currentUser, clipUser = clip.user {
+        if clipUser.id == currentUser.id {
+          likeButton.hidden = true
+        }
+      }
     }
 
     playClipImageView.alpha = CGFloat(showBookmarkPlayhead)
