@@ -125,8 +125,9 @@ class ClipsViewController: UIViewController {
     }
 
     let collectionViewWidthPreloadMultiple: CGFloat = 2
-    let rightInset = view.bounds.width * collectionViewWidthPreloadMultiple - view.bounds.width
-    collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: rightInset)
+    let leftInset = ClipCollectionViewCell.size.width
+    let rightInset = view.bounds.width * collectionViewWidthPreloadMultiple - view.bounds.width + ClipCollectionViewCell.size.width
+    collectionView.contentInset = UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: rightInset)
     collectionView.dataSource = self
     collectionView.delegate = self
     view.addSubview(collectionView)
