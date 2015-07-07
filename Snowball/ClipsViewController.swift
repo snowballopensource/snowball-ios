@@ -159,12 +159,16 @@ class ClipsViewController: UIViewController {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "refresh", name: UIApplicationWillEnterForegroundNotification, object: nil)
 
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "appResigningActive", name: UIApplicationWillResignActiveNotification, object: nil)
+
+    refresh()
   }
 
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
 
-    refresh()
+    if let bookmarkedClip = bookmarkedClip {
+      scrollToClip(bookmarkedClip, animated: false)
+    }
   }
 
   override func viewWillDisappear(animated: Bool) {
