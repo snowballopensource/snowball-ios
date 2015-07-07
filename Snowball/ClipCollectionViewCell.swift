@@ -250,6 +250,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
         })
       }
     }
+    playClipImageView.alpha = CGFloat(showBookmarkPlayhead)
     setInPlayState(false, isCurrentPlayingClip: false, animated: false)
     if clip.state == ClipState.Pending {
       addClipImageView.hidden = false
@@ -264,8 +265,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
       }
     }
 
-    playClipImageView.alpha = CGFloat(showBookmarkPlayhead)
-
     hideOptionsViewAnimated(false)
     optionsView.configureForUser(clip.user)
   }
@@ -275,6 +274,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let shouldDimContentView = (inPlayState && !isCurrentPlayingClip)
     dimContentView(shouldDimContentView)
     hideUserInfo(shouldDimContentView, animated: animated)
+    if inPlayState {
+      playClipImageView.alpha = 0
+    }
   }
 
   func setClipLikedAnimated(#liked: Bool) {
