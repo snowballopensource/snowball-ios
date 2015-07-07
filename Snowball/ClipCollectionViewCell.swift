@@ -234,7 +234,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     likeButton.setImage(heartFilledImage, forState: UIControlState.Selected)
     likeButton.tintColor = userColor
 
-    clipThumbnailImageView.image = UIImage()
+    clipThumbnailImageView.image = nil
     if let thumbnailURL = clip.thumbnailURL {
       if thumbnailURL.scheme == "file" {
         let imageData = NSData(contentsOfURL: thumbnailURL)!
