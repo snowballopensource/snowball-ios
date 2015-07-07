@@ -42,7 +42,7 @@ struct PushManager {
       if let aps = userInfo["aps"] as? [String: AnyObject] {
         if let message = aps["alert"] as? String {
           let alert = UIAlertController(title: nil, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-          let okAction = UIAlertAction(title: NSLocalizedString("OK"), style: UIAlertActionStyle.Default, handler: nil)
+          let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Default, handler: nil)
           alert.addAction(okAction)
           if let rootVC = UIApplication.sharedApplication().delegate?.window??.rootViewController {
             rootVC.presentViewController(alert, animated: true, completion: nil)

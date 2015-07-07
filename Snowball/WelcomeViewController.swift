@@ -32,7 +32,7 @@ class WelcomeViewController: UIViewController {
     let button = SnowballRoundedButton()
     button.tintColor = UIColor.SnowballColor.greenColor
     button.showChevron = true
-    button.setTitle(NSLocalizedString("sign up"), forState: UIControlState.Normal)
+    button.setTitle(NSLocalizedString("sign up", comment: ""), forState: UIControlState.Normal)
     return button
   }()
 
@@ -40,13 +40,13 @@ class WelcomeViewController: UIViewController {
     let button = SnowballRoundedButton()
     button.tintColor = UIColor.SnowballColor.grayColor
     button.showChevron = true
-    button.setTitle(NSLocalizedString("sign in"), forState: UIControlState.Normal)
+    button.setTitle(NSLocalizedString("sign in", comment: ""), forState: UIControlState.Normal)
     return button
   }()
 
   private let legalLabel: UILabel = {
     let label = UILabel()
-    label.text = NSLocalizedString("by continuing you are agreeing to the snowball\nterms of use and privacy policy")
+    label.text = NSLocalizedString("by continuing you are agreeing to the snowball\nterms of use and privacy policy", comment: "")
     label.textAlignment = NSTextAlignment.Center
     label.textColor = UIColor.SnowballColor.grayColor
     label.font = UIFont(name: UIFont.SnowballFont.bold, size: 10)

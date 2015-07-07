@@ -15,7 +15,7 @@ class PrivacyPolicyViewController: WebViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    topView.titleLabel.text = NSLocalizedString("Privacy Policy")
+    topView.titleLabel.text = NSLocalizedString("Privacy Policy", comment: "")
 
     let request = NSURLRequest(URL: NSURL(string: "http://snowball.is/privacy")!)
     webView.loadRequest(request)

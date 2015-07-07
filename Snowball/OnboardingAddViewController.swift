@@ -15,7 +15,7 @@ class OnboardingAddViewController: OnboardingViewController {
 
   let doneButton: UIButton = {
     let button = UIButton()
-    button.setTitle(NSLocalizedString("Done"), forState: UIControlState.Normal)
+    button.setTitle(NSLocalizedString("Done", comment: ""), forState: UIControlState.Normal)
     button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
     button.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 22)
     return button
@@ -26,8 +26,8 @@ class OnboardingAddViewController: OnboardingViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    titleLabel.text = NSLocalizedString("Add")
-    detailLabel.text = NSLocalizedString("Just tap + to add your clip to the timeline.\n\nNow your friends will see it in their film.")
+    titleLabel.text = NSLocalizedString("Add", comment: "")
+    detailLabel.text = NSLocalizedString("Just tap + to add your clip to the timeline.\n\nNow your friends will see it in their film.", comment: "")
     detailImageView.image = UIImage(named: "onboarding-add")
 
     doneButton.addTarget(self, action: "doneButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)

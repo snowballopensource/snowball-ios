@@ -15,7 +15,7 @@ class FindFriendsViewController: UIViewController {
 
   // MARK: - Properties
 
-  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Back, rightButtonType: nil, title: "Find Friends")
+  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Back, rightButtonType: nil, title: NSLocalizedString("Find Friends", comment: ""))
 
   private let tableView: UITableView = {
     let tableView = UITableView()
@@ -50,7 +50,7 @@ class FindFriendsViewController: UIViewController {
 
       if searching {
         searchTextField.setPlaceholder("", color: UIColor.blackColor())
-        tableViewLabel.text = NSLocalizedString("Find by username")
+        tableViewLabel.text = NSLocalizedString("Find by username", comment: "")
 
         let cancelImage = UIImage(named: "search-cancel")!
         let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: cancelImage.size.width + 20, height: cancelImage.size.height))
@@ -61,8 +61,8 @@ class FindFriendsViewController: UIViewController {
       } else {
         searchTextField.endEditing(true)
 
-        searchTextField.setPlaceholder(NSLocalizedString("Search by username"), color: UIColor.blackColor())
-        tableViewLabel.text = NSLocalizedString("Friends from my address book")
+        searchTextField.setPlaceholder(NSLocalizedString("Search by username", comment: ""), color: UIColor.blackColor())
+        tableViewLabel.text = NSLocalizedString("Friends from my address book", comment: "")
 
         let searchImage = UIImage(named: "search")!
         let searchImageView = UIImageView(image: searchImage)
@@ -87,7 +87,7 @@ class FindFriendsViewController: UIViewController {
 
   private let footerButton: SnowballFooterButton = {
     let button = SnowballFooterButton(rightImage: UIImage(named: "plane"))
-    button.setTitle(NSLocalizedString("Invite a friend"), forState: UIControlState.Normal)
+    button.setTitle(NSLocalizedString("Invite a friend", comment: ""), forState: UIControlState.Normal)
     return button
     }()
 
@@ -153,8 +153,8 @@ class FindFriendsViewController: UIViewController {
     let authorizationStatus = ABAddressBookGetAuthorizationStatus()
     if authorizationStatus != ABAuthorizationStatus.Authorized {
         tableView.refreshControl.endRefreshing()
-        let alertController = UIAlertController(title: NSLocalizedString("Couldn't load users"), message: NSLocalizedString("Please go to Settings > Snowball > Contacts to allow Snowball to access your Contacts."), preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("OK"), style: UIAlertActionStyle.Cancel, handler: nil))
+        let alertController = UIAlertController(title: NSLocalizedString("Couldn't load users", comment: ""), message: NSLocalizedString("Please go to Settings > Snowball > Contacts to allow Snowball to access your Contacts.", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
         presentViewController(alertController, animated: true, completion: nil)
         return
     }
@@ -207,9 +207,9 @@ class FindFriendsViewController: UIViewController {
   @objc private func footerButtonTapped() {
     let messageComposeViewController = MFMessageComposeViewController()
     messageComposeViewController.messageComposeDelegate = self
-    var body = NSLocalizedString("Download the Snowball app (http://bit.ly/snblapp) and follow me.")
+    var body = NSLocalizedString("Download the Snowball app (http://bit.ly/snblapp) and follow me.", comment: "")
     if let username = User.currentUser?.username {
-      body += NSLocalizedString(" My username is \(username).")
+      body += NSLocalizedString(" My username is \(username).", comment: "")
     }
     messageComposeViewController.body = body
     if MFMessageComposeViewController.canSendText() {

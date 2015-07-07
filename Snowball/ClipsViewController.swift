@@ -398,9 +398,9 @@ extension ClipsViewController: ClipCollectionViewCellDelegate {
   func userDidFlagClipForCell(cell: ClipCollectionViewCell) {
     if let clip = clipForCell(cell) {
       if let id = clip.id {
-        let alertController = UIAlertController(title: NSLocalizedString("Flag this clip?"), message: NSLocalizedString("Are you sure you want to report this clip as inappropriate?"), preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Don't Flag"), style: UIAlertActionStyle.Cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Flag"), style: UIAlertActionStyle.Destructive) { (action) -> Void in
+        let alertController = UIAlertController(title: NSLocalizedString("Flag this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to report this clip as inappropriate?", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Don't Flag", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Flag", comment: ""), style: UIAlertActionStyle.Destructive) { (action) -> Void in
           API.request(Router.FlagClip(clipID: id)).response { (request, response, JSON, error) in
             if error != nil { displayAPIErrorToUser(JSON); return }
             let index = self.indexOfClip(clip)
@@ -416,9 +416,9 @@ extension ClipsViewController: ClipCollectionViewCellDelegate {
 
   func userDidDeleteClipForCell(cell: ClipCollectionViewCell) {
     if let clip = clipForCell(cell) {
-      let alertController = UIAlertController(title: NSLocalizedString("Delete this clip?"), message: NSLocalizedString("Are you sure you want to delete this clip?"), preferredStyle: UIAlertControllerStyle.Alert)
-      alertController.addAction(UIAlertAction(title: NSLocalizedString("Don't Delete"), style: UIAlertActionStyle.Cancel, handler: nil))
-      alertController.addAction(UIAlertAction(title: NSLocalizedString("Delete"), style: UIAlertActionStyle.Destructive) { (action) in
+      let alertController = UIAlertController(title: NSLocalizedString("Delete this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to delete this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+      alertController.addAction(UIAlertAction(title: NSLocalizedString("Don't Delete", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
+      alertController.addAction(UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
         let index = self.indexOfClip(clip)
         self.clips.removeAtIndex(index)
         self.collectionView.deleteItemsAtIndexPaths([NSIndexPath(forItem: index, inSection: 0)])

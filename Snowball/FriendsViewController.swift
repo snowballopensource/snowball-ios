@@ -13,7 +13,7 @@ class FriendsViewController: UIViewController {
 
   // MARK: - Properties
 
-  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Camera, rightButtonType: SnowballTopViewButtonType.AddFriends, title: "Friends")
+  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Camera, rightButtonType: SnowballTopViewButtonType.AddFriends, title: NSLocalizedString("Friends", comment: ""))
 
   private let currentUserAvatarImageView: UserAvatarImageView = {
     let imageView = UserAvatarImageView()
@@ -48,8 +48,8 @@ class FriendsViewController: UIViewController {
     let segmentedControl = UISegmentedControl()
     let segmentedControlFont = UIFont(name: UIFont.SnowballFont.bold, size: 17)!
     segmentedControl.setTitleTextAttributes([NSFontAttributeName: segmentedControlFont], forState: UIControlState.Normal)
-    segmentedControl.insertSegmentWithTitle(NSLocalizedString("Following"), atIndex: FollowersFollowingSegmentedControlIndex.Following.rawValue, animated: false)
-    segmentedControl.insertSegmentWithTitle(NSLocalizedString("Followers"), atIndex: FollowersFollowingSegmentedControlIndex.Followers.rawValue, animated: false)
+    segmentedControl.insertSegmentWithTitle(NSLocalizedString("Following", comment: ""), atIndex: FollowersFollowingSegmentedControlIndex.Following.rawValue, animated: false)
+    segmentedControl.insertSegmentWithTitle(NSLocalizedString("Followers", comment: ""), atIndex: FollowersFollowingSegmentedControlIndex.Followers.rawValue, animated: false)
     segmentedControl.selectedSegmentIndex = 0
     segmentedControl.tintColor = UIColor.blackColor()
     return segmentedControl

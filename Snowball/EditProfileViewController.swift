@@ -13,7 +13,7 @@ class EditProfileViewController: UIViewController {
 
   // MARK: - Properties
 
-  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Back, rightButtonType: SnowballTopViewButtonType.Save, title: "Edit Profile")
+  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Back, rightButtonType: SnowballTopViewButtonType.Save, title: NSLocalizedString("Edit Profile", comment: ""))
 
   private let tableViewController = FormTableViewController()
 
@@ -34,7 +34,7 @@ class EditProfileViewController: UIViewController {
 
 //  private let logOutButton: UIButton = {
 //    let logOutButton = UIButton()
-//    logOutButton.setTitle(NSLocalizedString("log out"), forState: UIControlState.Normal)
+//    logOutButton.setTitle(NSLocalizedString("log out", comment: ""), forState: UIControlState.Normal)
 //    logOutButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
 //    logOutButton.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
 //    logOutButton.alignLeft(insetWidth: 20)
@@ -205,14 +205,14 @@ extension EditProfileViewController: UITableViewDataSource {
     let index = EditProfileTextFieldIndex(rawValue: indexPath.row)!
     switch(index) {
     case .Username:
-      cell.textField.setPlaceholder(NSLocalizedString("username"), color: cell.textField.tintColor)
+      cell.textField.setPlaceholder(NSLocalizedString("username", comment: ""), color: cell.textField.tintColor)
       cell.textField.text = User.currentUser?.username
     case .PhoneNumber:
-      cell.textField.setPlaceholder(NSLocalizedString("phone number"), color: cell.textField.tintColor)
+      cell.textField.setPlaceholder(NSLocalizedString("phone number", comment: ""), color: cell.textField.tintColor)
       cell.textField.text = User.currentUser?.phoneNumber
       cell.textField.keyboardType = UIKeyboardType.PhonePad
     case .Email:
-      cell.textField.setPlaceholder(NSLocalizedString("email"), color: cell.textField.tintColor)
+      cell.textField.setPlaceholder(NSLocalizedString("email", comment: ""), color: cell.textField.tintColor)
       cell.textField.text = User.currentUser?.email
       cell.textField.keyboardType = UIKeyboardType.EmailAddress
     }

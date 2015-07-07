@@ -15,7 +15,7 @@ class TermsViewController: WebViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    topView.titleLabel.text = NSLocalizedString("Terms of Service")
+    topView.titleLabel.text = NSLocalizedString("Terms of Service", comment: "")
 
     let request = NSURLRequest(URL: NSURL(string: "http://snowball.is/terms")!)
     webView.loadRequest(request)

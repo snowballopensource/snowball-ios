@@ -15,8 +15,8 @@ class OnboardingPlayViewController: OnboardingViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    titleLabel.text = NSLocalizedString("Play")
-    detailLabel.text = NSLocalizedString("Tap on a clip in the timeline to start playing from there.\n\nTap again to stop.")
+    titleLabel.text = NSLocalizedString("Play", comment: "")
+    detailLabel.text = NSLocalizedString("Tap on a clip in the timeline to start playing from there.\n\nTap again to stop.", comment: "")
     detailImageView.image = UIImage(named: "onboarding-play")
   }
 

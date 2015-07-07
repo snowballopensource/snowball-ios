@@ -52,7 +52,7 @@ class PhoneNumberViewController: UIViewController {
 
   private let disclaimerLabel: UILabel = {
     let label = UILabel()
-    label.text = NSLocalizedString("No one will ever see your phone number on Snowball.")
+    label.text = NSLocalizedString("No one will ever see your phone number on Snowball.", comment: "")
     label.font = UIFont(name: UIFont.SnowballFont.bold, size: 10)
     label.textColor = UIColor.SnowballColor.greenColor
     return label

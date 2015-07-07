@@ -11,10 +11,6 @@ import UIKit
 
 let isIphone4S = (UIScreen.mainScreen().bounds.height < 568)
 
-func NSLocalizedString(key: String) -> String {
-  return NSLocalizedString(key, comment: "")
-}
-
 func requireSubclass() {
   fatalError("This method should be overridden by a subclass.")
 }

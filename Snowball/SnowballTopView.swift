@@ -111,7 +111,7 @@ class SnowballTopView: UIView {
       rightButtonSpinner?.color = UIColor.SnowballColor.greenColor
       addSubview(rightButtonSpinner!)
     }
-    titleLabel.text = NSLocalizedString(title)
+    titleLabel.text = title
     addSubview(titleLabel)
   }
 

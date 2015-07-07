@@ -83,14 +83,14 @@ extension SignUpViewController: UITableViewDataSource {
     let index = SignUpTextFieldIndex(rawValue: indexPath.row)!
     switch(index) {
     case .Username:
-      cell.textField.setPlaceholder(NSLocalizedString("username"), color: cell.textField.tintColor)
+      cell.textField.setPlaceholder(NSLocalizedString("username", comment: ""), color: cell.textField.tintColor)
       cell.textField.text = User.currentUser?.username
     case .Email:
-      cell.textField.setPlaceholder(NSLocalizedString("email"), color: cell.textField.tintColor)
+      cell.textField.setPlaceholder(NSLocalizedString("email", comment: ""), color: cell.textField.tintColor)
       cell.textField.text = User.currentUser?.email
       cell.textField.keyboardType = UIKeyboardType.EmailAddress
     case .Password:
-      cell.textField.setPlaceholder(NSLocalizedString("password"), color: cell.textField.tintColor)
+      cell.textField.setPlaceholder(NSLocalizedString("password", comment: ""), color: cell.textField.tintColor)
       cell.textField.text = User.currentUser?.email
       cell.textField.secureTextEntry = true
     }

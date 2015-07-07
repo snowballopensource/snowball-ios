@@ -79,11 +79,11 @@ extension SignInViewController: UITableViewDataSource {
     let index = SignInTextFieldIndex(rawValue: indexPath.row)!
     switch(index) {
     case .Email:
-      cell.textField.setPlaceholder(NSLocalizedString("email"), color: cell.textField.tintColor)
+      cell.textField.setPlaceholder(NSLocalizedString("email", comment: ""), color: cell.textField.tintColor)
       cell.textField.text = User.currentUser?.email
       cell.textField.keyboardType = UIKeyboardType.EmailAddress
     case .Password:
-      cell.textField.setPlaceholder(NSLocalizedString("password"), color: cell.textField.tintColor)
+      cell.textField.setPlaceholder(NSLocalizedString("password", comment: ""), color: cell.textField.tintColor)
       cell.textField.text = User.currentUser?.email
       cell.textField.secureTextEntry = true
     }
