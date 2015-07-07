@@ -36,8 +36,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
   private let clipThumbnailLoadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
 
   private let addClipImageView: UIImageView = {
-    let imageView = UIImageView(image: UIImage(named: "add-clip")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate))
-    imageView.backgroundColor = UIColor.whiteColor()
+    let imageView = UIImageView(image: UIImage(named: "add-clip"))
+    imageView.backgroundColor = User.currentUser?.color as? UIColor ?? UIColor.SnowballColor.greenColor
     imageView.contentMode = UIViewContentMode.Center
     return imageView
   }()
