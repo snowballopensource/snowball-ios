@@ -53,6 +53,11 @@ class ClipsViewController: UIViewController {
     return imageView
   }()
 
+  let playerControlSingleTapGestureRecognizer: UITapGestureRecognizer = {
+    let gestureRecognizer = UITapGestureRecognizer()
+    return gestureRecognizer
+  }()
+
   let playerControlSwipeLeftGestureRecognizer: UISwipeGestureRecognizer = {
     let gestureRecognizer = UISwipeGestureRecognizer()
     gestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
@@ -158,6 +163,9 @@ class ClipsViewController: UIViewController {
       activityIndicatorView.top == collectionView.top + 50
     }
 
+    playerControlSingleTapGestureRecognizer.addTarget(self, action: "userDidTapPlayerControlGestureRecognizer:")
+    playerView.addGestureRecognizer(playerControlSingleTapGestureRecognizer)
+
     playerControlSwipeLeftGestureRecognizer.addTarget(self, action: "userDidSwipePlayerControlGestureRecognizerLeft:")
     view.addGestureRecognizer(playerControlSwipeLeftGestureRecognizer)
     playerControlSwipeRightGestureRecognizer.addTarget(self, action: "userDidSwipePlayerControlGestureRecognizerRight:")
@@ -238,6 +246,12 @@ class ClipsViewController: UIViewController {
   }
 
   // MARK: - Private
+
+  @objc private func userDidTapPlayerControlGestureRecognizer(recognizer: UISwipeGestureRecognizer) {
+    if player.playing {
+      player.stop()
+    }
+  }
 
   @objc private func userDidSwipePlayerControlGestureRecognizerLeft(recognizer: UISwipeGestureRecognizer) {
     if player.playing {
