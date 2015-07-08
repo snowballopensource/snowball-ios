@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window?.makeKeyAndVisible()
     Fabric.with([Crashlytics()])
     PushManager.registerForPushNotifications()
+    application.applicationSupportsShakeToEdit = true
     return true
   }
 
