@@ -250,7 +250,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
         })
       }
     }
-    playClipImageView.alpha = CGFloat(showBookmarkPlayhead)
+
+    if clip.state == ClipState.Pending {
+      playClipImageView.alpha = 0
+    } else {
+      playClipImageView.alpha = CGFloat(showBookmarkPlayhead)
+    }
     setInPlayState(false, isCurrentPlayingClip: false, animated: false)
     if clip.state == ClipState.Pending {
       addClipImageView.hidden = false
