@@ -19,6 +19,7 @@ class ProfileClipsViewController: ClipsViewController {
   init(user: User) {
     self.user = user
     super.init(nibName: nil, bundle: nil)
+    shouldIgnoreBookmark = true
   }
 
   required init(coder: NSCoder) {

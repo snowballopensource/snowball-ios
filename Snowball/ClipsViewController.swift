@@ -68,26 +68,33 @@ class ClipsViewController: UIViewController {
   var clips: [Clip] = []
 
   private let kClipBookmarkDateKey = "ClipBookmarkDate"
+  var shouldIgnoreBookmark = false // For profile bookmark
   private var bookmarkedClip: Clip? {
     get {
-      let clipBookmarkDate = NSUserDefaults.standardUserDefaults().objectForKey(kClipBookmarkDateKey) as? NSDate
-      if let bookmarkDate = clipBookmarkDate {
-        for clip in clips {
-          if let clipCreatedAt = clip.createdAt {
-            if bookmarkDate.compare(clipCreatedAt) == NSComparisonResult.OrderedAscending {
-              return clip
+      if !shouldIgnoreBookmark {
+        let clipBookmarkDate = NSUserDefaults.standardUserDefaults().objectForKey(kClipBookmarkDateKey) as? NSDate
+        if let bookmarkDate = clipBookmarkDate {
+          for clip in clips {
+            if let clipCreatedAt = clip.createdAt {
+              if bookmarkDate.compare(clipCreatedAt) == NSComparisonResult.OrderedAscending {
+                return clip
+              }
             }
           }
         }
+        return clips.first
+      } else {
+        return nil
       }
-      return clips.first
     }
     set {
-      if let newClipBookmarkDate = newValue?.createdAt {
-        if let oldClipBookmarkDate = self.bookmarkedClip?.createdAt {
-          if oldClipBookmarkDate.compare(newClipBookmarkDate) == NSComparisonResult.OrderedAscending {
-            NSUserDefaults.standardUserDefaults().setObject(newClipBookmarkDate, forKey: kClipBookmarkDateKey)
-            NSUserDefaults.standardUserDefaults().synchronize()
+      if !shouldIgnoreBookmark {
+        if let newClipBookmarkDate = newValue?.createdAt {
+          if let oldClipBookmarkDate = self.bookmarkedClip?.createdAt {
+            if oldClipBookmarkDate.compare(newClipBookmarkDate) == NSComparisonResult.OrderedAscending {
+              NSUserDefaults.standardUserDefaults().setObject(newClipBookmarkDate, forKey: kClipBookmarkDateKey)
+              NSUserDefaults.standardUserDefaults().synchronize()
+            }
           }
         }
       }
