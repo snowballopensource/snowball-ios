@@ -34,7 +34,7 @@ class SignInViewController: AuthenticationViewController {
 
     let messageString = NSMutableAttributedString()
     messageString.appendAttributedString(NSAttributedString(string: "Ok, let's get you ", attributes: [NSForegroundColorAttributeName: UIColor.blackColor()]))
-    messageString.appendAttributedString(NSAttributedString(string: "back into ", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor]))
+    messageString.appendAttributedString(NSAttributedString(string: "back into ", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.blueColor]))
     messageString.appendAttributedString(NSAttributedString(string: "your account.", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor]))
     messageLabel.attributedText = messageString
   }

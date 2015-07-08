@@ -57,9 +57,9 @@ enum SnowballTopViewButtonType {
   private var color: UIColor? {
     switch self {
     case .BackWhite: return UIColor.whiteColor()
-    case .Forward: return UIColor.SnowballColor.greenColor
+    case .Forward: return UIColor.SnowballColor.blueColor
     case .AddFriends: return nil
-    case .Save: return UIColor.SnowballColor.greenColor
+    case .Save: return UIColor.SnowballColor.blueColor
     case .ChangeCamera: return UIColor.whiteColor()
     case .Friends: return UIColor.whiteColor()
     default: return UIColor.blackColor()
@@ -108,7 +108,7 @@ class SnowballTopView: UIView {
       rightButton!.addTarget(delegate, action: "snowballTopViewRightButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
       addSubview(rightButton!)
       rightButtonSpinner = UIActivityIndicatorView()
-      rightButtonSpinner?.color = UIColor.SnowballColor.greenColor
+      rightButtonSpinner?.color = UIColor.SnowballColor.blueColor
       addSubview(rightButtonSpinner!)
     }
     titleLabel.text = title

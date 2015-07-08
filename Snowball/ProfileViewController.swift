@@ -55,7 +55,7 @@ class ProfileViewController: UIViewController {
 
     userAvatarImageView.configureForUser(user)
 
-    let userColor = user.color as? UIColor ?? UIColor.SnowballColor.greenColor
+    let userColor = user.color as? UIColor ?? UIColor.SnowballColor.blueColor
 
     backgroundImageView.backgroundColor = userColor
     if let imageURLString = user.avatarURL {

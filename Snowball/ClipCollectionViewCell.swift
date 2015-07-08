@@ -37,7 +37,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   private let addClipImageView: UIImageView = {
     let imageView = UIImageView(image: UIImage(named: "add-clip"))
-    imageView.backgroundColor = User.currentUser?.color as? UIColor ?? UIColor.SnowballColor.greenColor
+    imageView.backgroundColor = User.currentUser?.color as? UIColor ?? UIColor.SnowballColor.blueColor
     imageView.contentMode = UIViewContentMode.Center
     return imageView
   }()
@@ -127,7 +127,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipThumbnailLoadingIndicator.height == clipThumbnailLoadingIndicator.superview!.height
     }
 
-    addClipImageView.tintColor = User.currentUser?.color as? UIColor ?? UIColor.SnowballColor.greenColor
+    addClipImageView.tintColor = User.currentUser?.color as? UIColor ?? UIColor.SnowballColor.blueColor
     clipThumbnailImageView.addSubview(addClipImageView)
 
     clipThumbnailImageView.addSubview(playClipImageView)
@@ -220,7 +220,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   func configureForClip(clip: Clip, showBookmarkPlayhead: Bool = false) {
     usernameLabel.text = clip.user?.username
-    let userColor = clip.user?.color as? UIColor ?? UIColor.SnowballColor.greenColor
+    let userColor = clip.user?.color as? UIColor ?? UIColor.SnowballColor.blueColor
     if let user = clip.user {
       userAvatarImageView.configureForUser(user)
     }

@@ -20,7 +20,7 @@ class SnowballFooterButton: UIButton {
   init(rightImage: UIImage? = nil) {
     super.init(frame: CGRectZero)
 
-    backgroundColor = UIColor.SnowballColor.greenColor
+    backgroundColor = UIColor.SnowballColor.blueColor
     titleLabel?.font = UIFont(name: UIFont.SnowballFont.bold, size: 19)
     alignLeft(insetWidth: 20)
 

@@ -20,7 +20,7 @@ class UserAvatarImageView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     clipsToBounds = true
-    backgroundColor = UIColor.SnowballColor.greenColor
+    backgroundColor = UIColor.SnowballColor.blueColor
     addSubview(imageView)
   }
 
@@ -38,7 +38,7 @@ class UserAvatarImageView: UIView {
   // MARK: - Internal
 
   func configureForUser(user: User) {
-    backgroundColor = user.color as? UIColor ?? UIColor.SnowballColor.greenColor
+    backgroundColor = user.color as? UIColor ?? UIColor.SnowballColor.blueColor
     imageView.image = UIImage(named: "face")
     if let imageURLString = user.avatarURL {
       if let imageURL = NSURL(string: imageURLString) {

@@ -30,7 +30,7 @@ class WelcomeViewController: UIViewController {
 
   private let signUpButton: SnowballRoundedButton = {
     let button = SnowballRoundedButton()
-    button.tintColor = UIColor.SnowballColor.greenColor
+    button.tintColor = UIColor.SnowballColor.blueColor
     button.showChevron = true
     button.setTitle(NSLocalizedString("sign up", comment: ""), forState: UIControlState.Normal)
     return button

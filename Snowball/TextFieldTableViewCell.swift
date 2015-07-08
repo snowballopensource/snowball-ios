@@ -20,7 +20,7 @@ class TextFieldTableViewCell: UITableViewCell {
   let textField: SnowballRoundedTextField = {
     let textField = SnowballRoundedTextField()
     textField.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    textField.tintColor = UIColor.SnowballColor.greenColor
+    textField.tintColor = UIColor.SnowballColor.blueColor
     return textField
     }()
 

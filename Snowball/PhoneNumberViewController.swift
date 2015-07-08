@@ -21,7 +21,7 @@ class PhoneNumberViewController: UIViewController {
     label.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
     let messageString = NSMutableAttributedString()
     messageString.appendAttributedString(NSAttributedString(string: "Next, we need your ", attributes: [NSForegroundColorAttributeName: UIColor.blackColor()]))
-    messageString.appendAttributedString(NSAttributedString(string: "phone number, ", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.greenColor]))
+    messageString.appendAttributedString(NSAttributedString(string: "phone number, ", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.blueColor]))
     messageString.appendAttributedString(NSAttributedString(string: "so we can help your friends find you.", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor]))
     label.attributedText = messageString
     return label
@@ -29,7 +29,7 @@ class PhoneNumberViewController: UIViewController {
 
   private let countryCodeTextField: SnowballRoundedTextField = {
     let textField = SnowballRoundedTextField()
-    textField.backgroundColor = UIColor.SnowballColor.greenColor
+    textField.backgroundColor = UIColor.SnowballColor.blueColor
     textField.keyboardType = UIKeyboardType.PhonePad
     textField.text = "+1"
     textField.font = UIFont(name: "Helvetica", size: 24)
@@ -46,7 +46,7 @@ class PhoneNumberViewController: UIViewController {
     textField.font = UIFont(name: "Helvetica", size: 28)
     textField.alignLeft(insetWidth: 0)
     textField.textAlignment = NSTextAlignment.Center
-    textField.tintColor = UIColor.SnowballColor.greenColor
+    textField.tintColor = UIColor.SnowballColor.blueColor
     return textField
   }()
 
@@ -54,7 +54,7 @@ class PhoneNumberViewController: UIViewController {
     let label = UILabel()
     label.text = NSLocalizedString("No one will ever see your phone number on Snowball.", comment: "")
     label.font = UIFont(name: UIFont.SnowballFont.bold, size: 10)
-    label.textColor = UIColor.SnowballColor.greenColor
+    label.textColor = UIColor.SnowballColor.blueColor
     return label
   }()
 

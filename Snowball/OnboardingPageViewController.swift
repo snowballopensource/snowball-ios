@@ -21,7 +21,7 @@ class OnboardingPageViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    view.backgroundColor = UIColor.SnowballColor.greenColor
+    view.backgroundColor = UIColor.SnowballColor.blueColor
 
     pageViewController.dataSource = self
 

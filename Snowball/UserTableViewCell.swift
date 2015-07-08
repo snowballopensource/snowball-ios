@@ -88,7 +88,7 @@ class UserTableViewCell: UITableViewCell {
       color = UIColor.SnowballColor.grayColor
       followButton.setTitle(NSLocalizedString("unfollow", comment: ""), forState: UIControlState.Normal)
     } else {
-      color = UIColor.SnowballColor.greenColor
+      color = UIColor.SnowballColor.blueColor
       followButton.setTitle(NSLocalizedString("follow", comment: ""), forState: UIControlState.Normal)
     }
     followButton.backgroundColor = color
