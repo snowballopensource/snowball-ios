@@ -317,11 +317,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
       }
     } else {
       if down {
-        if isCurrentPlayingClip {
-          clipThumbnailImageView.transform = CGAffineTransformMakeScale(0.857, 0.857)
-        } else {
-          clipThumbnailImageView.transform = CGAffineTransformMakeScale(0.75, 0.75)
-        }
+        // We used to scale current clip to 0.857 and non-current clip to 0.75
+        // Removed for Jef testing. If it doesn't come back, remove `isCurrentPlayingClip`
+        clipThumbnailImageView.transform = CGAffineTransformMakeScale(0.857, 0.857)
       } else {
         clipThumbnailImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
       }
