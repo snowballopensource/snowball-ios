@@ -58,6 +58,12 @@ class ClipsViewController: UIViewController {
     return gestureRecognizer
   }()
 
+  let playerControlDoubleTapGestureRecognizer: UITapGestureRecognizer = {
+    let gestureRecognizer = UITapGestureRecognizer()
+    gestureRecognizer.numberOfTapsRequired = 2
+    return gestureRecognizer
+    }()
+
   let playerControlSwipeLeftGestureRecognizer: UISwipeGestureRecognizer = {
     let gestureRecognizer = UISwipeGestureRecognizer()
     gestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
@@ -166,6 +172,10 @@ class ClipsViewController: UIViewController {
     playerControlSingleTapGestureRecognizer.addTarget(self, action: "userDidTapPlayerControlGestureRecognizer:")
     playerView.addGestureRecognizer(playerControlSingleTapGestureRecognizer)
 
+    playerControlDoubleTapGestureRecognizer.addTarget(self, action: "userDidDoubleTapPlayerControlGestureRecognizer:")
+    playerView.addGestureRecognizer(playerControlDoubleTapGestureRecognizer)
+    playerControlSingleTapGestureRecognizer.requireGestureRecognizerToFail(playerControlDoubleTapGestureRecognizer)
+
     playerControlSwipeLeftGestureRecognizer.addTarget(self, action: "userDidSwipePlayerControlGestureRecognizerLeft:")
     view.addGestureRecognizer(playerControlSwipeLeftGestureRecognizer)
     playerControlSwipeRightGestureRecognizer.addTarget(self, action: "userDidSwipePlayerControlGestureRecognizerRight:")
@@ -247,9 +257,21 @@ class ClipsViewController: UIViewController {
 
   // MARK: - Private
 
-  @objc private func userDidTapPlayerControlGestureRecognizer(recognizer: UISwipeGestureRecognizer) {
+  @objc private func userDidTapPlayerControlGestureRecognizer(recognizer: UITapGestureRecognizer) {
     if player.playing {
       player.stop()
+    }
+  }
+
+  @objc private func userDidDoubleTapPlayerControlGestureRecognizer(recognizer: UITapGestureRecognizer) {
+    if let clip = player.currentClip {
+      if let clipUser = clip.user, currentUser = User.currentUser {
+        if clipUser.id != currentUser.id {
+          if let cell = cellForClip(clip) {
+            userDidTapLikeButtonForCell(cell)
+          }
+        }
+      }
     }
   }
 
