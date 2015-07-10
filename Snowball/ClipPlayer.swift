@@ -55,11 +55,23 @@ class ClipPlayer: AVQueuePlayer {
   func restartPlaybackWithNewClips(clips: [Clip]) {
     if clips.count > 0 {
       stopWithoutNotifyingDelegate()
-      playClips(clips)
+      playClipsWithoutNotifyingDelegate(clips)
     }
   }
 
   // MARK: - Private
+
+  // TODO: THIS IS AN UGLY DUPLICATE!!!
+  private func playClipsWithoutNotifyingDelegate(clips: [Clip]) {
+    if !playing {
+      if let clip = clips.first {
+        play()
+        currentClip = clip
+        delegate?.playerWillPlayClip(clip)
+        preloadQueue.preloadClips(clips)
+      }
+    }
+  }
 
   private func stopWithoutNotifyingDelegate() {
     preloadQueue.cancelAllOperations()
