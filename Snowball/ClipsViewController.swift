@@ -93,18 +93,19 @@ class ClipsViewController: UIViewController {
             }
             // If we get to the last clip and nothing has returned yet, then run this logic to check for deleted bookmarked clip OR user has not returned
             if let lastClip = clips.last {
-              let clipIsLastClip = (clip.id == lastClip.id)
-              if clipIsLastClip {
-                // If bookmark date is EARLIER than the first clip, user has not returned in some time
-                if let firstClip = clips.first {
-                  if let firstClipCreatedAt = firstClip.createdAt {
-                    if bookmarkDate.compare(firstClipCreatedAt) == NSComparisonResult.OrderedAscending {
-                      return firstClip
+              if let lastClipCreatedAt = lastClip.createdAt {
+                if clip == lastClip {
+                  // If bookmark date is EARLIER than the first clip, user has not returned in some time
+                  if let firstClip = clips.first {
+                    if let firstClipCreatedAt = firstClip.createdAt {
+                      if bookmarkDate.compare(firstClipCreatedAt) == NSComparisonResult.OrderedAscending {
+                        return firstClip
+                      }
                     }
                   }
+                  // Bookmarked clip was probably deleted, return last clip
+                  return lastClip
                 }
-                // Bookmark was probably deleted, return last clip
-                return lastClip
               }
             }
           }
@@ -370,7 +371,7 @@ class ClipsViewController: UIViewController {
 
   private func clipIsPlayingClip(clip: Clip) -> Bool {
     if let playingClip = player.currentClip {
-      if clip.id == playingClip.id {
+      if clip == playingClip {
         return true
       }
     }
@@ -418,7 +419,7 @@ extension ClipsViewController: UICollectionViewDataSource {
     let clip = clips[indexPath.item]
     var showBookmark = false
     if let bookmarkedClip = self.bookmarkedClip {
-      if clip.id == bookmarkedClip.id {
+      if clip == bookmarkedClip {
         showBookmark = true
       }
     }
@@ -544,7 +545,7 @@ extension ClipsViewController: ClipPlayerDelegate {
       let cell = cell as! ClipCollectionViewCell
       if let cellClip = clipForCell(cell) {
         if let playerClip = player.currentClip {
-          if playerClip.id == cellClip.id {
+          if playerClip == cellClip {
             cell.setInPlayState(true, isCurrentPlayingClip: true, animated: true)
           } else {
             cell.setInPlayState(true, isCurrentPlayingClip: false, animated: true)

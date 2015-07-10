@@ -105,7 +105,7 @@ class ClipPlayer: AVQueuePlayer {
     if let clip = self.currentClip {
       let notificationPlayerItem = notification.object as! ClipPlayerItem
       if let notificationPlayerItem = notification.object as? ClipPlayerItem {
-        if notificationPlayerItem.clip.id == clip.id {
+        if notificationPlayerItem.clip == clip {
           self.delegate?.clipDidPlayToEndTime(notificationPlayerItem.clip, forwards: true)
         }
         if let nextItem = itemAfterItem(notificationPlayerItem) {

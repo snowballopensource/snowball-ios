@@ -58,6 +58,23 @@ class Clip {
   }
 }
 
+// MARK: - Equatable
+
+extension Clip: Equatable {}
+
+func ==(lhs: Clip, rhs: Clip) -> Bool {
+  let clipIDsAreNotNil = lhs.id != nil && rhs.id != nil
+  if clipIDsAreNotNil && lhs.id == rhs.id {
+    return true
+  }
+  if let lhsCreatedAt = lhs.createdAt, rhsCreatedAt = rhs.createdAt {
+    let clipsCreatedAtSame = lhsCreatedAt.compare(rhsCreatedAt) == NSComparisonResult.OrderedSame
+    println(clipsCreatedAtSame)
+    return clipsCreatedAtSame
+  }
+  return false
+}
+
 enum ClipState {
   case Default, Pending
 }
