@@ -27,7 +27,6 @@ class OnboardingAddViewController: OnboardingViewController {
     super.viewDidLoad()
 
     titleLabel.text = NSLocalizedString("Add", comment: "")
-    detailLabel.text = NSLocalizedString("Just tap + to add your clip to the timeline.\n\nNow your friends will see it in their film.", comment: "")
     detailImageView.image = UIImage(named: "onboarding-add")
 
     doneButton.addTarget(self, action: "doneButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)

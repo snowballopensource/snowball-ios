@@ -16,16 +16,7 @@ class OnboardingViewController: UIViewController {
   let titleLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont(name: UIFont.SnowballFont.regular, size: 32)
-    label.textColor = UIColor.whiteColor()
-    return label
-  }()
-
-  let detailLabel: UILabel = {
-    let label = UILabel()
-    label.numberOfLines = 0
-    label.textAlignment = NSTextAlignment.Center
-    label.font = UIFont(name: UIFont.SnowballFont.regular, size: 19)
-    label.textColor = UIColor.whiteColor()
+    label.textColor = UIColor.blackColor()
     return label
   }()
 
@@ -46,14 +37,6 @@ class OnboardingViewController: UIViewController {
       titleLabel.top == titleLabel.superview!.top + 70
     }
 
-    let margin: CGFloat = 40
-    view.addSubview(detailLabel)
-    layout(detailLabel, titleLabel) { (detailLabel, titleLabel) in
-      detailLabel.left == detailLabel.superview!.left + margin
-      detailLabel.top == titleLabel.bottom + 10
-      detailLabel.right == detailLabel.superview!.right - margin
-    }
-
     view.addSubview(detailImageView)
     var originY: CGFloat = 300
     if isIphone4S {
@@ -66,5 +49,4 @@ class OnboardingViewController: UIViewController {
       detailImageView.bottom == detailImageView.superview!.bottom
     }
   }
-
 }

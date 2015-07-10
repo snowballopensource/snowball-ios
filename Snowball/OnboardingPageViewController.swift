@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Snowball, Inc. All rights reserved.
 //
 
+import Cartography
 import UIKit
 
 class OnboardingPageViewController: UIViewController {
@@ -14,6 +15,14 @@ class OnboardingPageViewController: UIViewController {
 
   private let pageViewController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
 
+  private let pageControl: UIPageControl = {
+    let pageControl = UIPageControl()
+    pageControl.currentPage = 0
+    pageControl.pageIndicatorTintColor = UIColor.SnowballColor.grayColor
+    pageControl.currentPageIndicatorTintColor = UIColor.SnowballColor.blueColor
+    return pageControl
+  }()
+
   private let viewControllerClasses: [UIViewController.Type] = [OnboardingPlayViewController.self, OnboardingCaptureViewController.self, OnboardingAddViewController.self]
 
   // MARK: - UIViewController
@@ -21,16 +30,24 @@ class OnboardingPageViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    view.backgroundColor = UIColor.SnowballColor.blueColor
+    view.backgroundColor = UIColor.whiteColor()
 
     pageViewController.dataSource = self
-
+    pageViewController.delegate = self
     pageViewController.setViewControllers([viewControllerAtIndex(0)!], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
 
     addChildViewController(pageViewController)
     pageViewController.view.frame = view.bounds
     view.addSubview(pageViewController.view)
     pageViewController.didMoveToParentViewController(self)
+
+    pageControl.numberOfPages = viewControllerClasses.count
+    view.addSubview(pageControl)
+    layout(pageControl) { (pageControl) in
+      pageControl.centerX == pageControl.superview!.centerX
+      pageControl.top == pageControl.superview!.top + 20
+      return
+    }
   }
 
   // MARK: - Private
@@ -68,13 +85,17 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource {
     let index = indexOfViewControllerClass(viewController.dynamicType)
     return viewControllerAtIndex(index + 1)
   }
+}
 
-  func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
-    return 0
+// MARK: -
+
+extension OnboardingPageViewController: UIPageViewControllerDelegate {
+
+  // MARK: - UIPageViewControllerDelegate
+
+  func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [AnyObject]) {
+    if let nextVC = pendingViewControllers.first as? UIViewController {
+      pageControl.currentPage = indexOfViewControllerClass(nextVC.dynamicType)
+    }
   }
-
-  func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
-    return viewControllerClasses.count
-  }
-
 }
