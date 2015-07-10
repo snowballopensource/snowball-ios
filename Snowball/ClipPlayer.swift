@@ -48,21 +48,33 @@ class ClipPlayer: AVQueuePlayer {
   }
 
   func stop() {
-    stopWithoutNotifyingDelegate()
+    preloadQueue.cancelAllOperations()
+    pause()
+    removeAllItems()
+    currentClip = nil
     delegate?.playerDidEndPlayback()
   }
 
   func restartPlaybackWithNewClips(clips: [Clip]) {
     if clips.count > 0 {
-      stopWithoutNotifyingDelegate()
-      playClipsWithoutNotifyingDelegate(clips)
+      var forwards = true
+      if let currentClip = currentClip {
+        let objcClips = clips as NSArray
+        if objcClips.containsObject(currentClip) {
+          forwards = false
+        } else {
+          forwards = true
+        }
+      }
+      stopInPreparationForRestart(forwards: forwards)
+      playClipsAfterRestart(clips)
     }
   }
 
   // MARK: - Private
 
   // TODO: THIS IS AN UGLY DUPLICATE!!!
-  private func playClipsWithoutNotifyingDelegate(clips: [Clip]) {
+  private func playClipsAfterRestart(clips: [Clip]) {
     if !playing {
       if let clip = clips.first {
         play()
@@ -73,7 +85,11 @@ class ClipPlayer: AVQueuePlayer {
     }
   }
 
-  private func stopWithoutNotifyingDelegate() {
+  // TODO: THIS IS AN UGLY DUPLICATE!!!
+  private func stopInPreparationForRestart(#forwards: Bool) {
+    if let currentClip = currentClip {
+      delegate?.clipDidPlayToEndTime(currentClip, forwards: forwards)
+    }
     preloadQueue.cancelAllOperations()
     pause()
     removeAllItems()
@@ -90,7 +106,7 @@ class ClipPlayer: AVQueuePlayer {
       let notificationPlayerItem = notification.object as! ClipPlayerItem
       if let notificationPlayerItem = notification.object as? ClipPlayerItem {
         if notificationPlayerItem.clip.id == clip.id {
-          self.delegate?.clipDidPlayToEndTime(notificationPlayerItem.clip)
+          self.delegate?.clipDidPlayToEndTime(notificationPlayerItem.clip, forwards: true)
         }
         if let nextItem = itemAfterItem(notificationPlayerItem) {
           self.currentClip = nextItem.clip
@@ -132,7 +148,7 @@ protocol ClipPlayerDelegate {
   func playerWillBeginPlayback()
   func playerDidEndPlayback()
   func playerWillPlayClip(clip: Clip)
-  func clipDidPlayToEndTime(clip: Clip)
+  func clipDidPlayToEndTime(clip: Clip, forwards: Bool)
 }
 
 // MARK: -

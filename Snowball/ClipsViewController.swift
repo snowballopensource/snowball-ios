@@ -552,17 +552,28 @@ extension ClipsViewController: ClipPlayerDelegate {
     Analytics.track("Watch Clip")
   }
 
-  func clipDidPlayToEndTime(clip: Clip) {
-    bookmarkedClip = clip
+  func clipDidPlayToEndTime(clip: Clip, forwards: Bool) {
     if let cell = cellForClip(clip) {
       cell.setInPlayState(true, isCurrentPlayingClip: false, animated: true)
     }
-    if let nextClip = clipAfterClip(clip) {
-      if let nextCell = cellForClip(nextClip) {
-        nextCell.setInPlayState(true, isCurrentPlayingClip: true, animated: true)
+    if forwards {
+      bookmarkedClip = clip
+      if let nextClip = clipAfterClip(clip) {
+        if let nextCell = cellForClip(nextClip) {
+          nextCell.setInPlayState(true, isCurrentPlayingClip: true, animated: true)
+        }
+      } else {
+        player.stop()
       }
     } else {
-      player.stop()
+      // Going backwards in timeline
+      if let previousClip = clipBeforeClip(clip) {
+        if let previousCell = cellForClip(previousClip) {
+          previousCell.setInPlayState(true, isCurrentPlayingClip: true, animated: true)
+        }
+      } else {
+        player.stop()
+      }
     }
   }
 }
