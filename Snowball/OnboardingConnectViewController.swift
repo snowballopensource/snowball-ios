@@ -16,7 +16,7 @@ class OnboardingConnectViewController: OnboardingViewController {
   let doneButton: UIButton = {
     let button = UIButton()
     button.setTitle(NSLocalizedString("Done", comment: ""), forState: UIControlState.Normal)
-    button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+    button.setTitleColor(UIColor.SnowballColor.blueColor, forState: UIControlState.Normal)
     button.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 22)
     return button
     }()
