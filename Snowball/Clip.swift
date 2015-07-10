@@ -69,7 +69,6 @@ func ==(lhs: Clip, rhs: Clip) -> Bool {
   }
   if let lhsCreatedAt = lhs.createdAt, rhsCreatedAt = rhs.createdAt {
     let clipsCreatedAtSame = lhsCreatedAt.compare(rhsCreatedAt) == NSComparisonResult.OrderedSame
-    println(clipsCreatedAtSame)
     return clipsCreatedAtSame
   }
   return false
