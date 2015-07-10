@@ -23,7 +23,7 @@ class OnboardingPageViewController: UIViewController {
     return pageControl
   }()
 
-  private let viewControllerClasses: [UIViewController.Type] = [OnboardingPlayViewController.self, OnboardingCaptureViewController.self, OnboardingAddViewController.self]
+  private let viewControllerClasses: [UIViewController.Type] = [OnboardingPlayViewController.self, OnboardingCaptureViewController.self, OnboardingAddViewController.self, OnboardingConnectViewController.self]
 
   // MARK: - UIViewController
 

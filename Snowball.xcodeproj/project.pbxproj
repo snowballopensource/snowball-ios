@@ -55,6 +55,7 @@
 		BA8812EB1A783CD600B50651 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */; };
 		BA938A011A7B06C600857CF7 /* NSError+Print.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA938A001A7B06C600857CF7 /* NSError+Print.swift */; };
 		BA97DE591B4DC9B2005DF812 /* UIViewController+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA97DE581B4DC9B2005DF812 /* UIViewController+Shake.swift */; };
+		BA989AD31B508D5A0029B674 /* OnboardingConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA989AD21B508D5A0029B674 /* OnboardingConnectViewController.swift */; };
 		BA9AA67C1A67465F002C4992 /* AuthenticationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9AA67B1A67465F002C4992 /* AuthenticationNavigationController.swift */; };
 		BA9AA6831A674804002C4992 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9AA6821A674804002C4992 /* MainNavigationController.swift */; };
 		BA9C8E801AAB779200CF05AB /* FormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C8E7F1AAB779200CF05AB /* FormTableViewController.swift */; };
@@ -161,6 +162,7 @@
 		BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		BA938A001A7B06C600857CF7 /* NSError+Print.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Print.swift"; sourceTree = "<group>"; };
 		BA97DE581B4DC9B2005DF812 /* UIViewController+Shake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Shake.swift"; sourceTree = "<group>"; };
+		BA989AD21B508D5A0029B674 /* OnboardingConnectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingConnectViewController.swift; sourceTree = "<group>"; };
 		BA9AA67B1A67465F002C4992 /* AuthenticationNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationNavigationController.swift; sourceTree = "<group>"; };
 		BA9AA6821A674804002C4992 /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		BA9C8E7F1AAB779200CF05AB /* FormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewController.swift; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 				BAE702481A96C1130040DA6F /* OnboardingPlayViewController.swift */,
 				BAE7024A1A96C1220040DA6F /* OnboardingCaptureViewController.swift */,
 				BAE7024C1A96C12E0040DA6F /* OnboardingAddViewController.swift */,
+				BA989AD21B508D5A0029B674 /* OnboardingConnectViewController.swift */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -645,6 +648,7 @@
 				BA32C7951A3287BE0052F4CA /* UserAvatarImageView.swift in Sources */,
 				BA1835551AA51F8500D6A0BE /* ClipPlayer.swift in Sources */,
 				BAA966BD1A87FEEC0032752F /* FindFriendsViewController.swift in Sources */,
+				BA989AD31B508D5A0029B674 /* OnboardingConnectViewController.swift in Sources */,
 				BA2ABF461AE9940200BD0861 /* ProfileClipsViewController.swift in Sources */,
 				BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */,
 				BA7C0E481A65C315001B3B4C /* UIButton+Snowball.swift in Sources */,
