@@ -257,10 +257,25 @@ class ClipsViewController: UIViewController {
     activityIndicatorView.startAnimating()
     API.request(Router.GetClipStream).responseJSON { (request, response, JSON, error) in
       if let JSON = JSON as? [AnyObject] {
+        // Clips that were already captured and are pending before the timeline loads from server...
+        // Keep track of them and keep them in the pending clips array upon reload
+        var pendingClips = self.clips.filter { (clip) -> Bool in
+          if clip.state == ClipState.Pending {
+            return true
+          }
+          return false
+        }
         self.clips = Clip.importJSON(JSON)
-        self.collectionView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.collectionView.numberOfSections())))
-        if let bookmarkedClip = self.bookmarkedClip {
-          self.scrollToClip(bookmarkedClip, animated: false)
+        self.clips += pendingClips
+         self.collectionView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.collectionView.numberOfSections())))
+        if pendingClips.count > 0 {
+          if let pendingClip = pendingClips.last {
+            self.scrollToClip(pendingClip, animated: false)
+          }
+        } else {
+          if let bookmarkedClip = self.bookmarkedClip {
+            self.scrollToClip(bookmarkedClip, animated: false)
+          }
         }
       }
       self.activityIndicatorView.stopAnimating()
