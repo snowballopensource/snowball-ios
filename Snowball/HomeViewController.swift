@@ -87,6 +87,7 @@ extension HomeViewController: ClipsViewControllerDelegate {
 
   func userDidAcceptPreviewClip(clip: Clip) {
     cameraViewController.view.hidden = false
+    clipsViewController.prepareForClipPreview(starting: false)
     topView.setHidden(false, animated: true)
     if clip.id == nil {
       clip.state = ClipState.Default
@@ -126,10 +127,12 @@ extension HomeViewController: CameraViewControllerDelegate {
     clip.thumbnailURL = thumbnailURL
     clip.user = User.currentUser
     clip.createdAt = NSDate()
+    clipsViewController.prepareForClipPreview(starting: true)
     clipsViewController.addClipToTimeline(clip)
   }
 
   func videoPreviewDidCancel() {
+    clipsViewController.prepareForClipPreview(starting: false)
     clipsViewController.removePendingClipFromTimeline()
     topView.setHidden(false, animated: true)
   }

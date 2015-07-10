@@ -271,6 +271,15 @@ class ClipsViewController: UIViewController {
     collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: animated)
   }
 
+  func prepareForClipPreview(#starting: Bool) {
+    if let bookmarkedClip = bookmarkedClip {
+      if let cell = cellForClip(bookmarkedClip) {
+        cell.setBookmarkPlayheadHidden(starting)
+      }
+    }
+    collectionView.scrollEnabled = !starting
+  }
+
   // MARK: - Private
 
   @objc private func userDidTapPlayerControlGestureRecognizer(recognizer: UITapGestureRecognizer) {
