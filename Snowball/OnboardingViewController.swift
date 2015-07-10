@@ -22,7 +22,7 @@ class OnboardingViewController: UIViewController {
 
   let detailImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.contentMode = UIViewContentMode.ScaleAspectFit
+    imageView.contentMode = UIViewContentMode.Bottom
     return imageView
   }()
 
@@ -37,15 +37,13 @@ class OnboardingViewController: UIViewController {
       titleLabel.top == titleLabel.superview!.top + 70
     }
 
+    let margin: CGFloat = 35
+
     view.addSubview(detailImageView)
-    var originY: CGFloat = 300
-    if isIphone4S {
-      originY = 250
-    }
-    layout(detailImageView) { (detailImageView) in
-      detailImageView.left == detailImageView.superview!.left
-      detailImageView.top == detailImageView.superview!.top + originY
-      detailImageView.right == detailImageView.superview!.right
+    layout(detailImageView, titleLabel) { (detailImageView, titleLabel) in
+      detailImageView.left == detailImageView.superview!.left + margin
+      detailImageView.top == titleLabel.bottom + margin
+      detailImageView.right == detailImageView.superview!.right - margin
       detailImageView.bottom == detailImageView.superview!.bottom
     }
   }
