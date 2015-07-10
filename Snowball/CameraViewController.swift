@@ -119,7 +119,12 @@ class CameraViewController: UIViewController {
         self.captureSession.addInput(audioDeviceInput)
       }
       let movieFileOutput = AVCaptureMovieFileOutput()
-      movieFileOutput.maxRecordedDuration = CMTimeMakeWithSeconds(self.maxRecordingSeconds, self.FPS)
+      // TODO: Check to see if this works after 9.0 is released.
+      // As of 8.x, setting the maxRecordedDuration will stop recording correctly, but the sound for the next
+      // recorded clip will not be there. For now, I am ending recording when the progressView gets > 100%.
+      // Details in Pivotal issue:
+      // https://www.pivotaltracker.com/story/show/96253720
+      // movieFileOutput.maxRecordedDuration = CMTimeMakeWithSeconds(self.maxRecordingSeconds, self.FPS)
       self.movieFileOutput = movieFileOutput
       if self.captureSession.canAddOutput(movieFileOutput) {
         self.captureSession.addOutput(movieFileOutput)
@@ -323,6 +328,8 @@ class CameraViewController: UIViewController {
     let timeInterval = timer.userInfo as! Double
     if progressView.progress <= 1 {
       progressView.progress += Float(timeInterval / maxRecordingSeconds)
+    } else {
+      endRecording()
     }
   }
 
