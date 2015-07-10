@@ -91,6 +91,22 @@ class ClipsViewController: UIViewController {
                 return clip
               }
             }
+            // If we get to the last clip and nothing has returned yet, then run this logic to check for deleted bookmarked clip OR user has not returned
+            if let lastClip = clips.last {
+              let clipIsLastClip = (clip.id == lastClip.id)
+              if clipIsLastClip {
+                // If bookmark date is EARLIER than the first clip, user has not returned in some time
+                if let firstClip = clips.first {
+                  if let firstClipCreatedAt = firstClip.createdAt {
+                    if bookmarkDate.compare(firstClipCreatedAt) == NSComparisonResult.OrderedAscending {
+                      return firstClip
+                    }
+                  }
+                }
+                // Bookmark was probably deleted, return last clip
+                return lastClip
+              }
+            }
           }
         }
         return clips.first
