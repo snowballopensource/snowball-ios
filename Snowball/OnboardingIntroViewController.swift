@@ -21,6 +21,12 @@ class OnboardingIntroViewController: UIViewController {
     imageView.contentMode = UIViewContentMode.Center
     return imageView
     }()
+  let arrowImageView: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = UIImage(named: "chevron")
+    imageView.contentMode = UIViewContentMode.Center
+    return imageView
+    }()
 
   // MARK: - UIViewController
 
@@ -41,6 +47,14 @@ class OnboardingIntroViewController: UIViewController {
       logoImageView.top == logoImageView.superview!.top
       logoImageView.width == logoImageView.superview!.width
       logoImageView.height == logoImageView.superview!.height / 2
+    }
+
+    view.addSubview(arrowImageView)
+    layout(arrowImageView) { (arrowImageView) in
+      arrowImageView.left == arrowImageView.superview!.left
+      arrowImageView.top == arrowImageView.superview!.centerX + 50
+      arrowImageView.width == arrowImageView.superview!.width
+      arrowImageView.height == arrowImageView.superview!.height
     }
   }
 }
