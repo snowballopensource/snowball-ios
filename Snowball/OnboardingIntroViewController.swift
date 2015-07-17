@@ -23,7 +23,7 @@ class OnboardingIntroViewController: UIViewController {
     }()
   let arrowImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: "chevron")
+    imageView.image = UIImage(named: "onboarding-chevron")
     imageView.contentMode = UIViewContentMode.Center
     return imageView
     }()
@@ -56,5 +56,8 @@ class OnboardingIntroViewController: UIViewController {
       arrowImageView.width == arrowImageView.superview!.width
       arrowImageView.height == arrowImageView.superview!.height
     }
+    UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.Autoreverse | UIViewAnimationOptions.Repeat | UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+      self.arrowImageView.alpha = 0.5
+      }, completion: nil)
   }
 }
