@@ -25,6 +25,8 @@ class OnboardingPageViewController: UIViewController {
 
   private let viewControllerClasses: [UIViewController.Type] = [OnboardingIntroViewController.self, OnboardingPlayViewController.self, OnboardingCaptureViewController.self, OnboardingAddViewController.self, OnboardingConnectViewController.self]
 
+  private let tapGestureRecognizer = UITapGestureRecognizer()
+
   // MARK: - UIViewController
 
   override func viewDidLoad() {
@@ -48,6 +50,9 @@ class OnboardingPageViewController: UIViewController {
       pageControl.top == pageControl.superview!.top + 20
       return
     }
+
+    tapGestureRecognizer.addTarget(self, action: "tapGestureRecognizerTapped")
+    view.addGestureRecognizer(tapGestureRecognizer)
   }
 
   // MARK: - Private
@@ -67,6 +72,18 @@ class OnboardingPageViewController: UIViewController {
     }
     let viewControllerClass = viewControllerClasses[index]
     return viewControllerClass()
+  }
+
+  @objc private func tapGestureRecognizerTapped() {
+    if let viewController = pageViewController.viewControllers.last as? UIViewController {
+      if let nextViewController = pageViewController(pageViewController, viewControllerAfterViewController: viewController) {
+        let viewControllers = [nextViewController]
+        // Have to call the willTransitionToViewControllers manually since the delegate
+        // is not called when navigating programatically...
+        pageViewController(pageViewController, willTransitionToViewControllers: viewControllers)
+        pageViewController.setViewControllers(viewControllers, direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+      }
+    }
   }
 }
 
