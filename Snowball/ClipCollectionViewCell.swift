@@ -54,6 +54,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return swipeGestureRecognizer
     }()
 
+  private let showOptionsLongPressGestureRecognizer = UILongPressGestureRecognizer()
+
   private let hideOptionsGestureRecognizer: UISwipeGestureRecognizer = {
     let swipeGestureRecognizer = UISwipeGestureRecognizer()
     swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Up
@@ -134,6 +136,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     showOptionsGestureRecognizer.addTarget(self, action: "showOptionsGestureRecognizerSwiped")
     addGestureRecognizer(showOptionsGestureRecognizer)
+
+    showOptionsLongPressGestureRecognizer.addTarget(self, action: "showOptionsGestureRecognizerLongPressed")
+    addGestureRecognizer(showOptionsLongPressGestureRecognizer)
 
     hideOptionsGestureRecognizer.addTarget(self, action: "hideOptionsGestureRecognizerSwiped")
     addGestureRecognizer(hideOptionsGestureRecognizer)
@@ -376,6 +381,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
   }
 
   @objc private func showOptionsGestureRecognizerSwiped() {
+    showOptionsViewAnimated(true)
+  }
+
+  @objc private func showOptionsGestureRecognizerLongPressed() {
     showOptionsViewAnimated(true)
   }
 
