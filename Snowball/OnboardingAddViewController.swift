@@ -16,7 +16,7 @@ class OnboardingAddViewController: OnboardingViewController {
     super.viewDidLoad()
 
     titleLabel.text = NSLocalizedString("Add", comment: "")
-    detailImageView.image = UIImage(named: "onboarding-add")
+    detailImageView.image = UIImage(named: "onboard-add")
   }
   
 }

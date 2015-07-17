@@ -27,7 +27,7 @@ class OnboardingConnectViewController: OnboardingViewController {
     super.viewDidLoad()
 
     titleLabel.text = NSLocalizedString("Connect", comment: "")
-    detailImageView.image = UIImage(named: "onboarding-add")
+    detailImageView.image = UIImage(named: "onboard-connect")
 
     doneButton.addTarget(self, action: "doneButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(doneButton)

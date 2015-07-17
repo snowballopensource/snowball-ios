@@ -16,7 +16,7 @@ class OnboardingPlayViewController: OnboardingViewController {
     super.viewDidLoad()
 
     titleLabel.text = NSLocalizedString("Play", comment: "")
-    detailImageView.image = UIImage(named: "onboarding-play")
+    detailImageView.image = UIImage(named: "onboard-play")
   }
 
 }

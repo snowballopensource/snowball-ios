@@ -442,8 +442,8 @@
 				BA989AD41B508DDB0029B674 /* OnboardingIntroViewController.swift */,
 				BA6314D01A97C8B100021E3F /* OnboardingViewController.swift */,
 				BAE702481A96C1130040DA6F /* OnboardingPlayViewController.swift */,
-				BAE7024A1A96C1220040DA6F /* OnboardingCaptureViewController.swift */,
 				BAE7024C1A96C12E0040DA6F /* OnboardingAddViewController.swift */,
+				BAE7024A1A96C1220040DA6F /* OnboardingCaptureViewController.swift */,
 				BA989AD21B508D5A0029B674 /* OnboardingConnectViewController.swift */,
 			);
 			name = Onboarding;

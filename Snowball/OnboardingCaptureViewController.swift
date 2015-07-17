@@ -16,7 +16,7 @@ class OnboardingCaptureViewController: OnboardingViewController {
     super.viewDidLoad()
 
     titleLabel.text = NSLocalizedString("Capture", comment: "")
-    detailImageView.image = UIImage(named: "onboarding-capture")
+    detailImageView.image = UIImage(named: "onboard-capture")
   }
 
 }
