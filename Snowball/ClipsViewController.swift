@@ -160,14 +160,14 @@ class ClipsViewController: UIViewController {
     }
 
     let collectionViewLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-    collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: ClipCollectionViewCell.size.width, bottom: 0, right: ClipCollectionViewCell.size.width)
+    let collectionViewWidthPreloadMultiple: CGFloat = 2
     collectionView.dataSource = self
     collectionView.delegate = self
     view.addSubview(collectionView)
     layout(collectionView, playerView) { (collectionView, playerView) in
       collectionView.left == collectionView.superview!.left
       collectionView.top == playerView.bottom
-      collectionView.width == collectionView.superview!.width
+      collectionView.width == collectionView.superview!.width * collectionViewWidthPreloadMultiple
       collectionView.bottom == collectionView.superview!.bottom
     }
 
@@ -182,7 +182,7 @@ class ClipsViewController: UIViewController {
 
     view.addSubview(activityIndicatorView)
     layout(activityIndicatorView, collectionView) { (activityIndicatorView, collectionView) in
-      activityIndicatorView.centerX == collectionView.centerX
+      activityIndicatorView.centerX == collectionView.centerX / collectionViewWidthPreloadMultiple
       activityIndicatorView.top == collectionView.top + 50
     }
 
