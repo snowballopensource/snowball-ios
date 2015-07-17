@@ -47,12 +47,6 @@ class ClipsViewController: UIViewController {
     return activityIndicatorView
     }()
 
-  let pauseImageView: UIImageView = {
-    let imageView = UIImageView(image: UIImage(named: "pause"))
-    imageView.contentMode = UIViewContentMode.Center
-    return imageView
-  }()
-
   let playerControlSingleTapGestureRecognizer: UITapGestureRecognizer = {
     let gestureRecognizer = UITapGestureRecognizer()
     return gestureRecognizer
@@ -169,15 +163,6 @@ class ClipsViewController: UIViewController {
       collectionView.top == playerView.bottom
       collectionView.width == collectionView.superview!.width * collectionViewWidthPreloadMultiple
       collectionView.bottom == collectionView.superview!.bottom
-    }
-
-    setPauseImageViewHidden(true, animated: false)
-    view.addSubview(pauseImageView)
-    layout(pauseImageView, collectionView) { (pauseImageView, collectionView) in
-      pauseImageView.left == pauseImageView.superview!.left
-      pauseImageView.top == collectionView.top
-      pauseImageView.right == pauseImageView.superview!.right
-      pauseImageView.height == ClipCollectionViewCell.size.width
     }
 
     view.addSubview(activityIndicatorView)
@@ -399,17 +384,6 @@ class ClipsViewController: UIViewController {
     collectionView.deleteItemsAtIndexPaths([NSIndexPath(forItem: index, inSection: 0)])
   }
 
-  private func setPauseImageViewHidden(hidden: Bool, animated: Bool = true) {
-    if animated {
-      UIView.animateWithDuration(0.2) {
-        self.setPauseImageViewHidden(hidden, animated: false)
-      }
-    } else {
-      let alpha = CGFloat(!hidden)
-      pauseImageView.alpha = alpha
-    }
-  }
-
   private func setBookmarkPlayheadHiddenForBookmarkedClip(hidden: Bool) {
     if let bookmarkedClip = bookmarkedClip {
       if let cell = cellForClip(bookmarkedClip) {
@@ -566,7 +540,6 @@ extension ClipsViewController: ClipPlayerDelegate {
             cell.setInPlayState(true, isCurrentPlayingClip: false, animated: true)
           }
           collectionView.scrollEnabled = false
-          setPauseImageViewHidden(false)
           setBookmarkPlayheadHiddenForBookmarkedClip(true)
         }
       }
@@ -580,7 +553,6 @@ extension ClipsViewController: ClipPlayerDelegate {
       cell.setInPlayState(false, isCurrentPlayingClip: false, animated: true)
     }
     collectionView.scrollEnabled = true
-    setPauseImageViewHidden(true)
     setBookmarkPlayheadHiddenForBookmarkedClip(false)
     delegate?.playerDidEndPlayback()
   }

@@ -48,6 +48,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return imageView
     }()
 
+  private let pauseClipImageView: UIImageView = {
+    let imageView = UIImageView(image: UIImage(named: "pause"))
+    imageView.contentMode = UIViewContentMode.Center
+    return imageView
+    }()
+
   private let showOptionsGestureRecognizer: UISwipeGestureRecognizer = {
     let swipeGestureRecognizer = UISwipeGestureRecognizer()
     swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Down
@@ -134,6 +140,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     clipThumbnailImageView.addSubview(playClipImageView)
 
+    setPauseImageHidden(true, animated: false)
+    clipThumbnailImageView.addSubview(pauseClipImageView)
+
     showOptionsGestureRecognizer.addTarget(self, action: "showOptionsGestureRecognizerSwiped")
     addGestureRecognizer(showOptionsGestureRecognizer)
 
@@ -215,6 +224,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     addClipImageView.frame = clipThumbnailImageView.bounds
     playClipImageView.frame = clipThumbnailImageView.bounds
+    pauseClipImageView.frame = clipThumbnailImageView.bounds
     optionsView.frame = clipThumbnailImageView.bounds
     optionsViewOverlay.frame = clipThumbnailImageView.bounds
     hideOptionsViewAnimated(false)
@@ -274,7 +284,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
         }
       }
     }
-
     hideOptionsViewAnimated(false)
     optionsView.configureForUser(clip.user)
   }
@@ -283,6 +292,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     scaleClipThumbnail(inPlayState, isCurrentPlayingClip: isCurrentPlayingClip, animated: animated)
     let shouldDimContentView = (inPlayState && !isCurrentPlayingClip)
     dimContentView(shouldDimContentView)
+    let shouldShowPauseImage = (inPlayState && isCurrentPlayingClip)
+    setPauseImageHidden(!shouldShowPauseImage, animated: animated)
     hideUserInfo(shouldDimContentView, animated: animated)
     if inPlayState {
       playClipImageView.alpha = 0
@@ -311,6 +322,16 @@ class ClipCollectionViewCell: UICollectionViewCell {
   func setBookmarkPlayheadHidden(hidden: Bool) {
     UIView.animateWithDuration(0.4) {
       self.playClipImageView.alpha = CGFloat(!hidden)
+    }
+  }
+
+  func setPauseImageHidden(hidden: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.4) {
+        self.setPauseImageHidden(hidden, animated: false)
+      }
+    } else {
+      self.pauseClipImageView.alpha = CGFloat(!hidden)
     }
   }
 
