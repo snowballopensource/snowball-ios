@@ -69,21 +69,31 @@ extension HomeViewController: ClipsViewControllerDelegate {
     clipsViewController.prepareForClipPreview(starting: false)
     topView.setHidden(false, animated: true)
     if clip.id == nil {
-      clip.state = ClipState.Default
+      clip.state = ClipState.Uploading
       self.clipsViewController.reloadCellForClip(clip)
       self.cameraViewController.endPreview()
-      self.uploadClip(clip)
+      self.uploadClip(clip) { (success) in
+        if success {
+          println("clip upload succeeded")
+          clip.state = ClipState.Default
+        } else {
+          println("clip upload failed")
+        }
+      }
     }
   }
 
   // MARK: - Private
 
-  private func uploadClip(clip: Clip) {
+  private func uploadClip(clip: Clip, completion: (success: Bool) -> Void) {
     Analytics.track("Create Clip")
     API.uploadClip(clip) { (request, response, JSON, error) in
       if let error = error {
         error.print("upload clip")
         displayAPIErrorToUser(JSON)
+        completion(success: false)
+      } else {
+        completion(success: true)
       }
     }
   }

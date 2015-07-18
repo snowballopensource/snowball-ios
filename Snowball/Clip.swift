@@ -75,5 +75,5 @@ func ==(lhs: Clip, rhs: Clip) -> Bool {
 }
 
 enum ClipState {
-  case Default, Pending
+  case Default, Pending, Uploading
 }

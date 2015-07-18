@@ -69,6 +69,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }()
 
   private let userAvatarImageView = UserAvatarImageView()
+  private var userAvatarImageViewYConstraint: ConstraintGroup!
 
   private let usernameLabel: UILabel = {
     let label = UILabel()
@@ -158,9 +159,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
 
     contentView.addSubview(userAvatarImageView)
-    layout(userAvatarImageView, clipThumbnailImageView) { (userAvatarImageView, clipThumbnailImageView) in
+    setAvatarConstraintForTopOfBounce(false)
+    layout(userAvatarImageView) { (userAvatarImageView) in
       userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
-      userAvatarImageView.centerY == clipThumbnailImageView.bottom
       userAvatarImageView.width == avatarDiameter
       userAvatarImageView.height == userAvatarImageView.width
     }
@@ -175,9 +176,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
 
     contentView.addSubview(usernameLabel)
-    layout(usernameLabel, userAvatarImageView) { (usernameLabel, userAvatarImageView) in
+    layout(usernameLabel, clipThumbnailImageView) { (usernameLabel, clipThumbnailImageView) in
       usernameLabel.left == usernameLabel.superview!.left
-      usernameLabel.top == userAvatarImageView.bottom + 5
+      usernameLabel.top == clipThumbnailImageView.bottom + (avatarDiameter / 2) + 5
       usernameLabel.right == usernameLabel.superview!.right
     }
 
@@ -286,6 +287,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
     hideOptionsViewAnimated(false)
     optionsView.configureForUser(clip.user)
+    if clip.state == ClipState.Uploading {
+      setAvatarBouncing(true)
+    }
   }
 
   func setInPlayState(inPlayState: Bool, isCurrentPlayingClip: Bool, animated: Bool = true) {
@@ -333,6 +337,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
     } else {
       self.pauseClipImageView.alpha = CGFloat(!hidden)
     }
+  }
+
+  override func prepareForReuse() {
+    super.prepareForReuse()
+
+    setAvatarBouncing(false)
   }
 
   // MARK: - Private
@@ -398,6 +408,57 @@ class ClipCollectionViewCell: UICollectionViewCell {
       if frame.origin.y == newOriginY { return }
       let newFrame = CGRectMake(frame.origin.x, newOriginY, frame.size.width, frame.size.height)
       self.optionsView.frame = newFrame
+    }
+  }
+
+  private func setAvatarConstraintForTopOfBounce(topOfBounce: Bool) {
+    if topOfBounce {
+      userAvatarImageViewYConstraint = constrain(userAvatarImageView, clipThumbnailImageView, replace: userAvatarImageViewYConstraint) { (userAvatarImageView, clipThumbnailImageView) in
+        userAvatarImageView.centerY == clipThumbnailImageView.bottom - 75
+      }
+    } else {
+      if userAvatarImageViewYConstraint == nil {
+        userAvatarImageViewYConstraint = constrain(userAvatarImageView, clipThumbnailImageView) { (userAvatarImageView, clipThumbnailImageView) in
+          userAvatarImageView.centerY == clipThumbnailImageView.bottom
+        }
+      } else {
+        userAvatarImageViewYConstraint = constrain(userAvatarImageView, clipThumbnailImageView, replace: userAvatarImageViewYConstraint) { (userAvatarImageView, clipThumbnailImageView) in
+          userAvatarImageView.centerY == clipThumbnailImageView.bottom
+        }
+      }
+    }
+  }
+
+  private func setAvatarBouncing(bounce: Bool) {
+    if bounce {
+      userAvatarImageView.layer.removeAllAnimations()
+      // Move the avatar up
+      setAvatarConstraintForTopOfBounce(true)
+      UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut,
+        animations: { () -> Void in
+          self.userAvatarImageView.layoutIfNeeded()
+        }) { (animated) -> Void in
+          self.setAvatarConstraintForTopOfBounce(false)
+          UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+            self.userAvatarImageView.layoutIfNeeded()
+            }, completion: { (finished) -> Void in
+              if finished {
+                self.setAvatarBouncing(true)
+              }
+          })
+      }
+      // Spin the avatar around 360 degress
+      UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+        self.userAvatarImageView.transform = CGAffineTransformRotate(self.userAvatarImageView.transform, CGFloat(M_PI))
+        }) { (completed) -> Void in
+          UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+            self.userAvatarImageView.transform = CGAffineTransformRotate(self.userAvatarImageView.transform, CGFloat(M_PI))
+            }, completion: nil)
+      }
+    } else {
+      userAvatarImageView.layer.removeAllAnimations()
+      setAvatarConstraintForTopOfBounce(false)
+      userAvatarImageView.layoutIfNeeded()
     }
   }
 

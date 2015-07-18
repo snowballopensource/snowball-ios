@@ -244,7 +244,7 @@ class ClipsViewController: UIViewController {
         // Clips that were already captured and are pending before the timeline loads from server...
         // Keep track of them and keep them in the pending clips array upon reload
         var pendingClips = self.clips.filter { (clip) -> Bool in
-          if clip.state == ClipState.Pending {
+          if clip.state == ClipState.Pending || clip.state == ClipState.Uploading {
             return true
           }
           return false
