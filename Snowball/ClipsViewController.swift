@@ -35,6 +35,9 @@ class ClipsViewController: UIViewController {
     flowLayout.itemSize = ClipCollectionViewCell.size
 
     let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: flowLayout)
+    let collectionViewLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+    let preloadWidth = ClipCollectionViewCell.size.width * 3
+    collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: preloadWidth, bottom: 0, right: preloadWidth)
     collectionView.backgroundColor = UIColor.whiteColor()
     collectionView.registerClass(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell))
     collectionView.showsHorizontalScrollIndicator = false
@@ -154,13 +157,14 @@ class ClipsViewController: UIViewController {
     }
 
     let collectionViewLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+    let preloadWidth = collectionViewLayout.sectionInset.left
     collectionView.dataSource = self
     collectionView.delegate = self
     view.addSubview(collectionView)
     layout(collectionView, playerView) { (collectionView, playerView) in
-      collectionView.left == collectionView.superview!.left
+      collectionView.left == collectionView.superview!.left - preloadWidth
       collectionView.top == playerView.bottom
-      collectionView.width == collectionView.superview!.width
+      collectionView.right == collectionView.superview!.right + preloadWidth
       collectionView.bottom == collectionView.superview!.bottom
     }
 
