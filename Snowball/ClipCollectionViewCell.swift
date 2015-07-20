@@ -499,10 +499,12 @@ extension ClipCollectionViewCell: ClipOptionsViewDelegate {
   // MARK: - ClipOptionsViewDelegate
 
   func userDidSelectFlagClipOption() {
+    hideOptionsViewAnimated(true)
     delegate?.userDidFlagClipForCell(self)
   }
 
   func userDidSelectDeleteClipOption() {
+    hideOptionsViewAnimated(true)
     delegate?.userDidDeleteClipForCell(self)
   }
 }
