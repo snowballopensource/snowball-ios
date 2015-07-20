@@ -342,6 +342,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
 
+    clipThumbnailImageView.image = nil
     setAvatarBouncing(false)
   }
 
