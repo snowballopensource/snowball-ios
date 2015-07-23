@@ -8,9 +8,16 @@
 
 import UIKit
 
+enum SnowballRoundedButtonStyle {
+  case Border
+  case Fill
+}
+
 class SnowballRoundedButton: UIButton {
 
   // MARK: - Properties
+
+  private let style: SnowballRoundedButtonStyle
 
   private var chevronImageView: UIImageView = {
     let chevronImage = UIImage(named: "chevron")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
@@ -25,10 +32,18 @@ class SnowballRoundedButton: UIButton {
 
   // MARK: - Initializers
 
-  init() {
+  convenience init() {
+    self.init(style: .Border)
+  }
+
+  init(style: SnowballRoundedButtonStyle) {
+    self.style = style
+
     super.init(frame: CGRectZero)
 
-    layer.borderWidth = 2
+    if style == .Border {
+      layer.borderWidth = 2
+    }
     titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
     alignLeft(insetWidth: 20)
     chevronImageView.hidden = true
@@ -54,8 +69,15 @@ class SnowballRoundedButton: UIButton {
   override func tintColorDidChange() {
     super.tintColorDidChange()
 
-    layer.borderColor = tintColor?.CGColor
-    setTitleColor(tintColor, forState: UIControlState.Normal)
-    chevronImageView.tintColor = tintColor
+    switch(style) {
+    case .Border:
+      layer.borderColor = tintColor?.CGColor
+      setTitleColor(tintColor, forState: UIControlState.Normal)
+      chevronImageView.tintColor = tintColor
+    case .Fill:
+      backgroundColor = tintColor
+      setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+      chevronImageView.tintColor = UIColor.whiteColor()
+    }
   }
 }

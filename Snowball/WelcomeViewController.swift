@@ -13,7 +13,7 @@ class WelcomeViewController: UIViewController {
 
   // MARK: - Properties
 
-  private let topImageView: UIImageView = {
+  private let backgroundImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "welcome-image")
     imageView.contentMode = UIViewContentMode.ScaleAspectFill
@@ -21,7 +21,7 @@ class WelcomeViewController: UIViewController {
     return imageView
   }()
 
-  private let topImageViewLogo: UIImageView = {
+  private let backgroundImageViewLogo: UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "snowball-logo")
     imageView.contentMode = UIViewContentMode.Center
@@ -29,7 +29,7 @@ class WelcomeViewController: UIViewController {
   }()
 
   private let signUpButton: SnowballRoundedButton = {
-    let button = SnowballRoundedButton()
+    let button = SnowballRoundedButton(style: SnowballRoundedButtonStyle.Fill)
     button.tintColor = UIColor.SnowballColor.blueColor
     button.showChevron = true
     button.setTitle(NSLocalizedString("sign up", comment: ""), forState: UIControlState.Normal)
@@ -37,7 +37,7 @@ class WelcomeViewController: UIViewController {
   }()
 
   private let signInButton: SnowballRoundedButton = {
-    let button = SnowballRoundedButton()
+    let button = SnowballRoundedButton(style: SnowballRoundedButtonStyle.Fill)
     button.tintColor = UIColor.SnowballColor.grayColor
     button.showChevron = true
     button.setTitle(NSLocalizedString("sign in", comment: ""), forState: UIControlState.Normal)
@@ -74,24 +74,30 @@ class WelcomeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    view.addSubview(topImageView)
-    layout(topImageView) { (topImageView) in
-      topImageView.left == topImageView.superview!.left
-      topImageView.top == topImageView.superview!.top
-      topImageView.right == topImageView.superview!.right
-      topImageView.height == Float(UIScreen.mainScreen().bounds.size.height / 2)
+    view.addSubview(backgroundImageView)
+    layout(backgroundImageView) { (backgroundImageView) in
+      backgroundImageView.left == backgroundImageView.superview!.left
+      backgroundImageView.top == backgroundImageView.superview!.top
+      backgroundImageView.right == backgroundImageView.superview!.right
+      backgroundImageView.height == backgroundImageView.superview!.height
     }
 
-    topImageViewLogo.frame = topImageView.bounds
-    topImageView.addSubview(topImageViewLogo)
+    backgroundImageView.addSubview(backgroundImageViewLogo)
+    view.addSubview(backgroundImageView)
+    layout(backgroundImageViewLogo) { (backgroundImageViewLogo) in
+      backgroundImageViewLogo.left == backgroundImageViewLogo.superview!.left
+      backgroundImageViewLogo.top == backgroundImageViewLogo.superview!.top
+      backgroundImageViewLogo.right == backgroundImageViewLogo.superview!.right
+      backgroundImageViewLogo.height == backgroundImageViewLogo.superview!.height / 2
+    }
 
     let buttonMargin: Float = 25
 
     signUpButton.addTarget(self, action: "signUpButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(signUpButton)
-    layout(signUpButton, topImageView) { (signUpButton, topImageView) in
+    layout(signUpButton) { (signUpButton) in
       signUpButton.left == signUpButton.superview!.left + buttonMargin
-      signUpButton.top == topImageView.bottom + 40
+      signUpButton.top == signUpButton.superview!.centerY + 40
       signUpButton.right == signUpButton.superview!.right - buttonMargin
       signUpButton.height == 50
     }
