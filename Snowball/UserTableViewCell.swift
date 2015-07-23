@@ -33,7 +33,7 @@ class UserTableViewCell: UITableViewCell {
 
   private let followButton: UIButton = {
     let button = UIButton()
-    button.titleLabel?.font = UIFont(name: UIFont.SnowballFont.bold, size: 18)
+    button.titleLabel?.font = UIFont(name: UIFont.SnowballFont.bold, size: 14)
     button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
     button.layer.cornerRadius = 20
     return button
@@ -64,7 +64,7 @@ class UserTableViewCell: UITableViewCell {
     followButton.addTarget(self, action: "followButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     contentView.addSubview(followButton)
     layout(followButton) { (followButton) in
-      followButton.width == 100
+      followButton.width == 80
       followButton.centerY == followButton.superview!.centerY
       followButton.right == followButton.superview!.right - margin
       followButton.height == 40
@@ -87,11 +87,13 @@ class UserTableViewCell: UITableViewCell {
     if user.following.boolValue {
       color = UIColor.SnowballColor.grayColor
       followButton.setTitle(NSLocalizedString("unfollow", comment: ""), forState: UIControlState.Normal)
+      followButton.backgroundColor = color
     } else {
       color = UIColor.SnowballColor.blueColor
       followButton.setTitle(NSLocalizedString("follow", comment: ""), forState: UIControlState.Normal)
+      followButton.backgroundColor = userColor
     }
-    followButton.backgroundColor = color
+    //followButton.backgroundColor = color
   }
 
   // MARK: - Private

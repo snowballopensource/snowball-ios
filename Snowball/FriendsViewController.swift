@@ -13,8 +13,10 @@ class FriendsViewController: UIViewController {
 
   // MARK: - Properties
 
-  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Camera, rightButtonType: SnowballTopViewButtonType.AddFriends, title: NSLocalizedString("Friends", comment: ""))
+  //private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Camera, rightButtonType: SnowballTopViewButtonType.AddFriends, title: NSLocalizedString("Friends", comment: ""))
 
+  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Camera, rightButtonType: SnowballTopViewButtonType.AddFriends, title: NSLocalizedString("", comment: ""))
+    
   private let currentUserAvatarImageView: UserAvatarImageView = {
     let imageView = UserAvatarImageView()
     if let user = User.currentUser {
@@ -77,16 +79,19 @@ class FriendsViewController: UIViewController {
 
     view.addSubview(currentUserAvatarImageView)
     layout(currentUserAvatarImageView, topView) { (currentUserAvatarImageView, topView) in
-      currentUserAvatarImageView.left == currentUserAvatarImageView.superview!.left + margin
-      currentUserAvatarImageView.top == topView.bottom + 20
-      currentUserAvatarImageView.width == 40
+      //currentUserAvatarImageView.left == currentUserAvatarImageView.superview!.left + margin
+      currentUserAvatarImageView.centerX == currentUserAvatarImageView.superview!.centerX
+      currentUserAvatarImageView.top == topView.bottom - 15
+      currentUserAvatarImageView.width == 100
       currentUserAvatarImageView.height == currentUserAvatarImageView.width
     }
 
     view.addSubview(currentUserUsernameLabel)
     layout(currentUserUsernameLabel, currentUserAvatarImageView) { (currentUserUsernameLabel, currentUserAvatarImageView) in
-      currentUserUsernameLabel.left == currentUserAvatarImageView.right + 15
-      currentUserUsernameLabel.centerY == currentUserAvatarImageView.centerY
+      //currentUserUsernameLabel.left == currentUserAvatarImageView.right + 15
+      //currentUserUsernameLabel.centerY == currentUserAvatarImageView.centerY
+      currentUserUsernameLabel.centerX == currentUserAvatarImageView.centerX
+      currentUserUsernameLabel.top == currentUserAvatarImageView.bottom + 10
     }
 
     currentUserProfileButton.addTarget(self, action: "currentUserProfileButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
@@ -100,9 +105,9 @@ class FriendsViewController: UIViewController {
 
     settingsButton.addTarget(self, action: "settingsButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(settingsButton)
-    layout(settingsButton, currentUserAvatarImageView) { (settingsButton, currentUserAvatarImageView) in
+    layout(settingsButton, currentUserUsernameLabel) { (settingsButton, currentUserUsernameLabel) in
       settingsButton.right == settingsButton.superview!.right - margin
-      settingsButton.centerY == currentUserAvatarImageView.centerY
+      settingsButton.centerY == currentUserUsernameLabel.centerY
       settingsButton.width == 44
       settingsButton.height == settingsButton.width
     }
@@ -110,10 +115,10 @@ class FriendsViewController: UIViewController {
     followersFollowingSegmentedControl.addTarget(self, action: "followersFollowingSegmentedControlTapped", forControlEvents: UIControlEvents.ValueChanged)
     view.addSubview(followersFollowingSegmentedControl)
     layout(followersFollowingSegmentedControl, currentUserAvatarImageView) { (followersFollowingSegmentedControl, currentUserAvatarImageView) in
-      followersFollowingSegmentedControl.top == currentUserAvatarImageView.bottom + 20
+      followersFollowingSegmentedControl.top == currentUserAvatarImageView.bottom + 55
       followersFollowingSegmentedControl.left == followersFollowingSegmentedControl.superview!.left + margin
       followersFollowingSegmentedControl.right == followersFollowingSegmentedControl.superview!.right - margin
-      followersFollowingSegmentedControl.height == 40
+      followersFollowingSegmentedControl.height == 35
     }
 
     tableView.addRefreshControl(self, action: "refresh")

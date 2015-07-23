@@ -446,7 +446,7 @@ extension ClipsViewController: ClipCollectionViewCellDelegate {
   func userDidFlagClipForCell(cell: ClipCollectionViewCell) {
     if let clip = clipForCell(cell) {
       if let id = clip.id {
-        let alertController = UIAlertController(title: NSLocalizedString("Flag this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to report this clip as inappropriate?", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: NSLocalizedString("Flag this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to report this clip as inappropriate?", comment: ""), preferredStyle: UIAlertControllerStyle.ActionSheet)
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Don't Flag", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Flag", comment: ""), style: UIAlertActionStyle.Destructive) { (action) -> Void in
           API.request(Router.FlagClip(clipID: id)).response { (request, response, JSON, error) in
@@ -464,7 +464,7 @@ extension ClipsViewController: ClipCollectionViewCellDelegate {
 
   func userDidDeleteClipForCell(cell: ClipCollectionViewCell) {
     if let clip = clipForCell(cell) {
-      let alertController = UIAlertController(title: NSLocalizedString("Delete this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to delete this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+      let alertController = UIAlertController(title: NSLocalizedString("Delete this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to delete this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.ActionSheet)
       alertController.addAction(UIAlertAction(title: NSLocalizedString("Don't Delete", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
       alertController.addAction(UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
         let index = self.indexOfClip(clip)
