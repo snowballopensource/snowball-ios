@@ -491,9 +491,11 @@ extension ClipsViewController: ClipCollectionViewCellDelegate {
   }
 
   func userDidTapUserButtonForCell(cell: ClipCollectionViewCell) {
-    if let clip = clipForCell(cell) {
-      if let user = clip.user {
-        navigationController?.pushViewController(ProfileViewController(user: user), animated: true)
+    if !player.playing {
+      if let clip = clipForCell(cell) {
+        if let user = clip.user {
+          navigationController?.pushViewController(ProfileViewController(user: user), animated: true)
+        }
       }
     }
   }
