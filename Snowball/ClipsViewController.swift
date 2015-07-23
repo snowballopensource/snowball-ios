@@ -37,7 +37,7 @@ class ClipsViewController: UIViewController {
     let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: flowLayout)
     let collectionViewLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
     let preloadWidth = ClipCollectionViewCell.size.width * 3
-    collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: preloadWidth, bottom: 0, right: preloadWidth)
+    collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: preloadWidth)
     collectionView.backgroundColor = UIColor.whiteColor()
     collectionView.registerClass(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell))
     collectionView.showsHorizontalScrollIndicator = false
@@ -157,12 +157,12 @@ class ClipsViewController: UIViewController {
     }
 
     let collectionViewLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-    let preloadWidth = collectionViewLayout.sectionInset.left
+    let preloadWidth = collectionViewLayout.sectionInset.right
     collectionView.dataSource = self
     collectionView.delegate = self
     view.addSubview(collectionView)
     layout(collectionView, playerView) { (collectionView, playerView) in
-      collectionView.left == collectionView.superview!.left - preloadWidth
+      collectionView.left == collectionView.superview!.left
       collectionView.top == playerView.bottom
       collectionView.right == collectionView.superview!.right + preloadWidth
       collectionView.bottom == collectionView.superview!.bottom
@@ -170,7 +170,7 @@ class ClipsViewController: UIViewController {
 
     view.addSubview(activityIndicatorView)
     layout(activityIndicatorView, collectionView) { (activityIndicatorView, collectionView) in
-      activityIndicatorView.centerX == collectionView.centerX
+      activityIndicatorView.centerX == activityIndicatorView.superview!.centerX
       activityIndicatorView.top == collectionView.top + 50
     }
 
@@ -191,14 +191,6 @@ class ClipsViewController: UIViewController {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "appResigningActive", name: UIApplicationWillResignActiveNotification, object: nil)
 
     refresh()
-  }
-
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
-
-    if let bookmarkedClip = bookmarkedClip {
-      scrollToClip(bookmarkedClip, animated: false)
-    }
   }
 
   override func viewWillDisappear(animated: Bool) {
