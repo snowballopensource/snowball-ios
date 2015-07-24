@@ -74,11 +74,9 @@ extension HomeViewController: ClipsViewControllerDelegate {
       self.cameraViewController.endPreview()
       self.uploadClip(clip) { (success) in
         if success {
-          println("clip upload succeeded")
-          clip.state = ClipState.Default
-          self.clipsViewController.reloadCellForClip(clip)
+          self.handleSuccessfulUploadForClip(clip)
         } else {
-          println("clip upload failed")
+          self.handleFailedUploadForClip(clip)
         }
       }
     }
@@ -91,12 +89,23 @@ extension HomeViewController: ClipsViewControllerDelegate {
     API.uploadClip(clip) { (request, response, JSON, error) in
       if let error = error {
         error.print("upload clip")
-        displayAPIErrorToUser(JSON)
         completion(success: false)
       } else {
         completion(success: true)
       }
     }
+  }
+
+  private func handleSuccessfulUploadForClip(clip: Clip) {
+    clip.state = ClipState.Default
+    self.clipsViewController.reloadCellForClip(clip)
+  }
+
+  private func handleFailedUploadForClip(clip: Clip) {
+    // TODO: Right now, UploadFailed is not a state on the cell.
+    // Awaiting refactor of cell state machine.
+    clip.state = ClipState.UploadFailed
+    self.clipsViewController.reloadCellForClip(clip)
   }
 }
 
