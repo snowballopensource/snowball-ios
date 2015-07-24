@@ -83,17 +83,13 @@ class UserTableViewCell: UITableViewCell {
     let userColor = user.color as! UIColor
     avatarImageView.configureForUser(user)
     usernameLabel.textColor = userColor
-    var color: UIColor!
     if user.following.boolValue {
-      color = UIColor.SnowballColor.grayColor
       followButton.setTitle(NSLocalizedString("unfollow", comment: ""), forState: UIControlState.Normal)
-      followButton.backgroundColor = color
+      followButton.backgroundColor = UIColor.SnowballColor.grayColor
     } else {
-      color = UIColor.SnowballColor.blueColor
       followButton.setTitle(NSLocalizedString("follow", comment: ""), forState: UIControlState.Normal)
       followButton.backgroundColor = userColor
     }
-    //followButton.backgroundColor = color
   }
 
   // MARK: - Private
