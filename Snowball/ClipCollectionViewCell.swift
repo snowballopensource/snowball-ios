@@ -267,7 +267,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
       }
     }
 
-    if clip.state == ClipState.Pending {
+    if clip.state == ClipState.Pending || clip.state == ClipState.Uploading {
       playClipImageView.alpha = 0
     } else {
       playClipImageView.alpha = CGFloat(showBookmarkPlayhead)
