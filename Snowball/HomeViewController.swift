@@ -69,29 +69,23 @@ extension HomeViewController: ClipsViewControllerDelegate {
     clipsViewController.prepareForClipPreview(starting: false)
     topView.setHidden(false, animated: true)
     if clip.id == nil {
-      clip.state = ClipState.Uploading
-      self.clipsViewController.reloadCellForClip(clip)
+      Analytics.track("Create Clip")
       self.cameraViewController.endPreview()
-      self.uploadClip(clip) { (success) in
-        if success {
-          self.handleSuccessfulUploadForClip(clip)
-        } else {
-          self.handleFailedUploadForClip(clip)
-        }
-      }
+      self.uploadClip(clip)
     }
   }
 
   // MARK: - Private
 
-  private func uploadClip(clip: Clip, completion: (success: Bool) -> Void) {
-    Analytics.track("Create Clip")
+  private func uploadClip(clip: Clip) {
+    clip.state = ClipState.Uploading
+    self.clipsViewController.reloadCellForClip(clip)
     API.uploadClip(clip) { (request, response, JSON, error) in
       if let error = error {
         error.print("upload clip")
-        completion(success: false)
+        self.handleFailedUploadForClip(clip)
       } else {
-        completion(success: true)
+        self.handleSuccessfulUploadForClip(clip)
       }
     }
   }
@@ -106,6 +100,14 @@ extension HomeViewController: ClipsViewControllerDelegate {
     // Awaiting refactor of cell state machine.
     clip.state = ClipState.UploadFailed
     self.clipsViewController.reloadCellForClip(clip)
+
+    // TODO: remove this and replace with textless cell state...
+    let alertController = UIAlertController(title: NSLocalizedString("Upload Failed", comment: ""), message: "Want to try again?", preferredStyle: UIAlertControllerStyle.Alert)
+    alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel Upload", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
+    alertController.addAction(UIAlertAction(title: NSLocalizedString("Try Again", comment: ""), style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+      self.uploadClip(clip)
+    }))
+    presentViewController(alertController, animated: true, completion: nil)
   }
 }
 
