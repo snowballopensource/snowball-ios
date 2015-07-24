@@ -13,9 +13,7 @@ class FriendsViewController: UIViewController {
 
   // MARK: - Properties
 
-  //private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Camera, rightButtonType: SnowballTopViewButtonType.AddFriends, title: NSLocalizedString("Friends", comment: ""))
-
-  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Camera, rightButtonType: SnowballTopViewButtonType.AddFriends, title: NSLocalizedString("", comment: ""))
+  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Camera, rightButtonType: SnowballTopViewButtonType.AddFriends)
     
   private let currentUserAvatarImageView: UserAvatarImageView = {
     let imageView = UserAvatarImageView()
@@ -79,7 +77,6 @@ class FriendsViewController: UIViewController {
 
     view.addSubview(currentUserAvatarImageView)
     layout(currentUserAvatarImageView, topView) { (currentUserAvatarImageView, topView) in
-      //currentUserAvatarImageView.left == currentUserAvatarImageView.superview!.left + margin
       currentUserAvatarImageView.centerX == currentUserAvatarImageView.superview!.centerX
       currentUserAvatarImageView.top == topView.bottom - 15
       currentUserAvatarImageView.width == 100
@@ -88,8 +85,6 @@ class FriendsViewController: UIViewController {
 
     view.addSubview(currentUserUsernameLabel)
     layout(currentUserUsernameLabel, currentUserAvatarImageView) { (currentUserUsernameLabel, currentUserAvatarImageView) in
-      //currentUserUsernameLabel.left == currentUserAvatarImageView.right + 15
-      //currentUserUsernameLabel.centerY == currentUserAvatarImageView.centerY
       currentUserUsernameLabel.centerX == currentUserAvatarImageView.centerX
       currentUserUsernameLabel.top == currentUserAvatarImageView.bottom + 10
     }
@@ -114,8 +109,8 @@ class FriendsViewController: UIViewController {
 
     followersFollowingSegmentedControl.addTarget(self, action: "followersFollowingSegmentedControlTapped", forControlEvents: UIControlEvents.ValueChanged)
     view.addSubview(followersFollowingSegmentedControl)
-    layout(followersFollowingSegmentedControl, currentUserAvatarImageView) { (followersFollowingSegmentedControl, currentUserAvatarImageView) in
-      followersFollowingSegmentedControl.top == currentUserAvatarImageView.bottom + 55
+    layout(followersFollowingSegmentedControl, currentUserUsernameLabel) { (followersFollowingSegmentedControl, currentUserUsernameLabel) in
+      followersFollowingSegmentedControl.top == currentUserUsernameLabel.bottom + 10
       followersFollowingSegmentedControl.left == followersFollowingSegmentedControl.superview!.left + margin
       followersFollowingSegmentedControl.right == followersFollowingSegmentedControl.superview!.right - margin
       followersFollowingSegmentedControl.height == 35
