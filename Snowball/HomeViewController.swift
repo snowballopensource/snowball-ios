@@ -76,6 +76,7 @@ extension HomeViewController: ClipsViewControllerDelegate {
         if success {
           println("clip upload succeeded")
           clip.state = ClipState.Default
+          self.clipsViewController.reloadCellForClip(clip)
         } else {
           println("clip upload failed")
         }
