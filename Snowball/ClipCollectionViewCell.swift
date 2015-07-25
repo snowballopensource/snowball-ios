@@ -115,6 +115,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return view
   }()
 
+  private var shouldContinueBouncing = false
+
   // MARK: - Initializers
 
   override init(frame: CGRect) {
@@ -432,7 +434,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   private func setAvatarBouncing(bounce: Bool) {
     if bounce {
-      userAvatarImageView.layer.removeAllAnimations()
+      setAvatarBouncing(false) // Reset the bounce
+      shouldContinueBouncing = true
       // Move the avatar up
       setAvatarConstraintForTopOfBounce(true)
       UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut,
@@ -443,7 +446,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
           UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
             self.userAvatarImageView.layoutIfNeeded()
             }, completion: { (finished) -> Void in
-              if finished {
+              if self.shouldContinueBouncing {
+                println("bounce again!")
                 self.setAvatarBouncing(true)
               }
           })
@@ -457,6 +461,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
             }, completion: nil)
       }
     } else {
+      shouldContinueBouncing = false
       userAvatarImageView.layer.removeAllAnimations()
       setAvatarConstraintForTopOfBounce(false)
       userAvatarImageView.layoutIfNeeded()
