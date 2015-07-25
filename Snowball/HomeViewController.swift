@@ -92,14 +92,14 @@ extension HomeViewController: ClipsViewControllerDelegate {
 
   private func handleSuccessfulUploadForClip(clip: Clip) {
     clip.state = ClipState.Default
-    self.clipsViewController.reloadCellForClip(clip)
+    clipsViewController.stopAnimationsOnCellForClip(clip)
   }
 
   private func handleFailedUploadForClip(clip: Clip) {
     // TODO: Right now, UploadFailed is not a state on the cell.
     // Awaiting refactor of cell state machine.
     clip.state = ClipState.UploadFailed
-    self.clipsViewController.reloadCellForClip(clip)
+    clipsViewController.reloadCellForClip(clip)
 
     // TODO: remove this and replace with textless cell state...
     let alertController = UIAlertController(title: NSLocalizedString("Upload Failed", comment: ""), message: "Want to try again?", preferredStyle: UIAlertControllerStyle.Alert)

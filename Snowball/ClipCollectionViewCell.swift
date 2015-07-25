@@ -348,6 +348,35 @@ class ClipCollectionViewCell: UICollectionViewCell {
     setAvatarBouncing(false)
   }
 
+  func setAvatarBouncing(bounce: Bool) {
+    if bounce {
+      shouldContinueBouncing = true
+      // Move the avatar up
+      setAvatarConstraintForTopOfBounce(true)
+      UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut,
+        animations: { () -> Void in
+          self.userAvatarImageView.layoutIfNeeded()
+        }) { (animated) -> Void in
+          self.setAvatarConstraintForTopOfBounce(false)
+          UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+            self.userAvatarImageView.layoutIfNeeded()
+            }, completion: { (finished) -> Void in
+              self.setAvatarBouncing(self.shouldContinueBouncing)
+          })
+      }
+      // Spin the avatar around 360 degress
+      UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+        self.userAvatarImageView.transform = CGAffineTransformRotate(self.userAvatarImageView.transform, CGFloat(M_PI))
+        }) { (completed) -> Void in
+          UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+            self.userAvatarImageView.transform = CGAffineTransformRotate(self.userAvatarImageView.transform, CGFloat(M_PI))
+            }, completion: nil)
+      }
+    } else {
+      shouldContinueBouncing = false
+    }
+  }
+
   // MARK: - Private
 
   private func dimContentView(dim: Bool) {
@@ -429,42 +458,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
           userAvatarImageView.centerY == clipThumbnailImageView.bottom
         }
       }
-    }
-  }
-
-  private func setAvatarBouncing(bounce: Bool) {
-    if bounce {
-      setAvatarBouncing(false) // Reset the bounce
-      shouldContinueBouncing = true
-      // Move the avatar up
-      setAvatarConstraintForTopOfBounce(true)
-      UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut,
-        animations: { () -> Void in
-          self.userAvatarImageView.layoutIfNeeded()
-        }) { (animated) -> Void in
-          self.setAvatarConstraintForTopOfBounce(false)
-          UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
-            self.userAvatarImageView.layoutIfNeeded()
-            }, completion: { (finished) -> Void in
-              if self.shouldContinueBouncing {
-                println("bounce again!")
-                self.setAvatarBouncing(true)
-              }
-          })
-      }
-      // Spin the avatar around 360 degress
-      UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
-        self.userAvatarImageView.transform = CGAffineTransformRotate(self.userAvatarImageView.transform, CGFloat(M_PI))
-        }) { (completed) -> Void in
-          UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
-            self.userAvatarImageView.transform = CGAffineTransformRotate(self.userAvatarImageView.transform, CGFloat(M_PI))
-            }, completion: nil)
-      }
-    } else {
-      shouldContinueBouncing = false
-      userAvatarImageView.layer.removeAllAnimations()
-      setAvatarConstraintForTopOfBounce(false)
-      userAvatarImageView.layoutIfNeeded()
     }
   }
 

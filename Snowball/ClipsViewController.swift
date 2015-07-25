@@ -220,6 +220,11 @@ class ClipsViewController: UIViewController {
     }
   }
 
+  func stopAnimationsOnCellForClip(clip: Clip) {
+    let cell = cellForClip(clip)
+    cell?.setAvatarBouncing(false)
+  }
+
   func removePendingClipFromTimeline() {
     if let lastClip = clips.last {
       if lastClip.state == ClipState.Pending {
