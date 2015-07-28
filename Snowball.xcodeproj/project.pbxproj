@@ -15,6 +15,8 @@
 		BA1835551AA51F8500D6A0BE /* ClipPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1835541AA51F8500D6A0BE /* ClipPlayer.swift */; };
 		BA20CCEE1A9D156C00D96A31 /* UploadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */; };
 		BA2460C91B68216F003E3FB5 /* SnowballSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2460C81B68216F003E3FB5 /* SnowballSpec.swift */; };
+		BA2460D81B6826E6003E3FB5 /* ClipSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2460D71B6826E6003E3FB5 /* ClipSpec.swift */; };
+		BA2460DA1B6826EC003E3FB5 /* TimelineSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2460D91B6826EC003E3FB5 /* TimelineSpec.swift */; };
 		BA2ABF441AE9917D00BD0861 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2ABF431AE9917D00BD0861 /* ProfileViewController.swift */; };
 		BA2ABF461AE9940200BD0861 /* ProfileClipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2ABF451AE9940200BD0861 /* ProfileClipsViewController.swift */; };
 		BA30B31C1B68008600BB49EF /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30B31B1B68008600BB49EF /* CoreDataStack.swift */; };
@@ -116,6 +118,8 @@
 		BA1835541AA51F8500D6A0BE /* ClipPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPlayer.swift; sourceTree = "<group>"; };
 		BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadQueue.swift; sourceTree = "<group>"; };
 		BA2460C81B68216F003E3FB5 /* SnowballSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballSpec.swift; sourceTree = "<group>"; };
+		BA2460D71B6826E6003E3FB5 /* ClipSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipSpec.swift; sourceTree = "<group>"; };
+		BA2460D91B6826EC003E3FB5 /* TimelineSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineSpec.swift; sourceTree = "<group>"; };
 		BA2ABF431AE9917D00BD0861 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		BA2ABF451AE9940200BD0861 /* ProfileClipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileClipsViewController.swift; sourceTree = "<group>"; };
 		BA30B31B1B68008600BB49EF /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -229,6 +233,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		BA2460DB1B6826F1003E3FB5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BA2460D71B6826E6003E3FB5 /* ClipSpec.swift */,
+				BA2460D91B6826EC003E3FB5 /* TimelineSpec.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		BA30B31F1B6800D700BB49EF /* CoreRecord */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				BA2460C81B68216F003E3FB5 /* SnowballSpec.swift */,
+				BA2460DB1B6826F1003E3FB5 /* Models */,
 				BA38C1741A30228700A2F2AE /* Supporting Files */,
 			);
 			path = SnowballTests;
@@ -746,6 +760,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA2460D81B6826E6003E3FB5 /* ClipSpec.swift in Sources */,
+				BA2460DA1B6826EC003E3FB5 /* TimelineSpec.swift in Sources */,
 				BA2460C91B68216F003E3FB5 /* SnowballSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
