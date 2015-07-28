@@ -8,14 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		590C6EB6ECEE12594A815ED5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC32A4062714B26F6F63153 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		BA042C251A90A10000D83B81 /* CoreRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA042C241A90A10000D83B81 /* CoreRecord.framework */; };
-		BA042C261A90A10000D83B81 /* CoreRecord.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA042C241A90A10000D83B81 /* CoreRecord.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BA061D8C1B1948CE00CEAFDB /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA061D891B1948CE00CEAFDB /* Alamofire.framework */; };
-		BA061D8D1B1948CE00CEAFDB /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA061D8A1B1948CE00CEAFDB /* Cartography.framework */; };
-		BA061D8E1B1948CE00CEAFDB /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA061D8B1B1948CE00CEAFDB /* Haneke.framework */; };
-		BA061D901B1948E200CEAFDB /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA061D891B1948CE00CEAFDB /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BA061D921B1948E200CEAFDB /* Cartography.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA061D8A1B1948CE00CEAFDB /* Cartography.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BA061D941B1948E200CEAFDB /* Haneke.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA061D8B1B1948CE00CEAFDB /* Haneke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA137C7E1A7199AA001F8FCF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA137C7C1A7199AA001F8FCF /* Crashlytics.framework */; };
 		BA137C7F1A7199AA001F8FCF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA137C7D1A7199AA001F8FCF /* Fabric.framework */; };
 		BA1835511AA4FC5500D6A0BE /* ClipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1835501AA4FC5500D6A0BE /* ClipsViewController.swift */; };
@@ -24,6 +16,8 @@
 		BA20CCEE1A9D156C00D96A31 /* UploadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */; };
 		BA2ABF441AE9917D00BD0861 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2ABF431AE9917D00BD0861 /* ProfileViewController.swift */; };
 		BA2ABF461AE9940200BD0861 /* ProfileClipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2ABF451AE9940200BD0861 /* ProfileClipsViewController.swift */; };
+		BA30B31C1B68008600BB49EF /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30B31B1B68008600BB49EF /* CoreDataStack.swift */; };
+		BA30B31E1B6800A600BB49EF /* NSManagedObject+CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30B31D1B6800A600BB49EF /* NSManagedObject+CoreRecord.swift */; };
 		BA32C7921A3286250052F4CA /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */; };
 		BA32C7951A3287BE0052F4CA /* UserAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32C7941A3287BE0052F4CA /* UserAvatarImageView.swift */; };
 		BA372D141A880C58004E58E9 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA372D131A880C58004E58E9 /* TextFieldTableViewCell.swift */; };
@@ -50,8 +44,6 @@
 		BA7C27C61A37A28F00A9CFC5 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27C51A37A28F00A9CFC5 /* Router.swift */; };
 		BA7C27CB1A37A64400A9CFC5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27CA1A37A64400A9CFC5 /* API.swift */; };
 		BA7C27D31A37ADA600A9CFC5 /* RemoteObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */; };
-		BA87C1481A840C0400A58E64 /* Swifter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC90F3A1A8343C5005C9405 /* Swifter.framework */; };
-		BA87C1491A840C0400A58E64 /* Swifter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAC90F3A1A8343C5005C9405 /* Swifter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA8812EB1A783CD600B50651 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */; };
 		BA938A011A7B06C600857CF7 /* NSError+Print.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA938A001A7B06C600857CF7 /* NSError+Print.swift */; };
 		BA97DE591B4DC9B2005DF812 /* UIViewController+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA97DE581B4DC9B2005DF812 /* UIViewController+Shake.swift */; };
@@ -103,11 +95,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BA042C261A90A10000D83B81 /* CoreRecord.framework in Embed Frameworks */,
-				BA061D921B1948E200CEAFDB /* Cartography.framework in Embed Frameworks */,
-				BA061D901B1948E200CEAFDB /* Alamofire.framework in Embed Frameworks */,
-				BA87C1491A840C0400A58E64 /* Swifter.framework in Embed Frameworks */,
-				BA061D941B1948E200CEAFDB /* Haneke.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,10 +105,6 @@
 		2BC32A4062714B26F6F63153 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		32713D4685D2B1201FD238E6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8A6E3769866E85F9B3BF4ACB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		BA042C241A90A10000D83B81 /* CoreRecord.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreRecord.framework; path = Carthage/Build/iOS/CoreRecord.framework; sourceTree = "<group>"; };
-		BA061D891B1948CE00CEAFDB /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		BA061D8A1B1948CE00CEAFDB /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cartography.framework; path = Carthage/Build/iOS/Cartography.framework; sourceTree = "<group>"; };
-		BA061D8B1B1948CE00CEAFDB /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = Carthage/Build/iOS/Haneke.framework; sourceTree = "<group>"; };
 		BA137C7C1A7199AA001F8FCF /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		BA137C7D1A7199AA001F8FCF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		BA1835501AA4FC5500D6A0BE /* ClipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipsViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +113,8 @@
 		BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadQueue.swift; sourceTree = "<group>"; };
 		BA2ABF431AE9917D00BD0861 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		BA2ABF451AE9940200BD0861 /* ProfileClipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileClipsViewController.swift; sourceTree = "<group>"; };
+		BA30B31B1B68008600BB49EF /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		BA30B31D1B6800A600BB49EF /* NSManagedObject+CoreRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+CoreRecord.swift"; sourceTree = "<group>"; };
 		BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Snowball.swift"; sourceTree = "<group>"; };
 		BA32C7941A3287BE0052F4CA /* UserAvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAvatarImageView.swift; sourceTree = "<group>"; };
 		BA372D131A880C58004E58E9 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
@@ -177,7 +162,6 @@
 		BAB8F2C71A830F5500937407 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		BABE8FCC1A8957D600B81DD1 /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
 		BAC8CD391A6607550075B503 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
-		BAC90F3A1A8343C5005C9405 /* Swifter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swifter.framework; path = Carthage/Build/iOS/Swifter.framework; sourceTree = "<group>"; };
 		BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeSince.swift"; sourceTree = "<group>"; };
 		BAE26FB21A77090700A0977C /* SnowballTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballTopView.swift; sourceTree = "<group>"; };
 		BAE702451A96AFDF0040DA6F /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
@@ -201,11 +185,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA061D8C1B1948CE00CEAFDB /* Alamofire.framework in Frameworks */,
-				BA061D8D1B1948CE00CEAFDB /* Cartography.framework in Frameworks */,
-				BA061D8E1B1948CE00CEAFDB /* Haneke.framework in Frameworks */,
-				BA042C251A90A10000D83B81 /* CoreRecord.framework in Frameworks */,
-				BA87C1481A840C0400A58E64 /* Swifter.framework in Frameworks */,
 				BA137C7E1A7199AA001F8FCF /* Crashlytics.framework in Frameworks */,
 				BA137C7F1A7199AA001F8FCF /* Fabric.framework in Frameworks */,
 				590C6EB6ECEE12594A815ED5 /* Pods.framework in Frameworks */,
@@ -225,9 +204,6 @@
 		04150CE1616CDA3B9208DA56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BA061D891B1948CE00CEAFDB /* Alamofire.framework */,
-				BA061D8A1B1948CE00CEAFDB /* Cartography.framework */,
-				BA061D8B1B1948CE00CEAFDB /* Haneke.framework */,
 				2BC32A4062714B26F6F63153 /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -243,13 +219,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		BA145D071A687CCC00D81E53 /* Carthage */ = {
+		BA30B31F1B6800D700BB49EF /* CoreRecord */ = {
 			isa = PBXGroup;
 			children = (
-				BA042C241A90A10000D83B81 /* CoreRecord.framework */,
-				BAC90F3A1A8343C5005C9405 /* Swifter.framework */,
+				BA30B31B1B68008600BB49EF /* CoreDataStack.swift */,
+				BA30B31D1B6800A600BB49EF /* NSManagedObject+CoreRecord.swift */,
 			);
-			name = Carthage;
+			name = CoreRecord;
+			path = Snowball;
 			sourceTree = "<group>";
 		};
 		BA32C7801A3256CC0052F4CA /* Assets */ = {
@@ -281,10 +258,9 @@
 				BA38C15A1A30228700A2F2AE /* Snowball */,
 				BA38C1731A30228700A2F2AE /* SnowballTests */,
 				BA38C1591A30228700A2F2AE /* Products */,
-				BA145D071A687CCC00D81E53 /* Carthage */,
 				BAA15E701A6888F70055756E /* Vendor */,
-				6D01F357A6304CC3C3D1F10B /* Pods */,
 				04150CE1616CDA3B9208DA56 /* Frameworks */,
+				6D01F357A6304CC3C3D1F10B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -417,6 +393,7 @@
 		BAA15E701A6888F70055756E /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				BA30B31F1B6800D700BB49EF /* CoreRecord */,
 				BA137C7C1A7199AA001F8FCF /* Crashlytics.framework */,
 				BA137C7D1A7199AA001F8FCF /* Fabric.framework */,
 			);
@@ -488,7 +465,6 @@
 				BA38C1561A30228700A2F2AE /* Resources */,
 				BAE10A171A30400100CCFA25 /* Embed Frameworks */,
 				BA137C7B1A71996F001F8FCF /* Fabric Script */,
-				BAE32F651A71CB6800B130EC /* Carthage Temporary Fix 1/22/2015 */,
 				40A4A0A5F11886F0349A4D1E /* Copy Pods Resources */,
 				0EAFFB57047BE28CB5F4CBF5 /* Embed Pods Frameworks */,
 			);
@@ -635,25 +611,6 @@
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run 3ad6062e840bc33bf27000e2eac426550ff9ddc5 027b542a5e7453d709fac8530608bfb4016d21c2389d342f4e4066c4cf4ff823";
 		};
-		BAE32F651A71CB6800B130EC /* Carthage Temporary Fix 1/22/2015 */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Swifter.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/CoreRecord.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Cartography.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Haneke.framework",
-			);
-			name = "Carthage Temporary Fix 1/22/2015";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -670,7 +627,9 @@
 				BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */,
 				BA7C0E481A65C315001B3B4C /* UIButton+Snowball.swift in Sources */,
 				BAE702491A96C1130040DA6F /* OnboardingPlayViewController.swift in Sources */,
+				BA30B31C1B68008600BB49EF /* CoreDataStack.swift in Sources */,
 				BA38C15E1A30228700A2F2AE /* AppDelegate.swift in Sources */,
+				BA30B31E1B6800A600BB49EF /* NSManagedObject+CoreRecord.swift in Sources */,
 				BA97DE591B4DC9B2005DF812 /* UIViewController+Shake.swift in Sources */,
 				BA372D141A880C58004E58E9 /* TextFieldTableViewCell.swift in Sources */,
 				BA3DB8241A9EEEFD00378F6D /* SnowballRoundedButton.swift in Sources */,
@@ -842,7 +801,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Snowball/Info.plist;
@@ -860,7 +818,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Snowball/Info.plist;
@@ -954,7 +911,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Snowball/Info.plist;
