@@ -7,7 +7,7 @@
 //
 
 import CoreData
-import Foundation
+import UIKit
 
 extension UIViewController {
   override public func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {

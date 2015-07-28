@@ -170,7 +170,6 @@
 		BA9C8E7F1AAB779200CF05AB /* FormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewController.swift; sourceTree = "<group>"; };
 		BA9C8E811AAB7EFC00CF05AB /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		BA9C8E831AAB7F0400CF05AB /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		BAA15EAE1A688AB80055756E /* Snowball-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snowball-Bridging-Header.h"; sourceTree = "<group>"; };
 		BAA637591B180181000F3359 /* PushManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
 		BAA8C07F1A32F8F300AAB9F4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BAA966BC1A87FEEC0032752F /* FindFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFriendsViewController.swift; sourceTree = "<group>"; };
@@ -315,7 +314,6 @@
 				BA38C1691A30228700A2F2AE /* LaunchScreen.xib */,
 				BA38C15F1A30228700A2F2AE /* Snowball.xcdatamodeld */,
 				BA3A286F1A3051E300A85C29 /* Util.swift */,
-				BAA15EAE1A688AB80055756E /* Snowball-Bridging-Header.h */,
 				BA38C15B1A30228700A2F2AE /* Supporting Files */,
 			);
 			path = Snowball;
@@ -850,7 +848,6 @@
 				INFOPLIST_FILE = Snowball/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Snowball/Snowball-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -869,7 +866,6 @@
 				INFOPLIST_FILE = Snowball/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Snowball/Snowball-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -964,7 +960,6 @@
 				INFOPLIST_FILE = Snowball/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Snowball/Snowball-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = "Debug-Staging";
