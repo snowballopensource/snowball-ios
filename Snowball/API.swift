@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Snowball, Inc. All rights reserved.
 //
 
+import AFNetworking
 import Alamofire
 import Foundation
 import UIKit

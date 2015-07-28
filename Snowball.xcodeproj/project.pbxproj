@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8DF0E3E6680E2FB7F9D9B73D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2855F299F88B0B69D9D1484C /* libPods.a */; };
+		590C6EB6ECEE12594A815ED5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC32A4062714B26F6F63153 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		BA042C251A90A10000D83B81 /* CoreRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA042C241A90A10000D83B81 /* CoreRecord.framework */; };
 		BA042C261A90A10000D83B81 /* CoreRecord.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA042C241A90A10000D83B81 /* CoreRecord.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA061D8C1B1948CE00CEAFDB /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA061D891B1948CE00CEAFDB /* Alamofire.framework */; };
@@ -115,7 +115,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2855F299F88B0B69D9D1484C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BC32A4062714B26F6F63153 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		32713D4685D2B1201FD238E6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8A6E3769866E85F9B3BF4ACB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		BA042C241A90A10000D83B81 /* CoreRecord.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreRecord.framework; path = Carthage/Build/iOS/CoreRecord.framework; sourceTree = "<group>"; };
@@ -209,7 +209,7 @@
 				BA87C1481A840C0400A58E64 /* Swifter.framework in Frameworks */,
 				BA137C7E1A7199AA001F8FCF /* Crashlytics.framework in Frameworks */,
 				BA137C7F1A7199AA001F8FCF /* Fabric.framework in Frameworks */,
-				8DF0E3E6680E2FB7F9D9B73D /* libPods.a in Frameworks */,
+				590C6EB6ECEE12594A815ED5 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,7 +229,7 @@
 				BA061D891B1948CE00CEAFDB /* Alamofire.framework */,
 				BA061D8A1B1948CE00CEAFDB /* Cartography.framework */,
 				BA061D8B1B1948CE00CEAFDB /* Haneke.framework */,
-				2855F299F88B0B69D9D1484C /* libPods.a */,
+				2BC32A4062714B26F6F63153 /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -492,6 +492,7 @@
 				BA137C7B1A71996F001F8FCF /* Fabric Script */,
 				BAE32F651A71CB6800B130EC /* Carthage Temporary Fix 1/22/2015 */,
 				40A4A0A5F11886F0349A4D1E /* Copy Pods Resources */,
+				0EAFFB57047BE28CB5F4CBF5 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -590,6 +591,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		0EAFFB57047BE28CB5F4CBF5 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		40A4A0A5F11886F0349A4D1E /* Copy Pods Resources */ = {

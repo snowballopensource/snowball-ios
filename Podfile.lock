@@ -20,14 +20,12 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Bolts/Tasks (1.1.5)
-  - Mixpanel (2.8.1):
-    - Mixpanel/Mixpanel (= 2.8.1)
-  - Mixpanel/Mixpanel (2.8.1):
-    - Mixpanel/MPCategoryHelpers
-  - Mixpanel/MPCategoryHelpers (2.8.1)
-  - Parse (1.7.4):
-    - Bolts/Tasks (>= 1.1.5)
+  - Bolts/Tasks (1.2.0)
+  - Mixpanel (2.8.2):
+    - Mixpanel/Mixpanel (= 2.8.2)
+  - Mixpanel/Mixpanel (2.8.2)
+  - Parse (1.7.5.3):
+    - Bolts/Tasks (>= 1.2.0)
 
 DEPENDENCIES:
   - AFNetworking
@@ -36,8 +34,8 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
-  Bolts: aac24961496d504aa56fc267cde95162a71bac39
-  Mixpanel: 93c4825025e6380ced273ed7178496282e385077
-  Parse: 6ca512c6e860b66739c95151b2f76ac4712b7842
+  Bolts: d176cb1e0012175589e389a9db49b85e27787576
+  Mixpanel: f4d71ac2a306e7cda6ad03d4a2be249a0fd7a967
+  Parse: 373adbb1ad2e34d383542c3b28f678c49ebe4881
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.38.2

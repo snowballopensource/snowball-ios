@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Snowball, Inc. All rights reserved.
 //
 
+import Parse
 import UIKit
 
 struct PushManager {
