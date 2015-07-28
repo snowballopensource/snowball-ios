@@ -27,8 +27,10 @@ PODS:
   - Mixpanel (2.8.2):
     - Mixpanel/Mixpanel (= 2.8.2)
   - Mixpanel/Mixpanel (2.8.2)
+  - Nimble (1.0.0)
   - Parse (1.7.5.3):
     - Bolts/Tasks (>= 1.2.0)
+  - Quick (0.3.1)
 
 DEPENDENCIES:
   - AFNetworking
@@ -36,7 +38,9 @@ DEPENDENCIES:
   - Cartography
   - HanekeSwift
   - Mixpanel
+  - Nimble (~> 1.0.0)
   - Parse
+  - Quick (~> 0.3.1)
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
@@ -45,6 +49,8 @@ SPEC CHECKSUMS:
   Cartography: 774e5cc446f5a6bca5d4345c5aa6af9a1fe74dc6
   HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb
   Mixpanel: f4d71ac2a306e7cda6ad03d4a2be249a0fd7a967
+  Nimble: 8bee528e5fcc403653076545db562d2b5db7bb87
   Parse: 373adbb1ad2e34d383542c3b28f678c49ebe4881
+  Quick: 824572d3d198d51e52cf4aa722cebf7e59952a35
 
 COCOAPODS: 0.38.2
