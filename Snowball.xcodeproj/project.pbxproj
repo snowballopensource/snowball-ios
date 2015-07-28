@@ -10,15 +10,16 @@
 		590C6EB6ECEE12594A815ED5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC32A4062714B26F6F63153 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		BA137C7E1A7199AA001F8FCF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA137C7C1A7199AA001F8FCF /* Crashlytics.framework */; };
 		BA137C7F1A7199AA001F8FCF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA137C7D1A7199AA001F8FCF /* Fabric.framework */; };
-		BA1835511AA4FC5500D6A0BE /* ClipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1835501AA4FC5500D6A0BE /* ClipsViewController.swift */; };
+		BA1835511AA4FC5500D6A0BE /* OLDClipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1835501AA4FC5500D6A0BE /* OLDClipsViewController.swift */; };
 		BA1835531AA51C1D00D6A0BE /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1835521AA51C1D00D6A0BE /* PlayerView.swift */; };
-		BA1835551AA51F8500D6A0BE /* ClipPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1835541AA51F8500D6A0BE /* ClipPlayer.swift */; };
 		BA20CCEE1A9D156C00D96A31 /* UploadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */; };
 		BA2460C91B68216F003E3FB5 /* SnowballSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2460C81B68216F003E3FB5 /* SnowballSpec.swift */; };
 		BA2460D81B6826E6003E3FB5 /* ClipSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2460D71B6826E6003E3FB5 /* ClipSpec.swift */; };
 		BA2460DA1B6826EC003E3FB5 /* TimelineSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2460D91B6826EC003E3FB5 /* TimelineSpec.swift */; };
-		BA2ABF441AE9917D00BD0861 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2ABF431AE9917D00BD0861 /* ProfileViewController.swift */; };
-		BA2ABF461AE9940200BD0861 /* ProfileClipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2ABF451AE9940200BD0861 /* ProfileClipsViewController.swift */; };
+		BA2460E31B683600003E3FB5 /* MainTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2460E21B683600003E3FB5 /* MainTimelineViewController.swift */; };
+		BA2460E51B6836B6003E3FB5 /* ProfileTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2460E41B6836B6003E3FB5 /* ProfileTimelineViewController.swift */; };
+		BA2ABF441AE9917D00BD0861 /* OLDProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2ABF431AE9917D00BD0861 /* OLDProfileViewController.swift */; };
+		BA2ABF461AE9940200BD0861 /* OLDProfileClipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2ABF451AE9940200BD0861 /* OLDProfileClipsViewController.swift */; };
 		BA30B31C1B68008600BB49EF /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30B31B1B68008600BB49EF /* CoreDataStack.swift */; };
 		BA30B31E1B6800A600BB49EF /* NSManagedObject+CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30B31D1B6800A600BB49EF /* NSManagedObject+CoreRecord.swift */; };
 		BA32C7921A3286250052F4CA /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */; };
@@ -72,7 +73,7 @@
 		BAEEA7391A97ED9500C83CF9 /* PhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEEA7381A97ED9500C83CF9 /* PhoneNumberViewController.swift */; };
 		BAF2E45A1A800F1E00A093E5 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */; };
 		BAF3BC961A76E02A00AFD3E5 /* MoreNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */; };
-		BAF50E721AA55C4400AB874E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF50E711AA55C4400AB874E /* HomeViewController.swift */; };
+		BAF50E721AA55C4400AB874E /* OLDHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF50E711AA55C4400AB874E /* OLDHomeViewController.swift */; };
 		BAF50E741AA63D3200AB874E /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF50E731AA63D3200AB874E /* CameraViewController.swift */; };
 		BAF50E761AA63E4B00AB874E /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF50E751AA63E4B00AB874E /* CameraView.swift */; };
 		BAF50E781AA644DF00AB874E /* CameraPreviewPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF50E771AA644DF00AB874E /* CameraPreviewPlayer.swift */; };
@@ -113,15 +114,16 @@
 		9F54AD9E25FBB15DB5289F67 /* Pods_SnowballTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnowballTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA137C7C1A7199AA001F8FCF /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		BA137C7D1A7199AA001F8FCF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		BA1835501AA4FC5500D6A0BE /* ClipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipsViewController.swift; sourceTree = "<group>"; };
+		BA1835501AA4FC5500D6A0BE /* OLDClipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLDClipsViewController.swift; sourceTree = "<group>"; };
 		BA1835521AA51C1D00D6A0BE /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
-		BA1835541AA51F8500D6A0BE /* ClipPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPlayer.swift; sourceTree = "<group>"; };
 		BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadQueue.swift; sourceTree = "<group>"; };
 		BA2460C81B68216F003E3FB5 /* SnowballSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballSpec.swift; sourceTree = "<group>"; };
 		BA2460D71B6826E6003E3FB5 /* ClipSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipSpec.swift; sourceTree = "<group>"; };
 		BA2460D91B6826EC003E3FB5 /* TimelineSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineSpec.swift; sourceTree = "<group>"; };
-		BA2ABF431AE9917D00BD0861 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		BA2ABF451AE9940200BD0861 /* ProfileClipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileClipsViewController.swift; sourceTree = "<group>"; };
+		BA2460E21B683600003E3FB5 /* MainTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTimelineViewController.swift; sourceTree = "<group>"; };
+		BA2460E41B6836B6003E3FB5 /* ProfileTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTimelineViewController.swift; sourceTree = "<group>"; };
+		BA2ABF431AE9917D00BD0861 /* OLDProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLDProfileViewController.swift; sourceTree = "<group>"; };
+		BA2ABF451AE9940200BD0861 /* OLDProfileClipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLDProfileClipsViewController.swift; sourceTree = "<group>"; };
 		BA30B31B1B68008600BB49EF /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		BA30B31D1B6800A600BB49EF /* NSManagedObject+CoreRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+CoreRecord.swift"; sourceTree = "<group>"; };
 		BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Snowball.swift"; sourceTree = "<group>"; };
@@ -179,7 +181,7 @@
 		BAEEA7381A97ED9500C83CF9 /* PhoneNumberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberViewController.swift; sourceTree = "<group>"; };
 		BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		BAF3BC951A76E02A00AFD3E5 /* MoreNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreNavigationController.swift; sourceTree = "<group>"; };
-		BAF50E711AA55C4400AB874E /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		BAF50E711AA55C4400AB874E /* OLDHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLDHomeViewController.swift; sourceTree = "<group>"; };
 		BAF50E731AA63D3200AB874E /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BAF50E751AA63E4B00AB874E /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		BAF50E771AA644DF00AB874E /* CameraPreviewPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPreviewPlayer.swift; sourceTree = "<group>"; };
@@ -240,6 +242,17 @@
 				BA2460D91B6826EC003E3FB5 /* TimelineSpec.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		BA2460E11B6834C0003E3FB5 /* OLD */ = {
+			isa = PBXGroup;
+			children = (
+				BAF50E711AA55C4400AB874E /* OLDHomeViewController.swift */,
+				BA1835501AA4FC5500D6A0BE /* OLDClipsViewController.swift */,
+				BA2ABF431AE9917D00BD0861 /* OLDProfileViewController.swift */,
+				BA2ABF451AE9940200BD0861 /* OLDProfileClipsViewController.swift */,
+			);
+			name = OLD;
 			sourceTree = "<group>";
 		};
 		BA30B31F1B6800D700BB49EF /* CoreRecord */ = {
@@ -379,13 +392,13 @@
 			name = Authentication;
 			sourceTree = "<group>";
 		};
-		BA789E091A7052C500BA1611 /* Player */ = {
+		BA789E091A7052C500BA1611 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				BA1835541AA51F8500D6A0BE /* ClipPlayer.swift */,
+				BAF50E731AA63D3200AB874E /* CameraViewController.swift */,
 				BAF50E771AA644DF00AB874E /* CameraPreviewPlayer.swift */,
 			);
-			name = Player;
+			name = Camera;
 			sourceTree = "<group>";
 		};
 		BA7C27C71A37A32A00A9CFC5 /* Networking */ = {
@@ -404,12 +417,10 @@
 			isa = PBXGroup;
 			children = (
 				BA9AA6821A674804002C4992 /* MainNavigationController.swift */,
-				BAF50E711AA55C4400AB874E /* HomeViewController.swift */,
-				BA1835501AA4FC5500D6A0BE /* ClipsViewController.swift */,
-				BA2ABF431AE9917D00BD0861 /* ProfileViewController.swift */,
-				BA2ABF451AE9940200BD0861 /* ProfileClipsViewController.swift */,
-				BAF50E731AA63D3200AB874E /* CameraViewController.swift */,
-				BA789E091A7052C500BA1611 /* Player */,
+				BA2460E21B683600003E3FB5 /* MainTimelineViewController.swift */,
+				BA2460E41B6836B6003E3FB5 /* ProfileTimelineViewController.swift */,
+				BA2460E11B6834C0003E3FB5 /* OLD */,
+				BA789E091A7052C500BA1611 /* Camera */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -692,10 +703,9 @@
 			files = (
 				BAF3BC961A76E02A00AFD3E5 /* MoreNavigationController.swift in Sources */,
 				BA32C7951A3287BE0052F4CA /* UserAvatarImageView.swift in Sources */,
-				BA1835551AA51F8500D6A0BE /* ClipPlayer.swift in Sources */,
 				BAA966BD1A87FEEC0032752F /* FindFriendsViewController.swift in Sources */,
 				BA989AD31B508D5A0029B674 /* OnboardingConnectViewController.swift in Sources */,
-				BA2ABF461AE9940200BD0861 /* ProfileClipsViewController.swift in Sources */,
+				BA2ABF461AE9940200BD0861 /* OLDProfileClipsViewController.swift in Sources */,
 				BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */,
 				BA7C0E481A65C315001B3B4C /* UIButton+Snowball.swift in Sources */,
 				BAE702491A96C1130040DA6F /* OnboardingPlayViewController.swift in Sources */,
@@ -709,11 +719,12 @@
 				BA8812EB1A783CD600B50651 /* UserTableViewCell.swift in Sources */,
 				BA3DB8261A9EFD9A00378F6D /* SnowballRoundedTextField.swift in Sources */,
 				BA989AD51B508DDB0029B674 /* OnboardingIntroViewController.swift in Sources */,
+				BA2460E31B683600003E3FB5 /* MainTimelineViewController.swift in Sources */,
 				BA7C0E4A1A65EF94001B3B4C /* UITextField+Snowball.swift in Sources */,
 				BAF50E781AA644DF00AB874E /* CameraPreviewPlayer.swift in Sources */,
 				BA9AA67C1A67465F002C4992 /* AuthenticationNavigationController.swift in Sources */,
 				BAEEA7391A97ED9500C83CF9 /* PhoneNumberViewController.swift in Sources */,
-				BAF50E721AA55C4400AB874E /* HomeViewController.swift in Sources */,
+				BAF50E721AA55C4400AB874E /* OLDHomeViewController.swift in Sources */,
 				BA3A28701A3051E300A85C29 /* Util.swift in Sources */,
 				BA7C27D31A37ADA600A9CFC5 /* RemoteObject.swift in Sources */,
 				BA44E4581A9C0EC600B75DF3 /* TermsViewController.swift in Sources */,
@@ -735,6 +746,7 @@
 				BA20CCEE1A9D156C00D96A31 /* UploadQueue.swift in Sources */,
 				BA3A28771A305AF600A85C29 /* ClipCollectionViewCell.swift in Sources */,
 				BAA8C0801A32F8F300AAB9F4 /* User.swift in Sources */,
+				BA2460E51B6836B6003E3FB5 /* ProfileTimelineViewController.swift in Sources */,
 				BA9C8E801AAB779200CF05AB /* FormTableViewController.swift in Sources */,
 				BA44E4561A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift in Sources */,
 				BA1835531AA51C1D00D6A0BE /* PlayerView.swift in Sources */,
@@ -747,12 +759,12 @@
 				BA7C27CB1A37A64400A9CFC5 /* API.swift in Sources */,
 				BABE8FCD1A8957D600B81DD1 /* Clip.swift in Sources */,
 				BA6314D11A97C8B100021E3F /* OnboardingViewController.swift in Sources */,
-				BA2ABF441AE9917D00BD0861 /* ProfileViewController.swift in Sources */,
+				BA2ABF441AE9917D00BD0861 /* OLDProfileViewController.swift in Sources */,
 				BAF50E741AA63D3200AB874E /* CameraViewController.swift in Sources */,
 				BA44E4541A9C0B7700B75DF3 /* WebViewController.swift in Sources */,
 				BAE7024D1A96C12E0040DA6F /* OnboardingAddViewController.swift in Sources */,
 				BA4BD7221AA2E1F00057380C /* Cache.swift in Sources */,
-				BA1835511AA4FC5500D6A0BE /* ClipsViewController.swift in Sources */,
+				BA1835511AA4FC5500D6A0BE /* OLDClipsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

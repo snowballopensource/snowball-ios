@@ -13,7 +13,7 @@ class MainNavigationController: UINavigationController {
   // MARK: - Initializers
 
   init() {
-    super.init(rootViewController: HomeViewController())
+    super.init(rootViewController: MainTimelineViewController())
     navigationBarHidden = true
   }
 
