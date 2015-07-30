@@ -247,6 +247,7 @@
 		BA2460E11B6834C0003E3FB5 /* OLD */ = {
 			isa = PBXGroup;
 			children = (
+				BA3A28761A305AF600A85C29 /* ClipCollectionViewCellOld.swift */,
 				BAF50E711AA55C4400AB874E /* OLDHomeViewController.swift */,
 				BA1835501AA4FC5500D6A0BE /* OLDClipsViewController.swift */,
 				BA2ABF431AE9917D00BD0861 /* OLDProfileViewController.swift */,
@@ -314,6 +315,7 @@
 			children = (
 				BA38C15D1A30228700A2F2AE /* AppDelegate.swift */,
 				BAA637591B180181000F3359 /* PushManager.swift */,
+				BA2460E11B6834C0003E3FB5 /* OLD */,
 				BA6385DB1A65A90000B002D9 /* Authentication */,
 				BAE702471A96BF030040DA6F /* Onboarding */,
 				BA9AA6811A6747F0002C4992 /* Main */,
@@ -360,7 +362,6 @@
 		BA3A28851A30615800A85C29 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				BA3A28761A305AF600A85C29 /* ClipCollectionViewCellOld.swift */,
 				BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */,
 				BA372D131A880C58004E58E9 /* TextFieldTableViewCell.swift */,
 			);
@@ -419,7 +420,6 @@
 				BA9AA6821A674804002C4992 /* MainNavigationController.swift */,
 				BA2460E21B683600003E3FB5 /* MainTimelineViewController.swift */,
 				BA2460E41B6836B6003E3FB5 /* ProfileTimelineViewController.swift */,
-				BA2460E11B6834C0003E3FB5 /* OLD */,
 				BA789E091A7052C500BA1611 /* Camera */,
 			);
 			name = Main;
