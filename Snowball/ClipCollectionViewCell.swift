@@ -28,6 +28,16 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   private let clipThumbnailImageView = UIImageView()
   private let userAvatarImageView = UserAvatarImageView()
+  private let usernameLabel: UILabel = {
+    let label = UILabel()
+    var fontSize: CGFloat = 17
+    if isIphone4S {
+      fontSize = 15
+    }
+    label.font = UIFont(name: UIFont.SnowballFont.bold, size: fontSize)
+    label.textAlignment = NSTextAlignment.Center
+    return label
+    }()
 
   // MARK: - Initializers
 
@@ -53,14 +63,18 @@ class ClipCollectionViewCell: UICollectionViewCell {
   // MARK: - Internal
 
   func configureForClip(clip: Clip, state: ClipCollectionViewCellState) {
-    backgroundColor = clip.user?.color as? UIColor ?? UIColor.SnowballColor.blueColor
+    let userColor = clip.user?.color as? UIColor ?? UIColor.SnowballColor.blueColor
 
     if let thumbnailURL = clip.thumbnailURL {
       clipThumbnailImageView.hnk_setImageFromURL(thumbnailURL, format: Format<UIImage>(name: "original"))
     }
+
     if let user = clip.user {
       userAvatarImageView.configureForUser(user)
     }
+
+    usernameLabel.text = clip.user?.username
+    usernameLabel.textColor = userColor
   }
 
   // MARK: - Private
@@ -82,6 +96,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
       userAvatarImageView.centerY == clipThumbnailImageView.bottom
       userAvatarImageView.width == width
       userAvatarImageView.height == userAvatarImageView.width
+    }
+
+    contentView.addSubview(usernameLabel)
+    layout(usernameLabel, userAvatarImageView) { (usernameLabel, userAvatarImageView) in
+      usernameLabel.centerX == usernameLabel.superview!.centerX
+      usernameLabel.top == userAvatarImageView.bottom + 5
     }
   }
 }
