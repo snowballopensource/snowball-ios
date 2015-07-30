@@ -28,6 +28,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   private let clipThumbnailImageView = UIImageView()
   private let userAvatarImageView = UserAvatarImageView()
+
   private let usernameLabel: UILabel = {
     let label = UILabel()
     var fontSize: CGFloat = 17
@@ -36,6 +37,14 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
     label.font = UIFont(name: UIFont.SnowballFont.bold, size: fontSize)
     label.textAlignment = NSTextAlignment.Center
+    return label
+    }()
+
+  private let clipTimeLabel: UILabel = {
+    let label = UILabel()
+    label.font = UIFont(name: UIFont.SnowballFont.regular, size: 12)
+    label.textAlignment = NSTextAlignment.Center
+    label.textColor = UIColor.SnowballColor.grayColor
     return label
     }()
 
@@ -75,6 +84,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     usernameLabel.text = clip.user?.username
     usernameLabel.textColor = userColor
+
+    clipTimeLabel.text = clip.createdAt?.shortTimeSinceString()
   }
 
   // MARK: - Private
@@ -102,6 +113,16 @@ class ClipCollectionViewCell: UICollectionViewCell {
     layout(usernameLabel, userAvatarImageView) { (usernameLabel, userAvatarImageView) in
       usernameLabel.centerX == usernameLabel.superview!.centerX
       usernameLabel.top == userAvatarImageView.bottom + 5
+    }
+
+    contentView.addSubview(clipTimeLabel)
+    layout(clipTimeLabel, usernameLabel) { (clipTimeLabel, usernameLabel) in
+      clipTimeLabel.left == clipTimeLabel.superview!.left
+      clipTimeLabel.top == usernameLabel.bottom + 2
+      clipTimeLabel.right == clipTimeLabel.superview!.right
+      if isIphone4S {
+        clipTimeLabel.height == 0
+      }
     }
   }
 }
