@@ -27,6 +27,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
   }
 
   private let clipThumbnailImageView = UIImageView()
+  private let userAvatarImageView = UserAvatarImageView()
 
   // MARK: - Initializers
 
@@ -46,6 +47,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     super.prepareForReuse()
 
     clipThumbnailImageView.image = nil
+    userAvatarImageView.image = nil
   }
 
   // MARK: - Internal
@@ -55,6 +57,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     if let thumbnailURL = clip.thumbnailURL {
       clipThumbnailImageView.hnk_setImageFromURL(thumbnailURL, format: Format<UIImage>(name: "original"))
+    }
+    if let user = clip.user {
+      userAvatarImageView.configureForUser(user)
     }
   }
 
@@ -67,6 +72,16 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipThumbnailImageView.top == clipThumbnailImageView.superview!.top
       clipThumbnailImageView.trailing == clipThumbnailImageView.superview!.trailing
       clipThumbnailImageView.height == clipThumbnailImageView.width
+    }
+
+    contentView.addSubview(userAvatarImageView)
+    layout(userAvatarImageView, clipThumbnailImageView) { (userAvatarImageView, clipThumbnailImageView) in
+      var width: Float = 40
+      if isIphone4S { width = 30 }
+      userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
+      userAvatarImageView.centerY == clipThumbnailImageView.bottom
+      userAvatarImageView.width == width
+      userAvatarImageView.height == userAvatarImageView.width
     }
   }
 }

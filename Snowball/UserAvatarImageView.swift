@@ -9,19 +9,18 @@
 import Haneke
 import UIKit
 
-class UserAvatarImageView: UIView {
-
-  // MARK: - Properties
-
-  let imageView = UIImageView()
+class UserAvatarImageView: UIImageView {
 
   // MARK: - UIView
+
+  convenience init() {
+    self.init(frame: CGRectZero)
+  }
 
   override init(frame: CGRect) {
     super.init(frame: frame)
     clipsToBounds = true
     backgroundColor = UIColor.SnowballColor.blueColor
-    addSubview(imageView)
   }
 
   required init(coder: NSCoder) {
@@ -32,17 +31,16 @@ class UserAvatarImageView: UIView {
     super.layoutSubviews()
 
     layer.cornerRadius = frame.size.width/2
-    imageView.frame = bounds
   }
 
   // MARK: - Internal
 
   func configureForUser(user: User) {
     backgroundColor = user.color as? UIColor ?? UIColor.SnowballColor.blueColor
-    imageView.image = UIImage(named: "face")
+    image = UIImage(named: "face")
     if let imageURLString = user.avatarURL {
       if let imageURL = NSURL(string: imageURLString) {
-        imageView.hnk_setImageFromURL(imageURL, format: Format<UIImage>(name: "original"))
+        hnk_setImageFromURL(imageURL, format: Format<UIImage>(name: "original"))
       }
     }
   }

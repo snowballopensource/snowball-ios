@@ -243,7 +243,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         UIGraphicsEndImageContext()
 
         // TODO: show spinner while uploading, show final image when done
-        self.avatarImageView.imageView.image = processedImage
+        self.avatarImageView.image = processedImage
         API.changeAvatarToImage(processedImage) { (request, response, JSON, error) in
           if let error = error {
             error.print("change avatar")
