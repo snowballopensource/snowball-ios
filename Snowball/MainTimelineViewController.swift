@@ -8,4 +8,30 @@
 
 import UIKit
 
-class MainTimelineViewController: UIViewController {}
+class MainTimelineViewController: TimelineViewController {
+
+  // MARK: - TimelineViewController
+
+  override func refresh() {
+    timeline.requestHomeTimeline { (error) -> Void in
+      if let error = error {
+        println(error)
+        // TODO: Display the error
+      }
+    }
+  }
+}
+
+// MARK: - TimelineDelegate
+extension MainTimelineViewController: TimelineDelegate {
+
+  override func timelineClipsDidChange() {
+    super.timelineClipsDidChange()
+
+    if let pendingClip = timeline.pendingClips.last {
+      scrollToClip(pendingClip, animated: false)
+    } else if let bookmarkedClip = timeline.bookmarkedClip {
+      scrollToClip(bookmarkedClip, animated: false)
+    }
+  }
+}

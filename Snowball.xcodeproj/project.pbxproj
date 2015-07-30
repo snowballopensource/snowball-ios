@@ -60,6 +60,10 @@
 		BAA6375A1B180181000F3359 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA637591B180181000F3359 /* PushManager.swift */; };
 		BAA8C0801A32F8F300AAB9F4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA8C07F1A32F8F300AAB9F4 /* User.swift */; };
 		BAA966BD1A87FEEC0032752F /* FindFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA966BC1A87FEEC0032752F /* FindFriendsViewController.swift */; };
+		BAAC6C141B6AC84700F400FB /* ClipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAC6C131B6AC84700F400FB /* ClipCollectionViewCell.swift */; };
+		BAAC6C161B6AC89700F400FB /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAC6C151B6AC89700F400FB /* TimelineViewController.swift */; };
+		BAAC6C181B6ACB6900F400FB /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAC6C171B6ACB6900F400FB /* Timeline.swift */; };
+		BAAC6C1A1B6ACBB100F400FB /* TimelinePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAC6C191B6ACBB100F400FB /* TimelinePlayer.swift */; };
 		BAB1A3261AA0C9F400C2FB49 /* UITableView+RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB1A3251AA0C9F400C2FB49 /* UITableView+RefreshControl.swift */; };
 		BAB8F2C81A830F5500937407 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB8F2C71A830F5500937407 /* FriendsViewController.swift */; };
 		BABE8FCD1A8957D600B81DD1 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABE8FCC1A8957D600B81DD1 /* Clip.swift */; };
@@ -168,6 +172,10 @@
 		BAA637591B180181000F3359 /* PushManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
 		BAA8C07F1A32F8F300AAB9F4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BAA966BC1A87FEEC0032752F /* FindFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFriendsViewController.swift; sourceTree = "<group>"; };
+		BAAC6C131B6AC84700F400FB /* ClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClipCollectionViewCell.swift; path = "../../../Development/snowball-ios/Snowball/ClipCollectionViewCell.swift"; sourceTree = "<group>"; };
+		BAAC6C151B6AC89700F400FB /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineViewController.swift; path = "../../../Development/snowball-ios/Snowball/TimelineViewController.swift"; sourceTree = "<group>"; };
+		BAAC6C171B6ACB6900F400FB /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = "../../../Development/snowball-ios/Snowball/Timeline.swift"; sourceTree = "<group>"; };
+		BAAC6C191B6ACBB100F400FB /* TimelinePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelinePlayer.swift; path = "../../../Development/snowball-ios/Snowball/TimelinePlayer.swift"; sourceTree = "<group>"; };
 		BAB1A3251AA0C9F400C2FB49 /* UITableView+RefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+RefreshControl.swift"; sourceTree = "<group>"; };
 		BAB8F2C71A830F5500937407 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		BABE8FCC1A8957D600B81DD1 /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
@@ -315,6 +323,7 @@
 			children = (
 				BA38C15D1A30228700A2F2AE /* AppDelegate.swift */,
 				BAA637591B180181000F3359 /* PushManager.swift */,
+				BAAC6C191B6ACBB100F400FB /* TimelinePlayer.swift */,
 				BA2460E11B6834C0003E3FB5 /* OLD */,
 				BA6385DB1A65A90000B002D9 /* Authentication */,
 				BAE702471A96BF030040DA6F /* Onboarding */,
@@ -362,6 +371,7 @@
 		BA3A28851A30615800A85C29 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				BAAC6C131B6AC84700F400FB /* ClipCollectionViewCell.swift */,
 				BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */,
 				BA372D131A880C58004E58E9 /* TextFieldTableViewCell.swift */,
 			);
@@ -418,6 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				BA9AA6821A674804002C4992 /* MainNavigationController.swift */,
+				BAAC6C151B6AC89700F400FB /* TimelineViewController.swift */,
 				BA2460E21B683600003E3FB5 /* MainTimelineViewController.swift */,
 				BA2460E41B6836B6003E3FB5 /* ProfileTimelineViewController.swift */,
 				BA789E091A7052C500BA1611 /* Camera */,
@@ -441,6 +452,7 @@
 				BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */,
 				BAA8C07F1A32F8F300AAB9F4 /* User.swift */,
 				BABE8FCC1A8957D600B81DD1 /* Clip.swift */,
+				BAAC6C171B6ACB6900F400FB /* Timeline.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -706,6 +718,7 @@
 				BAA966BD1A87FEEC0032752F /* FindFriendsViewController.swift in Sources */,
 				BA989AD31B508D5A0029B674 /* OnboardingConnectViewController.swift in Sources */,
 				BA2ABF461AE9940200BD0861 /* OLDProfileClipsViewController.swift in Sources */,
+				BAAC6C181B6ACB6900F400FB /* Timeline.swift in Sources */,
 				BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */,
 				BA7C0E481A65C315001B3B4C /* UIButton+Snowball.swift in Sources */,
 				BAE702491A96C1130040DA6F /* OnboardingPlayViewController.swift in Sources */,
@@ -724,6 +737,7 @@
 				BAF50E781AA644DF00AB874E /* CameraPreviewPlayer.swift in Sources */,
 				BA9AA67C1A67465F002C4992 /* AuthenticationNavigationController.swift in Sources */,
 				BAEEA7391A97ED9500C83CF9 /* PhoneNumberViewController.swift in Sources */,
+				BAAC6C161B6AC89700F400FB /* TimelineViewController.swift in Sources */,
 				BAF50E721AA55C4400AB874E /* OLDHomeViewController.swift in Sources */,
 				BA3A28701A3051E300A85C29 /* Util.swift in Sources */,
 				BA7C27D31A37ADA600A9CFC5 /* RemoteObject.swift in Sources */,
@@ -746,6 +760,7 @@
 				BA20CCEE1A9D156C00D96A31 /* UploadQueue.swift in Sources */,
 				BA3A28771A305AF600A85C29 /* ClipCollectionViewCellOld.swift in Sources */,
 				BAA8C0801A32F8F300AAB9F4 /* User.swift in Sources */,
+				BAAC6C1A1B6ACBB100F400FB /* TimelinePlayer.swift in Sources */,
 				BA2460E51B6836B6003E3FB5 /* ProfileTimelineViewController.swift in Sources */,
 				BA9C8E801AAB779200CF05AB /* FormTableViewController.swift in Sources */,
 				BA44E4561A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift in Sources */,
@@ -765,6 +780,7 @@
 				BAE7024D1A96C12E0040DA6F /* OnboardingAddViewController.swift in Sources */,
 				BA4BD7221AA2E1F00057380C /* Cache.swift in Sources */,
 				BA1835511AA4FC5500D6A0BE /* OLDClipsViewController.swift in Sources */,
+				BAAC6C141B6AC84700F400FB /* ClipCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
