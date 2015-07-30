@@ -37,6 +37,8 @@ class TimelineViewController: UIViewController {
     timeline.delegate = self
 
     player.timeline = timeline
+    player.delegate = self
+
     playerView.player = player
 
     collectionView.dataSource = self
@@ -83,6 +85,20 @@ extension TimelineViewController: TimelineDelegate {
   func timelineClipsDidChange() {
     collectionView.reloadData()
   }
+}
+
+// MARK: - TimelinePlayerDelegate
+extension TimelineViewController: TimelinePlayerDelegate {
+
+  func timelinePlayerWillBeginPlayback(timelinePlayer: TimelinePlayer) {}
+
+  func timelinePlayer(timelinePlayer: TimelinePlayer, clipWillBeginPlayback clip: Clip) {
+    scrollToClip(clip, animated: true)
+  }
+
+  func timelinePlayer(timelinePlayer: TimelinePlayer, clipDidEndPlayback clip: Clip) {}
+
+  func timelinePlayerDidEndPlayback(timelinePlayer: TimelinePlayer) {}
 }
 
 // MARK: - UICollectionViewDataSource
