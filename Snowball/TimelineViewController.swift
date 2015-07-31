@@ -87,7 +87,7 @@ class TimelineViewController: UIViewController {
 
   // MARK: - Private
 
-  func cellForClip(clip: Clip) -> ClipCollectionViewCell? {
+  private func cellForClip(clip: Clip) -> ClipCollectionViewCell? {
     if let index = timeline.indexOfClip(clip) {
       let indexPath = NSIndexPath(forItem: index, inSection: 0)
       return collectionView.cellForItemAtIndexPath(indexPath) as? ClipCollectionViewCell
