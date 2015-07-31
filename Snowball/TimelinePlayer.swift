@@ -28,7 +28,7 @@ class TimelinePlayer: AVPlayer {
         delegate?.timelinePlayer(self, clipDidEndPlayback: self.currentClip!)
       }
       if currentClip == nil && newValue != nil {
-        delegate?.timelinePlayerWillBeginPlayback(self)
+        delegate?.timelinePlayer(self, willBeginPlaybackWithInitialClip: newValue!)
       }
       if newValue != nil {
         let clip = newValue!
@@ -89,7 +89,7 @@ class TimelinePlayer: AVPlayer {
 }
 
 protocol TimelinePlayerDelegate {
-  func timelinePlayerWillBeginPlayback(timelinePlayer: TimelinePlayer)
+  func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithInitialClip clip: Clip)
   func timelinePlayer(timelinePlayer: TimelinePlayer, clipWillBeginPlayback clip: Clip)
   func timelinePlayer(timelinePlayer: TimelinePlayer, clipDidEndPlayback clip: Clip)
   func timelinePlayerDidEndPlayback(timelinePlayer: TimelinePlayer)

@@ -107,10 +107,16 @@ extension TimelineViewController: TimelineDelegate {
 // MARK: - TimelinePlayerDelegate
 extension TimelineViewController: TimelinePlayerDelegate {
 
-  func timelinePlayerWillBeginPlayback(timelinePlayer: TimelinePlayer) {
+  func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithInitialClip clip: Clip) {
     for cell in collectionView.visibleCells() {
       if let cell = cell as? ClipCollectionViewCell {
-        cell.setState(ClipCollectionViewCellState.PlayingIdle, animated: true)
+        if let initialClipCell = cellForClip(clip) {
+          if cell == initialClipCell {
+            cell.setState(ClipCollectionViewCellState.PlayingActive, animated: true)
+          } else {
+            cell.setState(ClipCollectionViewCellState.PlayingIdle, animated: true)
+          }
+        }
       }
     }
   }
