@@ -41,6 +41,7 @@ class TimelinePlayer: AVPlayer {
     }
     didSet {
       if oldValue != nil && currentClip == nil {
+        pause()
         delegate?.timelinePlayerDidEndPlayback(self)
         return
       }
@@ -67,6 +68,10 @@ class TimelinePlayer: AVPlayer {
 
   func play(clip: Clip) {
     currentClip = clip
+  }
+
+  func stop() {
+    currentClip = nil
   }
 
   // MARK: - Private

@@ -126,7 +126,13 @@ extension TimelineViewController: TimelinePlayerDelegate {
     cell?.setState(ClipCollectionViewCellState.PlayingIdle, animated: true)
   }
 
-  func timelinePlayerDidEndPlayback(timelinePlayer: TimelinePlayer) {}
+  func timelinePlayerDidEndPlayback(timelinePlayer: TimelinePlayer) {
+    for cell in collectionView.visibleCells() {
+      if let cell = cell as? ClipCollectionViewCell {
+        cell.setState(ClipCollectionViewCellState.Default, animated: true)
+      }
+    }
+  }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -147,7 +153,11 @@ extension TimelineViewController: UICollectionViewDataSource {
 extension TimelineViewController: UICollectionViewDelegate {
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    let clip = timeline.clips[indexPath.row]
-    player.play(clip)
+    if player.playing {
+      player.stop()
+    } else {
+      let clip = timeline.clips[indexPath.row]
+      player.play(clip)
+    }
   }
 }
