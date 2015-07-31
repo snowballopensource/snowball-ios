@@ -121,7 +121,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   func setState(state: ClipCollectionViewCellState, animated: Bool) {
     let bookmarked = (state == .Bookmarked)
-    bookmarkImageView.hidden = !bookmarked
+    hideBookmarkImage(!bookmarked, animated: animated)
 
     let playingIdle = (state == .PlayingIdle)
     let playingActive = (state == .PlayingActive)
@@ -250,6 +250,17 @@ class ClipCollectionViewCell: UICollectionViewCell {
       var alpha: CGFloat = 0.6
       if hidden { alpha = 0 }
       dimOverlayView.alpha = alpha
+    }
+  }
+
+  private func hideBookmarkImage(hidden: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.4) {
+        self.hideBookmarkImage(hidden, animated: false)
+      }
+    } else {
+      let alpha = CGFloat(!hidden)
+      bookmarkImageView.alpha = alpha
     }
   }
 
