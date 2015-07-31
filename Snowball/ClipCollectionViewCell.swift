@@ -65,7 +65,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
   private let dimOverlayView: UIView = {
     let view = UIView()
     view.backgroundColor = UIColor.whiteColor()
-    view.alpha = 0.6
     return view
     }()
 
@@ -127,7 +126,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let playingIdle = (state == .PlayingIdle)
     let playingActive = (state == .PlayingActive)
     scaleClipThumbnail((playingIdle || playingActive), animated: animated)
-    dimOverlayView.hidden = !playingIdle
+    hideDimOverlay(!playingIdle, animated: animated)
     hideClipInfo(playingIdle, animated: animated)
   }
 
@@ -239,6 +238,18 @@ class ClipCollectionViewCell: UICollectionViewCell {
       usernameLabel.alpha = alpha
       clipTimeLabel.alpha = alpha
       likeButton.alpha = alpha
+    }
+  }
+
+  private func hideDimOverlay(hidden: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.4) {
+        self.hideDimOverlay(hidden, animated: false)
+      }
+    } else {
+      var alpha: CGFloat = 0.6
+      if hidden { alpha = 0 }
+      dimOverlayView.alpha = alpha
     }
   }
 
