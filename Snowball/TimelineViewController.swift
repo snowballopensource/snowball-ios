@@ -129,7 +129,8 @@ extension TimelineViewController: TimelinePlayerDelegate {
   func timelinePlayerDidEndPlayback(timelinePlayer: TimelinePlayer) {
     for cell in collectionView.visibleCells() {
       if let cell = cell as? ClipCollectionViewCell {
-        cell.setState(ClipCollectionViewCellState.Default, animated: true)
+        let indexPath = collectionView.indexPathForCell(cell)!
+        cell.setState(stateForCellAtIndexPath(indexPath), animated: true)
       }
     }
   }
