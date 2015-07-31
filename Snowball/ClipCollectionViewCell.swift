@@ -98,7 +98,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     clipTimeLabel.text = clip.createdAt?.shortTimeSinceString()
 
-    likeButton.selected = clip.liked
+    setClipLiked(clip.liked, animated: false)
     likeButton.tintColor = userColor
     likeButton.hidden = false
     if clip.user == User.currentUser {
@@ -154,5 +154,30 @@ class ClipCollectionViewCell: UICollectionViewCell {
       }
       likeButton.height == likeButton.width
     }
+  }
+
+  private func setClipLiked(liked: Bool, animated: Bool) {
+    if liked && animated {
+      let originFrame = likeButton.frame
+      let heartImage = likeButton.imageForState(UIControlState.Selected)
+      let animatingImageView = UIImageView(image: heartImage)
+      animatingImageView.tintColor = likeButton.tintColor
+      animatingImageView.frame = originFrame
+      contentView.addSubview(animatingImageView)
+      UIView.animateWithDuration(1.2, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+        animatingImageView.frame = CGRect(x: originFrame.origin.x, y: originFrame.origin.y - 180, width: originFrame.size.width, height: originFrame.size.height)
+        animatingImageView.alpha = 0
+        animatingImageView.transform = CGAffineTransformMakeScale(1.5, 1.5)
+        }, completion: { (completed) -> Void in
+          animatingImageView.removeFromSuperview()
+      })
+    }
+    likeButton.selected = liked
+  }
+
+  @objc private func likeButtonTapped() {
+    let liked = likeButton.selected
+    setClipLiked(!liked, animated: true)
+    // TODO: Let delegate know so it can perform the actual request
   }
 }
