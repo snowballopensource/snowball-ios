@@ -20,6 +20,16 @@ class MainTimelineViewController: TimelineViewController {
       }
     }
   }
+
+  override func stateForCellAtIndexPath(indexPath: NSIndexPath) -> ClipCollectionViewCellState {
+    let clip = timeline.clips[indexPath.row]
+    if let bookmarkedClip = timeline.bookmarkedClip {
+      if clip == bookmarkedClip {
+        return ClipCollectionViewCellState.Bookmarked
+      }
+    }
+    return super.stateForCellAtIndexPath(indexPath)
+  }
 }
 
 // MARK: - TimelineDelegate

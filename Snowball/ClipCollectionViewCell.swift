@@ -12,6 +12,7 @@ import UIKit
 
 enum ClipCollectionViewCellState {
   case Default
+  case Bookmarked
 }
 
 class ClipCollectionViewCell: UICollectionViewCell {
@@ -56,6 +57,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     button.setImage(heartFilledImage, forState: UIControlState.Selected)
     return button
     }()
+
+  private let bookmarkImageView = UIImageView(image: UIImage(named: "play"))
 
   // MARK: - Initializers
 
@@ -103,6 +106,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
     likeButton.hidden = false
     if clip.user == User.currentUser {
       likeButton.hidden = true
+    }
+
+    switch(state) {
+    case .Default:
+      bookmarkImageView.hidden = true
+    case .Bookmarked:
+      bookmarkImageView.hidden = false
     }
   }
 
@@ -153,6 +163,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
         likeButton.width == 44
       }
       likeButton.height == likeButton.width
+    }
+
+    contentView.addSubview(bookmarkImageView)
+    layout(bookmarkImageView, clipThumbnailImageView) { (bookmarkImageView, clipThumbnailImageView) in
+      bookmarkImageView.centerX == clipThumbnailImageView.centerX
+      bookmarkImageView.centerY == clipThumbnailImageView.centerY
     }
   }
 

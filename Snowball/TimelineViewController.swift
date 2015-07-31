@@ -77,6 +77,10 @@ class TimelineViewController: UIViewController {
       collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.CenteredHorizontally, animated: animated)
     }
   }
+
+  func stateForCellAtIndexPath(indexPath: NSIndexPath) -> ClipCollectionViewCellState {
+    return ClipCollectionViewCellState.Default
+  }
 }
 
 // MARK: - TimelineDelegate
@@ -110,7 +114,7 @@ extension TimelineViewController: UICollectionViewDataSource {
 
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(ClipCollectionViewCell), forIndexPath: indexPath) as! ClipCollectionViewCell
-    cell.configureForClip(timeline.clips[indexPath.row], state: ClipCollectionViewCellState.Default)
+    cell.configureForClip(timeline.clips[indexPath.row], state: stateForCellAtIndexPath(indexPath))
     return cell
   }
 }
