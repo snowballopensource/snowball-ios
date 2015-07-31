@@ -48,12 +48,23 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return label
     }()
 
+  private let likeButton: UIButton = {
+    let button = UIButton()
+    let heartImage = UIImage(named: "heart")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+    let heartFilledImage = UIImage(named: "heart-filled")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+    button.setImage(heartImage, forState: UIControlState.Normal)
+    button.setImage(heartFilledImage, forState: UIControlState.Selected)
+    return button
+    }()
+
   // MARK: - Initializers
 
   override init(frame: CGRect) {
     super.init(frame: frame)
 
     setupSubviews()
+
+    likeButton.addTarget(self, action: "likeButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
   }
 
   required init(coder: NSCoder) {
@@ -86,6 +97,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
     usernameLabel.textColor = userColor
 
     clipTimeLabel.text = clip.createdAt?.shortTimeSinceString()
+
+    likeButton.selected = clip.liked
+    likeButton.tintColor = userColor
+    likeButton.hidden = false
+    if clip.user == User.currentUser {
+      likeButton.hidden = true
+    }
   }
 
   // MARK: - Private
@@ -123,6 +141,18 @@ class ClipCollectionViewCell: UICollectionViewCell {
       if isIphone4S {
         clipTimeLabel.height == 0
       }
+    }
+
+    contentView.addSubview(likeButton)
+    layout(likeButton, clipTimeLabel) { (likeButton, clipTimeLabel) in
+      likeButton.centerX == likeButton.superview!.centerX
+      likeButton.top == clipTimeLabel.bottom + 2
+      if isIphone4S {
+        likeButton.width == 23
+      } else {
+        likeButton.width == 44
+      }
+      likeButton.height == likeButton.width
     }
   }
 }
