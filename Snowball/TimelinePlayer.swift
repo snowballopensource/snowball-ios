@@ -23,28 +23,17 @@ class TimelinePlayer: AVPlayer {
   var timeline: Timeline?
   var delegate: TimelinePlayerDelegate?
   private(set) var currentClip: Clip? = nil {
-    willSet {
-      if currentClip != nil {
-        delegate?.timelinePlayer(self, clipDidEndPlayback: self.currentClip!)
-      }
-      if currentClip == nil && newValue != nil {
-        delegate?.timelinePlayer(self, willBeginPlaybackWithInitialClip: newValue!)
-      }
-      if newValue != nil {
-        let clip = newValue!
-        delegate?.timelinePlayer(self, clipWillBeginPlayback: clip)
-        let playerItem = ClipPlayerItem(clip: clip)
+    didSet {
+      if currentClip == nil {
+        pause()
+        replaceCurrentItemWithPlayerItem(nil)
+      } else {
+        let playerItem = ClipPlayerItem(clip: currentClip!)
         registerPlayerItemForNotifications(playerItem)
         replaceCurrentItemWithPlayerItem(playerItem)
         play()
       }
-    }
-    didSet {
-      if oldValue != nil && currentClip == nil {
-        pause()
-        delegate?.timelinePlayerDidEndPlayback(self)
-        return
-      }
+      delegate?.timelinePlayer(self, didTransitionFromClip: oldValue, toClip: currentClip)
     }
   }
   var playing: Bool {
@@ -89,10 +78,7 @@ class TimelinePlayer: AVPlayer {
 }
 
 protocol TimelinePlayerDelegate {
-  func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithInitialClip clip: Clip)
-  func timelinePlayer(timelinePlayer: TimelinePlayer, clipWillBeginPlayback clip: Clip)
-  func timelinePlayer(timelinePlayer: TimelinePlayer, clipDidEndPlayback clip: Clip)
-  func timelinePlayerDidEndPlayback(timelinePlayer: TimelinePlayer)
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip?, toClip: Clip?)
 }
 
 class TimelinePlayerView: UIView {
