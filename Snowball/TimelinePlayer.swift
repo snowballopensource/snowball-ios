@@ -46,6 +46,12 @@ class TimelinePlayer: AVPlayer {
       }
     }
   }
+  var playing: Bool {
+    if rate != 0 && error == nil {
+      return true
+    }
+    return false
+  }
 
   // MARK: - Initializers
 

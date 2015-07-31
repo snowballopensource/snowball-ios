@@ -67,7 +67,7 @@ class TimelineViewController: UIViewController {
     }
   }
 
-  // MARK: - INTERNAL
+  // MARK: - Internal
 
   func refresh() {}
 
@@ -79,6 +79,9 @@ class TimelineViewController: UIViewController {
   }
 
   func stateForCellAtIndexPath(indexPath: NSIndexPath) -> ClipCollectionViewCellState {
+    if player.playing {
+      return ClipCollectionViewCellState.PlayingIdle
+    }
     return ClipCollectionViewCellState.Default
   }
 }
@@ -94,7 +97,13 @@ extension TimelineViewController: TimelineDelegate {
 // MARK: - TimelinePlayerDelegate
 extension TimelineViewController: TimelinePlayerDelegate {
 
-  func timelinePlayerWillBeginPlayback(timelinePlayer: TimelinePlayer) {}
+  func timelinePlayerWillBeginPlayback(timelinePlayer: TimelinePlayer) {
+    for cell in collectionView.visibleCells() {
+      if let cell = cell as? ClipCollectionViewCell {
+        cell.setState(ClipCollectionViewCellState.PlayingIdle, animated: true)
+      }
+    }
+  }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, clipWillBeginPlayback clip: Clip) {
     scrollToClip(clip, animated: true)

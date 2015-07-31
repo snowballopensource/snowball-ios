@@ -22,13 +22,17 @@ class MainTimelineViewController: TimelineViewController {
   }
 
   override func stateForCellAtIndexPath(indexPath: NSIndexPath) -> ClipCollectionViewCellState {
+    let superState = super.stateForCellAtIndexPath(indexPath)
+    if superState != ClipCollectionViewCellState.Default {
+      return superState
+    }
     let clip = timeline.clips[indexPath.row]
     if let bookmarkedClip = timeline.bookmarkedClip {
       if clip == bookmarkedClip {
         return ClipCollectionViewCellState.Bookmarked
       }
     }
-    return super.stateForCellAtIndexPath(indexPath)
+    return superState
   }
 }
 

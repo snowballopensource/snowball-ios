@@ -13,6 +13,7 @@ import UIKit
 enum ClipCollectionViewCellState {
   case Default
   case Bookmarked
+  case PlayingIdle
 }
 
 class ClipCollectionViewCell: UICollectionViewCell {
@@ -59,6 +60,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }()
 
   private let bookmarkImageView = UIImageView(image: UIImage(named: "play"))
+
+  private let dimOverlayView: UIView = {
+    let view = UIView()
+    view.backgroundColor = UIColor.whiteColor()
+    view.alpha = 0.6
+    return view
+    }()
 
   // MARK: - Initializers
 
@@ -108,12 +116,17 @@ class ClipCollectionViewCell: UICollectionViewCell {
       likeButton.hidden = true
     }
 
-    switch(state) {
-    case .Default:
-      bookmarkImageView.hidden = true
-    case .Bookmarked:
-      bookmarkImageView.hidden = false
-    }
+    setState(state, animated: false)
+  }
+
+  func setState(state: ClipCollectionViewCellState, animated: Bool) {
+    let bookmarked = (state == .Bookmarked)
+    bookmarkImageView.hidden = !bookmarked
+
+    let playingIdle = (state == .PlayingIdle)
+    scaleClipThumbnail(playingIdle, animated: animated)
+    dimOverlayView.hidden = !playingIdle
+    hideClipInfo(playingIdle, animated: animated)
   }
 
   // MARK: - Private
@@ -170,6 +183,14 @@ class ClipCollectionViewCell: UICollectionViewCell {
       bookmarkImageView.centerX == clipThumbnailImageView.centerX
       bookmarkImageView.centerY == clipThumbnailImageView.centerY
     }
+
+    contentView.addSubview(dimOverlayView)
+    layout(dimOverlayView) { (dimOverlayView) in
+      dimOverlayView.left == dimOverlayView.superview!.left
+      dimOverlayView.top == dimOverlayView.superview!.top
+      dimOverlayView.right == dimOverlayView.superview!.right
+      dimOverlayView.bottom == dimOverlayView.superview!.bottom
+    }
   }
 
   private func setClipLiked(liked: Bool, animated: Bool) {
@@ -189,6 +210,34 @@ class ClipCollectionViewCell: UICollectionViewCell {
       })
     }
     likeButton.selected = liked
+  }
+
+  private func scaleClipThumbnail(down: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.4) {
+        self.scaleClipThumbnail(down, animated: false)
+      }
+    } else {
+      if down {
+        clipThumbnailImageView.transform = CGAffineTransformMakeScale(0.857, 0.857)
+      } else {
+        clipThumbnailImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+      }
+    }
+  }
+
+  private func hideClipInfo(hidden: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.4) {
+        self.hideClipInfo(hidden, animated: false)
+      }
+    } else {
+      let alpha = CGFloat(!hidden)
+      userAvatarImageView.alpha = alpha
+      usernameLabel.alpha = alpha
+      clipTimeLabel.alpha = alpha
+      likeButton.alpha = alpha
+    }
   }
 
   @objc private func likeButtonTapped() {
