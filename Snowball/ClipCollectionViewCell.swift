@@ -14,6 +14,7 @@ enum ClipCollectionViewCellState {
   case Default
   case Bookmarked
   case PlayingIdle
+  case PlayingActive
 }
 
 class ClipCollectionViewCell: UICollectionViewCell {
@@ -124,7 +125,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     bookmarkImageView.hidden = !bookmarked
 
     let playingIdle = (state == .PlayingIdle)
-    scaleClipThumbnail(playingIdle, animated: animated)
+    let playingActive = (state == .PlayingActive)
+    scaleClipThumbnail((playingIdle || playingActive), animated: animated)
     dimOverlayView.hidden = !playingIdle
     hideClipInfo(playingIdle, animated: animated)
   }
