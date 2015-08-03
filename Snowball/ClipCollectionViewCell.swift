@@ -32,6 +32,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return CGSizeMake(cellWidth, cellHeight)
   }
 
+  var delegate: ClipCollectionViewCellDelegate?
+
   private let clipThumbnailImageView = UIImageView()
 
   private let addClipImageView: UIImageView = {
@@ -330,7 +332,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
   @objc private func likeButtonTapped() {
     let liked = likeButton.selected
     setClipLiked(!liked, animated: true)
-    // TODO: Let delegate know so it can perform the actual request
+    delegate?.userDidTapLikeButtonForCell(self)
   }
 
   private func setUserAvatarBouncing(bounce: Bool) {
@@ -405,17 +407,23 @@ class ClipCollectionViewCell: UICollectionViewCell {
   }
 }
 
+// MARK: -
+protocol ClipCollectionViewCellDelegate {
+  func userDidTapDeleteButtonForCell(cell: ClipCollectionViewCell)
+  func userDidTapFlagButtonForCell(cell: ClipCollectionViewCell)
+//  func userDidTapUserButtonForCell(cell: ClipCollectionViewCell)
+  func userDidTapLikeButtonForCell(cell: ClipCollectionViewCell)
+}
+
 // MARK: - ClipOptionsViewDelegate
 extension ClipCollectionViewCell: ClipOptionsViewDelegate {
 
-  func userDidSelectFlagClipOption() {
-    // TODO: Add delegate calls
-    println("flag")
+  func userDidTapFlagButton() {
+    delegate?.userDidTapFlagButtonForCell(self)
   }
 
-  func userDidSelectDeleteClipOption() {
-    // TODO: Add delegate calls
-    println("delete")
+  func userDidTapDeleteButton() {
+    delegate?.userDidTapDeleteButtonForCell(self)
   }
 }
 
@@ -476,16 +484,16 @@ class ClipOptionsView: UIView {
   // MARK: - Private
 
   @objc private func flagButtonTapped() {
-    delegate?.userDidSelectFlagClipOption()
+    delegate?.userDidTapFlagButton()
   }
 
   @objc private func deleteButtonTapped() {
-    delegate?.userDidSelectDeleteClipOption()
+    delegate?.userDidTapDeleteButton()
   }
 }
 
 // MARK: -
 protocol ClipOptionsViewDelegate {
-  func userDidSelectFlagClipOption()
-  func userDidSelectDeleteClipOption()
+  func userDidTapFlagButton()
+  func userDidTapDeleteButton()
 }
