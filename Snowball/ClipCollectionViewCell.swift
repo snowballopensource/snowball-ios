@@ -15,6 +15,7 @@ enum ClipCollectionViewCellState {
   case Bookmarked
   case PlayingIdle
   case PlayingActive
+  case PendingUpload
 }
 
 class ClipCollectionViewCell: UICollectionViewCell {
@@ -30,6 +31,14 @@ class ClipCollectionViewCell: UICollectionViewCell {
   }
 
   private let clipThumbnailImageView = UIImageView()
+
+  private let addClipImageView: UIImageView = {
+    let imageView = UIImageView(image: UIImage(named: "add-clip"))
+    imageView.backgroundColor = User.currentUser?.color as? UIColor ?? UIColor.SnowballColor.blueColor
+    imageView.contentMode = UIViewContentMode.Center
+    return imageView
+    }()
+
   private let userAvatarImageView = UserAvatarImageView()
 
   private let usernameLabel: UILabel = {
@@ -128,6 +137,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
     scaleClipThumbnail((playingIdle || playingActive), animated: animated)
     hideDimOverlay(!playingIdle, animated: animated)
     hideClipInfo(playingIdle, animated: animated)
+
+    let pendingUpload = (state == .PendingUpload)
+    addClipImageView.hidden = !pendingUpload
+    clipTimeLabel.hidden = pendingUpload
   }
 
   // MARK: - Private
@@ -139,6 +152,14 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipThumbnailImageView.top == clipThumbnailImageView.superview!.top
       clipThumbnailImageView.trailing == clipThumbnailImageView.superview!.trailing
       clipThumbnailImageView.height == clipThumbnailImageView.width
+    }
+
+    contentView.addSubview(addClipImageView)
+    layout(addClipImageView, clipThumbnailImageView) { (addClipImageView, clipThumbnailImageView) in
+      addClipImageView.left == clipThumbnailImageView.left
+      addClipImageView.top == clipThumbnailImageView.top
+      addClipImageView.right == clipThumbnailImageView.right
+      addClipImageView.bottom == clipThumbnailImageView.bottom
     }
 
     contentView.addSubview(userAvatarImageView)
