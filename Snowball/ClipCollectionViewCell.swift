@@ -16,6 +16,7 @@ enum ClipCollectionViewCellState {
   case PlayingIdle
   case PlayingActive
   case PendingUpload
+  case Uploading
 }
 
 class ClipCollectionViewCell: UICollectionViewCell {
@@ -40,6 +41,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }()
 
   private let userAvatarImageView = UserAvatarImageView()
+  private var userAvatarImageViewYConstraint = ConstraintGroup()
+  private var userAvatarShouldContinueBouncing = false
+  private var userAvatarBounceInProgress = false
 
   private let usernameLabel: UILabel = {
     let label = UILabel()
@@ -141,6 +145,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let pendingUpload = (state == .PendingUpload)
     addClipImageView.hidden = !pendingUpload
     clipTimeLabel.hidden = pendingUpload
+
+    let uploading = (state == .Uploading)
+    setUserAvatarBouncing(uploading)
   }
 
   // MARK: - Private
@@ -163,19 +170,19 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
 
     contentView.addSubview(userAvatarImageView)
+    setUserAvatarImageViewYConstraint()
     layout(userAvatarImageView, clipThumbnailImageView) { (userAvatarImageView, clipThumbnailImageView) in
       var width: Float = 40
       if isIphone4S { width = 30 }
       userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
-      userAvatarImageView.centerY == clipThumbnailImageView.bottom
       userAvatarImageView.width == width
       userAvatarImageView.height == userAvatarImageView.width
     }
 
     contentView.addSubview(usernameLabel)
-    layout(usernameLabel, userAvatarImageView) { (usernameLabel, userAvatarImageView) in
+    layout(usernameLabel, clipThumbnailImageView) { (usernameLabel, clipThumbnailImageView) in
       usernameLabel.centerX == usernameLabel.superview!.centerX
-      usernameLabel.top == userAvatarImageView.bottom + 5
+      usernameLabel.top == clipThumbnailImageView.bottom + (self.userAvatarImageView.frame.height / 2) + 5
     }
 
     contentView.addSubview(clipTimeLabel)
@@ -289,5 +296,45 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let liked = likeButton.selected
     setClipLiked(!liked, animated: true)
     // TODO: Let delegate know so it can perform the actual request
+  }
+
+  private func setUserAvatarBouncing(bounce: Bool) {
+    if !bounce { userAvatarShouldContinueBouncing = false; return }
+    if bounce && !userAvatarBounceInProgress {
+      userAvatarBounceInProgress = true
+      userAvatarShouldContinueBouncing = true
+      setUserAvatarImageViewYConstraint(topOfBounce: true)
+      UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut,
+        animations: { () -> Void in
+          self.userAvatarImageView.layoutIfNeeded()
+        }) { (completed) -> Void in
+          self.setUserAvatarImageViewYConstraint(topOfBounce: false)
+          UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+            self.userAvatarImageView.layoutIfNeeded()
+            }) { (completed) -> Void in
+              self.userAvatarBounceInProgress = false
+              self.setUserAvatarBouncing(self.userAvatarShouldContinueBouncing)
+          }
+      }
+      UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+        self.userAvatarImageView.transform = CGAffineTransformRotate(self.userAvatarImageView.transform, CGFloat(M_PI))
+        }) { (completed) -> Void in
+          UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+            self.userAvatarImageView.transform = CGAffineTransformRotate(self.userAvatarImageView.transform, CGFloat(M_PI))
+            }, completion: nil)
+      }
+    }
+  }
+
+  private func setUserAvatarImageViewYConstraint(topOfBounce: Bool = false) {
+    if topOfBounce {
+      userAvatarImageViewYConstraint = constrain(userAvatarImageView, clipThumbnailImageView, replace: userAvatarImageViewYConstraint) { (userAvatarImageView, clipThumbnailImageView) in
+        userAvatarImageView.centerY == clipThumbnailImageView.bottom - 75
+      }
+    } else {
+      userAvatarImageViewYConstraint = constrain(userAvatarImageView, clipThumbnailImageView, replace: userAvatarImageViewYConstraint) { (userAvatarImageView, clipThumbnailImageView) in
+        userAvatarImageView.centerY == clipThumbnailImageView.bottom
+      }
+    }
   }
 }
