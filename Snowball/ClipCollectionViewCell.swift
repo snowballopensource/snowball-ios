@@ -47,6 +47,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
   private var userAvatarImageViewYConstraint = ConstraintGroup()
   private var userAvatarShouldContinueBouncing = false
   private var userAvatarBounceInProgress = false
+  private let userButton = UIButton()
 
   private let usernameLabel: UILabel = {
     let label = UILabel()
@@ -105,6 +106,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     super.init(frame: frame)
 
     setupSubviews()
+
+    userButton.addTarget(self, action: "userButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
 
     likeButton.addTarget(self, action: "likeButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
 
@@ -214,6 +217,14 @@ class ClipCollectionViewCell: UICollectionViewCell {
       userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
       userAvatarImageView.width == width
       userAvatarImageView.height == userAvatarImageView.width
+    }
+
+    contentView.addSubview(userButton)
+    layout(userButton, userAvatarImageView) { (userButton, userAvatarImageView) in
+      userButton.left == userAvatarImageView.left
+      userButton.top == userAvatarImageView.top
+      userButton.right == userAvatarImageView.right
+      userButton.bottom == userAvatarImageView.bottom
     }
 
     contentView.addSubview(usernameLabel)
@@ -329,6 +340,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
   }
 
+  @objc private func userButtonTapped() {
+    delegate?.userDidTapUserButtonForCell(self)
+  }
+
   @objc private func likeButtonTapped() {
     let liked = likeButton.selected
     setClipLiked(!liked, animated: true)
@@ -411,7 +426,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 protocol ClipCollectionViewCellDelegate {
   func userDidTapDeleteButtonForCell(cell: ClipCollectionViewCell)
   func userDidTapFlagButtonForCell(cell: ClipCollectionViewCell)
-//  func userDidTapUserButtonForCell(cell: ClipCollectionViewCell)
+  func userDidTapUserButtonForCell(cell: ClipCollectionViewCell)
   func userDidTapLikeButtonForCell(cell: ClipCollectionViewCell)
 }
 
