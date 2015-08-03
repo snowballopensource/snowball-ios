@@ -263,7 +263,7 @@ extension FindFriendsViewController: UITableViewDelegate {
 
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     let user = users[indexPath.row]
-    navigationController?.pushViewController(ProfileViewController(user: user), animated: true)
+    navigationController?.pushViewController(ProfileTimelineViewController(user: user), animated: true)
   }
 }
 

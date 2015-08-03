@@ -105,6 +105,19 @@ class Timeline {
       }
     }
   }
+
+  func requestUserTimeline(user: User, completion: (error: NSError?) -> Void) {
+    if let userID = user.id {
+      API.request(Router.GetClipStreamForUser(userID: userID)).responseJSON { (request, response, JSON, error) in
+        if let error = error {
+          completion(error: error)
+        } else if let JSON = JSON as? [AnyObject] {
+          self.clips = Clip.importJSON(JSON)
+          completion(error: nil)
+        }
+      }
+    }
+  }
 }
 
 protocol TimelineDelegate {

@@ -94,6 +94,13 @@ class TimelineViewController: UIViewController {
     }
     return nil
   }
+
+  private func clipForCell(cell: ClipCollectionViewCell) -> Clip? {
+    if let indexPath = collectionView.indexPathForCell(cell) {
+      return timeline.clips[indexPath.row]
+    }
+    return nil
+  }
 }
 
 // MARK: - TimelineDelegate
@@ -155,6 +162,7 @@ extension TimelineViewController: UICollectionViewDataSource {
 
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(ClipCollectionViewCell), forIndexPath: indexPath) as! ClipCollectionViewCell
+    cell.delegate = self
     cell.configureForClip(timeline.clips[indexPath.row], state: stateForCellAtIndexPath(indexPath))
     return cell
   }
@@ -170,5 +178,36 @@ extension TimelineViewController: UICollectionViewDelegate {
       let clip = timeline.clips[indexPath.row]
       player.play(clip)
     }
+  }
+}
+
+// MARK: - ClipCollectionViewCellDelegate
+extension TimelineViewController: ClipCollectionViewCellDelegate {
+
+  func userDidTapDeleteButtonForCell(cell: ClipCollectionViewCell) {
+    let clip = clipForCell(cell)
+    if clip?.user == User.currentUser {
+      // TODO: Delete the clip
+      println("delete clip")
+    }
+  }
+
+  func userDidTapFlagButtonForCell(cell: ClipCollectionViewCell) {
+    let clip = clipForCell(cell)
+    // TODO: Flag the clip
+    println("flag clip")
+  }
+
+  func userDidTapUserButtonForCell(cell: ClipCollectionViewCell) {
+    let clip = clipForCell(cell)
+    if let user = clip?.user {
+      navigationController?.pushViewController(ProfileTimelineViewController(user: user), animated: true)
+    }
+  }
+
+  func userDidTapLikeButtonForCell(cell: ClipCollectionViewCell) {
+    let clip = clipForCell(cell)
+    // TODO: Like the clip
+    println("like clip")
   }
 }

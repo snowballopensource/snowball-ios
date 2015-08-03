@@ -138,7 +138,7 @@ class FriendsViewController: UIViewController {
 
   @objc private func currentUserProfileButtonTapped() {
     if let user = User.currentUser {
-      navigationController?.pushViewController(ProfileViewController(user: user), animated: true)
+      navigationController?.pushViewController(ProfileTimelineViewController(user: user), animated: true)
     }
   }
 
@@ -231,7 +231,7 @@ extension FriendsViewController: UITableViewDelegate {
 
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     let user = users[indexPath.row]
-    navigationController?.pushViewController(ProfileViewController(user: user), animated: true)
+    navigationController?.pushViewController(ProfileTimelineViewController(user: user), animated: true)
   }
 }
 
