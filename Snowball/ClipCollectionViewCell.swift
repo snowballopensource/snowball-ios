@@ -17,6 +17,7 @@ enum ClipCollectionViewCellState {
   case PlayingActive
   case PendingUpload
   case Uploading
+  case Options
 }
 
 class ClipCollectionViewCell: UICollectionViewCell {
@@ -81,6 +82,21 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return view
     }()
 
+  private let optionsView = ClipOptionsView()
+  private var optionsViewYConstraint = ConstraintGroup()
+
+  private let showOptionsGestureRecognizer: UISwipeGestureRecognizer = {
+    let swipeGestureRecognizer = UISwipeGestureRecognizer()
+    swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Down
+    return swipeGestureRecognizer
+    }()
+
+  private let hideOptionsGestureRecognizer: UISwipeGestureRecognizer = {
+    let swipeGestureRecognizer = UISwipeGestureRecognizer()
+    swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Up
+    return swipeGestureRecognizer
+    }()
+
   // MARK: - Initializers
 
   override init(frame: CGRect) {
@@ -89,6 +105,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
     setupSubviews()
 
     likeButton.addTarget(self, action: "likeButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+
+    optionsView.delegate = self
+
+    showOptionsGestureRecognizer.addTarget(self, action: "showOptionsGestureRecognizerSwiped")
+    addGestureRecognizer(showOptionsGestureRecognizer)
+    hideOptionsGestureRecognizer.addTarget(self, action: "hideOptionsGestureRecognizerSwiped")
+    addGestureRecognizer(hideOptionsGestureRecognizer)
   }
 
   required init(coder: NSCoder) {
@@ -115,6 +138,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     if let user = clip.user {
       userAvatarImageView.configureForUser(user)
+      optionsView.configureForUser(user)
     }
 
     usernameLabel.text = clip.user?.username
@@ -148,6 +172,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     let uploading = (state == .Uploading)
     setUserAvatarBouncing(uploading)
+
+    let options = (state == .Options)
+    hideOptionsView(!options, animated: animated)
   }
 
   // MARK: - Private
@@ -167,6 +194,14 @@ class ClipCollectionViewCell: UICollectionViewCell {
       addClipImageView.top == clipThumbnailImageView.top
       addClipImageView.right == clipThumbnailImageView.right
       addClipImageView.bottom == clipThumbnailImageView.bottom
+    }
+
+    contentView.addSubview(optionsView)
+    setOptionsViewYConstraint(hidden: true)
+    layout(optionsView, clipThumbnailImageView) { (optionsView, clipThumbnailImageView) in
+      optionsView.left == clipThumbnailImageView.left
+      optionsView.width == clipThumbnailImageView.width
+      optionsView.height == clipThumbnailImageView.height
     }
 
     contentView.addSubview(userAvatarImageView)
@@ -337,4 +372,120 @@ class ClipCollectionViewCell: UICollectionViewCell {
       }
     }
   }
+
+  private func hideOptionsView(hidden: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.2) {
+        self.hideOptionsView(hidden, animated: false)
+      }
+    } else {
+      setOptionsViewYConstraint(hidden: hidden)
+      optionsView.layoutIfNeeded()
+    }
+  }
+
+  private func setOptionsViewYConstraint(#hidden: Bool) {
+    if hidden {
+      optionsViewYConstraint = constrain(optionsView, clipThumbnailImageView, replace: optionsViewYConstraint) { (optionsView, clipThumbnailImageView) in
+        optionsView.bottom == clipThumbnailImageView.top
+      }
+    } else {
+      userAvatarImageViewYConstraint = constrain(optionsView, clipThumbnailImageView, replace: optionsViewYConstraint) { (optionsView, clipThumbnailImageView) in
+        optionsView.bottom == clipThumbnailImageView.bottom
+      }
+    }
+  }
+
+  @objc private func showOptionsGestureRecognizerSwiped() {
+    hideOptionsView(false, animated: true)
+  }
+
+  @objc private func hideOptionsGestureRecognizerSwiped() {
+    hideOptionsView(true, animated: true)
+  }
+}
+
+// MARK: - ClipOptionsViewDelegate
+extension ClipCollectionViewCell: ClipOptionsViewDelegate {
+
+  func userDidSelectFlagClipOption() {
+    // TODO: Add delegate calls
+    println("flag")
+  }
+
+  func userDidSelectDeleteClipOption() {
+    // TODO: Add delegate calls
+    println("delete")
+  }
+}
+
+// MARK: -
+class ClipOptionsView: UIView {
+
+  // MARK: - Properties
+
+  private let flagButton: UIButton = {
+    let button = UIButton()
+    button.setImage(UIImage(named: "clip-flag"), forState: UIControlState.Normal)
+    return button
+    }()
+
+  private let deleteButton: UIButton = {
+    let button = UIButton()
+    button.setImage(UIImage(named: "clip-delete"), forState: UIControlState.Normal)
+    return button
+    }()
+
+  var delegate: ClipOptionsViewDelegate?
+
+  // MARK: - Initializers
+
+  convenience init() {
+    self.init(frame: CGRectZero)
+
+    addSubview(flagButton)
+    flagButton.addTarget(self, action: "flagButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    addSubview(deleteButton)
+    deleteButton.addTarget(self, action: "deleteButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+  }
+
+  // MARK: - UIView
+
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    flagButton.frame = bounds
+    deleteButton.frame = bounds
+  }
+
+  // MARK: - Internal
+
+  func configureForUser(user: User?) {
+    flagButton.hidden = true
+    deleteButton.hidden = true
+    if let user = user {
+      if let currentUser = User.currentUser {
+        if user == currentUser {
+          deleteButton.hidden = false
+        } else {
+          flagButton.hidden = false
+        }
+      }
+    }
+  }
+
+  // MARK: - Private
+
+  @objc private func flagButtonTapped() {
+    delegate?.userDidSelectFlagClipOption()
+  }
+
+  @objc private func deleteButtonTapped() {
+    delegate?.userDidSelectDeleteClipOption()
+  }
+}
+
+// MARK: -
+protocol ClipOptionsViewDelegate {
+  func userDidSelectFlagClipOption()
+  func userDidSelectDeleteClipOption()
 }
