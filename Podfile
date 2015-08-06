@@ -10,6 +10,7 @@ pod 'Cartography'
 pod 'HanekeSwift'
 pod 'Mixpanel'
 pod 'Parse'
+pod 'SwiftSpinner'
 
 target 'SnowballTests' do
   pod 'Nimble', '~> 1.0.0'

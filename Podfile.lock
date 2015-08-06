@@ -31,6 +31,7 @@ PODS:
   - Parse (1.7.5.3):
     - Bolts/Tasks (>= 1.2.0)
   - Quick (0.3.1)
+  - SwiftSpinner (0.7.0)
 
 DEPENDENCIES:
   - AFNetworking
@@ -41,6 +42,7 @@ DEPENDENCIES:
   - Nimble (~> 1.0.0)
   - Parse
   - Quick (~> 0.3.1)
+  - SwiftSpinner
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
@@ -52,5 +54,6 @@ SPEC CHECKSUMS:
   Nimble: 8bee528e5fcc403653076545db562d2b5db7bb87
   Parse: 373adbb1ad2e34d383542c3b28f678c49ebe4881
   Quick: 824572d3d198d51e52cf4aa722cebf7e59952a35
+  SwiftSpinner: 034bb8b00675b3e4f4c97531fa9af3f550462192
 
 COCOAPODS: 0.38.2

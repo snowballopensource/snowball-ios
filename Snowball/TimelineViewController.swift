@@ -7,6 +7,7 @@
 //
 
 import Cartography
+import SwiftSpinner
 import UIKit
 
 class TimelineViewController: UIViewController, TimelineDelegate {
@@ -204,11 +205,12 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
       let alertController = UIAlertController(title: NSLocalizedString("Delete this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to delete this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.ActionSheet)
       alertController.addAction(UIAlertAction(title: NSLocalizedString("Don't Delete", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
       let deleteAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
-        // TODO: Show spinner
+        SwiftSpinner.show(NSLocalizedString("Deleting...", comment: ""))
         API.request(Router.DeleteClip(clipID: clipID)).responseJSON { (request, response, JSON, error) in
+          SwiftSpinner.hide()
           if let error = error {
             println(error)
-            // TODO: Display the error
+            // TOOD: Display the error
           } else {
             self.timeline.deleteClip(clip)
           }
