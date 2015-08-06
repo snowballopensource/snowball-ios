@@ -186,9 +186,13 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
 
   func userDidTapDeleteButtonForCell(cell: ClipCollectionViewCell) {
     let clip = clipForCell(cell)
-    if clip?.user == User.currentUser {
-      // TODO: Delete the clip
-      println("delete clip")
+    if clip?.user == User.currentUser, let clipID = clip?.id {
+      API.request(Router.DeleteClip(clipID: clipID)).responseJSON { (request, response, JSON, error) in
+        if let error = error {
+          println(error)
+          // TODO: Display the error
+        }
+      }
     }
   }
 
