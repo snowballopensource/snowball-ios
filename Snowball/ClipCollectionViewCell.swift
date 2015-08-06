@@ -158,7 +158,11 @@ class ClipCollectionViewCell: UICollectionViewCell {
       likeButton.hidden = true
     }
 
-    setState(state, animated: false)
+    if clip.state == ClipState.PendingUpload {
+      setState(ClipCollectionViewCellState.PendingUpload, animated: false)
+    } else {
+      setState(state, animated: false)
+    }
   }
 
   func setState(state: ClipCollectionViewCellState, animated: Bool) {

@@ -6,9 +6,33 @@
 //  Copyright (c) 2015 Snowball, Inc. All rights reserved.
 //
 
+import Cartography
 import UIKit
 
 class MainTimelineViewController: TimelineViewController {
+  let cameraViewController = CameraViewController()
+
+  // MARK: - UIViewController
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+    cameraViewController.delegate = self
+  }
+
+  override func loadView() {
+    super.loadView()
+
+    addChildViewController(cameraViewController)
+    view.addSubview(cameraViewController.view)
+    cameraViewController.didMoveToParentViewController(self)
+    layout(cameraViewController.view) { (cameraView) in
+      cameraView.left == cameraView.superview!.left
+      cameraView.top == cameraView.superview!.top
+      cameraView.right == cameraView.superview!.right
+      cameraView.height == cameraView.width
+    }
+  }
 
   // MARK: - TimelineViewController
 
@@ -46,6 +70,30 @@ extension MainTimelineViewController: TimelineDelegate {
       scrollToClip(pendingClip, animated: false)
     } else if let bookmarkedClip = timeline.bookmarkedClip {
       scrollToClip(bookmarkedClip, animated: false)
+    }
+  }
+}
+
+extension MainTimelineViewController: CameraViewControllerDelegate {
+
+  func videoDidBeginRecording() {
+
+  }
+
+  func videoDidEndRecordingToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL) {
+    let clip = Clip()
+    clip.state = ClipState.PendingUpload
+    clip.videoURL = videoURL
+    clip.thumbnailURL = thumbnailURL
+    clip.user = User.currentUser
+    clip.createdAt = NSDate()
+    timeline.appendClip(clip)
+    scrollToClip(clip, animated: true)
+  }
+
+  func videoPreviewDidCancel() {
+    if let clip = timeline.pendingClips.last {
+      timeline.deleteClip(clip)
     }
   }
 }

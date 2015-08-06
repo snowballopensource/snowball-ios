@@ -13,7 +13,7 @@ class Timeline {
   var clips = [Clip]()
   var pendingClips: [Clip] {
     var pendingClips = self.clips.filter { (clip) -> Bool in
-      if clip.state == ClipState.Pending || clip.state == ClipState.Uploading {
+      if clip.state == ClipState.PendingUpload || clip.state == ClipState.Uploading {
         return true
       }
       return false
@@ -88,6 +88,10 @@ class Timeline {
 
   func indexOfClip(clip: Clip) -> Int? {
     return find(clips, clip)
+  }
+
+  func appendClip(clip: Clip) {
+    insertClip(clip, atIndex: clips.count)
   }
 
   func insertClip(clip: Clip, atIndex index: Int) {
