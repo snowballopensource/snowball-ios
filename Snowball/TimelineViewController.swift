@@ -206,7 +206,7 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
       alertController.addAction(UIAlertAction(title: NSLocalizedString("Don't Delete", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
       let deleteAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
         SwiftSpinner.show(NSLocalizedString("Deleting...", comment: ""))
-        API.request(Router.DeleteClip(clipID: clipID)).response { (request, response, JSON, error) in
+        API.request(Router.DeleteClip(clipID: clipID)).response { (request, response, data, error) in
           SwiftSpinner.hide()
           if let error = error {
             println(error)
@@ -252,7 +252,13 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
 
   func userDidTapLikeButtonForCell(cell: ClipCollectionViewCell) {
     let clip = clipForCell(cell)
-    // TODO: Like the clip
-    println("like clip")
+    if let clip = clip, let clipID = clip.id {
+      if clip.liked {
+        API.request(Router.UnlikeClip(clipID: clipID))
+      } else {
+        API.request(Router.LikeClip(clipID: clipID))
+      }
+      clip.liked = !clip.liked
+    }
   }
 }
