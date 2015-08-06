@@ -39,8 +39,8 @@ class MainTimelineViewController: TimelineViewController {
 // MARK: - TimelineDelegate
 extension MainTimelineViewController: TimelineDelegate {
 
-  override func timelineClipsDidChange() {
-    super.timelineClipsDidChange()
+  override func timelineClipsDidLoad() {
+    super.timelineClipsDidLoad()
 
     if let pendingClip = timeline.pendingClips.last {
       scrollToClip(pendingClip, animated: false)

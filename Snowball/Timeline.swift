@@ -10,11 +10,7 @@ import Foundation
 
 class Timeline {
   var delegate: TimelineDelegate?
-  var clips = [Clip]() {
-    didSet {
-      delegate?.timelineClipsDidChange()
-    }
-  }
+  var clips = [Clip]()
   var pendingClips: [Clip] {
     var pendingClips = self.clips.filter { (clip) -> Bool in
       if clip.state == ClipState.Pending || clip.state == ClipState.Uploading {
@@ -94,6 +90,18 @@ class Timeline {
     return find(clips, clip)
   }
 
+  func insertClip(clip: Clip, atIndex index: Int) {
+    insert(&clips, clip, atIndex: index)
+    delegate?.timeline(self, didInsertClip: clip, atIndex: index)
+  }
+
+  func deleteClip(clip: Clip) {
+    if let index = indexOfClip(clip) {
+      removeAtIndex(&clips, index)
+      delegate?.timeline(self, didDeleteClip: clip, atIndex: index)
+    }
+  }
+
   func requestHomeTimeline(completion: (error: NSError?) -> Void) {
     API.request(Router.GetClipStream).responseJSON { (request, response, JSON, error) in
       if let error = error {
@@ -101,6 +109,7 @@ class Timeline {
       } else if let JSON = JSON as? [AnyObject] {
         // Handle clips that were captured before the timeline loads from server...
         self.clips = Clip.importJSON(JSON) + self.pendingClips
+        self.delegate?.timelineClipsDidLoad()
         completion(error: nil)
       }
     }
@@ -113,6 +122,7 @@ class Timeline {
           completion(error: error)
         } else if let JSON = JSON as? [AnyObject] {
           self.clips = Clip.importJSON(JSON)
+          self.delegate?.timelineClipsDidLoad()
           completion(error: nil)
         }
       }
@@ -121,5 +131,7 @@ class Timeline {
 }
 
 protocol TimelineDelegate {
-  func timelineClipsDidChange()
+  func timelineClipsDidLoad()
+  func timeline(timeline: Timeline, didInsertClip clip: Clip, atIndex index: Int)
+  func timeline(timeline: Timeline, didDeleteClip clip: Clip, atIndex index: Int)
 }

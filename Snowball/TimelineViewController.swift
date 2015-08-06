@@ -9,7 +9,7 @@
 import Cartography
 import UIKit
 
-class TimelineViewController: UIViewController {
+class TimelineViewController: UIViewController, TimelineDelegate {
 
   // MARK: - Properties
 
@@ -101,13 +101,27 @@ class TimelineViewController: UIViewController {
     }
     return nil
   }
-}
 
-// MARK: - TimelineDelegate
-extension TimelineViewController: TimelineDelegate {
+  // This next part is the TimelineDelegate implementation. It's ugly because as of Swift 1.2 we are not allowed to
+  // override certain functions/types in an extension. It's weird and I don't get it, but oh well.
+  // When changing it back to an extension, don't forget to remove the <TimelineDelegate> from the
+  // class declaration above.
 
-  func timelineClipsDidChange() {
+  // MARK: - TimelineDelegate
+  // extension TimelineViewController: TimelineDelegate {
+
+  func timelineClipsDidLoad() {
     collectionView.reloadData()
+  }
+
+  func timeline(timeline: Timeline, didInsertClip clip: Clip, atIndex index: Int) {
+    let indexPath = NSIndexPath(forItem: index, inSection: 0)
+    collectionView.insertItemsAtIndexPaths([indexPath])
+  }
+
+  func timeline(timeline: Timeline, didDeleteClip clip: Clip, atIndex index: Int) {
+    let indexPath = NSIndexPath(forItem: index, inSection: 0)
+    collectionView.deleteItemsAtIndexPaths([indexPath])
   }
 }
 
@@ -186,11 +200,14 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
 
   func userDidTapDeleteButtonForCell(cell: ClipCollectionViewCell) {
     let clip = clipForCell(cell)
-    if clip?.user == User.currentUser, let clipID = clip?.id {
+    if clip?.user == User.currentUser, let clipID = clip?.id, let clip = clip {
+      // TODO: Show spinner
       API.request(Router.DeleteClip(clipID: clipID)).responseJSON { (request, response, JSON, error) in
         if let error = error {
           println(error)
           // TODO: Display the error
+        } else {
+          self.timeline.deleteClip(clip)
         }
       }
     }
