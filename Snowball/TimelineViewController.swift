@@ -206,7 +206,7 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
       alertController.addAction(UIAlertAction(title: NSLocalizedString("Don't Delete", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
       let deleteAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
         SwiftSpinner.show(NSLocalizedString("Deleting...", comment: ""))
-        API.request(Router.DeleteClip(clipID: clipID)).responseJSON { (request, response, JSON, error) in
+        API.request(Router.DeleteClip(clipID: clipID)).response { (request, response, JSON, error) in
           SwiftSpinner.hide()
           if let error = error {
             println(error)
@@ -223,8 +223,24 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
 
   func userDidTapFlagButtonForCell(cell: ClipCollectionViewCell) {
     let clip = clipForCell(cell)
-    // TODO: Flag the clip
-    println("flag clip")
+    if let clipID = clip?.id, let clip = clip {
+      let alertController = UIAlertController(title: NSLocalizedString("Flag this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to flag this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.ActionSheet)
+      alertController.addAction(UIAlertAction(title: NSLocalizedString("Don't Flag", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
+      let deleteAction = UIAlertAction(title: NSLocalizedString("Flag", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
+        SwiftSpinner.show(NSLocalizedString("Flagging...", comment: ""))
+        API.request(Router.FlagClip(clipID: clipID)).response { (request, response, data, error) in
+          SwiftSpinner.hide()
+          if let error = error {
+            println(error)
+            // TOOD: Display the error
+          } else {
+            self.timeline.deleteClip(clip)
+          }
+        }
+      }
+      alertController.addAction(deleteAction)
+      presentViewController(alertController, animated: true, completion: nil)
+    }
   }
 
   func userDidTapUserButtonForCell(cell: ClipCollectionViewCell) {
