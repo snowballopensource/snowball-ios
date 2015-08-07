@@ -373,11 +373,11 @@ class ClipCollectionViewCell: UICollectionViewCell {
       setUserAvatarImageViewYConstraint(topOfBounce: true)
       UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut,
         animations: { () -> Void in
-          self.userAvatarImageView.layoutIfNeeded()
+          self.contentView.layoutIfNeeded()
         }) { (completed) -> Void in
           self.setUserAvatarImageViewYConstraint(topOfBounce: false)
           UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
-            self.userAvatarImageView.layoutIfNeeded()
+            self.contentView.layoutIfNeeded()
             }) { (completed) -> Void in
               self.userAvatarBounceInProgress = false
               self.setUserAvatarBouncing(self.userAvatarShouldContinueBouncing)
