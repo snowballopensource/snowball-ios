@@ -10,7 +10,8 @@ import Cartography
 import UIKit
 
 class MainTimelineViewController: TimelineViewController {
-  let cameraViewController = CameraViewController()
+  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Friends, rightButtonType: SnowballTopViewButtonType.ChangeCamera)
+  private let cameraViewController = CameraViewController()
 
   // MARK: - UIViewController
 
@@ -32,6 +33,9 @@ class MainTimelineViewController: TimelineViewController {
       cameraView.right == cameraView.superview!.right
       cameraView.height == cameraView.width
     }
+
+    view.addSubview(topView)
+    topView.setupDefaultLayout()
   }
 
   // MARK: - TimelineViewController
@@ -110,5 +114,17 @@ extension MainTimelineViewController: CameraViewControllerDelegate {
     if let clip = timeline.pendingClips.last {
       timeline.deleteClip(clip)
     }
+  }
+}
+
+// MARK: - SnowballTopViewDelegate
+extension MainTimelineViewController: SnowballTopViewDelegate {
+
+  func snowballTopViewLeftButtonTapped() {
+    switchToNavigationController(MoreNavigationController())
+  }
+
+  func snowballTopViewRightButtonTapped() {
+    cameraViewController.changeCamera()
   }
 }

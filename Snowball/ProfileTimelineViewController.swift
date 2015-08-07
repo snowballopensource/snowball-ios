@@ -12,7 +12,8 @@ class ProfileTimelineViewController: TimelineViewController {
 
   // MARK: - Properties
 
-  let user: User
+  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.BackWhite, rightButtonType: nil)
+  private let user: User
 
   // MARK: - Initializers
 
@@ -23,6 +24,15 @@ class ProfileTimelineViewController: TimelineViewController {
 
   required init(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+
+  // MARK: - UIViewController
+
+  override func loadView() {
+    super.loadView()
+
+    view.addSubview(topView)
+    topView.setupDefaultLayout()
   }
 
   // MARK: - TimelineViewController
@@ -46,5 +56,13 @@ extension ProfileTimelineViewController: TimelineDelegate {
     if let lastClip = timeline.clips.last {
       scrollToClip(lastClip, animated: false)
     }
+  }
+}
+
+// MARK: - SnowballTopViewDelegate
+extension ProfileTimelineViewController: SnowballTopViewDelegate {
+
+  func snowballTopViewLeftButtonTapped() {
+    navigationController?.popViewControllerAnimated(true)
   }
 }

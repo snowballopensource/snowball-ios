@@ -35,6 +35,8 @@ class TimelineViewController: UIViewController, TimelineDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    view.backgroundColor = UIColor.whiteColor()
+
     timeline.delegate = self
 
     player.timeline = timeline
