@@ -65,6 +65,19 @@ class MainTimelineViewController: TimelineViewController {
     }
     return superState
   }
+
+  // MARK: - TimelinePlayerDelegate
+  // See the comment in TimelineViewController for the TimelinePlayer delegate
+  // to see why this is here. It's such a confusing mess. Sorry future self!
+  override func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip) {
+    super.timelinePlayer(timelinePlayer, didBeginPlayingWithClip: clip)
+    cameraViewController.view.hidden = true
+  }
+
+  override func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingLastClip lastClip: Clip) {
+    super.timelinePlayer(timelinePlayer, didEndPlayingLastClip: lastClip)
+    cameraViewController.view.hidden = false
+  }
 }
 
 // MARK: - TimelineDelegate

@@ -10,7 +10,7 @@ import Cartography
 import SwiftSpinner
 import UIKit
 
-class TimelineViewController: UIViewController, TimelineDelegate {
+class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayerDelegate {
 
   // MARK: - Properties
 
@@ -130,10 +130,12 @@ class TimelineViewController: UIViewController, TimelineDelegate {
     let indexPath = NSIndexPath(forItem: index, inSection: 0)
     collectionView.deleteItemsAtIndexPaths([indexPath])
   }
-}
 
-// MARK: - TimelinePlayerDelegate
-extension TimelineViewController: TimelinePlayerDelegate {
+  // This next part is the TimelinePlayerDelegate implementation. For details as to why it's here,
+  // see the large comment block above the TimelineDelegate implementation above.
+
+  // MARK: - TimelinePlayerDelegate
+  // extension TimelineViewController: TimelinePlayerDelegate {
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip) {
     topView.setHidden(true, animated: true)
@@ -152,11 +154,11 @@ extension TimelineViewController: TimelinePlayerDelegate {
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
-      let fromCell = cellForClip(fromClip)
-      fromCell?.setState(ClipCollectionViewCellState.PlayingIdle, animated: true)
-      let toCell = cellForClip(toClip)
-      toCell?.setState(ClipCollectionViewCellState.PlayingActive, animated: true)
-      scrollToClip(toClip, animated: true)
+    let fromCell = cellForClip(fromClip)
+    fromCell?.setState(ClipCollectionViewCellState.PlayingIdle, animated: true)
+    let toCell = cellForClip(toClip)
+    toCell?.setState(ClipCollectionViewCellState.PlayingActive, animated: true)
+    scrollToClip(toClip, animated: true)
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingLastClip lastClip: Clip) {
