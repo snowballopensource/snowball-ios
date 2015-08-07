@@ -104,6 +104,7 @@ class User: RemoteObject {
 
   // MARK: - Internal
 
+  // TODO: Handle errors in VCs
   func toggleFollowing() {
     if following.boolValue {
       unfollow()
