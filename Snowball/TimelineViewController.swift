@@ -86,9 +86,7 @@ class TimelineViewController: UIViewController, TimelineDelegate {
     return ClipCollectionViewCellState.Default
   }
 
-  // MARK: - Private
-
-  private func cellForClip(clip: Clip) -> ClipCollectionViewCell? {
+  func cellForClip(clip: Clip) -> ClipCollectionViewCell? {
     if let index = timeline.indexOfClip(clip) {
       let indexPath = NSIndexPath(forItem: index, inSection: 0)
       return collectionView.cellForItemAtIndexPath(indexPath) as? ClipCollectionViewCell
@@ -96,7 +94,7 @@ class TimelineViewController: UIViewController, TimelineDelegate {
     return nil
   }
 
-  private func clipForCell(cell: ClipCollectionViewCell) -> Clip? {
+  func clipForCell(cell: ClipCollectionViewCell) -> Clip? {
     if let indexPath = collectionView.indexPathForCell(cell) {
       return timeline.clips[indexPath.row]
     }
@@ -118,6 +116,11 @@ class TimelineViewController: UIViewController, TimelineDelegate {
   func timeline(timeline: Timeline, didInsertClip clip: Clip, atIndex index: Int) {
     let indexPath = NSIndexPath(forItem: index, inSection: 0)
     collectionView.insertItemsAtIndexPaths([indexPath])
+  }
+
+  func timeline(timeline: Timeline, didUpdateClip clip: Clip, atIndex index: Int) {
+    let indexPath = NSIndexPath(forItem: index, inSection: 0)
+    collectionView.reloadItemsAtIndexPaths([indexPath])
   }
 
   func timeline(timeline: Timeline, didDeleteClip clip: Clip, atIndex index: Int) {
@@ -198,6 +201,8 @@ extension TimelineViewController: UICollectionViewDelegate {
 
 // MARK: - ClipCollectionViewCellDelegate
 extension TimelineViewController: ClipCollectionViewCellDelegate {
+
+  func userDidTapAddButtonForCell(cell: ClipCollectionViewCell) {}
 
   func userDidTapDeleteButtonForCell(cell: ClipCollectionViewCell) {
     let clip = clipForCell(cell)

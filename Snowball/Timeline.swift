@@ -106,6 +106,12 @@ class Timeline {
     }
   }
 
+  func markClipAsUpdated(clip: Clip) {
+    if let index = indexOfClip(clip) {
+      delegate?.timeline(self, didUpdateClip: clip, atIndex: index)
+    }
+  }
+
   func requestHomeTimeline(completion: (error: NSError?) -> Void) {
     API.request(Router.GetClipStream).responseJSON { (request, response, JSON, error) in
       if let error = error {
@@ -137,5 +143,6 @@ class Timeline {
 protocol TimelineDelegate {
   func timelineClipsDidLoad()
   func timeline(timeline: Timeline, didInsertClip clip: Clip, atIndex index: Int)
+  func timeline(timeline: Timeline, didUpdateClip clip: Clip, atIndex index: Int)
   func timeline(timeline: Timeline, didDeleteClip clip: Clip, atIndex index: Int)
 }

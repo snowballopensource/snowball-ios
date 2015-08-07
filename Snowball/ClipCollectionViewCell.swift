@@ -18,6 +18,7 @@ enum ClipCollectionViewCellState {
   case PendingUpload
   case Uploading
   case Options
+  case UploadFailed
 }
 
 class ClipCollectionViewCell: UICollectionViewCell {
@@ -36,11 +37,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   private let clipThumbnailImageView = UIImageView()
 
-  private let addClipImageView: UIImageView = {
-    let imageView = UIImageView(image: UIImage(named: "add-clip"))
-    imageView.backgroundColor = User.currentUser?.color as? UIColor ?? UIColor.SnowballColor.blueColor
-    imageView.contentMode = UIViewContentMode.Center
-    return imageView
+  private let addButton: UIButton = {
+    let button = UIButton()
+    button.setImage(UIImage(named: "add-clip"), forState: UIControlState.Normal)
+    button.backgroundColor = User.currentUser?.color as? UIColor ?? UIColor.SnowballColor.blueColor
+    button.imageView!.contentMode = UIViewContentMode.Center
+    return button
     }()
 
   private let userAvatarImageView = UserAvatarImageView()
@@ -107,6 +109,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     setupSubviews()
 
+    addButton.addTarget(self, action: "addButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+
     userButton.addTarget(self, action: "userButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
 
     likeButton.addTarget(self, action: "likeButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
@@ -158,11 +162,14 @@ class ClipCollectionViewCell: UICollectionViewCell {
       likeButton.hidden = true
     }
 
-    if clip.state == ClipState.PendingUpload {
-      setState(ClipCollectionViewCellState.PendingUpload, animated: false)
-    } else {
-      setState(state, animated: false)
+    var cellState: ClipCollectionViewCellState!
+    switch(clip.state) {
+    case ClipState.Default: cellState = state
+    case ClipState.PendingUpload: cellState = ClipCollectionViewCellState.PendingUpload
+    case ClipState.Uploading: cellState = ClipCollectionViewCellState.Uploading
+    case ClipState.UploadFailed: cellState = ClipCollectionViewCellState.UploadFailed
     }
+    setState(cellState, animated: false)
   }
 
   func setState(state: ClipCollectionViewCellState, animated: Bool) {
@@ -176,7 +183,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     hideClipInfo(playingIdle, animated: animated)
 
     let pendingUpload = (state == .PendingUpload)
-    addClipImageView.hidden = !pendingUpload
+    addButton.hidden = !pendingUpload
     clipTimeLabel.hidden = pendingUpload
 
     let uploading = (state == .Uploading)
@@ -197,12 +204,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipThumbnailImageView.height == clipThumbnailImageView.width
     }
 
-    contentView.addSubview(addClipImageView)
-    layout(addClipImageView, clipThumbnailImageView) { (addClipImageView, clipThumbnailImageView) in
-      addClipImageView.left == clipThumbnailImageView.left
-      addClipImageView.top == clipThumbnailImageView.top
-      addClipImageView.right == clipThumbnailImageView.right
-      addClipImageView.bottom == clipThumbnailImageView.bottom
+    contentView.addSubview(addButton)
+    layout(addButton, clipThumbnailImageView) { (addButton, clipThumbnailImageView) in
+      addButton.left == clipThumbnailImageView.left
+      addButton.top == clipThumbnailImageView.top
+      addButton.right == clipThumbnailImageView.right
+      addButton.bottom == clipThumbnailImageView.bottom
     }
 
     contentView.addSubview(optionsView)
@@ -344,6 +351,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
   }
 
+  @objc private func addButtonTapped() {
+    delegate?.userDidTapAddButtonForCell(self)
+  }
+
   @objc private func userButtonTapped() {
     delegate?.userDidTapUserButtonForCell(self)
   }
@@ -428,6 +439,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
 // MARK: -
 protocol ClipCollectionViewCellDelegate {
+  func userDidTapAddButtonForCell(cell: ClipCollectionViewCell)
   func userDidTapDeleteButtonForCell(cell: ClipCollectionViewCell)
   func userDidTapFlagButtonForCell(cell: ClipCollectionViewCell)
   func userDidTapUserButtonForCell(cell: ClipCollectionViewCell)

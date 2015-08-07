@@ -74,6 +74,21 @@ extension MainTimelineViewController: TimelineDelegate {
   }
 }
 
+// MARK: - ClipCollectionViewCellDelegate
+extension MainTimelineViewController: ClipCollectionViewCellDelegate {
+
+  override func userDidTapAddButtonForCell(cell: ClipCollectionViewCell) {
+    if let clip = clipForCell(cell) {
+      clip.state = .Uploading
+      timeline.markClipAsUpdated(clip)
+      Analytics.track("Create Clip")
+      cameraViewController.endPreview()
+      // TODO: Start the API upload
+    }
+  }
+}
+
+// MARK: - CameraViewControllerDelegate
 extension MainTimelineViewController: CameraViewControllerDelegate {
 
   func videoDidBeginRecording() {
