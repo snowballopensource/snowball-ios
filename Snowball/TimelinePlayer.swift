@@ -33,7 +33,14 @@ class TimelinePlayer: AVPlayer {
         replaceCurrentItemWithPlayerItem(playerItem)
         play()
       }
-      delegate?.timelinePlayer(self, didTransitionFromClip: oldValue, toClip: currentClip)
+      if oldValue == nil && currentClip == nil { return }
+      if oldValue == nil && currentClip != nil {
+        delegate?.timelinePlayer(self, didBeginPlayingWithClip: currentClip!)
+      } else if oldValue != nil && currentClip != nil {
+        delegate?.timelinePlayer(self, didTransitionFromClip: oldValue!, toClip: currentClip!)
+      } else if oldValue != nil && currentClip == nil {
+        delegate?.timelinePlayer(self, didEndPlayingLastClip: oldValue!)
+      }
     }
   }
   var playing: Bool {
@@ -78,7 +85,9 @@ class TimelinePlayer: AVPlayer {
 }
 
 protocol TimelinePlayerDelegate {
-  func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip?, toClip: Clip?)
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip)
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip)
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingLastClip lastClip: Clip)
 }
 
 class TimelinePlayerView: UIView {

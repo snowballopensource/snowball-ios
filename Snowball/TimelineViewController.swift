@@ -135,41 +135,38 @@ class TimelineViewController: UIViewController, TimelineDelegate {
 // MARK: - TimelinePlayerDelegate
 extension TimelineViewController: TimelinePlayerDelegate {
 
-  // TODO: Break this out into three separate methods
-  func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip?, toClip: Clip?) {
-    if fromClip == nil && toClip == nil { return }
-    if fromClip == nil && toClip != nil {
-      // Just starting playback for the first time
-      topView.setHidden(true, animated: true)
-      for cell in collectionView.visibleCells() {
-        if let cell = cell as? ClipCollectionViewCell {
-          if let initialClipCell = cellForClip(toClip!) {
-            if cell == initialClipCell {
-              cell.setState(ClipCollectionViewCellState.PlayingActive, animated: true)
-            } else {
-              cell.setState(ClipCollectionViewCellState.PlayingIdle, animated: true)
-            }
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip) {
+    topView.setHidden(true, animated: true)
+    for cell in collectionView.visibleCells() {
+      if let cell = cell as? ClipCollectionViewCell {
+        if let initialClipCell = cellForClip(clip) {
+          if cell == initialClipCell {
+            cell.setState(ClipCollectionViewCellState.PlayingActive, animated: true)
+          } else {
+            cell.setState(ClipCollectionViewCellState.PlayingIdle, animated: true)
           }
         }
       }
-      scrollToClip(toClip!, animated: true)
-    } else if fromClip != nil && toClip != nil {
-      // Transition from a clip to a clip
-      let fromCell = cellForClip(fromClip!)
+    }
+    scrollToClip(clip, animated: true)
+  }
+
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
+      let fromCell = cellForClip(fromClip)
       fromCell?.setState(ClipCollectionViewCellState.PlayingIdle, animated: true)
-      let toCell = cellForClip(toClip!)
+      let toCell = cellForClip(toClip)
       toCell?.setState(ClipCollectionViewCellState.PlayingActive, animated: true)
-      scrollToClip(toClip!, animated: true)
-    } else if fromClip != nil && toClip == nil {
-      // Playback ending
-      topView.setHidden(false, animated: true)
-      for cell in collectionView.visibleCells() {
-        if let cell = cell as? ClipCollectionViewCell {
-          let indexPath = collectionView.indexPathForCell(cell)!
-          cell.setState(stateForCellAtIndexPath(indexPath), animated: true)
-          if stateForCellAtIndexPath(indexPath) == .PlayingIdle {
-            println(stateForCellAtIndexPath(indexPath))
-          }
+      scrollToClip(toClip, animated: true)
+  }
+
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingLastClip lastClip: Clip) {
+    topView.setHidden(false, animated: true)
+    for cell in collectionView.visibleCells() {
+      if let cell = cell as? ClipCollectionViewCell {
+        let indexPath = collectionView.indexPathForCell(cell)!
+        cell.setState(stateForCellAtIndexPath(indexPath), animated: true)
+        if stateForCellAtIndexPath(indexPath) == .PlayingIdle {
+          println(stateForCellAtIndexPath(indexPath))
         }
       }
     }
