@@ -14,6 +14,7 @@ class TimelineViewController: UIViewController, TimelineDelegate {
 
   // MARK: - Properties
 
+  var topView: SnowballTopView! // Must be set by subclass
   let timeline = Timeline()
   let player = TimelinePlayer()
   let playerView = TimelinePlayerView()
@@ -139,6 +140,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
     if fromClip == nil && toClip == nil { return }
     if fromClip == nil && toClip != nil {
       // Just starting playback for the first time
+      topView.setHidden(true, animated: true)
       for cell in collectionView.visibleCells() {
         if let cell = cell as? ClipCollectionViewCell {
           if let initialClipCell = cellForClip(toClip!) {
@@ -160,6 +162,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
       scrollToClip(toClip!, animated: true)
     } else if fromClip != nil && toClip == nil {
       // Playback ending
+      topView.setHidden(false, animated: true)
       for cell in collectionView.visibleCells() {
         if let cell = cell as? ClipCollectionViewCell {
           let indexPath = collectionView.indexPathForCell(cell)!

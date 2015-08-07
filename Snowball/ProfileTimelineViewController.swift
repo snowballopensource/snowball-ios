@@ -12,7 +12,6 @@ class ProfileTimelineViewController: TimelineViewController {
 
   // MARK: - Properties
 
-  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.BackWhite, rightButtonType: nil)
   private let user: User
 
   // MARK: - Initializers
@@ -31,6 +30,7 @@ class ProfileTimelineViewController: TimelineViewController {
   override func loadView() {
     super.loadView()
 
+    topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.BackWhite, rightButtonType: nil)
     view.addSubview(topView)
     topView.setupDefaultLayout()
   }

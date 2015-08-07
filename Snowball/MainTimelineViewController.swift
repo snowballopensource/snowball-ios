@@ -10,7 +10,9 @@ import Cartography
 import UIKit
 
 class MainTimelineViewController: TimelineViewController {
-  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Friends, rightButtonType: SnowballTopViewButtonType.ChangeCamera)
+
+  // MARK: - Properties
+
   private let cameraViewController = CameraViewController()
 
   // MARK: - UIViewController
@@ -34,6 +36,7 @@ class MainTimelineViewController: TimelineViewController {
       cameraView.height == cameraView.width
     }
 
+    topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Friends, rightButtonType: SnowballTopViewButtonType.ChangeCamera)
     view.addSubview(topView)
     topView.setupDefaultLayout()
   }
@@ -82,6 +85,7 @@ extension MainTimelineViewController: TimelineDelegate {
 extension MainTimelineViewController: ClipCollectionViewCellDelegate {
 
   override func userDidTapAddButtonForCell(cell: ClipCollectionViewCell) {
+    topView.setHidden(false, animated: true)
     if let clip = clipForCell(cell) {
       clip.state = .Uploading
       timeline.markClipAsUpdated(clip)
@@ -96,7 +100,7 @@ extension MainTimelineViewController: ClipCollectionViewCellDelegate {
 extension MainTimelineViewController: CameraViewControllerDelegate {
 
   func videoDidBeginRecording() {
-
+    topView.setHidden(true, animated: true)
   }
 
   func videoDidEndRecordingToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL) {
@@ -111,6 +115,7 @@ extension MainTimelineViewController: CameraViewControllerDelegate {
   }
 
   func videoPreviewDidCancel() {
+    topView.setHidden(false, animated: true)
     if let clip = timeline.pendingClips.last {
       timeline.deleteClip(clip)
     }
