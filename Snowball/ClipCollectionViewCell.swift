@@ -82,6 +82,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
   private let bookmarkImageView = UIImageView(image: UIImage(named: "play"))
   private let pauseImageView = UIImageView(image: UIImage(named: "pause"))
 
+  private let uploadRetryButton: UIButton = {
+    let button = UIButton()
+    button.setImage(UIImage(named: "clip-retry"), forState: UIControlState.Normal)
+    button.imageView!.contentMode = UIViewContentMode.Center
+    return button
+    }()
+
   private let dimOverlayView: UIView = {
     let view = UIView()
     view.backgroundColor = UIColor.whiteColor()
@@ -115,6 +122,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     userButton.addTarget(self, action: "userButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
 
     likeButton.addTarget(self, action: "likeButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+
+    uploadRetryButton.addTarget(self, action: "uploadRetryButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
 
     optionsView.delegate = self
 
@@ -190,6 +199,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     let uploading = (state == .Uploading)
     setUserAvatarBouncing(uploading)
+
+    let uploadingFailed = (state == .UploadFailed)
+    hideUploadRetryButton(!uploadingFailed, animated: animated)
 
     let options = (state == .Options)
     hideOptionsView(!options, animated: animated)
@@ -278,6 +290,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
     layout(pauseImageView, bookmarkImageView) { (pauseImageView, bookmarkImageView) in
       pauseImageView.centerX == bookmarkImageView.centerX
       pauseImageView.centerY == bookmarkImageView.centerY
+    }
+
+    contentView.addSubview(uploadRetryButton)
+    layout(uploadRetryButton, clipThumbnailImageView) { (uploadRetryButton, clipThumbnailImageView) in
+      uploadRetryButton.centerX == clipThumbnailImageView.centerX
+      uploadRetryButton.centerY == clipThumbnailImageView.centerY
     }
 
     contentView.addSubview(dimOverlayView)
@@ -370,6 +388,17 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
   }
 
+  private func hideUploadRetryButton(hidden: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.4) {
+        self.hideUploadRetryButton(hidden, animated: false)
+      }
+    } else {
+      let alpha = CGFloat(!hidden)
+      uploadRetryButton.alpha = alpha
+    }
+  }
+
   @objc private func addButtonTapped() {
     delegate?.userDidTapAddButtonForCell(self)
   }
@@ -382,6 +411,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let liked = likeButton.selected
     setClipLiked(!liked, animated: true)
     delegate?.userDidTapLikeButtonForCell(self)
+  }
+
+  @objc private func uploadRetryButtonTapped() {
+    delegate?.userDidTapUploadRetryButtonForCell(self)
   }
 
   private func setUserAvatarBouncing(bounce: Bool) {
@@ -463,6 +496,7 @@ protocol ClipCollectionViewCellDelegate {
   func userDidTapFlagButtonForCell(cell: ClipCollectionViewCell)
   func userDidTapUserButtonForCell(cell: ClipCollectionViewCell)
   func userDidTapLikeButtonForCell(cell: ClipCollectionViewCell)
+  func userDidTapUploadRetryButtonForCell(cell: ClipCollectionViewCell)
 }
 
 // MARK: - ClipOptionsViewDelegate

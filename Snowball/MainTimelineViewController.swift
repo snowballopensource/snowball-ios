@@ -98,13 +98,28 @@ extension MainTimelineViewController: TimelineDelegate {
 extension MainTimelineViewController: ClipCollectionViewCellDelegate {
 
   override func userDidTapAddButtonForCell(cell: ClipCollectionViewCell) {
+    Analytics.track("Create Clip")
     topView.setHidden(false, animated: true)
+    cameraViewController.endPreview()
+    uploadClipForCell(cell)
+  }
+
+  override func userDidTapUploadRetryButtonForCell(cell: ClipCollectionViewCell) {
+    uploadClipForCell(cell)
+  }
+
+  private func uploadClipForCell(cell: ClipCollectionViewCell) {
     if let clip = clipForCell(cell) {
       clip.state = .Uploading
       timeline.markClipAsUpdated(clip)
-      Analytics.track("Create Clip")
-      cameraViewController.endPreview()
-      // TODO: Start the API upload
+      API.uploadClip(clip) { (request, response, JSON, error) -> () in
+        if let error = error {
+          clip.state = ClipState.UploadFailed
+        } else {
+          clip.state = ClipState.Default
+        }
+        self.timeline.markClipAsUpdated(clip)
+      }
     }
   }
 }

@@ -268,4 +268,6 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
       clip.liked = !clip.liked
     }
   }
+
+  func userDidTapUploadRetryButtonForCell(cell: ClipCollectionViewCell) {}
 }
