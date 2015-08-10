@@ -86,8 +86,16 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     if player.playing {
       return ClipCollectionViewCellState.PlayingIdle
     }
-    return ClipCollectionViewCellState.Default
-  }
+    let clip = timeline.clips[indexPath.row]
+    var state = ClipCollectionViewCellState.Default
+    switch(clip.state) {
+    case ClipState.Default: state = ClipCollectionViewCellState.Default
+    case ClipState.PendingUpload: state = ClipCollectionViewCellState.PendingUpload
+    case ClipState.Uploading: state = ClipCollectionViewCellState.Uploading
+    case ClipState.UploadFailed: state = ClipCollectionViewCellState.UploadFailed
+    }
+    return state
+}
 
   func cellForClip(clip: Clip) -> ClipCollectionViewCell? {
     if let index = timeline.indexOfClip(clip) {
