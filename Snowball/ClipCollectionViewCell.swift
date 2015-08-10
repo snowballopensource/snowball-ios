@@ -80,6 +80,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }()
 
   private let bookmarkImageView = UIImageView(image: UIImage(named: "play"))
+  private let pauseImageView = UIImageView(image: UIImage(named: "pause"))
 
   private let dimOverlayView: UIView = {
     let view = UIView()
@@ -181,6 +182,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     scaleClipThumbnail((playingIdle || playingActive), animated: animated)
     hideDimOverlay(!playingIdle, animated: animated)
     hideClipInfo(playingIdle, animated: animated)
+    hidePauseImage(!playingActive, animated: animated)
 
     let pendingUpload = (state == .PendingUpload)
     addButton.hidden = !pendingUpload
@@ -272,6 +274,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
       bookmarkImageView.centerY == clipThumbnailImageView.centerY
     }
 
+    contentView.addSubview(pauseImageView)
+    layout(pauseImageView, bookmarkImageView) { (pauseImageView, bookmarkImageView) in
+      pauseImageView.centerX == bookmarkImageView.centerX
+      pauseImageView.centerY == bookmarkImageView.centerY
+    }
+
     contentView.addSubview(dimOverlayView)
     layout(dimOverlayView) { (dimOverlayView) in
       dimOverlayView.left == dimOverlayView.superview!.left
@@ -348,6 +356,17 @@ class ClipCollectionViewCell: UICollectionViewCell {
     } else {
       let alpha = CGFloat(!hidden)
       bookmarkImageView.alpha = alpha
+    }
+  }
+
+  private func hidePauseImage(hidden: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.4) {
+        self.hidePauseImage(hidden, animated: false)
+      }
+    } else {
+      let alpha = CGFloat(!hidden)
+      pauseImageView.alpha = alpha
     }
   }
 
