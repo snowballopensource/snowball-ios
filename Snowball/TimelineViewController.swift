@@ -192,11 +192,13 @@ extension TimelineViewController: UICollectionViewDataSource {
 extension TimelineViewController: UICollectionViewDelegate {
 
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    if player.playing {
-      player.stop()
-    } else {
-      let clip = timeline.clips[indexPath.row]
-      player.play(clip)
+    let clip = timeline.clips[indexPath.row]
+    if clip.state == ClipState.Default {
+      if player.playing {
+        player.stop()
+      } else {
+        player.play(clip)
+      }
     }
   }
 }
