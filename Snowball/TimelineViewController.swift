@@ -167,9 +167,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
       if let cell = cell as? ClipCollectionViewCell {
         let indexPath = collectionView.indexPathForCell(cell)!
         cell.setState(stateForCellAtIndexPath(indexPath), animated: true)
-        if stateForCellAtIndexPath(indexPath) == .PlayingIdle {
-          println(stateForCellAtIndexPath(indexPath))
-        }
+        timeline.bookmarkedClip = lastClip
       }
     }
   }
