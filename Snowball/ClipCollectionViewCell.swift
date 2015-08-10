@@ -95,6 +95,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return view
     }()
 
+  private let darkDimOverlayView: UIView = {
+    let view = UIView()
+    view.backgroundColor = UIColor.blackColor()
+    return view
+    }()
+
   private let optionsView = ClipOptionsView()
   private var optionsViewYConstraint = ConstraintGroup()
 
@@ -208,6 +214,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     let uploadingFailed = (state == .UploadFailed)
     hideUploadRetryButton(!uploadingFailed, animated: animated)
+    hideDarkDimOverlay(!uploadingFailed, animated: animated)
 
     let options = (state == .Options)
     hideOptionsView(!options, animated: animated)
@@ -222,6 +229,14 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipThumbnailImageView.top == clipThumbnailImageView.superview!.top
       clipThumbnailImageView.trailing == clipThumbnailImageView.superview!.trailing
       clipThumbnailImageView.height == clipThumbnailImageView.width
+    }
+
+    contentView.addSubview(darkDimOverlayView)
+    layout(darkDimOverlayView, clipThumbnailImageView) { (darkDimOverlayView, clipThumbnailImageView) in
+      darkDimOverlayView.left == clipThumbnailImageView.left
+      darkDimOverlayView.top == clipThumbnailImageView.top
+      darkDimOverlayView.right == clipThumbnailImageView.right
+      darkDimOverlayView.bottom == clipThumbnailImageView.bottom
     }
 
     contentView.addSubview(addButton)
@@ -298,18 +313,20 @@ class ClipCollectionViewCell: UICollectionViewCell {
       pauseImageView.centerY == bookmarkImageView.centerY
     }
 
-    contentView.addSubview(uploadRetryButton)
-    layout(uploadRetryButton, clipThumbnailImageView) { (uploadRetryButton, clipThumbnailImageView) in
-      uploadRetryButton.centerX == clipThumbnailImageView.centerX
-      uploadRetryButton.centerY == clipThumbnailImageView.centerY
-    }
-
     contentView.addSubview(dimOverlayView)
     layout(dimOverlayView) { (dimOverlayView) in
       dimOverlayView.left == dimOverlayView.superview!.left
       dimOverlayView.top == dimOverlayView.superview!.top
       dimOverlayView.right == dimOverlayView.superview!.right
       dimOverlayView.bottom == dimOverlayView.superview!.bottom
+    }
+
+    contentView.addSubview(uploadRetryButton)
+    layout(uploadRetryButton, clipThumbnailImageView) { (uploadRetryButton, clipThumbnailImageView) in
+      uploadRetryButton.left == clipThumbnailImageView.left
+      uploadRetryButton.top == clipThumbnailImageView.top
+      uploadRetryButton.right == clipThumbnailImageView.right
+      uploadRetryButton.bottom == clipThumbnailImageView.bottom
     }
   }
 
@@ -369,6 +386,18 @@ class ClipCollectionViewCell: UICollectionViewCell {
       var alpha: CGFloat = 0.6
       if hidden { alpha = 0 }
       dimOverlayView.alpha = alpha
+    }
+  }
+
+  private func hideDarkDimOverlay(hidden: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.4) {
+        self.hideDarkDimOverlay(hidden, animated: false)
+      }
+    } else {
+      var alpha: CGFloat = 0.5
+      if hidden { alpha = 0 }
+      darkDimOverlayView.alpha = alpha
     }
   }
 
