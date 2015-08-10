@@ -152,7 +152,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let userColor = clip.user?.color as? UIColor ?? UIColor.SnowballColor.blueColor
 
     if let thumbnailURL = clip.thumbnailURL {
-      clipThumbnailImageView.hnk_setImageFromURL(thumbnailURL, format: Format<UIImage>(name: "original"))
+      if thumbnailURL.scheme == "file" {
+        let imageData = NSData(contentsOfURL: thumbnailURL)!
+        let image = UIImage(data: imageData)
+        clipThumbnailImageView.image = image
+      } else {
+        clipThumbnailImageView.hnk_setImageFromURL(thumbnailURL, format: Format<UIImage>(name: "original"))
+      }
     }
 
     if let user = clip.user {
