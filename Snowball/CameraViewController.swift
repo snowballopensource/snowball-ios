@@ -11,7 +11,7 @@ import Cartography
 import UIKit
 
 enum CameraViewControllerState {
-  case Default, Previewing
+  case Default, Recording, Previewing
 }
 
 // MARK: -
@@ -373,6 +373,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
   func captureOutput(captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAtURL fileURL: NSURL!, fromConnections connections: [AnyObject]!) {
     setFocusLocked(true)
     beginProgressViewAnimation()
+    state = .Recording
     delegate?.videoDidBeginRecording()
   }
 

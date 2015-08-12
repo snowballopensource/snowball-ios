@@ -187,6 +187,10 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   // MARK: - TimelinePlayerDelegate
   // extension TimelineViewController: TimelinePlayerDelegate {
 
+  func timelinePlayer(timelinePlayer: TimelinePlayer, shouldBeginPlayingWithClip clip: Clip) -> Bool {
+    return true
+  }
+
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip) {
     setInterfaceFocused(true)
     for cell in collectionView.visibleCells() {

@@ -63,7 +63,11 @@ class TimelinePlayer: AVPlayer {
   // MARK: - Internal
 
   func play(clip: Clip) {
-    currentClip = clip
+    if let delegate = delegate {
+      if delegate.timelinePlayer(self, shouldBeginPlayingWithClip: clip) {
+        currentClip = clip
+      }
+    }
   }
 
   func stop() {
@@ -85,6 +89,7 @@ class TimelinePlayer: AVPlayer {
 }
 
 protocol TimelinePlayerDelegate {
+  func timelinePlayer(timelinePlayer: TimelinePlayer, shouldBeginPlayingWithClip clip: Clip) -> Bool
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip)
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip)
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingLastClip lastClip: Clip)
