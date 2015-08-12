@@ -213,6 +213,25 @@ class ClipCollectionViewCell: UICollectionViewCell {
     hideOptionsView(!options, animated: animated)
   }
 
+  func setClipLiked(liked: Bool, animated: Bool) {
+    if liked && animated {
+      let originFrame = likeButton.frame
+      let heartImage = likeButton.imageForState(UIControlState.Selected)
+      let animatingImageView = UIImageView(image: heartImage)
+      animatingImageView.tintColor = likeButton.tintColor
+      animatingImageView.frame = originFrame
+      contentView.addSubview(animatingImageView)
+      UIView.animateWithDuration(1.2, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+        animatingImageView.frame = CGRect(x: originFrame.origin.x, y: originFrame.origin.y - 180, width: originFrame.size.width, height: originFrame.size.height)
+        animatingImageView.alpha = 0
+        animatingImageView.transform = CGAffineTransformMakeScale(1.5, 1.5)
+        }, completion: { (completed) -> Void in
+          animatingImageView.removeFromSuperview()
+      })
+    }
+    likeButton.selected = liked
+  }
+
   // MARK: - Private
 
   private func setupSubviews() {
@@ -323,25 +342,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
   }
 
-  private func setClipLiked(liked: Bool, animated: Bool) {
-    if liked && animated {
-      let originFrame = likeButton.frame
-      let heartImage = likeButton.imageForState(UIControlState.Selected)
-      let animatingImageView = UIImageView(image: heartImage)
-      animatingImageView.tintColor = likeButton.tintColor
-      animatingImageView.frame = originFrame
-      contentView.addSubview(animatingImageView)
-      UIView.animateWithDuration(1.2, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-        animatingImageView.frame = CGRect(x: originFrame.origin.x, y: originFrame.origin.y - 180, width: originFrame.size.width, height: originFrame.size.height)
-        animatingImageView.alpha = 0
-        animatingImageView.transform = CGAffineTransformMakeScale(1.5, 1.5)
-        }, completion: { (completed) -> Void in
-          animatingImageView.removeFromSuperview()
-      })
-    }
-    likeButton.selected = liked
-  }
-
   private func scaleClipThumbnail(down: Bool, animated: Bool) {
     if animated {
       UIView.animateWithDuration(0.4) {
@@ -436,8 +436,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
   }
 
   @objc private func likeButtonTapped() {
-    let liked = likeButton.selected
-    setClipLiked(!liked, animated: true)
     delegate?.userDidTapLikeButtonForCell(self)
   }
 

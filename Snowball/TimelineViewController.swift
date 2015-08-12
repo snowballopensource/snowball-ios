@@ -232,7 +232,6 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
 
   @objc private func userDidDoubleTapPlayerControlGestureRecognizer(recognizer: UITapGestureRecognizer) {
     if let clip = player.currentClip, cell = cellForClip(clip) {
-      // TODO: Make the like animation
       userDidTapLikeButtonForCell(cell)
     }
   }
@@ -349,12 +348,13 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
   func userDidTapLikeButtonForCell(cell: ClipCollectionViewCell) {
     let clip = clipForCell(cell)
     if let clip = clip, let clipID = clip.id {
-      if clip.liked {
-        API.request(Router.UnlikeClip(clipID: clipID))
-      } else {
-        API.request(Router.LikeClip(clipID: clipID))
-      }
       clip.liked = !clip.liked
+      cell.setClipLiked(clip.liked, animated: true)
+      if clip.liked {
+        API.request(Router.LikeClip(clipID: clipID))
+      } else {
+        API.request(Router.UnlikeClip(clipID: clipID))
+      }
     }
   }
 
