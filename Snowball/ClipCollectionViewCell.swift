@@ -154,6 +154,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     clipThumbnailImageView.image = nil
     userAvatarImageView.image = nil
+
+    contentView.layer.removeAllAnimations()
   }
 
   // MARK: - Internal
