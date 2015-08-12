@@ -33,7 +33,7 @@ struct API {
       let encodedAuthToken = encodedAuthTokenData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
       request.setValue("Basic \(encodedAuthToken)", forHTTPHeaderField: "Authorization")
 
-      self.tryUpload(request, retryCount: 3, completion: completion)
+      self.tryUpload(request, completion: completion)
     }
   }
 
@@ -51,17 +51,15 @@ struct API {
       let encodedAuthToken = encodedAuthTokenData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
       request.setValue("Basic \(encodedAuthToken)", forHTTPHeaderField: "Authorization")
 
-      self.tryUpload(request, retryCount: 3, completion: completion)    }
+      self.tryUpload(request, completion: completion)
+    }
   }
 
   // MARK: - Private
 
-  private static func tryUpload(request: NSURLRequest, retryCount: Int, completion: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> ()) {
+  private static func tryUpload(request: NSURLRequest, completion: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> ()) {
     let manager = AFURLSessionManager(sessionConfiguration: NSURLSessionConfiguration.defaultSessionConfiguration())
     let uploadTask = manager.uploadTaskWithStreamedRequest(request, progress: nil) { (response, responseObject, error) in
-      if error != nil && retryCount > 1 {
-        self.tryUpload(request, retryCount: retryCount - 1, completion: completion)
-      }
       completion(request, response as! NSHTTPURLResponse?, responseObject, error)
     }
     uploadTask.resume()
