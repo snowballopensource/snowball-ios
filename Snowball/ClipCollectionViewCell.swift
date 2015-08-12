@@ -495,6 +495,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     } else {
       setOptionsViewYConstraint(hidden: hidden)
       optionsView.layoutIfNeeded()
+      hideDarkDimOverlay(hidden, animated: animated)
     }
   }
 
