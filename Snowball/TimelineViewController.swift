@@ -31,6 +31,26 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     return collectionView
     }()
 
+  let playerControlSingleTapGestureRecognizer: UITapGestureRecognizer = {
+    let gestureRecognizer = UITapGestureRecognizer()
+    return gestureRecognizer
+    }()
+  let playerControlDoubleTapGestureRecognizer: UITapGestureRecognizer = {
+    let gestureRecognizer = UITapGestureRecognizer()
+    gestureRecognizer.numberOfTapsRequired = 2
+    return gestureRecognizer
+    }()
+  let playerControlSwipeLeftGestureRecognizer: UISwipeGestureRecognizer = {
+    let gestureRecognizer = UISwipeGestureRecognizer()
+    gestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
+    return gestureRecognizer
+    }()
+  let playerControlSwipeRightGestureRecognizer: UISwipeGestureRecognizer = {
+    let gestureRecognizer = UISwipeGestureRecognizer()
+    gestureRecognizer.direction = UISwipeGestureRecognizerDirection.Right
+    return gestureRecognizer
+    }()
+
   // MARK: - UIViewController
 
   override func viewDidLoad() {
@@ -47,6 +67,18 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
 
     collectionView.dataSource = self
     collectionView.delegate = self
+
+    playerControlSingleTapGestureRecognizer.addTarget(self, action: "userDidTapPlayerControlGestureRecognizer:")
+    playerView.addGestureRecognizer(playerControlSingleTapGestureRecognizer)
+
+    playerControlDoubleTapGestureRecognizer.addTarget(self, action: "userDidDoubleTapPlayerControlGestureRecognizer:")
+    playerView.addGestureRecognizer(playerControlDoubleTapGestureRecognizer)
+    playerControlSingleTapGestureRecognizer.requireGestureRecognizerToFail(playerControlDoubleTapGestureRecognizer)
+
+    playerControlSwipeLeftGestureRecognizer.addTarget(self, action: "userDidSwipePlayerControlGestureRecognizerLeft:")
+    view.addGestureRecognizer(playerControlSwipeLeftGestureRecognizer)
+    playerControlSwipeRightGestureRecognizer.addTarget(self, action: "userDidSwipePlayerControlGestureRecognizerRight:")
+    view.addGestureRecognizer(playerControlSwipeRightGestureRecognizer)
 
     refresh()
   }
@@ -69,6 +101,11 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
       collectionView.right == collectionView.superview!.right
       collectionView.bottom == collectionView.superview!.bottom
     }
+
+    playerView.addGestureRecognizer(playerControlSingleTapGestureRecognizer)
+    playerView.addGestureRecognizer(playerControlDoubleTapGestureRecognizer)
+    view.addGestureRecognizer(playerControlSwipeLeftGestureRecognizer)
+    view.addGestureRecognizer(playerControlSwipeRightGestureRecognizer)
   }
 
   // MARK: - Internal
@@ -181,6 +218,37 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
         let indexPath = collectionView.indexPathForCell(cell)!
         cell.setState(stateForCellAtIndexPath(indexPath), animated: true)
         timeline.bookmarkedClip = lastClip
+      }
+    }
+  }
+
+  // MARK: - Private
+
+  @objc private func userDidTapPlayerControlGestureRecognizer(recognizer: UITapGestureRecognizer) {
+    if player.playing {
+      player.stop()
+    }
+  }
+
+  @objc private func userDidDoubleTapPlayerControlGestureRecognizer(recognizer: UITapGestureRecognizer) {
+    if let clip = player.currentClip, cell = cellForClip(clip) {
+      // TODO: Make the like animation
+      userDidTapLikeButtonForCell(cell)
+    }
+  }
+
+  @objc private func userDidSwipePlayerControlGestureRecognizerLeft(recognizer: UISwipeGestureRecognizer) {
+    if player.playing {
+      if let currentClip = player.currentClip, let nextClip = timeline.clipAfterClip(currentClip) {
+        player.play(nextClip)
+      }
+    }
+  }
+
+  @objc private func userDidSwipePlayerControlGestureRecognizerRight(recognizer: UISwipeGestureRecognizer) {
+    if player.playing {
+      if let currentClip = player.currentClip, let previousClip = timeline.clipBeforeClip(currentClip) {
+        player.play(previousClip)
       }
     }
   }
