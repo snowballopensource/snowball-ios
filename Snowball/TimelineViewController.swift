@@ -147,6 +147,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip) {
     topView.setHidden(true, animated: true)
+    collectionView.scrollEnabled = false
     for cell in collectionView.visibleCells() {
       if let cell = cell as? ClipCollectionViewCell {
         if let initialClipCell = cellForClip(clip) {
@@ -171,6 +172,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingLastClip lastClip: Clip) {
     topView.setHidden(false, animated: true)
+    collectionView.scrollEnabled = true
     for cell in collectionView.visibleCells() {
       if let cell = cell as? ClipCollectionViewCell {
         let indexPath = collectionView.indexPathForCell(cell)!
