@@ -61,6 +61,14 @@ class AuthenticationViewController: UIViewController {
     }
   }
 
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+
+    if let firstCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as? TextFieldTableViewCell {
+      firstCell.textField.becomeFirstResponder()
+    }
+  }
+
   // MARK: - Internal
 
   func authenticationCompletedSuccessfully(user: User) {
