@@ -98,8 +98,7 @@ extension MainTimelineViewController: ClipCollectionViewCellDelegate {
 
   override func userDidTapAddButtonForCell(cell: ClipCollectionViewCell) {
     Analytics.track("Create Clip")
-    topView.setHidden(false, animated: true)
-    collectionView.scrollEnabled = true
+    setInterfaceFocused(false)
     cameraViewController.endPreview()
     uploadClipForCell(cell)
   }
@@ -128,8 +127,7 @@ extension MainTimelineViewController: ClipCollectionViewCellDelegate {
 extension MainTimelineViewController: CameraViewControllerDelegate {
 
   func videoDidBeginRecording() {
-    topView.setHidden(true, animated: true)
-    collectionView.scrollEnabled = false
+    setInterfaceFocused(true)
   }
 
   func videoDidEndRecordingToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL) {
@@ -144,8 +142,7 @@ extension MainTimelineViewController: CameraViewControllerDelegate {
   }
 
   func videoPreviewDidCancel() {
-    topView.setHidden(false, animated: true)
-    collectionView.scrollEnabled = true
+    setInterfaceFocused(false)
     if let clip = timeline.pendingClips.last {
       timeline.deleteClip(clip)
     }

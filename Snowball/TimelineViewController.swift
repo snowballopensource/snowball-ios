@@ -112,6 +112,11 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     return nil
   }
 
+  func setInterfaceFocused(focused: Bool) {
+    topView.setHidden(focused, animated: true)
+    collectionView.scrollEnabled = !focused
+  }
+
   // This next part is the TimelineDelegate implementation. It's ugly because as of Swift 1.2 we are not allowed to
   // override certain functions/types in an extension. It's weird and I don't get it, but oh well.
   // When changing it back to an extension, don't forget to remove the <TimelineDelegate> from the
@@ -146,8 +151,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   // extension TimelineViewController: TimelinePlayerDelegate {
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip) {
-    topView.setHidden(true, animated: true)
-    collectionView.scrollEnabled = false
+    setInterfaceFocused(true)
     for cell in collectionView.visibleCells() {
       if let cell = cell as? ClipCollectionViewCell {
         if let initialClipCell = cellForClip(clip) {
@@ -171,8 +175,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingLastClip lastClip: Clip) {
-    topView.setHidden(false, animated: true)
-    collectionView.scrollEnabled = true
+    setInterfaceFocused(false)
     for cell in collectionView.visibleCells() {
       if let cell = cell as? ClipCollectionViewCell {
         let indexPath = collectionView.indexPathForCell(cell)!
