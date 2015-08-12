@@ -57,6 +57,19 @@ class ProfileTimelineViewController: TimelineViewController {
       }
     }
   }
+
+  // MARK: - TimelinePlayerDelegate
+  // See the comment in TimelineViewController for the TimelinePlayer delegate
+  // to see why this is here. It's such a confusing mess. Sorry future self!
+  override func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip) {
+    super.timelinePlayer(timelinePlayer, didBeginPlayingWithClip: clip)
+    userProfileDetailView.hidden = true
+  }
+
+  override func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingLastClip lastClip: Clip) {
+    super.timelinePlayer(timelinePlayer, didEndPlayingLastClip: lastClip)
+    userProfileDetailView.hidden = false
+  }
 }
 
 // MARK: - TimelineDelegate
