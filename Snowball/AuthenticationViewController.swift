@@ -70,6 +70,7 @@ class AuthenticationViewController: UIViewController {
   // MARK: - Private
 
   private func performAuthenticationRequest() {
+    resignFirstResponder()
     topBar.spinRightButton(true)
     API.request(authenticationRoute).responseJSON { (request, response, JSON, error) in
       if error != nil {
@@ -103,5 +104,25 @@ extension AuthenticationViewController: SnowballTopViewDelegate {
 
   func snowballTopViewRightButtonTapped() {
     performAuthenticationRequest()
+  }
+}
+
+// MARK: - UITextFieldDelegate
+extension AuthenticationViewController: UITextFieldDelegate {
+  func textFieldShouldReturn(textField: UITextField) -> Bool {
+    for cell in tableView.visibleCells() {
+      if let cell = cell as? TextFieldTableViewCell {
+        if textField.isDescendantOfView(cell.contentView) {
+          if let indexPath = tableView.indexPathForCell(cell) {
+            if let nextCell = tableView.cellForRowAtIndexPath(NSIndexPath(forItem: indexPath.row + 1, inSection: indexPath.section)) as? TextFieldTableViewCell {
+              nextCell.textField.becomeFirstResponder()
+            } else {
+              performAuthenticationRequest()
+            }
+          }
+        }
+      }
+    }
+    return false
   }
 }

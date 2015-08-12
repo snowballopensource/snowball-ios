@@ -75,6 +75,7 @@ extension SignInViewController: UITableViewDataSource {
     cell.textField.autocapitalizationType = UITextAutocapitalizationType.None
     cell.textField.keyboardType = UIKeyboardType.Default
     cell.textField.secureTextEntry = false
+    cell.textField.delegate = self
 
     let index = SignInTextFieldIndex(rawValue: indexPath.row)!
     switch(index) {
@@ -82,10 +83,12 @@ extension SignInViewController: UITableViewDataSource {
       cell.textField.setPlaceholder(NSLocalizedString("email", comment: ""), color: cell.textField.tintColor)
       cell.textField.text = User.currentUser?.email
       cell.textField.keyboardType = UIKeyboardType.EmailAddress
+      cell.textField.returnKeyType = UIReturnKeyType.Next
     case .Password:
       cell.textField.setPlaceholder(NSLocalizedString("password", comment: ""), color: cell.textField.tintColor)
       cell.textField.text = User.currentUser?.email
       cell.textField.secureTextEntry = true
+      cell.textField.returnKeyType = UIReturnKeyType.Done
     }
   }
 }
