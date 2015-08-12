@@ -99,6 +99,7 @@ extension MainTimelineViewController: ClipCollectionViewCellDelegate {
   override func userDidTapAddButtonForCell(cell: ClipCollectionViewCell) {
     Analytics.track("Create Clip")
     topView.setHidden(false, animated: true)
+    collectionView.scrollEnabled = true
     cameraViewController.endPreview()
     uploadClipForCell(cell)
   }
@@ -128,6 +129,7 @@ extension MainTimelineViewController: CameraViewControllerDelegate {
 
   func videoDidBeginRecording() {
     topView.setHidden(true, animated: true)
+    collectionView.scrollEnabled = false
   }
 
   func videoDidEndRecordingToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL) {
@@ -143,6 +145,7 @@ extension MainTimelineViewController: CameraViewControllerDelegate {
 
   func videoPreviewDidCancel() {
     topView.setHidden(false, animated: true)
+    collectionView.scrollEnabled = true
     if let clip = timeline.pendingClips.last {
       timeline.deleteClip(clip)
     }
