@@ -208,6 +208,12 @@ extension TimelineViewController: UICollectionViewDelegate {
     let clip = timeline.clips[indexPath.row]
     if clip.state == ClipState.Default {
       if player.playing {
+        if let playingClip = player.currentClip {
+          if playingClip != clip {
+            player.play(clip)
+            return
+          }
+        }
         player.stop()
       } else {
         player.play(clip)
