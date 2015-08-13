@@ -40,7 +40,7 @@ class UserAvatarImageView: UIImageView {
     image = UIImage(named: "face")
     if let imageURLString = user.avatarURL {
       if let imageURL = NSURL(string: imageURLString) {
-        hnk_setImageFromURL(imageURL, format: Format<UIImage>(name: "original"))
+        setImageFromURL(imageURL)
       }
     }
   }

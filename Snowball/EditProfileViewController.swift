@@ -8,6 +8,7 @@
 
 import Cartography
 import Foundation
+import SwiftSpinner
 
 class EditProfileViewController: UIViewController {
 
@@ -226,6 +227,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
   // MARK: - UIImagePickerControllerDelegate
 
   func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+    SwiftSpinner.show("Uploading...", animated: true)
     picker.dismissViewControllerAnimated(true) {
       dispatch_async(dispatch_get_main_queue()) {
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
@@ -242,12 +244,18 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         let processedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
-        // TODO: show spinner while uploading, show final image when done
-        self.avatarImageView.image = processedImage
         API.changeAvatarToImage(processedImage) { (request, response, JSON, error) in
+          SwiftSpinner.hide()
           if let error = error {
             error.print("change avatar")
             displayAPIErrorToUser(JSON)
+          } else {
+            let imageURL = editingInfo[UIImagePickerControllerReferenceURL] as? NSURL
+            if let imageURL = imageURL, let user = User.currentUser {
+              user.avatarURL = imageURL.absoluteString
+              user.managedObjectContext?.save(nil)
+              self.avatarImageView.configureForUser(user)
+            }
           }
         }
       }

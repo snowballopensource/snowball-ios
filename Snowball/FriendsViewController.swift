@@ -131,6 +131,10 @@ class FriendsViewController: UIViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
 
+    if let user = User.currentUser {
+      currentUserAvatarImageView.configureForUser(user)
+    }
+
     refresh()
   }
 
