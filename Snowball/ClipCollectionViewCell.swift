@@ -508,7 +508,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
     } else {
       setOptionsViewYConstraint(hidden: hidden)
       optionsView.layoutIfNeeded()
-      hideDarkDimOverlay(hidden, animated: animated)
     }
   }
 
@@ -526,14 +525,17 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   @objc private func showOptionsGestureRecognizerSwiped() {
     hideOptionsView(false, animated: true)
+    hideDarkDimOverlay(false, animated: true)
   }
 
   @objc private func showOptionsGestureRecognizerLongPressed() {
     hideOptionsView(false, animated: true)
+    hideDarkDimOverlay(false, animated: true)
   }
 
   @objc private func hideOptionsGestureRecognizerSwiped() {
     hideOptionsView(true, animated: true)
+    hideDarkDimOverlay(true, animated: true)
   }
 }
 
