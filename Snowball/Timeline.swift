@@ -24,7 +24,13 @@ class Timeline {
   var bookmarkedClip: Clip? {
     get {
       if let bookmarkDate = NSUserDefaults.standardUserDefaults().objectForKey(kClipBookmarkDateKey) as? NSDate {
-        for clip in clips {
+        let filteredClips = clips.filter() { (clip) -> Bool in
+          if clip.state == ClipState.Default {
+            return true
+          }
+          return false
+        }
+        for clip in filteredClips {
           if let clipCreatedAt = clip.createdAt {
             if bookmarkDate.compare(clipCreatedAt) == NSComparisonResult.OrderedAscending {
               return clip
@@ -33,13 +39,15 @@ class Timeline {
         }
         // If we finish looping through all the clips and nothing has returned yet, then
         // run this logic to check for deleted bookmarked clip OR user has not returned
-        if let firstClip = clips.first, let firstClipCreatedAt = firstClip.createdAt, let lastClip = clips.last, let lastClipCreatedAt = lastClip.createdAt {
+        if let firstClip = filteredClips.first, let firstClipCreatedAt = firstClip.createdAt, let lastClip = filteredClips.last, let lastClipCreatedAt = lastClip.createdAt {
           // If bookmark date is EARLIER than the first clip, user has not returned in some time
           if bookmarkDate.compare(firstClipCreatedAt) == NSComparisonResult.OrderedAscending {
             return firstClip
           }
-          // Bookmarked clip was probably deleted, return last clip
-          return lastClip
+          // Bookmarked clip was probably deleted, return last clip that is not uploading, etc.
+          if let lastFilteredClip = filteredClips.last {
+            return lastFilteredClip
+          }
         }
       }
       return clips.first
