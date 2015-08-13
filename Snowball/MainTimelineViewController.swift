@@ -126,6 +126,9 @@ extension MainTimelineViewController: ClipCollectionViewCellDelegate {
           clip.state = ClipState.UploadFailed
         } else {
           clip.state = ClipState.Default
+          if let JSON: AnyObject = JSON {
+            clip.assignAttributes(JSON)
+          }
         }
         self.timeline.markClipAsUpdated(clip)
       }
