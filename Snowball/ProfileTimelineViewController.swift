@@ -131,7 +131,7 @@ class UserProfileDetailView: UIView {
     backgroundImageView.backgroundColor = userColor
     if let imageURLString = user.avatarURL {
       if let imageURL = NSURL(string: imageURLString) {
-        backgroundImageView.hnk_setImageFromURL(imageURL, format: Format<UIImage>(name: "original"))
+        backgroundImageView.setImageFromURL(imageURL)
       }
     }
 
