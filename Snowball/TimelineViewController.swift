@@ -173,7 +173,15 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
 
   func timeline(timeline: Timeline, didUpdateClip clip: Clip, atIndex index: Int) {
     let indexPath = NSIndexPath(forItem: index, inSection: 0)
-    collectionView.reloadItemsAtIndexPaths([indexPath])
+    let visibleIndexPaths = collectionView.indexPathsForVisibleItems()
+    let _visibleIndexPaths = visibleIndexPaths as NSArray
+    if _visibleIndexPaths.containsObject(indexPath) {
+      for cell in collectionView.visibleCells() {
+        if let cell = cell as? ClipCollectionViewCell, cellIndexPath = collectionView.indexPathForCell(cell) {
+          cell.setState(stateForCellAtIndexPath(cellIndexPath), animated: true)
+        }
+      }
+    }
   }
 
   func timeline(timeline: Timeline, didDeleteClip clip: Clip, atIndex index: Int) {
