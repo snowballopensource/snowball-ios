@@ -49,6 +49,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
   private var userAvatarImageViewYConstraint = ConstraintGroup()
   private var userAvatarShouldContinueBouncing = false
   private var userAvatarBounceInProgress = false
+  private var userAvatarSetToTopOfBounce = true
   private let userButton = UIButton()
 
   private let usernameLabel: UILabel = {
@@ -154,6 +155,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     clipThumbnailImageView.image = nil
     userAvatarImageView.image = nil
+
+    setUserAvatarPosition(topOfBounce: false, animated: false)
 
     contentView.layer.removeAllAnimations()
   }
@@ -454,7 +457,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
     if bounce && !userAvatarBounceInProgress {
       userAvatarBounceInProgress = true
       userAvatarShouldContinueBouncing = true
+      spinUserAvatarAnimated(true)
       setUserAvatarPosition(topOfBounce: true, animated: true) {
+        self.spinUserAvatarAnimated(true)
         self.setUserAvatarPosition(topOfBounce: false, animated: true) {
           self.userAvatarBounceInProgress = false
           self.setUserAvatarBouncing(self.userAvatarShouldContinueBouncing)
@@ -471,12 +476,21 @@ class ClipCollectionViewCell: UICollectionViewCell {
       }, completion: { (completed) -> Void in
         if let animationCompletion = animationCompletion { animationCompletion() }
       })
-      UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
-        self.userAvatarImageView.transform = CGAffineTransformRotate(self.userAvatarImageView.transform, CGFloat(M_PI))
-      }, completion: nil)
     } else {
+      if topOfBounce == userAvatarSetToTopOfBounce { return }
       setUserAvatarImageViewYConstraint(topOfBounce: topOfBounce)
+      userAvatarSetToTopOfBounce = topOfBounce
       contentView.layoutIfNeeded()
+    }
+  }
+
+  private func spinUserAvatarAnimated(animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+        self.spinUserAvatarAnimated(false)
+        }, completion: nil)
+    } else {
+      userAvatarImageView.transform = CGAffineTransformRotate(self.userAvatarImageView.transform, CGFloat(M_PI))
     }
   }
 
