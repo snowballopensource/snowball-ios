@@ -343,9 +343,11 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
   }
 
   func userDidTapUserButtonForCell(cell: ClipCollectionViewCell) {
-    let clip = clipForCell(cell)
-    if let user = clip?.user {
-      navigationController?.pushViewController(ProfileTimelineViewController(user: user), animated: true)
+    if !player.playing {
+      let clip = clipForCell(cell)
+      if let user = clip?.user {
+        navigationController?.pushViewController(ProfileTimelineViewController(user: user), animated: true)
+      }
     }
   }
 
