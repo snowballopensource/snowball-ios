@@ -107,6 +107,12 @@ extension MainTimelineViewController: ClipCollectionViewCellDelegate {
     uploadClipForCell(cell)
   }
 
+  override func userDidTapUserButtonForCell(cell: ClipCollectionViewCell) {
+    if cameraViewController.state == CameraViewControllerState.Default {
+      super.userDidTapUserButtonForCell(cell)
+    }
+  }
+
   override func userDidTapUploadRetryButtonForCell(cell: ClipCollectionViewCell) {
     uploadClipForCell(cell)
   }
