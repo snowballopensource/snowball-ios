@@ -41,10 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return true
   }
 
-  func applicationDidBecomeActive(application: UIApplication) {
-    Analytics.track("Session Start")
-  }
-
   func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
     PushManager.registrationSucceeded(deviceToken: deviceToken)
   }

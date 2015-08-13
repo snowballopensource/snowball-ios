@@ -6,6 +6,7 @@ use_frameworks!
 
 pod 'AFNetworking'
 pod 'Alamofire'
+pod 'Amplitude-iOS'
 pod 'Cartography'
 pod 'HanekeSwift'
 pod 'Mixpanel'

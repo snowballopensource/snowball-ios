@@ -21,6 +21,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Alamofire (1.3.0)
+  - Amplitude-iOS (2.5.1)
   - Bolts/Tasks (1.2.0)
   - Cartography (0.5.0)
   - HanekeSwift (0.9.1)
@@ -36,6 +37,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - Alamofire
+  - Amplitude-iOS
   - Cartography
   - HanekeSwift
   - Mixpanel
@@ -47,6 +49,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   Alamofire: 220403a8d5840e0b4c946a6fbaf209dbca124282
+  Amplitude-iOS: 1108012e40096d339d768cb8a6d79c774f47da2c
   Bolts: d176cb1e0012175589e389a9db49b85e27787576
   Cartography: 774e5cc446f5a6bca5d4345c5aa6af9a1fe74dc6
   HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb

@@ -355,8 +355,10 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
       clip.liked = !clip.liked
       cell.setClipLiked(clip.liked, animated: true)
       if clip.liked {
+        Analytics.track("Like Clip")
         API.request(Router.LikeClip(clipID: clipID))
       } else {
+        Analytics.track("Unlike Clip")
         API.request(Router.UnlikeClip(clipID: clipID))
       }
     }

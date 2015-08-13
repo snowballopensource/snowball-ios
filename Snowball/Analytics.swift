@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Snowball, Inc. All rights reserved.
 //
 
+import Amplitude_iOS
 import Foundation
 import Mixpanel
 
@@ -20,11 +21,19 @@ class Analytics {
     return Singleton.sharedAnalytics
   }
 
-  let mixpanel = Mixpanel.sharedInstanceWithToken("38692cce5751bea6cc1628c3b66a915c")
+  var amplitude: Amplitude {
+    return Amplitude.instance()
+  }
+
+  var mixpanel: Mixpanel {
+    return Mixpanel.sharedInstance()
+  }
 
   // MARK: - Initializers
 
   init() {
+    Amplitude.instance().initializeApiKey("38e169294d46839c1ce50f44923d6046")
+    Mixpanel.sharedInstanceWithToken("38692cce5751bea6cc1628c3b66a915c")
     if let userID = User.currentUser?.id {
       identify(userID)
     }
@@ -52,8 +61,10 @@ class Analytics {
     } else {
       println("Tracking event: \(eventName)")
       if let properties = properties {
+        amplitude.logEvent(eventName, withEventProperties: properties)
         mixpanel.track(eventName, properties: properties)
       } else {
+        amplitude.logEvent(eventName)
         mixpanel.track(eventName)
       }
     }
@@ -70,6 +81,7 @@ class Analytics {
     if !isStaging() {
       mixpanel.identify(userID)
       mixpanel.registerSuperProperties(["User ID": userID])
+      amplitude.setUserId(userID)
     }
   }
 }
