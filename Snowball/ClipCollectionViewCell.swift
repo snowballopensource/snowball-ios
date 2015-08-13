@@ -454,26 +454,29 @@ class ClipCollectionViewCell: UICollectionViewCell {
     if bounce && !userAvatarBounceInProgress {
       userAvatarBounceInProgress = true
       userAvatarShouldContinueBouncing = true
-      setUserAvatarImageViewYConstraint(topOfBounce: true)
-      UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut,
-        animations: { () -> Void in
-          self.contentView.layoutIfNeeded()
-        }) { (completed) -> Void in
-          self.setUserAvatarImageViewYConstraint(topOfBounce: false)
-          UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
-            self.contentView.layoutIfNeeded()
-            }) { (completed) -> Void in
-              self.userAvatarBounceInProgress = false
-              self.setUserAvatarBouncing(self.userAvatarShouldContinueBouncing)
-          }
+      setUserAvatarPosition(topOfBounce: true, animated: true) {
+        self.setUserAvatarPosition(topOfBounce: false, animated: true) {
+          self.userAvatarBounceInProgress = false
+          self.setUserAvatarBouncing(self.userAvatarShouldContinueBouncing)
+        }
       }
+    }
+  }
+
+  private func setUserAvatarPosition(#topOfBounce: Bool, animated: Bool, animationCompletion: (() -> Void)? = nil) {
+    if animated {
+      let animationOptions = topOfBounce ? UIViewAnimationOptions.CurveEaseOut : UIViewAnimationOptions.CurveEaseIn
+      UIView.animateWithDuration(0.5, delay: 0, options: animationOptions, animations: { () -> Void in
+        self.setUserAvatarPosition(topOfBounce: topOfBounce, animated: false)
+      }, completion: { (completed) -> Void in
+        if let animationCompletion = animationCompletion { animationCompletion() }
+      })
       UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
         self.userAvatarImageView.transform = CGAffineTransformRotate(self.userAvatarImageView.transform, CGFloat(M_PI))
-        }) { (completed) -> Void in
-          UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
-            self.userAvatarImageView.transform = CGAffineTransformRotate(self.userAvatarImageView.transform, CGFloat(M_PI))
-            }, completion: nil)
-      }
+      }, completion: nil)
+    } else {
+      setUserAvatarImageViewYConstraint(topOfBounce: topOfBounce)
+      contentView.layoutIfNeeded()
     }
   }
 
