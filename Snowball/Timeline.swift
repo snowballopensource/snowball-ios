@@ -23,42 +23,32 @@ class Timeline {
   private let kClipBookmarkDateKey = "ClipBookmarkDate"
   var bookmarkedClip: Clip? {
     get {
-      let clipBookmarkDate = NSUserDefaults.standardUserDefaults().objectForKey(kClipBookmarkDateKey) as? NSDate
-      if let bookmarkDate = clipBookmarkDate {
+      if let bookmarkDate = NSUserDefaults.standardUserDefaults().objectForKey(kClipBookmarkDateKey) as? NSDate {
         for clip in clips {
           if let clipCreatedAt = clip.createdAt {
             if bookmarkDate.compare(clipCreatedAt) == NSComparisonResult.OrderedAscending {
               return clip
             }
           }
-          // If we get to the last clip and nothing has returned yet, then run this logic to check for deleted bookmarked clip OR user has not returned
-          if let lastClip = clips.last {
-            if let lastClipCreatedAt = lastClip.createdAt {
-              if clip == lastClip {
-                // If bookmark date is EARLIER than the first clip, user has not returned in some time
-                if let firstClip = clips.first {
-                  if let firstClipCreatedAt = firstClip.createdAt {
-                    if bookmarkDate.compare(firstClipCreatedAt) == NSComparisonResult.OrderedAscending {
-                      return firstClip
-                    }
-                  }
-                }
-                // Bookmarked clip was probably deleted, return last clip
-                return lastClip
-              }
-            }
+        }
+        // If we finish looping through all the clips and nothing has returned yet, then
+        // run this logic to check for deleted bookmarked clip OR user has not returned
+        if let firstClip = clips.first, let firstClipCreatedAt = firstClip.createdAt, let lastClip = clips.last, let lastClipCreatedAt = lastClip.createdAt {
+          // If bookmark date is EARLIER than the first clip, user has not returned in some time
+          if bookmarkDate.compare(firstClipCreatedAt) == NSComparisonResult.OrderedAscending {
+            return firstClip
           }
+          // Bookmarked clip was probably deleted, return last clip
+          return lastClip
         }
       }
       return clips.first
     }
     set {
-      if let newClipBookmarkDate = newValue?.createdAt {
-        if let oldClipBookmarkDate = self.bookmarkedClip?.createdAt {
-          if oldClipBookmarkDate.compare(newClipBookmarkDate) == NSComparisonResult.OrderedAscending {
-            NSUserDefaults.standardUserDefaults().setObject(newClipBookmarkDate, forKey: kClipBookmarkDateKey)
-            NSUserDefaults.standardUserDefaults().synchronize()
-          }
+      if let newClipBookmarkDate = newValue?.createdAt, let oldClipBookmarkDate = self.bookmarkedClip?.createdAt {
+        if oldClipBookmarkDate.compare(newClipBookmarkDate) == NSComparisonResult.OrderedAscending {
+          NSUserDefaults.standardUserDefaults().setObject(newClipBookmarkDate, forKey: kClipBookmarkDateKey)
+          NSUserDefaults.standardUserDefaults().synchronize()
         }
       }
     }
