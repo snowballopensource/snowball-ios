@@ -41,6 +41,13 @@ extension NSManagedObject {
 
   // MARK: - Finders
 
+  public class func count(context: NSManagedObjectContext = CoreDataStack.defaultStack.mainQueueManagedObjectContext) -> Int {
+    let entityDescription = NSEntityDescription.entityForName(entityName, inManagedObjectContext: context)
+    let fetchRequest = NSFetchRequest(entityName: entityName)
+    fetchRequest.entity = entityDescription
+    return context.countForFetchRequest(fetchRequest, error: nil)
+  }
+
   public class func find(primaryKey: String, context: NSManagedObjectContext = CoreDataStack.defaultStack.mainQueueManagedObjectContext) -> NSManagedObject? {
     let predicate = NSPredicate(format: "%K == %@", self.primaryKey, primaryKey)
     return findAll(predicate: predicate, context: context).first

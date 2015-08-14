@@ -66,7 +66,10 @@ class Timeline {
 
   init() {
     let sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
-    clips = Clip.findAll(limit: 25, sortDescriptors: sortDescriptors) as! [Clip]
+    let size = 20
+    var offset = Clip.count() - size
+    if offset < 0 { offset = 0 }
+    clips = Clip.findAll(limit: size, offset: offset, sortDescriptors: sortDescriptors) as! [Clip]
   }
 
   // MARK: - Internal
