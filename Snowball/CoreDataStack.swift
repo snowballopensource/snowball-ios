@@ -54,6 +54,8 @@ public class CoreDataStack {
     persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: databaseURL, options: nil, error: &error)
     if error != nil {
       println("Failed to initialize the application's saved data. There was an error creating or loading the application's saved data. Error: \(error)")
+      NSFileManager.defaultManager().removeItemAtURL(databaseURL, error: nil)
+      println("The existing store has been deleted and a new store will be created on the next launch.")
       abort()
     }
 
