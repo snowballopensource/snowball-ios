@@ -62,6 +62,13 @@ class Timeline {
     }
   }
 
+  // MARK: - Initializers
+
+  init() {
+    let sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
+    clips = Clip.findAll(limit: 25, sortDescriptors: sortDescriptors) as! [Clip]
+  }
+
   // MARK: - Internal
 
   func clipAfterClip(clip: Clip) -> Clip? {
@@ -117,6 +124,7 @@ class Timeline {
       } else if let JSON = JSON as? [AnyObject] {
         // Handle clips that were captured before the timeline loads from server...
         let clips = Clip.objectsFromJSON(JSON) as! [Clip]
+        clips.first?.managedObjectContext?.save(nil)
         self.clips = clips + self.pendingClips
         self.delegate?.timelineClipsDidLoad()
         completion(error: nil)

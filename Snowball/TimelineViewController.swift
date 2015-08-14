@@ -80,6 +80,9 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     playerControlSwipeRightGestureRecognizer.addTarget(self, action: "userDidSwipePlayerControlGestureRecognizerRight:")
     view.addGestureRecognizer(playerControlSwipeRightGestureRecognizer)
 
+    // This is a hack to force scrolling to bookmark on cached clips
+    timelineClipsDidLoad()
+
     refresh()
   }
 
