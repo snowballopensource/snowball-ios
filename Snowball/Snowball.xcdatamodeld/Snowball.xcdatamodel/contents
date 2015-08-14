@@ -6,6 +6,7 @@
         <attribute name="liked" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="thumbnailURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoURL" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="clips" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="Snowball.User" syncable="YES">
         <attribute name="avatarURL" optional="YES" attributeType="String" syncable="YES"/>
@@ -16,9 +17,10 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phoneNumber" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="clips" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Clip" inverseName="user" inverseEntity="Clip" syncable="YES"/>
     </entity>
     <elements>
-        <element name="User" positionX="-36" positionY="9" width="128" height="163"/>
-        <element name="Clip" positionX="-36" positionY="72" width="128" height="120"/>
+        <element name="User" positionX="-36" positionY="9" width="128" height="180"/>
+        <element name="Clip" positionX="-36" positionY="72" width="128" height="135"/>
     </elements>
 </model>

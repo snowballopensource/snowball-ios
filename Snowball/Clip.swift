@@ -17,7 +17,7 @@ class Clip: RemoteObject {
   @NSManaged var thumbnailURL: String?
   @NSManaged var liked: NSNumber
   @NSManaged var createdAt: NSDate?
-  var user: User? // TODO: Represent this relationship in Core Data
+  @NSManaged var user: User?
   var state = ClipState.Default
 
   // MARK: - Internal

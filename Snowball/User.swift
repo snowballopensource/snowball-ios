@@ -21,6 +21,7 @@ class User: RemoteObject {
   @NSManaged var email: String?
   @NSManaged var phoneNumber: String?
   @NSManaged var color: AnyObject
+  @NSManaged var clips: NSSet
   var authToken: String?
 
   // MARK: Current User
