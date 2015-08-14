@@ -8,43 +8,29 @@
 
 import Foundation
 
-class Clip {
+class Clip: RemoteObject {
 
   // MARK: - Properties
 
-  var id: String?
-  var videoURL: NSURL?
-  var thumbnailURL: NSURL?
-  var liked = false
-  var createdAt: NSDate?
-  var user: User?
+  @NSManaged var id: String?
+  @NSManaged var videoURL: String?
+  @NSManaged var thumbnailURL: String?
+  @NSManaged var liked: NSNumber
+  @NSManaged var createdAt: NSDate?
+  var user: User? // TODO: Represent this relationship in Core Data
   var state = ClipState.Default
-
-  // MARK: - Initializers
-
-  init() {}
 
   // MARK: - Internal
 
-  class func importJSON(JSON: [AnyObject]) -> [Clip] {
-    var clips = [Clip]()
-    for object in JSON {
-      let clip = Clip()
-      clip.assignAttributes(object)
-      clips.append(clip)
-    }
-    return clips
-  }
-
-  func assignAttributes(attributes: AnyObject) {
+  override func assignAttributes(attributes: [String : AnyObject]) {
     if let id = attributes["id"] as? String {
       self.id = id
     }
     if let videoURL = attributes["video_url"] as? String {
-      self.videoURL = NSURL(string: videoURL)
+      self.videoURL = videoURL
     }
     if let thumbnailURL = attributes["thumbnail_url"] as? String {
-      self.thumbnailURL = NSURL(string: thumbnailURL)
+      self.thumbnailURL = thumbnailURL
     }
     if let liked = attributes["liked"] as? Bool {
       self.liked = liked

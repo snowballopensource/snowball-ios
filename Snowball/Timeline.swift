@@ -116,7 +116,8 @@ class Timeline {
         completion(error: error)
       } else if let JSON = JSON as? [AnyObject] {
         // Handle clips that were captured before the timeline loads from server...
-        self.clips = Clip.importJSON(JSON) + self.pendingClips
+        let clips = Clip.objectsFromJSON(JSON) as! [Clip]
+        self.clips = clips + self.pendingClips
         self.delegate?.timelineClipsDidLoad()
         completion(error: nil)
       }
@@ -129,7 +130,7 @@ class Timeline {
         if let error = error {
           completion(error: error)
         } else if let JSON = JSON as? [AnyObject] {
-          self.clips = Clip.importJSON(JSON)
+          self.clips = Clip.objectsFromJSON(JSON) as! [Clip]
           self.delegate?.timelineClipsDidLoad()
           completion(error: nil)
         }

@@ -364,9 +364,9 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
     let clip = clipForCell(cell)
     if let clip = clip, let clipID = clip.id, let user = clip.user, let currentUser = User.currentUser {
       if user != currentUser {
-        clip.liked = !clip.liked
-        cell.setClipLiked(clip.liked, animated: true)
-        if clip.liked {
+        clip.liked = !clip.liked.boolValue
+        cell.setClipLiked(clip.liked.boolValue, animated: true)
+        if clip.liked.boolValue {
           Analytics.track("Like Clip")
           API.request(Router.LikeClip(clipID: clipID))
         } else {

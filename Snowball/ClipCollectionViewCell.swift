@@ -166,7 +166,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
   func configureForClip(clip: Clip, state: ClipCollectionViewCellState) {
     let userColor = clip.user?.color as? UIColor ?? UIColor.SnowballColor.blueColor
 
-    if let thumbnailURL = clip.thumbnailURL {
+    if let thumbnailURLString = clip.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
       clipThumbnailImageView.setImageFromURL(thumbnailURL)
     }
 
@@ -180,7 +180,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     clipTimeLabel.text = clip.createdAt?.shortTimeSinceString()
 
-    setClipLiked(clip.liked, animated: false)
+    setClipLiked(clip.liked.boolValue, animated: false)
     likeButton.tintColor = userColor
     likeButton.hidden = false
     if clip.user == User.currentUser {

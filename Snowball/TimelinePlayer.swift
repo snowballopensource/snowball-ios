@@ -14,7 +14,8 @@ class ClipPlayerItem: AVPlayerItem {
   var clip: Clip!
 
   convenience init(clip: Clip) {
-    self.init(URL: clip.videoURL)
+    // TODO: make this optional
+    self.init(URL: NSURL(string: clip.videoURL!)!)
     self.clip = clip
   }
 }

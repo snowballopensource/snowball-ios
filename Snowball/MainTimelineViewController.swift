@@ -126,7 +126,7 @@ extension MainTimelineViewController: ClipCollectionViewCellDelegate {
           clip.state = ClipState.UploadFailed
         } else {
           clip.state = ClipState.Default
-          if let JSON: AnyObject = JSON {
+          if let JSON = JSON as? [String: AnyObject] {
             clip.assignAttributes(JSON)
           }
         }
@@ -146,8 +146,8 @@ extension MainTimelineViewController: CameraViewControllerDelegate {
   func videoDidEndRecordingToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL) {
     let clip = Clip()
     clip.state = ClipState.PendingUpload
-    clip.videoURL = videoURL
-    clip.thumbnailURL = thumbnailURL
+    clip.videoURL = videoURL.absoluteString
+    clip.thumbnailURL = videoURL.absoluteString
     clip.user = User.currentUser
     clip.createdAt = NSDate()
     timeline.appendClip(clip)

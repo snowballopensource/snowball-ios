@@ -25,8 +25,8 @@ struct API {
         URLString: requestURL.absoluteString!,
         parameters: nil,
         constructingBodyWithBlock: { (formData: AFMultipartFormData!) in
-          formData.appendPartWithFileURL(clip.videoURL, name: "video", error: nil)
-          formData.appendPartWithFileURL(clip.thumbnailURL, name: "thumbnail", error: nil)
+          formData.appendPartWithFileURL(NSURL(string: clip.videoURL!)!, name: "video", error: nil)
+          formData.appendPartWithFileURL(NSURL(string: clip.thumbnailURL!)!, name: "thumbnail", error: nil)
           return
         }, error: nil)
       let encodedAuthTokenData = "\(APICredential.authToken!):".dataUsingEncoding(NSUTF8StringEncoding)!

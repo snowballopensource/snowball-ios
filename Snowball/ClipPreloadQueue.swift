@@ -34,7 +34,7 @@ class ClipPreloadQueue: NSOperationQueue {
     for clip in clips {
       let videoOperation = NSBlockOperation()
       videoOperation.addExecutionBlock {
-        if let videoURL = clip.videoURL {
+        if let videoURLString = clip.videoURL, videoURL = NSURL(string: videoURLString) {
           let (data, cacheURL) = Cache.sharedCache.fetchDataAtURL(videoURL)
           if let data = data {
             if let cacheURL = cacheURL {
