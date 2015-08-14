@@ -26,10 +26,11 @@ extension UIImageView {
         })
       }
     } else {
-      let imageData = NSData(contentsOfURL: url)!
-      let image = UIImage(data: imageData)
-      if let image = image {
-        hnk_setImage(image, animated: false, success: nil)
+      if let imageData = NSData(contentsOfURL: url) {
+        let image = UIImage(data: imageData)
+        if let image = image {
+          hnk_setImage(image, animated: false, success: nil)
+        }
       }
     }
   }
