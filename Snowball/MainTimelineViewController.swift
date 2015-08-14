@@ -144,10 +144,10 @@ extension MainTimelineViewController: CameraViewControllerDelegate {
   }
 
   func videoDidEndRecordingToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL) {
-    let clip = Clip()
+    let clip = Clip.newObject() as! Clip
     clip.state = ClipState.PendingUpload
     clip.videoURL = videoURL.absoluteString
-    clip.thumbnailURL = videoURL.absoluteString
+    clip.thumbnailURL = thumbnailURL.absoluteString
     clip.user = User.currentUser
     clip.createdAt = NSDate()
     timeline.appendClip(clip)
