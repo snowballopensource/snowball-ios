@@ -169,24 +169,17 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   func timeline(timeline: Timeline, didInsertClip clip: Clip, atIndex index: Int) {
     let indexPath = NSIndexPath(forItem: index, inSection: 0)
     collectionView.insertItemsAtIndexPaths([indexPath])
+    resetStateOnVisibleCells()
   }
 
   func timeline(timeline: Timeline, didUpdateClip clip: Clip, atIndex index: Int) {
-    let indexPath = NSIndexPath(forItem: index, inSection: 0)
-    let visibleIndexPaths = collectionView.indexPathsForVisibleItems()
-    let _visibleIndexPaths = visibleIndexPaths as NSArray
-    if _visibleIndexPaths.containsObject(indexPath) {
-      for cell in collectionView.visibleCells() {
-        if let cell = cell as? ClipCollectionViewCell, cellIndexPath = collectionView.indexPathForCell(cell) {
-          cell.setState(stateForCellAtIndexPath(cellIndexPath), animated: true)
-        }
-      }
-    }
+    resetStateOnVisibleCells()
   }
 
   func timeline(timeline: Timeline, didDeleteClip clip: Clip, atIndex index: Int) {
     let indexPath = NSIndexPath(forItem: index, inSection: 0)
     collectionView.deleteItemsAtIndexPaths([indexPath])
+    resetStateOnVisibleCells()
   }
 
   // This next part is the TimelinePlayerDelegate implementation. For details as to why it's here,
@@ -260,6 +253,14 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     if player.playing {
       if let currentClip = player.currentClip, let previousClip = timeline.clipBeforeClip(currentClip) {
         player.play(previousClip)
+      }
+    }
+  }
+
+  private func resetStateOnVisibleCells() {
+    for cell in collectionView.visibleCells() {
+      if let cell = cell as? ClipCollectionViewCell, cellIndexPath = collectionView.indexPathForCell(cell) {
+        cell.setState(stateForCellAtIndexPath(cellIndexPath), animated: true)
       }
     }
   }
