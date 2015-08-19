@@ -25,18 +25,24 @@ class ClipPreloader: NSOperationQueue {
 
   // MARK: - Internal
 
-  class func load(clip: Clip, completion: (cacheURL: NSURL?, error: NSError?) -> Void) {
+  class func load(clip: Clip, completion: ((cacheURL: NSURL?, error: NSError?) -> Void)?) {
     sharedPreloader.addOperationWithBlock { () -> Void in
       if let videoURLString = clip.videoURL, videoURL = NSURL(string: videoURLString) {
         let (data, cacheURL) = Cache.sharedCache.fetchDataAtURL(videoURL)
         if let data = data, cacheURL = cacheURL {
           dispatch_async(dispatch_get_main_queue()) {
-            completion(cacheURL: cacheURL, error: nil)
+            completion?(cacheURL: cacheURL, error: nil)
           }
           return
         }
       }
-      completion(cacheURL: nil, error: NSError())
+      completion?(cacheURL: nil, error: NSError())
+    }
+  }
+
+  class func preloadTimeline(timeline: Timeline) {
+    for clip in timeline.clips {
+      load(clip, completion: nil)
     }
   }
 }

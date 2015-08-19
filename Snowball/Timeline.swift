@@ -10,7 +10,11 @@ import Foundation
 
 class Timeline {
   var delegate: TimelineDelegate?
-  var clips = [Clip]()
+  var clips = [Clip]() {
+    didSet {
+      ClipPreloader.preloadTimeline(self)
+    }
+  }
   var pendingClips: [Clip] {
     var pendingClips = self.clips.filter { (clip) -> Bool in
       if clip.state == ClipState.PendingUpload || clip.state == ClipState.Uploading {
