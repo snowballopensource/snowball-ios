@@ -40,9 +40,20 @@ class ClipPreloader: NSOperationQueue {
     }
   }
 
-  class func preloadTimeline(timeline: Timeline) {
-    for clip in timeline.clips {
-      load(clip, completion: nil)
+  class func preloadTimeline(timeline: Timeline, withFirstClip clip: Clip?) {
+    if let clip = clip {
+      var offset = timeline.indexOfClip(clip)
+      if let offset = offset {
+        let clipsCount = timeline.clips.count
+        for var i = 0; i < clipsCount; i++ {
+          let offsetIndex = (i + offset) % clipsCount
+          load(timeline.clips[offsetIndex], completion: nil)
+        }
+      }
+    } else if let firstClip = timeline.clips.first {
+      for clip in timeline.clips {
+        load(clip, completion: nil)
+      }
     }
   }
 }

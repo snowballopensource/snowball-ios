@@ -12,7 +12,7 @@ class Timeline {
   var delegate: TimelineDelegate?
   var clips = [Clip]() {
     didSet {
-      ClipPreloader.preloadTimeline(self)
+      ClipPreloader.preloadTimeline(self, withFirstClip: bookmarkedClip)
     }
   }
   var pendingClips: [Clip] {
