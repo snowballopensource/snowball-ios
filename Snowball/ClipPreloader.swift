@@ -8,6 +8,16 @@
 
 import Foundation
 
+/*
+  The goal of this class is to preload clips for playback by reshuffling preload operations.
+  This was not achieved the correct way.
+  Goal: [0, 1, 2, 3, 4, 5], press play on 3, loads 3, 4, 5, 0, 1, 2
+  This happens, but if you stop the clip from playing and then press play on 0,
+  the operation queue will look like 0, 3, 4, 5, 1, 2, 1, 2, 3, 4, 5
+  since the operations are not cancelled. Cancelling would not work with the current API laid
+  out below, but could possibly be done better with a minor refactor of this class.
+*/
+
 class ClipPreloader: NSOperationQueue {
 
   // MARK: - Properties
