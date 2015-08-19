@@ -38,6 +38,11 @@ class TimelinePlayer: AVPlayer {
             // TODO: Handle error
           }
         }
+        if oldValue == nil {
+          if let nextClip = timeline?.clipAfterClip(currentClip!) {
+            ClipPreloader.preloadTimeline(timeline!, withFirstClip: nextClip)
+          }
+        }
       }
       if oldValue == nil && currentClip == nil { return }
       if oldValue == nil && currentClip != nil {

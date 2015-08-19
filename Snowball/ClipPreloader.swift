@@ -26,7 +26,32 @@ class ClipPreloader: NSOperationQueue {
   // MARK: - Internal
 
   class func load(clip: Clip, completion: ((cacheURL: NSURL?, error: NSError?) -> Void)?) {
-    sharedPreloader.addOperationWithBlock { () -> Void in
+    load(clip, priority: NSOperationQueuePriority.VeryHigh, completion: completion)
+  }
+
+  class func preloadTimeline(timeline: Timeline, withFirstClip clip: Clip?) {
+    if let clip = clip {
+      var offset = timeline.indexOfClip(clip)
+      if let offset = offset {
+        let clipsCount = timeline.clips.count
+        for var i = 0; i < clipsCount; i++ {
+          let offsetIndex = (i + offset) % clipsCount
+          load(timeline.clips[offsetIndex], priority: NSOperationQueuePriority.Normal, completion: nil)
+        }
+      }
+    } else if let firstClip = timeline.clips.first {
+      for clip in timeline.clips {
+        load(clip, priority: NSOperationQueuePriority.Normal, completion: nil)
+      }
+    }
+  }
+
+  // MARK: - Private
+
+  private class func load(clip: Clip, priority: NSOperationQueuePriority, completion: ((cacheURL: NSURL?, error: NSError?) -> Void)?) {
+    let operation = NSBlockOperation()
+    operation.queuePriority = priority
+    operation.addExecutionBlock {
       if let videoURLString = clip.videoURL, videoURL = NSURL(string: videoURLString) {
         let (data, cacheURL) = Cache.sharedCache.fetchDataAtURL(videoURL)
         if let data = data, cacheURL = cacheURL {
@@ -38,22 +63,6 @@ class ClipPreloader: NSOperationQueue {
       }
       completion?(cacheURL: nil, error: NSError())
     }
-  }
-
-  class func preloadTimeline(timeline: Timeline, withFirstClip clip: Clip?) {
-    if let clip = clip {
-      var offset = timeline.indexOfClip(clip)
-      if let offset = offset {
-        let clipsCount = timeline.clips.count
-        for var i = 0; i < clipsCount; i++ {
-          let offsetIndex = (i + offset) % clipsCount
-          load(timeline.clips[offsetIndex], completion: nil)
-        }
-      }
-    } else if let firstClip = timeline.clips.first {
-      for clip in timeline.clips {
-        load(clip, completion: nil)
-      }
-    }
+    sharedPreloader.addOperation(operation)
   }
 }
