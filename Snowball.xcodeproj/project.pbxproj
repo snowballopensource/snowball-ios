@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		590C6EB6ECEE12594A815ED5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC32A4062714B26F6F63153 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		BA03571A1B8502CA00AC5487 /* ClipPreloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0357191B8502CA00AC5487 /* ClipPreloader.swift */; };
 		BA137C7E1A7199AA001F8FCF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA137C7C1A7199AA001F8FCF /* Crashlytics.framework */; };
 		BA137C7F1A7199AA001F8FCF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA137C7D1A7199AA001F8FCF /* Fabric.framework */; };
 		BA1835511AA4FC5500D6A0BE /* OLDClipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1835501AA4FC5500D6A0BE /* OLDClipsViewController.swift */; };
@@ -117,6 +118,7 @@
 		8A6E3769866E85F9B3BF4ACB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		90DFEDDD19AA212445892AD5 /* Pods-SnowballTests.debug-staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnowballTests.debug-staging.xcconfig"; path = "Pods/Target Support Files/Pods-SnowballTests/Pods-SnowballTests.debug-staging.xcconfig"; sourceTree = "<group>"; };
 		9F54AD9E25FBB15DB5289F67 /* Pods_SnowballTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnowballTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA0357191B8502CA00AC5487 /* ClipPreloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPreloader.swift; sourceTree = "<group>"; };
 		BA137C7C1A7199AA001F8FCF /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		BA137C7D1A7199AA001F8FCF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		BA1835501AA4FC5500D6A0BE /* OLDClipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLDClipsViewController.swift; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 				BA38C15D1A30228700A2F2AE /* AppDelegate.swift */,
 				BAA637591B180181000F3359 /* PushManager.swift */,
 				BAAC6C191B6ACBB100F400FB /* TimelinePlayer.swift */,
+				BA0357191B8502CA00AC5487 /* ClipPreloader.swift */,
 				BA2460E11B6834C0003E3FB5 /* OLD */,
 				BA6385DB1A65A90000B002D9 /* Authentication */,
 				BAE702471A96BF030040DA6F /* Onboarding */,
@@ -716,6 +719,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA03571A1B8502CA00AC5487 /* ClipPreloader.swift in Sources */,
 				BAF3BC961A76E02A00AFD3E5 /* MoreNavigationController.swift in Sources */,
 				BA32C7951A3287BE0052F4CA /* UserAvatarImageView.swift in Sources */,
 				BAA966BD1A87FEEC0032752F /* FindFriendsViewController.swift in Sources */,

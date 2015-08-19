@@ -13,9 +13,8 @@ import UIKit
 class ClipPlayerItem: AVPlayerItem {
   var clip: Clip!
 
-  convenience init(clip: Clip) {
-    // TODO: make this optional
-    self.init(URL: NSURL(string: clip.videoURL!)!)
+  convenience init(url: NSURL, clip: Clip) {
+    self.init(URL: url)
     self.clip = clip
   }
 }
@@ -29,10 +28,16 @@ class TimelinePlayer: AVPlayer {
         pause()
         replaceCurrentItemWithPlayerItem(nil)
       } else {
-        let playerItem = ClipPlayerItem(clip: currentClip!)
-        registerPlayerItemForNotifications(playerItem)
-        replaceCurrentItemWithPlayerItem(playerItem)
-        play()
+        ClipPreloader.load(currentClip!) { (cacheURL, error) -> Void in
+          if let url = cacheURL {
+            let playerItem = ClipPlayerItem(url: url, clip: self.currentClip!)
+            self.registerPlayerItemForNotifications(playerItem)
+            self.replaceCurrentItemWithPlayerItem(playerItem)
+            self.play()
+          } else {
+            // TODO: Handle error
+          }
+        }
       }
       if oldValue == nil && currentClip == nil { return }
       if oldValue == nil && currentClip != nil {
