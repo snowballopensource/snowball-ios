@@ -49,13 +49,14 @@ class Clip: RemoteObject {
 extension Clip: Equatable {}
 
 func ==(lhs: Clip, rhs: Clip) -> Bool {
-  let clipIDsAreNotNil = lhs.id != nil && rhs.id != nil
-  if clipIDsAreNotNil && lhs.id == rhs.id {
+  let aClipIdIsNil = lhs.id == nil || rhs.id == nil
+  if !aClipIdIsNil && lhs.id == rhs.id {
     return true
-  }
-  if let lhsCreatedAt = lhs.createdAt, rhsCreatedAt = rhs.createdAt {
-    let clipsCreatedAtSame = lhsCreatedAt.compare(rhsCreatedAt) == NSComparisonResult.OrderedSame
-    return clipsCreatedAtSame
+  } else if aClipIdIsNil {
+    if let lhsCreatedAt = lhs.createdAt, rhsCreatedAt = rhs.createdAt {
+      let clipsCreatedAtSame = lhsCreatedAt.compare(rhsCreatedAt) == NSComparisonResult.OrderedSame
+      return clipsCreatedAtSame
+    }
   }
   return false
 }
