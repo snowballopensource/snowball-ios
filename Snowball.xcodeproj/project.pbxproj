@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		590C6EB6ECEE12594A815ED5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC32A4062714B26F6F63153 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		BA03571A1B8502CA00AC5487 /* ClipPreloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0357191B8502CA00AC5487 /* ClipPreloader.swift */; };
-		BA137C7E1A7199AA001F8FCF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA137C7C1A7199AA001F8FCF /* Crashlytics.framework */; };
-		BA137C7F1A7199AA001F8FCF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA137C7D1A7199AA001F8FCF /* Fabric.framework */; };
 		BA1835511AA4FC5500D6A0BE /* OLDClipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1835501AA4FC5500D6A0BE /* OLDClipsViewController.swift */; };
 		BA1835531AA51C1D00D6A0BE /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1835521AA51C1D00D6A0BE /* PlayerView.swift */; };
 		BA20CCEE1A9D156C00D96A31 /* UploadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */; };
@@ -119,8 +117,6 @@
 		90DFEDDD19AA212445892AD5 /* Pods-SnowballTests.debug-staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnowballTests.debug-staging.xcconfig"; path = "Pods/Target Support Files/Pods-SnowballTests/Pods-SnowballTests.debug-staging.xcconfig"; sourceTree = "<group>"; };
 		9F54AD9E25FBB15DB5289F67 /* Pods_SnowballTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnowballTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA0357191B8502CA00AC5487 /* ClipPreloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPreloader.swift; sourceTree = "<group>"; };
-		BA137C7C1A7199AA001F8FCF /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		BA137C7D1A7199AA001F8FCF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		BA1835501AA4FC5500D6A0BE /* OLDClipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLDClipsViewController.swift; sourceTree = "<group>"; };
 		BA1835521AA51C1D00D6A0BE /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadQueue.swift; sourceTree = "<group>"; };
@@ -208,8 +204,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA137C7E1A7199AA001F8FCF /* Crashlytics.framework in Frameworks */,
-				BA137C7F1A7199AA001F8FCF /* Fabric.framework in Frameworks */,
 				590C6EB6ECEE12594A815ED5 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -445,8 +439,6 @@
 			isa = PBXGroup;
 			children = (
 				BA30B31F1B6800D700BB49EF /* CoreRecord */,
-				BA137C7C1A7199AA001F8FCF /* Crashlytics.framework */,
-				BA137C7D1A7199AA001F8FCF /* Fabric.framework */,
 			);
 			name = Vendor;
 			sourceTree = "<group>";
@@ -695,7 +687,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 3ad6062e840bc33bf27000e2eac426550ff9ddc5 027b542a5e7453d709fac8530608bfb4016d21c2389d342f4e4066c4cf4ff823";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 3ad6062e840bc33bf27000e2eac426550ff9ddc5 027b542a5e7453d709fac8530608bfb4016d21c2389d342f4e4066c4cf4ff823";
 		};
 		C86E6ED9209F122AB3C56408 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
