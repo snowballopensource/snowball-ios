@@ -115,6 +115,8 @@ class Timeline {
   func deleteClip(clip: Clip) {
     if let index = indexOfClip(clip) {
       removeAtIndex(&clips, index)
+      clip.delete()
+      CoreDataStack.defaultStack.mainQueueManagedObjectContext.save(nil)
       delegate?.timeline(self, didDeleteClip: clip, atIndex: index)
     }
   }

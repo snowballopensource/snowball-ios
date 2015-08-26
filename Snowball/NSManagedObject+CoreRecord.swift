@@ -66,4 +66,10 @@ extension NSManagedObject {
     }
     return [NSManagedObject]()
   }
+
+  // MARK: - Deletion
+
+  public func delete(context: NSManagedObjectContext = CoreDataStack.defaultStack.mainQueueManagedObjectContext) {
+    context.deleteObject(self)
+  }
 }
