@@ -18,7 +18,19 @@ class Clip: RemoteObject {
   @NSManaged var liked: NSNumber
   @NSManaged var createdAt: NSDate?
   @NSManaged var user: User?
-  var state = ClipState.Default
+  @NSManaged private var stateString: String?
+
+  var state: ClipState {
+    get {
+      if let stateString = stateString {
+        return ClipState(rawValue: stateString) ?? ClipState.Default
+      }
+      return ClipState.Default
+    }
+    set {
+      stateString = newValue.rawValue
+    }
+  }
 
   // MARK: - Internal
 
@@ -61,6 +73,9 @@ func ==(lhs: Clip, rhs: Clip) -> Bool {
   return false
 }
 
-enum ClipState {
-  case Default, PendingUpload, Uploading, UploadFailed
+enum ClipState: String {
+  case Default = "Default"
+  case PendingUpload = "PendingUpload"
+  case Uploading = "Uploading"
+  case UploadFailed = "UploadFailed"
 }
