@@ -73,7 +73,8 @@ class Timeline {
     let size = 20
     var offset = Clip.count() - size
     if offset < 0 { offset = 0 }
-    clips = Clip.findAll(limit: size, offset: offset, sortDescriptors: sortDescriptors) as! [Clip]
+    let predicate = NSPredicate(format: "stateString == %@ || stateString == nil", ClipState.Default.rawValue)
+    clips = Clip.findAll(predicate: predicate, limit: size, offset: offset, sortDescriptors: sortDescriptors) as! [Clip]
   }
 
   // MARK: - Internal
