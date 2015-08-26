@@ -35,6 +35,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   var delegate: ClipCollectionViewCellDelegate?
 
+  private var currentState = ClipCollectionViewCellState.Default
+
   private let clipThumbnailImageView = UIImageView()
 
   private let addButton: UIButton = {
@@ -191,6 +193,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
   }
 
   func setState(state: ClipCollectionViewCellState, animated: Bool) {
+    if !canChangeStateToState(state) {
+      return
+    } else {
+      currentState = state
+    }
+
     let bookmarked = (state == .Bookmarked)
     hideBookmarkImage(!bookmarked, animated: animated)
 
@@ -343,6 +351,18 @@ class ClipCollectionViewCell: UICollectionViewCell {
       uploadRetryButton.top == clipThumbnailImageView.top
       uploadRetryButton.right == clipThumbnailImageView.right
       uploadRetryButton.bottom == clipThumbnailImageView.bottom
+    }
+  }
+
+  private func canChangeStateToState(desiredState: ClipCollectionViewCellState) -> Bool {
+    switch(desiredState) {
+    case .Options:
+      switch(currentState) {
+      case .PendingUpload, .PlayingIdle, .PlayingActive, .Uploading:
+        return false
+      default: return true
+      }
+    default: return true
     }
   }
 
