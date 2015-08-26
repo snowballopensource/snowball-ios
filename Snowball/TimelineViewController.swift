@@ -308,6 +308,16 @@ extension TimelineViewController: UICollectionViewDelegate {
 // MARK: - ClipCollectionViewCellDelegate
 extension TimelineViewController: ClipCollectionViewCellDelegate {
 
+  func userDidShowOptionsGestureForCell(cell: ClipCollectionViewCell) {
+    cell.setState(.Options, animated: true)
+  }
+
+  func userDidHideOptionsGestureForCell(cell: ClipCollectionViewCell) {
+    if let indexPath = collectionView.indexPathForCell(cell) {
+      cell.setState(stateForCellAtIndexPath(indexPath), animated: true)
+    }
+  }
+
   func userDidTapAddButtonForCell(cell: ClipCollectionViewCell) {}
 
   func userDidTapDeleteButtonForCell(cell: ClipCollectionViewCell) {

@@ -214,6 +214,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     let options = (state == .Options)
     hideOptionsView(!options, animated: animated)
+    hideDarkDimOverlay(!options, animated: animated)
   }
 
   func setClipLiked(liked: Bool, animated: Bool) {
@@ -524,23 +525,22 @@ class ClipCollectionViewCell: UICollectionViewCell {
   }
 
   @objc private func showOptionsGestureRecognizerSwiped() {
-    hideOptionsView(false, animated: true)
-    hideDarkDimOverlay(false, animated: true)
+    delegate?.userDidShowOptionsGestureForCell(self)
   }
 
   @objc private func showOptionsGestureRecognizerLongPressed() {
-    hideOptionsView(false, animated: true)
-    hideDarkDimOverlay(false, animated: true)
+    delegate?.userDidShowOptionsGestureForCell(self)
   }
 
   @objc private func hideOptionsGestureRecognizerSwiped() {
-    hideOptionsView(true, animated: true)
-    hideDarkDimOverlay(true, animated: true)
+    delegate?.userDidHideOptionsGestureForCell(self)
   }
 }
 
 // MARK: -
 protocol ClipCollectionViewCellDelegate {
+  func userDidShowOptionsGestureForCell(cell: ClipCollectionViewCell)
+  func userDidHideOptionsGestureForCell(cell: ClipCollectionViewCell)
   func userDidTapAddButtonForCell(cell: ClipCollectionViewCell)
   func userDidTapDeleteButtonForCell(cell: ClipCollectionViewCell)
   func userDidTapFlagButtonForCell(cell: ClipCollectionViewCell)
