@@ -46,20 +46,17 @@ class TimelinePlayer: AVPlayer {
       }
       if oldValue == nil && currentClip == nil { return }
       if oldValue == nil && currentClip != nil {
+        playing = true
         delegate?.timelinePlayer(self, didBeginPlayingWithClip: currentClip!)
       } else if oldValue != nil && currentClip != nil {
         delegate?.timelinePlayer(self, didTransitionFromClip: oldValue!, toClip: currentClip!)
       } else if oldValue != nil && currentClip == nil {
+        playing = false
         delegate?.timelinePlayer(self, didEndPlayingLastClip: oldValue!)
       }
     }
   }
-  var playing: Bool {
-    if rate != 0 && error == nil {
-      return true
-    }
-    return false
-  }
+  var playing = false
 
   // MARK: - Initializers
 
