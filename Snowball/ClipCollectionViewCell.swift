@@ -210,7 +210,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     hidePauseImage(!playingActive, animated: animated)
 
     let pendingUpload = (state == .PendingUpload)
-    addButton.hidden = !pendingUpload
+    hideAddButton(!pendingUpload, animated: animated)
     clipTimeLabel.hidden = pendingUpload
 
     let uploading = (state == .Uploading)
@@ -377,6 +377,17 @@ class ClipCollectionViewCell: UICollectionViewCell {
       } else {
         clipThumbnailImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
       }
+    }
+  }
+
+  private func hideAddButton(hidden: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.4) {
+        self.hideAddButton(hidden, animated: false)
+      }
+    } else {
+      let alpha = CGFloat(!hidden)
+      addButton.alpha = alpha
     }
   }
 
