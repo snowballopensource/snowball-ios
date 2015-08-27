@@ -130,6 +130,7 @@ extension MainTimelineViewController: ClipCollectionViewCellDelegate {
             clip.assignAttributes(JSON)
           }
         }
+        clip.managedObjectContext?.save(nil)
         self.timeline.markClipAsUpdated(clip)
       }
     }
