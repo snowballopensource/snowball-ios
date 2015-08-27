@@ -322,29 +322,27 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
 
   func userDidTapDeleteButtonForCell(cell: ClipCollectionViewCell) {
     let clip = clipForCell(cell)
-    if clip?.user == User.currentUser, let clipID = clip?.id, let clip = clip {
+    if clip?.user == User.currentUser, let clip = clip {
       let alertController = UIAlertController(title: NSLocalizedString("Delete this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to delete this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.ActionSheet)
       alertController.addAction(UIAlertAction(title: NSLocalizedString("Don't Delete", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
       let deleteAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
-        SwiftSpinner.show(NSLocalizedString("Deleting...", comment: ""))
-        API.request(Router.DeleteClip(clipID: clipID)).response { (request, response, data, error) in
-          SwiftSpinner.hide()
-          if let error = error {
-            println(error)
-            // TOOD: Display the error
-          } else {
-            self.timeline.deleteClip(clip)
+        if let clipID = clip.id {
+          SwiftSpinner.show(NSLocalizedString("Deleting...", comment: ""))
+          API.request(Router.DeleteClip(clipID: clipID)).response { (request, response, data, error) in
+            SwiftSpinner.hide()
+            if let error = error {
+              println(error)
+              // TOOD: Display the error
+            } else {
+              self.timeline.deleteClip(clip)
+            }
           }
+        } else {
+          self.timeline.deleteClip(clip)
         }
       }
       alertController.addAction(deleteAction)
       presentViewController(alertController, animated: true, completion: nil)
-    } else {
-      if let clip = clip {
-        if clip.id == nil {
-          timeline.deleteClip(clip)
-        }
-      }
     }
   }
 
