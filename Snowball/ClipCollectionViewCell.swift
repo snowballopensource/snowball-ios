@@ -485,6 +485,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   private func setUserAvatarPosition(#topOfBounce: Bool, animated: Bool, animationCompletion: (() -> Void)? = nil) {
     if animated {
+      contentView.layoutIfNeeded()
       let animationOptions = topOfBounce ? UIViewAnimationOptions.CurveEaseOut : UIViewAnimationOptions.CurveEaseIn
       UIView.animateWithDuration(0.5, delay: 0, options: animationOptions, animations: { () -> Void in
         self.setUserAvatarPosition(topOfBounce: topOfBounce, animated: false)
@@ -523,12 +524,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   private func hideOptionsView(hidden: Bool, animated: Bool) {
     if animated {
+      contentView.layoutIfNeeded()
       UIView.animateWithDuration(0.2) {
         self.hideOptionsView(hidden, animated: false)
       }
     } else {
       setOptionsViewYConstraint(hidden: hidden)
-      optionsView.layoutIfNeeded()
+      contentView.layoutIfNeeded()
     }
   }
 
