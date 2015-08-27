@@ -339,6 +339,12 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
       }
       alertController.addAction(deleteAction)
       presentViewController(alertController, animated: true, completion: nil)
+    } else {
+      if let clip = clip {
+        if clip.id == nil {
+          timeline.deleteClip(clip)
+        }
+      }
     }
   }
 
