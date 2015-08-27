@@ -540,7 +540,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
         optionsView.bottom == clipThumbnailImageView.top
       }
     } else {
-      userAvatarImageViewYConstraint = constrain(optionsView, clipThumbnailImageView, replace: optionsViewYConstraint) { (optionsView, clipThumbnailImageView) in
+      optionsViewYConstraint = constrain(optionsView, clipThumbnailImageView, replace: optionsViewYConstraint) { (optionsView, clipThumbnailImageView) in
         optionsView.bottom == clipThumbnailImageView.bottom
       }
     }
