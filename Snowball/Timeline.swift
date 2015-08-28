@@ -17,10 +17,10 @@ class Timeline {
   }
   var pendingClips: [Clip] {
     var pendingClips = self.clips.filter { (clip) -> Bool in
-      if clip.state == ClipState.PendingUpload || clip.state == ClipState.Uploading || clip.state == ClipState.UploadFailed {
-        return true
+      if clip.state == ClipState.Default {
+        return false
       }
-      return false
+      return true
     }
     return pendingClips
   }
@@ -73,8 +73,7 @@ class Timeline {
     let size = 20
     var offset = Clip.count() - size
     if offset < 0 { offset = 0 }
-    let predicate = NSPredicate(format: "stateString == %@ || stateString == %@ || stateString == nil", ClipState.Default.rawValue, ClipState.UploadFailed.rawValue)
-    clips = Clip.findAll(predicate: predicate, limit: size, offset: offset, sortDescriptors: sortDescriptors) as! [Clip]
+    clips = Clip.findAll(limit: size, offset: offset, sortDescriptors: sortDescriptors) as! [Clip]
   }
 
   // MARK: - Internal
