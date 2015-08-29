@@ -13,7 +13,7 @@ pod 'Fabric'
 pod 'HanekeSwift'
 pod 'Mixpanel'
 pod 'Parse'
-pod 'SwiftSpinner'
+pod 'SwiftSpinner', git: 'https://github.com/snowballhq/SwiftSpinner.git'
 
 target 'SnowballTests' do
   pod 'Nimble', '~> 1.0.0'

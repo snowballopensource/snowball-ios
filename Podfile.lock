@@ -50,7 +50,16 @@ DEPENDENCIES:
   - Nimble (~> 1.0.0)
   - Parse
   - Quick (~> 0.3.1)
-  - SwiftSpinner
+  - SwiftSpinner (from `https://github.com/snowballhq/SwiftSpinner.git`)
+
+EXTERNAL SOURCES:
+  SwiftSpinner:
+    :git: https://github.com/snowballhq/SwiftSpinner.git
+
+CHECKOUT OPTIONS:
+  SwiftSpinner:
+    :commit: dfde498b3572697daf1a0da23840035a5deb1f06
+    :git: https://github.com/snowballhq/SwiftSpinner.git
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
@@ -65,6 +74,6 @@ SPEC CHECKSUMS:
   Nimble: 8bee528e5fcc403653076545db562d2b5db7bb87
   Parse: 373adbb1ad2e34d383542c3b28f678c49ebe4881
   Quick: 824572d3d198d51e52cf4aa722cebf7e59952a35
-  SwiftSpinner: 034bb8b00675b3e4f4c97531fa9af3f550462192
+  SwiftSpinner: 24512d44e621a854b9d429329363844ee7884f30
 
 COCOAPODS: 0.38.2
