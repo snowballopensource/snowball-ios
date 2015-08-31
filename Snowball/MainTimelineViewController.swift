@@ -21,6 +21,8 @@ class MainTimelineViewController: TimelineViewController {
     super.viewDidLoad()
 
     cameraViewController.delegate = self
+
+    timeline.loadCachedClips()
   }
 
   override func loadView() {
