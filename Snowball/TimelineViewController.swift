@@ -17,6 +17,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   var topView: SnowballTopView! // Must be set by subclass
   let timeline = Timeline()
   let player = TimelinePlayer()
+  let playerLoadingImageView = UIImageView()
   let playerView = TimelinePlayerView()
   let collectionView: UICollectionView = {
     let flowLayout = UICollectionViewFlowLayout()
@@ -85,6 +86,14 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
 
   override func loadView() {
     super.loadView()
+
+    view.addSubview(playerLoadingImageView)
+    layout(playerLoadingImageView) { (playerLoadingImageView) in
+      playerLoadingImageView.left == playerLoadingImageView.superview!.left
+      playerLoadingImageView.top == playerLoadingImageView.superview!.top
+      playerLoadingImageView.right == playerLoadingImageView.superview!.right
+      playerLoadingImageView.height == playerLoadingImageView.width
+    }
 
     view.addSubview(playerView)
     layout(playerView) { (playerView) in
@@ -205,7 +214,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
         }
       }
     }
-    scrollToClip(clip, animated: true)
+    prepareToPlayClip(clip)
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
@@ -213,7 +222,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     fromCell?.setState(ClipCollectionViewCellState.PlayingIdle, animated: true)
     let toCell = cellForClip(toClip)
     toCell?.setState(ClipCollectionViewCellState.PlayingActive, animated: true)
-    scrollToClip(toClip, animated: true)
+    prepareToPlayClip(toClip)
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingLastClip lastClip: Clip) {
@@ -263,6 +272,13 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
         cell.setState(stateForCellAtIndexPath(cellIndexPath), animated: true)
       }
     }
+  }
+
+  private func prepareToPlayClip(clip: Clip) {
+    if let thumbnailURLString = clip.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
+      playerLoadingImageView.setImageFromURL(thumbnailURL)
+    }
+    scrollToClip(clip, animated: true)
   }
 }
 
