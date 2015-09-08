@@ -19,6 +19,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   let player = TimelinePlayer()
   let playerLoadingImageView = UIImageView()
   let playerView = TimelinePlayerView()
+  private class var collectionViewSideContentInset: CGFloat { return ClipCollectionViewCell.size.width * 4 }
   let collectionView: UICollectionView = {
     let flowLayout = UICollectionViewFlowLayout()
     flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
@@ -26,6 +27,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     flowLayout.minimumLineSpacing = 0
     flowLayout.itemSize = ClipCollectionViewCell.size // TODO: maybe use autolayout to calculate?
     let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: flowLayout)
+    collectionView.contentInset = UIEdgeInsets(top: 0, left: collectionViewSideContentInset, bottom: 0, right: collectionViewSideContentInset)
     collectionView.backgroundColor = UIColor.whiteColor()
     collectionView.showsHorizontalScrollIndicator = false
     collectionView.registerClass(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell))
@@ -105,9 +107,9 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
 
     view.addSubview(collectionView)
     layout(collectionView, playerView) { (collectionView, playerView) in
-      collectionView.left == collectionView.superview!.left
+      collectionView.left == collectionView.superview!.left - TimelineViewController.collectionViewSideContentInset
       collectionView.top == playerView.bottom
-      collectionView.right == collectionView.superview!.right
+      collectionView.right == collectionView.superview!.right + TimelineViewController.collectionViewSideContentInset
       collectionView.bottom == collectionView.superview!.bottom
     }
 
