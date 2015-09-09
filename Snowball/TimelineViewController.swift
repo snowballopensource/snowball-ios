@@ -26,8 +26,8 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     flowLayout.minimumInteritemSpacing = 0
     flowLayout.minimumLineSpacing = 0
     flowLayout.itemSize = ClipCollectionViewCell.size // TODO: maybe use autolayout to calculate?
+    flowLayout.sectionInset = UIEdgeInsets(top: 0, left: collectionViewSideContentInset, bottom: 0, right: collectionViewSideContentInset)
     let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: flowLayout)
-    collectionView.contentInset = UIEdgeInsets(top: 0, left: collectionViewSideContentInset, bottom: 0, right: collectionViewSideContentInset)
     collectionView.backgroundColor = UIColor.whiteColor()
     collectionView.showsHorizontalScrollIndicator = false
     collectionView.registerClass(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell))
