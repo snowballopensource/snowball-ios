@@ -139,9 +139,10 @@ class FindFriendsViewController: UIViewController {
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
 
+    tableView.refreshControl.beginRefreshing()
+    tableView.offsetContentForRefreshControl()
     ABAddressBookRequestAccessWithCompletion(addressBook) { (granted, error) in
       if granted {
-        self.tableView.offsetContentForRefreshControl()
         self.refresh()
       }
     }
@@ -158,7 +159,6 @@ class FindFriendsViewController: UIViewController {
         presentViewController(alertController, animated: true, completion: nil)
         return
     }
-    tableView.refreshControl.beginRefreshing()
     var phoneNumbers = [String]()
     let contacts = ABAddressBookCopyArrayOfAllPeople(addressBook).takeRetainedValue() as NSArray
     for contact in contacts {
