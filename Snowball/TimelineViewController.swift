@@ -84,6 +84,10 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     view.addGestureRecognizer(playerControlSwipeLeftGestureRecognizer)
     playerControlSwipeRightGestureRecognizer.addTarget(self, action: "userDidSwipePlayerControlGestureRecognizerRight:")
     view.addGestureRecognizer(playerControlSwipeRightGestureRecognizer)
+  }
+
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
 
     refresh()
   }
