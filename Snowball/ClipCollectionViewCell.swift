@@ -223,11 +223,15 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     let uploadingFailed = (state == .UploadFailed)
     hideUploadRetryButton(!uploadingFailed, animated: animated)
-    hideDarkDimOverlay(!uploadingFailed, animated: animated)
 
     let options = (state == .Options)
     hideOptionsView(!options, animated: animated)
-    hideDarkDimOverlay(!options, animated: animated)
+
+    if uploadingFailed || options {
+      hideDarkDimOverlay(false, animated: animated)
+    } else {
+      hideDarkDimOverlay(true, animated: animated)
+    }
   }
 
   func setClipLiked(liked: Bool, animated: Bool) {
