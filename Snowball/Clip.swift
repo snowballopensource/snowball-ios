@@ -54,6 +54,15 @@ class Clip: RemoteObject {
       self.user = User.objectFromJSON(user) as? User
     }
   }
+
+  class func cleanupUploadingStates() {
+    let predicate = NSPredicate(format: "stateString == %@", ClipState.Uploading.rawValue)
+    let clips = Clip.findAll(predicate: predicate) as! [Clip]
+    for clip in clips {
+      clip.state == ClipState.UploadFailed
+    }
+    CoreDataStack.defaultStack.mainQueueManagedObjectContext.save(nil)
+  }
 }
 
 // MARK: - Equatable

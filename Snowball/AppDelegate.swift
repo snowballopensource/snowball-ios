@@ -38,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Fabric.with([Crashlytics()])
     PushManager.registerForPushNotifications()
     application.applicationSupportsShakeToEdit = true
+    Clip.cleanupUploadingStates()
     return true
   }
 
