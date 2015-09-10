@@ -61,6 +61,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     super.viewDidLoad()
 
     view.backgroundColor = UIColor.whiteColor()
+    view.clipsToBounds = true
 
     timeline.delegate = self
 
