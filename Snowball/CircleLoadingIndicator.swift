@@ -33,22 +33,35 @@ class CircleLoadingIndicator: UIView {
 
   // MARK: - Internal
 
-  func startAnimating() {
-    backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0)
-    hidden = false
-    UIView.animateWithDuration(0.1, delay: 1, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
-      self.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
-    }) { (completed) -> Void in
-      if completed {
-        UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.CurveLinear | UIViewAnimationOptions.Autoreverse | UIViewAnimationOptions.Repeat, animations: { () -> Void in
-          self.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.9)
-          }, completion: nil)
+  func startAnimating(color: UIColor = UIColor.whiteColor(), withDelay delay: Bool = false) {
+    if delay {
+      backgroundColor = color.colorWithAlphaComponent(0)
+      hidden = false
+      UIView.animateWithDuration(0.1, delay: 1, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+        self.backgroundColor = color.colorWithAlphaComponent(0.2)
+        }) { (completed) -> Void in
+          if completed {
+            self.startPulseAnimation(color: color)
+          }
       }
+    } else {
+      backgroundColor = color.colorWithAlphaComponent(0.2)
+      hidden = false
+      startPulseAnimation(color: color)
     }
   }
 
   func stopAnimating() {
     layer.removeAllAnimations()
     hidden = true
+  }
+
+  // MARK: - Private
+
+  private func startPulseAnimation(#color: UIColor) {
+    backgroundColor = color.colorWithAlphaComponent(0.2)
+    UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.CurveLinear | UIViewAnimationOptions.Autoreverse | UIViewAnimationOptions.Repeat, animations: { () -> Void in
+      self.backgroundColor = color.colorWithAlphaComponent(0.9)
+      }, completion: nil)
   }
 }

@@ -248,7 +248,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginBufferingClip clip: Clip) {
-    playerLoadingIndicator.startAnimating()
+    playerLoadingIndicator.startAnimating(withDelay: true)
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlaybackOfClip clip: Clip) {
