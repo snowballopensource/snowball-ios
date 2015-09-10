@@ -11,9 +11,15 @@ import Photos
 import UIKit
 
 extension UIImageView {
-  func setImageFromURL(url: NSURL) {
+  func setImageFromURL(url: NSURL, completion: (() -> Void)? = nil) {
     if url.scheme == "http" {
-      hnk_setImageFromURL(url, format: Format<UIImage>(name: "original"))
+      hnk_setImageFromURL(url, format: Format<UIImage>(name: "original"),
+        failure: { (error) -> () in
+          completion?()
+        }, success: { (image) -> () in
+          self.image = image
+          completion?()
+      })
     } else if url.scheme == "assets-library" {
       let result = PHAsset.fetchAssetsWithALAssetURLs([url], options: PHFetchOptions())
       if let asset = result.firstObject as? PHAsset {

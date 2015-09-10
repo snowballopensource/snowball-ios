@@ -39,6 +39,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   private let clipThumbnailImageView = UIImageView()
 
+  private let clipThumbnailLoadingIndicator = CircleLoadingIndicator()
+
   private let addButton: UIButton = {
     let button = UIButton()
     button.setImage(UIImage(named: "add-clip"), forState: UIControlState.Normal)
@@ -169,7 +171,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let userColor = clip.user?.color as? UIColor ?? UIColor.SnowballColor.blueColor
 
     if let thumbnailURLString = clip.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
-      clipThumbnailImageView.setImageFromURL(thumbnailURL)
+      clipThumbnailLoadingIndicator.startAnimating(color: userColor)
+      clipThumbnailImageView.setImageFromURL(thumbnailURL) {
+        self.clipThumbnailLoadingIndicator.stopAnimating()
+      }
     }
 
     if let user = clip.user {
@@ -253,6 +258,14 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipThumbnailImageView.top == clipThumbnailImageView.superview!.top
       clipThumbnailImageView.trailing == clipThumbnailImageView.superview!.trailing
       clipThumbnailImageView.height == clipThumbnailImageView.width
+    }
+
+    contentView.addSubview(clipThumbnailLoadingIndicator)
+    layout(clipThumbnailLoadingIndicator, clipThumbnailImageView) { (clipThumbnailLoadingIndicator, clipThumbnailImageView) in
+      clipThumbnailLoadingIndicator.centerX == clipThumbnailImageView.centerX
+      clipThumbnailLoadingIndicator.centerY == clipThumbnailImageView.centerY
+      clipThumbnailLoadingIndicator.width == 15
+      clipThumbnailLoadingIndicator.height == 15
     }
 
     contentView.addSubview(darkDimOverlayView)
