@@ -32,6 +32,7 @@
 		BA44E4541A9C0B7700B75DF3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4531A9C0B7700B75DF3 /* WebViewController.swift */; };
 		BA44E4561A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4551A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift */; };
 		BA44E4581A9C0EC600B75DF3 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */; };
+		BA46D6FE1BA10FCD0048D09D /* CircleLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA46D6FD1BA10FCD0048D09D /* CircleLoadingIndicator.swift */; };
 		BA4943371B7D4963004FE784 /* UIImageView+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4943361B7D4963004FE784 /* UIImageView+Snowball.swift */; };
 		BA4BD7201AA2D6820057380C /* ClipPreloadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4BD71F1AA2D6820057380C /* ClipPreloadQueue.swift */; };
 		BA4BD7221AA2E1F00057380C /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4BD7211AA2E1F00057380C /* Cache.swift */; };
@@ -139,6 +140,7 @@
 		BA44E4531A9C0B7700B75DF3 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		BA44E4551A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
+		BA46D6FD1BA10FCD0048D09D /* CircleLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleLoadingIndicator.swift; sourceTree = "<group>"; };
 		BA4943361B7D4963004FE784 /* UIImageView+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Snowball.swift"; sourceTree = "<group>"; };
 		BA4BD71F1AA2D6820057380C /* ClipPreloadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPreloadQueue.swift; sourceTree = "<group>"; };
 		BA4BD7211AA2E1F00057380C /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				BA1835521AA51C1D00D6A0BE /* PlayerView.swift */,
 				BAF50E751AA63E4B00AB874E /* CameraView.swift */,
 				BAF8CDC11AAF65CC00222872 /* SnowballFooterButton.swift */,
+				BA46D6FD1BA10FCD0048D09D /* CircleLoadingIndicator.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -709,6 +712,7 @@
 				BA3DB8261A9EFD9A00378F6D /* SnowballRoundedTextField.swift in Sources */,
 				BA989AD51B508DDB0029B674 /* OnboardingIntroViewController.swift in Sources */,
 				BA2460E31B683600003E3FB5 /* MainTimelineViewController.swift in Sources */,
+				BA46D6FE1BA10FCD0048D09D /* CircleLoadingIndicator.swift in Sources */,
 				BA7C0E4A1A65EF94001B3B4C /* UITextField+Snowball.swift in Sources */,
 				BAF50E781AA644DF00AB874E /* CameraPreviewPlayer.swift in Sources */,
 				BA9AA67C1A67465F002C4992 /* AuthenticationNavigationController.swift in Sources */,

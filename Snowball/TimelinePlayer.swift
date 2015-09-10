@@ -28,7 +28,9 @@ class TimelinePlayer: AVPlayer {
         pause()
         replaceCurrentItemWithPlayerItem(nil)
       } else {
+        delegate?.timelinePlayer(self, didBeginBufferingClip: currentClip!)
         ClipPreloader.load(currentClip!) { (cacheURL, error) -> Void in
+          self.delegate?.timelinePlayer(self, didBeginPlaybackOfClip: self.currentClip!)
           if let url = cacheURL {
             let playerItem = ClipPlayerItem(url: url, clip: self.currentClip!)
             self.registerPlayerItemForNotifications(playerItem)
@@ -101,6 +103,8 @@ protocol TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip)
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip)
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingLastClip lastClip: Clip)
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginBufferingClip clip: Clip)
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlaybackOfClip clip: Clip)
 }
 
 class TimelinePlayerView: UIView {

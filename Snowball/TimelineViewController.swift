@@ -19,6 +19,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   let player = TimelinePlayer()
   let playerLoadingImageView = UIImageView()
   let playerView = TimelinePlayerView()
+  let playerLoadingIndicator = CircleLoadingIndicator()
   private class var collectionViewSideContentInset: CGFloat { return ClipCollectionViewCell.size.width * 4 }
   let collectionView: UICollectionView = {
     let flowLayout = UICollectionViewFlowLayout()
@@ -103,6 +104,14 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
       playerView.top == playerView.superview!.top
       playerView.right == playerView.superview!.right
       playerView.height == playerView.width
+    }
+
+    view.addSubview(playerLoadingIndicator)
+    layout(playerLoadingIndicator, playerView) { (playerLoadingIndicator, playerView) in
+      playerLoadingIndicator.centerX == playerView.centerX
+      playerLoadingIndicator.bottom == playerView.bottom - 15
+      playerLoadingIndicator.width == 15
+      playerLoadingIndicator.height == 15
     }
 
     view.addSubview(collectionView)
@@ -236,6 +245,14 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
         timeline.bookmarkedClip = lastClip
       }
     }
+  }
+
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginBufferingClip clip: Clip) {
+    playerLoadingIndicator.startAnimating()
+  }
+
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlaybackOfClip clip: Clip) {
+    playerLoadingIndicator.stopAnimating()
   }
 
   // MARK: - Private
