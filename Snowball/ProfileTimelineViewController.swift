@@ -140,7 +140,7 @@ class UserProfileDetailView: UIView {
 
     let userColor = user.color as? UIColor ?? UIColor.SnowballColor.blueColor
 
-    backgroundImageView.backgroundColor = userColor
+    backgroundImageView.backgroundColor = userColor.darkVersion()
     if let imageURLString = user.avatarURL {
       if let imageURL = NSURL(string: imageURLString) {
         backgroundImageView.setImageFromURL(imageURL)
