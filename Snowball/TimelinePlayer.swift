@@ -28,6 +28,7 @@ class TimelinePlayer: AVPlayer {
         pause()
         replaceCurrentItemWithPlayerItem(nil)
       } else {
+        replaceCurrentItemWithPlayerItem(nil)
         delegate?.timelinePlayer(self, didBeginBufferingClip: currentClip!)
         ClipPreloader.load(currentClip!) { (cacheURL, error) -> Void in
           if let url = cacheURL {

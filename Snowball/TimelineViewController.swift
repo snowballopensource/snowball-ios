@@ -257,12 +257,10 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     if let thumbnailURLString = clip.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
       playerLoadingImageView.setImageFromURL(thumbnailURL)
     }
-    playerView.hidden = true
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlaybackOfClip clip: Clip) {
     playerLoadingIndicator.stopAnimating()
-    playerView.hidden = false
   }
 
   // MARK: - Private
