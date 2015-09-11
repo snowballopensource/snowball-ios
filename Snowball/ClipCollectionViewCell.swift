@@ -39,8 +39,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   private let clipThumbnailImageView = UIImageView()
 
-  private let clipThumbnailLoadingIndicator = CircleLoadingIndicator()
-
   private let addButton: UIButton = {
     let button = UIButton()
     button.setImage(UIImage(named: "add-clip"), forState: UIControlState.Normal)
@@ -122,6 +120,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Up
     return swipeGestureRecognizer
     }()
+
+  private let clipThumbnailLoadingIndicator = CircleLoadingIndicator()
 
   // MARK: - Initializers
 
@@ -264,14 +264,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
       clipThumbnailImageView.height == clipThumbnailImageView.width
     }
 
-    contentView.addSubview(clipThumbnailLoadingIndicator)
-    layout(clipThumbnailLoadingIndicator, clipThumbnailImageView) { (clipThumbnailLoadingIndicator, clipThumbnailImageView) in
-      clipThumbnailLoadingIndicator.centerX == clipThumbnailImageView.centerX
-      clipThumbnailLoadingIndicator.centerY == clipThumbnailImageView.centerY
-      clipThumbnailLoadingIndicator.width == 15
-      clipThumbnailLoadingIndicator.height == 15
-    }
-
     contentView.addSubview(darkDimOverlayView)
     layout(darkDimOverlayView, clipThumbnailImageView) { (darkDimOverlayView, clipThumbnailImageView) in
       darkDimOverlayView.left == clipThumbnailImageView.left
@@ -368,6 +360,14 @@ class ClipCollectionViewCell: UICollectionViewCell {
       uploadRetryButton.top == clipThumbnailImageView.top
       uploadRetryButton.right == clipThumbnailImageView.right
       uploadRetryButton.bottom == clipThumbnailImageView.bottom
+    }
+
+    contentView.addSubview(clipThumbnailLoadingIndicator)
+    layout(clipThumbnailLoadingIndicator, clipThumbnailImageView) { (clipThumbnailLoadingIndicator, clipThumbnailImageView) in
+      clipThumbnailLoadingIndicator.centerX == clipThumbnailImageView.centerX
+      clipThumbnailLoadingIndicator.centerY == clipThumbnailImageView.centerY
+      clipThumbnailLoadingIndicator.width == 15
+      clipThumbnailLoadingIndicator.height == 15
     }
   }
 
