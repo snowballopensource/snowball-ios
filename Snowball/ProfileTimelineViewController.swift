@@ -92,6 +92,13 @@ extension ProfileTimelineViewController: SnowballTopViewDelegate {
   }
 }
 
+// MARK: - ClipCollectionViewCellDelegate
+extension ProfileTimelineViewController: ClipCollectionViewCellDelegate {
+
+  // Prevent going to profile again from the profile
+  override func userDidTapUserButtonForCell(cell: ClipCollectionViewCell) {}
+}
+
 // MARK: -
 class UserProfileDetailView: UIView {
 
