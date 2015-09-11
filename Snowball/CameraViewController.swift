@@ -164,7 +164,7 @@ class CameraViewController: UIViewController {
     playerView.addSubview(cancelPreviewButton)
     layout(cancelPreviewButton) { (cancelPreviewButton) in
       cancelPreviewButton.left == cancelPreviewButton.superview!.left
-      cancelPreviewButton.top == cancelPreviewButton.superview!.top
+      cancelPreviewButton.top == cancelPreviewButton.superview!.top + 20
       cancelPreviewButton.right == cancelPreviewButton.superview!.right
       cancelPreviewButton.height == 65
     }
