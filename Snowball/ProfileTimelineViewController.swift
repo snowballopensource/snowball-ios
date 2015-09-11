@@ -106,6 +106,14 @@ class UserProfileDetailView: UIView {
 
   private var user: User!
   private let backgroundImageView = UIImageView()
+  private let backgroundImageViewGradient: CAGradientLayer = {
+    let gradientLayer = CAGradientLayer()
+    let color1 = UIColor(red: 0, green: 0, blue: 0, alpha: 0.9).CGColor as CGColorRef
+    let color2 = UIColor.clearColor().CGColor as CGColorRef
+    let color3 = UIColor(red: 0, green: 0, blue: 0, alpha: 0.9).CGColor as CGColorRef
+    gradientLayer.colors = [color1, color2, color3]
+    return gradientLayer
+    }()
   private let userAvatarImageView = UserAvatarImageView()
   private let usernameLabel: UILabel = {
     let label = UILabel()
@@ -162,14 +170,7 @@ class UserProfileDetailView: UIView {
       backgroundImageView.bottom == backgroundImageView.superview!.bottom
     }
 
-    let backgroundBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Dark))
-    backgroundImageView.addSubview(backgroundBlurView)
-    layout(backgroundBlurView) { (backgroundBlurView) in
-      backgroundBlurView.left == backgroundBlurView.superview!.left
-      backgroundBlurView.top == backgroundBlurView.superview!.top
-      backgroundBlurView.right == backgroundBlurView.superview!.right
-      backgroundBlurView.bottom == backgroundBlurView.superview!.bottom
-    }
+    backgroundImageView.layer.addSublayer(backgroundImageViewGradient)
 
     addSubview(userAvatarImageView)
     layout(userAvatarImageView) { (userAvatarImageView) in
@@ -193,6 +194,12 @@ class UserProfileDetailView: UIView {
       followButton.height == 40
       followButton.bottom == followButton.superview!.bottom - 20
     }
+  }
+
+  override func layoutSubviews() {
+    super.layoutSubviews()
+
+    backgroundImageViewGradient.frame = backgroundImageView.bounds
   }
 
   // MARK: - Private
