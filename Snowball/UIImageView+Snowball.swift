@@ -27,7 +27,10 @@ extension UIImageView {
         let size = CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
         manager.requestImageForAsset(asset, targetSize: size, contentMode: PHImageContentMode.AspectFill, options: PHImageRequestOptions(), resultHandler: { (image, info) -> Void in
           if let image = image {
-            self.hnk_setImage(image, animated: false, success: nil)
+            self.hnk_setImage(image, animated: false, success: { (image) -> () in
+              self.image = image
+              completion?()
+            })
           }
         })
       }
@@ -35,7 +38,10 @@ extension UIImageView {
       if let imageData = NSData(contentsOfURL: url) {
         let image = UIImage(data: imageData)
         if let image = image {
-          hnk_setImage(image, animated: false, success: nil)
+          hnk_setImage(image, animated: false, success: { (image) -> () in
+            self.image = image
+            completion?()
+          })
         }
       }
     }
