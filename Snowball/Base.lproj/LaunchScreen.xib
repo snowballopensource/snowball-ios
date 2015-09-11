@@ -14,8 +14,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6J-wK-HGb">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="240"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="snowball-logo" translatesAutoresizingMaskIntoConstraints="NO" id="0G0-0M-PAw">
-                            <rect key="frame" x="90" y="81" width="300" height="77"/>
+                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="snowball-logo-inverse" translatesAutoresizingMaskIntoConstraints="NO" id="0G0-0M-PAw">
+                            <rect key="frame" x="153" y="32" width="175" height="175"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -25,7 +25,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.5607843137254902" green="0.92549019607843142" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="O6J-wK-HGb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EoM-iR-a24"/>
                 <constraint firstAttribute="centerY" secondItem="O6J-wK-HGb" secondAttribute="bottom" id="Siv-fw-6aB"/>
@@ -38,6 +38,6 @@
         </view>
     </objects>
     <resources>
-        <image name="snowball-logo" width="300" height="77"/>
+        <image name="snowball-logo-inverse" width="175" height="175"/>
     </resources>
 </document>
