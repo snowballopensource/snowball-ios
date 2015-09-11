@@ -23,6 +23,8 @@ class ProfileTimelineViewController: TimelineViewController {
     self.user = user
     self.userProfileDetailView = UserProfileDetailView(user: user)
     super.init(nibName: nil, bundle: nil)
+
+    self.userProfileDetailView.delegate = self
   }
 
   required init(coder: NSCoder) {
@@ -99,10 +101,25 @@ extension ProfileTimelineViewController: ClipCollectionViewCellDelegate {
   override func userDidTapUserButtonForCell(cell: ClipCollectionViewCell) {}
 }
 
+// MARK: - UserProfileDetailViewDelegate
+extension ProfileTimelineViewController: UserProfileDetailViewDelegate {
+
+  func userDidSwipeHideProfileGestureRecognizer() {
+    navigationController?.popViewControllerAnimated(true)
+  }
+}
+
+// MARK: -
+protocol UserProfileDetailViewDelegate {
+  func userDidSwipeHideProfileGestureRecognizer()
+}
+
 // MARK: -
 class UserProfileDetailView: UIView {
 
   // MARK: - Properties
+
+  var delegate: UserProfileDetailViewDelegate?
 
   private var user: User!
   private let backgroundImageView = UIImageView()
@@ -114,6 +131,11 @@ class UserProfileDetailView: UIView {
     let color4 = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6).CGColor as CGColorRef
     gradientLayer.colors = [color1, color2, color3, color4]
     return gradientLayer
+    }()
+  private let hideProfileGestureRecognizer: UISwipeGestureRecognizer = {
+    let swipeGestureRecognizer = UISwipeGestureRecognizer()
+    swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Right
+    return swipeGestureRecognizer
     }()
   private let usernameLabel: UILabel = {
     let label = UILabel()
@@ -147,6 +169,10 @@ class UserProfileDetailView: UIView {
         backgroundImageView.setImageFromURL(imageURL)
       }
     }
+
+    hideProfileGestureRecognizer.addTarget(self, action: "hideProfileGestureRecognizerSwiped")
+    backgroundImageView.addGestureRecognizer(hideProfileGestureRecognizer)
+    backgroundImageView.userInteractionEnabled = true
 
     usernameLabel.text = user.username
     usernameLabel.textColor = userColor
@@ -213,5 +239,9 @@ class UserProfileDetailView: UIView {
     // This should probably be a delegate method where the controller does this, but oh well.
     user.toggleFollowing()
     configureFollowButton(user)
+  }
+
+  @objc private func hideProfileGestureRecognizerSwiped() {
+    delegate?.userDidSwipeHideProfileGestureRecognizer()
   }
 }
