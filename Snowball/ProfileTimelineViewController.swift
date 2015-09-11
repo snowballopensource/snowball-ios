@@ -108,10 +108,11 @@ class UserProfileDetailView: UIView {
   private let backgroundImageView = UIImageView()
   private let backgroundImageViewGradient: CAGradientLayer = {
     let gradientLayer = CAGradientLayer()
-    let color1 = UIColor(red: 0, green: 0, blue: 0, alpha: 0.9).CGColor as CGColorRef
+    let color1 = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3).CGColor as CGColorRef
     let color2 = UIColor.clearColor().CGColor as CGColorRef
-    let color3 = UIColor(red: 0, green: 0, blue: 0, alpha: 0.9).CGColor as CGColorRef
-    gradientLayer.colors = [color1, color2, color3]
+    let color3 = UIColor.clearColor().CGColor as CGColorRef
+    let color4 = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6).CGColor as CGColorRef
+    gradientLayer.colors = [color1, color2, color3, color4]
     return gradientLayer
     }()
   private let usernameLabel: UILabel = {
