@@ -15,7 +15,7 @@ class WelcomeViewController: UIViewController {
 
   private let backgroundImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: "welcome-image")
+    imageView.image = UIImage(named: "onboard-splash")
     imageView.contentMode = UIViewContentMode.ScaleAspectFill
     imageView.clipsToBounds = true
     return imageView
