@@ -230,7 +230,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
         }
       }
     }
-    prepareToPlayClip(clip)
+    scrollToClip(clip, animated: true)
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
@@ -238,7 +238,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     fromCell?.setState(ClipCollectionViewCellState.PlayingIdle, animated: true)
     let toCell = cellForClip(toClip)
     toCell?.setState(ClipCollectionViewCellState.PlayingActive, animated: true)
-    prepareToPlayClip(toClip)
+    scrollToClip(toClip, animated: true)
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingLastClip lastClip: Clip) {
@@ -254,10 +254,15 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginBufferingClip clip: Clip) {
     playerLoadingIndicator.startAnimating(withDelay: true)
+    if let thumbnailURLString = clip.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
+      playerLoadingImageView.setImageFromURL(thumbnailURL)
+    }
+    playerView.hidden = true
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlaybackOfClip clip: Clip) {
     playerLoadingIndicator.stopAnimating()
+    playerView.hidden = false
   }
 
   // MARK: - Private
@@ -296,13 +301,6 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
         cell.setState(stateForCellAtIndexPath(cellIndexPath), animated: true)
       }
     }
-  }
-
-  private func prepareToPlayClip(clip: Clip) {
-    if let thumbnailURLString = clip.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
-      playerLoadingImageView.setImageFromURL(thumbnailURL)
-    }
-    scrollToClip(clip, animated: true)
   }
 }
 
