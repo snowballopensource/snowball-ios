@@ -114,7 +114,6 @@ class UserProfileDetailView: UIView {
     gradientLayer.colors = [color1, color2, color3]
     return gradientLayer
     }()
-  private let userAvatarImageView = UserAvatarImageView()
   private let usernameLabel: UILabel = {
     let label = UILabel()
     var fontSize: CGFloat = 28
@@ -138,8 +137,6 @@ class UserProfileDetailView: UIView {
     self.init(frame: CGRectZero)
 
     self.user = user
-
-    userAvatarImageView.configureForUser(user)
 
     let userColor = user.color as? UIColor ?? UIColor.SnowballColor.blueColor
 
@@ -172,27 +169,19 @@ class UserProfileDetailView: UIView {
 
     backgroundImageView.layer.addSublayer(backgroundImageViewGradient)
 
-    addSubview(userAvatarImageView)
-    layout(userAvatarImageView) { (userAvatarImageView) in
-      userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
-      userAvatarImageView.top == userAvatarImageView.superview!.top + 50
-      userAvatarImageView.width == 140
-      userAvatarImageView.height == userAvatarImageView.width
-    }
-
-    addSubview(usernameLabel)
-    layout(usernameLabel, userAvatarImageView) { (usernameLabel, userAvatarImageView) in
-      usernameLabel.left == usernameLabel.superview!.left
-      usernameLabel.top == userAvatarImageView.bottom + 20
-      usernameLabel.right == usernameLabel.superview!.right
-    }
-
     addSubview(followButton)
     layout(followButton) { (followButton) in
       followButton.centerX == followButton.superview!.centerX
       followButton.width == 100
       followButton.height == 40
       followButton.bottom == followButton.superview!.bottom - 20
+    }
+
+    addSubview(usernameLabel)
+    layout(usernameLabel, followButton) { (usernameLabel, followButton) in
+      usernameLabel.left == usernameLabel.superview!.left
+      usernameLabel.bottom == followButton.top - 20
+      usernameLabel.right == usernameLabel.superview!.right
     }
   }
 
