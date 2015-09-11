@@ -30,12 +30,12 @@ class TimelinePlayer: AVPlayer {
       } else {
         delegate?.timelinePlayer(self, didBeginBufferingClip: currentClip!)
         ClipPreloader.load(currentClip!) { (cacheURL, error) -> Void in
-          self.delegate?.timelinePlayer(self, didBeginPlaybackOfClip: self.currentClip!)
           if let url = cacheURL {
             let playerItem = ClipPlayerItem(url: url, clip: self.currentClip!)
             self.registerPlayerItemForNotifications(playerItem)
             self.replaceCurrentItemWithPlayerItem(playerItem)
             self.play()
+            self.delegate?.timelinePlayer(self, didBeginPlaybackOfClip: self.currentClip!)
           } else {
             // TODO: Handle error
           }
