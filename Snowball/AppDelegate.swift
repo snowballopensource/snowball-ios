@@ -36,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     window?.makeKeyAndVisible()
     Fabric.with([Crashlytics()])
-    PushManager.registerForPushNotifications()
     application.applicationSupportsShakeToEdit = true
     Clip.cleanupUploadingStates()
     return true
