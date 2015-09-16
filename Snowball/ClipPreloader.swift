@@ -35,7 +35,7 @@ class ClipPreloader: NSOperationQueue {
 
   // MARK: - Internal
 
-  class func load(clip: Clip, completion: ((cacheURL: NSURL?, error: NSError?) -> Void)?) {
+  class func load(clip: Clip, completion: ((clip: Clip, cacheURL: NSURL?, error: NSError?) -> Void)?) {
     load(clip, priority: NSOperationQueuePriority.VeryHigh, completion: completion)
   }
 
@@ -58,7 +58,7 @@ class ClipPreloader: NSOperationQueue {
 
   // MARK: - Private
 
-  private class func load(clip: Clip, priority: NSOperationQueuePriority, completion: ((cacheURL: NSURL?, error: NSError?) -> Void)?) {
+  private class func load(clip: Clip, priority: NSOperationQueuePriority, completion: ((clip: Clip, cacheURL: NSURL?, error: NSError?) -> Void)?) {
     let operation = NSBlockOperation()
     operation.queuePriority = priority
     operation.addExecutionBlock {
@@ -66,12 +66,12 @@ class ClipPreloader: NSOperationQueue {
         let (data, cacheURL) = Cache.sharedCache.fetchDataAtURL(videoURL)
         if let data = data, cacheURL = cacheURL {
           dispatch_async(dispatch_get_main_queue()) {
-            completion?(cacheURL: cacheURL, error: nil)
+            completion?(clip: clip, cacheURL: cacheURL, error: nil)
           }
           return
         }
       }
-      completion?(cacheURL: nil, error: NSError())
+      completion?(clip: clip, cacheURL: nil, error: NSError())
     }
     sharedPreloader.addOperation(operation)
   }

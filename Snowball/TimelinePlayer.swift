@@ -24,19 +24,18 @@ class TimelinePlayer: AVPlayer {
   var delegate: TimelinePlayerDelegate?
   private(set) var currentClip: Clip? = nil {
     didSet {
+      replaceCurrentItemWithPlayerItem(nil)
       if currentClip == nil {
         pause()
-        replaceCurrentItemWithPlayerItem(nil)
       } else {
-        replaceCurrentItemWithPlayerItem(nil)
         delegate?.timelinePlayer(self, didBeginBufferingClip: currentClip!)
-        ClipPreloader.load(currentClip!) { (cacheURL, error) -> Void in
+        ClipPreloader.load(currentClip!) { (preloadedClip, cacheURL, error) -> Void in
           if let url = cacheURL {
-            let playerItem = ClipPlayerItem(url: url, clip: self.currentClip!)
+            let playerItem = ClipPlayerItem(url: url, clip: preloadedClip)
             self.registerPlayerItemForNotifications(playerItem)
             self.replaceCurrentItemWithPlayerItem(playerItem)
             self.play()
-            self.delegate?.timelinePlayer(self, didBeginPlaybackOfClip: self.currentClip!)
+            self.delegate?.timelinePlayer(self, didBeginPlaybackOfClip: preloadedClip)
           } else {
             // TODO: Handle error
           }
