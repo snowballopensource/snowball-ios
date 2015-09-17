@@ -72,7 +72,7 @@ class AuthenticationViewController: UIViewController {
   // MARK: - Internal
 
   func authenticationCompletedSuccessfully(user: User) {
-    PushManager.associateCurrentInstallationWithCurrentUser(true)
+    PushManager.associateCurrentInstallationWithCurrentUser(saveImmediately: true)
   }
 
   // MARK: - Private

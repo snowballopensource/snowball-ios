@@ -57,7 +57,7 @@ class Clip: RemoteObject {
 
   class func cleanupUploadingStates() {
     let predicate = NSPredicate(format: "stateString == %@", ClipState.Uploading.rawValue)
-    let clips = Clip.findAll(predicate) as! [Clip]
+    let clips = Clip.findAll(predicate: predicate) as! [Clip]
     for clip in clips {
       clip.state == ClipState.UploadFailed
     }

@@ -45,7 +45,7 @@ class SnowballRoundedButton: UIButton {
       layer.borderWidth = 2
     }
     titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    alignLeft(20)
+    alignLeft(insetWidth: 20)
     chevronImageView.hidden = true
     addSubview(chevronImageView)
   }

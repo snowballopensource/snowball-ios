@@ -32,7 +32,7 @@ struct PushManager {
   }
 
   static func registrationFailed(error error: NSError) {
-    error.print("Push notification registration")
+    print("Push notification registration failed.")
   }
 
   static func handleRemoteNotification(userInfo userInfo: [NSObject: AnyObject]) {
@@ -53,7 +53,7 @@ struct PushManager {
     }
   }
 
-  static func associateCurrentInstallationWithCurrentUser(saveImmediately: Bool = false) {
+  static func associateCurrentInstallationWithCurrentUser(saveImmediately saveImmediately: Bool = false) {
     if let userID = User.currentUser?.id {
       let installation = PFInstallation.currentInstallation()
       let installationUserID = installation["user_id"] as? String

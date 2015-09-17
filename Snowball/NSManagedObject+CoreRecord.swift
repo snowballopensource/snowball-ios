@@ -50,10 +50,10 @@ extension NSManagedObject {
 
   public class func find(primaryKey: String, context: NSManagedObjectContext = CoreDataStack.defaultStack.mainQueueManagedObjectContext) -> NSManagedObject? {
     let predicate = NSPredicate(format: "%K == %@", self.primaryKey, primaryKey)
-    return findAll(predicate, context: context).first
+    return findAll(predicate: predicate, context: context).first
   }
 
-  public class func findAll(predicate: NSPredicate? = nil, limit: Int = 0, offset: Int = 0, sortDescriptors: [NSSortDescriptor]? = nil, context: NSManagedObjectContext = CoreDataStack.defaultStack.mainQueueManagedObjectContext) -> [NSManagedObject] {
+  public class func findAll(predicate predicate: NSPredicate? = nil, limit: Int = 0, offset: Int = 0, sortDescriptors: [NSSortDescriptor]? = nil, context: NSManagedObjectContext = CoreDataStack.defaultStack.mainQueueManagedObjectContext) -> [NSManagedObject] {
     let entityDescription = NSEntityDescription.entityForName(entityName, inManagedObjectContext: context)
     let fetchRequest = NSFetchRequest(entityName: entityName)
     fetchRequest.entity = entityDescription
