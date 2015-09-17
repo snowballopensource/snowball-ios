@@ -108,13 +108,13 @@ class CameraViewController: UIViewController {
       var error: NSError?
       self.captureSession.sessionPreset = AVCaptureSessionPreset640x480
       let videoDevice = self.captureDeviceForMediaType(AVMediaTypeVideo, position: self.defaultCameraPosition)
-      let videoDeviceInput = AVCaptureDeviceInput(device: videoDevice, error: nil)
+      let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice)
       if self.captureSession.canAddInput(videoDeviceInput) {
         self.captureSession.addInput(videoDeviceInput)
         self.currentVideoDeviceInput = videoDeviceInput
       }
       let audioDevice = self.captureDeviceForMediaType(AVMediaTypeAudio)
-      let audioDeviceInput = AVCaptureDeviceInput(device: audioDevice, error: nil)
+      let audioDeviceInput = try? AVCaptureDeviceInput(device: audioDevice)
       if self.captureSession.canAddInput(audioDeviceInput) {
         self.captureSession.addInput(audioDeviceInput)
       }
@@ -216,7 +216,13 @@ class CameraViewController: UIViewController {
       defaultCameraPosition = newPosition
       if let newDevice = captureDeviceForMediaType(AVMediaTypeVideo, position: newPosition) {
         var error: NSError?
-        let newDeviceInput = AVCaptureDeviceInput(device: newDevice, error: &error)
+        let newDeviceInput: AVCaptureDeviceInput!
+        do {
+          newDeviceInput = try AVCaptureDeviceInput(device: newDevice)
+        } catch let error1 as NSError {
+          error = error1
+          newDeviceInput = nil
+        }
         captureSession.beginConfiguration()
         captureSession.removeInput(currentVideoDeviceInput)
         if captureSession.canAddInput(newDeviceInput) {
@@ -303,7 +309,10 @@ class CameraViewController: UIViewController {
       if let captureDevice = captureDevice {
         let focusMode = locked ? AVCaptureFocusMode.Locked : AVCaptureFocusMode.ContinuousAutoFocus
         if captureDevice.isFocusModeSupported(focusMode) {
-          captureDevice.lockForConfiguration(nil)
+          do {
+            try captureDevice.lockForConfiguration()
+          } catch _ {
+          }
           captureDevice.focusMode = focusMode
           captureDevice.unlockForConfiguration()
         }
@@ -383,7 +392,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     endProgressViewAnimation()
     // Crop video
     // http://stackoverflow.com/a/5231713/801858
-    let asset = AVAsset.assetWithURL(outputFileURL) as! AVAsset
+    let asset = AVAsset.assetWithURL(outputFileURL) 
     let videoTrack = asset.tracksWithMediaType(AVMediaTypeVideo).first as! AVAssetTrack
 
     // When thinking about the following code, think of capturing video in landscape!
@@ -410,10 +419,19 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     let exportedVideoURL = outputFileURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent("video_\(randomString).mp4")
     let exportedThumbnailURL = exportedVideoURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent("image_\(randomString).png")
 
-    // Export
-    NSFileManager.defaultManager().removeItemAtURL(outputFileURL, error: nil)
-    NSFileManager.defaultManager().removeItemAtURL(exportedVideoURL, error: nil)
-    NSFileManager.defaultManager().removeItemAtURL(exportedThumbnailURL, error: nil)
+    do {
+      // Export
+      try NSFileManager.defaultManager().removeItemAtURL(outputFileURL)
+    } catch _ {
+    }
+    do {
+      try NSFileManager.defaultManager().removeItemAtURL(exportedVideoURL)
+    } catch _ {
+    }
+    do {
+      try NSFileManager.defaultManager().removeItemAtURL(exportedThumbnailURL)
+    } catch _ {
+    }
 
     let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetHighestQuality)
     exporter.videoComposition = videoComposition
@@ -422,7 +440,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     exporter.exportAsynchronouslyWithCompletionHandler {
       let asset = AVURLAsset(URL: exportedVideoURL, options: nil)
       let imageGenerator = AVAssetImageGenerator(asset: asset)
-      let imageRef = imageGenerator.copyCGImageAtTime(kCMTimeZero, actualTime: nil, error: nil)
+      let imageRef = try? imageGenerator.copyCGImageAtTime(kCMTimeZero, actualTime: nil)
       let thumbnailData = UIImagePNGRepresentation(UIImage(CGImage: imageRef))
       thumbnailData.writeToURL(exportedThumbnailURL, atomically: true)
       dispatch_async(dispatch_get_main_queue()) {

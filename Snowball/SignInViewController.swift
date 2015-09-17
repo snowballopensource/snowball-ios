@@ -61,7 +61,7 @@ extension SignInViewController: UITableViewDataSource {
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(TextFieldTableViewCell),
-      forIndexPath: indexPath) as! UITableViewCell
+      forIndexPath: indexPath) 
     configureCell(cell, atIndexPath: indexPath)
     return cell
   }

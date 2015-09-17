@@ -120,7 +120,10 @@ class User: RemoteObject {
     if let userID = id {
       Analytics.track("Follow User")
       following = true
-      managedObjectContext?.save(nil)
+      do {
+        try managedObjectContext?.save()
+      } catch _ {
+      }
 
       API.request(Router.FollowUser(userID: userID)).responseJSON { (request, response, JSON, error) in
         if let error = error {
@@ -136,7 +139,10 @@ class User: RemoteObject {
   private func unfollow() {
     if let userID = id {
       following = false
-      managedObjectContext?.save(nil)
+      do {
+        try managedObjectContext?.save()
+      } catch _ {
+      }
 
       API.request(Router.UnfollowUser(userID: userID)).responseJSON { (request, response, JSON, error) in
         if let error = error {

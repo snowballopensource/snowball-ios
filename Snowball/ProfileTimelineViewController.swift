@@ -27,7 +27,7 @@ class ProfileTimelineViewController: TimelineViewController {
     self.userProfileDetailView.delegate = self
   }
 
-  required init(coder: NSCoder) {
+  required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
@@ -54,7 +54,7 @@ class ProfileTimelineViewController: TimelineViewController {
   override func refresh() {
     timeline.requestUserTimeline(user) { (error) -> Void in
       if let error = error {
-        println(error)
+        print(error)
         // TODO: Display the error
       }
     }

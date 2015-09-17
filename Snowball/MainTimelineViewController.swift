@@ -48,7 +48,7 @@ class MainTimelineViewController: TimelineViewController {
   override func refresh() {
     timeline.requestHomeTimeline { (error) -> Void in
       if let error = error {
-        println(error)
+        print(error)
         // TODO: Display the error
       }
     }
@@ -133,7 +133,10 @@ extension MainTimelineViewController: ClipCollectionViewCellDelegate {
             clip.assignAttributes(JSON)
           }
         }
-        clip.managedObjectContext?.save(nil)
+        do {
+          try clip.managedObjectContext?.save()
+        } catch _ {
+        }
         self.timeline.markClipAsUpdated(clip)
       }
     }

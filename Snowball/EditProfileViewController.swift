@@ -148,7 +148,7 @@ extension EditProfileViewController: SnowballTopViewDelegate {
     let user = User.currentUser!
     let usernameCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: EditProfileTextFieldIndex.Username.rawValue, inSection: 0)) as! TextFieldTableViewCell
     var username: String?
-    if user.username != usernameCell.textField.text && count(usernameCell.textField.text) > 0 {
+    if user.username != usernameCell.textField.text && (usernameCell.textField.text).count > 0 {
       username = usernameCell.textField.text
       user.username = username
     }
@@ -160,7 +160,7 @@ extension EditProfileViewController: SnowballTopViewDelegate {
     }
     let emailCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: EditProfileTextFieldIndex.Email.rawValue, inSection: 0)) as! TextFieldTableViewCell
     var email: String?
-    if user.email != emailCell.textField.text && count(emailCell.textField.text) > 0 {
+    if user.email != emailCell.textField.text && (emailCell.textField.text).count > 0 {
       email = emailCell.textField.text
       user.email = email
     }

@@ -79,7 +79,7 @@ class FindFriendsViewController: UIViewController {
     var error: Unmanaged<CFError>?
     let addressBook = ABAddressBookCreateWithOptions(nil, &error)
     if error != nil {
-      println("Address book creation error: \(error)")
+      print("Address book creation error: \(error)")
       return nil
     }
     return addressBook.takeRetainedValue()
@@ -241,7 +241,7 @@ extension FindFriendsViewController: UITableViewDataSource {
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(UserTableViewCell),
-      forIndexPath: indexPath) as! UITableViewCell
+      forIndexPath: indexPath) 
     configureCell(cell, atIndexPath: indexPath)
     return cell
   }
@@ -292,7 +292,7 @@ extension FindFriendsViewController: UITextFieldDelegate {
   }
 
   func textFieldShouldReturn(textField: UITextField) -> Bool {
-    if count(textField.text) > 2 {
+    if textField.text.characters.count > 2 {
       searchForUserWithUsername(textField.text)
     } else {
       cancelSearch()
@@ -307,7 +307,7 @@ extension FindFriendsViewController: MFMessageComposeViewControllerDelegate {
 
   // MARK: - MFMessageComposeViewControllerDelegate
 
-  func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult) {
+  func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
     controller.dismissViewControllerAnimated(true, completion: nil)
   }
 }

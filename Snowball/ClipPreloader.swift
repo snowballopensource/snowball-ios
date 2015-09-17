@@ -41,7 +41,7 @@ class ClipPreloader: NSOperationQueue {
 
   class func preloadTimeline(timeline: Timeline, withFirstClip clip: Clip?) {
     if let clip = clip {
-      var offset = timeline.indexOfClip(clip)
+      let offset = timeline.indexOfClip(clip)
       if let offset = offset {
         let clipsCount = timeline.clips.count
         for var i = 0; i < clipsCount; i++ {

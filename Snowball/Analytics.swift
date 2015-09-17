@@ -57,9 +57,9 @@ class Analytics {
 
   private func track(eventName: String, properties: [String: String]? = nil) {
     if isStaging() {
-      println("Received but not tracking event: \(eventName)")
+      print("Received but not tracking event: \(eventName)")
     } else {
-      println("Tracking event: \(eventName)")
+      print("Tracking event: \(eventName)")
       if let properties = properties {
         amplitude.logEvent(eventName, withEventProperties: properties)
         mixpanel.track(eventName, properties: properties)

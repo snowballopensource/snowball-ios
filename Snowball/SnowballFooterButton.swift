@@ -22,7 +22,7 @@ class SnowballFooterButton: UIButton {
 
     backgroundColor = UIColor.SnowballColor.blueColor
     titleLabel?.font = UIFont(name: UIFont.SnowballFont.bold, size: 19)
-    alignLeft(insetWidth: 20)
+    alignLeft(20)
 
     if let rightImage = rightImage {
       rightImageView.image = rightImage.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
@@ -32,7 +32,7 @@ class SnowballFooterButton: UIButton {
     tintColor = UIColor.whiteColor()
   }
 
-  required init(coder: NSCoder) {
+  required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 

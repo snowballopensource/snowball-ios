@@ -17,26 +17,26 @@ struct PushManager {
     Parse.setApplicationId("XfkcX3ZtlbyMxbSgeblGLixNuJCkmdCVEFBDkf6J",
       clientKey: "BW8JgNZNUvWG6lvcfQUGscEKkqtJUpTRRkhw13ze")
 
-    let types = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
+    let types: UIUserNotificationType = [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]
     let settings = UIUserNotificationSettings(forTypes: types, categories: nil)
     let application = UIApplication.sharedApplication()
     application.registerUserNotificationSettings(settings)
     application.registerForRemoteNotifications()
   }
 
-  static func registrationSucceeded(#deviceToken: NSData) {
+  static func registrationSucceeded(deviceToken deviceToken: NSData) {
     let installation = PFInstallation.currentInstallation()
     installation.setDeviceTokenFromData(deviceToken)
     associateCurrentInstallationWithCurrentUser()
     installation.saveInBackgroundWithBlock(nil)
   }
 
-  static func registrationFailed(#error: NSError) {
+  static func registrationFailed(error error: NSError) {
     error.print("Push notification registration")
   }
 
-  static func handleRemoteNotification(#userInfo: [NSObject: AnyObject]) {
-    println("Push notification received: \(userInfo)")
+  static func handleRemoteNotification(userInfo userInfo: [NSObject: AnyObject]) {
+    print("Push notification received: \(userInfo)")
 
     let applicationState = UIApplication.sharedApplication().applicationState
     if applicationState == UIApplicationState.Active {

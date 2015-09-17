@@ -71,7 +71,7 @@ class OnboardingPageViewController: UIViewController {
       return nil
     }
     let viewControllerClass = viewControllerClasses[index]
-    return viewControllerClass()
+    return viewControllerClass.init()
   }
 
   @objc private func tapGestureRecognizerTapped() {
@@ -110,7 +110,7 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate {
 
   // MARK: - UIPageViewControllerDelegate
 
-  func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [AnyObject]) {
+  func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
     if let nextVC = pendingViewControllers.first as? UIViewController {
       pageControl.currentPage = indexOfViewControllerClass(nextVC.dynamicType)
     }

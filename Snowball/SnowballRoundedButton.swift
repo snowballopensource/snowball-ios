@@ -45,12 +45,12 @@ class SnowballRoundedButton: UIButton {
       layer.borderWidth = 2
     }
     titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    alignLeft(insetWidth: 20)
+    alignLeft(20)
     chevronImageView.hidden = true
     addSubview(chevronImageView)
   }
 
-  required init(coder: NSCoder) {
+  required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 

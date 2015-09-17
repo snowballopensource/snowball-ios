@@ -72,7 +72,7 @@ class AuthenticationViewController: UIViewController {
   // MARK: - Internal
 
   func authenticationCompletedSuccessfully(user: User) {
-    PushManager.associateCurrentInstallationWithCurrentUser(saveImmediately: true)
+    PushManager.associateCurrentInstallationWithCurrentUser(true)
   }
 
   // MARK: - Private
@@ -118,7 +118,7 @@ extension AuthenticationViewController: SnowballTopViewDelegate {
 // MARK: - UITextFieldDelegate
 extension AuthenticationViewController: UITextFieldDelegate {
   func textFieldShouldReturn(textField: UITextField) -> Bool {
-    for cell in tableView.visibleCells() {
+    for cell in tableView.visibleCells {
       if let cell = cell as? TextFieldTableViewCell {
         if textField.isDescendantOfView(cell.contentView) {
           if let indexPath = tableView.indexPathForCell(cell) {

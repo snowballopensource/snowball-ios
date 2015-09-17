@@ -21,7 +21,7 @@ class CircleLoadingIndicator: UIView {
     clipsToBounds = true
   }
 
-  required init(coder: NSCoder) {
+  required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
@@ -58,9 +58,9 @@ class CircleLoadingIndicator: UIView {
 
   // MARK: - Private
 
-  private func startPulseAnimation(#color: UIColor) {
+  private func startPulseAnimation(color color: UIColor) {
     backgroundColor = color.colorWithAlphaComponent(0.2)
-    UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.CurveLinear | UIViewAnimationOptions.Autoreverse | UIViewAnimationOptions.Repeat, animations: { () -> Void in
+    UIView.animateWithDuration(1, delay: 0, options: [UIViewAnimationOptions.CurveLinear, UIViewAnimationOptions.Autoreverse, UIViewAnimationOptions.Repeat], animations: { () -> Void in
       self.backgroundColor = color.colorWithAlphaComponent(0.9)
       }, completion: nil)
   }

@@ -10,6 +10,6 @@ import Foundation
 
 extension NSError {
   func print(name: String) {
-    println("\(name.capitalizedString) Error: \(description)")
+    Swift.print("\(name.capitalizedString) Error: \(description)")
   }
 }

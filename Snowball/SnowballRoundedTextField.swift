@@ -16,10 +16,10 @@ class SnowballRoundedTextField: UITextField {
     super.init(frame: frame)
 
     layer.borderWidth = 2
-    alignLeft(insetWidth: 20)
+    alignLeft(20)
   }
 
-  required init(coder: NSCoder) {
+  required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 

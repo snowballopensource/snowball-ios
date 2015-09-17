@@ -211,7 +211,7 @@ extension FriendsViewController: UITableViewDataSource {
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(UserTableViewCell),
-      forIndexPath: indexPath) as! UITableViewCell
+      forIndexPath: indexPath) 
     configureCell(cell, atIndexPath: indexPath)
     return cell
   }

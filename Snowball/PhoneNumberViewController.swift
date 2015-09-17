@@ -33,7 +33,7 @@ class PhoneNumberViewController: UIViewController {
     textField.keyboardType = UIKeyboardType.PhonePad
     textField.text = "+1"
     textField.font = UIFont(name: "Helvetica", size: 24)
-    textField.alignLeft(insetWidth: 0)
+    textField.alignLeft(0)
     textField.textAlignment = NSTextAlignment.Center
     textField.tintColor = UIColor.whiteColor()
     return textField
@@ -44,7 +44,7 @@ class PhoneNumberViewController: UIViewController {
     textField.keyboardType = UIKeyboardType.PhonePad
     textField.attributedPlaceholder = NSAttributedString(string: "4151234567", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor])
     textField.font = UIFont(name: "Helvetica", size: 28)
-    textField.alignLeft(insetWidth: 0)
+    textField.alignLeft(0)
     textField.textAlignment = NSTextAlignment.Center
     textField.tintColor = UIColor.SnowballColor.blueColor
     return textField
@@ -110,7 +110,7 @@ extension PhoneNumberViewController: SnowballTopViewDelegate {
 
   func snowballTopViewRightButtonTapped() {
     let newPhoneNumber = "\(countryCodeTextField.text)\(phoneNumberTextField.text)"
-    if count(newPhoneNumber) > 5 {
+    if newPhoneNumber.characters.count > 5 {
       topBar.spinRightButton(true)
       API.request(Router.UpdateCurrentUser(name: nil, username: nil, email: nil, phoneNumber: newPhoneNumber)).responseJSON { (request, response, JSON, error) in
         if let error = error {

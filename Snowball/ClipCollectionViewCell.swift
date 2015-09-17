@@ -29,7 +29,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let screenHeight = UIScreen.mainScreen().bounds.height
     let screenWidth = UIScreen.mainScreen().bounds.width
     let cellHeight = screenHeight - screenWidth
-    var cellWidth = screenWidth / 2.5
+    let cellWidth = screenWidth / 2.5
     return CGSizeMake(cellWidth, cellHeight)
   }
 
@@ -148,7 +148,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     addGestureRecognizer(hideOptionsGestureRecognizer)
   }
 
-  required init(coder: NSCoder) {
+  required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
@@ -171,7 +171,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let userColor = clip.user?.color as? UIColor ?? UIColor.SnowballColor.blueColor
 
     if let thumbnailURLString = clip.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
-      clipThumbnailLoadingIndicator.startAnimating(color: userColor)
+      clipThumbnailLoadingIndicator.startAnimating(userColor)
       clipThumbnailImageView.setImageFromURL(thumbnailURL) {
         self.clipThumbnailLoadingIndicator.stopAnimating()
       }
@@ -511,7 +511,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
   }
 
-  private func setUserAvatarPosition(#topOfBounce: Bool, animated: Bool, animationCompletion: (() -> Void)? = nil) {
+  private func setUserAvatarPosition(topOfBounce topOfBounce: Bool, animated: Bool, animationCompletion: (() -> Void)? = nil) {
     if animated {
       contentView.layoutIfNeeded()
       let animationOptions = topOfBounce ? UIViewAnimationOptions.CurveEaseOut : UIViewAnimationOptions.CurveEaseIn
@@ -522,7 +522,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
       })
     } else {
       if topOfBounce == userAvatarSetToTopOfBounce { return }
-      setUserAvatarImageViewYConstraint(topOfBounce: topOfBounce)
+      setUserAvatarImageViewYConstraint(topOfBounce)
       userAvatarSetToTopOfBounce = topOfBounce
       contentView.layoutIfNeeded()
     }
@@ -562,7 +562,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
   }
 
-  private func setOptionsViewYConstraint(#hidden: Bool) {
+  private func setOptionsViewYConstraint(hidden hidden: Bool) {
     if hidden {
       optionsViewYConstraint = constrain(optionsView, clipThumbnailImageView, replace: optionsViewYConstraint) { (optionsView, clipThumbnailImageView) in
         optionsView.bottom == clipThumbnailImageView.top

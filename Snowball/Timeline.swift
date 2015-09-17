@@ -16,7 +16,7 @@ class Timeline {
     }
   }
   var pendingClips: [Clip] {
-    var pendingClips = self.clips.filter { (clip) -> Bool in
+    let pendingClips = self.clips.filter { (clip) -> Bool in
       if clip.state == ClipState.Default {
         return false
       }
@@ -78,7 +78,7 @@ class Timeline {
   }
 
   func clipAfterClip(clip: Clip) -> Clip? {
-    if let index = find(clips, clip) {
+    if let index = clips.indexOf(clip) {
       let nextIndex = index + 1
       if nextIndex < clips.count {
         return clips[nextIndex]
@@ -88,7 +88,7 @@ class Timeline {
   }
 
   func clipBeforeClip(clip: Clip) -> Clip? {
-    if let index = find(clips, clip) {
+    if let index = clips.indexOf(clip) {
       let previousIndex = index - 1
       if previousIndex >= 0 {
         return clips[previousIndex]
@@ -98,7 +98,7 @@ class Timeline {
   }
 
   func indexOfClip(clip: Clip) -> Int? {
-    return find(clips, clip)
+    return clips.indexOf(clip)
   }
 
   func appendClip(clip: Clip) {
@@ -106,15 +106,18 @@ class Timeline {
   }
 
   func insertClip(clip: Clip, atIndex index: Int) {
-    insert(&clips, clip, atIndex: index)
+    clips.insert(clip, atIndex: index)
     delegate?.timeline(self, didInsertClip: clip, atIndex: index)
   }
 
   func deleteClip(clip: Clip) {
     if let index = indexOfClip(clip) {
-      removeAtIndex(&clips, index)
+      clips.removeAtIndex(index)
       clip.delete()
-      CoreDataStack.defaultStack.mainQueueManagedObjectContext.save(nil)
+      do {
+        try CoreDataStack.defaultStack.mainQueueManagedObjectContext.save()
+      } catch _ {
+      }
       delegate?.timeline(self, didDeleteClip: clip, atIndex: index)
     }
   }

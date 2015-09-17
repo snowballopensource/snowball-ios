@@ -15,7 +15,7 @@ struct Cache {
   static let sharedCache = Cache()
 
   private static let basePath: String = {
-    let cachePath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as! String
+    let cachePath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] 
     return cachePath.stringByAppendingPathComponent("DataCache")
   }()
 
@@ -41,7 +41,11 @@ struct Cache {
 
   static func removeAllData() {
     var error: NSError?
-    NSFileManager.defaultManager().removeItemAtPath(basePath, error: &error)
+    do {
+      try NSFileManager.defaultManager().removeItemAtPath(basePath)
+    } catch let error1 as NSError {
+      error = error1
+    }
     error?.print("clearing cache")
     createDirectory()
   }
@@ -50,29 +54,43 @@ struct Cache {
 
   private static func createDirectory() {
     var error: NSError?
-    NSFileManager.defaultManager().createDirectoryAtPath(basePath, withIntermediateDirectories: true, attributes: nil, error: &error)
+    do {
+      try NSFileManager.defaultManager().createDirectoryAtPath(basePath, withIntermediateDirectories: true, attributes: nil)
+    } catch let error1 as NSError {
+      error = error1
+    }
     error?.print("creating cache directory")
   }
 
   private func localDataAtURL(url: NSURL) -> (NSData?, NSURL?) {
     let path = pathForKey(keyForURL(url))
     var error: NSError?
-    if let data = NSData(contentsOfFile: path, options: NSDataReadingOptions.allZeros, error: &error) {
+    do {
+      let data = try NSData(contentsOfFile: path, options: NSDataReadingOptions())
       return (data, NSURL(fileURLWithPath: path))
+    } catch let error1 as NSError {
+      error = error1
     }
     return (nil, nil)
   }
 
-  private func setDataForKey(#data: NSData, key: String) -> Bool {
+  private func setDataForKey(data data: NSData, key: String) -> Bool {
     let path = pathForKey(key)
     var error: NSError?
-    let result = data.writeToFile(path, options: NSDataWritingOptions.DataWritingAtomic, error: &error)
+    let result: Bool
+    do {
+      try data.writeToFile(path, options: NSDataWritingOptions.DataWritingAtomic)
+      result = true
+    } catch let error1 as NSError {
+      error = error1
+      result = false
+    }
     error?.print("writing to cache")
     return result
   }
 
   private func keyForURL(url: NSURL) -> String {
-    return url.absoluteString!
+    return url.absoluteString
   }
 
   private func pathForKey(key: String) -> String {

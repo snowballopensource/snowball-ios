@@ -56,7 +56,7 @@ class OnboardingIntroViewController: UIViewController {
       arrowImageView.width == arrowImageView.superview!.width
       arrowImageView.height == arrowImageView.superview!.height
     }
-    UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.Autoreverse | UIViewAnimationOptions.Repeat | UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+    UIView.animateWithDuration(1, delay: 0, options: [UIViewAnimationOptions.Autoreverse, UIViewAnimationOptions.Repeat, UIViewAnimationOptions.CurveLinear], animations: { () -> Void in
       self.arrowImageView.alpha = 0.5
       }, completion: nil)
   }
