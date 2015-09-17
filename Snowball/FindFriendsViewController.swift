@@ -104,7 +104,7 @@ class FindFriendsViewController: UIViewController {
     searchTextField.delegate = self
     view.addSubview(searchTextField)
     let margin: CGFloat = 20
-    layout(searchTextField, topView) { (searchTextField, topView) in
+    constrain(searchTextField, topView) { (searchTextField, topView) in
       searchTextField.left == searchTextField.superview!.left + margin
       searchTextField.top == topView.bottom
       searchTextField.right == searchTextField.superview!.right - margin
@@ -112,7 +112,7 @@ class FindFriendsViewController: UIViewController {
     }
 
     view.addSubview(tableViewLabel)
-    layout(tableViewLabel, searchTextField) { (tableViewLabel, searchTextField) in
+    constrain(tableViewLabel, searchTextField) { (tableViewLabel, searchTextField) in
       tableViewLabel.left == tableViewLabel.superview!.left + margin
       tableViewLabel.top == searchTextField.bottom + 15
       tableViewLabel.right == tableViewLabel.superview!.right - margin
@@ -128,7 +128,7 @@ class FindFriendsViewController: UIViewController {
     tableView.dataSource = self
     tableView.delegate = self
     view.addSubview(tableView)
-    layout(tableView, tableViewLabel, footerButton) { (tableView, tableViewLabel, footerButton) in
+    constrain(tableView, tableViewLabel, footerButton) { (tableView, tableViewLabel, footerButton) in
       tableView.left == tableView.superview!.left
       tableView.top == tableViewLabel.bottom + 5
       tableView.right == tableView.superview!.right

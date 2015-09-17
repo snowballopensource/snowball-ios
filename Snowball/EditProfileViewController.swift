@@ -57,7 +57,7 @@ class EditProfileViewController: UIViewController {
 
     tableHeaderView.addSubview(avatarButton)
     avatarButton.addTarget(self, action: "avatarButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
-    layout(avatarButton) { (avatarButton) in
+    constrain(avatarButton) { (avatarButton) in
       avatarButton.top == avatarButton.superview!.top
       avatarButton.centerX == avatarButton.superview!.centerX
       avatarButton.width == avatarButtonDiameter
@@ -71,7 +71,7 @@ class EditProfileViewController: UIViewController {
     addChildViewController(tableViewController)
     view.addSubview(tableViewController.view)
     tableViewController.didMoveToParentViewController(self)
-    layout(tableViewController.view, topView) { (tableView, topView) in
+    constrain(tableViewController.view, topView) { (tableView, topView) in
       tableView.left == tableView.superview!.left
       tableView.top == topView.bottom
       tableView.right == tableView.superview!.right
@@ -81,7 +81,7 @@ class EditProfileViewController: UIViewController {
 //
 //    logOutButton.addTarget(self, action: "logOutButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
 //    view.addSubview(logOutButton)
-//    layout(logOutButton, emailTextField) { (logOutButton, emailTextField) in
+//    constrain(logOutButton, emailTextField) { (logOutButton, emailTextField) in
 //      logOutButton.left == logOutButton.superview!.left + margin
 //      logOutButton.top == emailTextField.bottom + afterTextFieldSpacing
 //      logOutButton.right == logOutButton.superview!.right - margin
@@ -93,7 +93,7 @@ class EditProfileViewController: UIViewController {
 //    let logOutChevron = UIImageView(image: chevronImage)
 //    logOutChevron.tintColor = UIColor.redColor()
 //    logOutButton.addSubview(logOutChevron)
-//    layout(logOutChevron) { (logOutChevron) in
+//    constrain(logOutChevron) { (logOutChevron) in
 //      logOutChevron.width == Float(chevronImage.size.width)
 //      logOutChevron.centerY == logOutChevron.superview!.centerY
 //      logOutChevron.right == logOutChevron.superview!.right - 25

@@ -257,7 +257,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   private func setupSubviews() {
     contentView.addSubview(clipThumbnailImageView)
-    layout(clipThumbnailImageView) { (clipThumbnailImageView) in
+    constrain(clipThumbnailImageView) { (clipThumbnailImageView) in
       clipThumbnailImageView.leading == clipThumbnailImageView.superview!.leading
       clipThumbnailImageView.top == clipThumbnailImageView.superview!.top
       clipThumbnailImageView.trailing == clipThumbnailImageView.superview!.trailing
@@ -265,7 +265,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
 
     contentView.addSubview(darkDimOverlayView)
-    layout(darkDimOverlayView, clipThumbnailImageView) { (darkDimOverlayView, clipThumbnailImageView) in
+    constrain(darkDimOverlayView, clipThumbnailImageView) { (darkDimOverlayView, clipThumbnailImageView) in
       darkDimOverlayView.left == clipThumbnailImageView.left
       darkDimOverlayView.top == clipThumbnailImageView.top
       darkDimOverlayView.right == clipThumbnailImageView.right
@@ -273,7 +273,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
 
     contentView.addSubview(addButton)
-    layout(addButton, clipThumbnailImageView) { (addButton, clipThumbnailImageView) in
+    constrain(addButton, clipThumbnailImageView) { (addButton, clipThumbnailImageView) in
       addButton.left == clipThumbnailImageView.left
       addButton.top == clipThumbnailImageView.top
       addButton.right == clipThumbnailImageView.right
@@ -282,7 +282,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     contentView.addSubview(optionsView)
     setOptionsViewYConstraint(hidden: true)
-    layout(optionsView, clipThumbnailImageView) { (optionsView, clipThumbnailImageView) in
+    constrain(optionsView, clipThumbnailImageView) { (optionsView, clipThumbnailImageView) in
       optionsView.left == clipThumbnailImageView.left
       optionsView.width == clipThumbnailImageView.width
       optionsView.height == clipThumbnailImageView.height
@@ -290,7 +290,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     contentView.addSubview(userAvatarImageView)
     setUserAvatarImageViewYConstraint()
-    layout(userAvatarImageView, clipThumbnailImageView) { (userAvatarImageView, clipThumbnailImageView) in
+    constrain(userAvatarImageView, clipThumbnailImageView) { (userAvatarImageView, clipThumbnailImageView) in
       var width: Float = 40
       if isIphone4S { width = 30 }
       userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
@@ -299,7 +299,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
 
     contentView.addSubview(userButton)
-    layout(userButton, userAvatarImageView) { (userButton, userAvatarImageView) in
+    constrain(userButton, userAvatarImageView) { (userButton, userAvatarImageView) in
       userButton.left == userAvatarImageView.left
       userButton.top == userAvatarImageView.top
       userButton.right == userAvatarImageView.right
@@ -307,13 +307,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
 
     contentView.addSubview(usernameLabel)
-    layout(usernameLabel, clipThumbnailImageView) { (usernameLabel, clipThumbnailImageView) in
+    constrain(usernameLabel, clipThumbnailImageView) { (usernameLabel, clipThumbnailImageView) in
       usernameLabel.centerX == usernameLabel.superview!.centerX
       usernameLabel.top == clipThumbnailImageView.bottom + (self.userAvatarImageView.frame.height / 2) + 5
     }
 
     contentView.addSubview(clipTimeLabel)
-    layout(clipTimeLabel, usernameLabel) { (clipTimeLabel, usernameLabel) in
+    constrain(clipTimeLabel, usernameLabel) { (clipTimeLabel, usernameLabel) in
       clipTimeLabel.left == clipTimeLabel.superview!.left
       clipTimeLabel.top == usernameLabel.bottom + 2
       clipTimeLabel.right == clipTimeLabel.superview!.right
@@ -323,7 +323,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
 
     contentView.addSubview(likeButton)
-    layout(likeButton, clipTimeLabel) { (likeButton, clipTimeLabel) in
+    constrain(likeButton, clipTimeLabel) { (likeButton, clipTimeLabel) in
       likeButton.centerX == likeButton.superview!.centerX
       likeButton.top == clipTimeLabel.bottom + 2
       if isIphone4S {
@@ -335,19 +335,19 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
 
     contentView.addSubview(bookmarkImageView)
-    layout(bookmarkImageView, clipThumbnailImageView) { (bookmarkImageView, clipThumbnailImageView) in
+    constrain(bookmarkImageView, clipThumbnailImageView) { (bookmarkImageView, clipThumbnailImageView) in
       bookmarkImageView.centerX == clipThumbnailImageView.centerX
       bookmarkImageView.centerY == clipThumbnailImageView.centerY
     }
 
     contentView.addSubview(pauseImageView)
-    layout(pauseImageView, bookmarkImageView) { (pauseImageView, bookmarkImageView) in
+    constrain(pauseImageView, bookmarkImageView) { (pauseImageView, bookmarkImageView) in
       pauseImageView.centerX == bookmarkImageView.centerX
       pauseImageView.centerY == bookmarkImageView.centerY
     }
 
     contentView.addSubview(dimOverlayView)
-    layout(dimOverlayView) { (dimOverlayView) in
+    constrain(dimOverlayView) { (dimOverlayView) in
       dimOverlayView.left == dimOverlayView.superview!.left
       dimOverlayView.top == dimOverlayView.superview!.top
       dimOverlayView.right == dimOverlayView.superview!.right
@@ -355,7 +355,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
 
     contentView.addSubview(uploadRetryButton)
-    layout(uploadRetryButton, clipThumbnailImageView) { (uploadRetryButton, clipThumbnailImageView) in
+    constrain(uploadRetryButton, clipThumbnailImageView) { (uploadRetryButton, clipThumbnailImageView) in
       uploadRetryButton.left == clipThumbnailImageView.left
       uploadRetryButton.top == clipThumbnailImageView.top
       uploadRetryButton.right == clipThumbnailImageView.right
@@ -363,7 +363,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
 
     contentView.addSubview(clipThumbnailLoadingIndicator)
-    layout(clipThumbnailLoadingIndicator, clipThumbnailImageView) { (clipThumbnailLoadingIndicator, clipThumbnailImageView) in
+    constrain(clipThumbnailLoadingIndicator, clipThumbnailImageView) { (clipThumbnailLoadingIndicator, clipThumbnailImageView) in
       clipThumbnailLoadingIndicator.centerX == clipThumbnailImageView.centerX
       clipThumbnailLoadingIndicator.centerY == clipThumbnailImageView.centerY
       clipThumbnailLoadingIndicator.width == 15

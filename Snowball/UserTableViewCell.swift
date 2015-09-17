@@ -47,7 +47,7 @@ class UserTableViewCell: UITableViewCell {
     let margin: Float = 20
 
     contentView.addSubview(avatarImageView)
-    layout(avatarImageView) { (avatarImageView) in
+    constrain(avatarImageView) { (avatarImageView) in
       avatarImageView.left == avatarImageView.superview!.left + margin
       avatarImageView.centerY == avatarImageView.superview!.centerY
       avatarImageView.width == 40
@@ -55,7 +55,7 @@ class UserTableViewCell: UITableViewCell {
     }
 
     contentView.addSubview(usernameLabel)
-    layout(usernameLabel, avatarImageView) { (usernameLabel, avatarImageView) in
+    constrain(usernameLabel, avatarImageView) { (usernameLabel, avatarImageView) in
       usernameLabel.left == avatarImageView.right + 15
       usernameLabel.centerY == usernameLabel.superview!.centerY
       usernameLabel.right == usernameLabel.superview!.right
@@ -63,7 +63,7 @@ class UserTableViewCell: UITableViewCell {
 
     followButton.addTarget(self, action: "followButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     contentView.addSubview(followButton)
-    layout(followButton) { (followButton) in
+    constrain(followButton) { (followButton) in
       followButton.width == 80
       followButton.centerY == followButton.superview!.centerY
       followButton.right == followButton.superview!.right - margin

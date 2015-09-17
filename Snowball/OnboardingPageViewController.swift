@@ -45,7 +45,7 @@ class OnboardingPageViewController: UIViewController {
 
     pageControl.numberOfPages = viewControllerClasses.count
     view.addSubview(pageControl)
-    layout(pageControl) { (pageControl) in
+    constrain(pageControl) { (pageControl) in
       pageControl.centerX == pageControl.superview!.centerX
       pageControl.top == pageControl.superview!.top + 20
       return

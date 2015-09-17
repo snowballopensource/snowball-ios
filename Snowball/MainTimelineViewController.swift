@@ -31,7 +31,7 @@ class MainTimelineViewController: TimelineViewController {
     addChildViewController(cameraViewController)
     view.addSubview(cameraViewController.view)
     cameraViewController.didMoveToParentViewController(self)
-    layout(cameraViewController.view) { (cameraView) in
+    constrain(cameraViewController.view) { (cameraView) in
       cameraView.left == cameraView.superview!.left
       cameraView.top == cameraView.superview!.top
       cameraView.right == cameraView.superview!.right

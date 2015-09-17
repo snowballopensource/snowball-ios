@@ -138,7 +138,7 @@ class CameraViewController: UIViewController {
     }
 
     view.addSubview(cameraView)
-    layout(cameraView) { (cameraView) in
+    constrain(cameraView) { (cameraView) in
       cameraView.left == cameraView.superview!.left
       cameraView.top == cameraView.superview!.top
       cameraView.right == cameraView.superview!.right
@@ -153,7 +153,7 @@ class CameraViewController: UIViewController {
     playerView.player = CameraPreviewPlayer()
     playerView.hidden = true
     view.addSubview(playerView)
-    layout(playerView) { (playerView) in
+    constrain(playerView) { (playerView) in
       playerView.left == playerView.superview!.left
       playerView.top == playerView.superview!.top
       playerView.right == playerView.superview!.right
@@ -162,7 +162,7 @@ class CameraViewController: UIViewController {
 
     cancelPreviewButton.addTarget(self, action: "cancelPreview", forControlEvents: UIControlEvents.TouchUpInside)
     playerView.addSubview(cancelPreviewButton)
-    layout(cancelPreviewButton) { (cancelPreviewButton) in
+    constrain(cancelPreviewButton) { (cancelPreviewButton) in
       cancelPreviewButton.left == cancelPreviewButton.superview!.left
       cancelPreviewButton.top == cancelPreviewButton.superview!.top + 20
       cancelPreviewButton.right == cancelPreviewButton.superview!.right
@@ -170,7 +170,7 @@ class CameraViewController: UIViewController {
     }
 
     view.addSubview(progressView)
-    layout(progressView) { (progressView) in
+    constrain(progressView) { (progressView) in
       progressView.left == progressView.superview!.left
       progressView.top == progressView.superview!.top
       progressView.right == progressView.superview!.right

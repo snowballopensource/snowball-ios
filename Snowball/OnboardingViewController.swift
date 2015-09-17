@@ -32,7 +32,7 @@ class OnboardingViewController: UIViewController {
     super.viewDidLoad()
 
     view.addSubview(titleLabel)
-    layout(titleLabel) { (titleLabel) in
+    constrain(titleLabel) { (titleLabel) in
       titleLabel.centerX == titleLabel.superview!.centerX
       titleLabel.top == titleLabel.superview!.top + 70
     }
@@ -40,7 +40,7 @@ class OnboardingViewController: UIViewController {
     let margin: CGFloat = 35
 
     view.addSubview(detailImageView)
-    layout(detailImageView, titleLabel) { (detailImageView, titleLabel) in
+    constrain(detailImageView, titleLabel) { (detailImageView, titleLabel) in
       detailImageView.left == detailImageView.superview!.left + margin
       detailImageView.top == titleLabel.bottom + margin
       detailImageView.right == detailImageView.superview!.right - margin

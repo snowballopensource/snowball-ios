@@ -27,7 +27,7 @@ class WebViewController: UIViewController {
     topView.setupDefaultLayout()
 
     view.addSubview(webView)
-    layout(webView, topView) { (webView, topView) in
+    constrain(webView, topView) { (webView, topView) in
       webView.left == webView.superview!.left
       webView.top == topView.bottom
       webView.right == webView.superview!.right

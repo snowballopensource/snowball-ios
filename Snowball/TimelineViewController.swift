@@ -98,7 +98,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     super.loadView()
 
     view.addSubview(playerLoadingImageView)
-    layout(playerLoadingImageView) { (playerLoadingImageView) in
+    constrain(playerLoadingImageView) { (playerLoadingImageView) in
       playerLoadingImageView.left == playerLoadingImageView.superview!.left
       playerLoadingImageView.top == playerLoadingImageView.superview!.top
       playerLoadingImageView.right == playerLoadingImageView.superview!.right
@@ -106,7 +106,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     }
 
     view.addSubview(playerView)
-    layout(playerView) { (playerView) in
+    constrain(playerView) { (playerView) in
       playerView.left == playerView.superview!.left
       playerView.top == playerView.superview!.top
       playerView.right == playerView.superview!.right
@@ -114,7 +114,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     }
 
     view.addSubview(playerLoadingIndicator)
-    layout(playerLoadingIndicator, playerView) { (playerLoadingIndicator, playerView) in
+    constrain(playerLoadingIndicator, playerView) { (playerLoadingIndicator, playerView) in
       playerLoadingIndicator.centerX == playerView.centerX
       playerLoadingIndicator.bottom == playerView.bottom - 15
       playerLoadingIndicator.width == 15
@@ -122,7 +122,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     }
 
     view.addSubview(collectionView)
-    layout(collectionView, playerView) { (collectionView, playerView) in
+    constrain(collectionView, playerView) { (collectionView, playerView) in
       collectionView.left == collectionView.superview!.left - TimelineViewController.collectionViewSideContentInset
       collectionView.top == playerView.bottom
       collectionView.right == collectionView.superview!.right + TimelineViewController.collectionViewSideContentInset

@@ -75,7 +75,7 @@ class WelcomeViewController: UIViewController {
     super.viewDidLoad()
 
     view.addSubview(backgroundImageView)
-    layout(backgroundImageView) { (backgroundImageView) in
+    constrain(backgroundImageView) { (backgroundImageView) in
       backgroundImageView.left == backgroundImageView.superview!.left
       backgroundImageView.top == backgroundImageView.superview!.top
       backgroundImageView.right == backgroundImageView.superview!.right
@@ -84,7 +84,7 @@ class WelcomeViewController: UIViewController {
 
     backgroundImageView.addSubview(backgroundImageViewLogo)
     view.addSubview(backgroundImageView)
-    layout(backgroundImageViewLogo) { (backgroundImageViewLogo) in
+    constrain(backgroundImageViewLogo) { (backgroundImageViewLogo) in
       backgroundImageViewLogo.left == backgroundImageViewLogo.superview!.left
       backgroundImageViewLogo.top == backgroundImageViewLogo.superview!.top
       backgroundImageViewLogo.right == backgroundImageViewLogo.superview!.right
@@ -95,7 +95,7 @@ class WelcomeViewController: UIViewController {
 
     signUpButton.addTarget(self, action: "signUpButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(signUpButton)
-    layout(signUpButton) { (signUpButton) in
+    constrain(signUpButton) { (signUpButton) in
       signUpButton.left == signUpButton.superview!.left + buttonMargin
       signUpButton.top == signUpButton.superview!.centerY + 40
       signUpButton.right == signUpButton.superview!.right - buttonMargin
@@ -104,7 +104,7 @@ class WelcomeViewController: UIViewController {
 
     signInButton.addTarget(self, action: "signInButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(signInButton)
-    layout(signInButton, signUpButton) { (signInButton, signUpButton) -> () in
+    constrain(signInButton, signUpButton) { (signInButton, signUpButton) -> () in
       signInButton.left == signUpButton.left
       signInButton.top == signUpButton.bottom + buttonMargin
       signInButton.right == signUpButton.right
@@ -112,7 +112,7 @@ class WelcomeViewController: UIViewController {
     }
 
     view.addSubview(legalLabel)
-    layout(legalLabel) { (legalLabel) in
+    constrain(legalLabel) { (legalLabel) in
       let margin: Float = 45
       legalLabel.left == legalLabel.superview!.left + margin
       legalLabel.right == legalLabel.superview!.right - margin
@@ -121,7 +121,7 @@ class WelcomeViewController: UIViewController {
 
     termsButton.addTarget(self, action: "termsButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(termsButton)
-    layout(termsButton, legalLabel) { (termsButton, legalLabel) in
+    constrain(termsButton, legalLabel) { (termsButton, legalLabel) in
       termsButton.left == legalLabel.left
       termsButton.top == legalLabel.top
       termsButton.right == termsButton.superview!.centerX
@@ -130,7 +130,7 @@ class WelcomeViewController: UIViewController {
 
     privacyButton.addTarget(self, action: "privacyButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(privacyButton)
-    layout(privacyButton, legalLabel) { (privacyButton, legalLabel) in
+    constrain(privacyButton, legalLabel) { (privacyButton, legalLabel) in
       privacyButton.left == privacyButton.superview!.centerX
       privacyButton.top == legalLabel.top
       privacyButton.right == legalLabel.right

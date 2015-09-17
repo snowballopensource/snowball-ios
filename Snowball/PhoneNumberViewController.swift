@@ -69,7 +69,7 @@ class PhoneNumberViewController: UIViewController {
     topBar.setupDefaultLayout()
 
     view.addSubview(messageLabel)
-    layout(messageLabel, topBar) { (messageLabel, topBar) in
+    constrain(messageLabel, topBar) { (messageLabel, topBar) in
       let sideMargin: Float = 40
       messageLabel.left == messageLabel.superview!.left + sideMargin
       messageLabel.top == topBar.bottom
@@ -77,7 +77,7 @@ class PhoneNumberViewController: UIViewController {
     }
 
     view.addSubview(countryCodeTextField)
-    layout(countryCodeTextField, messageLabel) { (countryCodeTextField, messageLabel) in
+    constrain(countryCodeTextField, messageLabel) { (countryCodeTextField, messageLabel) in
       countryCodeTextField.left == countryCodeTextField.superview!.left + 25
       countryCodeTextField.top == messageLabel.bottom + 15
       countryCodeTextField.width == 90
@@ -85,7 +85,7 @@ class PhoneNumberViewController: UIViewController {
     }
 
     view.addSubview(phoneNumberTextField)
-    layout(phoneNumberTextField, countryCodeTextField) { (phoneNumberTextField, countryCodeTextField) in
+    constrain(phoneNumberTextField, countryCodeTextField) { (phoneNumberTextField, countryCodeTextField) in
       phoneNumberTextField.left == countryCodeTextField.right + 10
       phoneNumberTextField.top == countryCodeTextField.top
       phoneNumberTextField.right == phoneNumberTextField.superview!.right - 25
@@ -93,7 +93,7 @@ class PhoneNumberViewController: UIViewController {
     }
 
     view.addSubview(disclaimerLabel)
-    layout(disclaimerLabel, phoneNumberTextField) { (disclaimerLabel, phoneNumberTextField) in
+    constrain(disclaimerLabel, phoneNumberTextField) { (disclaimerLabel, phoneNumberTextField) in
       disclaimerLabel.centerX == disclaimerLabel.superview!.centerX
       disclaimerLabel.top == phoneNumberTextField.bottom + 30
     }

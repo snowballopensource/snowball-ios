@@ -31,7 +31,7 @@ class TextFieldTableViewCell: UITableViewCell {
 
     let margin: Float = 20
     contentView.addSubview(textField)
-    layout(textField) { (textField) in
+    constrain(textField) { (textField) in
       textField.left == textField.superview!.left + margin
       textField.top == textField.superview!.top + 10
       textField.right == textField.superview!.right - margin

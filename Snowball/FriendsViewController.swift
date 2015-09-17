@@ -76,7 +76,7 @@ class FriendsViewController: UIViewController {
     let margin: Float = 20
 
     view.addSubview(currentUserAvatarImageView)
-    layout(currentUserAvatarImageView, topView) { (currentUserAvatarImageView, topView) in
+    constrain(currentUserAvatarImageView, topView) { (currentUserAvatarImageView, topView) in
       currentUserAvatarImageView.centerX == currentUserAvatarImageView.superview!.centerX
       currentUserAvatarImageView.top == topView.bottom - 15
       currentUserAvatarImageView.width == 100
@@ -84,14 +84,14 @@ class FriendsViewController: UIViewController {
     }
 
     view.addSubview(currentUserUsernameLabel)
-    layout(currentUserUsernameLabel, currentUserAvatarImageView) { (currentUserUsernameLabel, currentUserAvatarImageView) in
+    constrain(currentUserUsernameLabel, currentUserAvatarImageView) { (currentUserUsernameLabel, currentUserAvatarImageView) in
       currentUserUsernameLabel.centerX == currentUserAvatarImageView.centerX
       currentUserUsernameLabel.top == currentUserAvatarImageView.bottom + 10
     }
 
     currentUserProfileButton.addTarget(self, action: "currentUserProfileButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(currentUserProfileButton)
-    layout(currentUserProfileButton, currentUserAvatarImageView) { (currentUserProfileButton, currentUserAvatarImageView) in
+    constrain(currentUserProfileButton, currentUserAvatarImageView) { (currentUserProfileButton, currentUserAvatarImageView) in
       currentUserProfileButton.left == currentUserProfileButton.superview!.left
       currentUserProfileButton.top == currentUserAvatarImageView.top
       currentUserProfileButton.right == currentUserProfileButton.superview!.right
@@ -100,7 +100,7 @@ class FriendsViewController: UIViewController {
 
     settingsButton.addTarget(self, action: "settingsButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(settingsButton)
-    layout(settingsButton, currentUserUsernameLabel) { (settingsButton, currentUserUsernameLabel) in
+    constrain(settingsButton, currentUserUsernameLabel) { (settingsButton, currentUserUsernameLabel) in
       settingsButton.right == settingsButton.superview!.right - margin
       settingsButton.centerY == currentUserUsernameLabel.centerY
       settingsButton.width == 44
@@ -109,7 +109,7 @@ class FriendsViewController: UIViewController {
 
     followersFollowingSegmentedControl.addTarget(self, action: "followersFollowingSegmentedControlTapped", forControlEvents: UIControlEvents.ValueChanged)
     view.addSubview(followersFollowingSegmentedControl)
-    layout(followersFollowingSegmentedControl, currentUserUsernameLabel) { (followersFollowingSegmentedControl, currentUserUsernameLabel) in
+    constrain(followersFollowingSegmentedControl, currentUserUsernameLabel) { (followersFollowingSegmentedControl, currentUserUsernameLabel) in
       followersFollowingSegmentedControl.top == currentUserUsernameLabel.bottom + 10
       followersFollowingSegmentedControl.left == followersFollowingSegmentedControl.superview!.left + margin
       followersFollowingSegmentedControl.right == followersFollowingSegmentedControl.superview!.right - margin
@@ -120,7 +120,7 @@ class FriendsViewController: UIViewController {
     tableView.dataSource = self
     tableView.delegate = self
     view.addSubview(tableView)
-    layout(tableView, followersFollowingSegmentedControl) { (tableView, followersFollowingSegmentedControl) in
+    constrain(tableView, followersFollowingSegmentedControl) { (tableView, followersFollowingSegmentedControl) in
       tableView.left == tableView.superview!.left
       tableView.top == followersFollowingSegmentedControl.bottom + 15
       tableView.right == tableView.superview!.right

@@ -43,7 +43,7 @@ class AuthenticationViewController: UIViewController {
     let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 70))
     let sideMargin: CGFloat = 25
     tableHeaderView.addSubview(messageLabel)
-    layout(messageLabel) { (messageLabel) in
+    constrain(messageLabel) { (messageLabel) in
       messageLabel.left == messageLabel.superview!.left + sideMargin
       messageLabel.top == messageLabel.superview!.top
       messageLabel.right == messageLabel.superview!.right - sideMargin
@@ -53,7 +53,7 @@ class AuthenticationViewController: UIViewController {
     addChildViewController(tableViewController)
     view.addSubview(tableViewController.view)
     tableViewController.didMoveToParentViewController(self)
-    layout(tableViewController.view, topBar) { (tableView, topBar) in
+    constrain(tableViewController.view, topBar) { (tableView, topBar) in
       tableView.left == tableView.superview!.left
       tableView.top == topBar.bottom
       tableView.right == tableView.superview!.right

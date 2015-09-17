@@ -34,7 +34,7 @@ class OnboardingIntroViewController: UIViewController {
     super.viewDidLoad()
 
     view.addSubview(introImageView)
-    layout(introImageView) { (introImageView) in
+    constrain(introImageView) { (introImageView) in
       introImageView.left == introImageView.superview!.left
       introImageView.top == introImageView.superview!.top
       introImageView.width == introImageView.superview!.width
@@ -42,7 +42,7 @@ class OnboardingIntroViewController: UIViewController {
     }
 
     view.addSubview(logoImageView)
-    layout(logoImageView) { (logoImageView) in
+    constrain(logoImageView) { (logoImageView) in
       logoImageView.left == logoImageView.superview!.left
       logoImageView.top == logoImageView.superview!.top
       logoImageView.width == logoImageView.superview!.width
@@ -50,7 +50,7 @@ class OnboardingIntroViewController: UIViewController {
     }
 
     view.addSubview(arrowImageView)
-    layout(arrowImageView) { (arrowImageView) in
+    constrain(arrowImageView) { (arrowImageView) in
       arrowImageView.left == arrowImageView.superview!.left
       arrowImageView.top == arrowImageView.superview!.centerX + 50
       arrowImageView.width == arrowImageView.superview!.width

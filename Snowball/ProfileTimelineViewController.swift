@@ -37,7 +37,7 @@ class ProfileTimelineViewController: TimelineViewController {
     super.loadView()
 
     view.addSubview(userProfileDetailView)
-    layout(userProfileDetailView) { (userProfileDetailView) in
+    constrain(userProfileDetailView) { (userProfileDetailView) in
       userProfileDetailView.left == userProfileDetailView.superview!.left
       userProfileDetailView.top == userProfileDetailView.superview!.top
       userProfileDetailView.right == userProfileDetailView.superview!.right
@@ -187,7 +187,7 @@ class UserProfileDetailView: UIView {
 
   func setupViews() {
     addSubview(backgroundImageView)
-    layout(backgroundImageView) { (backgroundImageView) in
+    constrain(backgroundImageView) { (backgroundImageView) in
       backgroundImageView.left == backgroundImageView.superview!.left
       backgroundImageView.top == backgroundImageView.superview!.top
       backgroundImageView.right == backgroundImageView.superview!.right
@@ -197,7 +197,7 @@ class UserProfileDetailView: UIView {
     backgroundImageView.layer.addSublayer(backgroundImageViewGradient)
 
     addSubview(followButton)
-    layout(followButton) { (followButton) in
+    constrain(followButton) { (followButton) in
       followButton.centerX == followButton.superview!.centerX
       followButton.width == 100
       followButton.height == 40
@@ -205,7 +205,7 @@ class UserProfileDetailView: UIView {
     }
 
     addSubview(usernameLabel)
-    layout(usernameLabel, followButton) { (usernameLabel, followButton) in
+    constrain(usernameLabel, followButton) { (usernameLabel, followButton) in
       usernameLabel.left == usernameLabel.superview!.left
       usernameLabel.bottom == followButton.top - 20
       usernameLabel.right == usernameLabel.superview!.right

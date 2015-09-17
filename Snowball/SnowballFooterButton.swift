@@ -59,7 +59,7 @@ class SnowballFooterButton: UIButton {
   func setupDefaultLayout() {
     let height: Float = 50
 
-    layout(self) { (footerButton) in
+    constrain(self) { (footerButton) in
       footerButton.left == footerButton.superview!.left
       footerButton.bottom == footerButton.superview!.bottom
       footerButton.right == footerButton.superview!.right
