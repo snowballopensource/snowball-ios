@@ -307,9 +307,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
 
     contentView.addSubview(usernameLabel)
-    constrain(usernameLabel, clipThumbnailImageView) { (usernameLabel, clipThumbnailImageView) in
+    constrain(usernameLabel, userAvatarImageView) { (usernameLabel, userAvatarImageView) in
       usernameLabel.centerX == usernameLabel.superview!.centerX
-      usernameLabel.top == clipThumbnailImageView.bottom + (self.userAvatarImageView.frame.height / 2) + 5
+      usernameLabel.top == userAvatarImageView.bottom + 5
     }
 
     contentView.addSubview(clipTimeLabel)
