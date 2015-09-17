@@ -22,11 +22,11 @@ struct API {
     UploadQueue.sharedQueue.addTask {
       let requestURL = NSURL(string: Router.baseURLString)!.URLByAppendingPathComponent("clips")
       let request = AFHTTPRequestSerializer().multipartFormRequestWithMethod("POST",
-        URLString: requestURL.absoluteString!,
+        URLString: requestURL.absoluteString,
         parameters: nil,
         constructingBodyWithBlock: { (formData: AFMultipartFormData!) in
-          formData.appendPartWithFileURL(NSURL(string: clip.videoURL!)!, name: "video", error: nil)
-          formData.appendPartWithFileURL(NSURL(string: clip.thumbnailURL!)!, name: "thumbnail", error: nil)
+          do { try formData.appendPartWithFileURL(NSURL(string: clip.videoURL!)!, name: "video") } catch {}
+          do { try formData.appendPartWithFileURL(NSURL(string: clip.thumbnailURL!)!, name: "thumbnail") } catch {}
           return
         }, error: nil)
       let encodedAuthTokenData = "\(APICredential.authToken!):".dataUsingEncoding(NSUTF8StringEncoding)!
@@ -41,10 +41,10 @@ struct API {
     UploadQueue.sharedQueue.addTask {
       let requestURL = NSURL(string: Router.baseURLString)!.URLByAppendingPathComponent("users/me")
       let request = AFHTTPRequestSerializer().multipartFormRequestWithMethod("PATCH",
-        URLString: requestURL.absoluteString!,
+        URLString: requestURL.absoluteString,
         parameters: nil,
         constructingBodyWithBlock: { (formData: AFMultipartFormData!) in
-          formData.appendPartWithFileData(UIImagePNGRepresentation(image), name: "avatar", fileName: "image.png", mimeType: "image/png")
+          formData.appendPartWithFileData(UIImagePNGRepresentation(image)!, name: "avatar", fileName: "image.png", mimeType: "image/png")
           return
         }, error: nil)
       let encodedAuthTokenData = "\(APICredential.authToken!):".dataUsingEncoding(NSUTF8StringEncoding)!
@@ -60,7 +60,7 @@ struct API {
   private static func tryUpload(request: NSURLRequest, completion: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> ()) {
     let manager = AFURLSessionManager(sessionConfiguration: NSURLSessionConfiguration.defaultSessionConfiguration())
     let uploadTask = manager.uploadTaskWithStreamedRequest(request, progress: nil) { (response, responseObject, error) in
-      completion(request, response as! NSHTTPURLResponse?, responseObject, error)
+      completion(request, response as? NSHTTPURLResponse, responseObject, error)
     }
     uploadTask.resume()
   }

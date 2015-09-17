@@ -75,7 +75,7 @@ class OnboardingPageViewController: UIViewController {
   }
 
   @objc private func tapGestureRecognizerTapped() {
-    if let viewController = pageViewController.viewControllers.last as? UIViewController {
+    if let viewController = pageViewController.viewControllers?.last {
       if let nextViewController = pageViewController(pageViewController, viewControllerAfterViewController: viewController) {
         let viewControllers = [nextViewController]
         // Have to call the willTransitionToViewControllers manually since the delegate
@@ -111,7 +111,7 @@ extension OnboardingPageViewController: UIPageViewControllerDelegate {
   // MARK: - UIPageViewControllerDelegate
 
   func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
-    if let nextVC = pendingViewControllers.first as? UIViewController {
+    if let nextVC = pendingViewControllers.first {
       pageControl.currentPage = indexOfViewControllerClass(nextVC.dynamicType)
     }
   }

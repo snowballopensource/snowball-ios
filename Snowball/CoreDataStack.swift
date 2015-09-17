@@ -42,7 +42,7 @@ public class CoreDataStack {
     let modelURL = NSBundle.mainBundle().URLForResource(stackName, withExtension: "momd")!
     let managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL)!
 
-    let documentDirectory = NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).last as! NSURL
+    let documentDirectory = NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).last!
     let databaseURL = documentDirectory.URLByAppendingPathComponent("\(stackName).sqlite")
 
     self.init(databaseURL: databaseURL, model: managedObjectModel)

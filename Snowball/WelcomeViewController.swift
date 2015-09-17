@@ -91,7 +91,7 @@ class WelcomeViewController: UIViewController {
       backgroundImageViewLogo.height == backgroundImageViewLogo.superview!.height / 2
     }
 
-    let buttonMargin: Float = 25
+    let buttonMargin: CGFloat = 25
 
     signUpButton.addTarget(self, action: "signUpButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(signUpButton)
@@ -113,7 +113,7 @@ class WelcomeViewController: UIViewController {
 
     view.addSubview(legalLabel)
     constrain(legalLabel) { (legalLabel) in
-      let margin: Float = 45
+      let margin: CGFloat = 45
       legalLabel.left == legalLabel.superview!.left + margin
       legalLabel.right == legalLabel.superview!.right - margin
       legalLabel.bottom == legalLabel.superview!.bottom - 30

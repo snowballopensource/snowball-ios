@@ -101,7 +101,7 @@ class MainTimelineViewController: TimelineViewController {
 }
 
 // MARK: - ClipCollectionViewCellDelegate
-extension MainTimelineViewController: ClipCollectionViewCellDelegate {
+extension MainTimelineViewController {
 
   override func userDidTapAddButtonForCell(cell: ClipCollectionViewCell) {
     Analytics.track("Create Clip")

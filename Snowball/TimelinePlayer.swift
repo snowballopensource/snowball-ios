@@ -111,7 +111,7 @@ class TimelinePlayerView: UIView {
   var player: AVPlayer {
     get {
       let playerLayer = layer as! AVPlayerLayer
-      return playerLayer.player
+      return playerLayer.player!
     }
     set {
       let playerLayer = layer as! AVPlayerLayer

@@ -80,16 +80,16 @@ class AuthenticationViewController: UIViewController {
   private func performAuthenticationRequest() {
     resignFirstResponder()
     topBar.spinRightButton(true)
-    API.request(authenticationRoute).responseJSON { (request, response, JSON, error) in
-      if error != nil {
-        displayAPIErrorToUser(JSON)
+    API.request(authenticationRoute).responseJSON { (request, response, result) in
+      if result.error != nil {
+        displayAPIErrorToUser(result.value)
         self.topBar.spinRightButton(false)
         return
       }
-      if let userJSON: AnyObject = JSON {
+      if let userJSON: AnyObject = result.value {
         dispatch_async(dispatch_get_main_queue()) {
           let user = User.objectFromJSON(userJSON) as! User?
-          user?.managedObjectContext?.save(nil)
+          do { try user?.managedObjectContext?.save() } catch {}
           User.currentUser = user
           if let user = user {
             self.authenticationCompletedSuccessfully(user)

@@ -32,7 +32,7 @@ class OnboardingConnectViewController: OnboardingViewController {
     doneButton.addTarget(self, action: "doneButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
     view.addSubview(doneButton)
     constrain(doneButton) { (doneButton) in
-      let margin: Float = 10
+      let margin: CGFloat = 10
       doneButton.right == doneButton.superview!.right - margin
       doneButton.top == doneButton.superview!.top + margin
       doneButton.width == 80

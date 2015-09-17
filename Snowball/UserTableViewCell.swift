@@ -44,7 +44,7 @@ class UserTableViewCell: UITableViewCell {
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-    let margin: Float = 20
+    let margin: CGFloat = 20
 
     contentView.addSubview(avatarImageView)
     constrain(avatarImageView) { (avatarImageView) in

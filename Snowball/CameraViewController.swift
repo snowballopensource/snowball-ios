@@ -284,10 +284,9 @@ class CameraViewController: UIViewController {
     dispatch_async(captureSessionQueue) {
       if let recording = self.movieFileOutput?.recording {
         if !recording {
-          let outputFileName = "video".stringByAppendingPathExtension("mov")!
-          let documentDirectory = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).first as! String
-          let outputFilePath = documentDirectory.stringByAppendingPathComponent(outputFileName)
-          self.movieFileOutput?.startRecordingToOutputFileURL(NSURL(fileURLWithPath: outputFilePath), recordingDelegate: self)
+          let documentDirectory = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).first!
+          let outputFilePath = NSURL(fileURLWithPath: documentDirectory).URLByAppendingPathComponent("video.mov")
+          self.movieFileOutput?.startRecordingToOutputFileURL(outputFilePath, recordingDelegate: self)
         }
       }
     }
@@ -392,8 +391,8 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     endProgressViewAnimation()
     // Crop video
     // http://stackoverflow.com/a/5231713/801858
-    let asset = AVAsset.assetWithURL(outputFileURL) 
-    let videoTrack = asset.tracksWithMediaType(AVMediaTypeVideo).first as! AVAssetTrack
+    let asset = AVAsset(URL: outputFileURL)
+    let videoTrack = asset.tracksWithMediaType(AVMediaTypeVideo).first!
 
     // When thinking about the following code, think of capturing video in landscape!
     // e.g. videoTrack.naturalSize.height is the width if you are holding the phone portrait
@@ -433,20 +432,20 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     } catch _ {
     }
 
-    let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetHighestQuality)
+    let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetHighestQuality)!
     exporter.videoComposition = videoComposition
     exporter.outputURL = exportedVideoURL
     exporter.outputFileType = AVFileTypeMPEG4
     exporter.exportAsynchronouslyWithCompletionHandler {
       let asset = AVURLAsset(URL: exportedVideoURL, options: nil)
       let imageGenerator = AVAssetImageGenerator(asset: asset)
-      let imageRef = try? imageGenerator.copyCGImageAtTime(kCMTimeZero, actualTime: nil)
-      let thumbnailData = UIImagePNGRepresentation(UIImage(CGImage: imageRef))
+      let imageRef = try! imageGenerator.copyCGImageAtTime(kCMTimeZero, actualTime: nil)
+      let thumbnailData = UIImagePNGRepresentation(UIImage(CGImage: imageRef))!
       thumbnailData.writeToURL(exportedThumbnailURL, atomically: true)
       dispatch_async(dispatch_get_main_queue()) {
         self.resetProgressViewAnimation()
-        self.previewVideo(exporter.outputURL)
-        self.delegate?.videoDidEndRecordingToFileAtURL(exporter.outputURL, thumbnailURL: exportedThumbnailURL)
+        self.previewVideo(exporter.outputURL!)
+        self.delegate?.videoDidEndRecordingToFileAtURL(exporter.outputURL!, thumbnailURL: exportedThumbnailURL)
       }
     }
   }

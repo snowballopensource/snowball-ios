@@ -57,7 +57,7 @@ class SnowballFooterButton: UIButton {
   // MARK: - Internal
 
   func setupDefaultLayout() {
-    let height: Float = 50
+    let height: CGFloat = 50
 
     constrain(self) { (footerButton) in
       footerButton.left == footerButton.superview!.left

@@ -26,7 +26,10 @@ class SignUpViewController: AuthenticationViewController {
     let usernameCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: SignUpTextFieldIndex.Username.rawValue, inSection: 0))! as! TextFieldTableViewCell
     let emailCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: SignUpTextFieldIndex.Email.rawValue, inSection: 0))! as! TextFieldTableViewCell
     let passwordCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: SignUpTextFieldIndex.Password.rawValue, inSection: 0))! as! TextFieldTableViewCell
-    return Router.SignUp(username: usernameCell.textField.text, email: emailCell.textField.text, password: passwordCell.textField.text)
+    let username = usernameCell.textField.text ?? ""
+    let email = emailCell.textField.text ?? ""
+    let password = passwordCell.textField.text ?? ""
+    return Router.SignUp(username: username, email: email, password: password)
   }
 
   // MARK: - UIViewController

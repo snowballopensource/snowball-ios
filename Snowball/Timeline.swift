@@ -113,7 +113,7 @@ class Timeline {
   func deleteClip(clip: Clip) {
     if let index = indexOfClip(clip) {
       clips.removeAtIndex(index)
-      clip.delete()
+      clip.deleteObject()
       do {
         try CoreDataStack.defaultStack.mainQueueManagedObjectContext.save()
       } catch _ {
@@ -128,14 +128,14 @@ class Timeline {
     }
   }
 
-  func requestHomeTimeline(completion: (error: NSError?) -> Void) {
-    API.request(Router.GetClipStream).responseJSON { (request, response, JSON, error) in
-      if let error = error {
+  func requestHomeTimeline(completion: (error: ErrorType?) -> Void) {
+    API.request(Router.GetClipStream).responseJSON { (request, response, result) in
+      if let error = result.error {
         completion(error: error)
-      } else if let JSON = JSON as? [AnyObject] {
+      } else if let JSON = result.value as? [AnyObject] {
         // Handle clips that were captured before the timeline loads from server...
         let clips = Clip.objectsFromJSON(JSON) as! [Clip]
-        clips.first?.managedObjectContext?.save(nil)
+        do { try clips.first?.managedObjectContext?.save() } catch {}
         self.clips = clips + self.pendingClips
         self.delegate?.timelineClipsDidLoad()
         completion(error: nil)
@@ -143,12 +143,12 @@ class Timeline {
     }
   }
 
-  func requestUserTimeline(user: User, completion: (error: NSError?) -> Void) {
+  func requestUserTimeline(user: User, completion: (error: ErrorType?) -> Void) {
     if let userID = user.id {
-      API.request(Router.GetClipStreamForUser(userID: userID)).responseJSON { (request, response, JSON, error) in
-        if let error = error {
+      API.request(Router.GetClipStreamForUser(userID: userID)).responseJSON { (request, response, result) in
+        if let error = result.error {
           completion(error: error)
-        } else if let JSON = JSON as? [AnyObject] {
+        } else if let JSON = result.value as? [AnyObject] {
           self.clips = Clip.objectsFromJSON(JSON) as! [Clip]
           self.delegate?.timelineClipsDidLoad()
           completion(error: nil)

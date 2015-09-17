@@ -75,7 +75,7 @@ class ProfileTimelineViewController: TimelineViewController {
 }
 
 // MARK: - TimelineDelegate
-extension ProfileTimelineViewController: TimelineDelegate {
+extension ProfileTimelineViewController {
 
   override func timelineClipsDidLoad() {
     super.timelineClipsDidLoad()
@@ -95,7 +95,7 @@ extension ProfileTimelineViewController: SnowballTopViewDelegate {
 }
 
 // MARK: - ClipCollectionViewCellDelegate
-extension ProfileTimelineViewController: ClipCollectionViewCellDelegate {
+extension ProfileTimelineViewController {
 
   // Prevent going to profile again from the profile
   override func userDidTapUserButtonForCell(cell: ClipCollectionViewCell) {}

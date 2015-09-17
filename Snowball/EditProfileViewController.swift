@@ -103,10 +103,9 @@ class EditProfileViewController: UIViewController {
     view.backgroundColor = UIColor.whiteColor()
 
     // TODO: prevent editing while loading this, but allow to go back
-    API.request(Router.GetCurrentUser).responseJSON { (request, response, JSON, error) in
-      error?.print("api get current user")
-      if error != nil { displayAPIErrorToUser(JSON); return }
-      if let JSON: AnyObject = JSON {
+    API.request(Router.GetCurrentUser).responseJSON { (request, response, result) in
+      if result.error != nil { displayAPIErrorToUser(result.value); return }
+      if let JSON: AnyObject = result.value {
         dispatch_async(dispatch_get_main_queue()) {
           User.objectFromJSON(JSON)
           self.tableView.reloadData()
@@ -148,9 +147,11 @@ extension EditProfileViewController: SnowballTopViewDelegate {
     let user = User.currentUser!
     let usernameCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: EditProfileTextFieldIndex.Username.rawValue, inSection: 0)) as! TextFieldTableViewCell
     var username: String?
-    if user.username != usernameCell.textField.text && (usernameCell.textField.text).count > 0 {
-      username = usernameCell.textField.text
-      user.username = username
+    if let text = usernameCell.textField.text {
+      if user.username != text && text.characters.count > 0 {
+        username = usernameCell.textField.text
+        user.username = username
+      }
     }
     let phoneNumberCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: EditProfileTextFieldIndex.PhoneNumber.rawValue, inSection: 0)) as! TextFieldTableViewCell
     var phoneNumber: String?
@@ -160,15 +161,16 @@ extension EditProfileViewController: SnowballTopViewDelegate {
     }
     let emailCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: EditProfileTextFieldIndex.Email.rawValue, inSection: 0)) as! TextFieldTableViewCell
     var email: String?
-    if user.email != emailCell.textField.text && (emailCell.textField.text).count > 0 {
-      email = emailCell.textField.text
-      user.email = email
+    if let text = emailCell.textField.text {
+      if user.email != text && text.characters.count > 0 {
+        email = emailCell.textField.text
+        user.email = email
+      }
     }
     if user.hasChanges {
-      API.request(Router.UpdateCurrentUser(name: nil, username: username, email: email, phoneNumber: phoneNumber)).responseJSON { (request, response, JSON, error) in
-        error?.print("api update current user")
-        if error != nil { displayAPIErrorToUser(JSON); return }
-        user.managedObjectContext?.save(nil)
+      API.request(Router.UpdateCurrentUser(name: nil, username: username, email: email, phoneNumber: phoneNumber)).responseJSON { (request, response, result) in
+        if result.error != nil { displayAPIErrorToUser(result.value); return }
+        do { try user.managedObjectContext?.save() } catch {}
         self.navigationController?.popViewControllerAnimated(true)
       }
     } else {
@@ -253,7 +255,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
             let imageURL = editingInfo[UIImagePickerControllerReferenceURL] as? NSURL
             if let imageURL = imageURL, let user = User.currentUser {
               user.avatarURL = imageURL.absoluteString
-              user.managedObjectContext?.save(nil)
+              do { try user.managedObjectContext?.save() } catch {}
               self.avatarImageView.configureForUser(user)
             }
           }

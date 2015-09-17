@@ -291,7 +291,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     contentView.addSubview(userAvatarImageView)
     setUserAvatarImageViewYConstraint()
     constrain(userAvatarImageView, clipThumbnailImageView) { (userAvatarImageView, clipThumbnailImageView) in
-      var width: Float = 40
+      var width: CGFloat = 40
       if isIphone4S { width = 30 }
       userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
       userAvatarImageView.width == width

@@ -29,7 +29,7 @@ class TextFieldTableViewCell: UITableViewCell {
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-    let margin: Float = 20
+    let margin: CGFloat = 20
     contentView.addSubview(textField)
     constrain(textField) { (textField) in
       textField.left == textField.superview!.left + margin

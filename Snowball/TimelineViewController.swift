@@ -366,7 +366,7 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
           API.request(Router.DeleteClip(clipID: clipID)).response { (request, response, data, error) in
             SwiftSpinner.hide()
             if let error = error {
-              println(error)
+              print(error)
               // TOOD: Display the error
             } else {
               self.timeline.deleteClip(clip)
@@ -391,7 +391,7 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
         API.request(Router.FlagClip(clipID: clipID)).response { (request, response, data, error) in
           SwiftSpinner.hide()
           if let error = error {
-            println(error)
+            print(error)
             // TOOD: Display the error
           } else {
             self.timeline.deleteClip(clip)

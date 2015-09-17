@@ -71,7 +71,7 @@ class ClipPreloader: NSOperationQueue {
           return
         }
       }
-      completion?(clip: clip, cacheURL: nil, error: NSError())
+      completion?(clip: clip, cacheURL: nil, error: NSError(domain: "", code: 0, userInfo: nil))
     }
     sharedPreloader.addOperation(operation)
   }

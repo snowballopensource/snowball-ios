@@ -15,9 +15,9 @@ struct Cache {
   static let sharedCache = Cache()
 
   private static let basePath: String = {
-    let cachePath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] 
-    return cachePath.stringByAppendingPathComponent("DataCache")
-  }()
+    let cachePath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]
+    return NSURL.fileURLWithPath(cachePath).URLByAppendingPathComponent("DataCache").absoluteString
+    }()
 
   // MARK: - Initializers
 
@@ -95,8 +95,8 @@ struct Cache {
 
   private func pathForKey(key: String) -> String {
     let filename = escapedFilenameForKey(key)
-    let path = Cache.basePath.stringByAppendingPathComponent(filename)
-    return path
+    let path = NSURL(fileURLWithPath: Cache.basePath).URLByAppendingPathComponent(filename)
+    return path.absoluteString
   }
 
   private func escapedFilenameForKey(key: String) -> String {

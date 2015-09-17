@@ -73,7 +73,7 @@ class FriendsViewController: UIViewController {
     view.addSubview(topView)
     topView.setupDefaultLayout()
 
-    let margin: Float = 20
+    let margin: CGFloat = 20
 
     view.addSubview(currentUserAvatarImageView)
     constrain(currentUserAvatarImageView, topView) { (currentUserAvatarImageView, topView) in
@@ -162,19 +162,17 @@ class FriendsViewController: UIViewController {
 
     switch(followersFollowingSegmentedControl.selectedSegmentIndex) {
     case FollowersFollowingSegmentedControlIndex.Following.rawValue:
-      API.request(Router.GetCurrentUserFollowing).responseJSON { (request, response, JSON, error) in
+      API.request(Router.GetCurrentUserFollowing).responseJSON { (request, response, result) in
         self.tableView.refreshControl.endRefreshing()
-        error?.print("api get current user following/followers")
-        if let JSON: AnyObject = JSON {
+        if let JSON: AnyObject = result.value {
           self.users = User.objectsFromJSON(JSON) as! [User]
           self.tableView.reloadData()
         }
       }
     case FollowersFollowingSegmentedControlIndex.Followers.rawValue:
-      API.request(Router.GetCurrentUserFollowers).responseJSON { (request, response, JSON, error) in
+      API.request(Router.GetCurrentUserFollowers).responseJSON { (request, response, result) in
         self.tableView.refreshControl.endRefreshing()
-        error?.print("api get current user following/followers")
-        if let JSON: AnyObject = JSON {
+        if let JSON: AnyObject = result.value {
           self.users = User.objectsFromJSON(JSON) as! [User]
           self.tableView.reloadData()
         }

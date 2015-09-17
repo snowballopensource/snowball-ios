@@ -70,7 +70,7 @@ class PhoneNumberViewController: UIViewController {
 
     view.addSubview(messageLabel)
     constrain(messageLabel, topBar) { (messageLabel, topBar) in
-      let sideMargin: Float = 40
+      let sideMargin: CGFloat = 40
       messageLabel.left == messageLabel.superview!.left + sideMargin
       messageLabel.top == topBar.bottom
       messageLabel.right == messageLabel.superview!.right - sideMargin
@@ -112,10 +112,9 @@ extension PhoneNumberViewController: SnowballTopViewDelegate {
     let newPhoneNumber = "\(countryCodeTextField.text)\(phoneNumberTextField.text)"
     if newPhoneNumber.characters.count > 5 {
       topBar.spinRightButton(true)
-      API.request(Router.UpdateCurrentUser(name: nil, username: nil, email: nil, phoneNumber: newPhoneNumber)).responseJSON { (request, response, JSON, error) in
-        if let error = error {
-          displayAPIErrorToUser(JSON)
-          error.print("add phone number to new user")
+      API.request(Router.UpdateCurrentUser(name: nil, username: nil, email: nil, phoneNumber: newPhoneNumber)).responseJSON { (request, response, result) in
+        if let error = result.error {
+          displayAPIErrorToUser(result.value)
           self.topBar.spinRightButton(false)
         } else {
           Analytics.track("Add Phone Number During Onboarding")

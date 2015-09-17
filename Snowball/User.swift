@@ -125,12 +125,11 @@ class User: RemoteObject {
       } catch _ {
       }
 
-      API.request(Router.FollowUser(userID: userID)).responseJSON { (request, response, JSON, error) in
-        if let error = error {
-          error.print("follow")
-          displayAPIErrorToUser(JSON)
+      API.request(Router.FollowUser(userID: userID)).responseJSON { (request, response, result) in
+        if let error = result.error {
+          displayAPIErrorToUser(result.value)
           self.following = false
-          self.managedObjectContext?.save(nil)
+          do { try self.managedObjectContext?.save() } catch {}
         }
       }
     }
@@ -144,12 +143,11 @@ class User: RemoteObject {
       } catch _ {
       }
 
-      API.request(Router.UnfollowUser(userID: userID)).responseJSON { (request, response, JSON, error) in
-        if let error = error {
-          error.print("unfollow")
-          displayAPIErrorToUser(JSON)
+      API.request(Router.UnfollowUser(userID: userID)).responseJSON { (request, response, result) in
+        if let error = result.error {
+          displayAPIErrorToUser(result.value)
           self.following = true
-          self.managedObjectContext?.save(nil)
+          do { try self.managedObjectContext?.save() } catch {}
         }
       }
     }

@@ -22,7 +22,9 @@ class SignInViewController: AuthenticationViewController {
   override var authenticationRoute: Router! {
     let emailCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: SignInTextFieldIndex.Email.rawValue, inSection: 0))! as! TextFieldTableViewCell
     let passwordCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: SignInTextFieldIndex.Password.rawValue, inSection: 0))! as! TextFieldTableViewCell
-    return Router.SignIn(email: emailCell.textField.text, password: passwordCell.textField.text)
+    let email = emailCell.textField.text ?? ""
+    let password = passwordCell.textField.text ?? ""
+    return Router.SignIn(email: email, password: password)
   }
 
   // MARK: - UIViewController

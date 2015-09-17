@@ -169,10 +169,9 @@ class FindFriendsViewController: UIViewController {
       }
     }
 
-    API.request(Router.FindUsersByPhoneNumbers(phoneNumbers: phoneNumbers)).responseJSON { (request, response, JSON, error) in
+    API.request(Router.FindUsersByPhoneNumbers(phoneNumbers: phoneNumbers)).responseJSON { (request, response, result) in
       self.tableView.refreshControl.endRefreshing()
-      error?.print("api find friends")
-      if let JSON: AnyObject = JSON {
+      if let JSON: AnyObject = result.value {
         if let users = User.objectsFromJSON(JSON) as? [User] {
           self.users = users
           self.tableView.reloadData()
@@ -183,10 +182,9 @@ class FindFriendsViewController: UIViewController {
 
   private func searchForUserWithUsername(username: String) {
     tableView.refreshControl.beginRefreshing()
-    API.request(Router.FindUsersByUsername(username: username)).responseJSON { (request, response, JSON, error) in
+    API.request(Router.FindUsersByUsername(username: username)).responseJSON { (request, response, result) in
       self.tableView.refreshControl.endRefreshing()
-      error?.print("api search for user by username")
-      if let JSON: AnyObject = JSON {
+      if let JSON: AnyObject = result.value {
         if let users = User.objectsFromJSON(JSON) as? [User] {
           self.users = users
           self.tableView.reloadData()
@@ -292,8 +290,8 @@ extension FindFriendsViewController: UITextFieldDelegate {
   }
 
   func textFieldShouldReturn(textField: UITextField) -> Bool {
-    if textField.text.characters.count > 2 {
-      searchForUserWithUsername(textField.text)
+    if let text = textField.text where text.characters.count > 2 {
+      searchForUserWithUsername(textField.text!)
     } else {
       cancelSearch()
     }
