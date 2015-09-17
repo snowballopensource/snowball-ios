@@ -11,9 +11,6 @@
 		BA03571A1B8502CA00AC5487 /* ClipPreloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0357191B8502CA00AC5487 /* ClipPreloader.swift */; };
 		BA1835531AA51C1D00D6A0BE /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1835521AA51C1D00D6A0BE /* PlayerView.swift */; };
 		BA20CCEE1A9D156C00D96A31 /* UploadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */; };
-		BA2460C91B68216F003E3FB5 /* SnowballSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2460C81B68216F003E3FB5 /* SnowballSpec.swift */; };
-		BA2460D81B6826E6003E3FB5 /* ClipSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2460D71B6826E6003E3FB5 /* ClipSpec.swift */; };
-		BA2460DA1B6826EC003E3FB5 /* TimelineSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2460D91B6826EC003E3FB5 /* TimelineSpec.swift */; };
 		BA2460E31B683600003E3FB5 /* MainTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2460E21B683600003E3FB5 /* MainTimelineViewController.swift */; };
 		BA2460E51B6836B6003E3FB5 /* ProfileTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2460E41B6836B6003E3FB5 /* ProfileTimelineViewController.swift */; };
 		BA30B31C1B68008600BB49EF /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30B31B1B68008600BB49EF /* CoreDataStack.swift */; };
@@ -79,18 +76,7 @@
 		BAF50E781AA644DF00AB874E /* CameraPreviewPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF50E771AA644DF00AB874E /* CameraPreviewPlayer.swift */; };
 		BAF8CDC21AAF65CC00222872 /* SnowballFooterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8CDC11AAF65CC00222872 /* SnowballFooterButton.swift */; };
 		BAFB06E41A9E915600EDA01B /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFB06E31A9E915600EDA01B /* Analytics.swift */; };
-		C516C0C1F5A64AF6BDAED939 /* Pods_SnowballTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F54AD9E25FBB15DB5289F67 /* Pods_SnowballTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		BA38C1711A30228700A2F2AE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BA38C1501A30228700A2F2AE /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BA38C1571A30228700A2F2AE;
-			remoteInfo = Snowball;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		BAE10A171A30400100CCFA25 /* Embed Frameworks */ = {
@@ -108,16 +94,10 @@
 /* Begin PBXFileReference section */
 		2BC32A4062714B26F6F63153 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		32713D4685D2B1201FD238E6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		362F4E6BAB7B3166CD2A3D20 /* Pods-SnowballTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnowballTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SnowballTests/Pods-SnowballTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8A6E3769866E85F9B3BF4ACB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		90DFEDDD19AA212445892AD5 /* Pods-SnowballTests.debug-staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnowballTests.debug-staging.xcconfig"; path = "Pods/Target Support Files/Pods-SnowballTests/Pods-SnowballTests.debug-staging.xcconfig"; sourceTree = "<group>"; };
-		9F54AD9E25FBB15DB5289F67 /* Pods_SnowballTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnowballTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA0357191B8502CA00AC5487 /* ClipPreloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPreloader.swift; sourceTree = "<group>"; };
 		BA1835521AA51C1D00D6A0BE /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadQueue.swift; sourceTree = "<group>"; };
-		BA2460C81B68216F003E3FB5 /* SnowballSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballSpec.swift; sourceTree = "<group>"; };
-		BA2460D71B6826E6003E3FB5 /* ClipSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipSpec.swift; sourceTree = "<group>"; };
-		BA2460D91B6826EC003E3FB5 /* TimelineSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineSpec.swift; sourceTree = "<group>"; };
 		BA2460E21B683600003E3FB5 /* MainTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTimelineViewController.swift; sourceTree = "<group>"; };
 		BA2460E41B6836B6003E3FB5 /* ProfileTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTimelineViewController.swift; sourceTree = "<group>"; };
 		BA30B31B1B68008600BB49EF /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -131,8 +111,6 @@
 		BA38C1601A30228700A2F2AE /* Snowball.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Snowball.xcdatamodel; sourceTree = "<group>"; };
 		BA38C1671A30228700A2F2AE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BA38C16A1A30228700A2F2AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		BA38C1701A30228700A2F2AE /* SnowballTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnowballTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA38C1751A30228700A2F2AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA3A286F1A3051E300A85C29 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		BA3DB8211A9EEA8B00378F6D /* UIViewController+NavigationTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+NavigationTransition.swift"; sourceTree = "<group>"; };
 		BA3DB8231A9EEEFD00378F6D /* SnowballRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballRoundedButton.swift; sourceTree = "<group>"; };
@@ -188,7 +166,6 @@
 		BAF8CDC11AAF65CC00222872 /* SnowballFooterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballFooterButton.swift; sourceTree = "<group>"; };
 		BAFB06E31A9E915600EDA01B /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		F9469431E12979BC7E01C516 /* Pods.debug-staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods.debug-staging.xcconfig"; path = "Pods/Target Support Files/Pods/Pods.debug-staging.xcconfig"; sourceTree = "<group>"; };
-		FFEFA33B23E5B9AB15389838 /* Pods-SnowballTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnowballTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SnowballTests/Pods-SnowballTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,14 +177,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BA38C16D1A30228700A2F2AE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C516C0C1F5A64AF6BDAED939 /* Pods_SnowballTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -215,7 +184,6 @@
 			isa = PBXGroup;
 			children = (
 				2BC32A4062714B26F6F63153 /* Pods.framework */,
-				9F54AD9E25FBB15DB5289F67 /* Pods_SnowballTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -226,20 +194,8 @@
 				32713D4685D2B1201FD238E6 /* Pods.debug.xcconfig */,
 				F9469431E12979BC7E01C516 /* Pods.debug-staging.xcconfig */,
 				8A6E3769866E85F9B3BF4ACB /* Pods.release.xcconfig */,
-				362F4E6BAB7B3166CD2A3D20 /* Pods-SnowballTests.debug.xcconfig */,
-				90DFEDDD19AA212445892AD5 /* Pods-SnowballTests.debug-staging.xcconfig */,
-				FFEFA33B23E5B9AB15389838 /* Pods-SnowballTests.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		BA2460DB1B6826F1003E3FB5 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				BA2460D71B6826E6003E3FB5 /* ClipSpec.swift */,
-				BA2460D91B6826EC003E3FB5 /* TimelineSpec.swift */,
-			);
-			name = Models;
 			sourceTree = "<group>";
 		};
 		BA30B31F1B6800D700BB49EF /* CoreRecord */ = {
@@ -280,7 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				BA38C15A1A30228700A2F2AE /* Snowball */,
-				BA38C1731A30228700A2F2AE /* SnowballTests */,
 				BA38C1591A30228700A2F2AE /* Products */,
 				BAA15E701A6888F70055756E /* Vendor */,
 				04150CE1616CDA3B9208DA56 /* Frameworks */,
@@ -292,7 +247,6 @@
 			isa = PBXGroup;
 			children = (
 				BA38C1581A30228700A2F2AE /* Snowball.app */,
-				BA38C1701A30228700A2F2AE /* SnowballTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -325,24 +279,6 @@
 			isa = PBXGroup;
 			children = (
 				BA38C15C1A30228700A2F2AE /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		BA38C1731A30228700A2F2AE /* SnowballTests */ = {
-			isa = PBXGroup;
-			children = (
-				BA2460C81B68216F003E3FB5 /* SnowballSpec.swift */,
-				BA2460DB1B6826F1003E3FB5 /* Models */,
-				BA38C1741A30228700A2F2AE /* Supporting Files */,
-			);
-			path = SnowballTests;
-			sourceTree = "<group>";
-		};
-		BA38C1741A30228700A2F2AE /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				BA38C1751A30228700A2F2AE /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -502,27 +438,6 @@
 			productReference = BA38C1581A30228700A2F2AE /* Snowball.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BA38C16F1A30228700A2F2AE /* SnowballTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BA38C17D1A30228700A2F2AE /* Build configuration list for PBXNativeTarget "SnowballTests" */;
-			buildPhases = (
-				570A14A405FB99D07B974CD6 /* Check Pods Manifest.lock */,
-				BA38C16C1A30228700A2F2AE /* Sources */,
-				BA38C16D1A30228700A2F2AE /* Frameworks */,
-				BA38C16E1A30228700A2F2AE /* Resources */,
-				5A32C885D1C6CF8F4CA902C2 /* Embed Pods Frameworks */,
-				C86E6ED9209F122AB3C56408 /* Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BA38C1721A30228700A2F2AE /* PBXTargetDependency */,
-			);
-			name = SnowballTests;
-			productName = SnowballTests;
-			productReference = BA38C1701A30228700A2F2AE /* SnowballTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -535,10 +450,6 @@
 				TargetAttributes = {
 					BA38C1571A30228700A2F2AE = {
 						CreatedOnToolsVersion = 6.1.1;
-					};
-					BA38C16F1A30228700A2F2AE = {
-						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = BA38C1571A30228700A2F2AE;
 					};
 				};
 			};
@@ -556,7 +467,6 @@
 			projectRoot = "";
 			targets = (
 				BA38C1571A30228700A2F2AE /* Snowball */,
-				BA38C16F1A30228700A2F2AE /* SnowballTests */,
 			);
 		};
 /* End PBXProject section */
@@ -568,13 +478,6 @@
 			files = (
 				BA38C16B1A30228700A2F2AE /* LaunchScreen.xib in Resources */,
 				BA38C1681A30228700A2F2AE /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BA38C16E1A30228700A2F2AE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,36 +529,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		570A14A405FB99D07B974CD6 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		5A32C885D1C6CF8F4CA902C2 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SnowballTests/Pods-SnowballTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		BA137C7B1A71996F001F8FCF /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -669,21 +542,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 3ad6062e840bc33bf27000e2eac426550ff9ddc5 027b542a5e7453d709fac8530608bfb4016d21c2389d342f4e4066c4cf4ff823";
-		};
-		C86E6ED9209F122AB3C56408 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SnowballTests/Pods-SnowballTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -761,25 +619,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BA38C16C1A30228700A2F2AE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BA2460D81B6826E6003E3FB5 /* ClipSpec.swift in Sources */,
-				BA2460DA1B6826EC003E3FB5 /* TimelineSpec.swift in Sources */,
-				BA2460C91B68216F003E3FB5 /* SnowballSpec.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		BA38C1721A30228700A2F2AE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BA38C1571A30228700A2F2AE /* Snowball */;
-			targetProxy = BA38C1711A30228700A2F2AE /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BA38C1691A30228700A2F2AE /* LaunchScreen.xib */ = {
@@ -905,42 +745,6 @@
 			};
 			name = Release;
 		};
-		BA38C17E1A30228700A2F2AE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 362F4E6BAB7B3166CD2A3D20 /* Pods-SnowballTests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SnowballTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Snowball.app/Snowball";
-			};
-			name = Debug;
-		};
-		BA38C17F1A30228700A2F2AE /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FFEFA33B23E5B9AB15389838 /* Pods-SnowballTests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SnowballTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Snowball.app/Snowball";
-			};
-			name = Release;
-		};
 		BA44E4501A9BFDB400B75DF3 /* Debug-Staging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1001,26 +805,6 @@
 			};
 			name = "Debug-Staging";
 		};
-		BA44E4521A9BFDB400B75DF3 /* Debug-Staging */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 90DFEDDD19AA212445892AD5 /* Pods-SnowballTests.debug-staging.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SnowballTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Snowball.app/Snowball";
-			};
-			name = "Debug-Staging";
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1040,16 +824,6 @@
 				BA38C17B1A30228700A2F2AE /* Debug */,
 				BA44E4511A9BFDB400B75DF3 /* Debug-Staging */,
 				BA38C17C1A30228700A2F2AE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BA38C17D1A30228700A2F2AE /* Build configuration list for PBXNativeTarget "SnowballTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BA38C17E1A30228700A2F2AE /* Debug */,
-				BA44E4521A9BFDB400B75DF3 /* Debug-Staging */,
-				BA38C17F1A30228700A2F2AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
