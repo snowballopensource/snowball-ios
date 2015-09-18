@@ -215,14 +215,7 @@ class CameraViewController: UIViewController {
       }
       defaultCameraPosition = newPosition
       if let newDevice = captureDeviceForMediaType(AVMediaTypeVideo, position: newPosition) {
-        var error: NSError?
-        let newDeviceInput: AVCaptureDeviceInput!
-        do {
-          newDeviceInput = try AVCaptureDeviceInput(device: newDevice)
-        } catch let error1 as NSError {
-          error = error1
-          newDeviceInput = nil
-        }
+        let newDeviceInput = try? AVCaptureDeviceInput(device: newDevice)
         captureSession.beginConfiguration()
         captureSession.removeInput(currentVideoDeviceInput)
         if captureSession.canAddInput(newDeviceInput) {
@@ -308,10 +301,7 @@ class CameraViewController: UIViewController {
       if let captureDevice = captureDevice {
         let focusMode = locked ? AVCaptureFocusMode.Locked : AVCaptureFocusMode.ContinuousAutoFocus
         if captureDevice.isFocusModeSupported(focusMode) {
-          do {
-            try captureDevice.lockForConfiguration()
-          } catch _ {
-          }
+          do { try captureDevice.lockForConfiguration() } catch {}
           captureDevice.focusMode = focusMode
           captureDevice.unlockForConfiguration()
         }
@@ -418,19 +408,10 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     let exportedVideoURL = outputFileURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent("video_\(randomString).mp4")
     let exportedThumbnailURL = exportedVideoURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent("image_\(randomString).png")
 
-    do {
-      // Export
-      try NSFileManager.defaultManager().removeItemAtURL(outputFileURL)
-    } catch _ {
-    }
-    do {
-      try NSFileManager.defaultManager().removeItemAtURL(exportedVideoURL)
-    } catch _ {
-    }
-    do {
-      try NSFileManager.defaultManager().removeItemAtURL(exportedThumbnailURL)
-    } catch _ {
-    }
+    // Export
+    do { try NSFileManager.defaultManager().removeItemAtURL(outputFileURL) } catch { }
+    do { try NSFileManager.defaultManager().removeItemAtURL(exportedVideoURL) } catch { }
+    do { try NSFileManager.defaultManager().removeItemAtURL(exportedThumbnailURL) } catch { }
 
     let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetHighestQuality)!
     exporter.videoComposition = videoComposition

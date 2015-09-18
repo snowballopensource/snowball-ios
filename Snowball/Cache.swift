@@ -40,39 +40,27 @@ struct Cache {
   }
 
   static func removeAllData() {
-    do {
-      try NSFileManager.defaultManager().removeItemAtPath(basePath)
-    } catch {}
+    do { try NSFileManager.defaultManager().removeItemAtPath(basePath) } catch {}
     createDirectory()
   }
 
   // MARK: - Private
 
   private static func createDirectory() {
-    do {
-      try NSFileManager.defaultManager().createDirectoryAtPath(basePath, withIntermediateDirectories: true, attributes: nil)
-    } catch {}
+    do { try NSFileManager.defaultManager().createDirectoryAtPath(basePath, withIntermediateDirectories: true, attributes: nil) } catch {}
   }
 
   private func localDataAtURL(url: NSURL) -> (NSData?, NSURL?) {
     let path = pathForKey(keyForURL(url))
-    do {
-      let data = try NSData(contentsOfFile: path, options: NSDataReadingOptions())
+    if let data = NSData(contentsOfFile: path) {
       return (data, NSURL(fileURLWithPath: path))
-    } catch {}
+    }
     return (nil, nil)
   }
 
   private func setDataForKey(data data: NSData, key: String) -> Bool {
     let path = pathForKey(key)
-    let result: Bool
-    do {
-      try data.writeToFile(path, options: NSDataWritingOptions.DataWritingAtomic)
-      result = true
-    } catch {
-      result = false
-    }
-    return result
+    return data.writeToFile(path, atomically: true)
   }
 
   private func keyForURL(url: NSURL) -> String {

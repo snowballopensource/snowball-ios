@@ -133,10 +133,7 @@ extension MainTimelineViewController {
             clip.assignAttributes(JSON)
           }
         }
-        do {
-          try clip.managedObjectContext?.save()
-        } catch _ {
-        }
+        do { try clip.managedObjectContext?.save() } catch {}
         self.timeline.markClipAsUpdated(clip)
       }
     }

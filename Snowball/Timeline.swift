@@ -114,10 +114,7 @@ class Timeline {
     if let index = indexOfClip(clip) {
       clips.removeAtIndex(index)
       clip.deleteObject()
-      do {
-        try CoreDataStack.defaultStack.mainQueueManagedObjectContext.save()
-      } catch _ {
-      }
+      do { try CoreDataStack.defaultStack.mainQueueManagedObjectContext.save() } catch {}
       delegate?.timeline(self, didDeleteClip: clip, atIndex: index)
     }
   }

@@ -61,10 +61,7 @@ class Clip: RemoteObject {
     for clip in clips {
       clip.state == ClipState.UploadFailed
     }
-    do {
-      try CoreDataStack.defaultStack.mainQueueManagedObjectContext.save()
-    } catch _ {
-    }
+    do { try CoreDataStack.defaultStack.mainQueueManagedObjectContext.save() } catch {}
   }
 }
 

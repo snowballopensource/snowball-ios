@@ -50,18 +50,11 @@ public class CoreDataStack {
 
   public init(databaseURL: NSURL, model: NSManagedObjectModel) {
     let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
-    var error: NSError?
     do {
       try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: databaseURL, options: nil)
-    } catch let error1 as NSError {
-      error = error1
-    }
-    if error != nil {
+    } catch {
       print("Failed to initialize the application's saved data. There was an error creating or loading the application's saved data. Error: \(error)")
-      do {
-        try NSFileManager.defaultManager().removeItemAtURL(databaseURL)
-      } catch _ {
-      }
+      do { try NSFileManager.defaultManager().removeItemAtURL(databaseURL) } catch {}
       print("The existing store has been deleted and a new store will be created on the next launch.")
       abort()
     }
