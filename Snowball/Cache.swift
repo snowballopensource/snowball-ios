@@ -14,9 +14,9 @@ struct Cache {
 
   static let sharedCache = Cache()
 
-  private static let basePath: String = {
+  private static let baseURL: NSURL = {
     let cachePath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]
-    return NSURL.fileURLWithPath(cachePath).URLByAppendingPathComponent("DataCache").absoluteString
+    return NSURL.fileURLWithPath(cachePath).URLByAppendingPathComponent("DataCache")
     }()
 
   // MARK: - Initializers
@@ -27,50 +27,52 @@ struct Cache {
 
   // MARK: - Internal
 
-  func fetchDataAtURL(url: NSURL) -> (NSData?, NSURL?) {
-    let (data, cacheURL) = localDataAtURL(url)
-    if let data = data {
-      return (data, cacheURL)
+  func fetchDataAtRemoteURL(remoteURL: NSURL) -> (NSData?, NSURL?) {
+    if let data = localDataAtRemoteURL(remoteURL) {
+      return (data, localURLForRemoteURL(remoteURL))
     }
-    if let data = NSData(contentsOfURL: url) {
-      setDataForKey(data: data, key: keyForURL(url))
-      return (data, NSURL(fileURLWithPath: pathForKey(keyForURL(url))))
+    if let data = NSData(contentsOfURL: remoteURL) {
+      setDataForKey(data: data, key: keyForRemoteURL(remoteURL))
+      return (data, localURLForRemoteURL(remoteURL))
     }
     return (nil, nil)
   }
 
   static func removeAllData() {
-    do { try NSFileManager.defaultManager().removeItemAtPath(basePath) } catch {}
+    do { try NSFileManager.defaultManager().removeItemAtURL(baseURL) } catch {}
     createDirectory()
   }
 
   // MARK: - Private
 
   private static func createDirectory() {
-    do { try NSFileManager.defaultManager().createDirectoryAtPath(basePath, withIntermediateDirectories: true, attributes: nil) } catch {}
+    do { try NSFileManager.defaultManager().createDirectoryAtURL(baseURL, withIntermediateDirectories: true, attributes: nil) } catch {}
   }
 
-  private func localDataAtURL(url: NSURL) -> (NSData?, NSURL?) {
-    let path = pathForKey(keyForURL(url))
-    if let data = NSData(contentsOfFile: path) {
-      return (data, NSURL(fileURLWithPath: path))
+  private func localDataAtRemoteURL(remoteURL: NSURL) -> NSData? {
+    let localURL = localURLForRemoteURL(remoteURL)
+    if let data = NSData(contentsOfURL: localURL) {
+      return data
     }
-    return (nil, nil)
+    return nil
   }
 
   private func setDataForKey(data data: NSData, key: String) -> Bool {
-    let path = pathForKey(key)
-    return data.writeToFile(path, atomically: true)
+    let url = localURLForKey(key)
+    return data.writeToURL(url, atomically: true)
   }
 
-  private func keyForURL(url: NSURL) -> String {
+  private func localURLForRemoteURL(remoteURL: NSURL) -> NSURL {
+    return localURLForKey(keyForRemoteURL(remoteURL))
+  }
+
+  private func keyForRemoteURL(url: NSURL) -> String {
     return url.absoluteString
   }
 
-  private func pathForKey(key: String) -> String {
+  private func localURLForKey(key: String) -> NSURL {
     let filename = escapedFilenameForKey(key)
-    let path = NSURL(fileURLWithPath: Cache.basePath).URLByAppendingPathComponent(filename)
-    return path.absoluteString
+    return Cache.baseURL.URLByAppendingPathComponent(filename)
   }
 
   private func escapedFilenameForKey(key: String) -> String {

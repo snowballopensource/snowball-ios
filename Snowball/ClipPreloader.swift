@@ -63,7 +63,7 @@ class ClipPreloader: NSOperationQueue {
     operation.queuePriority = priority
     operation.addExecutionBlock {
       if let videoURLString = clip.videoURL, videoURL = NSURL(string: videoURLString) {
-        let (data, cacheURL) = Cache.sharedCache.fetchDataAtURL(videoURL)
+        let (data, cacheURL) = Cache.sharedCache.fetchDataAtRemoteURL(videoURL)
         if let data = data, cacheURL = cacheURL {
           dispatch_async(dispatch_get_main_queue()) {
             completion?(clip: clip, cacheURL: cacheURL, error: nil)
