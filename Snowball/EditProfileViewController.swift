@@ -191,7 +191,7 @@ extension EditProfileViewController: UITableViewDataSource {
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(TextFieldTableViewCell),
-      forIndexPath: indexPath) as! UITableViewCell
+      forIndexPath: indexPath) 
     configureCell(cell, atIndexPath: indexPath)
     return cell
   }
@@ -248,7 +248,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
 
         API.changeAvatarToImage(processedImage) { (request, response, JSON, error) in
           SwiftSpinner.hide()
-          if let error = error {
+          if let _ = error {
             displayAPIErrorToUser(JSON)
           } else {
             let imageURL = editingInfo[UIImagePickerControllerReferenceURL] as? NSURL

@@ -125,7 +125,7 @@ extension MainTimelineViewController {
       clip.state = .Uploading
       timeline.markClipAsUpdated(clip)
       API.uploadClip(clip) { (request, response, JSON, error) -> () in
-        if let error = error {
+        if let _ = error {
           clip.state = ClipState.UploadFailed
         } else {
           clip.state = ClipState.Default

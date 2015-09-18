@@ -105,7 +105,6 @@ class CameraViewController: UIViewController {
 
     checkDeviceAuthorizationStatus()
     dispatch_async(captureSessionQueue) {
-      var error: NSError?
       self.captureSession.sessionPreset = AVCaptureSessionPreset640x480
       let videoDevice = self.captureDeviceForMediaType(AVMediaTypeVideo, position: self.defaultCameraPosition)
       let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice)
@@ -248,7 +247,7 @@ class CameraViewController: UIViewController {
 
   private func captureDeviceForMediaType(mediaType: String, position: AVCaptureDevicePosition? = nil) -> AVCaptureDevice? {
     let devices = AVCaptureDevice.devicesWithMediaType(mediaType)
-    if let captureDevicePosition = position {
+    if let _ = position {
       for device in devices {
         let captureDevice = device as! AVCaptureDevice
         if captureDevice.position == position {

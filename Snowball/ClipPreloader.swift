@@ -49,7 +49,7 @@ class ClipPreloader: NSOperationQueue {
           load(timeline.clips[offsetIndex], priority: NSOperationQueuePriority.Normal, completion: nil)
         }
       }
-    } else if let firstClip = timeline.clips.first {
+    } else if let _ = timeline.clips.first {
       for clip in timeline.clips {
         load(clip, priority: NSOperationQueuePriority.Normal, completion: nil)
       }
@@ -64,7 +64,7 @@ class ClipPreloader: NSOperationQueue {
     operation.addExecutionBlock {
       if let videoURLString = clip.videoURL, videoURL = NSURL(string: videoURLString) {
         let (data, cacheURL) = Cache.sharedCache.fetchDataAtRemoteURL(videoURL)
-        if let data = data, cacheURL = cacheURL {
+        if let _ = data, cacheURL = cacheURL {
           dispatch_async(dispatch_get_main_queue()) {
             completion?(clip: clip, cacheURL: cacheURL, error: nil)
           }

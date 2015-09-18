@@ -131,7 +131,7 @@ class SnowballTopView: UIView {
     }
     if let rightButton = rightButton {
       var rightButtonWidth: CGFloat
-      if let image = rightButton.imageView?.image {
+      if let _ = rightButton.imageView?.image {
         rightButtonWidth = (width + rightButton.imageView!.image!.size.width / 2) * 2
       } else {
         rightButtonWidth = 84

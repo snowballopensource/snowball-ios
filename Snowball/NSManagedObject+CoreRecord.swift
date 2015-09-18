@@ -24,9 +24,9 @@ extension NSManagedObject {
   // MARK: - Creation
 
   public class func newObject(attributes: [String: AnyObject]? = nil, context: NSManagedObjectContext = CoreDataStack.defaultStack.mainQueueManagedObjectContext) -> NSManagedObject? {
-    let object = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context) as? NSManagedObject
+    let object = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context)
     if let attributes = attributes {
-      object?.assignAttributes(attributes)
+      object.assignAttributes(attributes)
     }
     return object
   }

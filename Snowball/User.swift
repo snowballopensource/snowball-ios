@@ -123,7 +123,7 @@ class User: RemoteObject {
       do { try managedObjectContext?.save() } catch {}
 
       API.request(Router.FollowUser(userID: userID)).responseJSON { (request, response, result) in
-        if let error = result.error {
+        if let _ = result.error {
           displayAPIErrorToUser(result.value)
           self.following = false
           do { try self.managedObjectContext?.save() } catch {}
@@ -138,7 +138,7 @@ class User: RemoteObject {
       do { try managedObjectContext?.save() } catch {}
 
       API.request(Router.UnfollowUser(userID: userID)).responseJSON { (request, response, result) in
-        if let error = result.error {
+        if let _ = result.error {
           displayAPIErrorToUser(result.value)
           self.following = true
           do { try self.managedObjectContext?.save() } catch {}
