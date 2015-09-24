@@ -64,8 +64,13 @@ class EditProfileViewController: UIViewController {
       avatarButton.height == avatarButtonDiameter
     }
 
-    avatarImageView.frame = avatarButton.bounds
     avatarButton.addSubview(avatarImageView)
+    constrain(avatarImageView) { (avatarImageView) in
+      avatarImageView.left == avatarImageView.superview!.left
+      avatarImageView.top == avatarImageView.superview!.top
+      avatarImageView.width == avatarImageView.superview!.width
+      avatarImageView.height == avatarImageView.superview!.height
+    }
 
     tableView.dataSource = self
     addChildViewController(tableViewController)
