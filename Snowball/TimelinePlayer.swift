@@ -24,9 +24,9 @@ class TimelinePlayer: AVPlayer {
   var delegate: TimelinePlayerDelegate?
   private(set) var currentClip: Clip? = nil {
     didSet {
-      replaceCurrentItemWithPlayerItem(nil)
       if currentClip == nil {
         pause()
+        replaceCurrentItemWithPlayerItem(nil)
       } else {
         delegate?.timelinePlayer(self, didBeginBufferingClip: currentClip!)
         ClipPreloader.load(currentClip!) { (preloadedClip, cacheURL, error) -> Void in
@@ -35,7 +35,6 @@ class TimelinePlayer: AVPlayer {
             self.registerPlayerItemForNotifications(playerItem)
             self.replaceCurrentItemWithPlayerItem(playerItem)
             self.play()
-            self.delegate?.timelinePlayer(self, didBeginPlaybackOfClip: preloadedClip)
           } else {
             // TODO: Handle error
           }
@@ -64,6 +63,11 @@ class TimelinePlayer: AVPlayer {
 
   override init() {
     super.init()
+    addBoundaryTimeObserverForTimes([NSValue(CMTime: CMTime(value: 1, timescale: 100))], queue: dispatch_get_main_queue()) { () -> Void in
+      if let currentClip = self.currentClip {
+        self.delegate?.timelinePlayer(self, didBeginPlaybackOfClip: currentClip)
+      }
+    }
   }
 
   deinit {

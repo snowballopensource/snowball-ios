@@ -97,20 +97,20 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   override func loadView() {
     super.loadView()
 
-    view.addSubview(playerLoadingImageView)
-    constrain(playerLoadingImageView) { (playerLoadingImageView) in
-      playerLoadingImageView.left == playerLoadingImageView.superview!.left
-      playerLoadingImageView.top == playerLoadingImageView.superview!.top
-      playerLoadingImageView.right == playerLoadingImageView.superview!.right
-      playerLoadingImageView.height == playerLoadingImageView.width
-    }
-
     view.addSubview(playerView)
     constrain(playerView) { (playerView) in
       playerView.left == playerView.superview!.left
       playerView.top == playerView.superview!.top
       playerView.right == playerView.superview!.right
       playerView.height == playerView.width
+    }
+
+    view.addSubview(playerLoadingImageView)
+    constrain(playerLoadingImageView) { (playerLoadingImageView) in
+      playerLoadingImageView.left == playerLoadingImageView.superview!.left
+      playerLoadingImageView.top == playerLoadingImageView.superview!.top
+      playerLoadingImageView.right == playerLoadingImageView.superview!.right
+      playerLoadingImageView.height == playerLoadingImageView.width
     }
 
     view.addSubview(playerLoadingIndicator)
@@ -263,6 +263,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlaybackOfClip clip: Clip) {
     playerLoadingIndicator.stopAnimating()
+    playerLoadingImageView.image = nil
   }
 
   // MARK: - Private
