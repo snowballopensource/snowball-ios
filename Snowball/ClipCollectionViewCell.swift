@@ -290,11 +290,11 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     contentView.addSubview(userAvatarImageView)
     setUserAvatarImageViewYConstraint()
+    var userAvatarImageViewWidth: CGFloat = 40
+    if isIphone4S { userAvatarImageViewWidth = 30 }
     constrain(userAvatarImageView, clipThumbnailImageView) { (userAvatarImageView, clipThumbnailImageView) in
-      var width: CGFloat = 40
-      if isIphone4S { width = 30 }
       userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
-      userAvatarImageView.width == width
+      userAvatarImageView.width == userAvatarImageViewWidth
       userAvatarImageView.height == userAvatarImageView.width
     }
 
@@ -307,9 +307,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
 
     contentView.addSubview(usernameLabel)
-    constrain(usernameLabel, userAvatarImageView) { (usernameLabel, userAvatarImageView) in
+    constrain(usernameLabel, clipThumbnailImageView) { (usernameLabel, clipThumbnailImageView) in
       usernameLabel.centerX == usernameLabel.superview!.centerX
-      usernameLabel.top == userAvatarImageView.bottom + 5
+      usernameLabel.top == clipThumbnailImageView.bottom + (userAvatarImageViewWidth / 2) + 5
     }
 
     contentView.addSubview(clipTimeLabel)
