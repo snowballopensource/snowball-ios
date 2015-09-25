@@ -86,6 +86,8 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     view.addGestureRecognizer(playerControlSwipeLeftGestureRecognizer)
     playerControlSwipeRightGestureRecognizer.addTarget(self, action: "userDidSwipePlayerControlGestureRecognizerRight:")
     view.addGestureRecognizer(playerControlSwipeRightGestureRecognizer)
+
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "refresh", name: UIApplicationWillEnterForegroundNotification, object: nil)
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -267,6 +269,10 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   }
 
   // MARK: - Private
+
+  @objc private func applicationWillEnterForeground() {
+    refresh()
+  }
 
   @objc private func userDidTapPlayerControlGestureRecognizer(recognizer: UITapGestureRecognizer) {
     if player.playing {
