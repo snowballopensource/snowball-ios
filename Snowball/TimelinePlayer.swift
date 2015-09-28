@@ -63,7 +63,7 @@ class TimelinePlayer: AVPlayer {
 
   override init() {
     super.init()
-    addBoundaryTimeObserverForTimes([NSValue(CMTime: CMTime(value: 1, timescale: 1000))], queue: dispatch_get_main_queue()) { () -> Void in
+    addBoundaryTimeObserverForTimes([NSValue(CMTime: CMTime(value: 1, timescale: 100))], queue: dispatch_get_main_queue()) { () -> Void in
       if let currentClip = self.currentClip {
         self.delegate?.timelinePlayer(self, didBeginPlaybackOfClip: currentClip)
       }
