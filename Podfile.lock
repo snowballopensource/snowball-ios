@@ -24,10 +24,10 @@ PODS:
   - Amplitude-iOS (3.0.0)
   - Bolts/Tasks (1.2.2)
   - Cartography (0.5.0)
-  - Crashlytics (3.3.1)
-  - Fabric (1.5.1):
-    - Fabric/Base (= 1.5.1)
-  - Fabric/Base (1.5.1)
+  - Crashlytics (3.3.4)
+  - Fabric (1.5.5):
+    - Fabric/Base (= 1.5.5)
+  - Fabric/Base (1.5.5)
   - HanekeSwift (0.9.1)
   - Mixpanel (2.8.3):
     - Mixpanel/Mixpanel (= 2.8.3)
@@ -75,8 +75,8 @@ SPEC CHECKSUMS:
   Amplitude-iOS: 07875b822c2c935ea7f8021830d375ed4d812d31
   Bolts: 20a2bd788273360cb1e31530dc19b8544eef2544
   Cartography: 314f5ed1495995760487161eeb7a8a0940d88ad3
-  Crashlytics: 0e61bdda9def51f1e99720f804eebe94865442b2
-  Fabric: 03c3b3fe77e11a2bc31421b989a9c7adaa4779a5
+  Crashlytics: 41c082440d2e14da444186fff65e79c0b4b35d4c
+  Fabric: 190bf1a6eb65f7500de1347d027d2e59a7e53db1
   HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb
   Mixpanel: fd52e097ae0d27295d0595b2261c60b94d191fda
   Parse: c09d6efe4b2eea752765bc6f365a55516d909079
