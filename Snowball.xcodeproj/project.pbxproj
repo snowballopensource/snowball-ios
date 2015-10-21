@@ -190,6 +190,26 @@
 			name = Misc;
 			sourceTree = "<group>";
 		};
+		BA2AC7091BD8476F004E22B1 /* Terms / Privacy */ = {
+			isa = PBXGroup;
+			children = (
+				BA44E4531A9C0B7700B75DF3 /* WebViewController.swift */,
+				BA44E4551A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift */,
+				BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */,
+			);
+			name = "Terms / Privacy";
+			sourceTree = "<group>";
+		};
+		BA2AC70A1BD8481E004E22B1 /* Sign Up / In */ = {
+			isa = PBXGroup;
+			children = (
+				BAC8CD391A6607550075B503 /* AuthenticationViewController.swift */,
+				BA9C8E811AAB7EFC00CF05AB /* SignUpViewController.swift */,
+				BA9C8E831AAB7F0400CF05AB /* SignInViewController.swift */,
+			);
+			name = "Sign Up / In";
+			sourceTree = "<group>";
+		};
 		BA30B31F1B6800D700BB49EF /* CoreRecord */ = {
 			isa = PBXGroup;
 			children = (
@@ -283,13 +303,9 @@
 			children = (
 				BA9AA67B1A67465F002C4992 /* AuthenticationNavigationController.swift */,
 				BA6385E21A65ACAF00B002D9 /* WelcomeViewController.swift */,
-				BAC8CD391A6607550075B503 /* AuthenticationViewController.swift */,
-				BA9C8E811AAB7EFC00CF05AB /* SignUpViewController.swift */,
-				BA9C8E831AAB7F0400CF05AB /* SignInViewController.swift */,
 				BAEEA7381A97ED9500C83CF9 /* PhoneNumberViewController.swift */,
-				BA44E4531A9C0B7700B75DF3 /* WebViewController.swift */,
-				BA44E4551A9C0CF000B75DF3 /* PrivacyPolicyViewController.swift */,
-				BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */,
+				BA2AC70A1BD8481E004E22B1 /* Sign Up / In */,
+				BA2AC7091BD8476F004E22B1 /* Terms / Privacy */,
 			);
 			name = Authentication;
 			sourceTree = "<group>";

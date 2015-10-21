@@ -60,8 +60,6 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    PushManager.registerForPushNotifications()
-
     view.backgroundColor = UIColor.whiteColor()
     view.clipsToBounds = true
 

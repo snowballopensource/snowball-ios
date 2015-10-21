@@ -43,10 +43,11 @@ class SignInViewController: AuthenticationViewController {
 
   // MARK: - AuthenticationViewController
 
-  override func authenticationCompletedSuccessfully(user: User) {
-    super.authenticationCompletedSuccessfully(user)
-    Analytics.identify(user.id!)
+  override func authenticationCompletedSuccessfully() {
+    super.authenticationCompletedSuccessfully()
+    Analytics.identify(User.currentUser!.id!)
     Analytics.track("Sign In")
+    PushManager.registerForPushNotifications()
     self.switchToNavigationController(MainNavigationController())
   }
 }

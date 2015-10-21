@@ -71,9 +71,7 @@ class AuthenticationViewController: UIViewController {
 
   // MARK: - Internal
 
-  func authenticationCompletedSuccessfully(user: User) {
-    PushManager.associateCurrentInstallationWithCurrentUser(saveImmediately: true)
-  }
+  func authenticationCompletedSuccessfully() {}
 
   // MARK: - Private
 
@@ -91,9 +89,7 @@ class AuthenticationViewController: UIViewController {
           let user = User.objectFromJSON(userJSON) as! User?
           do { try user?.managedObjectContext?.save() } catch {}
           User.currentUser = user
-          if let user = user {
-            self.authenticationCompletedSuccessfully(user)
-          }
+          self.authenticationCompletedSuccessfully()
         }
       }
     }

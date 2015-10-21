@@ -10,20 +10,20 @@ import Parse
 import UIKit
 
 struct PushManager {
-
+  
   // MARK: - Internal
-
+  
   static func registerForPushNotifications() {
     Parse.setApplicationId("XfkcX3ZtlbyMxbSgeblGLixNuJCkmdCVEFBDkf6J",
       clientKey: "BW8JgNZNUvWG6lvcfQUGscEKkqtJUpTRRkhw13ze")
-
+    
     let types: UIUserNotificationType = [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]
     let settings = UIUserNotificationSettings(forTypes: types, categories: nil)
     let application = UIApplication.sharedApplication()
     application.registerUserNotificationSettings(settings)
     application.registerForRemoteNotifications()
   }
-
+  
   static func registrationSucceeded(deviceToken deviceToken: NSData) {
     let installation = PFInstallation.currentInstallation()
     installation.setDeviceTokenFromData(deviceToken)
@@ -31,13 +31,9 @@ struct PushManager {
     installation.saveInBackgroundWithBlock(nil)
   }
 
-  static func registrationFailed(error error: NSError) {
-    print("Push notification registration failed.")
-  }
-
+  static func registrationFailed(error error: NSError) {}
+  
   static func handleRemoteNotification(userInfo userInfo: [NSObject: AnyObject]) {
-    print("Push notification received: \(userInfo)")
-
     let applicationState = UIApplication.sharedApplication().applicationState
     if applicationState == UIApplicationState.Active {
       if let aps = userInfo["aps"] as? [String: AnyObject] {
@@ -52,16 +48,14 @@ struct PushManager {
       }
     }
   }
-
-  static func associateCurrentInstallationWithCurrentUser(saveImmediately saveImmediately: Bool = false) {
+  
+  private static func associateCurrentInstallationWithCurrentUser() {
     if let userID = User.currentUser?.id {
       let installation = PFInstallation.currentInstallation()
       let installationUserID = installation["user_id"] as? String
       if installationUserID != userID {
         installation["user_id"] = userID
-        if saveImmediately {
-          installation.saveInBackgroundWithBlock(nil)
-        }
+        installation.saveInBackgroundWithBlock(nil)
       }
     }
   }
