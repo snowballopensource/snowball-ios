@@ -11,10 +11,6 @@ import UIKit
 
 let isIphone4S = (UIScreen.mainScreen().bounds.height < 568)
 
-func requireSubclass() {
-  fatalError("This method should be overridden by a subclass.")
-}
-
 func isStaging() -> Bool {
   if let bundleIdentifier = NSBundle.mainBundle().bundleIdentifier {
     if bundleIdentifier == "is.snowball.snowball-staging" {
