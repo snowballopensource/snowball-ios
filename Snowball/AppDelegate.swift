@@ -37,7 +37,6 @@ extension AppDelegate: UIApplicationDelegate {
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     window?.makeKeyAndVisible()
     Fabric.with([Crashlytics()])
-    application.applicationSupportsShakeToEdit = true
     Clip.cleanupUploadingStates()
     return true
   }

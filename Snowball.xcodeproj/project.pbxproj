@@ -42,7 +42,6 @@
 		BA7C27CB1A37A64400A9CFC5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27CA1A37A64400A9CFC5 /* API.swift */; };
 		BA7C27D31A37ADA600A9CFC5 /* RemoteObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */; };
 		BA8812EB1A783CD600B50651 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */; };
-		BA97DE591B4DC9B2005DF812 /* UIViewController+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA97DE581B4DC9B2005DF812 /* UIViewController+Shake.swift */; };
 		BA989AD31B508D5A0029B674 /* OnboardingConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA989AD21B508D5A0029B674 /* OnboardingConnectViewController.swift */; };
 		BA989AD51B508DDB0029B674 /* OnboardingIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA989AD41B508DDB0029B674 /* OnboardingIntroViewController.swift */; };
 		BA9AA67C1A67465F002C4992 /* AuthenticationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9AA67B1A67465F002C4992 /* AuthenticationNavigationController.swift */; };
@@ -130,7 +129,6 @@
 		BA7C27CA1A37A64400A9CFC5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteObject.swift; sourceTree = "<group>"; };
 		BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
-		BA97DE581B4DC9B2005DF812 /* UIViewController+Shake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Shake.swift"; sourceTree = "<group>"; };
 		BA989AD21B508D5A0029B674 /* OnboardingConnectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingConnectViewController.swift; sourceTree = "<group>"; };
 		BA989AD41B508DDB0029B674 /* OnboardingIntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingIntroViewController.swift; sourceTree = "<group>"; };
 		BA9AA67B1A67465F002C4992 /* AuthenticationNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationNavigationController.swift; sourceTree = "<group>"; };
@@ -403,7 +401,6 @@
 				BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */,
 				BA7C0E491A65EF94001B3B4C /* UITextField+Snowball.swift */,
 				BA3DB8211A9EEA8B00378F6D /* UIViewController+NavigationTransition.swift */,
-				BA97DE581B4DC9B2005DF812 /* UIViewController+Shake.swift */,
 				BAB1A3251AA0C9F400C2FB49 /* UITableView+RefreshControl.swift */,
 				BA4943361B7D4963004FE784 /* UIImageView+Snowball.swift */,
 			);
@@ -560,7 +557,6 @@
 				BA30B31C1B68008600BB49EF /* CoreDataStack.swift in Sources */,
 				BA38C15E1A30228700A2F2AE /* AppDelegate.swift in Sources */,
 				BA30B31E1B6800A600BB49EF /* NSManagedObject+CoreRecord.swift in Sources */,
-				BA97DE591B4DC9B2005DF812 /* UIViewController+Shake.swift in Sources */,
 				BA372D141A880C58004E58E9 /* TextFieldTableViewCell.swift in Sources */,
 				BA3DB8241A9EEEFD00378F6D /* SnowballRoundedButton.swift in Sources */,
 				BAFB06E41A9E915600EDA01B /* Analytics.swift in Sources */,
