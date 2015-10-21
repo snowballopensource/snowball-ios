@@ -53,10 +53,7 @@ class ProfileTimelineViewController: TimelineViewController {
 
   override func refresh() {
     timeline.requestUserTimeline(user) { (error) -> Void in
-      if let error = error {
-        print(error)
-        // TODO: Display the error
-      }
+      error?.alertUser()
     }
   }
 

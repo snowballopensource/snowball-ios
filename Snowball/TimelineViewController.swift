@@ -370,9 +370,8 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
           SwiftSpinner.show(NSLocalizedString("Deleting...", comment: ""))
           API.request(Router.DeleteClip(clipID: clipID)).response { (request, response, data, error) in
             SwiftSpinner.hide()
-            if let error = error {
-              print(error)
-              // TOOD: Display the error
+            if let error = error as? NSError {
+              error.alertUser()
             } else {
               self.timeline.deleteClip(clip)
             }
@@ -395,9 +394,8 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
         SwiftSpinner.show(NSLocalizedString("Flagging...", comment: ""))
         API.request(Router.FlagClip(clipID: clipID)).response { (request, response, data, error) in
           SwiftSpinner.hide()
-          if let error = error {
-            print(error)
-            // TOOD: Display the error
+          if let error = error as? NSError {
+            error.alertUser()
           } else {
             self.timeline.deleteClip(clip)
           }

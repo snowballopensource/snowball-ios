@@ -125,9 +125,9 @@ class Timeline {
     }
   }
 
-  func requestHomeTimeline(completion: (error: ErrorType?) -> Void) {
+  func requestHomeTimeline(completion: (error: NSError?) -> Void) {
     API.request(Router.GetClipStream).responseJSON { (request, response, result) in
-      if let error = result.error {
+      if let error = result.error as? NSError {
         completion(error: error)
       } else if let JSON = result.value as? [AnyObject] {
         // Handle clips that were captured before the timeline loads from server...
@@ -140,10 +140,10 @@ class Timeline {
     }
   }
 
-  func requestUserTimeline(user: User, completion: (error: ErrorType?) -> Void) {
+  func requestUserTimeline(user: User, completion: (error: NSError?) -> Void) {
     if let userID = user.id {
       API.request(Router.GetClipStreamForUser(userID: userID)).responseJSON { (request, response, result) in
-        if let error = result.error {
+        if let error = result.error as? NSError {
           completion(error: error)
         } else if let JSON = result.value as? [AnyObject] {
           self.clips = Clip.objectsFromJSON(JSON) as! [Clip]

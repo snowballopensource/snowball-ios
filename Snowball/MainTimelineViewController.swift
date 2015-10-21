@@ -48,8 +48,7 @@ class MainTimelineViewController: TimelineViewController {
   override func refresh() {
     timeline.requestHomeTimeline { (error) -> Void in
       if let error = error {
-        print(error)
-        // TODO: Display the error
+        error.alertUser()
       }
     }
   }
@@ -125,7 +124,8 @@ extension MainTimelineViewController {
       clip.state = .Uploading
       timeline.markClipAsUpdated(clip)
       API.uploadClip(clip) { (request, response, JSON, error) -> () in
-        if let _ = error {
+        if let error = error {
+          error.alertUser()
           clip.state = ClipState.UploadFailed
         } else {
           clip.state = ClipState.Default

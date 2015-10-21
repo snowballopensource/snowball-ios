@@ -31,7 +31,9 @@ struct PushManager {
     installation.saveInBackgroundWithBlock(nil)
   }
 
-  static func registrationFailed(error error: NSError) {}
+  static func registrationFailed(error error: NSError) {
+    error.alertUser()
+  }
   
   static func handleRemoteNotification(userInfo userInfo: [NSObject: AnyObject]) {
     let applicationState = UIApplication.sharedApplication().applicationState

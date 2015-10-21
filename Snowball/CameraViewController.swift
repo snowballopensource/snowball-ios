@@ -376,6 +376,9 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
   }
 
   func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!) {
+    if let error = error {
+      error.alertUser()
+    }
     setFocusLocked(false)
     endProgressViewAnimation()
     // Crop video

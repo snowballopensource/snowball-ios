@@ -172,7 +172,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     if let thumbnailURLString = clip.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
       clipThumbnailLoadingIndicator.startAnimating(userColor)
-      clipThumbnailImageView.setImageFromURL(thumbnailURL) {
+      clipThumbnailImageView.setImageFromURL(thumbnailURL) { error in
         self.clipThumbnailLoadingIndicator.stopAnimating()
       }
     }
