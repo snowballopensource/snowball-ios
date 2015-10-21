@@ -58,17 +58,6 @@ class WelcomeViewController: UIViewController {
 
   private let privacyButton = UIButton()
 
-  private let kHasSeenOnboardingKey = "HasSeenOnboarding"
-  var hasSeenOnboarding: Bool {
-    get {
-      return NSUserDefaults.standardUserDefaults().objectForKey(kHasSeenOnboardingKey) as? Bool ?? false
-    }
-    set {
-      NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: kHasSeenOnboardingKey)
-      NSUserDefaults.standardUserDefaults().synchronize()
-    }
-  }
-
   // MARK: - UIViewController
 
   override func viewDidLoad() {
@@ -135,16 +124,6 @@ class WelcomeViewController: UIViewController {
       privacyButton.top == legalLabel.top
       privacyButton.right == legalLabel.right
       privacyButton.bottom == legalLabel.bottom
-    }
-  }
-
-  override func viewDidAppear(animated: Bool) {
-    super.viewDidAppear(animated)
-
-    if !hasSeenOnboarding {
-      presentViewController(OnboardingPageViewController(), animated: true) {
-        self.hasSeenOnboarding = true
-      }
     }
   }
 
