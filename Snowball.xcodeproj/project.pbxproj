@@ -142,7 +142,7 @@
 		BAAC6C131B6AC84700F400FB /* ClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClipCollectionViewCell.swift; path = "../../../Development/snowball-ios/Snowball/ClipCollectionViewCell.swift"; sourceTree = "<group>"; };
 		BAAC6C151B6AC89700F400FB /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineViewController.swift; path = "../../../Development/snowball-ios/Snowball/TimelineViewController.swift"; sourceTree = "<group>"; };
 		BAAC6C171B6ACB6900F400FB /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = "../../../Development/snowball-ios/Snowball/Timeline.swift"; sourceTree = "<group>"; };
-		BAAC6C191B6ACBB100F400FB /* TimelinePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelinePlayer.swift; path = "../../../Development/snowball-ios/Snowball/TimelinePlayer.swift"; sourceTree = "<group>"; };
+		BAAC6C191B6ACBB100F400FB /* TimelinePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelinePlayer.swift; sourceTree = "<group>"; };
 		BAB1A3251AA0C9F400C2FB49 /* UITableView+RefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+RefreshControl.swift"; sourceTree = "<group>"; };
 		BAB8F2C71A830F5500937407 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		BABE8FCC1A8957D600B81DD1 /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
@@ -192,6 +192,16 @@
 				8A6E3769866E85F9B3BF4ACB /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		BA2AC7081BD83B79004E22B1 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				BA38C1691A30228700A2F2AE /* LaunchScreen.xib */,
+				BA38C15F1A30228700A2F2AE /* Snowball.xcdatamodeld */,
+				BA3A286F1A3051E300A85C29 /* Util.swift */,
+			);
+			name = Misc;
 			sourceTree = "<group>";
 		};
 		BA30B31F1B6800D700BB49EF /* CoreRecord */ = {
@@ -251,21 +261,14 @@
 			isa = PBXGroup;
 			children = (
 				BA38C15D1A30228700A2F2AE /* AppDelegate.swift */,
-				BAA637591B180181000F3359 /* PushManager.swift */,
-				BAAC6C191B6ACBB100F400FB /* TimelinePlayer.swift */,
-				BA0357191B8502CA00AC5487 /* ClipPreloader.swift */,
-				BA6385DB1A65A90000B002D9 /* Authentication */,
-				BAE702471A96BF030040DA6F /* Onboarding */,
-				BA9AA6811A6747F0002C4992 /* Main */,
-				BAF3BC971A76E03F00AFD3E5 /* More */,
+				BAD086D41BD8336300C02B31 /* Controllers */,
+				BAD086D21BD832C100C02B31 /* View Controllers */,
 				BA32C7931A3287AC0052F4CA /* Views */,
 				BAA8C07E1A32F8EC00AAB9F4 /* Models */,
 				BA7C27C71A37A32A00A9CFC5 /* Networking */,
 				BAF3DDBF1A3048440062C068 /* Extensions */,
 				BA32C7801A3256CC0052F4CA /* Assets */,
-				BA38C1691A30228700A2F2AE /* LaunchScreen.xib */,
-				BA38C15F1A30228700A2F2AE /* Snowball.xcdatamodeld */,
-				BA3A286F1A3051E300A85C29 /* Util.swift */,
+				BA2AC7081BD83B79004E22B1 /* Misc */,
 				BA38C15B1A30228700A2F2AE /* Supporting Files */,
 			);
 			path = Snowball;
@@ -287,15 +290,6 @@
 				BA372D131A880C58004E58E9 /* TextFieldTableViewCell.swift */,
 			);
 			name = Cells;
-			sourceTree = "<group>";
-		};
-		BA4D62D71AA385EB00690BD0 /* Cache */ = {
-			isa = PBXGroup;
-			children = (
-				BA4BD71F1AA2D6820057380C /* ClipPreloadQueue.swift */,
-				BA4BD7211AA2E1F00057380C /* Cache.swift */,
-			);
-			name = Cache;
 			sourceTree = "<group>";
 		};
 		BA6385DB1A65A90000B002D9 /* Authentication */ = {
@@ -330,12 +324,14 @@
 				BA7C27C51A37A28F00A9CFC5 /* Router.swift */,
 				BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */,
 				BAFB06E31A9E915600EDA01B /* Analytics.swift */,
-				BA4D62D71AA385EB00690BD0 /* Cache */,
+				BA0357191B8502CA00AC5487 /* ClipPreloader.swift */,
+				BA4BD71F1AA2D6820057380C /* ClipPreloadQueue.swift */,
+				BA4BD7211AA2E1F00057380C /* Cache.swift */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
 		};
-		BA9AA6811A6747F0002C4992 /* Main */ = {
+		BA9AA6811A6747F0002C4992 /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
 				BA9AA6821A674804002C4992 /* MainNavigationController.swift */,
@@ -344,7 +340,7 @@
 				BA2460E41B6836B6003E3FB5 /* ProfileTimelineViewController.swift */,
 				BA789E091A7052C500BA1611 /* Camera */,
 			);
-			name = Main;
+			name = Timeline;
 			sourceTree = "<group>";
 		};
 		BAA15E701A6888F70055756E /* Vendor */ = {
@@ -358,12 +354,40 @@
 		BAA8C07E1A32F8EC00AAB9F4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BAAC6C171B6ACB6900F400FB /* Timeline.swift */,
+				BAD086D31BD8333100C02B31 /* Core Data */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		BAD086D21BD832C100C02B31 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BA6385DB1A65A90000B002D9 /* Authentication */,
+				BAE702471A96BF030040DA6F /* Onboarding */,
+				BA9AA6811A6747F0002C4992 /* Timeline */,
+				BAF3BC971A76E03F00AFD3E5 /* People */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		BAD086D31BD8333100C02B31 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
 				BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */,
 				BAA8C07F1A32F8F300AAB9F4 /* User.swift */,
 				BABE8FCC1A8957D600B81DD1 /* Clip.swift */,
-				BAAC6C171B6ACB6900F400FB /* Timeline.swift */,
 			);
-			name = Models;
+			name = "Core Data";
+			sourceTree = "<group>";
+		};
+		BAD086D41BD8336300C02B31 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BAA637591B180181000F3359 /* PushManager.swift */,
+				BAAC6C191B6ACBB100F400FB /* TimelinePlayer.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		BAE702471A96BF030040DA6F /* Onboarding */ = {
@@ -380,7 +404,7 @@
 			name = Onboarding;
 			sourceTree = "<group>";
 		};
-		BAF3BC971A76E03F00AFD3E5 /* More */ = {
+		BAF3BC971A76E03F00AFD3E5 /* People */ = {
 			isa = PBXGroup;
 			children = (
 				BA9C8E7F1AAB779200CF05AB /* FormTableViewController.swift */,
@@ -389,7 +413,7 @@
 				BAA966BC1A87FEEC0032752F /* FindFriendsViewController.swift */,
 				BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */,
 			);
-			name = More;
+			name = People;
 			sourceTree = "<group>";
 		};
 		BAF3DDBF1A3048440062C068 /* Extensions */ = {
