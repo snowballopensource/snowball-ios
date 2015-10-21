@@ -71,11 +71,7 @@ struct API {
 func displayAPIErrorToUser(errorJSON: AnyObject?) {
   if let errorJSON: AnyObject = errorJSON {
     if let message = errorJSON["message"] as? String {
-      let alertController = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: message, preferredStyle: UIAlertControllerStyle.Alert)
-      alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
-      if let rootVC = AppDelegate.sharedDelegate.window!.rootViewController {
-        rootVC.presentViewController(alertController, animated: true, completion: nil)
-      }
+      UIAlertController.displayAlertWithTitle(NSLocalizedString("Error", comment: ""), message: message)
     }
   }
 }

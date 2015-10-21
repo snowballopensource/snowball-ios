@@ -83,7 +83,7 @@ class FindFriendsViewController: UIViewController {
       return nil
     }
     return addressBook.takeRetainedValue()
-  }()
+    }()
 
   private let footerButton: SnowballFooterButton = {
     let button = SnowballFooterButton(rightImage: UIImage(named: "plane"))
@@ -153,11 +153,10 @@ class FindFriendsViewController: UIViewController {
   @objc private func refresh() {
     let authorizationStatus = ABAddressBookGetAuthorizationStatus()
     if authorizationStatus != ABAuthorizationStatus.Authorized {
-        tableView.refreshControl.endRefreshing()
-        let alertController = UIAlertController(title: NSLocalizedString("Couldn't load users", comment: ""), message: NSLocalizedString("Please go to Settings > Snowball > Contacts to allow Snowball to access your Contacts.", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
-        presentViewController(alertController, animated: true, completion: nil)
-        return
+      tableView.refreshControl.endRefreshing()
+      let error = NSError.snowballErrorWithReason(NSLocalizedString("Please go to Settings > Snowball > Contacts to allow Snowball to access your Contacts.", comment: ""))
+      error.alertUser()
+      return
     }
     var phoneNumbers = [String]()
     let contacts = ABAddressBookCopyArrayOfAllPeople(addressBook).takeRetainedValue() as NSArray
@@ -239,7 +238,7 @@ extension FindFriendsViewController: UITableViewDataSource {
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(UserTableViewCell),
-      forIndexPath: indexPath) 
+      forIndexPath: indexPath)
     configureCell(cell, atIndexPath: indexPath)
     return cell
   }

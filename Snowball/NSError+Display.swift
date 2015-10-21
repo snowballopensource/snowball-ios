@@ -12,10 +12,6 @@ extension NSError {
   func alertUser() {
     var message = localizedFailureReason
     if message == nil { message = NSLocalizedString("An unknown error has occured.", comment: "") }
-    let alertController = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: message, preferredStyle: UIAlertControllerStyle.Alert)
-    alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
-    if let rootVC = AppDelegate.sharedDelegate.window!.rootViewController {
-      rootVC.presentViewController(alertController, animated: true, completion: nil)
-    }
+    UIAlertController.displayAlertWithTitle(NSLocalizedString("Error", comment: ""), message: message)
   }
 }
