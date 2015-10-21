@@ -18,11 +18,11 @@ import Foundation
   out below, but could possibly be done better with a minor refactor of this class.
 */
 
-class ClipPreloader: NSOperationQueue {
+class ClipDownloader: NSOperationQueue {
 
   // MARK: - Properties
 
-  static let sharedPreloader = ClipPreloader()
+  static let sharedDownloader = ClipDownloader()
 
   // MARK: - Initializers
 
@@ -39,7 +39,7 @@ class ClipPreloader: NSOperationQueue {
     load(clip, priority: NSOperationQueuePriority.VeryHigh, completion: completion)
   }
 
-  class func preloadTimeline(timeline: Timeline, withFirstClip clip: Clip?) {
+  class func downloadTimeline(timeline: Timeline, withFirstClip clip: Clip?) {
     if let clip = clip {
       let offset = timeline.indexOfClip(clip)
       if let offset = offset {
@@ -71,8 +71,8 @@ class ClipPreloader: NSOperationQueue {
           return
         }
       }
-      completion?(clip: clip, cacheURL: nil, error: NSError(domain: "", code: 0, userInfo: nil))
+      completion?(clip: clip, cacheURL: nil, error: NSError.snowballErrorWithReason("Error loading clip."))
     }
-    sharedPreloader.addOperation(operation)
+    sharedDownloader.addOperation(operation)
   }
 }

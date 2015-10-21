@@ -19,7 +19,7 @@ struct API {
   // MARK - Internal
 
   static func uploadClip(clip: Clip, completion: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> ()) {
-    UploadQueue.sharedQueue.addTask {
+    ClipUploadQueue.sharedQueue.addTask {
       let requestURL = NSURL(string: Router.baseURLString)!.URLByAppendingPathComponent("clips")
       let request = AFHTTPRequestSerializer().multipartFormRequestWithMethod("POST",
         URLString: requestURL.absoluteString,
@@ -38,7 +38,7 @@ struct API {
   }
 
   static func changeAvatarToImage(image: UIImage, completion: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> ()) {
-    UploadQueue.sharedQueue.addTask {
+    ClipUploadQueue.sharedQueue.addTask {
       let requestURL = NSURL(string: Router.baseURLString)!.URLByAppendingPathComponent("users/me")
       let request = AFHTTPRequestSerializer().multipartFormRequestWithMethod("PATCH",
         URLString: requestURL.absoluteString,

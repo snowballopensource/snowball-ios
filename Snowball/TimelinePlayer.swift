@@ -29,7 +29,7 @@ class TimelinePlayer: AVPlayer {
         replaceCurrentItemWithPlayerItem(nil)
       } else {
         delegate?.timelinePlayer(self, didBeginBufferingClip: currentClip!)
-        ClipPreloader.load(currentClip!) { (preloadedClip, cacheURL, error) -> Void in
+        ClipDownloader.load(currentClip!) { (preloadedClip, cacheURL, error) -> Void in
           error?.alertUser()
           if let url = cacheURL {
             let playerItem = ClipPlayerItem(url: url, clip: preloadedClip)
@@ -40,7 +40,7 @@ class TimelinePlayer: AVPlayer {
         }
         if oldValue == nil {
           if let nextClip = timeline?.clipAfterClip(currentClip!) {
-            ClipPreloader.preloadTimeline(timeline!, withFirstClip: nextClip)
+            ClipDownloader.downloadTimeline(timeline!, withFirstClip: nextClip)
           }
         }
       }

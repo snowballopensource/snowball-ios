@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		590C6EB6ECEE12594A815ED5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC32A4062714B26F6F63153 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		BA03571A1B8502CA00AC5487 /* ClipPreloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0357191B8502CA00AC5487 /* ClipPreloader.swift */; };
+		BA03571A1B8502CA00AC5487 /* ClipDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0357191B8502CA00AC5487 /* ClipDownloader.swift */; };
 		BA1835531AA51C1D00D6A0BE /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1835521AA51C1D00D6A0BE /* PlayerView.swift */; };
-		BA20CCEE1A9D156C00D96A31 /* UploadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */; };
+		BA20CCEE1A9D156C00D96A31 /* ClipUploadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA20CCED1A9D156C00D96A31 /* ClipUploadQueue.swift */; };
 		BA2460E31B683600003E3FB5 /* MainTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2460E21B683600003E3FB5 /* MainTimelineViewController.swift */; };
 		BA2460E51B6836B6003E3FB5 /* ProfileTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2460E41B6836B6003E3FB5 /* ProfileTimelineViewController.swift */; };
 		BA2AC70C1BD849AD004E22B1 /* NSError+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AC70B1BD849AD004E22B1 /* NSError+Display.swift */; settings = {ASSET_TAGS = (); }; };
@@ -34,7 +34,7 @@
 		BA44E4581A9C0EC600B75DF3 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */; };
 		BA46D6FE1BA10FCD0048D09D /* CircleLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA46D6FD1BA10FCD0048D09D /* CircleLoadingIndicator.swift */; };
 		BA4943371B7D4963004FE784 /* UIImageView+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4943361B7D4963004FE784 /* UIImageView+Snowball.swift */; };
-		BA4BD7201AA2D6820057380C /* ClipPreloadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4BD71F1AA2D6820057380C /* ClipPreloadQueue.swift */; };
+		BA4BD7201AA2D6820057380C /* ClipDownloadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4BD71F1AA2D6820057380C /* ClipDownloadQueue.swift */; };
 		BA4BD7221AA2E1F00057380C /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4BD7211AA2E1F00057380C /* Cache.swift */; };
 		BA6385E31A65ACAF00B002D9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385E21A65ACAF00B002D9 /* WelcomeViewController.swift */; };
 		BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */; };
@@ -89,9 +89,9 @@
 		2BC32A4062714B26F6F63153 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		32713D4685D2B1201FD238E6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8A6E3769866E85F9B3BF4ACB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		BA0357191B8502CA00AC5487 /* ClipPreloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPreloader.swift; sourceTree = "<group>"; };
+		BA0357191B8502CA00AC5487 /* ClipDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipDownloader.swift; sourceTree = "<group>"; };
 		BA1835521AA51C1D00D6A0BE /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
-		BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadQueue.swift; sourceTree = "<group>"; };
+		BA20CCED1A9D156C00D96A31 /* ClipUploadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipUploadQueue.swift; sourceTree = "<group>"; };
 		BA2460E21B683600003E3FB5 /* MainTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTimelineViewController.swift; sourceTree = "<group>"; };
 		BA2460E41B6836B6003E3FB5 /* ProfileTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTimelineViewController.swift; sourceTree = "<group>"; };
 		BA2AC70B1BD849AD004E22B1 /* NSError+Display.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Display.swift"; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 		BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		BA46D6FD1BA10FCD0048D09D /* CircleLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleLoadingIndicator.swift; sourceTree = "<group>"; };
 		BA4943361B7D4963004FE784 /* UIImageView+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Snowball.swift"; sourceTree = "<group>"; };
-		BA4BD71F1AA2D6820057380C /* ClipPreloadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPreloadQueue.swift; sourceTree = "<group>"; };
+		BA4BD71F1AA2D6820057380C /* ClipDownloadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipDownloadQueue.swift; sourceTree = "<group>"; };
 		BA4BD7211AA2E1F00057380C /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		BA6385E21A65ACAF00B002D9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Snowball.swift"; sourceTree = "<group>"; };
@@ -214,6 +214,16 @@
 				BA9C8E831AAB7F0400CF05AB /* SignInViewController.swift */,
 			);
 			name = "Sign Up / In";
+			sourceTree = "<group>";
+		};
+		BA2AC7171BD85C0C004E22B1 /* Clip Download/Upload */ = {
+			isa = PBXGroup;
+			children = (
+				BA20CCED1A9D156C00D96A31 /* ClipUploadQueue.swift */,
+				BA0357191B8502CA00AC5487 /* ClipDownloader.swift */,
+				BA4BD71F1AA2D6820057380C /* ClipDownloadQueue.swift */,
+			);
+			name = "Clip Download/Upload";
 			sourceTree = "<group>";
 		};
 		BA30B31F1B6800D700BB49EF /* CoreRecord */ = {
@@ -330,10 +340,6 @@
 			children = (
 				BA7C27CA1A37A64400A9CFC5 /* API.swift */,
 				BA7C27C51A37A28F00A9CFC5 /* Router.swift */,
-				BA20CCED1A9D156C00D96A31 /* UploadQueue.swift */,
-				BAFB06E31A9E915600EDA01B /* Analytics.swift */,
-				BA0357191B8502CA00AC5487 /* ClipPreloader.swift */,
-				BA4BD71F1AA2D6820057380C /* ClipPreloadQueue.swift */,
 				BA4BD7211AA2E1F00057380C /* Cache.swift */,
 			);
 			name = Networking;
@@ -393,6 +399,8 @@
 			children = (
 				BAA637591B180181000F3359 /* PushManager.swift */,
 				BAAC6C191B6ACBB100F400FB /* TimelinePlayer.swift */,
+				BAFB06E31A9E915600EDA01B /* Analytics.swift */,
+				BA2AC7171BD85C0C004E22B1 /* Clip Download/Upload */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -565,7 +573,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA03571A1B8502CA00AC5487 /* ClipPreloader.swift in Sources */,
+				BA03571A1B8502CA00AC5487 /* ClipDownloader.swift in Sources */,
 				BAF3BC961A76E02A00AFD3E5 /* MoreNavigationController.swift in Sources */,
 				BA32C7951A3287BE0052F4CA /* UserAvatarImageView.swift in Sources */,
 				BAA966BD1A87FEEC0032752F /* FindFriendsViewController.swift in Sources */,
@@ -595,7 +603,7 @@
 				BA4943371B7D4963004FE784 /* UIImageView+Snowball.swift in Sources */,
 				BA6385E31A65ACAF00B002D9 /* WelcomeViewController.swift in Sources */,
 				BACA7A861A36E40900C34B6C /* NSDate+TimeSince.swift in Sources */,
-				BA4BD7201AA2D6820057380C /* ClipPreloadQueue.swift in Sources */,
+				BA4BD7201AA2D6820057380C /* ClipDownloadQueue.swift in Sources */,
 				BA38C1611A30228700A2F2AE /* Snowball.xcdatamodeld in Sources */,
 				BAF2E45A1A800F1E00A093E5 /* EditProfileViewController.swift in Sources */,
 				BAB1A3261AA0C9F400C2FB49 /* UITableView+RefreshControl.swift in Sources */,
@@ -606,7 +614,7 @@
 				BAA6375A1B180181000F3359 /* PushManager.swift in Sources */,
 				BA9C8E821AAB7EFC00CF05AB /* SignUpViewController.swift in Sources */,
 				BA32C7921A3286250052F4CA /* UIColor+Snowball.swift in Sources */,
-				BA20CCEE1A9D156C00D96A31 /* UploadQueue.swift in Sources */,
+				BA20CCEE1A9D156C00D96A31 /* ClipUploadQueue.swift in Sources */,
 				BAA8C0801A32F8F300AAB9F4 /* User.swift in Sources */,
 				BAAC6C1A1B6ACBB100F400FB /* TimelinePlayer.swift in Sources */,
 				BA2460E51B6836B6003E3FB5 /* ProfileTimelineViewController.swift in Sources */,

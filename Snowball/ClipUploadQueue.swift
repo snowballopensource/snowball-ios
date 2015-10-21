@@ -8,13 +8,13 @@
 
 import Foundation
 
-class UploadQueue {
+class ClipUploadQueue {
 
   // MARK: - Properties
 
-  class var sharedQueue: UploadQueue {
+  class var sharedQueue: ClipUploadQueue {
     struct Singleton {
-      static let sharedQueue = UploadQueue()
+      static let sharedQueue = ClipUploadQueue()
     }
     return Singleton.sharedQueue
   }
