@@ -22,14 +22,9 @@ class AppDelegate: UIResponder {
   lazy var window: UIWindow? = {
     let window = UIWindow(frame: UIScreen.mainScreen().bounds)
     window.backgroundColor = UIColor.whiteColor()
-    window.rootViewController = initialViewController
+    window.rootViewController = MainNavigationController()
     return window
     }()
-
-  private class var initialViewController: UIViewController {
-    if User.currentUser == nil { return AuthenticationNavigationController() }
-    return MainNavigationController()
-  }
 }
 
 // MARK: - UIApplicationDelegate
