@@ -10,8 +10,10 @@ import UIKit
 
 extension NSError {
   func alertUser() {
+    let title = NSLocalizedString("Error", comment: "")
     var message = localizedFailureReason
     if message == nil { message = NSLocalizedString("An unknown error has occured.", comment: "") }
-    UIAlertController.displayAlertWithTitle(NSLocalizedString("Error", comment: ""), message: message)
+    let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+    alert.display()
   }
 }

@@ -43,9 +43,7 @@ struct PushManager {
           let alert = UIAlertController(title: nil, message: message, preferredStyle: UIAlertControllerStyle.Alert)
           let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Default, handler: nil)
           alert.addAction(okAction)
-          if let rootVC = UIApplication.sharedApplication().delegate?.window??.rootViewController {
-            rootVC.presentViewController(alert, animated: true, completion: nil)
-          }
+          alert.display()
         }
       }
     }

@@ -363,9 +363,9 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
   func userDidTapDeleteButtonForCell(cell: ClipCollectionViewCell) {
     let clip = clipForCell(cell)
     if clip?.user == User.currentUser, let clip = clip {
-      let alertController = UIAlertController(title: NSLocalizedString("Delete this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to delete this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.ActionSheet)
-      alertController.addAction(UIAlertAction(title: NSLocalizedString("Don't Delete", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
-      let deleteAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
+      let alert = UIAlertController(title: NSLocalizedString("Delete this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to delete this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.ActionSheet)
+      alert.addAction(UIAlertAction(title: NSLocalizedString("Don't Delete", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
+      alert.addAction(UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
         if let clipID = clip.id {
           SwiftSpinner.show(NSLocalizedString("Deleting...", comment: ""))
           API.request(Router.DeleteClip(clipID: clipID)).response { (request, response, data, error) in
@@ -379,17 +379,16 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
         } else {
           self.timeline.deleteClip(clip)
         }
-      }
-      alertController.addAction(deleteAction)
-      presentViewController(alertController, animated: true, completion: nil)
+        })
+      alert.display()
     }
   }
 
   func userDidTapFlagButtonForCell(cell: ClipCollectionViewCell) {
     let clip = clipForCell(cell)
     if let clipID = clip?.id, let clip = clip {
-      let alertController = UIAlertController(title: NSLocalizedString("Flag this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to flag this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.ActionSheet)
-      alertController.addAction(UIAlertAction(title: NSLocalizedString("Don't Flag", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
+      let alert = UIAlertController(title: NSLocalizedString("Flag this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to flag this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.ActionSheet)
+      alert.addAction(UIAlertAction(title: NSLocalizedString("Don't Flag", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
       let deleteAction = UIAlertAction(title: NSLocalizedString("Flag", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
         SwiftSpinner.show(NSLocalizedString("Flagging...", comment: ""))
         API.request(Router.FlagClip(clipID: clipID)).response { (request, response, data, error) in
@@ -401,8 +400,8 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
           }
         }
       }
-      alertController.addAction(deleteAction)
-      presentViewController(alertController, animated: true, completion: nil)
+      alert.addAction(deleteAction)
+      alert.display()
     }
   }
 
