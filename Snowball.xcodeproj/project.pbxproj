@@ -61,6 +61,7 @@
 		BABE8FCD1A8957D600B81DD1 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABE8FCC1A8957D600B81DD1 /* Clip.swift */; };
 		BAC8CD3A1A6607550075B503 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC8CD391A6607550075B503 /* AuthenticationViewController.swift */; };
 		BACA7A861A36E40900C34B6C /* NSDate+TimeSince.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */; };
+		BACE6EE01BD9A2F7005B7227 /* UIViewController+Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACE6EDF1BD9A2F7005B7227 /* UIViewController+Authentication.swift */; settings = {ASSET_TAGS = (); }; };
 		BAE26FB31A77090700A0977C /* SnowballTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE26FB21A77090700A0977C /* SnowballTopView.swift */; };
 		BAEEA7391A97ED9500C83CF9 /* PhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEEA7381A97ED9500C83CF9 /* PhoneNumberViewController.swift */; };
 		BAF2E45A1A800F1E00A093E5 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */; };
@@ -144,6 +145,7 @@
 		BABE8FCC1A8957D600B81DD1 /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
 		BAC8CD391A6607550075B503 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeSince.swift"; sourceTree = "<group>"; };
+		BACE6EDF1BD9A2F7005B7227 /* UIViewController+Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Authentication.swift"; sourceTree = "<group>"; };
 		BAE26FB21A77090700A0977C /* SnowballTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballTopView.swift; sourceTree = "<group>"; };
 		BAEEA7381A97ED9500C83CF9 /* PhoneNumberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberViewController.swift; sourceTree = "<group>"; };
 		BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
@@ -431,6 +433,7 @@
 				BA2AC70B1BD849AD004E22B1 /* NSError+Display.swift */,
 				BA2AC7131BD8548F004E22B1 /* NSError+Snowball.swift */,
 				BA2AC7151BD858D9004E22B1 /* UIAlertController+Display.swift */,
+				BACE6EDF1BD9A2F7005B7227 /* UIViewController+Authentication.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -575,6 +578,7 @@
 			files = (
 				BA03571A1B8502CA00AC5487 /* ClipDownloader.swift in Sources */,
 				BAF3BC961A76E02A00AFD3E5 /* MoreNavigationController.swift in Sources */,
+				BACE6EE01BD9A2F7005B7227 /* UIViewController+Authentication.swift in Sources */,
 				BA32C7951A3287BE0052F4CA /* UserAvatarImageView.swift in Sources */,
 				BAA966BD1A87FEEC0032752F /* FindFriendsViewController.swift in Sources */,
 				BAAC6C181B6ACB6900F400FB /* Timeline.swift in Sources */,

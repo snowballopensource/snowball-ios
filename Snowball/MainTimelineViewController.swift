@@ -170,7 +170,9 @@ extension MainTimelineViewController: CameraViewControllerDelegate {
 extension MainTimelineViewController: SnowballTopViewDelegate {
 
   func snowballTopViewLeftButtonTapped() {
-    switchToNavigationController(MoreNavigationController())
+    authenticateUser {
+      self.switchToNavigationController(MoreNavigationController())
+    }
   }
 
   func snowballTopViewRightButtonTapped() {
