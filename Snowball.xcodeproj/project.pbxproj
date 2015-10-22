@@ -16,6 +16,8 @@
 		BA2AC70C1BD849AD004E22B1 /* NSError+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AC70B1BD849AD004E22B1 /* NSError+Display.swift */; settings = {ASSET_TAGS = (); }; };
 		BA2AC7141BD8548F004E22B1 /* NSError+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AC7131BD8548F004E22B1 /* NSError+Snowball.swift */; settings = {ASSET_TAGS = (); }; };
 		BA2AC7161BD858D9004E22B1 /* UIAlertController+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AC7151BD858D9004E22B1 /* UIAlertController+Display.swift */; settings = {ASSET_TAGS = (); }; };
+		BA2AC7201BD865E7004E22B1 /* JSONImportable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AC71E1BD865E7004E22B1 /* JSONImportable.swift */; settings = {ASSET_TAGS = (); }; };
+		BA2AC7211BD865E7004E22B1 /* SnowballAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AC71F1BD865E7004E22B1 /* SnowballAPI.swift */; settings = {ASSET_TAGS = (); }; };
 		BA30B31C1B68008600BB49EF /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30B31B1B68008600BB49EF /* CoreDataStack.swift */; };
 		BA30B31E1B6800A600BB49EF /* NSManagedObject+CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30B31D1B6800A600BB49EF /* NSManagedObject+CoreRecord.swift */; };
 		BA32C7921A3286250052F4CA /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */; };
@@ -97,6 +99,8 @@
 		BA2AC70B1BD849AD004E22B1 /* NSError+Display.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Display.swift"; sourceTree = "<group>"; };
 		BA2AC7131BD8548F004E22B1 /* NSError+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Snowball.swift"; sourceTree = "<group>"; };
 		BA2AC7151BD858D9004E22B1 /* UIAlertController+Display.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Display.swift"; sourceTree = "<group>"; };
+		BA2AC71E1BD865E7004E22B1 /* JSONImportable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONImportable.swift; sourceTree = "<group>"; };
+		BA2AC71F1BD865E7004E22B1 /* SnowballAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballAPI.swift; sourceTree = "<group>"; };
 		BA30B31B1B68008600BB49EF /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		BA30B31D1B6800A600BB49EF /* NSManagedObject+CoreRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+CoreRecord.swift"; sourceTree = "<group>"; };
 		BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Snowball.swift"; sourceTree = "<group>"; };
@@ -338,6 +342,8 @@
 		BA7C27C71A37A32A00A9CFC5 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				BA2AC71E1BD865E7004E22B1 /* JSONImportable.swift */,
+				BA2AC71F1BD865E7004E22B1 /* SnowballAPI.swift */,
 				BA7C27CA1A37A64400A9CFC5 /* API.swift */,
 				BA7C27C51A37A28F00A9CFC5 /* Router.swift */,
 				BA4BD7211AA2E1F00057380C /* Cache.swift */,
@@ -579,6 +585,7 @@
 				BAA966BD1A87FEEC0032752F /* FindFriendsViewController.swift in Sources */,
 				BAAC6C181B6ACB6900F400FB /* Timeline.swift in Sources */,
 				BA2AC7161BD858D9004E22B1 /* UIAlertController+Display.swift in Sources */,
+				BA2AC7201BD865E7004E22B1 /* JSONImportable.swift in Sources */,
 				BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */,
 				BA7C0E481A65C315001B3B4C /* UIButton+Snowball.swift in Sources */,
 				BA30B31C1B68008600BB49EF /* CoreDataStack.swift in Sources */,
@@ -592,6 +599,7 @@
 				BA2460E31B683600003E3FB5 /* MainTimelineViewController.swift in Sources */,
 				BA46D6FE1BA10FCD0048D09D /* CircleLoadingIndicator.swift in Sources */,
 				BA7C0E4A1A65EF94001B3B4C /* UITextField+Snowball.swift in Sources */,
+				BA2AC7211BD865E7004E22B1 /* SnowballAPI.swift in Sources */,
 				BAF50E781AA644DF00AB874E /* CameraPreviewPlayer.swift in Sources */,
 				BA9AA67C1A67465F002C4992 /* AuthenticationNavigationController.swift in Sources */,
 				BAEEA7391A97ED9500C83CF9 /* PhoneNumberViewController.swift in Sources */,
