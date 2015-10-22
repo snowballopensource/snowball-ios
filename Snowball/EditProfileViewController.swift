@@ -108,7 +108,8 @@ class EditProfileViewController: UIViewController {
     view.backgroundColor = UIColor.whiteColor()
 
     // TODO: prevent editing while loading this, but allow to go back
-    API.request(Router.GetCurrentUser).responseJSON { (request, response, result) in
+    API.request(Router.GetCurrentUser).responseJSON { response in
+      let result = response.result
       if result.error != nil { displayAPIErrorToUser(result.value); return }
       if let JSON: AnyObject = result.value {
         dispatch_async(dispatch_get_main_queue()) {
@@ -173,7 +174,8 @@ extension EditProfileViewController: SnowballTopViewDelegate {
       }
     }
     if user.hasChanges {
-      API.request(Router.UpdateCurrentUser(name: nil, username: username, email: email, phoneNumber: phoneNumber)).responseJSON { (request, response, result) in
+      API.request(Router.UpdateCurrentUser(name: nil, username: username, email: email, phoneNumber: phoneNumber)).responseJSON { response in
+        let result = response.result
         if result.error != nil { displayAPIErrorToUser(result.value); return }
         do { try user.managedObjectContext?.save() } catch {}
         self.navigationController?.popViewControllerAnimated(true)

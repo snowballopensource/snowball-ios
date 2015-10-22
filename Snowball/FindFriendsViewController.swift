@@ -168,7 +168,8 @@ class FindFriendsViewController: UIViewController {
       }
     }
 
-    API.request(Router.FindUsersByPhoneNumbers(phoneNumbers: phoneNumbers)).responseJSON { (request, response, result) in
+    API.request(Router.FindUsersByPhoneNumbers(phoneNumbers: phoneNumbers)).responseJSON { response in
+      let result = response.result
       self.tableView.refreshControl.endRefreshing()
       if let JSON: AnyObject = result.value {
         if let users = User.objectsFromJSON(JSON) as? [User] {
@@ -181,7 +182,8 @@ class FindFriendsViewController: UIViewController {
 
   private func searchForUserWithUsername(username: String) {
     tableView.refreshControl.beginRefreshing()
-    API.request(Router.FindUsersByUsername(username: username)).responseJSON { (request, response, result) in
+    API.request(Router.FindUsersByUsername(username: username)).responseJSON { response in
+      let result = response.result
       self.tableView.refreshControl.endRefreshing()
       if let JSON: AnyObject = result.value {
         if let users = User.objectsFromJSON(JSON) as? [User] {

@@ -112,8 +112,9 @@ extension PhoneNumberViewController: SnowballTopViewDelegate {
     let newPhoneNumber = "\(countryCodeTextField.text)\(phoneNumberTextField.text)"
     if newPhoneNumber.characters.count > 5 {
       topBar.spinRightButton(true)
-      API.request(Router.UpdateCurrentUser(name: nil, username: nil, email: nil, phoneNumber: newPhoneNumber)).responseJSON { (request, response, result) in
-        if let error = result.error as? NSError {
+      API.request(Router.UpdateCurrentUser(name: nil, username: nil, email: nil, phoneNumber: newPhoneNumber)).responseJSON { response in
+        let result = response.result
+        if let error = result.error {
           error.alertUser()
           displayAPIErrorToUser(result.value)
           self.topBar.spinRightButton(false)

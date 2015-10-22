@@ -162,7 +162,8 @@ class FriendsViewController: UIViewController {
 
     switch(followersFollowingSegmentedControl.selectedSegmentIndex) {
     case FollowersFollowingSegmentedControlIndex.Following.rawValue:
-      API.request(Router.GetCurrentUserFollowing).responseJSON { (request, response, result) in
+      API.request(Router.GetCurrentUserFollowing).responseJSON { response in
+        let result = response.result
         self.tableView.refreshControl.endRefreshing()
         if let JSON: AnyObject = result.value {
           self.users = User.objectsFromJSON(JSON) as! [User]
@@ -170,7 +171,8 @@ class FriendsViewController: UIViewController {
         }
       }
     case FollowersFollowingSegmentedControlIndex.Followers.rawValue:
-      API.request(Router.GetCurrentUserFollowers).responseJSON { (request, response, result) in
+      API.request(Router.GetCurrentUserFollowers).responseJSON { response in
+        let result = response.result
         self.tableView.refreshControl.endRefreshing()
         if let JSON: AnyObject = result.value {
           self.users = User.objectsFromJSON(JSON) as! [User]

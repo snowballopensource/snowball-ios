@@ -78,7 +78,8 @@ class AuthenticationViewController: UIViewController {
   private func performAuthenticationRequest() {
     resignFirstResponder()
     topBar.spinRightButton(true)
-    API.request(authenticationRoute).responseJSON { (request, response, result) in
+    API.request(authenticationRoute).responseJSON { response in
+      let result = response.result
       if result.error != nil {
         displayAPIErrorToUser(result.value)
         self.topBar.spinRightButton(false)

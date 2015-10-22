@@ -20,7 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.6.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Alamofire (2.0.1)
+  - Alamofire (3.0.1)
   - Amplitude-iOS (3.0.0)
   - Bolts/Tasks (1.2.2)
   - Cartography (0.5.0)
@@ -71,7 +71,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
-  Alamofire: 1d8e208d616fbbfd2391b15eae766d07c96cdc49
+  Alamofire: 2457e1b2e6c46bb05c3a598c542b7bfd08893775
   Amplitude-iOS: 07875b822c2c935ea7f8021830d375ed4d812d31
   Bolts: 20a2bd788273360cb1e31530dc19b8544eef2544
   Cartography: 314f5ed1495995760487161eeb7a8a0940d88ad3
