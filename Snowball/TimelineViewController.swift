@@ -361,14 +361,40 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
   func userDidTapAddButtonForCell(cell: ClipCollectionViewCell) {}
 
   func userDidTapDeleteButtonForCell(cell: ClipCollectionViewCell) {
-    let clip = clipForCell(cell)
-    if clip?.user == User.currentUser, let clip = clip {
-      let alert = UIAlertController(title: NSLocalizedString("Delete this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to delete this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.ActionSheet)
-      alert.addAction(UIAlertAction(title: NSLocalizedString("Don't Delete", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
-      alert.addAction(UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
-        if let clipID = clip.id {
-          SwiftSpinner.show(NSLocalizedString("Deleting...", comment: ""))
-          API.request(Router.DeleteClip(clipID: clipID)).response { (request, response, data, error) in
+    authenticateUser {
+      let clip = self.clipForCell(cell)
+      if clip?.user == User.currentUser, let clip = clip {
+        let alert = UIAlertController(title: NSLocalizedString("Delete this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to delete this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.ActionSheet)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Don't Delete", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
+          if let clipID = clip.id {
+            SwiftSpinner.show(NSLocalizedString("Deleting...", comment: ""))
+            API.request(Router.DeleteClip(clipID: clipID)).response { (request, response, data, error) in
+              SwiftSpinner.hide()
+              if let error = error {
+                error.alertUser()
+              } else {
+                self.timeline.deleteClip(clip)
+              }
+            }
+          } else {
+            self.timeline.deleteClip(clip)
+          }
+          })
+        alert.display()
+      }
+    }
+  }
+
+  func userDidTapFlagButtonForCell(cell: ClipCollectionViewCell) {
+    authenticateUser {
+      let clip = self.clipForCell(cell)
+      if let clipID = clip?.id, let clip = clip {
+        let alert = UIAlertController(title: NSLocalizedString("Flag this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to flag this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.ActionSheet)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Don't Flag", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
+        let deleteAction = UIAlertAction(title: NSLocalizedString("Flag", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
+          SwiftSpinner.show(NSLocalizedString("Flagging...", comment: ""))
+          API.request(Router.FlagClip(clipID: clipID)).response { (request, response, data, error) in
             SwiftSpinner.hide()
             if let error = error {
               error.alertUser()
@@ -376,56 +402,38 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
               self.timeline.deleteClip(clip)
             }
           }
-        } else {
-          self.timeline.deleteClip(clip)
         }
-        })
-      alert.display()
-    }
-  }
-
-  func userDidTapFlagButtonForCell(cell: ClipCollectionViewCell) {
-    let clip = clipForCell(cell)
-    if let clipID = clip?.id, let clip = clip {
-      let alert = UIAlertController(title: NSLocalizedString("Flag this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to flag this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.ActionSheet)
-      alert.addAction(UIAlertAction(title: NSLocalizedString("Don't Flag", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
-      let deleteAction = UIAlertAction(title: NSLocalizedString("Flag", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
-        SwiftSpinner.show(NSLocalizedString("Flagging...", comment: ""))
-        API.request(Router.FlagClip(clipID: clipID)).response { (request, response, data, error) in
-          SwiftSpinner.hide()
-          if let error = error {
-            error.alertUser()
-          } else {
-            self.timeline.deleteClip(clip)
-          }
-        }
+        alert.addAction(deleteAction)
+        alert.display()
       }
-      alert.addAction(deleteAction)
-      alert.display()
     }
   }
 
   func userDidTapUserButtonForCell(cell: ClipCollectionViewCell) {
-    if !player.playing {
-      let clip = clipForCell(cell)
-      if let user = clip?.user {
-        navigationController?.pushViewController(ProfileTimelineViewController(user: user), animated: true)
+    authenticateUser {
+      if !self.player.playing {
+        let clip = self.clipForCell(cell)
+        if let user = clip?.user {
+          self.navigationController?.pushViewController(ProfileTimelineViewController(user: user), animated: true)
+        }
       }
     }
   }
 
   func userDidTapLikeButtonForCell(cell: ClipCollectionViewCell) {
-    let clip = clipForCell(cell)
-    if let clip = clip, let clipID = clip.id, let user = clip.user, let currentUser = User.currentUser {
-      if user != currentUser {
-        clip.liked = !clip.liked.boolValue
-        cell.setClipLiked(clip.liked.boolValue, animated: true)
-        if clip.liked.boolValue {
-          Analytics.track("Like Clip")
-          API.request(Router.LikeClip(clipID: clipID))
-        } else {
-          Analytics.track("Unlike Clip")
-          API.request(Router.UnlikeClip(clipID: clipID))
+    authenticateUser {
+      let clip = self.clipForCell(cell)
+      if let clip = clip, let clipID = clip.id, let user = clip.user, let currentUser = User.currentUser {
+        if user != currentUser {
+          clip.liked = !clip.liked.boolValue
+          cell.setClipLiked(clip.liked.boolValue, animated: true)
+          if clip.liked.boolValue {
+            Analytics.track("Like Clip")
+            API.request(Router.LikeClip(clipID: clipID))
+          } else {
+            Analytics.track("Unlike Clip")
+            API.request(Router.UnlikeClip(clipID: clipID))
+          }
         }
       }
     }

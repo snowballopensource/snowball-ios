@@ -103,10 +103,12 @@ class MainTimelineViewController: TimelineViewController {
 extension MainTimelineViewController {
 
   override func userDidTapAddButtonForCell(cell: ClipCollectionViewCell) {
-    Analytics.track("Create Clip")
-    setInterfaceFocused(false)
-    cameraViewController.endPreview()
-    uploadClipForCell(cell)
+    authenticateUser {
+      Analytics.track("Create Clip")
+      self.setInterfaceFocused(false)
+      self.cameraViewController.endPreview()
+      self.uploadClipForCell(cell)
+    }
   }
 
   override func userDidTapUserButtonForCell(cell: ClipCollectionViewCell) {
