@@ -48,7 +48,7 @@ class SignInViewController: AuthenticationViewController {
     Analytics.identify(User.currentUser!.id!)
     Analytics.track("Sign In")
     PushManager.registerForPushNotifications()
-    self.switchToNavigationController(MainNavigationController())
+    dismissViewControllerAnimated(true, completion: nil)
   }
 }
 
