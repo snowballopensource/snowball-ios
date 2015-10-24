@@ -71,8 +71,7 @@ struct API {
 func displayAPIErrorToUser(errorJSON: AnyObject?) {
   if let errorJSON: AnyObject = errorJSON {
     if let message = errorJSON["message"] as? String {
-      let alert = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: message, preferredStyle: UIAlertControllerStyle.Alert)
-      alert.display()
+      NSError.snowballErrorWithReason(message).alertUser()
     }
   }
 }

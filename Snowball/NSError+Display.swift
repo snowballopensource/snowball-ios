@@ -14,6 +14,8 @@ extension NSError {
     var message = localizedFailureReason
     if message == nil { message = NSLocalizedString("An unknown error has occured.", comment: "") }
     let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+    let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Default, handler: nil)
+    alert.addAction(okAction)
     alert.display()
   }
 }

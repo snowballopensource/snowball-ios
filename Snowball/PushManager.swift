@@ -32,6 +32,10 @@ struct PushManager {
   }
 
   static func registrationFailed(error error: NSError) {
+    if error.code == 3010 {
+      // Simulator unsupported error
+      return
+    }
     error.alertUser()
   }
   
