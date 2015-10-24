@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Snowball, Inc. All rights reserved.
 //
 
+import Cartography
 import UIKit
 
 @objc protocol SnowballTopViewDelegate: class {
@@ -136,7 +137,7 @@ class SnowballTopView: UIView {
       } else {
         rightButtonWidth = 84
       }
-      rightButton.frame = CGRect(x: UIScreen.mainScreen().bounds.size.width - rightButtonWidth, y: 0, width: rightButtonWidth, height: bounds.height)
+      rightButton.frame = CGRect(x: frame.width - rightButtonWidth, y: 0, width: rightButtonWidth, height: bounds.height)
       rightButtonSpinner?.center = rightButton.center
     }
     titleLabel.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
@@ -159,7 +160,12 @@ class SnowballTopView: UIView {
   // MARK: - Internal
 
   func setupDefaultLayout() {
-    frame = CGRect(x: superview!.bounds.origin.x, y: superview!.bounds.origin.y, width: superview!.bounds.size.width, height: 65)
+    constrain(self) { view in
+      view.left == view.superview!.left
+      view.top == view.superview!.top
+      view.width == view.superview!.width
+      view.height == 65
+    }
   }
 
   func setHidden(hidden: Bool, animated: Bool) {
