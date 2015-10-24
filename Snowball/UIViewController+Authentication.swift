@@ -12,7 +12,7 @@ import UIKit
 extension UIViewController {
   func authenticateUser(ifAuthenticated: () -> Void) {
     if User.currentUser == nil {
-      let authenticationNC = AuthenticationNavigationController()
+      let authenticationNC = RoundedCornerViewController(childViewController: AuthenticationNavigationController())
       authenticationNC.transitioningDelegate = AuthenticationPresentationControllerTransitioningDelegate.sharedInstance
       authenticationNC.modalPresentationStyle = .Custom
       presentViewController(authenticationNC, animated: true, completion: nil)
@@ -37,6 +37,9 @@ class AuthenticationPresentationController: UIPresentationController {
 
   let cancelButton: UIButton = {
     let button = UIButton()
+    button.backgroundColor = UIColor.whiteColor()
+    button.layer.cornerRadius = 22
+    button.clipsToBounds = true
     button.setImage(UIImage(named: "top-bar-x")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: UIControlState.Normal)
     button.imageView?.tintColor = UIColor.blackColor()
     return button
@@ -47,22 +50,23 @@ class AuthenticationPresentationController: UIPresentationController {
   override init(presentedViewController: UIViewController, presentingViewController: UIViewController) {
     super.init(presentedViewController: presentedViewController, presentingViewController: presentingViewController)
 
-    presentedView()?.addSubview(cancelButton)
+    guard let presentedView = presentedView() else { return }
+
+    presentedView.addSubview(cancelButton)
     constrain(cancelButton) { cancelButton in
       cancelButton.centerX == cancelButton.superview!.centerX
-      cancelButton.top == cancelButton.superview!.top
+      cancelButton.top == cancelButton.superview!.top - 10
       cancelButton.width == 44
-      cancelButton.height == 65
+      cancelButton.height == 44
     }
     cancelButton.addTarget(self, action: "cancelButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
-
-    presentedView()?.layer.cornerRadius = 10.0
-    presentedView()?.layer.masksToBounds = true
   }
 
   override func presentationTransitionWillBegin() {
-    dimView.frame = containerView!.bounds
-    containerView?.addSubview(dimView)
+    guard let containerView = containerView else { return }
+
+    dimView.frame = containerView.bounds
+    containerView.addSubview(dimView)
 
     presentedViewController.transitionCoordinator()?.animateAlongsideTransition(
       { _ in

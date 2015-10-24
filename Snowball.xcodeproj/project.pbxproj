@@ -36,6 +36,7 @@
 		BA4943371B7D4963004FE784 /* UIImageView+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4943361B7D4963004FE784 /* UIImageView+Snowball.swift */; };
 		BA4BD7201AA2D6820057380C /* ClipDownloadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4BD71F1AA2D6820057380C /* ClipDownloadQueue.swift */; };
 		BA4BD7221AA2E1F00057380C /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4BD7211AA2E1F00057380C /* Cache.swift */; };
+		BA6066061BDC0AC200CFB9D4 /* RoundedCornerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6066051BDC0AC200CFB9D4 /* RoundedCornerViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		BA6385E31A65ACAF00B002D9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385E21A65ACAF00B002D9 /* WelcomeViewController.swift */; };
 		BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */; };
 		BA7C0E481A65C315001B3B4C /* UIButton+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */; };
@@ -120,6 +121,7 @@
 		BA4943361B7D4963004FE784 /* UIImageView+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Snowball.swift"; sourceTree = "<group>"; };
 		BA4BD71F1AA2D6820057380C /* ClipDownloadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipDownloadQueue.swift; sourceTree = "<group>"; };
 		BA4BD7211AA2E1F00057380C /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		BA6066051BDC0AC200CFB9D4 /* RoundedCornerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCornerViewController.swift; sourceTree = "<group>"; };
 		BA6385E21A65ACAF00B002D9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Snowball.swift"; sourceTree = "<group>"; };
 		BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Snowball.swift"; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 		BAD086D21BD832C100C02B31 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BA6066051BDC0AC200CFB9D4 /* RoundedCornerViewController.swift */,
 				BA6385DB1A65A90000B002D9 /* Authentication */,
 				BA9AA6811A6747F0002C4992 /* Timeline */,
 				BAF3BC971A76E03F00AFD3E5 /* People */,
@@ -597,6 +600,7 @@
 				BA46D6FE1BA10FCD0048D09D /* CircleLoadingIndicator.swift in Sources */,
 				BA7C0E4A1A65EF94001B3B4C /* UITextField+Snowball.swift in Sources */,
 				BAF50E781AA644DF00AB874E /* CameraPreviewPlayer.swift in Sources */,
+				BA6066061BDC0AC200CFB9D4 /* RoundedCornerViewController.swift in Sources */,
 				BA9AA67C1A67465F002C4992 /* AuthenticationNavigationController.swift in Sources */,
 				BAEEA7391A97ED9500C83CF9 /* PhoneNumberViewController.swift in Sources */,
 				BAAC6C161B6AC89700F400FB /* TimelineViewController.swift in Sources */,
