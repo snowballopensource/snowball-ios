@@ -23,12 +23,22 @@ extension NSManagedObject {
 
   // MARK: - Creation
 
-  public class func newObject(attributes: [String: AnyObject]? = nil, context: NSManagedObjectContext = CoreDataStack.defaultStack.mainQueueManagedObjectContext) -> NSManagedObject? {
+  public class func newObject(attributes: [String: AnyObject]? = nil, context: NSManagedObjectContext = CoreDataStack.defaultStack.mainQueueManagedObjectContext) -> NSManagedObject {
     let object = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: context)
     if let attributes = attributes {
       object.assignAttributes(attributes)
     }
     return object
+  }
+
+  public class func findOrNewObject(attributes: [String: AnyObject]? = nil, context: NSManagedObjectContext = CoreDataStack.defaultStack.mainQueueManagedObjectContext) -> NSManagedObject {
+    if let attributes = attributes, let primaryValue = attributes[primaryKey] as? String {
+      if let object = find(primaryValue, context: context) {
+        object.assignAttributes(attributes)
+        return object
+      }
+    }
+    return newObject(attributes, context: context)
   }
 
   // MARK: - Attribute Assignment

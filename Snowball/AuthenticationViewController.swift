@@ -78,20 +78,17 @@ class AuthenticationViewController: UIViewController {
   private func performAuthenticationRequest() {
     resignFirstResponder()
     topBar.spinRightButton(true)
-    API.request(authenticationRoute).responseJSON { response in
-      let result = response.result
-      if result.error != nil {
-        displayAPIErrorToUser(result.value)
+    SnowballAPI.requestObject(authenticationRoute) { (response: ObjectResponse<User>) -> Void in
+      switch response {
+      case .Success(let user):
+        do { try user.managedObjectContext?.save() } catch {}
+        User.currentUser = user
+        self.authenticationCompletedSuccessfully()
+        break
+      case .Failure(let error):
+        self.presentViewController(error.newAlertViewController(), animated: true, completion: nil)
         self.topBar.spinRightButton(false)
-        return
-      }
-      if let userJSON: AnyObject = result.value {
-        dispatch_async(dispatch_get_main_queue()) {
-          let user = User.objectFromJSON(userJSON) as! User?
-          do { try user?.managedObjectContext?.save() } catch {}
-          User.currentUser = user
-          self.authenticationCompletedSuccessfully()
-        }
+        break
       }
     }
   }

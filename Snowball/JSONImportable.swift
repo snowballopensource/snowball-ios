@@ -12,6 +12,14 @@ typealias JSONObject = [String: AnyObject]
 typealias JSONArray = [JSONObject]
 
 protocol JSONImportable {
-  static func fromJSONObject(JSONObject: JSONObject) -> Self
-  static func fromJSONArray(JSONArray: JSONArray) -> [Self]
+  static func fromJSONObject(JSON: JSONObject) -> Self
+  static func fromJSONArray(JSON: JSONArray) -> [Self]
+}
+
+extension JSONImportable {
+  static func fromJSONArray(JSON: JSONArray) -> [Self] {
+    return JSON.map { object in
+      return fromJSONObject(object)
+    }
+  }
 }

@@ -9,7 +9,7 @@
 import CoreData
 import UIKit
 
-class User: RemoteObject {
+final class User: RemoteObject {
 
   // MARK: - Properties
 
@@ -147,5 +147,12 @@ class User: RemoteObject {
         }
       }
     }
+  }
+}
+
+// MARK: - JSONImportable
+extension User: JSONImportable {
+  static func fromJSONObject(JSON: JSONObject) -> User {
+    return findOrNewObject(JSON) as! User
   }
 }
