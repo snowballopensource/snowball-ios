@@ -65,13 +65,3 @@ struct API {
     uploadTask.resume()
   }
 }
-
-// MARK: - Global
-
-func displayAPIErrorToUser(errorJSON: AnyObject?) {
-  if let errorJSON: AnyObject = errorJSON {
-    if let message = errorJSON["message"] as? String {
-      NSError.snowballErrorWithReason(message).alertUser()
-    }
-  }
-}

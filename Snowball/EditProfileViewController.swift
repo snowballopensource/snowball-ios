@@ -256,7 +256,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         API.changeAvatarToImage(processedImage) { (request, response, JSON, error) in
           SwiftSpinner.hide()
           if let _ = error {
-            displayAPIErrorToUser(JSON)
+            // displayAPIErrorToUser(JSON)
           } else {
             let imageURL = editingInfo[UIImagePickerControllerReferenceURL] as? NSURL
             if let imageURL = imageURL, let user = User.currentUser {
