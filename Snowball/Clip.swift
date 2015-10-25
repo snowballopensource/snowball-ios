@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Clip: RemoteObject {
+final class Clip: RemoteObject {
 
   // MARK: - Properties
 
@@ -85,4 +85,11 @@ enum ClipState: String {
   case PendingUpload = "PendingUpload"
   case Uploading = "Uploading"
   case UploadFailed = "UploadFailed"
+}
+
+// MARK: - JSONImportable
+extension Clip: JSONImportable {
+  static func fromJSONObject(JSON: JSONObject) -> Clip {
+    return findOrNewObject(JSON) as! Clip
+  }
 }

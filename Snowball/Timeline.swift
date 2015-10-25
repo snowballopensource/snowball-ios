@@ -126,32 +126,27 @@ class Timeline {
   }
 
   func requestHomeTimeline(completion: (error: NSError?) -> Void) {
-    API.request(Router.GetClipStream).responseJSON { response in
-      let result = response.result
-      if let error = result.error {
-        completion(error: error)
-      } else if let JSON = result.value as? [AnyObject] {
-        // Handle clips that were captured before the timeline loads from server...
-        let clips = Clip.objectsFromJSON(JSON) as! [Clip]
-        do { try clips.first?.managedObjectContext?.save() } catch {}
-        self.clips = clips + self.pendingClips
-        self.delegate?.timelineClipsDidLoad()
-        completion(error: nil)
-      }
-    }
+    requestTimelineWithRoute(.GetClipStream, completion: completion)
   }
 
   func requestUserTimeline(user: User, completion: (error: NSError?) -> Void) {
     if let userID = user.id {
-      API.request(Router.GetClipStreamForUser(userID: userID)).responseJSON { response in
-        let result = response.result
-        if let error = result.error {
-          completion(error: error)
-        } else if let JSON = result.value as? [AnyObject] {
-          self.clips = Clip.objectsFromJSON(JSON) as! [Clip]
-          self.delegate?.timelineClipsDidLoad()
-          completion(error: nil)
-        }
+      requestTimelineWithRoute(.GetClipStreamForUser(userID: userID), completion: completion)
+    }
+  }
+
+  // MARK: - Private
+
+  func requestTimelineWithRoute(route: Router, completion: (error: NSError?) -> Void) {
+    SnowballAPI.requestObjects(route) { (response: ObjectResponse<[Clip]>) in
+      switch response {
+      case .Success(let clips):
+        do { try clips.first?.managedObjectContext?.save() } catch {}
+        self.clips = clips + self.pendingClips
+        self.delegate?.timelineClipsDidLoad()
+        completion(error: nil)
+      case .Failure(let error):
+        completion(error: error)
       }
     }
   }

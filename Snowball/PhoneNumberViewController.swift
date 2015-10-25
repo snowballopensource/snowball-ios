@@ -112,15 +112,14 @@ extension PhoneNumberViewController: SnowballTopViewDelegate {
     let newPhoneNumber = "\(countryCodeTextField.text)\(phoneNumberTextField.text)"
     if newPhoneNumber.characters.count > 5 {
       topBar.spinRightButton(true)
-      API.request(Router.UpdateCurrentUser(name: nil, username: nil, email: nil, phoneNumber: newPhoneNumber)).responseJSON { response in
-        let result = response.result
-        if let error = result.error {
-          error.alertUser()
-          displayAPIErrorToUser(result.value)
-          self.topBar.spinRightButton(false)
-        } else {
+      SnowballAPI.request(.UpdateCurrentUser(name: nil, username: nil, email: nil, phoneNumber: newPhoneNumber)) { response in
+        self.topBar.spinRightButton(false)
+        switch response {
+        case .Success:
           Analytics.track("Add Phone Number During Onboarding")
           self.dismissViewControllerAnimated(true, completion: nil)
+        case .Failure(let error):
+          error.alertUser()
         }
       }
     } else {

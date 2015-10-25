@@ -122,10 +122,11 @@ final class User: RemoteObject {
       following = true
       do { try managedObjectContext?.save() } catch {}
 
-      API.request(Router.FollowUser(userID: userID)).responseJSON { response in
-        let result = response.result
-        if let _ = result.error {
-          displayAPIErrorToUser(result.value)
+      SnowballAPI.request(.FollowUser(userID: userID)) { response in
+        switch response {
+        case .Success: break
+        case .Failure(let error):
+          error.alertUser()
           self.following = false
           do { try self.managedObjectContext?.save() } catch {}
         }
@@ -138,10 +139,11 @@ final class User: RemoteObject {
       following = false
       do { try managedObjectContext?.save() } catch {}
 
-      API.request(Router.UnfollowUser(userID: userID)).responseJSON { response in
-        let result = response.result
-        if let _ = result.error {
-          displayAPIErrorToUser(result.value)
+      SnowballAPI.request(.UnfollowUser(userID: userID)) { response in
+        switch response {
+        case .Success: break
+        case .Failure(let error):
+          error.alertUser()
           self.following = true
           do { try self.managedObjectContext?.save() } catch {}
         }

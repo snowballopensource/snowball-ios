@@ -160,26 +160,22 @@ class FriendsViewController: UIViewController {
     tableView.refreshControl.beginRefreshing()
     tableView.offsetContentForRefreshControl()
 
+    let route: Router
     switch(followersFollowingSegmentedControl.selectedSegmentIndex) {
     case FollowersFollowingSegmentedControlIndex.Following.rawValue:
-      API.request(Router.GetCurrentUserFollowing).responseJSON { response in
-        let result = response.result
-        self.tableView.refreshControl.endRefreshing()
-        if let JSON: AnyObject = result.value {
-          self.users = User.objectsFromJSON(JSON) as! [User]
-          self.tableView.reloadData()
-        }
+      route = .GetCurrentUserFollowing
+    default:
+      route = .GetCurrentUserFollowers
+    }
+    SnowballAPI.requestObjects(route) { (response: ObjectResponse<[User]>) in
+      self.tableView.refreshControl.endRefreshing()
+      switch response {
+      case .Success(let users):
+        self.users = users
+        self.tableView.reloadData()
+      case .Failure(let error):
+        error.alertUser()
       }
-    case FollowersFollowingSegmentedControlIndex.Followers.rawValue:
-      API.request(Router.GetCurrentUserFollowers).responseJSON { response in
-        let result = response.result
-        self.tableView.refreshControl.endRefreshing()
-        if let JSON: AnyObject = result.value {
-          self.users = User.objectsFromJSON(JSON) as! [User]
-          self.tableView.reloadData()
-        }
-      }
-    default: return
     }
   }
 }

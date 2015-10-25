@@ -187,14 +187,14 @@ class FindFriendsViewController: UIViewController {
 
   private func searchForUserWithUsername(username: String) {
     tableView.refreshControl.beginRefreshing()
-    API.request(Router.FindUsersByUsername(username: username)).responseJSON { response in
-      let result = response.result
+    SnowballAPI.requestObjects(.FindUsersByUsername(username: username)) { (response: ObjectResponse<[User]>) in
       self.tableView.refreshControl.endRefreshing()
-      if let JSON: AnyObject = result.value {
-        if let users = User.objectsFromJSON(JSON) as? [User] {
-          self.users = users
-          self.tableView.reloadData()
-        }
+      switch response {
+      case .Success(let users):
+        self.users = users
+        self.tableView.reloadData()
+      case .Failure(let error):
+        error.alertUser()
       }
     }
   }

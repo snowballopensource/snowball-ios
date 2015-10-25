@@ -369,12 +369,11 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
         alert.addAction(UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
           if let clipID = clip.id {
             SwiftSpinner.show(NSLocalizedString("Deleting...", comment: ""))
-            API.request(Router.DeleteClip(clipID: clipID)).response { (request, response, data, error) in
+            SnowballAPI.request(.DeleteClip(clipID: clipID)) { response in
               SwiftSpinner.hide()
-              if let error = error {
-                error.alertUser()
-              } else {
-                self.timeline.deleteClip(clip)
+              switch response {
+              case .Success: self.timeline.deleteClip(clip)
+              case .Failure(let error): error.alertUser()
               }
             }
           } else {
@@ -394,12 +393,11 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
         alert.addAction(UIAlertAction(title: NSLocalizedString("Don't Flag", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
         let deleteAction = UIAlertAction(title: NSLocalizedString("Flag", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
           SwiftSpinner.show(NSLocalizedString("Flagging...", comment: ""))
-          API.request(Router.FlagClip(clipID: clipID)).response { (request, response, data, error) in
+          SnowballAPI.request(.FlagClip(clipID: clipID)) { response in
             SwiftSpinner.hide()
-            if let error = error {
-              error.alertUser()
-            } else {
-              self.timeline.deleteClip(clip)
+            switch response {
+            case .Success: self.timeline.deleteClip(clip)
+            case .Failure(let error): error.alertUser()
             }
           }
         }
@@ -427,12 +425,33 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
         if user != currentUser {
           clip.liked = !clip.liked.boolValue
           cell.setClipLiked(clip.liked.boolValue, animated: true)
+          do { try clip.managedObjectContext?.save() } catch {}
           if clip.liked.boolValue {
             Analytics.track("Like Clip")
-            API.request(Router.LikeClip(clipID: clipID))
+            SnowballAPI.request(.LikeClip(clipID: clipID)) { response in
+              SwiftSpinner.hide()
+              switch response {
+              case .Success: break
+              case .Failure(let error):
+                error.alertUser()
+                clip.liked = !clip.liked.boolValue
+                cell.setClipLiked(clip.liked.boolValue, animated: true)
+                do { try clip.managedObjectContext?.save() } catch {}
+              }
+            }
           } else {
             Analytics.track("Unlike Clip")
-            API.request(Router.UnlikeClip(clipID: clipID))
+            SnowballAPI.request(.UnlikeClip(clipID: clipID)) { response in
+              SwiftSpinner.hide()
+              switch response {
+              case .Success: break
+              case .Failure(let error):
+                error.alertUser()
+                clip.liked = !clip.liked.boolValue
+                cell.setClipLiked(clip.liked.boolValue, animated: true)
+                do { try clip.managedObjectContext?.save() } catch {}
+              }
+            }
           }
         }
       }
