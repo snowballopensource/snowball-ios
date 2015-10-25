@@ -13,14 +13,13 @@ struct SnowballAPI {
   typealias Route = Router
 
   static func request(route: Route, completion: (response: Response) -> Void) {
-    Alamofire.request(route).validate().responseJSON { afResponse in
-      switch afResponse.result {
-      case .Success:
+    Alamofire.request(route).validate().response { request, response, data, error in
+      if error == nil {
         completion(response: Response.Success)
-        break
-      case .Failure:
-        completion(response: Response.Failure(errorFromAlamofireResponse(afResponse)))
-        break
+      } else if let data = data {
+        completion(response: Response.Failure(errorFromAlamofireData(data)))
+      } else {
+        completion(response: Response.Failure(NSError.snowballErrorWithReason("Server Error")))
       }
     }
   }
@@ -60,18 +59,20 @@ struct SnowballAPI {
   }
 
   private static func errorFromAlamofireResponse(response: Alamofire.Response<AnyObject, NSError>) -> NSError {
-    var error = NSError.snowballErrorWithReason("Unknown Error")
     if let data = response.data {
-      error = NSError.snowballErrorWithReason("Server Error")
-      do {
-        if let serverErrorJSON = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? [String: AnyObject], let message = serverErrorJSON["message"] as? String {
-          error = NSError.snowballErrorWithReason(message)
-        }
-      } catch {}
+      return errorFromAlamofireData(data)
     } else {
-      // Server did not respond with an error.
-      error = NSError.snowballErrorWithReason("Request Error")
+      return NSError.snowballErrorWithReason("Request Error")
     }
+  }
+
+  private static func errorFromAlamofireData(data: NSData) -> NSError {
+    var error = NSError.snowballErrorWithReason("Unknown Error")
+    do {
+      if let serverErrorJSON = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? [String: AnyObject], let message = serverErrorJSON["message"] as? String {
+        error = NSError.snowballErrorWithReason(message)
+      }
+    } catch {}
     return error
   }
 }
