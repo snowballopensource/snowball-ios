@@ -144,18 +144,24 @@ class FindFriendsViewController: UIViewController {
     ABAddressBookRequestAccessWithCompletion(addressBook) { (granted, error) in
       if granted {
         self.refresh()
+      } else {
+        self.accessUnauthorized()
       }
     }
   }
 
   // MARK: - Private
 
+  private func accessUnauthorized() {
+    tableView.refreshControl.endRefreshing()
+    let error = NSError.snowballErrorWithReason(NSLocalizedString("Please go to Settings > Snowball > Contacts to allow Snowball to access your Contacts.", comment: ""))
+    error.alertUser()
+  }
+
   @objc private func refresh() {
     let authorizationStatus = ABAddressBookGetAuthorizationStatus()
     if authorizationStatus != ABAuthorizationStatus.Authorized {
-      tableView.refreshControl.endRefreshing()
-      let error = NSError.snowballErrorWithReason(NSLocalizedString("Please go to Settings > Snowball > Contacts to allow Snowball to access your Contacts.", comment: ""))
-      error.alertUser()
+      accessUnauthorized()
       return
     }
     var phoneNumbers = [String]()
@@ -168,14 +174,13 @@ class FindFriendsViewController: UIViewController {
       }
     }
 
-    API.request(Router.FindUsersByPhoneNumbers(phoneNumbers: phoneNumbers)).responseJSON { response in
-      let result = response.result
+    SnowballAPI.requestObjects(.FindUsersByPhoneNumbers(phoneNumbers: phoneNumbers)) { (response: ObjectResponse<[User]>) in
       self.tableView.refreshControl.endRefreshing()
-      if let JSON: AnyObject = result.value {
-        if let users = User.objectsFromJSON(JSON) as? [User] {
-          self.users = users
-          self.tableView.reloadData()
-        }
+      switch response {
+      case .Success(let users):
+        self.users = users
+        self.tableView.reloadData()
+      case .Failure(let error): error.alertUser()
       }
     }
   }

@@ -108,14 +108,12 @@ class EditProfileViewController: UIViewController {
     view.backgroundColor = UIColor.whiteColor()
 
     // TODO: prevent editing while loading this, but allow to go back
-    API.request(Router.GetCurrentUser).responseJSON { response in
-      let result = response.result
-      if result.error != nil { displayAPIErrorToUser(result.value); return }
-      if let JSON: AnyObject = result.value {
-        dispatch_async(dispatch_get_main_queue()) {
-          User.objectFromJSON(JSON)
-          self.tableView.reloadData()
-        }
+    SnowballAPI.requestObject(Router.GetCurrentUser) { (response: ObjectResponse<User>) in
+      switch response {
+      case .Success:
+        self.tableView.reloadData()
+        break
+      case .Failure(let error): error.alertUser(); break
       }
     }
   }
@@ -174,11 +172,13 @@ extension EditProfileViewController: SnowballTopViewDelegate {
       }
     }
     if user.hasChanges {
-      API.request(Router.UpdateCurrentUser(name: nil, username: username, email: email, phoneNumber: phoneNumber)).responseJSON { response in
-        let result = response.result
-        if result.error != nil { displayAPIErrorToUser(result.value); return }
-        do { try user.managedObjectContext?.save() } catch {}
-        self.navigationController?.popViewControllerAnimated(true)
+      SnowballAPI.request(.UpdateCurrentUser(name: nil, username: username, email: email, phoneNumber: phoneNumber)) { response in
+        switch response {
+        case .Success:
+          do { try user.managedObjectContext?.save() } catch {}
+          self.navigationController?.popViewControllerAnimated(true);
+        case .Failure(let error): error.alertUser()
+        }
       }
     } else {
       navigationController?.popViewControllerAnimated(true)
