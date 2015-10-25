@@ -37,6 +37,8 @@
 		BA4BD7201AA2D6820057380C /* ClipDownloadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4BD71F1AA2D6820057380C /* ClipDownloadQueue.swift */; };
 		BA4BD7221AA2E1F00057380C /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4BD7211AA2E1F00057380C /* Cache.swift */; };
 		BA6066061BDC0AC200CFB9D4 /* RoundedCornerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6066051BDC0AC200CFB9D4 /* RoundedCornerViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		BA6066081BDC2EC400CFB9D4 /* SnowballAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6066071BDC2EC400CFB9D4 /* SnowballAPI.swift */; settings = {ASSET_TAGS = (); }; };
+		BA60660B1BDC637C00CFB9D4 /* JSONImportable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA60660A1BDC637C00CFB9D4 /* JSONImportable.swift */; settings = {ASSET_TAGS = (); }; };
 		BA6385E31A65ACAF00B002D9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385E21A65ACAF00B002D9 /* WelcomeViewController.swift */; };
 		BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */; };
 		BA7C0E481A65C315001B3B4C /* UIButton+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */; };
@@ -122,6 +124,8 @@
 		BA4BD71F1AA2D6820057380C /* ClipDownloadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipDownloadQueue.swift; sourceTree = "<group>"; };
 		BA4BD7211AA2E1F00057380C /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		BA6066051BDC0AC200CFB9D4 /* RoundedCornerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCornerViewController.swift; sourceTree = "<group>"; };
+		BA6066071BDC2EC400CFB9D4 /* SnowballAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballAPI.swift; sourceTree = "<group>"; };
+		BA60660A1BDC637C00CFB9D4 /* JSONImportable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONImportable.swift; sourceTree = "<group>"; };
 		BA6385E21A65ACAF00B002D9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Snowball.swift"; sourceTree = "<group>"; };
 		BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Snowball.swift"; sourceTree = "<group>"; };
@@ -318,6 +322,14 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		BA6066091BDC2EEA00CFB9D4 /* Deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				BA7C27CA1A37A64400A9CFC5 /* API.swift */,
+			);
+			name = Deprecated;
+			sourceTree = "<group>";
+		};
 		BA6385DB1A65A90000B002D9 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,8 +354,10 @@
 		BA7C27C71A37A32A00A9CFC5 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				BA7C27CA1A37A64400A9CFC5 /* API.swift */,
+				BA6066091BDC2EEA00CFB9D4 /* Deprecated */,
+				BA6066071BDC2EC400CFB9D4 /* SnowballAPI.swift */,
 				BA7C27C51A37A28F00A9CFC5 /* Router.swift */,
+				BA60660A1BDC637C00CFB9D4 /* JSONImportable.swift */,
 				BA4BD7211AA2E1F00057380C /* Cache.swift */,
 			);
 			name = Networking;
@@ -606,6 +620,7 @@
 				BAEEA7391A97ED9500C83CF9 /* PhoneNumberViewController.swift in Sources */,
 				BAAC6C161B6AC89700F400FB /* TimelineViewController.swift in Sources */,
 				BA3A28701A3051E300A85C29 /* Util.swift in Sources */,
+				BA6066081BDC2EC400CFB9D4 /* SnowballAPI.swift in Sources */,
 				BA7C27D31A37ADA600A9CFC5 /* RemoteObject.swift in Sources */,
 				BA44E4581A9C0EC600B75DF3 /* TermsViewController.swift in Sources */,
 				BAF50E761AA63E4B00AB874E /* CameraView.swift in Sources */,
@@ -635,6 +650,7 @@
 				BA2AC70C1BD849AD004E22B1 /* NSError+Display.swift in Sources */,
 				BAE26FB31A77090700A0977C /* SnowballTopView.swift in Sources */,
 				BAB8F2C81A830F5500937407 /* FriendsViewController.swift in Sources */,
+				BA60660B1BDC637C00CFB9D4 /* JSONImportable.swift in Sources */,
 				BAC8CD3A1A6607550075B503 /* AuthenticationViewController.swift in Sources */,
 				BA7C27CB1A37A64400A9CFC5 /* API.swift in Sources */,
 				BABE8FCD1A8957D600B81DD1 /* Clip.swift in Sources */,
