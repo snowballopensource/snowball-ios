@@ -119,7 +119,7 @@ extension PhoneNumberViewController: SnowballTopViewDelegate {
           Analytics.track("Add Phone Number During Onboarding")
           self.dismissViewControllerAnimated(true, completion: nil)
         case .Failure(let error):
-          error.alertUser()
+          self.presentViewController(error.newAlertViewController(), animated: true, completion: nil)
         }
       }
     } else {
