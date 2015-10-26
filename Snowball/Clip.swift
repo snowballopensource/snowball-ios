@@ -59,7 +59,7 @@ final class Clip: RemoteObject {
     let predicate = NSPredicate(format: "stateString == %@", ClipState.Uploading.rawValue)
     let clips = Clip.findAll(predicate: predicate) as! [Clip]
     for clip in clips {
-      clip.state == ClipState.UploadFailed
+      clip.state = ClipState.UploadFailed
     }
     do { try CoreDataStack.defaultStack.mainQueueManagedObjectContext.save() } catch {}
   }
