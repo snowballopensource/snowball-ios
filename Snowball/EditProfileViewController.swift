@@ -258,11 +258,12 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
           if let _ = error {
             // displayAPIErrorToUser(JSON)
           } else {
-            let imageURL = editingInfo[UIImagePickerControllerReferenceURL] as? NSURL
-            if let imageURL = imageURL, let user = User.currentUser {
-              user.avatarURL = imageURL.absoluteString
-              do { try user.managedObjectContext?.save() } catch {}
-              self.avatarImageView.configureForUser(user)
+            if let data = UIImagePNGRepresentation(processedImage), let imageURL = editingInfo[UIImagePickerControllerReferenceURL] as? NSURL, let user = User.currentUser {
+              if let cacheURL = Cache.sharedCache.setDataForRemoteURL(data: data, remoteURL: imageURL) {
+                user.avatarURL = cacheURL.absoluteString
+                do { try user.managedObjectContext?.save() } catch {}
+                self.avatarImageView.configureForUser(user)
+              }
             }
           }
         }

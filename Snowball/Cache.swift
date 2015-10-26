@@ -38,6 +38,11 @@ struct Cache {
     return (nil, nil)
   }
 
+  func setDataForRemoteURL(data data: NSData, remoteURL: NSURL) -> NSURL? {
+    setDataForKey(data: data, key: keyForRemoteURL(remoteURL))
+    return localURLForRemoteURL(remoteURL)
+  }
+
   static func removeAllData() {
     do { try NSFileManager.defaultManager().removeItemAtURL(baseURL) } catch {}
     createDirectory()
