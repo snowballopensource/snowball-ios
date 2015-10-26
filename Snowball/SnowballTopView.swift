@@ -92,6 +92,8 @@ class SnowballTopView: UIView {
 
   private var rightButtonSpinner: UIActivityIndicatorView?
 
+  private var constraintGroup = ConstraintGroup()
+
   var delegate: SnowballTopViewDelegate?
 
   // MARK: - Initializers
@@ -160,12 +162,7 @@ class SnowballTopView: UIView {
   // MARK: - Internal
 
   func setupDefaultLayout() {
-    constrain(self) { view in
-      view.left == view.superview!.left
-      view.top == view.superview!.top
-      view.width == view.superview!.width
-      view.height == 65
-    }
+    setupLayout(hidden: false)
   }
 
   func setHidden(hidden: Bool, animated: Bool) {
@@ -174,15 +171,8 @@ class SnowballTopView: UIView {
         self.setHidden(hidden, animated: false)
       }
     } else {
-      if hidden {
-        if frame.origin.y >= 0 {
-          frame = CGRect(x: frame.origin.x, y: frame.origin.y - frame.size.height, width: frame.size.width, height: frame.size.height)
-        }
-      } else {
-        if frame.origin.y < 0 {
-          frame = CGRect(x: frame.origin.x, y: frame.origin.y + frame.size.height, width: frame.size.width, height: frame.size.height)
-        }
-      }
+      setupLayout(hidden: hidden)
+      layoutIfNeeded()
     }
   }
 
@@ -206,6 +196,22 @@ class SnowballTopView: UIView {
       if !spin {
         self.rightButton?.enabled = true
         self.rightButtonSpinner?.stopAnimating()
+      }
+    }
+  }
+
+  // MARK: - Private
+
+  private func setupLayout(hidden hidden: Bool) {
+    constraintGroup = constrain(self, replace: constraintGroup) { view in
+      view.left == view.superview!.left
+      view.width == view.superview!.width
+      let height: CGFloat = 65.0
+      view.height == height
+      if hidden {
+        view.top == view.superview!.top - height
+      } else {
+        view.top == view.superview!.top
       }
     }
   }
