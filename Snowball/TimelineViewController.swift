@@ -247,8 +247,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     setInterfaceFocused(false)
     for cell in collectionView.visibleCells() {
       if let cell = cell as? ClipCollectionViewCell {
-        let indexPath = collectionView.indexPathForCell(cell)!
-        cell.setState(stateForCellAtIndexPath(indexPath), animated: true)
+        resetStateForCell(cell)
         timeline.bookmarkedClip = lastClip
       }
     }
@@ -302,9 +301,15 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
 
   private func resetStateOnVisibleCells() {
     for cell in collectionView.visibleCells() {
-      if let cell = cell as? ClipCollectionViewCell, cellIndexPath = collectionView.indexPathForCell(cell) {
-        cell.setState(stateForCellAtIndexPath(cellIndexPath), animated: true)
+      if let cell = cell as? ClipCollectionViewCell {
+        resetStateForCell(cell)
       }
+    }
+  }
+
+  private func resetStateForCell(cell: ClipCollectionViewCell) {
+    if let indexPath = collectionView.indexPathForCell(cell) {
+      cell.setState(stateForCellAtIndexPath(indexPath), animated: true)
     }
   }
 }
@@ -353,9 +358,7 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
   }
 
   func userDidHideOptionsGestureForCell(cell: ClipCollectionViewCell) {
-    if let indexPath = collectionView.indexPathForCell(cell) {
-      cell.setState(stateForCellAtIndexPath(indexPath), animated: true)
-    }
+    resetStateForCell(cell)
   }
 
   func userDidTapAddButtonForCell(cell: ClipCollectionViewCell) {}
@@ -365,7 +368,9 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
       let clip = self.clipForCell(cell)
       if clip?.user == User.currentUser, let clip = clip {
         let alert = UIAlertController(title: NSLocalizedString("Delete this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to delete this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.ActionSheet)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Don't Delete", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Don't Delete", comment: ""), style: UIAlertActionStyle.Cancel) { action in
+          self.resetStateForCell(cell)
+          })
         alert.addAction(UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
           if let clipID = clip.id {
             SwiftSpinner.show(NSLocalizedString("Deleting...", comment: ""))
@@ -390,7 +395,9 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
       let clip = self.clipForCell(cell)
       if let clipID = clip?.id, let clip = clip {
         let alert = UIAlertController(title: NSLocalizedString("Flag this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to flag this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.ActionSheet)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Don't Flag", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Don't Flag", comment: ""), style: UIAlertActionStyle.Cancel) { action in
+          self.resetStateForCell(cell)
+          })
         let deleteAction = UIAlertAction(title: NSLocalizedString("Flag", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
           SwiftSpinner.show(NSLocalizedString("Flagging...", comment: ""))
           SnowballAPI.request(.FlagClip(clipID: clipID)) { response in
