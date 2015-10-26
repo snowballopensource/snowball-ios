@@ -229,8 +229,10 @@ class CameraViewController: UIViewController {
 
   @objc private func toggleRecording(sender: UILongPressGestureRecognizer) {
     switch (sender.state) {
-    case UIGestureRecognizerState.Began: beginRecording()
-    case UIGestureRecognizerState.Ended: endRecording()
+    case .Began:
+      beginRecording()
+    case .Ended, .Cancelled, .Failed:
+      endRecording()
     default: return
     }
   }
