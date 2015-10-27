@@ -76,6 +76,7 @@ class PhoneNumberViewController: UIViewController {
       messageLabel.right == messageLabel.superview!.right - sideMargin
     }
 
+    countryCodeTextField.delegate = self
     view.addSubview(countryCodeTextField)
     constrain(countryCodeTextField, messageLabel) { (countryCodeTextField, messageLabel) in
       countryCodeTextField.left == countryCodeTextField.superview!.left + 25
@@ -125,5 +126,20 @@ extension PhoneNumberViewController: SnowballTopViewDelegate {
     } else {
       dismissViewControllerAnimated(true, completion: nil)
     }
+  }
+}
+
+// MARK: -
+extension PhoneNumberViewController: UITextFieldDelegate {
+  func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    if textField == countryCodeTextField {
+      let resultString = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string) as NSString
+      let prefixString = "+"
+      let prefixStringRange = resultString.rangeOfString(prefixString)
+      if prefixStringRange.location != 0 {
+        return false
+      }
+    }
+    return true
   }
 }
