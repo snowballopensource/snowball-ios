@@ -139,8 +139,7 @@ class FindFriendsViewController: UIViewController {
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
 
-    tableView.refreshControl.beginRefreshing()
-    tableView.offsetContentForRefreshControl()
+    tableView.refreshControl?.beginRefreshing()
     ABAddressBookRequestAccessWithCompletion(addressBook) { (granted, error) in
       if granted {
         self.refresh()
@@ -153,7 +152,7 @@ class FindFriendsViewController: UIViewController {
   // MARK: - Private
 
   private func accessUnauthorized() {
-    tableView.refreshControl.endRefreshing()
+    tableView.refreshControl?.endRefreshing()
     let error = NSError.snowballErrorWithReason(NSLocalizedString("Please go to Settings > Snowball > Contacts to allow Snowball to access your Contacts.", comment: ""))
     error.alertUser()
   }
@@ -175,7 +174,7 @@ class FindFriendsViewController: UIViewController {
     }
 
     SnowballAPI.requestObjects(.FindUsersByPhoneNumbers(phoneNumbers: phoneNumbers)) { (response: ObjectResponse<[User]>) in
-      self.tableView.refreshControl.endRefreshing()
+      self.tableView.refreshControl?.endRefreshing()
       switch response {
       case .Success(let users):
         self.users = users
@@ -186,9 +185,9 @@ class FindFriendsViewController: UIViewController {
   }
 
   private func searchForUserWithUsername(username: String) {
-    tableView.refreshControl.beginRefreshing()
+    tableView.refreshControl?.beginRefreshing()
     SnowballAPI.requestObjects(.FindUsersByUsername(username: username)) { (response: ObjectResponse<[User]>) in
-      self.tableView.refreshControl.endRefreshing()
+      self.tableView.refreshControl?.endRefreshing()
       switch response {
       case .Success(let users):
         self.users = users

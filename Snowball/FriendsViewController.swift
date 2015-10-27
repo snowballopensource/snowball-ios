@@ -157,8 +157,7 @@ class FriendsViewController: UIViewController {
   }
 
   @objc private func refresh() {
-    tableView.refreshControl.beginRefreshing()
-    tableView.offsetContentForRefreshControl()
+    tableView.refreshControl?.beginRefreshing()
 
     let route: Router
     switch(followersFollowingSegmentedControl.selectedSegmentIndex) {
@@ -168,7 +167,7 @@ class FriendsViewController: UIViewController {
       route = .GetCurrentUserFollowers
     }
     SnowballAPI.requestObjects(route) { (response: ObjectResponse<[User]>) in
-      self.tableView.refreshControl.endRefreshing()
+      self.tableView.refreshControl?.endRefreshing()
       switch response {
       case .Success(let users):
         self.users = users

@@ -12,9 +12,9 @@ private var refreshControlAssociationKey: UInt8 = 0
 
 extension UITableView {
 
-  var refreshControl: UIRefreshControl {
+  var refreshControl: UIRefreshControl? {
     get {
-      return objc_getAssociatedObject(self, &refreshControlAssociationKey) as! UIRefreshControl
+      return objc_getAssociatedObject(self, &refreshControlAssociationKey) as? UIRefreshControl
     }
     set(newValue) {
       objc_setAssociatedObject(self, &refreshControlAssociationKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
@@ -24,14 +24,9 @@ extension UITableView {
   // MARK: - Internal
 
   func addRefreshControl(target: AnyObject, action: Selector) {
-    refreshControl = UIRefreshControl()
+    let refreshControl = UIRefreshControl()
     refreshControl.addTarget(target, action: action, forControlEvents: UIControlEvents.ValueChanged)
     insertSubview(refreshControl, atIndex: 0)
-  }
-
-  func offsetContentForRefreshControl() {
-    // Hacky fix for the animation sometimes not showing when calling refreshControl.startRefreshing()
-    // This doesn't quite work all the time, so find a better solution.
-    contentOffset = CGPoint(x: 0, y: -refreshControl.frame.height)
+    self.refreshControl = refreshControl
   }
 }
