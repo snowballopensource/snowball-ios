@@ -136,10 +136,15 @@ class FindFriendsViewController: UIViewController {
     }
   }
 
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+
+    tableView.beginRefreshingAnimation()
+  }
+
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
 
-    tableView.beginRefreshingAnimation()
     ABAddressBookRequestAccessWithCompletion(addressBook) { (granted, error) in
       if granted {
         self.refresh()
