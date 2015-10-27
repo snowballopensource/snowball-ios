@@ -13,9 +13,9 @@
 		BA20CCEE1A9D156C00D96A31 /* ClipUploadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA20CCED1A9D156C00D96A31 /* ClipUploadQueue.swift */; };
 		BA2460E31B683600003E3FB5 /* MainTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2460E21B683600003E3FB5 /* MainTimelineViewController.swift */; };
 		BA2460E51B6836B6003E3FB5 /* ProfileTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2460E41B6836B6003E3FB5 /* ProfileTimelineViewController.swift */; };
-		BA2AC70C1BD849AD004E22B1 /* NSError+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AC70B1BD849AD004E22B1 /* NSError+Display.swift */; settings = {ASSET_TAGS = (); }; };
-		BA2AC7141BD8548F004E22B1 /* NSError+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AC7131BD8548F004E22B1 /* NSError+Snowball.swift */; settings = {ASSET_TAGS = (); }; };
-		BA2AC7161BD858D9004E22B1 /* UIAlertController+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AC7151BD858D9004E22B1 /* UIAlertController+Display.swift */; settings = {ASSET_TAGS = (); }; };
+		BA2AC70C1BD849AD004E22B1 /* NSError+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AC70B1BD849AD004E22B1 /* NSError+Display.swift */; };
+		BA2AC7141BD8548F004E22B1 /* NSError+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AC7131BD8548F004E22B1 /* NSError+Snowball.swift */; };
+		BA2AC7161BD858D9004E22B1 /* UIAlertController+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AC7151BD858D9004E22B1 /* UIAlertController+Display.swift */; };
 		BA30B31C1B68008600BB49EF /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30B31B1B68008600BB49EF /* CoreDataStack.swift */; };
 		BA30B31E1B6800A600BB49EF /* NSManagedObject+CoreRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30B31D1B6800A600BB49EF /* NSManagedObject+CoreRecord.swift */; };
 		BA32C7921A3286250052F4CA /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32C7911A3286250052F4CA /* UIColor+Snowball.swift */; };
@@ -36,9 +36,9 @@
 		BA4943371B7D4963004FE784 /* UIImageView+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4943361B7D4963004FE784 /* UIImageView+Snowball.swift */; };
 		BA4BD7201AA2D6820057380C /* ClipDownloadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4BD71F1AA2D6820057380C /* ClipDownloadQueue.swift */; };
 		BA4BD7221AA2E1F00057380C /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4BD7211AA2E1F00057380C /* Cache.swift */; };
-		BA6066061BDC0AC200CFB9D4 /* RoundedCornerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6066051BDC0AC200CFB9D4 /* RoundedCornerViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		BA6066081BDC2EC400CFB9D4 /* SnowballAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6066071BDC2EC400CFB9D4 /* SnowballAPI.swift */; settings = {ASSET_TAGS = (); }; };
-		BA60660B1BDC637C00CFB9D4 /* JSONImportable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA60660A1BDC637C00CFB9D4 /* JSONImportable.swift */; settings = {ASSET_TAGS = (); }; };
+		BA6066061BDC0AC200CFB9D4 /* RoundedCornerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6066051BDC0AC200CFB9D4 /* RoundedCornerViewController.swift */; };
+		BA6066081BDC2EC400CFB9D4 /* SnowballAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6066071BDC2EC400CFB9D4 /* SnowballAPI.swift */; };
+		BA60660B1BDC637C00CFB9D4 /* JSONImportable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA60660A1BDC637C00CFB9D4 /* JSONImportable.swift */; };
 		BA6385E31A65ACAF00B002D9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6385E21A65ACAF00B002D9 /* WelcomeViewController.swift */; };
 		BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E3F1A65BF56001B3B4C /* UIFont+Snowball.swift */; };
 		BA7C0E481A65C315001B3B4C /* UIButton+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C0E471A65C315001B3B4C /* UIButton+Snowball.swift */; };
@@ -64,7 +64,7 @@
 		BABE8FCD1A8957D600B81DD1 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABE8FCC1A8957D600B81DD1 /* Clip.swift */; };
 		BAC8CD3A1A6607550075B503 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC8CD391A6607550075B503 /* AuthenticationViewController.swift */; };
 		BACA7A861A36E40900C34B6C /* NSDate+TimeSince.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */; };
-		BACE6EE01BD9A2F7005B7227 /* UIViewController+Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACE6EDF1BD9A2F7005B7227 /* UIViewController+Authentication.swift */; settings = {ASSET_TAGS = (); }; };
+		BACE6EE01BD9A2F7005B7227 /* UIViewController+Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACE6EDF1BD9A2F7005B7227 /* UIViewController+Authentication.swift */; };
 		BAE26FB31A77090700A0977C /* SnowballTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE26FB21A77090700A0977C /* SnowballTopView.swift */; };
 		BAEEA7391A97ED9500C83CF9 /* PhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEEA7381A97ED9500C83CF9 /* PhoneNumberViewController.swift */; };
 		BAF2E45A1A800F1E00A093E5 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */; };
