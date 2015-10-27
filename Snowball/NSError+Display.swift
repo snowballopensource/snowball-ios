@@ -14,7 +14,7 @@ extension NSError {
   }
 
   func newAlertViewController() -> UIAlertController {
-    let title = NSLocalizedString("Error", comment: "")
+    let title = NSLocalizedString("Oops", comment: "")
     var message = localizedFailureReason
     if message == nil { message = NSLocalizedString("An unknown error has occured.", comment: "") }
     let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
