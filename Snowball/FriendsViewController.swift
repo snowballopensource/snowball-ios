@@ -167,7 +167,6 @@ class FriendsViewController: UIViewController {
       route = .GetCurrentUserFollowers
     }
     SnowballAPI.requestObjects(route) { (response: ObjectResponse<[User]>) in
-      self.tableView.refreshControl?.endRefreshing()
       switch response {
       case .Success(let users):
         self.users = users
@@ -175,6 +174,7 @@ class FriendsViewController: UIViewController {
       case .Failure(let error):
         error.alertUser()
       }
+      self.tableView.refreshControl?.endRefreshing()
     }
   }
 }

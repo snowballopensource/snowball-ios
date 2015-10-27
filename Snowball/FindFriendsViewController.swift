@@ -174,20 +174,19 @@ class FindFriendsViewController: UIViewController {
     }
 
     SnowballAPI.requestObjects(.FindUsersByPhoneNumbers(phoneNumbers: phoneNumbers)) { (response: ObjectResponse<[User]>) in
-      self.tableView.refreshControl?.endRefreshing()
       switch response {
       case .Success(let users):
         self.users = users
         self.tableView.reloadData()
       case .Failure(let error): error.alertUser()
       }
+      self.tableView.refreshControl?.endRefreshing()
     }
   }
 
   private func searchForUserWithUsername(username: String) {
     tableView.refreshControl?.beginRefreshing()
     SnowballAPI.requestObjects(.FindUsersByUsername(username: username)) { (response: ObjectResponse<[User]>) in
-      self.tableView.refreshControl?.endRefreshing()
       switch response {
       case .Success(let users):
         self.users = users
@@ -195,6 +194,7 @@ class FindFriendsViewController: UIViewController {
       case .Failure(let error):
         error.alertUser()
       }
+      self.tableView.refreshControl?.endRefreshing()
     }
   }
 
