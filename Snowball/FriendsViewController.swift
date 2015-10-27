@@ -157,8 +157,7 @@ class FriendsViewController: UIViewController {
   }
 
   @objc private func refresh() {
-    tableView.refreshControl?.beginRefreshing()
-
+    tableView.beginRefreshingAnimation()
     let route: Router
     switch(followersFollowingSegmentedControl.selectedSegmentIndex) {
     case FollowersFollowingSegmentedControlIndex.Following.rawValue:
@@ -174,7 +173,7 @@ class FriendsViewController: UIViewController {
       case .Failure(let error):
         error.alertUser()
       }
-      self.tableView.refreshControl?.endRefreshing()
+      self.tableView.endRefreshingAnimation()
     }
   }
 }

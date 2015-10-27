@@ -29,4 +29,14 @@ extension UITableView {
     insertSubview(refreshControl, atIndex: 0)
     self.refreshControl = refreshControl
   }
+
+  func beginRefreshingAnimation() {
+    refreshControl?.beginRefreshing()
+    setContentOffset(CGPoint(x: 0, y: -(refreshControl?.frame.height ?? 0)), animated: false)
+  }
+
+  func endRefreshingAnimation() {
+    refreshControl?.endRefreshing()
+    setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+  }
 }
