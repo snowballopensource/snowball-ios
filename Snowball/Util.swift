@@ -19,3 +19,7 @@ func isStaging() -> Bool {
   }
   return false
 }
+
+func printCurrentQueue() {
+  print(String(UTF8String: dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL))!)
+}
