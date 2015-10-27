@@ -9,7 +9,11 @@
 import Foundation
 
 extension NSError {
-  static func snowballErrorWithReason(reason: String) -> NSError {
-    return NSError(domain: "is.snowball.snowball.error", code: 0, userInfo: [NSLocalizedFailureReasonErrorKey: reason])
+  static func snowballErrorWithReason(reason: String?) -> NSError {
+    let domain = "is.snowball.snowball.error"
+    if let reason = reason {
+      return NSError(domain: domain, code: 0, userInfo: [NSLocalizedFailureReasonErrorKey: reason])
+    }
+    return NSError(domain: domain, code: 0, userInfo: nil)
   }
 }

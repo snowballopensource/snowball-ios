@@ -19,7 +19,7 @@ struct SnowballAPI {
       } else if let data = data {
         completion(response: Response.Failure(errorFromAlamofireData(data)))
       } else {
-        completion(response: Response.Failure(NSError.snowballErrorWithReason("Server Error")))
+        completion(response: Response.Failure(NSError.snowballErrorWithReason(nil)))
       }
     }
   }
@@ -31,7 +31,7 @@ struct SnowballAPI {
         if let object = value as? JSONObject {
           completion(response: ObjectResponse.Success(T.fromJSONObject(object)))
         } else {
-          completion(response: ObjectResponse.Failure(NSError.snowballErrorWithReason("Error importing object.")))
+          completion(response: ObjectResponse.Failure(NSError.snowballErrorWithReason(nil)))
         }
         break
       case .Failure:
@@ -48,7 +48,7 @@ struct SnowballAPI {
         if let array = value as? JSONArray {
           completion(response: ObjectResponse.Success(T.fromJSONArray(array)))
         } else {
-          completion(response: ObjectResponse.Failure(NSError.snowballErrorWithReason("Error importing objects.")))
+          completion(response: ObjectResponse.Failure(NSError.snowballErrorWithReason(nil)))
         }
         break
       case .Failure:
@@ -62,12 +62,12 @@ struct SnowballAPI {
     if let data = response.data {
       return errorFromAlamofireData(data)
     } else {
-      return NSError.snowballErrorWithReason("Request Error")
+      return NSError.snowballErrorWithReason(nil)
     }
   }
 
   private static func errorFromAlamofireData(data: NSData) -> NSError {
-    var error = NSError.snowballErrorWithReason("Unknown Error")
+    var error = NSError.snowballErrorWithReason(nil)
     do {
       if let serverErrorJSON = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? [String: AnyObject], let message = serverErrorJSON["message"] as? String {
         error = NSError.snowballErrorWithReason(message)
