@@ -22,7 +22,12 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   let playerLoadingIndicator = CircleLoadingIndicator()
   private class var collectionViewSideContentInset: CGFloat { return ClipCollectionViewCell.size.width * 4 }
   let collectionView: UICollectionView = {
-    let flowLayout = UICollectionViewFlowLayout()
+    class TimelineFlowLayout: UICollectionViewFlowLayout {
+      override func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint) -> CGPoint {
+        return CGPoint(x: proposedContentOffset.x + ClipCollectionViewCell.size.width, y: proposedContentOffset.y)
+      }
+    }
+    let flowLayout = TimelineFlowLayout()
     flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
     flowLayout.minimumInteritemSpacing = 0
     flowLayout.minimumLineSpacing = 0
