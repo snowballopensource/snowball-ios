@@ -370,7 +370,9 @@ extension TimelineViewController: UICollectionViewDelegate {
 extension TimelineViewController: ClipCollectionViewCellDelegate {
 
   func userDidShowOptionsGestureForCell(cell: ClipCollectionViewCell) {
-    cell.setState(.Options, animated: true)
+    authenticateUser {
+      cell.setState(.Options, animated: true)
+    }
   }
 
   func userDidHideOptionsGestureForCell(cell: ClipCollectionViewCell) {
@@ -380,53 +382,49 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
   func userDidTapAddButtonForCell(cell: ClipCollectionViewCell) {}
 
   func userDidTapDeleteButtonForCell(cell: ClipCollectionViewCell) {
-    authenticateUser {
-      let clip = self.clipForCell(cell)
-      if clip?.user == User.currentUser, let clip = clip {
-        let alert = UIAlertController(title: NSLocalizedString("Delete this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to delete this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.ActionSheet)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Don't Delete", comment: ""), style: UIAlertActionStyle.Cancel) { action in
-          self.resetStateForCell(cell)
-          })
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
-          if let clipID = clip.id {
-            SwiftSpinner.show(NSLocalizedString("Deleting...", comment: ""))
-            SnowballAPI.request(.DeleteClip(clipID: clipID)) { response in
-              SwiftSpinner.hide()
-              switch response {
-              case .Success: self.timeline.deleteClip(clip)
-              case .Failure(let error): error.alertUser()
-              }
-            }
-          } else {
-            self.timeline.deleteClip(clip)
-          }
-          })
-        alert.display()
-      }
-    }
-  }
-
-  func userDidTapFlagButtonForCell(cell: ClipCollectionViewCell) {
-    authenticateUser {
-      let clip = self.clipForCell(cell)
-      if let clipID = clip?.id, let clip = clip {
-        let alert = UIAlertController(title: NSLocalizedString("Flag this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to flag this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.ActionSheet)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Don't Flag", comment: ""), style: UIAlertActionStyle.Cancel) { action in
-          self.resetStateForCell(cell)
-          })
-        let deleteAction = UIAlertAction(title: NSLocalizedString("Flag", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
-          SwiftSpinner.show(NSLocalizedString("Flagging...", comment: ""))
-          SnowballAPI.request(.FlagClip(clipID: clipID)) { response in
+    let clip = clipForCell(cell)
+    if clip?.user == User.currentUser, let clip = clip {
+      let alert = UIAlertController(title: NSLocalizedString("Delete this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to delete this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.ActionSheet)
+      alert.addAction(UIAlertAction(title: NSLocalizedString("Don't Delete", comment: ""), style: UIAlertActionStyle.Cancel) { action in
+        self.resetStateForCell(cell)
+        })
+      alert.addAction(UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
+        if let clipID = clip.id {
+          SwiftSpinner.show(NSLocalizedString("Deleting...", comment: ""))
+          SnowballAPI.request(.DeleteClip(clipID: clipID)) { response in
             SwiftSpinner.hide()
             switch response {
             case .Success: self.timeline.deleteClip(clip)
             case .Failure(let error): error.alertUser()
             }
           }
+        } else {
+          self.timeline.deleteClip(clip)
         }
-        alert.addAction(deleteAction)
-        alert.display()
+        })
+      alert.display()
+    }
+  }
+
+  func userDidTapFlagButtonForCell(cell: ClipCollectionViewCell) {
+    let clip = self.clipForCell(cell)
+    if let clipID = clip?.id, let clip = clip {
+      let alert = UIAlertController(title: NSLocalizedString("Flag this clip?", comment: ""), message: NSLocalizedString("Are you sure you want to flag this clip?", comment: ""), preferredStyle: UIAlertControllerStyle.ActionSheet)
+      alert.addAction(UIAlertAction(title: NSLocalizedString("Don't Flag", comment: ""), style: UIAlertActionStyle.Cancel) { action in
+        self.resetStateForCell(cell)
+        })
+      let deleteAction = UIAlertAction(title: NSLocalizedString("Flag", comment: ""), style: UIAlertActionStyle.Destructive) { (action) in
+        SwiftSpinner.show(NSLocalizedString("Flagging...", comment: ""))
+        SnowballAPI.request(.FlagClip(clipID: clipID)) { response in
+          SwiftSpinner.hide()
+          switch response {
+          case .Success: self.timeline.deleteClip(clip)
+          case .Failure(let error): error.alertUser()
+          }
+        }
       }
+      alert.addAction(deleteAction)
+      alert.display()
     }
   }
 
