@@ -73,6 +73,8 @@ class MainTimelineViewController: TimelineViewController {
   override func timelineClipsDidLoad() {
     super.timelineClipsDidLoad()
 
+    collectionView.layoutIfNeeded() // Hack to ensure that the scrolling will take place
+
     if let pendingClip = timeline.pendingClips.last {
       scrollToClip(pendingClip, animated: false)
     } else if let bookmarkedClip = timeline.bookmarkedClip {
