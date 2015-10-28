@@ -171,6 +171,7 @@ class Timeline {
     for clip in clipsToDelete {
       let index = clips.indexOf(clip)!
       clips.removeAtIndex(index)
+      clip.deleteObject()
       delegate?.timeline(self, didDeleteClip: clip, atIndex: index)
     }
 
