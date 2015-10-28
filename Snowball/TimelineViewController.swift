@@ -99,12 +99,6 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     refresh()
   }
 
-  override func viewWillDisappear(animated: Bool) {
-    super.viewWillDisappear(animated)
-
-    player.stop()
-  }
-
   override func loadView() {
     super.loadView()
 
