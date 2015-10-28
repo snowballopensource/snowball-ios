@@ -158,10 +158,13 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   }
 
   func stateForCellAtIndexPath(indexPath: NSIndexPath) -> ClipCollectionViewCellState {
+    let clip = timeline.clips[indexPath.row]
     if player.playing {
+      if clip == player.currentClip {
+        return ClipCollectionViewCellState.PlayingActive
+      }
       return ClipCollectionViewCellState.PlayingIdle
     }
-    let clip = timeline.clips[indexPath.row]
     var state = ClipCollectionViewCellState.Default
     switch(clip.state) {
     case ClipState.Default: state = ClipCollectionViewCellState.Default

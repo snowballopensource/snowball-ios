@@ -105,6 +105,7 @@ class MainTimelineViewController: TimelineViewController {
   // MARK: - Private
 
   private func scrollToPendingOrBookmark(animated: Bool) {
+    if player.playing { return }
     if let pendingClip = timeline.pendingClips.last {
       scrollToClip(pendingClip, animated: animated)
     } else if let bookmarkedClip = timeline.bookmarkedClip {
