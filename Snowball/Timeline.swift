@@ -152,26 +152,41 @@ class Timeline {
 
   private func mergeOldClipsWithNewClips(newClips: [Clip]) {
     let pendingClips = self.pendingClips
-    let deletedClips = self.clips.filter { !newClips.contains($0) }
-    for deletedClip in deletedClips {
-      deletedClip.deleteObject()
-      let index = self.clips.indexOf(deletedClip)!
-      self.clips.removeAtIndex(index)
-      self.delegate?.timeline(self, didDeleteClip: deletedClip, atIndex: index)
+
+    let cacheClips = NSMutableOrderedSet(array: clips)
+    let serverClips = NSMutableOrderedSet(array: newClips)
+
+    let clipsToDeleteSet = cacheClips.mutableCopy()
+    clipsToDeleteSet.minusOrderedSet(serverClips)
+    let clipsToDelete = clipsToDeleteSet.array as! [Clip]
+
+    let clipsToUpdateSet = cacheClips.mutableCopy()
+    clipsToUpdateSet.intersectOrderedSet(serverClips)
+    let clipsToUpdate = clipsToUpdateSet.array as! [Clip]
+
+    let clipsToInsertSet = serverClips.mutableCopy()
+    clipsToInsertSet.minusOrderedSet(cacheClips)
+    let clipsToInsert = clipsToInsertSet.array as! [Clip]
+
+    for clip in clipsToDelete {
+      let index = clips.indexOf(clip)!
+      clips.removeAtIndex(index)
+      delegate?.timeline(self, didDeleteClip: clip, atIndex: index)
     }
-    for newClip in newClips {
-      if self.clips.contains(newClip) {
-        self.delegate?.timeline(self, didUpdateClip: newClip, atIndex: self.clips.indexOf(newClip)!)
-      } else {
-        self.clips.append(newClip)
-        self.delegate?.timeline(self, didInsertClip: newClip, atIndex: self.clips.indexOf(newClip)!)
-      }
+
+    for clip in clipsToUpdate {
+      delegate?.timeline(self, didUpdateClip: clip, atIndex: clips.indexOf(clip)!)
     }
-    for pendingClip in pendingClips {
-      self.clips.append(pendingClip)
-      self.delegate?.timeline(self, didInsertClip: pendingClip, atIndex: self.clips.indexOf(pendingClip)!)
+
+    for clip in clipsToInsert {
+      insertClip(clip, atIndex: newClips.indexOf(clip)!)
     }
-    self.delegate?.timelineDidChangeClips()
+
+    for clip in pendingClips {
+      insertClip(clip, atIndex: newClips.indexOf(clip)!)
+    }
+
+    delegate?.timelineDidChangeClips()
   }
 }
 
