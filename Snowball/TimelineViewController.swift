@@ -195,7 +195,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   // MARK: - TimelineDelegate
   // extension TimelineViewController: TimelineDelegate {
 
-  func timelineClipsDidLoad() {
+  func timelineClipsDidLoadFromCache() {
     collectionView.reloadData()
   }
 
@@ -214,6 +214,8 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     collectionView.deleteItemsAtIndexPaths([indexPath])
     resetStateOnVisibleCells()
   }
+
+  func timelineDidChangeClips() {}
 
   // This next part is the TimelinePlayerDelegate implementation. For details as to why it's here,
   // see the large comment block above the TimelineDelegate implementation above.

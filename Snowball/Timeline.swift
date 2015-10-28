@@ -74,7 +74,7 @@ class Timeline {
     var offset = Clip.count() - size
     if offset < 0 { offset = 0 }
     clips = Clip.findAll(limit: size, offset: offset, sortDescriptors: sortDescriptors) as! [Clip]
-    delegate?.timelineClipsDidLoad()
+    delegate?.timelineClipsDidLoadFromCache()
   }
 
   func clipAfterClip(clip: Clip) -> Clip? {
@@ -141,20 +141,44 @@ class Timeline {
     SnowballAPI.requestObjects(route) { (response: ObjectResponse<[Clip]>) in
       switch response {
       case .Success(let clips):
-        do { try clips.first?.managedObjectContext?.save() } catch {}
-        self.clips = clips + self.pendingClips
-        self.delegate?.timelineClipsDidLoad()
+        self.mergeOldClipsWithNewClips(clips)
+        do { try self.clips.first?.managedObjectContext?.save() } catch {}
         completion(error: nil)
       case .Failure(let error):
         completion(error: error)
       }
     }
   }
+
+  private func mergeOldClipsWithNewClips(newClips: [Clip]) {
+    let pendingClips = self.pendingClips
+    let deletedClips = self.clips.filter { !newClips.contains($0) }
+    for deletedClip in deletedClips {
+      deletedClip.deleteObject()
+      let index = self.clips.indexOf(deletedClip)!
+      self.clips.removeAtIndex(index)
+      self.delegate?.timeline(self, didDeleteClip: deletedClip, atIndex: index)
+    }
+    for newClip in newClips {
+      if self.clips.contains(newClip) {
+        self.delegate?.timeline(self, didUpdateClip: newClip, atIndex: self.clips.indexOf(newClip)!)
+      } else {
+        self.clips.append(newClip)
+        self.delegate?.timeline(self, didInsertClip: newClip, atIndex: self.clips.indexOf(newClip)!)
+      }
+    }
+    for pendingClip in pendingClips {
+      self.clips.append(pendingClip)
+      self.delegate?.timeline(self, didInsertClip: pendingClip, atIndex: self.clips.indexOf(pendingClip)!)
+    }
+    self.delegate?.timelineDidChangeClips()
+  }
 }
 
 protocol TimelineDelegate {
-  func timelineClipsDidLoad()
+  func timelineClipsDidLoadFromCache()
   func timeline(timeline: Timeline, didInsertClip clip: Clip, atIndex index: Int)
   func timeline(timeline: Timeline, didUpdateClip clip: Clip, atIndex index: Int)
   func timeline(timeline: Timeline, didDeleteClip clip: Clip, atIndex index: Int)
+  func timelineDidChangeClips()
 }

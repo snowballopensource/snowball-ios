@@ -70,16 +70,18 @@ class MainTimelineViewController: TimelineViewController {
   // MARK: - TimelineDelegate
   // See the comment in TimelineViewController for the TimelinePlayer delegate
   // to see why this is here. It's such a confusing mess. Sorry future self!
-  override func timelineClipsDidLoad() {
-    super.timelineClipsDidLoad()
+  override func timelineClipsDidLoadFromCache() {
+    super.timelineClipsDidLoadFromCache()
 
     collectionView.layoutIfNeeded() // Hack to ensure that the scrolling will take place
 
-    if let pendingClip = timeline.pendingClips.last {
-      scrollToClip(pendingClip, animated: false)
-    } else if let bookmarkedClip = timeline.bookmarkedClip {
-      scrollToClip(bookmarkedClip, animated: false)
-    }
+    scrollToPendingOrBookmark(false)
+  }
+
+  override func timelineDidChangeClips() {
+    super.timelineDidChangeClips()
+
+    scrollToPendingOrBookmark(true)
   }
 
   // MARK: - TimelinePlayerDelegate
@@ -98,6 +100,16 @@ class MainTimelineViewController: TimelineViewController {
   override func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingLastClip lastClip: Clip) {
     super.timelinePlayer(timelinePlayer, didEndPlayingLastClip: lastClip)
     cameraViewController.view.hidden = false
+  }
+
+  // MARK: - Private
+
+  private func scrollToPendingOrBookmark(animated: Bool) {
+    if let pendingClip = timeline.pendingClips.last {
+      scrollToClip(pendingClip, animated: animated)
+    } else if let bookmarkedClip = timeline.bookmarkedClip {
+      scrollToClip(bookmarkedClip, animated: animated)
+    }
   }
 }
 

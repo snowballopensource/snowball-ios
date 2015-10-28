@@ -74,8 +74,8 @@ class ProfileTimelineViewController: TimelineViewController {
 // MARK: - TimelineDelegate
 extension ProfileTimelineViewController {
 
-  override func timelineClipsDidLoad() {
-    super.timelineClipsDidLoad()
+  override func timelineDidChangeClips() {
+    super.timelineDidChangeClips()
 
     if let lastClip = timeline.clips.last {
       scrollToClip(lastClip, animated: false)
