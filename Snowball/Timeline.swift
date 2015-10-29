@@ -106,22 +106,20 @@ class Timeline {
   }
 
   func insertClip(clip: Clip, atIndex index: Int) {
-    clips.insert(clip, atIndex: index)
-    delegate?.timeline(self, didInsertClip: clip, atIndex: index)
+    insertClipWithoutNotification(clip, atIndex: index)
+    delegate?.timelineDidChangeClips(self, insertedClipIndexes: [index], deletedClipIndexes: [Int]())
   }
 
   func deleteClip(clip: Clip) {
     if let index = indexOfClip(clip) {
-      clips.removeAtIndex(index)
-      clip.deleteObject()
-      do { try CoreDataStack.defaultStack.mainQueueManagedObjectContext.save() } catch {}
-      delegate?.timeline(self, didDeleteClip: clip, atIndex: index)
+      deleteClipWithoutNotification(clip)
+      delegate?.timelineDidChangeClips(self, insertedClipIndexes: [Int](), deletedClipIndexes: [index])
     }
   }
 
   func markClipAsUpdated(clip: Clip) {
     if let index = indexOfClip(clip) {
-      delegate?.timeline(self, didUpdateClip: clip, atIndex: index)
+      delegate?.timeline(self, didUpdateClipAtIndex: index)
     }
   }
 
@@ -150,9 +148,19 @@ class Timeline {
     }
   }
 
-  private func mergeOldClipsWithNewClips(newClips: [Clip]) {
-    let pendingClips = self.pendingClips
+  private func insertClipWithoutNotification(clip: Clip, atIndex index: Int) {
+    clips.insert(clip, atIndex: index)
+  }
 
+  private func deleteClipWithoutNotification(clip: Clip) {
+    if let index = indexOfClip(clip) {
+      clips.removeAtIndex(index)
+      clip.deleteObject()
+      do { try CoreDataStack.defaultStack.mainQueueManagedObjectContext.save() } catch {}
+    }
+  }
+
+  private func mergeOldClipsWithNewClips(newClips: [Clip]) {
     let cacheClips = NSMutableOrderedSet(array: clips)
     let serverClips = NSMutableOrderedSet(array: newClips)
 
@@ -160,41 +168,30 @@ class Timeline {
     clipsToDeleteSet.minusOrderedSet(serverClips)
     let clipsToDelete = clipsToDeleteSet.array as! [Clip]
 
-    let clipsToUpdateSet = cacheClips.mutableCopy()
-    clipsToUpdateSet.intersectOrderedSet(serverClips)
-    let clipsToUpdate = clipsToUpdateSet.array as! [Clip]
-
     let clipsToInsertSet = serverClips.mutableCopy()
     clipsToInsertSet.minusOrderedSet(cacheClips)
     let clipsToInsert = clipsToInsertSet.array as! [Clip]
 
+    var deletedClipIndexes = [Int]()
     for clip in clipsToDelete {
       let index = clips.indexOf(clip)!
-      clips.removeAtIndex(index)
-      clip.deleteObject()
-      delegate?.timeline(self, didDeleteClip: clip, atIndex: index)
+      deletedClipIndexes.append(index)
+      deleteClipWithoutNotification(clip)
     }
 
-    for clip in clipsToUpdate {
-      delegate?.timeline(self, didUpdateClip: clip, atIndex: clips.indexOf(clip)!)
-    }
-
+    var insertedClipIndexes = [Int]()
     for clip in clipsToInsert {
-      insertClip(clip, atIndex: newClips.indexOf(clip)!)
+      let index = newClips.indexOf(clip)!
+      insertedClipIndexes.append(index)
+      insertClipWithoutNotification(clip, atIndex: index)
     }
 
-    for clip in pendingClips {
-      insertClip(clip, atIndex: newClips.indexOf(clip)!)
-    }
-
-    delegate?.timelineDidChangeClips()
+    delegate?.timelineDidChangeClips(self, insertedClipIndexes: insertedClipIndexes, deletedClipIndexes: deletedClipIndexes)
   }
 }
 
 protocol TimelineDelegate {
   func timelineClipsDidLoadFromCache()
-  func timeline(timeline: Timeline, didInsertClip clip: Clip, atIndex index: Int)
-  func timeline(timeline: Timeline, didUpdateClip clip: Clip, atIndex index: Int)
-  func timeline(timeline: Timeline, didDeleteClip clip: Clip, atIndex index: Int)
-  func timelineDidChangeClips()
+  func timeline(timeline: Timeline, didUpdateClipAtIndex index: Int)
+  func timelineDidChangeClips(timeline: Timeline, insertedClipIndexes: [Int], deletedClipIndexes: [Int])
 }

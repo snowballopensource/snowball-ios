@@ -201,20 +201,21 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     collectionView.reloadData()
   }
 
-  func timeline(timeline: Timeline, didInsertClip clip: Clip, atIndex index: Int) {
-    let indexPath = NSIndexPath(forItem: index, inSection: 0)
-    collectionView.insertItemsAtIndexPaths([indexPath])
+  func timeline(timeline: Timeline, didUpdateClipAtIndex index: Int) {
     resetStateOnVisibleCells()
   }
 
-  func timeline(timeline: Timeline, didUpdateClip clip: Clip, atIndex index: Int) {
-    resetStateOnVisibleCells()
-  }
-
-  func timeline(timeline: Timeline, didDeleteClip clip: Clip, atIndex index: Int) {
-    let indexPath = NSIndexPath(forItem: index, inSection: 0)
-    collectionView.deleteItemsAtIndexPaths([indexPath])
-    resetStateOnVisibleCells()
+  func timelineDidChangeClips(timeline: Timeline, insertedClipIndexes: [Int], deletedClipIndexes: [Int]) {
+    let insertedIndexPaths = insertedClipIndexes.map { NSIndexPath(forItem: $0, inSection: 0) }
+    let deletedIndexPaths = deletedClipIndexes.map { NSIndexPath(forItem: $0, inSection: 0) }
+    collectionView.performBatchUpdates({
+      self.collectionView.insertItemsAtIndexPaths(insertedIndexPaths)
+      self.collectionView.deleteItemsAtIndexPaths(deletedIndexPaths)
+      },
+      completion: { (finished) -> Void in
+        self.resetStateOnVisibleCells()
+        self.timelineDidChangeClips()
+      })
   }
 
   func timelineDidChangeClips() {}
