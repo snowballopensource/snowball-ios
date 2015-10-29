@@ -69,13 +69,10 @@ class ProfileTimelineViewController: TimelineViewController {
     super.timelinePlayer(timelinePlayer, didEndPlayingLastClip: lastClip)
     userProfileDetailView.hidden = false
   }
-}
 
-// MARK: - TimelineDelegate
-extension ProfileTimelineViewController {
-
-  override func timelineDidChangeClips() {
-    super.timelineDidChangeClips()
+  // MARK: - TimelineFlowLayoutDelegate
+  override func timelineFlowLayoutDidFinalizeCollectionViewUpdates(layout: TimelineFlowLayout) {
+    super.timelineFlowLayoutDidFinalizeCollectionViewUpdates(layout)
 
     if let lastClip = timeline.clips.last {
       scrollToClip(lastClip, animated: false)

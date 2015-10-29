@@ -78,12 +78,6 @@ class MainTimelineViewController: TimelineViewController {
     scrollToPendingOrBookmark(false)
   }
 
-  override func timelineDidChangeClips() {
-    super.timelineDidChangeClips()
-
-    scrollToPendingOrBookmark(true)
-  }
-
   // MARK: - TimelinePlayerDelegate
   // See the comment in TimelineViewController for the TimelinePlayer delegate
   // to see why this is here. It's such a confusing mess. Sorry future self!
@@ -100,6 +94,13 @@ class MainTimelineViewController: TimelineViewController {
   override func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingLastClip lastClip: Clip) {
     super.timelinePlayer(timelinePlayer, didEndPlayingLastClip: lastClip)
     cameraViewController.view.hidden = false
+  }
+
+  // MARK: - TimelineFlowLayoutDelegate
+  override func timelineFlowLayoutDidFinalizeCollectionViewUpdates(layout: TimelineFlowLayout) {
+    super.timelineFlowLayoutDidFinalizeCollectionViewUpdates(layout)
+
+    scrollToPendingOrBookmark(false)
   }
 
   // MARK: - Private

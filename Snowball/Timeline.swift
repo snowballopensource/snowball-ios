@@ -70,7 +70,7 @@ class Timeline {
 
   func loadCachedClips() {
     let sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
-    let size = 25
+    let size = 20
     var offset = Clip.count() - size
     if offset < 0 { offset = 0 }
     clips = Clip.findAll(limit: size, offset: offset, sortDescriptors: sortDescriptors) as! [Clip]

@@ -10,7 +10,25 @@ import Cartography
 import SwiftSpinner
 import UIKit
 
-class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayerDelegate {
+// MARK: -
+
+protocol TimelineFlowLayoutDelegate {
+  func timelineFlowLayoutDidFinalizeCollectionViewUpdates(layout: TimelineFlowLayout)
+}
+
+class TimelineFlowLayout: UICollectionViewFlowLayout {
+  var delegate: TimelineFlowLayoutDelegate?
+
+  override func finalizeCollectionViewUpdates() {
+    super.finalizeCollectionViewUpdates()
+
+    delegate?.timelineFlowLayoutDidFinalizeCollectionViewUpdates(self)
+  }
+}
+
+// MARK: -
+
+class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayerDelegate, TimelineFlowLayoutDelegate {
 
   // MARK: - Properties
 
@@ -22,11 +40,6 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   let playerLoadingIndicator = CircleLoadingIndicator()
   private class var collectionViewSideContentInset: CGFloat { return ClipCollectionViewCell.size.width * 4 }
   let collectionView: UICollectionView = {
-    class TimelineFlowLayout: UICollectionViewFlowLayout {
-      override func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint) -> CGPoint {
-        return CGPoint(x: proposedContentOffset.x + ClipCollectionViewCell.size.width, y: proposedContentOffset.y)
-      }
-    }
     let flowLayout = TimelineFlowLayout()
     flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
     flowLayout.minimumInteritemSpacing = 0
@@ -64,6 +77,9 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    let collectionViewLayout = collectionView.collectionViewLayout as! TimelineFlowLayout
+    collectionViewLayout.delegate = self
 
     view.backgroundColor = UIColor.whiteColor()
     view.clipsToBounds = true
@@ -167,7 +183,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     case ClipState.UploadFailed: state = ClipCollectionViewCellState.UploadFailed
     }
     return state
-}
+  }
 
   func cellForClip(clip: Clip) -> ClipCollectionViewCell? {
     if let index = timeline.indexOfClip(clip) {
@@ -214,11 +230,8 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
       },
       completion: { (finished) -> Void in
         self.resetStateOnVisibleCells()
-        self.timelineDidChangeClips()
       })
   }
-
-  func timelineDidChangeClips() {}
 
   // This next part is the TimelinePlayerDelegate implementation. For details as to why it's here,
   // see the large comment block above the TimelineDelegate implementation above.
@@ -275,6 +288,9 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     playerLoadingIndicator.stopAnimating()
     playerLoadingImageView.image = nil
   }
+
+  // MARK: - TimelineFlowLayoutDelegate
+  func timelineFlowLayoutDidFinalizeCollectionViewUpdates(layout: TimelineFlowLayout) {}
 
   // MARK: - Private
 
