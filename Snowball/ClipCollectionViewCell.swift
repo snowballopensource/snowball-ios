@@ -29,7 +29,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let screenHeight = UIScreen.mainScreen().bounds.height
     let screenWidth = UIScreen.mainScreen().bounds.width
     let cellHeight = screenHeight - screenWidth
-    let cellWidth = screenWidth / 2.5
+    let cellsPerScreen: CGFloat = isIphone4S ? 4 : 2.5
+    let cellWidth = screenWidth / cellsPerScreen
     return CGSizeMake(cellWidth, cellHeight)
   }
 
