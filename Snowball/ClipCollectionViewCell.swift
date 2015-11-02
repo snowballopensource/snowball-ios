@@ -177,12 +177,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
       }
     }
 
-    if let user = clip.user {
-      userAvatarImageView.configureForUser(user)
-      optionsView.configureForUser(user)
-    }
+    userAvatarImageView.configureForUser(clip.user)
+    optionsView.configureForUser(clip.user)
 
-    usernameLabel.text = clip.user?.username
+    usernameLabel.text = clip.user?.username ?? NSLocalizedString("you", comment: "")
     usernameLabel.textColor = userColor
 
     clipTimeLabel.text = clip.createdAt?.shortTimeSinceString()

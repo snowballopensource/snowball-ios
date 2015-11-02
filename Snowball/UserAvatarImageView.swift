@@ -35,10 +35,10 @@ class UserAvatarImageView: UIImageView {
 
   // MARK: - Internal
 
-  func configureForUser(user: User) {
-    backgroundColor = user.color as? UIColor ?? UIColor.SnowballColor.blueColor
+  func configureForUser(user: User?) {
+    backgroundColor = user?.color as? UIColor ?? UIColor.SnowballColor.blueColor
     image = UIImage(named: "face")
-    if let imageURLString = user.avatarURL {
+    if let imageURLString = user?.avatarURL {
       if let imageURL = NSURL(string: imageURLString) {
         setImageFromURL(imageURL)
       }
