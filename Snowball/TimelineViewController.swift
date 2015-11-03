@@ -222,8 +222,8 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   }
 
   func timelineDidChangeClips(timeline: Timeline, insertedClipIndexes: [Int], deletedClipIndexes: [Int]) {
-    let insertedIndexPaths = insertedClipIndexes.map { NSIndexPath(forItem: $0, inSection: 0) }
-    let deletedIndexPaths = deletedClipIndexes.map { NSIndexPath(forItem: $0, inSection: 0) }
+    let insertedIndexPaths = insertedClipIndexes.filter { $0 != NSNotFound }.map { NSIndexPath(forItem: $0, inSection: 0) }
+    let deletedIndexPaths = deletedClipIndexes.filter { $0 != NSNotFound }.map { NSIndexPath(forItem: $0, inSection: 0) }
     collectionView.performBatchUpdates({
       self.collectionView.insertItemsAtIndexPaths(insertedIndexPaths)
       self.collectionView.deleteItemsAtIndexPaths(deletedIndexPaths)
