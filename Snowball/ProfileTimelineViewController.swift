@@ -65,8 +65,8 @@ class ProfileTimelineViewController: TimelineViewController {
     userProfileDetailView.hidden = true
   }
 
-  override func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingLastClip lastClip: Clip) {
-    super.timelinePlayer(timelinePlayer, didEndPlayingLastClip: lastClip)
+  override func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingWithLastClip lastClip: Clip) {
+    super.timelinePlayer(timelinePlayer, didEndPlayingWithLastClip: lastClip)
     userProfileDetailView.hidden = false
   }
 

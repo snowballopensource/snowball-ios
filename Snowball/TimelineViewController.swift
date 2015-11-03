@@ -35,7 +35,6 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   var topView: SnowballTopView! // Must be set by subclass
   let timeline = Timeline()
   let player = TimelinePlayer()
-  let playerLoadingImageView = UIImageView()
   let playerView = TimelinePlayerView()
   let playerLoadingIndicator = CircleLoadingIndicator()
   private class var collectionViewSideContentInset: CGFloat { return ClipCollectionViewCell.size.width * 4 }
@@ -124,14 +123,6 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
       playerView.top == playerView.superview!.top
       playerView.right == playerView.superview!.right
       playerView.height == playerView.width
-    }
-
-    view.addSubview(playerLoadingImageView)
-    constrain(playerLoadingImageView) { (playerLoadingImageView) in
-      playerLoadingImageView.left == playerLoadingImageView.superview!.left
-      playerLoadingImageView.top == playerLoadingImageView.superview!.top
-      playerLoadingImageView.right == playerLoadingImageView.superview!.right
-      playerLoadingImageView.height == playerLoadingImageView.width
     }
 
     view.addSubview(playerLoadingIndicator)
@@ -267,7 +258,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     scrollToClip(toClip, animated: true)
   }
 
-  func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingLastClip lastClip: Clip) {
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingWithLastClip lastClip: Clip) {
     setInterfaceFocused(false)
     for cell in collectionView.visibleCells() {
       if let cell = cell as? ClipCollectionViewCell {
@@ -277,16 +268,12 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     }
   }
 
-  func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginBufferingClip clip: Clip) {
+  func timelinePlayerDidBeginBuffering(timelinePlayer: TimelinePlayer) {
     playerLoadingIndicator.startAnimating(withDelay: true)
-    if let thumbnailURLString = clip.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
-      playerLoadingImageView.setImageFromURL(thumbnailURL)
-    }
   }
 
-  func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlaybackOfClip clip: Clip) {
+  func timelinePlayerDidEndBuffering(timelinePlayer: TimelinePlayer) {
     playerLoadingIndicator.stopAnimating()
-    playerLoadingImageView.image = nil
   }
 
   // MARK: - TimelineFlowLayoutDelegate

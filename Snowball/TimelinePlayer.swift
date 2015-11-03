@@ -28,7 +28,7 @@ class TimelinePlayer: AVPlayer {
         pause()
         replaceCurrentItemWithPlayerItem(nil)
       } else {
-        delegate?.timelinePlayer(self, didBeginBufferingClip: currentClip!)
+        delegate?.timelinePlayerDidBeginBuffering(self)
         ClipDownloader.load(currentClip!) { (preloadedClip, cacheURL, error) -> Void in
           error?.alertUser()
           if let url = cacheURL {
@@ -52,7 +52,7 @@ class TimelinePlayer: AVPlayer {
         delegate?.timelinePlayer(self, didTransitionFromClip: oldValue!, toClip: currentClip!)
       } else if oldValue != nil && currentClip == nil {
         playing = false
-        delegate?.timelinePlayer(self, didEndPlayingLastClip: oldValue!)
+        delegate?.timelinePlayer(self, didEndPlayingWithLastClip: oldValue!)
       }
     }
   }
@@ -63,9 +63,7 @@ class TimelinePlayer: AVPlayer {
   override init() {
     super.init()
     addBoundaryTimeObserverForTimes([NSValue(CMTime: CMTime(value: 1, timescale: 100))], queue: dispatch_get_main_queue()) { () -> Void in
-      if let currentClip = self.currentClip {
-        self.delegate?.timelinePlayer(self, didBeginPlaybackOfClip: currentClip)
-      }
+      self.delegate?.timelinePlayerDidEndBuffering(self)
     }
   }
 
@@ -104,10 +102,10 @@ class TimelinePlayer: AVPlayer {
 protocol TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, shouldBeginPlayingWithClip clip: Clip) -> Bool
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip)
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingWithLastClip lastClip: Clip)
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip)
-  func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingLastClip lastClip: Clip)
-  func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginBufferingClip clip: Clip)
-  func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlaybackOfClip clip: Clip)
+  func timelinePlayerDidBeginBuffering(timelinePlayer: TimelinePlayer)
+  func timelinePlayerDidEndBuffering(timelinePlayer: TimelinePlayer)
 }
 
 class TimelinePlayerView: UIView {
