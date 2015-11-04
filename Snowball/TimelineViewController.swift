@@ -36,6 +36,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   let timeline = Timeline()
   let player = TimelinePlayer()
   let playerView = TimelinePlayerView()
+  let playerLoadingImageView = UIImageView()
   let playerLoadingIndicator = CircleLoadingIndicator()
   private class var collectionViewSideContentInset: CGFloat { return ClipCollectionViewCell.size.width * 4 }
   let collectionView: UICollectionView = {
@@ -117,20 +118,28 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   override func loadView() {
     super.loadView()
 
+    view.addSubview(playerLoadingImageView)
+    constrain(playerLoadingImageView) { (playerLoadingImageView) in
+      playerLoadingImageView.left == playerLoadingImageView.superview!.left
+      playerLoadingImageView.top == playerLoadingImageView.superview!.top
+      playerLoadingImageView.right == playerLoadingImageView.superview!.right
+      playerLoadingImageView.height == playerLoadingImageView.width
+    }
+
+    view.addSubview(playerLoadingIndicator)
+    constrain(playerLoadingIndicator, playerLoadingImageView) { (playerLoadingIndicator, playerLoadingImageView) in
+      playerLoadingIndicator.centerX == playerLoadingImageView.centerX
+      playerLoadingIndicator.bottom == playerLoadingImageView.bottom - 15
+      playerLoadingIndicator.width == 15
+      playerLoadingIndicator.height == 15
+    }
+
     view.addSubview(playerView)
     constrain(playerView) { (playerView) in
       playerView.left == playerView.superview!.left
       playerView.top == playerView.superview!.top
       playerView.right == playerView.superview!.right
       playerView.height == playerView.width
-    }
-
-    view.addSubview(playerLoadingIndicator)
-    constrain(playerLoadingIndicator, playerView) { (playerLoadingIndicator, playerView) in
-      playerLoadingIndicator.centerX == playerView.centerX
-      playerLoadingIndicator.bottom == playerView.bottom - 15
-      playerLoadingIndicator.width == 15
-      playerLoadingIndicator.height == 15
     }
 
     view.addSubview(collectionView)
@@ -268,14 +277,6 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     }
   }
 
-  func timelinePlayerDidBeginBuffering(timelinePlayer: TimelinePlayer) {
-    playerLoadingIndicator.startAnimating(withDelay: true)
-  }
-
-  func timelinePlayerDidEndBuffering(timelinePlayer: TimelinePlayer) {
-    playerLoadingIndicator.stopAnimating()
-  }
-
   // MARK: - TimelineFlowLayoutDelegate
   func timelineFlowLayoutDidFinalizeCollectionViewUpdates(layout: TimelineFlowLayout) {}
 
@@ -299,17 +300,13 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
 
   @objc private func userDidSwipePlayerControlGestureRecognizerLeft(recognizer: UISwipeGestureRecognizer) {
     if player.playing {
-      if let currentClip = player.currentClip, let nextClip = timeline.clipAfterClip(currentClip) {
-        player.play(nextClip)
-      }
+      player.next()
     }
   }
 
   @objc private func userDidSwipePlayerControlGestureRecognizerRight(recognizer: UISwipeGestureRecognizer) {
     if player.playing {
-      if let currentClip = player.currentClip, let previousClip = timeline.clipBeforeClip(currentClip) {
-        player.play(previousClip)
-      }
+      player.previous()
     }
   }
 

@@ -19,82 +19,96 @@ class ClipPlayerItem: AVPlayerItem {
   }
 }
 
-class TimelinePlayer: AVPlayer {
+class TimelinePlayer: AVQueuePlayer {
   var timeline: Timeline?
   var delegate: TimelinePlayerDelegate?
-  private(set) var currentClip: Clip? = nil {
-    didSet {
-      if currentClip == nil {
-        pause()
-        replaceCurrentItemWithPlayerItem(nil)
-      } else {
-        delegate?.timelinePlayerDidBeginBuffering(self)
-        ClipDownloader.load(currentClip!) { (preloadedClip, cacheURL, error) -> Void in
-          error?.alertUser()
-          if let url = cacheURL {
-            let playerItem = ClipPlayerItem(url: url, clip: preloadedClip)
-            self.registerPlayerItemForNotifications(playerItem)
-            self.replaceCurrentItemWithPlayerItem(playerItem)
-            self.play()
-          }
-        }
-        if oldValue == nil {
-          if let nextClip = timeline?.clipAfterClip(currentClip!) {
-            ClipDownloader.downloadTimeline(timeline!, withFirstClip: nextClip)
-          }
-        }
-      }
-      if oldValue == nil && currentClip == nil { return }
-      if oldValue == nil && currentClip != nil {
-        playing = true
-        delegate?.timelinePlayer(self, didBeginPlayingWithClip: currentClip!)
-      } else if oldValue != nil && currentClip != nil {
-        delegate?.timelinePlayer(self, didTransitionFromClip: oldValue!, toClip: currentClip!)
-      } else if oldValue != nil && currentClip == nil {
-        playing = false
-        delegate?.timelinePlayer(self, didEndPlayingWithLastClip: oldValue!)
-      }
-    }
+  var playing: Bool {
+    return (currentItem != nil)
   }
-  var playing = false
+  var currentClip: Clip? {
+    let clipItem = currentItem as? ClipPlayerItem
+    return clipItem?.clip
+  }
+  private let currentItemKeyPath = "currentItem"
 
   // MARK: - Initializers
 
   override init() {
     super.init()
-    addBoundaryTimeObserverForTimes([NSValue(CMTime: CMTime(value: 1, timescale: 100))], queue: dispatch_get_main_queue()) { () -> Void in
-      self.delegate?.timelinePlayerDidEndBuffering(self)
-    }
+    addObserver(self, forKeyPath: currentItemKeyPath, options: [.New, .Old], context: nil)
   }
 
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    removeObserver(self, forKeyPath: currentItemKeyPath)
   }
 
   // MARK: - Internal
 
   func play(clip: Clip) {
+    if playing { return }
     if let delegate = delegate {
       if delegate.timelinePlayer(self, shouldBeginPlayingWithClip: clip) {
-        currentClip = clip
+        preloadTimelineStartingWithClip(clip)
+        play()
       }
     }
   }
 
   func stop() {
-    currentClip = nil
+    pause()
+    removeAllItems()
+  }
+
+  func next() {
+    advanceToNextItem()
+  }
+
+  func previous() {
+    guard let currentClip = currentClip else { return }
+    guard let previousClip = timeline?.clipBeforeClip(currentClip) else { return }
+    pause()
+    let itemsToRemove = items().filter { $0 != currentItem }
+    for item in itemsToRemove {
+      removeItem(item)
+    }
+    preloadAndPlayStartingWithClip(previousClip)
+    next() // TODO: Don't call next until previous clip is ready...
+  }
+
+  // MARK: - KVO
+
+  override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String: AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    if keyPath == currentItemKeyPath {
+      guard let change = change else { return }
+      let oldValue = change[NSKeyValueChangeOldKey] as? ClipPlayerItem
+      let newValue = change[NSKeyValueChangeNewKey] as? ClipPlayerItem
+      if oldValue == nil && newValue == nil { return }
+      if oldValue == nil && newValue != nil {
+        delegate?.timelinePlayer(self, didBeginPlayingWithClip: newValue!.clip)
+      } else if oldValue != nil && newValue != nil {
+        delegate?.timelinePlayer(self, didTransitionFromClip: oldValue!.clip, toClip: newValue!.clip)
+      } else if oldValue != nil && newValue == nil {
+        delegate?.timelinePlayer(self, didEndPlayingWithLastClip: oldValue!.clip)
+      }
+    }
   }
 
   // MARK: - Private
 
-  private func registerPlayerItemForNotifications(playerItem: ClipPlayerItem) {
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidPlayToEndTime:", name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
+  private func preloadAndPlayStartingWithClip(clip: Clip) {
+    preloadTimelineStartingWithClip(clip)
+    play()
   }
 
-  @objc private func playerItemDidPlayToEndTime(notification: NSNotification) {
-    NSNotificationCenter.defaultCenter().removeObserver(self, name: notification.name, object: notification.object)
-    if let playerItem = notification.object as? ClipPlayerItem {
-      currentClip = timeline?.clipAfterClip(playerItem.clip)
+  private func preloadTimelineStartingWithClip(clip: Clip) {
+    guard let timeline = timeline else { return }
+    let clips = [clip] + timeline.clipsAfterClip(clip)
+    ClipDownloader.loadClips(clips) { (preloadedClip, cacheURL, error) -> Void in
+      error?.alertUser()
+      if let url = cacheURL {
+        let playerItem = ClipPlayerItem(url: url, clip: preloadedClip)
+        self.insertItem(playerItem, afterItem: self.items().last)
+      }
     }
   }
 }
@@ -104,8 +118,6 @@ protocol TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip)
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingWithLastClip lastClip: Clip)
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip)
-  func timelinePlayerDidBeginBuffering(timelinePlayer: TimelinePlayer)
-  func timelinePlayerDidEndBuffering(timelinePlayer: TimelinePlayer)
 }
 
 class TimelinePlayerView: UIView {

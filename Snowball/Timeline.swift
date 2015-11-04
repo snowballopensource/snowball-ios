@@ -77,14 +77,16 @@ class Timeline {
     delegate?.timelineClipsDidLoadFromCache()
   }
 
-  func clipAfterClip(clip: Clip) -> Clip? {
+  func clipsAfterClip(clip: Clip) -> [Clip] {
+    var afterClips = [Clip]()
     if let index = clips.indexOf(clip) {
-      let nextIndex = index + 1
-      if nextIndex < clips.count {
-        return clips[nextIndex]
-      }
+      afterClips = Array(clips[index+1..<clips.count])
     }
-    return nil
+    return afterClips
+  }
+
+  func clipAfterClip(clip: Clip) -> Clip? {
+    return clipsAfterClip(clip).first
   }
 
   func clipBeforeClip(clip: Clip) -> Clip? {

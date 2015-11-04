@@ -35,8 +35,10 @@ class ClipDownloader: NSOperationQueue {
 
   // MARK: - Internal
 
-  class func load(clip: Clip, completion: ((clip: Clip, cacheURL: NSURL?, error: NSError?) -> Void)?) {
-    load(clip, priority: NSOperationQueuePriority.VeryHigh, completion: completion)
+  class func loadClips(clips: [Clip], afterEachClip callback: ((clip: Clip, cacheURL: NSURL?, error: NSError?) -> Void)?) {
+    for clip in clips {
+      load(clip, priority: NSOperationQueuePriority.High, completion: callback)
+    }
   }
 
   class func downloadTimeline(timeline: Timeline, withFirstClip clip: Clip?) {
