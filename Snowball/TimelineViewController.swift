@@ -245,6 +245,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip) {
     setInterfaceFocused(true)
+    playerView.hidden = false
     for cell in collectionView.visibleCells() {
       if let cell = cell as? ClipCollectionViewCell {
         if let initialClipCell = cellForClip(clip) {
@@ -269,6 +270,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingWithLastClip lastClip: Clip) {
     setInterfaceFocused(false)
+    playerView.hidden = true
     for cell in collectionView.visibleCells() {
       if let cell = cell as? ClipCollectionViewCell {
         resetStateForCell(cell)
