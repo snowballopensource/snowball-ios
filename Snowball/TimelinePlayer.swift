@@ -48,8 +48,9 @@ class TimelinePlayer: AVQueuePlayer {
     if playing { return }
     if let delegate = delegate {
       if delegate.timelinePlayer(self, shouldBeginPlayingWithClip: clip) {
-        preloadTimelineStartingWithClip(clip)
-        play()
+        preloadTimelineStartingWithClip(clip) {
+          self.play()
+        }
       }
     }
   }
@@ -61,18 +62,24 @@ class TimelinePlayer: AVQueuePlayer {
 
   func next() {
     advanceToNextItem()
+    play()
   }
 
   func previous() {
     guard let currentClip = currentClip else { return }
     guard let previousClip = timeline?.clipBeforeClip(currentClip) else { return }
     pause()
-    let itemsToRemove = items().filter { $0 != currentItem }
-    for item in itemsToRemove {
-      removeItem(item)
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+      let itemsToRemove = self.items().filter { $0 != self.currentItem }
+      for item in itemsToRemove {
+        self.removeItem(item)
+      }
+      dispatch_async(dispatch_get_main_queue()) {
+        self.preloadTimelineStartingWithClip(previousClip) {
+          self.next()
+        }
+      }
     }
-    preloadAndPlayStartingWithClip(previousClip)
-    next() // TODO: Don't call next until previous clip is ready...
   }
 
   // MARK: - KVO
@@ -95,12 +102,7 @@ class TimelinePlayer: AVQueuePlayer {
 
   // MARK: - Private
 
-  private func preloadAndPlayStartingWithClip(clip: Clip) {
-    preloadTimelineStartingWithClip(clip)
-    play()
-  }
-
-  private func preloadTimelineStartingWithClip(clip: Clip) {
+  private func preloadTimelineStartingWithClip(clip: Clip, firstClipFinished: (Void -> Void)?) {
     guard let timeline = timeline else { return }
     let clips = [clip] + timeline.clipsAfterClip(clip)
     ClipDownloader.loadClips(clips) { (preloadedClip, cacheURL, error) -> Void in
@@ -109,6 +111,7 @@ class TimelinePlayer: AVQueuePlayer {
         let playerItem = ClipPlayerItem(url: url, clip: preloadedClip)
         self.insertItem(playerItem, afterItem: self.items().last)
       }
+      if preloadedClip == clip { firstClipFinished?() }
     }
   }
 }
