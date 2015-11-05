@@ -23,11 +23,21 @@ class TimelinePlayer: AVQueuePlayer {
   var timeline: Timeline?
   var delegate: TimelinePlayerDelegate?
   var playing: Bool {
-    return (currentItem != nil)
+    return (currentClip != nil)
   }
   var currentClip: Clip? {
-    let clipItem = currentItem as? ClipPlayerItem
-    return clipItem?.clip
+    didSet {
+      let newValue = currentClip
+      if oldValue == nil && newValue == nil { return }
+      if oldValue == newValue { return }
+      if oldValue == nil && newValue != nil {
+        delegate?.timelinePlayer(self, didBeginPlayingWithClip: newValue!)
+      } else if oldValue != nil && newValue != nil {
+        delegate?.timelinePlayer(self, didTransitionFromClip: oldValue!, toClip: newValue!)
+      } else if oldValue != nil && newValue == nil {
+        delegate?.timelinePlayer(self, didEndPlayingWithLastClip: oldValue!)
+      }
+    }
   }
   private let currentItemKeyPath = "currentItem"
 
@@ -35,7 +45,7 @@ class TimelinePlayer: AVQueuePlayer {
 
   override init() {
     super.init()
-    addObserver(self, forKeyPath: currentItemKeyPath, options: [.New, .Old], context: nil)
+    addObserver(self, forKeyPath: currentItemKeyPath, options: .New, context: nil)
   }
 
   deinit {
@@ -48,6 +58,7 @@ class TimelinePlayer: AVQueuePlayer {
     if playing { return }
     if let delegate = delegate {
       if delegate.timelinePlayer(self, shouldBeginPlayingWithClip: clip) {
+        currentClip = clip
         preloadTimelineStartingWithClip(clip) {
           self.play()
         }
@@ -56,11 +67,15 @@ class TimelinePlayer: AVQueuePlayer {
   }
 
   func stop() {
+    currentClip = nil
     pause()
     removeAllItems()
   }
 
   func next() {
+    guard let currentClip = currentClip else { return }
+    guard let nextClip = timeline?.clipAfterClip(currentClip) else { return }
+    self.currentClip = nextClip
     advanceToNextItem()
     play()
   }
@@ -68,6 +83,7 @@ class TimelinePlayer: AVQueuePlayer {
   func previous() {
     guard let currentClip = currentClip else { return }
     guard let previousClip = timeline?.clipBeforeClip(currentClip) else { return }
+    self.currentClip = previousClip
     pause()
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
       let itemsToRemove = self.items().filter { $0 != self.currentItem }
@@ -76,7 +92,8 @@ class TimelinePlayer: AVQueuePlayer {
       }
       dispatch_async(dispatch_get_main_queue()) {
         self.preloadTimelineStartingWithClip(previousClip) {
-          self.next()
+          self.advanceToNextItem()
+          self.play()
         }
       }
     }
@@ -87,16 +104,8 @@ class TimelinePlayer: AVQueuePlayer {
   override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String: AnyObject]?, context: UnsafeMutablePointer<Void>) {
     if keyPath == currentItemKeyPath {
       guard let change = change else { return }
-      let oldValue = change[NSKeyValueChangeOldKey] as? ClipPlayerItem
       let newValue = change[NSKeyValueChangeNewKey] as? ClipPlayerItem
-      if oldValue == nil && newValue == nil { return }
-      if oldValue == nil && newValue != nil {
-        delegate?.timelinePlayer(self, didBeginPlayingWithClip: newValue!.clip)
-      } else if oldValue != nil && newValue != nil {
-        delegate?.timelinePlayer(self, didTransitionFromClip: oldValue!.clip, toClip: newValue!.clip)
-      } else if oldValue != nil && newValue == nil {
-        delegate?.timelinePlayer(self, didEndPlayingWithLastClip: oldValue!.clip)
-      }
+      currentClip = newValue?.clip
     }
   }
 
