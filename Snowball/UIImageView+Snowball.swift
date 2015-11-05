@@ -17,7 +17,7 @@ extension UIImageView {
         failure: { (error) -> () in
           completion?(error)
         }, success: { (image) -> () in
-          self.image = image
+          self.setImage(image, animated: true)
           completion?(nil)
       })
     } else if url.scheme == "assets-library" {
@@ -28,7 +28,7 @@ extension UIImageView {
         manager.requestImageForAsset(asset, targetSize: size, contentMode: PHImageContentMode.AspectFill, options: PHImageRequestOptions(), resultHandler: { (image, info) -> Void in
           if let image = image {
             self.hnk_setImage(image, animated: false, success: { (image) -> () in
-              self.image = image
+              self.setImage(image, animated: true)
               completion?(nil)
             })
           }
@@ -39,11 +39,21 @@ extension UIImageView {
         let image = UIImage(data: imageData)
         if let image = image {
           hnk_setImage(image, animated: false, success: { (image) -> () in
-            self.image = image
+            self.setImage(image, animated: true)
             completion?(nil)
           })
         }
       }
+    }
+  }
+
+  private func setImage(image: UIImage, animated: Bool) {
+    if animated {
+      UIView.transitionWithView(self, duration: 0.4, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
+        self.setImage(image, animated: false)
+        }, completion: nil)
+    } else {
+      self.image = image
     }
   }
 }
