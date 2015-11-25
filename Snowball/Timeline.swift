@@ -125,13 +125,13 @@ class Timeline {
     }
   }
 
-  func requestHomeTimeline(completion: (error: NSError?) -> Void) {
-    requestTimelineWithRoute(.GetClipStream, completion: completion)
+  func requestHomeTimeline(page page: Int, completion: (error: NSError?) -> Void) {
+    requestTimelineWithRoute(.GetClipStream(page: page), completion: completion)
   }
 
-  func requestUserTimeline(user: User, completion: (error: NSError?) -> Void) {
+  func requestUserTimeline(user: User, page: Int, completion: (error: NSError?) -> Void) {
     if let userID = user.id {
-      requestTimelineWithRoute(.GetClipStreamForUser(userID: userID), completion: completion)
+      requestTimelineWithRoute(.GetClipStreamForUser(userID: userID, page: page), completion: completion)
     }
   }
 

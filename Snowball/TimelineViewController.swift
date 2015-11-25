@@ -73,6 +73,12 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     return gestureRecognizer
     }()
 
+  enum TimelineLoadingState {
+    case Idle, Triggered, Loading
+  }
+  private var timelineLoadingState = TimelineLoadingState.Idle
+  private var currentPage = 0
+
   // MARK: - UIViewController
 
   override func viewDidLoad() {
@@ -158,7 +164,26 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
 
   // MARK: - Internal
 
-  func refresh() {}
+  // -loadPage is designed to be subclassed and never called outside of -refresh or -loadPreviousPage
+  func loadPage(page: Int, completion: () -> Void) {}
+
+  final func refresh() {
+    print("Refresh")
+    timelineLoadingState = .Loading
+    currentPage = 1
+    loadPage(currentPage) {
+      self.timelineLoadingState = .Idle
+    }
+  }
+
+  final func loadPreviousPage() {
+    print("Previous")
+    timelineLoadingState = .Loading
+    currentPage++
+    loadPage(currentPage) {
+      self.timelineLoadingState = .Idle
+    }
+  }
 
   func scrollToClip(clip: Clip, animated: Bool = true) {
     if let index = timeline.indexOfClip(clip) {
@@ -359,6 +384,32 @@ extension TimelineViewController: UICollectionViewDelegate {
       } else {
         player.play(clip)
       }
+    }
+  }
+}
+
+// MARK: - UIScrollViewDelegate
+extension TimelineViewController: UIScrollViewDelegate {
+
+  func scrollViewDidScroll(scrollView: UIScrollView) {
+    let pullToLoadDistance: CGFloat = 75
+    let xOffset = scrollView.contentOffset.x
+    if xOffset < 0 && xOffset < -pullToLoadDistance {
+      beginLoadIfAppropriate(scrollView) { completion in
+        self.loadPreviousPage()
+      }
+    } else if (xOffset + scrollView.bounds.width) > scrollView.contentSize.width + pullToLoadDistance {
+      beginLoadIfAppropriate(scrollView) { completion in
+        self.refresh()
+      }
+    }
+  }
+
+  private func beginLoadIfAppropriate(scrollView: UIScrollView, load: () -> Void) {
+    if scrollView.tracking && timelineLoadingState == .Idle {
+      timelineLoadingState = .Triggered
+    } else if !scrollView.tracking && timelineLoadingState == .Triggered {
+      load()
     }
   }
 }

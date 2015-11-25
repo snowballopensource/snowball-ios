@@ -23,8 +23,8 @@ enum Router: URLRequestConvertible {
   case FindUsersByPhoneNumbers(phoneNumbers: [String])
   case FindUsersByUsername(username: String)
   // Clip
-  case GetClipStream
-  case GetClipStreamForUser(userID: String)
+  case GetClipStream(page: Int)
+  case GetClipStreamForUser(userID: String, page: Int)
   case DeleteClip(clipID: String)
   case LikeClip(clipID: String)
   case UnlikeClip(clipID: String)
@@ -88,6 +88,8 @@ enum Router: URLRequestConvertible {
     case .UpdateCurrentUser: return ParameterEncoding.JSON
     case .FindUsersByPhoneNumbers: return ParameterEncoding.JSON
     case .FindUsersByUsername: return ParameterEncoding.URL
+    case .GetClipStream: return ParameterEncoding.URL
+    case .GetClipStreamForUser: return ParameterEncoding.URL
     default: return nil
     }
   }
@@ -113,6 +115,8 @@ enum Router: URLRequestConvertible {
       return userParameters
     case .FindUsersByPhoneNumbers(let phoneNumbers): return ["phone_numbers": phoneNumbers]
     case .FindUsersByUsername(let username): return ["username": username]
+    case .GetClipStream(let page): return ["page": page]
+    case .GetClipStreamForUser(_, let page): return ["page": page]
     default: return nil
     }
   }
