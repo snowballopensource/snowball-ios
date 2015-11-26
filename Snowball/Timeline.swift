@@ -12,6 +12,12 @@ class Timeline {
   var delegate: TimelineDelegate?
   var clips = [Clip]() {
     didSet {
+      clips = clips.sort { (leftClip, rightClip) -> Bool in
+        guard let leftClipCreatedAt = leftClip.createdAt, rightClipCreatedAt = rightClip.createdAt else {
+          return false
+        }
+        return leftClipCreatedAt.compare(rightClipCreatedAt) == NSComparisonResult.OrderedAscending
+      }
       ClipDownloader.downloadTimeline(self, withFirstClip: bookmarkedClip)
     }
   }
