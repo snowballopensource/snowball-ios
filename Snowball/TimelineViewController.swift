@@ -72,12 +72,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     gestureRecognizer.direction = UISwipeGestureRecognizerDirection.Right
     return gestureRecognizer
     }()
-
-  enum TimelineLoadingState {
-    case Idle, Triggered, Loading
-  }
-  private var timelineLoadingState = TimelineLoadingState.Idle
-  private var currentPage = 0
+  var pullToRefreshTriggered = false
 
   // MARK: - UIViewController
 
@@ -165,24 +160,16 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   // MARK: - Internal
 
   // -loadPage is designed to be subclassed and never called outside of -refresh or -loadPreviousPage
-  func loadPage(page: Int, completion: () -> Void) {}
+  func loadPage(page: Int) {}
 
   final func refresh() {
     print("Refresh")
-    timelineLoadingState = .Loading
-    currentPage = 1
-    loadPage(currentPage) {
-      self.timelineLoadingState = .Idle
-    }
+    loadPage(1)
   }
 
   final func loadPreviousPage() {
     print("Previous")
-    timelineLoadingState = .Loading
-    currentPage++
-    loadPage(currentPage) {
-      self.timelineLoadingState = .Idle
-    }
+    loadPage(timeline.currentPage + 1)
   }
 
   func scrollToClip(clip: Clip, animated: Bool = true) {
@@ -406,9 +393,10 @@ extension TimelineViewController: UIScrollViewDelegate {
   }
 
   private func beginLoadIfAppropriate(scrollView: UIScrollView, load: () -> Void) {
-    if scrollView.tracking && timelineLoadingState == .Idle {
-      timelineLoadingState = .Triggered
-    } else if !scrollView.tracking && timelineLoadingState == .Triggered {
+    if scrollView.tracking && timeline.loadingState == TimelineLoadingState.Idle {
+      pullToRefreshTriggered = true
+    } else if !scrollView.tracking && pullToRefreshTriggered {
+      pullToRefreshTriggered = false
       load()
     }
   }

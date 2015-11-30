@@ -45,10 +45,9 @@ class MainTimelineViewController: TimelineViewController {
 
   // MARK: - TimelineViewController
 
-  override func loadPage(page: Int, completion: () -> Void) {
+  override func loadPage(page: Int) {
     timeline.requestHomeTimeline(page: page) { (error) -> Void in
       error?.alertUser()
-      completion()
     }
   }
 

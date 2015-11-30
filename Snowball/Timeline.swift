@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum TimelineLoadingState {
+  case Idle, Loading
+}
+
 class Timeline {
   var delegate: TimelineDelegate?
   var clips = [Clip]() {
@@ -71,6 +75,8 @@ class Timeline {
       }
     }
   }
+  private(set) var loadingState = TimelineLoadingState.Idle
+  private(set) var currentPage = 0
 
   // MARK: - Internal
 
@@ -132,11 +138,13 @@ class Timeline {
   }
 
   func requestHomeTimeline(page page: Int, completion: (error: NSError?) -> Void) {
+    currentPage = page
     requestTimelineWithRoute(.GetClipStream(page: page), completion: completion)
   }
 
   func requestUserTimeline(user: User, page: Int, completion: (error: NSError?) -> Void) {
     if let userID = user.id {
+      currentPage = page
       requestTimelineWithRoute(.GetClipStreamForUser(userID: userID, page: page), completion: completion)
     }
   }
@@ -144,6 +152,7 @@ class Timeline {
   // MARK: - Private
 
   func requestTimelineWithRoute(route: Router, completion: (error: NSError?) -> Void) {
+    loadingState = .Loading
     SnowballAPI.requestObjects(route) { (response: ObjectResponse<[Clip]>) in
       switch response {
       case .Success(let clips):
@@ -153,6 +162,7 @@ class Timeline {
       case .Failure(let error):
         completion(error: error)
       }
+      self.loadingState = .Idle
     }
   }
 
