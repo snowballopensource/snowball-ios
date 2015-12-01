@@ -254,6 +254,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip) {
+    Analytics.track("Watch Clip")
     setInterfaceFocused(true)
     playerView.hidden = false
     for cell in collectionView.visibleCells() {
@@ -271,6 +272,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
+    Analytics.track("Watch Clip")
     let fromCell = cellForClip(fromClip)
     fromCell?.setState(ClipCollectionViewCellState.PlayingIdle, animated: true)
     let toCell = cellForClip(toClip)
