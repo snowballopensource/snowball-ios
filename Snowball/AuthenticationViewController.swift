@@ -86,7 +86,9 @@ class AuthenticationViewController: UIViewController {
         self.authenticationCompletedSuccessfully()
         break
       case .Failure(let error):
-        self.presentViewController(error.newAlertViewController(), animated: true, completion: nil)
+        if let alertController = error.newAlertViewController() {
+          self.presentViewController(alertController, animated: true, completion: nil)
+        }
         self.topBar.spinRightButton(false)
         break
       }

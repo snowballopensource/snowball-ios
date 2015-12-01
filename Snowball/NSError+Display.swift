@@ -10,13 +10,12 @@ import UIKit
 
 extension NSError {
   func alertUser() {
-    newAlertViewController().display()
+    newAlertViewController()?.display()
   }
 
-  func newAlertViewController() -> UIAlertController {
+  func newAlertViewController() -> UIAlertController? {
     let title = NSLocalizedString("Oops", comment: "")
-    var message = localizedFailureReason
-    if message == nil { message = NSLocalizedString("An unknown error has occured.", comment: "") }
+    guard let message = localizedFailureReason else { return nil }
     let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
     let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Default, handler: nil)
     alert.addAction(okAction)
