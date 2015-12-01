@@ -233,16 +233,14 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     resetStateOnVisibleCells()
   }
 
-  func timelineDidChangeClips(timeline: Timeline, insertedClipIndexes: [Int], deletedClipIndexes: [Int]) {
-    let insertedIndexPaths = insertedClipIndexes.filter { $0 != NSNotFound }.map { NSIndexPath(forItem: $0, inSection: 0) }
-    let deletedIndexPaths = deletedClipIndexes.filter { $0 != NSNotFound }.map { NSIndexPath(forItem: $0, inSection: 0) }
-    collectionView.performBatchUpdates({
-      self.collectionView.insertItemsAtIndexPaths(insertedIndexPaths)
-      self.collectionView.deleteItemsAtIndexPaths(deletedIndexPaths)
-      },
-      completion: { (finished) -> Void in
-        self.resetStateOnVisibleCells()
-      })
+  func timeline(timeline: Timeline, didInsertClipAtIndex index: Int) {
+    collectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: index, inSection: 0)])
+    resetStateOnVisibleCells()
+  }
+
+  func timeline(timeline: Timeline, didDeleteClipAtIndex index: Int) {
+    collectionView.deleteItemsAtIndexPaths([NSIndexPath(forItem: index, inSection: 0)])
+    resetStateOnVisibleCells()
   }
 
   // This next part is the TimelinePlayerDelegate implementation. For details as to why it's here,
