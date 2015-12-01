@@ -141,24 +141,28 @@ class Timeline {
 
   func requestHomeTimeline(page page: Int, completion: (error: NSError?) -> Void) {
     currentPage = page
-    requestTimelineWithRoute(.GetClipStream(page: page), completion: completion)
+    requestTimelineWithRoute(.GetClipStream(page: page), isRefresh: (page == 1), completion: completion)
   }
 
   func requestUserTimeline(user: User, page: Int, completion: (error: NSError?) -> Void) {
     if let userID = user.id {
       currentPage = page
-      requestTimelineWithRoute(.GetClipStreamForUser(userID: userID, page: page), completion: completion)
+      requestTimelineWithRoute(.GetClipStreamForUser(userID: userID, page: page), isRefresh: (page == 1), completion: completion)
     }
   }
 
   // MARK: - Private
 
-  func requestTimelineWithRoute(route: Router, completion: (error: NSError?) -> Void) {
+  func requestTimelineWithRoute(route: Router, isRefresh: Bool, completion: (error: NSError?) -> Void) {
     loadingState = .Loading
     SnowballAPI.requestObjects(route) { (response: ObjectResponse<[Clip]>) in
       switch response {
       case .Success(let clips):
-        self.mergeOldClipsWithNewClips(clips)
+        if isRefresh {
+          self.performPostRefreshMergeWithNewClips(clips)
+        } else {
+          self.performPreviousPageMergeWithNewClips(clips)
+        }
         do { try self.clips.first?.managedObjectContext?.save() } catch {}
         completion(error: nil)
       case .Failure(let error):
@@ -168,7 +172,7 @@ class Timeline {
     }
   }
 
-  private func mergeOldClipsWithNewClips(newClips: [Clip]) {
+  private func performPostRefreshMergeWithNewClips(newClips: [Clip]) {
     let cacheClips = NSMutableOrderedSet(array: clips)
     let serverClips = NSMutableOrderedSet(array: newClips)
 
@@ -187,6 +191,12 @@ class Timeline {
     for clip in clipsToInsert {
       let index = newClips.indexOf(clip)!
       insertClip(clip, atIndex: index)
+    }
+  }
+
+  private func performPreviousPageMergeWithNewClips(newClips: [Clip]) {
+    for clip in newClips {
+      insertClip(clip, atIndex: clips.count)
     }
   }
 }
