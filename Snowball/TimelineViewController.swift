@@ -74,7 +74,8 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     }()
 
   // At some time in the future, refactor pull to refresh/pull to scroll back to its own class...
-  var pullToRefreshTriggered = false
+  // TODO: BRING BACK PAGINATION / PULL TO REFRESH
+  // var pullToRefreshTriggered = false
 
   // MARK: - UIViewController
 
@@ -395,31 +396,32 @@ extension TimelineViewController: UICollectionViewDelegate {
 }
 
 // MARK: - UIScrollViewDelegate
-extension TimelineViewController: UIScrollViewDelegate {
-
-  func scrollViewDidScroll(scrollView: UIScrollView) {
-    let pullToLoadDistance: CGFloat = 55
-    let xOffset = scrollView.contentOffset.x
-    if xOffset < 0 && xOffset < -pullToLoadDistance {
-      beginLoadIfAppropriate(scrollView) {
-        self.loadPreviousPage()
-      }
-    } else if (xOffset + scrollView.bounds.width) > scrollView.contentSize.width + pullToLoadDistance {
-      beginLoadIfAppropriate(scrollView) {
-        self.refresh()
-      }
-    }
-  }
-
-  private func beginLoadIfAppropriate(scrollView: UIScrollView, load: () -> Void) {
-    if scrollView.tracking && timeline.loadingState == TimelineLoadingState.Idle {
-      pullToRefreshTriggered = true
-    } else if !scrollView.tracking && pullToRefreshTriggered {
-      pullToRefreshTriggered = false
-      load()
-    }
-  }
-}
+// TODO: BRING BACK PAGINATION / PULL TO REFRESH
+//extension TimelineViewController: UIScrollViewDelegate {
+//
+//  func scrollViewDidScroll(scrollView: UIScrollView) {
+//    let pullToLoadDistance: CGFloat = 55
+//    let xOffset = scrollView.contentOffset.x
+//    if xOffset < 0 && xOffset < -pullToLoadDistance {
+//      beginLoadIfAppropriate(scrollView) {
+//        self.loadPreviousPage()
+//      }
+//    } else if (xOffset + scrollView.bounds.width) > scrollView.contentSize.width + pullToLoadDistance {
+//      beginLoadIfAppropriate(scrollView) {
+//        self.refresh()
+//      }
+//    }
+//  }
+//
+//  private func beginLoadIfAppropriate(scrollView: UIScrollView, load: () -> Void) {
+//    if scrollView.tracking && timeline.loadingState == TimelineLoadingState.Idle {
+//      pullToRefreshTriggered = true
+//    } else if !scrollView.tracking && pullToRefreshTriggered {
+//      pullToRefreshTriggered = false
+//      load()
+//    }
+//  }
+//}
 
 // MARK: - ClipCollectionViewCellDelegate
 extension TimelineViewController: ClipCollectionViewCellDelegate {
