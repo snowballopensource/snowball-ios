@@ -29,7 +29,7 @@ class MainTimelineViewController: TimelineViewController {
     super.loadView()
 
     addChildViewController(cameraViewController)
-    view.insertSubview(cameraViewController.view, belowSubview: playerView)
+    view.addSubview(cameraViewController.view)
     cameraViewController.didMoveToParentViewController(self)
     constrain(cameraViewController.view) { (cameraView) in
       cameraView.left == cameraView.superview!.left
@@ -82,6 +82,16 @@ class MainTimelineViewController: TimelineViewController {
   override func timelinePlayer(timelinePlayer: TimelinePlayer, shouldBeginPlayingWithClip clip: Clip) -> Bool {
     super.timelinePlayer(timelinePlayer, shouldBeginPlayingWithClip: clip)
     return cameraViewController.state == CameraViewControllerState.Default
+  }
+
+  override func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip) {
+    super.timelinePlayer(timelinePlayer, didBeginPlayingWithClip: clip)
+    cameraViewController.view.hidden = true
+  }
+
+  override func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingWithLastClip lastClip: Clip) {
+    super.timelinePlayer(timelinePlayer, didEndPlayingWithLastClip: lastClip)
+    cameraViewController.view.hidden = false
   }
 
   // MARK: - TimelineFlowLayoutDelegate
