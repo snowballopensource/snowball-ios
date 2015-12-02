@@ -86,12 +86,12 @@ class MainTimelineViewController: TimelineViewController {
 
   override func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip) {
     super.timelinePlayer(timelinePlayer, didBeginPlayingWithClip: clip)
-    cameraViewController.view.hidden = true
+    view.sendSubviewToBack(cameraViewController.view)
   }
 
   override func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingWithLastClip lastClip: Clip) {
     super.timelinePlayer(timelinePlayer, didEndPlayingWithLastClip: lastClip)
-    cameraViewController.view.hidden = false
+    view.sendSubviewToBack(playerView)
   }
 
   // MARK: - TimelineFlowLayoutDelegate

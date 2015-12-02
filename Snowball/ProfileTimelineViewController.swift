@@ -62,12 +62,12 @@ class ProfileTimelineViewController: TimelineViewController {
   // to see why this is here. It's such a confusing mess. Sorry future self!
   override func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip) {
     super.timelinePlayer(timelinePlayer, didBeginPlayingWithClip: clip)
-    userProfileDetailView.hidden = true
+    view.sendSubviewToBack(userProfileDetailView)
   }
 
   override func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingWithLastClip lastClip: Clip) {
     super.timelinePlayer(timelinePlayer, didEndPlayingWithLastClip: lastClip)
-    userProfileDetailView.hidden = false
+    view.sendSubviewToBack(playerView)
   }
 
   // MARK: - TimelineFlowLayoutDelegate
