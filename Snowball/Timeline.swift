@@ -175,9 +175,11 @@ class Timeline {
   private func performPostRefreshMergeWithNewClips(newClips: [Clip]) {
     let cacheClips = NSMutableOrderedSet(array: clips)
     let serverClips = NSMutableOrderedSet(array: newClips)
+    let pendingClips = NSMutableOrderedSet(array: clips.filter({ !$0.isOnServer }))
 
     let clipsToDeleteSet = cacheClips.mutableCopy()
     clipsToDeleteSet.minusOrderedSet(serverClips)
+    clipsToDeleteSet.minusOrderedSet(pendingClips)
     let clipsToDelete = clipsToDeleteSet.array as! [Clip]
 
     let clipsToInsertSet = serverClips.mutableCopy()

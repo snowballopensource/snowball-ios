@@ -32,6 +32,10 @@ final class Clip: RemoteObject {
     }
   }
 
+  var isOnServer: Bool {
+    return state == .Default
+  }
+
   // MARK: - Internal
 
   override func assignAttributes(attributes: [String : AnyObject]) {
