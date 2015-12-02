@@ -425,9 +425,12 @@ extension TimelineViewController: UIScrollViewDelegate {
 extension TimelineViewController: ClipCollectionViewCellDelegate {
 
   func userDidShowOptionsGestureForCell(cell: ClipCollectionViewCell) {
-    authenticateUser {
-      cell.setState(.Options, animated: true)
-    }
+    authenticateUser(
+      afterSuccessfulAuthentication: {
+        self.refresh()
+      }, whenAlreadyAuthenticated: {
+        cell.setState(.Options, animated: true)
+    })
   }
 
   func userDidHideOptionsGestureForCell(cell: ClipCollectionViewCell) {
@@ -484,54 +487,60 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
   }
 
   func userDidTapUserButtonForCell(cell: ClipCollectionViewCell) {
-    authenticateUser {
-      if !self.player.playing {
-        let clip = self.clipForCell(cell)
-        if let user = clip?.user {
-          self.navigationController?.pushViewController(ProfileTimelineViewController(user: user), animated: true)
+    authenticateUser(
+      afterSuccessfulAuthentication: {
+        self.refresh()
+      }, whenAlreadyAuthenticated: {
+        if !self.player.playing {
+          let clip = self.clipForCell(cell)
+          if let user = clip?.user {
+            self.navigationController?.pushViewController(ProfileTimelineViewController(user: user), animated: true)
+          }
         }
-      }
-    }
+    })
   }
 
   func userDidTapLikeButtonForCell(cell: ClipCollectionViewCell) {
-    authenticateUser {
-      let clip = self.clipForCell(cell)
-      if let clip = clip, let clipID = clip.id, let user = clip.user, let currentUser = User.currentUser {
-        if user != currentUser {
-          clip.liked = !clip.liked.boolValue
-          cell.setClipLiked(clip.liked.boolValue, animated: true)
-          do { try clip.managedObjectContext?.save() } catch {}
-          if clip.liked.boolValue {
-            Analytics.track("Like Clip")
-            SnowballAPI.request(.LikeClip(clipID: clipID)) { response in
-              SwiftSpinner.hide()
-              switch response {
-              case .Success: break
-              case .Failure(let error):
-                error.alertUser()
-                clip.liked = !clip.liked.boolValue
-                cell.setClipLiked(clip.liked.boolValue, animated: true)
-                do { try clip.managedObjectContext?.save() } catch {}
+    authenticateUser(
+      afterSuccessfulAuthentication: {
+        self.refresh()
+      }, whenAlreadyAuthenticated: {
+        let clip = self.clipForCell(cell)
+        if let clip = clip, let clipID = clip.id, let user = clip.user, let currentUser = User.currentUser {
+          if user != currentUser {
+            clip.liked = !clip.liked.boolValue
+            cell.setClipLiked(clip.liked.boolValue, animated: true)
+            do { try clip.managedObjectContext?.save() } catch {}
+            if clip.liked.boolValue {
+              Analytics.track("Like Clip")
+              SnowballAPI.request(.LikeClip(clipID: clipID)) { response in
+                SwiftSpinner.hide()
+                switch response {
+                case .Success: break
+                case .Failure(let error):
+                  error.alertUser()
+                  clip.liked = !clip.liked.boolValue
+                  cell.setClipLiked(clip.liked.boolValue, animated: true)
+                  do { try clip.managedObjectContext?.save() } catch {}
+                }
               }
-            }
-          } else {
-            Analytics.track("Unlike Clip")
-            SnowballAPI.request(.UnlikeClip(clipID: clipID)) { response in
-              SwiftSpinner.hide()
-              switch response {
-              case .Success: break
-              case .Failure(let error):
-                error.alertUser()
-                clip.liked = !clip.liked.boolValue
-                cell.setClipLiked(clip.liked.boolValue, animated: true)
-                do { try clip.managedObjectContext?.save() } catch {}
+            } else {
+              Analytics.track("Unlike Clip")
+              SnowballAPI.request(.UnlikeClip(clipID: clipID)) { response in
+                SwiftSpinner.hide()
+                switch response {
+                case .Success: break
+                case .Failure(let error):
+                  error.alertUser()
+                  clip.liked = !clip.liked.boolValue
+                  cell.setClipLiked(clip.liked.boolValue, animated: true)
+                  do { try clip.managedObjectContext?.save() } catch {}
+                }
               }
             }
           }
         }
-      }
-    }
+    })
   }
 
   func userDidTapUploadRetryButtonForCell(cell: ClipCollectionViewCell) {}

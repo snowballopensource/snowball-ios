@@ -10,14 +10,20 @@ import Cartography
 import UIKit
 
 extension UIViewController {
-  func authenticateUser(ifAuthenticated: () -> Void) {
+  func authenticateUser(afterSuccessfulAuthentication afterSuccessfulAuthentication: (() -> Void)?, whenAlreadyAuthenticated: (() -> Void)?) {
     if User.currentUser == nil {
       let authenticationNC = RoundedCornerViewController(childViewController: AuthenticationNavigationController())
-      authenticationNC.transitioningDelegate = AuthenticationPresentationControllerTransitioningDelegate.sharedInstance
+      let transitioningDelegate = AuthenticationPresentationControllerTransitioningDelegate.sharedInstance
+      transitioningDelegate.onComplete = {
+        if User.currentUser != nil {
+          afterSuccessfulAuthentication?()
+        }
+      }
+      authenticationNC.transitioningDelegate = transitioningDelegate
       authenticationNC.modalPresentationStyle = .Custom
       presentViewController(authenticationNC, animated: true, completion: nil)
     } else {
-      ifAuthenticated()
+      whenAlreadyAuthenticated?()
     }
   }
 }
@@ -82,6 +88,9 @@ class AuthenticationPresentationController: UIPresentationController {
       },
       completion: { _ in
         self.dimView.removeFromSuperview()
+        if let transitioningDelegate = self.presentedViewController.transitioningDelegate as? AuthenticationPresentationControllerTransitioningDelegate {
+          transitioningDelegate.onComplete?()
+        }
     })
   }
 
@@ -100,6 +109,8 @@ class AuthenticationPresentationController: UIPresentationController {
 
 class AuthenticationPresentationControllerTransitioningDelegate: NSObject {
   static let sharedInstance = AuthenticationPresentationControllerTransitioningDelegate()
+
+  var onComplete: (() -> Void)? = nil
 }
 
 // MARK: - UIViewControllerTransitioningDelegate

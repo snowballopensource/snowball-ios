@@ -117,12 +117,19 @@ class MainTimelineViewController: TimelineViewController {
 extension MainTimelineViewController {
 
   override func userDidTapAddButtonForCell(cell: ClipCollectionViewCell) {
-    authenticateUser {
+    let completion = {
       Analytics.track("Create Clip")
       self.setInterfaceFocused(false)
       self.cameraViewController.endPreview()
       self.uploadClipForCell(cell)
     }
+    authenticateUser(
+      afterSuccessfulAuthentication: {
+        self.refresh()
+        completion()
+      }, whenAlreadyAuthenticated: {
+        completion()
+    })
   }
 
   override func userDidTapUserButtonForCell(cell: ClipCollectionViewCell) {
@@ -186,9 +193,12 @@ extension MainTimelineViewController: CameraViewControllerDelegate {
 extension MainTimelineViewController: SnowballTopViewDelegate {
 
   func snowballTopViewLeftButtonTapped() {
-    authenticateUser {
-      self.switchToNavigationController(MoreNavigationController())
-    }
+    authenticateUser(
+      afterSuccessfulAuthentication: {
+        self.refresh()
+      }, whenAlreadyAuthenticated: {
+        self.switchToNavigationController(MoreNavigationController())
+    })
   }
 
   func snowballTopViewRightButtonTapped() {
