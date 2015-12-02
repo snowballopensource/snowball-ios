@@ -72,6 +72,18 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     gestureRecognizer.direction = UISwipeGestureRecognizerDirection.Right
     return gestureRecognizer
     }()
+
+  // At some time in the future, refactor pull to refresh/pull to scroll back to its own class...
+  let leftPullToRefreshView: UIView = {
+    let view = UIView()
+    view.backgroundColor = UIColor.SnowballColor.blueColor
+    return view
+  }()
+  let rightPullToRefreshView: UIView = {
+    let view = UIView()
+    view.backgroundColor = UIColor.SnowballColor.blueColor
+    return view
+  }()
   var pullToRefreshTriggered = false
 
   // MARK: - UIViewController
@@ -151,10 +163,33 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
       collectionView.bottom == collectionView.superview!.bottom
     }
 
+    collectionView.addSubview(leftPullToRefreshView)
+    collectionView.addSubview(rightPullToRefreshView)
+
     playerView.addGestureRecognizer(playerControlSingleTapGestureRecognizer)
     playerView.addGestureRecognizer(playerControlDoubleTapGestureRecognizer)
     view.addGestureRecognizer(playerControlSwipeLeftGestureRecognizer)
     view.addGestureRecognizer(playerControlSwipeRightGestureRecognizer)
+  }
+
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+
+    let y: CGFloat = (ClipCollectionViewCell.size.width / 2) - (leftPullToRefreshView.frame.width / 2)
+    let width: CGFloat = 25
+    let height: CGFloat = 25
+    leftPullToRefreshView.frame = CGRect(
+      x: TimelineViewController.collectionViewSideContentInset - leftPullToRefreshView.frame.width - 15,
+      y: y,
+      width: width,
+      height: height
+    )
+    rightPullToRefreshView.frame = CGRect(
+      x: max(collectionView.contentSize.width - TimelineViewController.collectionViewSideContentInset + 15, collectionView.bounds.size.width),
+      y: y,
+      width: width,
+      height: height
+    )
   }
 
   // MARK: - Internal
@@ -215,6 +250,14 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   func setInterfaceFocused(focused: Bool) {
     topView.setHidden(focused, animated: true)
     collectionView.scrollEnabled = !focused
+  }
+
+  // MARK: - Private
+
+  private func setScrollViewContentInsetAnimated(insets: UIEdgeInsets) {
+    UIView.animateWithDuration(0.2) {
+      self.collectionView.contentInset = insets
+    }
   }
 
   // This next part is the TimelineDelegate implementation. It's ugly because as of Swift 1.2 we are not allowed to
@@ -379,14 +422,14 @@ extension TimelineViewController: UICollectionViewDelegate {
 extension TimelineViewController: UIScrollViewDelegate {
 
   func scrollViewDidScroll(scrollView: UIScrollView) {
-    let pullToLoadDistance: CGFloat = 75
+    let pullToLoadDistance: CGFloat = 55
     let xOffset = scrollView.contentOffset.x
     if xOffset < 0 && xOffset < -pullToLoadDistance {
-      beginLoadIfAppropriate(scrollView) { completion in
+      beginLoadIfAppropriate(scrollView) {
         self.loadPreviousPage()
       }
     } else if (xOffset + scrollView.bounds.width) > scrollView.contentSize.width + pullToLoadDistance {
-      beginLoadIfAppropriate(scrollView) { completion in
+      beginLoadIfAppropriate(scrollView) {
         self.refresh()
       }
     }
@@ -397,6 +440,12 @@ extension TimelineViewController: UIScrollViewDelegate {
       pullToRefreshTriggered = true
     } else if !scrollView.tracking && pullToRefreshTriggered {
       pullToRefreshTriggered = false
+      let loadingInset: CGFloat = 55
+      if scrollView.contentOffset.x < 0 {
+        setScrollViewContentInsetAnimated(UIEdgeInsets(top: 0, left: loadingInset, bottom: 0, right: 0))
+      } else {
+        setScrollViewContentInsetAnimated(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: loadingInset))
+      }
       load()
     }
   }
