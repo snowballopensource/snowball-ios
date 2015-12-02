@@ -121,6 +121,14 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   override func loadView() {
     super.loadView()
 
+    view.addSubview(playerView)
+    constrain(playerView) { (playerView) in
+      playerView.left == playerView.superview!.left
+      playerView.top == playerView.superview!.top
+      playerView.right == playerView.superview!.right
+      playerView.height == playerView.width
+    }
+
     view.addSubview(playerLoadingImageView)
     constrain(playerLoadingImageView) { (playerLoadingImageView) in
       playerLoadingImageView.left == playerLoadingImageView.superview!.left
@@ -135,14 +143,6 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
       playerLoadingIndicator.bottom == playerLoadingImageView.bottom - 15
       playerLoadingIndicator.width == 15
       playerLoadingIndicator.height == 15
-    }
-
-    view.addSubview(playerView)
-    constrain(playerView) { (playerView) in
-      playerView.left == playerView.superview!.left
-      playerView.top == playerView.superview!.top
-      playerView.right == playerView.superview!.right
-      playerView.height == playerView.width
     }
 
     view.addSubview(collectionView)
@@ -285,6 +285,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingWithLastClip lastClip: Clip) {
     setInterfaceFocused(false)
     playerView.hidden = true
+    endBuffering()
     for cell in collectionView.visibleCells() {
       if let cell = cell as? ClipCollectionViewCell {
         resetStateForCell(cell)
@@ -293,10 +294,26 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     }
   }
 
+  func timelinePlayerDidBeginBuffering(timelinePlayer: TimelinePlayer) {
+    playerLoadingIndicator.startAnimating(withDelay: true)
+    if let thumbnailURLString = timelinePlayer.currentClip?.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
+      playerLoadingImageView.setImageFromURL(thumbnailURL)
+    }
+  }
+
+  func timelinePlayerDidEndBuffering(timelinePlayer: TimelinePlayer) {
+    endBuffering()
+  }
+
   // MARK: - TimelineFlowLayoutDelegate
   func timelineFlowLayoutDidFinalizeCollectionViewUpdates(layout: TimelineFlowLayout) {}
 
   // MARK: - Private
+
+  private func endBuffering() {
+    playerLoadingIndicator.stopAnimating()
+    playerLoadingImageView.image = nil
+  }
 
   @objc private func applicationWillEnterForeground() {
     refresh()

@@ -37,6 +37,9 @@ class TimelinePlayer: AVQueuePlayer {
       } else if oldValue != nil && newValue == nil {
         delegate?.timelinePlayer(self, didEndPlayingWithLastClip: oldValue!)
       }
+      if newValue != nil {
+        delegate?.timelinePlayerDidBeginBuffering(self)
+      }
     }
   }
   private let currentItemKeyPath = "currentItem"
@@ -46,6 +49,9 @@ class TimelinePlayer: AVQueuePlayer {
   override init() {
     super.init()
     addObserver(self, forKeyPath: currentItemKeyPath, options: .New, context: nil)
+    addBoundaryTimeObserverForTimes([NSValue(CMTime: CMTime(value: 1, timescale: 30))], queue: dispatch_get_main_queue()) {
+      self.delegate?.timelinePlayerDidEndBuffering(self)
+    }
   }
 
   deinit {
@@ -130,6 +136,8 @@ protocol TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip)
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingWithLastClip lastClip: Clip)
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip)
+  func timelinePlayerDidBeginBuffering(timelinePlayer: TimelinePlayer)
+  func timelinePlayerDidEndBuffering(timelinePlayer: TimelinePlayer)
 }
 
 class TimelinePlayerView: UIView {
