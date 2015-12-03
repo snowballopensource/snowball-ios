@@ -35,7 +35,7 @@ class MainTimelineViewController: TimelineViewController {
   private var onboardingCompleted: Bool {
     get {
       if User.currentUser != nil {
-        self.onboardingCompleted = false
+        self.onboardingCompleted = true
       }
       return NSUserDefaults.standardUserDefaults().boolForKey(kCaptureOnboardingCompletedKey)
     }
