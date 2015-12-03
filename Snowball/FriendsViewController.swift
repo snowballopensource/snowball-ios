@@ -13,7 +13,7 @@ class FriendsViewController: UIViewController {
 
   // MARK: - Properties
 
-  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Camera, rightButtonType: SnowballTopViewButtonType.AddFriends)
+  private let topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Camera, rightButtonType: SnowballTopViewButtonType.Settings)
     
   private let currentUserAvatarImageView: UserAvatarImageView = {
     let imageView = UserAvatarImageView()
@@ -33,9 +33,9 @@ class FriendsViewController: UIViewController {
 
   private let currentUserProfileButton = UIButton()
 
-  private let settingsButton: UIButton = {
-    let button = UIButton()
-    button.setImage(UIImage(named: "settings"), forState: UIControlState.Normal)
+  private let findFriendsButton: SnowballFooterButton = {
+    let button = SnowballFooterButton(rightImage: UIImage(named: "add-friends"))
+    button.setTitle(NSLocalizedString("Find Friends", comment: ""), forState: UIControlState.Normal)
     return button
   }()
 
@@ -98,15 +98,6 @@ class FriendsViewController: UIViewController {
       currentUserProfileButton.bottom == currentUserAvatarImageView.bottom
     }
 
-    settingsButton.addTarget(self, action: "settingsButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
-    view.addSubview(settingsButton)
-    constrain(settingsButton, currentUserUsernameLabel) { (settingsButton, currentUserUsernameLabel) in
-      settingsButton.right == settingsButton.superview!.right - margin
-      settingsButton.centerY == currentUserUsernameLabel.centerY
-      settingsButton.width == 44
-      settingsButton.height == settingsButton.width
-    }
-
     followersFollowingSegmentedControl.addTarget(self, action: "followersFollowingSegmentedControlTapped", forControlEvents: UIControlEvents.ValueChanged)
     view.addSubview(followersFollowingSegmentedControl)
     constrain(followersFollowingSegmentedControl, currentUserUsernameLabel) { (followersFollowingSegmentedControl, currentUserUsernameLabel) in
@@ -116,15 +107,19 @@ class FriendsViewController: UIViewController {
       followersFollowingSegmentedControl.height == 35
     }
 
+    findFriendsButton.addTarget(self, action: "findFriendsButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    view.addSubview(findFriendsButton)
+    findFriendsButton.setupDefaultLayout()
+
     tableView.addRefreshControl(self, action: "refresh")
     tableView.dataSource = self
     tableView.delegate = self
     view.addSubview(tableView)
-    constrain(tableView, followersFollowingSegmentedControl) { (tableView, followersFollowingSegmentedControl) in
+    constrain(tableView, followersFollowingSegmentedControl, findFriendsButton) { (tableView, followersFollowingSegmentedControl, findFriendsButton) in
       tableView.left == tableView.superview!.left
       tableView.top == followersFollowingSegmentedControl.bottom + 15
       tableView.right == tableView.superview!.right
-      tableView.bottom == tableView.superview!.bottom
+      tableView.bottom == findFriendsButton.top
     }
   }
 
@@ -146,8 +141,8 @@ class FriendsViewController: UIViewController {
     }
   }
 
-  @objc private func settingsButtonTapped() {
-    navigationController?.pushViewController(EditProfileViewController(), animated: true)
+  @objc private func findFriendsButtonTapped() {
+    navigationController?.pushViewController(FindFriendsViewController(), animated: true)
   }
 
   @objc private func followersFollowingSegmentedControlTapped() {
@@ -189,7 +184,7 @@ extension FriendsViewController: SnowballTopViewDelegate {
   }
 
   func snowballTopViewRightButtonTapped() {
-    navigationController?.pushViewController(FindFriendsViewController(), animated: true)
+    navigationController?.pushViewController(EditProfileViewController(), animated: true)
   }
 }
 
