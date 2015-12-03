@@ -36,6 +36,7 @@ class TimelinePlayer: AVQueuePlayer {
         if playing {
           if let lastClip = timeline?.clips.last {
             if oldValue == lastClip {
+              playing = false
               delegate?.timelinePlayer(self, didEndPlayingWithLastClip: oldValue!)
             }
           }
