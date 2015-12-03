@@ -15,6 +15,11 @@ class MainTimelineViewController: TimelineViewController {
 
   private let cameraViewController = CameraViewController()
 
+  private let onboardingAnnotationPlay: UIImageView = {
+    let imageView = UIImageView(image: UIImage(named: "coachmark-play"))
+    imageView.userInteractionEnabled = false
+    return imageView
+  }()
   private let onboardingAnnotationCapture: UIImageView = {
     let imageView = UIImageView(image: UIImage(named: "coachmark-capture"))
     imageView.userInteractionEnabled = false
@@ -30,7 +35,7 @@ class MainTimelineViewController: TimelineViewController {
   private var onboardingCompleted: Bool {
     get {
       if User.currentUser != nil {
-        self.onboardingCompleted = true
+        self.onboardingCompleted = false
       }
       return NSUserDefaults.standardUserDefaults().boolForKey(kCaptureOnboardingCompletedKey)
     }
@@ -49,7 +54,8 @@ class MainTimelineViewController: TimelineViewController {
 
     timeline.loadCachedClips()
 
-    setOnboardingAnnotationCaptureHidden(onboardingCompleted, animated: false)
+    setOnboardingAnnotationPlayHidden(onboardingCompleted, animated: false)
+    setOnboardingAnnotationCaptureHidden(true, animated: false)
     setOnboardingAnnotationAddHidden(true, animated: false)
   }
 
@@ -69,6 +75,14 @@ class MainTimelineViewController: TimelineViewController {
     topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Friends, rightButtonType: SnowballTopViewButtonType.ChangeCamera)
     view.addSubview(topView)
     topView.setupDefaultLayout()
+
+    view.addSubview(onboardingAnnotationPlay)
+    constrain(onboardingAnnotationPlay, cameraViewController.view) { onboardingAnnotationPlay, cameraView in
+      onboardingAnnotationPlay.left == cameraView.left + 15
+      onboardingAnnotationPlay.bottom == cameraView.bottom + 30
+      onboardingAnnotationPlay.width == self.onboardingAnnotationPlay.image!.size.width
+      onboardingAnnotationPlay.height == self.onboardingAnnotationPlay.image!.size.height
+    }
 
     view.addSubview(onboardingAnnotationCapture)
     constrain(onboardingAnnotationCapture, cameraViewController.view) { onboardingAnnotationCapture, cameraView in
@@ -129,11 +143,13 @@ class MainTimelineViewController: TimelineViewController {
 
   override func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip) {
     super.timelinePlayer(timelinePlayer, didBeginPlayingWithClip: clip)
+    setOnboardingAnnotationPlayHidden(true, animated: true)
     view.sendSubviewToBack(cameraViewController.view)
   }
 
   override func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingWithLastClip lastClip: Clip) {
     super.timelinePlayer(timelinePlayer, didEndPlayingWithLastClip: lastClip)
+    setOnboardingAnnotationCaptureHidden(onboardingCompleted, animated: true)
     view.sendSubviewToBack(playerView)
   }
 
@@ -152,6 +168,16 @@ class MainTimelineViewController: TimelineViewController {
       scrollToClip(pendingClip, animated: animated)
     } else if let bookmarkedClip = timeline.bookmarkedClip {
       scrollToClip(bookmarkedClip, animated: animated)
+    }
+  }
+
+  private func setOnboardingAnnotationPlayHidden(hidden: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.4) {
+        self.setOnboardingAnnotationPlayHidden(hidden, animated: false)
+      }
+    } else {
+      onboardingAnnotationPlay.alpha = CGFloat(!hidden)
     }
   }
 
@@ -253,7 +279,7 @@ extension MainTimelineViewController: CameraViewControllerDelegate {
     if let clip = timeline.pendingClips.last {
       timeline.deleteClip(clip)
     }
-    setOnboardingAnnotationCaptureHidden(onboardingCompleted, animated: true)
+    setOnboardingAnnotationCaptureHidden(true, animated: true)
     setOnboardingAnnotationAddHidden(true, animated: true)
   }
 }
