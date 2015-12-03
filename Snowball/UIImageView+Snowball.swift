@@ -11,13 +11,13 @@ import Photos
 import UIKit
 
 extension UIImageView {
-  func setImageFromURL(url: NSURL, completion: ((NSError?) -> Void)? = nil) {
+  func setImageFromURL(url: NSURL, animated: Bool = true, completion: ((NSError?) -> Void)? = nil) {
     if url.scheme == "http" {
       hnk_setImageFromURL(url, format: Format<UIImage>(name: "original"),
         failure: { (error) -> () in
           completion?(error)
         }, success: { (image) -> () in
-          self.setImage(image, animated: true)
+          self.setImage(image, animated: animated)
           completion?(nil)
       })
     } else if url.scheme == "assets-library" {
@@ -28,7 +28,7 @@ extension UIImageView {
         manager.requestImageForAsset(asset, targetSize: size, contentMode: PHImageContentMode.AspectFill, options: PHImageRequestOptions(), resultHandler: { (image, info) -> Void in
           if let image = image {
             self.hnk_setImage(image, animated: false, success: { (image) -> () in
-              self.setImage(image, animated: true)
+              self.setImage(image, animated: animated)
               completion?(nil)
             })
           }
@@ -39,7 +39,7 @@ extension UIImageView {
         let image = UIImage(data: imageData)
         if let image = image {
           hnk_setImage(image, animated: false, success: { (image) -> () in
-            self.setImage(image, animated: true)
+            self.setImage(image, animated: animated)
             completion?(nil)
           })
         }

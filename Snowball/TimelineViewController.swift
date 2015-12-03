@@ -307,7 +307,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   func timelinePlayerDidBeginBuffering(timelinePlayer: TimelinePlayer) {
     playerLoadingIndicator.startAnimating(withDelay: true)
     if let thumbnailURLString = timelinePlayer.currentClip?.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
-      playerLoadingImageView.setImageFromURL(thumbnailURL)
+      playerLoadingImageView.setImageFromURL(thumbnailURL, animated: false)
     }
   }
 
