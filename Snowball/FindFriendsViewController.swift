@@ -217,7 +217,7 @@ class FindFriendsViewController: UIViewController {
     messageComposeViewController.messageComposeDelegate = self
     var body = NSLocalizedString("Hey! Join me on the simple new video app, Snowball: http://bit.ly/snblapp.", comment: "")
     if let username = User.currentUser?.username {
-      body += NSLocalizedString(" My username is \(username).", comment: "")
+      body += " " + NSLocalizedString("My username is \(username).", comment: "")
     }
     messageComposeViewController.body = body
     if MFMessageComposeViewController.canSendText() {
