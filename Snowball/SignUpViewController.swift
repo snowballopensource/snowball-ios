@@ -85,7 +85,7 @@ extension SignUpViewController: UITableViewDataSource {
     switch(index) {
     case .Username:
       cell.descriptionLabel.text = NSLocalizedString("username", comment: "")
-      cell.textField.setPlaceholder(NSLocalizedString("snowball", comment: ""), color: UIColor.SnowballColor.grayColor)
+      cell.textField.setPlaceholder("snowball", color: UIColor.SnowballColor.grayColor)
       cell.textField.text = User.currentUser?.username
       cell.textField.returnKeyType = UIReturnKeyType.Next
     case .Email:
