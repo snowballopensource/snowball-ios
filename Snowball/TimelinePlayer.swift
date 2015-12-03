@@ -96,8 +96,8 @@ class TimelinePlayer: AVQueuePlayer {
       for item in itemsToRemove {
         self.removeItem(item)
       }
-      dispatch_async(dispatch_get_main_queue()) {
-        self.preloadTimelineStartingWithClip(previousClip) {
+      self.preloadTimelineStartingWithClip(previousClip) {
+        dispatch_async(dispatch_get_main_queue()) {
           self.advanceToNextItem()
           self.play()
         }
