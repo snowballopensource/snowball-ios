@@ -120,15 +120,13 @@ class Timeline {
   }
 
   func insertClip(clip: Clip, atIndex index: Int) {
-    clips.insert(clip, atIndex: index)
+    insertClipWithoutNotification(clip, atIndex: index)
     delegate?.timeline(self, didInsertClipAtIndex: index)
   }
 
   func deleteClip(clip: Clip) {
     if let index = indexOfClip(clip) {
-      clips.removeAtIndex(index)
-      clip.deleteObject()
-      do { try CoreDataStack.defaultStack.mainQueueManagedObjectContext.save() } catch {}
+      deleteClipWithoutNotification(clip)
       delegate?.timeline(self, didDeleteClipAtIndex: index)
     }
   }
@@ -152,6 +150,18 @@ class Timeline {
   }
 
   // MARK: - Private
+
+  private func insertClipWithoutNotification(clip: Clip, atIndex index: Int) {
+    clips.insert(clip, atIndex: index)
+  }
+
+  private func deleteClipWithoutNotification(clip: Clip) {
+    if let index = indexOfClip(clip) {
+      clips.removeAtIndex(index)
+      clip.deleteObject()
+      do { try CoreDataStack.defaultStack.mainQueueManagedObjectContext.save() } catch {}
+    }
+  }
 
   func requestTimelineWithRoute(route: Router, isRefresh: Bool, completion: (error: NSError?) -> Void) {
     loadingState = .Loading
@@ -186,14 +196,21 @@ class Timeline {
     clipsToInsertSet.minusOrderedSet(cacheClips)
     let clipsToInsert = clipsToInsertSet.array as! [Clip]
 
+    var deleteIndexes = [Int]()
     for clip in clipsToDelete {
-      deleteClip(clip)
+      let index = clips.indexOf(clip)!
+      deleteIndexes.append(index)
+      deleteClipWithoutNotification(clip)
     }
 
+    var insertIndexes = [Int]()
     for clip in clipsToInsert {
       let index = newClips.indexOf(clip)!
-      insertClip(clip, atIndex: index)
+      insertIndexes.append(index)
+      insertClipWithoutNotification(clip, atIndex: index)
     }
+
+    delegate?.timeline(self, didInsertClipsAtIndexes: insertIndexes, didDeleteClipsAtIndexes: deleteIndexes)
   }
 
   private func performPreviousPageMergeWithNewClips(newClips: [Clip]) {
@@ -208,4 +225,5 @@ protocol TimelineDelegate {
   func timeline(timeline: Timeline, didUpdateClipAtIndex index: Int)
   func timeline(timeline: Timeline, didInsertClipAtIndex index: Int)
   func timeline(timeline: Timeline, didDeleteClipAtIndex index: Int)
+  func timeline(timeline: Timeline, didInsertClipsAtIndexes insertIndexes: [Int], didDeleteClipsAtIndexes deleteIndexes: [Int])
 }
