@@ -392,7 +392,11 @@ extension TimelineViewController: UICollectionViewDelegate {
       if player.playing {
         if let playingClip = player.currentClip {
           if playingClip != clip {
-            player.play(clip)
+            if timeline.clips.indexOf(playingClip) < timeline.clips.indexOf(clip) {
+              player.next()
+            } else {
+              player.previous()
+            }
             return
           }
         }
