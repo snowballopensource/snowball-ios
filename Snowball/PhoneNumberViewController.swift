@@ -13,7 +13,7 @@ class PhoneNumberViewController: UIViewController {
 
   // MARK: - Properties
 
-  private let topBar = SnowballTopView(leftButtonType: nil, rightButtonType: SnowballTopViewButtonType.Forward)
+  private let topBar = SnowballTopView(leftButtonType: nil, rightButtonType: SnowballTopViewButtonType.Skip)
 
   private let messageLabel: UILabel = {
     let label = UILabel()
@@ -139,7 +139,7 @@ class PhoneNumberViewController: UIViewController {
       continueButton.top == phoneNumberTextFieldBottomBorderLine.bottom + 25
       continueButton.right == continueButton.superview!.right - 25
     }
-    continueButton.addTarget(self, action: "snowballTopViewRightButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    continueButton.addTarget(self, action: "submit", forControlEvents: UIControlEvents.TouchUpInside)
 
     view.addSubview(disclaimerLabel)
     constrain(disclaimerLabel, continueButton) { (disclaimerLabel, continueButton) in
@@ -149,40 +149,43 @@ class PhoneNumberViewController: UIViewController {
 
     phoneNumberTextField.becomeFirstResponder()
   }
+
+  // MARK: - Private
+
+  private func skip() {
+    self.dismissViewControllerAnimated(true, completion: nil)
+  }
+
+  @objc private func submit() {
+    guard let countryCode = countryCodeTextField.text, phoneNumber = phoneNumberTextField.text else {
+      skip()
+      return
+    }
+    let newPhoneNumber = "\(countryCode)\(phoneNumber)"
+    topBar.spinRightButton(true)
+    SnowballAPI.request(.UpdateCurrentUser(name: nil, username: nil, email: nil, phoneNumber: newPhoneNumber)) { response in
+      self.topBar.spinRightButton(false)
+      switch response {
+      case .Success:
+        Analytics.track("Add Phone Number During Onboarding")
+        self.dismissViewControllerAnimated(true, completion: nil)
+      case .Failure(let error):
+        if let alertController = error.newAlertViewController() {
+          self.presentViewController(alertController, animated: true, completion: nil)
+        }
+      }
+    }
+  }
 }
 
-// MARK: - 
+// MARK: -
 
 extension PhoneNumberViewController: SnowballTopViewDelegate {
 
   // MARK: - SnowballTopViewDelegate
 
   func snowballTopViewRightButtonTapped() {
-    let skip = {
-      self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    guard let countryCode = countryCodeTextField.text, phoneNumber = phoneNumberTextField.text else {
-      skip()
-      return
-    }
-    let newPhoneNumber = "\(countryCode)\(phoneNumber)"
-    if newPhoneNumber.characters.count > 5 {
-      topBar.spinRightButton(true)
-      SnowballAPI.request(.UpdateCurrentUser(name: nil, username: nil, email: nil, phoneNumber: newPhoneNumber)) { response in
-        self.topBar.spinRightButton(false)
-        switch response {
-        case .Success:
-          Analytics.track("Add Phone Number During Onboarding")
-          self.dismissViewControllerAnimated(true, completion: nil)
-        case .Failure(let error):
-          if let alertController = error.newAlertViewController() {
-            self.presentViewController(alertController, animated: true, completion: nil)
-          }
-        }
-      }
-    } else {
-      skip()
-    }
+    skip()
   }
 }
 

@@ -23,6 +23,7 @@ enum SnowballTopViewButtonType {
   case Save
   case ChangeCamera
   case Friends
+  case Skip
 
   // MARK: - Properties
 
@@ -63,13 +64,15 @@ enum SnowballTopViewButtonType {
     case .Save: return UIColor.SnowballColor.blueColor
     case .ChangeCamera: return UIColor.whiteColor()
     case .Friends: return UIColor.whiteColor()
+    case .Skip: return UIColor.SnowballColor.blueColor
     default: return UIColor.blackColor()
     }
   }
 
   private var title: String? {
     switch self {
-    case .Save: return "Save"
+    case .Save: return NSLocalizedString("Save", comment: "")
+    case .Skip: return NSLocalizedString("Skip", comment: "")
     default: return nil
     }
   }
