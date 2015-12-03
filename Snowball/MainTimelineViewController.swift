@@ -15,6 +15,28 @@ class MainTimelineViewController: TimelineViewController {
 
   private let cameraViewController = CameraViewController()
 
+  private let onboardingAnnotationCapture: UIImageView = {
+    let imageView = UIImageView(image: UIImage(named: "coachmark-capture"))
+    imageView.userInteractionEnabled = false
+    return imageView
+  }()
+  private let onboardingAnnotationAdd: UIImageView = {
+    let imageView = UIImageView(image: UIImage(named: "coachmark-add"))
+    imageView.userInteractionEnabled = false
+    return imageView
+  }()
+
+  private let kCaptureOnboardingCompletedKey = "CaptureOnboardingCompleted"
+  private var onboardingCompleted: Bool {
+    get {
+      return NSUserDefaults.standardUserDefaults().boolForKey(kCaptureOnboardingCompletedKey)
+    }
+    set {
+      NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: kCaptureOnboardingCompletedKey)
+      NSUserDefaults.standardUserDefaults().synchronize()
+    }
+  }
+
   // MARK: - UIViewController
 
   override func viewDidLoad() {
@@ -23,6 +45,9 @@ class MainTimelineViewController: TimelineViewController {
     cameraViewController.delegate = self
 
     timeline.loadCachedClips()
+
+    setOnboardingAnnotationCaptureHidden(onboardingCompleted, animated: false)
+    setOnboardingAnnotationAddHidden(true, animated: false)
   }
 
   override func loadView() {
@@ -41,6 +66,21 @@ class MainTimelineViewController: TimelineViewController {
     topView = SnowballTopView(leftButtonType: SnowballTopViewButtonType.Friends, rightButtonType: SnowballTopViewButtonType.ChangeCamera)
     view.addSubview(topView)
     topView.setupDefaultLayout()
+
+    view.addSubview(onboardingAnnotationCapture)
+    constrain(onboardingAnnotationCapture, cameraViewController.view) { onboardingAnnotationCapture, cameraView in
+      onboardingAnnotationCapture.center == cameraView.center
+      onboardingAnnotationCapture.width == self.onboardingAnnotationCapture.image!.size.width
+      onboardingAnnotationCapture.height == self.onboardingAnnotationCapture.image!.size.height
+    }
+
+    view.addSubview(onboardingAnnotationAdd)
+    constrain(onboardingAnnotationAdd, cameraViewController.view) { onboardingAnnotationAdd, cameraView in
+      onboardingAnnotationAdd.right == cameraView.right - 15
+      onboardingAnnotationAdd.bottom == cameraView.bottom + 15
+      onboardingAnnotationAdd.width == self.onboardingAnnotationAdd.image!.size.width
+      onboardingAnnotationAdd.height == self.onboardingAnnotationAdd.image!.size.height
+    }
   }
 
   // MARK: - TimelineViewController
@@ -111,6 +151,26 @@ class MainTimelineViewController: TimelineViewController {
       scrollToClip(bookmarkedClip, animated: animated)
     }
   }
+
+  private func setOnboardingAnnotationCaptureHidden(hidden: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.4) {
+        self.setOnboardingAnnotationCaptureHidden(hidden, animated: false)
+      }
+    } else {
+      onboardingAnnotationCapture.alpha = CGFloat(!hidden)
+    }
+  }
+
+  private func setOnboardingAnnotationAddHidden(hidden: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.4) {
+        self.setOnboardingAnnotationAddHidden(hidden, animated: false)
+      }
+    } else {
+      onboardingAnnotationAdd.alpha = CGFloat(!hidden)
+    }
+  }
 }
 
 // MARK: - ClipCollectionViewCellDelegate
@@ -118,6 +178,8 @@ extension MainTimelineViewController {
 
   override func userDidTapAddButtonForCell(cell: ClipCollectionViewCell) {
     let completion = {
+      self.setOnboardingAnnotationAddHidden(true, animated: true)
+      self.onboardingCompleted = true
       Analytics.track("Create Clip")
       self.setInterfaceFocused(false)
       self.cameraViewController.endPreview()
@@ -168,6 +230,7 @@ extension MainTimelineViewController: CameraViewControllerDelegate {
 
   func videoDidBeginRecording() {
     setInterfaceFocused(true)
+    setOnboardingAnnotationCaptureHidden(true, animated: true)
   }
 
   func videoDidEndRecordingToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL) {
@@ -179,6 +242,7 @@ extension MainTimelineViewController: CameraViewControllerDelegate {
     clip.createdAt = NSDate()
     timeline.appendClip(clip)
     scrollToClip(clip, animated: true)
+    setOnboardingAnnotationAddHidden(onboardingCompleted, animated: true)
   }
 
   func videoPreviewDidCancel() {
@@ -186,6 +250,8 @@ extension MainTimelineViewController: CameraViewControllerDelegate {
     if let clip = timeline.pendingClips.last {
       timeline.deleteClip(clip)
     }
+    setOnboardingAnnotationCaptureHidden(onboardingCompleted, animated: true)
+    setOnboardingAnnotationAddHidden(true, animated: true)
   }
 }
 
