@@ -139,6 +139,7 @@ class PhoneNumberViewController: UIViewController {
       continueButton.top == phoneNumberTextFieldBottomBorderLine.bottom + 25
       continueButton.right == continueButton.superview!.right - 25
     }
+    continueButton.addTarget(self, action: "snowballTopViewRightButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
 
     view.addSubview(disclaimerLabel)
     constrain(disclaimerLabel, continueButton) { (disclaimerLabel, continueButton) in
@@ -157,7 +158,14 @@ extension PhoneNumberViewController: SnowballTopViewDelegate {
   // MARK: - SnowballTopViewDelegate
 
   func snowballTopViewRightButtonTapped() {
-    let newPhoneNumber = "\(countryCodeTextField.text)\(phoneNumberTextField.text)"
+    let skip = {
+      self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    guard let countryCode = countryCodeTextField.text, phoneNumber = phoneNumberTextField.text else {
+      skip()
+      return
+    }
+    let newPhoneNumber = "\(countryCode)\(phoneNumber)"
     if newPhoneNumber.characters.count > 5 {
       topBar.spinRightButton(true)
       SnowballAPI.request(.UpdateCurrentUser(name: nil, username: nil, email: nil, phoneNumber: newPhoneNumber)) { response in
@@ -173,7 +181,7 @@ extension PhoneNumberViewController: SnowballTopViewDelegate {
         }
       }
     } else {
-      dismissViewControllerAnimated(true, completion: nil)
+      skip()
     }
   }
 }
