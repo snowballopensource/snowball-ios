@@ -27,7 +27,6 @@ class TextFieldTableViewCell: UITableViewCell {
   let textField: SnowballRoundedTextField = {
     let textField = SnowballRoundedTextField()
     textField.font = UIFont(name: UIFont.SnowballFont.regular, size: 22)
-    textField.tintColor = UIColor.SnowballColor.blueColor
     return textField
     }()
 
@@ -58,9 +57,9 @@ class TextFieldTableViewCell: UITableViewCell {
     }
 
     contentView.addSubview(bottomBorderLine)
-    constrain(bottomBorderLine) { bottomBorderLine in
+    constrain(bottomBorderLine, textField) { bottomBorderLine, textField in
       bottomBorderLine.left == bottomBorderLine.superview!.left + margin
-      bottomBorderLine.bottom == bottomBorderLine.superview!.bottom
+      bottomBorderLine.bottom == textField.bottom - 1
       bottomBorderLine.right == bottomBorderLine.superview!.right - margin
       bottomBorderLine.height == 1
     }

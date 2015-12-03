@@ -33,6 +33,14 @@ class EditProfileViewController: UIViewController {
     return imageView
   }()
 
+  private let editAvatarLabel: UILabel = {
+    let label = UILabel()
+    label.font = UIFont(name: UIFont.SnowballFont.regular, size: 14)
+    label.text = NSLocalizedString("Edit", comment: "")
+    label.textColor = User.currentUser?.color as? UIColor ?? UIColor.SnowballColor.blueColor
+    return label
+  }()
+
 //  private let logOutButton: UIButton = {
 //    let logOutButton = UIButton()
 //    logOutButton.setTitle(NSLocalizedString("log out", comment: ""), forState: UIControlState.Normal)
@@ -52,7 +60,7 @@ class EditProfileViewController: UIViewController {
     topView.setupDefaultLayout()
 
     let avatarButtonDiameter: CGFloat = 100
-    let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: avatarButtonDiameter))
+    let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: avatarButtonDiameter + 20))
     tableView.tableHeaderView = tableHeaderView
 
     tableHeaderView.addSubview(avatarButton)
@@ -70,6 +78,12 @@ class EditProfileViewController: UIViewController {
       avatarImageView.top == avatarImageView.superview!.top
       avatarImageView.width == avatarImageView.superview!.width
       avatarImageView.height == avatarImageView.superview!.height
+    }
+
+    tableHeaderView.addSubview(editAvatarLabel)
+    constrain(editAvatarLabel, avatarImageView) { (editAvatarLabel, avatarImageView) in
+      editAvatarLabel.top == avatarImageView.bottom + 5
+      editAvatarLabel.centerX == editAvatarLabel.superview!.centerX
     }
 
     tableView.dataSource = self
@@ -133,8 +147,8 @@ class EditProfileViewController: UIViewController {
 
 private enum EditProfileTextFieldIndex: Int {
   case Username
-  case PhoneNumber
   case Email
+  case PhoneNumber
 }
 
 // MARK: - 
@@ -215,21 +229,24 @@ extension EditProfileViewController: UITableViewDataSource {
     let index = EditProfileTextFieldIndex(rawValue: indexPath.row)!
     switch(index) {
     case .Username:
-      cell.textField.setPlaceholder(NSLocalizedString("username", comment: ""), color: cell.textField.tintColor)
+      cell.descriptionLabel.text = NSLocalizedString("username", comment: "")
+      cell.textField.setPlaceholder(NSLocalizedString("snowball", comment: ""), color: UIColor.SnowballColor.grayColor)
       cell.textField.text = User.currentUser?.username
-    case .PhoneNumber:
-      cell.textField.setPlaceholder(NSLocalizedString("phone number", comment: ""), color: cell.textField.tintColor)
-      cell.textField.text = User.currentUser?.phoneNumber
-      cell.textField.keyboardType = UIKeyboardType.PhonePad
     case .Email:
-      cell.textField.setPlaceholder(NSLocalizedString("email", comment: ""), color: cell.textField.tintColor)
+      cell.descriptionLabel.text = NSLocalizedString("email", comment: "")
+      cell.textField.setPlaceholder(NSLocalizedString("hello@snowball.is", comment: ""), color: UIColor.SnowballColor.grayColor)
       cell.textField.text = User.currentUser?.email
       cell.textField.keyboardType = UIKeyboardType.EmailAddress
+    case .PhoneNumber:
+      cell.descriptionLabel.text = NSLocalizedString("phone number", comment: "")
+      cell.textField.setPlaceholder(NSLocalizedString("4151234567", comment: ""), color: UIColor.SnowballColor.grayColor)
+      cell.textField.text = User.currentUser?.phoneNumber
+      cell.textField.keyboardType = UIKeyboardType.PhonePad
     }
   }
 }
 
-// MARK: - 
+// MARK: -
 
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
