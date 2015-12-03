@@ -39,11 +39,8 @@ class SignUpViewController: AuthenticationViewController {
 
     tableView.dataSource = self
 
-    let messageString = NSMutableAttributedString()
-    messageString.appendAttributedString(NSAttributedString(string: "Ok, let's get started with\n", attributes: [NSForegroundColorAttributeName: UIColor.blackColor()]))
-    messageString.appendAttributedString(NSAttributedString(string: "creating ", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.blueColor]))
-    messageString.appendAttributedString(NSAttributedString(string: "your account.", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor]))
-    messageLabel.attributedText = messageString
+    messageLabel.text = NSLocalizedString("Ok, let's get started with creating your account.", comment: "")
+    continueButton.setTitle(NSLocalizedString("sign up", comment: ""), forState: UIControlState.Normal)
   }
 
   // MARK: - AuthenticationViewController
@@ -87,16 +84,19 @@ extension SignUpViewController: UITableViewDataSource {
     let index = SignUpTextFieldIndex(rawValue: indexPath.row)!
     switch(index) {
     case .Username:
-      cell.textField.setPlaceholder(NSLocalizedString("username", comment: ""), color: cell.textField.tintColor)
+      cell.descriptionLabel.text = NSLocalizedString("username", comment: "")
+      cell.textField.setPlaceholder(NSLocalizedString("snowball", comment: ""), color: UIColor.SnowballColor.grayColor)
       cell.textField.text = User.currentUser?.username
       cell.textField.returnKeyType = UIReturnKeyType.Next
     case .Email:
-      cell.textField.setPlaceholder(NSLocalizedString("email", comment: ""), color: cell.textField.tintColor)
+      cell.descriptionLabel.text = NSLocalizedString("email", comment: "")
+      cell.textField.setPlaceholder(NSLocalizedString("hello@snowball.is", comment: ""), color: UIColor.SnowballColor.grayColor)
       cell.textField.text = User.currentUser?.email
       cell.textField.keyboardType = UIKeyboardType.EmailAddress
       cell.textField.returnKeyType = UIReturnKeyType.Next
     case .Password:
-      cell.textField.setPlaceholder(NSLocalizedString("password", comment: ""), color: cell.textField.tintColor)
+      cell.descriptionLabel.text = NSLocalizedString("password", comment: "")
+      cell.textField.setPlaceholder(NSLocalizedString("password", comment: ""), color: UIColor.SnowballColor.grayColor)
       cell.textField.text = User.currentUser?.email
       cell.textField.secureTextEntry = true
       cell.textField.returnKeyType = UIReturnKeyType.Done
