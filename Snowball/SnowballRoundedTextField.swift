@@ -10,31 +10,11 @@ import UIKit
 
 class SnowballRoundedTextField: UITextField {
 
-  // MARK: - Initializers
-
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-
-    layer.borderWidth = 2
-    alignLeft(20)
-  }
-
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-
   // MARK: - UIView
-
-  override func layoutSubviews() {
-    super.layoutSubviews()
-
-    layer.cornerRadius = frame.height / 2
-  }
 
   override func tintColorDidChange() {
     super.tintColorDidChange()
 
-    layer.borderColor = tintColor?.CGColor
     textColor = tintColor
   }
 

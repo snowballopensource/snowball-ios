@@ -22,6 +22,8 @@ class AuthenticationViewController: UIViewController {
     return label
   }()
 
+  let continueButton = SnowballRoundedButton(style: .Rainbow)
+
   private let tableViewController = FormTableViewController()
 
   var tableView: UITableView {
@@ -40,6 +42,8 @@ class AuthenticationViewController: UIViewController {
     view.addSubview(topBar)
     topBar.setupDefaultLayout()
 
+    continueButton.addTarget(self, action: "performAuthenticationRequest", forControlEvents: UIControlEvents.TouchUpInside)
+
     let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 70))
     let sideMargin: CGFloat = 25
     tableHeaderView.addSubview(messageLabel)
@@ -49,6 +53,15 @@ class AuthenticationViewController: UIViewController {
       messageLabel.right == messageLabel.superview!.right - sideMargin
     }
     tableView.tableHeaderView = tableHeaderView
+
+    let tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 70))
+    tableFooterView.addSubview(continueButton)
+    constrain(continueButton) { continueButton in
+      continueButton.left == continueButton.superview!.left + sideMargin
+      continueButton.top == continueButton.superview!.top + 25
+      continueButton.right == continueButton.superview!.right - sideMargin
+    }
+    tableView.tableFooterView = tableFooterView
 
     addChildViewController(tableViewController)
     view.addSubview(tableViewController.view)
@@ -75,7 +88,7 @@ class AuthenticationViewController: UIViewController {
 
   // MARK: - Private
 
-  private func performAuthenticationRequest() {
+  @objc private func performAuthenticationRequest() {
     resignFirstResponder()
     topBar.spinRightButton(true)
     SnowballAPI.requestObject(authenticationRoute) { (response: ObjectResponse<User>) -> Void in

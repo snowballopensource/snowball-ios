@@ -14,28 +14,55 @@ class TextFieldTableViewCell: UITableViewCell {
   // MARK: - Properties
 
   class var height: CGFloat {
-    return 60
+    return 90
   }
+
+  let descriptionLabel: UILabel = {
+    let label = UILabel()
+    label.font = UIFont(name: UIFont.SnowballFont.regular, size: 18)
+    label.textColor = UIColor.blackColor()
+    return label
+  }()
 
   let textField: SnowballRoundedTextField = {
     let textField = SnowballRoundedTextField()
-    textField.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
+    textField.font = UIFont(name: UIFont.SnowballFont.regular, size: 22)
     textField.tintColor = UIColor.SnowballColor.blueColor
     return textField
     }()
+
+  let bottomBorderLine: UIView = {
+    let view = UIView()
+    view.backgroundColor = UIColor.blackColor()
+    return view
+  }()
 
   // MARK: - Initializers
 
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-    let margin: CGFloat = 20
+    let margin: CGFloat = 25
+    contentView.addSubview(descriptionLabel)
+    constrain(descriptionLabel) { (descriptionLabel) in
+      descriptionLabel.left == descriptionLabel.superview!.left + margin
+      descriptionLabel.top == descriptionLabel.superview!.top + 10
+    }
+
     contentView.addSubview(textField)
-    constrain(textField) { (textField) in
+    constrain(textField, descriptionLabel) { (textField, descriptionLabel) in
       textField.left == textField.superview!.left + margin
-      textField.top == textField.superview!.top + 10
+      textField.top == descriptionLabel.bottom
       textField.right == textField.superview!.right - margin
       textField.height == 50
+    }
+
+    contentView.addSubview(bottomBorderLine)
+    constrain(bottomBorderLine) { bottomBorderLine in
+      bottomBorderLine.left == bottomBorderLine.superview!.left + margin
+      bottomBorderLine.bottom == bottomBorderLine.superview!.bottom
+      bottomBorderLine.right == bottomBorderLine.superview!.right - margin
+      bottomBorderLine.height == 1
     }
   }
 

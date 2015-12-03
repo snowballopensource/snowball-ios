@@ -34,11 +34,8 @@ class SignInViewController: AuthenticationViewController {
 
     tableView.dataSource = self
 
-    let messageString = NSMutableAttributedString()
-    messageString.appendAttributedString(NSAttributedString(string: "Ok, let's get you ", attributes: [NSForegroundColorAttributeName: UIColor.blackColor()]))
-    messageString.appendAttributedString(NSAttributedString(string: "back into ", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.blueColor]))
-    messageString.appendAttributedString(NSAttributedString(string: "your account.", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor]))
-    messageLabel.attributedText = messageString
+    messageLabel.text = NSLocalizedString("Welcome back! \nLogin to your account.", comment: "")
+    continueButton.setTitle(NSLocalizedString("sign in", comment: ""), forState: UIControlState.Normal)
   }
 
   // MARK: - AuthenticationViewController
@@ -83,12 +80,14 @@ extension SignInViewController: UITableViewDataSource {
     let index = SignInTextFieldIndex(rawValue: indexPath.row)!
     switch(index) {
     case .Email:
-      cell.textField.setPlaceholder(NSLocalizedString("email", comment: ""), color: cell.textField.tintColor)
+      cell.descriptionLabel.text = NSLocalizedString("email", comment: "")
+      cell.textField.setPlaceholder(NSLocalizedString("hello@snowball.is", comment: ""), color: UIColor.SnowballColor.grayColor)
       cell.textField.text = User.currentUser?.email
       cell.textField.keyboardType = UIKeyboardType.EmailAddress
       cell.textField.returnKeyType = UIReturnKeyType.Next
     case .Password:
-      cell.textField.setPlaceholder(NSLocalizedString("password", comment: ""), color: cell.textField.tintColor)
+      cell.descriptionLabel.text = NSLocalizedString("password", comment: "")
+      cell.textField.setPlaceholder(NSLocalizedString("••••••••", comment: ""), color: UIColor.SnowballColor.grayColor)
       cell.textField.text = User.currentUser?.email
       cell.textField.secureTextEntry = true
       cell.textField.returnKeyType = UIReturnKeyType.Done
