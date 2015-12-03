@@ -24,7 +24,7 @@ class WelcomeViewController: UIViewController {
   private let backgroundImageViewLogo: UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "snowball-logo")
-    imageView.contentMode = UIViewContentMode.Center
+    imageView.contentMode = UIViewContentMode.ScaleAspectFit
     return imageView
   }()
 
@@ -71,9 +71,9 @@ class WelcomeViewController: UIViewController {
     backgroundImageView.addSubview(backgroundImageViewLogo)
     view.addSubview(backgroundImageView)
     constrain(backgroundImageViewLogo) { (backgroundImageViewLogo) in
-      backgroundImageViewLogo.left == backgroundImageViewLogo.superview!.left
+      backgroundImageViewLogo.left == backgroundImageViewLogo.superview!.left + 40
       backgroundImageViewLogo.top == backgroundImageViewLogo.superview!.top
-      backgroundImageViewLogo.right == backgroundImageViewLogo.superview!.right
+      backgroundImageViewLogo.right == backgroundImageViewLogo.superview!.right - 40
       backgroundImageViewLogo.height == backgroundImageViewLogo.superview!.height / 2
     }
 
