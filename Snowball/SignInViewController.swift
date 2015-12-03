@@ -87,7 +87,7 @@ extension SignInViewController: UITableViewDataSource {
       cell.textField.returnKeyType = UIReturnKeyType.Next
     case .Password:
       cell.descriptionLabel.text = NSLocalizedString("password", comment: "")
-      cell.textField.setPlaceholder(NSLocalizedString("••••••••", comment: ""), color: UIColor.SnowballColor.grayColor)
+      cell.textField.setPlaceholder(NSLocalizedString("password", comment: ""), color: UIColor.SnowballColor.grayColor)
       cell.textField.text = User.currentUser?.email
       cell.textField.secureTextEntry = true
       cell.textField.returnKeyType = UIReturnKeyType.Done
