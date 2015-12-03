@@ -234,12 +234,12 @@ extension EditProfileViewController: UITableViewDataSource {
       cell.textField.text = User.currentUser?.username
     case .Email:
       cell.descriptionLabel.text = NSLocalizedString("email", comment: "")
-      cell.textField.setPlaceholder(NSLocalizedString("hello@snowball.is", comment: ""), color: UIColor.SnowballColor.grayColor)
+      cell.textField.setPlaceholder("hello@snowball.is", color: UIColor.SnowballColor.grayColor)
       cell.textField.text = User.currentUser?.email
       cell.textField.keyboardType = UIKeyboardType.EmailAddress
     case .PhoneNumber:
       cell.descriptionLabel.text = NSLocalizedString("phone number", comment: "")
-      cell.textField.setPlaceholder(NSLocalizedString("4151234567", comment: ""), color: UIColor.SnowballColor.grayColor)
+      cell.textField.setPlaceholder("4151234567", color: UIColor.SnowballColor.grayColor)
       cell.textField.text = User.currentUser?.phoneNumber
       cell.textField.keyboardType = UIKeyboardType.PhonePad
     }

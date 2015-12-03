@@ -90,7 +90,7 @@ extension SignUpViewController: UITableViewDataSource {
       cell.textField.returnKeyType = UIReturnKeyType.Next
     case .Email:
       cell.descriptionLabel.text = NSLocalizedString("email", comment: "")
-      cell.textField.setPlaceholder(NSLocalizedString("hello@snowball.is", comment: ""), color: UIColor.SnowballColor.grayColor)
+      cell.textField.setPlaceholder("hello@snowball.is", color: UIColor.SnowballColor.grayColor)
       cell.textField.text = User.currentUser?.email
       cell.textField.keyboardType = UIKeyboardType.EmailAddress
       cell.textField.returnKeyType = UIReturnKeyType.Next
