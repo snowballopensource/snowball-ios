@@ -136,6 +136,7 @@ class UserProfileDetailView: UIView {
     var fontSize: CGFloat = 28
     label.font = UIFont(name: UIFont.SnowballFont.bold, size: fontSize)
     label.textAlignment = NSTextAlignment.Center
+    label.textColor = UIColor.whiteColor()
     return label
     }()
   private let followButton: UIButton = {
@@ -169,7 +170,6 @@ class UserProfileDetailView: UIView {
     backgroundImageView.userInteractionEnabled = true
 
     usernameLabel.text = user.username
-    usernameLabel.textColor = userColor
 
     configureFollowButton(user)
     followButton.addTarget(self, action: "followButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
