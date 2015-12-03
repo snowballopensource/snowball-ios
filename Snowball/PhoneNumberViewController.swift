@@ -19,24 +19,35 @@ class PhoneNumberViewController: UIViewController {
     let label = UILabel()
     label.numberOfLines = 0
     label.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-    let messageString = NSMutableAttributedString()
-    messageString.appendAttributedString(NSAttributedString(string: "Next, we need your ", attributes: [NSForegroundColorAttributeName: UIColor.blackColor()]))
-    messageString.appendAttributedString(NSAttributedString(string: "phone number, ", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.blueColor]))
-    messageString.appendAttributedString(NSAttributedString(string: "so we can help your friends find you.", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor]))
-    label.attributedText = messageString
+    label.text = NSLocalizedString("Next we need your phone number so we can help you find your friends.", comment: "")
+    return label
+  }()
+
+  private let countryCodeDescriptionLabel: UILabel = {
+    let label = UILabel()
+    label.font = UIFont(name: UIFont.SnowballFont.regular, size: 14)
+    label.text = NSLocalizedString("Country", comment: "")
     return label
   }()
 
   private let countryCodeTextField: SnowballRoundedTextField = {
     let textField = SnowballRoundedTextField()
-    textField.backgroundColor = UIColor.SnowballColor.blueColor
+    textField.layer.borderWidth = 2
+    textField.layer.borderColor = UIColor.blackColor().CGColor
+    textField.layer.cornerRadius = 10
     textField.keyboardType = UIKeyboardType.PhonePad
     textField.text = "+1"
     textField.font = UIFont(name: "Helvetica", size: 24)
-    textField.alignLeft(0)
     textField.textAlignment = NSTextAlignment.Center
-    textField.tintColor = UIColor.whiteColor()
+    textField.tintColor = UIColor.blackColor()
     return textField
+  }()
+
+  private let phoneNumberDescriptionLabel: UILabel = {
+    let label = UILabel()
+    label.font = UIFont(name: UIFont.SnowballFont.regular, size: 14)
+    label.text = NSLocalizedString("Number", comment: "")
+    return label
   }()
 
   private let phoneNumberTextField: SnowballRoundedTextField = {
@@ -44,17 +55,26 @@ class PhoneNumberViewController: UIViewController {
     textField.keyboardType = UIKeyboardType.PhonePad
     textField.attributedPlaceholder = NSAttributedString(string: "4151234567", attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor])
     textField.font = UIFont(name: "Helvetica", size: 28)
-    textField.alignLeft(0)
-    textField.textAlignment = NSTextAlignment.Center
     textField.tintColor = UIColor.SnowballColor.blueColor
     return textField
+  }()
+
+  private let phoneNumberTextFieldBottomBorderLine: UIView = {
+    let view = UIView()
+    view.backgroundColor = UIColor.blackColor()
+    return view
+  }()
+
+  private let continueButton: SnowballRoundedButton = {
+    let button = SnowballRoundedButton(style: .Rainbow)
+    button.setTitle(NSLocalizedString("continue", comment: ""), forState: UIControlState.Normal)
+    return button
   }()
 
   private let disclaimerLabel: UILabel = {
     let label = UILabel()
     label.text = NSLocalizedString("No one will ever see your phone number on Snowball.", comment: "")
     label.font = UIFont(name: UIFont.SnowballFont.bold, size: 10)
-    label.textColor = UIColor.SnowballColor.blueColor
     return label
   }()
 
@@ -70,33 +90,60 @@ class PhoneNumberViewController: UIViewController {
 
     view.addSubview(messageLabel)
     constrain(messageLabel, topBar) { (messageLabel, topBar) in
-      let sideMargin: CGFloat = 40
+      let sideMargin: CGFloat = 25
       messageLabel.left == messageLabel.superview!.left + sideMargin
       messageLabel.top == topBar.bottom
       messageLabel.right == messageLabel.superview!.right - sideMargin
     }
 
+    view.addSubview(countryCodeDescriptionLabel)
+    constrain(countryCodeDescriptionLabel, messageLabel) { (countryCodeDescriptionLabel, messageLabel) in
+      countryCodeDescriptionLabel.left == countryCodeDescriptionLabel.superview!.left + 25
+      countryCodeDescriptionLabel.top == messageLabel.bottom + 15
+    }
+
     countryCodeTextField.delegate = self
     view.addSubview(countryCodeTextField)
-    constrain(countryCodeTextField, messageLabel) { (countryCodeTextField, messageLabel) in
+    constrain(countryCodeTextField, countryCodeDescriptionLabel) { (countryCodeTextField, countryCodeDescriptionLabel) in
       countryCodeTextField.left == countryCodeTextField.superview!.left + 25
-      countryCodeTextField.top == messageLabel.bottom + 15
-      countryCodeTextField.width == 90
+      countryCodeTextField.top == countryCodeDescriptionLabel.bottom + 15
+      countryCodeTextField.width == 80
       countryCodeTextField.height == 50
     }
 
+    view.addSubview(phoneNumberDescriptionLabel)
+    constrain(phoneNumberDescriptionLabel, countryCodeDescriptionLabel, countryCodeTextField) { (phoneNumberDescriptionLabel, countryCodeDescriptionLabel, countryCodeTextField) in
+      phoneNumberDescriptionLabel.left == countryCodeTextField.right + 20
+      phoneNumberDescriptionLabel.top == countryCodeDescriptionLabel.top
+    }
+
     view.addSubview(phoneNumberTextField)
-    constrain(phoneNumberTextField, countryCodeTextField) { (phoneNumberTextField, countryCodeTextField) in
-      phoneNumberTextField.left == countryCodeTextField.right + 10
-      phoneNumberTextField.top == countryCodeTextField.top
+    constrain(phoneNumberTextField, phoneNumberDescriptionLabel) { (phoneNumberTextField, phoneNumberDescriptionLabel) in
+      phoneNumberTextField.left == phoneNumberDescriptionLabel.left
+      phoneNumberTextField.top == phoneNumberDescriptionLabel.bottom + 15
       phoneNumberTextField.right == phoneNumberTextField.superview!.right - 25
-      phoneNumberTextField.height == countryCodeTextField.height
+      phoneNumberTextField.height == 50
+    }
+
+    view.addSubview(phoneNumberTextFieldBottomBorderLine)
+    constrain(phoneNumberTextFieldBottomBorderLine, phoneNumberTextField) { bottomBorderLine, phoneNumberTextField in
+      bottomBorderLine.left == phoneNumberTextField.left
+      bottomBorderLine.bottom == phoneNumberTextField.bottom - 1
+      bottomBorderLine.right == phoneNumberTextField.right
+      bottomBorderLine.height == 1
+    }
+
+    view.addSubview(continueButton)
+    constrain(continueButton, phoneNumberTextFieldBottomBorderLine) { continueButton, phoneNumberTextFieldBottomBorderLine in
+      continueButton.left == continueButton.superview!.left + 25
+      continueButton.top == phoneNumberTextFieldBottomBorderLine.bottom + 25
+      continueButton.right == continueButton.superview!.right - 25
     }
 
     view.addSubview(disclaimerLabel)
-    constrain(disclaimerLabel, phoneNumberTextField) { (disclaimerLabel, phoneNumberTextField) in
+    constrain(disclaimerLabel, continueButton) { (disclaimerLabel, continueButton) in
       disclaimerLabel.centerX == disclaimerLabel.superview!.centerX
-      disclaimerLabel.top == phoneNumberTextField.bottom + 30
+      disclaimerLabel.top == continueButton.bottom + 30
     }
 
     phoneNumberTextField.becomeFirstResponder()
