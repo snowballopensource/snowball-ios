@@ -29,6 +29,9 @@ class MainTimelineViewController: TimelineViewController {
   private let kCaptureOnboardingCompletedKey = "CaptureOnboardingCompleted"
   private var onboardingCompleted: Bool {
     get {
+      if User.currentUser != nil {
+        self.onboardingCompleted = true
+      }
       return NSUserDefaults.standardUserDefaults().boolForKey(kCaptureOnboardingCompletedKey)
     }
     set {
