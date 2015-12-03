@@ -215,7 +215,7 @@ class FindFriendsViewController: UIViewController {
   @objc private func footerButtonTapped() {
     let messageComposeViewController = MFMessageComposeViewController()
     messageComposeViewController.messageComposeDelegate = self
-    var body = NSLocalizedString("Hey! Join me on the simple new video app, Snowball: http://bit.ly/snblapp.", comment: "")
+    var body = NSLocalizedString("Hey! Join me on the simple new video app, Snowball", comment: "") + ": http://bit.ly/snblapp."
     if let username = User.currentUser?.username {
       body += " " + NSLocalizedString("My username is \(username).", comment: "")
     }
