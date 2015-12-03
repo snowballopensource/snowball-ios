@@ -22,9 +22,7 @@ class ClipPlayerItem: AVPlayerItem {
 class TimelinePlayer: AVQueuePlayer {
   var timeline: Timeline?
   var delegate: TimelinePlayerDelegate?
-  var playing: Bool {
-    return (currentClip != nil)
-  }
+  var playing = false
   var currentClip: Clip? {
     didSet {
       let newValue = currentClip
@@ -35,7 +33,16 @@ class TimelinePlayer: AVQueuePlayer {
       } else if oldValue != nil && newValue != nil {
         delegate?.timelinePlayer(self, didTransitionFromClip: oldValue!, toClip: newValue!)
       } else if oldValue != nil && newValue == nil {
-        delegate?.timelinePlayer(self, didEndPlayingWithLastClip: oldValue!)
+        if playing {
+          if let lastClip = timeline?.clips.last {
+            if oldValue == lastClip {
+              delegate?.timelinePlayer(self, didEndPlayingWithLastClip: oldValue!)
+            }
+          }
+        } else {
+          // We stopped playback manually..
+          delegate?.timelinePlayer(self, didEndPlayingWithLastClip: oldValue!)
+        }
       }
       if newValue != nil {
         delegate?.timelinePlayerDidBeginBuffering(self)
@@ -64,6 +71,7 @@ class TimelinePlayer: AVQueuePlayer {
     if playing { return }
     if let delegate = delegate {
       if delegate.timelinePlayer(self, shouldBeginPlayingWithClip: clip) {
+        playing = true
         currentClip = clip
         preloadTimelineStartingWithClip(clip) {
           self.play()
@@ -73,6 +81,7 @@ class TimelinePlayer: AVQueuePlayer {
   }
 
   func stop() {
+    playing = false
     currentClip = nil
     pause()
     removeAllItems()
