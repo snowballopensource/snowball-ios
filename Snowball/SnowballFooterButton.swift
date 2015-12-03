@@ -15,12 +15,15 @@ class SnowballFooterButton: UIButton {
 
   private var rightImageView = UIImageView()
 
+  private var gradientLayer = CAGradientLayer.snowballRainbowGradient()
+
   // MARK: - Initializers
 
   init(rightImage: UIImage? = nil) {
     super.init(frame: CGRectZero)
 
-    backgroundColor = UIColor.SnowballColor.blueColor
+    layer.insertSublayer(gradientLayer, atIndex: 0)
+
     titleLabel?.font = UIFont(name: UIFont.SnowballFont.bold, size: 19)
     alignLeft(insetWidth: 20)
 
@@ -45,6 +48,8 @@ class SnowballFooterButton: UIButton {
       let margin: CGFloat = 20
       rightImageView.frame = CGRect(x: bounds.width - rightImage.size.width - margin, y: CGRectGetMidY(bounds) - rightImage.size.height / 2, width: rightImage.size.width, height: rightImage.size.height)
     }
+
+    gradientLayer.frame = self.bounds
   }
 
   override func tintColorDidChange() {

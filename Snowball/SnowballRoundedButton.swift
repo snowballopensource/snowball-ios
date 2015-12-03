@@ -42,15 +42,7 @@ class SnowballRoundedButton: UIButton {
     titleLabel?.textAlignment = .Center
 
     if style == .Rainbow {
-      gradientLayer = CAGradientLayer()
-      gradientLayer!.colors = [
-        UIColor(red: 246 / 255.0, green: 245 / 255.0, blue: 23 / 255.0, alpha: 1.0).CGColor,
-        UIColor(red: 83 / 255.0, green: 253 / 255.0, blue: 143 / 255.0, alpha: 1.0).CGColor,
-        UIColor(red: 81 / 255.0, green: 213 / 255.0, blue: 236 / 255.0, alpha: 1.0).CGColor,
-        UIColor(red: 224 / 255.0, green: 81 / 255.0, blue: 236 / 255.0, alpha: 1.0).CGColor
-      ]
-      gradientLayer!.startPoint = CGPoint(x: 0, y: 0.5)
-      gradientLayer!.endPoint = CGPoint(x: 1.0, y: 0.5)
+      gradientLayer = CAGradientLayer.snowballRainbowGradient()
       layer.insertSublayer(gradientLayer!, atIndex: 0)
     }
   }

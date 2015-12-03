@@ -47,6 +47,8 @@
 		BA7C27CB1A37A64400A9CFC5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27CA1A37A64400A9CFC5 /* API.swift */; };
 		BA7C27D31A37ADA600A9CFC5 /* RemoteObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */; };
 		BA8812EB1A783CD600B50651 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */; };
+		BA928E811C10BCC8006662CB /* CGColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA928E801C10BCC8006662CB /* CGColor+Snowball.swift */; };
+		BA928E831C10BCD8006662CB /* CAGradientLayer+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA928E821C10BCD8006662CB /* CAGradientLayer+Snowball.swift */; };
 		BA9AA67C1A67465F002C4992 /* AuthenticationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9AA67B1A67465F002C4992 /* AuthenticationNavigationController.swift */; };
 		BA9AA6831A674804002C4992 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9AA6821A674804002C4992 /* MainNavigationController.swift */; };
 		BA9C8E801AAB779200CF05AB /* FormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C8E7F1AAB779200CF05AB /* FormTableViewController.swift */; };
@@ -134,6 +136,8 @@
 		BA7C27CA1A37A64400A9CFC5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BA7C27D21A37ADA600A9CFC5 /* RemoteObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteObject.swift; sourceTree = "<group>"; };
 		BA8812EA1A783CD600B50651 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		BA928E801C10BCC8006662CB /* CGColor+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGColor+Snowball.swift"; sourceTree = "<group>"; };
+		BA928E821C10BCD8006662CB /* CAGradientLayer+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+Snowball.swift"; sourceTree = "<group>"; };
 		BA9AA67B1A67465F002C4992 /* AuthenticationNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationNavigationController.swift; sourceTree = "<group>"; };
 		BA9AA6821A674804002C4992 /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		BA9C8E7F1AAB779200CF05AB /* FormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewController.swift; sourceTree = "<group>"; };
@@ -451,6 +455,8 @@
 				BA2AC7131BD8548F004E22B1 /* NSError+Snowball.swift */,
 				BA2AC7151BD858D9004E22B1 /* UIAlertController+Display.swift */,
 				BACE6EDF1BD9A2F7005B7227 /* UIViewController+Authentication.swift */,
+				BA928E801C10BCC8006662CB /* CGColor+Snowball.swift */,
+				BA928E821C10BCD8006662CB /* CAGradientLayer+Snowball.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -603,6 +609,7 @@
 				BA2AC7161BD858D9004E22B1 /* UIAlertController+Display.swift in Sources */,
 				BA7C0E401A65BF56001B3B4C /* UIFont+Snowball.swift in Sources */,
 				BA7C0E481A65C315001B3B4C /* UIButton+Snowball.swift in Sources */,
+				BA928E831C10BCD8006662CB /* CAGradientLayer+Snowball.swift in Sources */,
 				BA30B31C1B68008600BB49EF /* CoreDataStack.swift in Sources */,
 				BA38C15E1A30228700A2F2AE /* AppDelegate.swift in Sources */,
 				BA30B31E1B6800A600BB49EF /* NSManagedObject+CoreRecord.swift in Sources */,
@@ -616,6 +623,7 @@
 				BA7C0E4A1A65EF94001B3B4C /* UITextField+Snowball.swift in Sources */,
 				BAF50E781AA644DF00AB874E /* CameraPreviewPlayer.swift in Sources */,
 				BA6066061BDC0AC200CFB9D4 /* RoundedCornerViewController.swift in Sources */,
+				BA928E811C10BCC8006662CB /* CGColor+Snowball.swift in Sources */,
 				BA9AA67C1A67465F002C4992 /* AuthenticationNavigationController.swift in Sources */,
 				BAEEA7391A97ED9500C83CF9 /* PhoneNumberViewController.swift in Sources */,
 				BAAC6C161B6AC89700F400FB /* TimelineViewController.swift in Sources */,
