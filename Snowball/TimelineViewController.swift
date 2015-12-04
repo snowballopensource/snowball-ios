@@ -306,6 +306,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
 
   func timelinePlayerDidBeginBuffering(timelinePlayer: TimelinePlayer) {
     playerLoadingIndicator.startAnimating(withDelay: true)
+    playerLoadingImageView.backgroundColor = UIColor.SnowballColor.grayColor
     if let thumbnailURLString = timelinePlayer.currentClip?.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
       playerLoadingImageView.setImageFromURL(thumbnailURL, animated: false)
     }
@@ -321,6 +322,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   // MARK: - Private
 
   private func endBuffering() {
+    playerLoadingImageView.backgroundColor = nil
     playerLoadingIndicator.stopAnimating()
     playerLoadingImageView.cancelAsyncImageLoad()
     playerLoadingImageView.image = nil
