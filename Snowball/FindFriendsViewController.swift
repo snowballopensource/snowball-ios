@@ -36,6 +36,12 @@ class FindFriendsViewController: UIViewController {
     return textField
     }()
 
+  private let searchTextFieldBottomBorderLine: UIView = {
+    let view = UIView()
+    view.backgroundColor = UIColor.blackColor()
+    return view
+  }()
+
   private let tableViewLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont(name: UIFont.SnowballFont.regular, size: 17)
@@ -109,6 +115,14 @@ class FindFriendsViewController: UIViewController {
       searchTextField.top == topView.bottom
       searchTextField.right == searchTextField.superview!.right - margin
       searchTextField.height == 50
+    }
+
+    view.addSubview(searchTextFieldBottomBorderLine)
+    constrain(searchTextFieldBottomBorderLine, searchTextField) { bottomBorderLine, searchTextField in
+      bottomBorderLine.left == searchTextField.left
+      bottomBorderLine.bottom == searchTextField.bottom - 1
+      bottomBorderLine.right == searchTextField.right
+      bottomBorderLine.height == 1
     }
 
     view.addSubview(tableViewLabel)
