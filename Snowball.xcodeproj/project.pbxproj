@@ -67,6 +67,8 @@
 		BAC8CD3A1A6607550075B503 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC8CD391A6607550075B503 /* AuthenticationViewController.swift */; };
 		BACA7A861A36E40900C34B6C /* NSDate+TimeSince.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */; };
 		BACE6EE01BD9A2F7005B7227 /* UIViewController+Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACE6EDF1BD9A2F7005B7227 /* UIViewController+Authentication.swift */; };
+		BAD6C4061C112FCA00ED2459 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BAD6C4081C112FCA00ED2459 /* InfoPlist.strings */; };
+		BAD6C40C1C112FCB00ED2459 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BAD6C40E1C112FCB00ED2459 /* Localizable.strings */; };
 		BAE26FB31A77090700A0977C /* SnowballTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE26FB21A77090700A0977C /* SnowballTopView.swift */; };
 		BAEEA7391A97ED9500C83CF9 /* PhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEEA7381A97ED9500C83CF9 /* PhoneNumberViewController.swift */; };
 		BAF2E45A1A800F1E00A093E5 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */; };
@@ -156,6 +158,9 @@
 		BAC8CD391A6607550075B503 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		BACA7A851A36E40900C34B6C /* NSDate+TimeSince.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeSince.swift"; sourceTree = "<group>"; };
 		BACE6EDF1BD9A2F7005B7227 /* UIViewController+Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Authentication.swift"; sourceTree = "<group>"; };
+		BAD6C4071C112FCA00ED2459 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BAD6C4091C112FCA00ED2459 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		BAD6C40D1C112FCB00ED2459 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BAE26FB21A77090700A0977C /* SnowballTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballTopView.swift; sourceTree = "<group>"; };
 		BAEEA7381A97ED9500C83CF9 /* PhoneNumberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberViewController.swift; sourceTree = "<group>"; };
 		BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
@@ -311,6 +316,8 @@
 		BA38C15B1A30228700A2F2AE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BAD6C40E1C112FCB00ED2459 /* Localizable.strings */,
+				BAD6C4081C112FCA00ED2459 /* InfoPlist.strings */,
 				BA38C15C1A30228700A2F2AE /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -527,6 +534,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA38C16B1A30228700A2F2AE /* LaunchScreen.xib in Resources */,
+				BAD6C40C1C112FCB00ED2459 /* Localizable.strings in Resources */,
+				BAD6C4061C112FCA00ED2459 /* InfoPlist.strings in Resources */,
 				BA38C1681A30228700A2F2AE /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -676,8 +685,25 @@
 			isa = PBXVariantGroup;
 			children = (
 				BA38C16A1A30228700A2F2AE /* Base */,
+				BAD6C4091C112FCA00ED2459 /* de */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		BAD6C4081C112FCA00ED2459 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BAD6C4071C112FCA00ED2459 /* de */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BAD6C40E1C112FCB00ED2459 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BAD6C40D1C112FCB00ED2459 /* de */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
