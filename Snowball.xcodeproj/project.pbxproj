@@ -161,6 +161,9 @@
 		BAD6C4071C112FCA00ED2459 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BAD6C4091C112FCA00ED2459 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		BAD6C40D1C112FCB00ED2459 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BAD6C40F1C1130CF00ED2459 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		BAD6C4101C1130CF00ED2459 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		BAD6C4111C1130CF00ED2459 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		BAE26FB21A77090700A0977C /* SnowballTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballTopView.swift; sourceTree = "<group>"; };
 		BAEEA7381A97ED9500C83CF9 /* PhoneNumberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberViewController.swift; sourceTree = "<group>"; };
 		BAF2E4591A800F1E00A093E5 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
@@ -686,6 +689,7 @@
 			children = (
 				BA38C16A1A30228700A2F2AE /* Base */,
 				BAD6C4091C112FCA00ED2459 /* de */,
+				BAD6C4101C1130CF00ED2459 /* zh-CN */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -694,6 +698,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				BAD6C4071C112FCA00ED2459 /* de */,
+				BAD6C40F1C1130CF00ED2459 /* zh-CN */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -702,6 +707,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				BAD6C40D1C112FCB00ED2459 /* de */,
+				BAD6C4111C1130CF00ED2459 /* zh-CN */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
