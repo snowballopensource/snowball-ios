@@ -33,23 +33,13 @@ class EditProfileViewController: UIViewController {
     return imageView
   }()
 
-  private let editAvatarLabel: UILabel = {
-    let label = UILabel()
-    label.font = UIFont(name: UIFont.SnowballFont.regular, size: 14)
-    label.text = NSLocalizedString("Edit", comment: "")
-    label.textColor = User.currentUser?.color as? UIColor ?? UIColor.SnowballColor.blueColor
-    return label
+  private let editAvatarButton: UIButton = {
+    let button = UIButton()
+    button.setTitle(NSLocalizedString("Edit", comment: ""), forState: UIControlState.Normal)
+    button.setTitleColor((User.currentUser?.color as? UIColor ?? UIColor.SnowballColor.blueColor), forState: UIControlState.Normal)
+    button.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 14)
+    return button
   }()
-
-//  private let logOutButton: UIButton = {
-//    let logOutButton = UIButton()
-//    logOutButton.setTitle(NSLocalizedString("log out", comment: ""), forState: UIControlState.Normal)
-//    logOutButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
-//    logOutButton.titleLabel?.font = UIFont(name: UIFont.SnowballFont.regular, size: 24)
-//    logOutButton.alignLeft(insetWidth: 20)
-//    logOutButton.showSnowballStyleBorderWithColor(UIColor.redColor())
-//    return logOutButton
-//  }()
 
   // MARK: - UIViewController
 
@@ -60,7 +50,7 @@ class EditProfileViewController: UIViewController {
     topView.setupDefaultLayout()
 
     let avatarButtonDiameter: CGFloat = 100
-    let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: avatarButtonDiameter + 20))
+    let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: avatarButtonDiameter + 40))
     tableView.tableHeaderView = tableHeaderView
 
     tableHeaderView.addSubview(avatarButton)
@@ -80,10 +70,13 @@ class EditProfileViewController: UIViewController {
       avatarImageView.height == avatarImageView.superview!.height
     }
 
-    tableHeaderView.addSubview(editAvatarLabel)
-    constrain(editAvatarLabel, avatarImageView) { (editAvatarLabel, avatarImageView) in
-      editAvatarLabel.top == avatarImageView.bottom + 5
-      editAvatarLabel.centerX == editAvatarLabel.superview!.centerX
+    tableHeaderView.addSubview(editAvatarButton)
+    editAvatarButton.addTarget(self, action: "avatarButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+    constrain(editAvatarButton, avatarImageView) { (editAvatarButton, avatarImageView) in
+      editAvatarButton.top == avatarImageView.bottom + 5
+      editAvatarButton.centerX == editAvatarButton.superview!.centerX
+      editAvatarButton.width == 44
+      editAvatarButton.height == 30
     }
 
     tableView.dataSource = self
@@ -96,28 +89,6 @@ class EditProfileViewController: UIViewController {
       tableView.right == tableView.superview!.right
       tableView.bottom == tableView.superview!.bottom
     }
-
-//
-//    logOutButton.addTarget(self, action: "logOutButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
-//    view.addSubview(logOutButton)
-//    constrain(logOutButton, emailTextField) { (logOutButton, emailTextField) in
-//      logOutButton.left == logOutButton.superview!.left + margin
-//      logOutButton.top == emailTextField.bottom + afterTextFieldSpacing
-//      logOutButton.right == logOutButton.superview!.right - margin
-//      logOutButton.height == 50
-//    }
-//
-//    // When bringing this back from uncomment, this bad boy can be a snowballroundedbutton
-//    let chevronImage = UIImage(named: "chevron")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-//    let logOutChevron = UIImageView(image: chevronImage)
-//    logOutChevron.tintColor = UIColor.redColor()
-//    logOutButton.addSubview(logOutChevron)
-//    constrain(logOutChevron) { (logOutChevron) in
-//      logOutChevron.width == Float(chevronImage.size.width)
-//      logOutChevron.centerY == logOutChevron.superview!.centerY
-//      logOutChevron.right == logOutChevron.superview!.right - 25
-//      logOutChevron.height == Float(chevronImage.size.height)
-//    }
 
     view.backgroundColor = UIColor.whiteColor()
 
