@@ -204,16 +204,18 @@ class Timeline {
 
     var deleteIndexes = [Int]()
     for clip in clipsToDelete {
-      let index = clips.indexOf(clip)!
-      deleteIndexes.append(index)
-      deleteClipWithoutNotification(clip)
+      if let index = clips.indexOf(clip) {
+        deleteIndexes.append(index)
+        deleteClipWithoutNotification(clip)
+      }
     }
 
     var insertIndexes = [Int]()
     for clip in clipsToInsert {
-      let index = sortedNewClips.indexOf(clip)!
-      insertIndexes.append(index)
-      insertClipWithoutNotification(clip, atIndex: index)
+      if let index = sortedNewClips.indexOf(clip) {
+        insertIndexes.append(index)
+        insertClipWithoutNotification(clip, atIndex: index)
+      }
     }
 
     delegate?.timeline(self, didInsertClipsAtIndexes: insertIndexes, didDeleteClipsAtIndexes: deleteIndexes)
