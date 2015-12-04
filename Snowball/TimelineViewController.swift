@@ -322,6 +322,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
 
   private func endBuffering() {
     playerLoadingIndicator.stopAnimating()
+    playerLoadingImageView.cancelAsyncImageLoad()
     playerLoadingImageView.image = nil
   }
 

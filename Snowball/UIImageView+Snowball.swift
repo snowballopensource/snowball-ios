@@ -47,6 +47,10 @@ extension UIImageView {
     }
   }
 
+  func cancelAsyncImageLoad() {
+    hnk_cancelSetImage()
+  }
+
   private func setImage(image: UIImage, animated: Bool) {
     if animated {
       UIView.transitionWithView(self, duration: 0.4, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
