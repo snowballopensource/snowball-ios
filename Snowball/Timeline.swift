@@ -16,12 +16,7 @@ class Timeline {
   var delegate: TimelineDelegate?
   var clips = [Clip]() {
     didSet {
-      clips = clips.sort { (leftClip, rightClip) -> Bool in
-        guard let leftClipCreatedAt = leftClip.createdAt, rightClipCreatedAt = rightClip.createdAt else {
-          return false
-        }
-        return leftClipCreatedAt.compare(rightClipCreatedAt) == NSComparisonResult.OrderedAscending
-      }
+      clips = sortClips(clips)
       ClipDownloader.downloadTimeline(self, withFirstClip: bookmarkedClip)
     }
   }
@@ -151,6 +146,15 @@ class Timeline {
 
   // MARK: - Private
 
+  private func sortClips(clips: [Clip]) -> [Clip] {
+    return clips.sort { (leftClip, rightClip) -> Bool in
+      guard let leftClipCreatedAt = leftClip.createdAt, rightClipCreatedAt = rightClip.createdAt else {
+        return false
+      }
+      return leftClipCreatedAt.compare(rightClipCreatedAt) == NSComparisonResult.OrderedAscending
+    }
+  }
+
   private func insertClipWithoutNotification(clip: Clip, atIndex index: Int) {
     clips.insert(clip, atIndex: index)
   }
@@ -183,8 +187,10 @@ class Timeline {
   }
 
   private func performPostRefreshMergeWithNewClips(newClips: [Clip]) {
+    let sortedNewClips = sortClips(newClips)
+
     let cacheClips = NSMutableOrderedSet(array: clips)
-    let serverClips = NSMutableOrderedSet(array: newClips)
+    let serverClips = NSMutableOrderedSet(array: sortedNewClips)
     let pendingClips = NSMutableOrderedSet(array: clips.filter({ !$0.isOnServer }))
 
     let clipsToDeleteSet = cacheClips.mutableCopy()
@@ -205,7 +211,7 @@ class Timeline {
 
     var insertIndexes = [Int]()
     for clip in clipsToInsert {
-      let index = newClips.indexOf(clip)!
+      let index = sortedNewClips.indexOf(clip)!
       insertIndexes.append(index)
       insertClipWithoutNotification(clip, atIndex: index)
     }
