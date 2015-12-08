@@ -17,7 +17,7 @@ class Timeline {
   var clips = [Clip]() {
     didSet {
       clips = sortClips(clips)
-      ClipDownloader.downloadTimeline(self, withFirstClip: bookmarkedClip)
+      ClipDownloadQueue.preloadClips(clips)
     }
   }
   var pendingClips: [Clip] {

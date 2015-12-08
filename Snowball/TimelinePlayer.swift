@@ -130,7 +130,7 @@ class TimelinePlayer: AVQueuePlayer {
   private func preloadTimelineStartingWithClip(clip: Clip, firstClipFinished: (Void -> Void)?) {
     guard let timeline = timeline else { return }
     let clips = [clip] + timeline.clipsAfterClip(clip)
-    ClipDownloader.loadClips(clips) { (preloadedClip, cacheURL, error) -> Void in
+    ClipDownloadQueue.downloadClips(clips) { (preloadedClip, cacheURL, error) -> () in
       if !self.playing { return }
       error?.alertUser()
       if let url = cacheURL {

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		590C6EB6ECEE12594A815ED5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC32A4062714B26F6F63153 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		BA03571A1B8502CA00AC5487 /* ClipDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0357191B8502CA00AC5487 /* ClipDownloader.swift */; };
 		BA1835531AA51C1D00D6A0BE /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1835521AA51C1D00D6A0BE /* PlayerView.swift */; };
 		BA20CCEE1A9D156C00D96A31 /* ClipUploadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA20CCED1A9D156C00D96A31 /* ClipUploadQueue.swift */; };
 		BA2460E31B683600003E3FB5 /* MainTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2460E21B683600003E3FB5 /* MainTimelineViewController.swift */; };
@@ -35,6 +34,7 @@
 		BA46D6FE1BA10FCD0048D09D /* CircleLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA46D6FD1BA10FCD0048D09D /* CircleLoadingIndicator.swift */; };
 		BA4943371B7D4963004FE784 /* UIImageView+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4943361B7D4963004FE784 /* UIImageView+Snowball.swift */; };
 		BA4BD7221AA2E1F00057380C /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4BD7211AA2E1F00057380C /* Cache.swift */; };
+		BA5EFCAF1C17939300680F04 /* ClipDownloadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5EFCAE1C17939300680F04 /* ClipDownloadQueue.swift */; };
 		BA6066061BDC0AC200CFB9D4 /* RoundedCornerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6066051BDC0AC200CFB9D4 /* RoundedCornerViewController.swift */; };
 		BA6066081BDC2EC400CFB9D4 /* SnowballAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6066071BDC2EC400CFB9D4 /* SnowballAPI.swift */; };
 		BA60660B1BDC637C00CFB9D4 /* JSONImportable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA60660A1BDC637C00CFB9D4 /* JSONImportable.swift */; };
@@ -96,7 +96,6 @@
 		2BC32A4062714B26F6F63153 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		32713D4685D2B1201FD238E6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8A6E3769866E85F9B3BF4ACB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		BA0357191B8502CA00AC5487 /* ClipDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipDownloader.swift; sourceTree = "<group>"; };
 		BA1835521AA51C1D00D6A0BE /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		BA20CCED1A9D156C00D96A31 /* ClipUploadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipUploadQueue.swift; sourceTree = "<group>"; };
 		BA2460E21B683600003E3FB5 /* MainTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTimelineViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +124,7 @@
 		BA46D6FD1BA10FCD0048D09D /* CircleLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleLoadingIndicator.swift; sourceTree = "<group>"; };
 		BA4943361B7D4963004FE784 /* UIImageView+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Snowball.swift"; sourceTree = "<group>"; };
 		BA4BD7211AA2E1F00057380C /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		BA5EFCAE1C17939300680F04 /* ClipDownloadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipDownloadQueue.swift; sourceTree = "<group>"; };
 		BA6066051BDC0AC200CFB9D4 /* RoundedCornerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCornerViewController.swift; sourceTree = "<group>"; };
 		BA6066071BDC2EC400CFB9D4 /* SnowballAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballAPI.swift; sourceTree = "<group>"; };
 		BA60660A1BDC637C00CFB9D4 /* JSONImportable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONImportable.swift; sourceTree = "<group>"; };
@@ -259,7 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				BA20CCED1A9D156C00D96A31 /* ClipUploadQueue.swift */,
-				BA0357191B8502CA00AC5487 /* ClipDownloader.swift */,
+				BA5EFCAE1C17939300680F04 /* ClipDownloadQueue.swift */,
 			);
 			name = "Clip Download/Upload";
 			sourceTree = "<group>";
@@ -630,7 +630,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA03571A1B8502CA00AC5487 /* ClipDownloader.swift in Sources */,
 				BAF3BC961A76E02A00AFD3E5 /* MoreNavigationController.swift in Sources */,
 				BACE6EE01BD9A2F7005B7227 /* UIViewController+Authentication.swift in Sources */,
 				BA32C7951A3287BE0052F4CA /* UserAvatarImageView.swift in Sources */,
@@ -647,6 +646,7 @@
 				BA3DB8241A9EEEFD00378F6D /* SnowballRoundedButton.swift in Sources */,
 				BAFB06E41A9E915600EDA01B /* Analytics.swift in Sources */,
 				BA8812EB1A783CD600B50651 /* UserTableViewCell.swift in Sources */,
+				BA5EFCAF1C17939300680F04 /* ClipDownloadQueue.swift in Sources */,
 				BA3DB8261A9EFD9A00378F6D /* SnowballRoundedTextField.swift in Sources */,
 				BA2460E31B683600003E3FB5 /* MainTimelineViewController.swift in Sources */,
 				BA46D6FE1BA10FCD0048D09D /* CircleLoadingIndicator.swift in Sources */,
