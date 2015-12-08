@@ -34,7 +34,6 @@
 		BA44E4581A9C0EC600B75DF3 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */; };
 		BA46D6FE1BA10FCD0048D09D /* CircleLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA46D6FD1BA10FCD0048D09D /* CircleLoadingIndicator.swift */; };
 		BA4943371B7D4963004FE784 /* UIImageView+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4943361B7D4963004FE784 /* UIImageView+Snowball.swift */; };
-		BA4BD7201AA2D6820057380C /* ClipDownloadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4BD71F1AA2D6820057380C /* ClipDownloadQueue.swift */; };
 		BA4BD7221AA2E1F00057380C /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4BD7211AA2E1F00057380C /* Cache.swift */; };
 		BA6066061BDC0AC200CFB9D4 /* RoundedCornerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6066051BDC0AC200CFB9D4 /* RoundedCornerViewController.swift */; };
 		BA6066081BDC2EC400CFB9D4 /* SnowballAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6066071BDC2EC400CFB9D4 /* SnowballAPI.swift */; };
@@ -125,7 +124,6 @@
 		BA44E4571A9C0EC600B75DF3 /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		BA46D6FD1BA10FCD0048D09D /* CircleLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleLoadingIndicator.swift; sourceTree = "<group>"; };
 		BA4943361B7D4963004FE784 /* UIImageView+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Snowball.swift"; sourceTree = "<group>"; };
-		BA4BD71F1AA2D6820057380C /* ClipDownloadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipDownloadQueue.swift; sourceTree = "<group>"; };
 		BA4BD7211AA2E1F00057380C /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		BA6066051BDC0AC200CFB9D4 /* RoundedCornerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCornerViewController.swift; sourceTree = "<group>"; };
 		BA6066071BDC2EC400CFB9D4 /* SnowballAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballAPI.swift; sourceTree = "<group>"; };
@@ -262,7 +260,6 @@
 			children = (
 				BA20CCED1A9D156C00D96A31 /* ClipUploadQueue.swift */,
 				BA0357191B8502CA00AC5487 /* ClipDownloader.swift */,
-				BA4BD71F1AA2D6820057380C /* ClipDownloadQueue.swift */,
 			);
 			name = "Clip Download/Upload";
 			sourceTree = "<group>";
@@ -668,7 +665,6 @@
 				BA4943371B7D4963004FE784 /* UIImageView+Snowball.swift in Sources */,
 				BA6385E31A65ACAF00B002D9 /* WelcomeViewController.swift in Sources */,
 				BACA7A861A36E40900C34B6C /* NSDate+TimeSince.swift in Sources */,
-				BA4BD7201AA2D6820057380C /* ClipDownloadQueue.swift in Sources */,
 				BA38C1611A30228700A2F2AE /* Snowball.xcdatamodeld in Sources */,
 				BAF2E45A1A800F1E00A093E5 /* EditProfileViewController.swift in Sources */,
 				BAB1A3261AA0C9F400C2FB49 /* UITableView+RefreshControl.swift in Sources */,
