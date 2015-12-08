@@ -248,8 +248,10 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
 
   func timeline(timeline: Timeline, didInsertClipsAtIndexes insertIndexes: [Int], didDeleteClipsAtIndexes deleteIndexes: [Int]) {
     collectionView.performBatchUpdates({
-      self.collectionView.insertItemsAtIndexPaths(insertIndexes.map({ NSIndexPath(forItem: $0, inSection: 0) }))
-      self.collectionView.deleteItemsAtIndexPaths(deleteIndexes.map({ NSIndexPath(forItem: $0, inSection: 0) }))
+      let insertIndexPaths = insertIndexes.map({ NSIndexPath(forItem: $0, inSection: 0) })
+      let deleteIndexPaths = deleteIndexes.map({ NSIndexPath(forItem: $0, inSection: 0) })
+      self.collectionView.insertItemsAtIndexPaths(insertIndexPaths)
+      self.collectionView.deleteItemsAtIndexPaths(deleteIndexPaths)
       }) { _ in
         self.resetStateOnVisibleCells()
     }
