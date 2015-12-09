@@ -197,6 +197,7 @@ class Timeline {
     }
 
     for clip in clipsToInsert {
+      // TODO: Figure out a better index. This will not work when adding pagination, and can potentially insert things at the incorrect location.
       if let index = sortedNewClips.indexOf(clip) {
         insertClip(clip, atIndex: index)
       }
