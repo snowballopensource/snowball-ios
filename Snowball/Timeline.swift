@@ -115,13 +115,15 @@ class Timeline {
   }
 
   func insertClip(clip: Clip, atIndex index: Int) {
-    insertClipWithoutNotification(clip, atIndex: index)
+    clips.insert(clip, atIndex: index)
     delegate?.timeline(self, didInsertClipAtIndex: index)
   }
 
   func deleteClip(clip: Clip) {
     if let index = indexOfClip(clip) {
-      deleteClipWithoutNotification(clip)
+      clips.removeAtIndex(index)
+      clip.deleteObject()
+      do { try CoreDataStack.defaultStack.mainQueueManagedObjectContext.save() } catch {}
       delegate?.timeline(self, didDeleteClipAtIndex: index)
     }
   }
@@ -152,18 +154,6 @@ class Timeline {
         return false
       }
       return leftClipCreatedAt.compare(rightClipCreatedAt) == NSComparisonResult.OrderedAscending
-    }
-  }
-
-  private func insertClipWithoutNotification(clip: Clip, atIndex index: Int) {
-    clips.insert(clip, atIndex: index)
-  }
-
-  private func deleteClipWithoutNotification(clip: Clip) {
-    if let index = indexOfClip(clip) {
-      clips.removeAtIndex(index)
-      clip.deleteObject()
-      do { try CoreDataStack.defaultStack.mainQueueManagedObjectContext.save() } catch {}
     }
   }
 
@@ -202,23 +192,15 @@ class Timeline {
     clipsToInsertSet.minusOrderedSet(cacheClips)
     let clipsToInsert = clipsToInsertSet.array as! [Clip]
 
-    var deleteIndexes = [Int]()
     for clip in clipsToDelete {
-      if let index = clips.indexOf(clip) {
-        deleteIndexes.append(index)
-        deleteClipWithoutNotification(clip)
-      }
+      deleteClip(clip)
     }
 
-    var insertIndexes = [Int]()
     for clip in clipsToInsert {
       if let index = sortedNewClips.indexOf(clip) {
-        insertIndexes.append(index)
-        insertClipWithoutNotification(clip, atIndex: index)
+        insertClip(clip, atIndex: index)
       }
     }
-
-    delegate?.timeline(self, didInsertClipsAtIndexes: insertIndexes, didDeleteClipsAtIndexes: deleteIndexes)
   }
 
   private func performPreviousPageMergeWithNewClips(newClips: [Clip]) {
@@ -233,5 +215,4 @@ protocol TimelineDelegate {
   func timeline(timeline: Timeline, didUpdateClipAtIndex index: Int)
   func timeline(timeline: Timeline, didInsertClipAtIndex index: Int)
   func timeline(timeline: Timeline, didDeleteClipAtIndex index: Int)
-  func timeline(timeline: Timeline, didInsertClipsAtIndexes insertIndexes: [Int], didDeleteClipsAtIndexes deleteIndexes: [Int])
 }
