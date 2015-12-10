@@ -100,59 +100,6 @@ class MainTimelineViewController: TimelineViewController {
     }
   }
 
-  // MARK: - TimelineViewController
-
-  override func loadPage(page: Int) {
-    timeline.requestHomeTimeline(page: page) { (error) -> Void in
-      error?.alertUser()
-    }
-  }
-
-  override func stateForCellAtIndexPath(indexPath: NSIndexPath) -> ClipCollectionViewCellState {
-    let superState = super.stateForCellAtIndexPath(indexPath)
-    if superState != ClipCollectionViewCellState.Default {
-      return superState
-    }
-    let clip = timeline.clips[indexPath.row]
-    if let bookmarkedClip = timeline.bookmarkedClip {
-      if clip == bookmarkedClip {
-        return ClipCollectionViewCellState.Bookmarked
-      }
-    }
-    return superState
-  }
-
-  // MARK: - TimelineDelegate
-  // See the comment in TimelineViewController for the TimelinePlayer delegate
-  // to see why this is here. It's such a confusing mess. Sorry future self!
-  override func timelineClipsDidLoadFromCache() {
-    super.timelineClipsDidLoadFromCache()
-
-    collectionView.layoutIfNeeded() // Hack to ensure that the scrolling will take place
-
-    scrollToPendingOrBookmark(false)
-  }
-
-  // MARK: - TimelinePlayerDelegate
-  // See the comment in TimelineViewController for the TimelinePlayer delegate
-  // to see why this is here. It's such a confusing mess. Sorry future self!
-  override func timelinePlayer(timelinePlayer: TimelinePlayer, shouldBeginPlayingWithClip clip: Clip) -> Bool {
-    super.timelinePlayer(timelinePlayer, shouldBeginPlayingWithClip: clip)
-    return cameraViewController.state == CameraViewControllerState.Default
-  }
-
-  override func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip) {
-    super.timelinePlayer(timelinePlayer, didBeginPlayingWithClip: clip)
-    setOnboardingAnnotationPlayHidden(true, animated: true)
-    view.sendSubviewToBack(cameraViewController.view)
-  }
-
-  override func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingWithLastClip lastClip: Clip) {
-    super.timelinePlayer(timelinePlayer, didEndPlayingWithLastClip: lastClip)
-    setOnboardingAnnotationCaptureHidden(onboardingCompleted, animated: true)
-    view.sendSubviewToBack(playerView)
-  }
-
   // MARK: - Private
 
   private func scrollToPendingOrBookmark(animated: Bool) {
@@ -192,6 +139,59 @@ class MainTimelineViewController: TimelineViewController {
     } else {
       onboardingAnnotationAdd.alpha = CGFloat(!hidden)
     }
+  }
+
+  // MARK: - TimelineViewController
+
+  override func refresh() {
+    timeline.requestHomeTimeline(page: 0) { (error) -> Void in
+      error?.alertUser()
+    }
+  }
+
+  override func stateForCellAtIndexPath(indexPath: NSIndexPath) -> ClipCollectionViewCellState {
+    let superState = super.stateForCellAtIndexPath(indexPath)
+    if superState != ClipCollectionViewCellState.Default {
+      return superState
+    }
+    let clip = timeline.clips[indexPath.row]
+    if let bookmarkedClip = timeline.bookmarkedClip {
+      if clip == bookmarkedClip {
+        return ClipCollectionViewCellState.Bookmarked
+      }
+    }
+    return superState
+  }
+}
+
+// MARK: - TimelineDelegate
+extension MainTimelineViewController {
+  override func timelineClipsDidLoadFromCache() {
+    super.timelineClipsDidLoadFromCache()
+
+    collectionView.layoutIfNeeded() // Hack to ensure that the scrolling will take place
+
+    scrollToPendingOrBookmark(false)
+  }
+}
+
+// MARK: - TimelinePlayerDelegate
+extension MainTimelineViewController {
+  override func timelinePlayer(timelinePlayer: TimelinePlayer, shouldBeginPlayingWithClip clip: Clip) -> Bool {
+    super.timelinePlayer(timelinePlayer, shouldBeginPlayingWithClip: clip)
+    return cameraViewController.state == CameraViewControllerState.Default
+  }
+
+  override func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip) {
+    super.timelinePlayer(timelinePlayer, didBeginPlayingWithClip: clip)
+    setOnboardingAnnotationPlayHidden(true, animated: true)
+    view.sendSubviewToBack(cameraViewController.view)
+  }
+
+  override func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlayingWithLastClip lastClip: Clip) {
+    super.timelinePlayer(timelinePlayer, didEndPlayingWithLastClip: lastClip)
+    setOnboardingAnnotationCaptureHidden(onboardingCompleted, animated: true)
+    view.sendSubviewToBack(playerView)
   }
 }
 

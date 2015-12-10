@@ -51,15 +51,15 @@ class ProfileTimelineViewController: TimelineViewController {
 
   // MARK: - TimelineViewController
 
-  override func loadPage(page: Int) {
-    timeline.requestUserTimeline(user, page: page) { (error) -> Void in
+  override func refresh() {
+    timeline.requestUserTimeline(user, page: 0) { (error) -> Void in
       error?.alertUser()
     }
   }
+}
 
-  // MARK: - TimelinePlayerDelegate
-  // See the comment in TimelineViewController for the TimelinePlayer delegate
-  // to see why this is here. It's such a confusing mess. Sorry future self!
+// MARK: - TimelinePlayerDelegate
+extension ProfileTimelineViewController {
   override func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlayingWithClip clip: Clip) {
     super.timelinePlayer(timelinePlayer, didBeginPlayingWithClip: clip)
     view.sendSubviewToBack(userProfileDetailView)
@@ -81,8 +81,6 @@ extension ProfileTimelineViewController: SnowballTopViewDelegate {
 
 // MARK: - ClipCollectionViewCellDelegate
 extension ProfileTimelineViewController {
-
-  // Prevent going to profile again from the profile
   override func userDidTapUserButtonForCell(cell: ClipCollectionViewCell) {}
 }
 
@@ -221,7 +219,6 @@ class UserProfileDetailView: UIView {
   }
 
   @objc private func followButtonTapped() {
-    // This should probably be a delegate method where the controller does this, but oh well.
     user.toggleFollowing()
     configureFollowButton(user)
   }

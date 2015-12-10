@@ -12,7 +12,7 @@ import UIKit
 
 // MARK: -
 
-class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayerDelegate {
+class TimelineViewController: UIViewController {
 
   // MARK: - Properties
 
@@ -93,7 +93,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
 
-    refresh()
+//    refresh()
   }
 
   override func loadView() {
@@ -139,18 +139,7 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
 
   // MARK: - Internal
 
-  // -loadPage is designed to be subclassed and never called outside of -refresh or -loadPreviousPage
-  func loadPage(page: Int) {}
-
-  final func refresh() {
-    print("Refresh")
-    loadPage(1)
-  }
-
-  final func loadPreviousPage() {
-    print("Previous")
-    loadPage(timeline.currentPage + 1)
-  }
+  func refresh() {}
 
   func scrollToClip(clip: Clip, animated: Bool = true) {
     if let index = timeline.indexOfClip(clip) {
@@ -197,13 +186,55 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     collectionView.scrollEnabled = !focused
   }
 
-  // This next part is the TimelineDelegate implementation. It's ugly because as of Swift 1.2 we are not allowed to
-  // override certain functions/types in an extension. It's weird and I don't get it, but oh well.
-  // When changing it back to an extension, don't forget to remove the <TimelineDelegate> from the
-  // class declaration above.
+  // MARK: - Private
 
-  // MARK: - TimelineDelegate
-  // extension TimelineViewController: TimelineDelegate {
+  private func endBuffering() {
+    playerLoadingIndicator.stopAnimating()
+    playerLoadingImageView.cancelAsyncImageLoad()
+    playerLoadingImageView.image = nil
+  }
+
+  @objc private func applicationWillEnterForeground() {
+    refresh()
+  }
+
+  @objc private func userDidTapPlayerControlGestureRecognizer(recognizer: UITapGestureRecognizer) {
+    if player.playing {
+      player.stop()
+    }
+  }
+
+  @objc private func userDidDoubleTapPlayerControlGestureRecognizer(recognizer: UITapGestureRecognizer) {
+    if let clip = player.currentClip, cell = cellForClip(clip) {
+      userDidTapLikeButtonForCell(cell)
+    }
+  }
+
+  @objc private func userDidSwipePlayerControlGestureRecognizerLeft(recognizer: UISwipeGestureRecognizer) {
+    if player.playing {
+      player.next()
+    }
+  }
+
+  @objc private func userDidSwipePlayerControlGestureRecognizerRight(recognizer: UISwipeGestureRecognizer) {
+    if player.playing {
+      player.previous()
+    }
+  }
+
+  private func reloadVisibleCells() {
+    collectionView.reloadItemsAtIndexPaths(collectionView.indexPathsForVisibleItems())
+  }
+
+  private func resetStateForCell(cell: ClipCollectionViewCell) {
+    if let indexPath = collectionView.indexPathForCell(cell) {
+      cell.setState(stateForCellAtIndexPath(indexPath), animated: true)
+    }
+  }
+}
+
+// MARK: - TimelineDelegate
+extension TimelineViewController: TimelineDelegate {
 
   func timelineClipsDidLoadFromCache() {
     collectionView.reloadData()
@@ -223,11 +254,10 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     reloadVisibleCells()
   }
 
-  // This next part is the TimelinePlayerDelegate implementation. For details as to why it's here,
-  // see the large comment block above the TimelineDelegate implementation above.
+}
 
-  // MARK: - TimelinePlayerDelegate
-  // extension TimelineViewController: TimelinePlayerDelegate {
+// MARK: - TimelinePlayerDelegate
+extension TimelineViewController: TimelinePlayerDelegate {
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, shouldBeginPlayingWithClip clip: Clip) -> Bool {
     return true
@@ -282,52 +312,6 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   func timelinePlayerDidEndBuffering(timelinePlayer: TimelinePlayer) {
     endBuffering()
   }
-
-  // MARK: - Private
-
-  private func endBuffering() {
-    playerLoadingIndicator.stopAnimating()
-    playerLoadingImageView.cancelAsyncImageLoad()
-    playerLoadingImageView.image = nil
-  }
-
-  @objc private func applicationWillEnterForeground() {
-    refresh()
-  }
-
-  @objc private func userDidTapPlayerControlGestureRecognizer(recognizer: UITapGestureRecognizer) {
-    if player.playing {
-      player.stop()
-    }
-  }
-
-  @objc private func userDidDoubleTapPlayerControlGestureRecognizer(recognizer: UITapGestureRecognizer) {
-    if let clip = player.currentClip, cell = cellForClip(clip) {
-      userDidTapLikeButtonForCell(cell)
-    }
-  }
-
-  @objc private func userDidSwipePlayerControlGestureRecognizerLeft(recognizer: UISwipeGestureRecognizer) {
-    if player.playing {
-      player.next()
-    }
-  }
-
-  @objc private func userDidSwipePlayerControlGestureRecognizerRight(recognizer: UISwipeGestureRecognizer) {
-    if player.playing {
-      player.previous()
-    }
-  }
-
-  private func reloadVisibleCells() {
-    collectionView.reloadItemsAtIndexPaths(collectionView.indexPathsForVisibleItems())
-  }
-
-  private func resetStateForCell(cell: ClipCollectionViewCell) {
-    if let indexPath = collectionView.indexPathForCell(cell) {
-      cell.setState(stateForCellAtIndexPath(indexPath), animated: true)
-    }
-  }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -369,34 +353,6 @@ extension TimelineViewController: UICollectionViewDelegate {
     }
   }
 }
-
-// MARK: - UIScrollViewDelegate
-// TODO: BRING BACK PAGINATION / PULL TO REFRESH
-//extension TimelineViewController: UIScrollViewDelegate {
-//
-//  func scrollViewDidScroll(scrollView: UIScrollView) {
-//    let pullToLoadDistance: CGFloat = 55
-//    let xOffset = scrollView.contentOffset.x
-//    if xOffset < 0 && xOffset < -pullToLoadDistance {
-//      beginLoadIfAppropriate(scrollView) {
-//        self.loadPreviousPage()
-//      }
-//    } else if (xOffset + scrollView.bounds.width) > scrollView.contentSize.width + pullToLoadDistance {
-//      beginLoadIfAppropriate(scrollView) {
-//        self.refresh()
-//      }
-//    }
-//  }
-//
-//  private func beginLoadIfAppropriate(scrollView: UIScrollView, load: () -> Void) {
-//    if scrollView.tracking && timeline.loadingState == TimelineLoadingState.Idle {
-//      pullToRefreshTriggered = true
-//    } else if !scrollView.tracking && pullToRefreshTriggered {
-//      pullToRefreshTriggered = false
-//      load()
-//    }
-//  }
-//}
 
 // MARK: - ClipCollectionViewCellDelegate
 extension TimelineViewController: ClipCollectionViewCellDelegate {
