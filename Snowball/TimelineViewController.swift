@@ -233,17 +233,17 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   }
 
   func timeline(timeline: Timeline, didUpdateClipAtIndex index: Int) {
-    resetStateOnVisibleCells()
+    reloadVisibleCells()
   }
 
   func timeline(timeline: Timeline, didInsertClipAtIndex index: Int) {
     collectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: index, inSection: 0)])
-    resetStateOnVisibleCells()
+    reloadVisibleCells()
   }
 
   func timeline(timeline: Timeline, didDeleteClipAtIndex index: Int) {
     collectionView.deleteItemsAtIndexPaths([NSIndexPath(forItem: index, inSection: 0)])
-    resetStateOnVisibleCells()
+    reloadVisibleCells()
   }
 
   // This next part is the TimelinePlayerDelegate implementation. For details as to why it's here,
@@ -345,12 +345,8 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     }
   }
 
-  private func resetStateOnVisibleCells() {
-    for cell in collectionView.visibleCells() {
-      if let cell = cell as? ClipCollectionViewCell {
-        resetStateForCell(cell)
-      }
-    }
+  private func reloadVisibleCells() {
+    collectionView.reloadItemsAtIndexPaths(collectionView.indexPathsForVisibleItems())
   }
 
   private func resetStateForCell(cell: ClipCollectionViewCell) {
