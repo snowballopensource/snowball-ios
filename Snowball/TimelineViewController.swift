@@ -12,23 +12,7 @@ import UIKit
 
 // MARK: -
 
-protocol TimelineFlowLayoutDelegate {
-  func timelineFlowLayoutDidFinalizeCollectionViewUpdates(layout: TimelineFlowLayout)
-}
-
-class TimelineFlowLayout: UICollectionViewFlowLayout {
-  var delegate: TimelineFlowLayoutDelegate?
-
-  override func finalizeCollectionViewUpdates() {
-    super.finalizeCollectionViewUpdates()
-
-    delegate?.timelineFlowLayoutDidFinalizeCollectionViewUpdates(self)
-  }
-}
-
-// MARK: -
-
-class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayerDelegate, TimelineFlowLayoutDelegate {
+class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayerDelegate {
 
   // MARK: - Properties
 
@@ -40,13 +24,13 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   let playerLoadingIndicator = CircleLoadingIndicator()
   private class var collectionViewSideContentInset: CGFloat { return ClipCollectionViewCell.size.width * 4 }
   let collectionView: UICollectionView = {
-    let flowLayout = TimelineFlowLayout()
+    let collectionView = UICollectionView()
+    let flowLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
     flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
     flowLayout.minimumInteritemSpacing = 0
     flowLayout.minimumLineSpacing = 0
     flowLayout.itemSize = ClipCollectionViewCell.size // TODO: maybe use autolayout to calculate?
     flowLayout.sectionInset = UIEdgeInsets(top: 0, left: collectionViewSideContentInset, bottom: 0, right: collectionViewSideContentInset)
-    let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: flowLayout)
     collectionView.backgroundColor = UIColor.whiteColor()
     collectionView.showsHorizontalScrollIndicator = false
     collectionView.registerClass(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell))
@@ -73,17 +57,10 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
     return gestureRecognizer
     }()
 
-  // At some time in the future, refactor pull to refresh/pull to scroll back to its own class...
-  // TODO: BRING BACK PAGINATION / PULL TO REFRESH
-  // var pullToRefreshTriggered = false
-
   // MARK: - UIViewController
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    let collectionViewLayout = collectionView.collectionViewLayout as! TimelineFlowLayout
-    collectionViewLayout.delegate = self
 
     view.backgroundColor = UIColor.whiteColor()
     view.clipsToBounds = true
@@ -305,9 +282,6 @@ class TimelineViewController: UIViewController, TimelineDelegate, TimelinePlayer
   func timelinePlayerDidEndBuffering(timelinePlayer: TimelinePlayer) {
     endBuffering()
   }
-
-  // MARK: - TimelineFlowLayoutDelegate
-  func timelineFlowLayoutDidFinalizeCollectionViewUpdates(layout: TimelineFlowLayout) {}
 
   // MARK: - Private
 

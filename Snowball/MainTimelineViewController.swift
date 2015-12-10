@@ -153,13 +153,6 @@ class MainTimelineViewController: TimelineViewController {
     view.sendSubviewToBack(playerView)
   }
 
-  // MARK: - TimelineFlowLayoutDelegate
-  override func timelineFlowLayoutDidFinalizeCollectionViewUpdates(layout: TimelineFlowLayout) {
-    super.timelineFlowLayoutDidFinalizeCollectionViewUpdates(layout)
-
-    scrollToPendingOrBookmark(false)
-  }
-
   // MARK: - Private
 
   private func scrollToPendingOrBookmark(animated: Bool) {

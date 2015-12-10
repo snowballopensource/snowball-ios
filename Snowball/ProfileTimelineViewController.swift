@@ -69,15 +69,6 @@ class ProfileTimelineViewController: TimelineViewController {
     super.timelinePlayer(timelinePlayer, didEndPlayingWithLastClip: lastClip)
     view.sendSubviewToBack(playerView)
   }
-
-  // MARK: - TimelineFlowLayoutDelegate
-  override func timelineFlowLayoutDidFinalizeCollectionViewUpdates(layout: TimelineFlowLayout) {
-    super.timelineFlowLayoutDidFinalizeCollectionViewUpdates(layout)
-
-    if let lastClip = timeline.clips.last {
-      scrollToClip(lastClip, animated: false)
-    }
-  }
 }
 
 // MARK: - SnowballTopViewDelegate
