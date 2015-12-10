@@ -24,7 +24,7 @@ class TimelineViewController: UIViewController {
   let playerLoadingIndicator = CircleLoadingIndicator()
   private class var collectionViewSideContentInset: CGFloat { return ClipCollectionViewCell.size.width * 4 }
   let collectionView: UICollectionView = {
-    let collectionView = UICollectionView()
+    let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
     let flowLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
     flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
     flowLayout.minimumInteritemSpacing = 0
