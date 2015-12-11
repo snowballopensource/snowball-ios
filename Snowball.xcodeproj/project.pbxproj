@@ -14,6 +14,8 @@
 		BA73BCD21C1A759100B22588 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCD11C1A759100B22588 /* TimelineViewController.swift */; };
 		BA73BCD41C1A766100B22588 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCD31C1A766100B22588 /* TimelineView.swift */; };
 		BA73BCD61C1A7B4F00B22588 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCD51C1A7B4F00B22588 /* ViewController.swift */; };
+		BA73BCE51C1AB56E00B22588 /* ActiveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCE41C1AB56E00B22588 /* ActiveModel.swift */; };
+		BA73BCE91C1AB84F00B22588 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCE81C1AB84F00B22588 /* Clip.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		BA73BCD11C1A759100B22588 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 		BA73BCD31C1A766100B22588 /* TimelineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		BA73BCD51C1A7B4F00B22588 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BA73BCE41C1AB56E00B22588 /* ActiveModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveModel.swift; sourceTree = "<group>"; };
+		BA73BCE81C1AB84F00B22588 /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,14 +85,40 @@
 			isa = PBXGroup;
 			children = (
 				BA73BCBF1C1A71B400B22588 /* AppDelegate.swift */,
-				BA73BCD51C1A7B4F00B22588 /* ViewController.swift */,
-				BA73BCD11C1A759100B22588 /* TimelineViewController.swift */,
-				BA73BCD31C1A766100B22588 /* TimelineView.swift */,
+				BA73BCE21C1AB28300B22588 /* View Controllers */,
+				BA73BCE31C1AB28D00B22588 /* Views */,
+				BA73BCD91C1AA62400B22588 /* Models */,
 				BA73BCC61C1A71B400B22588 /* Assets.xcassets */,
 				BA73BCC81C1A71B400B22588 /* LaunchScreen.storyboard */,
 				BA73BCCB1C1A71B400B22588 /* Info.plist */,
 			);
 			path = Snowball;
+			sourceTree = "<group>";
+		};
+		BA73BCD91C1AA62400B22588 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BA73BCE41C1AB56E00B22588 /* ActiveModel.swift */,
+				BA73BCE81C1AB84F00B22588 /* Clip.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		BA73BCE21C1AB28300B22588 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BA73BCD51C1A7B4F00B22588 /* ViewController.swift */,
+				BA73BCD11C1A759100B22588 /* TimelineViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		BA73BCE31C1AB28D00B22588 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BA73BCD31C1A766100B22588 /* TimelineView.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +243,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA73BCC01C1A71B400B22588 /* AppDelegate.swift in Sources */,
+				BA73BCE91C1AB84F00B22588 /* Clip.swift in Sources */,
+				BA73BCE51C1AB56E00B22588 /* ActiveModel.swift in Sources */,
 				BA73BCD41C1A766100B22588 /* TimelineView.swift in Sources */,
 				BA73BCD61C1A7B4F00B22588 /* ViewController.swift in Sources */,
 				BA73BCD21C1A759100B22588 /* TimelineViewController.swift in Sources */,

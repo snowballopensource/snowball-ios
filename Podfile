@@ -5,3 +5,4 @@ inhibit_all_warnings!
 use_frameworks!
 
 pod 'Cartography'
+pod 'RealmSwift'
