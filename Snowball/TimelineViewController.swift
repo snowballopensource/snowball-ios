@@ -6,21 +6,27 @@
 //  Copyright © 2015 Snowball, Inc. All rights reserved.
 //
 
+import Cartography
 import UIKit
 
-class TimelineViewController: UIViewController {
+class TimelineViewController: ViewController {
 
   // MARK: Properties
 
   let timelineView = TimelineView()
 
-  // MARK: UIViewController
+  // MARK: ViewController
 
-  override func loadView() {
-    super.loadView()
+  override func setupSubviews() {
+    view.addSubview(timelineView)
   }
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
+  override func setupAutolayoutConstraints() {
+    constrain(timelineView) { timelineView in
+      timelineView.top == timelineView.superview!.centerY
+      timelineView.right == timelineView.superview!.right
+      timelineView.bottom == timelineView.superview!.bottom
+      timelineView.left == timelineView.superview!.left
+    }
   }
 }

@@ -13,6 +13,7 @@
 		BA73BCCA1C1A71B400B22588 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA73BCC81C1A71B400B22588 /* LaunchScreen.storyboard */; };
 		BA73BCD21C1A759100B22588 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCD11C1A759100B22588 /* TimelineViewController.swift */; };
 		BA73BCD41C1A766100B22588 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCD31C1A766100B22588 /* TimelineView.swift */; };
+		BA73BCD61C1A7B4F00B22588 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCD51C1A7B4F00B22588 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		BA73BCCB1C1A71B400B22588 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA73BCD11C1A759100B22588 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 		BA73BCD31C1A766100B22588 /* TimelineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
+		BA73BCD51C1A7B4F00B22588 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				BA73BCBF1C1A71B400B22588 /* AppDelegate.swift */,
+				BA73BCD51C1A7B4F00B22588 /* ViewController.swift */,
 				BA73BCD11C1A759100B22588 /* TimelineViewController.swift */,
 				BA73BCD31C1A766100B22588 /* TimelineView.swift */,
 				BA73BCC61C1A71B400B22588 /* Assets.xcassets */,
@@ -211,6 +214,7 @@
 			files = (
 				BA73BCC01C1A71B400B22588 /* AppDelegate.swift in Sources */,
 				BA73BCD41C1A766100B22588 /* TimelineView.swift in Sources */,
+				BA73BCD61C1A7B4F00B22588 /* ViewController.swift in Sources */,
 				BA73BCD21C1A759100B22588 /* TimelineViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
