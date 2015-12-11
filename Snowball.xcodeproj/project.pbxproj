@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6ADFB79AE9E2FA151B23A329 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ACC25125F448DC6A7011ECF /* Pods.framework */; };
 		BA73BCC01C1A71B400B22588 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCBF1C1A71B400B22588 /* AppDelegate.swift */; };
 		BA73BCC71C1A71B400B22588 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA73BCC61C1A71B400B22588 /* Assets.xcassets */; };
 		BA73BCCA1C1A71B400B22588 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA73BCC81C1A71B400B22588 /* LaunchScreen.storyboard */; };
@@ -15,6 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1AB0D3543714478732381B18 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		4ACC25125F448DC6A7011ECF /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA990512BC7FECAEF9AE902D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		BA73BCBC1C1A71B400B22588 /* Snowball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snowball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA73BCBF1C1A71B400B22588 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA73BCC61C1A71B400B22588 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -29,17 +33,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6ADFB79AE9E2FA151B23A329 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2267DBCEC49A798A52E846FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4ACC25125F448DC6A7011ECF /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9D049035B8D0CF46AC555BFE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1AB0D3543714478732381B18 /* Pods.debug.xcconfig */,
+				AA990512BC7FECAEF9AE902D /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		BA73BCB31C1A71B300B22588 = {
 			isa = PBXGroup;
 			children = (
 				BA73BCBE1C1A71B400B22588 /* Snowball */,
 				BA73BCBD1C1A71B400B22588 /* Products */,
+				9D049035B8D0CF46AC555BFE /* Pods */,
+				2267DBCEC49A798A52E846FC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA73BCCE1C1A71B400B22588 /* Build configuration list for PBXNativeTarget "Snowball" */;
 			buildPhases = (
+				D12418D76B8A95DD9AFF1147 /* Check Pods Manifest.lock */,
 				BA73BCB81C1A71B400B22588 /* Sources */,
 				BA73BCB91C1A71B400B22588 /* Frameworks */,
 				BA73BCBA1C1A71B400B22588 /* Resources */,
+				5C68C6CFF4BBC25B1A39CF36 /* Embed Pods Frameworks */,
+				3A1677B758D90FAC080E4C3C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -128,6 +155,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3A1677B758D90FAC080E4C3C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5C68C6CFF4BBC25B1A39CF36 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D12418D76B8A95DD9AFF1147 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BA73BCB81C1A71B400B22588 /* Sources */ = {
@@ -237,6 +312,7 @@
 		};
 		BA73BCCF1C1A71B400B22588 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AB0D3543714478732381B18 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Snowball/Info.plist;
@@ -249,6 +325,7 @@
 		};
 		BA73BCD01C1A71B400B22588 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA990512BC7FECAEF9AE902D /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Snowball/Info.plist;
