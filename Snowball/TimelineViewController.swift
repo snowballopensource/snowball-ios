@@ -19,9 +19,6 @@ class TimelineViewController: ViewController {
 
   override func setupSubviews() {
     view.addSubview(timelineView)
-  }
-
-  override func setupAutolayoutConstraints() {
     constrain(timelineView) { timelineView in
       timelineView.top == timelineView.superview!.centerY
       timelineView.right == timelineView.superview!.right
