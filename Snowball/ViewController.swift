@@ -16,11 +16,9 @@ class ViewController: UIViewController {
     super.viewDidLoad()
 
     setupSubviews()
-    setupAutolayoutConstraints()
   }
 
   // MARK: Internal
 
   func setupSubviews() {}
-  func setupAutolayoutConstraints() {}
 }
