@@ -52,7 +52,7 @@ class ProfileTimelineViewController: TimelineViewController {
   // MARK: - TimelineViewController
 
   override func refresh() {
-    timeline.requestUserTimeline(user, page: 0) { (error) -> Void in
+    timeline.requestUserTimeline(user, page: 1) { (error) -> Void in
       error?.alertUser()
     }
   }

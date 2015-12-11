@@ -144,7 +144,7 @@ class MainTimelineViewController: TimelineViewController {
   // MARK: - TimelineViewController
 
   override func refresh() {
-    timeline.requestHomeTimeline(page: 0) { (error) -> Void in
+    timeline.requestHomeTimeline(page: 1) { (error) -> Void in
       error?.alertUser()
     }
   }
