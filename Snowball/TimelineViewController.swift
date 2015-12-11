@@ -93,7 +93,7 @@ class TimelineViewController: UIViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
 
-//    refresh()
+    refresh()
   }
 
   override func loadView() {
