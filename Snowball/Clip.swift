@@ -14,4 +14,5 @@ class Clip: ActiveModel {
 
   dynamic var id: String?
   dynamic var name: String?
+  dynamic var thumbnailURL: String?
 }
