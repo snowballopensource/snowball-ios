@@ -9,7 +9,7 @@
 import Cartography
 import UIKit
 
-class TimelineViewController: ViewController {
+class TimelineViewController: UIViewController {
 
   // MARK: Properties
 
@@ -19,8 +19,8 @@ class TimelineViewController: ViewController {
 
   // MARK: ViewController
 
-  override func setupSubviews() {
-    super.setupSubviews()
+  override func viewDidLoad() {
+    super.viewDidLoad()
 
     view.addSubview(playerView)
     constrain(playerView) { playerView in
@@ -37,11 +37,6 @@ class TimelineViewController: ViewController {
       timelineCollectionView.right == timelineCollectionView.superview!.right
       timelineCollectionView.bottom == timelineCollectionView.superview!.bottom
     }
-  }
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
     timelineCollectionView.dataSource = self
   }
 }
