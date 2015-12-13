@@ -17,6 +17,8 @@
 		BA73BCE51C1AB56E00B22588 /* ActiveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCE41C1AB56E00B22588 /* ActiveModel.swift */; };
 		BA73BCE91C1AB84F00B22588 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCE81C1AB84F00B22588 /* Clip.swift */; };
 		BAD774FD1C1DD8CF00ED1A64 /* ClipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD774FC1C1DD8CF00ED1A64 /* ClipCollectionViewCell.swift */; };
+		BAD774FF1C1DE18E00ED1A64 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD774FE1C1DE18E00ED1A64 /* User.swift */; };
+		BAD775011C1DF36B00ED1A64 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD775001C1DF36B00ED1A64 /* UIColor+Hex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		BA73BCE41C1AB56E00B22588 /* ActiveModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveModel.swift; sourceTree = "<group>"; };
 		BA73BCE81C1AB84F00B22588 /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
 		BAD774FC1C1DD8CF00ED1A64 /* ClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCollectionViewCell.swift; sourceTree = "<group>"; };
+		BAD774FE1C1DE18E00ED1A64 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BAD775001C1DF36B00ED1A64 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,7 @@
 				BA73BCC61C1A71B400B22588 /* Assets.xcassets */,
 				BA73BCC81C1A71B400B22588 /* LaunchScreen.storyboard */,
 				BA73BCCB1C1A71B400B22588 /* Info.plist */,
+				BAD775021C1DF63A00ED1A64 /* Extensions */,
 			);
 			path = Snowball;
 			sourceTree = "<group>";
@@ -102,6 +107,7 @@
 			children = (
 				BA73BCE41C1AB56E00B22588 /* ActiveModel.swift */,
 				BA73BCE81C1AB84F00B22588 /* Clip.swift */,
+				BAD774FE1C1DE18E00ED1A64 /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -122,6 +128,14 @@
 				BAD774FC1C1DD8CF00ED1A64 /* ClipCollectionViewCell.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		BAD775021C1DF63A00ED1A64 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BAD775001C1DF36B00ED1A64 /* UIColor+Hex.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,7 +262,9 @@
 				BA73BCC01C1A71B400B22588 /* AppDelegate.swift in Sources */,
 				BAD774FD1C1DD8CF00ED1A64 /* ClipCollectionViewCell.swift in Sources */,
 				BA73BCE91C1AB84F00B22588 /* Clip.swift in Sources */,
+				BAD775011C1DF36B00ED1A64 /* UIColor+Hex.swift in Sources */,
 				BA73BCE51C1AB56E00B22588 /* ActiveModel.swift in Sources */,
+				BAD774FF1C1DE18E00ED1A64 /* User.swift in Sources */,
 				BA73BCD41C1A766100B22588 /* TimelineCollectionView.swift in Sources */,
 				BA73BCD61C1A7B4F00B22588 /* ViewController.swift in Sources */,
 				BA73BCD21C1A759100B22588 /* TimelineViewController.swift in Sources */,
