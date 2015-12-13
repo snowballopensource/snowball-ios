@@ -39,8 +39,12 @@ class ActiveModel: Object {
     return findAll("id = %@", id).first
   }
 
-  class func findAll(predicateFormat: String, _ args: AnyObject...) -> Results<ActiveModel> {
-    return ActiveModel.realm.objects(self).filter(predicateFormat, args)
+  class func findAll(predicateFormat: String? = nil, _ args: AnyObject...) -> [ActiveModel] {
+    var results = ActiveModel.realm.objects(self)
+    if let predicateFormat = predicateFormat {
+      results = results.filter(predicateFormat, args)
+    }
+    return Array<ActiveModel>(results)
   }
 
   func update(transaction: Transaction) {
