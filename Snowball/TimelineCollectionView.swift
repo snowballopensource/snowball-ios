@@ -20,7 +20,7 @@ class TimelineCollectionView: UICollectionView {
     layout.itemSize = ClipCollectionViewCell.defaultSize
     super.init(frame: CGRectZero, collectionViewLayout: layout)
     showsHorizontalScrollIndicator = false
-    backgroundColor = UIColor.purpleColor()
+    backgroundColor = UIColor.whiteColor()
     registerClass(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell))
   }
 

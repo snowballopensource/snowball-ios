@@ -14,6 +14,7 @@ class TimelineViewController: ViewController {
   // MARK: Properties
 
   let clips = Clip.findAll()
+  let playerView = UIView()
   let timelineCollectionView = TimelineCollectionView()
 
   // MARK: ViewController
@@ -21,10 +22,18 @@ class TimelineViewController: ViewController {
   override func setupSubviews() {
     super.setupSubviews()
 
+    view.addSubview(playerView)
+    constrain(playerView) { playerView in
+      playerView.left == playerView.superview!.left
+      playerView.top == playerView.superview!.top
+      playerView.right == playerView.superview!.right
+      playerView.height == playerView.superview!.width
+    }
+
     view.addSubview(timelineCollectionView)
-    constrain(timelineCollectionView) { timelineCollectionView in
+    constrain(timelineCollectionView, playerView) { timelineCollectionView, playerView in
       timelineCollectionView.left == timelineCollectionView.superview!.left
-      timelineCollectionView.top == timelineCollectionView.superview!.centerY
+      timelineCollectionView.top == playerView.bottom
       timelineCollectionView.right == timelineCollectionView.superview!.right
       timelineCollectionView.bottom == timelineCollectionView.superview!.bottom
     }
