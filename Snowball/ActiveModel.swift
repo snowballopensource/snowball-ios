@@ -31,8 +31,10 @@ class ActiveModel: Object {
 
   // MARK: Internal
 
-  class func create(transaction: Transaction) {
-    self.init().update(transaction)
+  class func create(transaction: Transaction) -> ActiveModel {
+    let object = self.init()
+    object.update(transaction)
+    return object
   }
 
   class func find(id: String) -> ActiveModel? {
