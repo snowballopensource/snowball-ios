@@ -41,12 +41,12 @@ class ActiveModel: Object {
     return findAll("id = %@", id).first
   }
 
-  class func findAll(predicateFormat: String? = nil, _ args: AnyObject...) -> [ActiveModel] {
+  class func findAll(predicateFormat: String? = nil, _ args: AnyObject...) -> Results<ActiveModel> {
     var results = ActiveModel.realm.objects(self)
     if let predicateFormat = predicateFormat {
       results = results.filter(predicateFormat, args)
     }
-    return Array<ActiveModel>(results)
+    return results
   }
 
   func update(transaction: Transaction) {
