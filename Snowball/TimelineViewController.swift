@@ -39,6 +39,17 @@ class TimelineViewController: UIViewController {
     }
     timelineCollectionView.dataSource = self
   }
+
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+
+    SnowballAPI.requestObjects(.GetClipStream(page: 1)) { (response: ObjectResponse<[Clip]>) in
+      switch response {
+      case .Success(let clips): print(clips)
+      case .Failure(let error): print(error) // TODO: Handle error
+      }
+    }
+  }
 }
 
 // MARK: - UICollectionViewDataSource
