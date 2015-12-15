@@ -15,10 +15,6 @@ class ActiveModel: Object {
 
   private dynamic var _id = NSUUID().UUIDString
 
-  private class var realm: Realm {
-    return try! Realm()
-  }
-
   // MARK: Typealias
 
   typealias Transaction = (object: ActiveModel) -> Void
@@ -31,64 +27,46 @@ class ActiveModel: Object {
 
   // MARK: Internal
 
-  class func create(transaction: Transaction) -> ActiveModel {
-    let object = self.init()
-    object.update(transaction)
-    return object
-  }
-
   class func find(id: String) -> ActiveModel? {
-    return findAll("id = %@", id).first
+    return findAll().filter("id = %@", id).first
   }
 
-  class func findAll(predicateFormat: String? = nil, _ args: AnyObject...) -> Results<ActiveModel> {
-    var results = ActiveModel.realm.objects(self)
-    if let predicateFormat = predicateFormat {
-      results = results.filter(NSPredicate(format: predicateFormat, argumentArray: args))
-    }
-    return results
+  class func findAll() -> Results<ActiveModel> {
+    return Database.findAll(self)
   }
 
-  class func findOrNew(id: String) -> ActiveModel {
+  class func findOrInitialize(id: String) -> ActiveModel {
     return find(id) ?? self.init()
   }
 
-  func update(transaction: Transaction) {
-    try! ActiveModel.realm.write {
-      transaction(object: self)
-      ActiveModel.realm.add(self, update: true)
-    }
+  func save() {
+    Database.save(self)
   }
 
   func delete() {
-    try! ActiveModel.realm.write {
-      ActiveModel.realm.delete(self)
-    }
+    Database.delete(self)
   }
 }
 
 // MARK: - JSON
 
-typealias ActiveModelAttributes = [String: AnyObject]
 typealias JSONObject = [String: AnyObject]
 typealias JSONArray = [JSONObject]
 
 extension ActiveModel {
 
-  func assignAttributes(attributes: ActiveModelAttributes) {}
+  func importJSON(JSON: JSONObject) {}
 
-  static func fromJSONObject<T>(JSON: JSONObject) -> T {
+  static func fromJSONObject<T: ActiveModel>(JSON: JSONObject) -> T {
     if let id = JSON["id"] as? String {
-      let object = findOrNew(id)
-      object.update { object in
-        object.assignAttributes(JSON)
-      }
+      let object = findOrInitialize(id)
+      object.importJSON(JSON)
       return object as! T
     }
-    return create({ _ in }) as! T
+    return T()
   }
 
-  static func fromJSONArray<T>(JSON: JSONArray) -> [T] {
+  static func fromJSONArray<T: ActiveModel>(JSON: JSONArray) -> [T] {
     return JSON.map { JSON in
       return fromJSONObject(JSON)
     }

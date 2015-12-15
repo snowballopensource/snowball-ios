@@ -13,7 +13,7 @@ class TimelineViewController: UIViewController {
 
   // MARK: Properties
 
-  let clips = Clip.findAll()
+  let clips = Clip.findAll().sorted("createdAt", ascending: true)
   let playerView = UIView()
   let timelineCollectionView = TimelineCollectionView()
 

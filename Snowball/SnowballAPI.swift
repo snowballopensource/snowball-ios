@@ -18,7 +18,11 @@ struct SnowballAPI {
       switch afResponse.result {
       case .Success(let value):
         if let value = value as? JSONArray {
-          completion(response: ObjectResponse.Success(T.fromJSONArray(value)))
+          var objects = [T]()
+          Database.performTransaction {
+            objects = T.fromJSONArray(value)
+          }
+          completion(response: ObjectResponse.Success(objects))
         } else {
           completion(response: .Failure(NSError.snowballErrorWithReason(nil)))
         }
