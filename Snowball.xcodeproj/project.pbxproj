@@ -16,6 +16,7 @@
 		BA73BCE51C1AB56E00B22588 /* ActiveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCE41C1AB56E00B22588 /* ActiveModel.swift */; };
 		BA73BCE91C1AB84F00B22588 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCE81C1AB84F00B22588 /* Clip.swift */; };
 		BA9410A11C1FB33500D366C5 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9410A01C1FB33500D366C5 /* Database.swift */; };
+		BAB280721C35AD8200AE098D /* UIImageView+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB280711C35AD8200AE098D /* UIImageView+Cache.swift */; };
 		BAD774FD1C1DD8CF00ED1A64 /* ClipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD774FC1C1DD8CF00ED1A64 /* ClipCollectionViewCell.swift */; };
 		BAD774FF1C1DE18E00ED1A64 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD774FE1C1DE18E00ED1A64 /* User.swift */; };
 		BAD775011C1DF36B00ED1A64 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD775001C1DF36B00ED1A64 /* UIColor+Hex.swift */; };
@@ -38,6 +39,7 @@
 		BA73BCE41C1AB56E00B22588 /* ActiveModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveModel.swift; sourceTree = "<group>"; };
 		BA73BCE81C1AB84F00B22588 /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
 		BA9410A01C1FB33500D366C5 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		BAB280711C35AD8200AE098D /* UIImageView+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Cache.swift"; sourceTree = "<group>"; };
 		BAD774FC1C1DD8CF00ED1A64 /* ClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCollectionViewCell.swift; sourceTree = "<group>"; };
 		BAD774FE1C1DE18E00ED1A64 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BAD775001C1DF36B00ED1A64 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			children = (
 				BAD775001C1DF36B00ED1A64 /* UIColor+Hex.swift */,
 				BAD7750C1C1E02AC00ED1A64 /* NSError+Snowball.swift */,
+				BAB280711C35AD8200AE098D /* UIImageView+Cache.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				BA9410A11C1FB33500D366C5 /* Database.swift in Sources */,
 				BAD775011C1DF36B00ED1A64 /* UIColor+Hex.swift in Sources */,
 				BA73BCE51C1AB56E00B22588 /* ActiveModel.swift in Sources */,
+				BAB280721C35AD8200AE098D /* UIImageView+Cache.swift in Sources */,
 				BAD774FF1C1DE18E00ED1A64 /* User.swift in Sources */,
 				BA73BCD41C1A766100B22588 /* TimelineCollectionView.swift in Sources */,
 				BA73BCD21C1A759100B22588 /* TimelineViewController.swift in Sources */,

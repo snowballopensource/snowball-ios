@@ -51,8 +51,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
   // MARK: Internal
 
   func configueForClip(clip: Clip) {
-    if let thumbnailURL = clip.thumbnailURL {
-      thumbnailImageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: thumbnailURL)!)!)
+    if let thumbnailURLString = clip.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
+      thumbnailImageView.setImageFromURL(thumbnailURL)
     }
   }
 }
