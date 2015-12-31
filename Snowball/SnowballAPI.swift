@@ -21,6 +21,7 @@ struct SnowballAPI {
           var objects = [T]()
           Database.performTransaction {
             objects = T.fromJSONArray(value)
+            for object in objects { object.save() }
           }
           completion(response: ObjectResponse.Success(objects))
         } else {
