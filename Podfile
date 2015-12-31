@@ -7,3 +7,4 @@ use_frameworks!
 pod 'Alamofire'
 pod 'Cartography'
 pod 'RealmSwift'
+pod 'SwiftFetchedResultsController'

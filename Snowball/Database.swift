@@ -8,12 +8,13 @@
 
 import Foundation
 import RealmSwift
+import SwiftFetchedResultsController
 
 struct Database {
 
   // MARK: Properties
 
-  private static var realm: Realm {
+  static var realm: Realm {
     return try! Realm()
   }
 
@@ -24,11 +25,11 @@ struct Database {
   }
 
   static func save(object: ActiveModel) {
-    realm.add(object, update: true)
+    realm.addWithNotification(object, update: true)
   }
 
   static func delete(object: ActiveModel) {
-    realm.delete(object)
+    realm.deleteWithNotification(object)
   }
 
   static func findAll<T: ActiveModel>(type: T.Type) -> Results<T> {
