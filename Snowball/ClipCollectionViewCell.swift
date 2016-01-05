@@ -22,7 +22,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return CGSizeMake(cellWidth, cellHeight)
   }
 
+  var delegate: ClipCollectionViewCellDelegate?
+
   let thumbnailImageView = UIImageView()
+  let playButton = UIButton()
 
   // MARK: Initializers
 
@@ -36,6 +39,15 @@ class ClipCollectionViewCell: UICollectionViewCell {
       thumbnailImageView.right == thumbnailImageView.superview!.right
       thumbnailImageView.height == thumbnailImageView.width
     }
+
+    addSubview(playButton)
+    constrain(playButton, thumbnailImageView) { (playButton, thumbnailImageView) in
+      playButton.left == thumbnailImageView.left
+      playButton.top == thumbnailImageView.top
+      playButton.right == thumbnailImageView.right
+      playButton.height == thumbnailImageView.height
+    }
+    playButton.addTarget(self, action: "playButtonTapped", forControlEvents: .TouchUpInside)
   }
 
   required init?(coder: NSCoder) {
@@ -55,4 +67,15 @@ class ClipCollectionViewCell: UICollectionViewCell {
       thumbnailImageView.setImageFromURL(thumbnailURL)
     }
   }
+
+  // MARK: Private
+
+  @objc private func playButtonTapped() {
+    delegate?.clipCollectionViewCellPlayButtonTapped(self)
+  }
+}
+
+// MARK: - ClipCollectionViewCellDelegate
+protocol ClipCollectionViewCellDelegate {
+  func clipCollectionViewCellPlayButtonTapped(cell: ClipCollectionViewCell)
 }

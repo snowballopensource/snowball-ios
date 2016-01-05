@@ -15,7 +15,8 @@ class TimelineViewController: UIViewController {
 
   // MARK: Properties
 
-  let playerView = UIView()
+  let player = TimelinePlayer()
+  let playerView = PlayerView()
   let timelineCollectionView = TimelineCollectionView()
   let fetchedResultsController: FetchedResultsController<Clip> = {
     let fetchRequest = FetchRequest<Clip>(realm: Database.realm, predicate: NSPredicate(value: true))
@@ -24,7 +25,7 @@ class TimelineViewController: UIViewController {
   }()
   var collectionViewUpdates = [NSBlockOperation]()
 
-  // MARK: ViewController
+  // MARK: UIViewController
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -36,6 +37,8 @@ class TimelineViewController: UIViewController {
       playerView.right == playerView.superview!.right
       playerView.height == playerView.superview!.width
     }
+    player.delegate = self
+    playerView.player = player
 
     view.addSubview(timelineCollectionView)
     constrain(timelineCollectionView, playerView) { timelineCollectionView, playerView in
@@ -60,6 +63,26 @@ class TimelineViewController: UIViewController {
       }
     }
   }
+
+  // MARK: - Internal
+
+  private func scrollToCellForClip(clip: Clip) {
+    if let indexPath = fetchedResultsController.indexPathForObject(clip) {
+      timelineCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: true)
+    }
+  }
+
+  private func clipForCell(cell: ClipCollectionViewCell) -> Clip? {
+    if let indexPath = timelineCollectionView.indexPathForCell(cell) {
+      return fetchedResultsController.objectAtIndexPath(indexPath)
+    }
+    return nil
+  }
+
+  private func clipsIncludingAndAfterClip(clip: Clip) -> Results<ActiveModel> {
+    guard let clipCreatedAt = clip.createdAt else { return Clip.findAll() }
+    return Clip.findAll().filter("createdAt >= %@", clipCreatedAt).sorted("createdAt", ascending: true)
+  }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -78,6 +101,7 @@ extension TimelineViewController: UICollectionViewDataSource {
     if let clip = fetchedResultsController.objectAtIndexPath(indexPath) {
       cell.configueForClip(clip)
     }
+    cell.delegate = self
     return cell
   }
 }
@@ -126,5 +150,44 @@ extension TimelineViewController: FetchedResultsControllerDelegate {
         updateClosure.start()
       }
       }, completion: nil)
+  }
+}
+
+// MARK: - TimelinePlayerDelegate
+extension TimelineViewController: TimelinePlayerDelegate {
+  func timelinePlayerShouldBeginPlayback(timelinePlayer: TimelinePlayer) -> Bool {
+    return true
+  }
+
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlaybackWithFirstClip clip: Clip) {
+    print("did begin")
+    scrollToCellForClip(clip)
+  }
+
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
+    print("did transition")
+    scrollToCellForClip(toClip)
+  }
+
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
+    print("did end")
+  }
+}
+
+// MARK: - ClipCollectionViewCellDelegate
+extension TimelineViewController: ClipCollectionViewCellDelegate {
+  func clipCollectionViewCellPlayButtonTapped(cell: ClipCollectionViewCell) {
+    if player.playing {
+      player.stop()
+    } else {
+      guard let clip = clipForCell(cell) else { return }
+      for object in clipsIncludingAndAfterClip(clip) {
+        let clip = object as! Clip
+        let url = NSURL(string: clip.videoURL!)!
+        let playerItem = ClipPlayerItem(URL: url, clip: clip)
+        player.insertItem(playerItem, afterItem: player.items().last)
+      }
+      player.play()
+    }
   }
 }
