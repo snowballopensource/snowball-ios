@@ -64,7 +64,7 @@ class TimelineViewController: UIViewController {
     }
   }
 
-  // MARK: - Internal
+  // MARK: - Private
 
   private func scrollToCellForClip(clip: Clip) {
     if let indexPath = fetchedResultsController.indexPathForObject(clip) {
@@ -79,9 +79,32 @@ class TimelineViewController: UIViewController {
     return nil
   }
 
+  private func clipsAfterClip(clip: Clip) -> Results<ActiveModel> {
+    guard let clipCreatedAt = clip.createdAt else { return Clip.findAll() }
+    return Clip.findAll().filter("createdAt > %@", clipCreatedAt).sorted("createdAt", ascending: true)
+  }
+
   private func clipsIncludingAndAfterClip(clip: Clip) -> Results<ActiveModel> {
     guard let clipCreatedAt = clip.createdAt else { return Clip.findAll() }
     return Clip.findAll().filter("createdAt >= %@", clipCreatedAt).sorted("createdAt", ascending: true)
+  }
+
+  private func enqueueClipsInPlayer(clips: Results<ActiveModel>) {
+    if let clip = clips.first as? Clip {
+      enqueueClipInPlayer(clip) {
+        self.enqueueClipsInPlayer(self.clipsAfterClip(clip))
+      }
+    }
+  }
+
+  private func enqueueClipInPlayer(clip: Clip, completion: () -> Void) {
+    guard let playerItem = ClipPlayerItem(clip: clip) else { completion(); return }
+    playerItem.asset.loadValuesAsynchronouslyForKeys(["playable"]) {
+      dispatch_async(dispatch_get_main_queue()) {
+        self.player.insertItem(playerItem, afterItem: self.player.items().last)
+        completion()
+      }
+    }
   }
 }
 
@@ -181,12 +204,7 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
       player.stop()
     } else {
       guard let clip = clipForCell(cell) else { return }
-      for object in clipsIncludingAndAfterClip(clip) {
-        let clip = object as! Clip
-        let URL = NSURL(string: clip.videoURL!)!
-        let playerItem = ClipPlayerItem(URL: URL, clip: clip)
-        player.insertItem(playerItem, afterItem: player.items().last)
-      }
+      enqueueClipsInPlayer(clipsIncludingAndAfterClip(clip))
       player.play()
     }
   }

@@ -16,10 +16,13 @@ class ClipPlayerItem: AVPlayerItem {
 
   // MARK: Initializers
 
-  convenience init(URL: NSURL, clip: Clip) {
-    let URLComponents = NSURLComponents(URL: URL, resolvingAgainstBaseURL: true)!
+  convenience init?(clip: Clip) {
+    guard let videoURL = clip.videoURL else { return nil }
+    guard let URL = NSURL(string: videoURL) else { return nil }
+    guard let URLComponents = NSURLComponents(URL: URL, resolvingAgainstBaseURL: true) else { return nil }
     URLComponents.scheme = CachedAssetResourceLoader.handledScheme
-    let asset = AVURLAsset(URL: URLComponents.URL!)
+    guard let modifiedURL = URLComponents.URL else { return nil }
+    let asset = AVURLAsset(URL: modifiedURL)
     asset.resourceLoader.setDelegate(CachedAssetResourceLoader.sharedInstance, queue: dispatch_get_main_queue())
     self.init(asset: asset)
     self.clip = clip

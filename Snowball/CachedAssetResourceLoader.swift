@@ -22,8 +22,6 @@ class CachedAssetResourceLoader: NSObject {
 // MARK: - AVAssetResourceLoaderDelegate
 extension CachedAssetResourceLoader: AVAssetResourceLoaderDelegate {
   func resourceLoader(resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
-    print("CALLED TO LOAD RESOURCE")
-
     if let URL = loadingRequest.request.URL {
       if URL.scheme == CachedAssetResourceLoader.handledScheme {
 
