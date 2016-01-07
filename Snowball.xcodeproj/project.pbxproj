@@ -27,6 +27,7 @@
 		BAD775071C1DFEAB00ED1A64 /* SnowballRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD775061C1DFEAB00ED1A64 /* SnowballRoute.swift */; };
 		BAD775091C1DFF9200ED1A64 /* SnowballAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD775081C1DFF9200ED1A64 /* SnowballAPI.swift */; };
 		BAD7750D1C1E02AC00ED1A64 /* NSError+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD7750C1C1E02AC00ED1A64 /* NSError+Snowball.swift */; };
+		BAFC72171C3DC5F600D46747 /* CachedAssetResourceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFC72161C3DC5F600D46747 /* CachedAssetResourceLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		BAD775061C1DFEAB00ED1A64 /* SnowballRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballRoute.swift; sourceTree = "<group>"; };
 		BAD775081C1DFF9200ED1A64 /* SnowballAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballAPI.swift; sourceTree = "<group>"; };
 		BAD7750C1C1E02AC00ED1A64 /* NSError+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Snowball.swift"; sourceTree = "<group>"; };
+		BAFC72161C3DC5F600D46747 /* CachedAssetResourceLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedAssetResourceLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 				BA98087B1C3BA71D00F86C04 /* TimelinePlayer.swift */,
 				BA9808771C3BA01C00F86C04 /* PlayerView.swift */,
 				BA98087D1C3C1BE600F86C04 /* ClipPlayerItem.swift */,
+				BAFC72161C3DC5F600D46747 /* CachedAssetResourceLoader.swift */,
 			);
 			name = Player;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				BAD775071C1DFEAB00ED1A64 /* SnowballRoute.swift in Sources */,
 				BA9808781C3BA01C00F86C04 /* PlayerView.swift in Sources */,
 				BA98087C1C3BA71D00F86C04 /* TimelinePlayer.swift in Sources */,
+				BAFC72171C3DC5F600D46747 /* CachedAssetResourceLoader.swift in Sources */,
 				BAD774FD1C1DD8CF00ED1A64 /* ClipCollectionViewCell.swift in Sources */,
 				BAD775091C1DFF9200ED1A64 /* SnowballAPI.swift in Sources */,
 				BA73BCE91C1AB84F00B22588 /* Clip.swift in Sources */,

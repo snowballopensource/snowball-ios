@@ -183,8 +183,8 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
       guard let clip = clipForCell(cell) else { return }
       for object in clipsIncludingAndAfterClip(clip) {
         let clip = object as! Clip
-        let url = NSURL(string: clip.videoURL!)!
-        let playerItem = ClipPlayerItem(URL: url, clip: clip)
+        let URL = NSURL(string: clip.videoURL!)!
+        let playerItem = ClipPlayerItem(URL: URL, clip: clip)
         player.insertItem(playerItem, afterItem: player.items().last)
       }
       player.play()
