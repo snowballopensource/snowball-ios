@@ -89,17 +89,15 @@ class TimelineViewController: UIViewController {
     return Clip.findAll().filter("createdAt >= %@", clipCreatedAt).sorted("createdAt", ascending: true)
   }
 
-  private func enqueueClipsInPlayer(clips: Results<ActiveModel>, completion: () -> Void) {
-    if let clip = clips.first as? Clip {
-      enqueueClipInPlayer(clip) {
-        self.enqueueClipsInPlayer(self.clipsAfterClip(clip), completion: completion)
-      }
-    } else {
-      completion()
+  private func enqueueClipsInPlayer(clips: Results<ActiveModel>, readyToPlayFirstClip: (() -> Void)?) {
+    guard let clip = clips.first as? Clip else { return }
+    enqueueClipInPlayer(clip) {
+      readyToPlayFirstClip?()
+      self.enqueueClipsInPlayer(self.clipsAfterClip(clip), readyToPlayFirstClip: nil)
     }
   }
 
-  private func enqueueClipInPlayer(clip: Clip, completion: () -> Void) {
+  private func enqueueClipInPlayer(clip: Clip, completion: (() -> Void)) {
     guard let playerItem = ClipPlayerItem(clip: clip) else { completion(); return }
     playerItem.asset.loadValuesAsynchronouslyForKeys(["playable"]) {
       dispatch_async(dispatch_get_main_queue()) {
