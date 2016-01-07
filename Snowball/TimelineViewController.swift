@@ -89,11 +89,13 @@ class TimelineViewController: UIViewController {
     return Clip.findAll().filter("createdAt >= %@", clipCreatedAt).sorted("createdAt", ascending: true)
   }
 
-  private func enqueueClipsInPlayer(clips: Results<ActiveModel>) {
+  private func enqueueClipsInPlayer(clips: Results<ActiveModel>, completion: () -> Void) {
     if let clip = clips.first as? Clip {
       enqueueClipInPlayer(clip) {
-        self.enqueueClipsInPlayer(self.clipsAfterClip(clip))
+        self.enqueueClipsInPlayer(self.clipsAfterClip(clip), completion: completion)
       }
+    } else {
+      completion()
     }
   }
 
@@ -200,12 +202,23 @@ extension TimelineViewController: TimelinePlayerDelegate {
 // MARK: - ClipCollectionViewCellDelegate
 extension TimelineViewController: ClipCollectionViewCellDelegate {
   func clipCollectionViewCellPlayButtonTapped(cell: ClipCollectionViewCell) {
+    guard let clip = clipForCell(cell) else { player.stop(); return }
     if player.playing {
-      player.stop()
+      if clip == player.currentClip {
+        player.stop()
+        return
+      } else {
+        player.pause()
+        player.removeAllItemsExceptCurrentItem()
+        enqueueClipsInPlayer(clipsIncludingAndAfterClip(clip)) {
+          self.player.advanceToNextItem()
+          self.player.play()
+        }
+      }
     } else {
-      guard let clip = clipForCell(cell) else { return }
-      enqueueClipsInPlayer(clipsIncludingAndAfterClip(clip))
-      player.play()
+      enqueueClipsInPlayer(clipsIncludingAndAfterClip(clip)) {
+        self.player.play()
+      }
     }
   }
 }

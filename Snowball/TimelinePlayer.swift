@@ -72,6 +72,14 @@ class TimelinePlayer: AVQueuePlayer {
     pause()
     removeAllItems()
   }
+
+  func removeAllItemsExceptCurrentItem() {
+    for item in items() {
+      if item != currentItem {
+        removeItem(item)
+      }
+    }
+  }
 }
 
 // MARK: - TimelinePlayerDelegate
