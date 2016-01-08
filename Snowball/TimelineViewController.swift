@@ -79,32 +79,9 @@ class TimelineViewController: UIViewController {
     return nil
   }
 
-  private func clipsAfterClip(clip: Clip) -> Results<ActiveModel> {
-    guard let clipCreatedAt = clip.createdAt else { return Clip.findAll() }
-    return Clip.findAll().filter("createdAt > %@", clipCreatedAt).sorted("createdAt", ascending: true)
-  }
-
   private func clipsIncludingAndAfterClip(clip: Clip) -> Results<ActiveModel> {
     guard let clipCreatedAt = clip.createdAt else { return Clip.findAll() }
     return Clip.findAll().filter("createdAt >= %@", clipCreatedAt).sorted("createdAt", ascending: true)
-  }
-
-  private func enqueueClipsInPlayer(clips: Results<ActiveModel>, readyToPlayFirstClip: (() -> Void)?) {
-    guard let clip = clips.first as? Clip else { return }
-    enqueueClipInPlayer(clip) {
-      readyToPlayFirstClip?()
-      self.enqueueClipsInPlayer(self.clipsAfterClip(clip), readyToPlayFirstClip: nil)
-    }
-  }
-
-  private func enqueueClipInPlayer(clip: Clip, completion: (() -> Void)) {
-    guard let playerItem = ClipPlayerItem(clip: clip) else { completion(); return }
-    playerItem.asset.loadValuesAsynchronouslyForKeys(["playable"]) {
-      dispatch_async(dispatch_get_main_queue()) {
-        self.player.insertItem(playerItem, afterItem: self.player.items().last)
-        completion()
-      }
-    }
   }
 }
 
@@ -190,6 +167,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
     print("did transition")
     scrollToCellForClip(toClip)
+    player.queueManager.topUpPlayerQueueWithClips(clipsIncludingAndAfterClip(toClip))
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
@@ -208,13 +186,13 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
       } else {
         player.pause()
         player.removeAllItemsExceptCurrentItem()
-        enqueueClipsInPlayer(clipsIncludingAndAfterClip(clip)) {
+        player.queueManager.topUpPlayerQueueWithClips(clipsIncludingAndAfterClip(clip)) {
           self.player.advanceToNextItem()
           self.player.play()
         }
       }
     } else {
-      enqueueClipsInPlayer(clipsIncludingAndAfterClip(clip)) {
+      player.queueManager.topUpPlayerQueueWithClips(clipsIncludingAndAfterClip(clip)) {
         self.player.play()
       }
     }

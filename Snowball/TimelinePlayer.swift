@@ -13,6 +13,7 @@ class TimelinePlayer: AVQueuePlayer {
   // MARK: Properties
 
   private(set) var playing = false
+  let queueManager = PlayerQueueManager()
   var delegate: TimelinePlayerDelegate?
   var currentClip: Clip? {
     didSet {
@@ -38,6 +39,7 @@ class TimelinePlayer: AVQueuePlayer {
 
   override init() {
     super.init()
+    queueManager.player = self
     addObserver(self, forKeyPath: currentItemKeyPath, options: .New, context: nil)
   }
 

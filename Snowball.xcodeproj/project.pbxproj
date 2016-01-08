@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6ADFB79AE9E2FA151B23A329 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ACC25125F448DC6A7011ECF /* Pods.framework */; };
+		BA1881111C3F5F01002202B4 /* PlayerQueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1881101C3F5F01002202B4 /* PlayerQueueManager.swift */; };
+		BA1881131C3F6D09002202B4 /* LoadPlayerItemOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1881121C3F6D09002202B4 /* LoadPlayerItemOperation.swift */; };
 		BA73BCC01C1A71B400B22588 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCBF1C1A71B400B22588 /* AppDelegate.swift */; };
 		BA73BCC71C1A71B400B22588 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA73BCC61C1A71B400B22588 /* Assets.xcassets */; };
 		BA73BCCA1C1A71B400B22588 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA73BCC81C1A71B400B22588 /* LaunchScreen.storyboard */; };
@@ -34,6 +36,8 @@
 		1AB0D3543714478732381B18 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		4ACC25125F448DC6A7011ECF /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA990512BC7FECAEF9AE902D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		BA1881101C3F5F01002202B4 /* PlayerQueueManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerQueueManager.swift; sourceTree = "<group>"; };
+		BA1881121C3F6D09002202B4 /* LoadPlayerItemOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadPlayerItemOperation.swift; sourceTree = "<group>"; };
 		BA73BCBC1C1A71B400B22588 /* Snowball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snowball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA73BCBF1C1A71B400B22588 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA73BCC61C1A71B400B22588 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -154,9 +158,11 @@
 			isa = PBXGroup;
 			children = (
 				BA98087B1C3BA71D00F86C04 /* TimelinePlayer.swift */,
-				BA9808771C3BA01C00F86C04 /* PlayerView.swift */,
-				BA98087D1C3C1BE600F86C04 /* ClipPlayerItem.swift */,
 				BAFC72161C3DC5F600D46747 /* CachedAssetResourceLoader.swift */,
+				BA1881101C3F5F01002202B4 /* PlayerQueueManager.swift */,
+				BA1881121C3F6D09002202B4 /* LoadPlayerItemOperation.swift */,
+				BA98087D1C3C1BE600F86C04 /* ClipPlayerItem.swift */,
+				BA9808771C3BA01C00F86C04 /* PlayerView.swift */,
 			);
 			name = Player;
 			sourceTree = "<group>";
@@ -317,7 +323,9 @@
 				BA98087C1C3BA71D00F86C04 /* TimelinePlayer.swift in Sources */,
 				BAFC72171C3DC5F600D46747 /* CachedAssetResourceLoader.swift in Sources */,
 				BAD774FD1C1DD8CF00ED1A64 /* ClipCollectionViewCell.swift in Sources */,
+				BA1881111C3F5F01002202B4 /* PlayerQueueManager.swift in Sources */,
 				BAD775091C1DFF9200ED1A64 /* SnowballAPI.swift in Sources */,
+				BA1881131C3F6D09002202B4 /* LoadPlayerItemOperation.swift in Sources */,
 				BA73BCE91C1AB84F00B22588 /* Clip.swift in Sources */,
 				BA9410A11C1FB33500D366C5 /* Database.swift in Sources */,
 				BAD775011C1DF36B00ED1A64 /* UIColor+Hex.swift in Sources */,
