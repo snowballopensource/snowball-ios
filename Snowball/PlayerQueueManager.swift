@@ -52,19 +52,21 @@ class PlayerQueueManager {
 
   private func enqueueClipsInPlayer(clips: [Clip], readyToPlayFirstClip: (() -> Void)?) {
     guard let clip = clips.first else { return }
-    enqueueClipInPlayer(clip)
-    readyToPlayFirstClip?()
+    enqueueClipInPlayer(clip) {
+      readyToPlayFirstClip?()
+    }
     var nextClips = clips
     nextClips.removeFirst()
     enqueueClipsInPlayer(nextClips, readyToPlayFirstClip: nil)
   }
 
-  private func enqueueClipInPlayer(clip: Clip) {
+  private func enqueueClipInPlayer(clip: Clip, completion: () -> Void) {
     guard let playerItem = ClipPlayerItem(clip: clip) else { return }
     let loadPlayerItemOperation = LoadPlayerItemOperation(playerItem: playerItem)
     loadPlayerItemOperation.completionBlock = {
       dispatch_async(dispatch_get_main_queue()) {
         self.player?.insertItem(playerItem, afterItem: self.player?.items().last)
+        completion()
       }
     }
     queue.addOperation(loadPlayerItemOperation)
