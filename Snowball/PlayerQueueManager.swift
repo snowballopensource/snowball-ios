@@ -25,9 +25,23 @@ class PlayerQueueManager {
 
   // MARK: Internal
 
-  // TODO: Rename, since it isn't always topping up, and includes 4? already in queue
-  func topUpPlayerQueueWithClips(clips: Results<ActiveModel>, readyToPlayFirstClip: (() -> Void)? = nil) {
-    let clipsEnqueuedCount = (player?.items().count ?? 0) + queue.operationCount
+  func ensurePlayerQueueToppedOffWithClips(clips: Results<ActiveModel>) {
+    preparePlayerQueueToPlayClips(clips, readyToPlayFirstClip: nil)
+  }
+
+  func preparePlayerQueueToPlayClips(clips: Results<ActiveModel>, readyToPlayFirstClip: (() -> Void)?) {
+    preparePlayerQueueWithClips(clips, ignoringPlayerItemsCount: false, readyToPlayFirstClip: readyToPlayFirstClip)
+  }
+
+  func preparePlayerQueueToSkipToClips(clips: Results<ActiveModel>, readyToPlayFirstClip: (() -> Void)?) {
+    preparePlayerQueueWithClips(clips, ignoringPlayerItemsCount: true, readyToPlayFirstClip: readyToPlayFirstClip)
+  }
+
+  // MARK: Private
+
+  private func preparePlayerQueueWithClips(clips: Results<ActiveModel>, ignoringPlayerItemsCount: Bool, readyToPlayFirstClip: (() -> Void)?) {
+    let playerItemsCount = ignoringPlayerItemsCount ? 0 : (player?.items().count ?? 0)
+    let clipsEnqueuedCount = playerItemsCount + queue.operationCount
     let totalClipsCount = clips.count
     let bufferClipCount = (totalClipsCount >= desiredMaximumClipCount) ? desiredMaximumClipCount : totalClipsCount
     let countOfClipsToAdd = bufferClipCount - clipsEnqueuedCount
@@ -35,8 +49,6 @@ class PlayerQueueManager {
     guard let clipsToEnqueue = Array(clips[clipsEnqueuedCount...(clipsEnqueuedCount + countOfClipsToAdd - 1)]) as? [Clip] else { return }
     enqueueClipsInPlayer(clipsToEnqueue, readyToPlayFirstClip: readyToPlayFirstClip)
   }
-
-  // MARK: Private
 
   private func enqueueClipsInPlayer(clips: [Clip], readyToPlayFirstClip: (() -> Void)?) {
     guard let clip = clips.first else { return }

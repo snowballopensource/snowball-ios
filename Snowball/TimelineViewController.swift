@@ -167,7 +167,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
     print("did transition")
     scrollToCellForClip(toClip)
-    player.queueManager.topUpPlayerQueueWithClips(clipsIncludingAndAfterClip(toClip))
+    player.queueManager.ensurePlayerQueueToppedOffWithClips(clipsIncludingAndAfterClip(toClip))
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
@@ -186,13 +186,13 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
       } else {
         player.pause()
         player.removeAllItemsExceptCurrentItem()
-        player.queueManager.topUpPlayerQueueWithClips(clipsIncludingAndAfterClip(clip)) {
+        player.queueManager.preparePlayerQueueToSkipToClips(clipsIncludingAndAfterClip(clip)) {
           self.player.advanceToNextItem()
           self.player.play()
         }
       }
     } else {
-      player.queueManager.topUpPlayerQueueWithClips(clipsIncludingAndAfterClip(clip)) {
+      player.queueManager.preparePlayerQueueToPlayClips(clipsIncludingAndAfterClip(clip)) {
         self.player.play()
       }
     }
