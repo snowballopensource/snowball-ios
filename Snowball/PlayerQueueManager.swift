@@ -22,6 +22,9 @@ class PlayerQueueManager {
     return queue
   }()
   private let desiredMaximumClipCount = 3
+  private var uncancelledOperations: [NSOperation] {
+    return queue.operations.filter({ !$0.cancelled })
+  }
 
   // MARK: Internal
 
@@ -45,7 +48,7 @@ class PlayerQueueManager {
 
   private func preparePlayerQueueWithClips(clips: Results<ActiveModel>, ignoringPlayerItemsCount: Bool, readyToPlayFirstClip: (() -> Void)?) {
     let playerItemsCount = ignoringPlayerItemsCount ? 0 : (player?.items().count ?? 0)
-    let clipsEnqueuedCount = playerItemsCount + queue.operationCount
+    let clipsEnqueuedCount = playerItemsCount + uncancelledOperations.count
     let totalClipsCount = clips.count
     let bufferClipCount = (totalClipsCount >= desiredMaximumClipCount) ? desiredMaximumClipCount : totalClipsCount
     let countOfClipsToAdd = bufferClipCount - clipsEnqueuedCount
