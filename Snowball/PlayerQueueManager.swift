@@ -37,6 +37,10 @@ class PlayerQueueManager {
     preparePlayerQueueWithClips(clips, ignoringPlayerItemsCount: true, readyToPlayFirstClip: readyToPlayFirstClip)
   }
 
+  func cancelAllOperations() {
+    queue.cancelAllOperations()
+  }
+
   // MARK: Private
 
   private func preparePlayerQueueWithClips(clips: Results<ActiveModel>, ignoringPlayerItemsCount: Bool, readyToPlayFirstClip: (() -> Void)?) {
@@ -64,9 +68,11 @@ class PlayerQueueManager {
     guard let playerItem = ClipPlayerItem(clip: clip) else { return }
     let loadPlayerItemOperation = LoadPlayerItemOperation(playerItem: playerItem)
     loadPlayerItemOperation.completionBlock = {
-      dispatch_async(dispatch_get_main_queue()) {
-        self.player?.insertItem(playerItem, afterItem: self.player?.items().last)
-        completion()
+      if !loadPlayerItemOperation.cancelled {
+        dispatch_async(dispatch_get_main_queue()) {
+          self.player?.insertItem(playerItem, afterItem: self.player?.items().last)
+          completion()
+        }
       }
     }
     queue.addOperation(loadPlayerItemOperation)

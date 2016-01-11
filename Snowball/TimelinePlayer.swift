@@ -27,7 +27,7 @@ class TimelinePlayer: AVQueuePlayer {
       if beginningPlayback { delegate?.timelinePlayer(self, didBeginPlaybackWithFirstClip: newValue!) }
       if continuingPlayback { delegate?.timelinePlayer(self, didTransitionFromClip: oldValue!, toClip: newValue!) }
       if endingPlayback {
-        playing = false // This handles when playback stops by reaching end of avail. clips
+        stop() // This handles when playback stops by reaching end of avail. clips
         delegate?.timelinePlayer(self, didEndPlaybackWithLastClip: oldValue!)
       }
     }
@@ -70,6 +70,7 @@ class TimelinePlayer: AVQueuePlayer {
   }
 
   func stop() {
+    queueManager.cancelAllOperations()
     playing = false
     pause()
     removeAllItems()
