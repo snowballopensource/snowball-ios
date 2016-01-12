@@ -58,7 +58,7 @@ class TimelineViewController: UIViewController {
 
     SnowballAPI.requestObjects(.GetClipStream(page: 1)) { (response: ObjectResponse<[Clip]>) in
       switch response {
-      case .Success: break
+      case .Success(let clips): self.deleteClipsNotInClips(clips)
       case .Failure(let error): print(error) // TODO: Handle error
       }
     }
@@ -82,6 +82,18 @@ class TimelineViewController: UIViewController {
   private func clipsIncludingAndAfterClip(clip: Clip) -> Results<ActiveModel> {
     guard let clipCreatedAt = clip.createdAt else { return Clip.findAll() }
     return Clip.findAll().filter("createdAt >= %@", clipCreatedAt).sorted("createdAt", ascending: true)
+  }
+
+  private func deleteClipsNotInClips(clips: [Clip]) {
+    var clipIDs = [String]()
+    for clip in clips {
+      guard let clipID = clip.id else { break }
+      clipIDs.append(clipID)
+    }
+    let clipsToDelete = Clip.findAll().filter("NOT id IN %@", clipIDs)
+    Database.performTransaction {
+      Database.realm.deleteWithNotification(clipsToDelete)
+    }
   }
 }
 
