@@ -166,9 +166,13 @@ extension TimelineViewController: TimelinePlayerDelegate {
     return true
   }
 
+  func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
+    print("will begin")
+    scrollToCellForClip(clip)
+  }
+
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlaybackWithFirstClip clip: Clip) {
     print("did begin")
-    scrollToCellForClip(clip)
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {

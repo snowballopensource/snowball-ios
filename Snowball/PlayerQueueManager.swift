@@ -15,6 +15,7 @@ class PlayerQueueManager {
   // MARK: Properties
 
   weak var player: AVQueuePlayer?
+  var delegate: PlayerQueueManagerDelegate?
   private let queue: NSOperationQueue = {
     let queue = NSOperationQueue()
     queue.qualityOfService = .UserInitiated
@@ -36,6 +37,7 @@ class PlayerQueueManager {
   }
 
   func preparePlayerQueueToPlayClip(clip: Clip, readyToPlayFirstClip: (() -> Void)?) {
+    delegate?.queueManager(self, willPreparePlayerQueueToPlayClip: clip)
     fillPlayerQueueWithClips(clipsIncludingAndAfterClip(clip), ignoringPlayerItemsCount: false, readyToPlayFirstClip: readyToPlayFirstClip)
   }
 
@@ -93,4 +95,9 @@ class PlayerQueueManager {
     guard let clipCreatedAt = clip.createdAt else { return Clip.findAll() }
     return Clip.findAll().filter("createdAt > %@", clipCreatedAt).sorted("createdAt", ascending: true)
   }
+}
+
+// MARK: - PlayerQueueManagerDelegate
+protocol PlayerQueueManagerDelegate {
+  func queueManager(queueManager: PlayerQueueManager, willPreparePlayerQueueToPlayClip clip: Clip)
 }

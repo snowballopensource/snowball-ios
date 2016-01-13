@@ -40,6 +40,7 @@ class TimelinePlayer: AVQueuePlayer {
   override init() {
     super.init()
     queueManager.player = self
+    queueManager.delegate = self
     addObserver(self, forKeyPath: currentItemKeyPath, options: .New, context: nil)
   }
 
@@ -85,9 +86,17 @@ class TimelinePlayer: AVQueuePlayer {
   }
 }
 
+// MARK: PlayerQueueManagerDelegate
+extension TimelinePlayer: PlayerQueueManagerDelegate {
+  func queueManager(queueManager: PlayerQueueManager, willPreparePlayerQueueToPlayClip clip: Clip) {
+    delegate?.timelinePlayer(self, willBeginPlaybackWithFirstClip: clip)
+  }
+}
+
 // MARK: - TimelinePlayerDelegate
 protocol TimelinePlayerDelegate {
   func timelinePlayerShouldBeginPlayback(timelinePlayer: TimelinePlayer) -> Bool
+  func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip)
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlaybackWithFirstClip clip: Clip)
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip)
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip)
