@@ -13,7 +13,7 @@ class LoadPlayerItemOperation: NSOperation {
 
   // MARK: Properties
 
-  private let playerItem: AVPlayerItem
+  let playerItem: AVPlayerItem
 
   // MARK: Initializers
 

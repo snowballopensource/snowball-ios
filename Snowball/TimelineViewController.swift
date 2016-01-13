@@ -79,11 +79,6 @@ class TimelineViewController: UIViewController {
     return nil
   }
 
-  private func clipsIncludingAndAfterClip(clip: Clip) -> Results<ActiveModel> {
-    guard let clipCreatedAt = clip.createdAt else { return Clip.findAll() }
-    return Clip.findAll().filter("createdAt >= %@", clipCreatedAt).sorted("createdAt", ascending: true)
-  }
-
   private func deleteClipsNotInClips(clips: [Clip]) {
     var clipIDs = [String]()
     for clip in clips {
@@ -179,7 +174,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
     print("did transition")
     scrollToCellForClip(toClip)
-    player.queueManager.ensurePlayerQueueToppedOffWithClips(clipsIncludingAndAfterClip(toClip))
+    player.queueManager.ensurePlayerQueueToppedOff()
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
@@ -198,13 +193,13 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
       } else {
         player.pause()
         player.removeAllItemsExceptCurrentItem()
-        player.queueManager.preparePlayerQueueToSkipToClips(clipsIncludingAndAfterClip(clip)) {
+        player.queueManager.preparePlayerQueueToSkipToClip(clip) {
           self.player.advanceToNextItem()
           self.player.play()
         }
       }
     } else {
-      player.queueManager.preparePlayerQueueToPlayClips(clipsIncludingAndAfterClip(clip)) {
+      player.queueManager.preparePlayerQueueToPlayClip(clip) {
         self.player.play()
       }
     }

@@ -28,16 +28,19 @@ class PlayerQueueManager {
 
   // MARK: Internal
 
-  func ensurePlayerQueueToppedOffWithClips(clips: Results<ActiveModel>) {
-    preparePlayerQueueToPlayClips(clips, readyToPlayFirstClip: nil)
+  func ensurePlayerQueueToppedOff() {
+    let lastPlayerClip = (player?.items().last as? ClipPlayerItem)?.clip
+    let lastLoadingClip = ((uncancelledOperations.last as? LoadPlayerItemOperation)?.playerItem as? ClipPlayerItem)?.clip
+    guard let lastQueuedClip = lastLoadingClip != nil ? lastLoadingClip : lastPlayerClip else { return }
+    fillPlayerQueueWithClips(clipsAfterClip(lastQueuedClip), ignoringPlayerItemsCount: false, readyToPlayFirstClip: nil)
   }
 
-  func preparePlayerQueueToPlayClips(clips: Results<ActiveModel>, readyToPlayFirstClip: (() -> Void)?) {
-    preparePlayerQueueWithClips(clips, ignoringPlayerItemsCount: false, readyToPlayFirstClip: readyToPlayFirstClip)
+  func preparePlayerQueueToPlayClip(clip: Clip, readyToPlayFirstClip: (() -> Void)?) {
+    fillPlayerQueueWithClips(clipsIncludingAndAfterClip(clip), ignoringPlayerItemsCount: false, readyToPlayFirstClip: readyToPlayFirstClip)
   }
 
-  func preparePlayerQueueToSkipToClips(clips: Results<ActiveModel>, readyToPlayFirstClip: (() -> Void)?) {
-    preparePlayerQueueWithClips(clips, ignoringPlayerItemsCount: true, readyToPlayFirstClip: readyToPlayFirstClip)
+  func preparePlayerQueueToSkipToClip(clip: Clip, readyToPlayFirstClip: (() -> Void)?) {
+    fillPlayerQueueWithClips(clipsIncludingAndAfterClip(clip), ignoringPlayerItemsCount: true, readyToPlayFirstClip: readyToPlayFirstClip)
   }
 
   func cancelAllOperations() {
@@ -46,14 +49,14 @@ class PlayerQueueManager {
 
   // MARK: Private
 
-  private func preparePlayerQueueWithClips(clips: Results<ActiveModel>, ignoringPlayerItemsCount: Bool, readyToPlayFirstClip: (() -> Void)?) {
+  private func fillPlayerQueueWithClips(clips: Results<ActiveModel>, ignoringPlayerItemsCount: Bool, readyToPlayFirstClip: (() -> Void)?) {
     let playerItemsCount = ignoringPlayerItemsCount ? 0 : (player?.items().count ?? 0)
     let clipsEnqueuedCount = playerItemsCount + uncancelledOperations.count
     let totalClipsCount = clips.count
     let bufferClipCount = (totalClipsCount >= desiredMaximumClipCount) ? desiredMaximumClipCount : totalClipsCount
     let countOfClipsToAdd = bufferClipCount - clipsEnqueuedCount
     if countOfClipsToAdd <= 0 { return }
-    guard let clipsToEnqueue = Array(clips[clipsEnqueuedCount...(clipsEnqueuedCount + countOfClipsToAdd - 1)]) as? [Clip] else { return }
+    guard let clipsToEnqueue = Array(clips[0..<countOfClipsToAdd]) as? [Clip] else { return }
     enqueueClipsInPlayer(clipsToEnqueue, readyToPlayFirstClip: readyToPlayFirstClip)
   }
 
@@ -79,5 +82,15 @@ class PlayerQueueManager {
       }
     }
     queue.addOperation(loadPlayerItemOperation)
+  }
+
+  private func clipsIncludingAndAfterClip(clip: Clip) -> Results<ActiveModel> {
+    guard let clipCreatedAt = clip.createdAt else { return Clip.findAll() }
+    return Clip.findAll().filter("createdAt >= %@", clipCreatedAt).sorted("createdAt", ascending: true)
+  }
+
+  private func clipsAfterClip(clip: Clip) -> Results<ActiveModel> {
+    guard let clipCreatedAt = clip.createdAt else { return Clip.findAll() }
+    return Clip.findAll().filter("createdAt > %@", clipCreatedAt).sorted("createdAt", ascending: true)
   }
 }
