@@ -51,14 +51,14 @@ class PlayerQueueManager {
 
   // MARK: Private
 
-  private func fillPlayerQueueWithClips(clips: Results<ActiveModel>, ignoringPlayerItemsCount: Bool, readyToPlayFirstClip: (() -> Void)?) {
+  private func fillPlayerQueueWithClips(clips: Slice<Results<ActiveModel>>, ignoringPlayerItemsCount: Bool, readyToPlayFirstClip: (() -> Void)?) {
     let playerItemsCount = ignoringPlayerItemsCount ? 0 : (player?.items().count ?? 0)
     let clipsEnqueuedCount = playerItemsCount + uncancelledOperations.count
     let totalClipsLeftCount = clips.count
     let maxCountOfClipsToAdd = desiredMaximumClipCount - clipsEnqueuedCount
     let countOfClipsToAdd = (totalClipsLeftCount >= maxCountOfClipsToAdd) ? maxCountOfClipsToAdd : totalClipsLeftCount
     if countOfClipsToAdd <= 0 { return }
-    guard let clipsToEnqueue = Array(clips[0..<countOfClipsToAdd]) as? [Clip] else { return }
+    guard let clipsToEnqueue = Array(clips[clips.startIndex..<(clips.startIndex + countOfClipsToAdd)]) as? [Clip] else { return }
     enqueueClipsInPlayer(clipsToEnqueue, readyToPlayFirstClip: readyToPlayFirstClip)
   }
 
@@ -86,14 +86,15 @@ class PlayerQueueManager {
     queue.addOperation(loadPlayerItemOperation)
   }
 
-  private func clipsIncludingAndAfterClip(clip: Clip) -> Results<ActiveModel> {
-    guard let clipCreatedAt = clip.createdAt else { return Clip.findAll() }
-    return Clip.findAll().filter("createdAt >= %@", clipCreatedAt).sorted("createdAt", ascending: true)
+  private func clipsIncludingAndAfterClip(clip: Clip) -> Slice<Results<ActiveModel>> {
+    let clips = Clip.timelineClips()
+    guard let clipIndex = clips.indexOf(clip) else { return clips[clips.startIndex..<clips.endIndex] }
+    return clips[clipIndex..<clips.endIndex]
   }
 
-  private func clipsAfterClip(clip: Clip) -> Results<ActiveModel> {
-    guard let clipCreatedAt = clip.createdAt else { return Clip.findAll() }
-    return Clip.findAll().filter("createdAt > %@", clipCreatedAt).sorted("createdAt", ascending: true)
+  private func clipsAfterClip(clip: Clip) -> Slice<Results<ActiveModel>> {
+    let clips = clipsIncludingAndAfterClip(clip)
+    return clips[(clips.startIndex + 1)..<clips.endIndex]
   }
 }
 

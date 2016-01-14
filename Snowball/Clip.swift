@@ -6,6 +6,7 @@
 //  Copyright © 2015 Snowball, Inc. All rights reserved.
 //
 
+import RealmSwift
 import Foundation
 
 class Clip: ActiveModel {
@@ -40,5 +41,11 @@ class Clip: ActiveModel {
     if let userJSON = JSON["user"] as? JSONObject {
       self.user = User.fromJSONObject(userJSON) as User
     }
+  }
+
+  // MARK: Internal
+
+  class func timelineClips() -> Results<ActiveModel> {
+    return Clip.findAll().sorted("createdAt", ascending: true)
   }
 }
