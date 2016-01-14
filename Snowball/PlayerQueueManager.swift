@@ -54,9 +54,9 @@ class PlayerQueueManager {
   private func fillPlayerQueueWithClips(clips: Results<ActiveModel>, ignoringPlayerItemsCount: Bool, readyToPlayFirstClip: (() -> Void)?) {
     let playerItemsCount = ignoringPlayerItemsCount ? 0 : (player?.items().count ?? 0)
     let clipsEnqueuedCount = playerItemsCount + uncancelledOperations.count
-    let totalClipsCount = clips.count
-    let bufferClipCount = (totalClipsCount >= desiredMaximumClipCount) ? desiredMaximumClipCount : totalClipsCount
-    let countOfClipsToAdd = bufferClipCount - clipsEnqueuedCount
+    let totalClipsLeftCount = clips.count
+    let maxCountOfClipsToAdd = desiredMaximumClipCount - clipsEnqueuedCount
+    let countOfClipsToAdd = (totalClipsLeftCount >= maxCountOfClipsToAdd) ? maxCountOfClipsToAdd : totalClipsLeftCount
     if countOfClipsToAdd <= 0 { return }
     guard let clipsToEnqueue = Array(clips[0..<countOfClipsToAdd]) as? [Clip] else { return }
     enqueueClipsInPlayer(clipsToEnqueue, readyToPlayFirstClip: readyToPlayFirstClip)
