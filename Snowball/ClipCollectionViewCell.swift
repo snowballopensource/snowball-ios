@@ -25,6 +25,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
   var delegate: ClipCollectionViewCellDelegate?
 
   let thumbnailImageView = UIImageView()
+  let playheadImageView: UIImageView = {
+    let imageView = UIImageView(image: UIImage(named: "play"))
+    imageView.contentMode = .Center
+    imageView.tintColor = UIColor.whiteColor()
+    return imageView
+  }()
   let playButton = UIButton()
 
   // MARK: Initializers
@@ -38,6 +44,14 @@ class ClipCollectionViewCell: UICollectionViewCell {
       thumbnailImageView.top == thumbnailImageView.superview!.top
       thumbnailImageView.right == thumbnailImageView.superview!.right
       thumbnailImageView.height == thumbnailImageView.width
+    }
+
+    addSubview(playheadImageView)
+    constrain(playheadImageView, thumbnailImageView) { playheadImageView, thumbnailImageView in
+      playheadImageView.left == thumbnailImageView.left
+      playheadImageView.top == thumbnailImageView.top
+      playheadImageView.right == thumbnailImageView.right
+      playheadImageView.bottom == thumbnailImageView.bottom
     }
 
     addSubview(playButton)
@@ -62,10 +76,24 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   // MARK: Internal
 
-  func configueForClip(clip: Clip) {
+  func configueForClip(clip: Clip, state: ClipCollectionViewCellState = .Default) {
     if let thumbnailURLString = clip.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
       thumbnailImageView.setImageFromURL(thumbnailURL)
     }
+
+    setState(state, animated: false)
+  }
+
+  func setState(state: ClipCollectionViewCellState, animated: Bool) {
+    let bookmarked = state == .Bookmarked
+//    let options = state == .Options
+//    let playingIdle = state == .PlayingIdle
+//    let playingActive = state == .PlayingActive
+//    let pendingUpload = state == .PendingUpload
+//    let uploading = state == .Uploading
+//    let uploadFailed = state == .UploadFailed
+
+    playheadImageView.setHidden(!bookmarked, animated: animated)
   }
 
   // MARK: Private
@@ -78,4 +106,16 @@ class ClipCollectionViewCell: UICollectionViewCell {
 // MARK: - ClipCollectionViewCellDelegate
 protocol ClipCollectionViewCellDelegate {
   func clipCollectionViewCellPlayButtonTapped(cell: ClipCollectionViewCell)
+}
+
+// MARK: - ClipCollectionViewCellState
+enum ClipCollectionViewCellState {
+  case Default
+  case Bookmarked
+  case Options
+  case PlayingIdle
+  case PlayingActive
+  case PendingUpload
+  case Uploading
+  case UploadFailed
 }

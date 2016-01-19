@@ -10,6 +10,7 @@
 		6ADFB79AE9E2FA151B23A329 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ACC25125F448DC6A7011ECF /* Pods.framework */; };
 		BA1881111C3F5F01002202B4 /* PlayerQueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1881101C3F5F01002202B4 /* PlayerQueueManager.swift */; };
 		BA1881131C3F6D09002202B4 /* LoadPlayerItemOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1881121C3F6D09002202B4 /* LoadPlayerItemOperation.swift */; };
+		BA6318BB1C4DB85D00BB40AE /* UIView+HideAnimated.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6318BA1C4DB85D00BB40AE /* UIView+HideAnimated.swift */; };
 		BA73BCC01C1A71B400B22588 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCBF1C1A71B400B22588 /* AppDelegate.swift */; };
 		BA73BCC71C1A71B400B22588 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA73BCC61C1A71B400B22588 /* Assets.xcassets */; };
 		BA73BCCA1C1A71B400B22588 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA73BCC81C1A71B400B22588 /* LaunchScreen.storyboard */; };
@@ -38,6 +39,7 @@
 		AA990512BC7FECAEF9AE902D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		BA1881101C3F5F01002202B4 /* PlayerQueueManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerQueueManager.swift; sourceTree = "<group>"; };
 		BA1881121C3F6D09002202B4 /* LoadPlayerItemOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadPlayerItemOperation.swift; sourceTree = "<group>"; };
+		BA6318BA1C4DB85D00BB40AE /* UIView+HideAnimated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+HideAnimated.swift"; sourceTree = "<group>"; };
 		BA73BCBC1C1A71B400B22588 /* Snowball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snowball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA73BCBF1C1A71B400B22588 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA73BCC61C1A71B400B22588 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				BAD775001C1DF36B00ED1A64 /* UIColor+Hex.swift */,
 				BAD7750C1C1E02AC00ED1A64 /* NSError+Snowball.swift */,
 				BAB280711C35AD8200AE098D /* UIImageView+Cache.swift */,
+				BA6318BA1C4DB85D00BB40AE /* UIView+HideAnimated.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				BA9808781C3BA01C00F86C04 /* PlayerView.swift in Sources */,
 				BA98087C1C3BA71D00F86C04 /* TimelinePlayer.swift in Sources */,
 				BAFC72171C3DC5F600D46747 /* CachedAssetResourceLoader.swift in Sources */,
+				BA6318BB1C4DB85D00BB40AE /* UIView+HideAnimated.swift in Sources */,
 				BAD774FD1C1DD8CF00ED1A64 /* ClipCollectionViewCell.swift in Sources */,
 				BA1881111C3F5F01002202B4 /* PlayerQueueManager.swift in Sources */,
 				BAD775091C1DFF9200ED1A64 /* SnowballAPI.swift in Sources */,

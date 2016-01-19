@@ -90,6 +90,22 @@ class TimelineViewController: UIViewController {
       Database.realm.deleteWithNotification(clipsToDelete)
     }
   }
+
+  private func updateStateForCell(cell: ClipCollectionViewCell) {
+    guard let clip = clipForCell(cell) else { return }
+    cell.setState(cellStateForClip(clip), animated: true)
+  }
+
+  private func updateStateForVisibleCells() {
+    for cell in timelineCollectionView.visibleCells() as! [ClipCollectionViewCell] {
+      updateStateForCell(cell)
+    }
+  }
+
+  private func cellStateForClip(clip: Clip) -> ClipCollectionViewCellState {
+    // TODO: Determine state correctly.
+    return .Default
+  }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -106,7 +122,7 @@ extension TimelineViewController: UICollectionViewDataSource {
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(ClipCollectionViewCell), forIndexPath: indexPath) as! ClipCollectionViewCell
     if let clip = fetchedResultsController.objectAtIndexPath(indexPath) {
-      cell.configueForClip(clip)
+      cell.configueForClip(clip, state: cellStateForClip(clip))
     }
     cell.delegate = self
     return cell
