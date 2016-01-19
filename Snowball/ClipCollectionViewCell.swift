@@ -87,19 +87,35 @@ class ClipCollectionViewCell: UICollectionViewCell {
   func setState(state: ClipCollectionViewCellState, animated: Bool) {
     let bookmarked = state == .Bookmarked
 //    let options = state == .Options
-//    let playingIdle = state == .PlayingIdle
-//    let playingActive = state == .PlayingActive
+    let playingIdle = state == .PlayingIdle
+    let playingActive = state == .PlayingActive
+    let playing = (playingIdle || playingActive)
 //    let pendingUpload = state == .PendingUpload
 //    let uploading = state == .Uploading
 //    let uploadFailed = state == .UploadFailed
 
     playheadImageView.setHidden(!bookmarked, animated: animated)
+    setThumbnailScaledDown(playing, animated: animated)
   }
 
   // MARK: Private
 
   @objc private func playButtonTapped() {
     delegate?.clipCollectionViewCellPlayButtonTapped(self)
+  }
+
+  private func setThumbnailScaledDown(scaledDown: Bool, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.4) {
+        self.setThumbnailScaledDown(scaledDown, animated: false)
+      }
+    } else {
+      if scaledDown {
+        thumbnailImageView.transform = CGAffineTransformMakeScale(0.857, 0.857)
+      } else {
+        thumbnailImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+      }
+    }
   }
 }
 

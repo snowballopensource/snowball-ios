@@ -103,6 +103,13 @@ class TimelineViewController: UIViewController {
     return nil
   }
 
+  private func cellForClip(clip: Clip) -> ClipCollectionViewCell? {
+    if let indexPath = fetchedResultsController.indexPathForObject(clip) {
+      return timelineCollectionView.cellForItemAtIndexPath(indexPath) as? ClipCollectionViewCell
+    }
+    return nil
+  }
+
   private func deleteClipsNotInClips(clips: [Clip]) {
     var clipIDs = [String]()
     for clip in clips {
@@ -112,6 +119,14 @@ class TimelineViewController: UIViewController {
     let clipsToDelete = Clip.findAll().filter("NOT id IN %@", clipIDs)
     Database.performTransaction {
       Database.realm.deleteWithNotification(clipsToDelete)
+    }
+  }
+
+  private func setStateToPlayingClipForVisibleCells(clip: Clip) {
+    let playingClipCell = cellForClip(clip)
+    for cell in timelineCollectionView.visibleCells() as! [ClipCollectionViewCell] {
+      let state: ClipCollectionViewCellState = (cell == playingClipCell) ? .PlayingActive : .PlayingIdle
+      cell.setState(state, animated: true)
     }
   }
 
@@ -224,21 +239,22 @@ extension TimelineViewController: TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
     print("will begin")
     scrollToCellForClip(clip, animated: true)
+    setStateToPlayingClipForVisibleCells(clip)
   }
 
-  func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlaybackWithFirstClip clip: Clip) {
-    print("did begin")
-  }
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlaybackWithFirstClip clip: Clip) {}
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
     print("did transition")
     scrollToCellForClip(toClip, animated: true)
     player.queueManager.ensurePlayerQueueToppedOff()
+    updateStateForVisibleCells()
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
     print("did end")
     timeline.bookmarkedClip = clip
+    updateStateForVisibleCells()
   }
 }
 
