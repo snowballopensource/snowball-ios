@@ -15,7 +15,8 @@ class TimelineViewController: UIViewController {
 
   // MARK: Properties
 
-  let player = TimelinePlayer()
+  let timeline = Timeline(type: .Home)
+  let player: TimelinePlayer
   let playerView = PlayerView()
   let timelineCollectionView = TimelineCollectionView()
   let fetchedResultsController: FetchedResultsController<Clip> = {
@@ -24,8 +25,16 @@ class TimelineViewController: UIViewController {
     return FetchedResultsController<Clip>(fetchRequest: fetchRequest, sectionNameKeyPath: nil, cacheName: nil)
   }()
   var collectionViewUpdates = [NSBlockOperation]()
-  var bookmarkedClip: Clip {
-    return fetchedResultsController.fetchedObjects.last!
+
+  // MARK: Initializers
+
+  init() {
+    player = TimelinePlayer(timeline: timeline)
+    super.init(nibName: nil, bundle: nil)
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 
   // MARK: UIViewController
@@ -76,7 +85,9 @@ class TimelineViewController: UIViewController {
   // MARK: - Private
 
   private func scrollToBookmarkedClip(animated: Bool) {
-    scrollToCellForClip(bookmarkedClip, animated: animated)
+    if let bookmarkedClip = timeline.bookmarkedClip {
+      scrollToCellForClip(bookmarkedClip, animated: animated)
+    }
   }
 
   private func scrollToCellForClip(clip: Clip, animated: Bool) {
@@ -116,7 +127,7 @@ class TimelineViewController: UIViewController {
   }
 
   private func cellStateForClip(clip: Clip) -> ClipCollectionViewCellState {
-    if clip == bookmarkedClip {
+    if clip == timeline.bookmarkedClip {
       return .Bookmarked
     }
     return .Default

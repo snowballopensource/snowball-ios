@@ -14,6 +14,7 @@ class PlayerQueueManager {
 
   // MARK: Properties
 
+  private let timeline: Timeline
   weak var player: AVQueuePlayer?
   var delegate: PlayerQueueManagerDelegate?
   private let queue: NSOperationQueue = {
@@ -27,22 +28,28 @@ class PlayerQueueManager {
     return queue.operations.filter({ !$0.cancelled })
   }
 
+  // MARK: Initializers
+
+  init(timeline: Timeline) {
+    self.timeline = timeline
+  }
+
   // MARK: Internal
 
   func ensurePlayerQueueToppedOff() {
     let lastPlayerClip = (player?.items().last as? ClipPlayerItem)?.clip
     let lastLoadingClip = ((uncancelledOperations.last as? LoadPlayerItemOperation)?.playerItem as? ClipPlayerItem)?.clip
     guard let lastQueuedClip = lastLoadingClip != nil ? lastLoadingClip : lastPlayerClip else { return }
-    fillPlayerQueueWithClips(clipsAfterClip(lastQueuedClip), ignoringPlayerItemsCount: false, readyToPlayFirstClip: nil)
+    fillPlayerQueueWithClips(timeline.clipsAfterClip(lastQueuedClip), ignoringPlayerItemsCount: false, readyToPlayFirstClip: nil)
   }
 
   func preparePlayerQueueToPlayClip(clip: Clip, readyToPlayFirstClip: (() -> Void)?) {
     delegate?.queueManager(self, willPreparePlayerQueueToPlayClip: clip)
-    fillPlayerQueueWithClips(clipsIncludingAndAfterClip(clip), ignoringPlayerItemsCount: false, readyToPlayFirstClip: readyToPlayFirstClip)
+    fillPlayerQueueWithClips(timeline.clipsIncludingAndAfterClip(clip), ignoringPlayerItemsCount: false, readyToPlayFirstClip: readyToPlayFirstClip)
   }
 
   func preparePlayerQueueToSkipToClip(clip: Clip, readyToPlayFirstClip: (() -> Void)?) {
-    fillPlayerQueueWithClips(clipsIncludingAndAfterClip(clip), ignoringPlayerItemsCount: true, readyToPlayFirstClip: readyToPlayFirstClip)
+    fillPlayerQueueWithClips(timeline.clipsIncludingAndAfterClip(clip), ignoringPlayerItemsCount: true, readyToPlayFirstClip: readyToPlayFirstClip)
   }
 
   func cancelAllOperations() {
@@ -84,17 +91,6 @@ class PlayerQueueManager {
       }
     }
     queue.addOperation(loadPlayerItemOperation)
-  }
-
-  private func clipsIncludingAndAfterClip(clip: Clip) -> Slice<Results<ActiveModel>> {
-    let clips = Clip.timelineClips()
-    guard let clipIndex = clips.indexOf(clip) else { return clips[clips.startIndex..<clips.endIndex] }
-    return clips[clipIndex..<clips.endIndex]
-  }
-
-  private func clipsAfterClip(clip: Clip) -> Slice<Results<ActiveModel>> {
-    let clips = clipsIncludingAndAfterClip(clip)
-    return clips[(clips.startIndex + 1)..<clips.endIndex]
   }
 }
 

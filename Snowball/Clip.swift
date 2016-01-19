@@ -42,10 +42,4 @@ class Clip: ActiveModel {
       self.user = User.fromJSONObject(userJSON) as User
     }
   }
-
-  // MARK: Internal
-
-  class func timelineClips() -> Results<ActiveModel> {
-    return Clip.findAll().sorted("createdAt", ascending: true)
-  }
 }
