@@ -24,6 +24,9 @@ class TimelineViewController: UIViewController {
     return FetchedResultsController<Clip>(fetchRequest: fetchRequest, sectionNameKeyPath: nil, cacheName: nil)
   }()
   var collectionViewUpdates = [NSBlockOperation]()
+  var bookmarkedClip: Clip {
+    return fetchedResultsController.fetchedObjects.last!
+  }
 
   // MARK: UIViewController
 
@@ -64,11 +67,21 @@ class TimelineViewController: UIViewController {
     }
   }
 
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+
+    scrollToBookmarkedClip(false)
+  }
+
   // MARK: - Private
 
-  private func scrollToCellForClip(clip: Clip) {
+  private func scrollToBookmarkedClip(animated: Bool) {
+    scrollToCellForClip(bookmarkedClip, animated: animated)
+  }
+
+  private func scrollToCellForClip(clip: Clip, animated: Bool) {
     if let indexPath = fetchedResultsController.indexPathForObject(clip) {
-      timelineCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: true)
+      timelineCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: animated)
     }
   }
 
@@ -103,7 +116,9 @@ class TimelineViewController: UIViewController {
   }
 
   private func cellStateForClip(clip: Clip) -> ClipCollectionViewCellState {
-    // TODO: Determine state correctly.
+    if clip == bookmarkedClip {
+      return .Bookmarked
+    }
     return .Default
   }
 }
@@ -172,7 +187,12 @@ extension TimelineViewController: FetchedResultsControllerDelegate {
       for updateClosure in self.collectionViewUpdates {
         updateClosure.start()
       }
-      }, completion: nil)
+      }, completion: { _ in
+        if self.collectionViewUpdates.count > 0 {
+          self.updateStateForVisibleCells()
+          self.scrollToBookmarkedClip(true)
+        }
+    })
   }
 }
 
@@ -184,7 +204,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
     print("will begin")
-    scrollToCellForClip(clip)
+    scrollToCellForClip(clip, animated: true)
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlaybackWithFirstClip clip: Clip) {
@@ -193,7 +213,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
     print("did transition")
-    scrollToCellForClip(toClip)
+    scrollToCellForClip(toClip, animated: true)
     player.queueManager.ensurePlayerQueueToppedOff()
   }
 
