@@ -15,8 +15,28 @@ class Timeline {
 
   let type: TimelineType
   let clips: Results<ActiveModel>
+  private let kClipBookmarkDateKey = "ClipBookmarkDate"
   var bookmarkedClip: Clip? {
-    return clips.last as? Clip
+    get {
+      let filteredClips = clips.filter("id != NULL")
+      if let bookmarkDate = NSUserDefaults.standardUserDefaults().objectForKey(kClipBookmarkDateKey) as? NSDate {
+        if let clipAfterBookmark = filteredClips.filter("createdAt > %@", bookmarkDate).first as? Clip {
+          return clipAfterBookmark
+        }
+        if let clipAtBookmark = filteredClips.filter("createdAt == %@", bookmarkDate).first as? Clip {
+          return clipAtBookmark
+        }
+      }
+      return filteredClips.first as? Clip
+    }
+    set {
+      if let newClipBookmarkDate = newValue?.createdAt, let oldClipBookmarkDate = self.bookmarkedClip?.createdAt {
+        if oldClipBookmarkDate.compare(newClipBookmarkDate) == NSComparisonResult.OrderedAscending {
+          NSUserDefaults.standardUserDefaults().setObject(newClipBookmarkDate, forKey: kClipBookmarkDateKey)
+          NSUserDefaults.standardUserDefaults().synchronize()
+        }
+      }
+    }
   }
 
   // MARK: Initializers

@@ -127,10 +127,18 @@ class TimelineViewController: UIViewController {
   }
 
   private func cellStateForClip(clip: Clip) -> ClipCollectionViewCellState {
+    var state = ClipCollectionViewCellState.Default
     if clip == timeline.bookmarkedClip {
-      return .Bookmarked
+      state = .Bookmarked
     }
-    return .Default
+    if player.playing {
+      if player.currentClip == clip {
+        state = .PlayingActive
+      } else {
+        state = .PlayingIdle
+      }
+    }
+    return state
   }
 }
 
@@ -230,6 +238,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
     print("did end")
+    timeline.bookmarkedClip = clip
   }
 }
 
