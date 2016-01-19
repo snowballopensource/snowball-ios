@@ -32,6 +32,11 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return imageView
   }()
   let playButton = UIButton()
+  let dimOverlayView: UIView = {
+    let view = UIView()
+    view.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+    return view
+  }()
 
   // MARK: Initializers
 
@@ -62,6 +67,14 @@ class ClipCollectionViewCell: UICollectionViewCell {
       playButton.height == thumbnailImageView.height
     }
     playButton.addTarget(self, action: "playButtonTapped", forControlEvents: .TouchUpInside)
+
+    addSubview(dimOverlayView)
+    constrain(dimOverlayView) { dimOverlayView in
+      dimOverlayView.left == dimOverlayView.superview!.left
+      dimOverlayView.top == dimOverlayView.superview!.top
+      dimOverlayView.right == dimOverlayView.superview!.right
+      dimOverlayView.bottom == dimOverlayView.superview!.bottom
+    }
   }
 
   required init?(coder: NSCoder) {
@@ -96,6 +109,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     playheadImageView.setHidden(!bookmarked, animated: animated)
     setThumbnailScaledDown(playing, animated: animated)
+    dimOverlayView.setHidden(!playingIdle, animated: true)
   }
 
   // MARK: Private
