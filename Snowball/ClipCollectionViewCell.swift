@@ -32,6 +32,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return imageView
   }()
   let playButton = UIButton()
+  let userAvatarImageView = UserAvatarImageView()
   let dimOverlayView: UIView = {
     let view = UIView()
     view.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
@@ -68,6 +69,14 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
     playButton.addTarget(self, action: "playButtonTapped", forControlEvents: .TouchUpInside)
 
+    addSubview(userAvatarImageView)
+    constrain(userAvatarImageView, thumbnailImageView) { userAvatarImageView, thumbnailImageView in
+      userAvatarImageView.centerY == thumbnailImageView.bottom
+      userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
+      userAvatarImageView.width == 40
+      userAvatarImageView.height == userAvatarImageView.width
+    }
+
     addSubview(dimOverlayView)
     constrain(dimOverlayView) { dimOverlayView in
       dimOverlayView.left == dimOverlayView.superview!.left
@@ -85,6 +94,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   override func prepareForReuse() {
     thumbnailImageView.image = nil
+    userAvatarImageView.image = nil
   }
 
   // MARK: Internal
@@ -92,6 +102,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
   func configueForClip(clip: Clip, state: ClipCollectionViewCellState = .Default) {
     if let thumbnailURLString = clip.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
       thumbnailImageView.setImageFromURL(thumbnailURL)
+    }
+    if let user = clip.user {
+      userAvatarImageView.setUser(user)
     }
 
     setState(state, animated: false)
