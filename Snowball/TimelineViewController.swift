@@ -25,6 +25,7 @@ class TimelineViewController: UIViewController {
     return FetchedResultsController<Clip>(fetchRequest: fetchRequest, sectionNameKeyPath: nil, cacheName: nil)
   }()
   var collectionViewUpdates = [NSBlockOperation]()
+  var currentPage = 0
 
   // MARK: Initializers
 
@@ -60,6 +61,7 @@ class TimelineViewController: UIViewController {
       timelineCollectionView.bottom == timelineCollectionView.superview!.bottom
     }
     timelineCollectionView.dataSource = self
+    timelineCollectionView.enableInfiniteScrollingWithDelegate(self)
 
     fetchedResultsController.delegate = self
     fetchedResultsController.performFetch()
@@ -68,12 +70,7 @@ class TimelineViewController: UIViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
 
-    SnowballAPI.requestObjects(.GetClipStream(page: 1)) { (response: ObjectResponse<[Clip]>) in
-      switch response {
-      case .Success(let clips): self.deleteClipsNotInClips(clips)
-      case .Failure(let error): print(error) // TODO: Handle error
-      }
-    }
+    requestRefreshOfClips()
   }
 
   override func viewDidAppear(animated: Bool) {
@@ -83,6 +80,30 @@ class TimelineViewController: UIViewController {
   }
 
   // MARK: - Private
+
+  private func requestRefreshOfClips(completion: (() -> Void)? = nil) {
+    currentPage = 1
+    _requestClipsOnCurrentPage(completion)
+  }
+
+  private func requestNextPageOfClips(completion: (() -> Void)?) {
+    currentPage++
+    _requestClipsOnCurrentPage(completion)
+  }
+
+  private func _requestClipsOnCurrentPage(completion: (() -> Void)?) {
+    let requestedPage = currentPage
+    SnowballAPI.requestObjects(.GetClipStream(page: requestedPage)) { (response: ObjectResponse<[Clip]>) in
+      switch response {
+      case .Success(let clips):
+        if requestedPage == 1 {
+          self.deleteClipsNotInClips(clips)
+        }
+      case .Failure(let error): print(error) // TODO: Handle error
+      }
+      completion?()
+    }
+  }
 
   private func scrollToBookmarkedClip(animated: Bool) {
     if let bookmarkedClip = timeline.bookmarkedClip {
@@ -278,6 +299,15 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
       player.queueManager.preparePlayerQueueToPlayClip(clip) {
         self.player.play()
       }
+    }
+  }
+}
+
+// MARK: - UIScrollViewInfiniteScrollDelegate
+extension TimelineViewController: UIScrollViewInfiniteScrollDelegate {
+  func scrollViewDidPullToRefresh(scrollView: UIScrollView) {
+    requestNextPageOfClips {
+      scrollView.stopInfiniteScrollAnimation()
     }
   }
 }

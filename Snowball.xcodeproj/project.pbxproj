@@ -26,6 +26,7 @@
 		BAB280721C35AD8200AE098D /* UIImageView+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB280711C35AD8200AE098D /* UIImageView+Cache.swift */; };
 		BAB280741C35AEE800AE098D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB280731C35AEE800AE098D /* Util.swift */; };
 		BACA135E1C4DF09500387C5D /* UserAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA135D1C4DF09500387C5D /* UserAvatarImageView.swift */; };
+		BAD677AE1C5ADD5900B41507 /* UIScrollView+InfiniteScrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD677AD1C5ADD5900B41507 /* UIScrollView+InfiniteScrolling.swift */; };
 		BAD774FD1C1DD8CF00ED1A64 /* ClipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD774FC1C1DD8CF00ED1A64 /* ClipCollectionViewCell.swift */; };
 		BAD774FF1C1DE18E00ED1A64 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD774FE1C1DE18E00ED1A64 /* User.swift */; };
 		BAD775011C1DF36B00ED1A64 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD775001C1DF36B00ED1A64 /* UIColor+Hex.swift */; };
@@ -59,6 +60,7 @@
 		BAB280711C35AD8200AE098D /* UIImageView+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Cache.swift"; sourceTree = "<group>"; };
 		BAB280731C35AEE800AE098D /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		BACA135D1C4DF09500387C5D /* UserAvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAvatarImageView.swift; sourceTree = "<group>"; };
+		BAD677AD1C5ADD5900B41507 /* UIScrollView+InfiniteScrolling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+InfiniteScrolling.swift"; sourceTree = "<group>"; };
 		BAD774FC1C1DD8CF00ED1A64 /* ClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCollectionViewCell.swift; sourceTree = "<group>"; };
 		BAD774FE1C1DE18E00ED1A64 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BAD775001C1DF36B00ED1A64 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				BAD7750C1C1E02AC00ED1A64 /* NSError+Snowball.swift */,
 				BAB280711C35AD8200AE098D /* UIImageView+Cache.swift */,
 				BA6318BA1C4DB85D00BB40AE /* UIView+HideAnimated.swift */,
+				BAD677AD1C5ADD5900B41507 /* UIScrollView+InfiniteScrolling.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				BAB280721C35AD8200AE098D /* UIImageView+Cache.swift in Sources */,
 				BAD774FF1C1DE18E00ED1A64 /* User.swift in Sources */,
 				BAB280741C35AEE800AE098D /* Util.swift in Sources */,
+				BAD677AE1C5ADD5900B41507 /* UIScrollView+InfiniteScrolling.swift in Sources */,
 				BA73BCD41C1A766100B22588 /* TimelineCollectionView.swift in Sources */,
 				BA73BCD21C1A759100B22588 /* TimelineViewController.swift in Sources */,
 			);
