@@ -272,6 +272,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
     print("will begin")
+    navigationController?.setNavigationBarHidden(true, animated: true)
     scrollToCellForClip(clip, animated: true)
     setStateToPlayingClipForVisibleCells(clip)
   }
@@ -287,6 +288,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
     print("did end")
+    navigationController?.setNavigationBarHidden(false, animated: true)
     timeline.bookmarkedClip = clip
     updateStateForVisibleCells()
   }
