@@ -82,8 +82,10 @@ class PlayerQueueManager {
   private func enqueueClipInPlayer(clip: Clip, completion: () -> Void) {
     guard let playerItem = ClipPlayerItem(clip: clip) else { return }
     let loadPlayerItemOperation = LoadPlayerItemOperation(playerItem: playerItem)
+    weak var safeOperation = loadPlayerItemOperation
     loadPlayerItemOperation.completionBlock = {
-      if !loadPlayerItemOperation.cancelled {
+      guard let operation = safeOperation else { return }
+      if !operation.cancelled {
         dispatch_async(dispatch_get_main_queue()) {
           self.player?.insertItem(playerItem, afterItem: self.player?.items().last)
           completion()
