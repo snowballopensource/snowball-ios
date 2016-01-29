@@ -44,9 +44,7 @@ class TimelineViewController: UIViewController {
     super.viewDidLoad()
 
     navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-friends"), style: .Plain, target: self, action: "leftBarButtonItemPressed")
-    navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
     navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-flip-camera"), style: .Plain, target: self, action: "rightBarButtonItemPressed")
-    navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
 
     view.addSubview(playerView)
     constrain(playerView) { playerView in

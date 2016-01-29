@@ -16,11 +16,18 @@ class FriendsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    title = NSLocalizedString("Friends", comment: "")
     navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-camera-outline"), style: .Plain, target: self, action: "leftBarButtonItemPressed")
-    navigationItem.leftBarButtonItem?.tintColor = UIColor.blackColor()
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-add-friends"), style: .Plain, target: self, action: "rightBarButtonItemPressed")
   }
+
+  // MARK: Actions
 
   @objc private func leftBarButtonItemPressed() {
     AppDelegate.sharedInstance.window?.transitionRootViewControllerToViewController(HomeNavigationController())
+  }
+
+  @objc private func rightBarButtonItemPressed() {
+    print("NOT IMPLEMENTED: rightBarButtonItemPressed")
   }
 }
