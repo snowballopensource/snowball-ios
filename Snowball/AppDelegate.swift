@@ -14,6 +14,10 @@ class AppDelegate: UIResponder {
 
   // MARK: Properties
 
+  static var sharedInstance: AppDelegate {
+    return UIApplication.sharedApplication().delegate as! AppDelegate
+  }
+
   var window: UIWindow? = {
     let window = UIWindow(frame: UIScreen.mainScreen().bounds)
     window.backgroundColor = UIColor.whiteColor()

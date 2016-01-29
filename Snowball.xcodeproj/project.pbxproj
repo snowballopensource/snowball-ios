@@ -10,6 +10,9 @@
 		6ADFB79AE9E2FA151B23A329 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ACC25125F448DC6A7011ECF /* Pods.framework */; };
 		BA0B879D1C5B16990094D6D7 /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B879C1C5B16990094D6D7 /* HomeNavigationController.swift */; };
 		BA0B87A11C5B17B60094D6D7 /* UINavigationBar+Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B87A01C5B17B60094D6D7 /* UINavigationBar+Transparent.swift */; };
+		BA0B87A31C5B1ECF0094D6D7 /* FriendsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B87A21C5B1ECF0094D6D7 /* FriendsNavigationController.swift */; };
+		BA0B87A51C5B270F0094D6D7 /* UIWindow+RootViewControllerTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B87A41C5B270F0094D6D7 /* UIWindow+RootViewControllerTransition.swift */; };
+		BA0B87A71C5B298B0094D6D7 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B87A61C5B298B0094D6D7 /* FriendsViewController.swift */; };
 		BA1881111C3F5F01002202B4 /* PlayerQueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1881101C3F5F01002202B4 /* PlayerQueueManager.swift */; };
 		BA1881131C3F6D09002202B4 /* LoadPlayerItemOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1881121C3F6D09002202B4 /* LoadPlayerItemOperation.swift */; };
 		BA59956F1C4DC69100E14B6A /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA59956E1C4DC69100E14B6A /* Timeline.swift */; };
@@ -44,6 +47,9 @@
 		AA990512BC7FECAEF9AE902D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		BA0B879C1C5B16990094D6D7 /* HomeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
 		BA0B87A01C5B17B60094D6D7 /* UINavigationBar+Transparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Transparent.swift"; sourceTree = "<group>"; };
+		BA0B87A21C5B1ECF0094D6D7 /* FriendsNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsNavigationController.swift; sourceTree = "<group>"; };
+		BA0B87A41C5B270F0094D6D7 /* UIWindow+RootViewControllerTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+RootViewControllerTransition.swift"; sourceTree = "<group>"; };
+		BA0B87A61C5B298B0094D6D7 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		BA1881101C3F5F01002202B4 /* PlayerQueueManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerQueueManager.swift; sourceTree = "<group>"; };
 		BA1881121C3F6D09002202B4 /* LoadPlayerItemOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadPlayerItemOperation.swift; sourceTree = "<group>"; };
 		BA59956E1C4DC69100E14B6A /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
@@ -107,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				BA0B879C1C5B16990094D6D7 /* HomeNavigationController.swift */,
+				BA0B87A21C5B1ECF0094D6D7 /* FriendsNavigationController.swift */,
 			);
 			name = "Navigation Controllers";
 			sourceTree = "<group>";
@@ -162,6 +169,7 @@
 			children = (
 				BA0B879F1C5B16B30094D6D7 /* Navigation Controllers */,
 				BA73BCD11C1A759100B22588 /* TimelineViewController.swift */,
+				BA0B87A61C5B298B0094D6D7 /* FriendsViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -207,6 +215,7 @@
 				BA6318BA1C4DB85D00BB40AE /* UIView+HideAnimated.swift */,
 				BAD677AD1C5ADD5900B41507 /* UIScrollView+PullToLoad.swift */,
 				BA0B87A01C5B17B60094D6D7 /* UINavigationBar+Transparent.swift */,
+				BA0B87A41C5B270F0094D6D7 /* UIWindow+RootViewControllerTransition.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -347,6 +356,7 @@
 				BAD775071C1DFEAB00ED1A64 /* SnowballRoute.swift in Sources */,
 				BA9808781C3BA01C00F86C04 /* PlayerView.swift in Sources */,
 				BA0B879D1C5B16990094D6D7 /* HomeNavigationController.swift in Sources */,
+				BA0B87A51C5B270F0094D6D7 /* UIWindow+RootViewControllerTransition.swift in Sources */,
 				BA98087C1C3BA71D00F86C04 /* TimelinePlayer.swift in Sources */,
 				BA0B87A11C5B17B60094D6D7 /* UINavigationBar+Transparent.swift in Sources */,
 				BACA135E1C4DF09500387C5D /* UserAvatarImageView.swift in Sources */,
@@ -356,7 +366,9 @@
 				BA1881111C3F5F01002202B4 /* PlayerQueueManager.swift in Sources */,
 				BAD775091C1DFF9200ED1A64 /* SnowballAPI.swift in Sources */,
 				BA59956F1C4DC69100E14B6A /* Timeline.swift in Sources */,
+				BA0B87A31C5B1ECF0094D6D7 /* FriendsNavigationController.swift in Sources */,
 				BA1881131C3F6D09002202B4 /* LoadPlayerItemOperation.swift in Sources */,
+				BA0B87A71C5B298B0094D6D7 /* FriendsViewController.swift in Sources */,
 				BA73BCE91C1AB84F00B22588 /* Clip.swift in Sources */,
 				BA9410A11C1FB33500D366C5 /* Database.swift in Sources */,
 				BAD775011C1DF36B00ED1A64 /* UIColor+Hex.swift in Sources */,

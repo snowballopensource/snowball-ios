@@ -43,6 +43,11 @@ class TimelineViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-friends"), style: .Plain, target: self, action: "leftBarButtonItemPressed")
+    navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-flip-camera"), style: .Plain, target: self, action: "rightBarButtonItemPressed")
+    navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
+
     view.addSubview(playerView)
     constrain(playerView) { playerView in
       playerView.left == playerView.superview!.left
@@ -175,6 +180,16 @@ class TimelineViewController: UIViewController {
       }
     }
     return state
+  }
+
+  // MARK: Actions
+
+  @objc private func leftBarButtonItemPressed() {
+    AppDelegate.sharedInstance.window?.transitionRootViewControllerToViewController(FriendsNavigationController())
+  }
+
+  @objc private func rightBarButtonItemPressed() {
+    print("NOT IMPLEMENTED: rightBarButtonItemPressed")
   }
 }
 
