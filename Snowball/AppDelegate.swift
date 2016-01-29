@@ -17,7 +17,7 @@ class AppDelegate: UIResponder {
   var window: UIWindow? = {
     let window = UIWindow(frame: UIScreen.mainScreen().bounds)
     window.backgroundColor = UIColor.whiteColor()
-    window.rootViewController = TimelineViewController()
+    window.rootViewController = HomeNavigationController()
     return window
   }()
 }
