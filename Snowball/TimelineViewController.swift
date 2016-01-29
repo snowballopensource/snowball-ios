@@ -61,7 +61,7 @@ class TimelineViewController: UIViewController {
       timelineCollectionView.bottom == timelineCollectionView.superview!.bottom
     }
     timelineCollectionView.dataSource = self
-    timelineCollectionView.enableInfiniteScrollingWithDelegate(self)
+    timelineCollectionView.enablePullToLoadWithDelegate(self)
 
     fetchedResultsController.delegate = self
     fetchedResultsController.performFetch()
@@ -303,11 +303,11 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
   }
 }
 
-// MARK: - UIScrollViewInfiniteScrollDelegate
-extension TimelineViewController: UIScrollViewInfiniteScrollDelegate {
-  func scrollViewDidPullToRefresh(scrollView: UIScrollView) {
+// MARK: - UIScrollViewPullToLoadDelegate
+extension TimelineViewController: UIScrollViewPullToLoadDelegate {
+  func scrollViewDidPullToLoad(scrollView: UIScrollView) {
     requestNextPageOfClips {
-      scrollView.stopInfiniteScrollAnimation()
+      scrollView.stopPullToLoadAnimation()
     }
   }
 }
