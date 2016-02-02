@@ -21,7 +21,6 @@ class TimelineViewController: UIViewController {
   let timelineCollectionView = TimelineCollectionView()
   let fetchedResultsController: FetchedResultsController<Clip>
   var collectionViewUpdates = [NSBlockOperation]()
-  var currentPage = 0
 
   // MARK: Initializers
 
@@ -75,7 +74,7 @@ class TimelineViewController: UIViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
 
-    requestRefreshOfClips()
+    timeline.requestRefreshOfClips()
   }
 
   override func viewDidAppear(animated: Bool) {
@@ -85,30 +84,6 @@ class TimelineViewController: UIViewController {
   }
 
   // MARK: - Private
-
-  private func requestRefreshOfClips(completion: (() -> Void)? = nil) {
-    currentPage = 1
-    _requestClipsOnCurrentPage(completion)
-  }
-
-  private func requestNextPageOfClips(completion: (() -> Void)?) {
-    currentPage++
-    _requestClipsOnCurrentPage(completion)
-  }
-
-  private func _requestClipsOnCurrentPage(completion: (() -> Void)?) {
-    let requestedPage = currentPage
-    SnowballAPI.requestObjects(.GetClipStream(page: requestedPage)) { (response: ObjectResponse<[Clip]>) in
-      switch response {
-      case .Success(let clips):
-        if requestedPage == 1 {
-          self.deleteClipsNotInClips(clips)
-        }
-      case .Failure(let error): print(error) // TODO: Handle error
-      }
-      completion?()
-    }
-  }
 
   private func scrollToBookmarkedClip(animated: Bool) {
     if let bookmarkedClip = timeline.bookmarkedClip {
@@ -134,18 +109,6 @@ class TimelineViewController: UIViewController {
       return timelineCollectionView.cellForItemAtIndexPath(indexPath) as? ClipCollectionViewCell
     }
     return nil
-  }
-
-  private func deleteClipsNotInClips(clips: [Clip]) {
-    var clipIDs = [String]()
-    for clip in clips {
-      guard let clipID = clip.id else { break }
-      clipIDs.append(clipID)
-    }
-    let clipsToDelete = Clip.findAll().filter("NOT id IN %@", clipIDs)
-    Database.performTransaction {
-      Database.realm.deleteWithNotification(clipsToDelete)
-    }
   }
 
   private func setStateToPlayingClipForVisibleCells(clip: Clip) {
@@ -323,7 +286,7 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
 // MARK: - UIScrollViewPullToLoadDelegate
 extension TimelineViewController: UIScrollViewPullToLoadDelegate {
   func scrollViewDidPullToLoad(scrollView: UIScrollView) {
-    requestNextPageOfClips {
+    timeline.requestNextPageOfClips {
       scrollView.stopPullToLoadAnimation()
     }
   }

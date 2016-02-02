@@ -15,6 +15,7 @@ class Timeline {
 
   let type: TimelineType
   let clips: Results<ActiveModel>
+  var currentPage = 0
   private let kClipBookmarkDateKey = "ClipBookmarkDate"
   var bookmarkedClip: Clip? {
     get {
@@ -68,6 +69,50 @@ class Timeline {
   func clipsAfterClip(clip: Clip) -> Slice<Results<ActiveModel>> {
     let clips = clipsIncludingAndAfterClip(clip)
     return clips[(clips.startIndex + 1)..<clips.endIndex]
+  }
+
+  func requestRefreshOfClips(completion: (() -> Void)? = nil) {
+    currentPage = 1
+    requestClipsOnCurrentPage(completion)
+  }
+
+  func requestNextPageOfClips(completion: (() -> Void)?) {
+    currentPage++
+    requestClipsOnCurrentPage(completion)
+  }
+
+  // MARK: Private
+
+  private func requestClipsOnCurrentPage(completion: (() -> Void)?) {
+    let requestedPage = currentPage
+    let route: SnowballRoute = {
+      switch self.type {
+      case .Home: return SnowballRoute.GetClipStream(page: requestedPage)
+      case .User(let userID): return SnowballRoute.GetClipStreamForUser(userID: userID, page: requestedPage)
+      }
+    }()
+    SnowballAPI.requestObjects(route) { (response: ObjectResponse<[Clip]>) in
+      switch response {
+      case .Success(let clips):
+        if requestedPage == 1 {
+          self.deleteClipsNotInClips(clips)
+        }
+      case .Failure(let error): print(error) // TODO: Handle error
+      }
+      completion?()
+    }
+  }
+
+  private func deleteClipsNotInClips(clips: [Clip]) {
+    var clipIDs = [String]()
+    for clip in clips {
+      guard let clipID = clip.id else { break }
+      clipIDs.append(clipID)
+    }
+    let clipsToDelete = Clip.findAll().filter("NOT id IN %@", clipIDs)
+    Database.performTransaction {
+      Database.realm.deleteWithNotification(clipsToDelete)
+    }
   }
 }
 
