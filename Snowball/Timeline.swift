@@ -99,7 +99,7 @@ class Timeline {
     SnowballAPI.requestObjects(route) { (response: ObjectResponse<[Clip]>) in
       switch response {
       case .Success(let clips):
-        if requestedPage == 1 {
+        if requestedPage == 1 && self.type == .Home {
           self.deleteClipsNotInClips(clips)
         }
       case .Failure(let error): print(error) // TODO: Handle error
@@ -129,9 +129,18 @@ enum TimelineType {
   // MARK: Properties
 
   var allowsBookmark: Bool {
-    switch self {
-    case .Home: return true
-    default: return false
+    if self == .Home {
+      return true
     }
+    return false
+  }
+}
+
+extension TimelineType: Equatable {}
+func ==(lhs: TimelineType, rhs: TimelineType) -> Bool {
+  switch (lhs, rhs) {
+  case (.Home, .Home): return true
+  case (.User(let lhsUserID), .User(let rhsUserID)): return lhsUserID == rhsUserID
+  default: return false
   }
 }
