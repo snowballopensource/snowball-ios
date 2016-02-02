@@ -44,7 +44,11 @@ class TimelineViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-friends"), style: .Plain, target: self, action: "leftBarButtonItemPressed")
+    navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: "backBarButtonItemPressed")
+    navigationItem.backBarButtonItem?.tintColor = UIColor.whiteColor()
+    if navigationController?.viewControllers.first == self {
+      navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-friends"), style: .Plain, target: self, action: "leftBarButtonItemPressed")
+    }
     navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-flip-camera"), style: .Plain, target: self, action: "rightBarButtonItemPressed")
 
     view.addSubview(playerView)
@@ -150,6 +154,10 @@ class TimelineViewController: UIViewController {
   }
 
   // MARK: Actions
+
+  @objc private func backBarButtonItemPressed() {
+    navigationController?.popViewControllerAnimated(true)
+  }
 
   @objc private func leftBarButtonItemPressed() {
     AppDelegate.sharedInstance.window?.transitionRootViewControllerToViewController(FriendsNavigationController())
