@@ -78,13 +78,17 @@ class TimelineViewController: UIViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
 
-    timeline.requestRefreshOfClips()
+    if isAppearingForFirstTime() {
+      timeline.requestRefreshOfClips()
+    }
   }
 
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
 
-    scrollToBookmarkedClipAnimated(false)
+    if isAppearingForFirstTime() {
+      scrollToBookmarkedClipAnimated(false)
+    }
   }
 
   // MARK: - Private

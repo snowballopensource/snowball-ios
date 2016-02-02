@@ -31,6 +31,7 @@
 		BA98087E1C3C1BE600F86C04 /* ClipPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA98087D1C3C1BE600F86C04 /* ClipPlayerItem.swift */; };
 		BAB280721C35AD8200AE098D /* UIImageView+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB280711C35AD8200AE098D /* UIImageView+Cache.swift */; };
 		BAB280741C35AEE800AE098D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB280731C35AEE800AE098D /* Util.swift */; };
+		BAC8419A1C606CE90076CBEE /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC841991C606CE90076CBEE /* UIViewController+Navigation.swift */; };
 		BACA135E1C4DF09500387C5D /* UserAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA135D1C4DF09500387C5D /* UserAvatarImageView.swift */; };
 		BAD677AE1C5ADD5900B41507 /* UIScrollView+PullToLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD677AD1C5ADD5900B41507 /* UIScrollView+PullToLoad.swift */; };
 		BAD774FD1C1DD8CF00ED1A64 /* ClipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD774FC1C1DD8CF00ED1A64 /* ClipCollectionViewCell.swift */; };
@@ -71,6 +72,7 @@
 		BA98087D1C3C1BE600F86C04 /* ClipPlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPlayerItem.swift; sourceTree = "<group>"; };
 		BAB280711C35AD8200AE098D /* UIImageView+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Cache.swift"; sourceTree = "<group>"; };
 		BAB280731C35AEE800AE098D /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		BAC841991C606CE90076CBEE /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
 		BACA135D1C4DF09500387C5D /* UserAvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAvatarImageView.swift; sourceTree = "<group>"; };
 		BAD677AD1C5ADD5900B41507 /* UIScrollView+PullToLoad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+PullToLoad.swift"; sourceTree = "<group>"; };
 		BAD774FC1C1DD8CF00ED1A64 /* ClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				BA0B87A01C5B17B60094D6D7 /* UINavigationBar+Transparent.swift */,
 				BA0B87A81C5B2D140094D6D7 /* UINavigationBar+Height.swift */,
 				BA0B87A41C5B270F0094D6D7 /* UIWindow+RootViewControllerTransition.swift */,
+				BAC841991C606CE90076CBEE /* UIViewController+Navigation.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				BAD775091C1DFF9200ED1A64 /* SnowballAPI.swift in Sources */,
 				BA59956F1C4DC69100E14B6A /* Timeline.swift in Sources */,
 				BA0B87A31C5B1ECF0094D6D7 /* FriendsNavigationController.swift in Sources */,
+				BAC8419A1C606CE90076CBEE /* UIViewController+Navigation.swift in Sources */,
 				BA1881131C3F6D09002202B4 /* LoadPlayerItemOperation.swift in Sources */,
 				BA0B87A71C5B298B0094D6D7 /* FriendsViewController.swift in Sources */,
 				BA73BCE91C1AB84F00B22588 /* Clip.swift in Sources */,
