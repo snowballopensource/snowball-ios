@@ -33,6 +33,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
   }()
   let playButton = UIButton()
   let userAvatarImageView = UserAvatarImageView()
+  let profileButton = UIButton()
   let dimOverlayView: UIView = {
     let view = UIView()
     view.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
@@ -76,6 +77,15 @@ class ClipCollectionViewCell: UICollectionViewCell {
       userAvatarImageView.width == 40
       userAvatarImageView.height == userAvatarImageView.width
     }
+
+    addSubview(profileButton)
+    constrain(profileButton, userAvatarImageView) { (profileButton, userAvatarImageView) in
+      profileButton.left == userAvatarImageView.left
+      profileButton.top == userAvatarImageView.top
+      profileButton.right == userAvatarImageView.right
+      profileButton.height == userAvatarImageView.height
+    }
+    profileButton.addTarget(self, action: "profileButtonTapped", forControlEvents: .TouchUpInside)
 
     addSubview(dimOverlayView)
     constrain(dimOverlayView) { dimOverlayView in
@@ -131,6 +141,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
     delegate?.clipCollectionViewCellPlayButtonTapped(self)
   }
 
+  @objc private func profileButtonTapped() {
+    delegate?.clipCollectionViewCellProfileButtonTapped(self)
+  }
+
   private func setThumbnailScaledDown(scaledDown: Bool, animated: Bool) {
     if animated {
       UIView.animateWithDuration(0.4) {
@@ -149,6 +163,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 // MARK: - ClipCollectionViewCellDelegate
 protocol ClipCollectionViewCellDelegate {
   func clipCollectionViewCellPlayButtonTapped(cell: ClipCollectionViewCell)
+  func clipCollectionViewCellProfileButtonTapped(cell: ClipCollectionViewCell)
 }
 
 // MARK: - ClipCollectionViewCellState

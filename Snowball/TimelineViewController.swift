@@ -80,14 +80,18 @@ class TimelineViewController: UIViewController {
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
 
-    scrollToBookmarkedClip(false)
+    scrollToBookmarkedClipIfAppropriateAnimated(false)
   }
 
   // MARK: - Private
 
-  private func scrollToBookmarkedClip(animated: Bool) {
-    if let bookmarkedClip = timeline.bookmarkedClip {
-      scrollToCellForClip(bookmarkedClip, animated: animated)
+  private func scrollToBookmarkedClipIfAppropriateAnimated(animated: Bool) {
+    switch timeline.type {
+    case .Home:
+      if let bookmarkedClip = timeline.bookmarkedClip {
+        scrollToCellForClip(bookmarkedClip, animated: animated)
+      }
+    default: break
     }
   }
 
@@ -223,7 +227,7 @@ extension TimelineViewController: FetchedResultsControllerDelegate {
       }, completion: { _ in
         if self.collectionViewUpdates.count > 0 {
           self.updateStateForVisibleCells()
-          self.scrollToBookmarkedClip(true)
+          self.scrollToBookmarkedClipIfAppropriateAnimated(true)
         }
     })
   }
@@ -280,6 +284,11 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
         self.player.play()
       }
     }
+  }
+
+  func clipCollectionViewCellProfileButtonTapped(cell: ClipCollectionViewCell) {
+    guard let clip = clipForCell(cell), let userID = clip.user?.id else { return }
+    navigationController?.pushViewController(TimelineViewController(timelineType: .User(userID: userID)), animated: true)
   }
 }
 
