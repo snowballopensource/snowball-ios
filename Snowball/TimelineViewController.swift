@@ -15,7 +15,7 @@ class TimelineViewController: UIViewController {
 
   // MARK: Properties
 
-  let timeline = Timeline(type: .Home)
+  let timeline: Timeline
   let player: TimelinePlayer
   let playerView = PlayerView()
   let timelineCollectionView = TimelineCollectionView()
@@ -29,7 +29,8 @@ class TimelineViewController: UIViewController {
 
   // MARK: Initializers
 
-  init() {
+  init(timelineType: TimelineType) {
+    timeline = Timeline(type: timelineType)
     player = TimelinePlayer(timeline: timeline)
     super.init(nibName: nil, bundle: nil)
   }

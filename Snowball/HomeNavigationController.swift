@@ -11,7 +11,7 @@ import UIKit
 
 class HomeNavigationController: UINavigationController {
   init() {
-    super.init(rootViewController: TimelineViewController())
+    super.init(rootViewController: TimelineViewController(timelineType: .Home))
     navigationBar.transparent = true
   }
 
