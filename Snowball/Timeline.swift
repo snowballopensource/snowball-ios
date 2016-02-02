@@ -39,14 +39,23 @@ class Timeline {
     }
   }
 
+  // Storing these values is so that the VC can generate a fetch request
+  // Once the third party FRC is gone, this can most likely be removed
+  let predicate: NSPredicate
+  let sortDescriptors: [SortDescriptor]
+
   // MARK: Initializers
 
   init(type: TimelineType) {
     self.type = type
+    sortDescriptors = [SortDescriptor(property: "createdAt", ascending: true)]
     switch type {
     case .Home:
-      self.clips = Clip.findAll().sorted("createdAt", ascending: true)
+      predicate = NSPredicate(value: true)
+    case .User(let userID):
+      predicate = NSPredicate(format: "user.id = %@", userID)
     }
+    self.clips = Clip.findAll().filter(predicate).sorted(sortDescriptors)
   }
 
   // MARK: Internal
@@ -65,4 +74,5 @@ class Timeline {
 // MARK: - TimelineType
 enum TimelineType {
   case Home
+  case User(userID: String)
 }

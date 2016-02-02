@@ -19,11 +19,7 @@ class TimelineViewController: UIViewController {
   let player: TimelinePlayer
   let playerView = PlayerView()
   let timelineCollectionView = TimelineCollectionView()
-  let fetchedResultsController: FetchedResultsController<Clip> = {
-    let fetchRequest = FetchRequest<Clip>(realm: Database.realm, predicate: NSPredicate(value: true))
-    fetchRequest.sortDescriptors = [SortDescriptor(property: "createdAt", ascending: true)]
-    return FetchedResultsController<Clip>(fetchRequest: fetchRequest, sectionNameKeyPath: nil, cacheName: nil)
-  }()
+  let fetchedResultsController: FetchedResultsController<Clip>
   var collectionViewUpdates = [NSBlockOperation]()
   var currentPage = 0
 
@@ -32,6 +28,11 @@ class TimelineViewController: UIViewController {
   init(timelineType: TimelineType) {
     timeline = Timeline(type: timelineType)
     player = TimelinePlayer(timeline: timeline)
+
+    let fetchRequest = FetchRequest<Clip>(realm: Database.realm, predicate: timeline.predicate)
+    fetchRequest.sortDescriptors = timeline.sortDescriptors
+    fetchedResultsController = FetchedResultsController<Clip>(fetchRequest: fetchRequest, sectionNameKeyPath: nil, cacheName: nil)
+
     super.init(nibName: nil, bundle: nil)
   }
 
