@@ -19,22 +19,27 @@ class Timeline {
   private let kClipBookmarkDateKey = "ClipBookmarkDate"
   var bookmarkedClip: Clip? {
     get {
-      let filteredClips = clips.filter("id != NULL")
-      if let bookmarkDate = NSUserDefaults.standardUserDefaults().objectForKey(kClipBookmarkDateKey) as? NSDate {
-        if let clipAfterBookmark = filteredClips.filter("createdAt > %@", bookmarkDate).first as? Clip {
-          return clipAfterBookmark
+      if type.allowsBookmark {
+        let filteredClips = clips.filter("id != NULL")
+        if let bookmarkDate = NSUserDefaults.standardUserDefaults().objectForKey(kClipBookmarkDateKey) as? NSDate {
+          if let clipAfterBookmark = filteredClips.filter("createdAt > %@", bookmarkDate).first as? Clip {
+            return clipAfterBookmark
+          }
+          if let clipAtBookmark = filteredClips.filter("createdAt == %@", bookmarkDate).first as? Clip {
+            return clipAtBookmark
+          }
         }
-        if let clipAtBookmark = filteredClips.filter("createdAt == %@", bookmarkDate).first as? Clip {
-          return clipAtBookmark
-        }
+        return filteredClips.first as? Clip
       }
-      return filteredClips.first as? Clip
+      return nil
     }
     set {
-      if let newClipBookmarkDate = newValue?.createdAt, let oldClipBookmarkDate = self.bookmarkedClip?.createdAt {
-        if oldClipBookmarkDate.compare(newClipBookmarkDate) == NSComparisonResult.OrderedAscending {
-          NSUserDefaults.standardUserDefaults().setObject(newClipBookmarkDate, forKey: kClipBookmarkDateKey)
-          NSUserDefaults.standardUserDefaults().synchronize()
+      if type.allowsBookmark {
+        if let newClipBookmarkDate = newValue?.createdAt, let oldClipBookmarkDate = self.bookmarkedClip?.createdAt {
+          if oldClipBookmarkDate.compare(newClipBookmarkDate) == NSComparisonResult.OrderedAscending {
+            NSUserDefaults.standardUserDefaults().setObject(newClipBookmarkDate, forKey: kClipBookmarkDateKey)
+            NSUserDefaults.standardUserDefaults().synchronize()
+          }
         }
       }
     }
@@ -120,4 +125,13 @@ class Timeline {
 enum TimelineType {
   case Home
   case User(userID: String)
+
+  // MARK: Properties
+
+  var allowsBookmark: Bool {
+    switch self {
+    case .Home: return true
+    default: return false
+    }
+  }
 }

@@ -84,19 +84,14 @@ class TimelineViewController: UIViewController {
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
 
-    scrollToBookmarkedClipIfAppropriateAnimated(false)
+    scrollToBookmarkedClipAnimated(false)
   }
 
   // MARK: - Private
 
-  private func scrollToBookmarkedClipIfAppropriateAnimated(animated: Bool) {
-    switch timeline.type {
-    case .Home:
-      if let bookmarkedClip = timeline.bookmarkedClip {
-        scrollToCellForClip(bookmarkedClip, animated: animated)
-      }
-    default: break
-    }
+  private func scrollToBookmarkedClipAnimated(animated: Bool) {
+    guard let bookmarkedClip = timeline.bookmarkedClip else { return }
+    scrollToCellForClip(bookmarkedClip, animated: animated)
   }
 
   private func scrollToCellForClip(clip: Clip, animated: Bool) {
@@ -235,7 +230,7 @@ extension TimelineViewController: FetchedResultsControllerDelegate {
       }, completion: { _ in
         if self.collectionViewUpdates.count > 0 {
           self.updateStateForVisibleCells()
-          self.scrollToBookmarkedClipIfAppropriateAnimated(true)
+          self.scrollToBookmarkedClipAnimated(true)
         }
     })
   }
