@@ -20,6 +20,7 @@ class Clip: ActiveModel {
   dynamic var createdAt: NSDate?
   dynamic var user: User?
   dynamic var inHomeTimeline = false
+  dynamic var timelineID: String?
 
   // MARK: ActiveModel
 

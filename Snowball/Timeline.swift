@@ -13,6 +13,7 @@ class Timeline {
 
   // MARK: Properties
 
+  let id = NSUUID().UUIDString
   let type: TimelineType
   let clips: Results<ActiveModel>
   var currentPage = 0
@@ -57,9 +58,9 @@ class Timeline {
     sortDescriptors = [SortDescriptor(property: "createdAt", ascending: true)]
     switch type {
     case .Home:
-      predicate = NSPredicate(format: "inHomeTimeline = %@", true)
+      predicate = NSPredicate(format: "inHomeTimeline == %@", true)
     case .User(let userID):
-      predicate = NSPredicate(format: "user.id = %@", userID)
+      predicate = NSPredicate(format: "timelineID == %@ && user.id == %@", id, userID)
     }
     self.clips = Clip.findAll().filter(predicate).sorted(sortDescriptors)
   }
@@ -98,6 +99,7 @@ class Timeline {
     }()
     SnowballAPI.requestObjects(route,
       eachObjectBeforeSave: { (clip: Clip) in
+        clip.timelineID = self.id
         if self.type == .Home {
           clip.inHomeTimeline = true
         }
