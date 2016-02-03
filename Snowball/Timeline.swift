@@ -57,7 +57,7 @@ class Timeline {
     sortDescriptors = [SortDescriptor(property: "createdAt", ascending: true)]
     switch type {
     case .Home:
-      predicate = NSPredicate(value: true)
+      predicate = NSPredicate(format: "inHomeTimeline = %@", true)
     case .User(let userID):
       predicate = NSPredicate(format: "user.id = %@", userID)
     }
@@ -96,16 +96,22 @@ class Timeline {
       case .User(let userID): return SnowballRoute.GetClipStreamForUser(userID: userID, page: requestedPage)
       }
     }()
-    SnowballAPI.requestObjects(route) { (response: ObjectResponse<[Clip]>) in
-      switch response {
-      case .Success(let clips):
-        if requestedPage == 1 && self.type == .Home {
-          self.deleteClipsNotInClips(clips)
+    SnowballAPI.requestObjects(route,
+      eachObjectBeforeSave: { (clip: Clip) in
+        if self.type == .Home {
+          clip.inHomeTimeline = true
         }
-      case .Failure(let error): print(error) // TODO: Handle error
-      }
-      completion?()
-    }
+      },
+      completion: { (response: ObjectResponse<[Clip]>) in
+        switch response {
+        case .Success(let clips):
+          if self.type == .Home && requestedPage == 1 {
+            self.deleteClipsNotInClips(clips)
+          }
+        case .Failure(let error): print(error) // TODO: Handle error
+        }
+        completion?()
+    })
   }
 
   private func deleteClipsNotInClips(clips: [Clip]) {

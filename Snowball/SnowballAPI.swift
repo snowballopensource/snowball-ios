@@ -14,6 +14,10 @@ struct SnowballAPI {
   // MARK: Internal
 
   static func requestObjects<T: ActiveModel>(route: SnowballRoute, completion: (response: ObjectResponse<[T]>) -> Void) {
+    requestObjects(route, eachObjectBeforeSave: nil, completion: completion)
+  }
+
+  static func requestObjects<T: ActiveModel>(route: SnowballRoute, eachObjectBeforeSave: ((object: T) -> Void)?, completion: (response: ObjectResponse<[T]>) -> Void) {
     Alamofire.request(route).responseJSON { afResponse in
       switch afResponse.result {
       case .Success(let value):
@@ -21,7 +25,10 @@ struct SnowballAPI {
           var objects = [T]()
           Database.performTransaction {
             objects = T.fromJSONArray(value)
-            for object in objects { object.save() }
+            for object in objects {
+              eachObjectBeforeSave?(object: object)
+              object.save()
+            }
           }
           completion(response: ObjectResponse.Success(objects))
         } else {

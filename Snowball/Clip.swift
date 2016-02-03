@@ -19,6 +19,7 @@ class Clip: ActiveModel {
   dynamic var liked = false
   dynamic var createdAt: NSDate?
   dynamic var user: User?
+  dynamic var inHomeTimeline = false
 
   // MARK: ActiveModel
 
