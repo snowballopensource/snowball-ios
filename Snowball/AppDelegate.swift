@@ -6,7 +6,6 @@
 //  Copyright © 2015 Snowball, Inc. All rights reserved.
 //
 
-import Haneke
 import UIKit
 
 @UIApplicationMain
@@ -30,7 +29,6 @@ class AppDelegate: UIResponder {
 extension AppDelegate: UIApplicationDelegate {
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     window?.makeKeyAndVisible()
-    Shared.dataCache.removeAll()
     return true
   }
 }
