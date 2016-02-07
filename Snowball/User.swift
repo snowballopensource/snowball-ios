@@ -18,7 +18,14 @@ class User: ActiveModel {
   dynamic var following = false
   dynamic var email: String?
   dynamic var phoneNumber: String?
-  dynamic var color: String = UIColor.blueColor().hexValue
+  dynamic var colorHex: String?
+
+  var color: UIColor {
+    guard let colorHex = colorHex else { return UIColor.SnowballColor.blueColor }
+    return UIColor(hex: colorHex)
+  }
+
+  static var currentUser: User? = nil
 
   // MARK: ActiveModel
 
