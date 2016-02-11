@@ -65,7 +65,7 @@ class CameraViewController: UIViewController {
 
   private var cancelPreviewButton: UIButton = {
     let button = UIButton()
-    button.setImage(UIImage(named: "x"), forState: UIControlState.Normal)
+    button.setImage(UIImage(named: "top-x"), forState: UIControlState.Normal)
     return button
   }()
 
