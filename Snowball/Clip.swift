@@ -30,7 +30,9 @@ class Clip: Object {
 
   override func importJSON(JSON: JSONObject) {
     if let id = JSON["id"] as? String {
-      self.id = id
+      if self.id == nil {
+        self.id = id
+      }
     }
     if let videoURL = JSON["video_url"] as? String {
       self.videoURL = videoURL
