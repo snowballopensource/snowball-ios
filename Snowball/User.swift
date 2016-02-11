@@ -6,9 +6,11 @@
 //  Copyright © 2015 Snowball, Inc. All rights reserved.
 //
 
+import Foundation
+import RealmSwift
 import UIKit
 
-class User: ActiveModel {
+class User: Object {
 
   // MARK: Properties
 
@@ -31,7 +33,11 @@ class User: ActiveModel {
 
   static var currentUser: User? = nil
 
-  // MARK: ActiveModel
+  // MARK: Object
+
+  override static func primaryKey() -> String? {
+    return "id"
+  }
 
   override static func ignoredProperties() -> [String] {
     return ["color"]

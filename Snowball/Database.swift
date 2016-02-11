@@ -24,15 +24,23 @@ struct Database {
     try! realm.write(transaction)
   }
 
-  static func save(object: ActiveModel) {
+  static func save(object: Object) {
     realm.addWithNotification(object, update: true)
   }
 
-  static func delete(object: ActiveModel) {
+  static func delete(object: Object) {
     realm.deleteWithNotification(object)
   }
 
-  static func findAll<T: ActiveModel>(type: T.Type) -> Results<T> {
+  static func findAll<T: Object>(type: T.Type) -> Results<T> {
     return realm.objects(type)
+  }
+
+  static func find<T: Object>(id: String) -> T? {
+    return findAll(T).filter("id = %@", id).first
+  }
+
+  static func findOrInitialize<T: Object>(id: String) -> T {
+    return find(id) ?? T.init()
   }
 }

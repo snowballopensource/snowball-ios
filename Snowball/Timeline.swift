@@ -15,7 +15,7 @@ class Timeline {
 
   let id = NSUUID().UUIDString
   let type: TimelineType
-  let clips: Results<ActiveModel>
+  let clips: Results<Clip>
   var currentPage = 0
   private let kClipBookmarkDateKey = "ClipBookmarkDate"
   var bookmarkedClip: Clip? {
@@ -23,14 +23,14 @@ class Timeline {
       if type.allowsBookmark {
         let filteredClips = clips.filter("id != NULL")
         if let bookmarkDate = NSUserDefaults.standardUserDefaults().objectForKey(kClipBookmarkDateKey) as? NSDate {
-          if let clipAfterBookmark = filteredClips.filter("createdAt > %@", bookmarkDate).first as? Clip {
+          if let clipAfterBookmark = filteredClips.filter("createdAt > %@", bookmarkDate).first {
             return clipAfterBookmark
           }
-          if let clipAtBookmark = filteredClips.filter("createdAt == %@", bookmarkDate).first as? Clip {
+          if let clipAtBookmark = filteredClips.filter("createdAt == %@", bookmarkDate).first {
             return clipAtBookmark
           }
         }
-        return filteredClips.first as? Clip
+        return filteredClips.first
       }
       return nil
     }
@@ -62,17 +62,17 @@ class Timeline {
     case .User(let userID):
       predicate = NSPredicate(format: "timelineID == %@ && user.id == %@", id, userID)
     }
-    self.clips = Clip.findAll().filter(predicate).sorted(sortDescriptors)
+    self.clips = Database.findAll(Clip).filter(predicate).sorted(sortDescriptors)
   }
 
   // MARK: Internal
 
-  func clipsIncludingAndAfterClip(clip: Clip) -> Slice<Results<ActiveModel>> {
+  func clipsIncludingAndAfterClip(clip: Clip) -> Slice<Results<Clip>> {
     guard let clipIndex = clips.indexOf(clip) else { return clips[clips.startIndex..<clips.endIndex] }
     return clips[clipIndex..<clips.endIndex]
   }
 
-  func clipsAfterClip(clip: Clip) -> Slice<Results<ActiveModel>> {
+  func clipsAfterClip(clip: Clip) -> Slice<Results<Clip>> {
     let clips = clipsIncludingAndAfterClip(clip)
     return clips[(clips.startIndex + 1)..<clips.endIndex]
   }
@@ -122,7 +122,7 @@ class Timeline {
       guard let clipID = clip.id else { break }
       clipIDs.append(clipID)
     }
-    let clipsToDelete = Clip.findAll().filter("NOT id IN %@", clipIDs)
+    let clipsToDelete = Database.findAll(Clip).filter("NOT id IN %@", clipIDs)
     Database.performTransaction {
       Database.realm.deleteWithNotification(clipsToDelete)
     }

@@ -8,16 +8,17 @@
 
 import Alamofire
 import Foundation
+import RealmSwift
 
 struct SnowballAPI {
 
   // MARK: Internal
 
-  static func requestObjects<T: ActiveModel>(route: SnowballRoute, completion: (response: ObjectResponse<[T]>) -> Void) {
+  static func requestObjects<T: Object>(route: SnowballRoute, completion: (response: ObjectResponse<[T]>) -> Void) {
     requestObjects(route, eachObjectBeforeSave: nil, completion: completion)
   }
 
-  static func requestObjects<T: ActiveModel>(route: SnowballRoute, eachObjectBeforeSave: ((object: T) -> Void)?, completion: (response: ObjectResponse<[T]>) -> Void) {
+  static func requestObjects<T: Object>(route: SnowballRoute, eachObjectBeforeSave: ((object: T) -> Void)?, completion: (response: ObjectResponse<[T]>) -> Void) {
     Alamofire.request(route).responseJSON { afResponse in
       switch afResponse.result {
       case .Success(let value):
@@ -27,7 +28,7 @@ struct SnowballAPI {
             objects = T.fromJSONArray(value)
             for object in objects {
               eachObjectBeforeSave?(object: object)
-              object.save()
+              Database.save(object)
             }
           }
           completion(response: ObjectResponse.Success(objects))

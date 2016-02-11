@@ -26,7 +26,6 @@
 		BA73BCCA1C1A71B400B22588 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA73BCC81C1A71B400B22588 /* LaunchScreen.storyboard */; };
 		BA73BCD21C1A759100B22588 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCD11C1A759100B22588 /* TimelineViewController.swift */; };
 		BA73BCD41C1A766100B22588 /* TimelineCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCD31C1A766100B22588 /* TimelineCollectionView.swift */; };
-		BA73BCE51C1AB56E00B22588 /* ActiveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCE41C1AB56E00B22588 /* ActiveModel.swift */; };
 		BA73BCE91C1AB84F00B22588 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCE81C1AB84F00B22588 /* Clip.swift */; };
 		BA9410A11C1FB33500D366C5 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9410A01C1FB33500D366C5 /* Database.swift */; };
 		BA9808781C3BA01C00F86C04 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9808771C3BA01C00F86C04 /* PlayerView.swift */; };
@@ -34,6 +33,7 @@
 		BA98087E1C3C1BE600F86C04 /* ClipPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA98087D1C3C1BE600F86C04 /* ClipPlayerItem.swift */; };
 		BAB280721C35AD8200AE098D /* UIImageView+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB280711C35AD8200AE098D /* UIImageView+Cache.swift */; };
 		BAB280741C35AEE800AE098D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB280731C35AEE800AE098D /* Util.swift */; };
+		BAC2EF7B1C6C40F60020005C /* RLMObject+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC2EF7A1C6C40F60020005C /* RLMObject+JSON.swift */; };
 		BAC8419A1C606CE90076CBEE /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC841991C606CE90076CBEE /* UIViewController+Navigation.swift */; };
 		BACA135E1C4DF09500387C5D /* UserAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA135D1C4DF09500387C5D /* UserAvatarImageView.swift */; };
 		BAD677AE1C5ADD5900B41507 /* UIScrollView+PullToLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD677AD1C5ADD5900B41507 /* UIScrollView+PullToLoad.swift */; };
@@ -71,7 +71,6 @@
 		BA73BCCB1C1A71B400B22588 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA73BCD11C1A759100B22588 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 		BA73BCD31C1A766100B22588 /* TimelineCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineCollectionView.swift; sourceTree = "<group>"; };
-		BA73BCE41C1AB56E00B22588 /* ActiveModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveModel.swift; sourceTree = "<group>"; };
 		BA73BCE81C1AB84F00B22588 /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
 		BA9410A01C1FB33500D366C5 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		BA9808771C3BA01C00F86C04 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
@@ -79,6 +78,7 @@
 		BA98087D1C3C1BE600F86C04 /* ClipPlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPlayerItem.swift; sourceTree = "<group>"; };
 		BAB280711C35AD8200AE098D /* UIImageView+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Cache.swift"; sourceTree = "<group>"; };
 		BAB280731C35AEE800AE098D /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		BAC2EF7A1C6C40F60020005C /* RLMObject+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RLMObject+JSON.swift"; sourceTree = "<group>"; };
 		BAC841991C606CE90076CBEE /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
 		BACA135D1C4DF09500387C5D /* UserAvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAvatarImageView.swift; sourceTree = "<group>"; };
 		BAD677AD1C5ADD5900B41507 /* UIScrollView+PullToLoad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+PullToLoad.swift"; sourceTree = "<group>"; };
@@ -169,7 +169,6 @@
 			isa = PBXGroup;
 			children = (
 				BA9410A01C1FB33500D366C5 /* Database.swift */,
-				BA73BCE41C1AB56E00B22588 /* ActiveModel.swift */,
 				BA73BCE81C1AB84F00B22588 /* Clip.swift */,
 				BAD774FE1C1DE18E00ED1A64 /* User.swift */,
 			);
@@ -224,6 +223,7 @@
 		BAD775021C1DF63A00ED1A64 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				BAC2EF7A1C6C40F60020005C /* RLMObject+JSON.swift */,
 				BAD775001C1DF36B00ED1A64 /* UIColor+Hex.swift */,
 				BAD7750C1C1E02AC00ED1A64 /* NSError+Snowball.swift */,
 				BAB280711C35AD8200AE098D /* UIImageView+Cache.swift */,
@@ -390,13 +390,13 @@
 				BA0B87A31C5B1ECF0094D6D7 /* FriendsNavigationController.swift in Sources */,
 				BAC8419A1C606CE90076CBEE /* UIViewController+Navigation.swift in Sources */,
 				BA67BDD11C6413D900720090 /* CameraView.swift in Sources */,
+				BAC2EF7B1C6C40F60020005C /* RLMObject+JSON.swift in Sources */,
 				BA1881131C3F6D09002202B4 /* LoadPlayerItemOperation.swift in Sources */,
 				BA0B87A71C5B298B0094D6D7 /* FriendsViewController.swift in Sources */,
 				BA73BCE91C1AB84F00B22588 /* Clip.swift in Sources */,
 				BA9410A11C1FB33500D366C5 /* Database.swift in Sources */,
 				BA0B87A91C5B2D140094D6D7 /* UINavigationBar+Height.swift in Sources */,
 				BAD775011C1DF36B00ED1A64 /* UIColor+Hex.swift in Sources */,
-				BA73BCE51C1AB56E00B22588 /* ActiveModel.swift in Sources */,
 				BA98087E1C3C1BE600F86C04 /* ClipPlayerItem.swift in Sources */,
 				BAB280721C35AD8200AE098D /* UIImageView+Cache.swift in Sources */,
 				BAD774FF1C1DE18E00ED1A64 /* User.swift in Sources */,

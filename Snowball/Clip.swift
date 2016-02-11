@@ -9,7 +9,7 @@
 import RealmSwift
 import Foundation
 
-class Clip: ActiveModel {
+class Clip: Object {
 
   // MARK: Properties
 
@@ -22,7 +22,11 @@ class Clip: ActiveModel {
   dynamic var inHomeTimeline = false
   dynamic var timelineID: String?
 
-  // MARK: ActiveModel
+  // MARK: Object
+
+  override static func primaryKey() -> String? {
+    return "id"
+  }
 
   override func importJSON(JSON: JSONObject) {
     if let id = JSON["id"] as? String {
