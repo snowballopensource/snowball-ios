@@ -188,7 +188,7 @@ class TimelineViewController: UIViewController {
   }
 
   @objc private func rightBarButtonItemPressed() {
-    print("NOT IMPLEMENTED: rightBarButtonItemPressed")
+    cameraViewController.changeCamera()
   }
 }
 
