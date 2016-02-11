@@ -340,11 +340,26 @@ extension TimelineViewController: CameraViewControllerDelegate {
   }
 
   func videoDidEndRecordingToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL) {
-    // TODO: Create clip
     // TODO: When clip is accepted, set state to .Default
+    let clip = Clip()
+    clip.state = .PendingUpload
+    clip.timelineID = timeline.id
+    clip.inHomeTimeline = true
+    clip.videoURL = videoURL.absoluteString
+    clip.thumbnailURL = thumbnailURL.absoluteString
+    clip.createdAt = NSDate()
+    clip.user = User.currentUser
+    Database.performTransaction {
+      Database.save(clip)
+    }
   }
 
   func videoPreviewDidCancel() {
     state = .Default
+    if let pendingClip = timeline.clipsPendingUpload.last {
+      Database.performTransaction {
+        Database.delete(pendingClip)
+      }
+    }
   }
 }

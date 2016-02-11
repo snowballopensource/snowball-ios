@@ -14,6 +14,7 @@ class User: Object {
 
   // MARK: Properties
 
+  dynamic var _id = NSUUID().UUIDString
   dynamic var id: String?
   dynamic var username: String?
   dynamic var avatarURL: String?
@@ -36,7 +37,7 @@ class User: Object {
   // MARK: Object
 
   override static func primaryKey() -> String? {
-    return "id"
+    return "_id"
   }
 
   override static func ignoredProperties() -> [String] {

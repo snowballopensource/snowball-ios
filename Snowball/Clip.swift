@@ -13,6 +13,7 @@ class Clip: Object {
 
   // MARK: Properties
 
+  dynamic var _id = NSUUID().UUIDString
   dynamic var id: String?
   dynamic var videoURL: String?
   dynamic var thumbnailURL: String?
@@ -21,11 +22,25 @@ class Clip: Object {
   dynamic var user: User?
   dynamic var inHomeTimeline = false
   dynamic var timelineID: String?
+  private dynamic var stateString = ClipState.Default.rawValue
+
+  var state: ClipState {
+    get {
+      return ClipState(rawValue: stateString) ?? .Default
+    }
+    set {
+      stateString = newValue.rawValue
+    }
+  }
 
   // MARK: Object
 
   override static func primaryKey() -> String? {
-    return "id"
+    return "_id"
+  }
+
+  override static func ignoredProperties() -> [String] {
+    return ["state"]
   }
 
   override func importJSON(JSON: JSONObject) {
@@ -50,4 +65,12 @@ class Clip: Object {
       self.user = User.fromJSONObject(userJSON) as User
     }
   }
+}
+
+// MARK: - ClipState
+enum ClipState: String {
+  case Default = "Default"
+  case PendingUpload = "PendingUpload"
+  case Uploading = "Uploading"
+  case UploadFailed = "UploadFailed"
 }
