@@ -1,5 +1,5 @@
 //
-//  CameraPreviewPlayer.swift
+//  SingleItemLoopingPlayer.swift
 //  Snowball
 //
 //  Created by James Martinez on 3/3/15.
@@ -9,11 +9,11 @@
 import AVFoundation
 import Foundation
 
-class CameraPreviewPlayer: AVPlayer {
+class SingleItemLoopingPlayer: AVPlayer {
 
   // MARK: Internal
 
-  func playVideo(videoURL: NSURL) {
+  func playVideoURL(videoURL: NSURL) {
     let playerItem = AVPlayerItem(URL: videoURL)
     registerPlayerItemForNotifications(playerItem)
     replaceCurrentItemWithPlayerItem(playerItem)

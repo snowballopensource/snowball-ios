@@ -16,11 +16,24 @@ class TimelineViewController: UIViewController {
   // MARK: Properties
 
   let timeline: Timeline
+  let cameraViewController = CameraViewController()
   let player: TimelinePlayer
   let playerView = PlayerView()
   let timelineCollectionView = TimelineCollectionView()
   let fetchedResultsController: FetchedResultsController<Clip>
   var collectionViewUpdates = [NSBlockOperation]()
+
+  // MARK: TimelineViewControllerState
+  private enum TimelineViewControllerState {
+    case Default, Recording, Playing
+  }
+  private var state = TimelineViewControllerState.Default {
+    didSet {
+      let navBarHidden = (state == .Playing || state == .Recording)
+      navigationController?.setNavigationBarHidden(navBarHidden, animated: true)
+      playerView.hidden = (state != .Playing)
+    }
+  }
 
   // MARK: Initializers
 
@@ -51,6 +64,17 @@ class TimelineViewController: UIViewController {
     }
     navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-flip-camera"), style: .Plain, target: self, action: "rightBarButtonItemPressed")
 
+    addChildViewController(cameraViewController)
+    view.addSubview(cameraViewController.view)
+    constrain(cameraViewController.view) { cameraView in
+      cameraView.left == cameraView.superview!.left
+      cameraView.top == cameraView.superview!.top
+      cameraView.right == cameraView.superview!.right
+      cameraView.height == cameraView.superview!.width
+    }
+    cameraViewController.didMoveToParentViewController(self)
+    cameraViewController.delegate = self
+
     view.addSubview(playerView)
     constrain(playerView) { playerView in
       playerView.left == playerView.superview!.left
@@ -60,6 +84,7 @@ class TimelineViewController: UIViewController {
     }
     player.delegate = self
     playerView.player = player
+    playerView.hidden = true
 
     view.addSubview(timelineCollectionView)
     constrain(timelineCollectionView, playerView) { timelineCollectionView, playerView in
@@ -248,7 +273,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
     print("will begin")
-    navigationController?.setNavigationBarHidden(true, animated: true)
+    state = .Playing
     scrollToCellForClip(clip, animated: true)
     setStateToPlayingClipForVisibleCells(clip)
   }
@@ -264,7 +289,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
     print("did end")
-    navigationController?.setNavigationBarHidden(false, animated: true)
+    state = .Default
     timeline.bookmarkedClip = clip
     updateStateForVisibleCells()
   }
@@ -305,5 +330,21 @@ extension TimelineViewController: UIScrollViewPullToLoadDelegate {
     timeline.requestNextPageOfClips {
       scrollView.stopPullToLoadAnimation()
     }
+  }
+}
+
+// MARK: - CameraViewControllerDelegate
+extension TimelineViewController: CameraViewControllerDelegate {
+  func videoDidBeginRecording() {
+    state = .Recording
+  }
+
+  func videoDidEndRecordingToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL) {
+    // TODO: Create clip
+    // TODO: When clip is accepted, set state to .Default
+  }
+
+  func videoPreviewDidCancel() {
+    state = .Default
   }
 }

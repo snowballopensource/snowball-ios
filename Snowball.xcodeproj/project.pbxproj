@@ -18,7 +18,7 @@
 		BA1881131C3F6D09002202B4 /* LoadPlayerItemOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1881121C3F6D09002202B4 /* LoadPlayerItemOperation.swift */; };
 		BA59956F1C4DC69100E14B6A /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA59956E1C4DC69100E14B6A /* Timeline.swift */; };
 		BA6318BB1C4DB85D00BB40AE /* UIView+HideAnimated.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6318BA1C4DB85D00BB40AE /* UIView+HideAnimated.swift */; };
-		BA67BDD01C6413D900720090 /* CameraPreviewPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA67BDCD1C6413D900720090 /* CameraPreviewPlayer.swift */; };
+		BA67BDD01C6413D900720090 /* SingleItemLoopingPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA67BDCD1C6413D900720090 /* SingleItemLoopingPlayer.swift */; };
 		BA67BDD11C6413D900720090 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA67BDCE1C6413D900720090 /* CameraView.swift */; };
 		BA67BDD21C6413D900720090 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA67BDCF1C6413D900720090 /* CameraViewController.swift */; };
 		BA73BCC01C1A71B400B22588 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCBF1C1A71B400B22588 /* AppDelegate.swift */; };
@@ -61,7 +61,7 @@
 		BA1881121C3F6D09002202B4 /* LoadPlayerItemOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadPlayerItemOperation.swift; sourceTree = "<group>"; };
 		BA59956E1C4DC69100E14B6A /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
 		BA6318BA1C4DB85D00BB40AE /* UIView+HideAnimated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+HideAnimated.swift"; sourceTree = "<group>"; };
-		BA67BDCD1C6413D900720090 /* CameraPreviewPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPreviewPlayer.swift; sourceTree = "<group>"; };
+		BA67BDCD1C6413D900720090 /* SingleItemLoopingPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleItemLoopingPlayer.swift; sourceTree = "<group>"; };
 		BA67BDCE1C6413D900720090 /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		BA67BDCF1C6413D900720090 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BA73BCBC1C1A71B400B22588 /* Snowball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snowball.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,7 +181,6 @@
 				BA0B879F1C5B16B30094D6D7 /* Navigation Controllers */,
 				BA73BCD11C1A759100B22588 /* TimelineViewController.swift */,
 				BA0B87A61C5B298B0094D6D7 /* FriendsViewController.swift */,
-				BA67BDCD1C6413D900720090 /* CameraPreviewPlayer.swift */,
 				BA67BDCF1C6413D900720090 /* CameraViewController.swift */,
 			);
 			name = "View Controllers";
@@ -201,6 +200,7 @@
 		BA98087F1C3C1C0600F86C04 /* Player */ = {
 			isa = PBXGroup;
 			children = (
+				BA67BDCD1C6413D900720090 /* SingleItemLoopingPlayer.swift */,
 				BA98087B1C3BA71D00F86C04 /* TimelinePlayer.swift */,
 				BAFC72161C3DC5F600D46747 /* CachedAssetResourceLoader.swift */,
 				BA1881101C3F5F01002202B4 /* PlayerQueueManager.swift */,
@@ -382,7 +382,7 @@
 				BAFC72171C3DC5F600D46747 /* CachedAssetResourceLoader.swift in Sources */,
 				BA6318BB1C4DB85D00BB40AE /* UIView+HideAnimated.swift in Sources */,
 				BAD774FD1C1DD8CF00ED1A64 /* ClipCollectionViewCell.swift in Sources */,
-				BA67BDD01C6413D900720090 /* CameraPreviewPlayer.swift in Sources */,
+				BA67BDD01C6413D900720090 /* SingleItemLoopingPlayer.swift in Sources */,
 				BAF578B11C67E317003F9404 /* UIColor+Snowball.swift in Sources */,
 				BA1881111C3F5F01002202B4 /* PlayerQueueManager.swift in Sources */,
 				BAD775091C1DFF9200ED1A64 /* SnowballAPI.swift in Sources */,

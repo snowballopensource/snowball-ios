@@ -13,11 +13,7 @@ import UIKit
 class CameraViewController: UIViewController {
 
   //
-  // TODO: NOTE TO SELF - This class should probably be refactored, 
-  // along with all of the other camera-related classes.
-  // CameraViewController (and everything in this file)
-  // CameraView
-  // CameraPreviewPlayer
+  // TODO: NOTE TO SELF - This class should probably be refactored
   //
 
   // MARK: Properties
@@ -63,8 +59,8 @@ class CameraViewController: UIViewController {
 
   private let playerView = PlayerView()
 
-  private var player: CameraPreviewPlayer {
-    return playerView.player as! CameraPreviewPlayer
+  private var player: SingleItemLoopingPlayer {
+    return playerView.player as! SingleItemLoopingPlayer
   }
 
   private var cancelPreviewButton: UIButton = {
@@ -145,7 +141,7 @@ class CameraViewController: UIViewController {
     recordingGestureRecognizer.addTarget(self, action: "toggleRecording:")
     cameraView.addGestureRecognizer(recordingGestureRecognizer)
 
-    playerView.player = CameraPreviewPlayer()
+    playerView.player = SingleItemLoopingPlayer()
     playerView.hidden = true
     view.addSubview(playerView)
     constrain(playerView) { (playerView) in
@@ -330,7 +326,7 @@ class CameraViewController: UIViewController {
 
   private func previewVideo(url: NSURL) {
     state = CameraViewControllerState.Previewing
-    player.playVideo(url)
+    player.playVideoURL(url)
   }
 
   @objc private func cancelPreview() {

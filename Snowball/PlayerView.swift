@@ -24,17 +24,6 @@ class PlayerView: UIView {
     }
   }
 
-  // MARK: Initializers
-
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    backgroundColor = UIColor.darkGrayColor()
-  }
-
-  required init?(coder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
-  }
-
   // MARK: UIView
 
   override class func layerClass() -> AnyClass {
