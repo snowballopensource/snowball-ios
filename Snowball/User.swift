@@ -18,16 +18,24 @@ class User: ActiveModel {
   dynamic var following = false
   dynamic var email: String?
   dynamic var phoneNumber: String?
-  dynamic var colorHex: String?
+  private dynamic var colorData = NSKeyedArchiver.archivedDataWithRootObject(UIColor.SnowballColor.randomColor)
 
   var color: UIColor {
-    guard let colorHex = colorHex else { return UIColor.SnowballColor.blueColor }
-    return UIColor(hex: colorHex)
+    get {
+      return NSKeyedUnarchiver.unarchiveObjectWithData(colorData) as? UIColor ?? UIColor.SnowballColor.blueColor
+    }
+    set {
+      colorData = NSKeyedArchiver.archivedDataWithRootObject(newValue)
+    }
   }
 
   static var currentUser: User? = nil
 
   // MARK: ActiveModel
+
+  override static func ignoredProperties() -> [String] {
+    return ["color"]
+  }
 
   override func importJSON(JSON: JSONObject) {
     if let id = JSON["id"] as? String {
