@@ -65,6 +65,17 @@ class Clip: Object {
       self.user = User.fromJSONObject(userJSON) as User
     }
   }
+
+  // MARK: Internal
+
+  static func cleanUpFailedClipUploads() {
+    Database.performTransaction {
+      for clip in Database.findAll(Clip).filter("stateString == %@", ClipState.Uploading.rawValue) {
+        clip.state = ClipState.UploadFailed
+        Database.save(clip)
+      }
+    }
+  }
 }
 
 // MARK: - ClipState

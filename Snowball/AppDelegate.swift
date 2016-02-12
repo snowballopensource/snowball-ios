@@ -28,8 +28,9 @@ class AppDelegate: UIResponder {
 // MARK: - UIApplicationDelegate
 extension AppDelegate: UIApplicationDelegate {
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    window?.makeKeyAndVisible()
     print("Realm Path: " + Database.realm.path)
+    Clip.cleanUpFailedClipUploads()
+    window?.makeKeyAndVisible()
     return true
   }
 }
