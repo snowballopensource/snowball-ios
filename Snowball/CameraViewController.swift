@@ -68,6 +68,7 @@ class CameraViewController: UIViewController {
     button.setImage(UIImage(named: "top-x"), forState: UIControlState.Normal)
     return button
   }()
+  private let cancelPreviewButtonAnimatableConstraints = ConstraintGroup()
 
   private let progressView: UIProgressView = {
     let progressView = UIProgressView()
@@ -155,10 +156,10 @@ class CameraViewController: UIViewController {
     playerView.addSubview(cancelPreviewButton)
     constrain(cancelPreviewButton) { (cancelPreviewButton) in
       cancelPreviewButton.left == cancelPreviewButton.superview!.left
-      cancelPreviewButton.top == cancelPreviewButton.superview!.top + 20
       cancelPreviewButton.right == cancelPreviewButton.superview!.right
       cancelPreviewButton.height == 65
     }
+    setCancelPreviewButtonHidden(true, animated: false)
 
     view.addSubview(progressView)
     constrain(progressView) { (progressView) in
@@ -340,16 +341,16 @@ class CameraViewController: UIViewController {
         self.setCancelPreviewButtonHidden(hidden, animated: false)
       }
     } else {
-      let frame = self.cancelPreviewButton.frame
       if hidden {
-        if frame.origin.y >= 0 {
-          self.cancelPreviewButton.frame = CGRect(x: frame.origin.x, y: frame.origin.y - frame.size.height, width: frame.size.width, height: frame.size.height)
+        constrain(cancelPreviewButton, replace: cancelPreviewButtonAnimatableConstraints) { cancelPreviewButton in
+          cancelPreviewButton.bottom == cancelPreviewButton.superview!.top
         }
       } else {
-        if frame.origin.y < 0 {
-          self.cancelPreviewButton.frame = CGRect(x: frame.origin.x, y: frame.origin.y + frame.size.height, width: frame.size.width, height: frame.size.height)
+        constrain(cancelPreviewButton, replace: cancelPreviewButtonAnimatableConstraints) { cancelPreviewButton in
+          cancelPreviewButton.top == cancelPreviewButton.superview!.top + 20
         }
       }
+      cancelPreviewButton.layoutIfNeeded()
     }
   }
 }
