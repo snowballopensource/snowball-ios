@@ -330,8 +330,7 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
       clip.state = .Uploading
       Database.save(clip)
     }
-    // TODO: Upload Clip
-    print("TODO: Upload Clip")
+    ClipUploadQueue.queueClipForUploading(clip)
   }
 
   func clipCollectionViewCellProfileButtonTapped(cell: ClipCollectionViewCell) {

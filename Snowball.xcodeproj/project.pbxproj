@@ -16,6 +16,7 @@
 		BA0B87A91C5B2D140094D6D7 /* UINavigationBar+Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B87A81C5B2D140094D6D7 /* UINavigationBar+Height.swift */; };
 		BA1881111C3F5F01002202B4 /* PlayerQueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1881101C3F5F01002202B4 /* PlayerQueueManager.swift */; };
 		BA1881131C3F6D09002202B4 /* LoadPlayerItemOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1881121C3F6D09002202B4 /* LoadPlayerItemOperation.swift */; };
+		BA1AE4EA1C6E4BC700AEEBF1 /* ClipUploadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1AE4E91C6E4BC700AEEBF1 /* ClipUploadQueue.swift */; };
 		BA59956F1C4DC69100E14B6A /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA59956E1C4DC69100E14B6A /* Timeline.swift */; };
 		BA6318BB1C4DB85D00BB40AE /* UIView+HideAnimated.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6318BA1C4DB85D00BB40AE /* UIView+HideAnimated.swift */; };
 		BA67BDD01C6413D900720090 /* SingleItemLoopingPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA67BDCD1C6413D900720090 /* SingleItemLoopingPlayer.swift */; };
@@ -59,6 +60,7 @@
 		BA0B87A81C5B2D140094D6D7 /* UINavigationBar+Height.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Height.swift"; sourceTree = "<group>"; };
 		BA1881101C3F5F01002202B4 /* PlayerQueueManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerQueueManager.swift; sourceTree = "<group>"; };
 		BA1881121C3F6D09002202B4 /* LoadPlayerItemOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadPlayerItemOperation.swift; sourceTree = "<group>"; };
+		BA1AE4E91C6E4BC700AEEBF1 /* ClipUploadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipUploadQueue.swift; sourceTree = "<group>"; };
 		BA59956E1C4DC69100E14B6A /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
 		BA6318BA1C4DB85D00BB40AE /* UIView+HideAnimated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+HideAnimated.swift"; sourceTree = "<group>"; };
 		BA67BDCD1C6413D900720090 /* SingleItemLoopingPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleItemLoopingPlayer.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 			children = (
 				BAB280731C35AEE800AE098D /* Util.swift */,
 				BA98087F1C3C1C0600F86C04 /* Player */,
+				BA1AE4E91C6E4BC700AEEBF1 /* ClipUploadQueue.swift */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 			files = (
 				BA73BCC01C1A71B400B22588 /* AppDelegate.swift in Sources */,
 				BAD7750D1C1E02AC00ED1A64 /* NSError+Snowball.swift in Sources */,
+				BA1AE4EA1C6E4BC700AEEBF1 /* ClipUploadQueue.swift in Sources */,
 				BAD775071C1DFEAB00ED1A64 /* SnowballRoute.swift in Sources */,
 				BA67BDD21C6413D900720090 /* CameraViewController.swift in Sources */,
 				BA9808781C3BA01C00F86C04 /* PlayerView.swift in Sources */,
