@@ -16,8 +16,11 @@ class Timeline {
   let id = NSUUID().UUIDString
   let type: TimelineType
   let clips: Results<Clip>
-  var clipsPendingUpload: Results<Clip> {
-    return clips.filter("stateString == %@", ClipState.PendingAcceptance.rawValue).sorted("createdAt")
+  var clipPendingAcceptance: Clip? {
+    return clips.filter("stateString == %@", ClipState.PendingAcceptance.rawValue).sorted("createdAt").last
+  }
+  var clipsNeedingAttention: Results<Clip> {
+    return clips.filter("stateString == %@ || stateString == %@", ClipState.PendingAcceptance.rawValue, ClipState.UploadFailed.rawValue).sorted("createdAt")
   }
   var currentPage = 0
   private let kClipBookmarkDateKey = "ClipBookmarkDate"

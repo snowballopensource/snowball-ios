@@ -112,15 +112,18 @@ class TimelineViewController: UIViewController {
     super.viewDidAppear(animated)
 
     if isAppearingForFirstTime() {
-      scrollToBookmarkedClipAnimated(false)
+      scrollToRelevantClip(animated)
     }
   }
 
   // MARK: - Private
 
-  private func scrollToBookmarkedClipAnimated(animated: Bool) {
-    guard let bookmarkedClip = timeline.bookmarkedClip else { return }
-    scrollToCellForClip(bookmarkedClip, animated: animated)
+  private func scrollToRelevantClip(animated: Bool) {
+    if let clipNeedingAttention = timeline.clipsNeedingAttention.last {
+      scrollToCellForClip(clipNeedingAttention, animated: animated)
+    } else if let bookmarkedClip = timeline.bookmarkedClip {
+      scrollToCellForClip(bookmarkedClip, animated: animated)
+    }
   }
 
   private func scrollToCellForClip(clip: Clip, animated: Bool) {
@@ -263,7 +266,6 @@ extension TimelineViewController: FetchedResultsControllerDelegate {
       }, completion: { _ in
         if self.collectionViewUpdates.count > 0 {
           self.updateStateForVisibleCells()
-          self.scrollToBookmarkedClipAnimated(true)
         }
     })
   }
@@ -367,11 +369,12 @@ extension TimelineViewController: CameraViewControllerDelegate {
     Database.performTransaction {
       Database.save(clip)
     }
+    scrollToCellForClip(clip, animated: true)
   }
 
   func videoPreviewDidCancel() {
     state = .Default
-    if let pendingClip = timeline.clipsPendingUpload.last {
+    if let pendingClip = timeline.clipPendingAcceptance {
       Database.performTransaction {
         Database.delete(pendingClip)
       }
