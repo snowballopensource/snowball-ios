@@ -61,7 +61,7 @@ class Timeline {
 
   init(type: TimelineType) {
     self.type = type
-    sortDescriptors = [SortDescriptor(property: "createdAt", ascending: true)]
+    sortDescriptors = [SortDescriptor(property: "stateString"), SortDescriptor(property: "createdAt")]
     switch type {
     case .Home:
       predicate = NSPredicate(format: "inHomeTimeline == %@", true)
