@@ -342,7 +342,7 @@ extension TimelineViewController: CameraViewControllerDelegate {
   func videoDidEndRecordingToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL) {
     // TODO: When clip is accepted, set state to .Default
     let clip = Clip()
-    clip.state = .PendingUpload
+    clip.state = .PendingAcceptance
     clip.timelineID = timeline.id
     clip.inHomeTimeline = true
     clip.videoURL = videoURL.absoluteString

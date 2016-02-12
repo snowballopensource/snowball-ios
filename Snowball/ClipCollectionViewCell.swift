@@ -126,7 +126,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let playingIdle = state == .PlayingIdle
     let playingActive = state == .PlayingActive
     let playing = (playingIdle || playingActive)
-//    let pendingUpload = state == .PendingUpload
+//    let pendingAcceptance = state == .PendingAcceptance
 //    let uploading = state == .Uploading
 //    let uploadFailed = state == .UploadFailed
 

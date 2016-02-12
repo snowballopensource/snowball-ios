@@ -70,7 +70,7 @@ class Clip: Object {
 // MARK: - ClipState
 enum ClipState: String {
   case Default = "Default"
-  case PendingUpload = "PendingUpload"
+  case PendingAcceptance = "PendingAcceptance"
   case Uploading = "Uploading"
   case UploadFailed = "UploadFailed"
 }
