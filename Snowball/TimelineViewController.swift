@@ -164,14 +164,18 @@ class TimelineViewController: UIViewController {
 
   private func cellStateForClip(clip: Clip) -> ClipCollectionViewCellState {
     var state = ClipCollectionViewCellState.Default
-    if clip == timeline.bookmarkedClip {
-      state = .Bookmarked
-    }
     if player.playing {
       if player.currentClip == clip {
         state = .PlayingActive
       } else {
         state = .PlayingIdle
+      }
+    } else {
+      if clip == timeline.bookmarkedClip {
+        state = .Bookmarked
+      }
+      if clip.state == .PendingAcceptance {
+        state = .PendingAcceptance
       }
     }
     return state
@@ -318,6 +322,18 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
     }
   }
 
+  func clipCollectionViewCellAddButtonTapped(cell: ClipCollectionViewCell) {
+    guard let clip = clipForCell(cell) else { return }
+    state = .Default
+    cameraViewController.endPreview()
+    Database.performTransaction {
+      clip.state = .Uploading
+      Database.save(clip)
+    }
+    // TODO: Upload Clip
+    print("TODO: Upload Clip")
+  }
+
   func clipCollectionViewCellProfileButtonTapped(cell: ClipCollectionViewCell) {
     guard let clip = clipForCell(cell), let userID = clip.user?.id else { return }
     navigationController?.pushViewController(TimelineViewController(timelineType: .User(userID: userID)), animated: true)
@@ -340,7 +356,6 @@ extension TimelineViewController: CameraViewControllerDelegate {
   }
 
   func videoDidEndRecordingToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL) {
-    // TODO: When clip is accepted, set state to .Default
     let clip = Clip()
     clip.state = .PendingAcceptance
     clip.timelineID = timeline.id

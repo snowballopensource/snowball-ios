@@ -125,7 +125,7 @@ class Timeline {
       guard let clipID = clip.id else { break }
       clipIDs.append(clipID)
     }
-    let clipsToDelete = Database.findAll(Clip).filter("NOT id IN %@", clipIDs)
+    let clipsToDelete = Database.findAll(Clip).filter("NOT id IN %@", clipIDs).filter("stateString == %@", ClipState.Default.rawValue)
     Database.performTransaction {
       Database.realm.deleteWithNotification(clipsToDelete)
     }

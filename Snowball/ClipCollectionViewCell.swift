@@ -32,8 +32,16 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return imageView
   }()
   let playButton = UIButton()
+  let addButton: UIButton = {
+    let button = UIButton()
+    button.setImage(UIImage(named: "cell-clip-add"), forState: UIControlState.Normal)
+    button.backgroundColor = User.currentUser?.color
+    return button
+  }()
+
   let userAvatarImageView = UserAvatarImageView()
   let profileButton = UIButton()
+
   let dimOverlayView: UIView = {
     let view = UIView()
     view.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
@@ -69,6 +77,15 @@ class ClipCollectionViewCell: UICollectionViewCell {
       playButton.height == thumbnailImageView.height
     }
     playButton.addTarget(self, action: "playButtonTapped", forControlEvents: .TouchUpInside)
+
+    addSubview(addButton)
+    constrain(addButton, thumbnailImageView) { addButton, thumbnailImageView in
+      addButton.left == thumbnailImageView.left
+      addButton.top == thumbnailImageView.top
+      addButton.right == thumbnailImageView.right
+      addButton.bottom == thumbnailImageView.bottom
+    }
+    addButton.addTarget(self, action: "addButtonTapped", forControlEvents: .TouchUpInside)
 
     addSubview(userAvatarImageView)
     constrain(userAvatarImageView, thumbnailImageView) { userAvatarImageView, thumbnailImageView in
@@ -126,19 +143,24 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let playingIdle = state == .PlayingIdle
     let playingActive = state == .PlayingActive
     let playing = (playingIdle || playingActive)
-//    let pendingAcceptance = state == .PendingAcceptance
+    let pendingAcceptance = state == .PendingAcceptance
 //    let uploading = state == .Uploading
 //    let uploadFailed = state == .UploadFailed
 
     playheadImageView.setHidden(!bookmarked, animated: animated)
     setThumbnailScaledDown(playing, animated: animated)
-    dimOverlayView.setHidden(!playingIdle, animated: true)
+    dimOverlayView.setHidden(!playingIdle, animated: animated)
+    addButton.setHidden(!pendingAcceptance, animated: animated)
   }
 
   // MARK: Private
 
   @objc private func playButtonTapped() {
     delegate?.clipCollectionViewCellPlayButtonTapped(self)
+  }
+
+  @objc private func addButtonTapped() {
+    delegate?.clipCollectionViewCellAddButtonTapped(self)
   }
 
   @objc private func profileButtonTapped() {
@@ -163,6 +185,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 // MARK: - ClipCollectionViewCellDelegate
 protocol ClipCollectionViewCellDelegate {
   func clipCollectionViewCellPlayButtonTapped(cell: ClipCollectionViewCell)
+  func clipCollectionViewCellAddButtonTapped(cell: ClipCollectionViewCell)
   func clipCollectionViewCellProfileButtonTapped(cell: ClipCollectionViewCell)
 }
 
@@ -173,7 +196,7 @@ enum ClipCollectionViewCellState {
   case Options
   case PlayingIdle
   case PlayingActive
-  case PendingUpload
+  case PendingAcceptance
   case Uploading
   case UploadFailed
 }
