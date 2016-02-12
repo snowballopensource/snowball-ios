@@ -38,6 +38,11 @@ class ClipCollectionViewCell: UICollectionViewCell {
     button.backgroundColor = User.currentUser?.color
     return button
   }()
+  let retryUploadButton: UIButton = {
+    let button = UIButton()
+    button.setImage(UIImage(named: "cell-clip-retry"), forState: UIControlState.Normal)
+    return button
+  }()
 
   let userAvatarImageView = UserAvatarImageView()
   let profileButton = UIButton()
@@ -86,6 +91,15 @@ class ClipCollectionViewCell: UICollectionViewCell {
       addButton.bottom == thumbnailImageView.bottom
     }
     addButton.addTarget(self, action: "addButtonTapped", forControlEvents: .TouchUpInside)
+
+    addSubview(retryUploadButton)
+    constrain(retryUploadButton, thumbnailImageView) { retryUploadButton, thumbnailImageView in
+      retryUploadButton.left == thumbnailImageView.left
+      retryUploadButton.top == thumbnailImageView.top
+      retryUploadButton.right == thumbnailImageView.right
+      retryUploadButton.bottom == thumbnailImageView.bottom
+    }
+    retryUploadButton.addTarget(self, action: "retryUploadButtonTapped", forControlEvents: .TouchUpInside)
 
     addSubview(userAvatarImageView)
     constrain(userAvatarImageView, thumbnailImageView) { userAvatarImageView, thumbnailImageView in
@@ -145,12 +159,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let playing = (playingIdle || playingActive)
     let pendingAcceptance = state == .PendingAcceptance
 //    let uploading = state == .Uploading
-//    let uploadFailed = state == .UploadFailed
+    let uploadFailed = state == .UploadFailed
 
     playheadImageView.setHidden(!bookmarked, animated: animated)
     setThumbnailScaledDown(playing, animated: animated)
     dimOverlayView.setHidden(!playingIdle, animated: animated)
     addButton.setHidden(!pendingAcceptance, animated: animated)
+    retryUploadButton.setHidden(!uploadFailed, animated: animated)
   }
 
   // MARK: Private
@@ -161,6 +176,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   @objc private func addButtonTapped() {
     delegate?.clipCollectionViewCellAddButtonTapped(self)
+  }
+
+  @objc private func retryUploadButtonTapped() {
+    delegate?.clipCollectionViewCellRetryUploadButtonTapped(self)
   }
 
   @objc private func profileButtonTapped() {
@@ -186,6 +205,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 protocol ClipCollectionViewCellDelegate {
   func clipCollectionViewCellPlayButtonTapped(cell: ClipCollectionViewCell)
   func clipCollectionViewCellAddButtonTapped(cell: ClipCollectionViewCell)
+  func clipCollectionViewCellRetryUploadButtonTapped(cell: ClipCollectionViewCell)
   func clipCollectionViewCellProfileButtonTapped(cell: ClipCollectionViewCell)
 }
 

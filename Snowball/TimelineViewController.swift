@@ -179,6 +179,8 @@ class TimelineViewController: UIViewController {
       }
       if clip.state == .PendingAcceptance {
         state = .PendingAcceptance
+      } else if clip.state == .UploadFailed {
+        state = .UploadFailed
       }
     }
     return state
@@ -326,19 +328,30 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
 
   func clipCollectionViewCellAddButtonTapped(cell: ClipCollectionViewCell) {
     guard let clip = clipForCell(cell) else { return }
-    state = .Default
     cameraViewController.endPreview()
+    tryUploadingClip(clip)
+  }
+
+  func clipCollectionViewCellRetryUploadButtonTapped(cell: ClipCollectionViewCell) {
+    guard let clip = clipForCell(cell) else { return }
+    tryUploadingClip(clip)
+  }
+
+  func clipCollectionViewCellProfileButtonTapped(cell: ClipCollectionViewCell) {
+    guard let clip = clipForCell(cell), let userID = clip.user?.id else { return }
+    navigationController?.pushViewController(TimelineViewController(timelineType: .User(userID: userID)), animated: true)
+  }
+
+  // MARK: Private
+
+  func tryUploadingClip(clip: Clip) {
+    state = .Default
     SnowballAPI.queueClipForUploadingAndHandleStateChanges(clip) { (response) -> Void in
       switch response {
       case .Success: break
       case .Failure(let error): print(error) // TODO: Handle error
       }
     }
-  }
-
-  func clipCollectionViewCellProfileButtonTapped(cell: ClipCollectionViewCell) {
-    guard let clip = clipForCell(cell), let userID = clip.user?.id else { return }
-    navigationController?.pushViewController(TimelineViewController(timelineType: .User(userID: userID)), animated: true)
   }
 }
 
