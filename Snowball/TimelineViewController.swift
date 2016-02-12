@@ -326,11 +326,12 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
     guard let clip = clipForCell(cell) else { return }
     state = .Default
     cameraViewController.endPreview()
-    Database.performTransaction {
-      clip.state = .Uploading
-      Database.save(clip)
+    SnowballAPI.queueClipForUploadingAndHandleStateChanges(clip) { (response) -> Void in
+      switch response {
+      case .Success: break
+      case .Failure(let error): print(error) // TODO: Handle error
+      }
     }
-    ClipUploadQueue.queueClipForUploading(clip)
   }
 
   func clipCollectionViewCellProfileButtonTapped(cell: ClipCollectionViewCell) {

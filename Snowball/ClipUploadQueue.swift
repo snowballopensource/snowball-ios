@@ -23,11 +23,7 @@ class ClipUploadQueue {
 
   // MARK: - Internal
 
-  static func queueClipForUploading(clip: Clip) {
-    // TODO: Upload Clip
-    print("TODO: Upload Clip")
-    sharedInstance.operationQueue.addOperationWithBlock {
-      print("Upload operation completed")
-    }
+  static func addOperationWithBlock(block: () -> Void) {
+    sharedInstance.operationQueue.addOperationWithBlock(block)
   }
 }

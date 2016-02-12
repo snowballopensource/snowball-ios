@@ -29,6 +29,7 @@ enum SnowballRoute: URLRequestConvertible {
   case LikeClip(clipID: String)
   case UnlikeClip(clipID: String)
   case FlagClip(clipID: String)
+  case UploadClip
 
   // MARK: Properties
 
@@ -54,6 +55,7 @@ enum SnowballRoute: URLRequestConvertible {
     case .LikeClip: return .POST
     case .UnlikeClip: return .DELETE
     case .FlagClip: return .POST
+    case .UploadClip: return .POST
     }
   }
 
@@ -75,6 +77,7 @@ enum SnowballRoute: URLRequestConvertible {
     case .LikeClip(let clipID): return "clips/\(clipID)/likes"
     case .UnlikeClip(let clipID): return "clips/\(clipID)/likes"
     case .FlagClip(let clipID): return "clips/\(clipID)/flags"
+    case .UploadClip: return "clips"
     }
   }
 
