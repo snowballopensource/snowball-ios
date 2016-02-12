@@ -71,9 +71,9 @@ struct SnowballAPI {
             case .Success(let value):
               if let JSON = value as? JSONObject {
                 Database.performTransaction {
-                  let parsedClip: Clip = Clip.fromJSONObject(JSON)
-                  parsedClip.state = .Default
-                  Database.save(parsedClip)
+                  clip.importJSON(JSON)
+                  clip.state = .Default
+                  Database.save(clip)
                 }
               } else { onFailure() }
             case .Failure: onFailure()
