@@ -46,6 +46,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   let userAvatarImageView = UserAvatarImageView()
   let profileButton = UIButton()
+  let usernameLabel: UILabel = {
+    let label = UILabel()
+    label.font = UIFont.SnowballFont.mediumFont.fontWithSize(14)
+    label.textAlignment = .Center
+    return label
+  }()
 
   let dimOverlayView: UIView = {
     let view = UIView()
@@ -102,11 +108,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
     retryUploadButton.addTarget(self, action: "retryUploadButtonTapped", forControlEvents: .TouchUpInside)
 
+    let userAvatarImageViewWidthHeight: CGFloat = 40
     addSubview(userAvatarImageView)
     constrain(userAvatarImageView, thumbnailImageView) { userAvatarImageView, thumbnailImageView in
       userAvatarImageView.centerY == thumbnailImageView.bottom
       userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
-      userAvatarImageView.width == 40
+      userAvatarImageView.width == userAvatarImageViewWidthHeight
       userAvatarImageView.height == userAvatarImageView.width
     }
 
@@ -118,6 +125,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
       profileButton.height == userAvatarImageView.height
     }
     profileButton.addTarget(self, action: "profileButtonTapped", forControlEvents: .TouchUpInside)
+
+    addSubview(usernameLabel)
+    constrain(usernameLabel, thumbnailImageView, userAvatarImageView) { usernameLabel, thumbnailImageView, userAvatarImageView in
+      usernameLabel.left == usernameLabel.superview!.left
+      usernameLabel.top == thumbnailImageView.bottom + (userAvatarImageViewWidthHeight / 2) + 10
+      usernameLabel.right == usernameLabel.superview!.right
+    }
 
     addSubview(dimOverlayView)
     constrain(dimOverlayView) { dimOverlayView in
@@ -147,6 +161,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
     if let user = clip.user {
       userAvatarImageView.setUser(user)
+
+      usernameLabel.textColor = user.color
+      usernameLabel.text = user.username
     }
 
     setState(state, animated: false)
