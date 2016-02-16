@@ -49,6 +49,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   let dimOverlayView: UIView = {
     let view = UIView()
+    view.userInteractionEnabled = false
     view.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
     return view
   }()
