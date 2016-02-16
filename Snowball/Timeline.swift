@@ -73,6 +73,20 @@ class Timeline {
 
   // MARK: Internal
 
+  func clipBeforeClip(clip: Clip) -> Clip? {
+    if let clipIndex = clips.indexOf(clip) {
+      let beforeClipIndex = clipIndex - 1
+      if beforeClipIndex >= 0 {
+        return clips[beforeClipIndex]
+      }
+    }
+    return nil
+  }
+
+  func clipAfterClip(clip: Clip) -> Clip? {
+    return clipsAfterClip(clip).first
+  }
+
   func clipsIncludingAndAfterClip(clip: Clip) -> Slice<Results<Clip>> {
     guard let clipIndex = clips.indexOf(clip) else { return clips[clips.startIndex..<clips.endIndex] }
     return clips[clipIndex..<clips.endIndex]

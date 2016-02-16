@@ -32,6 +32,7 @@ class TimelineViewController: UIViewController {
       let navBarHidden = (state == .Playing || state == .Recording)
       navigationController?.setNavigationBarHidden(navBarHidden, animated: true)
       playerView.hidden = (state != .Playing)
+      timelineCollectionView.scrollEnabled = (state != .Playing)
     }
   }
 
@@ -94,6 +95,7 @@ class TimelineViewController: UIViewController {
       timelineCollectionView.bottom == timelineCollectionView.superview!.bottom
     }
     timelineCollectionView.dataSource = self
+    timelineCollectionView.timelineDelegate = self
     timelineCollectionView.enablePullToLoadWithDelegate(self)
 
     fetchedResultsController.delegate = self
@@ -184,6 +186,15 @@ class TimelineViewController: UIViewController {
       }
     }
     return state
+  }
+
+  private func skipToClip(clip: Clip) {
+    player.pause()
+    player.removeAllItemsExceptCurrentItem()
+    player.queueManager.preparePlayerQueueToSkipToClip(clip) {
+      self.player.advanceToNextItem()
+      self.player.play()
+    }
   }
 
   // MARK: Actions
@@ -312,12 +323,7 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
         player.stop()
         return
       } else {
-        player.pause()
-        player.removeAllItemsExceptCurrentItem()
-        player.queueManager.preparePlayerQueueToSkipToClip(clip) {
-          self.player.advanceToNextItem()
-          self.player.play()
-        }
+        skipToClip(clip)
       }
     } else {
       player.queueManager.preparePlayerQueueToPlayClip(clip) {
@@ -391,6 +397,23 @@ extension TimelineViewController: CameraViewControllerDelegate {
       Database.performTransaction {
         Database.delete(pendingClip)
       }
+    }
+  }
+}
+
+// MARK: - TimelineCollectionViewDelegate
+extension TimelineViewController: TimelineCollectionViewDelegate {
+  func timelineCollectionViewSwipedLeft(collectionView: TimelineCollectionView) {
+    print("left")
+    if let currentClip = player.currentClip, nextClip = timeline.clipAfterClip(currentClip) {
+      skipToClip(nextClip)
+    }
+  }
+
+  func timelineCollectionViewSwipedRight(collectionView: TimelineCollectionView) {
+    print("right")
+    if let currentClip = player.currentClip, previousClip = timeline.clipBeforeClip(currentClip) {
+      skipToClip(previousClip)
     }
   }
 }
