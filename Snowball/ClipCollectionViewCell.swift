@@ -26,7 +26,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   let thumbnailImageView = UIImageView()
   let playImageView: UIImageView = {
-    let imageView = UIImageView(image: UIImage(named: "play"))
+    let imageView = UIImageView(image: UIImage(named: "cell-clip-play"))
     imageView.contentMode = .Center
     imageView.tintColor = UIColor.whiteColor()
     return imageView
