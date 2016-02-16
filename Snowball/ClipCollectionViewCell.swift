@@ -25,8 +25,14 @@ class ClipCollectionViewCell: UICollectionViewCell {
   var delegate: ClipCollectionViewCellDelegate?
 
   let thumbnailImageView = UIImageView()
-  let playheadImageView: UIImageView = {
+  let playImageView: UIImageView = {
     let imageView = UIImageView(image: UIImage(named: "play"))
+    imageView.contentMode = .Center
+    imageView.tintColor = UIColor.whiteColor()
+    return imageView
+  }()
+  let pauseImageView: UIImageView = {
+    let imageView = UIImageView(image: UIImage(named: "cell-clip-pause"))
     imageView.contentMode = .Center
     imageView.tintColor = UIColor.whiteColor()
     return imageView
@@ -73,12 +79,20 @@ class ClipCollectionViewCell: UICollectionViewCell {
       thumbnailImageView.height == thumbnailImageView.width
     }
 
-    addSubview(playheadImageView)
-    constrain(playheadImageView, thumbnailImageView) { playheadImageView, thumbnailImageView in
-      playheadImageView.left == thumbnailImageView.left
-      playheadImageView.top == thumbnailImageView.top
-      playheadImageView.right == thumbnailImageView.right
-      playheadImageView.bottom == thumbnailImageView.bottom
+    addSubview(playImageView)
+    constrain(playImageView, thumbnailImageView) { playImageView, thumbnailImageView in
+      playImageView.left == thumbnailImageView.left
+      playImageView.top == thumbnailImageView.top
+      playImageView.right == thumbnailImageView.right
+      playImageView.bottom == thumbnailImageView.bottom
+    }
+
+    addSubview(pauseImageView)
+    constrain(pauseImageView, playImageView) { pauseImageView, playImageView in
+      pauseImageView.left == playImageView.left
+      pauseImageView.top == playImageView.top
+      pauseImageView.right == playImageView.right
+      pauseImageView.bottom == playImageView.bottom
     }
 
     addSubview(playButton)
@@ -179,7 +193,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
 //    let uploading = state == .Uploading
     let uploadFailed = state == .UploadFailed
 
-    playheadImageView.setHidden(!bookmarked, animated: animated)
+    playImageView.setHidden(!bookmarked, animated: animated)
+    pauseImageView.setHidden(!playingActive, animated: animated)
     setThumbnailScaledDown(playing, animated: animated)
     dimOverlayView.setHidden(!playingIdle, animated: animated)
     addButton.setHidden(!pendingAcceptance, animated: animated)
