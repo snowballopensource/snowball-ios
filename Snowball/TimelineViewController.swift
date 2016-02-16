@@ -404,14 +404,12 @@ extension TimelineViewController: CameraViewControllerDelegate {
 // MARK: - TimelineCollectionViewDelegate
 extension TimelineViewController: TimelineCollectionViewDelegate {
   func timelineCollectionViewSwipedLeft(collectionView: TimelineCollectionView) {
-    print("left")
     if let currentClip = player.currentClip, nextClip = timeline.clipAfterClip(currentClip) {
       skipToClip(nextClip)
     }
   }
 
   func timelineCollectionViewSwipedRight(collectionView: TimelineCollectionView) {
-    print("right")
     if let currentClip = player.currentClip, previousClip = timeline.clipBeforeClip(currentClip) {
       skipToClip(previousClip)
     }
