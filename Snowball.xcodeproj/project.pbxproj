@@ -15,6 +15,7 @@
 		BA0B87A71C5B298B0094D6D7 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B87A61C5B298B0094D6D7 /* FriendsViewController.swift */; };
 		BA0B87A91C5B2D140094D6D7 /* UINavigationBar+Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B87A81C5B2D140094D6D7 /* UINavigationBar+Height.swift */; };
 		BA1420D81C73E5D3007F50B9 /* UIFont+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1420D71C73E5D3007F50B9 /* UIFont+Snowball.swift */; };
+		BA1420DC1C73EDE2007F50B9 /* NSDate+TimeSince.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1420DB1C73EDE2007F50B9 /* NSDate+TimeSince.swift */; };
 		BA1881111C3F5F01002202B4 /* PlayerQueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1881101C3F5F01002202B4 /* PlayerQueueManager.swift */; };
 		BA1881131C3F6D09002202B4 /* LoadPlayerItemOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1881121C3F6D09002202B4 /* LoadPlayerItemOperation.swift */; };
 		BA1AE4EA1C6E4BC700AEEBF1 /* ClipUploadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1AE4E91C6E4BC700AEEBF1 /* ClipUploadQueue.swift */; };
@@ -60,6 +61,7 @@
 		BA0B87A61C5B298B0094D6D7 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		BA0B87A81C5B2D140094D6D7 /* UINavigationBar+Height.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Height.swift"; sourceTree = "<group>"; };
 		BA1420D71C73E5D3007F50B9 /* UIFont+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Snowball.swift"; sourceTree = "<group>"; };
+		BA1420DB1C73EDE2007F50B9 /* NSDate+TimeSince.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeSince.swift"; sourceTree = "<group>"; };
 		BA1881101C3F5F01002202B4 /* PlayerQueueManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerQueueManager.swift; sourceTree = "<group>"; };
 		BA1881121C3F6D09002202B4 /* LoadPlayerItemOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadPlayerItemOperation.swift; sourceTree = "<group>"; };
 		BA1AE4E91C6E4BC700AEEBF1 /* ClipUploadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipUploadQueue.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				BA6318BA1C4DB85D00BB40AE /* UIView+HideAnimated.swift */,
 				BAD677AD1C5ADD5900B41507 /* UIScrollView+PullToLoad.swift */,
 				BA0B87A01C5B17B60094D6D7 /* UINavigationBar+Transparent.swift */,
+				BA1420DB1C73EDE2007F50B9 /* NSDate+TimeSince.swift */,
 				BA0B87A81C5B2D140094D6D7 /* UINavigationBar+Height.swift */,
 				BA0B87A41C5B270F0094D6D7 /* UIWindow+RootViewControllerTransition.swift */,
 				BAC841991C606CE90076CBEE /* UIViewController+Navigation.swift */,
@@ -407,6 +410,7 @@
 				BAD775011C1DF36B00ED1A64 /* UIColor+Hex.swift in Sources */,
 				BA98087E1C3C1BE600F86C04 /* ClipPlayerItem.swift in Sources */,
 				BAB280721C35AD8200AE098D /* UIImageView+Cache.swift in Sources */,
+				BA1420DC1C73EDE2007F50B9 /* NSDate+TimeSince.swift in Sources */,
 				BAD774FF1C1DE18E00ED1A64 /* User.swift in Sources */,
 				BAB280741C35AEE800AE098D /* Util.swift in Sources */,
 				BAD677AE1C5ADD5900B41507 /* UIScrollView+PullToLoad.swift in Sources */,

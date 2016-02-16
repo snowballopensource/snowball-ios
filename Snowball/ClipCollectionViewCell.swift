@@ -58,6 +58,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
     label.textAlignment = .Center
     return label
   }()
+  let timeAgoLabel: UILabel = {
+    let label = UILabel()
+    label.font = UIFont.SnowballFont.mediumFont.fontWithSize(12)
+    label.textColor = UIColor.SnowballColor.grayColor
+    label.textAlignment = .Center
+    return label
+  }()
 
   let dimOverlayView: UIView = {
     let view = UIView()
@@ -143,8 +150,15 @@ class ClipCollectionViewCell: UICollectionViewCell {
     addSubview(usernameLabel)
     constrain(usernameLabel, thumbnailImageView, userAvatarImageView) { usernameLabel, thumbnailImageView, userAvatarImageView in
       usernameLabel.left == usernameLabel.superview!.left
-      usernameLabel.top == thumbnailImageView.bottom + (userAvatarImageViewWidthHeight / 2) + 10
+      usernameLabel.top == thumbnailImageView.bottom + (userAvatarImageViewWidthHeight / 2) + 7
       usernameLabel.right == usernameLabel.superview!.right
+    }
+
+    addSubview(timeAgoLabel)
+    constrain(timeAgoLabel, usernameLabel) { timeAgoLabel, usernameLabel in
+      timeAgoLabel.left == timeAgoLabel.superview!.left
+      timeAgoLabel.top == usernameLabel.bottom + 4
+      timeAgoLabel.right == timeAgoLabel.superview!.right
     }
 
     addSubview(dimOverlayView)
@@ -179,6 +193,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
       usernameLabel.textColor = user.color
       usernameLabel.text = user.username
     }
+
+    timeAgoLabel.text = clip.createdAt?.shortTimeSinceString() ?? NSLocalizedString("Now", comment: "")
 
     setState(state, animated: false)
   }
