@@ -34,6 +34,8 @@
 		BA9808781C3BA01C00F86C04 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9808771C3BA01C00F86C04 /* PlayerView.swift */; };
 		BA98087C1C3BA71D00F86C04 /* TimelinePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA98087B1C3BA71D00F86C04 /* TimelinePlayer.swift */; };
 		BA98087E1C3C1BE600F86C04 /* ClipPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA98087D1C3C1BE600F86C04 /* ClipPlayerItem.swift */; };
+		BA9A1DA31C750657008AD0E4 /* HomeTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9A1DA21C750657008AD0E4 /* HomeTimelineViewController.swift */; };
+		BA9A1DA51C750940008AD0E4 /* UserTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9A1DA41C750940008AD0E4 /* UserTimelineViewController.swift */; };
 		BAB280721C35AD8200AE098D /* UIImageView+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB280711C35AD8200AE098D /* UIImageView+Cache.swift */; };
 		BAB280741C35AEE800AE098D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB280731C35AEE800AE098D /* Util.swift */; };
 		BAC2EF7B1C6C40F60020005C /* RLMObject+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC2EF7A1C6C40F60020005C /* RLMObject+JSON.swift */; };
@@ -82,6 +84,8 @@
 		BA9808771C3BA01C00F86C04 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		BA98087B1C3BA71D00F86C04 /* TimelinePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelinePlayer.swift; sourceTree = "<group>"; };
 		BA98087D1C3C1BE600F86C04 /* ClipPlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipPlayerItem.swift; sourceTree = "<group>"; };
+		BA9A1DA21C750657008AD0E4 /* HomeTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTimelineViewController.swift; sourceTree = "<group>"; };
+		BA9A1DA41C750940008AD0E4 /* UserTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTimelineViewController.swift; sourceTree = "<group>"; };
 		BAB280711C35AD8200AE098D /* UIImageView+Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Cache.swift"; sourceTree = "<group>"; };
 		BAB280731C35AEE800AE098D /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		BAC2EF7A1C6C40F60020005C /* RLMObject+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RLMObject+JSON.swift"; sourceTree = "<group>"; };
@@ -186,6 +190,8 @@
 			children = (
 				BA0B879F1C5B16B30094D6D7 /* Navigation Controllers */,
 				BA73BCD11C1A759100B22588 /* TimelineViewController.swift */,
+				BA9A1DA21C750657008AD0E4 /* HomeTimelineViewController.swift */,
+				BA9A1DA41C750940008AD0E4 /* UserTimelineViewController.swift */,
 				BA0B87A61C5B298B0094D6D7 /* FriendsViewController.swift */,
 				BA67BDCF1C6413D900720090 /* CameraViewController.swift */,
 			);
@@ -388,6 +394,7 @@
 				BA0B87A51C5B270F0094D6D7 /* UIWindow+RootViewControllerTransition.swift in Sources */,
 				BA98087C1C3BA71D00F86C04 /* TimelinePlayer.swift in Sources */,
 				BA0B87A11C5B17B60094D6D7 /* UINavigationBar+Transparent.swift in Sources */,
+				BA9A1DA31C750657008AD0E4 /* HomeTimelineViewController.swift in Sources */,
 				BACA135E1C4DF09500387C5D /* UserAvatarImageView.swift in Sources */,
 				BAFC72171C3DC5F600D46747 /* CachedAssetResourceLoader.swift in Sources */,
 				BA6318BB1C4DB85D00BB40AE /* UIView+HideAnimated.swift in Sources */,
@@ -409,6 +416,7 @@
 				BA0B87A91C5B2D140094D6D7 /* UINavigationBar+Height.swift in Sources */,
 				BAD775011C1DF36B00ED1A64 /* UIColor+Hex.swift in Sources */,
 				BA98087E1C3C1BE600F86C04 /* ClipPlayerItem.swift in Sources */,
+				BA9A1DA51C750940008AD0E4 /* UserTimelineViewController.swift in Sources */,
 				BAB280721C35AD8200AE098D /* UIImageView+Cache.swift in Sources */,
 				BA1420DC1C73EDE2007F50B9 /* NSDate+TimeSince.swift in Sources */,
 				BAD774FF1C1DE18E00ED1A64 /* User.swift in Sources */,

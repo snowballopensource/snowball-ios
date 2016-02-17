@@ -17,7 +17,6 @@ class TimelineViewController: UIViewController {
   // MARK: Properties
 
   let timeline: Timeline
-  let cameraViewController: CameraViewController?
   let player: TimelinePlayer
   let playerView = PlayerView()
   let timelineCollectionView = TimelineCollectionView()
@@ -25,10 +24,10 @@ class TimelineViewController: UIViewController {
   var collectionViewUpdates = [NSBlockOperation]()
 
   // MARK: TimelineViewControllerState
-  private enum TimelineViewControllerState {
+  enum TimelineViewControllerState {
     case Default, Recording, Playing
   }
-  private var state = TimelineViewControllerState.Default {
+  var state = TimelineViewControllerState.Default {
     didSet {
       let navBarHidden = (state == .Playing || state == .Recording)
       navigationController?.setNavigationBarHidden(navBarHidden, animated: true)
@@ -42,12 +41,6 @@ class TimelineViewController: UIViewController {
   init(timelineType: TimelineType) {
     timeline = Timeline(type: timelineType)
     player = TimelinePlayer(timeline: timeline)
-
-    if timelineType == .Home {
-      cameraViewController = CameraViewController()
-    } else {
-      cameraViewController = nil
-    }
 
     let fetchRequest = FetchRequest<Clip>(realm: Database.realm, predicate: timeline.predicate)
     fetchRequest.sortDescriptors = timeline.sortDescriptors
@@ -71,21 +64,6 @@ class TimelineViewController: UIViewController {
       navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-friends"), style: .Plain, target: self, action: "leftBarButtonItemPressed")
     } else {
       navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-back"), style: .Plain, target: self, action: "backBarButtonItemPressed")
-    }
-
-    if let cameraViewController = cameraViewController {
-      navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-flip-camera"), style: .Plain, target: self, action: "rightBarButtonItemPressed")
-
-      addChildViewController(cameraViewController)
-      view.addSubview(cameraViewController.view)
-      constrain(cameraViewController.view) { cameraView in
-        cameraView.left == cameraView.superview!.left
-        cameraView.top == cameraView.superview!.top
-        cameraView.right == cameraView.superview!.right
-        cameraView.height == cameraView.superview!.width
-      }
-      cameraViewController.didMoveToParentViewController(self)
-      cameraViewController.delegate = self
     }
 
     view.addSubview(playerView)
@@ -130,7 +108,22 @@ class TimelineViewController: UIViewController {
     }
   }
 
-  // MARK: - Private
+  // MARK: Internal
+
+  func scrollToCellForClip(clip: Clip, animated: Bool) {
+    if let indexPath = fetchedResultsController.indexPathForObject(clip) {
+      timelineCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: animated)
+    }
+  }
+
+  func clipForCell(cell: ClipCollectionViewCell) -> Clip? {
+    if let indexPath = timelineCollectionView.indexPathForCell(cell) {
+      return fetchedResultsController.objectAtIndexPath(indexPath)
+    }
+    return nil
+  }
+
+  // MARK: Private
 
   private func scrollToRelevantClip(animated: Bool) {
     if let clipNeedingAttention = timeline.clipsNeedingAttention.last {
@@ -138,19 +131,6 @@ class TimelineViewController: UIViewController {
     } else if let bookmarkedClip = timeline.bookmarkedClip {
       scrollToCellForClip(bookmarkedClip, animated: animated)
     }
-  }
-
-  private func scrollToCellForClip(clip: Clip, animated: Bool) {
-    if let indexPath = fetchedResultsController.indexPathForObject(clip) {
-      timelineCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: animated)
-    }
-  }
-
-  private func clipForCell(cell: ClipCollectionViewCell) -> Clip? {
-    if let indexPath = timelineCollectionView.indexPathForCell(cell) {
-      return fetchedResultsController.objectAtIndexPath(indexPath)
-    }
-    return nil
   }
 
   private func cellForClip(clip: Clip) -> ClipCollectionViewCell? {
@@ -217,10 +197,6 @@ class TimelineViewController: UIViewController {
 
   @objc private func leftBarButtonItemPressed() {
     AppDelegate.sharedInstance.window?.transitionRootViewControllerToViewController(FriendsNavigationController())
-  }
-
-  @objc private func rightBarButtonItemPressed() {
-    cameraViewController?.changeCamera()
   }
 }
 
@@ -344,20 +320,13 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
     }
   }
 
-  func clipCollectionViewCellAddButtonTapped(cell: ClipCollectionViewCell) {
-    guard let clip = clipForCell(cell) else { return }
-    cameraViewController?.endPreview()
-    tryUploadingClip(clip)
-  }
+  func clipCollectionViewCellAddButtonTapped(cell: ClipCollectionViewCell) {}
 
-  func clipCollectionViewCellRetryUploadButtonTapped(cell: ClipCollectionViewCell) {
-    guard let clip = clipForCell(cell) else { return }
-    tryUploadingClip(clip)
-  }
+  func clipCollectionViewCellRetryUploadButtonTapped(cell: ClipCollectionViewCell) {}
 
   func clipCollectionViewCellProfileButtonTapped(cell: ClipCollectionViewCell) {
-    guard let clip = clipForCell(cell), let userID = clip.user?.id else { return }
-    navigationController?.pushViewController(TimelineViewController(timelineType: .User(userID: userID)), animated: true)
+    guard let clip = clipForCell(cell), let user = clip.user else { return }
+    navigationController?.pushViewController(UserTimelineViewController(user: user), animated: true)
   }
 
   func clipCollectionViewCellLongPressTriggered(cell: ClipCollectionViewCell) {
@@ -412,18 +381,6 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
     alert.addAction(alertCancelAction)
     presentViewController(alert, animated: true, completion: nil)
   }
-
-  // MARK: Private
-
-  private func tryUploadingClip(clip: Clip) {
-    state = .Default
-    SnowballAPI.queueClipForUploadingAndHandleStateChanges(clip) { (response) -> Void in
-      switch response {
-      case .Success: break
-      case .Failure(let error): print(error) // TODO: Handle error
-      }
-    }
-  }
 }
 
 // MARK: - UIScrollViewPullToLoadDelegate
@@ -431,36 +388,6 @@ extension TimelineViewController: UIScrollViewPullToLoadDelegate {
   func scrollViewDidPullToLoad(scrollView: UIScrollView) {
     timeline.requestNextPageOfClips {
       scrollView.stopPullToLoadAnimation()
-    }
-  }
-}
-
-// MARK: - CameraViewControllerDelegate
-extension TimelineViewController: CameraViewControllerDelegate {
-  func videoDidBeginRecording() {
-    state = .Recording
-  }
-
-  func videoDidEndRecordingToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL) {
-    let clip = Clip()
-    clip.state = .PendingAcceptance
-    clip.timelineID = timeline.id
-    clip.inHomeTimeline = true
-    clip.videoURL = videoURL.absoluteString
-    clip.thumbnailURL = thumbnailURL.absoluteString
-    clip.user = User.currentUser
-    Database.performTransaction {
-      Database.save(clip)
-    }
-    scrollToCellForClip(clip, animated: true)
-  }
-
-  func videoPreviewDidCancel() {
-    state = .Default
-    if let pendingClip = timeline.clipPendingAcceptance {
-      Database.performTransaction {
-        Database.delete(pendingClip)
-      }
     }
   }
 }
