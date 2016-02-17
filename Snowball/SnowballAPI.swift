@@ -14,6 +14,15 @@ struct SnowballAPI {
 
   // MARK: Internal
 
+  static func request(route: SnowballRoute, completion: (response: Response) -> Void) {
+    Alamofire.request(route).responseData { afResponse in
+      switch afResponse.result {
+      case .Success: completion(response: .Success)
+      case .Failure(let error): completion(response: .Failure(error))
+      }
+    }
+  }
+
   static func requestObjects<T: Object>(route: SnowballRoute, completion: (response: ObjectResponse<[T]>) -> Void) {
     requestObjects(route, eachObjectBeforeSave: nil, completion: completion)
   }
@@ -101,6 +110,12 @@ struct SnowballAPI {
 //    }
 //    return error
 //  }
+}
+
+// MARK: - Response
+enum Response {
+  case Success
+  case Failure(NSError)
 }
 
 // MARK: - ObjectResponse

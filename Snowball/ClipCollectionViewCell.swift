@@ -24,6 +24,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   var delegate: ClipCollectionViewCellDelegate?
 
+  let longPressGestureRecognizer = UILongPressGestureRecognizer()
+
   let thumbnailImageView = UIImageView()
   let playImageView: UIImageView = {
     let imageView = UIImageView(image: UIImage(named: "cell-clip-play"))
@@ -66,6 +68,23 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return label
   }()
 
+  let optionsView: UIView = {
+    let view = UIView()
+    view.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+    return view
+  }()
+  let deleteImageView: UIImageView = {
+    let imageView = UIImageView(image: UIImage(named: "cell-clip-delete"))
+    imageView.contentMode = .Center
+    return imageView
+  }()
+  let flagImageView: UIImageView = {
+    let imageView = UIImageView(image: UIImage(named: "cell-clip-flag"))
+    imageView.contentMode = .Center
+    return imageView
+  }()
+  let optionsButton = UIButton()
+
   let dimOverlayView: UIView = {
     let view = UIView()
     view.userInteractionEnabled = false
@@ -85,6 +104,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
       thumbnailImageView.right == thumbnailImageView.superview!.right
       thumbnailImageView.height == thumbnailImageView.width
     }
+    addGestureRecognizer(longPressGestureRecognizer)
+    longPressGestureRecognizer.addTarget(self, action: "longPressGestureRecognizerTriggered")
 
     addSubview(playImageView)
     constrain(playImageView, thumbnailImageView) { playImageView, thumbnailImageView in
@@ -161,6 +182,39 @@ class ClipCollectionViewCell: UICollectionViewCell {
       timeAgoLabel.right == timeAgoLabel.superview!.right
     }
 
+    addSubview(optionsView)
+    constrain(optionsView, thumbnailImageView) { optionsView, thumbnailImageView in
+      optionsView.left == thumbnailImageView.left
+      optionsView.top == thumbnailImageView.top
+      optionsView.right == thumbnailImageView.right
+      optionsView.bottom == thumbnailImageView.bottom
+    }
+
+    optionsView.addSubview(deleteImageView)
+    constrain(deleteImageView) { deleteImageView in
+      deleteImageView.left == deleteImageView.superview!.left
+      deleteImageView.top == deleteImageView.superview!.top
+      deleteImageView.right == deleteImageView.superview!.right
+      deleteImageView.bottom == deleteImageView.superview!.bottom
+    }
+
+    optionsView.addSubview(flagImageView)
+    constrain(flagImageView) { flagImageView in
+      flagImageView.left == flagImageView.superview!.left
+      flagImageView.top == flagImageView.superview!.top
+      flagImageView.right == flagImageView.superview!.right
+      flagImageView.bottom == flagImageView.superview!.bottom
+    }
+
+    optionsView.addSubview(optionsButton)
+    constrain(optionsButton) { optionsButton in
+      optionsButton.left == optionsButton.superview!.left
+      optionsButton.top == optionsButton.superview!.top
+      optionsButton.right == optionsButton.superview!.right
+      optionsButton.bottom == optionsButton.superview!.bottom
+    }
+    optionsButton.addTarget(self, action: "optionsButtonTapped", forControlEvents: .TouchUpInside)
+
     addSubview(dimOverlayView)
     constrain(dimOverlayView) { dimOverlayView in
       dimOverlayView.left == dimOverlayView.superview!.left
@@ -192,6 +246,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
       usernameLabel.textColor = user.color
       usernameLabel.text = user.username
+
+      let isCurrentUser = (user == User.currentUser)
+      deleteImageView.hidden = !isCurrentUser
+      flagImageView.hidden = isCurrentUser
     }
 
     timeAgoLabel.text = clip.createdAt?.shortTimeSinceString() ?? NSLocalizedString("Now", comment: "")
@@ -201,7 +259,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   func setState(state: ClipCollectionViewCellState, animated: Bool) {
     let bookmarked = state == .Bookmarked
-//    let options = state == .Options
+    let options = state == .Options
     let playingIdle = state == .PlayingIdle
     let playingActive = state == .PlayingActive
     let playing = (playingIdle || playingActive)
@@ -209,12 +267,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
 //    let uploading = state == .Uploading
     let uploadFailed = state == .UploadFailed
 
-    playImageView.setHidden(!bookmarked, animated: animated)
+    playImageView.setHidden(!(bookmarked && !options), animated: animated)
     pauseImageView.setHidden(!playingActive, animated: animated)
     setThumbnailScaledDown(playing, animated: animated)
     dimOverlayView.setHidden(!playingIdle, animated: animated)
     addButton.setHidden(!pendingAcceptance, animated: animated)
     retryUploadButton.setHidden(!uploadFailed, animated: animated)
+    optionsView.setHidden(!options, animated: animated)
   }
 
   // MARK: Private
@@ -233,6 +292,14 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   @objc private func profileButtonTapped() {
     delegate?.clipCollectionViewCellProfileButtonTapped(self)
+  }
+
+  @objc private func longPressGestureRecognizerTriggered() {
+    delegate?.clipCollectionViewCellLongPressTriggered(self)
+  }
+
+  @objc private func optionsButtonTapped() {
+    delegate?.clipcollectionViewCellOptionsButtonTapped(self)
   }
 
   private func setThumbnailScaledDown(scaledDown: Bool, animated: Bool) {
@@ -256,6 +323,8 @@ protocol ClipCollectionViewCellDelegate {
   func clipCollectionViewCellAddButtonTapped(cell: ClipCollectionViewCell)
   func clipCollectionViewCellRetryUploadButtonTapped(cell: ClipCollectionViewCell)
   func clipCollectionViewCellProfileButtonTapped(cell: ClipCollectionViewCell)
+  func clipCollectionViewCellLongPressTriggered(cell: ClipCollectionViewCell)
+  func clipcollectionViewCellOptionsButtonTapped(cell: ClipCollectionViewCell)
 }
 
 // MARK: - ClipCollectionViewCellState

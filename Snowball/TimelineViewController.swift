@@ -156,14 +156,14 @@ class TimelineViewController: UIViewController {
     }
   }
 
-  private func updateStateForCell(cell: ClipCollectionViewCell) {
+  private func resetStateForCell(cell: ClipCollectionViewCell) {
     guard let clip = clipForCell(cell) else { return }
     cell.setState(cellStateForClip(clip), animated: true)
   }
 
-  private func updateStateForVisibleCells() {
+  private func resetStateForVisibleCells() {
     for cell in timelineCollectionView.visibleCells() as! [ClipCollectionViewCell] {
-      updateStateForCell(cell)
+      resetStateForCell(cell)
     }
   }
 
@@ -278,7 +278,7 @@ extension TimelineViewController: FetchedResultsControllerDelegate {
       }
       }, completion: { _ in
         if self.collectionViewUpdates.count > 0 {
-          self.updateStateForVisibleCells()
+          self.resetStateForVisibleCells()
         }
     })
   }
@@ -303,14 +303,14 @@ extension TimelineViewController: TimelinePlayerDelegate {
     print("did transition")
     scrollToCellForClip(toClip, animated: true)
     player.queueManager.ensurePlayerQueueToppedOff()
-    updateStateForVisibleCells()
+    resetStateForVisibleCells()
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
     print("did end")
     state = .Default
     timeline.bookmarkedClip = clip
-    updateStateForVisibleCells()
+    resetStateForVisibleCells()
   }
 }
 
@@ -348,9 +348,59 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
     navigationController?.pushViewController(TimelineViewController(timelineType: .User(userID: userID)), animated: true)
   }
 
+  func clipCollectionViewCellLongPressTriggered(cell: ClipCollectionViewCell) {
+    cell.setState(.Options, animated: true)
+  }
+
+  func clipcollectionViewCellOptionsButtonTapped(cell: ClipCollectionViewCell) {
+    guard let clip = clipForCell(cell), let clipID = clip.id, let user = clip.user else { return }
+
+    let isCurrentUser = (user == User.currentUser)
+
+    let confirmed: UIAlertAction -> Void = { action in
+      let completion: Response -> Void = { response in
+        switch response {
+        case .Success:
+          self.resetStateForCell(cell)
+        case .Failure(let error):
+          print(error) // TODO: Handle error
+        }
+      }
+      if isCurrentUser {
+        SnowballAPI.request(SnowballRoute.DeleteClip(clipID: clipID), completion: completion)
+      } else {
+        SnowballAPI.request(SnowballRoute.FlagClip(clipID: clipID), completion: completion)
+      }
+    }
+    let cancelled: UIAlertAction -> Void = { action in
+      self.resetStateForCell(cell)
+    }
+
+    var alertTitle: String
+    var alertMessage: String
+    var alertConfirmAction: UIAlertAction
+    var alertCancelAction: UIAlertAction
+    if isCurrentUser {
+      alertTitle = NSLocalizedString("Delete this clip?", comment: "")
+      alertMessage = NSLocalizedString("Are you sure you want to delete this clip?", comment: "")
+      alertConfirmAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .Destructive, handler: confirmed)
+      alertCancelAction = UIAlertAction(title: NSLocalizedString("Don't Delete", comment: ""), style: .Cancel, handler: cancelled)
+    } else {
+      alertTitle = NSLocalizedString("Flag this clip?", comment: "")
+      alertMessage = NSLocalizedString("Are you sure you want to flag this clip?", comment: "")
+      alertConfirmAction = UIAlertAction(title: NSLocalizedString("Flag", comment: ""), style: .Destructive, handler: confirmed)
+      alertCancelAction = UIAlertAction(title: NSLocalizedString("Don't Flag", comment: ""), style: .Cancel, handler: cancelled)
+    }
+
+    let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .ActionSheet)
+    alert.addAction(alertConfirmAction)
+    alert.addAction(alertCancelAction)
+    presentViewController(alert, animated: true, completion: nil)
+  }
+
   // MARK: Private
 
-  func tryUploadingClip(clip: Clip) {
+  private func tryUploadingClip(clip: Clip) {
     state = .Default
     SnowballAPI.queueClipForUploadingAndHandleStateChanges(clip) { (response) -> Void in
       switch response {
