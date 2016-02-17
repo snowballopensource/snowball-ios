@@ -437,7 +437,6 @@ extension TimelineViewController: CameraViewControllerDelegate {
     clip.inHomeTimeline = true
     clip.videoURL = videoURL.absoluteString
     clip.thumbnailURL = thumbnailURL.absoluteString
-    clip.createdAt = NSDate()
     clip.user = User.currentUser
     Database.performTransaction {
       Database.save(clip)
