@@ -52,22 +52,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return button
   }()
 
-  let userAvatarImageView = UserAvatarImageView()
-  let profileButton = UIButton()
-  let usernameLabel: UILabel = {
-    let label = UILabel()
-    label.font = UIFont.SnowballFont.mediumFont.fontWithSize(14)
-    label.textAlignment = .Center
-    return label
-  }()
-  let timeAgoLabel: UILabel = {
-    let label = UILabel()
-    label.font = UIFont.SnowballFont.mediumFont.fontWithSize(12)
-    label.textColor = UIColor.SnowballColor.grayColor
-    label.textAlignment = .Center
-    return label
-  }()
-
   let optionsView: UIView = {
     let view = UIView()
     view.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
@@ -84,6 +68,22 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return imageView
   }()
   let optionsButton = UIButton()
+
+  let userAvatarImageView = UserAvatarImageView()
+  let profileButton = UIButton()
+  let usernameLabel: UILabel = {
+    let label = UILabel()
+    label.font = UIFont.SnowballFont.mediumFont.fontWithSize(14)
+    label.textAlignment = .Center
+    return label
+  }()
+  let timeAgoLabel: UILabel = {
+    let label = UILabel()
+    label.font = UIFont.SnowballFont.mediumFont.fontWithSize(12)
+    label.textColor = UIColor.SnowballColor.grayColor
+    label.textAlignment = .Center
+    return label
+  }()
 
   let dimOverlayView: UIView = {
     let view = UIView()
@@ -150,38 +150,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
     retryUploadButton.addTarget(self, action: "retryUploadButtonTapped", forControlEvents: .TouchUpInside)
 
-    let userAvatarImageViewWidthHeight: CGFloat = 40
-    addSubview(userAvatarImageView)
-    constrain(userAvatarImageView, thumbnailImageView) { userAvatarImageView, thumbnailImageView in
-      userAvatarImageView.centerY == thumbnailImageView.bottom
-      userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
-      userAvatarImageView.width == userAvatarImageViewWidthHeight
-      userAvatarImageView.height == userAvatarImageView.width
-    }
-
-    addSubview(profileButton)
-    constrain(profileButton, userAvatarImageView) { (profileButton, userAvatarImageView) in
-      profileButton.left == userAvatarImageView.left
-      profileButton.top == userAvatarImageView.top
-      profileButton.right == userAvatarImageView.right
-      profileButton.height == userAvatarImageView.height
-    }
-    profileButton.addTarget(self, action: "profileButtonTapped", forControlEvents: .TouchUpInside)
-
-    addSubview(usernameLabel)
-    constrain(usernameLabel, thumbnailImageView, userAvatarImageView) { usernameLabel, thumbnailImageView, userAvatarImageView in
-      usernameLabel.left == usernameLabel.superview!.left
-      usernameLabel.top == thumbnailImageView.bottom + (userAvatarImageViewWidthHeight / 2) + 7
-      usernameLabel.right == usernameLabel.superview!.right
-    }
-
-    addSubview(timeAgoLabel)
-    constrain(timeAgoLabel, usernameLabel) { timeAgoLabel, usernameLabel in
-      timeAgoLabel.left == timeAgoLabel.superview!.left
-      timeAgoLabel.top == usernameLabel.bottom + 4
-      timeAgoLabel.right == timeAgoLabel.superview!.right
-    }
-
     addSubview(optionsView)
     constrain(optionsView, thumbnailImageView) { optionsView, thumbnailImageView in
       optionsView.left == thumbnailImageView.left
@@ -214,6 +182,38 @@ class ClipCollectionViewCell: UICollectionViewCell {
       optionsButton.bottom == optionsButton.superview!.bottom
     }
     optionsButton.addTarget(self, action: "optionsButtonTapped", forControlEvents: .TouchUpInside)
+
+    let userAvatarImageViewWidthHeight: CGFloat = 40
+    addSubview(userAvatarImageView)
+    constrain(userAvatarImageView, thumbnailImageView) { userAvatarImageView, thumbnailImageView in
+      userAvatarImageView.centerY == thumbnailImageView.bottom
+      userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
+      userAvatarImageView.width == userAvatarImageViewWidthHeight
+      userAvatarImageView.height == userAvatarImageView.width
+    }
+
+    addSubview(profileButton)
+    constrain(profileButton, userAvatarImageView) { (profileButton, userAvatarImageView) in
+      profileButton.left == userAvatarImageView.left
+      profileButton.top == userAvatarImageView.top
+      profileButton.right == userAvatarImageView.right
+      profileButton.height == userAvatarImageView.height
+    }
+    profileButton.addTarget(self, action: "profileButtonTapped", forControlEvents: .TouchUpInside)
+
+    addSubview(usernameLabel)
+    constrain(usernameLabel, thumbnailImageView, userAvatarImageView) { usernameLabel, thumbnailImageView, userAvatarImageView in
+      usernameLabel.left == usernameLabel.superview!.left
+      usernameLabel.top == thumbnailImageView.bottom + (userAvatarImageViewWidthHeight / 2) + 7
+      usernameLabel.right == usernameLabel.superview!.right
+    }
+
+    addSubview(timeAgoLabel)
+    constrain(timeAgoLabel, usernameLabel) { timeAgoLabel, usernameLabel in
+      timeAgoLabel.left == timeAgoLabel.superview!.left
+      timeAgoLabel.top == usernameLabel.bottom + 4
+      timeAgoLabel.right == timeAgoLabel.superview!.right
+    }
 
     addSubview(dimOverlayView)
     constrain(dimOverlayView) { dimOverlayView in
