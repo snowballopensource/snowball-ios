@@ -67,10 +67,10 @@ class TimelineViewController: UIViewController {
 
     view.backgroundColor = UIColor.whiteColor()
 
-    navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: "backBarButtonItemPressed")
-    navigationItem.backBarButtonItem?.tintColor = UIColor.whiteColor()
     if navigationController?.viewControllers.first == self {
       navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-friends"), style: .Plain, target: self, action: "leftBarButtonItemPressed")
+    } else {
+      navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-back"), style: .Plain, target: self, action: "backBarButtonItemPressed")
     }
 
     if let cameraViewController = cameraViewController {
