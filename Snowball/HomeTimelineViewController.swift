@@ -63,6 +63,19 @@ class HomeTimelineViewController: TimelineViewController {
     cameraViewController.changeCamera()
   }
 
+  // MARK: TimelinePlayerDelegate Overrides
+  // This is because swift does not allow overrides in extensions. Sorry!
+
+  override func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
+    super.timelinePlayer(timelinePlayer, willBeginPlaybackWithFirstClip: clip)
+    view.sendSubviewToBack(cameraViewController.view)
+  }
+
+  override func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
+    super.timelinePlayer(timelinePlayer, didEndPlaybackWithLastClip: clip)
+    view.bringSubviewToFront(cameraViewController.view)
+  }
+
   // MARK: ClipCollectionViewCellDelegate Overrides
   // This is because swift does not allow overrides in extensions. Sorry!
 
