@@ -17,7 +17,7 @@ class TimelineViewController: UIViewController {
   // MARK: Properties
 
   let timeline: Timeline
-  let cameraViewController = CameraViewController()
+  let cameraViewController: CameraViewController?
   let player: TimelinePlayer
   let playerView = PlayerView()
   let timelineCollectionView = TimelineCollectionView()
@@ -43,6 +43,12 @@ class TimelineViewController: UIViewController {
     timeline = Timeline(type: timelineType)
     player = TimelinePlayer(timeline: timeline)
 
+    if timelineType == .Home {
+      cameraViewController = CameraViewController()
+    } else {
+      cameraViewController = nil
+    }
+
     let fetchRequest = FetchRequest<Clip>(realm: Database.realm, predicate: timeline.predicate)
     fetchRequest.sortDescriptors = timeline.sortDescriptors
     fetchedResultsController = FetchedResultsController<Clip>(fetchRequest: fetchRequest, sectionNameKeyPath: nil, cacheName: nil)
@@ -59,23 +65,28 @@ class TimelineViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    view.backgroundColor = UIColor.whiteColor()
+
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: "backBarButtonItemPressed")
     navigationItem.backBarButtonItem?.tintColor = UIColor.whiteColor()
     if navigationController?.viewControllers.first == self {
       navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-friends"), style: .Plain, target: self, action: "leftBarButtonItemPressed")
     }
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-flip-camera"), style: .Plain, target: self, action: "rightBarButtonItemPressed")
 
-    addChildViewController(cameraViewController)
-    view.addSubview(cameraViewController.view)
-    constrain(cameraViewController.view) { cameraView in
-      cameraView.left == cameraView.superview!.left
-      cameraView.top == cameraView.superview!.top
-      cameraView.right == cameraView.superview!.right
-      cameraView.height == cameraView.superview!.width
+    if let cameraViewController = cameraViewController {
+      navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-flip-camera"), style: .Plain, target: self, action: "rightBarButtonItemPressed")
+
+      addChildViewController(cameraViewController)
+      view.addSubview(cameraViewController.view)
+      constrain(cameraViewController.view) { cameraView in
+        cameraView.left == cameraView.superview!.left
+        cameraView.top == cameraView.superview!.top
+        cameraView.right == cameraView.superview!.right
+        cameraView.height == cameraView.superview!.width
+      }
+      cameraViewController.didMoveToParentViewController(self)
+      cameraViewController.delegate = self
     }
-    cameraViewController.didMoveToParentViewController(self)
-    cameraViewController.delegate = self
 
     view.addSubview(playerView)
     constrain(playerView) { playerView in
@@ -209,7 +220,7 @@ class TimelineViewController: UIViewController {
   }
 
   @objc private func rightBarButtonItemPressed() {
-    cameraViewController.changeCamera()
+    cameraViewController?.changeCamera()
   }
 }
 
@@ -335,7 +346,7 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
 
   func clipCollectionViewCellAddButtonTapped(cell: ClipCollectionViewCell) {
     guard let clip = clipForCell(cell) else { return }
-    cameraViewController.endPreview()
+    cameraViewController?.endPreview()
     tryUploadingClip(clip)
   }
 
