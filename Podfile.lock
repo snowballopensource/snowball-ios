@@ -12,6 +12,7 @@ PODS:
   - SwiftFetchedResultsController (3.0):
     - RBQFetchedResultsController (>= 3.0)
     - RealmSwift (>= 0.96)
+  - SwiftSpinner (0.8.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - HanekeSwift
   - RealmSwift
   - SwiftFetchedResultsController
+  - SwiftSpinner
 
 SPEC CHECKSUMS:
   Alamofire: 4da478599fccddff361205c8929333d7fe18dceb
@@ -28,5 +30,6 @@ SPEC CHECKSUMS:
   Realm: ca4a4122e939e228e10694fc49011386cb2ecb07
   RealmSwift: 7d3c7033427816a2c3417ba0d004d694987e503a
   SwiftFetchedResultsController: 204434885dbc16c9eabe653e326aac679f9b7bce
+  SwiftSpinner: 11c2c5ec7443d92f3026d3067ca8a91d4adef13f
 
 COCOAPODS: 0.39.0

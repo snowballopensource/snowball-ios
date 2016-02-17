@@ -9,6 +9,7 @@
 import Cartography
 import RealmSwift
 import SwiftFetchedResultsController
+import SwiftSpinner
 import UIKit
 
 class TimelineViewController: UIViewController {
@@ -359,6 +360,7 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
 
     let confirmed: UIAlertAction -> Void = { action in
       let completion: Response -> Void = { response in
+        SwiftSpinner.hide()
         switch response {
         case .Success:
           self.resetStateForCell(cell)
@@ -367,8 +369,10 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
         }
       }
       if isCurrentUser {
+        SwiftSpinner.show(NSLocalizedString("Deleting...", comment: ""))
         SnowballAPI.request(SnowballRoute.DeleteClip(clipID: clipID), completion: completion)
       } else {
+        SwiftSpinner.show(NSLocalizedString("Flagging...", comment: ""))
         SnowballAPI.request(SnowballRoute.FlagClip(clipID: clipID), completion: completion)
       }
     }
