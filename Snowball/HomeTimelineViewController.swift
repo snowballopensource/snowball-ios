@@ -74,6 +74,7 @@ class HomeTimelineViewController: TimelineViewController {
   }
 
   override func clipCollectionViewCellRetryUploadButtonTapped(cell: ClipCollectionViewCell) {
+    super.clipCollectionViewCellRetryUploadButtonTapped(cell)
     guard let clip = clipForCell(cell) else { return }
     tryUploadingClip(clip)
   }
