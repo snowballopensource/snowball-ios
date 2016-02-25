@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6ADFB79AE9E2FA151B23A329 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ACC25125F448DC6A7011ECF /* Pods.framework */; };
 		BA0B879D1C5B16990094D6D7 /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B879C1C5B16990094D6D7 /* HomeNavigationController.swift */; };
 		BA0B87A11C5B17B60094D6D7 /* UINavigationBar+Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B87A01C5B17B60094D6D7 /* UINavigationBar+Transparent.swift */; };
 		BA0B87A31C5B1ECF0094D6D7 /* FriendsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B87A21C5B1ECF0094D6D7 /* FriendsNavigationController.swift */; };
@@ -50,12 +49,12 @@
 		BAD7750D1C1E02AC00ED1A64 /* NSError+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD7750C1C1E02AC00ED1A64 /* NSError+Snowball.swift */; };
 		BAF578B11C67E317003F9404 /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF578B01C67E317003F9404 /* UIColor+Snowball.swift */; };
 		BAFC72171C3DC5F600D46747 /* CachedAssetResourceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFC72161C3DC5F600D46747 /* CachedAssetResourceLoader.swift */; };
+		CCFCD0A57EF5CB89566E2D1C /* Pods_Snowball.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9E3C0AC8C7F6F443CC06F9C /* Pods_Snowball.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1AB0D3543714478732381B18 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		1C8027867E84311258F16F62 /* Pods-Snowball.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snowball.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snowball/Pods-Snowball.debug.xcconfig"; sourceTree = "<group>"; };
 		4ACC25125F448DC6A7011ECF /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AA990512BC7FECAEF9AE902D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		BA0B879C1C5B16990094D6D7 /* HomeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
 		BA0B87A01C5B17B60094D6D7 /* UINavigationBar+Transparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Transparent.swift"; sourceTree = "<group>"; };
 		BA0B87A21C5B1ECF0094D6D7 /* FriendsNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsNavigationController.swift; sourceTree = "<group>"; };
@@ -100,6 +99,8 @@
 		BAD7750C1C1E02AC00ED1A64 /* NSError+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Snowball.swift"; sourceTree = "<group>"; };
 		BAF578B01C67E317003F9404 /* UIColor+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Snowball.swift"; sourceTree = "<group>"; };
 		BAFC72161C3DC5F600D46747 /* CachedAssetResourceLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedAssetResourceLoader.swift; sourceTree = "<group>"; };
+		D9E3C0AC8C7F6F443CC06F9C /* Pods_Snowball.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snowball.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3B23BF6C99EDCC845A73A75 /* Pods-Snowball.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snowball.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snowball/Pods-Snowball.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6ADFB79AE9E2FA151B23A329 /* Pods.framework in Frameworks */,
+				CCFCD0A57EF5CB89566E2D1C /* Pods_Snowball.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,15 +119,16 @@
 			isa = PBXGroup;
 			children = (
 				4ACC25125F448DC6A7011ECF /* Pods.framework */,
+				D9E3C0AC8C7F6F443CC06F9C /* Pods_Snowball.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		9D049035B8D0CF46AC555BFE /* Pods */ = {
+		527A4F9928D58B2438D45762 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1AB0D3543714478732381B18 /* Pods.debug.xcconfig */,
-				AA990512BC7FECAEF9AE902D /* Pods.release.xcconfig */,
+				1C8027867E84311258F16F62 /* Pods-Snowball.debug.xcconfig */,
+				F3B23BF6C99EDCC845A73A75 /* Pods-Snowball.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -145,8 +147,8 @@
 			children = (
 				BA73BCBE1C1A71B400B22588 /* Snowball */,
 				BA73BCBD1C1A71B400B22588 /* Products */,
-				9D049035B8D0CF46AC555BFE /* Pods */,
 				2267DBCEC49A798A52E846FC /* Frameworks */,
+				527A4F9928D58B2438D45762 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -270,12 +272,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA73BCCE1C1A71B400B22588 /* Build configuration list for PBXNativeTarget "Snowball" */;
 			buildPhases = (
-				D12418D76B8A95DD9AFF1147 /* Check Pods Manifest.lock */,
+				C36434F7B9FD8E41FEBD2DEC /* Check Pods Manifest.lock */,
 				BA73BCB81C1A71B400B22588 /* Sources */,
 				BA73BCB91C1A71B400B22588 /* Frameworks */,
 				BA73BCBA1C1A71B400B22588 /* Resources */,
-				5C68C6CFF4BBC25B1A39CF36 /* Embed Pods Frameworks */,
-				3A1677B758D90FAC080E4C3C /* Copy Pods Resources */,
+				AB3BB7B5985E6E1A74162068 /* Embed Pods Frameworks */,
+				47232F67D9DDC0E45F00DC7C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -332,7 +334,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3A1677B758D90FAC080E4C3C /* Copy Pods Resources */ = {
+		47232F67D9DDC0E45F00DC7C /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -344,10 +346,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Snowball/Pods-Snowball-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5C68C6CFF4BBC25B1A39CF36 /* Embed Pods Frameworks */ = {
+		AB3BB7B5985E6E1A74162068 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -359,10 +361,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Snowball/Pods-Snowball-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D12418D76B8A95DD9AFF1147 /* Check Pods Manifest.lock */ = {
+		C36434F7B9FD8E41FEBD2DEC /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -524,7 +526,7 @@
 		};
 		BA73BCCF1C1A71B400B22588 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1AB0D3543714478732381B18 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 1C8027867E84311258F16F62 /* Pods-Snowball.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Snowball/Info.plist;
@@ -537,7 +539,7 @@
 		};
 		BA73BCD01C1A71B400B22588 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA990512BC7FECAEF9AE902D /* Pods.release.xcconfig */;
+			baseConfigurationReference = F3B23BF6C99EDCC845A73A75 /* Pods-Snowball.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Snowball/Info.plist;
