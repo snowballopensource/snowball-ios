@@ -11,6 +11,13 @@ import UIKit
 
 extension UIFont {
   struct SnowballFont {
+    static let regularFont: UIFont = {
+      if #available(iOS 8.2, *) {
+        return UIFont.systemFontOfSize(defaultFontSize, weight: UIFontWeightRegular)
+      } else {
+        return UIFont(name: "HelveticaNeue", size: defaultFontSize) ?? UIFont()
+      }
+    }()
     static let mediumFont: UIFont = {
       if #available(iOS 8.2, *) {
         return UIFont.systemFontOfSize(defaultFontSize, weight: UIFontWeightMedium)
