@@ -23,6 +23,29 @@ struct SnowballAPI {
     }
   }
 
+  static func requestObject<T: Object>(route: SnowballRoute, completion: (response: ObjectResponse<T>) -> Void) {
+    Alamofire.request(route).responseJSON { afResponse in
+      switch afResponse.result {
+      case .Success(let value):
+        if let value = value as? JSONObject {
+          var object: T?
+          Database.performTransaction {
+            object = T.fromJSONObject(value)
+          }
+          if let object = object {
+            completion(response: .Success(object))
+          } else {
+            completion(response: .Failure(NSError.snowballErrorWithReason(nil)))
+          }
+        } else {
+          completion(response: .Failure(NSError.snowballErrorWithReason(nil)))
+        }
+      case .Failure(let error):
+        completion(response: .Failure(error))
+      }
+    }
+  }
+
   static func requestObjects<T: Object>(route: SnowballRoute, completion: (response: ObjectResponse<[T]>) -> Void) {
     requestObjects(route, eachObjectBeforeSave: nil, completion: completion)
   }

@@ -62,7 +62,7 @@ class Clip: Object {
       self.createdAt = NSDate(timeIntervalSince1970: createdAt)
     }
     if let userJSON = JSON["user"] as? JSONObject {
-      self.user = User.fromJSONObject(userJSON) as User
+      self.user = User.fromJSONObject(userJSON)
     }
   }
 

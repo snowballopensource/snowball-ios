@@ -41,6 +41,6 @@ struct Database {
   }
 
   static func findOrInitialize<T: Object>(id: String) -> T {
-    return find(id) ?? T.init()
+    return find(id) ?? T()
   }
 }
