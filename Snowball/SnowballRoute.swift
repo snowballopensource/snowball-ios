@@ -137,7 +137,7 @@ enum SnowballRoute: URLRequestConvertible {
 }
 
 // MARK: - SnowballAPICredential
-private struct SnowballAPICredential {
+struct SnowballAPICredential {
   private static let kCurrentUserAuthTokenKey = "CurrentUserAuthToken"
   static var authToken: String? {
     get {

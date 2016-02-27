@@ -31,8 +31,15 @@ class User: Object {
       colorData = NSKeyedArchiver.archivedDataWithRootObject(newValue)
     }
   }
+  var authToken: String?
 
-  static var currentUser: User? = nil
+  static var currentUser: User? = nil {
+    didSet {
+      if let currentUser = currentUser {
+        SnowballAPICredential.authToken = currentUser.authToken
+      }
+    }
+  }
 
   // MARK: Object
 
@@ -41,7 +48,7 @@ class User: Object {
   }
 
   override static func ignoredProperties() -> [String] {
-    return ["color"]
+    return ["color", "authToken"]
   }
 
   override func importJSON(JSON: JSONObject) {
@@ -64,6 +71,9 @@ class User: Object {
     }
     if let phoneNumber = JSON["phone_number"] as? String {
       self.phoneNumber = phoneNumber
+    }
+    if let authToken = JSON["auth_token"] as? String {
+      self.authToken = authToken
     }
   }
 }

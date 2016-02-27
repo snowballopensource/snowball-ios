@@ -24,6 +24,14 @@ struct SnowballAPI {
   }
 
   static func requestObject<T: Object>(route: SnowballRoute, completion: (response: ObjectResponse<T>) -> Void) {
+    requestObject(route, beforeSave: nil, completion: completion)
+  }
+
+  static func requestObjects<T: Object>(route: SnowballRoute, completion: (response: ObjectResponse<[T]>) -> Void) {
+    requestObjects(route, eachObjectBeforeSave: nil, completion: completion)
+  }
+
+  static func requestObject<T: Object>(route: SnowballRoute, beforeSave: ((object: T) -> Void)?, completion: (response: ObjectResponse<T>) -> Void) {
     Alamofire.request(route).responseJSON { afResponse in
       switch afResponse.result {
       case .Success(let value):
@@ -31,6 +39,10 @@ struct SnowballAPI {
           var object: T?
           Database.performTransaction {
             object = T.fromJSONObject(value)
+            if let object = object {
+              beforeSave?(object: object)
+              Database.save(object)
+            }
           }
           if let object = object {
             completion(response: .Success(object))
@@ -44,10 +56,6 @@ struct SnowballAPI {
         completion(response: .Failure(error))
       }
     }
-  }
-
-  static func requestObjects<T: Object>(route: SnowballRoute, completion: (response: ObjectResponse<[T]>) -> Void) {
-    requestObjects(route, eachObjectBeforeSave: nil, completion: completion)
   }
 
   static func requestObjects<T: Object>(route: SnowballRoute, eachObjectBeforeSave: ((object: T) -> Void)?, completion: (response: ObjectResponse<[T]>) -> Void) {

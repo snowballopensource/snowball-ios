@@ -88,5 +88,22 @@ class SignInViewController: UIViewController {
       submitButton.right == passwordTextField.right
       submitButton.height == SnowballActionButton.defaultHeight
     }
+    submitButton.addTarget(self, action: "submitButtonPressed", forControlEvents: .TouchUpInside)
+  }
+
+  // MARK: Actions
+
+  @objc private func submitButtonPressed() {
+    guard let email = emailTextField.textField.text, let password = passwordTextField.textField.text else { return }
+    SnowballAPI.requestObject(SnowballRoute.SignIn(email: email, password: password)) { (response: ObjectResponse<User>) in
+        switch response {
+        case .Success(let user):
+          User.currentUser = user
+          // TODO: Analytics
+          // TODO: Push notifications
+          self.dismissViewControllerAnimated(true, completion: nil)
+        case .Failure(let error): print(error)
+        }
+    }
   }
 }
