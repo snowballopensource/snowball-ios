@@ -22,7 +22,6 @@ class User: Object {
   dynamic var email: String?
   dynamic var phoneNumber: String?
   private dynamic var colorData = NSKeyedArchiver.archivedDataWithRootObject(UIColor.SnowballColor.randomColor)
-
   var color: UIColor {
     get {
       return NSKeyedUnarchiver.unarchiveObjectWithData(colorData) as? UIColor ?? UIColor.SnowballColor.blueColor
@@ -33,11 +32,35 @@ class User: Object {
   }
   var authToken: String?
 
-  static var currentUser: User? = nil {
-    didSet {
-      if let currentUser = currentUser {
-        SnowballAPICredential.authToken = currentUser.authToken
+  private static let kCurrentUserIDKey = "CurrentUserID"
+  private static let kCurrentUserAuthTokenKey = "CurrentUserAuthToken"
+  private static var _currentUser: User?
+  static var currentUser: User? {
+    get {
+      let defaults = NSUserDefaults.standardUserDefaults()
+      if let currentUserID = defaults.objectForKey(kCurrentUserIDKey) as? String, let currentUserAuthToken = defaults.objectForKey(kCurrentUserAuthTokenKey) as? String {
+        if let _currentUser = _currentUser {
+          return _currentUser
+        } else {
+          _currentUser = Database.find(currentUserID)
+          _currentUser?.authToken = currentUserAuthToken
+          return _currentUser
+        }
       }
+      return nil
+    }
+    set {
+      let defaults = NSUserDefaults.standardUserDefaults()
+      if let id = newValue?.id, authToken = newValue?.authToken {
+        defaults.setObject(id, forKey: kCurrentUserIDKey)
+        defaults.setObject(authToken, forKey: kCurrentUserAuthTokenKey)
+        _currentUser = newValue
+      } else {
+        defaults.removeObjectForKey(kCurrentUserIDKey)
+        defaults.removeObjectForKey(kCurrentUserAuthTokenKey)
+        _currentUser = nil
+      }
+      defaults.synchronize()
     }
   }
 

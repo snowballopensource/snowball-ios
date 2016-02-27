@@ -124,7 +124,7 @@ enum SnowballRoute: URLRequestConvertible {
     let URL = NSURL(string: SnowballRoute.baseURLString)
     let mutableURLRequest = NSMutableURLRequest(URL: URL!.URLByAppendingPathComponent(path))
     mutableURLRequest.HTTPMethod = method.rawValue
-    if let authToken = SnowballAPICredential.authToken {
+    if let authToken = User.currentUser?.authToken {
       let encodedAuthTokenData = "\(authToken):".dataUsingEncoding(NSUTF8StringEncoding)!
       let encodedAuthToken = encodedAuthTokenData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
       mutableURLRequest.setValue("Basic \(encodedAuthToken)", forHTTPHeaderField: "Authorization")
@@ -133,23 +133,5 @@ enum SnowballRoute: URLRequestConvertible {
       return parameterEncoding!.encode(mutableURLRequest, parameters: params).0
     }
     return mutableURLRequest
-  }
-}
-
-// MARK: - SnowballAPICredential
-struct SnowballAPICredential {
-  private static let kCurrentUserAuthTokenKey = "CurrentUserAuthToken"
-  static var authToken: String? {
-    get {
-    return NSUserDefaults.standardUserDefaults().objectForKey(kCurrentUserAuthTokenKey) as! String?
-    }
-    set {
-      if let authToken = newValue {
-        NSUserDefaults.standardUserDefaults().setObject(authToken, forKey: kCurrentUserAuthTokenKey)
-      } else {
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(kCurrentUserAuthTokenKey)
-      }
-      NSUserDefaults.standardUserDefaults().synchronize()
-    }
   }
 }
