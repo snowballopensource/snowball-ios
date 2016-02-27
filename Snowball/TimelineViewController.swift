@@ -338,7 +338,7 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
 
     authenticateUser(
       afterSuccessfulAuthentication: {
-        // TODO: Reload
+        self.timeline.requestRefreshOfClips()
       },
       whenAlreadyAuthenticated: {
         let isCurrentUser = (user == User.currentUser)
