@@ -29,6 +29,13 @@ class PlayerQueueManager {
   var isLoadingAdditionalClips: Bool {
     return (uncancelledOperations.count != 0)
   }
+  var nextBufferingClip: Clip? {
+    if let operation = uncancelledOperations.first as? LoadPlayerItemOperation {
+      let playerItem = operation.playerItem as? ClipPlayerItem
+      return playerItem?.clip
+    }
+    return nil
+  }
 
   // MARK: Initializers
 

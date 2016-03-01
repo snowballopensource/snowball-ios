@@ -55,7 +55,9 @@ class TimelinePlayer: AVQueuePlayer {
       guard let change = change else { return }
       let newPlayerItem = change[NSKeyValueChangeNewKey] as? ClipPlayerItem
       let buffering = (newPlayerItem == nil && queueManager.isLoadingAdditionalClips)
-      if !buffering {
+      if buffering {
+        currentClip = queueManager.nextBufferingClip
+      } else {
         currentClip = newPlayerItem?.clip
       }
     } else {
