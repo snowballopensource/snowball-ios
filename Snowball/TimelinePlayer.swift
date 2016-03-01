@@ -27,7 +27,7 @@ class TimelinePlayer: AVQueuePlayer {
       if beginningPlayback { delegate?.timelinePlayer(self, didBeginPlaybackWithFirstClip: newValue!) }
       if continuingPlayback { delegate?.timelinePlayer(self, didTransitionFromClip: oldValue!, toClip: newValue!) }
       if endingPlayback {
-        stop() // This handles when playback stops by reaching end of avail. clips
+        stop()
         delegate?.timelinePlayer(self, didEndPlaybackWithLastClip: oldValue!)
       }
     }
@@ -54,7 +54,10 @@ class TimelinePlayer: AVQueuePlayer {
     if keyPath == currentItemKeyPath {
       guard let change = change else { return }
       let newPlayerItem = change[NSKeyValueChangeNewKey] as? ClipPlayerItem
-      currentClip = newPlayerItem?.clip
+      let buffering = (newPlayerItem == nil && queueManager.isLoadingAdditionalClips)
+      if !buffering {
+        currentClip = newPlayerItem?.clip
+      }
     } else {
       super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
     }

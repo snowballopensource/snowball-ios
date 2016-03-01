@@ -26,6 +26,9 @@ class PlayerQueueManager {
   private var uncancelledOperations: [NSOperation] {
     return queue.operations.filter({ !$0.cancelled })
   }
+  var isLoadingAdditionalClips: Bool {
+    return (uncancelledOperations.count != 0)
+  }
 
   // MARK: Initializers
 
