@@ -32,11 +32,10 @@ class UserAvatarImageView: UIImageView {
   // MARK: Internal
 
   func setUser(user: User) {
+    backgroundColor = user.color
+    image = UIImage(named: "user-avatar-default")
     if let URLString = user.avatarURL, URL = NSURL(string: URLString) {
       setImageFromURL(URL)
-    } else {
-      // TODO: User does not have an avatar URL. Set a default image.
-      print("User does not have an avatar URL. Set a default image.")
     }
   }
 }
