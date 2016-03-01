@@ -47,10 +47,16 @@ class TimelineViewController: UIViewController {
     fetchedResultsController = FetchedResultsController<Clip>(fetchRequest: fetchRequest, sectionNameKeyPath: nil, cacheName: nil)
 
     super.init(nibName: nil, bundle: nil)
+
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillEnterForeground", name: UIApplicationWillEnterForegroundNotification, object: nil)
   }
 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
   }
 
   // MARK: UIViewController
@@ -96,7 +102,7 @@ class TimelineViewController: UIViewController {
     super.viewWillAppear(animated)
 
     if isAppearingForFirstTime() {
-      timeline.requestRefreshOfClips()
+      refresh()
     }
   }
 
@@ -109,6 +115,10 @@ class TimelineViewController: UIViewController {
   }
 
   // MARK: Internal
+
+  func refresh() {
+    timeline.requestRefreshOfClips()
+  }
 
   func scrollToCellForClip(clip: Clip, animated: Bool) {
     if let indexPath = fetchedResultsController.indexPathForObject(clip) {
@@ -190,6 +200,10 @@ class TimelineViewController: UIViewController {
   }
 
   // MARK: Actions
+
+  @objc private func applicationWillEnterForeground() {
+    refresh()
+  }
 
   @objc private func backBarButtonItemPressed() {
     navigationController?.popViewControllerAnimated(true)
@@ -338,7 +352,7 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
 
     authenticateUser(
       afterSuccessfulAuthentication: {
-        self.timeline.requestRefreshOfClips()
+        self.refresh()
       },
       whenAlreadyAuthenticated: {
         let isCurrentUser = (user == User.currentUser)
