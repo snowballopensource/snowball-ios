@@ -190,15 +190,6 @@ class TimelineViewController: UIViewController {
     return state
   }
 
-  private func skipToClip(clip: Clip) {
-    player.pause()
-    player.removeAllItemsExceptCurrentItem()
-    player.queueManager.preparePlayerQueueToSkipToClip(clip) {
-      self.player.advanceToNextItem()
-      self.player.play()
-    }
-  }
-
   // MARK: Actions
 
   @objc private func applicationWillEnterForeground() {
@@ -304,7 +295,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
     print("did transition")
     scrollToCellForClip(toClip, animated: true)
-    player.queueManager.ensurePlayerQueueToppedOff()
+    player.topOffQueue()
     resetStateForVisibleCells()
   }
 
@@ -325,12 +316,10 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
         player.stop()
         return
       } else {
-        skipToClip(clip)
+        player.skipToClip(clip)
       }
     } else {
-      player.queueManager.preparePlayerQueueToPlayClip(clip) {
-        self.player.play()
-      }
+      player.playWithFirstClip(clip)
     }
   }
 
@@ -416,13 +405,13 @@ extension TimelineViewController: UIScrollViewPullToLoadDelegate {
 extension TimelineViewController: TimelineCollectionViewDelegate {
   func timelineCollectionViewSwipedLeft(collectionView: TimelineCollectionView) {
     if let currentClip = player.currentClip, nextClip = timeline.clipAfterClip(currentClip) {
-      skipToClip(nextClip)
+      player.skipToClip(nextClip)
     }
   }
 
   func timelineCollectionViewSwipedRight(collectionView: TimelineCollectionView) {
     if let currentClip = player.currentClip, previousClip = timeline.clipBeforeClip(currentClip) {
-      skipToClip(previousClip)
+      player.skipToClip(previousClip)
     }
   }
 }

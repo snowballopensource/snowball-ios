@@ -13,7 +13,7 @@ class TimelinePlayer: AVQueuePlayer {
   // MARK: Properties
 
   private(set) var playing = false
-  let queueManager: PlayerQueueManager
+  private let queueManager: PlayerQueueManager
   var delegate: TimelinePlayerDelegate?
   var currentClip: Clip? {
     didSet {
@@ -41,7 +41,6 @@ class TimelinePlayer: AVQueuePlayer {
     queueManager = PlayerQueueManager(timeline: timeline)
     super.init()
     queueManager.player = self
-    queueManager.delegate = self
     addObserver(self, forKeyPath: currentItemKeyPath, options: .New, context: nil)
   }
 
@@ -63,20 +62,37 @@ class TimelinePlayer: AVQueuePlayer {
 
   // MARK: Internal
 
-  override func play() {
+  func playWithFirstClip(clip: Clip) {
     let shouldBeginPlayback = delegate?.timelinePlayerShouldBeginPlayback(self) ?? false
     if shouldBeginPlayback {
       playing = true
-      super.play()
+      delegate?.timelinePlayer(self, willBeginPlaybackWithFirstClip: clip)
+      queueManager.preparePlayerQueueToPlayClip(clip)
+      play()
     }
   }
 
   func stop() {
-    queueManager.cancelAllOperations()
     playing = false
+    queueManager.cancelAllOperations()
     pause()
     removeAllItems()
   }
+
+  func topOffQueue() {
+    queueManager.ensurePlayerQueueToppedOff()
+  }
+
+  func skipToClip(clip: Clip) {
+    pause()
+    removeAllItemsExceptCurrentItem()
+    queueManager.preparePlayerQueueToSkipToClip(clip) {
+      self.advanceToNextItem()
+      self.play()
+    }
+  }
+
+  // MARK: Private
 
   func removeAllItemsExceptCurrentItem() {
     for item in items() {
@@ -84,13 +100,6 @@ class TimelinePlayer: AVQueuePlayer {
         removeItem(item)
       }
     }
-  }
-}
-
-// MARK: PlayerQueueManagerDelegate
-extension TimelinePlayer: PlayerQueueManagerDelegate {
-  func queueManager(queueManager: PlayerQueueManager, willPreparePlayerQueueToPlayClip clip: Clip) {
-    delegate?.timelinePlayer(self, willBeginPlaybackWithFirstClip: clip)
   }
 }
 

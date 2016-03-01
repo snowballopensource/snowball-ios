@@ -16,7 +16,6 @@ class PlayerQueueManager {
 
   private let timeline: Timeline
   weak var player: AVQueuePlayer?
-  var delegate: PlayerQueueManagerDelegate?
   private let queue: NSOperationQueue = {
     let queue = NSOperationQueue()
     queue.qualityOfService = .UserInitiated
@@ -43,9 +42,8 @@ class PlayerQueueManager {
     fillPlayerQueueWithClips(timeline.clipsAfterClip(lastQueuedClip), ignoringPlayerItemsCount: false, readyToPlayFirstClip: nil)
   }
 
-  func preparePlayerQueueToPlayClip(clip: Clip, readyToPlayFirstClip: (() -> Void)?) {
-    delegate?.queueManager(self, willPreparePlayerQueueToPlayClip: clip)
-    fillPlayerQueueWithClips(timeline.clipsIncludingAndAfterClip(clip), ignoringPlayerItemsCount: false, readyToPlayFirstClip: readyToPlayFirstClip)
+  func preparePlayerQueueToPlayClip(clip: Clip) {
+    fillPlayerQueueWithClips(timeline.clipsIncludingAndAfterClip(clip), ignoringPlayerItemsCount: false, readyToPlayFirstClip: nil)
   }
 
   func preparePlayerQueueToSkipToClip(clip: Clip, readyToPlayFirstClip: (() -> Void)?) {
@@ -94,9 +92,4 @@ class PlayerQueueManager {
     }
     queue.addOperation(loadPlayerItemOperation)
   }
-}
-
-// MARK: - PlayerQueueManagerDelegate
-protocol PlayerQueueManagerDelegate {
-  func queueManager(queueManager: PlayerQueueManager, willPreparePlayerQueueToPlayClip clip: Clip)
 }

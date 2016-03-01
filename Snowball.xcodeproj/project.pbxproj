@@ -142,6 +142,15 @@
 			name = "Navigation Controllers";
 			sourceTree = "<group>";
 		};
+		BA2031581C863B5F002187F2 /* Player Queue Management */ = {
+			isa = PBXGroup;
+			children = (
+				BA1881101C3F5F01002202B4 /* PlayerQueueManager.swift */,
+				BA1881121C3F6D09002202B4 /* LoadPlayerItemOperation.swift */,
+			);
+			name = "Player Queue Management";
+			sourceTree = "<group>";
+		};
 		BA73BCB31C1A71B300B22588 = {
 			isa = PBXGroup;
 			children = (
@@ -219,9 +228,8 @@
 			children = (
 				BA67BDCD1C6413D900720090 /* SingleItemLoopingPlayer.swift */,
 				BA98087B1C3BA71D00F86C04 /* TimelinePlayer.swift */,
+				BA2031581C863B5F002187F2 /* Player Queue Management */,
 				BAFC72161C3DC5F600D46747 /* CachedAssetResourceLoader.swift */,
-				BA1881101C3F5F01002202B4 /* PlayerQueueManager.swift */,
-				BA1881121C3F6D09002202B4 /* LoadPlayerItemOperation.swift */,
 				BA98087D1C3C1BE600F86C04 /* ClipPlayerItem.swift */,
 				BA9808771C3BA01C00F86C04 /* PlayerView.swift */,
 			);
