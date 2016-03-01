@@ -274,6 +274,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     addButton.setHidden(!pendingAcceptance, animated: animated)
     retryUploadButton.setHidden(!uploadFailed, animated: animated)
     optionsView.setHidden(!options, animated: animated)
+    usernameLabel.setHidden(playingIdle, animated: animated)
+    timeAgoLabel.setHidden(playingIdle, animated: animated)
   }
 
   // MARK: Private
