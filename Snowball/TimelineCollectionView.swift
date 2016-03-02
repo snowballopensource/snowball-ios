@@ -29,11 +29,7 @@ class TimelineCollectionView: UICollectionView {
   // MARK: UICollectionView
 
   init() {
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .Horizontal
-    layout.minimumInteritemSpacing = 0
-    layout.minimumLineSpacing = 0
-    layout.itemSize = ClipCollectionViewCell.defaultSize
+    let layout = TimelineCollectionViewFlowLayout()
     super.init(frame: CGRectZero, collectionViewLayout: layout)
     showsHorizontalScrollIndicator = false
     backgroundColor = UIColor.whiteColor()
@@ -66,8 +62,41 @@ class TimelineCollectionView: UICollectionView {
 }
 
 // MARK: - TimelineCollectionViewDelegate
-
 protocol TimelineCollectionViewDelegate {
   func timelineCollectionViewSwipedLeft(collectionView: TimelineCollectionView)
   func timelineCollectionViewSwipedRight(collectionView: TimelineCollectionView)
+}
+
+// MARK: - TimelineCollectionViewFlowLayout
+class TimelineCollectionViewFlowLayout: UICollectionViewFlowLayout {
+
+  // MARK: Initializers
+
+  override init() {
+    super.init()
+    scrollDirection = .Horizontal
+    minimumInteritemSpacing = 0
+    minimumLineSpacing = 0
+    itemSize = ClipCollectionViewCell.defaultSize
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  // MARK: UICollectionViewFlowLayout
+
+  override func finalizeCollectionViewUpdates() {
+    super.finalizeCollectionViewUpdates()
+
+    guard let collectionView = collectionView else { return }
+    let contentSizeBeforeAnimation = collectionView.contentSize
+    let contentSizeAfterAnimation = collectionViewContentSize()
+    let xOffset = contentSizeAfterAnimation.width - contentSizeBeforeAnimation.width
+    if xOffset < 0 {
+      collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+    } else {
+      collectionView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: false)
+    }
+  }
 }
