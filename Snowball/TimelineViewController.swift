@@ -349,21 +349,30 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
         let isCurrentUser = (user == User.currentUser)
 
         let confirmed: UIAlertAction -> Void = { action in
-          let completion: Response -> Void = { response in
-            SwiftSpinner.hide()
-            switch response {
-            case .Success:
-              self.resetStateForCell(cell)
-            case .Failure(let error):
-              print(error) // TODO: Handle error
-            }
-          }
           if isCurrentUser {
             SwiftSpinner.show(NSLocalizedString("Deleting...", comment: ""))
-            SnowballAPI.request(SnowballRoute.DeleteClip(clipID: clipID), completion: completion)
+            SnowballAPI.request(SnowballRoute.DeleteClip(clipID: clipID)) { response in
+              SwiftSpinner.hide()
+              switch response {
+              case .Success:
+                Database.performTransaction {
+                  Database.delete(clip)
+                }
+              case .Failure(let error):
+                print(error) // TODO: Handle error
+              }
+            }
           } else {
             SwiftSpinner.show(NSLocalizedString("Flagging...", comment: ""))
-            SnowballAPI.request(SnowballRoute.FlagClip(clipID: clipID), completion: completion)
+            SnowballAPI.request(SnowballRoute.FlagClip(clipID: clipID)) { response in
+              SwiftSpinner.hide()
+              switch response {
+              case .Success:
+                self.resetStateForCell(cell)
+              case .Failure(let error):
+                print(error) // TODO: Handle error
+              }
+            }
           }
         }
         let cancelled: UIAlertAction -> Void = { action in
