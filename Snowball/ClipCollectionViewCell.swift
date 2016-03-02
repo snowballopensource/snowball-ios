@@ -281,6 +281,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     optionsView.setHidden(!options, animated: animated)
     usernameLabel.setHidden(playingIdle, animated: animated)
     timeAgoLabel.setHidden(playingIdle, animated: animated)
+    userAvatarImageView.setHidden(playingIdle, animated: animated)
 
     if uploading {
       userAvatarImageViewBeginBouncing()
