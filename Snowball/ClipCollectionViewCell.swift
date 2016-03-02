@@ -313,7 +313,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
   }
 
   @objc private func optionsButtonTapped() {
-    delegate?.clipcollectionViewCellOptionsButtonTapped(self)
+    delegate?.clipCollectionViewCellOptionsButtonTapped(self)
   }
 
   private func setThumbnailScaledDown(scaledDown: Bool, animated: Bool) {
@@ -432,7 +432,7 @@ protocol ClipCollectionViewCellDelegate {
   func clipCollectionViewCellRetryUploadButtonTapped(cell: ClipCollectionViewCell)
   func clipCollectionViewCellProfileButtonTapped(cell: ClipCollectionViewCell)
   func clipCollectionViewCellLongPressTriggered(cell: ClipCollectionViewCell)
-  func clipcollectionViewCellOptionsButtonTapped(cell: ClipCollectionViewCell)
+  func clipCollectionViewCellOptionsButtonTapped(cell: ClipCollectionViewCell)
 }
 
 // MARK: - ClipCollectionViewCellState

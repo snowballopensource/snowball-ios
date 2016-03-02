@@ -338,9 +338,17 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
     cell.setState(.Options, animated: true)
   }
 
-  func clipcollectionViewCellOptionsButtonTapped(cell: ClipCollectionViewCell) {
-    guard let clip = clipForCell(cell), let clipID = clip.id, let user = clip.user else { return }
-
+  func clipCollectionViewCellOptionsButtonTapped(cell: ClipCollectionViewCell) {
+    guard let clip = clipForCell(cell), let user = clip.user else { return }
+    guard let clipID = clip.id else {
+      // Clip does not have an ID but user wants to delete it
+      if user == User.currentUser {
+        Database.performTransaction {
+          Database.delete(clip)
+        }
+      }
+      return
+    }
     authenticateUser(
       afterSuccessfulAuthentication: {
         self.refresh()
