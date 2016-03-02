@@ -185,6 +185,8 @@ class TimelineViewController: UIViewController {
         state = .PendingAcceptance
       } else if clip.state == .UploadFailed {
         state = .UploadFailed
+      } else if clip.state == .Uploading {
+        state = .Uploading
       }
     }
     return state

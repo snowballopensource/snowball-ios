@@ -70,6 +70,11 @@ class ClipCollectionViewCell: UICollectionViewCell {
   let optionsButton = UIButton()
 
   let userAvatarImageView = UserAvatarImageView()
+  private let userAvatarImageViewBounceConstraintGroup = ConstraintGroup()
+  private let userAvatarImageViewBounceDuration = 1.0
+  private var userAvatarImageViewBounceInProgress = false
+  private var userAvatarImageViewShouldContinueBouncing = false
+
   let profileButton = UIButton()
   let usernameLabel: UILabel = {
     let label = UILabel()
@@ -185,12 +190,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     let userAvatarImageViewWidthHeight: CGFloat = 40
     addSubview(userAvatarImageView)
-    constrain(userAvatarImageView, thumbnailImageView) { userAvatarImageView, thumbnailImageView in
-      userAvatarImageView.centerY == thumbnailImageView.bottom
+    constrain(userAvatarImageView) { userAvatarImageView in
       userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
       userAvatarImageView.width == userAvatarImageViewWidthHeight
       userAvatarImageView.height == userAvatarImageView.width
     }
+    setUserAvatarImageViewBounceConstraints()
 
     addSubview(profileButton)
     constrain(profileButton, userAvatarImageView) { (profileButton, userAvatarImageView) in
@@ -264,7 +269,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let playingActive = state == .PlayingActive
     let playing = (playingIdle || playingActive)
     let pendingAcceptance = state == .PendingAcceptance
-//    let uploading = state == .Uploading
+    let uploading = state == .Uploading
     let uploadFailed = state == .UploadFailed
 
     playImageView.setHidden(!(bookmarked && !options), animated: animated)
@@ -276,6 +281,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
     optionsView.setHidden(!options, animated: animated)
     usernameLabel.setHidden(playingIdle, animated: animated)
     timeAgoLabel.setHidden(playingIdle, animated: animated)
+
+    if uploading {
+      userAvatarImageViewBeginBouncing()
+    } else {
+      userAvatarImageViewStopBouncingAnimated(animated)
+    }
   }
 
   // MARK: Private
@@ -316,6 +327,100 @@ class ClipCollectionViewCell: UICollectionViewCell {
         thumbnailImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
       }
     }
+  }
+
+  private func setUserAvatarImageViewBounceConstraints(position: Int = 0) {
+    // 0 through 2, to represent the keyframes of the animation.
+    // 0 is start of bounce, 2 is top of bounce
+    let bounceHeight = ClipCollectionViewCell.defaultSize.width / 4 * 3
+    constrain(userAvatarImageView, thumbnailImageView, replace: userAvatarImageViewBounceConstraintGroup) { userAvatarImageView, thumbnailImageView in
+      switch position {
+      case 0: userAvatarImageView.centerY == thumbnailImageView.bottom
+      case 1: userAvatarImageView.centerY == thumbnailImageView.bottom - (bounceHeight / 2)
+      case 2: userAvatarImageView.centerY == thumbnailImageView.bottom - bounceHeight
+      default: fatalError("setUserAvatarImageViewBounceConstraints(position:) position must be between 0 and 4")
+      }
+    }
+  }
+
+  private func userAvatarImageViewBeginBouncing() {
+    if userAvatarImageViewBounceInProgress { return }
+    userAvatarImageViewBounceInProgress = true
+    userAvatarImageViewShouldContinueBouncing = true
+    _spinUserAvatarImageView()
+    _bounceUserAvatarImageView()
+  }
+
+  private func userAvatarImageViewStopBouncingAnimated(animated: Bool) {
+    userAvatarImageViewShouldContinueBouncing = false
+    if !animated {
+      userAvatarImageView.layer.removeAllAnimations()
+      userAvatarImageView.transform = CGAffineTransformIdentity
+    }
+  }
+
+  private func _bounceUserAvatarImageView(toTop toTop: Bool = true) {
+    let animationCurve = (toTop) ? UIViewAnimationOptions.CurveEaseOut : UIViewAnimationOptions.CurveEaseIn
+    UIView.animateKeyframesWithDuration(userAvatarImageViewBounceDuration / 2,
+      delay: 0,
+      options: [.CalculationModePaced, UIViewKeyframeAnimationOptions(rawValue: animationCurve.rawValue)],
+      animations: {
+        if toTop {
+          UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0) {
+            self.setUserAvatarImageViewBounceConstraints(1)
+            self.userAvatarImageView.setNeedsLayout()
+            self.userAvatarImageView.layoutIfNeeded()
+          }
+          UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0) {
+            self.setUserAvatarImageViewBounceConstraints(2)
+            self.userAvatarImageView.setNeedsLayout()
+            self.userAvatarImageView.layoutIfNeeded()
+          }
+        } else {
+          UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0) {
+            self.setUserAvatarImageViewBounceConstraints(1)
+            self.userAvatarImageView.setNeedsLayout()
+            self.userAvatarImageView.layoutIfNeeded()
+          }
+          UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0) {
+            self.setUserAvatarImageViewBounceConstraints(0)
+            self.userAvatarImageView.setNeedsLayout()
+            self.userAvatarImageView.layoutIfNeeded()
+          }
+        }
+      },
+      completion: { finished in
+        if finished && self.userAvatarImageViewShouldContinueBouncing {
+          self._bounceUserAvatarImageView(toTop: !toTop)
+        } else {
+          self.userAvatarImageViewBounceInProgress = false
+        }
+    })
+  }
+
+  private func _spinUserAvatarImageView() {
+    let fullRotation = CGFloat(M_PI * -2)
+    UIView.animateKeyframesWithDuration(userAvatarImageViewBounceDuration,
+      delay: 0,
+      options: [.CalculationModePaced, UIViewKeyframeAnimationOptions(rawValue: UIViewAnimationOptions.CurveLinear.rawValue)],
+      animations: {
+        UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0) {
+          self.userAvatarImageView.transform = CGAffineTransformMakeRotation(fullRotation * 1/3)
+        }
+        UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0) {
+          self.userAvatarImageView.transform = CGAffineTransformMakeRotation(fullRotation * 2/3)
+        }
+        UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0) {
+          self.userAvatarImageView.transform = CGAffineTransformMakeRotation(fullRotation * 3/3)
+        }
+      },
+      completion: { finished in
+        if finished && self.userAvatarImageViewShouldContinueBouncing {
+          self._spinUserAvatarImageView()
+        } else {
+          self.userAvatarImageViewBounceInProgress = false
+        }
+    })
   }
 }
 
