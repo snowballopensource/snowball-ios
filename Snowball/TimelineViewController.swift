@@ -20,6 +20,7 @@ class TimelineViewController: UIViewController {
   let player: TimelinePlayer
   let playerView = PlayerView()
   let playerBufferingImageView = UIImageView()
+  let pulsingLoadingIndicatorView = PulsingLoadingIndicatorView()
   let timelineCollectionView = TimelineCollectionView()
   let fetchedResultsController: FetchedResultsController<Clip>
   var collectionViewUpdates = [NSBlockOperation]()
@@ -36,7 +37,7 @@ class TimelineViewController: UIViewController {
       timelineCollectionView.scrollEnabled = (state != .Playing)
 
       if state != .Playing {
-        clearPlayerBufferImage()
+        endBufferingState()
       }
     }
   }
@@ -94,6 +95,14 @@ class TimelineViewController: UIViewController {
       playerBufferingImageView.top == playerView.top
       playerBufferingImageView.right == playerView.right
       playerBufferingImageView.height == playerView.height
+    }
+
+    view.insertSubview(pulsingLoadingIndicatorView, aboveSubview: playerBufferingImageView)
+    constrain(pulsingLoadingIndicatorView, playerBufferingImageView) { (pulsingLoadingIndicatorView, playerBufferingImageView) in
+      pulsingLoadingIndicatorView.centerX == playerBufferingImageView.centerX
+      pulsingLoadingIndicatorView.bottom == playerBufferingImageView.bottom - 15
+      pulsingLoadingIndicatorView.width == PulsingLoadingIndicatorView.defaultRadius
+      pulsingLoadingIndicatorView.height == PulsingLoadingIndicatorView.defaultRadius
     }
 
     view.addSubview(timelineCollectionView)
@@ -199,16 +208,16 @@ class TimelineViewController: UIViewController {
     return state
   }
 
-  private func setPlayerBufferImageForClip(clip: Clip) {
+  private func setClipBuffering(clip: Clip) {
     if let thumbnailURLString = clip.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
       playerBufferingImageView.setImageFromURL(thumbnailURL)
-      // TODO: start pulse
+      pulsingLoadingIndicatorView.startAnimating()
     }
   }
 
-  private func clearPlayerBufferImage() {
+  private func endBufferingState() {
     playerBufferingImageView.image = nil
-    // TODO: stop pulse
+    pulsingLoadingIndicatorView.stopAnimating()
   }
 
   // MARK: Actions
@@ -307,7 +316,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
     print("will begin")
     state = .Playing
-    setPlayerBufferImageForClip(clip)
+    setClipBuffering(clip)
     scrollToCellForClip(clip, animated: true)
     setStateToPlayingClipForVisibleCells(clip)
   }
@@ -316,7 +325,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
     print("did transition")
-    setPlayerBufferImageForClip(toClip)
+    setClipBuffering(toClip)
     scrollToCellForClip(toClip, animated: true)
     player.topOffQueue()
     resetStateForVisibleCells()

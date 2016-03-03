@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA007EB51C88054E00186A5C /* PulsingLoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA007EB41C88054E00186A5C /* PulsingLoadingIndicatorView.swift */; };
 		BA0B879D1C5B16990094D6D7 /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B879C1C5B16990094D6D7 /* HomeNavigationController.swift */; };
 		BA0B87A11C5B17B60094D6D7 /* UINavigationBar+Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B87A01C5B17B60094D6D7 /* UINavigationBar+Transparent.swift */; };
 		BA0B87A31C5B1ECF0094D6D7 /* FriendsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B87A21C5B1ECF0094D6D7 /* FriendsNavigationController.swift */; };
@@ -60,6 +61,7 @@
 /* Begin PBXFileReference section */
 		1CD3B92FEE9E666B662FC873 /* Pods-Snowball.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snowball.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snowball/Pods-Snowball.debug.xcconfig"; sourceTree = "<group>"; };
 		B914EA18328D882A848B32E7 /* Pods-Snowball.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snowball.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snowball/Pods-Snowball.release.xcconfig"; sourceTree = "<group>"; };
+		BA007EB41C88054E00186A5C /* PulsingLoadingIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulsingLoadingIndicatorView.swift; sourceTree = "<group>"; };
 		BA0B879C1C5B16990094D6D7 /* HomeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
 		BA0B87A01C5B17B60094D6D7 /* UINavigationBar+Transparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Transparent.swift"; sourceTree = "<group>"; };
 		BA0B87A21C5B1ECF0094D6D7 /* FriendsNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsNavigationController.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				BA67BDCE1C6413D900720090 /* CameraView.swift */,
 				BA89E7211C7FA635001AFD23 /* TextFieldContainerView.swift */,
 				BA9CDC951C7FC2D0001D85F2 /* SnowballActionButton.swift */,
+				BA007EB41C88054E00186A5C /* PulsingLoadingIndicatorView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				BA0B87A11C5B17B60094D6D7 /* UINavigationBar+Transparent.swift in Sources */,
 				BA9A1DA31C750657008AD0E4 /* HomeTimelineViewController.swift in Sources */,
 				BACA135E1C4DF09500387C5D /* UserAvatarImageView.swift in Sources */,
+				BA007EB51C88054E00186A5C /* PulsingLoadingIndicatorView.swift in Sources */,
 				BAFC72171C3DC5F600D46747 /* CachedAssetResourceLoader.swift in Sources */,
 				BA6318BB1C4DB85D00BB40AE /* UIView+HideAnimated.swift in Sources */,
 				BAD774FD1C1DD8CF00ED1A64 /* ClipCollectionViewCell.swift in Sources */,
