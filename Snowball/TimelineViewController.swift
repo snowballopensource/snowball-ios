@@ -117,7 +117,9 @@ class TimelineViewController: UIViewController {
   // MARK: Internal
 
   func refresh() {
-    timeline.requestRefreshOfClips()
+    timeline.requestRefreshOfClips {
+      self.scrollToRelevantClip(true)
+    }
   }
 
   func scrollToCellForClip(clip: Clip, animated: Bool) {
