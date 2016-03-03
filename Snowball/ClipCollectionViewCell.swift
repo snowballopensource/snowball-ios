@@ -397,6 +397,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
           self._bounceUserAvatarImageView(toTop: !toTop)
         } else {
           self.userAvatarImageViewBounceInProgress = false
+          if toTop {
+            // If was animating to top, but animation was cancelled, reset to bottom.
+            self.setUserAvatarImageViewBounceConstraints(0)
+            self.userAvatarImageView.setNeedsLayout()
+            self.userAvatarImageView.layoutIfNeeded()
+          }
         }
     })
   }
