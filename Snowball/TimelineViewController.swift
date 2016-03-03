@@ -19,6 +19,7 @@ class TimelineViewController: UIViewController {
   let timeline: Timeline
   let player: TimelinePlayer
   let playerView = PlayerView()
+  let playerBufferingImageView = UIImageView()
   let timelineCollectionView = TimelineCollectionView()
   let fetchedResultsController: FetchedResultsController<Clip>
   var collectionViewUpdates = [NSBlockOperation]()
@@ -33,6 +34,10 @@ class TimelineViewController: UIViewController {
       navigationController?.setNavigationBarHidden(navBarHidden, animated: true)
       playerView.hidden = (state != .Playing)
       timelineCollectionView.scrollEnabled = (state != .Playing)
+
+      if state != .Playing {
+        clearPlayerBufferImage()
+      }
     }
   }
 
@@ -82,6 +87,14 @@ class TimelineViewController: UIViewController {
     player.delegate = self
     playerView.player = player
     playerView.hidden = true
+
+    view.insertSubview(playerBufferingImageView, belowSubview: playerView)
+    constrain(playerBufferingImageView, playerView) { playerBufferingImageView, playerView in
+      playerBufferingImageView.left == playerView.left
+      playerBufferingImageView.top == playerView.top
+      playerBufferingImageView.right == playerView.right
+      playerBufferingImageView.height == playerView.height
+    }
 
     view.addSubview(timelineCollectionView)
     constrain(timelineCollectionView, playerView) { timelineCollectionView, playerView in
@@ -186,6 +199,18 @@ class TimelineViewController: UIViewController {
     return state
   }
 
+  private func setPlayerBufferImageForClip(clip: Clip) {
+    if let thumbnailURLString = clip.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
+      playerBufferingImageView.setImageFromURL(thumbnailURL)
+      // TODO: start pulse
+    }
+  }
+
+  private func clearPlayerBufferImage() {
+    playerBufferingImageView.image = nil
+    // TODO: stop pulse
+  }
+
   // MARK: Actions
 
   @objc private func applicationWillEnterForeground() {
@@ -282,6 +307,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
     print("will begin")
     state = .Playing
+    setPlayerBufferImageForClip(clip)
     scrollToCellForClip(clip, animated: true)
     setStateToPlayingClipForVisibleCells(clip)
   }
@@ -290,6 +316,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
     print("did transition")
+    setPlayerBufferImageForClip(toClip)
     scrollToCellForClip(toClip, animated: true)
     player.topOffQueue()
     resetStateForVisibleCells()
