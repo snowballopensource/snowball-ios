@@ -106,14 +106,6 @@ class TimelineViewController: UIViewController {
     }
   }
 
-  override func viewDidAppear(animated: Bool) {
-    super.viewDidAppear(animated)
-
-    if isAppearingForFirstTime() {
-      scrollToRelevantClip(animated)
-    }
-  }
-
   // MARK: Internal
 
   func refresh() {
