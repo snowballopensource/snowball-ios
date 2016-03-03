@@ -314,7 +314,6 @@ extension TimelineViewController: TimelinePlayerDelegate {
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
-    print("will begin")
     state = .Playing
     setClipBuffering(clip)
     scrollToCellForClip(clip, animated: true)
@@ -324,7 +323,6 @@ extension TimelineViewController: TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlaybackWithFirstClip clip: Clip) {}
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
-    print("did transition")
     setClipBuffering(toClip)
     scrollToCellForClip(toClip, animated: true)
     player.topOffQueue()
@@ -332,7 +330,6 @@ extension TimelineViewController: TimelinePlayerDelegate {
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
-    print("did end")
     state = .Default
     timeline.bookmarkedClip = clip
     resetStateForVisibleCells()
