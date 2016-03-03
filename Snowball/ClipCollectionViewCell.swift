@@ -283,6 +283,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     timeAgoLabel.setHidden(playingIdle, animated: animated)
     userAvatarImageView.setHidden(playingIdle, animated: animated)
 
+    profileButton.userInteractionEnabled = !playing
+
     if uploading {
       userAvatarImageViewBeginBouncing()
     } else {
