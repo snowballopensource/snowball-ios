@@ -30,7 +30,20 @@ extension AppDelegate: UIApplicationDelegate {
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     print("Realm Path: " + Database.realm.path)
     Clip.cleanUpFailedClipUploads()
+    PushNotificationController.registerApplicationForPushNotifications(application)
     window?.makeKeyAndVisible()
     return true
+  }
+
+  func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    PushNotificationController.registrationCompletedWithDeviceToken(deviceToken)
+  }
+
+  func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    PushNotificationController.registrationFailedWithError(error)
+  }
+
+  func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject]) {
+    PushNotificationController.applicationDidReceiveRemoteNotificationWithUserInfo(userInfo)
   }
 }
