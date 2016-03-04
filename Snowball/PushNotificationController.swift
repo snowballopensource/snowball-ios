@@ -25,8 +25,13 @@ class PushNotificationController {
   }
 
   static func registrationCompletedWithDeviceToken(deviceToken: NSData) {
-    // TODO: Send the device token to the server, which will then forward to Amazon
     print("Push notification token: ", deviceToken.description)
+    SnowballAPI.request(SnowballRoute.RegisterForPushNotifications(token: deviceToken.description)) { response in
+      switch response {
+      case .Success: break
+      case .Failure(let error): print(error)
+      }
+    }
   }
 
   static func registrationFailedWithError(error: NSError) {

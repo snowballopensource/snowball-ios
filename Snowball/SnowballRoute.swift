@@ -22,6 +22,8 @@ enum SnowballRoute: URLRequestConvertible {
   case UnfollowUser(userID: String)
   case FindUsersByPhoneNumbers(phoneNumbers: [String])
   case FindUsersByUsername(username: String)
+  // Device
+  case RegisterForPushNotifications(token: String)
   // Clip
   case GetClipStream(page: Int)
   case GetClipStreamForUser(userID: String, page: Int)
@@ -49,6 +51,7 @@ enum SnowballRoute: URLRequestConvertible {
     case .UnfollowUser: return .DELETE
     case .FindUsersByPhoneNumbers: return .POST
     case .FindUsersByUsername: return .GET
+    case .RegisterForPushNotifications: return .POST
     case .GetClipStream: return .GET
     case .GetClipStreamForUser: return .GET
     case .DeleteClip: return .DELETE
@@ -71,6 +74,7 @@ enum SnowballRoute: URLRequestConvertible {
     case .UnfollowUser(let userID): return "users/\(userID)/follow"
     case .FindUsersByPhoneNumbers: return "users/phone-search"
     case .FindUsersByUsername: return "users"
+    case .RegisterForPushNotifications: return "devices"
     case .GetClipStream: return "clips/stream"
     case .GetClipStreamForUser(let userID, _): return "users/\(userID)/clips/stream"
     case .DeleteClip(let clipID): return "clips/\(clipID)"
@@ -88,6 +92,7 @@ enum SnowballRoute: URLRequestConvertible {
     case .UpdateCurrentUser: return ParameterEncoding.JSON
     case .FindUsersByPhoneNumbers: return ParameterEncoding.JSON
     case .FindUsersByUsername: return ParameterEncoding.URL
+    case .RegisterForPushNotifications: return .JSON
     case .GetClipStream: return ParameterEncoding.URL
     case .GetClipStreamForUser: return ParameterEncoding.URL
     default: return nil
@@ -112,6 +117,12 @@ enum SnowballRoute: URLRequestConvertible {
       return userParameters
     case .FindUsersByPhoneNumbers(let phoneNumbers): return ["phone_numbers": phoneNumbers]
     case .FindUsersByUsername(let username): return ["username": username]
+    case .RegisterForPushNotifications(let token):
+      var pushParameters: [String: AnyObject] = ["platform": 0, "token": token]
+      if _isDebugAssertConfiguration() {
+        pushParameters["development"] = true
+      }
+      return pushParameters
     case .GetClipStream(let page): return ["page": page]
     case .GetClipStreamForUser(_, let page): return ["page": page]
     default: return nil
