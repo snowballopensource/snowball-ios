@@ -303,7 +303,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     usernameLabel.setHidden(playingIdle, animated: animated)
     timeAgoLabel.setHidden(playingIdle, animated: animated)
     userAvatarImageView.setHidden(playingIdle, animated: animated)
-    likeButton.setHidden(playing, animated: animated)
+    likeButton.setHidden(playingIdle, animated: animated)
 
     profileButton.userInteractionEnabled = !playing
 
