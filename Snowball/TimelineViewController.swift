@@ -436,6 +436,38 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
         self.presentViewController(alert, animated: true, completion: nil)
     })
   }
+
+  func clipCollectionViewCellLikeButtonTapped(cell: ClipCollectionViewCell) {
+    guard let clip = clipForCell(cell), clipID = clip.id else { return }
+    authenticateUser(
+      afterSuccessfulAuthentication: {
+        self.refresh()
+    },
+      whenAlreadyAuthenticated: {
+        let likedCurrently = clip.liked
+        func setClipLiked(liked: Bool) {
+          Database.performTransaction {
+            clip.liked = liked
+            Database.save(clip)
+          }
+        }
+        setClipLiked(!likedCurrently)
+        let route: SnowballRoute
+        if likedCurrently {
+          route = SnowballRoute.UnlikeClip(clipID: clipID)
+        } else {
+          route = SnowballRoute.LikeClip(clipID: clipID)
+        }
+        SnowballAPI.request(route) { response in
+          switch response {
+          case .Success: break
+          case .Failure(let error):
+            print(error)
+            setClipLiked(likedCurrently)
+          }
+        }
+    })
+  }
 }
 
 // MARK: - UIScrollViewPullToLoadDelegate

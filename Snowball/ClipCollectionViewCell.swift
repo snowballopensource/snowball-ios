@@ -90,6 +90,16 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return label
   }()
 
+  let likeButton: UIButton = {
+    let button = UIButton()
+    let heartImage = UIImage(named: "cell-clip-heart")
+    let heartFilledImage = UIImage(named: "cell-clip-heart-filled")
+    button.setImage(heartImage, forState: .Normal)
+    button.setImage(heartFilledImage, forState: .Selected)
+    button.setImage(heartFilledImage, forState: .Highlighted)
+    return button
+  }()
+
   let dimOverlayView: UIView = {
     let view = UIView()
     view.userInteractionEnabled = false
@@ -220,6 +230,15 @@ class ClipCollectionViewCell: UICollectionViewCell {
       timeAgoLabel.right == timeAgoLabel.superview!.right
     }
 
+    addSubview(likeButton)
+    constrain(likeButton, timeAgoLabel) { likeButton, timeAgoLabel  in
+      likeButton.top == timeAgoLabel.bottom + 18
+      likeButton.centerX == likeButton.superview!.centerX
+      likeButton.width == 30
+      likeButton.height == 25
+    }
+    likeButton.addTarget(self, action: "likeButtonTapped", forControlEvents: .TouchUpInside)
+
     addSubview(dimOverlayView)
     constrain(dimOverlayView) { dimOverlayView in
       dimOverlayView.left == dimOverlayView.superview!.left
@@ -259,6 +278,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     timeAgoLabel.text = clip.createdAt?.shortTimeSinceString() ?? NSLocalizedString("Now", comment: "")
 
+    likeButton.highlighted = clip.liked
+
     setState(state, animated: false)
   }
 
@@ -282,6 +303,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     usernameLabel.setHidden(playingIdle, animated: animated)
     timeAgoLabel.setHidden(playingIdle, animated: animated)
     userAvatarImageView.setHidden(playingIdle, animated: animated)
+    likeButton.setHidden(playing, animated: animated)
 
     profileButton.userInteractionEnabled = !playing
 
@@ -316,6 +338,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   @objc private func optionsButtonTapped() {
     delegate?.clipCollectionViewCellOptionsButtonTapped(self)
+  }
+
+  @objc private func likeButtonTapped() {
+    delegate?.clipCollectionViewCellLikeButtonTapped(self)
   }
 
   private func setThumbnailScaledDown(scaledDown: Bool, animated: Bool) {
@@ -441,6 +467,7 @@ protocol ClipCollectionViewCellDelegate {
   func clipCollectionViewCellProfileButtonTapped(cell: ClipCollectionViewCell)
   func clipCollectionViewCellLongPressTriggered(cell: ClipCollectionViewCell)
   func clipCollectionViewCellOptionsButtonTapped(cell: ClipCollectionViewCell)
+  func clipCollectionViewCellLikeButtonTapped(cell: ClipCollectionViewCell)
 }
 
 // MARK: - ClipCollectionViewCellState
