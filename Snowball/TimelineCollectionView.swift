@@ -70,6 +70,10 @@ protocol TimelineCollectionViewDelegate {
 // MARK: - TimelineCollectionViewFlowLayout
 class TimelineCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
+  // MARK: Properties
+
+  private var shouldOverrideScrollPosition = false
+
   // MARK: Initializers
 
   override init() {
@@ -86,17 +90,31 @@ class TimelineCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
   // MARK: UICollectionViewFlowLayout
 
+  override func prepareForCollectionViewUpdates(updateItems: [UICollectionViewUpdateItem]) {
+    super.prepareForCollectionViewUpdates(updateItems)
+
+    for updateItem in updateItems {
+      // TODO: All scroll related actions should be handled here (bookmarks!)
+      if updateItem.updateAction == .Insert {
+        shouldOverrideScrollPosition = true
+      }
+    }
+  }
+
   override func finalizeCollectionViewUpdates() {
     super.finalizeCollectionViewUpdates()
 
-    guard let collectionView = collectionView else { return }
-    let contentSizeBeforeAnimation = collectionView.contentSize
-    let contentSizeAfterAnimation = collectionViewContentSize()
-    let xOffset = contentSizeAfterAnimation.width - contentSizeBeforeAnimation.width
-    if xOffset < 0 {
-      collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-    } else {
-      collectionView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: false)
+    if shouldOverrideScrollPosition {
+      guard let collectionView = collectionView else { return }
+      let contentSizeBeforeAnimation = collectionView.contentSize
+      let contentSizeAfterAnimation = collectionViewContentSize()
+      let xOffset = contentSizeAfterAnimation.width - contentSizeBeforeAnimation.width
+      if xOffset < 0 {
+        collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+      } else {
+        collectionView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: false)
+      }
+      shouldOverrideScrollPosition = false
     }
   }
 }
