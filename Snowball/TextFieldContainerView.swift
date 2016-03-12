@@ -57,7 +57,7 @@ class TextFieldContainerView: UIView {
       hintLabel.left == hintLabel.superview!.left
       hintLabel.baseline == textField.baseline
     }
-    hintLabel.setContentHuggingPriority(textField.contentHuggingPriorityForAxis(.Horizontal) + 1, forAxis: .Horizontal)
+    hintLabel.setContentCompressionResistancePriority(textField.contentCompressionResistancePriorityForAxis(.Horizontal) + 1, forAxis: .Horizontal)
 
     constrain(textField, hintLabel, bottomLineView) { textField, hintLabel, bottomLineView in
       textField.left == hintLabel.right + 20
@@ -84,7 +84,8 @@ class TextFieldContainerView: UIView {
 
   func linkSizingWithTextFieldContainerView(textFieldContainerView: TextFieldContainerView) {
     constrain(hintLabel, textFieldContainerView.hintLabel) { thisHintLabel, thatHintLabel in
-      thisHintLabel.width == thatHintLabel.width
+      thisHintLabel.width >= thatHintLabel.width
+      thatHintLabel.width >= thisHintLabel.width
     }
   }
 }
