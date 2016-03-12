@@ -279,7 +279,11 @@ extension TimelineViewController: FetchedResultsControllerDelegate {
       case .Delete:
         self.timelineCollectionView.deleteItemsAtIndexPaths([indexPath!])
       case .Update:
-        self.timelineCollectionView.reloadItemsAtIndexPaths([indexPath!])
+        let clip = self.timeline.clips[indexPath!.row]
+        if let cell = self.timelineCollectionView.cellForItemAtIndexPath(indexPath!) as? ClipCollectionViewCell {
+          let state = self.cellStateForClip(clip)
+          cell.setState(state, animated: true)
+        }
       case .Move:
         self.timelineCollectionView.moveItemAtIndexPath(indexPath!, toIndexPath: newIndexPath!)
       }
