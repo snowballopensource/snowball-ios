@@ -15,19 +15,21 @@ extension Object {
 
   func importJSON(JSON: JSONObject) {}
 
-  static func fromJSONObject<T: Object>(JSON: JSONObject) -> T? {
+  static func fromJSONObject<T: Object>(JSON: JSONObject, beforeSave: ((object: T) -> Void)? = nil) -> T? {
     if let id = JSON["id"] as? String {
       let object: T = Database.findOrInitialize(id)
       object.importJSON(JSON)
+      beforeSave?(object: object)
+      Database.save(object)
       return object
     }
     return nil
   }
 
-  static func fromJSONArray<T: Object>(JSON: JSONArray) -> [T] {
+  static func fromJSONArray<T: Object>(JSON: JSONArray, beforeSaveEveryObject: ((object: T) -> Void)? = nil) -> [T] {
     var results = [T]()
     for JSONObject in JSON {
-      let object: T? = T.fromJSONObject(JSONObject)
+      let object: T? = T.fromJSONObject(JSONObject, beforeSave: beforeSaveEveryObject)
       if let object = object {
         results.append(object)
       }

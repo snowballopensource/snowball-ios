@@ -28,7 +28,7 @@ struct SnowballAPI {
   }
 
   static func requestObjects<T: Object>(route: SnowballRoute, completion: (response: ObjectResponse<[T]>) -> Void) {
-    requestObjects(route, eachObjectBeforeSave: nil, completion: completion)
+    requestObjects(route, beforeSaveEveryObject: nil, completion: completion)
   }
 
   static func requestObject<T: Object>(route: SnowballRoute, beforeSave: ((object: T) -> Void)?, completion: (response: ObjectResponse<T>) -> Void) {
@@ -38,11 +38,7 @@ struct SnowballAPI {
         if let value = value as? JSONObject {
           var object: T?
           Database.performTransaction {
-            object = T.fromJSONObject(value)
-            if let object = object {
-              beforeSave?(object: object)
-              Database.save(object)
-            }
+            object = T.fromJSONObject(value, beforeSave: beforeSave)
           }
           if let object = object {
             completion(response: .Success(object))
@@ -58,18 +54,14 @@ struct SnowballAPI {
     }
   }
 
-  static func requestObjects<T: Object>(route: SnowballRoute, eachObjectBeforeSave: ((object: T) -> Void)?, completion: (response: ObjectResponse<[T]>) -> Void) {
+  static func requestObjects<T: Object>(route: SnowballRoute, beforeSaveEveryObject: ((object: T) -> Void)?, completion: (response: ObjectResponse<[T]>) -> Void) {
     Alamofire.request(route).responseJSON { afResponse in
       switch afResponse.result {
       case .Success(let value):
         if let value = value as? JSONArray {
           var objects = [T]()
           Database.performTransaction {
-            objects = T.fromJSONArray(value)
-            for object in objects {
-              eachObjectBeforeSave?(object: object)
-              Database.save(object)
-            }
+            objects = T.fromJSONArray(value, beforeSaveEveryObject: beforeSaveEveryObject)
           }
           completion(response: .Success(objects))
         } else {

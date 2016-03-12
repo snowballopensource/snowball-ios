@@ -118,7 +118,7 @@ class Timeline {
       }
     }()
     SnowballAPI.requestObjects(route,
-      eachObjectBeforeSave: { (clip: Clip) in
+      beforeSaveEveryObject: { (clip: Clip) in
         clip.timelineID = self.id
         if self.type == .Home {
           clip.inHomeTimeline = true
