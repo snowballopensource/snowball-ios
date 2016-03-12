@@ -11,6 +11,7 @@ import Haneke
 
 extension UIImageView {
   func setImageFromURL(URL: NSURL) {
+    hnk_cancelSetImage()
     hnk_setImageFromURL(URL, placeholder: nil, format: Format<UIImage>(name: "original"), failure: nil, success: nil)
   }
 }
