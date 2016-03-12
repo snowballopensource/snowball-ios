@@ -71,6 +71,7 @@ class SignInViewController: UIViewController {
       emailTextField.right == emailTextField.superview!.right - TextFieldContainerView.defaultSideMargin
       emailTextField.height == TextFieldContainerView.defaultHeight
     }
+    emailTextField.textField.delegate = self
 
     view.addSubview(passwordTextField)
     constrain(passwordTextField, emailTextField) { passwordTextField, emailTextField in
@@ -79,6 +80,7 @@ class SignInViewController: UIViewController {
       passwordTextField.right == emailTextField.right
       passwordTextField.height == emailTextField.height
     }
+    passwordTextField.textField.delegate = self
     passwordTextField.linkSizingWithTextFieldContainerView(emailTextField)
 
     view.addSubview(submitButton)
@@ -94,16 +96,33 @@ class SignInViewController: UIViewController {
   // MARK: Actions
 
   @objc private func submitButtonPressed() {
+    signIn()
+  }
+
+  // MARK: Private
+
+  private func signIn() {
     guard let email = emailTextField.textField.text, let password = passwordTextField.textField.text else { return }
     SnowballAPI.requestObject(SnowballRoute.SignIn(email: email, password: password)) { (response: ObjectResponse<User>) in
-        switch response {
-        case .Success(let user):
-          User.currentUser = user
-          // TODO: Analytics
-          // TODO: Push notifications
-          self.dismissViewControllerAnimated(true, completion: nil)
-        case .Failure(let error): print(error)
-        }
+      switch response {
+      case .Success(let user):
+        User.currentUser = user
+        // TODO: Analytics
+        // TODO: Push notifications
+        self.dismissViewControllerAnimated(true, completion: nil)
+      case .Failure(let error): print(error)
+      }
     }
+  }
+}
+
+extension SignInViewController: UITextFieldDelegate {
+  func textFieldShouldReturn(textField: UITextField) -> Bool {
+    if textField == emailTextField.textField {
+      passwordTextField.textField.becomeFirstResponder()
+    } else if textField == passwordTextField.textField {
+      signIn()
+    }
+    return true
   }
 }
