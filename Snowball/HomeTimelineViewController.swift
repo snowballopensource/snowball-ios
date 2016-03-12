@@ -110,14 +110,15 @@ extension TimelineViewController: CameraViewControllerDelegate {
     Database.performTransaction {
       Database.save(clip)
     }
-    scrollToCellForClip(clip, animated: true)
   }
 
   func videoPreviewDidCancel() {
     state = .Default
     if let pendingClip = timeline.clipPendingAcceptance {
-      Database.performTransaction {
-        Database.delete(pendingClip)
+      performWithoutScrollOverride {
+        Database.performTransaction {
+          Database.delete(pendingClip)
+        }
       }
     }
   }

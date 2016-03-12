@@ -24,6 +24,7 @@ class TimelineViewController: UIViewController {
   let timelineCollectionView = TimelineCollectionView()
   let fetchedResultsController: FetchedResultsController<Clip>
   var collectionViewUpdates = [NSBlockOperation]()
+  var shouldOverrideScrollPosition = true
 
   // MARK: TimelineViewControllerState
   enum TimelineViewControllerState {
@@ -137,17 +138,17 @@ class TimelineViewController: UIViewController {
     timeline.requestRefreshOfClips()
   }
 
-  func scrollToCellForClip(clip: Clip, animated: Bool) {
-    if let indexPath = fetchedResultsController.indexPathForObject(clip) {
-      timelineCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: animated)
-    }
-  }
-
   func clipForCell(cell: ClipCollectionViewCell) -> Clip? {
     if let indexPath = timelineCollectionView.indexPathForCell(cell) {
       return fetchedResultsController.objectAtIndexPath(indexPath)
     }
     return nil
+  }
+
+  func performWithoutScrollOverride(closure: () -> Void) {
+    shouldOverrideScrollPosition = false
+    closure()
+    shouldOverrideScrollPosition = true
   }
 
   // MARK: Private
@@ -157,6 +158,12 @@ class TimelineViewController: UIViewController {
       return timelineCollectionView.cellForItemAtIndexPath(indexPath) as? ClipCollectionViewCell
     }
     return nil
+  }
+
+  private func scrollToCellForClip(clip: Clip, animated: Bool) {
+    if let indexPath = fetchedResultsController.indexPathForObject(clip) {
+      timelineCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: animated)
+    }
   }
 
   private func setStateToPlayingClipForVisibleCells(clip: Clip) {
@@ -494,22 +501,24 @@ extension TimelineViewController: TimelineCollectionViewDelegate {
 // MARK: - TimelineCollectionViewFlowLayoutDelegate
 extension TimelineViewController: TimelineCollectionViewFlowLayoutDelegate {
   func timelineCollectionViewFlowLayoutWillFinalizeCollectionViewUpdates(layout: TimelineCollectionViewFlowLayout) {
-    if let clipNeedingAttention = timeline.clipsNeedingAttention.last {
-      scrollToCellForClip(clipNeedingAttention, animated: false)
-    } else {
-      if timeline.currentPage == 1 {
-        if let bookmarkedClip = timeline.bookmarkedClip {
-          scrollToCellForClip(bookmarkedClip, animated: false)
-        }
+    if shouldOverrideScrollPosition {
+      if let clipNeedingAttention = timeline.clipsNeedingAttention.last {
+        scrollToCellForClip(clipNeedingAttention, animated: false)
       } else {
-        // Calculate offset...
-        let contentSizeBeforeAnimation = timelineCollectionView.contentSize
-        let contentSizeAfterAnimation = layout.collectionViewContentSize()
-        let xOffset = contentSizeAfterAnimation.width - contentSizeBeforeAnimation.width
-        if xOffset < 0 {
-          timelineCollectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        if timeline.currentPage == 1 {
+          if let bookmarkedClip = timeline.bookmarkedClip {
+            scrollToCellForClip(bookmarkedClip, animated: false)
+          }
         } else {
-          timelineCollectionView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: false)
+          // Calculate offset...
+          let contentSizeBeforeAnimation = timelineCollectionView.contentSize
+          let contentSizeAfterAnimation = layout.collectionViewContentSize()
+          let xOffset = contentSizeAfterAnimation.width - contentSizeBeforeAnimation.width
+          if xOffset < 0 {
+            timelineCollectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+          } else {
+            timelineCollectionView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: false)
+          }
         }
       }
     }
