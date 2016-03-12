@@ -54,6 +54,9 @@ class TimelineViewController: UIViewController {
 
     super.init(nibName: nil, bundle: nil)
 
+    let collectionViewLayout = timelineCollectionView.collectionViewLayout as! TimelineCollectionViewFlowLayout
+    collectionViewLayout.delegate = self
+
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillEnterForeground", name: UIApplicationWillEnterForegroundNotification, object: nil)
   }
 
@@ -131,9 +134,7 @@ class TimelineViewController: UIViewController {
   // MARK: Internal
 
   func refresh() {
-    timeline.requestRefreshOfClips {
-      self.scrollToRelevantClip(true)
-    }
+    timeline.requestRefreshOfClips()
   }
 
   func scrollToCellForClip(clip: Clip, animated: Bool) {
@@ -150,14 +151,6 @@ class TimelineViewController: UIViewController {
   }
 
   // MARK: Private
-
-  private func scrollToRelevantClip(animated: Bool) {
-    if let clipNeedingAttention = timeline.clipsNeedingAttention.last {
-      scrollToCellForClip(clipNeedingAttention, animated: animated)
-    } else if let bookmarkedClip = timeline.bookmarkedClip {
-      scrollToCellForClip(bookmarkedClip, animated: animated)
-    }
-  }
 
   private func cellForClip(clip: Clip) -> ClipCollectionViewCell? {
     if let indexPath = fetchedResultsController.indexPathForObject(clip) {
@@ -490,6 +483,31 @@ extension TimelineViewController: TimelineCollectionViewDelegate {
   func timelineCollectionViewSwipedRight(collectionView: TimelineCollectionView) {
     if let currentClip = player.currentClip, previousClip = timeline.clipBeforeClip(currentClip) {
       player.skipToClip(previousClip)
+    }
+  }
+}
+
+// MARK: - TimelineCollectionViewFlowLayoutDelegate
+extension TimelineViewController: TimelineCollectionViewFlowLayoutDelegate {
+  func timelineCollectionViewFlowLayoutWillFinalizeCollectionViewUpdates(layout: TimelineCollectionViewFlowLayout) {
+    if let clipNeedingAttention = timeline.clipsNeedingAttention.last {
+      scrollToCellForClip(clipNeedingAttention, animated: false)
+    } else {
+      if timeline.currentPage == 1 {
+        if let bookmarkedClip = timeline.bookmarkedClip {
+          scrollToCellForClip(bookmarkedClip, animated: false)
+        }
+      } else {
+        // Calculate offset...
+        let contentSizeBeforeAnimation = timelineCollectionView.contentSize
+        let contentSizeAfterAnimation = layout.collectionViewContentSize()
+        let xOffset = contentSizeAfterAnimation.width - contentSizeBeforeAnimation.width
+        if xOffset < 0 {
+          timelineCollectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        } else {
+          timelineCollectionView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: false)
+        }
+      }
     }
   }
 }
