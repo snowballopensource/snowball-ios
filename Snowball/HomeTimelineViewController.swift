@@ -80,6 +80,7 @@ class HomeTimelineViewController: TimelineViewController {
   // This is because swift does not allow overrides in extensions. Sorry!
 
   override func clipCollectionViewCellAddButtonTapped(cell: ClipCollectionViewCell) {
+    state = .Default
     super.clipCollectionViewCellAddButtonTapped(cell)
     guard let clip = clipForCell(cell) else { return }
     cameraViewController.endPreview()
@@ -100,6 +101,7 @@ extension TimelineViewController: CameraViewControllerDelegate {
   }
 
   func videoDidEndRecordingToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL) {
+    state = .Previewing
     let clip = Clip()
     clip.state = .PendingAcceptance
     clip.timelineID = timeline.id

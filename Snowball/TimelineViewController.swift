@@ -28,14 +28,14 @@ class TimelineViewController: UIViewController {
 
   // MARK: TimelineViewControllerState
   enum TimelineViewControllerState {
-    case Default, Recording, Playing
+    case Default, Recording, Playing, Previewing
   }
   var state = TimelineViewControllerState.Default {
     didSet {
-      let navBarHidden = (state == .Playing || state == .Recording)
+      let navBarHidden = (state == .Playing || state == .Previewing || state == .Recording)
       navigationController?.setNavigationBarHidden(navBarHidden, animated: true)
       playerView.hidden = (state != .Playing)
-      timelineCollectionView.scrollEnabled = (state != .Playing)
+      timelineCollectionView.scrollEnabled = (state != .Playing && state != .Previewing)
 
       if state != .Playing {
         endBufferingState()
