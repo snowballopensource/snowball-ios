@@ -324,8 +324,6 @@ extension TimelineViewController: TimelinePlayerDelegate {
     setStateToPlayingClipForVisibleCells(clip)
   }
 
-  func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlaybackWithFirstClip clip: Clip) {}
-
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
     setClipBuffering(toClip)
     scrollToCellForClip(toClip, animated: true)

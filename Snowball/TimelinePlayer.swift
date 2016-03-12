@@ -24,11 +24,19 @@ class TimelinePlayer: AVQueuePlayer {
       let endingPlayback = (oldValue != nil && newValue == nil)
 
       if noChanges { return }
-      if beginningPlayback { delegate?.timelinePlayer(self, didBeginPlaybackWithFirstClip: newValue!) }
+      if beginningPlayback {
+        playing = true
+        delegate?.timelinePlayer(self, willBeginPlaybackWithFirstClip: newValue!)
+        queueManager.preparePlayerQueueToPlayClip(newValue!)
+        play()
+      }
       if continuingPlayback { delegate?.timelinePlayer(self, didTransitionFromClip: oldValue!, toClip: newValue!) }
       if endingPlayback {
-        stop()
+        playing = false
         delegate?.timelinePlayer(self, didEndPlaybackWithLastClip: oldValue!)
+        queueManager.cancelAllOperations()
+        pause()
+        removeAllItems()
       }
     }
   }
@@ -69,19 +77,11 @@ class TimelinePlayer: AVQueuePlayer {
 
   func playWithFirstClip(clip: Clip) {
     let shouldBeginPlayback = delegate?.timelinePlayerShouldBeginPlayback(self) ?? false
-    if shouldBeginPlayback {
-      playing = true
-      delegate?.timelinePlayer(self, willBeginPlaybackWithFirstClip: clip)
-      queueManager.preparePlayerQueueToPlayClip(clip)
-      play()
-    }
+    if shouldBeginPlayback { currentClip = clip }
   }
 
   func stop() {
-    playing = false
-    queueManager.cancelAllOperations()
-    pause()
-    removeAllItems()
+    currentClip = nil
   }
 
   func topOffQueue() {
@@ -112,7 +112,6 @@ class TimelinePlayer: AVQueuePlayer {
 protocol TimelinePlayerDelegate {
   func timelinePlayerShouldBeginPlayback(timelinePlayer: TimelinePlayer) -> Bool
   func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip)
-  func timelinePlayer(timelinePlayer: TimelinePlayer, didBeginPlaybackWithFirstClip clip: Clip)
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip)
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip)
 }
