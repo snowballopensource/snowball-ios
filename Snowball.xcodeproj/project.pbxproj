@@ -54,6 +54,7 @@
 		BAD775071C1DFEAB00ED1A64 /* SnowballRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD775061C1DFEAB00ED1A64 /* SnowballRoute.swift */; };
 		BAD775091C1DFF9200ED1A64 /* SnowballAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD775081C1DFF9200ED1A64 /* SnowballAPI.swift */; };
 		BAD7750D1C1E02AC00ED1A64 /* NSError+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD7750C1C1E02AC00ED1A64 /* NSError+Snowball.swift */; };
+		BAD7E73D1C9378AE0068A7AB /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD7E73C1C9378AE0068A7AB /* UserTableViewCell.swift */; };
 		BAF578B11C67E317003F9404 /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF578B01C67E317003F9404 /* UIColor+Snowball.swift */; };
 		BAFC72171C3DC5F600D46747 /* CachedAssetResourceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFC72161C3DC5F600D46747 /* CachedAssetResourceLoader.swift */; };
 		C4F6C8B4A082CFFA6494A0FC /* Pods_Snowball.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E439DA692FA84121961F5E34 /* Pods_Snowball.framework */; };
@@ -111,6 +112,7 @@
 		BAD775061C1DFEAB00ED1A64 /* SnowballRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballRoute.swift; sourceTree = "<group>"; };
 		BAD775081C1DFF9200ED1A64 /* SnowballAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballAPI.swift; sourceTree = "<group>"; };
 		BAD7750C1C1E02AC00ED1A64 /* NSError+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Snowball.swift"; sourceTree = "<group>"; };
+		BAD7E73C1C9378AE0068A7AB /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		BAF578B01C67E317003F9404 /* UIColor+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Snowball.swift"; sourceTree = "<group>"; };
 		BAFC72161C3DC5F600D46747 /* CachedAssetResourceLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedAssetResourceLoader.swift; sourceTree = "<group>"; };
 		E439DA692FA84121961F5E34 /* Pods_Snowball.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snowball.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -224,6 +226,7 @@
 				BA89E7211C7FA635001AFD23 /* TextFieldContainerView.swift */,
 				BA9CDC951C7FC2D0001D85F2 /* SnowballActionButton.swift */,
 				BA007EB41C88054E00186A5C /* PulsingLoadingIndicatorView.swift */,
+				BAD7E73C1C9378AE0068A7AB /* UserTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				BAD7750D1C1E02AC00ED1A64 /* NSError+Snowball.swift in Sources */,
 				BA1AE4EA1C6E4BC700AEEBF1 /* ClipUploadQueue.swift in Sources */,
 				BAD775071C1DFEAB00ED1A64 /* SnowballRoute.swift in Sources */,
+				BAD7E73D1C9378AE0068A7AB /* UserTableViewCell.swift in Sources */,
 				BA67BDD21C6413D900720090 /* CameraViewController.swift in Sources */,
 				BA9808781C3BA01C00F86C04 /* PlayerView.swift in Sources */,
 				BA0B879D1C5B16990094D6D7 /* HomeNavigationController.swift in Sources */,
