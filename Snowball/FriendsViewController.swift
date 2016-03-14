@@ -62,6 +62,48 @@ extension FriendsViewController: UITableViewDataSource {
     let cell = UserTableViewCell()
     let user = users[indexPath.row]
     cell.configureForUser(user)
+    cell.delegate = self
     return cell
+  }
+}
+
+// MARK: - UserTableViewCellDelegate
+extension FriendsViewController: UserTableViewCellDelegate {
+  func userTableViewCellFollowButtonTapped(cell: UserTableViewCell) {
+    guard let indexPath = tableView.indexPathForCell(cell) else { return }
+    let user = users[indexPath.row]
+    guard let userID = user.id else { return }
+
+    let followingCurrently = user.following
+
+    func setFollowing(following: Bool) {
+      Database.performTransaction {
+        user.following = following
+        Database.save(user)
+      }
+      cell.followButton.setFollowing(following, animated: true)
+    }
+
+    setFollowing(!followingCurrently)
+
+    let route: SnowballRoute
+    if followingCurrently {
+      route = SnowballRoute.UnfollowUser(userID: userID)
+    } else {
+      route = SnowballRoute.FollowUser(userID: userID)
+    }
+
+    SnowballAPI.request(route) { response in
+      switch response {
+      case .Success: break
+      case .Failure(let error):
+        print(error)
+        setFollowing(followingCurrently)
+      }
+    }
+  }
+
+  private func setUserFollowing(cell: UserTableViewCell, following: Bool) {
+
   }
 }

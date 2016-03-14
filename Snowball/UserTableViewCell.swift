@@ -18,9 +18,11 @@ class UserTableViewCell: UITableViewCell {
   let userAvatarImageView = UserAvatarImageView()
   let usernameLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont.SnowballFont.mediumFont.fontWithSize(16)
+    label.font = UIFont.SnowballFont.mediumFont.fontWithSize(17)
     return label
   }()
+  let followButton = FollowButton()
+  var delegate: UserTableViewCellDelegate?
 
   // MARK: Initializers
 
@@ -40,6 +42,14 @@ class UserTableViewCell: UITableViewCell {
       usernameLabel.top == usernameLabel.superview!.top
       usernameLabel.bottom == usernameLabel.superview!.bottom
     }
+
+    addSubview(followButton)
+    constrain(followButton) { followButton in
+      followButton.centerY == followButton.superview!.centerY
+      followButton.right == followButton.superview!.right - 20
+      followButton.width == FollowButton.defaultSize.width
+      followButton.height == FollowButton.defaultSize.height
+    }
   }
 
   required init?(coder: NSCoder) {
@@ -53,5 +63,19 @@ class UserTableViewCell: UITableViewCell {
 
     usernameLabel.text = user.username
     usernameLabel.textColor = user.color
+
+    followButton.configureForUser(user)
+    followButton.addTarget(self, action: "followButtonTapped", forControlEvents: .TouchUpInside)
   }
+
+  // MARK: Actions
+
+  @objc private func followButtonTapped() {
+    delegate?.userTableViewCellFollowButtonTapped(self)
+  }
+}
+
+// MARK: -
+protocol UserTableViewCellDelegate {
+  func userTableViewCellFollowButtonTapped(cell: UserTableViewCell)
 }
