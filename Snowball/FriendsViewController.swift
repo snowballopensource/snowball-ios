@@ -20,7 +20,7 @@ class FriendsViewController: UIViewController {
     tableView.separatorStyle = .None
     return tableView
   }()
-  var users = Database.findAll(User)
+  var users = [User]()
 
   // MARK: UIViewController
 
@@ -39,6 +39,19 @@ class FriendsViewController: UIViewController {
       tableView.right == tableView.superview!.right
     }
     tableView.dataSource = self
+  }
+
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+
+    SnowballAPI.requestObjects(SnowballRoute.GetCurrentUserFollowing) { (response: ObjectResponse<[User]>) in
+      switch response {
+        case .Success(let users):
+          self.users = users
+          self.tableView.reloadData()
+        case .Failure(let error): print(error) // TODO: Handle error
+      }
+    }
   }
 
   // MARK: Actions
