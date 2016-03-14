@@ -14,7 +14,12 @@ class FriendsViewController: UIViewController {
 
   // MARK: Properties
 
-  let tableView = UITableView()
+  let tableView: UITableView = {
+    let tableView = UITableView()
+    tableView.rowHeight = UserTableViewCell.defaultHeight
+    tableView.separatorStyle = .None
+    return tableView
+  }()
   var users = Database.findAll(User)
 
   // MARK: UIViewController
@@ -56,8 +61,7 @@ extension FriendsViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = UserTableViewCell()
     let user = users[indexPath.row]
-    cell.userAvatarImageView.setUser(user)
-    cell.usernameLabel.text = user.username
+    cell.configureForUser(user)
     return cell
   }
 }
