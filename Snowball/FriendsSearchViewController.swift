@@ -89,7 +89,7 @@ class FriendsSearchViewController: UIViewController {
     }
 
     if segmentedControl.selectedIndex == 0 {
-      performRequest(SnowballRoute.GetCurrentUserFollowing)
+      performRequest(SnowballRoute.FindFriendsOfFriends)
     } else {
       getPhoneNumbersFromAddressBook(
         onSuccess: { (phoneNumbers) -> Void in
