@@ -34,7 +34,7 @@ class FriendsViewController: UIViewController {
 
     title = NSLocalizedString("Friends", comment: "")
     navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-camera-outline"), style: .Plain, target: self, action: "leftBarButtonItemPressed")
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-add-friends"), style: .Plain, target: self, action: "rightBarButtonItemPressed")
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-search"), style: .Plain, target: self, action: "rightBarButtonItemPressed")
 
     view.addSubview(segmentedControl)
     constrain(segmentedControl) { segmentedControl in
