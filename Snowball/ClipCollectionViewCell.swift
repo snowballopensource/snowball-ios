@@ -234,8 +234,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     constrain(likeButton, timeAgoLabel) { likeButton, timeAgoLabel  in
       likeButton.top == timeAgoLabel.bottom + 18
       likeButton.centerX == likeButton.superview!.centerX
-      likeButton.width == 30
-      likeButton.height == 25
+      likeButton.width == 35
+      likeButton.height == 30
     }
     likeButton.addTarget(self, action: "likeButtonTapped", forControlEvents: .TouchUpInside)
 
