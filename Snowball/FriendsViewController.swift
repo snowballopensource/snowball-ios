@@ -14,6 +14,11 @@ class FriendsViewController: UIViewController {
 
   // MARK: Properties
 
+  let segmentedControl: SegmentedControl = {
+    let titles = [NSLocalizedString("Following", comment: ""), NSLocalizedString("Followers", comment: "")]
+    let segmentedControl = SegmentedControl(titles: titles)
+    return segmentedControl
+  }()
   let tableView: UITableView = {
     let tableView = UITableView()
     tableView.rowHeight = UserTableViewCell.defaultHeight
@@ -31,9 +36,18 @@ class FriendsViewController: UIViewController {
     navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-camera-outline"), style: .Plain, target: self, action: "leftBarButtonItemPressed")
     navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-add-friends"), style: .Plain, target: self, action: "rightBarButtonItemPressed")
 
+    view.addSubview(segmentedControl)
+    constrain(segmentedControl) { segmentedControl in
+      segmentedControl.top == segmentedControl.superview!.top + navigationBarOffset
+      segmentedControl.left == segmentedControl.superview!.left + 17
+      segmentedControl.right == segmentedControl.superview!.right - 17
+      segmentedControl.height == 35
+    }
+    segmentedControl.addTarget(self, action: "segmentedControlValueChanged", forControlEvents: .ValueChanged)
+
     view.addSubview(tableView)
-    constrain(tableView) { tableView in
-      tableView.top == tableView.superview!.top
+    constrain(tableView, segmentedControl) { tableView, segmentedControl in
+      tableView.top == segmentedControl.bottom + 10
       tableView.left == tableView.superview!.left
       tableView.bottom == tableView.superview!.bottom
       tableView.right == tableView.superview!.right
@@ -62,6 +76,10 @@ class FriendsViewController: UIViewController {
 
   @objc private func rightBarButtonItemPressed() {
     print("NOT IMPLEMENTED: rightBarButtonItemPressed")
+  }
+
+  @objc private func segmentedControlValueChanged() {
+    print("NOT IMPLEMENTED: segmentedControlValueChanged")
   }
 }
 

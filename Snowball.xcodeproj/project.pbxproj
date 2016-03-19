@@ -22,6 +22,7 @@
 		BA59956F1C4DC69100E14B6A /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA59956E1C4DC69100E14B6A /* Timeline.swift */; };
 		BA6318BB1C4DB85D00BB40AE /* UIView+HideAnimated.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6318BA1C4DB85D00BB40AE /* UIView+HideAnimated.swift */; };
 		BA66F1D31C9756FF00FC4AD1 /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA66F1D21C9756FF00FC4AD1 /* FollowButton.swift */; };
+		BA66F1D51C977ED300FC4AD1 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA66F1D41C977ED300FC4AD1 /* SegmentedControl.swift */; };
 		BA67BDD01C6413D900720090 /* SingleItemLoopingPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA67BDCD1C6413D900720090 /* SingleItemLoopingPlayer.swift */; };
 		BA67BDD11C6413D900720090 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA67BDCE1C6413D900720090 /* CameraView.swift */; };
 		BA67BDD21C6413D900720090 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA67BDCF1C6413D900720090 /* CameraViewController.swift */; };
@@ -79,6 +80,7 @@
 		BA59956E1C4DC69100E14B6A /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
 		BA6318BA1C4DB85D00BB40AE /* UIView+HideAnimated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+HideAnimated.swift"; sourceTree = "<group>"; };
 		BA66F1D21C9756FF00FC4AD1 /* FollowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
+		BA66F1D41C977ED300FC4AD1 /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		BA67BDCD1C6413D900720090 /* SingleItemLoopingPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleItemLoopingPlayer.swift; sourceTree = "<group>"; };
 		BA67BDCE1C6413D900720090 /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		BA67BDCF1C6413D900720090 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				BA007EB41C88054E00186A5C /* PulsingLoadingIndicatorView.swift */,
 				BAD7E73C1C9378AE0068A7AB /* UserTableViewCell.swift */,
 				BA66F1D21C9756FF00FC4AD1 /* FollowButton.swift */,
+				BA66F1D41C977ED300FC4AD1 /* SegmentedControl.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -473,6 +476,7 @@
 				BAB280741C35AEE800AE098D /* Util.swift in Sources */,
 				BAD677AE1C5ADD5900B41507 /* UIScrollView+PullToLoad.swift in Sources */,
 				BA73BCD41C1A766100B22588 /* TimelineCollectionView.swift in Sources */,
+				BA66F1D51C977ED300FC4AD1 /* SegmentedControl.swift in Sources */,
 				BA73BCD21C1A759100B22588 /* TimelineViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
