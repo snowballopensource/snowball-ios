@@ -6,6 +6,7 @@
 //  Copyright © 2016 Snowball, Inc. All rights reserved.
 //
 
+import AddressBook
 import Cartography
 import Foundation
 import UIKit
@@ -26,6 +27,15 @@ class FriendsSearchViewController: UIViewController {
     return tableView
   }()
   var users = [User]()
+  private let addressBook: ABAddressBook? = {
+    var error: Unmanaged<CFError>?
+    let addressBook = ABAddressBookCreateWithOptions(nil, &error)
+    if error != nil {
+      print("Address book creation error: \(error)")
+      return nil
+    }
+    return addressBook.takeRetainedValue()
+  }()
 
   // MARK: UIViewController
 
@@ -67,18 +77,66 @@ class FriendsSearchViewController: UIViewController {
     self.users.removeAll()
     self.tableView.reloadData()
 
-    let route: SnowballRoute
-    if segmentedControl.selectedIndex == 0 {
-      route = SnowballRoute.GetCurrentUserFollowing
-    } else {
-      route = SnowballRoute.GetCurrentUserFollowers
+    func performRequest(route: SnowballRoute) {
+      SnowballAPI.requestObjects(route) { (response: ObjectResponse<[User]>) in
+        switch response {
+        case .Success(let users):
+          self.users = users
+          self.tableView.reloadData()
+        case .Failure(let error): print(error) // TODO: Handle error
+        }
+      }
     }
-    SnowballAPI.requestObjects(route) { (response: ObjectResponse<[User]>) in
-      switch response {
-      case .Success(let users):
-        self.users = users
-        self.tableView.reloadData()
-      case .Failure(let error): print(error) // TODO: Handle error
+
+    if segmentedControl.selectedIndex == 0 {
+      performRequest(SnowballRoute.GetCurrentUserFollowing)
+    } else {
+      getPhoneNumbersFromAddressBook(
+        onSuccess: { (phoneNumbers) -> Void in
+          performRequest(SnowballRoute.FindUsersByPhoneNumbers(phoneNumbers: phoneNumbers))
+        },
+        onFailure: {
+          let alertController = UIAlertController(title: NSLocalizedString("Snowball doesn't have access to your contacts. 😭", comment: ""), message: NSLocalizedString("We can take you there now!", comment: ""), preferredStyle: .Alert)
+          alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: nil))
+          alertController.addAction(UIAlertAction(title: NSLocalizedString("Let's go!", comment: ""), style: .Default,
+            handler: { action in
+              if let appSettings = NSURL(string: UIApplicationOpenSettingsURLString) {
+                UIApplication.sharedApplication().openURL(appSettings)
+              }
+            })
+          )
+          self.presentViewController(alertController, animated: true, completion: nil)
+        }
+      )
+    }
+  }
+
+  func getPhoneNumbersFromAddressBook(onSuccess onSuccess: (phoneNumbers: [String]) -> Void, onFailure: () -> Void) {
+    ABAddressBookRequestAccessWithCompletion(addressBook) { (granted, error) in
+      if granted {
+        let authorizationStatus = ABAddressBookGetAuthorizationStatus()
+        if authorizationStatus != ABAuthorizationStatus.Authorized {
+          dispatch_async(dispatch_get_main_queue()) {
+            onFailure()
+          }
+          return
+        }
+        var phoneNumbers = [String]()
+        let contacts = ABAddressBookCopyArrayOfAllPeople(self.addressBook).takeRetainedValue() as NSArray
+        for contact in contacts {
+          let phoneNumberProperty: AnyObject = ABRecordCopyValue(contact, kABPersonPhoneProperty).takeRetainedValue()
+          for var i = 0; i < ABMultiValueGetCount(phoneNumberProperty); i++ {
+            let phoneNumber = ABMultiValueCopyValueAtIndex(phoneNumberProperty, i).takeRetainedValue() as! String
+            phoneNumbers.append(phoneNumber)
+          }
+        }
+        dispatch_async(dispatch_get_main_queue()) {
+          onSuccess(phoneNumbers: phoneNumbers)
+        }
+      } else {
+        dispatch_async(dispatch_get_main_queue()) {
+          onFailure()
+        }
       }
     }
   }
