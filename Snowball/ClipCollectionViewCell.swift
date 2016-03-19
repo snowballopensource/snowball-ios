@@ -85,7 +85,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
   let timeAgoLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.SnowballFont.mediumFont.fontWithSize(12)
-    label.textColor = UIColor.SnowballColor.grayColor
+    label.textColor = UIColor.SnowballColor.lightGrayColor
     label.textAlignment = .Center
     return label
   }()

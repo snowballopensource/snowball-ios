@@ -17,7 +17,12 @@ class SnowballActionButton: UIButton {
 
   private let gradient: CAGradientLayer = {
     let gradient = CAGradientLayer()
-    gradient.colors = [UIColor(hex: "#F6F517").CGColor, UIColor(hex: "#53FD8F").CGColor, UIColor(hex: "#51D5EC").CGColor, UIColor(hex: "#E051EC").CGColor]
+    gradient.colors = [
+      UIColor(colorLiteralRed: 246/255.0, green: 245/255.0, blue: 23/255.0, alpha: 1).CGColor,
+      UIColor(colorLiteralRed: 83/255.0, green: 253/255.0, blue: 143/255.0, alpha: 1).CGColor,
+      UIColor(colorLiteralRed: 81/255.0, green: 213/255.0, blue: 236/255.0, alpha: 1).CGColor,
+      UIColor(colorLiteralRed: 224/255.0, green: 81/255.0, blue: 236/255.0, alpha: 1).CGColor
+    ]
     gradient.startPoint = CGPointZero
     gradient.endPoint = CGPoint(x: 1, y: 0)
     return gradient

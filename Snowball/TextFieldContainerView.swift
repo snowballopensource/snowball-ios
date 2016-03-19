@@ -76,7 +76,7 @@ class TextFieldContainerView: UIView {
   func configureText(hint hint: String?, placeholder: String?) {
     hintLabel.text = hint
     if let placeholder = placeholder {
-      textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.grayColor])
+      textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.lightGrayColor])
     } else {
       textField.placeholder = nil
     }
