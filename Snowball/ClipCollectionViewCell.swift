@@ -261,7 +261,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   // MARK: Internal
 
-  func configueForClip(clip: Clip, state: ClipCollectionViewCellState = .Default) {
+  func configueForClip(clip: Clip, state: ClipCollectionViewCellState = .Default, animated: Bool = false) {
     if let thumbnailURLString = clip.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
       thumbnailImageView.setImageFromURL(thumbnailURL)
     }
@@ -280,7 +280,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     likeButton.highlighted = clip.liked
 
-    setState(state, animated: false)
+    setState(state, animated: animated)
   }
 
   func setState(state: ClipCollectionViewCellState, animated: Bool) {

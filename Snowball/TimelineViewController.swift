@@ -185,6 +185,13 @@ class TimelineViewController: UIViewController {
     }
   }
 
+  private func reconfigureVisibleCells() {
+    for cell in timelineCollectionView.visibleCells() as! [ClipCollectionViewCell] {
+      guard let clip = clipForCell(cell) else { return }
+      cell.configueForClip(clip, state: cellStateForClip(clip), animated: true)
+    }
+  }
+
   private func cellStateForClip(clip: Clip) -> ClipCollectionViewCellState {
     var state = ClipCollectionViewCellState.Default
     if player.playing {
@@ -305,7 +312,7 @@ extension TimelineViewController: FetchedResultsControllerDelegate {
       }
       }, completion: { _ in
         if self.collectionViewUpdates.count > 0 {
-          self.resetStateForVisibleCells()
+          self.reconfigureVisibleCells()
         }
     })
   }
