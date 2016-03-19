@@ -89,7 +89,7 @@ class FriendsViewController: UIViewController {
   }
 
   @objc private func rightBarButtonItemPressed() {
-    navigationController?.pushViewController(FriendsSearchViewController(), animated: true)
+    navigationController?.pushViewController(FindFriendsViewController(), animated: true)
   }
 
   @objc private func segmentedControlValueChanged() {

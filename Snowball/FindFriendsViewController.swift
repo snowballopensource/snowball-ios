@@ -1,5 +1,5 @@
 //
-//  FriendsSearchViewController.swift
+//  FindFriendsViewController.swift
 //  Snowball
 //
 //  Created by James Martinez on 3/19/16.
@@ -11,7 +11,7 @@ import Cartography
 import Foundation
 import UIKit
 
-class FriendsSearchViewController: UIViewController {
+class FindFriendsViewController: UIViewController {
 
   // MARK: Properties
 
@@ -153,7 +153,7 @@ class FriendsSearchViewController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource
-extension FriendsSearchViewController: UITableViewDataSource {
+extension FindFriendsViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return users.count
   }
@@ -168,7 +168,7 @@ extension FriendsSearchViewController: UITableViewDataSource {
 }
 
 // MARK: - UserTableViewCellDelegate
-extension FriendsSearchViewController: UserTableViewCellDelegate {
+extension FindFriendsViewController: UserTableViewCellDelegate {
   func userTableViewCellFollowButtonTapped(cell: UserTableViewCell) {
     guard let indexPath = tableView.indexPathForCell(cell) else { return }
     let user = users[indexPath.row]
