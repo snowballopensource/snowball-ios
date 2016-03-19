@@ -26,6 +26,7 @@
 		BA67BDD01C6413D900720090 /* SingleItemLoopingPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA67BDCD1C6413D900720090 /* SingleItemLoopingPlayer.swift */; };
 		BA67BDD11C6413D900720090 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA67BDCE1C6413D900720090 /* CameraView.swift */; };
 		BA67BDD21C6413D900720090 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA67BDCF1C6413D900720090 /* CameraViewController.swift */; };
+		BA6BE0821C9E0B46008B60EB /* FriendsSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6BE0811C9E0B46008B60EB /* FriendsSearchViewController.swift */; };
 		BA732D811C88FE16007059A8 /* PushNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA732D801C88FE16007059A8 /* PushNotificationController.swift */; };
 		BA73BCC01C1A71B400B22588 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCBF1C1A71B400B22588 /* AppDelegate.swift */; };
 		BA73BCC71C1A71B400B22588 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA73BCC61C1A71B400B22588 /* Assets.xcassets */; };
@@ -83,6 +84,7 @@
 		BA67BDCD1C6413D900720090 /* SingleItemLoopingPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleItemLoopingPlayer.swift; sourceTree = "<group>"; };
 		BA67BDCE1C6413D900720090 /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		BA67BDCF1C6413D900720090 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		BA6BE0811C9E0B46008B60EB /* FriendsSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsSearchViewController.swift; sourceTree = "<group>"; };
 		BA732D801C88FE16007059A8 /* PushNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationController.swift; sourceTree = "<group>"; };
 		BA73BCBC1C1A71B400B22588 /* Snowball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snowball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA73BCBF1C1A71B400B22588 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				BA9A1DA21C750657008AD0E4 /* HomeTimelineViewController.swift */,
 				BA9A1DA41C750940008AD0E4 /* UserTimelineViewController.swift */,
 				BA0B87A61C5B298B0094D6D7 /* FriendsViewController.swift */,
+				BA6BE0811C9E0B46008B60EB /* FriendsSearchViewController.swift */,
 				BA67BDCF1C6413D900720090 /* CameraViewController.swift */,
 				BA89E71B1C7F8DBB001AFD23 /* SignInViewController.swift */,
 			);
@@ -433,6 +436,7 @@
 				BA66F1D31C9756FF00FC4AD1 /* FollowButton.swift in Sources */,
 				BA67BDD21C6413D900720090 /* CameraViewController.swift in Sources */,
 				BA9808781C3BA01C00F86C04 /* PlayerView.swift in Sources */,
+				BA6BE0821C9E0B46008B60EB /* FriendsSearchViewController.swift in Sources */,
 				BA0B879D1C5B16990094D6D7 /* HomeNavigationController.swift in Sources */,
 				BA0B87A51C5B270F0094D6D7 /* UIWindow+RootViewControllerTransition.swift in Sources */,
 				BA98087C1C3BA71D00F86C04 /* TimelinePlayer.swift in Sources */,

@@ -1,8 +1,8 @@
 //
-//  FriendsViewController.swift
+//  FriendsSearchViewController.swift
 //  Snowball
 //
-//  Created by James Martinez on 1/28/16.
+//  Created by James Martinez on 3/19/16.
 //  Copyright © 2016 Snowball, Inc. All rights reserved.
 //
 
@@ -10,12 +10,12 @@ import Cartography
 import Foundation
 import UIKit
 
-class FriendsViewController: UIViewController {
+class FriendsSearchViewController: UIViewController {
 
   // MARK: Properties
 
   let segmentedControl: SegmentedControl = {
-    let titles = [NSLocalizedString("Following", comment: ""), NSLocalizedString("Followers", comment: "")]
+    let titles = [NSLocalizedString("Friends of friends", comment: ""), NSLocalizedString("Contacts", comment: "")]
     let segmentedControl = SegmentedControl(titles: titles)
     return segmentedControl
   }()
@@ -32,9 +32,10 @@ class FriendsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    title = NSLocalizedString("Friends", comment: "")
-    navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-camera-outline"), style: .Plain, target: self, action: "leftBarButtonItemPressed")
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-add-friends"), style: .Plain, target: self, action: "rightBarButtonItemPressed")
+    view.backgroundColor = UIColor.whiteColor()
+
+    title = NSLocalizedString("Find friends", comment: "")
+    navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-back-black"), style: .Plain, target: self, action: "leftBarButtonItemPressed")
 
     view.addSubview(segmentedControl)
     constrain(segmentedControl) { segmentedControl in
@@ -85,11 +86,7 @@ class FriendsViewController: UIViewController {
   // MARK: Actions
 
   @objc private func leftBarButtonItemPressed() {
-    AppDelegate.sharedInstance.window?.transitionRootViewControllerToViewController(HomeNavigationController())
-  }
-
-  @objc private func rightBarButtonItemPressed() {
-    navigationController?.pushViewController(FriendsSearchViewController(), animated: true)
+    navigationController?.popViewControllerAnimated(true)
   }
 
   @objc private func segmentedControlValueChanged() {
@@ -98,7 +95,7 @@ class FriendsViewController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource
-extension FriendsViewController: UITableViewDataSource {
+extension FriendsSearchViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return users.count
   }
@@ -113,7 +110,7 @@ extension FriendsViewController: UITableViewDataSource {
 }
 
 // MARK: - UserTableViewCellDelegate
-extension FriendsViewController: UserTableViewCellDelegate {
+extension FriendsSearchViewController: UserTableViewCellDelegate {
   func userTableViewCellFollowButtonTapped(cell: UserTableViewCell) {
     guard let indexPath = tableView.indexPathForCell(cell) else { return }
     let user = users[indexPath.row]
