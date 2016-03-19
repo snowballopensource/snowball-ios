@@ -57,13 +57,27 @@ class FriendsViewController: UIViewController {
 
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
+    refresh()
+  }
 
-    SnowballAPI.requestObjects(SnowballRoute.GetCurrentUserFollowing) { (response: ObjectResponse<[User]>) in
+  // MARK: Private
+
+  private func refresh() {
+    self.users.removeAll()
+    self.tableView.reloadData()
+
+    let route: SnowballRoute
+    if segmentedControl.selectedIndex == 0 {
+      route = SnowballRoute.GetCurrentUserFollowing
+    } else {
+      route = SnowballRoute.GetCurrentUserFollowers
+    }
+    SnowballAPI.requestObjects(route) { (response: ObjectResponse<[User]>) in
       switch response {
-        case .Success(let users):
-          self.users = users
-          self.tableView.reloadData()
-        case .Failure(let error): print(error) // TODO: Handle error
+      case .Success(let users):
+        self.users = users
+        self.tableView.reloadData()
+      case .Failure(let error): print(error) // TODO: Handle error
       }
     }
   }
@@ -79,7 +93,7 @@ class FriendsViewController: UIViewController {
   }
 
   @objc private func segmentedControlValueChanged() {
-    print("NOT IMPLEMENTED: segmentedControlValueChanged")
+    refresh()
   }
 }
 
