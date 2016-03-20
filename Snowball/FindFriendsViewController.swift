@@ -26,6 +26,16 @@ class FindFriendsViewController: UIViewController {
     tableView.separatorStyle = .None
     return tableView
   }()
+  let searchTextFieldContainer: TextFieldContainerView = {
+    let textFieldContainer = TextFieldContainerView(showHintLabel: false, bottomLineHeight: 2)
+    textFieldContainer.configureText(hint: nil, placeholder: NSLocalizedString("Find by username", comment: ""))
+    textFieldContainer.textField.font = textFieldContainer.textField.font?.fontWithSize(21)
+    textFieldContainer.textField.autocapitalizationType = .None
+    textFieldContainer.textField.autocorrectionType = .No
+    textFieldContainer.textField.spellCheckingType = .No
+    textFieldContainer.textField.returnKeyType = .Search
+    return textFieldContainer
+  }()
   var users = [User]()
   private let addressBook: ABAddressBook? = {
     var error: Unmanaged<CFError>?
@@ -47,9 +57,17 @@ class FindFriendsViewController: UIViewController {
     title = NSLocalizedString("Find friends", comment: "")
     navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-back-black"), style: .Plain, target: self, action: "leftBarButtonItemPressed")
 
+    view.addSubview(searchTextFieldContainer)
+    constrain(searchTextFieldContainer) { searchTextFieldContainer in
+      searchTextFieldContainer.top == searchTextFieldContainer.superview!.top + navigationBarOffset
+      searchTextFieldContainer.left == searchTextFieldContainer.superview!.left + 20
+      searchTextFieldContainer.right == searchTextFieldContainer.superview!.right - 20
+      searchTextFieldContainer.height == TextFieldContainerView.defaultHeight
+    }
+
     view.addSubview(segmentedControl)
-    constrain(segmentedControl) { segmentedControl in
-      segmentedControl.top == segmentedControl.superview!.top + navigationBarOffset
+    constrain(segmentedControl, searchTextFieldContainer) { segmentedControl, searchTextFieldContainer in
+      segmentedControl.top == searchTextFieldContainer.bottom + 20
       segmentedControl.left == segmentedControl.superview!.left + 17
       segmentedControl.right == segmentedControl.superview!.right - 17
       segmentedControl.height == 35
