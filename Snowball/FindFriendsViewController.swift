@@ -26,6 +26,7 @@ class FindFriendsViewController: UIViewController {
     tableView.separatorStyle = .None
     return tableView
   }()
+  private let tableViewTopConstraintGroup = ConstraintGroup()
   let searchTextFieldContainer: TextFieldContainerView = {
     let textFieldContainer = TextFieldContainerView(showHintLabel: false, bottomLineHeight: 2)
     textFieldContainer.configureText(hint: nil, placeholder: NSLocalizedString("Find by username", comment: ""))
@@ -76,12 +77,12 @@ class FindFriendsViewController: UIViewController {
     segmentedControl.addTarget(self, action: "segmentedControlValueChanged", forControlEvents: .ValueChanged)
 
     view.addSubview(tableView)
-    constrain(tableView, segmentedControl) { tableView, segmentedControl in
-      tableView.top == segmentedControl.bottom + 10
+    constrain(tableView) { tableView in
       tableView.left == tableView.superview!.left
       tableView.bottom == tableView.superview!.bottom
       tableView.right == tableView.superview!.right
     }
+    setTableViewTopConstraint()
     tableView.dataSource = self
   }
 
@@ -164,6 +165,19 @@ class FindFriendsViewController: UIViewController {
     }
   }
 
+  private func setTableViewTopConstraint(coveringSegmentedControl coveringSegmentedControl: Bool = false) {
+    if coveringSegmentedControl {
+      constrain(tableView, segmentedControl, replace: tableViewTopConstraintGroup) { tableView, segmentedControl in
+        tableView.top == segmentedControl.top
+      }
+    } else {
+      constrain(tableView, segmentedControl, replace: tableViewTopConstraintGroup) { tableView, segmentedControl in
+        tableView.top == segmentedControl.bottom + 10
+      }
+    }
+    view.layoutIfNeeded()
+  }
+
   // MARK: Actions
 
   @objc private func leftBarButtonItemPressed() {
@@ -228,6 +242,10 @@ extension FindFriendsViewController: UserTableViewCellDelegate {
 }
 
 extension FindFriendsViewController: UITextFieldDelegate {
+  func textFieldDidBeginEditing(textField: UITextField) {
+    setTableViewTopConstraint(coveringSegmentedControl: true)
+  }
+
   func textFieldShouldReturn(textField: UITextField) -> Bool {
     if let search = textField.text {
       performUserRequest(search: search)
