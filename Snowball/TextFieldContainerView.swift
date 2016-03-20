@@ -19,12 +19,7 @@ class TextFieldContainerView: UIView {
   static let defaultSpaceBetween: CGFloat = 18
   static let defaultSpaceBeforeButton: CGFloat = 40
 
-  let hintLabel: UILabel = {
-    let label = UILabel()
-    label.font = UIFont.SnowballFont.regularFont.fontWithSize(16)
-    label.textColor = UIColor.blackColor()
-    return label
-  }()
+  var hintLabel: UILabel? = nil
   let textField: UITextField = {
     let textField = UITextField()
     textField.font = UIFont.SnowballFont.regularFont.fontWithSize(16)
@@ -39,31 +34,44 @@ class TextFieldContainerView: UIView {
 
   // MARK: Initializers
 
-  init() {
+  init(showHintLabel: Bool = true, bottomLineHeight: CGFloat = 1) {
     super.init(frame: CGRectZero)
 
     addSubview(bottomLineView)
     constrain(bottomLineView) { bottomLineView in
       bottomLineView.left == bottomLineView.superview!.left
       bottomLineView.right == bottomLineView.superview!.right
-      bottomLineView.height == 1
+      bottomLineView.height == bottomLineHeight
       bottomLineView.bottom == bottomLineView.superview!.bottom
     }
 
-    addSubview(hintLabel)
     addSubview(textField)
 
-    constrain(hintLabel, textField) { hintLabel, textField in
-      hintLabel.left == hintLabel.superview!.left
-      hintLabel.baseline == textField.baseline
-    }
-    hintLabel.setContentCompressionResistancePriority(textField.contentCompressionResistancePriorityForAxis(.Horizontal) + 1, forAxis: .Horizontal)
+    if showHintLabel {
+      hintLabel = UILabel()
+      guard let hintLabel = hintLabel else { return }
+      hintLabel.font = UIFont.SnowballFont.regularFont.fontWithSize(16)
+      hintLabel.textColor = UIColor.blackColor()
+      addSubview(hintLabel)
 
-    constrain(textField, hintLabel, bottomLineView) { textField, hintLabel, bottomLineView in
-      textField.left == hintLabel.right + 20
-      textField.top == textField.superview!.top
-      textField.right == textField.superview!.right
-      textField.bottom == bottomLineView.top
+      constrain(hintLabel, textField) { hintLabel, textField in
+        hintLabel.left == hintLabel.superview!.left
+        hintLabel.baseline == textField.baseline
+      }
+      hintLabel.setContentCompressionResistancePriority(textField.contentCompressionResistancePriorityForAxis(.Horizontal) + 1, forAxis: .Horizontal)
+      constrain(textField, hintLabel, bottomLineView) { textField, hintLabel, bottomLineView in
+        textField.left == hintLabel.right + 20
+        textField.top == textField.superview!.top
+        textField.right == textField.superview!.right
+        textField.bottom == bottomLineView.top
+      }
+    } else {
+      constrain(textField, bottomLineView) { textField, bottomLineView in
+        textField.left == textField.superview!.left
+        textField.top == textField.superview!.top
+        textField.right == textField.superview!.right
+        textField.bottom == bottomLineView.top
+      }
     }
   }
 
@@ -74,7 +82,7 @@ class TextFieldContainerView: UIView {
   // MARK: Internal
 
   func configureText(hint hint: String?, placeholder: String?) {
-    hintLabel.text = hint
+    hintLabel?.text = hint
     if let placeholder = placeholder {
       textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: UIColor.SnowballColor.lightGrayColor])
     } else {
@@ -83,7 +91,8 @@ class TextFieldContainerView: UIView {
   }
 
   func linkSizingWithTextFieldContainerView(textFieldContainerView: TextFieldContainerView) {
-    constrain(hintLabel, textFieldContainerView.hintLabel) { thisHintLabel, thatHintLabel in
+    guard let thisHintLabel = hintLabel, thatHintLabel = textFieldContainerView.hintLabel else { return }
+    constrain(thisHintLabel, thatHintLabel) { thisHintLabel, thatHintLabel in
       thisHintLabel.width >= thatHintLabel.width
       thatHintLabel.width >= thisHintLabel.width
     }
