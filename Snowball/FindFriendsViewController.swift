@@ -64,6 +64,7 @@ class FindFriendsViewController: UIViewController {
       searchTextFieldContainer.right == searchTextFieldContainer.superview!.right - 20
       searchTextFieldContainer.height == TextFieldContainerView.defaultHeight
     }
+    searchTextFieldContainer.textField.delegate = self
 
     view.addSubview(segmentedControl)
     constrain(segmentedControl, searchTextFieldContainer) { segmentedControl, searchTextFieldContainer in
@@ -86,12 +87,12 @@ class FindFriendsViewController: UIViewController {
 
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
-    refresh()
+    performUserRequest()
   }
 
   // MARK: Private
 
-  private func refresh() {
+  private func performUserRequest(search search: String? = nil) {
     self.users.removeAll()
     self.tableView.reloadData()
 
@@ -106,30 +107,34 @@ class FindFriendsViewController: UIViewController {
       }
     }
 
-    if segmentedControl.selectedIndex == 0 {
-      performRequest(SnowballRoute.FindFriendsOfFriends)
+    if let search = search {
+      performRequest(SnowballRoute.FindUsersByUsername(username: search))
     } else {
-      getPhoneNumbersFromAddressBook(
-        onSuccess: { (phoneNumbers) -> Void in
-          performRequest(SnowballRoute.FindUsersByPhoneNumbers(phoneNumbers: phoneNumbers))
-        },
-        onFailure: {
-          let alertController = UIAlertController(title: NSLocalizedString("Snowball doesn't have access to your contacts. 😭", comment: ""), message: NSLocalizedString("We can take you there now!", comment: ""), preferredStyle: .Alert)
-          alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: nil))
-          alertController.addAction(UIAlertAction(title: NSLocalizedString("Let's go!", comment: ""), style: .Default,
-            handler: { action in
-              if let appSettings = NSURL(string: UIApplicationOpenSettingsURLString) {
-                UIApplication.sharedApplication().openURL(appSettings)
-              }
+      if segmentedControl.selectedIndex == 0 {
+        performRequest(SnowballRoute.FindFriendsOfFriends)
+      } else {
+        getPhoneNumbersFromAddressBook(
+          onSuccess: { (phoneNumbers) -> Void in
+            performRequest(SnowballRoute.FindUsersByPhoneNumbers(phoneNumbers: phoneNumbers))
+          },
+          onFailure: {
+            let alertController = UIAlertController(title: NSLocalizedString("Snowball doesn't have access to your contacts. 😭", comment: ""), message: NSLocalizedString("We can take you there now!", comment: ""), preferredStyle: .Alert)
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("Let's go!", comment: ""), style: .Default,
+              handler: { action in
+                if let appSettings = NSURL(string: UIApplicationOpenSettingsURLString) {
+                  UIApplication.sharedApplication().openURL(appSettings)
+                }
             })
-          )
-          self.presentViewController(alertController, animated: true, completion: nil)
-        }
-      )
+            )
+            self.presentViewController(alertController, animated: true, completion: nil)
+          }
+        )
+      }
     }
   }
 
-  func getPhoneNumbersFromAddressBook(onSuccess onSuccess: (phoneNumbers: [String]) -> Void, onFailure: () -> Void) {
+  private func getPhoneNumbersFromAddressBook(onSuccess onSuccess: (phoneNumbers: [String]) -> Void, onFailure: () -> Void) {
     ABAddressBookRequestAccessWithCompletion(addressBook) { (granted, error) in
       if granted {
         let authorizationStatus = ABAddressBookGetAuthorizationStatus()
@@ -166,7 +171,7 @@ class FindFriendsViewController: UIViewController {
   }
 
   @objc private func segmentedControlValueChanged() {
-    refresh()
+    performUserRequest()
   }
 }
 
@@ -219,5 +224,15 @@ extension FindFriendsViewController: UserTableViewCellDelegate {
         setFollowing(followingCurrently)
       }
     }
+  }
+}
+
+extension FindFriendsViewController: UITextFieldDelegate {
+  func textFieldShouldReturn(textField: UITextField) -> Bool {
+    if let search = textField.text {
+      performUserRequest(search: search)
+    }
+    textField.resignFirstResponder()
+    return true
   }
 }
