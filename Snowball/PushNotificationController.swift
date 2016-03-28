@@ -35,12 +35,14 @@ class PushNotificationController {
   }
 
   static func registrationFailedWithError(error: NSError) {
-    // TODO: Show error
     print("Push notification registration failed: ", error)
   }
 
   static func applicationDidReceiveRemoteNotificationWithUserInfo(userInfo: [NSObject: AnyObject]) {
-    // TODO: Show alert
-    print("Push notification received while application in use: ", userInfo)
+    if let message = userInfo["aps"]?["alert"] as? String {
+      let alertController = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
+      alertController.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .Cancel, handler: nil))
+      AppDelegate.sharedInstance.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+    }
   }
 }
