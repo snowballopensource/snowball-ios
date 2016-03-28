@@ -112,6 +112,7 @@ extension TimelineViewController: CameraViewControllerDelegate {
     Database.performTransaction {
       Database.save(clip)
     }
+    scrollToCellForClip(clip, animated: true)
   }
 
   func videoPreviewDidCancel() {

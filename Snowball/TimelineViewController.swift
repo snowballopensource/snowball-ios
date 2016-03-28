@@ -146,6 +146,12 @@ class TimelineViewController: UIViewController {
     return nil
   }
 
+  func scrollToCellForClip(clip: Clip, animated: Bool) {
+    if let indexPath = fetchedResultsController.indexPathForObject(clip) {
+      timelineCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: animated)
+    }
+  }
+
   // MARK: Private
 
   private func cellForClip(clip: Clip) -> ClipCollectionViewCell? {
@@ -160,12 +166,6 @@ class TimelineViewController: UIViewController {
       self.scrollToCellForClip(clipNeedingAttenion, animated: animated)
     } else if let bookmarkedClip = self.timeline.bookmarkedClip {
       self.scrollToCellForClip(bookmarkedClip, animated: animated)
-    }
-  }
-
-  private func scrollToCellForClip(clip: Clip, animated: Bool) {
-    if let indexPath = fetchedResultsController.indexPathForObject(clip) {
-      timelineCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: animated)
     }
   }
 
@@ -514,12 +514,14 @@ extension TimelineViewController: TimelineCollectionViewFlowLayoutDelegate {
     // There are no updates here since we're not calling "reloadItemAtIndexPath" when the FRC updates
     if updates.count == 0 { return }
 
-    // Handle clips that are pending acceptance
-    if updates.count == 1 {
-      if let update = updates.first where update.updateAction == .Insert {
+    // If we're inserting a clip that is pending acceptance OR
+    // if we're performing any other action besides an insert on a single clip
+    // e.g. adding a clip, deleting a clip, etc.
+    // we let the default scroll handler do it, or use other scroll overrides
+    if updates.count == 1, let update = updates.first {
+      if update.updateAction == .Insert {
         let clip = timeline.clips[update.indexPathAfterUpdate!.row]
         if clip.state == .PendingAcceptance {
-          scrollToCellForClip(clip, animated: false)
           return
         }
       } else {
