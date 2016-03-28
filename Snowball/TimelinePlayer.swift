@@ -90,9 +90,12 @@ class TimelinePlayer: AVQueuePlayer {
 
   func skipToClip(clip: Clip) {
     pause()
-    queueManager.cancelAllOperations()
+
+    currentClip = clip
+
     removeAllItemsExceptCurrentItem()
     let itemsLeft = items().count
+    queueManager.cancelAllOperations()
     queueManager.preparePlayerQueueToSkipToClip(clip) {
       // If we remove all items except current item, but current item was not done
       // loading yet, advancing to next item would skip over the clip we wanted to
