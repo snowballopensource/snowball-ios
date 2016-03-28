@@ -52,7 +52,7 @@ class PlayerQueueManager {
     fillPlayerQueueWithClips(timeline.clipsAfterClip(lastQueuedClip), ignoringPlayerItemsCount: false, readyToPlayFirstClip: nil)
   }
 
-  func preparePlayerQueueToPlayClip(clip: Clip) {
+  func preparePlayerQueueToBeginPlaybackWithClip(clip: Clip) {
     fillPlayerQueueWithClips(timeline.clipsIncludingAndAfterClip(clip), ignoringPlayerItemsCount: false, readyToPlayFirstClip: nil)
   }
 

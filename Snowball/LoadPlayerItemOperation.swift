@@ -23,6 +23,8 @@ class LoadPlayerItemOperation: NSOperation {
 
   // MARK: NSOperation
 
+  override var asynchronous: Bool { return true }
+
   private var _executing = false
   override var executing: Bool {
     get {

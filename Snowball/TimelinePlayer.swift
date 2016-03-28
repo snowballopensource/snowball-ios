@@ -27,7 +27,7 @@ class TimelinePlayer: AVQueuePlayer {
       if beginningPlayback {
         playing = true
         delegate?.timelinePlayer(self, willBeginPlaybackWithFirstClip: newValue!)
-        queueManager.preparePlayerQueueToPlayClip(newValue!)
+        queueManager.preparePlayerQueueToBeginPlaybackWithClip(newValue!)
         play()
       }
       if continuingPlayback { delegate?.timelinePlayer(self, didTransitionFromClip: oldValue!, toClip: newValue!) }
@@ -90,9 +90,16 @@ class TimelinePlayer: AVQueuePlayer {
 
   func skipToClip(clip: Clip) {
     pause()
+    queueManager.cancelAllOperations()
     removeAllItemsExceptCurrentItem()
+    let itemsLeft = items().count
     queueManager.preparePlayerQueueToSkipToClip(clip) {
-      self.advanceToNextItem()
+      // If we remove all items except current item, but current item was not done
+      // loading yet, advancing to next item would skip over the clip we wanted to
+      // skip to
+      if itemsLeft > 0 {
+        self.advanceToNextItem()
+      }
       self.play()
     }
   }
