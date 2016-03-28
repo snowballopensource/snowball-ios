@@ -74,6 +74,8 @@ class TimelineCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
   var delegate: TimelineCollectionViewFlowLayoutDelegate?
 
+  private var updateItems = [UICollectionViewUpdateItem]()
+
   // MARK: Initializers
 
   override init() {
@@ -90,12 +92,19 @@ class TimelineCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
   // MARK: UICollectionViewFlowLayout
 
+  override func prepareForCollectionViewUpdates(updateItems: [UICollectionViewUpdateItem]) {
+    super.prepareForCollectionViewUpdates(updateItems)
+
+    self.updateItems = updateItems
+  }
+
   override func finalizeCollectionViewUpdates() {
     super.finalizeCollectionViewUpdates()
-    delegate?.timelineCollectionViewFlowLayoutWillFinalizeCollectionViewUpdates(self)
+    delegate?.timelineCollectionViewFlowLayout(self, willFinalizeCollectionViewUpdates: updateItems)
+    updateItems.removeAll()
   }
 }
 
 protocol TimelineCollectionViewFlowLayoutDelegate {
-  func timelineCollectionViewFlowLayoutWillFinalizeCollectionViewUpdates(layout: TimelineCollectionViewFlowLayout)
+  func timelineCollectionViewFlowLayout(layout: TimelineCollectionViewFlowLayout, willFinalizeCollectionViewUpdates updates: [UICollectionViewUpdateItem])
 }

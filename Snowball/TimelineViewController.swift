@@ -24,7 +24,6 @@ class TimelineViewController: UIViewController {
   let timelineCollectionView = TimelineCollectionView()
   let fetchedResultsController: FetchedResultsController<Clip>
   var collectionViewUpdates = [NSBlockOperation]()
-  var shouldOverrideScrollPosition = true
 
   // MARK: TimelineViewControllerState
   enum TimelineViewControllerState {
@@ -135,7 +134,9 @@ class TimelineViewController: UIViewController {
   // MARK: Internal
 
   func refresh() {
-    timeline.requestRefreshOfClips()
+    timeline.requestRefreshOfClips {
+      self.scrollToPriorityClipAnimated(true)
+    }
   }
 
   func clipForCell(cell: ClipCollectionViewCell) -> Clip? {
@@ -145,12 +146,6 @@ class TimelineViewController: UIViewController {
     return nil
   }
 
-  func performWithoutScrollOverride(closure: () -> Void) {
-    shouldOverrideScrollPosition = false
-    closure()
-    shouldOverrideScrollPosition = true
-  }
-
   // MARK: Private
 
   private func cellForClip(clip: Clip) -> ClipCollectionViewCell? {
@@ -158,6 +153,14 @@ class TimelineViewController: UIViewController {
       return timelineCollectionView.cellForItemAtIndexPath(indexPath) as? ClipCollectionViewCell
     }
     return nil
+  }
+
+  private func scrollToPriorityClipAnimated(animated: Bool) {
+    if let clipNeedingAttenion = self.timeline.clipsNeedingAttention.last {
+      self.scrollToCellForClip(clipNeedingAttenion, animated: animated)
+    } else if let bookmarkedClip = self.timeline.bookmarkedClip {
+      self.scrollToCellForClip(bookmarkedClip, animated: animated)
+    }
   }
 
   private func scrollToCellForClip(clip: Clip, animated: Bool) {
@@ -505,26 +508,34 @@ extension TimelineViewController: TimelineCollectionViewDelegate {
 
 // MARK: - TimelineCollectionViewFlowLayoutDelegate
 extension TimelineViewController: TimelineCollectionViewFlowLayoutDelegate {
-  func timelineCollectionViewFlowLayoutWillFinalizeCollectionViewUpdates(layout: TimelineCollectionViewFlowLayout) {
-    if shouldOverrideScrollPosition {
-      if let clipNeedingAttention = timeline.clipsNeedingAttention.last {
-        scrollToCellForClip(clipNeedingAttention, animated: false)
-      } else {
-        if timeline.currentPage == 1 {
-          if let bookmarkedClip = timeline.bookmarkedClip {
-            scrollToCellForClip(bookmarkedClip, animated: false)
-          }
-        } else {
-          // Calculate offset...
-          let contentSizeBeforeAnimation = timelineCollectionView.contentSize
-          let contentSizeAfterAnimation = layout.collectionViewContentSize()
-          let xOffset = contentSizeAfterAnimation.width - contentSizeBeforeAnimation.width
-          if xOffset < 0 {
-            timelineCollectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-          } else {
-            timelineCollectionView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: false)
-          }
+  func timelineCollectionViewFlowLayout(layout: TimelineCollectionViewFlowLayout, willFinalizeCollectionViewUpdates updates: [UICollectionViewUpdateItem]) {
+
+    // Only reloads of cells, no insert/delete here
+    // There are no updates here since we're not calling "reloadItemAtIndexPath" when the FRC updates
+    if updates.count == 0 { return }
+
+    // Handle clips that are pending acceptance
+    if updates.count == 1 {
+      if let update = updates.first where update.updateAction == .Insert {
+        let clip = timeline.clips[update.indexPathAfterUpdate!.row]
+        if clip.state == .PendingAcceptance {
+          scrollToCellForClip(clip, animated: false)
+          return
         }
+      } else {
+        return
+      }
+    }
+
+    if timeline.currentPage > 1 {
+      // Loading another page
+      let contentSizeBeforeAnimation = timelineCollectionView.contentSize
+      let contentSizeAfterAnimation = layout.collectionViewContentSize()
+      let xOffset = contentSizeAfterAnimation.width - contentSizeBeforeAnimation.width
+      if xOffset < 0 {
+        timelineCollectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+      } else {
+        timelineCollectionView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: false)
       }
     }
   }
