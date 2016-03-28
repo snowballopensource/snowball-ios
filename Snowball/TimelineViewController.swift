@@ -58,7 +58,7 @@ class TimelineViewController: UIViewController {
     let collectionViewLayout = timelineCollectionView.collectionViewLayout as! TimelineCollectionViewFlowLayout
     collectionViewLayout.delegate = self
 
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillEnterForeground", name: UIApplicationWillEnterForegroundNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimelineViewController.applicationWillEnterForeground), name: UIApplicationWillEnterForegroundNotification, object: nil)
   }
 
   required init?(coder: NSCoder) {
@@ -77,9 +77,9 @@ class TimelineViewController: UIViewController {
     view.backgroundColor = UIColor.whiteColor()
 
     if navigationController?.viewControllers.first == self {
-      navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-friends"), style: .Plain, target: self, action: "leftBarButtonItemPressed")
+      navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-friends"), style: .Plain, target: self, action: #selector(TimelineViewController.leftBarButtonItemPressed))
     } else {
-      navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-back"), style: .Plain, target: self, action: "backBarButtonItemPressed")
+      navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-back"), style: .Plain, target: self, action: #selector(TimelineViewController.backBarButtonItemPressed))
     }
 
     view.addSubview(playerView)

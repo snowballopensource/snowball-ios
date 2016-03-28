@@ -44,7 +44,7 @@ class SegmentedControl: UIControl {
     super.init(frame: CGRectZero)
 
     var previousLabel: UIView? = nil
-    for var i = 0; i < labels.count; i++ {
+    for i in 0 ..< labels.count {
       let label = labels[i]
       let underline = underlines[i]
       addSubview(label)
@@ -87,7 +87,7 @@ class SegmentedControl: UIControl {
 
     let touchPoint = touch.locationInView(self)
 
-    for var i = 0; i < labels.count; i++ {
+    for i in 0 ..< labels.count {
       let label = labels[i]
       if label.frame.contains(touchPoint) && selectedIndex != i {
         selectedIndex = i
@@ -100,7 +100,7 @@ class SegmentedControl: UIControl {
   // MARK: Private
 
   private func highlightIndex(index: Int) {
-    for var i = 0; i < labels.count; i++ {
+    for i in 0 ..< labels.count {
       let label = labels[i]
       let underline = underlines[i]
       if index == i {

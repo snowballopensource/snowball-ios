@@ -56,7 +56,7 @@ class FindFriendsViewController: UIViewController {
     view.backgroundColor = UIColor.whiteColor()
 
     title = NSLocalizedString("Find friends", comment: "")
-    navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-back-black"), style: .Plain, target: self, action: "leftBarButtonItemPressed")
+    navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-back-black"), style: .Plain, target: self, action: #selector(FindFriendsViewController.leftBarButtonItemPressed))
 
     view.addSubview(searchTextFieldContainer)
     constrain(searchTextFieldContainer) { searchTextFieldContainer in
@@ -74,7 +74,7 @@ class FindFriendsViewController: UIViewController {
       segmentedControl.right == segmentedControl.superview!.right - 17
       segmentedControl.height == 35
     }
-    segmentedControl.addTarget(self, action: "segmentedControlValueChanged", forControlEvents: .ValueChanged)
+    segmentedControl.addTarget(self, action: #selector(FindFriendsViewController.segmentedControlValueChanged), forControlEvents: .ValueChanged)
 
     view.addSubview(tableView)
     constrain(tableView) { tableView in
@@ -149,7 +149,7 @@ class FindFriendsViewController: UIViewController {
         let contacts = ABAddressBookCopyArrayOfAllPeople(self.addressBook).takeRetainedValue() as NSArray
         for contact in contacts {
           let phoneNumberProperty: AnyObject = ABRecordCopyValue(contact, kABPersonPhoneProperty).takeRetainedValue()
-          for var i = 0; i < ABMultiValueGetCount(phoneNumberProperty); i++ {
+          for i in 0 ..< ABMultiValueGetCount(phoneNumberProperty) {
             let phoneNumber = ABMultiValueCopyValueAtIndex(phoneNumberProperty, i).takeRetainedValue() as! String
             phoneNumbers.append(phoneNumber)
           }

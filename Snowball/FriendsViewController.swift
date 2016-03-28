@@ -33,8 +33,8 @@ class FriendsViewController: UIViewController {
     super.viewDidLoad()
 
     title = NSLocalizedString("Friends", comment: "")
-    navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-camera-outline"), style: .Plain, target: self, action: "leftBarButtonItemPressed")
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-search"), style: .Plain, target: self, action: "rightBarButtonItemPressed")
+    navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-camera-outline"), style: .Plain, target: self, action: #selector(FriendsViewController.leftBarButtonItemPressed))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-search"), style: .Plain, target: self, action: #selector(FriendsViewController.rightBarButtonItemPressed))
 
     view.addSubview(segmentedControl)
     constrain(segmentedControl) { segmentedControl in
@@ -43,7 +43,7 @@ class FriendsViewController: UIViewController {
       segmentedControl.right == segmentedControl.superview!.right - 17
       segmentedControl.height == 35
     }
-    segmentedControl.addTarget(self, action: "segmentedControlValueChanged", forControlEvents: .ValueChanged)
+    segmentedControl.addTarget(self, action: #selector(FriendsViewController.segmentedControlValueChanged), forControlEvents: .ValueChanged)
 
     view.addSubview(tableView)
     constrain(tableView, segmentedControl) { tableView, segmentedControl in

@@ -139,7 +139,7 @@ class CameraViewController: UIViewController {
 
     let recordingGestureRecognizer = UILongPressGestureRecognizer()
     recordingGestureRecognizer.minimumPressDuration = 0.2
-    recordingGestureRecognizer.addTarget(self, action: "toggleRecording:")
+    recordingGestureRecognizer.addTarget(self, action: #selector(CameraViewController.toggleRecording(_:)))
     cameraView.addGestureRecognizer(recordingGestureRecognizer)
 
     playerView.player = SingleItemLoopingPlayer()
@@ -152,7 +152,7 @@ class CameraViewController: UIViewController {
       playerView.bottom == playerView.superview!.bottom
     }
 
-    cancelPreviewButton.addTarget(self, action: "cancelPreview", forControlEvents: UIControlEvents.TouchUpInside)
+    cancelPreviewButton.addTarget(self, action: #selector(CameraViewController.cancelPreview), forControlEvents: UIControlEvents.TouchUpInside)
     playerView.addSubview(cancelPreviewButton)
     constrain(cancelPreviewButton) { (cancelPreviewButton) in
       cancelPreviewButton.left == cancelPreviewButton.superview!.left
@@ -306,7 +306,7 @@ class CameraViewController: UIViewController {
   private func beginProgressViewAnimation() {
     progressView.progress = 0
     let timeInterval = 1.0/30.0 // 30 FPS
-    progressViewTimer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: "progressViewTimerDidFire:", userInfo: timeInterval, repeats: true)
+    progressViewTimer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: #selector(CameraViewController.progressViewTimerDidFire(_:)), userInfo: timeInterval, repeats: true)
   }
 
   private func endProgressViewAnimation() {

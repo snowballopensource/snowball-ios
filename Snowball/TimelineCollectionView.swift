@@ -36,10 +36,10 @@ class TimelineCollectionView: UICollectionView {
     registerClass(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell))
 
     addGestureRecognizer(leftSwipeGestureRecognizer)
-    leftSwipeGestureRecognizer.addTarget(self, action: "leftSwipeGestureRecognizerSwiped")
+    leftSwipeGestureRecognizer.addTarget(self, action: #selector(TimelineCollectionView.leftSwipeGestureRecognizerSwiped))
 
     addGestureRecognizer(rightSwipeGestureRecognizer)
-    rightSwipeGestureRecognizer.addTarget(self, action: "rightSwipeGestureRecognizerSwiped")
+    rightSwipeGestureRecognizer.addTarget(self, action: #selector(TimelineCollectionView.rightSwipeGestureRecognizerSwiped))
   }
 
   required init?(coder: NSCoder) {

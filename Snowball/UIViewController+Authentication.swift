@@ -90,7 +90,7 @@ private class AuthenticationPresentationController: UIPresentationController {
       cancelButton.width == 44
       cancelButton.height == 44
     }
-    cancelButton.addTarget(self, action: "cancelButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+    cancelButton.addTarget(self, action: #selector(AuthenticationPresentationController.cancelButtonPressed), forControlEvents: UIControlEvents.TouchUpInside)
   }
 
   override func presentationTransitionWillBegin() {

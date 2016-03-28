@@ -90,7 +90,7 @@ class SignInViewController: UIViewController {
       submitButton.right == passwordTextFieldContainer.right
       submitButton.height == SnowballActionButton.defaultHeight
     }
-    submitButton.addTarget(self, action: "submitButtonPressed", forControlEvents: .TouchUpInside)
+    submitButton.addTarget(self, action: #selector(SignInViewController.submitButtonPressed), forControlEvents: .TouchUpInside)
   }
 
   // MARK: Actions

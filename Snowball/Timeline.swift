@@ -103,7 +103,7 @@ class Timeline {
   }
 
   func requestNextPageOfClips(completion: (() -> Void)?) {
-    currentPage++
+    currentPage += 1
     requestClipsOnCurrentPage(completion)
   }
 

@@ -65,7 +65,7 @@ class UserTableViewCell: UITableViewCell {
     usernameLabel.textColor = user.color
 
     followButton.configureForUser(user)
-    followButton.addTarget(self, action: "followButtonTapped", forControlEvents: .TouchUpInside)
+    followButton.addTarget(self, action: #selector(UserTableViewCell.followButtonTapped), forControlEvents: .TouchUpInside)
   }
 
   // MARK: Actions

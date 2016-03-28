@@ -120,7 +120,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
       thumbnailImageView.height == thumbnailImageView.width
     }
     addGestureRecognizer(longPressGestureRecognizer)
-    longPressGestureRecognizer.addTarget(self, action: "longPressGestureRecognizerTriggered")
+    longPressGestureRecognizer.addTarget(self, action: #selector(ClipCollectionViewCell.longPressGestureRecognizerTriggered))
 
     addSubview(playImageView)
     constrain(playImageView, thumbnailImageView) { playImageView, thumbnailImageView in
@@ -145,7 +145,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
       playButton.right == thumbnailImageView.right
       playButton.height == thumbnailImageView.height
     }
-    playButton.addTarget(self, action: "playButtonTapped", forControlEvents: .TouchUpInside)
+    playButton.addTarget(self, action: #selector(ClipCollectionViewCell.playButtonTapped), forControlEvents: .TouchUpInside)
 
     addSubview(addButton)
     constrain(addButton, thumbnailImageView) { addButton, thumbnailImageView in
@@ -154,7 +154,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
       addButton.right == thumbnailImageView.right
       addButton.bottom == thumbnailImageView.bottom
     }
-    addButton.addTarget(self, action: "addButtonTapped", forControlEvents: .TouchUpInside)
+    addButton.addTarget(self, action: #selector(ClipCollectionViewCell.addButtonTapped), forControlEvents: .TouchUpInside)
 
     addSubview(retryUploadButton)
     constrain(retryUploadButton, thumbnailImageView) { retryUploadButton, thumbnailImageView in
@@ -163,7 +163,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
       retryUploadButton.right == thumbnailImageView.right
       retryUploadButton.bottom == thumbnailImageView.bottom
     }
-    retryUploadButton.addTarget(self, action: "retryUploadButtonTapped", forControlEvents: .TouchUpInside)
+    retryUploadButton.addTarget(self, action: #selector(ClipCollectionViewCell.retryUploadButtonTapped), forControlEvents: .TouchUpInside)
 
     addSubview(optionsView)
     constrain(optionsView, thumbnailImageView) { optionsView, thumbnailImageView in
@@ -196,7 +196,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
       optionsButton.right == optionsButton.superview!.right
       optionsButton.bottom == optionsButton.superview!.bottom
     }
-    optionsButton.addTarget(self, action: "optionsButtonTapped", forControlEvents: .TouchUpInside)
+    optionsButton.addTarget(self, action: #selector(ClipCollectionViewCell.optionsButtonTapped), forControlEvents: .TouchUpInside)
 
     let userAvatarImageViewWidthHeight: CGFloat = 40
     addSubview(userAvatarImageView)
@@ -214,7 +214,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
       profileButton.right == userAvatarImageView.right
       profileButton.height == userAvatarImageView.height
     }
-    profileButton.addTarget(self, action: "profileButtonTapped", forControlEvents: .TouchUpInside)
+    profileButton.addTarget(self, action: #selector(ClipCollectionViewCell.profileButtonTapped), forControlEvents: .TouchUpInside)
 
     addSubview(usernameLabel)
     constrain(usernameLabel, thumbnailImageView, userAvatarImageView) { usernameLabel, thumbnailImageView, userAvatarImageView in
@@ -237,7 +237,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
       likeButton.width == 35
       likeButton.height == 30
     }
-    likeButton.addTarget(self, action: "likeButtonTapped", forControlEvents: .TouchUpInside)
+    likeButton.addTarget(self, action: #selector(ClipCollectionViewCell.likeButtonTapped), forControlEvents: .TouchUpInside)
 
     addSubview(dimOverlayView)
     constrain(dimOverlayView) { dimOverlayView in
