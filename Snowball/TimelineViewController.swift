@@ -375,19 +375,7 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
 
   func clipCollectionViewCellLongPressTriggered(cell: ClipCollectionViewCell) {
     cell.setState(.Options, animated: true)
-  }
-
-  func clipCollectionViewCellOptionsButtonTapped(cell: ClipCollectionViewCell) {
     guard let clip = clipForCell(cell), let user = clip.user else { return }
-    guard let clipID = clip.id else {
-      // Clip does not have an ID but user wants to delete it
-      if user == User.currentUser {
-        Database.performTransaction {
-          Database.delete(clip)
-        }
-      }
-      return
-    }
     authenticateUser(
       afterSuccessfulAuthentication: {
         self.refresh()
@@ -397,6 +385,15 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
 
         let confirmed: UIAlertAction -> Void = { action in
           if isCurrentUser {
+            guard let clipID = clip.id else {
+              // Clip does not have an ID but user wants to delete it
+              if user == User.currentUser {
+                Database.performTransaction {
+                  Database.delete(clip)
+                }
+              }
+              return
+            }
             SwiftSpinner.show(NSLocalizedString("Deleting...", comment: ""))
             SnowballAPI.request(SnowballRoute.DeleteClip(clipID: clipID)) { response in
               SwiftSpinner.hide()
@@ -410,6 +407,7 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
               }
             }
           } else {
+            guard let clipID = clip.id else { return }
             SwiftSpinner.show(NSLocalizedString("Flagging...", comment: ""))
             SnowballAPI.request(SnowballRoute.FlagClip(clipID: clipID)) { response in
               SwiftSpinner.hide()
@@ -426,23 +424,17 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
           self.resetStateForCell(cell)
         }
 
-        var alertTitle: String
-        var alertMessage: String
         var alertConfirmAction: UIAlertAction
         var alertCancelAction: UIAlertAction
         if isCurrentUser {
-          alertTitle = NSLocalizedString("Delete this clip?", comment: "")
-          alertMessage = NSLocalizedString("Are you sure you want to delete this clip?", comment: "")
           alertConfirmAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .Destructive, handler: confirmed)
           alertCancelAction = UIAlertAction(title: NSLocalizedString("Don't Delete", comment: ""), style: .Cancel, handler: cancelled)
         } else {
-          alertTitle = NSLocalizedString("Flag this clip?", comment: "")
-          alertMessage = NSLocalizedString("Are you sure you want to flag this clip?", comment: "")
           alertConfirmAction = UIAlertAction(title: NSLocalizedString("Flag", comment: ""), style: .Destructive, handler: confirmed)
           alertCancelAction = UIAlertAction(title: NSLocalizedString("Don't Flag", comment: ""), style: .Cancel, handler: cancelled)
         }
 
-        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .ActionSheet)
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         alert.addAction(alertConfirmAction)
         alert.addAction(alertCancelAction)
         self.presentViewController(alert, animated: true, completion: nil)

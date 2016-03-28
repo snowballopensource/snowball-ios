@@ -54,7 +54,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   let optionsView: UIView = {
     let view = UIView()
-    view.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+    view.backgroundColor = UIColor.redColor().colorWithAlphaComponent(0.5)
     return view
   }()
   let deleteImageView: UIImageView = {
@@ -67,7 +67,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
     imageView.contentMode = .Center
     return imageView
   }()
-  let optionsButton = UIButton()
 
   let userAvatarImageView = UserAvatarImageView()
   private let userAvatarImageViewBounceConstraintGroup = ConstraintGroup()
@@ -188,15 +187,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
       flagImageView.right == flagImageView.superview!.right
       flagImageView.bottom == flagImageView.superview!.bottom
     }
-
-    optionsView.addSubview(optionsButton)
-    constrain(optionsButton) { optionsButton in
-      optionsButton.left == optionsButton.superview!.left
-      optionsButton.top == optionsButton.superview!.top
-      optionsButton.right == optionsButton.superview!.right
-      optionsButton.bottom == optionsButton.superview!.bottom
-    }
-    optionsButton.addTarget(self, action: #selector(ClipCollectionViewCell.optionsButtonTapped), forControlEvents: .TouchUpInside)
 
     let userAvatarImageViewWidthHeight: CGFloat = 40
     addSubview(userAvatarImageView)
@@ -336,10 +326,6 @@ class ClipCollectionViewCell: UICollectionViewCell {
     delegate?.clipCollectionViewCellLongPressTriggered(self)
   }
 
-  @objc private func optionsButtonTapped() {
-    delegate?.clipCollectionViewCellOptionsButtonTapped(self)
-  }
-
   @objc private func likeButtonTapped() {
     delegate?.clipCollectionViewCellLikeButtonTapped(self)
   }
@@ -466,7 +452,6 @@ protocol ClipCollectionViewCellDelegate {
   func clipCollectionViewCellRetryUploadButtonTapped(cell: ClipCollectionViewCell)
   func clipCollectionViewCellProfileButtonTapped(cell: ClipCollectionViewCell)
   func clipCollectionViewCellLongPressTriggered(cell: ClipCollectionViewCell)
-  func clipCollectionViewCellOptionsButtonTapped(cell: ClipCollectionViewCell)
   func clipCollectionViewCellLikeButtonTapped(cell: ClipCollectionViewCell)
 }
 
