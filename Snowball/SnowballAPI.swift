@@ -121,6 +121,43 @@ struct SnowballAPI {
     }
   }
 
+  static func uploadUserAvatar(image: UIImage, completion: (response: ObjectResponse<User>) -> Void) {
+    let onFailure: (response: Alamofire.Response<AnyObject, NSError>?) -> Void = { response in
+      if let response = response {
+        completion(response: .Failure(errorFromResponse(response)))
+      } else {
+        completion(response: .Failure(NSError.snowballErrorWithReason(nil)))
+      }
+    }
+    let multipartFormData: (MultipartFormData -> Void) = { multipartFormData in
+      if let data = UIImagePNGRepresentation(image) {
+        multipartFormData.appendBodyPart(data: data, name: "avatar", fileName: "image.png", mimeType: "image/png")
+      } else {
+        onFailure(response: nil)
+        return
+      }
+    }
+    Alamofire.upload(SnowballRoute.UploadCurrentUserAvatar, multipartFormData: multipartFormData) { encodingResult in
+      switch encodingResult {
+      case .Success(let upload, _, _):
+        upload.responseJSON { afResponse in
+          switch afResponse.result {
+          case .Success(let value):
+            if let JSON = value as? JSONObject, let user = User.currentUser {
+              Database.performTransaction {
+                user.importJSON(JSON)
+                Database.save(user)
+              }
+              completion(response: .Success(user))
+            } else { onFailure(response: afResponse) }
+          case .Failure: onFailure(response: afResponse)
+          }
+        }
+      case .Failure: onFailure(response: nil)
+      }
+    }
+  }
+
   // MARK: Private
 
   private static func errorFromResponse(response: Alamofire.Response<AnyObject, NSError>) -> NSError {

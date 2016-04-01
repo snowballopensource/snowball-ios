@@ -34,6 +34,7 @@
 		BA73BCD21C1A759100B22588 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCD11C1A759100B22588 /* TimelineViewController.swift */; };
 		BA73BCD41C1A766100B22588 /* TimelineCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCD31C1A766100B22588 /* TimelineCollectionView.swift */; };
 		BA73BCE91C1AB84F00B22588 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA73BCE81C1AB84F00B22588 /* Clip.swift */; };
+		BA81B9ED1CAE127D0074ECED /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA81B9EC1CAE127D0074ECED /* EditProfileViewController.swift */; };
 		BA89E7181C7F8AA4001AFD23 /* UIViewController+Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA89E7171C7F8AA4001AFD23 /* UIViewController+Authentication.swift */; };
 		BA89E71A1C7F8B3B001AFD23 /* AuthenticationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA89E7191C7F8B3B001AFD23 /* AuthenticationNavigationController.swift */; };
 		BA89E71C1C7F8DBB001AFD23 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA89E71B1C7F8DBB001AFD23 /* SignInViewController.swift */; };
@@ -94,6 +95,7 @@
 		BA73BCD11C1A759100B22588 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 		BA73BCD31C1A766100B22588 /* TimelineCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineCollectionView.swift; sourceTree = "<group>"; };
 		BA73BCE81C1AB84F00B22588 /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
+		BA81B9EC1CAE127D0074ECED /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		BA89E7171C7F8AA4001AFD23 /* UIViewController+Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Authentication.swift"; sourceTree = "<group>"; };
 		BA89E7191C7F8B3B001AFD23 /* AuthenticationNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationNavigationController.swift; sourceTree = "<group>"; };
 		BA89E71B1C7F8DBB001AFD23 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				BA6BE0811C9E0B46008B60EB /* FindFriendsViewController.swift */,
 				BA67BDCF1C6413D900720090 /* CameraViewController.swift */,
 				BA89E71B1C7F8DBB001AFD23 /* SignInViewController.swift */,
+				BA81B9EC1CAE127D0074ECED /* EditProfileViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 				BAB280721C35AD8200AE098D /* UIImageView+Cache.swift in Sources */,
 				BA1420DC1C73EDE2007F50B9 /* NSDate+TimeSince.swift in Sources */,
 				BAD774FF1C1DE18E00ED1A64 /* User.swift in Sources */,
+				BA81B9ED1CAE127D0074ECED /* EditProfileViewController.swift in Sources */,
 				BA89E71A1C7F8B3B001AFD23 /* AuthenticationNavigationController.swift in Sources */,
 				BAB280741C35AEE800AE098D /* Util.swift in Sources */,
 				BAD677AE1C5ADD5900B41507 /* UIScrollView+PullToLoad.swift in Sources */,

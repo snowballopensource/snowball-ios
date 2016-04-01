@@ -16,6 +16,7 @@ enum SnowballRoute: URLRequestConvertible {
   // User
   case GetCurrentUser
   case UpdateCurrentUser(username: String?, email: String?, phoneNumber: String?)
+  case UploadCurrentUserAvatar
   case GetCurrentUserFollowers
   case GetCurrentUserFollowing
   case FollowUser(userID: String)
@@ -46,6 +47,7 @@ enum SnowballRoute: URLRequestConvertible {
     case .SignIn: return .POST
     case .GetCurrentUser: return .GET
     case .UpdateCurrentUser: return .PATCH
+    case .UploadCurrentUserAvatar: return .PATCH
     case .GetCurrentUserFollowers: return .GET
     case .GetCurrentUserFollowing: return .GET
     case .FollowUser: return .POST
@@ -70,6 +72,7 @@ enum SnowballRoute: URLRequestConvertible {
     case .SignIn: return "users/sign-in"
     case .GetCurrentUser: return "users/me"
     case .UpdateCurrentUser: return "users/me"
+    case .UploadCurrentUserAvatar: return "/users/me"
     case .GetCurrentUserFollowers: return "users/me/followers"
     case .GetCurrentUserFollowing: return "users/me/following"
     case .FollowUser(let userID): return "users/\(userID)/follow"

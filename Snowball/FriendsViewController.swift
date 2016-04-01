@@ -14,20 +14,11 @@ class FriendsViewController: UIViewController {
 
   // MARK: Properties
 
-  let userAvatarImageView: UserAvatarImageView = {
-    let imageView = UserAvatarImageView()
-    if let user = User.currentUser {
-      imageView.setUser(user)
-    }
-    return imageView
-  }()
+  let userAvatarImageView = UserAvatarImageView()
   let usernameLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.SnowballFont.mediumFont.fontWithSize(20)
     label.textAlignment = .Center
-    if let user = User.currentUser {
-      label.text = user.username
-    }
     return label
   }()
   let editProfileButton: UIButton = {
@@ -102,7 +93,14 @@ class FriendsViewController: UIViewController {
 
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
+
     refresh()
+
+    if let user = User.currentUser {
+      // Handle coming back from EditProfile VC
+      userAvatarImageView.setUser(user)
+      usernameLabel.text = user.username
+    }
   }
 
   // MARK: Private
@@ -142,8 +140,7 @@ class FriendsViewController: UIViewController {
   }
 
   @objc private func editProfileButtonPressed() {
-    // TODO: Change this.
-    navigationController?.pushViewController(FindFriendsViewController(), animated: true)
+    navigationController?.pushViewController(EditProfileViewController(), animated: true)
   }
 }
 
