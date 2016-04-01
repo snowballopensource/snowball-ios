@@ -28,6 +28,9 @@ class UserTableViewCell: UITableViewCell {
 
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+    selectionStyle = .None
+
     addSubview(userAvatarImageView)
     constrain(userAvatarImageView) { userAvatarImageView in
       userAvatarImageView.left == userAvatarImageView.superview!.left + 20

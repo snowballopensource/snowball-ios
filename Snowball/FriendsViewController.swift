@@ -88,6 +88,7 @@ class FriendsViewController: UIViewController {
       tableView.right == tableView.superview!.right
     }
     tableView.dataSource = self
+    tableView.delegate = self
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -165,6 +166,14 @@ extension FriendsViewController: UITableViewDataSource {
     cell.configureForUser(user)
     cell.delegate = self
     return cell
+  }
+}
+
+// MARK: - UITableViewDelegate
+extension FriendsViewController: UITableViewDelegate {
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    let user = users[indexPath.row]
+    navigationController?.pushViewController(UserTimelineViewController(user: user), animated: true)
   }
 }
 
