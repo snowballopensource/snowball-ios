@@ -14,6 +14,22 @@ class FriendsViewController: UIViewController {
 
   // MARK: Properties
 
+  let userAvatarImageView: UserAvatarImageView = {
+    let imageView = UserAvatarImageView()
+    if let user = User.currentUser {
+      imageView.setUser(user)
+    }
+    return imageView
+  }()
+  let usernameLabel: UILabel = {
+    let label = UILabel()
+    label.font = UIFont.SnowballFont.mediumFont.fontWithSize(20)
+    label.textAlignment = .Center
+    if let user = User.currentUser {
+      label.text = user.username
+    }
+    return label
+  }()
   let segmentedControl: SegmentedControl = {
     let titles = [NSLocalizedString("Following", comment: ""), NSLocalizedString("Followers", comment: "")]
     let segmentedControl = SegmentedControl(titles: titles)
@@ -32,13 +48,27 @@ class FriendsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    title = NSLocalizedString("Friends", comment: "")
     navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-camera-outline"), style: .Plain, target: self, action: #selector(FriendsViewController.leftBarButtonItemPressed))
     navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-search"), style: .Plain, target: self, action: #selector(FriendsViewController.rightBarButtonItemPressed))
 
+    view.addSubview(userAvatarImageView)
+    constrain(userAvatarImageView) { userAvatarImageView in
+      userAvatarImageView.top == userAvatarImageView.superview!.top + navigationBarOffset / 2
+      userAvatarImageView.centerX == userAvatarImageView.superview!.centerX
+      userAvatarImageView.height == 100
+      userAvatarImageView.width == 100
+    }
+
+    view.addSubview(usernameLabel)
+    constrain(usernameLabel, userAvatarImageView) { usernameLabel, userAvatarImageView in
+      usernameLabel.top == userAvatarImageView.bottom + 15
+      usernameLabel.left == usernameLabel.superview!.left
+      usernameLabel.right == usernameLabel.superview!.right
+    }
+
     view.addSubview(segmentedControl)
-    constrain(segmentedControl) { segmentedControl in
-      segmentedControl.top == segmentedControl.superview!.top + navigationBarOffset
+    constrain(segmentedControl, usernameLabel) { segmentedControl, usernameLabel in
+      segmentedControl.top == usernameLabel.bottom + 10
       segmentedControl.left == segmentedControl.superview!.left + 17
       segmentedControl.right == segmentedControl.superview!.right - 17
       segmentedControl.height == 35
