@@ -23,8 +23,7 @@ class FriendsViewController: UIViewController {
   }()
   let editProfileButton: UIButton = {
     let button = UIButton()
-    // TODO: Change this image
-    button.setImage(UIImage(named: "top-search"), forState: .Normal)
+    button.setImage(UIImage(named: "top-settings"), forState: .Normal)
     return button
   }()
   let segmentedControl: SegmentedControl = {
