@@ -15,7 +15,7 @@ struct SnowballAPI {
   // MARK: Internal
 
   static func request(route: SnowballRoute, completion: (response: Response) -> Void) {
-    Alamofire.request(route).responseJSON { afResponse in
+    Alamofire.request(route).validate().responseJSON { afResponse in
       switch afResponse.result {
       case .Success: completion(response: .Success)
       case .Failure: completion(response: .Failure(errorFromResponse(afResponse)))
@@ -55,7 +55,7 @@ struct SnowballAPI {
   }
 
   static func requestObjects<T: Object>(route: SnowballRoute, beforeSaveEveryObject: ((object: T) -> Void)?, completion: (response: ObjectResponse<[T]>) -> Void) {
-    Alamofire.request(route).responseJSON { afResponse in
+    Alamofire.request(route).validate().responseJSON { afResponse in
       switch afResponse.result {
       case .Success(let value):
         if let value = value as? JSONArray {
@@ -102,7 +102,7 @@ struct SnowballAPI {
       Alamofire.upload(SnowballRoute.UploadClip, multipartFormData: multipartFormData) { encodingResult in
         switch(encodingResult) {
         case .Success(let upload, _, _):
-          upload.responseJSON { afResponse in
+          upload.validate().responseJSON { afResponse in
             switch(afResponse.result) {
             case .Success(let value):
               if let JSON = value as? JSONObject {
@@ -140,7 +140,7 @@ struct SnowballAPI {
     Alamofire.upload(SnowballRoute.UploadCurrentUserAvatar, multipartFormData: multipartFormData) { encodingResult in
       switch encodingResult {
       case .Success(let upload, _, _):
-        upload.responseJSON { afResponse in
+        upload.validate().responseJSON { afResponse in
           switch afResponse.result {
           case .Success(let value):
             if let JSON = value as? JSONObject, let user = User.currentUser {
