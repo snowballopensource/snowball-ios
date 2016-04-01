@@ -30,6 +30,12 @@ class FriendsViewController: UIViewController {
     }
     return label
   }()
+  let editProfileButton: UIButton = {
+    let button = UIButton()
+    // TODO: Change this image
+    button.setImage(UIImage(named: "top-search"), forState: .Normal)
+    return button
+  }()
   let segmentedControl: SegmentedControl = {
     let titles = [NSLocalizedString("Following", comment: ""), NSLocalizedString("Followers", comment: "")]
     let segmentedControl = SegmentedControl(titles: titles)
@@ -65,6 +71,15 @@ class FriendsViewController: UIViewController {
       usernameLabel.left == usernameLabel.superview!.left
       usernameLabel.right == usernameLabel.superview!.right
     }
+
+    view.addSubview(editProfileButton)
+    constrain(editProfileButton, usernameLabel) { editProfileButton, usernameLabel in
+      editProfileButton.centerY == usernameLabel.centerY
+      editProfileButton.right == editProfileButton.superview!.right - 5
+      editProfileButton.width == 44
+      editProfileButton.height == 44
+    }
+    editProfileButton.addTarget(self, action: #selector(FriendsViewController.editProfileButtonPressed), forControlEvents: .TouchUpInside)
 
     view.addSubview(segmentedControl)
     constrain(segmentedControl, usernameLabel) { segmentedControl, usernameLabel in
@@ -124,6 +139,11 @@ class FriendsViewController: UIViewController {
 
   @objc private func segmentedControlValueChanged() {
     refresh()
+  }
+
+  @objc private func editProfileButtonPressed() {
+    // TODO: Change this.
+    navigationController?.pushViewController(FindFriendsViewController(), animated: true)
   }
 }
 
