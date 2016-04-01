@@ -110,7 +110,7 @@ class SignInViewController: UIViewController {
         // TODO: Analytics
         // TODO: Push notifications
         self.dismissViewControllerAnimated(true, completion: nil)
-      case .Failure(let error): print(error)
+      case .Failure(let error): error.displayToUserIfAppropriateFromViewController(self)
       }
     }
   }
