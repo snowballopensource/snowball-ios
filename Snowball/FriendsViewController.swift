@@ -94,8 +94,13 @@ class FriendsViewController: UIViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
 
+    reloadUserData()
     refresh()
+  }
 
+  // MARK: Private
+
+  private func reloadUserData() {
     if let user = User.currentUser {
       // Handle coming back from EditProfile VC
       userAvatarImageView.setUser(user)
@@ -103,11 +108,16 @@ class FriendsViewController: UIViewController {
     }
   }
 
-  // MARK: Private
-
   private func refresh() {
     self.users.removeAll()
     self.tableView.reloadData()
+
+    SnowballAPI.requestObject(SnowballRoute.GetCurrentUser) { (response: ObjectResponse<User>) in
+      switch response {
+      case .Success: self.reloadUserData()
+      default: break
+      }
+    }
 
     let route: SnowballRoute
     if segmentedControl.selectedIndex == 0 {
