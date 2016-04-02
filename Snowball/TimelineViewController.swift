@@ -241,7 +241,13 @@ class TimelineViewController: UIViewController {
   }
 
   @objc private func leftBarButtonItemPressed() {
-    AppDelegate.sharedInstance.window?.transitionRootViewControllerToViewController(FriendsNavigationController())
+    authenticateUser(
+      afterSuccessfulAuthentication:  {
+        self.refresh()
+      },
+      whenAlreadyAuthenticated: {
+        AppDelegate.sharedInstance.window?.transitionRootViewControllerToViewController(FriendsNavigationController())
+    })
   }
 }
 
@@ -369,8 +375,14 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
   func clipCollectionViewCellRetryUploadButtonTapped(cell: ClipCollectionViewCell) {}
 
   func clipCollectionViewCellProfileButtonTapped(cell: ClipCollectionViewCell) {
-    guard let clip = clipForCell(cell), let user = clip.user else { return }
-    navigationController?.pushViewController(UserTimelineViewController(user: user), animated: true)
+    authenticateUser(
+      afterSuccessfulAuthentication:  {
+        self.refresh()
+      },
+      whenAlreadyAuthenticated: {
+        guard let clip = self.clipForCell(cell), let user = clip.user else { return }
+        self.navigationController?.pushViewController(UserTimelineViewController(user: user), animated: true)
+    })
   }
 
   func clipCollectionViewCellLongPressTriggered(cell: ClipCollectionViewCell) {
