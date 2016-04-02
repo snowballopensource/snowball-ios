@@ -18,7 +18,10 @@ struct SnowballAPI {
     Alamofire.request(route).validate().responseJSON { afResponse in
       switch afResponse.result {
       case .Success: completion(response: .Success)
-      case .Failure: completion(response: .Failure(errorFromResponse(afResponse)))
+        // TODO: Handle errors correctly. This is skipped right now because we're sending a 201 with no body when
+        // a clip is liked, but a 5XX with an error when there is an error, along with JSON.
+        // Unfortunately I can't handle both JSON and no JSON here, so for the time being error handling is disabled.
+      case .Failure: completion(response: .Success)//.Failure(errorFromResponse(afResponse)))
       }
     }
   }
