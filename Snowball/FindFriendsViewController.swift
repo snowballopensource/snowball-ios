@@ -16,7 +16,7 @@ class FindFriendsViewController: UIViewController {
   // MARK: Properties
 
   let segmentedControl: SegmentedControl = {
-    let titles = [NSLocalizedString("Friends of friends", comment: ""), NSLocalizedString("Contacts", comment: "")]
+    let titles = [NSLocalizedString("Contacts", comment: "")]
     let segmentedControl = SegmentedControl(titles: titles)
     return segmentedControl
   }()
@@ -111,7 +111,7 @@ class FindFriendsViewController: UIViewController {
     if let search = search {
       performRequest(SnowballRoute.FindUsersByUsername(username: search))
     } else {
-      if segmentedControl.selectedIndex == 0 {
+      if segmentedControl.selectedIndex == 1 {
         performRequest(SnowballRoute.FindFriendsOfFriends)
       } else {
         getPhoneNumbersFromAddressBook(
