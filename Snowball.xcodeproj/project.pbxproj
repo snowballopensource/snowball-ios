@@ -38,7 +38,7 @@
 		BA81B9ED1CAE127D0074ECED /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA81B9EC1CAE127D0074ECED /* EditProfileViewController.swift */; };
 		BA89E7181C7F8AA4001AFD23 /* UIViewController+Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA89E7171C7F8AA4001AFD23 /* UIViewController+Authentication.swift */; };
 		BA89E71A1C7F8B3B001AFD23 /* AuthenticationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA89E7191C7F8B3B001AFD23 /* AuthenticationNavigationController.swift */; };
-		BA89E71C1C7F8DBB001AFD23 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA89E71B1C7F8DBB001AFD23 /* SignInViewController.swift */; };
+		BA89E71C1C7F8DBB001AFD23 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA89E71B1C7F8DBB001AFD23 /* AuthenticationViewController.swift */; };
 		BA9410A11C1FB33500D366C5 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9410A01C1FB33500D366C5 /* Database.swift */; };
 		BA9808781C3BA01C00F86C04 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9808771C3BA01C00F86C04 /* PlayerView.swift */; };
 		BA98087C1C3BA71D00F86C04 /* TimelinePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA98087B1C3BA71D00F86C04 /* TimelinePlayer.swift */; };
@@ -99,7 +99,7 @@
 		BA81B9EC1CAE127D0074ECED /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		BA89E7171C7F8AA4001AFD23 /* UIViewController+Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Authentication.swift"; sourceTree = "<group>"; };
 		BA89E7191C7F8B3B001AFD23 /* AuthenticationNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationNavigationController.swift; sourceTree = "<group>"; };
-		BA89E71B1C7F8DBB001AFD23 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		BA89E71B1C7F8DBB001AFD23 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		BA9410A01C1FB33500D366C5 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		BA9808771C3BA01C00F86C04 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		BA98087B1C3BA71D00F86C04 /* TimelinePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelinePlayer.swift; sourceTree = "<group>"; };
@@ -218,7 +218,7 @@
 				BA0B87A61C5B298B0094D6D7 /* FriendsViewController.swift */,
 				BA6BE0811C9E0B46008B60EB /* FindFriendsViewController.swift */,
 				BA67BDCF1C6413D900720090 /* CameraViewController.swift */,
-				BA89E71B1C7F8DBB001AFD23 /* SignInViewController.swift */,
+				BA89E71B1C7F8DBB001AFD23 /* AuthenticationViewController.swift */,
 				BA81B9EC1CAE127D0074ECED /* EditProfileViewController.swift */,
 			);
 			name = "View Controllers";
@@ -460,7 +460,7 @@
 				BA0B87A31C5B1ECF0094D6D7 /* FriendsNavigationController.swift in Sources */,
 				BAC8419A1C606CE90076CBEE /* UIViewController+Navigation.swift in Sources */,
 				BA732D811C88FE16007059A8 /* PushNotificationController.swift in Sources */,
-				BA89E71C1C7F8DBB001AFD23 /* SignInViewController.swift in Sources */,
+				BA89E71C1C7F8DBB001AFD23 /* AuthenticationViewController.swift in Sources */,
 				BA67BDD11C6413D900720090 /* CameraView.swift in Sources */,
 				BAC2EF7B1C6C40F60020005C /* RLMObject+JSON.swift in Sources */,
 				BA1881131C3F6D09002202B4 /* LoadPlayerItemOperation.swift in Sources */,

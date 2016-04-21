@@ -1,5 +1,5 @@
 //
-//  SignInViewController.swift
+//  AuthenticationViewController.swift
 //  Snowball
 //
 //  Created by James Martinez on 2/25/16.
@@ -10,7 +10,7 @@ import Cartography
 import Foundation
 import UIKit
 
-class SignInViewController: UIViewController {
+class AuthenticationViewController: UIViewController {
 
   // MARK: Properties
 
@@ -93,7 +93,7 @@ class SignInViewController: UIViewController {
       submitButton.right == passwordTextField.right
       submitButton.height == SnowballActionButton.defaultHeight
     }
-    submitButton.addTarget(self, action: #selector(SignInViewController.submitButtonPressed), forControlEvents: .TouchUpInside)
+    submitButton.addTarget(self, action: #selector(AuthenticationViewController.submitButtonPressed), forControlEvents: .TouchUpInside)
   }
 
   // MARK: Actions
@@ -119,7 +119,7 @@ class SignInViewController: UIViewController {
   }
 }
 
-extension SignInViewController: UITextFieldDelegate {
+extension AuthenticationViewController: UITextFieldDelegate {
   func textFieldShouldReturn(textField: UITextField) -> Bool {
     if textField == emailTextField {
       passwordTextField.becomeFirstResponder()
