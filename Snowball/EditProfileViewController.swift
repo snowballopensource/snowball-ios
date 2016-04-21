@@ -31,43 +31,46 @@ class EditProfileViewController: UIViewController {
     }
     return button
   }()
-  let usernameTextFieldContainer: TextFieldContainerView = {
-    let textFieldContainer = TextFieldContainerView()
-    textFieldContainer.configureText(hint: NSLocalizedString("Username", comment: ""), placeholder: NSLocalizedString("Your username", comment: ""))
-    textFieldContainer.textField.autocapitalizationType = .None
-    textFieldContainer.textField.autocorrectionType = .No
-    textFieldContainer.textField.spellCheckingType = .No
-    textFieldContainer.textField.returnKeyType = .Done
+  let usernameTextField: FormTextField = {
+    let textField = FormTextField()
+    textField.hint = NSLocalizedString("Username", comment: "")
+    textField.placeholder = NSLocalizedString("Your username", comment: "")
+    textField.autocapitalizationType = .None
+    textField.autocorrectionType = .No
+    textField.spellCheckingType = .No
+    textField.returnKeyType = .Done
     if let user = User.currentUser {
-      textFieldContainer.textField.text = user.username
+      textField.text = user.username
     }
-    return textFieldContainer
+    return textField
   }()
-  let emailTextFieldContainer: TextFieldContainerView = {
-    let textFieldContainer = TextFieldContainerView()
-    textFieldContainer.configureText(hint: NSLocalizedString("Email", comment: ""), placeholder: NSLocalizedString("Your email address", comment: ""))
-    textFieldContainer.textField.autocapitalizationType = .None
-    textFieldContainer.textField.autocorrectionType = .No
-    textFieldContainer.textField.spellCheckingType = .No
-    textFieldContainer.textField.keyboardType = .EmailAddress
-    textFieldContainer.textField.returnKeyType = .Done
+  let emailTextField: FormTextField = {
+    let textField = FormTextField()
+    textField.hint = NSLocalizedString("Email", comment: "")
+    textField.placeholder = NSLocalizedString("Your email address", comment: "")
+    textField.autocapitalizationType = .None
+    textField.autocorrectionType = .No
+    textField.spellCheckingType = .No
+    textField.keyboardType = .EmailAddress
+    textField.returnKeyType = .Done
     if let user = User.currentUser {
-      textFieldContainer.textField.text = user.email
+      textField.text = user.email
     }
-    return textFieldContainer
+    return textField
   }()
-  let phoneNumberTextFieldContainer: TextFieldContainerView = {
-    let textFieldContainer = TextFieldContainerView()
-    textFieldContainer.configureText(hint: NSLocalizedString("Phone Number", comment: ""), placeholder: NSLocalizedString("Your phone number", comment: ""))
-    textFieldContainer.textField.autocapitalizationType = .None
-    textFieldContainer.textField.autocorrectionType = .No
-    textFieldContainer.textField.spellCheckingType = .No
-    textFieldContainer.textField.keyboardType = .NumberPad
-    textFieldContainer.textField.returnKeyType = .Done
+  let phoneNumberTextField: FormTextField = {
+    let textField = FormTextField()
+    textField.hint = NSLocalizedString("Phone Number", comment: "")
+    textField.placeholder = NSLocalizedString("Your phone number", comment: "")
+    textField.autocapitalizationType = .None
+    textField.autocorrectionType = .No
+    textField.spellCheckingType = .No
+    textField.keyboardType = .NumberPad
+    textField.returnKeyType = .Done
     if let user = User.currentUser {
-      textFieldContainer.textField.text = user.phoneNumber
+      textField.text = user.phoneNumber
     }
-    return textFieldContainer
+    return textField
   }()
 
   // MARK: UIViewController
@@ -98,34 +101,34 @@ class EditProfileViewController: UIViewController {
     }
     editAvatarButton.addTarget(self, action: #selector(EditProfileViewController.editAvatarButtonPressed), forControlEvents: .TouchUpInside)
 
-    view.addSubview(usernameTextFieldContainer)
-    constrain(usernameTextFieldContainer, editAvatarButton) { usernameTextFieldContainer, editAvatarButton in
-      usernameTextFieldContainer.left == usernameTextFieldContainer.superview!.left + TextFieldContainerView.defaultSideMargin
-      usernameTextFieldContainer.top == editAvatarButton.bottom + 10
-      usernameTextFieldContainer.right == usernameTextFieldContainer.superview!.right - TextFieldContainerView.defaultSideMargin
-      usernameTextFieldContainer.height == TextFieldContainerView.defaultHeight
+    view.addSubview(usernameTextField)
+    constrain(usernameTextField, editAvatarButton) { usernameTextField, editAvatarButton in
+      usernameTextField.left == usernameTextField.superview!.left + FormTextField.defaultSideMargin
+      usernameTextField.top == editAvatarButton.bottom + 10
+      usernameTextField.right == usernameTextField.superview!.right - FormTextField.defaultSideMargin
+      usernameTextField.height == FormTextField.defaultHeight
     }
-    usernameTextFieldContainer.textField.delegate = self
+    usernameTextField.delegate = self
 
-    view.addSubview(emailTextFieldContainer)
-    constrain(emailTextFieldContainer, usernameTextFieldContainer) { emailTextFieldContainer, usernameTextFieldContainer in
-      emailTextFieldContainer.left == usernameTextFieldContainer.left
-      emailTextFieldContainer.top == usernameTextFieldContainer.bottom + TextFieldContainerView.defaultSpaceBetween
-      emailTextFieldContainer.right == usernameTextFieldContainer.right
-      emailTextFieldContainer.height == usernameTextFieldContainer.height
+    view.addSubview(emailTextField)
+    constrain(emailTextField, usernameTextField) { emailTextField, usernameTextField in
+      emailTextField.left == usernameTextField.left
+      emailTextField.top == usernameTextField.bottom + FormTextField.defaultSpaceBetween
+      emailTextField.right == usernameTextField.right
+      emailTextField.height == usernameTextField.height
     }
-    emailTextFieldContainer.textField.delegate = self
-    emailTextFieldContainer.linkSizingWithTextFieldContainerView(usernameTextFieldContainer)
+    emailTextField.delegate = self
 
-    view.addSubview(phoneNumberTextFieldContainer)
-    constrain(phoneNumberTextFieldContainer, emailTextFieldContainer) { phoneNumberTextFieldContainer, emailTextFieldContainer in
-      phoneNumberTextFieldContainer.left == emailTextFieldContainer.left
-      phoneNumberTextFieldContainer.top == emailTextFieldContainer.bottom + TextFieldContainerView.defaultSpaceBetween
-      phoneNumberTextFieldContainer.right == emailTextFieldContainer.right
-      phoneNumberTextFieldContainer.height == emailTextFieldContainer.height
+    view.addSubview(phoneNumberTextField)
+    constrain(phoneNumberTextField, emailTextField) { phoneNumberTextField, emailTextField in
+      phoneNumberTextField.left == emailTextField.left
+      phoneNumberTextField.top == emailTextField.bottom + FormTextField.defaultSpaceBetween
+      phoneNumberTextField.right == emailTextField.right
+      phoneNumberTextField.height == emailTextField.height
     }
-    phoneNumberTextFieldContainer.textField.delegate = self
-    phoneNumberTextFieldContainer.linkSizingWithTextFieldContainerView(emailTextFieldContainer)
+    phoneNumberTextField.delegate = self
+
+    FormTextField.linkFormTextFieldsHintSizing([usernameTextField, emailTextField, phoneNumberTextField])
   }
 
   // MARK: Private
@@ -140,25 +143,25 @@ class EditProfileViewController: UIViewController {
     var hasChanges = false
 
     var newUsername: String?
-    if let text = usernameTextFieldContainer.textField.text {
+    if let text = usernameTextField.text {
       if user.username != text && text.characters.count > 0 {
-        newUsername = usernameTextFieldContainer.textField.text
+        newUsername = usernameTextField.text
         hasChanges = true
       }
     }
 
     var newEmail: String?
-    if let text = emailTextFieldContainer.textField.text {
+    if let text = emailTextField.text {
       if user.email != text && text.characters.count > 0 {
-        newEmail = emailTextFieldContainer.textField.text
+        newEmail = emailTextField.text
         hasChanges = true
       }
     }
 
     var newPhoneNumber: String?
-    if let text = phoneNumberTextFieldContainer.textField.text {
+    if let text = phoneNumberTextField.text {
       if user.phoneNumber != text && text.characters.count > 0 {
-        newPhoneNumber = phoneNumberTextFieldContainer.textField.text
+        newPhoneNumber = phoneNumberTextField.text
         hasChanges = true
       }
     }

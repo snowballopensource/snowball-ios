@@ -22,26 +22,28 @@ class SignInViewController: UIViewController {
     return label
   }()
 
-  let emailTextFieldContainer: TextFieldContainerView = {
-    let textFieldContainer = TextFieldContainerView()
-    textFieldContainer.configureText(hint: NSLocalizedString("Email", comment: ""), placeholder: NSLocalizedString("Your email address", comment: ""))
-    textFieldContainer.textField.autocapitalizationType = .None
-    textFieldContainer.textField.autocorrectionType = .No
-    textFieldContainer.textField.spellCheckingType = .No
-    textFieldContainer.textField.keyboardType = .EmailAddress
-    textFieldContainer.textField.returnKeyType = .Next
-    return textFieldContainer
+  let emailTextField: FormTextField = {
+    let textField = FormTextField()
+    textField.hint = NSLocalizedString("Email", comment: "")
+    textField.placeholder = NSLocalizedString("Your email address", comment: "")
+    textField.autocapitalizationType = .None
+    textField.autocorrectionType = .No
+    textField.spellCheckingType = .No
+    textField.keyboardType = .EmailAddress
+    textField.returnKeyType = .Next
+    return textField
   }()
 
-  let passwordTextFieldContainer: TextFieldContainerView = {
-    let textFieldContainer = TextFieldContainerView()
-    textFieldContainer.configureText(hint: NSLocalizedString("Password", comment: ""), placeholder: NSLocalizedString("Your password", comment: ""))
-    textFieldContainer.textField.autocapitalizationType = .None
-    textFieldContainer.textField.autocorrectionType = .No
-    textFieldContainer.textField.spellCheckingType = .No
-    textFieldContainer.textField.returnKeyType = .Go
-    textFieldContainer.textField.secureTextEntry = true
-    return textFieldContainer
+  let passwordTextField: FormTextField = {
+    let textField = FormTextField()
+    textField.hint = NSLocalizedString("Password", comment: "")
+    textField.placeholder = NSLocalizedString("Your password", comment: "")
+    textField.autocapitalizationType = .None
+    textField.autocorrectionType = .No
+    textField.spellCheckingType = .No
+    textField.returnKeyType = .Go
+    textField.secureTextEntry = true
+    return textField
   }()
 
   let submitButton: SnowballActionButton = {
@@ -59,35 +61,36 @@ class SignInViewController: UIViewController {
 
     view.addSubview(topLabel)
     constrain(topLabel) { topLabel in
-      topLabel.left == topLabel.superview!.left + TextFieldContainerView.defaultSideMargin
+      topLabel.left == topLabel.superview!.left + FormTextField.defaultSideMargin
       topLabel.top == topLabel.superview!.top + 50
       topLabel.width == topLabel.superview!.width * 0.70
     }
 
-    view.addSubview(emailTextFieldContainer)
-    constrain(emailTextFieldContainer, topLabel) { emailTextFieldContainer, topLabel in
-      emailTextFieldContainer.left == emailTextFieldContainer.superview!.left + TextFieldContainerView.defaultSideMargin
-      emailTextFieldContainer.top == topLabel.bottom + 40
-      emailTextFieldContainer.right == emailTextFieldContainer.superview!.right - TextFieldContainerView.defaultSideMargin
-      emailTextFieldContainer.height == TextFieldContainerView.defaultHeight
+    view.addSubview(emailTextField)
+    constrain(emailTextField, topLabel) { emailTextField, topLabel in
+      emailTextField.left == emailTextField.superview!.left + FormTextField.defaultSideMargin
+      emailTextField.top == topLabel.bottom + 40
+      emailTextField.right == emailTextField.superview!.right - FormTextField.defaultSideMargin
+      emailTextField.height == FormTextField.defaultHeight
     }
-    emailTextFieldContainer.textField.delegate = self
+    emailTextField.delegate = self
 
-    view.addSubview(passwordTextFieldContainer)
-    constrain(passwordTextFieldContainer, emailTextFieldContainer) { passwordTextFieldContainer, emailTextFieldContainer in
-      passwordTextFieldContainer.left == emailTextFieldContainer.left
-      passwordTextFieldContainer.top == emailTextFieldContainer.bottom + TextFieldContainerView.defaultSpaceBetween
-      passwordTextFieldContainer.right == emailTextFieldContainer.right
-      passwordTextFieldContainer.height == emailTextFieldContainer.height
+    view.addSubview(passwordTextField)
+    constrain(passwordTextField, emailTextField) { passwordTextField, emailTextField in
+      passwordTextField.left == emailTextField.left
+      passwordTextField.top == emailTextField.bottom + FormTextField.defaultSpaceBetween
+      passwordTextField.right == emailTextField.right
+      passwordTextField.height == emailTextField.height
     }
-    passwordTextFieldContainer.textField.delegate = self
-    passwordTextFieldContainer.linkSizingWithTextFieldContainerView(emailTextFieldContainer)
+    passwordTextField.delegate = self
+
+    FormTextField.linkFormTextFieldsHintSizing([emailTextField, passwordTextField])
 
     view.addSubview(submitButton)
-    constrain(submitButton, passwordTextFieldContainer) { submitButton, passwordTextFieldContainer in
-      submitButton.left == passwordTextFieldContainer.left
-      submitButton.top == passwordTextFieldContainer.bottom + 40
-      submitButton.right == passwordTextFieldContainer.right
+    constrain(submitButton, passwordTextField) { submitButton, passwordTextField in
+      submitButton.left == passwordTextField.left
+      submitButton.top == passwordTextField.bottom + 40
+      submitButton.right == passwordTextField.right
       submitButton.height == SnowballActionButton.defaultHeight
     }
     submitButton.addTarget(self, action: #selector(SignInViewController.submitButtonPressed), forControlEvents: .TouchUpInside)
@@ -102,7 +105,7 @@ class SignInViewController: UIViewController {
   // MARK: Private
 
   private func signIn() {
-    guard let email = emailTextFieldContainer.textField.text, let password = passwordTextFieldContainer.textField.text else { return }
+    guard let email = emailTextField.text, let password = passwordTextField.text else { return }
     SnowballAPI.requestObject(SnowballRoute.SignIn(email: email, password: password)) { (response: ObjectResponse<User>) in
       switch response {
       case .Success(let user):
@@ -118,9 +121,9 @@ class SignInViewController: UIViewController {
 
 extension SignInViewController: UITextFieldDelegate {
   func textFieldShouldReturn(textField: UITextField) -> Bool {
-    if textField == emailTextFieldContainer.textField {
-      passwordTextFieldContainer.textField.becomeFirstResponder()
-    } else if textField == passwordTextFieldContainer.textField {
+    if textField == emailTextField {
+      passwordTextField.becomeFirstResponder()
+    } else if textField == passwordTextField {
       signIn()
     }
     return true

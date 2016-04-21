@@ -27,15 +27,15 @@ class FindFriendsViewController: UIViewController {
     return tableView
   }()
   private let tableViewTopConstraintGroup = ConstraintGroup()
-  let searchTextFieldContainer: TextFieldContainerView = {
-    let textFieldContainer = TextFieldContainerView(showHintLabel: false, bottomLineHeight: 2)
-    textFieldContainer.configureText(hint: nil, placeholder: NSLocalizedString("Find by username", comment: ""))
-    textFieldContainer.textField.font = textFieldContainer.textField.font?.fontWithSize(21)
-    textFieldContainer.textField.autocapitalizationType = .None
-    textFieldContainer.textField.autocorrectionType = .No
-    textFieldContainer.textField.spellCheckingType = .No
-    textFieldContainer.textField.returnKeyType = .Search
-    return textFieldContainer
+  let searchTextField: FormTextField = {
+    let textField = FormTextField()
+    textField.placeholder = NSLocalizedString("Find by username", comment: "")
+    textField.font = textField.font?.fontWithSize(21)
+    textField.autocapitalizationType = .None
+    textField.autocorrectionType = .No
+    textField.spellCheckingType = .No
+    textField.returnKeyType = .Search
+    return textField
   }()
   var users = [User]()
   private let addressBook: ABAddressBook? = {
@@ -58,18 +58,18 @@ class FindFriendsViewController: UIViewController {
     title = NSLocalizedString("Find friends", comment: "")
     navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-back-black"), style: .Plain, target: self, action: #selector(FindFriendsViewController.leftBarButtonItemPressed))
 
-    view.addSubview(searchTextFieldContainer)
-    constrain(searchTextFieldContainer) { searchTextFieldContainer in
-      searchTextFieldContainer.top == searchTextFieldContainer.superview!.top + navigationBarOffset
-      searchTextFieldContainer.left == searchTextFieldContainer.superview!.left + 20
-      searchTextFieldContainer.right == searchTextFieldContainer.superview!.right - 20
-      searchTextFieldContainer.height == TextFieldContainerView.defaultHeight
+    view.addSubview(searchTextField)
+    constrain(searchTextField) { searchTextField in
+      searchTextField.top == searchTextField.superview!.top + navigationBarOffset
+      searchTextField.left == searchTextField.superview!.left + 20
+      searchTextField.right == searchTextField.superview!.right - 20
+      searchTextField.height == FormTextField.defaultHeight
     }
-    searchTextFieldContainer.textField.delegate = self
+    searchTextField.delegate = self
 
     view.addSubview(segmentedControl)
-    constrain(segmentedControl, searchTextFieldContainer) { segmentedControl, searchTextFieldContainer in
-      segmentedControl.top == searchTextFieldContainer.bottom + 20
+    constrain(segmentedControl, searchTextField) { segmentedControl, searchTextField in
+      segmentedControl.top == searchTextField.bottom + 20
       segmentedControl.left == segmentedControl.superview!.left + 17
       segmentedControl.right == segmentedControl.superview!.right - 17
       segmentedControl.height == 35
