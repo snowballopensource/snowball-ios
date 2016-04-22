@@ -89,12 +89,14 @@ class AuthenticationFormViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-back-black"), style: .Plain, target: self, action: #selector(AuthenticationFormViewController.leftBarButtonItemPressed))
+
     view.backgroundColor = UIColor.whiteColor()
 
     view.addSubview(topLabel)
     constrain(topLabel) { topLabel in
       topLabel.left == topLabel.superview!.left + FormTextField.defaultSideMargin
-      topLabel.top == topLabel.superview!.top + 50
+      topLabel.top == topLabel.superview!.top + 70
       topLabel.width == topLabel.superview!.width * 0.70
     }
 
@@ -174,6 +176,10 @@ class AuthenticationFormViewController: UIViewController {
       case .Failure(let error): error.displayToUserIfAppropriateFromViewController(self)
       }
     }
+  }
+
+  @objc private func leftBarButtonItemPressed() {
+    navigationController?.popViewControllerAnimated(true)
   }
 }
 

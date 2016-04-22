@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+enum SnowballActionButtonStyle {
+  case Gradient
+  case Bordered
+}
+
 class SnowballActionButton: UIButton {
 
   // MARK: Properties
@@ -30,7 +35,7 @@ class SnowballActionButton: UIButton {
 
   // MARK: Initializers
 
-  init() {
+  init(style: SnowballActionButtonStyle = .Gradient) {
     super.init(frame: CGRectZero)
 
     setTitleColor(UIColor.whiteColor(), forState: .Normal)
@@ -40,7 +45,12 @@ class SnowballActionButton: UIButton {
 
     layer.cornerRadius = 13
 
-    layer.insertSublayer(gradient, atIndex: 0)
+    if style == .Gradient {
+      layer.insertSublayer(gradient, atIndex: 0)
+    } else {
+      layer.borderWidth = 2
+      layer.borderColor = UIColor.whiteColor().CGColor
+    }
   }
 
   required init?(coder: NSCoder) {

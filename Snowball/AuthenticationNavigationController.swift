@@ -11,7 +11,7 @@ import UIKit
 
 class AuthenticationNavigationController: UINavigationController {
   init() {
-    super.init(rootViewController: AuthenticationFormViewController(type: .SignUp))
+    super.init(rootViewController: AuthenticationWelcomeViewController())
     navigationBar.transparent = true
   }
 
