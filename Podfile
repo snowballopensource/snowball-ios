@@ -6,6 +6,7 @@ use_frameworks!
 
 target 'Snowball' do
   pod 'Alamofire'
+  pod 'Amplitude-iOS'
   pod 'Cartography'
   pod 'HanekeSwift'
   pod 'RealmSwift'

@@ -125,7 +125,7 @@ enum SnowballRoute: URLRequestConvertible {
     case .FindUsersByUsername(let username): return ["username": username]
     case .RegisterForPushNotifications(let token):
       var pushParameters: [String: AnyObject] = ["platform": 0, "token": token]
-      if _isDebugAssertConfiguration() {
+      if isDebug() {
         pushParameters["development"] = true
       }
       return pushParameters

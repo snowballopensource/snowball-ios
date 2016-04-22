@@ -109,6 +109,7 @@ struct SnowballAPI {
             switch(afResponse.result) {
             case .Success(let value):
               if let JSON = value as? JSONObject {
+                Analytics.track("Create Clip")
                 Database.performTransaction {
                   clip.importJSON(JSON)
                   clip.state = .Default

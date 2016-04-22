@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (3.2.0)
+  - Amplitude-iOS (3.7.0)
   - Cartography (0.6.0)
   - HanekeSwift (0.10.1)
   - RBQFetchedResultsController (3.0):
@@ -16,6 +17,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - Amplitude-iOS
   - Cartography
   - HanekeSwift
   - RealmSwift
@@ -24,6 +26,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: 4da478599fccddff361205c8929333d7fe18dceb
+  Amplitude-iOS: 8bc8b9dc9c1898dbe5da541e21e8941ec085644f
   Cartography: 70af183a248547694a8cfaa6b989cb7e04589985
   HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
   RBQFetchedResultsController: d94374941a05193fd7ab55624ee95272e4e5d315

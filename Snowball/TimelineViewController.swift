@@ -338,6 +338,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
     setClipBuffering(clip)
     scrollToCellForClip(clip, animated: true)
     setStateToPlayingClipForVisibleCells(clip)
+    Analytics.track("Watch Clip")
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
@@ -345,6 +346,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
     scrollToCellForClip(toClip, animated: true)
     player.topOffQueue()
     resetStateForVisibleCells()
+    Analytics.track("Watch Clip")
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
@@ -471,8 +473,10 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
         let route: SnowballRoute
         if likedCurrently {
           route = SnowballRoute.UnlikeClip(clipID: clipID)
+          Analytics.track("Unlike Clip")
         } else {
           route = SnowballRoute.LikeClip(clipID: clipID)
+          Analytics.track("Like Clip")
         }
         SnowballAPI.request(route) { response in
           switch response {

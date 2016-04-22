@@ -31,6 +31,7 @@ extension AppDelegate: UIApplicationDelegate {
     print("Realm Path: " + Database.realm.path)
     Clip.cleanUpFailedClipUploads()
     PushNotificationController.registerApplicationForPushNotifications(application)
+    Analytics.initialize()
     window?.makeKeyAndVisible()
     return true
   }

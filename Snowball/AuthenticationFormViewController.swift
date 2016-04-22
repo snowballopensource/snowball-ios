@@ -170,7 +170,14 @@ class AuthenticationFormViewController: UIViewController {
       switch response {
       case .Success(let user):
         User.currentUser = user
-        // TODO: Analytics
+        if let userID = User.currentUser?.id {
+          Analytics.identify(userID)
+        }
+        if self.type == .SignUp {
+          Analytics.track("Sign Up")
+        } else {
+          Analytics.track("Sign In")
+        }
         // TODO: Push notifications
         self.dismissViewControllerAnimated(true, completion: nil)
       case .Failure(let error): error.displayToUserIfAppropriateFromViewController(self)

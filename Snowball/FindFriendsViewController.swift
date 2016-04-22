@@ -226,8 +226,10 @@ extension FindFriendsViewController: UserTableViewCellDelegate {
     let route: SnowballRoute
     if followingCurrently {
       route = SnowballRoute.UnfollowUser(userID: userID)
+      Analytics.track("Unfollow User")
     } else {
       route = SnowballRoute.FollowUser(userID: userID)
+      Analytics.track("Follow User")
     }
 
     SnowballAPI.request(route) { response in
