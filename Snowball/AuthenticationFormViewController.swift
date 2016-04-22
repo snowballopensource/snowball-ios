@@ -1,5 +1,5 @@
 //
-//  AuthenticationViewController.swift
+//  AuthenticationFormViewController.swift
 //  Snowball
 //
 //  Created by James Martinez on 2/25/16.
@@ -10,16 +10,16 @@ import Cartography
 import Foundation
 import UIKit
 
-enum AuthenticationViewControllerType {
+enum AuthenticationFormViewControllerType {
   case SignIn
   case SignUp
 }
 
-class AuthenticationViewController: UIViewController {
+class AuthenticationFormViewController: UIViewController {
 
   // MARK: Properties
 
-  private let type: AuthenticationViewControllerType
+  private let type: AuthenticationFormViewControllerType
 
   let topLabel: UILabel = {
     let label = UILabel()
@@ -67,7 +67,7 @@ class AuthenticationViewController: UIViewController {
 
   // MARK: Initializer
 
-  init(type: AuthenticationViewControllerType) {
+  init(type: AuthenticationFormViewControllerType) {
     self.type = type
     super.init(nibName: nil, bundle: nil)
 
@@ -143,7 +143,7 @@ class AuthenticationViewController: UIViewController {
       submitButton.right == passwordTextField.right
       submitButton.height == SnowballActionButton.defaultHeight
     }
-    submitButton.addTarget(self, action: #selector(AuthenticationViewController.submitButtonPressed), forControlEvents: .TouchUpInside)
+    submitButton.addTarget(self, action: #selector(AuthenticationFormViewController.submitButtonPressed), forControlEvents: .TouchUpInside)
   }
 
   // MARK: Actions
@@ -177,7 +177,7 @@ class AuthenticationViewController: UIViewController {
   }
 }
 
-extension AuthenticationViewController: UITextFieldDelegate {
+extension AuthenticationFormViewController: UITextFieldDelegate {
   func textFieldShouldReturn(textField: UITextField) -> Bool {
     if textField == usernameTextField {
       emailTextField.becomeFirstResponder()
