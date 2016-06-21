@@ -14,6 +14,7 @@ class FriendsViewController: UIViewController {
 
   // MARK: Properties
 
+  let profileButton = UIButton()
   let userAvatarImageView = UserAvatarImageView()
   let usernameLabel: UILabel = {
     let label = UILabel()
@@ -54,6 +55,15 @@ class FriendsViewController: UIViewController {
       userAvatarImageView.height == 100
       userAvatarImageView.width == 100
     }
+
+    view.addSubview(profileButton)
+    constrain(profileButton, userAvatarImageView) { profileButton, userAvatarImageView in
+      profileButton.top == userAvatarImageView.top
+      profileButton.left == userAvatarImageView.left
+      profileButton.right == userAvatarImageView.right
+      profileButton.bottom == userAvatarImageView.bottom
+    }
+    profileButton.addTarget(self, action: #selector(FriendsViewController.profileButtonPressed), forControlEvents: .TouchUpInside)
 
     view.addSubview(usernameLabel)
     constrain(usernameLabel, userAvatarImageView) { usernameLabel, userAvatarImageView in
@@ -147,6 +157,11 @@ class FriendsViewController: UIViewController {
 
   @objc private func segmentedControlValueChanged() {
     refresh()
+  }
+
+  @objc private func profileButtonPressed() {
+    guard let user = User.currentUser else { return }
+    navigationController?.pushViewController(UserTimelineViewController(user: user), animated: true)
   }
 
   @objc private func editProfileButtonPressed() {
