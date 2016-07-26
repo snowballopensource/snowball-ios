@@ -38,7 +38,8 @@ enum SnowballRoute: URLRequestConvertible {
   // MARK: Properties
 
   static let baseURLString: String = {
-    return "https://api.snowball.is/v1/"
+//    return "https://api.snowball.is/v1/"
+    return "https://snowball-api.herokuapp.com/v1"
   }()
 
   private var method: Alamofire.Method {
@@ -53,7 +54,7 @@ enum SnowballRoute: URLRequestConvertible {
     case .FollowUser: return .POST
     case .UnfollowUser: return .DELETE
     case .FindUsersByPhoneNumbers: return .POST
-    case .FindUsersByUsername: return .GET
+    case .FindUsersByUsername: return .POST
     case .FindFriendsOfFriends: return .GET
     case .RegisterForPushNotifications: return .POST
     case .GetClipStream: return .GET
@@ -73,20 +74,20 @@ enum SnowballRoute: URLRequestConvertible {
     case .GetCurrentUser: return "users/me"
     case .UpdateCurrentUser: return "users/me"
     case .UploadCurrentUserAvatar: return "/users/me"
-    case .GetCurrentUserFollowers: return "users/me/followers"
-    case .GetCurrentUserFollowing: return "users/me/following"
+    case .GetCurrentUserFollowers: return "users/\(User.currentUser!.id!)/followers"
+    case .GetCurrentUserFollowing: return "users/\(User.currentUser!.id!)/following"
     case .FollowUser(let userID): return "users/\(userID)/follow"
     case .UnfollowUser(let userID): return "users/\(userID)/follow"
-    case .FindUsersByPhoneNumbers: return "users/phone-search"
-    case .FindUsersByUsername: return "users"
+    case .FindUsersByPhoneNumbers: return "users/search"
+    case .FindUsersByUsername: return "users/search"
     case .FindFriendsOfFriends: return "users/friends-of-friends"
-    case .RegisterForPushNotifications: return "devices"
+    case .RegisterForPushNotifications: return "installations"
     case .GetClipStream: return "clips/stream"
     case .GetClipStreamForUser(let userID, _): return "users/\(userID)/clips/stream"
     case .DeleteClip(let clipID): return "clips/\(clipID)"
-    case .LikeClip(let clipID): return "clips/\(clipID)/likes"
-    case .UnlikeClip(let clipID): return "clips/\(clipID)/likes"
-    case .FlagClip(let clipID): return "clips/\(clipID)/flags"
+    case .LikeClip(let clipID): return "clips/\(clipID)/like"
+    case .UnlikeClip(let clipID): return "clips/\(clipID)/like"
+    case .FlagClip(let clipID): return "clips/\(clipID)/flag"
     case .UploadClip: return "clips"
     }
   }
@@ -97,7 +98,7 @@ enum SnowballRoute: URLRequestConvertible {
     case .SignIn: return ParameterEncoding.JSON
     case .UpdateCurrentUser: return ParameterEncoding.JSON
     case .FindUsersByPhoneNumbers: return ParameterEncoding.JSON
-    case .FindUsersByUsername: return ParameterEncoding.URL
+    case .FindUsersByUsername: return ParameterEncoding.JSON
     case .RegisterForPushNotifications: return .JSON
     case .GetClipStream: return ParameterEncoding.URL
     case .GetClipStreamForUser: return ParameterEncoding.URL

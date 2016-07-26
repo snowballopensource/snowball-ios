@@ -49,17 +49,21 @@ class Clip: Object {
         self.id = id
       }
     }
-    if let videoURL = JSON["video_url"] as? String {
+    if let video = JSON["video"] as? JSONObject,
+      let standardRes = video["standard_resolution"] as? JSONObject,
+      let videoURL = standardRes["url"] as? String {
       self.videoURL = videoURL
     }
-    if let thumbnailURL = JSON["thumbnail_url"] as? String {
-      self.thumbnailURL = thumbnailURL
+    if let image = JSON["image"] as? JSONObject,
+      let standardRes = image["standard_resolution"] as? JSONObject,
+      let imageURL = standardRes["url"] as? String {
+      self.thumbnailURL = imageURL
     }
     if let liked = JSON["liked"] as? Bool {
       self.liked = liked
     }
-    if let createdAt = JSON["created_at"] as? NSTimeInterval {
-      self.createdAt = NSDate(timeIntervalSince1970: createdAt)
+    if let createdAt = JSON["created_at"] as? String {
+      self.createdAt = NSDate.dateFromISO8610String(createdAt)
     }
     if let userJSON = JSON["user"] as? JSONObject {
       self.user = User.fromJSONObject(userJSON)

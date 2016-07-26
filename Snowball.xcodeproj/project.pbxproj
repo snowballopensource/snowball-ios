@@ -19,6 +19,7 @@
 		BA1881111C3F5F01002202B4 /* PlayerQueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1881101C3F5F01002202B4 /* PlayerQueueManager.swift */; };
 		BA1881131C3F6D09002202B4 /* LoadPlayerItemOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1881121C3F6D09002202B4 /* LoadPlayerItemOperation.swift */; };
 		BA1AE4EA1C6E4BC700AEEBF1 /* ClipUploadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1AE4E91C6E4BC700AEEBF1 /* ClipUploadQueue.swift */; };
+		BA2DBA891D47180C008AAD64 /* NSDate+ISO8601.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2DBA881D47180C008AAD64 /* NSDate+ISO8601.swift */; };
 		BA4D3FC51CC9789D009B3773 /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4D3FC41CC9789D009B3773 /* FormTextField.swift */; };
 		BA4D3FC71CCABFA1009B3773 /* AuthenticationWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4D3FC61CCABFA1009B3773 /* AuthenticationWelcomeViewController.swift */; };
 		BA4D3FC91CCACF98009B3773 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4D3FC81CCACF98009B3773 /* Analytics.swift */; };
@@ -80,6 +81,7 @@
 		BA1881101C3F5F01002202B4 /* PlayerQueueManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerQueueManager.swift; sourceTree = "<group>"; };
 		BA1881121C3F6D09002202B4 /* LoadPlayerItemOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadPlayerItemOperation.swift; sourceTree = "<group>"; };
 		BA1AE4E91C6E4BC700AEEBF1 /* ClipUploadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipUploadQueue.swift; sourceTree = "<group>"; };
+		BA2DBA881D47180C008AAD64 /* NSDate+ISO8601.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+ISO8601.swift"; sourceTree = "<group>"; };
 		BA4D3FC41CC9789D009B3773 /* FormTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
 		BA4D3FC61CCABFA1009B3773 /* AuthenticationWelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationWelcomeViewController.swift; sourceTree = "<group>"; };
 		BA4D3FC81CCACF98009B3773 /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				BAF578B01C67E317003F9404 /* UIColor+Snowball.swift */,
 				BA1420D71C73E5D3007F50B9 /* UIFont+Snowball.swift */,
 				BA89E7171C7F8AA4001AFD23 /* UIViewController+Authentication.swift */,
+				BA2DBA881D47180C008AAD64 /* NSDate+ISO8601.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				BA73BCC01C1A71B400B22588 /* AppDelegate.swift in Sources */,
 				BAD7750D1C1E02AC00ED1A64 /* NSError+Snowball.swift in Sources */,
 				BA1AE4EA1C6E4BC700AEEBF1 /* ClipUploadQueue.swift in Sources */,
+				BA2DBA891D47180C008AAD64 /* NSDate+ISO8601.swift in Sources */,
 				BA4D3FC71CCABFA1009B3773 /* AuthenticationWelcomeViewController.swift in Sources */,
 				BAD775071C1DFEAB00ED1A64 /* SnowballRoute.swift in Sources */,
 				BAD7E73D1C9378AE0068A7AB /* UserTableViewCell.swift in Sources */,
