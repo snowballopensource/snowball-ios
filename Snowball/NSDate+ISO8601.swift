@@ -13,7 +13,7 @@ extension NSDate {
     let dateFormatter = NSDateFormatter()
     dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
     dateFormatter.timeZone = NSTimeZone.localTimeZone()
-    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
     return dateFormatter.dateFromString(ISO8610String)
   }
 }
