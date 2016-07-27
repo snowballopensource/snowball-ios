@@ -78,7 +78,6 @@ struct SnowballAPI {
 
   static func queueClipForUploadingAndHandleStateChanges(clip: Clip, completion: (response: ObjectResponse<Clip>) -> Void) {
     guard let videoURLString = clip.videoURL, videoURL = NSURL(string: videoURLString) else { return }
-    guard let thumbnailURLString = clip.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) else { return }
 
     Database.performTransaction {
       clip.state = .Uploading
@@ -100,7 +99,6 @@ struct SnowballAPI {
     ClipUploadQueue.addOperationWithBlock {
       let multipartFormData: (MultipartFormData -> Void) = { multipartFormData in
         multipartFormData.appendBodyPart(fileURL: videoURL, name: "video")
-        multipartFormData.appendBodyPart(fileURL: thumbnailURL, name: "thumbnail")
       }
       Alamofire.upload(SnowballRoute.UploadClip, multipartFormData: multipartFormData) { encodingResult in
         switch(encodingResult) {
