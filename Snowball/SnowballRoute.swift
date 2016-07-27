@@ -51,18 +51,18 @@ enum SnowballRoute: URLRequestConvertible {
     case .UploadCurrentUserAvatar: return .PATCH
     case .GetCurrentUserFollowers: return .GET
     case .GetCurrentUserFollowing: return .GET
-    case .FollowUser: return .POST
+    case .FollowUser: return .PUT
     case .UnfollowUser: return .DELETE
     case .FindUsersByPhoneNumbers: return .POST
     case .FindUsersByUsername: return .POST
     case .FindFriendsOfFriends: return .GET
-    case .RegisterForPushNotifications: return .POST
+    case .RegisterForPushNotifications: return .PUT
     case .GetClipStream: return .GET
     case .GetClipStreamForUser: return .GET
     case .DeleteClip: return .DELETE
-    case .LikeClip: return .POST
+    case .LikeClip: return .PUT
     case .UnlikeClip: return .DELETE
-    case .FlagClip: return .POST
+    case .FlagClip: return .PUT
     case .UploadClip: return .POST
     }
   }
