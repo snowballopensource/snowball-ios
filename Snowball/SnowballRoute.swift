@@ -38,8 +38,7 @@ enum SnowballRoute: URLRequestConvertible {
   // MARK: Properties
 
   static let baseURLString: String = {
-//    return "https://api.snowball.is/v1/"
-    return "https://snowball-api.herokuapp.com/v1"
+    return "https://api.snowball.is/v1/"
   }()
 
   private var method: Alamofire.Method {
