@@ -23,7 +23,7 @@ enum SnowballRoute: URLRequestConvertible {
   case UnfollowUser(userID: String)
   case FindUsersByPhoneNumbers(phoneNumbers: [String])
   case FindUsersByUsername(username: String)
-  case FindFriendsOfFriends
+  case FindRecommendedUsers
   // Device
   case RegisterForPushNotifications(token: String)
   // Clip
@@ -54,7 +54,7 @@ enum SnowballRoute: URLRequestConvertible {
     case .UnfollowUser: return .DELETE
     case .FindUsersByPhoneNumbers: return .POST
     case .FindUsersByUsername: return .POST
-    case .FindFriendsOfFriends: return .GET
+    case .FindRecommendedUsers: return .GET
     case .RegisterForPushNotifications: return .PUT
     case .GetClipStream: return .GET
     case .GetClipStreamForUser: return .GET
@@ -79,7 +79,7 @@ enum SnowballRoute: URLRequestConvertible {
     case .UnfollowUser(let userID): return "users/\(userID)/follow"
     case .FindUsersByPhoneNumbers: return "users/search"
     case .FindUsersByUsername: return "users/search"
-    case .FindFriendsOfFriends: return "users/friends-of-friends"
+    case .FindRecommendedUsers: return "users/recommended"
     case .RegisterForPushNotifications: return "installations"
     case .GetClipStream: return "clips/stream"
     case .GetClipStreamForUser(let userID, _): return "users/\(userID)/clips/stream"
