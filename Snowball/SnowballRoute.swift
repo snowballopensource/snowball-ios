@@ -70,7 +70,7 @@ enum SnowballRoute: URLRequestConvertible {
     switch self {
     case .SignUp: return "users/sign-up"
     case .SignIn: return "users/sign-in"
-    case .GetCurrentUser: return "users/\(User.currentUser!.id)"
+    case .GetCurrentUser: return "users/\(User.currentUser!.id!)"
     case .UpdateCurrentUser: return "users/me"
     case .UploadCurrentUserAvatar: return "/users/me"
     case .GetCurrentUserFollowers: return "users/\(User.currentUser!.id!)/followers"
