@@ -123,12 +123,7 @@ enum SnowballRoute: URLRequestConvertible {
       return userParameters
     case .FindUsersByPhoneNumbers(let phoneNumbers): return ["phone_numbers": phoneNumbers]
     case .FindUsersByUsername(let username): return ["username": username]
-    case .RegisterForPushNotifications(let token):
-      var pushParameters: [String: AnyObject] = ["platform": 0, "token": token]
-      if isDebug() {
-        pushParameters["development"] = true
-      }
-      return pushParameters
+    case .RegisterForPushNotifications(let token): return ["token": token]
     case .GetClipStream(let page): return ["page": page]
     case .GetClipStreamForUser(_, let page): return ["page": page]
     default: return nil
