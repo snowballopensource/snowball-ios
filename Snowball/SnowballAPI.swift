@@ -132,8 +132,8 @@ struct SnowballAPI {
       }
     }
     let multipartFormData: (MultipartFormData -> Void) = { multipartFormData in
-      if let data = UIImagePNGRepresentation(image) {
-        multipartFormData.appendBodyPart(data: data, name: "avatar", fileName: "image.png", mimeType: "image/png")
+      if let data = UIImageJPEGRepresentation(image, 1) {
+        multipartFormData.appendBodyPart(data: data, name: "avatar", fileName: "image.jpg", mimeType: "image/jpeg")
       } else {
         onFailure(response: nil)
         return

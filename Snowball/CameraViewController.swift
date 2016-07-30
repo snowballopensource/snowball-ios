@@ -401,7 +401,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
 
     let randomString = NSUUID().UUIDString
     let exportedVideoURL = outputFileURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent("video_\(randomString).mp4")
-    let exportedThumbnailURL = exportedVideoURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent("image_\(randomString).png")
+    let exportedThumbnailURL = exportedVideoURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent("image_\(randomString).jpg")
 
     // Export
     do { try NSFileManager.defaultManager().removeItemAtURL(outputFileURL) } catch { }
@@ -416,7 +416,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
       let asset = AVURLAsset(URL: exportedVideoURL, options: nil)
       let imageGenerator = AVAssetImageGenerator(asset: asset)
       let imageRef = try! imageGenerator.copyCGImageAtTime(kCMTimeZero, actualTime: nil)
-      let thumbnailData = UIImagePNGRepresentation(UIImage(CGImage: imageRef))!
+      let thumbnailData = UIImageJPEGRepresentation(UIImage(CGImage: imageRef), 1)!
       thumbnailData.writeToURL(exportedThumbnailURL, atomically: true)
       dispatch_async(dispatch_get_main_queue()) {
         self.resetProgressViewAnimation()
