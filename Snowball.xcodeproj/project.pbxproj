@@ -8,18 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		BA3286F21D588EA400571612 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3286F11D588EA400571612 /* AppDelegate.swift */; };
-		BA3286F41D588EA400571612 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3286F31D588EA400571612 /* ViewController.swift */; };
 		BA3286F91D588EA400571612 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA3286F81D588EA400571612 /* Assets.xcassets */; };
 		BA3286FC1D588EA400571612 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA3286FA1D588EA400571612 /* LaunchScreen.storyboard */; };
+		BA5269E61D58909E004AB21A /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5269E51D58909E004AB21A /* TimelineViewController.swift */; };
+		BA5269E81D5890C8004AB21A /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5269E71D5890C8004AB21A /* PlayerView.swift */; };
+		BA5269EA1D5892F3004AB21A /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5269E91D5892F3004AB21A /* Clip.swift */; };
+		BA5269EC1D58935E004AB21A /* TimelinePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5269EB1D58935E004AB21A /* TimelinePlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BA3286EE1D588EA400571612 /* Snowball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snowball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3286F11D588EA400571612 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BA3286F31D588EA400571612 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BA3286F81D588EA400571612 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA3286FB1D588EA400571612 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA3286FD1D588EA400571612 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA5269E51D58909E004AB21A /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
+		BA5269E71D5890C8004AB21A /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		BA5269E91D5892F3004AB21A /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
+		BA5269EB1D58935E004AB21A /* TimelinePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelinePlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +59,10 @@
 			isa = PBXGroup;
 			children = (
 				BA3286F11D588EA400571612 /* AppDelegate.swift */,
-				BA3286F31D588EA400571612 /* ViewController.swift */,
+				BA5269E51D58909E004AB21A /* TimelineViewController.swift */,
+				BA5269EB1D58935E004AB21A /* TimelinePlayer.swift */,
+				BA5269E91D5892F3004AB21A /* Clip.swift */,
+				BA5269E71D5890C8004AB21A /* PlayerView.swift */,
 				BA3286F81D588EA400571612 /* Assets.xcassets */,
 				BA3286FA1D588EA400571612 /* LaunchScreen.storyboard */,
 				BA3286FD1D588EA400571612 /* Info.plist */,
@@ -131,8 +140,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA3286F41D588EA400571612 /* ViewController.swift in Sources */,
+				BA5269EC1D58935E004AB21A /* TimelinePlayer.swift in Sources */,
+				BA5269E81D5890C8004AB21A /* PlayerView.swift in Sources */,
+				BA5269EA1D5892F3004AB21A /* Clip.swift in Sources */,
 				BA3286F21D588EA400571612 /* AppDelegate.swift in Sources */,
+				BA5269E61D58909E004AB21A /* TimelineViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
