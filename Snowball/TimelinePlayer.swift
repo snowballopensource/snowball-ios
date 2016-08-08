@@ -119,6 +119,6 @@ class ClipPlayerItem: AVPlayerItem {
 
   init(clip: Clip) {
     self.clip = clip
-    super.init(asset: AVAsset(URL: clip.URL), automaticallyLoadedAssetKeys: ["duration"])
+    super.init(asset: AVAsset(URL: clip.videoURL), automaticallyLoadedAssetKeys: ["duration"])
   }
 }

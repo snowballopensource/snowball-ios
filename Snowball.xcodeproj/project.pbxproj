@@ -15,6 +15,7 @@
 		BA5269E81D5890C8004AB21A /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5269E71D5890C8004AB21A /* PlayerView.swift */; };
 		BA5269EA1D5892F3004AB21A /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5269E91D5892F3004AB21A /* Clip.swift */; };
 		BA5269EC1D58935E004AB21A /* TimelinePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5269EB1D58935E004AB21A /* TimelinePlayer.swift */; };
+		BA8494881D5907C700D453C0 /* SnowballAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8494871D5907C700D453C0 /* SnowballAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		BA5269E71D5890C8004AB21A /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		BA5269E91D5892F3004AB21A /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
 		BA5269EB1D58935E004AB21A /* TimelinePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelinePlayer.swift; sourceTree = "<group>"; };
+		BA8494871D5907C700D453C0 /* SnowballAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 			children = (
 				BA3286F11D588EA400571612 /* AppDelegate.swift */,
 				BA5269E51D58909E004AB21A /* TimelineViewController.swift */,
+				BA8494871D5907C700D453C0 /* SnowballAPI.swift */,
 				BA5269EB1D58935E004AB21A /* TimelinePlayer.swift */,
 				BA5269E91D5892F3004AB21A /* Clip.swift */,
 				BA5269E71D5890C8004AB21A /* PlayerView.swift */,
@@ -217,6 +220,7 @@
 			files = (
 				BA5269EC1D58935E004AB21A /* TimelinePlayer.swift in Sources */,
 				BA5269E81D5890C8004AB21A /* PlayerView.swift in Sources */,
+				BA8494881D5907C700D453C0 /* SnowballAPI.swift in Sources */,
 				BA5269EA1D5892F3004AB21A /* Clip.swift in Sources */,
 				BA3286F21D588EA400571612 /* AppDelegate.swift in Sources */,
 				BA5269E61D58909E004AB21A /* TimelineViewController.swift in Sources */,

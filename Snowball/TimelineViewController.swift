@@ -6,15 +6,25 @@
 //  Copyright © 2016 Snowball, Inc. All rights reserved.
 //
 
+import Alamofire
 import UIKit
 
 class TimelineViewController: UIViewController {
-  let clips = [Clip]()
+  var clips = [Clip]()
   let player = TimelinePlayer()
   let playerView = PlayerView()
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    SnowballAPI.request(SnowballAPIRoute.ClipStream).responseCollection { (response: Response<[Clip], NSError>) in
+      switch response.result {
+      case .Success(let clips):
+        self.clips = clips
+        self.player.playClip(self.clips.first!)
+      case .Failure(let error): debugPrint(error)
+      }
+    }
 
     view.backgroundColor = UIColor.whiteColor()
 
