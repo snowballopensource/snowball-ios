@@ -87,21 +87,61 @@
 			isa = PBXGroup;
 			children = (
 				BA3286F11D588EA400571612 /* AppDelegate.swift */,
-				BA5269E51D58909E004AB21A /* TimelineViewController.swift */,
-				BA690B111D5A443E00DDA6DA /* ArrayDiff.swift */,
-				BA690B0F1D59A99400DDA6DA /* TimelineCollectionView.swift */,
-				BA84948B1D59773100D453C0 /* ClipCollectionViewCell.swift */,
-				BA8494871D5907C700D453C0 /* SnowballAPI.swift */,
-				BA8494911D598B0000D453C0 /* UIScrollView+InfiniteScroll.swift */,
-				BA5269EB1D58935E004AB21A /* TimelinePlayer.swift */,
-				BA5269E91D5892F3004AB21A /* Clip.swift */,
-				BA5269E71D5890C8004AB21A /* PlayerView.swift */,
-				BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */,
+				BA690B171D5A63C200DDA6DA /* Timeline */,
+				BA690B131D5A639700DDA6DA /* Player */,
+				BA690B151D5A63B700DDA6DA /* API */,
+				BA690B161D5A63BB00DDA6DA /* Models */,
+				BA690B141D5A63A500DDA6DA /* Misc */,
 				BA3286F81D588EA400571612 /* Assets.xcassets */,
 				BA3286FA1D588EA400571612 /* LaunchScreen.storyboard */,
 				BA3286FD1D588EA400571612 /* Info.plist */,
 			);
 			path = Snowball;
+			sourceTree = "<group>";
+		};
+		BA690B131D5A639700DDA6DA /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				BA5269EB1D58935E004AB21A /* TimelinePlayer.swift */,
+				BA5269E71D5890C8004AB21A /* PlayerView.swift */,
+			);
+			name = Player;
+			sourceTree = "<group>";
+		};
+		BA690B141D5A63A500DDA6DA /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				BA690B111D5A443E00DDA6DA /* ArrayDiff.swift */,
+				BA8494911D598B0000D453C0 /* UIScrollView+InfiniteScroll.swift */,
+				BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */,
+			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
+		BA690B151D5A63B700DDA6DA /* API */ = {
+			isa = PBXGroup;
+			children = (
+				BA8494871D5907C700D453C0 /* SnowballAPI.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		BA690B161D5A63BB00DDA6DA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BA5269E91D5892F3004AB21A /* Clip.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		BA690B171D5A63C200DDA6DA /* Timeline */ = {
+			isa = PBXGroup;
+			children = (
+				BA5269E51D58909E004AB21A /* TimelineViewController.swift */,
+				BA690B0F1D59A99400DDA6DA /* TimelineCollectionView.swift */,
+				BA84948B1D59773100D453C0 /* ClipCollectionViewCell.swift */,
+			);
+			name = Timeline;
 			sourceTree = "<group>";
 		};
 		EF82F47F63DC9AA8541F74C4 /* Frameworks */ = {
