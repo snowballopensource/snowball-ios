@@ -80,17 +80,7 @@ class TimelineViewController: UIViewController {
     SnowballAPI.request(SnowballAPIRoute.ClipStream(page: page)).responseCollection { (response: Response<[Clip], NSError>) in
       switch response.result {
       case .Success(let clips):
-        if page == 1 {
-          self.clips = clips.reverse()
-          self.collectionView.reloadData()
-        } else {
-          self.clips = clips.reverse() + self.clips
-          let indexPaths = clips.map { (clip) -> NSIndexPath in
-            let index = clips.indexOf(clip)!
-            return NSIndexPath(forItem: index, inSection: 0)
-          }
-          self.collectionView.insertItemsAtIndexPaths(indexPaths)
-        }
+        self.updateCollectionViewWithNewClips(clips, noMerge: (page == 1))
       case .Failure(let error): debugPrint(error)
       }
       self.collectionView.setLoadingCompleted()
@@ -100,6 +90,29 @@ class TimelineViewController: UIViewController {
   private func scrollToClip(clip: Clip) {
     if let index = clips.indexOf(clip) {
       collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: .CenteredHorizontally, animated: true)
+    }
+  }
+
+  private func updateCollectionViewWithNewClips(clips: [Clip], noMerge: Bool = false) {
+    if noMerge {
+      self.clips = clips.reverse()
+      collectionView.reloadData()
+    } else {
+      let (newClips, duplicateClips, allClips) = ArrayDiff.mergeArrayByPrepending(clips.reverse(), toArray: self.clips)
+      self.clips = allClips
+
+      func clipsToIndexPaths(clips: [Clip]) -> [NSIndexPath] {
+        return clips.map { (clip) -> NSIndexPath in
+          let index = self.clips.indexOf(clip)!
+          return NSIndexPath(forItem: index, inSection: 0)
+        }
+      }
+      let insertIndexPaths = clipsToIndexPaths(newClips)
+      let updateIndexPaths = clipsToIndexPaths(duplicateClips)
+      collectionView.performBatchUpdates({
+        self.collectionView.insertItemsAtIndexPaths(insertIndexPaths)
+        self.collectionView.reloadItemsAtIndexPaths(updateIndexPaths)
+      }, completion: nil)
     }
   }
 

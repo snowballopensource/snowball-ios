@@ -21,6 +21,13 @@ func ==(lhs: Clip, rhs: Clip) -> Bool {
   return lhs.id == rhs.id
 }
 
+// MARK: - Hashable
+extension Clip: Hashable {
+  var hashValue: Int {
+    return id.hashValue
+  }
+}
+
 // MARK: - ResponseObjectSerializable
 extension Clip: ResponseObjectSerializable {
   init?(response: NSHTTPURLResponse, representation: AnyObject) {
