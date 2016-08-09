@@ -47,7 +47,6 @@ class TimelineViewController: UIViewController {
       case .Success(let clips):
         self.clips = clips.reverse()
         self.collectionView.reloadData()
-        self.player.playClip(self.clips.first!)
       case .Failure(let error): debugPrint(error)
       }
     }
