@@ -10,55 +10,37 @@ import AVFoundation
 import Foundation
 
 class TimelinePlayer: AVQueuePlayer {
+
+  // MARK: Properties
+
   var dataSource: TimelinePlayerDataSource?
+  var delegate: TimelinePlayerDelegate?
 
-  private var previousClipIndex: Int? {
-    if let currentClip = currentClip, let currentClipIndex = dataSource?.timelinePlayer(self, indexOfClip: currentClip) {
-      let previousClipIndex = currentClipIndex - 1
-      if 0...(dataSource?.numberOfClipsInTimelinePlayer(self) ?? 0) ~= previousClipIndex {
-        return previousClipIndex
-      }
-    }
-    return nil
-  }
-
-  private var nextClipIndex: Int? {
-    if let currentClip = currentClip, let currentClipIndex = dataSource?.timelinePlayer(self, indexOfClip: currentClip) {
-      let nextClipIndex = currentClipIndex + 1
-      if nextClipIndex < dataSource?.numberOfClipsInTimelinePlayer(self) {
-        return nextClipIndex
-      }
-    }
-    return nil
-  }
-
-  private var previousClip: Clip? {
-    if let previousClipIndex = previousClipIndex {
-      return dataSource?.timelinePlayer(self, clipAtIndex: previousClipIndex)
-    }
-    return nil
-  }
-
-  private var nextClip: Clip? {
-    if let nextClipIndex = nextClipIndex {
-      return dataSource?.timelinePlayer(self, clipAtIndex: nextClipIndex)
-    }
-    return nil
-  }
+  private let currentItemKeyPath = "currentItem"
 
   private var currentClip: Clip? {
     return (currentItem as? ClipPlayerItem)?.clip
   }
 
+  // MARK: Initializers
+
+  override init() {
+    super.init()
+    addObserver(self, forKeyPath: currentItemKeyPath, options: [.Old, .New], context: nil)
+  }
+
+  deinit {
+    removeObserver(self, forKeyPath: currentItemKeyPath)
+  }
+
+  // MARK: Internal
+
   func playClip(clip: Clip) {
-    safelyEnqueueClipAndEnsureFullBuffer(clip)
+    safelyEnqueueClip(clip)
     play()
   }
 
   func next() {
-    if let nextClip = nextClip {
-      safelyEnqueueClipAndEnsureFullBuffer(nextClip)
-    }
     advanceToNextItem()
   }
 
@@ -68,13 +50,35 @@ class TimelinePlayer: AVQueuePlayer {
         removeItem(item)
       }
     }
-    if let previousClip = previousClip {
-      safelyEnqueueClipAndEnsureFullBuffer(previousClip)
+    if let currentClip = currentClip, let previousClip = clipBeforeClip(currentClip) {
+      safelyEnqueueClip(previousClip)
     }
     advanceToNextItem()
   }
 
-  private func safelyEnqueueClipAndEnsureFullBuffer(clip: Clip) {
+  // MARK: Private
+
+  private func clipAfterClip(clip: Clip) -> Clip? {
+    if let currentClip = currentClip, let currentClipIndex = dataSource?.timelinePlayer(self, indexOfClip: currentClip) {
+      let nextClipIndex = currentClipIndex + 1
+      if nextClipIndex < dataSource?.numberOfClipsInTimelinePlayer(self) {
+        return dataSource?.timelinePlayer(self, clipAtIndex: nextClipIndex)
+      }
+    }
+    return nil
+  }
+
+  private func clipBeforeClip(clip: Clip) -> Clip? {
+    if let currentClip = currentClip, let currentClipIndex = dataSource?.timelinePlayer(self, indexOfClip: currentClip) {
+      let previousClipIndex = currentClipIndex - 1
+      if 0...(dataSource?.numberOfClipsInTimelinePlayer(self) ?? 0) ~= previousClipIndex {
+        return dataSource?.timelinePlayer(self, clipAtIndex: previousClipIndex)
+      }
+    }
+    return nil
+  }
+
+  private func safelyEnqueueClip(clip: Clip) {
     func canEnqueueClip(clip: Clip) -> Bool {
       var shouldEnqueueClip = true
       for queuedItem in items() {
@@ -93,15 +97,46 @@ class TimelinePlayer: AVQueuePlayer {
       }
     }
 
-    if let clipIndex = dataSource?.timelinePlayer(self, indexOfClip: clip) {
+    if canEnqueueClip(clip) {
+      enqueueClip(clip)
+    }
+  }
+
+  private func ensureEnoughClipsInQueue() {
+    if let currentClip = currentClip, let clipIndex = dataSource?.timelinePlayer(self, indexOfClip: currentClip) {
       let numberOfClips = dataSource?.numberOfClipsInTimelinePlayer(self)
       for i in clipIndex..<clipIndex + 3 where i < numberOfClips {
         if let clip = dataSource?.timelinePlayer(self, clipAtIndex: i) {
-          if canEnqueueClip(clip) {
-            enqueueClip(clip)
-          }
+          safelyEnqueueClip(clip)
         }
       }
+    }
+  }
+
+  private func onClipChange(oldClip: Clip?, newClip: Clip?) {
+    if let oldClip = oldClip, newClip = newClip {
+     delegate?.timelinePlayer(self, didTransitionFromClip: oldClip, toClip: newClip)
+    } else if let oldClip = oldClip {
+      delegate?.timelinePlayer(self, didEndPlaybackWithLastClip: oldClip)
+    } else if let newClip = newClip {
+      delegate?.timelinePlayer(self, willBeginPlaybackWithFirstClip: newClip)
+    }
+
+    if newClip != nil {
+      ensureEnoughClipsInQueue()
+    }
+  }
+
+  // MARK: KVO
+
+  override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    if keyPath == currentItemKeyPath {
+      guard let change = change else { return }
+      let oldClip = (change[NSKeyValueChangeOldKey] as? ClipPlayerItem)?.clip
+      let newClip = (change[NSKeyValueChangeNewKey] as? ClipPlayerItem)?.clip
+      onClipChange(oldClip, newClip: newClip)
+    } else {
+      super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
     }
   }
 }
@@ -113,12 +148,20 @@ protocol TimelinePlayerDataSource {
   func timelinePlayer(player: TimelinePlayer, indexOfClip clip: Clip) -> Int?
 }
 
+// MARK: - TimelinePlayerDataSource
+protocol TimelinePlayerDelegate {
+//  func timelinePlayerShouldBeginPlayback(timelinePlayer: TimelinePlayer) -> Bool
+  func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip)
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip)
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip)
+}
+
 // MARK: - ClipPlayerItem
 class ClipPlayerItem: AVPlayerItem {
   let clip: Clip
 
   init(clip: Clip) {
     self.clip = clip
-    super.init(asset: AVAsset(URL: clip.videoURL), automaticallyLoadedAssetKeys: ["duration"])
+    super.init(asset: AVAsset(URL: clip.videoURL), automaticallyLoadedAssetKeys: ["tracks", "duration"])
   }
 }

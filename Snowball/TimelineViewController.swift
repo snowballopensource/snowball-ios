@@ -29,6 +29,7 @@ class TimelineViewController: UIViewController {
     view.backgroundColor = UIColor.whiteColor()
 
     player.dataSource = self
+    player.delegate = self
 
     view.addSubview(playerView)
     playerView.translatesAutoresizingMaskIntoConstraints = false
@@ -53,5 +54,20 @@ extension TimelineViewController: TimelinePlayerDataSource {
 
   func timelinePlayer(player: TimelinePlayer, indexOfClip clip: Clip) -> Int? {
     return clips.indexOf(clip)
+  }
+}
+
+// MARK: - TimelinePlayerDeleate
+extension TimelineViewController: TimelinePlayerDelegate {
+  func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
+    print("begin")
+  }
+
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
+    print("transition")
+  }
+
+  func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
+    print("done")
   }
 }
