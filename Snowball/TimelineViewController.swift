@@ -23,6 +23,7 @@ class TimelineViewController: UIViewController {
     flowLayout.minimumLineSpacing = 0
     flowLayout.itemSize = ClipCollectionViewCell.defaultSize
     let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: flowLayout)
+    collectionView.backgroundColor = UIColor.whiteColor()
     collectionView.registerClass(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell))
     collectionView.showsHorizontalScrollIndicator = false
     return collectionView
