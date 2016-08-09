@@ -30,7 +30,7 @@ extension User: Hashable {
 
 // MARK: - ResponseObjectSerializable
 extension User: ResponseObjectSerializable {
-  init?(response: NSHTTPURLResponse, representation: AnyObject) {
+  init?(representation: AnyObject) {
     let json = JSON(representation)
     if
       let id = json["id"].string,

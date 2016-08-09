@@ -64,20 +64,20 @@ enum SnowballAPIRoute: URLRequestConvertible {
 
 // MARK: - ResponseObjectSerializable
 protocol ResponseObjectSerializable {
-  init?(response: NSHTTPURLResponse, representation: AnyObject)
+  init?(representation: AnyObject)
 }
 
 // MARK: - ResponseCollectionSerializable
 protocol ResponseCollectionSerializable {
-  static func collection(response response: NSHTTPURLResponse, representation: AnyObject) -> [Self]
+  static func collection(representation representation: AnyObject) -> [Self]
 }
 
 extension ResponseCollectionSerializable where Self: ResponseObjectSerializable {
-  static func collection(response response: NSHTTPURLResponse, representation: AnyObject) -> [Self] {
+  static func collection(representation representation: AnyObject) -> [Self] {
     var collection = [Self]()
     if let collectionRepresentation = representation as? [[String: AnyObject]] {
       for objectRepresentation in collectionRepresentation {
-        if let object = Self(response: response, representation: objectRepresentation) {
+        if let object = Self(representation: objectRepresentation) {
           collection.append(object)
         }
       }
@@ -97,7 +97,7 @@ extension Request {
 
       switch result {
       case .Success(let value):
-        if let response = response, responseObject = T(response: response, representation: value) {
+        if let responseObject = T(representation: value) {
           return .Success(responseObject)
         } else {
           return .Failure(NSError(domain: "", code: 0, userInfo: nil))
@@ -117,12 +117,8 @@ extension Request {
 
       switch result {
       case .Success(let value):
-        if let response = response {
-          let responseObject = T.collection(response: response, representation: value)
-          return .Success(responseObject)
-        } else {
-          return .Failure(NSError(domain: "", code: 0, userInfo: nil))
-        }
+        let responseObject = T.collection(representation: value)
+        return .Success(responseObject)
       case .Failure(let error): return .Failure(error)
       }
     }

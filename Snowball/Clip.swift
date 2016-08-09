@@ -31,14 +31,14 @@ extension Clip: Hashable {
 
 // MARK: - ResponseObjectSerializable
 extension Clip: ResponseObjectSerializable {
-  init?(response: NSHTTPURLResponse, representation: AnyObject) {
+  init?(representation: AnyObject) {
     let json = JSON(representation)
     if
       let id = json["id"].string,
       let imageURL = json["image"]["standard_resolution"]["url"].URL,
       let videoURL = json["video"]["standard_resolution"]["url"].URL,
       let userRepresentation = json["user"].dictionaryObject,
-      let user = User(response: response, representation: userRepresentation) {
+      let user = User(representation: userRepresentation) {
 
       self.id = id
       self.imageURL = imageURL
