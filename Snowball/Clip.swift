@@ -13,6 +13,7 @@ struct Clip {
   let id: String
   let imageURL: NSURL
   let videoURL: NSURL
+  let user: User
 }
 
 // MARK: - Equatable
@@ -34,14 +35,15 @@ extension Clip: ResponseObjectSerializable {
     let json = JSON(representation)
     if
       let id = json["id"].string,
-      let imageURLString = json["image"]["standard_resolution"]["url"].string,
-      let imageURL = NSURL(string: imageURLString),
-      let videoURLString = json["video"]["standard_resolution"]["url"].string,
-      let videoURL = NSURL(string: videoURLString) {
+      let imageURL = json["image"]["standard_resolution"]["url"].URL,
+      let videoURL = json["video"]["standard_resolution"]["url"].URL,
+      let userRepresentation = json["user"].dictionaryObject,
+      let user = User(response: response, representation: userRepresentation) {
 
       self.id = id
       self.imageURL = imageURL
       self.videoURL = videoURL
+      self.user = user
     } else {
       return nil
     }
