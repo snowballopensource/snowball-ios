@@ -26,6 +26,16 @@ class TimelineViewController: UIViewController {
     collectionView.registerClass(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell))
     return collectionView
   }()
+  let previousClipGestureRecognizer: UISwipeGestureRecognizer = {
+    let gestureRecognizer = UISwipeGestureRecognizer()
+    gestureRecognizer.direction = .Right
+    return gestureRecognizer
+  }()
+  let nextClipGestureRecognizer: UISwipeGestureRecognizer = {
+    let gestureRecognizer = UISwipeGestureRecognizer()
+    gestureRecognizer.direction = .Left
+    return gestureRecognizer
+  }()
 
   // MARK: UIViewController
 
@@ -56,6 +66,10 @@ class TimelineViewController: UIViewController {
     playerView.heightAnchor.constraintEqualToAnchor(view.widthAnchor).active = true
 
     collectionView.dataSource = self
+    collectionView.addGestureRecognizer(previousClipGestureRecognizer)
+    collectionView.addGestureRecognizer(nextClipGestureRecognizer)
+    previousClipGestureRecognizer.addTarget(self, action: #selector(TimelineViewController.previousClipGestureRecognizerSwiped))
+    nextClipGestureRecognizer.addTarget(self, action: #selector(TimelineViewController.nextClipGestureRecognizerSwiped))
 
     view.addSubview(collectionView)
     collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -75,6 +89,16 @@ class TimelineViewController: UIViewController {
     if let index = clips.indexOf(clip) {
       collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: .CenteredHorizontally, animated: true)
     }
+  }
+
+  // MARK: Actions
+
+  @objc private func previousClipGestureRecognizerSwiped() {
+    player.previous()
+  }
+
+  @objc private func nextClipGestureRecognizerSwiped() {
+    player.next()
   }
 }
 
@@ -97,6 +121,7 @@ extension TimelineViewController: TimelinePlayerDataSource {
 extension TimelineViewController: TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
     print("begin")
+    collectionView.scrollEnabled = false
     scrollToClip(clip)
   }
 
@@ -107,6 +132,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
     print("done")
+    collectionView.scrollEnabled = true
   }
 }
 
