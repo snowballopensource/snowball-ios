@@ -16,18 +16,7 @@ class TimelineViewController: UIViewController {
   var clips = [Clip]()
   let player = TimelinePlayer()
   let playerView = PlayerView()
-  let collectionView: UICollectionView = {
-    let flowLayout = UICollectionViewFlowLayout()
-    flowLayout.scrollDirection = .Horizontal
-    flowLayout.minimumInteritemSpacing = 0
-    flowLayout.minimumLineSpacing = 0
-    flowLayout.itemSize = ClipCollectionViewCell.defaultSize
-    let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: flowLayout)
-    collectionView.backgroundColor = UIColor.whiteColor()
-    collectionView.registerClass(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell))
-    collectionView.showsHorizontalScrollIndicator = false
-    return collectionView
-  }()
+  let collectionView = TimelineCollectionView()
   let previousClipGestureRecognizer: UISwipeGestureRecognizer = {
     let gestureRecognizer = UISwipeGestureRecognizer()
     gestureRecognizer.direction = .Right
@@ -68,6 +57,8 @@ class TimelineViewController: UIViewController {
     nextClipGestureRecognizer.addTarget(self, action: #selector(TimelineViewController.nextClipGestureRecognizerSwiped))
 
     collectionView.enableInfiniteScrollWithDelegate(self)
+    let layout = collectionView.collectionViewLayout as! TimelineCollectionViewFlowLayout
+    layout.delegate = self
 
     view.addSubview(collectionView)
     collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -91,10 +82,15 @@ class TimelineViewController: UIViewController {
       case .Success(let clips):
         if page == 1 {
           self.clips = clips.reverse()
+          self.collectionView.reloadData()
         } else {
           self.clips = clips.reverse() + self.clips
+          let indexPaths = clips.map { (clip) -> NSIndexPath in
+            let index = clips.indexOf(clip)!
+            return NSIndexPath(forItem: index, inSection: 0)
+          }
+          self.collectionView.insertItemsAtIndexPaths(indexPaths)
         }
-        self.collectionView.reloadData()
       case .Failure(let error): debugPrint(error)
       }
       self.collectionView.setLoadingCompleted()
@@ -189,6 +185,24 @@ extension TimelineViewController: UIScrollViewInfiniteScrollDelegate {
       getClipStream(currentPage + 1)
     } else {
       getClipStream()
+    }
+  }
+}
+
+// MARK: - TimelineCollectionViewFlowLayoutDelegate
+extension TimelineViewController: TimelineCollectionViewFlowLayoutDelegate {
+  func timelineCollectionViewFlowLayout(layout: TimelineCollectionViewFlowLayout, willFinalizeCollectionViewUpdates updates: [UICollectionViewUpdateItem]) {
+
+    // Adjustments when loading secondary pages on the left
+    if currentPage > 1 {
+      let contentSizeBeforeAnimation = collectionView.contentSize
+      let contentSizeAfterAnimation = layout.collectionViewContentSize()
+      let xOffset = contentSizeAfterAnimation.width - contentSizeBeforeAnimation.width - ClipCollectionViewCell.defaultSize.width / 2
+      if xOffset < 0 {
+        collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+      } else {
+        collectionView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: false)
+      }
     }
   }
 }

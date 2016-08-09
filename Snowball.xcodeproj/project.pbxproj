@@ -15,6 +15,7 @@
 		BA5269E81D5890C8004AB21A /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5269E71D5890C8004AB21A /* PlayerView.swift */; };
 		BA5269EA1D5892F3004AB21A /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5269E91D5892F3004AB21A /* Clip.swift */; };
 		BA5269EC1D58935E004AB21A /* TimelinePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5269EB1D58935E004AB21A /* TimelinePlayer.swift */; };
+		BA690B101D59A99400DDA6DA /* TimelineCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA690B0F1D59A99400DDA6DA /* TimelineCollectionView.swift */; };
 		BA8494881D5907C700D453C0 /* SnowballAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8494871D5907C700D453C0 /* SnowballAPI.swift */; };
 		BA84948C1D59773100D453C0 /* ClipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA84948B1D59773100D453C0 /* ClipCollectionViewCell.swift */; };
 		BA84948E1D5979E400D453C0 /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */; };
@@ -34,6 +35,7 @@
 		BA5269E71D5890C8004AB21A /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		BA5269E91D5892F3004AB21A /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
 		BA5269EB1D58935E004AB21A /* TimelinePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelinePlayer.swift; sourceTree = "<group>"; };
+		BA690B0F1D59A99400DDA6DA /* TimelineCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineCollectionView.swift; sourceTree = "<group>"; };
 		BA8494871D5907C700D453C0 /* SnowballAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballAPI.swift; sourceTree = "<group>"; };
 		BA84948B1D59773100D453C0 /* ClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Snowball.swift"; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			children = (
 				BA3286F11D588EA400571612 /* AppDelegate.swift */,
 				BA5269E51D58909E004AB21A /* TimelineViewController.swift */,
+				BA690B0F1D59A99400DDA6DA /* TimelineCollectionView.swift */,
 				BA84948B1D59773100D453C0 /* ClipCollectionViewCell.swift */,
 				BA8494871D5907C700D453C0 /* SnowballAPI.swift */,
 				BA8494911D598B0000D453C0 /* UIScrollView+InfiniteScroll.swift */,
@@ -236,6 +239,7 @@
 				BA3286F21D588EA400571612 /* AppDelegate.swift in Sources */,
 				BA5269E61D58909E004AB21A /* TimelineViewController.swift in Sources */,
 				BA8494921D598B0000D453C0 /* UIScrollView+InfiniteScroll.swift in Sources */,
+				BA690B101D59A99400DDA6DA /* TimelineCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
