@@ -38,20 +38,14 @@ class TimelineViewController: UIViewController {
     gestureRecognizer.direction = .Left
     return gestureRecognizer
   }()
+  var currentPage = 1
 
   // MARK: UIViewController
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    SnowballAPI.request(SnowballAPIRoute.ClipStream).responseCollection { (response: Response<[Clip], NSError>) in
-      switch response.result {
-      case .Success(let clips):
-        self.clips = clips.reverse()
-        self.collectionView.reloadData()
-      case .Failure(let error): debugPrint(error)
-      }
-    }
+    getClipStream()
 
     view.backgroundColor = UIColor.whiteColor()
 
@@ -73,6 +67,8 @@ class TimelineViewController: UIViewController {
     previousClipGestureRecognizer.addTarget(self, action: #selector(TimelineViewController.previousClipGestureRecognizerSwiped))
     nextClipGestureRecognizer.addTarget(self, action: #selector(TimelineViewController.nextClipGestureRecognizerSwiped))
 
+    collectionView.enableInfiniteScrollWithDelegate(self)
+
     view.addSubview(collectionView)
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     collectionView.leftAnchor.constraintEqualToAnchor(view.leftAnchor).active = true
@@ -86,6 +82,20 @@ class TimelineViewController: UIViewController {
   }
 
   // MARK: Private
+
+  private func getClipStream(page: Int = 1) {
+    currentPage = page
+
+    SnowballAPI.request(SnowballAPIRoute.ClipStream(page: page)).responseCollection { (response: Response<[Clip], NSError>) in
+      switch response.result {
+      case .Success(let clips):
+        self.clips = clips.reverse()
+        self.collectionView.reloadData()
+      case .Failure(let error): debugPrint(error)
+      }
+      self.collectionView.setLoadingCompleted()
+    }
+  }
 
   private func scrollToClip(clip: Clip) {
     if let index = clips.indexOf(clip) {
@@ -164,6 +174,17 @@ extension TimelineViewController: UICollectionViewDelegate {
       }
     } else {
       player.playClip(clip)
+    }
+  }
+}
+
+// MARK: - UIScrollViewInfiniteScrollDelegate
+extension TimelineViewController: UIScrollViewInfiniteScrollDelegate {
+  func scrollView(scrollView: UIScrollView, infiniteScrollTriggered direction: UIScrollViewInfiniteScrollDirection) {
+    if direction == .Left {
+      getClipStream(currentPage + 1)
+    } else {
+      getClipStream()
     }
   }
 }

@@ -21,7 +21,7 @@ enum SnowballAPIRoute: URLRequestConvertible {
 
   case Ping
   // Clips
-  case ClipStream
+  case ClipStream(page: Int)
 
   var method: Alamofire.Method {
     switch self {
@@ -44,6 +44,7 @@ enum SnowballAPIRoute: URLRequestConvertible {
 
   var parameters: [String: AnyObject]? {
     switch self {
+    case .ClipStream(let page): return ["page": page]
     default: return nil
     }
   }
