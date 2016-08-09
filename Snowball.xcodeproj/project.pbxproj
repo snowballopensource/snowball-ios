@@ -17,6 +17,7 @@
 		BA5269EC1D58935E004AB21A /* TimelinePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5269EB1D58935E004AB21A /* TimelinePlayer.swift */; };
 		BA8494881D5907C700D453C0 /* SnowballAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8494871D5907C700D453C0 /* SnowballAPI.swift */; };
 		BA84948C1D59773100D453C0 /* ClipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA84948B1D59773100D453C0 /* ClipCollectionViewCell.swift */; };
+		BA84948E1D5979E400D453C0 /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		BA5269EB1D58935E004AB21A /* TimelinePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelinePlayer.swift; sourceTree = "<group>"; };
 		BA8494871D5907C700D453C0 /* SnowballAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballAPI.swift; sourceTree = "<group>"; };
 		BA84948B1D59773100D453C0 /* ClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCollectionViewCell.swift; sourceTree = "<group>"; };
+		BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Snowball.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				BA5269EB1D58935E004AB21A /* TimelinePlayer.swift */,
 				BA5269E91D5892F3004AB21A /* Clip.swift */,
 				BA5269E71D5890C8004AB21A /* PlayerView.swift */,
+				BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */,
 				BA3286F81D588EA400571612 /* Assets.xcassets */,
 				BA3286FA1D588EA400571612 /* LaunchScreen.storyboard */,
 				BA3286FD1D588EA400571612 /* Info.plist */,
@@ -224,6 +227,7 @@
 				BA5269EC1D58935E004AB21A /* TimelinePlayer.swift in Sources */,
 				BA84948C1D59773100D453C0 /* ClipCollectionViewCell.swift in Sources */,
 				BA5269E81D5890C8004AB21A /* PlayerView.swift in Sources */,
+				BA84948E1D5979E400D453C0 /* UIColor+Snowball.swift in Sources */,
 				BA8494881D5907C700D453C0 /* SnowballAPI.swift in Sources */,
 				BA5269EA1D5892F3004AB21A /* Clip.swift in Sources */,
 				BA3286F21D588EA400571612 /* AppDelegate.swift in Sources */,

@@ -59,6 +59,12 @@ class TimelineViewController: UIViewController {
     collectionView.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
     collectionView.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
   }
+
+  private func scrollToClip(clip: Clip) {
+    if let index = clips.indexOf(clip) {
+      collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: .CenteredHorizontally, animated: true)
+    }
+  }
 }
 
 // MARK: - TimelinePlayerDataSource
@@ -80,10 +86,12 @@ extension TimelineViewController: TimelinePlayerDataSource {
 extension TimelineViewController: TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
     print("begin")
+    scrollToClip(clip)
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
     print("transition")
+    scrollToClip(toClip)
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
@@ -99,7 +107,7 @@ extension TimelineViewController: UICollectionViewDataSource {
 
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(ClipCollectionViewCell), forIndexPath: indexPath) as! ClipCollectionViewCell
-    cell.backgroundColor = UIColor.purpleColor()
+    cell.backgroundColor = UIColor.SnowballColor.randomColor()
     return cell
   }
 }
