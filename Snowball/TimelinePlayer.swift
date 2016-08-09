@@ -58,6 +58,11 @@ class TimelinePlayer: AVQueuePlayer {
     advanceToNextItem()
   }
 
+  func stop() {
+    pause()
+    removeAllItems()
+  }
+
   // MARK: Private
 
   private func removeItemsExceptCurrentItem() {

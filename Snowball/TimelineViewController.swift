@@ -154,6 +154,15 @@ extension TimelineViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension TimelineViewController: UICollectionViewDelegate {
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    player.playClip(clips[indexPath.row])
+    let clip = clips[indexPath.row]
+    if let playerItem = player.currentItem as? ClipPlayerItem {
+      if playerItem.clip == clip {
+        player.stop()
+      } else {
+        player.playClip(clip)
+      }
+    } else {
+      player.playClip(clip)
+    }
   }
 }
