@@ -118,11 +118,14 @@ class TimelinePlayer: AVQueuePlayer {
   }
 
   private func ensureEnoughClipsInQueue() {
-    if let currentClip = currentClip, let clipIndex = dataSource?.timelinePlayer(self, indexOfClip: currentClip) {
-      let numberOfClips = dataSource?.numberOfClipsInTimelinePlayer(self)
-      for i in clipIndex..<clipIndex + 3 where i < numberOfClips {
-        if let clip = dataSource?.timelinePlayer(self, clipAtIndex: i) {
-          safelyEnqueueClip(clip)
+    let queue = dispatch_get_global_queue(Int(QOS_CLASS_UTILITY.rawValue), 0)
+    dispatch_async(queue) {
+      if let currentClip = self.currentClip, let clipIndex = self.dataSource?.timelinePlayer(self, indexOfClip: currentClip) {
+        let numberOfClips = self.dataSource?.numberOfClipsInTimelinePlayer(self)
+        for i in clipIndex..<clipIndex + 3 where i < numberOfClips {
+          if let clip = self.dataSource?.timelinePlayer(self, clipAtIndex: i) {
+            self.safelyEnqueueClip(clip)
+          }
         }
       }
     }
