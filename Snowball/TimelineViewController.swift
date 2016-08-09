@@ -88,8 +88,11 @@ class TimelineViewController: UIViewController {
   }
 
   private func scrollToClip(clip: Clip) {
-    if let index = clips.indexOf(clip) {
-      collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: .CenteredHorizontally, animated: true)
+    // Ugly hack alert: Delay a bit before scrolling since playback has a really long main queue time.
+    delay(0.05) {
+      if let index = self.clips.indexOf(clip) {
+        self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: .CenteredHorizontally, animated: true)
+      }
     }
   }
 
@@ -114,6 +117,16 @@ class TimelineViewController: UIViewController {
         self.collectionView.reloadItemsAtIndexPaths(updateIndexPaths)
       }, completion: nil)
     }
+  }
+
+  // This will be gone in Swift 3
+  private func delay(delay: Double, closure: () -> Void) {
+    dispatch_after(
+      dispatch_time(
+        DISPATCH_TIME_NOW,
+        Int64(delay * Double(NSEC_PER_SEC))
+      ),
+      dispatch_get_main_queue(), closure)
   }
 
   // MARK: Actions
