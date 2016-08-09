@@ -30,7 +30,7 @@ class TimelineViewController: UIViewController {
     SnowballAPI.request(SnowballAPIRoute.ClipStream).responseCollection { (response: Response<[Clip], NSError>) in
       switch response.result {
       case .Success(let clips):
-        self.clips = clips
+        self.clips = clips.reverse()
         self.collectionView.reloadData()
         self.player.playClip(self.clips.first!)
       case .Failure(let error): debugPrint(error)
