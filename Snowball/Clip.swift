@@ -11,6 +11,7 @@ import SwiftyJSON
 
 struct Clip {
   let id: String
+  let imageURL: NSURL
   let videoURL: NSURL
 }
 
@@ -26,10 +27,13 @@ extension Clip: ResponseObjectSerializable {
     let json = JSON(representation)
     if
       let id = json["id"].string,
+      let imageURLString = json["image"]["standard_resolution"]["url"].string,
+      let imageURL = NSURL(string: imageURLString),
       let videoURLString = json["video"]["standard_resolution"]["url"].string,
       let videoURL = NSURL(string: videoURLString) {
 
       self.id = id
+      self.imageURL = imageURL
       self.videoURL = videoURL
     } else {
       return nil

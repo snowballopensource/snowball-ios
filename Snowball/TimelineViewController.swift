@@ -107,7 +107,8 @@ extension TimelineViewController: UICollectionViewDataSource {
 
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(ClipCollectionViewCell), forIndexPath: indexPath) as! ClipCollectionViewCell
-    cell.backgroundColor = UIColor.SnowballColor.randomColor()
+    let clip = clips[indexPath.row]
+    cell.configureForClip(clip)
     return cell
   }
 }
