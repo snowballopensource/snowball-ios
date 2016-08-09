@@ -36,8 +36,14 @@ class TimelinePlayer: AVQueuePlayer {
   // MARK: Internal
 
   func playClip(clip: Clip) {
-    safelyEnqueueClip(clip)
     play()
+    if let _ = currentClip {
+      removeItemsExceptCurrentItem()
+      safelyEnqueueClip(clip)
+      advanceToNextItem()
+    } else {
+      safelyEnqueueClip(clip)
+    }
   }
 
   func next() {
@@ -45,11 +51,7 @@ class TimelinePlayer: AVQueuePlayer {
   }
 
   func previous() {
-    for item in items() {
-      if currentItem != item {
-        removeItem(item)
-      }
-    }
+    removeItemsExceptCurrentItem()
     if let currentClip = currentClip, let previousClip = clipBeforeClip(currentClip) {
       safelyEnqueueClip(previousClip)
     }
@@ -57,6 +59,14 @@ class TimelinePlayer: AVQueuePlayer {
   }
 
   // MARK: Private
+
+  private func removeItemsExceptCurrentItem() {
+    for item in items() {
+      if currentItem != item {
+        removeItem(item)
+      }
+    }
+  }
 
   private func clipAfterClip(clip: Clip) -> Clip? {
     if let currentClip = currentClip, let currentClipIndex = dataSource?.timelinePlayer(self, indexOfClip: currentClip) {

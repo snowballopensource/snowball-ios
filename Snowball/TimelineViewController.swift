@@ -66,6 +66,7 @@ class TimelineViewController: UIViewController {
     playerView.heightAnchor.constraintEqualToAnchor(view.widthAnchor).active = true
 
     collectionView.dataSource = self
+    collectionView.delegate = self
     collectionView.addGestureRecognizer(previousClipGestureRecognizer)
     collectionView.addGestureRecognizer(nextClipGestureRecognizer)
     previousClipGestureRecognizer.addTarget(self, action: #selector(TimelineViewController.previousClipGestureRecognizerSwiped))
@@ -136,7 +137,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
   }
 }
 
-// MARK: - UICollectionView
+// MARK: - UICollectionViewDataSource
 extension TimelineViewController: UICollectionViewDataSource {
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return clips.count
@@ -147,5 +148,12 @@ extension TimelineViewController: UICollectionViewDataSource {
     let clip = clips[indexPath.row]
     cell.configureForClip(clip)
     return cell
+  }
+}
+
+// MARK: - UICollectionViewDelegate
+extension TimelineViewController: UICollectionViewDelegate {
+  func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    player.playClip(clips[indexPath.row])
   }
 }
