@@ -13,6 +13,16 @@ class TimelineViewController: UIViewController {
   var clips = [Clip]()
   let player = TimelinePlayer()
   let playerView = PlayerView()
+  let collectionView: UICollectionView = {
+    let flowLayout = UICollectionViewFlowLayout()
+    flowLayout.scrollDirection = .Horizontal
+    flowLayout.minimumInteritemSpacing = 0
+    flowLayout.minimumLineSpacing = 0
+    flowLayout.itemSize = ClipCollectionViewCell.defaultSize
+    let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: flowLayout)
+    collectionView.registerClass(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell))
+    return collectionView
+  }()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -21,6 +31,7 @@ class TimelineViewController: UIViewController {
       switch response.result {
       case .Success(let clips):
         self.clips = clips
+        self.collectionView.reloadData()
         self.player.playClip(self.clips.first!)
       case .Failure(let error): debugPrint(error)
       }
@@ -30,15 +41,23 @@ class TimelineViewController: UIViewController {
 
     player.dataSource = self
     player.delegate = self
+    playerView.player = player
 
     view.addSubview(playerView)
     playerView.translatesAutoresizingMaskIntoConstraints = false
     playerView.leftAnchor.constraintEqualToAnchor(view.leftAnchor).active = true
     playerView.topAnchor.constraintEqualToAnchor(view.topAnchor).active = true
     playerView.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
-    playerView.bottomAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
+    playerView.heightAnchor.constraintEqualToAnchor(view.widthAnchor).active = true
 
-    playerView.player = player
+    collectionView.dataSource = self
+
+    view.addSubview(collectionView)
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
+    collectionView.leftAnchor.constraintEqualToAnchor(view.leftAnchor).active = true
+    collectionView.topAnchor.constraintEqualToAnchor(playerView.bottomAnchor).active = true
+    collectionView.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
+    collectionView.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
   }
 }
 
@@ -69,5 +88,18 @@ extension TimelineViewController: TimelinePlayerDelegate {
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
     print("done")
+  }
+}
+
+// MARK: - UICollectionView
+extension TimelineViewController: UICollectionViewDataSource {
+  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return clips.count
+  }
+
+  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(ClipCollectionViewCell), forIndexPath: indexPath) as! ClipCollectionViewCell
+    cell.backgroundColor = UIColor.purpleColor()
+    return cell
   }
 }
