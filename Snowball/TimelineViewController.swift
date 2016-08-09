@@ -10,6 +10,9 @@ import Alamofire
 import UIKit
 
 class TimelineViewController: UIViewController {
+
+  // MARK: Properties
+
   var clips = [Clip]()
   let player = TimelinePlayer()
   let playerView = PlayerView()
@@ -23,6 +26,8 @@ class TimelineViewController: UIViewController {
     collectionView.registerClass(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell))
     return collectionView
   }()
+
+  // MARK: UIViewController
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -59,6 +64,12 @@ class TimelineViewController: UIViewController {
     collectionView.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
     collectionView.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
   }
+
+  override func prefersStatusBarHidden() -> Bool {
+    return true
+  }
+
+  // MARK: Private
 
   private func scrollToClip(clip: Clip) {
     if let index = clips.indexOf(clip) {
