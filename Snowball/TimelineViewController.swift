@@ -89,7 +89,11 @@ class TimelineViewController: UIViewController {
     SnowballAPI.request(SnowballAPIRoute.ClipStream(page: page)).responseCollection { (response: Response<[Clip], NSError>) in
       switch response.result {
       case .Success(let clips):
-        self.clips = clips.reverse()
+        if page == 1 {
+          self.clips = clips.reverse()
+        } else {
+          self.clips = clips.reverse() + self.clips
+        }
         self.collectionView.reloadData()
       case .Failure(let error): debugPrint(error)
       }
