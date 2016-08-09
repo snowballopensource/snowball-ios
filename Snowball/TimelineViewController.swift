@@ -24,6 +24,7 @@ class TimelineViewController: UIViewController {
     flowLayout.itemSize = ClipCollectionViewCell.defaultSize
     let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: flowLayout)
     collectionView.registerClass(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell))
+    collectionView.showsHorizontalScrollIndicator = false
     return collectionView
   }()
   let previousClipGestureRecognizer: UISwipeGestureRecognizer = {
