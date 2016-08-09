@@ -15,6 +15,7 @@ struct SnowballAPI {
   }
 }
 
+// MARK: - SnowballAPIRoute
 enum SnowballAPIRoute: URLRequestConvertible {
   private static let baseURL = NSURL(string: "https://api.snowball.is/v1")!
 
@@ -60,10 +61,12 @@ enum SnowballAPIRoute: URLRequestConvertible {
   }
 }
 
+// MARK: - ResponseObjectSerializable
 protocol ResponseObjectSerializable {
   init?(response: NSHTTPURLResponse, representation: AnyObject)
 }
 
+// MARK: - ResponseCollectionSerializable
 protocol ResponseCollectionSerializable {
   static func collection(response response: NSHTTPURLResponse, representation: AnyObject) -> [Self]
 }
@@ -82,6 +85,7 @@ extension ResponseCollectionSerializable where Self: ResponseObjectSerializable 
   }
 }
 
+// MARK: - Request
 extension Request {
   func responseObject<T: ResponseObjectSerializable>(completionHandler: Response<T, NSError> -> Void) -> Self {
     let responseSerializer = ResponseSerializer<T, NSError> { request, response, data, error in
