@@ -48,9 +48,7 @@ extension UIScrollView {
   // MARK: Internal
 
   func enableInfiniteScrollWithDelegate(delegate: UIScrollViewInfiniteScrollDelegate) {
-    // This sets default edge insets
-    let pullToLoadInset: CGFloat = -45
-    enableInfiniteScrollWithDelegate(delegate, thresholds: UIEdgeInsets(top: pullToLoadInset, left: pullToLoadInset, bottom: pullToLoadInset, right: pullToLoadInset))
+    enableInfiniteScrollWithDelegate(delegate, thresholds: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
   }
 
   func enableInfiniteScrollWithDelegate(delegate: UIScrollViewInfiniteScrollDelegate, thresholds: UIEdgeInsets) {
