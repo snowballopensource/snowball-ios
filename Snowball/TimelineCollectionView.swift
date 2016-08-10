@@ -10,12 +10,16 @@ import UIKit
 
 class TimelineCollectionView: UICollectionView {
 
+  let sideBufferWidth = UIScreen.mainScreen().bounds.width
+
   init() {
     super.init(frame: CGRectZero, collectionViewLayout: TimelineCollectionViewFlowLayout())
 
     backgroundColor = UIColor.whiteColor()
     registerClass(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell))
     showsHorizontalScrollIndicator = false
+
+    contentInset = UIEdgeInsets(top: 0, left: sideBufferWidth, bottom: 0, right: sideBufferWidth)
   }
   
   required init?(coder: NSCoder) {
