@@ -22,6 +22,8 @@
 		BA84948C1D59773100D453C0 /* ClipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA84948B1D59773100D453C0 /* ClipCollectionViewCell.swift */; };
 		BA84948E1D5979E400D453C0 /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */; };
 		BA8494921D598B0000D453C0 /* UIScrollView+InfiniteScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8494911D598B0000D453C0 /* UIScrollView+InfiniteScroll.swift */; };
+		BAAD146F1D5C3D3800FD7D5F /* UserImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD146E1D5C3D3800FD7D5F /* UserImageView.swift */; };
+		BAAD14711D5C3DED00FD7D5F /* UIImageView+Remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD14701D5C3DED00FD7D5F /* UIImageView+Remote.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		BA84948B1D59773100D453C0 /* ClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Snowball.swift"; sourceTree = "<group>"; };
 		BA8494911D598B0000D453C0 /* UIScrollView+InfiniteScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+InfiniteScroll.swift"; sourceTree = "<group>"; };
+		BAAD146E1D5C3D3800FD7D5F /* UserImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageView.swift; sourceTree = "<group>"; };
+		BAAD14701D5C3DED00FD7D5F /* UIImageView+Remote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Remote.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,8 @@
 				BA690B111D5A443E00DDA6DA /* ArrayDiff.swift */,
 				BA8494911D598B0000D453C0 /* UIScrollView+InfiniteScroll.swift */,
 				BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */,
+				BAAD146E1D5C3D3800FD7D5F /* UserImageView.swift */,
+				BAAD14701D5C3DED00FD7D5F /* UIImageView+Remote.swift */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -284,9 +290,11 @@
 				BA5269EA1D5892F3004AB21A /* Clip.swift in Sources */,
 				BA3286F21D588EA400571612 /* AppDelegate.swift in Sources */,
 				BA5269E61D58909E004AB21A /* TimelineViewController.swift in Sources */,
+				BAAD14711D5C3DED00FD7D5F /* UIImageView+Remote.swift in Sources */,
 				BA690B191D5A63EE00DDA6DA /* User.swift in Sources */,
 				BA8494921D598B0000D453C0 /* UIScrollView+InfiniteScroll.swift in Sources */,
 				BA690B121D5A443E00DDA6DA /* ArrayDiff.swift in Sources */,
+				BAAD146F1D5C3D3800FD7D5F /* UserImageView.swift in Sources */,
 				BA690B101D59A99400DDA6DA /* TimelineCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

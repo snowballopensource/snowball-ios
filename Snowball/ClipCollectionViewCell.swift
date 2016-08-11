@@ -6,14 +6,11 @@
 //  Copyright © 2016 Snowball, Inc. All rights reserved.
 //
 
-import AlamofireImage
 import UIKit
 
 class ClipCollectionViewCell: UICollectionViewCell {
 
   // MARK: Properties
-
-  let imageView = UIImageView()
 
   class var defaultSize: CGSize {
     let screenHeight = UIScreen.mainScreen().bounds.height
@@ -23,6 +20,9 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let cellWidth = screenWidth / cellsPerScreen
     return CGSizeMake(cellWidth, cellHeight)
   }
+
+  let imageView = UIImageView()
+  let userImageView = UserImageView()
 
   // MARK: Initializers
 
@@ -35,6 +35,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
     imageView.topAnchor.constraintEqualToAnchor(topAnchor).active = true
     imageView.rightAnchor.constraintEqualToAnchor(rightAnchor).active = true
     imageView.heightAnchor.constraintEqualToAnchor(widthAnchor).active = true
+
+    addSubview(userImageView)
+    userImageView.translatesAutoresizingMaskIntoConstraints = false
+    userImageView.centerXAnchor.constraintEqualToAnchor(centerXAnchor).active = true
+    userImageView.centerYAnchor.constraintEqualToAnchor(imageView.bottomAnchor).active = true
+    userImageView.widthAnchor.constraintEqualToAnchor(widthAnchor, multiplier: 1/3).active = true
+    userImageView.heightAnchor.constraintEqualToAnchor(userImageView.widthAnchor).active = true
   }
 
   required init?(coder: NSCoder) {
@@ -44,7 +51,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
   // MARK: Internal
 
   func configureForClip(clip: Clip) {
-    backgroundColor = UIColor.SnowballColor.randomColor()
-    imageView.af_setImageWithURL(clip.imageURL, placeholderImage: UIImage())
+    imageView.setImageFromRemoteURL(clip.imageURL)
+    userImageView.setImageFromRemoteURL(clip.user.avatarURL)
   }
 }

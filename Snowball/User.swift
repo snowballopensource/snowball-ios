@@ -13,6 +13,7 @@ struct User {
   let id: String
   var username: String
   var avatarURL: NSURL? = nil
+  let color = UIColor.SnowballColor.randomColor()
 }
 
 // MARK: - Equatable
