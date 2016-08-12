@@ -29,6 +29,12 @@ class TimelineViewController: UIViewController {
   }()
   var currentPage = 1
 
+  var state = TimelineViewControllerState.Default {
+    didSet {
+      collectionView.scrollEnabled = (state != .Playing)
+    }
+  }
+
   // MARK: UIViewController
 
   override func viewDidLoad() {
@@ -129,6 +135,31 @@ class TimelineViewController: UIViewController {
       dispatch_get_main_queue(), closure)
   }
 
+  private func cellForClip(clip: Clip) -> ClipCollectionViewCell {
+    let indexPath = NSIndexPath(forItem: clips.indexOf(clip)!, inSection: 0)
+    return collectionView.cellForItemAtIndexPath(indexPath) as! ClipCollectionViewCell
+  }
+
+  private func cellStateForState(state: TimelineViewControllerState) -> ClipCollectionViewCellState {
+    switch state {
+    case .Playing: return .PlayingInactive
+    case .Default: return .Default
+    }
+  }
+
+  private func updateStateForVisibleCells() {
+    for cell in collectionView.visibleCells() {
+      let cell = cell as! ClipCollectionViewCell
+      cell.setState(cellStateForState(state), animated: true)
+    }
+
+    if state == .Playing {
+      guard let currentItem = player.currentItem as? ClipPlayerItem else { return }
+      let playingClipCell = cellForClip(currentItem.clip)
+      playingClipCell.setState(.PlayingActive, animated: true)
+    }
+  }
+
   // MARK: Actions
 
   @objc private func previousClipGestureRecognizerSwiped() {
@@ -138,6 +169,11 @@ class TimelineViewController: UIViewController {
   @objc private func nextClipGestureRecognizerSwiped() {
     player.next()
   }
+}
+
+// MARK: - TimelineViewControllerState
+enum TimelineViewControllerState {
+  case Default, Playing
 }
 
 // MARK: - TimelinePlayerDataSource
@@ -158,19 +194,19 @@ extension TimelineViewController: TimelinePlayerDataSource {
 // MARK: - TimelinePlayerDeleate
 extension TimelineViewController: TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
-    print("begin")
-    collectionView.scrollEnabled = false
+    state = .Playing
     scrollToClip(clip)
+    updateStateForVisibleCells()
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
-    print("transition")
     scrollToClip(toClip)
+    updateStateForVisibleCells()
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
-    print("done")
-    collectionView.scrollEnabled = true
+    state = .Default
+    updateStateForVisibleCells()
   }
 }
 

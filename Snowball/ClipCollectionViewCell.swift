@@ -24,6 +24,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
   let imageView = UIImageView()
   let userImageView = UserImageView()
 
+  private(set) var state: ClipCollectionViewCellState = .Default
+
   // MARK: Initializers
 
   override init(frame: CGRect) {
@@ -50,8 +52,32 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   // MARK: Internal
 
-  func configureForClip(clip: Clip) {
+  func configureForClip(clip: Clip, state: ClipCollectionViewCellState = .Default) {
+    setState(state, animated: false)
+
     imageView.setImageFromRemoteURL(clip.imageURL)
     userImageView.setImageFromRemoteURL(clip.user.avatarURL)
   }
+
+  func setState(state: ClipCollectionViewCellState, animated: Bool) {
+    if animated {
+      UIView.animateWithDuration(0.4) {
+        self.setState(state, animated: false)
+      }
+      return
+    }
+
+    if state == .PlayingActive || state == .PlayingInactive {
+      imageView.transform = CGAffineTransformMakeScale(0.8, 0.8)
+    } else {
+      imageView.transform = CGAffineTransformMakeScale(1, 1)
+    }
+
+    imageView.hidden = (state == .PlayingActive)
+  }
+}
+
+// MARK: - ClipCollectionViewCellState
+enum ClipCollectionViewCellState {
+  case Default, PlayingActive, PlayingInactive
 }
