@@ -94,11 +94,8 @@ class TimelineViewController: UIViewController {
   }
 
   private func scrollToClip(clip: Clip) {
-    // Ugly hack alert: Delay a bit before scrolling since playback has a really long main queue time.
-    delay(0.05) {
-      if let index = self.clips.indexOf(clip) {
-        self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: .CenteredHorizontally, animated: true)
-      }
+    if let index = clips.indexOf(clip) {
+      collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: .CenteredHorizontally, animated: true)
     }
   }
 
@@ -125,16 +122,6 @@ class TimelineViewController: UIViewController {
     }
   }
 
-  // This will be gone in Swift 3
-  private func delay(delay: Double, closure: () -> Void) {
-    dispatch_after(
-      dispatch_time(
-        DISPATCH_TIME_NOW,
-        Int64(delay * Double(NSEC_PER_SEC))
-      ),
-      dispatch_get_main_queue(), closure)
-  }
-
   private func cellForClip(clip: Clip) -> ClipCollectionViewCell {
     let indexPath = NSIndexPath(forItem: clips.indexOf(clip)!, inSection: 0)
     return collectionView.cellForItemAtIndexPath(indexPath) as! ClipCollectionViewCell
@@ -157,6 +144,14 @@ class TimelineViewController: UIViewController {
       guard let currentItem = player.currentItem as? ClipPlayerItem else { return }
       let playingClipCell = cellForClip(currentItem.clip)
       playingClipCell.setState(.PlayingActive, animated: true)
+    }
+  }
+
+  private func prepareForStateChangeThen(closure: () -> Void) {
+    // Ugly hack alert: Delay a bit before animating any changes since playback has a really long main queue time.
+    let time = dispatch_time(DISPATCH_TIME_NOW, Int64(0.05 * Double(NSEC_PER_SEC)))
+    dispatch_after(time, dispatch_get_main_queue()) {
+      closure()
     }
   }
 
@@ -194,19 +189,25 @@ extension TimelineViewController: TimelinePlayerDataSource {
 // MARK: - TimelinePlayerDeleate
 extension TimelineViewController: TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
-    state = .Playing
-    scrollToClip(clip)
-    updateStateForVisibleCells()
+    prepareForStateChangeThen {
+      self.state = .Playing
+      self.scrollToClip(clip)
+      self.updateStateForVisibleCells()
+    }
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
-    scrollToClip(toClip)
-    updateStateForVisibleCells()
+    prepareForStateChangeThen {
+      self.scrollToClip(toClip)
+      self.updateStateForVisibleCells()
+    }
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
-    state = .Default
-    updateStateForVisibleCells()
+    prepareForStateChangeThen {
+      self.state = .Default
+      self.updateStateForVisibleCells()
+    }
   }
 }
 
