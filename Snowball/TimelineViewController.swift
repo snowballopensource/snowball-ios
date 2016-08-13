@@ -137,13 +137,16 @@ class TimelineViewController: UIViewController {
   private func updateStateForVisibleCells() {
     for cell in collectionView.visibleCells() {
       let cell = cell as! ClipCollectionViewCell
-      cell.setState(cellStateForState(state), animated: true)
-    }
 
-    if state == .Playing {
-      guard let currentItem = player.currentItem as? ClipPlayerItem else { return }
-      let playingClipCell = cellForClip(currentItem.clip)
-      playingClipCell.setState(.PlayingActive, animated: true)
+      if state == .Playing {
+        if let currentItem = player.currentItem as? ClipPlayerItem {
+          if cell == cellForClip(currentItem.clip) {
+            cell.setState(.PlayingActive, animated: true)
+            return
+          }
+        }
+      }
+      cell.setState(cellStateForState(state), animated: true)
     }
   }
 

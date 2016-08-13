@@ -73,7 +73,13 @@ class ClipCollectionViewCell: UICollectionViewCell {
       imageView.transform = CGAffineTransformMakeScale(1, 1)
     }
 
-    imageView.hidden = (state == .PlayingActive)
+    if state == .PlayingInactive {
+      imageView.alpha = 0.5
+      userImageView.alpha = 0
+    } else {
+      imageView.alpha = 1
+      userImageView.alpha = 1
+    }
   }
 }
 
