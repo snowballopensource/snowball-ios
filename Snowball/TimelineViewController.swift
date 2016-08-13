@@ -147,14 +147,6 @@ class TimelineViewController: UIViewController {
     }
   }
 
-  private func prepareForStateChangeThen(closure: () -> Void) {
-    // Ugly hack alert: Delay a bit before animating any changes since playback has a really long main queue time.
-    let time = dispatch_time(DISPATCH_TIME_NOW, Int64(0.05 * Double(NSEC_PER_SEC)))
-    dispatch_after(time, dispatch_get_main_queue()) {
-      closure()
-    }
-  }
-
   // MARK: Actions
 
   @objc private func previousClipGestureRecognizerSwiped() {
@@ -189,25 +181,20 @@ extension TimelineViewController: TimelinePlayerDataSource {
 // MARK: - TimelinePlayerDeleate
 extension TimelineViewController: TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
-    prepareForStateChangeThen {
-      self.state = .Playing
-      self.scrollToClip(clip)
-      self.updateStateForVisibleCells()
-    }
+    state = .Playing
+    scrollToClip(clip)
+    updateStateForVisibleCells()
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
-    prepareForStateChangeThen {
-      self.scrollToClip(toClip)
-      self.updateStateForVisibleCells()
-    }
+    scrollToClip(toClip)
+    updateStateForVisibleCells()
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
-    prepareForStateChangeThen {
-      self.state = .Default
-      self.updateStateForVisibleCells()
-    }
+    state = .Default
+    updateStateForVisibleCells()
+
   }
 }
 

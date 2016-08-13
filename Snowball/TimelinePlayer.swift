@@ -22,6 +22,12 @@ class TimelinePlayer: AVQueuePlayer {
     return (currentItem as? ClipPlayerItem)?.clip
   }
 
+  private let loadingQueue: NSOperationQueue = {
+    let queue = NSOperationQueue()
+    queue.maxConcurrentOperationCount = 1
+    return queue
+  }()
+
   // MARK: Initializers
 
   override init() {
@@ -39,8 +45,9 @@ class TimelinePlayer: AVQueuePlayer {
     play()
     if let _ = currentClip {
       removeItemsExceptCurrentItem()
-      safelyEnqueueClip(clip)
-      advanceToNextItem()
+      safelyEnqueueClip(clip) {
+        self.advanceToNextItem()
+      }
     } else {
       safelyEnqueueClip(clip)
     }
@@ -53,13 +60,15 @@ class TimelinePlayer: AVQueuePlayer {
   func previous() {
     removeItemsExceptCurrentItem()
     if let currentClip = currentClip, let previousClip = clipBeforeClip(currentClip) {
-      safelyEnqueueClip(previousClip)
+      safelyEnqueueClip(previousClip) {
+        self.advanceToNextItem()
+      }
     }
-    advanceToNextItem()
   }
 
   func stop() {
     pause()
+    loadingQueue.cancelAllOperations()
     removeAllItems()
   }
 
@@ -93,9 +102,14 @@ class TimelinePlayer: AVQueuePlayer {
     return nil
   }
 
-  private func safelyEnqueueClip(clip: Clip) {
+  private func safelyEnqueueClip(clip: Clip, completion: (() -> Void)? = nil) {
     func canEnqueueClip(clip: Clip) -> Bool {
       var shouldEnqueueClip = true
+      for queueOperation in loadingQueue.operations {
+        if let queueOperation = queueOperation as? ClipLoadingOperation {
+          if clip == queueOperation.clip { shouldEnqueueClip = false }
+        }
+      }
       for queuedItem in items() {
         if let queuedItem = queuedItem as? ClipPlayerItem {
           if clip == queuedItem.clip { shouldEnqueueClip = false }
@@ -104,16 +118,16 @@ class TimelinePlayer: AVQueuePlayer {
       return shouldEnqueueClip
     }
 
-    func enqueueClip(clip: Clip) {
-      let playerItem = ClipPlayerItem(clip: clip)
-      let lastPlayerItem = items().last
-      if canInsertItem(playerItem, afterItem: lastPlayerItem) {
-        insertItem(playerItem, afterItem: lastPlayerItem)
+    func enqueueClip(clip: Clip, completion: (() -> Void)? = nil) {
+      let loadingOperation = ClipLoadingOperation(clip: clip) { playerItem in
+        self.insertItem(playerItem, afterItem: nil)
+        completion?()
       }
+      loadingQueue.addOperation(loadingOperation)
     }
 
     if canEnqueueClip(clip) {
-      enqueueClip(clip)
+      enqueueClip(clip, completion: completion)
     }
   }
 
@@ -133,7 +147,7 @@ class TimelinePlayer: AVQueuePlayer {
 
   private func onClipChange(oldClip: Clip?, newClip: Clip?) {
     if let oldClip = oldClip, newClip = newClip {
-     delegate?.timelinePlayer(self, didTransitionFromClip: oldClip, toClip: newClip)
+      delegate?.timelinePlayer(self, didTransitionFromClip: oldClip, toClip: newClip)
     } else if let oldClip = oldClip {
       delegate?.timelinePlayer(self, didEndPlaybackWithLastClip: oldClip)
     } else if let newClip = newClip {
@@ -178,8 +192,88 @@ protocol TimelinePlayerDelegate {
 class ClipPlayerItem: AVPlayerItem {
   let clip: Clip
 
-  init(clip: Clip) {
+  init(clip: Clip, asset: AVAsset) {
     self.clip = clip
-    super.init(asset: AVAsset(URL: clip.videoURL), automaticallyLoadedAssetKeys: ["tracks", "duration"])
+    super.init(asset: asset, automaticallyLoadedAssetKeys: nil)
+  }
+}
+
+// MARK: - ClipLoadingOperation
+class ClipLoadingOperation: NSOperation {
+  // NSOperations suck. Here's some help:
+  // https://github.com/robertmryan/Operation-Test-Swift/tree/master/OperationTestSwift
+
+  // MARK: Properties
+
+  let clip: Clip
+  private let onSuccess: (playerItem: ClipPlayerItem) -> Void
+
+  override var asynchronous: Bool { return true }
+
+  private var _executing = false
+  override var executing: Bool {
+    get {
+      return _executing
+    }
+    set {
+      willChangeValueForKey("isExecuting")
+      _executing = newValue
+      didChangeValueForKey("isExecuting")
+    }
+  }
+
+  private var _finished = false
+  override var finished: Bool {
+    get {
+      return _finished
+    }
+    set {
+      willChangeValueForKey("isFinished")
+      _finished = newValue
+      didChangeValueForKey("isFinished")
+    }
+  }
+
+  // MARK: Initializers
+
+  init(clip: Clip, onSuccess: (playerItem: ClipPlayerItem) -> Void) {
+    self.clip = clip
+    self.onSuccess = onSuccess
+    super.init()
+  }
+
+  // MARK: NSOperation
+
+  override func start() {
+    executing = true
+    unlessCancelled {
+      self.main()
+    }
+  }
+
+  override func main() {
+    let asset = AVAsset(URL: clip.videoURL)
+    asset.loadValuesAsynchronouslyForKeys(["duration", "tracks"]) {
+      self.unlessCancelled {
+        self.onSuccess(playerItem: ClipPlayerItem(clip: self.clip, asset: asset))
+        self.completeOperation()
+      }
+    }
+  }
+
+  // MARK: Private
+
+  private func completeOperation() {
+    executing = false
+    finished = true
+  }
+
+  private func unlessCancelled(block: () -> Void) {
+    if cancelled {
+      completeOperation()
+      return
+    } else {
+      block()
+    }
   }
 }
