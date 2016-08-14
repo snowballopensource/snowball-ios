@@ -49,6 +49,7 @@ class TimelinePlayer: AVQueuePlayer {
         self.advanceToNextItem()
       }
     } else {
+      delegate?.timelinePlayer(self, willBeginPlaybackWithFirstClip: clip)
       safelyEnqueueClip(clip)
     }
   }
@@ -150,8 +151,6 @@ class TimelinePlayer: AVQueuePlayer {
       delegate?.timelinePlayer(self, didTransitionFromClip: oldClip, toClip: newClip)
     } else if let oldClip = oldClip {
       delegate?.timelinePlayer(self, didEndPlaybackWithLastClip: oldClip)
-    } else if let newClip = newClip {
-      delegate?.timelinePlayer(self, willBeginPlaybackWithFirstClip: newClip)
     }
 
     if newClip != nil {
