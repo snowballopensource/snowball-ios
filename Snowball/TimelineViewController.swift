@@ -35,6 +35,13 @@ class TimelineViewController: UIViewController {
     }
   }
 
+  private var defaultCellStateForCurrentState: ClipCollectionViewCellState {
+    switch state {
+    case .Playing: return .PlayingInactive
+    case .Default: return .Default
+    }
+  }
+
   // MARK: UIViewController
 
   override func viewDidLoad() {
@@ -127,23 +134,30 @@ class TimelineViewController: UIViewController {
     return collectionView.cellForItemAtIndexPath(indexPath) as! ClipCollectionViewCell
   }
 
-  private func cellStateForState(state: TimelineViewControllerState) -> ClipCollectionViewCellState {
-    switch state {
-    case .Playing: return .PlayingInactive
-    case .Default: return .Default
+  private func clipForCell(cell: ClipCollectionViewCell) -> Clip {
+    let index = collectionView.indexPathForCell(cell)!.row
+    return clips[index]
+  }
+
+  private func updateStateForVisibleCells(stateBlock: ((cell: ClipCollectionViewCell) -> ClipCollectionViewCellState)) {
+    for cell in collectionView.visibleCells() {
+      let cell = cell as! ClipCollectionViewCell
+      cell.setState(stateBlock(cell: cell), animated: true)
+    }
+  }
+
+  private func updateStateForVisibleCellsWithPlayingClip(clip: Clip) {
+    updateStateForVisibleCells { cell -> ClipCollectionViewCellState in
+      if clip == self.clipForCell(cell) {
+        return .PlayingActive
+      }
+      return self.defaultCellStateForCurrentState
     }
   }
 
   private func updateStateForVisibleCells() {
-    for cell in collectionView.visibleCells() {
-      let cell = cell as! ClipCollectionViewCell
-      var desiredState = cellStateForState(state)
-      if let currentItem = player.currentItem as? ClipPlayerItem {
-        if cell == cellForClip(currentItem.clip) {
-          desiredState = .PlayingActive
-        }
-      }
-      cell.setState(desiredState, animated: true)
+    updateStateForVisibleCells { _ -> ClipCollectionViewCellState in
+      return self.defaultCellStateForCurrentState
     }
   }
 
@@ -183,12 +197,12 @@ extension TimelineViewController: TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
     state = .Playing
     scrollToClip(clip)
-    updateStateForVisibleCells()
+    updateStateForVisibleCellsWithPlayingClip(clip)
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
     scrollToClip(toClip)
-    updateStateForVisibleCells()
+    updateStateForVisibleCellsWithPlayingClip(toClip)
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
