@@ -18,8 +18,26 @@ class TimelinePlayer: AVQueuePlayer {
 
   private let currentItemKeyPath = "currentItem"
 
-  private var currentClip: Clip? {
-    return (currentItem as? ClipPlayerItem)?.clip
+  // currentClip is different from AVPlayer.currentItem
+  // and is used for delegate notifications since currentClip
+  // is set by the player when a clip "actually changes,"
+  // not when we want the clip to change. For example,
+  // starting the player with a clip, the currentItem doesn't
+  // get set immediately since the clip is loaded async, but
+  // the currentClip does. This is why currentClip is in charge
+  // of our delegate notifications.
+  private var currentClip: Clip? = nil {
+    didSet {
+      if oldValue == currentClip { return }
+      switch (oldValue, currentClip) {
+      case (nil, let newClip):
+        delegate?.timelinePlayer(self, willBeginPlaybackWithFirstClip: newClip!)
+      case (let oldClip, nil):
+        delegate?.timelinePlayer(self, didEndPlaybackWithLastClip: oldClip!)
+      case (let oldClip, let newClip):
+        delegate?.timelinePlayer(self, didTransitionFromClip: oldClip!, toClip: newClip!)
+      }
+    }
   }
 
   private let loadingQueue: NSOperationQueue = {
@@ -31,8 +49,8 @@ class TimelinePlayer: AVQueuePlayer {
   // MARK: Initializers
 
   override init() {
-    super.init()
-    addObserver(self, forKeyPath: currentItemKeyPath, options: [.Old, .New], context: nil)
+    super.init() // TODO: REmove old notifis
+    addObserver(self, forKeyPath: currentItemKeyPath, options: [.New], context: nil)
   }
 
   deinit {
@@ -49,18 +67,21 @@ class TimelinePlayer: AVQueuePlayer {
         self.advanceToNextItem()
       }
     } else {
-      delegate?.timelinePlayer(self, willBeginPlaybackWithFirstClip: clip)
       safelyEnqueueClip(clip)
     }
+    currentClip = clip
   }
 
   func next() {
+    currentClip = clipAfterClip(currentClip)
     advanceToNextItem()
   }
 
   func previous() {
     removeItemsExceptCurrentItem()
-    if let currentClip = currentClip, let previousClip = clipBeforeClip(currentClip) {
+    let previousClip = clipBeforeClip(currentClip)
+    currentClip = previousClip
+    if let previousClip = previousClip {
       safelyEnqueueClip(previousClip) {
         self.advanceToNextItem()
       }
@@ -69,6 +90,7 @@ class TimelinePlayer: AVQueuePlayer {
 
   func stop() {
     pause()
+    currentClip = nil
     loadingQueue.cancelAllOperations()
     removeAllItems()
   }
@@ -83,7 +105,10 @@ class TimelinePlayer: AVQueuePlayer {
     }
   }
 
-  private func clipAfterClip(clip: Clip) -> Clip? {
+  private func clipAfterClip(clip: Clip?) -> Clip? {
+    if clip == nil {
+      return nil
+    }
     if let currentClip = currentClip, let currentClipIndex = dataSource?.timelinePlayer(self, indexOfClip: currentClip) {
       let nextClipIndex = currentClipIndex + 1
       if nextClipIndex < dataSource?.numberOfClipsInTimelinePlayer(self) {
@@ -93,7 +118,10 @@ class TimelinePlayer: AVQueuePlayer {
     return nil
   }
 
-  private func clipBeforeClip(clip: Clip) -> Clip? {
+  private func clipBeforeClip(clip: Clip?) -> Clip? {
+    if clip == nil {
+      return nil
+    }
     if let currentClip = currentClip, let currentClipIndex = dataSource?.timelinePlayer(self, indexOfClip: currentClip) {
       let previousClipIndex = currentClipIndex - 1
       if 0...(dataSource?.numberOfClipsInTimelinePlayer(self) ?? 0) ~= previousClipIndex {
@@ -146,26 +174,16 @@ class TimelinePlayer: AVQueuePlayer {
     }
   }
 
-  private func onClipChange(oldClip: Clip?, newClip: Clip?) {
-    if let oldClip = oldClip, newClip = newClip {
-      delegate?.timelinePlayer(self, didTransitionFromClip: oldClip, toClip: newClip)
-    } else if let oldClip = oldClip {
-      delegate?.timelinePlayer(self, didEndPlaybackWithLastClip: oldClip)
-    }
-
-    if newClip != nil {
-      ensureEnoughClipsInQueue()
-    }
-  }
-
   // MARK: KVO
 
   override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
     if keyPath == currentItemKeyPath {
       guard let change = change else { return }
-      let oldClip = (change[NSKeyValueChangeOldKey] as? ClipPlayerItem)?.clip
       let newClip = (change[NSKeyValueChangeNewKey] as? ClipPlayerItem)?.clip
-      onClipChange(oldClip, newClip: newClip)
+      currentClip = newClip
+      if newClip != nil {
+        ensureEnoughClipsInQueue()
+      }
     } else {
       super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
     }
