@@ -75,9 +75,9 @@ class TimelineViewController: UIViewController {
 
     view.addSubview(collectionView)
     collectionView.translatesAutoresizingMaskIntoConstraints = false
-    collectionView.leftAnchor.constraintEqualToAnchor(view.leftAnchor, constant: -collectionView.sideBufferWidth).active = true
+    collectionView.leftAnchor.constraintEqualToAnchor(view.leftAnchor).active = true
     collectionView.topAnchor.constraintEqualToAnchor(playerView.bottomAnchor).active = true
-    collectionView.rightAnchor.constraintEqualToAnchor(view.rightAnchor, constant: collectionView.sideBufferWidth).active = true
+    collectionView.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
     collectionView.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
   }
 
@@ -261,7 +261,7 @@ extension TimelineViewController: TimelineCollectionViewFlowLayoutDelegate {
     if currentPage > 1 {
       let contentSizeBeforeAnimation = collectionView.contentSize
       let contentSizeAfterAnimation = layout.collectionViewContentSize()
-      let xOffset = contentSizeAfterAnimation.width - contentSizeBeforeAnimation.width - collectionView.sideBufferWidth - ClipCollectionViewCell.defaultSize.width / 2
+      let xOffset = contentSizeAfterAnimation.width - contentSizeBeforeAnimation.width - ClipCollectionViewCell.defaultSize.width / 2
       if xOffset < 0 {
         collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
       } else {

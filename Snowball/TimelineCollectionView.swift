@@ -10,8 +10,6 @@ import UIKit
 
 class TimelineCollectionView: UICollectionView {
 
-  let sideBufferWidth = UIScreen.mainScreen().bounds.width
-
   init() {
     let collectionViewLayout = TimelineCollectionViewFlowLayout()
     super.init(frame: CGRectZero, collectionViewLayout: collectionViewLayout)
@@ -20,8 +18,6 @@ class TimelineCollectionView: UICollectionView {
 
     backgroundColor = UIColor.whiteColor()
     showsHorizontalScrollIndicator = false
-
-    collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: sideBufferWidth, bottom: 0, right: sideBufferWidth)
   }
   
   required init?(coder: NSCoder) {
