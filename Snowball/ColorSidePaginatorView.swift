@@ -19,28 +19,37 @@ class ColorSidePaginatorView: PaginatorView {
         hidden = true
       case .InMotion:
         hidden = false
-        backgroundColor = UIColor.lightGrayColor()
+        colorView.backgroundColor = UIColor.lightGrayColor()
       case .Loading:
         setRandomColorAtIntervalsAnimated()
       }
     }
   }
 
+  private let colorView = UIView()
+
   // MARK: Initializers
 
   init() {
     super.init(size: 60)
+    addSubview(colorView)
   }
 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
+  // MARK: UIView
+
+  override func layoutSubviews() {
+    colorView.frame = CGRect(x: 0, y: 0, width: bounds.width, height: ClipCollectionViewCell.defaultSize.width)
+  }
+
   // MARK: Private
 
   func setRandomColorAtIntervalsAnimated() {
     UIView.animateWithDuration(0.3, animations: {
-      self.layer.backgroundColor = UIColor.SnowballColor.randomColor().CGColor
+      self.colorView.layer.backgroundColor = UIColor.SnowballColor.randomColor().CGColor
     }) { _ in
       if self.state == .Loading {
         self.setRandomColorAtIntervalsAnimated()
