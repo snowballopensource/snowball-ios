@@ -15,8 +15,11 @@ class ColorSidePaginatorView: PaginatorView {
   override var state: PaginatorState {
     didSet {
       switch state {
-      case .Default: backgroundColor = UIColor.lightGrayColor()
-      case .InMotion: backgroundColor = UIColor.lightGrayColor()
+      case .Default:
+        hidden = true
+      case .InMotion:
+        hidden = false
+        backgroundColor = UIColor.lightGrayColor()
       case .Loading:
         setRandomColorAtIntervalsAnimated()
       }

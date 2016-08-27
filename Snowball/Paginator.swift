@@ -48,8 +48,6 @@ class Paginator: NSObject {
     self.position = postition
     self.view = view
     self.loadBlock = loadBlock
-
-    view.hidden = true
   }
 
   // MARK: KVO
@@ -75,22 +73,18 @@ class Paginator: NSObject {
       if let leftPaginator = scrollView.leftPaginator {
         let size = leftPaginator.view.threshold
         leftPaginator.view.frame = CGRect(x: -size, y: 0, width: size, height: scrollView.bounds.height)
-        leftPaginator.view.hidden = (scrollView.contentSize.width == 0)
       }
       if let topPaginator = scrollView.topPaginator {
         let size = topPaginator.view.threshold
         topPaginator.view.frame = CGRect(x: 0, y: -size, width: scrollView.bounds.width, height: size)
-        topPaginator.view.hidden = (scrollView.contentSize.height == 0)
       }
       if let rightPaginator = scrollView.rightPaginator {
         let size = rightPaginator.view.threshold
         rightPaginator.view.frame = CGRect(x: scrollView.contentSize.width, y: 0, width: size, height: scrollView.bounds.height)
-        rightPaginator.view.hidden = (scrollView.contentSize.width == 0)
       }
       if let bottomPaginator = scrollView.bottomPaginator {
         let size = bottomPaginator.view.threshold
         bottomPaginator.view.frame = CGRect(x: 0, y: scrollView.contentSize.height, width: scrollView.bounds.width, height: size)
-        bottomPaginator.view.hidden = (scrollView.contentSize.height == 0)
       }
     }
   }
