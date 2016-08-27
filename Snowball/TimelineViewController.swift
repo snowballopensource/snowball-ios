@@ -69,7 +69,13 @@ class TimelineViewController: UIViewController {
     previousClipGestureRecognizer.addTarget(self, action: #selector(TimelineViewController.previousClipGestureRecognizerSwiped))
     nextClipGestureRecognizer.addTarget(self, action: #selector(TimelineViewController.nextClipGestureRecognizerSwiped))
 
-    collectionView.enableInfiniteScrollWithDelegate(self)
+    collectionView.addPaginator(Paginator(postition: .Left, view: ColorSidePaginatorView()) {
+      self.getClipStream(self.currentPage + 1)
+    })
+    collectionView.addPaginator(Paginator(postition: .Right, view: ColorSidePaginatorView()) {
+      self.getClipStream()
+    })
+
     let layout = collectionView.collectionViewLayout as! TimelineCollectionViewFlowLayout
     layout.delegate = self
 
@@ -89,14 +95,20 @@ class TimelineViewController: UIViewController {
 
   private func getClipStream(page: Int = 1) {
     currentPage = page
+    let isRefresh = (page == 1)
 
     SnowballAPI.request(SnowballAPIRoute.ClipStream(page: page)).responseCollection { (response: Response<[Clip], NSError>) in
       switch response.result {
       case .Success(let clips):
-        self.updateCollectionViewWithNewClips(clips, noMerge: (page == 1))
+        self.updateCollectionViewWithNewClips(clips, noMerge: isRefresh)
       case .Failure(let error): debugPrint(error)
       }
-      self.collectionView.setLoadingCompleted()
+
+      if isRefresh {
+        self.collectionView.rightPaginator?.endLoading()
+      } else {
+        self.collectionView.leftPaginator?.endLoading()
+      }
     }
   }
 
@@ -238,17 +250,6 @@ extension TimelineViewController: UICollectionViewDelegate {
       }
     } else {
       player.playClip(clip)
-    }
-  }
-}
-
-// MARK: - UIScrollViewInfiniteScrollDelegate
-extension TimelineViewController: UIScrollViewInfiniteScrollDelegate {
-  func scrollView(scrollView: UIScrollView, infiniteScrollTriggered direction: UIScrollViewInfiniteScrollDirection) {
-    if direction == .Left {
-      getClipStream(currentPage + 1)
-    } else {
-      getClipStream()
     }
   }
 }

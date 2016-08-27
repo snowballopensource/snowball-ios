@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		14CB24E2AF0E8EB82D3A3ED2 /* Pods_Snowball.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE03CC12344C4D0F328EEB91 /* Pods_Snowball.framework */; };
+		BA2C2C141D71663200E97CB4 /* Paginator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2C2C131D71663200E97CB4 /* Paginator.swift */; };
+		BA2C2C161D716B4C00E97CB4 /* UIScrollView+Paginator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2C2C151D716B4C00E97CB4 /* UIScrollView+Paginator.swift */; };
+		BA2C2C181D716E4800E97CB4 /* PaginatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2C2C171D716E4800E97CB4 /* PaginatorView.swift */; };
+		BA2C2C1A1D71916800E97CB4 /* ColorSidePaginatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2C2C191D71916800E97CB4 /* ColorSidePaginatorView.swift */; };
 		BA3286F21D588EA400571612 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3286F11D588EA400571612 /* AppDelegate.swift */; };
 		BA3286F91D588EA400571612 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA3286F81D588EA400571612 /* Assets.xcassets */; };
 		BA3286FC1D588EA400571612 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA3286FA1D588EA400571612 /* LaunchScreen.storyboard */; };
@@ -21,7 +25,6 @@
 		BA8494881D5907C700D453C0 /* SnowballAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8494871D5907C700D453C0 /* SnowballAPI.swift */; };
 		BA84948C1D59773100D453C0 /* ClipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA84948B1D59773100D453C0 /* ClipCollectionViewCell.swift */; };
 		BA84948E1D5979E400D453C0 /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */; };
-		BA8494921D598B0000D453C0 /* UIScrollView+InfiniteScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8494911D598B0000D453C0 /* UIScrollView+InfiniteScroll.swift */; };
 		BAAD146F1D5C3D3800FD7D5F /* UserImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD146E1D5C3D3800FD7D5F /* UserImageView.swift */; };
 		BAAD14711D5C3DED00FD7D5F /* UIImageView+Remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD14701D5C3DED00FD7D5F /* UIImageView+Remote.swift */; };
 /* End PBXBuildFile section */
@@ -30,6 +33,10 @@
 		0410575328535FA0B1444559 /* Pods-Snowball.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snowball.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snowball/Pods-Snowball.debug.xcconfig"; sourceTree = "<group>"; };
 		AE03CC12344C4D0F328EEB91 /* Pods_Snowball.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snowball.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF6B86E0ECCD4C15E09FA075 /* Pods-Snowball.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snowball.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snowball/Pods-Snowball.release.xcconfig"; sourceTree = "<group>"; };
+		BA2C2C131D71663200E97CB4 /* Paginator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Paginator.swift; sourceTree = "<group>"; };
+		BA2C2C151D716B4C00E97CB4 /* UIScrollView+Paginator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Paginator.swift"; sourceTree = "<group>"; };
+		BA2C2C171D716E4800E97CB4 /* PaginatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatorView.swift; sourceTree = "<group>"; };
+		BA2C2C191D71916800E97CB4 /* ColorSidePaginatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSidePaginatorView.swift; sourceTree = "<group>"; };
 		BA3286EE1D588EA400571612 /* Snowball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snowball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3286F11D588EA400571612 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA3286F81D588EA400571612 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -45,7 +52,6 @@
 		BA8494871D5907C700D453C0 /* SnowballAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballAPI.swift; sourceTree = "<group>"; };
 		BA84948B1D59773100D453C0 /* ClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Snowball.swift"; sourceTree = "<group>"; };
-		BA8494911D598B0000D453C0 /* UIScrollView+InfiniteScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+InfiniteScroll.swift"; sourceTree = "<group>"; };
 		BAAD146E1D5C3D3800FD7D5F /* UserImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageView.swift; sourceTree = "<group>"; };
 		BAAD14701D5C3DED00FD7D5F /* UIImageView+Remote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Remote.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,6 +75,16 @@
 				AF6B86E0ECCD4C15E09FA075 /* Pods-Snowball.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		BA2C2C121D7164D400E97CB4 /* Pagination */ = {
+			isa = PBXGroup;
+			children = (
+				BA2C2C151D716B4C00E97CB4 /* UIScrollView+Paginator.swift */,
+				BA2C2C131D71663200E97CB4 /* Paginator.swift */,
+				BA2C2C171D716E4800E97CB4 /* PaginatorView.swift */,
+			);
+			name = Pagination;
 			sourceTree = "<group>";
 		};
 		BA3286E51D588EA400571612 = {
@@ -117,8 +133,8 @@
 		BA690B141D5A63A500DDA6DA /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				BA2C2C121D7164D400E97CB4 /* Pagination */,
 				BA690B111D5A443E00DDA6DA /* ArrayDiff.swift */,
-				BA8494911D598B0000D453C0 /* UIScrollView+InfiniteScroll.swift */,
 				BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */,
 				BAAD146E1D5C3D3800FD7D5F /* UserImageView.swift */,
 				BAAD14701D5C3DED00FD7D5F /* UIImageView+Remote.swift */,
@@ -149,6 +165,7 @@
 				BA5269E51D58909E004AB21A /* TimelineViewController.swift */,
 				BA690B0F1D59A99400DDA6DA /* TimelineCollectionView.swift */,
 				BA84948B1D59773100D453C0 /* ClipCollectionViewCell.swift */,
+				BA2C2C191D71916800E97CB4 /* ColorSidePaginatorView.swift */,
 			);
 			name = Timeline;
 			sourceTree = "<group>";
@@ -284,7 +301,10 @@
 			files = (
 				BA5269EC1D58935E004AB21A /* TimelinePlayer.swift in Sources */,
 				BA84948C1D59773100D453C0 /* ClipCollectionViewCell.swift in Sources */,
+				BA2C2C1A1D71916800E97CB4 /* ColorSidePaginatorView.swift in Sources */,
 				BA5269E81D5890C8004AB21A /* PlayerView.swift in Sources */,
+				BA2C2C161D716B4C00E97CB4 /* UIScrollView+Paginator.swift in Sources */,
+				BA2C2C141D71663200E97CB4 /* Paginator.swift in Sources */,
 				BA84948E1D5979E400D453C0 /* UIColor+Snowball.swift in Sources */,
 				BA8494881D5907C700D453C0 /* SnowballAPI.swift in Sources */,
 				BA5269EA1D5892F3004AB21A /* Clip.swift in Sources */,
@@ -292,9 +312,9 @@
 				BA5269E61D58909E004AB21A /* TimelineViewController.swift in Sources */,
 				BAAD14711D5C3DED00FD7D5F /* UIImageView+Remote.swift in Sources */,
 				BA690B191D5A63EE00DDA6DA /* User.swift in Sources */,
-				BA8494921D598B0000D453C0 /* UIScrollView+InfiniteScroll.swift in Sources */,
 				BA690B121D5A443E00DDA6DA /* ArrayDiff.swift in Sources */,
 				BAAD146F1D5C3D3800FD7D5F /* UserImageView.swift in Sources */,
+				BA2C2C181D716E4800E97CB4 /* PaginatorView.swift in Sources */,
 				BA690B101D59A99400DDA6DA /* TimelineCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
