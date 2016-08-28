@@ -27,6 +27,8 @@
 		BA84948E1D5979E400D453C0 /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */; };
 		BAAD146F1D5C3D3800FD7D5F /* UserImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD146E1D5C3D3800FD7D5F /* UserImageView.swift */; };
 		BAAD14711D5C3DED00FD7D5F /* UIImageView+Remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD14701D5C3DED00FD7D5F /* UIImageView+Remote.swift */; };
+		BAADAE0D1D726DC800A39A67 /* NSDate+TimeSince.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAADAE0C1D726DC800A39A67 /* NSDate+TimeSince.swift */; };
+		BAADAE0F1D726FED00A39A67 /* NSDate+ISO8601.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAADAE0E1D726FED00A39A67 /* NSDate+ISO8601.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,8 @@
 		BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Snowball.swift"; sourceTree = "<group>"; };
 		BAAD146E1D5C3D3800FD7D5F /* UserImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageView.swift; sourceTree = "<group>"; };
 		BAAD14701D5C3DED00FD7D5F /* UIImageView+Remote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Remote.swift"; sourceTree = "<group>"; };
+		BAADAE0C1D726DC800A39A67 /* NSDate+TimeSince.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeSince.swift"; sourceTree = "<group>"; };
+		BAADAE0E1D726FED00A39A67 /* NSDate+ISO8601.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+ISO8601.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,8 +140,10 @@
 				BA2C2C121D7164D400E97CB4 /* Pagination */,
 				BA690B111D5A443E00DDA6DA /* ArrayDiff.swift */,
 				BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */,
+				BAADAE0E1D726FED00A39A67 /* NSDate+ISO8601.swift */,
 				BAAD146E1D5C3D3800FD7D5F /* UserImageView.swift */,
 				BAAD14701D5C3DED00FD7D5F /* UIImageView+Remote.swift */,
+				BAADAE0C1D726DC800A39A67 /* NSDate+TimeSince.swift */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -299,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAADAE0F1D726FED00A39A67 /* NSDate+ISO8601.swift in Sources */,
 				BA5269EC1D58935E004AB21A /* TimelinePlayer.swift in Sources */,
 				BA84948C1D59773100D453C0 /* ClipCollectionViewCell.swift in Sources */,
 				BA2C2C1A1D71916800E97CB4 /* ColorSidePaginatorView.swift in Sources */,
@@ -311,6 +318,7 @@
 				BA3286F21D588EA400571612 /* AppDelegate.swift in Sources */,
 				BA5269E61D58909E004AB21A /* TimelineViewController.swift in Sources */,
 				BAAD14711D5C3DED00FD7D5F /* UIImageView+Remote.swift in Sources */,
+				BAADAE0D1D726DC800A39A67 /* NSDate+TimeSince.swift in Sources */,
 				BA690B191D5A63EE00DDA6DA /* User.swift in Sources */,
 				BA690B121D5A443E00DDA6DA /* ArrayDiff.swift in Sources */,
 				BAAD146F1D5C3D3800FD7D5F /* UserImageView.swift in Sources */,

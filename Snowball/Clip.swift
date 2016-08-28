@@ -13,6 +13,7 @@ struct Clip {
   let id: String
   let imageURL: NSURL
   let videoURL: NSURL
+  var createdAt: NSDate?
   let user: User
 }
 
@@ -44,6 +45,10 @@ extension Clip: ResponseObjectSerializable {
       self.imageURL = imageURL
       self.videoURL = videoURL
       self.user = user
+
+      if let createdAtString = json["created_at"].string {
+        self.createdAt = NSDate.dateFromISO8610String(createdAtString)
+      }
     } else {
       return nil
     }

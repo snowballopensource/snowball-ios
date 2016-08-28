@@ -23,6 +23,18 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   let imageView = UIImageView()
   let userImageView = UserImageView()
+  let usernameLabel: UILabel = {
+    let label = UILabel()
+    label.textAlignment = .Center
+    return label
+  }()
+  let clipCreatedAtLabel: UILabel = {
+    let label = UILabel()
+    label.font = label.font.fontWithSize(14)
+    label.textAlignment = .Center
+    label.textColor = UIColor.SnowballColor.lightGrayColor
+    return label
+  }()
 
   private(set) var state: ClipCollectionViewCellState = .Default
 
@@ -44,6 +56,18 @@ class ClipCollectionViewCell: UICollectionViewCell {
     userImageView.centerYAnchor.constraintEqualToAnchor(imageView.bottomAnchor).active = true
     userImageView.widthAnchor.constraintEqualToAnchor(widthAnchor, multiplier: 1/3).active = true
     userImageView.heightAnchor.constraintEqualToAnchor(userImageView.widthAnchor).active = true
+
+    addSubview(usernameLabel)
+    usernameLabel.translatesAutoresizingMaskIntoConstraints = false
+    usernameLabel.leftAnchor.constraintEqualToAnchor(leftAnchor).active = true
+    usernameLabel.topAnchor.constraintEqualToAnchor(userImageView.bottomAnchor, constant: 10).active = true
+    usernameLabel.rightAnchor.constraintEqualToAnchor(rightAnchor).active = true
+
+    addSubview(clipCreatedAtLabel)
+    clipCreatedAtLabel.translatesAutoresizingMaskIntoConstraints = false
+    clipCreatedAtLabel.leftAnchor.constraintEqualToAnchor(leftAnchor).active = true
+    clipCreatedAtLabel.topAnchor.constraintEqualToAnchor(usernameLabel.bottomAnchor, constant: 5).active = true
+    clipCreatedAtLabel.rightAnchor.constraintEqualToAnchor(rightAnchor).active = true
   }
 
   required init?(coder: NSCoder) {
@@ -57,6 +81,11 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     imageView.setImageFromRemoteURL(clip.imageURL)
     userImageView.setImageFromRemoteURL(clip.user.avatarURL)
+
+    usernameLabel.text = clip.user.username
+    usernameLabel.textColor = clip.user.color
+
+    clipCreatedAtLabel.text = clip.createdAt?.shortTimeSinceString() ?? NSLocalizedString("Now", comment: "")
   }
 
   func setState(state: ClipCollectionViewCellState, animated: Bool) {
