@@ -25,15 +25,23 @@ class ClipCollectionViewCell: UICollectionViewCell {
   let userImageView = UserImageView()
   let usernameLabel: UILabel = {
     let label = UILabel()
+    label.font = label.font.fontWithSize(14)
     label.textAlignment = .Center
     return label
   }()
   let clipCreatedAtLabel: UILabel = {
     let label = UILabel()
-    label.font = label.font.fontWithSize(14)
+    label.font = label.font.fontWithSize(12)
     label.textAlignment = .Center
     label.textColor = UIColor.SnowballColor.lightGrayColor
     return label
+  }()
+  let likeButton: UIButton = {
+    let button = UIButton()
+    button.setImage(UIImage(named: "cell-clip-heart"), forState: .Normal)
+    button.setImage(UIImage(named: "cell-clip-heart-filled"), forState: .Selected)
+    button.setImage(UIImage(named: "cell-clip-heart-filled"), forState: .Highlighted)
+    return button
   }()
 
   private(set) var state: ClipCollectionViewCellState = .Default
@@ -54,20 +62,27 @@ class ClipCollectionViewCell: UICollectionViewCell {
     userImageView.translatesAutoresizingMaskIntoConstraints = false
     userImageView.centerXAnchor.constraintEqualToAnchor(centerXAnchor).active = true
     userImageView.centerYAnchor.constraintEqualToAnchor(imageView.bottomAnchor).active = true
-    userImageView.widthAnchor.constraintEqualToAnchor(widthAnchor, multiplier: 1/3).active = true
+    userImageView.widthAnchor.constraintEqualToConstant(40).active = true
     userImageView.heightAnchor.constraintEqualToAnchor(userImageView.widthAnchor).active = true
 
     addSubview(usernameLabel)
     usernameLabel.translatesAutoresizingMaskIntoConstraints = false
     usernameLabel.leftAnchor.constraintEqualToAnchor(leftAnchor).active = true
-    usernameLabel.topAnchor.constraintEqualToAnchor(userImageView.bottomAnchor, constant: 10).active = true
+    usernameLabel.topAnchor.constraintEqualToAnchor(userImageView.bottomAnchor, constant: 7).active = true
     usernameLabel.rightAnchor.constraintEqualToAnchor(rightAnchor).active = true
 
     addSubview(clipCreatedAtLabel)
     clipCreatedAtLabel.translatesAutoresizingMaskIntoConstraints = false
     clipCreatedAtLabel.leftAnchor.constraintEqualToAnchor(leftAnchor).active = true
-    clipCreatedAtLabel.topAnchor.constraintEqualToAnchor(usernameLabel.bottomAnchor, constant: 5).active = true
+    clipCreatedAtLabel.topAnchor.constraintEqualToAnchor(usernameLabel.bottomAnchor, constant: 4).active = true
     clipCreatedAtLabel.rightAnchor.constraintEqualToAnchor(rightAnchor).active = true
+
+    addSubview(likeButton)
+    likeButton.translatesAutoresizingMaskIntoConstraints = false
+    likeButton.centerXAnchor.constraintEqualToAnchor(centerXAnchor).active = true
+    likeButton.topAnchor.constraintEqualToAnchor(clipCreatedAtLabel.bottomAnchor, constant: 18).active = true
+    likeButton.widthAnchor.constraintEqualToConstant(35).active = true
+    likeButton.heightAnchor.constraintEqualToConstant(30).active = true
   }
 
   required init?(coder: NSCoder) {
