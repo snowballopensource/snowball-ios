@@ -84,9 +84,9 @@
 		BA2C2C121D7164D400E97CB4 /* Pagination */ = {
 			isa = PBXGroup;
 			children = (
-				BA2C2C151D716B4C00E97CB4 /* UIScrollView+Paginator.swift */,
 				BA2C2C131D71663200E97CB4 /* Paginator.swift */,
 				BA2C2C171D716E4800E97CB4 /* PaginatorView.swift */,
+				BA2C2C151D716B4C00E97CB4 /* UIScrollView+Paginator.swift */,
 			);
 			name = Pagination;
 			sourceTree = "<group>";
@@ -114,13 +114,8 @@
 			children = (
 				BA3286F11D588EA400571612 /* AppDelegate.swift */,
 				BA690B171D5A63C200DDA6DA /* Timeline */,
-				BA690B131D5A639700DDA6DA /* Player */,
-				BA690B151D5A63B700DDA6DA /* API */,
 				BA690B161D5A63BB00DDA6DA /* Models */,
 				BA690B141D5A63A500DDA6DA /* Misc */,
-				BA3286F81D588EA400571612 /* Assets.xcassets */,
-				BA3286FA1D588EA400571612 /* LaunchScreen.storyboard */,
-				BA3286FD1D588EA400571612 /* Info.plist */,
 			);
 			path = Snowball;
 			sourceTree = "<group>";
@@ -128,8 +123,8 @@
 		BA690B131D5A639700DDA6DA /* Player */ = {
 			isa = PBXGroup;
 			children = (
-				BA5269EB1D58935E004AB21A /* TimelinePlayer.swift */,
 				BA5269E71D5890C8004AB21A /* PlayerView.swift */,
+				BA5269EB1D58935E004AB21A /* TimelinePlayer.swift */,
 			);
 			name = Player;
 			sourceTree = "<group>";
@@ -137,23 +132,16 @@
 		BA690B141D5A63A500DDA6DA /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				BAADAE201D72CB6900A39A67 /* Extensions */,
 				BA2C2C121D7164D400E97CB4 /* Pagination */,
+				BAADAE1F1D72CB4900A39A67 /* Shared Views */,
 				BA690B111D5A443E00DDA6DA /* ArrayDiff.swift */,
-				BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */,
-				BAADAE0E1D726FED00A39A67 /* NSDate+ISO8601.swift */,
-				BAAD146E1D5C3D3800FD7D5F /* UserImageView.swift */,
-				BAAD14701D5C3DED00FD7D5F /* UIImageView+Remote.swift */,
-				BAADAE0C1D726DC800A39A67 /* NSDate+TimeSince.swift */,
+				BA8494871D5907C700D453C0 /* SnowballAPI.swift */,
+				BA3286F81D588EA400571612 /* Assets.xcassets */,
+				BA3286FA1D588EA400571612 /* LaunchScreen.storyboard */,
+				BA3286FD1D588EA400571612 /* Info.plist */,
 			);
 			name = Misc;
-			sourceTree = "<group>";
-		};
-		BA690B151D5A63B700DDA6DA /* API */ = {
-			isa = PBXGroup;
-			children = (
-				BA8494871D5907C700D453C0 /* SnowballAPI.swift */,
-			);
-			name = API;
 			sourceTree = "<group>";
 		};
 		BA690B161D5A63BB00DDA6DA /* Models */ = {
@@ -168,12 +156,32 @@
 		BA690B171D5A63C200DDA6DA /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
-				BA5269E51D58909E004AB21A /* TimelineViewController.swift */,
-				BA690B0F1D59A99400DDA6DA /* TimelineCollectionView.swift */,
+				BA690B131D5A639700DDA6DA /* Player */,
 				BA84948B1D59773100D453C0 /* ClipCollectionViewCell.swift */,
 				BA2C2C191D71916800E97CB4 /* ColorSidePaginatorView.swift */,
+				BA690B0F1D59A99400DDA6DA /* TimelineCollectionView.swift */,
+				BA5269E51D58909E004AB21A /* TimelineViewController.swift */,
 			);
 			name = Timeline;
+			sourceTree = "<group>";
+		};
+		BAADAE1F1D72CB4900A39A67 /* Shared Views */ = {
+			isa = PBXGroup;
+			children = (
+				BAAD146E1D5C3D3800FD7D5F /* UserImageView.swift */,
+			);
+			name = "Shared Views";
+			sourceTree = "<group>";
+		};
+		BAADAE201D72CB6900A39A67 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BAADAE0E1D726FED00A39A67 /* NSDate+ISO8601.swift */,
+				BAADAE0C1D726DC800A39A67 /* NSDate+TimeSince.swift */,
+				BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */,
+				BAAD14701D5C3DED00FD7D5F /* UIImageView+Remote.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		EF82F47F63DC9AA8541F74C4 /* Frameworks */ = {
