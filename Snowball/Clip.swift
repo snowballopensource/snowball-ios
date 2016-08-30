@@ -34,23 +34,23 @@ extension Clip: Hashable {
 extension Clip: ResponseObjectSerializable {
   init?(representation: AnyObject) {
     let json = JSON(representation)
-    if
+    guard
       let id = json["id"].string,
       let imageURL = json["image"]["standard_resolution"]["url"].URL,
       let videoURL = json["video"]["standard_resolution"]["url"].URL,
       let userRepresentation = json["user"].dictionaryObject,
-      let user = User(representation: userRepresentation) {
+      let user = User(representation: userRepresentation)
+      else {
+        return nil
+    }
 
-      self.id = id
-      self.imageURL = imageURL
-      self.videoURL = videoURL
-      self.user = user
+    self.id = id
+    self.imageURL = imageURL
+    self.videoURL = videoURL
+    self.user = user
 
-      if let createdAtString = json["created_at"].string {
-        self.createdAt = NSDate.dateFromISO8610String(createdAtString)
-      }
-    } else {
-      return nil
+    if let createdAtString = json["created_at"].string {
+      self.createdAt = NSDate.dateFromISO8610String(createdAtString)
     }
   }
 }

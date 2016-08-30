@@ -33,18 +33,18 @@ extension User: Hashable {
 extension User: ResponseObjectSerializable {
   init?(representation: AnyObject) {
     let json = JSON(representation)
-    if
+    guard
       let id = json["id"].string,
-      let username = json["username"].string {
+      let username = json["username"].string
+      else {
+        return nil
+    }
 
-      self.id = id
-      self.username = username
+    self.id = id
+    self.username = username
 
-      if let avatarURL = json["avatar_url"].URL {
-        self.avatarURL = avatarURL
-      }
-    } else {
-      return nil
+    if let avatarURL = json["avatar_url"].URL {
+      self.avatarURL = avatarURL
     }
   }
 }
