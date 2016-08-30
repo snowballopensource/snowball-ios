@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RocketData
 import SwiftyJSON
 
 struct Clip {
@@ -57,3 +58,57 @@ extension Clip: ResponseObjectSerializable {
 
 // MARK: - ResponseCollectionSerializable
 extension Clip: ResponseCollectionSerializable {}
+
+// MARK: - CacheableModel
+extension Clip: CacheableModel {
+
+  var modelIdentifier: String? {
+    return "Clip:\(id)"
+  }
+
+  init?(data: [NSObject : AnyObject]) {
+    if
+      let id = data["id"] as? String,
+      let imageURLData = data["imageURL"] as? NSData,
+      let imageURL = NSKeyedUnarchiver.unarchiveObjectWithData(imageURLData) as? NSURL,
+      let videoURLData = data["videoURL"] as? NSData,
+      let videoURL = NSKeyedUnarchiver.unarchiveObjectWithData(videoURLData) as? NSURL,
+      let userData = data["user"] as? [NSObject: AnyObject],
+      let user = User(data: userData)
+    {
+
+      self.id = id
+      self.imageURL = imageURL
+      self.videoURL = videoURL
+      self.user = user
+
+      if let createdAtData = data["createdAt"] as? NSData, let createdAt = NSKeyedUnarchiver.unarchiveObjectWithData(createdAtData) as? NSDate {
+        self.createdAt = createdAt
+      }
+    } else {
+      return nil
+    }
+  }
+
+  func data() -> [NSObject : AnyObject] {
+    var data = [
+      "id": id,
+      "imageURL": NSKeyedArchiver.archivedDataWithRootObject(imageURL),
+      "videoURL": NSKeyedArchiver.archivedDataWithRootObject(videoURL),
+      "user": user.data()
+    ]
+    if let createdAt = createdAt {
+      data["createdAt"] = NSKeyedArchiver.archivedDataWithRootObject(createdAt)
+    }
+    return data
+  }
+
+  func map(transform: Model -> Model?) -> Clip? {
+    guard let newUser = transform(user) as? User else { return nil }
+    return Clip(id: id, imageURL: imageURL, videoURL: videoURL, createdAt: createdAt, user: newUser)
+  }
+
+  func forEach(visit: Model -> Void) {
+    visit(user)
+  }
+}

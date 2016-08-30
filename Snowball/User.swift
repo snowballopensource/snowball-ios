@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import RocketData
 import SwiftyJSON
 
 struct User {
   let id: String
   var username: String
   var avatarURL: NSURL? = nil
-  let color = UIColor.SnowballColor.randomColor()
+  var color = UIColor.SnowballColor.randomColor()
 }
 
 // MARK: - Equatable
@@ -51,3 +52,52 @@ extension User: ResponseObjectSerializable {
 
 // MARK: - ResponseCollectionSerializable
 extension User: ResponseCollectionSerializable {}
+
+// MARK: - CacheableModel
+extension User: CacheableModel {
+
+  var modelIdentifier: String? {
+    return "User:\(id)"
+  }
+
+  init?(data: [NSObject : AnyObject]) {
+    if
+      let id = data["id"] as? String,
+      let username = data["username"] as? String,
+      let colorData = data["color"] as? NSData,
+      let color = NSKeyedUnarchiver.unarchiveObjectWithData(colorData) as? UIColor {
+
+      self.id = id
+      self.username = username
+      self.color = color
+
+      if let avatarURLData = data["avatarURL"] as? NSData, let avatarURL = NSKeyedUnarchiver.unarchiveObjectWithData(avatarURLData) as? NSURL {
+        self.avatarURL = avatarURL
+      }
+    } else {
+      return nil
+    }
+  }
+
+  func data() -> [NSObject : AnyObject] {
+    var data = [
+      "id": id,
+      "username": username,
+      "color": NSKeyedArchiver.archivedDataWithRootObject(color)
+    ]
+    if let avatarURL = avatarURL {
+      data["avatarURL"] = NSKeyedArchiver.archivedDataWithRootObject(avatarURL)
+    }
+    return data
+  }
+
+  func map(transform: Model -> Model?) -> User? {
+    // If I add nested models, transform them here using transform(modelName)
+    // e.g. let newChild = transform(child) as? ChildModel
+    return User(id: id, username: username, avatarURL: avatarURL, color: color)
+  }
+
+  func forEach(visit: Model -> Void) {
+    // If I add nested models, visit them here using visit(modelName)
+  }
+}

@@ -22,6 +22,11 @@
 		BA690B101D59A99400DDA6DA /* TimelineCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA690B0F1D59A99400DDA6DA /* TimelineCollectionView.swift */; };
 		BA690B121D5A443E00DDA6DA /* ArrayDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA690B111D5A443E00DDA6DA /* ArrayDiff.swift */; };
 		BA690B191D5A63EE00DDA6DA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA690B181D5A63EE00DDA6DA /* User.swift */; };
+		BA7F22611D754D9000C687F7 /* ModelCacheDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7F22601D754D9000C687F7 /* ModelCacheDelegate.swift */; };
+		BA7F22631D75511900C687F7 /* CacheableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7F22621D75511900C687F7 /* CacheableModel.swift */; };
+		BA7F22651D75571400C687F7 /* ModelCacheCollectionKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7F22641D75571400C687F7 /* ModelCacheCollectionKey.swift */; };
+		BA7F22671D75576600C687F7 /* ModelCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7F22661D75576600C687F7 /* ModelCache.swift */; };
+		BA7F22691D7564A600C687F7 /* TimelineDataCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7F22681D7564A600C687F7 /* TimelineDataCoordinator.swift */; };
 		BA8494881D5907C700D453C0 /* SnowballAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8494871D5907C700D453C0 /* SnowballAPI.swift */; };
 		BA84948C1D59773100D453C0 /* ClipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA84948B1D59773100D453C0 /* ClipCollectionViewCell.swift */; };
 		BA84948E1D5979E400D453C0 /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */; };
@@ -51,6 +56,11 @@
 		BA690B0F1D59A99400DDA6DA /* TimelineCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineCollectionView.swift; sourceTree = "<group>"; };
 		BA690B111D5A443E00DDA6DA /* ArrayDiff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayDiff.swift; sourceTree = "<group>"; };
 		BA690B181D5A63EE00DDA6DA /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BA7F22601D754D9000C687F7 /* ModelCacheDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelCacheDelegate.swift; sourceTree = "<group>"; };
+		BA7F22621D75511900C687F7 /* CacheableModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheableModel.swift; sourceTree = "<group>"; };
+		BA7F22641D75571400C687F7 /* ModelCacheCollectionKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelCacheCollectionKey.swift; sourceTree = "<group>"; };
+		BA7F22661D75576600C687F7 /* ModelCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelCache.swift; sourceTree = "<group>"; };
+		BA7F22681D7564A600C687F7 /* TimelineDataCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineDataCoordinator.swift; sourceTree = "<group>"; };
 		BA8494871D5907C700D453C0 /* SnowballAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballAPI.swift; sourceTree = "<group>"; };
 		BA84948B1D59773100D453C0 /* ClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Snowball.swift"; sourceTree = "<group>"; };
@@ -112,6 +122,7 @@
 		BA3286F01D588EA400571612 /* Snowball */ = {
 			isa = PBXGroup;
 			children = (
+				BA7F225F1D754D5600C687F7 /* Data Management */,
 				BA3286F11D588EA400571612 /* AppDelegate.swift */,
 				BA690B171D5A63C200DDA6DA /* Timeline */,
 				BA690B161D5A63BB00DDA6DA /* Models */,
@@ -160,9 +171,21 @@
 				BA84948B1D59773100D453C0 /* ClipCollectionViewCell.swift */,
 				BA2C2C191D71916800E97CB4 /* ColorSidePaginatorView.swift */,
 				BA690B0F1D59A99400DDA6DA /* TimelineCollectionView.swift */,
+				BA7F22681D7564A600C687F7 /* TimelineDataCoordinator.swift */,
 				BA5269E51D58909E004AB21A /* TimelineViewController.swift */,
 			);
 			name = Timeline;
+			sourceTree = "<group>";
+		};
+		BA7F225F1D754D5600C687F7 /* Data Management */ = {
+			isa = PBXGroup;
+			children = (
+				BA7F22621D75511900C687F7 /* CacheableModel.swift */,
+				BA7F22661D75576600C687F7 /* ModelCache.swift */,
+				BA7F22641D75571400C687F7 /* ModelCacheCollectionKey.swift */,
+				BA7F22601D754D9000C687F7 /* ModelCacheDelegate.swift */,
+			);
+			name = "Data Management";
 			sourceTree = "<group>";
 		};
 		BAADAE1F1D72CB4900A39A67 /* Shared Views */ = {
@@ -321,15 +344,20 @@
 				BA2C2C161D716B4C00E97CB4 /* UIScrollView+Paginator.swift in Sources */,
 				BA2C2C141D71663200E97CB4 /* Paginator.swift in Sources */,
 				BA84948E1D5979E400D453C0 /* UIColor+Snowball.swift in Sources */,
+				BA7F22671D75576600C687F7 /* ModelCache.swift in Sources */,
 				BA8494881D5907C700D453C0 /* SnowballAPI.swift in Sources */,
 				BA5269EA1D5892F3004AB21A /* Clip.swift in Sources */,
 				BA3286F21D588EA400571612 /* AppDelegate.swift in Sources */,
 				BA5269E61D58909E004AB21A /* TimelineViewController.swift in Sources */,
 				BAAD14711D5C3DED00FD7D5F /* UIImageView+Remote.swift in Sources */,
 				BAADAE0D1D726DC800A39A67 /* NSDate+TimeSince.swift in Sources */,
+				BA7F22651D75571400C687F7 /* ModelCacheCollectionKey.swift in Sources */,
+				BA7F22631D75511900C687F7 /* CacheableModel.swift in Sources */,
 				BA690B191D5A63EE00DDA6DA /* User.swift in Sources */,
 				BA690B121D5A443E00DDA6DA /* ArrayDiff.swift in Sources */,
 				BAAD146F1D5C3D3800FD7D5F /* UserImageView.swift in Sources */,
+				BA7F22611D754D9000C687F7 /* ModelCacheDelegate.swift in Sources */,
+				BA7F22691D7564A600C687F7 /* TimelineDataCoordinator.swift in Sources */,
 				BA2C2C181D716E4800E97CB4 /* PaginatorView.swift in Sources */,
 				BA690B101D59A99400DDA6DA /* TimelineCollectionView.swift in Sources */,
 			);

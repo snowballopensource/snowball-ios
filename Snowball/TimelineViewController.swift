@@ -47,6 +47,8 @@ class TimelineViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    let dc = TimelineDataCoordinator()
+
     getClipStream()
 
     view.backgroundColor = UIColor.whiteColor()
