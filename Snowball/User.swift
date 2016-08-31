@@ -29,10 +29,10 @@ extension User: Hashable {
   }
 }
 
-// MARK: - ResponseObjectSerializable
-extension User: ResponseObjectSerializable {
-  init?(representation: AnyObject) {
-    let json = JSON(representation)
+// MARK: - JSONRepresentable
+extension User: JSONRepresentable {
+  init?(json: JSONObject) {
+    let json = JSON(json)
     guard
       let id = json["id"].string,
       let username = json["username"].string
@@ -48,6 +48,3 @@ extension User: ResponseObjectSerializable {
     }
   }
 }
-
-// MARK: - ResponseCollectionSerializable
-extension User: ResponseCollectionSerializable {}

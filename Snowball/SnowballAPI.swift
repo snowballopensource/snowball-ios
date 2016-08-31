@@ -62,24 +62,22 @@ enum SnowballAPIRoute: URLRequestConvertible {
   }
 }
 
-// MARK: - ResponseObjectSerializable
-protocol ResponseObjectSerializable {
-  init?(representation: AnyObject)
+// MARK: - JSONRepresentable
+typealias JSONObject = [String: AnyObject]
+typealias JSONArray = [JSONObject]
+
+protocol JSONRepresentable {
+  init?(json: JSONObject)
+  static func fromJSONArray(jsonArray: JSONArray) -> [Self]
+  // TODO: func asJSON
 }
 
-// MARK: - ResponseCollectionSerializable
-protocol ResponseCollectionSerializable {
-  static func collection(representation representation: AnyObject) -> [Self]
-}
-
-extension ResponseCollectionSerializable where Self: ResponseObjectSerializable {
-  static func collection(representation representation: AnyObject) -> [Self] {
+extension JSONRepresentable {
+  static func fromJSONArray(jsonArray: JSONArray) -> [Self] {
     var collection = [Self]()
-    if let collectionRepresentation = representation as? [[String: AnyObject]] {
-      for objectRepresentation in collectionRepresentation {
-        if let object = Self(representation: objectRepresentation) {
-          collection.append(object)
-        }
+    for jsonObject in jsonArray {
+      if let object = Self(json: jsonObject) {
+        collection.append(object)
       }
     }
     return collection
@@ -88,7 +86,7 @@ extension ResponseCollectionSerializable where Self: ResponseObjectSerializable 
 
 // MARK: - Request
 extension Request {
-  func responseObject<T: ResponseObjectSerializable>(completionHandler: Response<T, NSError> -> Void) -> Self {
+  func responseObject<T: JSONRepresentable>(completionHandler: Response<T, NSError> -> Void) -> Self {
     let responseSerializer = ResponseSerializer<T, NSError> { request, response, data, error in
       guard error == nil else { return .Failure(error!) }
 
@@ -97,7 +95,9 @@ extension Request {
 
       switch result {
       case .Success(let value):
-        if let responseObject = T(representation: value) {
+        if
+          let value = value as? JSONObject,
+          let responseObject = T(json: value) {
           return .Success(responseObject)
         } else {
           return .Failure(NSError(domain: "", code: 0, userInfo: nil))
@@ -108,7 +108,7 @@ extension Request {
     return response(responseSerializer: responseSerializer, completionHandler: completionHandler)
   }
 
-  func responseCollection<T: ResponseCollectionSerializable>(completionHandler: Response<[T], NSError> -> Void) -> Self {
+  func responseCollection<T: JSONRepresentable>(completionHandler: Response<[T], NSError> -> Void) -> Self {
     let responseSerializer = ResponseSerializer<[T], NSError> { request, response, data, error in
       guard error == nil else { return .Failure(error!) }
 
@@ -117,8 +117,12 @@ extension Request {
 
       switch result {
       case .Success(let value):
-        let responseObject = T.collection(representation: value)
-        return .Success(responseObject)
+        if let value = value as? JSONArray {
+          let responseCollection = T.fromJSONArray(value)
+          return .Success(responseCollection)
+        } else {
+          return .Failure(NSError(domain: "", code: 0, userInfo: nil))
+        }
       case .Failure(let error): return .Failure(error)
       }
     }

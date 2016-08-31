@@ -30,16 +30,16 @@ extension Clip: Hashable {
   }
 }
 
-// MARK: - ResponseObjectSerializable
-extension Clip: ResponseObjectSerializable {
-  init?(representation: AnyObject) {
-    let json = JSON(representation)
+// MARK: - JSONRepresentable
+extension Clip: JSONRepresentable {
+  init?(json: JSONObject) {
+    let json = JSON(json)
     guard
       let id = json["id"].string,
       let imageURL = json["image"]["standard_resolution"]["url"].URL,
       let videoURL = json["video"]["standard_resolution"]["url"].URL,
-      let userRepresentation = json["user"].dictionaryObject,
-      let user = User(representation: userRepresentation)
+      let userJSON = json["user"].dictionaryObject,
+      let user = User(json: userJSON)
       else {
         return nil
     }
@@ -54,6 +54,3 @@ extension Clip: ResponseObjectSerializable {
     }
   }
 }
-
-// MARK: - ResponseCollectionSerializable
-extension Clip: ResponseCollectionSerializable {}
