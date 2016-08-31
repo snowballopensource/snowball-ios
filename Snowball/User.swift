@@ -47,4 +47,13 @@ extension User: JSONRepresentable {
       self.avatarURL = avatarURL
     }
   }
+
+  func asJSON() -> JSONObject {
+    var json = JSONObject()
+    json["id"] = id
+    json["username"] = username
+    json["avatar_url"] = avatarURL?.absoluteString
+    json["color"] = color.hexValue
+    return json
+  }
 }

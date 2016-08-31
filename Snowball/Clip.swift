@@ -53,4 +53,14 @@ extension Clip: JSONRepresentable {
       self.createdAt = NSDate.dateFromISO8610String(createdAtString)
     }
   }
+
+  func asJSON() -> JSONObject {
+    var json = JSONObject()
+    json["id"] = id
+    json["image"] = ["standard_resolution": ["url": imageURL.absoluteString]]
+    json["video"] = ["standard_resolution": ["url": imageURL.absoluteString]]
+    json["created_at"] = createdAt?.iso8610String
+    json["user"] = user.asJSON()
+    return json
+  }
 }

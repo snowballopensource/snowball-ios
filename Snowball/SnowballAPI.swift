@@ -69,7 +69,7 @@ typealias JSONArray = [JSONObject]
 protocol JSONRepresentable {
   init?(json: JSONObject)
   static func fromJSONArray(jsonArray: JSONArray) -> [Self]
-  // TODO: func asJSON
+  func asJSON() -> JSONObject
 }
 
 extension JSONRepresentable {

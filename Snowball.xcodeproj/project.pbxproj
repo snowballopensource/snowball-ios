@@ -29,6 +29,7 @@
 		BAAD14711D5C3DED00FD7D5F /* UIImageView+Remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD14701D5C3DED00FD7D5F /* UIImageView+Remote.swift */; };
 		BAADAE0D1D726DC800A39A67 /* NSDate+TimeSince.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAADAE0C1D726DC800A39A67 /* NSDate+TimeSince.swift */; };
 		BAADAE0F1D726FED00A39A67 /* NSDate+ISO8601.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAADAE0E1D726FED00A39A67 /* NSDate+ISO8601.swift */; };
+		BABBACE41D76A986008E7B99 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABBACE31D76A986008E7B99 /* UIColor+Hex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		BAAD14701D5C3DED00FD7D5F /* UIImageView+Remote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Remote.swift"; sourceTree = "<group>"; };
 		BAADAE0C1D726DC800A39A67 /* NSDate+TimeSince.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeSince.swift"; sourceTree = "<group>"; };
 		BAADAE0E1D726FED00A39A67 /* NSDate+ISO8601.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+ISO8601.swift"; sourceTree = "<group>"; };
+		BABBACE31D76A986008E7B99 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 			children = (
 				BAADAE0E1D726FED00A39A67 /* NSDate+ISO8601.swift */,
 				BAADAE0C1D726DC800A39A67 /* NSDate+TimeSince.swift */,
+				BABBACE31D76A986008E7B99 /* UIColor+Hex.swift */,
 				BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */,
 				BAAD14701D5C3DED00FD7D5F /* UIImageView+Remote.swift */,
 			);
@@ -322,6 +325,7 @@
 				BA2C2C141D71663200E97CB4 /* Paginator.swift in Sources */,
 				BA84948E1D5979E400D453C0 /* UIColor+Snowball.swift in Sources */,
 				BA8494881D5907C700D453C0 /* SnowballAPI.swift in Sources */,
+				BABBACE41D76A986008E7B99 /* UIColor+Hex.swift in Sources */,
 				BA5269EA1D5892F3004AB21A /* Clip.swift in Sources */,
 				BA3286F21D588EA400571612 /* AppDelegate.swift in Sources */,
 				BA5269E61D58909E004AB21A /* TimelineViewController.swift in Sources */,
