@@ -3,5 +3,8 @@ target 'Snowball' do
 
   pod 'Alamofire'
   pod 'AlamofireImage'
+  pod 'Changeset'
+  pod 'PINCache'
+  pod 'RocketData'
   pod 'SwiftyJSON'
 end

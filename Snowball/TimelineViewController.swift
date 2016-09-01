@@ -6,14 +6,17 @@
 //  Copyright © 2016 Snowball, Inc. All rights reserved.
 //
 
-import Alamofire
 import UIKit
 
 class TimelineViewController: UIViewController {
 
   // MARK: Properties
 
-  var clips = [Clip]()
+  let dataCoordinator = TimelineDataCoordinator()
+  var clips: [Clip] {
+    return dataCoordinator.data
+  }
+
   let player = TimelinePlayer()
   let playerView = PlayerView()
   let collectionView = TimelineCollectionView()
@@ -27,7 +30,6 @@ class TimelineViewController: UIViewController {
     gestureRecognizer.direction = .Left
     return gestureRecognizer
   }()
-  var currentPage = 1
 
   var state = TimelineViewControllerState.Default {
     didSet {
@@ -47,7 +49,8 @@ class TimelineViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    getClipStream()
+    dataCoordinator.delegate = self
+    dataCoordinator.refresh()
 
     view.backgroundColor = UIColor.whiteColor()
 
@@ -70,10 +73,10 @@ class TimelineViewController: UIViewController {
     nextClipGestureRecognizer.addTarget(self, action: #selector(TimelineViewController.nextClipGestureRecognizerSwiped))
 
     collectionView.addPaginator(Paginator(postition: .Left, view: ColorSidePaginatorView()) {
-      self.getClipStream(self.currentPage + 1)
+      self.dataCoordinator.loadPreviousPage()
     })
     collectionView.addPaginator(Paginator(postition: .Right, view: ColorSidePaginatorView()) {
-      self.getClipStream()
+      self.dataCoordinator.refresh()
     })
 
     let layout = collectionView.collectionViewLayout as! TimelineCollectionViewFlowLayout
@@ -93,51 +96,9 @@ class TimelineViewController: UIViewController {
 
   // MARK: Private
 
-  private func getClipStream(page: Int = 1) {
-    currentPage = page
-    let isRefresh = (page == 1)
-
-    SnowballAPI.request(SnowballAPIRoute.ClipStream(page: page)).responseCollection { (response: Response<[Clip], NSError>) in
-      switch response.result {
-      case .Success(let clips):
-        self.updateCollectionViewWithNewClips(clips, noMerge: isRefresh)
-      case .Failure(let error): debugPrint(error)
-      }
-
-      if isRefresh {
-        self.collectionView.rightPaginator?.endLoading()
-      } else {
-        self.collectionView.leftPaginator?.endLoading()
-      }
-    }
-  }
-
   private func scrollToClip(clip: Clip) {
     if let index = clips.indexOf(clip) {
       collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: .CenteredHorizontally, animated: true)
-    }
-  }
-
-  private func updateCollectionViewWithNewClips(clips: [Clip], noMerge: Bool = false) {
-    if noMerge {
-      self.clips = clips.reverse()
-      collectionView.reloadData()
-    } else {
-      let (newClips, duplicateClips, allClips) = ArrayDiff.mergeArrayByPrepending(clips.reverse(), toArray: self.clips)
-      self.clips = allClips
-
-      func clipsToIndexPaths(clips: [Clip]) -> [NSIndexPath] {
-        return clips.map { (clip) -> NSIndexPath in
-          let index = self.clips.indexOf(clip)!
-          return NSIndexPath(forItem: index, inSection: 0)
-        }
-      }
-      let insertIndexPaths = clipsToIndexPaths(newClips)
-      let updateIndexPaths = clipsToIndexPaths(duplicateClips)
-      collectionView.performBatchUpdates({
-        self.collectionView.insertItemsAtIndexPaths(insertIndexPaths)
-        self.collectionView.reloadItemsAtIndexPaths(updateIndexPaths)
-      }, completion: nil)
     }
   }
 
@@ -204,6 +165,26 @@ extension TimelineViewController: TimelinePlayerDataSource {
   }
 }
 
+// MARK: - DataCoordinatorDelegate
+extension TimelineViewController: CollectionDataCoordinatorDelegate {
+  func collectionDataCoordinator<T>(dataCoordinator: CollectionDataCoordinator<T>, didChangeData changes: [CollectionDataCoordinatorChange]) {
+    collectionView.performBatchUpdates({
+      for change in changes {
+        let indexPath = NSIndexPath(forItem: change.index, inSection: 0)
+        switch(change.type) {
+        case .Insert: self.collectionView.insertItemsAtIndexPaths([indexPath])
+        case .Delete: self.collectionView.deleteItemsAtIndexPaths([indexPath])
+        case .Move: self.collectionView.moveItemAtIndexPath(indexPath, toIndexPath: NSIndexPath(forItem: change.destinationIndex!, inSection: 0))
+        case .Update: self.collectionView.reloadItemsAtIndexPaths([indexPath])
+        }
+      }
+      }, completion: { _ in
+        self.collectionView.leftPaginator?.endLoading()
+        self.collectionView.rightPaginator?.endLoading()
+    })
+  }
+}
+
 // MARK: - TimelinePlayerDeleate
 extension TimelineViewController: TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
@@ -259,7 +240,7 @@ extension TimelineViewController: TimelineCollectionViewFlowLayoutDelegate {
   func timelineCollectionViewFlowLayout(layout: TimelineCollectionViewFlowLayout, willFinalizeCollectionViewUpdates updates: [UICollectionViewUpdateItem]) {
 
     // Adjustments when loading secondary pages on the left
-    if currentPage > 1 {
+    if dataCoordinator.currentPage > 1 {
       let contentSizeBeforeAnimation = collectionView.contentSize
       let contentSizeAfterAnimation = layout.collectionViewContentSize()
       let xOffset = contentSizeAfterAnimation.width - contentSizeBeforeAnimation.width - ClipCollectionViewCell.defaultSize.width / 2

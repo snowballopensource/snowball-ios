@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RocketData
 import SwiftyJSON
 
 struct User {
@@ -19,7 +20,10 @@ struct User {
 // MARK: - Equatable
 extension User: Equatable {}
 func ==(lhs: User, rhs: User) -> Bool {
-  return lhs.id == rhs.id
+  return lhs.id == rhs.id &&
+    lhs.username == rhs.username &&
+    lhs.avatarURL == rhs.avatarURL &&
+    lhs.color == rhs.color
 }
 
 // MARK: - Hashable
@@ -56,4 +60,15 @@ extension User: JSONRepresentable {
     json["color"] = color.hexValue
     return json
   }
+}
+
+// MARK: - Model
+extension User: Model {
+  var modelIdentifier: String? { return id }
+
+  func map(transform: Model -> Model?) -> User? {
+    return self
+  }
+
+  func forEach(visit: Model -> Void) {}
 }

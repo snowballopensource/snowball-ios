@@ -15,21 +15,25 @@
 		BA3286F21D588EA400571612 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3286F11D588EA400571612 /* AppDelegate.swift */; };
 		BA3286F91D588EA400571612 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA3286F81D588EA400571612 /* Assets.xcassets */; };
 		BA3286FC1D588EA400571612 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA3286FA1D588EA400571612 /* LaunchScreen.storyboard */; };
+		BA512D431D780346008ADB22 /* DataCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA512D421D780346008ADB22 /* DataCoordinator.swift */; };
+		BA512D451D78A626008ADB22 /* TimelineDataCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA512D441D78A626008ADB22 /* TimelineDataCoordinator.swift */; };
 		BA5269E61D58909E004AB21A /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5269E51D58909E004AB21A /* TimelineViewController.swift */; };
 		BA5269E81D5890C8004AB21A /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5269E71D5890C8004AB21A /* PlayerView.swift */; };
 		BA5269EA1D5892F3004AB21A /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5269E91D5892F3004AB21A /* Clip.swift */; };
 		BA5269EC1D58935E004AB21A /* TimelinePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5269EB1D58935E004AB21A /* TimelinePlayer.swift */; };
 		BA690B101D59A99400DDA6DA /* TimelineCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA690B0F1D59A99400DDA6DA /* TimelineCollectionView.swift */; };
-		BA690B121D5A443E00DDA6DA /* ArrayDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA690B111D5A443E00DDA6DA /* ArrayDiff.swift */; };
 		BA690B191D5A63EE00DDA6DA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA690B181D5A63EE00DDA6DA /* User.swift */; };
 		BA8494881D5907C700D453C0 /* SnowballAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8494871D5907C700D453C0 /* SnowballAPI.swift */; };
 		BA84948C1D59773100D453C0 /* ClipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA84948B1D59773100D453C0 /* ClipCollectionViewCell.swift */; };
 		BA84948E1D5979E400D453C0 /* UIColor+Snowball.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */; };
+		BA998EAE1D78BD87007557B1 /* Array+Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA998EAD1D78BD87007557B1 /* Array+Merge.swift */; };
 		BAAD146F1D5C3D3800FD7D5F /* UserImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD146E1D5C3D3800FD7D5F /* UserImageView.swift */; };
 		BAAD14711D5C3DED00FD7D5F /* UIImageView+Remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD14701D5C3DED00FD7D5F /* UIImageView+Remote.swift */; };
 		BAADAE0D1D726DC800A39A67 /* NSDate+TimeSince.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAADAE0C1D726DC800A39A67 /* NSDate+TimeSince.swift */; };
 		BAADAE0F1D726FED00A39A67 /* NSDate+ISO8601.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAADAE0E1D726FED00A39A67 /* NSDate+ISO8601.swift */; };
 		BABBACE41D76A986008E7B99 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABBACE31D76A986008E7B99 /* UIColor+Hex.swift */; };
+		BABBACE91D76AEEF008E7B99 /* ModelCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABBACE61D76AEEF008E7B99 /* ModelCache.swift */; };
+		BABBACEB1D76AEEF008E7B99 /* ModelCacheDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABBACE81D76AEEF008E7B99 /* ModelCacheDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,21 +49,25 @@
 		BA3286F81D588EA400571612 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA3286FB1D588EA400571612 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA3286FD1D588EA400571612 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA512D421D780346008ADB22 /* DataCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCoordinator.swift; sourceTree = "<group>"; };
+		BA512D441D78A626008ADB22 /* TimelineDataCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineDataCoordinator.swift; sourceTree = "<group>"; };
 		BA5269E51D58909E004AB21A /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 		BA5269E71D5890C8004AB21A /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		BA5269E91D5892F3004AB21A /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
 		BA5269EB1D58935E004AB21A /* TimelinePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelinePlayer.swift; sourceTree = "<group>"; };
 		BA690B0F1D59A99400DDA6DA /* TimelineCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineCollectionView.swift; sourceTree = "<group>"; };
-		BA690B111D5A443E00DDA6DA /* ArrayDiff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayDiff.swift; sourceTree = "<group>"; };
 		BA690B181D5A63EE00DDA6DA /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BA8494871D5907C700D453C0 /* SnowballAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowballAPI.swift; sourceTree = "<group>"; };
 		BA84948B1D59773100D453C0 /* ClipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA84948D1D5979E400D453C0 /* UIColor+Snowball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Snowball.swift"; sourceTree = "<group>"; };
+		BA998EAD1D78BD87007557B1 /* Array+Merge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Merge.swift"; sourceTree = "<group>"; };
 		BAAD146E1D5C3D3800FD7D5F /* UserImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageView.swift; sourceTree = "<group>"; };
 		BAAD14701D5C3DED00FD7D5F /* UIImageView+Remote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Remote.swift"; sourceTree = "<group>"; };
 		BAADAE0C1D726DC800A39A67 /* NSDate+TimeSince.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeSince.swift"; sourceTree = "<group>"; };
 		BAADAE0E1D726FED00A39A67 /* NSDate+ISO8601.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+ISO8601.swift"; sourceTree = "<group>"; };
 		BABBACE31D76A986008E7B99 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		BABBACE61D76AEEF008E7B99 /* ModelCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelCache.swift; sourceTree = "<group>"; };
+		BABBACE81D76AEEF008E7B99 /* ModelCacheDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelCacheDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,10 +142,11 @@
 		BA690B141D5A63A500DDA6DA /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				BABBACF21D76BC0D008E7B99 /* Data Coordinators */,
+				BABBACE51D76AEDD008E7B99 /* Data Cache */,
 				BAADAE201D72CB6900A39A67 /* Extensions */,
 				BA2C2C121D7164D400E97CB4 /* Pagination */,
 				BAADAE1F1D72CB4900A39A67 /* Shared Views */,
-				BA690B111D5A443E00DDA6DA /* ArrayDiff.swift */,
 				BA8494871D5907C700D453C0 /* SnowballAPI.swift */,
 				BA3286F81D588EA400571612 /* Assets.xcassets */,
 				BA3286FA1D588EA400571612 /* LaunchScreen.storyboard */,
@@ -178,6 +187,7 @@
 		BAADAE201D72CB6900A39A67 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				BA998EAD1D78BD87007557B1 /* Array+Merge.swift */,
 				BAADAE0E1D726FED00A39A67 /* NSDate+ISO8601.swift */,
 				BAADAE0C1D726DC800A39A67 /* NSDate+TimeSince.swift */,
 				BABBACE31D76A986008E7B99 /* UIColor+Hex.swift */,
@@ -185,6 +195,24 @@
 				BAAD14701D5C3DED00FD7D5F /* UIImageView+Remote.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		BABBACE51D76AEDD008E7B99 /* Data Cache */ = {
+			isa = PBXGroup;
+			children = (
+				BABBACE61D76AEEF008E7B99 /* ModelCache.swift */,
+				BABBACE81D76AEEF008E7B99 /* ModelCacheDelegate.swift */,
+			);
+			name = "Data Cache";
+			sourceTree = "<group>";
+		};
+		BABBACF21D76BC0D008E7B99 /* Data Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				BA512D421D780346008ADB22 /* DataCoordinator.swift */,
+				BA512D441D78A626008ADB22 /* TimelineDataCoordinator.swift */,
+			);
+			name = "Data Coordinators";
 			sourceTree = "<group>";
 		};
 		EF82F47F63DC9AA8541F74C4 /* Frameworks */ = {
@@ -321,6 +349,7 @@
 				BA84948C1D59773100D453C0 /* ClipCollectionViewCell.swift in Sources */,
 				BA2C2C1A1D71916800E97CB4 /* ColorSidePaginatorView.swift in Sources */,
 				BA5269E81D5890C8004AB21A /* PlayerView.swift in Sources */,
+				BABBACE91D76AEEF008E7B99 /* ModelCache.swift in Sources */,
 				BA2C2C161D716B4C00E97CB4 /* UIScrollView+Paginator.swift in Sources */,
 				BA2C2C141D71663200E97CB4 /* Paginator.swift in Sources */,
 				BA84948E1D5979E400D453C0 /* UIColor+Snowball.swift in Sources */,
@@ -329,12 +358,15 @@
 				BA5269EA1D5892F3004AB21A /* Clip.swift in Sources */,
 				BA3286F21D588EA400571612 /* AppDelegate.swift in Sources */,
 				BA5269E61D58909E004AB21A /* TimelineViewController.swift in Sources */,
+				BA998EAE1D78BD87007557B1 /* Array+Merge.swift in Sources */,
 				BAAD14711D5C3DED00FD7D5F /* UIImageView+Remote.swift in Sources */,
 				BAADAE0D1D726DC800A39A67 /* NSDate+TimeSince.swift in Sources */,
 				BA690B191D5A63EE00DDA6DA /* User.swift in Sources */,
-				BA690B121D5A443E00DDA6DA /* ArrayDiff.swift in Sources */,
 				BAAD146F1D5C3D3800FD7D5F /* UserImageView.swift in Sources */,
+				BA512D451D78A626008ADB22 /* TimelineDataCoordinator.swift in Sources */,
 				BA2C2C181D716E4800E97CB4 /* PaginatorView.swift in Sources */,
+				BA512D431D780346008ADB22 /* DataCoordinator.swift in Sources */,
+				BABBACEB1D76AEEF008E7B99 /* ModelCacheDelegate.swift in Sources */,
 				BA690B101D59A99400DDA6DA /* TimelineCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

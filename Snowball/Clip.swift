@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RocketData
 import SwiftyJSON
 
 struct Clip {
@@ -20,7 +21,11 @@ struct Clip {
 // MARK: - Equatable
 extension Clip: Equatable {}
 func ==(lhs: Clip, rhs: Clip) -> Bool {
-  return lhs.id == rhs.id
+  return lhs.id == rhs.id &&
+    lhs.imageURL == rhs.imageURL &&
+    lhs.videoURL == rhs.videoURL &&
+    lhs.createdAt == rhs.createdAt &&
+    lhs.user == rhs.user
 }
 
 // MARK: - Hashable
@@ -62,5 +67,19 @@ extension Clip: JSONRepresentable {
     json["created_at"] = createdAt?.iso8610String
     json["user"] = user.asJSON()
     return json
+  }
+}
+
+// MARK: - Model
+extension Clip: Model {
+  var modelIdentifier: String? { return id }
+
+  func map(transform: Model -> Model?) -> Clip? {
+    guard let user = transform(user) as? User else { return nil }
+    return Clip(id: id, imageURL: imageURL, videoURL: videoURL, createdAt: createdAt, user: user)
+  }
+
+  func forEach(visit: Model -> Void) {
+    visit(user)
   }
 }
