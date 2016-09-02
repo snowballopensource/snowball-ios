@@ -26,7 +26,7 @@ class TimelinePlayer: AVQueuePlayer {
   // get set immediately since the clip is loaded async, but
   // the currentClip does. This is why currentClip is in charge
   // of our delegate notifications.
-  private var currentClip: Clip? = nil {
+  private(set) var currentClip: Clip? = nil {
     didSet {
       if oldValue == currentClip { return }
       switch (oldValue, currentClip) {

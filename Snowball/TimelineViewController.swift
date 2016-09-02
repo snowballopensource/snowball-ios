@@ -33,14 +33,8 @@ class TimelineViewController: UIViewController {
 
   var state = TimelineViewControllerState.Default {
     didSet {
+      updateStateForVisibleCells()
       collectionView.scrollEnabled = (state != .Playing)
-    }
-  }
-
-  private var defaultCellStateForCurrentState: ClipCollectionViewCellState {
-    switch state {
-    case .Playing: return .PlayingInactive
-    case .Default: return .Default
     }
   }
 
@@ -102,9 +96,9 @@ class TimelineViewController: UIViewController {
     }
   }
 
-  private func cellForClip(clip: Clip) -> ClipCollectionViewCell {
+  private func cellForClip(clip: Clip) -> ClipCollectionViewCell? {
     let indexPath = NSIndexPath(forItem: clips.indexOf(clip)!, inSection: 0)
-    return collectionView.cellForItemAtIndexPath(indexPath) as! ClipCollectionViewCell
+    return collectionView.cellForItemAtIndexPath(indexPath) as? ClipCollectionViewCell
   }
 
   private func clipForCell(cell: ClipCollectionViewCell) -> Clip {
@@ -112,26 +106,21 @@ class TimelineViewController: UIViewController {
     return clips[index]
   }
 
-  private func updateStateForVisibleCells(stateBlock: ((cell: ClipCollectionViewCell) -> ClipCollectionViewCellState)) {
+  private func updateStateForVisibleCells() {
     for cell in collectionView.visibleCells() {
       let cell = cell as! ClipCollectionViewCell
-      cell.setState(stateBlock(cell: cell), animated: true)
+      updateStateForCell(cell)
     }
   }
 
-  private func updateStateForVisibleCellsWithPlayingClip(clip: Clip) {
-    updateStateForVisibleCells { cell -> ClipCollectionViewCellState in
-      if clip == self.clipForCell(cell) {
-        return .PlayingActive
+  private func updateStateForCell(cell: ClipCollectionViewCell) {
+    var state = self.state.cellState
+    if let playingClip = player.currentClip {
+      if playingClip == clipForCell(cell) {
+        state = .PlayingActive
       }
-      return self.defaultCellStateForCurrentState
     }
-  }
-
-  private func updateStateForVisibleCells() {
-    updateStateForVisibleCells { _ -> ClipCollectionViewCellState in
-      return self.defaultCellStateForCurrentState
-    }
+    cell.setState(state, animated: true)
   }
 
   // MARK: Actions
@@ -148,6 +137,13 @@ class TimelineViewController: UIViewController {
 // MARK: - TimelineViewControllerState
 enum TimelineViewControllerState {
   case Default, Playing
+
+  var cellState: ClipCollectionViewCellState {
+    switch self {
+    case .Playing: return .PlayingInactive
+    case .Default: return .Default
+    }
+  }
 }
 
 // MARK: - TimelinePlayerDataSource
@@ -190,18 +186,16 @@ extension TimelineViewController: TimelinePlayerDelegate {
   func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
     state = .Playing
     scrollToClip(clip)
-    updateStateForVisibleCellsWithPlayingClip(clip)
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
     scrollToClip(toClip)
-    updateStateForVisibleCellsWithPlayingClip(toClip)
+    if let fromCell = cellForClip(fromClip) { updateStateForCell(fromCell) }
+    if let toCell = cellForClip(toClip) { updateStateForCell(toCell) }
   }
 
   func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
     state = .Default
-    updateStateForVisibleCells()
-
   }
 }
 
@@ -215,7 +209,7 @@ extension TimelineViewController: UICollectionViewDataSource {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(ClipCollectionViewCell), forIndexPath: indexPath) as! ClipCollectionViewCell
     cell.delegate = self
     let clip = clips[indexPath.row]
-    cell.configureForClip(clip)
+    cell.configureForClip(clip, state: state.cellState)
     return cell
   }
 }
