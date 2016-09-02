@@ -239,9 +239,8 @@ extension TimelineViewController: UICollectionViewDelegate {
 // MARK: - TimelineCollectionViewFlowLayoutDelegate
 extension TimelineViewController: TimelineCollectionViewFlowLayoutDelegate {
   func timelineCollectionViewFlowLayout(layout: TimelineCollectionViewFlowLayout, willFinalizeCollectionViewUpdates updates: [UICollectionViewUpdateItem]) {
-
     // Adjustments when loading secondary pages on the left
-    if dataCoordinator.currentPage > 1 {
+    if collectionView.leftPaginator?.state == .Loading {
       let contentSizeBeforeAnimation = collectionView.contentSize
       let contentSizeAfterAnimation = layout.collectionViewContentSize()
       let xOffset = contentSizeAfterAnimation.width - contentSizeBeforeAnimation.width - ClipCollectionViewCell.defaultSize.width / 2

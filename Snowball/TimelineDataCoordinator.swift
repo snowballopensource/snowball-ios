@@ -14,7 +14,7 @@ class TimelineDataCoordinator: CollectionDataCoordinator<Clip> {
 
   // MARK: Properties
 
-  private(set) var currentPage = 1
+  private var currentPage = 1
 
   // MARK: Initializers
 
