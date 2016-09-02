@@ -14,6 +14,7 @@ struct Clip {
   let id: String
   let imageURL: NSURL
   let videoURL: NSURL
+  var liked: Bool = false
   var createdAt: NSDate?
   let user: User
 }
@@ -24,6 +25,7 @@ func ==(lhs: Clip, rhs: Clip) -> Bool {
   return lhs.id == rhs.id &&
     lhs.imageURL == rhs.imageURL &&
     lhs.videoURL == rhs.videoURL &&
+    lhs.liked == rhs.liked &&
     lhs.createdAt == rhs.createdAt &&
     lhs.user == rhs.user
 }
@@ -54,6 +56,9 @@ extension Clip: JSONRepresentable {
     self.videoURL = videoURL
     self.user = user
 
+    if let liked = json["liked"].bool {
+      self.liked = liked
+    }
     if let createdAtString = json["created_at"].string {
       self.createdAt = NSDate.dateFromISO8610String(createdAtString)
     }
@@ -64,6 +69,7 @@ extension Clip: JSONRepresentable {
     json["id"] = id
     json["image"] = ["standard_resolution": ["url": imageURL.absoluteString]]
     json["video"] = ["standard_resolution": ["url": imageURL.absoluteString]]
+    json["liked"] = liked
     json["created_at"] = createdAt?.iso8610String
     json["user"] = user.asJSON()
     return json
@@ -76,7 +82,7 @@ extension Clip: Model {
 
   func map(transform: Model -> Model?) -> Clip? {
     guard let user = transform(user) as? User else { return nil }
-    return Clip(id: id, imageURL: imageURL, videoURL: videoURL, createdAt: createdAt, user: user)
+    return Clip(id: id, imageURL: imageURL, videoURL: videoURL, liked: liked, createdAt: createdAt, user: user)
   }
 
   func forEach(visit: Model -> Void) {

@@ -7,6 +7,7 @@
 //
 
 import Alamofire
+import RocketData
 import Foundation
 
 class TimelineDataCoordinator: CollectionDataCoordinator<Clip> {
@@ -31,6 +32,25 @@ class TimelineDataCoordinator: CollectionDataCoordinator<Clip> {
 
   func loadPreviousPage() {
     getClipStream(page: currentPage + 1)
+  }
+
+  func toggleClipLiked(clip: Clip) {
+    var clip = clip
+    clip.liked = !clip.liked
+    DataModelManager.sharedInstance.updateModel(clip)
+
+    var route = SnowballAPIRoute.LikeClip(clipID: clip.id)
+    if !clip.liked { route = SnowballAPIRoute.UnlikeClip(clipID: clip.id) }
+    SnowballAPI.request(route).responseObject { (response: Response<Clip, NSError>) in
+      switch response.result {
+      case .Success(let clip):
+        DataModelManager.sharedInstance.updateModel(clip)
+      case .Failure(let error):
+        debugPrint(error)
+        clip.liked = !clip.liked
+        DataModelManager.sharedInstance.updateModel(clip)
+      }
+    }
   }
 
   // MARK: Private

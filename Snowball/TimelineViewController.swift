@@ -213,6 +213,7 @@ extension TimelineViewController: UICollectionViewDataSource {
 
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(ClipCollectionViewCell), forIndexPath: indexPath) as! ClipCollectionViewCell
+    cell.delegate = self
     let clip = clips[indexPath.row]
     cell.configureForClip(clip)
     return cell
@@ -250,5 +251,14 @@ extension TimelineViewController: TimelineCollectionViewFlowLayoutDelegate {
         collectionView.setContentOffset(CGPoint(x: xOffset, y: 0), animated: false)
       }
     }
+  }
+}
+
+// MARK: - ClipCollectionViewCellDelegate
+extension TimelineViewController: ClipCollectionViewCellDelegate {
+  func clipCollectionViewCellLikeButtonTapped(cell: ClipCollectionViewCell) {
+    guard let indexPath = collectionView.indexPathForCell(cell) else { return }
+    let clip = clips[indexPath.row]
+    dataCoordinator.toggleClipLiked(clip)
   }
 }

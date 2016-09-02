@@ -21,6 +21,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
     return CGSizeMake(cellWidth, cellHeight)
   }
 
+  var delegate: ClipCollectionViewCellDelegate?
+
   let imageView = UIImageView()
   let userImageView = UserImageView()
   let usernameLabel: UILabel = {
@@ -77,6 +79,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     clipCreatedAtLabel.topAnchor.constraintEqualToAnchor(usernameLabel.bottomAnchor, constant: 4).active = true
     clipCreatedAtLabel.rightAnchor.constraintEqualToAnchor(rightAnchor).active = true
 
+    likeButton.addTarget(self, action: #selector(ClipCollectionViewCell.likeButtonTapped), forControlEvents: .TouchUpInside)
     addSubview(likeButton)
     likeButton.translatesAutoresizingMaskIntoConstraints = false
     likeButton.centerXAnchor.constraintEqualToAnchor(centerXAnchor).active = true
@@ -99,6 +102,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     usernameLabel.text = clip.user.username
     usernameLabel.textColor = clip.user.color
+
+    likeButton.selected = clip.liked
 
     clipCreatedAtLabel.text = clip.createdAt?.shortTimeSinceString() ?? NSLocalizedString("Now", comment: "")
   }
@@ -125,9 +130,20 @@ class ClipCollectionViewCell: UICollectionViewCell {
       userImageView.alpha = 1
     }
   }
+
+  // MARK: Actions
+
+  @objc private func likeButtonTapped() {
+    delegate?.clipCollectionViewCellLikeButtonTapped(self)
+  }
 }
 
 // MARK: - ClipCollectionViewCellState
 enum ClipCollectionViewCellState {
   case Default, PlayingActive, PlayingInactive
+}
+
+// MARK: - ClipCollectionViewDelegate
+protocol ClipCollectionViewCellDelegate {
+  func clipCollectionViewCellLikeButtonTapped(cell: ClipCollectionViewCell)
 }

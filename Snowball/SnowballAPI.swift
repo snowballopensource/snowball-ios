@@ -22,10 +22,15 @@ enum SnowballAPIRoute: URLRequestConvertible {
   case Ping
   // Clips
   case ClipStream(page: Int)
+  case LikeClip(clipID: String)
+  case UnlikeClip(clipID: String)
 
   var method: Alamofire.Method {
     switch self {
-    default: return .GET
+    case .Ping: return .GET
+    case .ClipStream: return .GET
+    case .LikeClip: return .PUT
+    case .UnlikeClip: return .DELETE
     }
   }
 
@@ -33,6 +38,8 @@ enum SnowballAPIRoute: URLRequestConvertible {
     switch self {
     case .Ping: return "/"
     case .ClipStream: return "/clips/stream"
+    case .LikeClip(let clipID): return "/clips/\(clipID)/like"
+    case .UnlikeClip(let clipID): return "/clips/\(clipID)/like"
     }
   }
 
