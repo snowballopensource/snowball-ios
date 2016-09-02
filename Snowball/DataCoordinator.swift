@@ -25,7 +25,8 @@ class DataCoordinator<T: SimpleModel> {
   private let dataProvider = DataProvider<T>()
   private let cacheKey: String
 
-  private(set) var data: T? = nil {
+  var data: T? { return dataProvider.data }
+  private var _data: T? = nil {
     didSet {
       delegate?.dataCoordinatorDidChangeData(self)
     }
@@ -40,7 +41,7 @@ class DataCoordinator<T: SimpleModel> {
 
     dataProvider.fetchDataFromCache(cacheKey: cacheKey) { (data, error) in
       if let error = error { debugPrint(error); return }
-      if let data = data { self.data = data }
+      if let data = data { self._data = data }
     }
   }
 
@@ -48,7 +49,7 @@ class DataCoordinator<T: SimpleModel> {
 
   func updateData(data: T) {
     dataProvider.setData(data)
-    self.data = data
+    self._data = data
   }
 
   func refresh() { assertionFailure("Subclasses of DataCoordinator must implement refresh") }
@@ -57,7 +58,7 @@ class DataCoordinator<T: SimpleModel> {
 // MARK: - DataProviderDelegate
 extension DataCoordinator: DataProviderDelegate {
   func dataProviderHasUpdatedData<T>(dataProvider: DataProvider<T>, context: Any?) {
-    data = self.dataProvider.data
+    _data = self.dataProvider.data
   }
 }
 
@@ -76,7 +77,9 @@ class CollectionDataCoordinator<T: SimpleModel where T: Equatable> {
   private let dataProvider = CollectionDataProvider<T>()
   private let cacheKey: String
 
-  private(set) var data = [T]() {
+  var data: [T] { return dataProvider.data }
+
+  private var _data = [T]() {
     didSet {
       let changeset = Changeset(source: oldValue, target: data)
       var changes = [CollectionDataCoordinatorChange]()
@@ -112,7 +115,7 @@ class CollectionDataCoordinator<T: SimpleModel where T: Equatable> {
 
     dataProvider.fetchDataFromCache(cacheKey: cacheKey) { (data, error) in
       if let error = error { debugPrint(error); return }
-      if let data = data { self.data = data }
+      if let data = data { self._data = data }
     }
   }
 
@@ -120,7 +123,7 @@ class CollectionDataCoordinator<T: SimpleModel where T: Equatable> {
 
   func updateData(data: [T]) {
     dataProvider.setData(data, cacheKey: cacheKey)
-    self.data = data
+    self._data = data
   }
 
   func refresh() { assertionFailure("Subclasses of CollectionDataCoordinator must implement fetchDataFromAPI") }
@@ -129,7 +132,7 @@ class CollectionDataCoordinator<T: SimpleModel where T: Equatable> {
 // MARK: - CollectionDataProviderDelegate
 extension CollectionDataCoordinator: CollectionDataProviderDelegate {
   func collectionDataProviderHasUpdatedData<T>(dataProvider: CollectionDataProvider<T>, collectionChanges: CollectionChange, context: Any?) {
-    data = self.dataProvider.data
+    _data = self.dataProvider.data
   }
 }
 
