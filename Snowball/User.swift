@@ -14,7 +14,7 @@ struct User {
   let id: String
   var username: String
   var avatarURL: NSURL? = nil
-  let color = UIColor.SnowballColor.randomColor()
+  var color = UIColor.SnowballColor.randomColor()
 }
 
 // MARK: - Equatable
@@ -49,6 +49,9 @@ extension User: JSONRepresentable {
 
     if let avatarURL = json["avatar_url"].URL {
       self.avatarURL = avatarURL
+    }
+    if let colorHex = json["color"].string {
+      self.color = UIColor(hex: colorHex)
     }
   }
 

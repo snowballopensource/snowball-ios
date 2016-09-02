@@ -19,4 +19,17 @@ extension UIColor {
 
     return String(format: "#%02lX%02lX%02lX", lroundf(red * 255), lroundf(green * 255), lroundf(blue * 255))
   }
+
+  convenience init(hex: String) {
+    var rgb: UInt32 = 0
+    let scanner = NSScanner(string: hex)
+    scanner.scanLocation = 1 // Ignore the leading '#'
+    scanner.scanHexInt(&rgb)
+    self.init(
+      red: CGFloat((rgb & 0xFF0000) >> 16) / 255.0,
+      green: CGFloat((rgb & 0x00FF00) >> 8) / 255.0,
+      blue: CGFloat(rgb & 0x0000FF) / 255.0,
+      alpha: 1
+    )
+  }
 }
