@@ -1,11 +1,11 @@
 PODS:
-  - Alamofire (3.3.1)
-  - AlamofireImage (2.4.0):
+  - Alamofire (3.4.2)
+  - AlamofireImage (2.4.1):
     - Alamofire (~> 3.3)
   - Changeset (1.0.5)
-  - ConsistencyManager (2.0.0)
+  - ConsistencyManager (2.0.1)
   - PINCache (2.3)
-  - RocketData (1.1.0):
+  - RocketData (1.1.1):
     - ConsistencyManager (~> 2.0.0)
   - SwiftyJSON (2.3.2)
 
@@ -18,14 +18,14 @@ DEPENDENCIES:
   - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
-  AlamofireImage: 87408b652e0f5ae5fe364035f15aea8b9b24c77e
+  Alamofire: 6aa33201d20d069e1598891cf928883ff1888c7a
+  AlamofireImage: 3ccf3347d9ea24580dc11fb892770a0be6a29826
   Changeset: 073bdfd16dcb366b05e95f77f92e1a4c91d389cb
-  ConsistencyManager: 4a1f6f20628befc25ed3393444c7c18ae64149a4
+  ConsistencyManager: e91a2ec468361fcfecc5065c703fa886ba4e90c1
   PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
-  RocketData: 14468b0622e63ed0cf7cd187f95bf769e2763485
+  RocketData: d6ab20bfd2ab836163099f1f88cd4312f1064ac2
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 PODFILE CHECKSUM: 4faf038f25f17f1fe96d7bcfa913a88af999e6a3
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.0.beta.2
