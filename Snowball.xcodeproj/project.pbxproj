@@ -258,6 +258,7 @@
 				TargetAttributes = {
 					BA3286ED1D588EA400571612 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 9GF2XQ22BH;
 						LastSwiftMigration = 0800;
 					};
 				};
@@ -482,6 +483,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9GF2XQ22BH;
 				INFOPLIST_FILE = Snowball/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -497,6 +499,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9GF2XQ22BH;
 				INFOPLIST_FILE = Snowball/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
