@@ -49,7 +49,7 @@ class TimelinePlayer: AVQueuePlayer {
   // MARK: Initializers
 
   override init() {
-    super.init() // TODO: REmove old notifis
+    super.init()
     addObserver(self, forKeyPath: currentItemKeyPath, options: [.New], context: nil)
   }
 
