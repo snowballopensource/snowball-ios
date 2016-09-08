@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (3.4.2)
+  - Alamofire (3.5.0)
   - AlamofireImage (2.4.1):
     - Alamofire (~> 3.3)
   - Changeset (1.0.5)
@@ -10,15 +10,25 @@ PODS:
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
-  - Alamofire
+  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, tag `3.5.0`)
   - AlamofireImage
   - Changeset
   - PINCache
   - RocketData
   - SwiftyJSON
 
+EXTERNAL SOURCES:
+  Alamofire:
+    :git: https://github.com/Alamofire/Alamofire.git
+    :tag: 3.5.0
+
+CHECKOUT OPTIONS:
+  Alamofire:
+    :git: https://github.com/Alamofire/Alamofire.git
+    :tag: 3.5.0
+
 SPEC CHECKSUMS:
-  Alamofire: 6aa33201d20d069e1598891cf928883ff1888c7a
+  Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
   AlamofireImage: 3ccf3347d9ea24580dc11fb892770a0be6a29826
   Changeset: 073bdfd16dcb366b05e95f77f92e1a4c91d389cb
   ConsistencyManager: e91a2ec468361fcfecc5065c703fa886ba4e90c1
@@ -26,6 +36,6 @@ SPEC CHECKSUMS:
   RocketData: d6ab20bfd2ab836163099f1f88cd4312f1064ac2
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 4faf038f25f17f1fe96d7bcfa913a88af999e6a3
+PODFILE CHECKSUM: 62b7d502389260de65cdb2d64d832a190c09025c
 
 COCOAPODS: 1.1.0.beta.2

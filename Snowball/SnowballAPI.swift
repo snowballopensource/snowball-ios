@@ -57,7 +57,7 @@ enum SnowballAPIRoute: URLRequestConvertible {
   }
 
   var URLRequest: NSMutableURLRequest {
-    let URLRequest = NSMutableURLRequest(URL: SnowballAPIRoute.baseURL.URLByAppendingPathComponent(path))
+    let URLRequest = NSMutableURLRequest(URL: SnowballAPIRoute.baseURL.URLByAppendingPathComponent(path)!)
     URLRequest.HTTPMethod = method.rawValue
 
     let kAuthTokenKey = "CurrentUserAuthToken"

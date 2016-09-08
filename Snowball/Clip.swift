@@ -67,8 +67,12 @@ extension Clip: JSONRepresentable {
   func asJSON() -> JSONObject {
     var json = JSONObject()
     json["id"] = id
-    json["image"] = ["standard_resolution": ["url": imageURL.absoluteString]]
-    json["video"] = ["standard_resolution": ["url": imageURL.absoluteString]]
+    if let imageURLString = imageURL.absoluteString {
+        json["image"] = ["standard_resolution": ["url": imageURLString]]
+    }
+    if let videoURLString = videoURL.absoluteString {
+        json["video"] = ["standard_resolution": ["url": videoURLString]]
+    }
     json["liked"] = liked
     json["created_at"] = createdAt?.iso8610String
     json["user"] = user.asJSON()
