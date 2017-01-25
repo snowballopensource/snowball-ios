@@ -221,13 +221,15 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         let rect = CGRectMake(0, 0, 480, 480)
         UIGraphicsBeginImageContext(rect.size)
         finalImage.drawInRect(rect)
-        let processedImage = UIGraphicsGetImageFromCurrentImageContext()
+        guard let processedImage = UIGraphicsGetImageFromCurrentImageContext() else {
+          preconditionFailure()
+        }
         UIGraphicsEndImageContext()
 
         SnowballAPI.uploadUserAvatar(processedImage) { (response) in
           SwiftSpinner.hide()
           let resetAvatarImageView = {
-            if let user = User.currentUser, avatarURL = user.avatarURL {
+            if let user = User.currentUser, let avatarURL = user.avatarURL {
               let cache = Shared.imageCache
               cache.set(value: processedImage, key: avatarURL, formatName: "original") { _ in
                 self.userAvatarImageView.setUser(user)

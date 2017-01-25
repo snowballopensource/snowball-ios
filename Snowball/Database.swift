@@ -25,11 +25,11 @@ struct Database {
   }
 
   static func save(object: Object) {
-    realm.addWithNotification(object, update: true)
+    realm.add(object, update: true)
   }
 
   static func delete(object: Object) {
-    realm.deleteWithNotification(object)
+    realm.delete(object)
   }
 
   static func findAll<T: Object>(type: T.Type) -> Results<T> {

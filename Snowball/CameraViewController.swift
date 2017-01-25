@@ -400,8 +400,8 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     videoComposition.instructions = [instruction]
 
     let randomString = NSUUID().UUIDString
-    let exportedVideoURL = outputFileURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent("video_\(randomString).mp4")
-    let exportedThumbnailURL = exportedVideoURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent("image_\(randomString).jpg")
+    let exportedVideoURL = outputFileURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent("video_\(randomString).mp4")!
+    let exportedThumbnailURL = exportedVideoURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent("image_\(randomString).jpg")!
 
     // Export
     do { try NSFileManager.defaultManager().removeItemAtURL(outputFileURL) } catch { }

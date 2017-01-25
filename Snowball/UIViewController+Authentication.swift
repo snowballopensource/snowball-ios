@@ -78,7 +78,7 @@ private class AuthenticationPresentationController: UIPresentationController {
 
   // MARK: UIPresentationController
 
-  override init(presentedViewController: UIViewController, presentingViewController: UIViewController) {
+  override init(presentedViewController: UIViewController, presentingViewController: UIViewController?) {
     super.init(presentedViewController: presentedViewController, presentingViewController: presentingViewController)
 
     guard let presentedView = presentedView() else { return }
@@ -138,7 +138,7 @@ class AuthenticationPresentationControllerTransitioningDelegate: NSObject {
 
 // MARK: - UIViewControllerTransitioningDelegate
 extension AuthenticationPresentationControllerTransitioningDelegate: UIViewControllerTransitioningDelegate {
-  func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
+  func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController?, sourceViewController source: UIViewController) -> UIPresentationController? {
     return AuthenticationPresentationController(presentedViewController: presented, presentingViewController: presenting)
   }
 }
