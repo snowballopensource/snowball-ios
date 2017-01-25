@@ -28,7 +28,7 @@ class AppDelegate: UIResponder {
 // MARK: - UIApplicationDelegate
 extension AppDelegate: UIApplicationDelegate {
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    print("Realm Path: " + Database.realm.path)
+//    print("Realm Path: " + Database.realm.path)
     Clip.cleanUpFailedClipUploads()
     PushNotificationController.registerApplicationForPushNotifications(application)
     Analytics.initialize()

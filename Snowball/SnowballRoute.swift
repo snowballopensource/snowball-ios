@@ -134,7 +134,7 @@ enum SnowballRoute: URLRequestConvertible {
 
   var URLRequest: NSMutableURLRequest {
     let URL = NSURL(string: SnowballRoute.baseURLString)
-    let mutableURLRequest = NSMutableURLRequest(URL: URL!.URLByAppendingPathComponent(path))
+    let mutableURLRequest = NSMutableURLRequest(URL: URL!.URLByAppendingPathComponent(path)!)
     mutableURLRequest.HTTPMethod = method.rawValue
     if let authToken = User.currentUser?.authToken {
       let encodedAuthTokenData = "\(authToken):".dataUsingEncoding(NSUTF8StringEncoding)!

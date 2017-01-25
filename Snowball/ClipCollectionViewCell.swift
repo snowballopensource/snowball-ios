@@ -252,7 +252,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
   // MARK: Internal
 
   func configueForClip(clip: Clip, state: ClipCollectionViewCellState = .Default, animated: Bool = false) {
-    if let thumbnailURLString = clip.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
+    if let thumbnailURLString = clip.thumbnailURL, let thumbnailURL = NSURL(string: thumbnailURLString) {
       thumbnailImageView.setImageFromURL(thumbnailURL)
     }
     if let user = clip.user {
