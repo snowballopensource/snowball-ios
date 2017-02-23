@@ -16,13 +16,15 @@ class UserTimelineViewController: TimelineViewController {
 
   private let topBackgroundImageView = UIImageView()
   private let usernameLabel: UILabel
+  private let followButton: UIButton
   private let user: User
 
   // MARK: Initializers
 
   init(user: User) {
     self.user = user
-    self.usernameLabel = UILabel()
+    usernameLabel = UILabel()
+    followButton = UIButton(type: .Custom)
     super.init(timelineType: .User(userID: user.id ?? ""))
   }
 
@@ -46,6 +48,19 @@ class UserTimelineViewController: TimelineViewController {
       topBackgroundImageView.setImageFromURL(avatarURL)
     }
 
+    let followImage = user.following ? UIImage(imageLiteral: "button-following") : UIImage(imageLiteral: "button-follow")
+    followButton.setBackgroundImage(followImage, forState: .Normal)
+    let contentSize = followButton.intrinsicContentSize()
+    let followButtonAspectRatio = contentSize.height / contentSize.width
+    view.addSubview(followButton)
+
+    constrain(followButton, topBackgroundImageView) { followButton, topBackgroundImageView in
+      followButton.height == followButton.width * followButtonAspectRatio
+      followButton.width == 110
+      followButton.bottom == topBackgroundImageView.bottom - 20
+      followButton.centerX == topBackgroundImageView.centerX
+    }
+
     usernameLabel.font = UIFont.SnowballFont.mediumFont.fontWithSize(30)
     usernameLabel.textAlignment = .Center
     usernameLabel.text = user.username
@@ -54,10 +69,10 @@ class UserTimelineViewController: TimelineViewController {
 
     let height = usernameLabel.sizeThatFits(CGSize(width: view.bounds.width, height: CGFloat.max)).height
 
-    constrain(usernameLabel, topBackgroundImageView) { usernameLabel, topBackgroundImageView in
+    constrain(usernameLabel, topBackgroundImageView, followButton) { usernameLabel, topBackgroundImageView, followButton in
       usernameLabel.height == height
       usernameLabel.width == topBackgroundImageView.width
-      usernameLabel.bottom == topBackgroundImageView.bottom - 75
+      usernameLabel.bottom == followButton.top - 20
       usernameLabel.centerX == topBackgroundImageView.centerX
     }
   }
