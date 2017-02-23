@@ -209,36 +209,42 @@ extension FindFriendsViewController: UserTableViewCellDelegate {
   func userTableViewCellFollowButtonTapped(cell: UserTableViewCell) {
     guard let indexPath = tableView.indexPathForCell(cell) else { return }
     let user = users[indexPath.row]
-    guard let userID = user.id else { return }
+    guard user.id != nil else { return }
 
-    let followingCurrently = user.following
-
-    func setFollowing(following: Bool) {
-      Database.performTransaction {
-        user.following = following
-        Database.save(user)
-      }
+    followForUser(user) { following in
       cell.followButton.setFollowing(following, animated: true)
     }
+  }
+}
 
-    setFollowing(!followingCurrently)
+func followForUser(user: User, completion: (Bool) -> Void) {
+  let followingCurrently = user.following
 
-    let route: SnowballRoute
-    if followingCurrently {
-      route = SnowballRoute.UnfollowUser(userID: userID)
-      Analytics.track("Unfollow User")
-    } else {
-      route = SnowballRoute.FollowUser(userID: userID)
-      Analytics.track("Follow User")
+  func setFollowing(following: Bool) {
+    Database.performTransaction {
+      user.following = following
+      Database.save(user)
     }
+    completion(following)
+  }
 
-    SnowballAPI.request(route) { response in
-      switch response {
-      case .Success: break
-      case .Failure(let error):
-        print(error)
-        setFollowing(followingCurrently)
-      }
+  setFollowing(!followingCurrently)
+
+  let route: SnowballRoute
+  if followingCurrently {
+    route = SnowballRoute.UnfollowUser(userID: user.id!)
+    Analytics.track("Unfollow User")
+  } else {
+    route = SnowballRoute.FollowUser(userID: user.id!)
+    Analytics.track("Follow User")
+  }
+
+  SnowballAPI.request(route) { response in
+    switch response {
+    case .Success: break
+    case .Failure(let error):
+      print(error)
+      setFollowing(followingCurrently)
     }
   }
 }

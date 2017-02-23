@@ -48,10 +48,13 @@ class UserTimelineViewController: TimelineViewController {
       topBackgroundImageView.setImageFromURL(avatarURL)
     }
 
-    let followImage = user.following ? UIImage(imageLiteral: "button-following") : UIImage(imageLiteral: "button-follow")
-    followButton.setBackgroundImage(followImage, forState: .Normal)
-    let contentSize = followButton.intrinsicContentSize()
-    let followButtonAspectRatio = contentSize.height / contentSize.width
+    setFollowButtonState()
+    let followButtonAspectRatio: CGFloat = {
+      let contentSize = followButton.intrinsicContentSize()
+      return contentSize.height / contentSize.width
+    }()
+    followButton.addTarget(self, action: #selector(followButtonTapped), forControlEvents: .TouchUpInside)
+    followButton.hidden = user.id! == User.currentUser!.id
     view.addSubview(followButton)
 
     constrain(followButton, topBackgroundImageView) { followButton, topBackgroundImageView in
@@ -74,6 +77,17 @@ class UserTimelineViewController: TimelineViewController {
       usernameLabel.width == topBackgroundImageView.width
       usernameLabel.bottom == followButton.top - 20
       usernameLabel.centerX == topBackgroundImageView.centerX
+    }
+  }
+
+  private func setFollowButtonState() {
+    let followImage = user.following ? UIImage(imageLiteral: "button-following") : UIImage(imageLiteral: "button-follow")
+    followButton.setBackgroundImage(followImage, forState: .Normal)
+  }
+
+  @objc func followButtonTapped() {
+    followForUser(user) { following in
+      self.setFollowButtonState()
     }
   }
 
