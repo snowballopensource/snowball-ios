@@ -14,13 +14,15 @@ class UserTimelineViewController: TimelineViewController {
 
   // MARK: Properties
 
-  let topBackgroundImageView = UIImageView()
-  let user: User
+  private let topBackgroundImageView = UIImageView()
+  private let usernameLabel: UILabel
+  private let user: User
 
   // MARK: Initializers
 
   init(user: User) {
     self.user = user
+    self.usernameLabel = UILabel()
     super.init(timelineType: .User(userID: user.id ?? ""))
   }
 
@@ -42,6 +44,21 @@ class UserTimelineViewController: TimelineViewController {
     }
     if let avatarURLString = user.avatarURL, avatarURL = NSURL(string: avatarURLString) {
       topBackgroundImageView.setImageFromURL(avatarURL)
+    }
+
+    usernameLabel.font = UIFont.SnowballFont.mediumFont.fontWithSize(30)
+    usernameLabel.textAlignment = .Center
+    usernameLabel.text = user.username
+    usernameLabel.textColor = UIColor.whiteColor()
+    view.addSubview(usernameLabel)
+
+    let height = usernameLabel.sizeThatFits(CGSize(width: view.bounds.width, height: CGFloat.max)).height
+
+    constrain(usernameLabel, topBackgroundImageView) { usernameLabel, topBackgroundImageView in
+      usernameLabel.height == height
+      usernameLabel.width == topBackgroundImageView.width
+      usernameLabel.bottom == topBackgroundImageView.bottom - 75
+      usernameLabel.centerX == topBackgroundImageView.centerX
     }
   }
 
