@@ -17,7 +17,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (= 3.5.1)
-  - Amplitude-iOS (~> 3.14.0)
+  - Amplitude-iOS
   - Cartography (= 0.7)
   - HanekeSwift (from `https://github.com/Haneke/HanekeSwift`, commit `2f304e8`)
   - RBQFetchedResultsController (= 4.0.4)
