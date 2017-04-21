@@ -97,10 +97,14 @@ class UserTimelineViewController: TimelineViewController {
   override func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
     super.timelinePlayer(timelinePlayer, willBeginPlaybackWithFirstClip: clip)
     view.sendSubviewToBack(topBackgroundImageView)
+    view.sendSubviewToBack(usernameLabel)
+    view.sendSubviewToBack(followButton)
   }
 
   override func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
     super.timelinePlayer(timelinePlayer, didEndPlaybackWithLastClip: clip)
     view.bringSubviewToFront(topBackgroundImageView)
+    view.bringSubviewToFront(usernameLabel)
+    view.bringSubviewToFront(followButton)
   }
 }
