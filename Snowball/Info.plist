@@ -29,6 +29,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Snowball needs camera access to record your clips.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Snowball needs contacts access to find new people to follow.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Snowball needs microphone access to record audio for your clips.</string>
 	<key>UILaunchStoryboardName</key>
