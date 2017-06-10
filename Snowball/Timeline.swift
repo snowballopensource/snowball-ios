@@ -13,7 +13,7 @@ class Timeline {
 
   // MARK: Properties
 
-  let id = NSUUID().UUIDString
+  let id = UUID().uuidString
   let type: TimelineType
   let clips: Results<Clip>
   var clipPendingAcceptance: Clip? {
@@ -23,12 +23,12 @@ class Timeline {
     return clips.filter("stateString == %@ || stateString == %@", ClipState.PendingAcceptance.rawValue, ClipState.UploadFailed.rawValue).sorted("createdAt")
   }
   var currentPage = 0
-  private let kClipBookmarkDateKey = "ClipBookmarkDate"
+  fileprivate let kClipBookmarkDateKey = "ClipBookmarkDate"
   var bookmarkedClip: Clip? {
     get {
       if type.allowsBookmark {
         let filteredClips = clips.filter("id != NULL")
-        if let bookmarkDate = NSUserDefaults.standardUserDefaults().objectForKey(kClipBookmarkDateKey) as? NSDate {
+        if let bookmarkDate = UserDefaults.standard.object(forKey: kClipBookmarkDateKey) as? Date {
           if let clipAfterBookmark = filteredClips.filter("createdAt > %@", bookmarkDate).first {
             return clipAfterBookmark
           }
@@ -43,9 +43,9 @@ class Timeline {
     set {
       if type.allowsBookmark {
         if let newClipBookmarkDate = newValue?.createdAt, let oldClipBookmarkDate = self.bookmarkedClip?.createdAt {
-          if oldClipBookmarkDate.compare(newClipBookmarkDate) == NSComparisonResult.OrderedAscending {
-            NSUserDefaults.standardUserDefaults().setObject(newClipBookmarkDate, forKey: kClipBookmarkDateKey)
-            NSUserDefaults.standardUserDefaults().synchronize()
+          if oldClipBookmarkDate.compare(newClipBookmarkDate as Date) == ComparisonResult.orderedAscending {
+            UserDefaults.standard.set(newClipBookmarkDate, forKey: kClipBookmarkDateKey)
+            UserDefaults.standard.synchronize()
           }
         }
       }
@@ -63,9 +63,9 @@ class Timeline {
     self.type = type
     sortDescriptors = [SortDescriptor(property: "stateString"), SortDescriptor(property: "createdAt")]
     switch type {
-    case .Home:
-      predicate = NSPredicate(format: "inHomeTimeline == %@", true)
-    case .User(let userID):
+    case .home:
+      predicate = NSPredicate(format: "inHomeTimeline == %@", true as CVarArg)
+    case .user(let userID):
       predicate = NSPredicate(format: "timelineID == %@ && user.id == %@", id, userID)
     }
     self.clips = Database.findAll(Clip).filter(predicate).sorted(sortDescriptors)
@@ -73,7 +73,7 @@ class Timeline {
 
   // MARK: Internal
 
-  func clipBeforeClip(clip: Clip) -> Clip? {
+  func clipBeforeClip(_ clip: Clip) -> Clip? {
     if let clipIndex = clips.indexOf(clip) {
       let beforeClipIndex = clipIndex - 1
       if beforeClipIndex >= 0 {
@@ -83,60 +83,60 @@ class Timeline {
     return nil
   }
 
-  func clipAfterClip(clip: Clip) -> Clip? {
+  func clipAfterClip(_ clip: Clip) -> Clip? {
     return clipsAfterClip(clip).first
   }
 
-  func clipsIncludingAndAfterClip(clip: Clip) -> Slice<Results<Clip>> {
+  func clipsIncludingAndAfterClip(_ clip: Clip) -> Slice<Results<Clip>> {
     guard let clipIndex = clips.indexOf(clip) else { return clips[clips.startIndex..<clips.endIndex] }
     return clips[clipIndex..<clips.endIndex]
   }
 
-  func clipsAfterClip(clip: Clip) -> Slice<Results<Clip>> {
+  func clipsAfterClip(_ clip: Clip) -> Slice<Results<Clip>> {
     let clips = clipsIncludingAndAfterClip(clip)
     return clips[(clips.startIndex + 1)..<clips.endIndex]
   }
 
-  func requestRefreshOfClips(completion: (() -> Void)? = nil) {
+  func requestRefreshOfClips(_ completion: (() -> Void)? = nil) {
     currentPage = 1
     requestClipsOnCurrentPage(completion)
   }
 
-  func requestNextPageOfClips(completion: (() -> Void)?) {
+  func requestNextPageOfClips(_ completion: (() -> Void)?) {
     currentPage += 1
     requestClipsOnCurrentPage(completion)
   }
 
   // MARK: Private
 
-  private func requestClipsOnCurrentPage(completion: (() -> Void)?) {
+  fileprivate func requestClipsOnCurrentPage(_ completion: (() -> Void)?) {
     let requestedPage = currentPage
     let route: SnowballRoute = {
       switch self.type {
-      case .Home: return SnowballRoute.GetClipStream(page: requestedPage)
-      case .User(let userID): return SnowballRoute.GetClipStreamForUser(userID: userID, page: requestedPage)
+      case .home: return SnowballRoute.getClipStream(page: requestedPage)
+      case .user(let userID): return SnowballRoute.getClipStreamForUser(userID: userID, page: requestedPage)
       }
     }()
     SnowballAPI.requestObjects(route,
       beforeSaveEveryObject: { (clip: Clip) in
         clip.timelineID = self.id
-        if self.type == .Home {
+        if self.type == .home {
           clip.inHomeTimeline = true
         }
       },
       completion: { (response: ObjectResponse<[Clip]>) in
         switch response {
-        case .Success(let clips):
-          if self.type == .Home && requestedPage == 1 {
+        case .success(let clips):
+          if self.type == .home && requestedPage == 1 {
             self.deleteClipsNotInClips(clips)
           }
-        case .Failure(let error): print(error) // TODO: Handle error
+        case .failure(let error): print(error) // TODO: Handle error
         }
         completion?()
     })
   }
 
-  private func deleteClipsNotInClips(clips: [Clip]) {
+  fileprivate func deleteClipsNotInClips(_ clips: [Clip]) {
     var clipIDs = [String]()
     for clip in clips {
       guard let clipID = clip.id else { break }
@@ -151,13 +151,13 @@ class Timeline {
 
 // MARK: - TimelineType
 enum TimelineType {
-  case Home
-  case User(userID: String)
+  case home
+  case user(userID: String)
 
   // MARK: Properties
 
   var allowsBookmark: Bool {
-    if self == .Home {
+    if self == .home {
       return true
     }
     return false
@@ -167,8 +167,8 @@ enum TimelineType {
 extension TimelineType: Equatable {}
 func ==(lhs: TimelineType, rhs: TimelineType) -> Bool {
   switch (lhs, rhs) {
-  case (.Home, .Home): return true
-  case (.User(let lhsUserID), .User(let rhsUserID)): return lhsUserID == rhsUserID
+  case (.home, .home): return true
+  case (.user(let lhsUserID), .user(let rhsUserID)): return lhsUserID == rhsUserID
   default: return false
   }
 }

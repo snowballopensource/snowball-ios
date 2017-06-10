@@ -13,19 +13,19 @@ extension UIFont {
   struct SnowballFont {
     static let regularFont: UIFont = {
       if #available(iOS 8.2, *) {
-        return UIFont.systemFontOfSize(defaultFontSize, weight: UIFontWeightRegular)
+        return UIFont.systemFont(ofSize: defaultFontSize, weight: UIFontWeightRegular)
       } else {
         return UIFont(name: "HelveticaNeue", size: defaultFontSize) ?? UIFont()
       }
     }()
     static let mediumFont: UIFont = {
       if #available(iOS 8.2, *) {
-        return UIFont.systemFontOfSize(defaultFontSize, weight: UIFontWeightMedium)
+        return UIFont.systemFont(ofSize: defaultFontSize, weight: UIFontWeightMedium)
       } else {
         return UIFont(name: "HelveticaNeue-Medium", size: defaultFontSize) ?? UIFont()
       }
     }()
 
-    private static let defaultFontSize: CGFloat = 16
+    fileprivate static let defaultFontSize: CGFloat = 16
   }
 }

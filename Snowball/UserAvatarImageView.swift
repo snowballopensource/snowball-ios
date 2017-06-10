@@ -14,7 +14,7 @@ class UserAvatarImageView: UIImageView {
   // MARK: Initializers
 
   init() {
-    super.init(frame: CGRectZero)
+    super.init(frame: CGRect.zero)
     clipsToBounds = true
   }
 
@@ -31,10 +31,10 @@ class UserAvatarImageView: UIImageView {
 
   // MARK: Internal
 
-  func setUser(user: User) {
+  func setUser(_ user: User) {
     backgroundColor = user.color
     image = UIImage(named: "user-avatar-default")
-    if let URLString = user.avatarURL, URL = NSURL(string: URLString) {
+    if let URLString = user.avatarURL, let URL = URL(string: URLString) {
       setImageFromURL(URL)
     }
   }

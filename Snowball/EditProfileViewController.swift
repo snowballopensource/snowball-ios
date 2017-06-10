@@ -25,9 +25,9 @@ class EditProfileViewController: UIViewController {
   }()
   let editAvatarButton: UIButton = {
     let button = UIButton()
-    button.setTitle(NSLocalizedString("Edit", comment: ""), forState: .Normal)
+    button.setTitle(NSLocalizedString("Edit", comment: ""), for: UIControlState())
     if let user = User.currentUser {
-      button.setTitleColor(user.color, forState: .Normal)
+      button.setTitleColor(user.color, for: UIControlState())
     }
     return button
   }()
@@ -35,10 +35,10 @@ class EditProfileViewController: UIViewController {
     let textField = FormTextField()
     textField.hint = NSLocalizedString("Username", comment: "")
     textField.placeholder = NSLocalizedString("Your username", comment: "")
-    textField.autocapitalizationType = .None
-    textField.autocorrectionType = .No
-    textField.spellCheckingType = .No
-    textField.returnKeyType = .Done
+    textField.autocapitalizationType = .none
+    textField.autocorrectionType = .no
+    textField.spellCheckingType = .no
+    textField.returnKeyType = .done
     if let user = User.currentUser {
       textField.text = user.username
     }
@@ -48,11 +48,11 @@ class EditProfileViewController: UIViewController {
     let textField = FormTextField()
     textField.hint = NSLocalizedString("Email", comment: "")
     textField.placeholder = NSLocalizedString("Your email address", comment: "")
-    textField.autocapitalizationType = .None
-    textField.autocorrectionType = .No
-    textField.spellCheckingType = .No
-    textField.keyboardType = .EmailAddress
-    textField.returnKeyType = .Done
+    textField.autocapitalizationType = .none
+    textField.autocorrectionType = .no
+    textField.spellCheckingType = .no
+    textField.keyboardType = .emailAddress
+    textField.returnKeyType = .done
     if let user = User.currentUser {
       textField.text = user.email
     }
@@ -62,11 +62,11 @@ class EditProfileViewController: UIViewController {
     let textField = FormTextField()
     textField.hint = NSLocalizedString("Phone Number", comment: "")
     textField.placeholder = NSLocalizedString("Your phone number", comment: "")
-    textField.autocapitalizationType = .None
-    textField.autocorrectionType = .No
-    textField.spellCheckingType = .No
-    textField.keyboardType = .NumberPad
-    textField.returnKeyType = .Done
+    textField.autocapitalizationType = .none
+    textField.autocorrectionType = .no
+    textField.spellCheckingType = .no
+    textField.keyboardType = .numberPad
+    textField.returnKeyType = .done
     if let user = User.currentUser {
       textField.text = user.phoneNumber
     }
@@ -79,11 +79,11 @@ class EditProfileViewController: UIViewController {
     super.viewDidLoad()
 
     title = NSLocalizedString("Edit profile", comment: "")
-    view.backgroundColor = UIColor.whiteColor()
+    view.backgroundColor = UIColor.white
 
-    navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-back-black"), style: .Plain, target: self, action: #selector(EditProfileViewController.leftBarButtonItemPressed))
-    navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: NSLocalizedString("Save", comment: ""), style: .Plain, target: self, action: #selector(EditProfileViewController.rightBarButtonItemPressed))
-    navigationItem.rightBarButtonItem?.tintColor = UIColor.blackColor()
+    navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-back-black"), style: .plain, target: self, action: #selector(EditProfileViewController.leftBarButtonItemPressed))
+    navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: NSLocalizedString("Save", comment: ""), style: .plain, target: self, action: #selector(EditProfileViewController.rightBarButtonItemPressed))
+    navigationItem.rightBarButtonItem?.tintColor = UIColor.black
 
     view.addSubview(userAvatarImageView)
     constrain(userAvatarImageView) { userAvatarImageView in
@@ -99,7 +99,7 @@ class EditProfileViewController: UIViewController {
       editAvatarButton.centerX == userAvatarImageView.centerX
       editAvatarButton.height == 44
     }
-    editAvatarButton.addTarget(self, action: #selector(EditProfileViewController.editAvatarButtonPressed), forControlEvents: .TouchUpInside)
+    editAvatarButton.addTarget(self, action: #selector(EditProfileViewController.editAvatarButtonPressed), for: .touchUpInside)
 
     view.addSubview(usernameTextField)
     constrain(usernameTextField, editAvatarButton) { usernameTextField, editAvatarButton in
@@ -133,11 +133,11 @@ class EditProfileViewController: UIViewController {
 
   // MARK: Private
 
-  @objc private func leftBarButtonItemPressed() {
-    navigationController?.popViewControllerAnimated(true)
+  @objc fileprivate func leftBarButtonItemPressed() {
+    navigationController?.popViewController(animated: true)
   }
 
-  @objc private func rightBarButtonItemPressed() {
+  @objc fileprivate func rightBarButtonItemPressed() {
     guard let user = User.currentUser else { return }
 
     var hasChanges = false
@@ -168,10 +168,10 @@ class EditProfileViewController: UIViewController {
 
     if hasChanges {
       SwiftSpinner.show(NSLocalizedString("Updating...", comment: ""), animated: true)
-      SnowballAPI.request(SnowballRoute.UpdateCurrentUser(username: newUsername, email: newEmail, phoneNumber: newPhoneNumber)) { response in
+      SnowballAPI.request(SnowballRoute.updateCurrentUser(username: newUsername, email: newEmail, phoneNumber: newPhoneNumber)) { response in
         SwiftSpinner.hide()
         switch response {
-        case .Success:
+        case .success:
           Database.performTransaction {
             if let username = newUsername {
               user.username = username
@@ -184,33 +184,33 @@ class EditProfileViewController: UIViewController {
             }
             Database.save(user)
           }
-          self.navigationController?.popViewControllerAnimated(true)
+          self.navigationController?.popViewController(animated: true)
 
-        case .Failure(let error): error.displayToUserIfAppropriateFromViewController(self)
+        case .failure(let error): error.displayToUserIfAppropriateFromViewController(self)
         }
       }
     } else {
-      navigationController?.popViewControllerAnimated(true)
+      navigationController?.popViewController(animated: true)
     }
   }
 
-  @objc private func editAvatarButtonPressed() {
+  @objc fileprivate func editAvatarButtonPressed() {
     let imagePickerController = UIImagePickerController()
     imagePickerController.delegate = self
-    imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+    imagePickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
     imagePickerController.allowsEditing = true
-    presentViewController(imagePickerController, animated: true, completion: nil)
+    present(imagePickerController, animated: true, completion: nil)
   }
 }
 
 // MARK: UIImagePickerControllerDelegate, UINavigationControllerDelegate
 
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-  func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [AnyHashable: Any]!) {
     SwiftSpinner.show(NSLocalizedString("Uploading...", comment: ""), animated: true)
-    picker.dismissViewControllerAnimated(true) {
-      dispatch_async(dispatch_get_main_queue()) {
-        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
+    picker.dismiss(animated: true) {
+      DispatchQueue.main.async {
+        UIApplication.shared.setStatusBarHidden(true, with: UIStatusBarAnimation.fade)
         let editedImage = editingInfo[UIImagePickerControllerEditedImage] as? UIImage
         var finalImage: UIImage
         if let editedImage = editedImage {
@@ -218,9 +218,9 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         } else {
           finalImage = image
         }
-        let rect = CGRectMake(0, 0, 480, 480)
+        let rect = CGRect(x: 0, y: 0, width: 480, height: 480)
         UIGraphicsBeginImageContext(rect.size)
-        finalImage.drawInRect(rect)
+        finalImage.draw(in: rect)
         guard let processedImage = UIGraphicsGetImageFromCurrentImageContext() else {
           preconditionFailure()
         }
@@ -248,7 +248,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
 }
 
 extension EditProfileViewController: UITextFieldDelegate {
-  func textFieldShouldReturn(textField: UITextField) -> Bool {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     return true
   }
 }

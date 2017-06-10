@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 extension UIViewController {
-  func authenticateUser(afterSuccessfulAuthentication afterSuccessfulAuthentication: (() -> Void)?, whenAlreadyAuthenticated: (() -> Void)?) {
+  func authenticateUser(afterSuccessfulAuthentication: (() -> Void)?, whenAlreadyAuthenticated: (() -> Void)?) {
     if User.currentUser == nil {
       let authenticationNC = RoundedCornerViewController(childViewController: AuthenticationNavigationController())
       let transitioningDelegate = AuthenticationPresentationControllerTransitioningDelegate.sharedInstance
@@ -21,8 +21,8 @@ extension UIViewController {
         }
       }
       authenticationNC.transitioningDelegate = transitioningDelegate
-      authenticationNC.modalPresentationStyle = .Custom
-      presentViewController(authenticationNC, animated: true, completion: nil)
+      authenticationNC.modalPresentationStyle = .custom
+      present(authenticationNC, animated: true, completion: nil)
     } else {
       whenAlreadyAuthenticated?()
     }
@@ -37,17 +37,17 @@ private class RoundedCornerViewController: UIViewController {
 
     addChildViewController(childViewController)
     let childView = childViewController.view
-    view.addSubview(childView)
+    view.addSubview(childView!)
     constrain(childView) { childView in
       childView.left == childView.superview!.left
       childView.top == childView.superview!.top
       childView.right == childView.superview!.right
       childView.bottom == childView.superview!.bottom
     }
-    childViewController.didMoveToParentViewController(self)
+    childViewController.didMove(toParentViewController: self)
 
-    childView.layer.cornerRadius = 10
-    childView.clipsToBounds = true
+    childView?.layer.cornerRadius = 10
+    childView?.clipsToBounds = true
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -69,19 +69,19 @@ private class AuthenticationPresentationController: UIPresentationController {
 
   let cancelButton: UIButton = {
     let button = UIButton()
-    button.backgroundColor = UIColor.whiteColor()
+    button.backgroundColor = UIColor.white
     button.layer.cornerRadius = 22
     button.clipsToBounds = true
-    button.setImage(UIImage(named: "top-x-small"), forState: UIControlState.Normal)
+    button.setImage(UIImage(named: "top-x-small"), for: UIControlState())
     return button
   }()
 
   // MARK: UIPresentationController
 
-  override init(presentedViewController: UIViewController, presentingViewController: UIViewController?) {
-    super.init(presentedViewController: presentedViewController, presentingViewController: presentingViewController)
+  override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
+    super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
 
-    guard let presentedView = presentedView() else { return }
+    guard let presentedView = presentedView else { return }
 
     presentedView.addSubview(cancelButton)
     constrain(cancelButton) { cancelButton in
@@ -90,7 +90,7 @@ private class AuthenticationPresentationController: UIPresentationController {
       cancelButton.width == 44
       cancelButton.height == 44
     }
-    cancelButton.addTarget(self, action: #selector(AuthenticationPresentationController.cancelButtonPressed), forControlEvents: UIControlEvents.TouchUpInside)
+    cancelButton.addTarget(self, action: #selector(AuthenticationPresentationController.cancelButtonPressed), for: UIControlEvents.touchUpInside)
   }
 
   override func presentationTransitionWillBegin() {
@@ -99,16 +99,16 @@ private class AuthenticationPresentationController: UIPresentationController {
     dimView.frame = containerView.bounds
     containerView.addSubview(dimView)
 
-    presentedViewController.transitionCoordinator()?.animateAlongsideTransition(
-      { _ in
+    presentedViewController.transitionCoordinator?.animate(
+      alongsideTransition: { _ in
         self.dimView.alpha = 1
       },
       completion: nil)
   }
 
   override func dismissalTransitionWillBegin() {
-    presentedViewController.transitionCoordinator()?.animateAlongsideTransition(
-      { _ in
+    presentedViewController.transitionCoordinator?.animate(
+      alongsideTransition: { _ in
         self.dimView.alpha = 0
       },
       completion: { _ in
@@ -119,14 +119,14 @@ private class AuthenticationPresentationController: UIPresentationController {
     })
   }
 
-  override func frameOfPresentedViewInContainerView() -> CGRect {
-    return CGRectInset(containerView!.bounds, 20, 20)
+  override var frameOfPresentedViewInContainerView : CGRect {
+    return containerView!.bounds.insetBy(dx: 20, dy: 20)
   }
 
   // MARK: Private
 
-  @objc private func cancelButtonPressed() {
-    presentedViewController.dismissViewControllerAnimated(true, completion: nil)
+  @objc fileprivate func cancelButtonPressed() {
+    presentedViewController.dismiss(animated: true, completion: nil)
   }
 }
 
@@ -138,7 +138,7 @@ class AuthenticationPresentationControllerTransitioningDelegate: NSObject {
 
 // MARK: - UIViewControllerTransitioningDelegate
 extension AuthenticationPresentationControllerTransitioningDelegate: UIViewControllerTransitioningDelegate {
-  func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController?, sourceViewController source: UIViewController) -> UIPresentationController? {
-    return AuthenticationPresentationController(presentedViewController: presented, presentingViewController: presenting)
+  func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+    return AuthenticationPresentationController(presentedViewController: presented, presenting: presenting)
   }
 }

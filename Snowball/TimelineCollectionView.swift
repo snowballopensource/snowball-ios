@@ -14,15 +14,15 @@ class TimelineCollectionView: UICollectionView {
 
   var timelineDelegate: TimelineCollectionViewDelegate?
 
-  private let leftSwipeGestureRecognizer: UISwipeGestureRecognizer = {
+  fileprivate let leftSwipeGestureRecognizer: UISwipeGestureRecognizer = {
     let gestureRecognizer = UISwipeGestureRecognizer()
-    gestureRecognizer.direction = .Left
+    gestureRecognizer.direction = .left
     return gestureRecognizer
   }()
 
-  private let rightSwipeGestureRecognizer: UISwipeGestureRecognizer = {
+  fileprivate let rightSwipeGestureRecognizer: UISwipeGestureRecognizer = {
     let gestureRecognizer = UISwipeGestureRecognizer()
-    gestureRecognizer.direction = .Right
+    gestureRecognizer.direction = .right
     return gestureRecognizer
   }()
 
@@ -30,10 +30,10 @@ class TimelineCollectionView: UICollectionView {
 
   init() {
     let layout = TimelineCollectionViewFlowLayout()
-    super.init(frame: CGRectZero, collectionViewLayout: layout)
+    super.init(frame: CGRect.zero, collectionViewLayout: layout)
     showsHorizontalScrollIndicator = false
-    backgroundColor = UIColor.whiteColor()
-    registerClass(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell))
+    backgroundColor = UIColor.white
+    register(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell))
 
     addGestureRecognizer(leftSwipeGestureRecognizer)
     leftSwipeGestureRecognizer.addTarget(self, action: #selector(TimelineCollectionView.leftSwipeGestureRecognizerSwiped))
@@ -48,14 +48,14 @@ class TimelineCollectionView: UICollectionView {
 
   // MARK: Private
 
-  @objc private func leftSwipeGestureRecognizerSwiped() {
-    if !scrollEnabled {
+  @objc fileprivate func leftSwipeGestureRecognizerSwiped() {
+    if !isScrollEnabled {
       timelineDelegate?.timelineCollectionViewSwipedLeft(self)
     }
   }
 
-  @objc private func rightSwipeGestureRecognizerSwiped() {
-    if !scrollEnabled {
+  @objc fileprivate func rightSwipeGestureRecognizerSwiped() {
+    if !isScrollEnabled {
       timelineDelegate?.timelineCollectionViewSwipedRight(self)
     }
   }
@@ -63,8 +63,8 @@ class TimelineCollectionView: UICollectionView {
 
 // MARK: - TimelineCollectionViewDelegate
 protocol TimelineCollectionViewDelegate {
-  func timelineCollectionViewSwipedLeft(collectionView: TimelineCollectionView)
-  func timelineCollectionViewSwipedRight(collectionView: TimelineCollectionView)
+  func timelineCollectionViewSwipedLeft(_ collectionView: TimelineCollectionView)
+  func timelineCollectionViewSwipedRight(_ collectionView: TimelineCollectionView)
 }
 
 // MARK: - TimelineCollectionViewFlowLayout
@@ -74,13 +74,13 @@ class TimelineCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
   var delegate: TimelineCollectionViewFlowLayoutDelegate?
 
-  private var updateItems = [UICollectionViewUpdateItem]()
+  fileprivate var updateItems = [UICollectionViewUpdateItem]()
 
   // MARK: Initializers
 
   override init() {
     super.init()
-    scrollDirection = .Horizontal
+    scrollDirection = .horizontal
     minimumInteritemSpacing = 0
     minimumLineSpacing = 0
     itemSize = ClipCollectionViewCell.defaultSize
@@ -92,8 +92,8 @@ class TimelineCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
   // MARK: UICollectionViewFlowLayout
 
-  override func prepareForCollectionViewUpdates(updateItems: [UICollectionViewUpdateItem]) {
-    super.prepareForCollectionViewUpdates(updateItems)
+  override func prepare(forCollectionViewUpdates updateItems: [UICollectionViewUpdateItem]) {
+    super.prepare(forCollectionViewUpdates: updateItems)
 
     self.updateItems = updateItems
   }
@@ -106,5 +106,5 @@ class TimelineCollectionViewFlowLayout: UICollectionViewFlowLayout {
 }
 
 protocol TimelineCollectionViewFlowLayoutDelegate {
-  func timelineCollectionViewFlowLayout(layout: TimelineCollectionViewFlowLayout, willFinalizeCollectionViewUpdates updates: [UICollectionViewUpdateItem])
+  func timelineCollectionViewFlowLayout(_ layout: TimelineCollectionViewFlowLayout, willFinalizeCollectionViewUpdates updates: [UICollectionViewUpdateItem])
 }

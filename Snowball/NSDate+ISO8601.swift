@@ -8,12 +8,12 @@
 
 import Foundation
 
-extension NSDate {
-  class func dateFromISO8610String(ISO8610String: String) -> NSDate? {
-    let dateFormatter = NSDateFormatter()
-    dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-    dateFormatter.timeZone = NSTimeZone.localTimeZone()
+extension Date {
+  static func dateFromISO8610String(_ ISO8610String: String) -> Date? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+    dateFormatter.timeZone = TimeZone.autoupdatingCurrent
     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-    return dateFormatter.dateFromString(ISO8610String)
+    return dateFormatter.date(from: ISO8610String)
   }
 }

@@ -9,7 +9,7 @@
 import AVFoundation
 import Foundation
 
-class LoadPlayerItemOperation: NSOperation {
+class LoadPlayerItemOperation: Operation {
 
   // MARK: Properties
 
@@ -23,42 +23,42 @@ class LoadPlayerItemOperation: NSOperation {
 
   // MARK: NSOperation
 
-  override var asynchronous: Bool { return true }
+  override var isAsynchronous: Bool { return true }
 
-  private var _executing = false
-  override var executing: Bool {
+  fileprivate var _executing = false
+  override var isExecuting: Bool {
     get {
       return _executing
     }
     set {
-      willChangeValueForKey("isExecuting")
+      willChangeValue(forKey: "isExecuting")
       _executing = newValue
-      didChangeValueForKey("isExecuting")
+      didChangeValue(forKey: "isExecuting")
     }
   }
 
-  private var _finished = false
-  override var finished: Bool {
+  fileprivate var _finished = false
+  override var isFinished: Bool {
     get {
       return _finished
     }
     set {
-      willChangeValueForKey("isFinished")
+      willChangeValue(forKey: "isFinished")
       _finished = newValue
-      didChangeValueForKey("isFinished")
+      didChangeValue(forKey: "isFinished")
     }
   }
 
   override func start() {
-    if cancelled {
-      finished = true
+    if isCancelled {
+      isFinished = true
       return
     }
-    executing = true
+    isExecuting = true
 
-    playerItem.asset.loadValuesAsynchronouslyForKeys(["playable"]) {
-      self.executing = false
-      self.finished = true
+    playerItem.asset.loadValuesAsynchronously(forKeys: ["playable"]) {
+      self.isExecuting = false
+      self.isFinished = true
     }
   }
 }

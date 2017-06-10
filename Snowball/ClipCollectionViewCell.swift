@@ -14,12 +14,12 @@ class ClipCollectionViewCell: UICollectionViewCell {
   // MARK: Properties
 
   class var defaultSize: CGSize {
-    let screenHeight = UIScreen.mainScreen().bounds.height
-    let screenWidth = UIScreen.mainScreen().bounds.width
+    let screenHeight = UIScreen.main.bounds.height
+    let screenWidth = UIScreen.main.bounds.width
     let cellHeight = screenHeight - screenWidth
     let cellsPerScreen: CGFloat = 2.5
     let cellWidth = screenWidth / cellsPerScreen
-    return CGSizeMake(cellWidth, cellHeight)
+    return CGSize(width: cellWidth, height: cellHeight)
   }
 
   var delegate: ClipCollectionViewCellDelegate?
@@ -29,63 +29,63 @@ class ClipCollectionViewCell: UICollectionViewCell {
   let thumbnailImageView = UIImageView()
   let playImageView: UIImageView = {
     let imageView = UIImageView(image: UIImage(named: "cell-clip-play"))
-    imageView.contentMode = .Center
-    imageView.tintColor = UIColor.whiteColor()
+    imageView.contentMode = .center
+    imageView.tintColor = UIColor.white
     return imageView
   }()
   let pauseImageView: UIImageView = {
     let imageView = UIImageView(image: UIImage(named: "cell-clip-pause"))
-    imageView.contentMode = .Center
-    imageView.tintColor = UIColor.whiteColor()
+    imageView.contentMode = .center
+    imageView.tintColor = UIColor.white
     return imageView
   }()
   let playButton = UIButton()
   let addButton: UIButton = {
     let button = UIButton()
-    button.setImage(UIImage(named: "cell-clip-add"), forState: UIControlState.Normal)
+    button.setImage(UIImage(named: "cell-clip-add"), for: UIControlState())
     button.backgroundColor = User.currentUser?.color
     return button
   }()
   let retryUploadButton: UIButton = {
     let button = UIButton()
-    button.setImage(UIImage(named: "cell-clip-retry"), forState: UIControlState.Normal)
+    button.setImage(UIImage(named: "cell-clip-retry"), for: UIControlState())
     return button
   }()
 
   let optionsView: UIView = {
     let view = UIView()
-    view.backgroundColor = UIColor.redColor().colorWithAlphaComponent(0.5)
+    view.backgroundColor = UIColor.red.withAlphaComponent(0.5)
     return view
   }()
   let deleteImageView: UIImageView = {
     let imageView = UIImageView(image: UIImage(named: "cell-clip-delete"))
-    imageView.contentMode = .Center
+    imageView.contentMode = .center
     return imageView
   }()
   let flagImageView: UIImageView = {
     let imageView = UIImageView(image: UIImage(named: "cell-clip-flag"))
-    imageView.contentMode = .Center
+    imageView.contentMode = .center
     return imageView
   }()
 
   let userAvatarImageView = UserAvatarImageView()
-  private let userAvatarImageViewBounceConstraintGroup = ConstraintGroup()
-  private let userAvatarImageViewBounceDuration = 1.0
-  private var userAvatarImageViewBounceInProgress = false
-  private var userAvatarImageViewShouldContinueBouncing = false
+  fileprivate let userAvatarImageViewBounceConstraintGroup = ConstraintGroup()
+  fileprivate let userAvatarImageViewBounceDuration = 1.0
+  fileprivate var userAvatarImageViewBounceInProgress = false
+  fileprivate var userAvatarImageViewShouldContinueBouncing = false
 
   let profileButton = UIButton()
   let usernameLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont.SnowballFont.mediumFont.fontWithSize(14)
-    label.textAlignment = .Center
+    label.font = UIFont.SnowballFont.mediumFont.withSize(14)
+    label.textAlignment = .center
     return label
   }()
   let timeAgoLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont.SnowballFont.mediumFont.fontWithSize(12)
+    label.font = UIFont.SnowballFont.mediumFont.withSize(12)
     label.textColor = UIColor.SnowballColor.lightGrayColor
-    label.textAlignment = .Center
+    label.textAlignment = .center
     return label
   }()
 
@@ -93,16 +93,16 @@ class ClipCollectionViewCell: UICollectionViewCell {
     let button = UIButton()
     let heartImage = UIImage(named: "cell-clip-heart")
     let heartFilledImage = UIImage(named: "cell-clip-heart-filled")
-    button.setImage(heartImage, forState: .Normal)
-    button.setImage(heartFilledImage, forState: .Selected)
-    button.setImage(heartFilledImage, forState: .Highlighted)
+    button.setImage(heartImage, for: UIControlState())
+    button.setImage(heartFilledImage, for: .selected)
+    button.setImage(heartFilledImage, for: .highlighted)
     return button
   }()
 
   let dimOverlayView: UIView = {
     let view = UIView()
-    view.userInteractionEnabled = false
-    view.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+    view.isUserInteractionEnabled = false
+    view.backgroundColor = UIColor.white.withAlphaComponent(0.5)
     return view
   }()
 
@@ -144,7 +144,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
       playButton.right == thumbnailImageView.right
       playButton.height == thumbnailImageView.height
     }
-    playButton.addTarget(self, action: #selector(ClipCollectionViewCell.playButtonTapped), forControlEvents: .TouchUpInside)
+    playButton.addTarget(self, action: #selector(ClipCollectionViewCell.playButtonTapped), for: .touchUpInside)
 
     addSubview(addButton)
     constrain(addButton, thumbnailImageView) { addButton, thumbnailImageView in
@@ -153,7 +153,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
       addButton.right == thumbnailImageView.right
       addButton.bottom == thumbnailImageView.bottom
     }
-    addButton.addTarget(self, action: #selector(ClipCollectionViewCell.addButtonTapped), forControlEvents: .TouchUpInside)
+    addButton.addTarget(self, action: #selector(ClipCollectionViewCell.addButtonTapped), for: .touchUpInside)
 
     addSubview(retryUploadButton)
     constrain(retryUploadButton, thumbnailImageView) { retryUploadButton, thumbnailImageView in
@@ -162,7 +162,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
       retryUploadButton.right == thumbnailImageView.right
       retryUploadButton.bottom == thumbnailImageView.bottom
     }
-    retryUploadButton.addTarget(self, action: #selector(ClipCollectionViewCell.retryUploadButtonTapped), forControlEvents: .TouchUpInside)
+    retryUploadButton.addTarget(self, action: #selector(ClipCollectionViewCell.retryUploadButtonTapped), for: .touchUpInside)
 
     addSubview(optionsView)
     constrain(optionsView, thumbnailImageView) { optionsView, thumbnailImageView in
@@ -204,7 +204,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
       profileButton.right == userAvatarImageView.right
       profileButton.height == userAvatarImageView.height
     }
-    profileButton.addTarget(self, action: #selector(ClipCollectionViewCell.profileButtonTapped), forControlEvents: .TouchUpInside)
+    profileButton.addTarget(self, action: #selector(ClipCollectionViewCell.profileButtonTapped), for: .touchUpInside)
 
     addSubview(usernameLabel)
     constrain(usernameLabel, thumbnailImageView, userAvatarImageView) { usernameLabel, thumbnailImageView, userAvatarImageView in
@@ -227,7 +227,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
       likeButton.width == 35
       likeButton.height == 30
     }
-    likeButton.addTarget(self, action: #selector(ClipCollectionViewCell.likeButtonTapped), forControlEvents: .TouchUpInside)
+    likeButton.addTarget(self, action: #selector(ClipCollectionViewCell.likeButtonTapped), for: .touchUpInside)
 
     addSubview(dimOverlayView)
     constrain(dimOverlayView) { dimOverlayView in
@@ -251,8 +251,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   // MARK: Internal
 
-  func configueForClip(clip: Clip, state: ClipCollectionViewCellState = .Default, animated: Bool = false) {
-    if let thumbnailURLString = clip.thumbnailURL, let thumbnailURL = NSURL(string: thumbnailURLString) {
+  func configueForClip(_ clip: Clip, state: ClipCollectionViewCellState = .default, animated: Bool = false) {
+    if let thumbnailURLString = clip.thumbnailURL, let thumbnailURL = URL(string: thumbnailURLString) {
       thumbnailImageView.setImageFromURL(thumbnailURL)
     }
     if let user = clip.user {
@@ -268,20 +268,20 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
     timeAgoLabel.text = clip.createdAt?.shortTimeSinceString() ?? NSLocalizedString("Now", comment: "")
 
-    likeButton.highlighted = clip.liked
+    likeButton.isHighlighted = clip.liked
 
     setState(state, animated: animated)
   }
 
-  func setState(state: ClipCollectionViewCellState, animated: Bool) {
-    let bookmarked = state == .Bookmarked
-    let options = state == .Options
-    let playingIdle = state == .PlayingIdle
-    let playingActive = state == .PlayingActive
+  func setState(_ state: ClipCollectionViewCellState, animated: Bool) {
+    let bookmarked = state == .bookmarked
+    let options = state == .options
+    let playingIdle = state == .playingIdle
+    let playingActive = state == .playingActive
     let playing = (playingIdle || playingActive)
-    let pendingAcceptance = state == .PendingAcceptance
-    let uploading = state == .Uploading
-    let uploadFailed = state == .UploadFailed
+    let pendingAcceptance = state == .pendingAcceptance
+    let uploading = state == .uploading
+    let uploadFailed = state == .uploadFailed
 
     playImageView.setHidden(!(bookmarked && !options), animated: animated)
     pauseImageView.setHidden(!playingActive, animated: animated)
@@ -295,7 +295,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     userAvatarImageView.setHidden(playingIdle, animated: animated)
     likeButton.setHidden(playingIdle, animated: animated)
 
-    profileButton.userInteractionEnabled = !playing
+    profileButton.isUserInteractionEnabled = !playing
 
     if uploading {
       userAvatarImageViewBeginBouncing()
@@ -306,45 +306,45 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   // MARK: Private
 
-  @objc private func playButtonTapped() {
+  @objc fileprivate func playButtonTapped() {
     delegate?.clipCollectionViewCellPlayButtonTapped(self)
   }
 
-  @objc private func addButtonTapped() {
+  @objc fileprivate func addButtonTapped() {
     delegate?.clipCollectionViewCellAddButtonTapped(self)
   }
 
-  @objc private func retryUploadButtonTapped() {
+  @objc fileprivate func retryUploadButtonTapped() {
     delegate?.clipCollectionViewCellRetryUploadButtonTapped(self)
   }
 
-  @objc private func profileButtonTapped() {
+  @objc fileprivate func profileButtonTapped() {
     delegate?.clipCollectionViewCellProfileButtonTapped(self)
   }
 
-  @objc private func longPressGestureRecognizerTriggered() {
+  @objc fileprivate func longPressGestureRecognizerTriggered() {
     delegate?.clipCollectionViewCellLongPressTriggered(self)
   }
 
-  @objc private func likeButtonTapped() {
+  @objc fileprivate func likeButtonTapped() {
     delegate?.clipCollectionViewCellLikeButtonTapped(self)
   }
 
-  private func setThumbnailScaledDown(scaledDown: Bool, animated: Bool) {
+  fileprivate func setThumbnailScaledDown(_ scaledDown: Bool, animated: Bool) {
     if animated {
-      UIView.animateWithDuration(0.4) {
+      UIView.animate(withDuration: 0.4, animations: {
         self.setThumbnailScaledDown(scaledDown, animated: false)
-      }
+      }) 
     } else {
       if scaledDown {
-        thumbnailImageView.transform = CGAffineTransformMakeScale(0.857, 0.857)
+        thumbnailImageView.transform = CGAffineTransform(scaleX: 0.857, y: 0.857)
       } else {
-        thumbnailImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+        thumbnailImageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
       }
     }
   }
 
-  private func setUserAvatarImageViewBounceConstraints(position: Int = 0) {
+  fileprivate func setUserAvatarImageViewBounceConstraints(_ position: Int = 0) {
     // 0 through 2, to represent the keyframes of the animation.
     // 0 is start of bounce, 2 is top of bounce
     let bounceHeight = ClipCollectionViewCell.defaultSize.width / 4 * 3
@@ -358,7 +358,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
   }
 
-  private func userAvatarImageViewBeginBouncing() {
+  fileprivate func userAvatarImageViewBeginBouncing() {
     if userAvatarImageViewBounceInProgress { return }
     userAvatarImageViewBounceInProgress = true
     userAvatarImageViewShouldContinueBouncing = true
@@ -366,38 +366,38 @@ class ClipCollectionViewCell: UICollectionViewCell {
     _bounceUserAvatarImageView()
   }
 
-  private func userAvatarImageViewStopBouncingAnimated(animated: Bool) {
+  fileprivate func userAvatarImageViewStopBouncingAnimated(_ animated: Bool) {
     userAvatarImageViewShouldContinueBouncing = false
     if !animated {
       userAvatarImageView.layer.removeAllAnimations()
-      userAvatarImageView.transform = CGAffineTransformIdentity
+      userAvatarImageView.transform = CGAffineTransform.identity
     }
   }
 
-  private func _bounceUserAvatarImageView(toTop toTop: Bool = true) {
-    let animationCurve = (toTop) ? UIViewAnimationOptions.CurveEaseOut : UIViewAnimationOptions.CurveEaseIn
-    UIView.animateKeyframesWithDuration(userAvatarImageViewBounceDuration / 2,
+  fileprivate func _bounceUserAvatarImageView(toTop: Bool = true) {
+    let animationCurve = (toTop) ? UIViewAnimationOptions.curveEaseOut : UIViewAnimationOptions.curveEaseIn
+    UIView.animateKeyframes(withDuration: userAvatarImageViewBounceDuration / 2,
       delay: 0,
-      options: [.CalculationModePaced, UIViewKeyframeAnimationOptions(rawValue: animationCurve.rawValue)],
+      options: [.calculationModePaced, UIViewKeyframeAnimationOptions(rawValue: animationCurve.rawValue)],
       animations: {
         if toTop {
-          UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0) {
+          UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0) {
             self.setUserAvatarImageViewBounceConstraints(1)
             self.userAvatarImageView.setNeedsLayout()
             self.userAvatarImageView.layoutIfNeeded()
           }
-          UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0) {
+          UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0) {
             self.setUserAvatarImageViewBounceConstraints(2)
             self.userAvatarImageView.setNeedsLayout()
             self.userAvatarImageView.layoutIfNeeded()
           }
         } else {
-          UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0) {
+          UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0) {
             self.setUserAvatarImageViewBounceConstraints(1)
             self.userAvatarImageView.setNeedsLayout()
             self.userAvatarImageView.layoutIfNeeded()
           }
-          UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0) {
+          UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0) {
             self.setUserAvatarImageViewBounceConstraints(0)
             self.userAvatarImageView.setNeedsLayout()
             self.userAvatarImageView.layoutIfNeeded()
@@ -419,20 +419,20 @@ class ClipCollectionViewCell: UICollectionViewCell {
     })
   }
 
-  private func _spinUserAvatarImageView() {
+  fileprivate func _spinUserAvatarImageView() {
     let fullRotation = CGFloat(M_PI * -2)
-    UIView.animateKeyframesWithDuration(userAvatarImageViewBounceDuration,
+    UIView.animateKeyframes(withDuration: userAvatarImageViewBounceDuration,
       delay: 0,
-      options: [.CalculationModePaced, UIViewKeyframeAnimationOptions(rawValue: UIViewAnimationOptions.CurveLinear.rawValue)],
+      options: [.calculationModePaced, UIViewKeyframeAnimationOptions(rawValue: UIViewAnimationOptions.curveLinear.rawValue)],
       animations: {
-        UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0) {
-          self.userAvatarImageView.transform = CGAffineTransformMakeRotation(fullRotation * 1/3)
+        UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0) {
+          self.userAvatarImageView.transform = CGAffineTransform(rotationAngle: fullRotation * 1/3)
         }
-        UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0) {
-          self.userAvatarImageView.transform = CGAffineTransformMakeRotation(fullRotation * 2/3)
+        UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0) {
+          self.userAvatarImageView.transform = CGAffineTransform(rotationAngle: fullRotation * 2/3)
         }
-        UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0) {
-          self.userAvatarImageView.transform = CGAffineTransformMakeRotation(fullRotation * 3/3)
+        UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0) {
+          self.userAvatarImageView.transform = CGAffineTransform(rotationAngle: fullRotation * 3/3)
         }
       },
       completion: { finished in
@@ -447,22 +447,22 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
 // MARK: - ClipCollectionViewCellDelegate
 protocol ClipCollectionViewCellDelegate {
-  func clipCollectionViewCellPlayButtonTapped(cell: ClipCollectionViewCell)
-  func clipCollectionViewCellAddButtonTapped(cell: ClipCollectionViewCell)
-  func clipCollectionViewCellRetryUploadButtonTapped(cell: ClipCollectionViewCell)
-  func clipCollectionViewCellProfileButtonTapped(cell: ClipCollectionViewCell)
-  func clipCollectionViewCellLongPressTriggered(cell: ClipCollectionViewCell)
-  func clipCollectionViewCellLikeButtonTapped(cell: ClipCollectionViewCell)
+  func clipCollectionViewCellPlayButtonTapped(_ cell: ClipCollectionViewCell)
+  func clipCollectionViewCellAddButtonTapped(_ cell: ClipCollectionViewCell)
+  func clipCollectionViewCellRetryUploadButtonTapped(_ cell: ClipCollectionViewCell)
+  func clipCollectionViewCellProfileButtonTapped(_ cell: ClipCollectionViewCell)
+  func clipCollectionViewCellLongPressTriggered(_ cell: ClipCollectionViewCell)
+  func clipCollectionViewCellLikeButtonTapped(_ cell: ClipCollectionViewCell)
 }
 
 // MARK: - ClipCollectionViewCellState
 enum ClipCollectionViewCellState {
-  case Default
-  case Bookmarked
-  case Options
-  case PlayingIdle
-  case PlayingActive
-  case PendingAcceptance
-  case Uploading
-  case UploadFailed
+  case `default`
+  case bookmarked
+  case options
+  case playingIdle
+  case playingActive
+  case pendingAcceptance
+  case uploading
+  case uploadFailed
 }

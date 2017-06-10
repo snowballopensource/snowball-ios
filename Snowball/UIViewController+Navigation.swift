@@ -13,6 +13,6 @@ extension UIViewController {
   var navigationBarOffset: CGFloat { return 70 }
 
   func isAppearingForFirstTime() -> Bool {
-    return (isBeingPresented() || isMovingToParentViewController())
+    return (isBeingPresented || isMovingToParentViewController)
   }
 }

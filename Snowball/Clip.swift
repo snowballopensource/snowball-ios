@@ -13,16 +13,16 @@ class Clip: Object {
 
   // MARK: Properties
 
-  dynamic var _id = NSUUID().UUIDString
+  dynamic var _id = UUID().uuidString
   dynamic var id: String?
   dynamic var videoURL: String?
   dynamic var thumbnailURL: String?
   dynamic var liked = false
-  dynamic var createdAt: NSDate?
+  dynamic var createdAt: Date?
   dynamic var user: User?
   dynamic var inHomeTimeline = false
   dynamic var timelineID: String?
-  private dynamic var stateString = ClipState.Default.rawValue
+  fileprivate dynamic var stateString = ClipState.Default.rawValue
 
   var state: ClipState {
     get {
@@ -43,7 +43,7 @@ class Clip: Object {
     return ["state"]
   }
 
-  override func importJSON(JSON: JSONObject) {
+  override func importJSON(_ JSON: JSONObject) {
     if let id = JSON["id"] as? String {
       if self.id == nil {
         self.id = id
@@ -63,7 +63,7 @@ class Clip: Object {
       self.liked = liked
     }
     if let createdAt = JSON["created_at"] as? String {
-      self.createdAt = NSDate.dateFromISO8610String(createdAt)
+      self.createdAt = Date.dateFromISO8610String(createdAt)
     }
     if let userJSON = JSON["user"] as? JSONObject {
       self.user = User.fromJSONObject(userJSON)

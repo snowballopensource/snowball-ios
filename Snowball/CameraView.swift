@@ -26,7 +26,7 @@ class CameraView: UIView {
 
   // MARK: UIView
 
-  override class func layerClass() -> AnyClass {
+  override class var layerClass : AnyClass {
     return AVCaptureVideoPreviewLayer.self
   }
 }

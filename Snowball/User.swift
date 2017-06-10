@@ -14,31 +14,31 @@ class User: Object {
 
   // MARK: Properties
 
-  dynamic var _id = NSUUID().UUIDString
+  dynamic var _id = UUID().uuidString
   dynamic var id: String?
   dynamic var username: String?
   dynamic var avatarURL: String?
   dynamic var following = false
   dynamic var email: String?
   dynamic var phoneNumber: String?
-  private dynamic var colorData = NSKeyedArchiver.archivedDataWithRootObject(UIColor.SnowballColor.randomColor)
+  fileprivate dynamic var colorData = NSKeyedArchiver.archivedData(withRootObject: UIColor.SnowballColor.randomColor)
   var color: UIColor {
     get {
-      return NSKeyedUnarchiver.unarchiveObjectWithData(colorData) as? UIColor ?? UIColor.SnowballColor.blueColor
+      return NSKeyedUnarchiver.unarchiveObject(with: colorData) as? UIColor ?? UIColor.SnowballColor.blueColor
     }
     set {
-      colorData = NSKeyedArchiver.archivedDataWithRootObject(newValue)
+      colorData = NSKeyedArchiver.archivedData(withRootObject: newValue)
     }
   }
   var authToken: String?
 
-  private static let kCurrentUserIDKey = "CurrentUserID"
-  private static let kCurrentUserAuthTokenKey = "CurrentUserAuthToken"
-  private static var _currentUser: User?
+  fileprivate static let kCurrentUserIDKey = "CurrentUserID"
+  fileprivate static let kCurrentUserAuthTokenKey = "CurrentUserAuthToken"
+  fileprivate static var _currentUser: User?
   static var currentUser: User? {
     get {
-      let defaults = NSUserDefaults.standardUserDefaults()
-      if let currentUserID = defaults.objectForKey(kCurrentUserIDKey) as? String, let currentUserAuthToken = defaults.objectForKey(kCurrentUserAuthTokenKey) as? String {
+      let defaults = UserDefaults.standard
+      if let currentUserID = defaults.object(forKey: kCurrentUserIDKey) as? String, let currentUserAuthToken = defaults.object(forKey: kCurrentUserAuthTokenKey) as? String {
         if let _currentUser = _currentUser {
           return _currentUser
         } else {
@@ -50,14 +50,14 @@ class User: Object {
       return nil
     }
     set {
-      let defaults = NSUserDefaults.standardUserDefaults()
-      if let id = newValue?.id, authToken = newValue?.authToken {
-        defaults.setObject(id, forKey: kCurrentUserIDKey)
-        defaults.setObject(authToken, forKey: kCurrentUserAuthTokenKey)
+      let defaults = UserDefaults.standard
+      if let id = newValue?.id, let authToken = newValue?.authToken {
+        defaults.set(id, forKey: kCurrentUserIDKey)
+        defaults.set(authToken, forKey: kCurrentUserAuthTokenKey)
         _currentUser = newValue
       } else {
-        defaults.removeObjectForKey(kCurrentUserIDKey)
-        defaults.removeObjectForKey(kCurrentUserAuthTokenKey)
+        defaults.removeObject(forKey: kCurrentUserIDKey)
+        defaults.removeObject(forKey: kCurrentUserAuthTokenKey)
         _currentUser = nil
       }
       defaults.synchronize()
@@ -74,7 +74,7 @@ class User: Object {
     return ["color", "authToken"]
   }
 
-  override func importJSON(JSON: JSONObject) {
+  override func importJSON(_ JSON: JSONObject) {
     if let id = JSON["id"] as? String {
       if self.id == nil {
         self.id = id

@@ -18,21 +18,21 @@ class FollowButton: UIButton {
 
   var color: UIColor? = nil {
     didSet {
-      layer.borderColor = color?.CGColor
+      layer.borderColor = color?.cgColor
     }
   }
 
   // MARK: Initializers
 
   convenience init() {
-    self.init(frame: CGRectZero)
+    self.init(frame: CGRect.zero)
 
     clipsToBounds = true
 
     layer.borderWidth = 2
 
-    titleLabel?.textAlignment = .Center
-    titleLabel?.font = UIFont.SnowballFont.mediumFont.fontWithSize(14)
+    titleLabel?.textAlignment = .center
+    titleLabel?.font = UIFont.SnowballFont.mediumFont.withSize(14)
   }
 
   override init(frame: CGRect) {
@@ -45,29 +45,29 @@ class FollowButton: UIButton {
 
   // MARK: UIView
 
-  override func drawRect(rect: CGRect) {
-    super.drawRect(rect)
+  override func draw(_ rect: CGRect) {
+    super.draw(rect)
 
     layer.cornerRadius = bounds.height / 2
   }
 
   // MARK: Internal
 
-  func configureForUser(user: User) {
+  func configureForUser(_ user: User) {
     color = user.color
 
     setFollowing(user.following, animated: false)
   }
 
-  func setFollowing(following: Bool, animated: Bool) {
+  func setFollowing(_ following: Bool, animated: Bool) {
     if following {
-      setTitleColor(color, forState: .Normal)
+      setTitleColor(color, for: UIControlState())
       backgroundColor = nil
-      setTitle(NSLocalizedString("unfollow", comment: ""), forState: .Normal)
+      setTitle(NSLocalizedString("unfollow", comment: ""), for: UIControlState())
     } else {
-      setTitleColor(UIColor.whiteColor(), forState: .Normal)
+      setTitleColor(UIColor.white, for: UIControlState())
       backgroundColor = color
-      setTitle(NSLocalizedString("follow", comment: ""), forState: .Normal)
+      setTitle(NSLocalizedString("follow", comment: ""), for: UIControlState())
     }
   }
 }

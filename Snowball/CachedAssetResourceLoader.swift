@@ -21,13 +21,13 @@ class CachedAssetResourceLoader: NSObject {
 
 // MARK: - AVAssetResourceLoaderDelegate
 extension CachedAssetResourceLoader: AVAssetResourceLoaderDelegate {
-  func resourceLoader(resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
-    if let URL = loadingRequest.request.URL {
+  func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
+    if let URL = loadingRequest.request.url {
       if URL.scheme == CachedAssetResourceLoader.handledScheme {
 
-        guard let URLComponents = NSURLComponents(URL: URL, resolvingAgainstBaseURL: true) else { return false }
+        guard let URLComponents = URLComponents(url: URL, resolvingAgainstBaseURL: true) else { return false }
         URLComponents.scheme = "http"
-        guard let remoteURL = URLComponents.URL else { return false }
+        guard let remoteURL = URLComponents.url else { return false }
 
         let cache = Shared.dataCache
         cache.fetch(URL: remoteURL).onSuccess({ data in
@@ -56,7 +56,7 @@ extension CachedAssetResourceLoader: AVAssetResourceLoaderDelegate {
     return false
   }
 
-  private func UTIFromFileExtension(fileExtension: String) -> String? {
+  fileprivate func UTIFromFileExtension(_ fileExtension: String) -> String? {
     guard let UTI: CFString = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension as NSString, nil)?.takeRetainedValue() else { return nil }
     return UTI as String
   }

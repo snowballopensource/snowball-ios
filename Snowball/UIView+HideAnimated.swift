@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 
 extension UIView {
-  func setHidden(hidden: Bool, animated: Bool) {
+  func setHidden(_ hidden: Bool, animated: Bool) {
     if animated {
-      UIView.animateWithDuration(0.4) {
+      UIView.animate(withDuration: 0.4, animations: {
         self.setHidden(hidden, animated: false)
-      }
+      }) 
     } else {
       alpha = CGFloat(!hidden)
     }

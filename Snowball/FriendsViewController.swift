@@ -18,13 +18,13 @@ class FriendsViewController: UIViewController {
   let userAvatarImageView = UserAvatarImageView()
   let usernameLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont.SnowballFont.mediumFont.fontWithSize(20)
-    label.textAlignment = .Center
+    label.font = UIFont.SnowballFont.mediumFont.withSize(20)
+    label.textAlignment = .center
     return label
   }()
   let editProfileButton: UIButton = {
     let button = UIButton()
-    button.setImage(UIImage(named: "top-settings"), forState: .Normal)
+    button.setImage(UIImage(named: "top-settings"), for: UIControlState())
     return button
   }()
   let segmentedControl: SegmentedControl = {
@@ -35,7 +35,7 @@ class FriendsViewController: UIViewController {
   let tableView: UITableView = {
     let tableView = UITableView()
     tableView.rowHeight = UserTableViewCell.defaultHeight
-    tableView.separatorStyle = .None
+    tableView.separatorStyle = .none
     return tableView
   }()
   var users = [User]()
@@ -45,8 +45,8 @@ class FriendsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-camera-outline"), style: .Plain, target: self, action: #selector(FriendsViewController.leftBarButtonItemPressed))
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-search"), style: .Plain, target: self, action: #selector(FriendsViewController.rightBarButtonItemPressed))
+    navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-camera-outline"), style: .plain, target: self, action: #selector(FriendsViewController.leftBarButtonItemPressed))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-search"), style: .plain, target: self, action: #selector(FriendsViewController.rightBarButtonItemPressed))
 
     view.addSubview(userAvatarImageView)
     constrain(userAvatarImageView) { userAvatarImageView in
@@ -63,7 +63,7 @@ class FriendsViewController: UIViewController {
       profileButton.right == userAvatarImageView.right
       profileButton.bottom == userAvatarImageView.bottom
     }
-    profileButton.addTarget(self, action: #selector(FriendsViewController.profileButtonPressed), forControlEvents: .TouchUpInside)
+    profileButton.addTarget(self, action: #selector(FriendsViewController.profileButtonPressed), for: .touchUpInside)
 
     view.addSubview(usernameLabel)
     constrain(usernameLabel, userAvatarImageView) { usernameLabel, userAvatarImageView in
@@ -79,7 +79,7 @@ class FriendsViewController: UIViewController {
       editProfileButton.width == 44
       editProfileButton.height == 44
     }
-    editProfileButton.addTarget(self, action: #selector(FriendsViewController.editProfileButtonPressed), forControlEvents: .TouchUpInside)
+    editProfileButton.addTarget(self, action: #selector(FriendsViewController.editProfileButtonPressed), for: .touchUpInside)
 
     view.addSubview(segmentedControl)
     constrain(segmentedControl, usernameLabel) { segmentedControl, usernameLabel in
@@ -88,7 +88,7 @@ class FriendsViewController: UIViewController {
       segmentedControl.right == segmentedControl.superview!.right - 17
       segmentedControl.height == 35
     }
-    segmentedControl.addTarget(self, action: #selector(FriendsViewController.segmentedControlValueChanged), forControlEvents: .ValueChanged)
+    segmentedControl.addTarget(self, action: #selector(FriendsViewController.segmentedControlValueChanged), for: .valueChanged)
 
     view.addSubview(tableView)
     constrain(tableView, segmentedControl) { tableView, segmentedControl in
@@ -101,7 +101,7 @@ class FriendsViewController: UIViewController {
     tableView.delegate = self
   }
 
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
 
     reloadUserData()
@@ -110,7 +110,7 @@ class FriendsViewController: UIViewController {
 
   // MARK: Private
 
-  private func reloadUserData() {
+  fileprivate func reloadUserData() {
     if let user = User.currentUser {
       // Handle coming back from EditProfile VC
       userAvatarImageView.setUser(user)
@@ -118,64 +118,64 @@ class FriendsViewController: UIViewController {
     }
   }
 
-  private func refresh() {
+  fileprivate func refresh() {
     self.users.removeAll()
     self.tableView.reloadData()
 
-    SnowballAPI.requestObject(SnowballRoute.GetCurrentUser) { (response: ObjectResponse<User>) in
+    SnowballAPI.requestObject(SnowballRoute.getCurrentUser) { (response: ObjectResponse<User>) in
       switch response {
-      case .Success: self.reloadUserData()
+      case .success: self.reloadUserData()
       default: break
       }
     }
 
     let route: SnowballRoute
     if segmentedControl.selectedIndex == 0 {
-      route = SnowballRoute.GetCurrentUserFollowing
+      route = SnowballRoute.getCurrentUserFollowing
     } else {
-      route = SnowballRoute.GetCurrentUserFollowers
+      route = SnowballRoute.getCurrentUserFollowers
     }
     SnowballAPI.requestObjects(route) { (response: ObjectResponse<[User]>) in
       switch response {
-      case .Success(let users):
+      case .success(let users):
         self.users = users
         self.tableView.reloadData()
-      case .Failure(let error): print(error) // TODO: Handle error
+      case .failure(let error): print(error) // TODO: Handle error
       }
     }
   }
 
   // MARK: Actions
 
-  @objc private func leftBarButtonItemPressed() {
+  @objc fileprivate func leftBarButtonItemPressed() {
     AppDelegate.sharedInstance.window?.transitionRootViewControllerToViewController(HomeNavigationController())
   }
 
-  @objc private func rightBarButtonItemPressed() {
+  @objc fileprivate func rightBarButtonItemPressed() {
     navigationController?.pushViewController(FindFriendsViewController(), animated: true)
   }
 
-  @objc private func segmentedControlValueChanged() {
+  @objc fileprivate func segmentedControlValueChanged() {
     refresh()
   }
 
-  @objc private func profileButtonPressed() {
+  @objc fileprivate func profileButtonPressed() {
     guard let user = User.currentUser else { return }
     navigationController?.pushViewController(UserTimelineViewController(user: user), animated: true)
   }
 
-  @objc private func editProfileButtonPressed() {
+  @objc fileprivate func editProfileButtonPressed() {
     navigationController?.pushViewController(EditProfileViewController(), animated: true)
   }
 }
 
 // MARK: - UITableViewDataSource
 extension FriendsViewController: UITableViewDataSource {
-  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return users.count
   }
 
-  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = UserTableViewCell()
     let user = users[indexPath.row]
     cell.configureForUser(user)
@@ -186,7 +186,7 @@ extension FriendsViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension FriendsViewController: UITableViewDelegate {
-  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let user = users[indexPath.row]
     navigationController?.pushViewController(UserTimelineViewController(user: user), animated: true)
   }
@@ -194,14 +194,14 @@ extension FriendsViewController: UITableViewDelegate {
 
 // MARK: - UserTableViewCellDelegate
 extension FriendsViewController: UserTableViewCellDelegate {
-  func userTableViewCellFollowButtonTapped(cell: UserTableViewCell) {
-    guard let indexPath = tableView.indexPathForCell(cell) else { return }
+  func userTableViewCellFollowButtonTapped(_ cell: UserTableViewCell) {
+    guard let indexPath = tableView.indexPath(for: cell) else { return }
     let user = users[indexPath.row]
     guard let userID = user.id else { return }
 
     let followingCurrently = user.following
 
-    func setFollowing(following: Bool) {
+    func setFollowing(_ following: Bool) {
       Database.performTransaction {
         user.following = following
         Database.save(user)
@@ -213,15 +213,15 @@ extension FriendsViewController: UserTableViewCellDelegate {
 
     let route: SnowballRoute
     if followingCurrently {
-      route = SnowballRoute.UnfollowUser(userID: userID)
+      route = SnowballRoute.unfollowUser(userID: userID)
     } else {
-      route = SnowballRoute.FollowUser(userID: userID)
+      route = SnowballRoute.followUser(userID: userID)
     }
 
     SnowballAPI.request(route) { response in
       switch response {
-      case .Success: break
-      case .Failure(let error):
+      case .success: break
+      case .failure(let error):
         print(error)
         setFollowing(followingCurrently)
       }

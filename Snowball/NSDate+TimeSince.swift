@@ -8,10 +8,10 @@
 
 import Foundation
 
-extension NSDate {
+extension Date {
   func shortTimeSinceString() -> String {
-    let now = NSDate()
-    let deltaSeconds = Float(fabs(self.timeIntervalSinceDate(now)))
+    let now = Date()
+    let deltaSeconds = Float(fabs(self.timeIntervalSince(now)))
     let deltaMinutes = deltaSeconds / 60.0
     var value = 0
 

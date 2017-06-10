@@ -11,29 +11,29 @@ import Foundation
 
 enum SnowballRoute: URLRequestConvertible {
   // Authentication
-  case SignUp(username: String, email: String, password: String)
-  case SignIn(email: String, password: String)
+  case signUp(username: String, email: String, password: String)
+  case signIn(email: String, password: String)
   // User
-  case GetCurrentUser
-  case UpdateCurrentUser(username: String?, email: String?, phoneNumber: String?)
-  case UploadCurrentUserAvatar
-  case GetCurrentUserFollowers
-  case GetCurrentUserFollowing
-  case FollowUser(userID: String)
-  case UnfollowUser(userID: String)
-  case FindUsersByPhoneNumbers(phoneNumbers: [String])
-  case FindUsersByUsername(username: String)
-  case FindRecommendedUsers
+  case getCurrentUser
+  case updateCurrentUser(username: String?, email: String?, phoneNumber: String?)
+  case uploadCurrentUserAvatar
+  case getCurrentUserFollowers
+  case getCurrentUserFollowing
+  case followUser(userID: String)
+  case unfollowUser(userID: String)
+  case findUsersByPhoneNumbers(phoneNumbers: [String])
+  case findUsersByUsername(username: String)
+  case findRecommendedUsers
   // Device
-  case RegisterForPushNotifications(token: String)
+  case registerForPushNotifications(token: String)
   // Clip
-  case GetClipStream(page: Int)
-  case GetClipStreamForUser(userID: String, page: Int)
-  case DeleteClip(clipID: String)
-  case LikeClip(clipID: String)
-  case UnlikeClip(clipID: String)
-  case FlagClip(clipID: String)
-  case UploadClip
+  case getClipStream(page: Int)
+  case getClipStreamForUser(userID: String, page: Int)
+  case deleteClip(clipID: String)
+  case likeClip(clipID: String)
+  case unlikeClip(clipID: String)
+  case flagClip(clipID: String)
+  case uploadClip
 
   // MARK: Properties
 
@@ -41,75 +41,75 @@ enum SnowballRoute: URLRequestConvertible {
     return "https://api.snowball.is/v1/"
   }()
 
-  private var method: Alamofire.Method {
+  fileprivate var method: Alamofire.Method {
     switch self {
-    case .SignUp: return .POST
-    case .SignIn: return .POST
-    case .GetCurrentUser: return .GET
-    case .UpdateCurrentUser: return .PATCH
-    case .UploadCurrentUserAvatar: return .PATCH
-    case .GetCurrentUserFollowers: return .GET
-    case .GetCurrentUserFollowing: return .GET
-    case .FollowUser: return .PUT
-    case .UnfollowUser: return .DELETE
-    case .FindUsersByPhoneNumbers: return .POST
-    case .FindUsersByUsername: return .POST
-    case .FindRecommendedUsers: return .GET
-    case .RegisterForPushNotifications: return .PUT
-    case .GetClipStream: return .GET
-    case .GetClipStreamForUser: return .GET
-    case .DeleteClip: return .DELETE
-    case .LikeClip: return .PUT
-    case .UnlikeClip: return .DELETE
-    case .FlagClip: return .PUT
-    case .UploadClip: return .POST
+    case .signUp: return .POST
+    case .signIn: return .POST
+    case .getCurrentUser: return .GET
+    case .updateCurrentUser: return .PATCH
+    case .uploadCurrentUserAvatar: return .PATCH
+    case .getCurrentUserFollowers: return .GET
+    case .getCurrentUserFollowing: return .GET
+    case .followUser: return .PUT
+    case .unfollowUser: return .DELETE
+    case .findUsersByPhoneNumbers: return .POST
+    case .findUsersByUsername: return .POST
+    case .findRecommendedUsers: return .GET
+    case .registerForPushNotifications: return .PUT
+    case .getClipStream: return .GET
+    case .getClipStreamForUser: return .GET
+    case .deleteClip: return .DELETE
+    case .likeClip: return .PUT
+    case .unlikeClip: return .DELETE
+    case .flagClip: return .PUT
+    case .uploadClip: return .POST
     }
   }
 
-  private var path: String {
+  fileprivate var path: String {
     switch self {
-    case .SignUp: return "users/sign-up"
-    case .SignIn: return "users/sign-in"
-    case .GetCurrentUser: return "users/\(User.currentUser!.id!)"
-    case .UpdateCurrentUser: return "users/me"
-    case .UploadCurrentUserAvatar: return "/users/me"
-    case .GetCurrentUserFollowers: return "users/\(User.currentUser!.id!)/followers"
-    case .GetCurrentUserFollowing: return "users/\(User.currentUser!.id!)/following"
-    case .FollowUser(let userID): return "users/\(userID)/follow"
-    case .UnfollowUser(let userID): return "users/\(userID)/follow"
-    case .FindUsersByPhoneNumbers: return "users/search"
-    case .FindUsersByUsername: return "users/search"
-    case .FindRecommendedUsers: return "users/recommended"
-    case .RegisterForPushNotifications: return "installations"
-    case .GetClipStream: return "clips/stream"
-    case .GetClipStreamForUser(let userID, _): return "users/\(userID)/clips/stream"
-    case .DeleteClip(let clipID): return "clips/\(clipID)"
-    case .LikeClip(let clipID): return "clips/\(clipID)/like"
-    case .UnlikeClip(let clipID): return "clips/\(clipID)/like"
-    case .FlagClip(let clipID): return "clips/\(clipID)/flag"
-    case .UploadClip: return "clips"
+    case .signUp: return "users/sign-up"
+    case .signIn: return "users/sign-in"
+    case .getCurrentUser: return "users/\(User.currentUser!.id!)"
+    case .updateCurrentUser: return "users/me"
+    case .uploadCurrentUserAvatar: return "/users/me"
+    case .getCurrentUserFollowers: return "users/\(User.currentUser!.id!)/followers"
+    case .getCurrentUserFollowing: return "users/\(User.currentUser!.id!)/following"
+    case .followUser(let userID): return "users/\(userID)/follow"
+    case .unfollowUser(let userID): return "users/\(userID)/follow"
+    case .findUsersByPhoneNumbers: return "users/search"
+    case .findUsersByUsername: return "users/search"
+    case .findRecommendedUsers: return "users/recommended"
+    case .registerForPushNotifications: return "installations"
+    case .getClipStream: return "clips/stream"
+    case .getClipStreamForUser(let userID, _): return "users/\(userID)/clips/stream"
+    case .deleteClip(let clipID): return "clips/\(clipID)"
+    case .likeClip(let clipID): return "clips/\(clipID)/like"
+    case .unlikeClip(let clipID): return "clips/\(clipID)/like"
+    case .flagClip(let clipID): return "clips/\(clipID)/flag"
+    case .uploadClip: return "clips"
     }
   }
 
-  private var parameterEncoding: ParameterEncoding? {
+  fileprivate var parameterEncoding: ParameterEncoding? {
     switch self {
-    case .SignUp: return ParameterEncoding.JSON
-    case .SignIn: return ParameterEncoding.JSON
-    case .UpdateCurrentUser: return ParameterEncoding.JSON
-    case .FindUsersByPhoneNumbers: return ParameterEncoding.JSON
-    case .FindUsersByUsername: return ParameterEncoding.JSON
-    case .RegisterForPushNotifications: return .JSON
-    case .GetClipStream: return ParameterEncoding.URL
-    case .GetClipStreamForUser: return ParameterEncoding.URL
+    case .signUp: return ParameterEncoding.JSON
+    case .signIn: return ParameterEncoding.JSON
+    case .updateCurrentUser: return ParameterEncoding.JSON
+    case .findUsersByPhoneNumbers: return ParameterEncoding.JSON
+    case .findUsersByUsername: return ParameterEncoding.JSON
+    case .registerForPushNotifications: return .JSON
+    case .getClipStream: return ParameterEncoding.URL
+    case .getClipStreamForUser: return ParameterEncoding.URL
     default: return nil
     }
   }
 
-  private var parameters: [String: AnyObject]? {
+  fileprivate var parameters: [String: AnyObject]? {
     switch self {
-    case .SignUp(let username, let email, let password): return ["username": username, "email": email, "password": password]
-    case .SignIn(let email, let password): return ["email": email, "password": password]
-    case .UpdateCurrentUser(let username, let email, let phoneNumber):
+    case .signUp(let username, let email, let password): return ["username": username as AnyObject, "email": email as AnyObject, "password": password as AnyObject]
+    case .signIn(let email, let password): return ["email": email as AnyObject, "password": password as AnyObject]
+    case .updateCurrentUser(let username, let email, let phoneNumber):
       var userParameters = [String: String]()
       if let newUsername = username {
         userParameters["username"] = newUsername
@@ -120,12 +120,12 @@ enum SnowballRoute: URLRequestConvertible {
       if let newPhoneNumber = phoneNumber {
         userParameters["phone_number"] = newPhoneNumber
       }
-      return userParameters
-    case .FindUsersByPhoneNumbers(let phoneNumbers): return ["phone_numbers": phoneNumbers]
-    case .FindUsersByUsername(let username): return ["username": username]
-    case .RegisterForPushNotifications(let token): return ["token": token]
-    case .GetClipStream(let page): return ["page": page]
-    case .GetClipStreamForUser(_, let page): return ["page": page]
+      return userParameters as [String : AnyObject]
+    case .findUsersByPhoneNumbers(let phoneNumbers): return ["phone_numbers": phoneNumbers as AnyObject]
+    case .findUsersByUsername(let username): return ["username": username as AnyObject]
+    case .registerForPushNotifications(let token): return ["token": token as AnyObject]
+    case .getClipStream(let page): return ["page": page as AnyObject]
+    case .getClipStreamForUser(_, let page): return ["page": page as AnyObject]
     default: return nil
     }
   }
@@ -133,12 +133,12 @@ enum SnowballRoute: URLRequestConvertible {
   // MARK: URLRequestConvertible
 
   var URLRequest: NSMutableURLRequest {
-    let URL = NSURL(string: SnowballRoute.baseURLString)
-    let mutableURLRequest = NSMutableURLRequest(URL: URL!.URLByAppendingPathComponent(path)!)
+    let URL = Foundation.URL(string: SnowballRoute.baseURLString)
+    let mutableURLRequest = NSMutableURLRequest(url: URL!.appendingPathComponent(path))
     mutableURLRequest.HTTPMethod = method.rawValue
     if let authToken = User.currentUser?.authToken {
-      let encodedAuthTokenData = "\(authToken):".dataUsingEncoding(NSUTF8StringEncoding)!
-      let encodedAuthToken = encodedAuthTokenData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+      let encodedAuthTokenData = "\(authToken):".data(using: String.Encoding.utf8)!
+      let encodedAuthToken = encodedAuthTokenData.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
       mutableURLRequest.setValue("Basic \(encodedAuthToken)", forHTTPHeaderField: "Authorization")
     }
     if let params = parameters {

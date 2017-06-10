@@ -13,36 +13,36 @@ class PushNotificationController {
 
   // MARK: Properties
 
-  private static let sharedInstance = PushNotificationController()
+  fileprivate static let sharedInstance = PushNotificationController()
 
   // MARK: Internal
 
-  static func registerApplicationForPushNotifications(application: UIApplication) {
-    let notificationTypes: UIUserNotificationType = [.Alert, .Badge, .Sound]
-    let notificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
+  static func registerApplicationForPushNotifications(_ application: UIApplication) {
+    let notificationTypes: UIUserNotificationType = [.alert, .badge, .sound]
+    let notificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
     application.registerUserNotificationSettings(notificationSettings)
     application.registerForRemoteNotifications()
   }
 
-  static func registrationCompletedWithDeviceToken(deviceToken: NSData) {
+  static func registrationCompletedWithDeviceToken(_ deviceToken: Data) {
     print("Push notification token: ", deviceToken.description)
-    SnowballAPI.request(SnowballRoute.RegisterForPushNotifications(token: deviceToken.description)) { response in
+    SnowballAPI.request(SnowballRoute.registerForPushNotifications(token: deviceToken.description)) { response in
       switch response {
-      case .Success: break
-      case .Failure(let error): print(error)
+      case .success: break
+      case .failure(let error): print(error)
       }
     }
   }
 
-  static func registrationFailedWithError(error: NSError) {
+  static func registrationFailedWithError(_ error: NSError) {
     print("Push notification registration failed: ", error)
   }
 
-  static func applicationDidReceiveRemoteNotificationWithUserInfo(userInfo: [NSObject: AnyObject]) {
+  static func applicationDidReceiveRemoteNotificationWithUserInfo(_ userInfo: [AnyHashable: Any]) {
     if let message = userInfo["aps"]?["alert"] as? String {
-      let alertController = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
-      alertController.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .Cancel, handler: nil))
-      AppDelegate.sharedInstance.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+      let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+      alertController.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .cancel, handler: nil))
+      AppDelegate.sharedInstance.window?.rootViewController?.present(alertController, animated: true, completion: nil)
     }
   }
 }

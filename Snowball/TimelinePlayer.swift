@@ -12,8 +12,8 @@ class TimelinePlayer: AVQueuePlayer {
 
   // MARK: Properties
 
-  private(set) var playing = false
-  private let queueManager: PlayerQueueManager
+  fileprivate(set) var playing = false
+  fileprivate let queueManager: PlayerQueueManager
   var delegate: TimelinePlayerDelegate?
   var currentClip: Clip? {
     didSet {
@@ -41,7 +41,7 @@ class TimelinePlayer: AVQueuePlayer {
     }
   }
 
-  private let currentItemKeyPath = "currentItem"
+  fileprivate let currentItemKeyPath = "currentItem"
 
   // MARK: Initializers
 
@@ -49,7 +49,7 @@ class TimelinePlayer: AVQueuePlayer {
     queueManager = PlayerQueueManager(timeline: timeline)
     super.init()
     queueManager.player = self
-    addObserver(self, forKeyPath: currentItemKeyPath, options: .New, context: nil)
+    addObserver(self, forKeyPath: currentItemKeyPath, options: .new, context: nil)
   }
 
   deinit {
@@ -58,10 +58,10 @@ class TimelinePlayer: AVQueuePlayer {
 
   // MARK: KVO
 
-  override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
     if keyPath == currentItemKeyPath {
       guard let change = change else { return }
-      let newPlayerItem = change[NSKeyValueChangeNewKey] as? ClipPlayerItem
+      let newPlayerItem = change[NSKeyValueChangeKey.newKey] as? ClipPlayerItem
       let buffering = (newPlayerItem == nil && queueManager.isLoadingAdditionalClips)
       if buffering {
         currentClip = queueManager.nextBufferingClip
@@ -69,13 +69,13 @@ class TimelinePlayer: AVQueuePlayer {
         currentClip = newPlayerItem?.clip
       }
     } else {
-      super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+      super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
     }
   }
 
   // MARK: Internal
 
-  func playWithFirstClip(clip: Clip) {
+  func playWithFirstClip(_ clip: Clip) {
     let shouldBeginPlayback = delegate?.timelinePlayerShouldBeginPlayback(self) ?? false
     if shouldBeginPlayback { currentClip = clip }
   }
@@ -88,7 +88,7 @@ class TimelinePlayer: AVQueuePlayer {
     queueManager.ensurePlayerQueueToppedOff()
   }
 
-  func skipToClip(clip: Clip) {
+  func skipToClip(_ clip: Clip) {
     pause()
 
     currentClip = clip
@@ -112,7 +112,7 @@ class TimelinePlayer: AVQueuePlayer {
   func removeAllItemsExceptCurrentItem() {
     for item in items() {
       if item != currentItem {
-        removeItem(item)
+        remove(item)
       }
     }
   }
@@ -120,8 +120,8 @@ class TimelinePlayer: AVQueuePlayer {
 
 // MARK: - TimelinePlayerDelegate
 protocol TimelinePlayerDelegate {
-  func timelinePlayerShouldBeginPlayback(timelinePlayer: TimelinePlayer) -> Bool
-  func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip)
-  func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip)
-  func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip)
+  func timelinePlayerShouldBeginPlayback(_ timelinePlayer: TimelinePlayer) -> Bool
+  func timelinePlayer(_ timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip)
+  func timelinePlayer(_ timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip)
+  func timelinePlayer(_ timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip)
 }

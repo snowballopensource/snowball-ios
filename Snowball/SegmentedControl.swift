@@ -17,7 +17,7 @@ class SegmentedControl: UIControl {
   let underlines: [UIView]
   var selectedIndex = 0 {
     didSet {
-      sendActionsForControlEvents(.ValueChanged)
+      sendActions(for: .valueChanged)
       highlightIndex(selectedIndex)
     }
   }
@@ -28,20 +28,20 @@ class SegmentedControl: UIControl {
     var labels = [UILabel]()
     var underlines = [UIView]()
     for title in titles {
-      let label = UILabel(frame: CGRectZero)
+      let label = UILabel(frame: CGRect.zero)
       label.text = title
-      label.textAlignment = .Center
-      label.font = UIFont.SnowballFont.mediumFont.fontWithSize(17)
+      label.textAlignment = .center
+      label.font = UIFont.SnowballFont.mediumFont.withSize(17)
       labels.append(label)
 
       let underline = UIView()
-      underline.backgroundColor = UIColor.blackColor()
+      underline.backgroundColor = UIColor.black
       underlines.append(underline)
     }
     self.labels = labels
     self.underlines = underlines
 
-    super.init(frame: CGRectZero)
+    super.init(frame: CGRect.zero)
 
     var previousLabel: UIView? = nil
     for i in 0 ..< labels.count {
@@ -82,10 +82,10 @@ class SegmentedControl: UIControl {
 
   // MARK: UIControl
 
-  override func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
-    super.beginTrackingWithTouch(touch, withEvent: event)
+  override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+    super.beginTracking(touch, with: event)
 
-    let touchPoint = touch.locationInView(self)
+    let touchPoint = touch.location(in: self)
 
     for i in 0 ..< labels.count {
       let label = labels[i]
@@ -99,13 +99,13 @@ class SegmentedControl: UIControl {
 
   // MARK: Private
 
-  private func highlightIndex(index: Int) {
+  fileprivate func highlightIndex(_ index: Int) {
     for i in 0 ..< labels.count {
       let label = labels[i]
       let underline = underlines[i]
       if index == i {
-        label.textColor = UIColor.blackColor()
-        underline.backgroundColor = UIColor.blackColor()
+        label.textColor = UIColor.black
+        underline.backgroundColor = UIColor.black
       } else {
         label.textColor = UIColor.SnowballColor.lightGrayColor
         underline.backgroundColor = UIColor.SnowballColor.lightGrayColor

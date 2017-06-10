@@ -14,12 +14,12 @@ class AppDelegate: UIResponder {
   // MARK: Properties
 
   static var sharedInstance: AppDelegate {
-    return UIApplication.sharedApplication().delegate as! AppDelegate
+    return UIApplication.shared.delegate as! AppDelegate
   }
 
   var window: UIWindow? = {
-    let window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    window.backgroundColor = UIColor.whiteColor()
+    let window = UIWindow(frame: UIScreen.main.bounds)
+    window.backgroundColor = UIColor.white
     window.rootViewController = HomeNavigationController()
     return window
   }()
@@ -27,7 +27,7 @@ class AppDelegate: UIResponder {
 
 // MARK: - UIApplicationDelegate
 extension AppDelegate: UIApplicationDelegate {
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 //    print("Realm Path: " + Database.realm.path)
     Clip.cleanUpFailedClipUploads()
     PushNotificationController.registerApplicationForPushNotifications(application)
@@ -36,15 +36,15 @@ extension AppDelegate: UIApplicationDelegate {
     return true
   }
 
-  func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     PushNotificationController.registrationCompletedWithDeviceToken(deviceToken)
   }
 
-  func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+  func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
     PushNotificationController.registrationFailedWithError(error)
   }
 
-  func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject]) {
+  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
     PushNotificationController.applicationDidReceiveRemoteNotificationWithUserInfo(userInfo)
   }
 }

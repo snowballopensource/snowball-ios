@@ -23,29 +23,29 @@ class FindFriendsViewController: UIViewController {
   let tableView: UITableView = {
     let tableView = UITableView()
     tableView.rowHeight = UserTableViewCell.defaultHeight
-    tableView.separatorStyle = .None
+    tableView.separatorStyle = .none
     return tableView
   }()
-  private let tableViewTopConstraintGroup = ConstraintGroup()
+  fileprivate let tableViewTopConstraintGroup = ConstraintGroup()
   let searchTextField: FormTextField = {
     let textField = FormTextField()
     textField.placeholder = NSLocalizedString("Find by username", comment: "")
-    textField.font = textField.font?.fontWithSize(21)
-    textField.autocapitalizationType = .None
-    textField.autocorrectionType = .No
-    textField.spellCheckingType = .No
-    textField.returnKeyType = .Search
+    textField.font = textField.font?.withSize(21)
+    textField.autocapitalizationType = .none
+    textField.autocorrectionType = .no
+    textField.spellCheckingType = .no
+    textField.returnKeyType = .search
     return textField
   }()
   var users = [User]()
-  private let addressBook: ABAddressBook? = {
+  fileprivate let addressBook: ABAddressBook? = {
     var error: Unmanaged<CFError>?
     let addressBook = ABAddressBookCreateWithOptions(nil, &error)
     if error != nil {
       print("Address book creation error: \(error)")
       return nil
     }
-    return addressBook.takeRetainedValue()
+    return addressBook?.takeRetainedValue()
   }()
 
   // MARK: UIViewController
@@ -53,10 +53,10 @@ class FindFriendsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    view.backgroundColor = UIColor.whiteColor()
+    view.backgroundColor = UIColor.white
 
     title = NSLocalizedString("Find friends", comment: "")
-    navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-back-black"), style: .Plain, target: self, action: #selector(FindFriendsViewController.leftBarButtonItemPressed))
+    navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-back-black"), style: .plain, target: self, action: #selector(FindFriendsViewController.leftBarButtonItemPressed))
 
     view.addSubview(searchTextField)
     constrain(searchTextField) { searchTextField in
@@ -74,7 +74,7 @@ class FindFriendsViewController: UIViewController {
       segmentedControl.right == segmentedControl.superview!.right - 17
       segmentedControl.height == 35
     }
-    segmentedControl.addTarget(self, action: #selector(FindFriendsViewController.segmentedControlValueChanged), forControlEvents: .ValueChanged)
+    segmentedControl.addTarget(self, action: #selector(FindFriendsViewController.segmentedControlValueChanged), for: .valueChanged)
 
     view.addSubview(tableView)
     constrain(tableView) { tableView in
@@ -86,61 +86,61 @@ class FindFriendsViewController: UIViewController {
     tableView.dataSource = self
   }
 
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     performUserRequest()
   }
 
   // MARK: Private
 
-  private func performUserRequest(search search: String? = nil) {
+  fileprivate func performUserRequest(search: String? = nil) {
     self.users.removeAll()
     self.tableView.reloadData()
 
-    func performRequest(route: SnowballRoute) {
+    func performRequest(_ route: SnowballRoute) {
       SnowballAPI.requestObjects(route) { (response: ObjectResponse<[User]>) in
         switch response {
-        case .Success(let users):
+        case .success(let users):
           self.users = users
           self.tableView.reloadData()
-        case .Failure(let error): print(error) // TODO: Handle error
+        case .failure(let error): print(error) // TODO: Handle error
         }
       }
     }
 
     if let search = search {
-      performRequest(SnowballRoute.FindUsersByUsername(username: search))
+      performRequest(SnowballRoute.findUsersByUsername(username: search))
     } else {
       if segmentedControl.selectedIndex == 1 {
-        performRequest(SnowballRoute.FindRecommendedUsers)
+        performRequest(SnowballRoute.findRecommendedUsers)
       } else {
         getPhoneNumbersFromAddressBook(
           onSuccess: { (phoneNumbers) -> Void in
-            performRequest(SnowballRoute.FindUsersByPhoneNumbers(phoneNumbers: phoneNumbers))
+            performRequest(SnowballRoute.findUsersByPhoneNumbers(phoneNumbers: phoneNumbers))
           },
           onFailure: {
-            let alertController = UIAlertController(title: NSLocalizedString("Snowball doesn't have access to your contacts. 😭", comment: ""), message: NSLocalizedString("We can take you there now!", comment: ""), preferredStyle: .Alert)
-            alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: nil))
-            alertController.addAction(UIAlertAction(title: NSLocalizedString("Let's go!", comment: ""), style: .Default,
+            let alertController = UIAlertController(title: NSLocalizedString("Snowball doesn't have access to your contacts. 😭", comment: ""), message: NSLocalizedString("We can take you there now!", comment: ""), preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("Let's go!", comment: ""), style: .default,
               handler: { action in
-                if let appSettings = NSURL(string: UIApplicationOpenSettingsURLString) {
-                  UIApplication.sharedApplication().openURL(appSettings)
+                if let appSettings = URL(string: UIApplicationOpenSettingsURLString) {
+                  UIApplication.shared.openURL(appSettings)
                 }
             })
             )
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
           }
         )
       }
     }
   }
 
-  private func getPhoneNumbersFromAddressBook(onSuccess onSuccess: (phoneNumbers: [String]) -> Void, onFailure: () -> Void) {
+  fileprivate func getPhoneNumbersFromAddressBook(onSuccess: @escaping (_ phoneNumbers: [String]) -> Void, onFailure: @escaping () -> Void) {
     ABAddressBookRequestAccessWithCompletion(addressBook) { (granted, error) in
       if granted {
         let authorizationStatus = ABAddressBookGetAuthorizationStatus()
-        if authorizationStatus != ABAuthorizationStatus.Authorized {
-          dispatch_async(dispatch_get_main_queue()) {
+        if authorizationStatus != ABAuthorizationStatus.authorized {
+          DispatchQueue.main.async {
             onFailure()
           }
           return
@@ -148,24 +148,24 @@ class FindFriendsViewController: UIViewController {
         var phoneNumbers = [String]()
         let contacts = ABAddressBookCopyArrayOfAllPeople(self.addressBook).takeRetainedValue() as NSArray
         for contact in contacts {
-          let phoneNumberProperty: AnyObject = ABRecordCopyValue(contact, kABPersonPhoneProperty).takeRetainedValue()
+          let phoneNumberProperty: AnyObject = ABRecordCopyValue(contact as ABRecord, kABPersonPhoneProperty).takeRetainedValue()
           for i in 0 ..< ABMultiValueGetCount(phoneNumberProperty) {
             let phoneNumber = ABMultiValueCopyValueAtIndex(phoneNumberProperty, i).takeRetainedValue() as! String
             phoneNumbers.append(phoneNumber)
           }
         }
-        dispatch_async(dispatch_get_main_queue()) {
-          onSuccess(phoneNumbers: phoneNumbers)
+        DispatchQueue.main.async {
+          onSuccess(phoneNumbers)
         }
       } else {
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
           onFailure()
         }
       }
     }
   }
 
-  private func setTableViewTopConstraint(coveringSegmentedControl coveringSegmentedControl: Bool = false) {
+  fileprivate func setTableViewTopConstraint(coveringSegmentedControl: Bool = false) {
     if coveringSegmentedControl {
       constrain(tableView, segmentedControl, replace: tableViewTopConstraintGroup) { tableView, segmentedControl in
         tableView.top == segmentedControl.top
@@ -180,22 +180,22 @@ class FindFriendsViewController: UIViewController {
 
   // MARK: Actions
 
-  @objc private func leftBarButtonItemPressed() {
-    navigationController?.popViewControllerAnimated(true)
+  @objc fileprivate func leftBarButtonItemPressed() {
+    navigationController?.popViewController(animated: true)
   }
 
-  @objc private func segmentedControlValueChanged() {
+  @objc fileprivate func segmentedControlValueChanged() {
     performUserRequest()
   }
 }
 
 // MARK: - UITableViewDataSource
 extension FindFriendsViewController: UITableViewDataSource {
-  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return users.count
   }
 
-  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = UserTableViewCell()
     let user = users[indexPath.row]
     cell.configureForUser(user)
@@ -206,8 +206,8 @@ extension FindFriendsViewController: UITableViewDataSource {
 
 // MARK: - UserTableViewCellDelegate
 extension FindFriendsViewController: UserTableViewCellDelegate {
-  func userTableViewCellFollowButtonTapped(cell: UserTableViewCell) {
-    guard let indexPath = tableView.indexPathForCell(cell) else { return }
+  func userTableViewCellFollowButtonTapped(_ cell: UserTableViewCell) {
+    guard let indexPath = tableView.indexPath(for: cell) else { return }
     let user = users[indexPath.row]
     guard user.id != nil else { return }
 
@@ -217,10 +217,10 @@ extension FindFriendsViewController: UserTableViewCellDelegate {
   }
 }
 
-func followForUser(user: User, completion: (Bool) -> Void) {
+func followForUser(_ user: User, completion: @escaping (Bool) -> Void) {
   let followingCurrently = user.following
 
-  func setFollowing(following: Bool) {
+  func setFollowing(_ following: Bool) {
     Database.performTransaction {
       user.following = following
       Database.save(user)
@@ -232,17 +232,17 @@ func followForUser(user: User, completion: (Bool) -> Void) {
 
   let route: SnowballRoute
   if followingCurrently {
-    route = SnowballRoute.UnfollowUser(userID: user.id!)
+    route = SnowballRoute.unfollowUser(userID: user.id!)
     Analytics.track("Unfollow User")
   } else {
-    route = SnowballRoute.FollowUser(userID: user.id!)
+    route = SnowballRoute.followUser(userID: user.id!)
     Analytics.track("Follow User")
   }
 
   SnowballAPI.request(route) { response in
     switch response {
-    case .Success: break
-    case .Failure(let error):
+    case .success: break
+    case .failure(let error):
       print(error)
       setFollowing(followingCurrently)
     }
@@ -250,11 +250,11 @@ func followForUser(user: User, completion: (Bool) -> Void) {
 }
 
 extension FindFriendsViewController: UITextFieldDelegate {
-  func textFieldDidBeginEditing(textField: UITextField) {
+  func textFieldDidBeginEditing(_ textField: UITextField) {
     setTableViewTopConstraint(coveringSegmentedControl: true)
   }
 
-  func textFieldShouldReturn(textField: UITextField) -> Bool {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if let search = textField.text {
       performUserRequest(search: search)
     }

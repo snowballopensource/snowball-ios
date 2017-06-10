@@ -351,6 +351,7 @@
 					BA73BCBB1C1A71B400B22588 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 9GF2XQ22BH;
+						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -614,7 +615,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = is.snowball.snowball;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -633,7 +634,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = is.snowball.snowball;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

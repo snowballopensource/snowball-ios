@@ -11,20 +11,20 @@ import Foundation
 import UIKit
 
 enum AuthenticationFormViewControllerType {
-  case SignIn
-  case SignUp
+  case signIn
+  case signUp
 }
 
 class AuthenticationFormViewController: UIViewController {
 
   // MARK: Properties
 
-  private let type: AuthenticationFormViewControllerType
+  fileprivate let type: AuthenticationFormViewControllerType
 
   let topLabel: UILabel = {
     let label = UILabel()
     label.numberOfLines = 2
-    label.font = UIFont.SnowballFont.regularFont.fontWithSize(20)
+    label.font = UIFont.SnowballFont.regularFont.withSize(20)
     return label
   }()
 
@@ -32,10 +32,10 @@ class AuthenticationFormViewController: UIViewController {
     let textField = FormTextField()
     textField.hint = NSLocalizedString("Username", comment: "")
     textField.placeholder = NSLocalizedString("Your username", comment: "")
-    textField.autocapitalizationType = .None
-    textField.autocorrectionType = .No
-    textField.spellCheckingType = .No
-    textField.returnKeyType = .Next
+    textField.autocapitalizationType = .none
+    textField.autocorrectionType = .no
+    textField.spellCheckingType = .no
+    textField.returnKeyType = .next
     return textField
   }()
 
@@ -43,11 +43,11 @@ class AuthenticationFormViewController: UIViewController {
     let textField = FormTextField()
     textField.hint = NSLocalizedString("Email", comment: "")
     textField.placeholder = NSLocalizedString("Your email address", comment: "")
-    textField.autocapitalizationType = .None
-    textField.autocorrectionType = .No
-    textField.spellCheckingType = .No
-    textField.keyboardType = .EmailAddress
-    textField.returnKeyType = .Next
+    textField.autocapitalizationType = .none
+    textField.autocorrectionType = .no
+    textField.spellCheckingType = .no
+    textField.keyboardType = .emailAddress
+    textField.returnKeyType = .next
     return textField
   }()
 
@@ -55,11 +55,11 @@ class AuthenticationFormViewController: UIViewController {
     let textField = FormTextField()
     textField.hint = NSLocalizedString("Password", comment: "")
     textField.placeholder = NSLocalizedString("Your password", comment: "")
-    textField.autocapitalizationType = .None
-    textField.autocorrectionType = .No
-    textField.spellCheckingType = .No
-    textField.returnKeyType = .Go
-    textField.secureTextEntry = true
+    textField.autocapitalizationType = .none
+    textField.autocorrectionType = .no
+    textField.spellCheckingType = .no
+    textField.returnKeyType = .go
+    textField.isSecureTextEntry = true
     return textField
   }()
 
@@ -71,12 +71,12 @@ class AuthenticationFormViewController: UIViewController {
     self.type = type
     super.init(nibName: nil, bundle: nil)
 
-    if type == .SignUp {
+    if type == .signUp {
       topLabel.text = NSLocalizedString("Ok, let's get started with\ncreating your account.", comment: "")
-      submitButton.setTitle(NSLocalizedString("sign up", comment: ""), forState: .Normal)
+      submitButton.setTitle(NSLocalizedString("sign up", comment: ""), for: UIControlState())
     } else {
       topLabel.text = NSLocalizedString("Welcome back!\nLogin to your account.", comment: "")
-      submitButton.setTitle(NSLocalizedString("log in", comment: ""), forState: .Normal)
+      submitButton.setTitle(NSLocalizedString("log in", comment: ""), for: UIControlState())
     }
   }
   
@@ -89,9 +89,9 @@ class AuthenticationFormViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-back-black"), style: .Plain, target: self, action: #selector(AuthenticationFormViewController.leftBarButtonItemPressed))
+    navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-back-black"), style: .plain, target: self, action: #selector(AuthenticationFormViewController.leftBarButtonItemPressed))
 
-    view.backgroundColor = UIColor.whiteColor()
+    view.backgroundColor = UIColor.white
 
     view.addSubview(topLabel)
     constrain(topLabel) { topLabel in
@@ -100,7 +100,7 @@ class AuthenticationFormViewController: UIViewController {
       topLabel.width == topLabel.superview!.width * 0.70
     }
 
-    if type == .SignUp {
+    if type == .signUp {
       view.addSubview(usernameTextField)
       constrain(usernameTextField, topLabel) { usernameTextField, topLabel in
         usernameTextField.left == usernameTextField.superview!.left + FormTextField.defaultSideMargin
@@ -145,53 +145,53 @@ class AuthenticationFormViewController: UIViewController {
       submitButton.right == passwordTextField.right
       submitButton.height == SnowballActionButton.defaultHeight
     }
-    submitButton.addTarget(self, action: #selector(AuthenticationFormViewController.submitButtonPressed), forControlEvents: .TouchUpInside)
+    submitButton.addTarget(self, action: #selector(AuthenticationFormViewController.submitButtonPressed), for: .touchUpInside)
   }
 
   // MARK: Actions
 
-  @objc private func submitButtonPressed() {
+  @objc fileprivate func submitButtonPressed() {
     authenticate()
   }
 
   // MARK: Private
 
-  private func authenticate() {
+  fileprivate func authenticate() {
     var route: SnowballRoute
     guard let email = emailTextField.text, let password = passwordTextField.text else { return }
-    if type == .SignUp {
+    if type == .signUp {
       guard let username = usernameTextField.text else { return }
-      route = SnowballRoute.SignUp(username: username, email: email, password: password)
+      route = SnowballRoute.signUp(username: username, email: email, password: password)
     } else {
-      route = SnowballRoute.SignIn(email: email, password: password)
+      route = SnowballRoute.signIn(email: email, password: password)
     }
 
     SnowballAPI.requestObject(route) { (response: ObjectResponse<User>) in
       switch response {
-      case .Success(let user):
+      case .success(let user):
         User.currentUser = user
         if let userID = User.currentUser?.id {
           Analytics.identify(userID)
         }
-        if self.type == .SignUp {
+        if self.type == .signUp {
           Analytics.track("Sign Up")
         } else {
           Analytics.track("Sign In")
         }
         // TODO: Push notifications
-        self.dismissViewControllerAnimated(true, completion: nil)
-      case .Failure(let error): error.displayToUserIfAppropriateFromViewController(self)
+        self.dismiss(animated: true, completion: nil)
+      case .failure(let error): error.displayToUserIfAppropriateFromViewController(self)
       }
     }
   }
 
-  @objc private func leftBarButtonItemPressed() {
-    navigationController?.popViewControllerAnimated(true)
+  @objc fileprivate func leftBarButtonItemPressed() {
+    navigationController?.popViewController(animated: true)
   }
 }
 
 extension AuthenticationFormViewController: UITextFieldDelegate {
-  func textFieldShouldReturn(textField: UITextField) -> Bool {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if textField == usernameTextField {
       emailTextField.becomeFirstResponder()
     } else if textField == emailTextField {

@@ -14,21 +14,21 @@ extension UIScrollView {
 
   // MARK: Properties
 
-  private struct AssociatedKeys {
+  fileprivate struct AssociatedKeys {
     static var pullToLoadStateKey = "pullToLoadState"
     static var pullToLoadDelegateKey = "pullToLoadDelegate"
   }
 
-  private(set) var pullToLoadState: UIScrollViewPullToLoadState {
+  fileprivate(set) var pullToLoadState: UIScrollViewPullToLoadState {
     get {
-      return UIScrollViewPullToLoadState(rawValue: objc_getAssociatedObject(self, &AssociatedKeys.pullToLoadStateKey) as? Int ?? UIScrollViewPullToLoadState.Default.rawValue)!
+      return UIScrollViewPullToLoadState(rawValue: objc_getAssociatedObject(self, &AssociatedKeys.pullToLoadStateKey) as? Int ?? UIScrollViewPullToLoadState.default.rawValue)!
     }
     set {
       objc_setAssociatedObject(self, &AssociatedKeys.pullToLoadStateKey, newValue.rawValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
   }
 
-  private var pullToLoadDelegate: UIScrollViewPullToLoadDelegate? {
+  fileprivate var pullToLoadDelegate: UIScrollViewPullToLoadDelegate? {
     get {
       return objc_getAssociatedObject(self, &AssociatedKeys.pullToLoadDelegateKey) as? UIScrollViewPullToLoadDelegate
     }
@@ -39,9 +39,9 @@ extension UIScrollView {
 
   // MARK: Internal
 
-  func enablePullToLoadWithDelegate(delegate: UIScrollViewPullToLoadDelegate) {
+  func enablePullToLoadWithDelegate(_ delegate: UIScrollViewPullToLoadDelegate) {
     pullToLoadDelegate = delegate
-    addObserver(self, forKeyPath: "contentOffset", options: NSKeyValueObservingOptions.New, context: nil)
+    addObserver(self, forKeyPath: "contentOffset", options: NSKeyValueObservingOptions.new, context: nil)
   }
 
   func disablePullToLoad() {
@@ -49,14 +49,14 @@ extension UIScrollView {
   }
 
   func stopPullToLoadAnimation() {
-    pullToLoadState = .Default
+    pullToLoadState = .default
   }
 
   // MARK: KVO
 
-  public override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+  open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
     if keyPath == "contentOffset" {
-      guard let contentOffset = change?[NSKeyValueChangeNewKey]?.CGPointValue else { return }
+      guard let contentOffset = (change?[NSKeyValueChangeKey.newKey] as AnyObject).cgPointValue else { return }
       scrollViewDidScrollToContentOffset(contentOffset)
     }
   }
@@ -64,16 +64,16 @@ extension UIScrollView {
   // MARK: Private
 
   // This method only supports horizontal scrolling (e.g. the timeline). Convert to vertical and add an option for that if support is desired.
-  private func scrollViewDidScrollToContentOffset(contentOffset: CGPoint) {
+  fileprivate func scrollViewDidScrollToContentOffset(_ contentOffset: CGPoint) {
     let scrollThreshold: CGFloat = -60
-    if pullToLoadState != .Loading {
-      if pullToLoadState == .Triggered && !dragging {
-        pullToLoadState = .Loading
+    if pullToLoadState != .loading {
+      if pullToLoadState == .triggered && !isDragging {
+        pullToLoadState = .loading
         pullToLoadDelegate?.scrollViewDidPullToLoad(self)
-      } else if contentOffset.x < scrollThreshold && pullToLoadState == .Default && dragging {
-        pullToLoadState = .Triggered
-      } else if contentOffset.x >= scrollThreshold && pullToLoadState != .Default {
-        pullToLoadState = .Default
+      } else if contentOffset.x < scrollThreshold && pullToLoadState == .default && isDragging {
+        pullToLoadState = .triggered
+      } else if contentOffset.x >= scrollThreshold && pullToLoadState != .default {
+        pullToLoadState = .default
       }
     }
   }
@@ -81,10 +81,10 @@ extension UIScrollView {
 
 // MARK: - UIScrollViewPullToLoadState
 enum UIScrollViewPullToLoadState: Int {
-  case Default, Triggered, Loading
+  case `default`, triggered, loading
 }
 
 // MARK: - UIScrollViewPullToLoadDelegate
 protocol UIScrollViewPullToLoadDelegate: class {
-  func scrollViewDidPullToLoad(scrollView: UIScrollView)
+  func scrollViewDidPullToLoad(_ scrollView: UIScrollView)
 }

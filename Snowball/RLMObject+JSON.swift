@@ -13,20 +13,20 @@ extension Object {
 
   // MARK: Internal
 
-  func importJSON(JSON: JSONObject) {}
+  func importJSON(_ JSON: JSONObject) {}
 
-  static func fromJSONObject<T: Object>(JSON: JSONObject, beforeSave: ((object: T) -> Void)? = nil) -> T? {
+  static func fromJSONObject<T: Object>(_ JSON: JSONObject, beforeSave: ((_ object: T) -> Void)? = nil) -> T? {
     if let id = JSON["id"] as? String {
       let object: T = Database.findOrInitialize(id)
       object.importJSON(JSON)
-      beforeSave?(object: object)
+      beforeSave?(object)
       Database.save(object)
       return object
     }
     return nil
   }
 
-  static func fromJSONArray<T: Object>(JSON: JSONArray, beforeSaveEveryObject: ((object: T) -> Void)? = nil) -> [T] {
+  static func fromJSONArray<T: Object>(_ JSON: JSONArray, beforeSaveEveryObject: ((_ object: T) -> Void)? = nil) -> [T] {
     var results = [T]()
     for JSONObject in JSON {
       let object: T? = T.fromJSONObject(JSONObject, beforeSave: beforeSaveEveryObject)

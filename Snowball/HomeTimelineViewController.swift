@@ -19,7 +19,7 @@ class HomeTimelineViewController: TimelineViewController {
   // MARK: Initializers
 
   init() {
-    super.init(timelineType: .Home)
+    super.init(timelineType: .home)
   }
 
   required init?(coder: NSCoder) {
@@ -31,7 +31,7 @@ class HomeTimelineViewController: TimelineViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-flip-camera"), style: .Plain, target: self, action: #selector(HomeTimelineViewController.rightBarButtonItemPressed))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-flip-camera"), style: .plain, target: self, action: #selector(HomeTimelineViewController.rightBarButtonItemPressed))
 
     addChildViewController(cameraViewController)
     view.addSubview(cameraViewController.view)
@@ -41,53 +41,53 @@ class HomeTimelineViewController: TimelineViewController {
       cameraView.right == cameraView.superview!.right
       cameraView.height == cameraView.superview!.width
     }
-    cameraViewController.didMoveToParentViewController(self)
+    cameraViewController.didMove(toParentViewController: self)
     cameraViewController.delegate = self
   }
 
   // MARK: Private
 
-  private func tryUploadingClip(clip: Clip) {
-    state = .Default
+  fileprivate func tryUploadingClip(_ clip: Clip) {
+    state = .default
     SnowballAPI.queueClipForUploadingAndHandleStateChanges(clip) { (response) -> Void in
       switch response {
-      case .Success: break
-      case .Failure(let error): print(error) // TODO: Handle error
+      case .success: break
+      case .failure(let error): print(error) // TODO: Handle error
       }
     }
   }
 
   // MARK: Actions
 
-  @objc private func rightBarButtonItemPressed() {
+  @objc fileprivate func rightBarButtonItemPressed() {
     cameraViewController.changeCamera()
   }
 
   // MARK: TimelinePlayerDelegate Overrides
   // This is because swift does not allow overrides in extensions. Sorry!
 
-  override func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
+  override func timelinePlayer(_ timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
     super.timelinePlayer(timelinePlayer, willBeginPlaybackWithFirstClip: clip)
-    view.sendSubviewToBack(cameraViewController.view)
+    view.sendSubview(toBack: cameraViewController.view)
   }
 
-  override func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
+  override func timelinePlayer(_ timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
     super.timelinePlayer(timelinePlayer, didEndPlaybackWithLastClip: clip)
-    view.bringSubviewToFront(cameraViewController.view)
+    view.bringSubview(toFront: cameraViewController.view)
   }
 
   // MARK: ClipCollectionViewCellDelegate Overrides
   // This is because swift does not allow overrides in extensions. Sorry!
 
-  override func clipCollectionViewCellAddButtonTapped(cell: ClipCollectionViewCell) {
-    state = .Default
+  override func clipCollectionViewCellAddButtonTapped(_ cell: ClipCollectionViewCell) {
+    state = .default
     super.clipCollectionViewCellAddButtonTapped(cell)
     guard let clip = clipForCell(cell) else { return }
     cameraViewController.endPreview()
     tryUploadingClip(clip)
   }
 
-  override func clipCollectionViewCellRetryUploadButtonTapped(cell: ClipCollectionViewCell) {
+  override func clipCollectionViewCellRetryUploadButtonTapped(_ cell: ClipCollectionViewCell) {
     super.clipCollectionViewCellRetryUploadButtonTapped(cell)
     guard let clip = clipForCell(cell) else { return }
     tryUploadingClip(clip)
@@ -97,11 +97,11 @@ class HomeTimelineViewController: TimelineViewController {
 // MARK: - CameraViewControllerDelegate
 extension TimelineViewController: CameraViewControllerDelegate {
   func videoDidBeginRecording() {
-    state = .Recording
+    state = .recording
   }
 
-  func videoDidEndRecordingToFileAtURL(videoURL: NSURL, thumbnailURL: NSURL) {
-    state = .Previewing
+  func videoDidEndRecordingToFileAtURL(_ videoURL: URL, thumbnailURL: URL) {
+    state = .previewing
     let clip = Clip()
     clip.state = .PendingAcceptance
     clip.timelineID = timeline.id
@@ -116,7 +116,7 @@ extension TimelineViewController: CameraViewControllerDelegate {
   }
 
   func videoPreviewDidCancel() {
-    state = .Default
+    state = .default
     if let pendingClip = timeline.clipPendingAcceptance {
       Database.performTransaction {
         Database.delete(pendingClip)

@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 extension UIWindow {
-  func transitionRootViewControllerToViewController(viewController: UIViewController) {
-    UIView.transitionWithView(self, duration: 0.5, options: .TransitionFlipFromLeft, animations: {
+  func transitionRootViewControllerToViewController(_ viewController: UIViewController) {
+    UIView.transition(with: self, duration: 0.5, options: .transitionFlipFromLeft, animations: {
       self.rootViewController = viewController
       }, completion: nil)
   }

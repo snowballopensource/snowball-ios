@@ -14,17 +14,17 @@ class PlayerQueueManager {
 
   // MARK: Properties
 
-  private let timeline: Timeline
+  fileprivate let timeline: Timeline
   weak var player: AVQueuePlayer?
-  private let queue: NSOperationQueue = {
-    let queue = NSOperationQueue()
-    queue.qualityOfService = .UserInitiated
+  fileprivate let queue: OperationQueue = {
+    let queue = OperationQueue()
+    queue.qualityOfService = .userInitiated
     queue.maxConcurrentOperationCount = 1
     return queue
   }()
-  private let desiredMaximumClipCount = 3
-  private var uncancelledOperations: [NSOperation] {
-    return queue.operations.filter({ !$0.cancelled })
+  fileprivate let desiredMaximumClipCount = 3
+  fileprivate var uncancelledOperations: [Operation] {
+    return queue.operations.filter({ !$0.isCancelled })
   }
   var isLoadingAdditionalClips: Bool {
     return (uncancelledOperations.count != 0)
@@ -52,11 +52,11 @@ class PlayerQueueManager {
     fillPlayerQueueWithClips(timeline.clipsAfterClip(lastQueuedClip), ignoringPlayerItemsCount: false, readyToPlayFirstClip: nil)
   }
 
-  func preparePlayerQueueToBeginPlaybackWithClip(clip: Clip) {
+  func preparePlayerQueueToBeginPlaybackWithClip(_ clip: Clip) {
     fillPlayerQueueWithClips(timeline.clipsIncludingAndAfterClip(clip), ignoringPlayerItemsCount: false, readyToPlayFirstClip: nil)
   }
 
-  func preparePlayerQueueToSkipToClip(clip: Clip, readyToPlayFirstClip: (() -> Void)?) {
+  func preparePlayerQueueToSkipToClip(_ clip: Clip, readyToPlayFirstClip: (() -> Void)?) {
     fillPlayerQueueWithClips(timeline.clipsIncludingAndAfterClip(clip), ignoringPlayerItemsCount: true, readyToPlayFirstClip: readyToPlayFirstClip)
   }
 
@@ -66,7 +66,7 @@ class PlayerQueueManager {
 
   // MARK: Private
 
-  private func fillPlayerQueueWithClips(clips: Slice<Results<Clip>>, ignoringPlayerItemsCount: Bool, readyToPlayFirstClip: (() -> Void)?) {
+  fileprivate func fillPlayerQueueWithClips(_ clips: Slice<Results<Clip>>, ignoringPlayerItemsCount: Bool, readyToPlayFirstClip: (() -> Void)?) {
     let playerItemsCount = ignoringPlayerItemsCount ? 0 : (player?.items().count ?? 0)
     let clipsEnqueuedCount = playerItemsCount + uncancelledOperations.count
     let totalClipsLeftCount = clips.count
@@ -77,7 +77,7 @@ class PlayerQueueManager {
     enqueueClipsInPlayer(clipsToEnqueue, readyToPlayFirstClip: readyToPlayFirstClip)
   }
 
-  private func enqueueClipsInPlayer(clips: [Clip], readyToPlayFirstClip: (() -> Void)?) {
+  fileprivate func enqueueClipsInPlayer(_ clips: [Clip], readyToPlayFirstClip: (() -> Void)?) {
     guard let clip = clips.first else { return }
     enqueueClipInPlayer(clip) {
       readyToPlayFirstClip?()
@@ -87,15 +87,15 @@ class PlayerQueueManager {
     enqueueClipsInPlayer(nextClips, readyToPlayFirstClip: nil)
   }
 
-  private func enqueueClipInPlayer(clip: Clip, completion: () -> Void) {
+  fileprivate func enqueueClipInPlayer(_ clip: Clip, completion: @escaping () -> Void) {
     guard let playerItem = ClipPlayerItem(clip: clip) else { return }
     let loadPlayerItemOperation = LoadPlayerItemOperation(playerItem: playerItem)
     weak var safeOperation = loadPlayerItemOperation
     loadPlayerItemOperation.completionBlock = {
       guard let operation = safeOperation else { return }
-      if !operation.cancelled {
-        dispatch_async(dispatch_get_main_queue()) {
-          self.player?.insertItem(playerItem, afterItem: self.player?.items().last)
+      if !operation.isCancelled {
+        DispatchQueue.main.async {
+          self.player?.insert(playerItem, after: self.player?.items().last)
           completion()
         }
       }

@@ -28,30 +28,30 @@ class FormTextField: UITextField {
 
   var hintWidth: CGFloat = 0
 
-  private let hintLabel: UILabel = {
+  fileprivate let hintLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont.SnowballFont.regularFont.fontWithSize(16)
-    label.textColor = UIColor.blackColor()
+    label.font = UIFont.SnowballFont.regularFont.withSize(16)
+    label.textColor = UIColor.black
     return label
   }()
 
-  private let bottomBorder: CALayer = {
+  fileprivate let bottomBorder: CALayer = {
     let layer = CALayer()
-    layer.backgroundColor = UIColor.blackColor().CGColor
+    layer.backgroundColor = UIColor.black.cgColor
     return layer
   }()
-  private let bottomBorderWidth: CGFloat = 1
+  fileprivate let bottomBorderWidth: CGFloat = 1
 
   // MARK: Initializers
 
   override init(frame: CGRect) {
     super.init(frame: frame)
 
-    font = UIFont.SnowballFont.regularFont.fontWithSize(16)
-    textColor = UIColor.blackColor()
+    font = UIFont.SnowballFont.regularFont.withSize(16)
+    textColor = UIColor.black
 
     leftView = hintLabel
-    leftViewMode = .Always
+    leftViewMode = .always
 
     layer.addSublayer(bottomBorder)
   }
@@ -60,24 +60,24 @@ class FormTextField: UITextField {
     fatalError("init(coder:) has not been implemented")
   }
 
-  override func drawRect(rect: CGRect) {
-    super.drawRect(rect)
+  override func draw(_ rect: CGRect) {
+    super.draw(rect)
 
-    bottomBorder.frame = CGRectMake(0, rect.height - bottomBorderWidth, rect.width, bottomBorderWidth)
+    bottomBorder.frame = CGRect(x: 0, y: rect.height - bottomBorderWidth, width: rect.width, height: bottomBorderWidth)
   }
 
   // MARK: UITextField
 
-  override func leftViewRectForBounds(bounds: CGRect) -> CGRect {
+  override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
     return CGRect(x: 0, y: 0, width: hintWidth + 20, height: bounds.height)
   }
 
   // MARK: Internal
 
-  static func linkFormTextFieldsHintSizing(textFields: [FormTextField]) {
+  static func linkFormTextFieldsHintSizing(_ textFields: [FormTextField]) {
     var widestHintWidth: CGFloat = 0
     for textField in textFields {
-      let hintWidth = textField.hintLabel.intrinsicContentSize().width
+      let hintWidth = textField.hintLabel.intrinsicContentSize.width
       if widestHintWidth < hintWidth {
         widestHintWidth = hintWidth
       }

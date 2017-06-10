@@ -13,24 +13,24 @@ class SingleItemLoopingPlayer: AVPlayer {
 
   // MARK: Internal
 
-  func playVideoURL(videoURL: NSURL) {
-    let playerItem = AVPlayerItem(URL: videoURL)
+  func playVideoURL(_ videoURL: URL) {
+    let playerItem = AVPlayerItem(url: videoURL)
     registerPlayerItemForNotifications(playerItem)
-    replaceCurrentItemWithPlayerItem(playerItem)
+    replaceCurrentItem(with: playerItem)
     play()
   }
 
   func stop() {
     pause()
-    replaceCurrentItemWithPlayerItem(nil)
+    replaceCurrentItem(with: nil)
   }
 
   // MARK: Private
 
-  private func registerPlayerItemForNotifications(playerItem: AVPlayerItem) {
-    NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: playerItem, queue: nil) { (notification) in
+  fileprivate func registerPlayerItemForNotifications(_ playerItem: AVPlayerItem) {
+    NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem, queue: nil) { (notification) in
       if let playerItem = notification.object as? AVPlayerItem {
-        playerItem.seekToTime(kCMTimeZero)
+        playerItem.seek(to: kCMTimeZero)
         self.play()
       }
     }

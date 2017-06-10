@@ -14,18 +14,18 @@ class UserTimelineViewController: TimelineViewController {
 
   // MARK: Properties
 
-  private let topBackgroundImageView = UIImageView()
-  private let usernameLabel: UILabel
-  private let followButton: UIButton
-  private let user: User
+  fileprivate let topBackgroundImageView = UIImageView()
+  fileprivate let usernameLabel: UILabel
+  fileprivate let followButton: UIButton
+  fileprivate let user: User
 
   // MARK: Initializers
 
   init(user: User) {
     self.user = user
     usernameLabel = UILabel()
-    followButton = UIButton(type: .Custom)
-    super.init(timelineType: .User(userID: user.id ?? ""))
+    followButton = UIButton(type: .custom)
+    super.init(timelineType: .user(userID: user.id ?? ""))
   }
 
   required init?(coder: NSCoder) {
@@ -44,17 +44,17 @@ class UserTimelineViewController: TimelineViewController {
       topBackgroundImageView.right == topBackgroundImageView.superview!.right
       topBackgroundImageView.height == topBackgroundImageView.superview!.width
     }
-    if let avatarURLString = user.avatarURL, avatarURL = NSURL(string: avatarURLString) {
+    if let avatarURLString = user.avatarURL, let avatarURL = URL(string: avatarURLString) {
       topBackgroundImageView.setImageFromURL(avatarURL)
     }
 
     setFollowButtonState()
     let followButtonAspectRatio: CGFloat = {
-      let contentSize = followButton.intrinsicContentSize()
+      let contentSize = followButton.intrinsicContentSize
       return contentSize.height / contentSize.width
     }()
-    followButton.addTarget(self, action: #selector(followButtonTapped), forControlEvents: .TouchUpInside)
-    followButton.hidden = user.id! == User.currentUser!.id
+    followButton.addTarget(self, action: #selector(followButtonTapped), for: .touchUpInside)
+    followButton.isHidden = user.id! == User.currentUser!.id
     view.addSubview(followButton)
 
     constrain(followButton, topBackgroundImageView) { followButton, topBackgroundImageView in
@@ -64,13 +64,13 @@ class UserTimelineViewController: TimelineViewController {
       followButton.centerX == topBackgroundImageView.centerX
     }
 
-    usernameLabel.font = UIFont.SnowballFont.mediumFont.fontWithSize(30)
-    usernameLabel.textAlignment = .Center
+    usernameLabel.font = UIFont.SnowballFont.mediumFont.withSize(30)
+    usernameLabel.textAlignment = .center
     usernameLabel.text = user.username
-    usernameLabel.textColor = UIColor.whiteColor()
+    usernameLabel.textColor = UIColor.white
     view.addSubview(usernameLabel)
 
-    let height = usernameLabel.sizeThatFits(CGSize(width: view.bounds.width, height: CGFloat.max)).height
+    let height = usernameLabel.sizeThatFits(CGSize(width: view.bounds.width, height: CGFloat.greatestFiniteMagnitude)).height
 
     constrain(usernameLabel, topBackgroundImageView, followButton) { usernameLabel, topBackgroundImageView, followButton in
       usernameLabel.height == height
@@ -80,9 +80,9 @@ class UserTimelineViewController: TimelineViewController {
     }
   }
 
-  private func setFollowButtonState() {
+  fileprivate func setFollowButtonState() {
     let followImage = user.following ? UIImage(imageLiteral: "button-following") : UIImage(imageLiteral: "button-follow")
-    followButton.setBackgroundImage(followImage, forState: .Normal)
+    followButton.setBackgroundImage(followImage, for: UIControlState())
   }
 
   @objc func followButtonTapped() {
@@ -94,17 +94,17 @@ class UserTimelineViewController: TimelineViewController {
   // MARK: TimelinePlayerDelegate Overrides
   // This is because swift does not allow overrides in extensions. Sorry!
 
-  override func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
+  override func timelinePlayer(_ timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
     super.timelinePlayer(timelinePlayer, willBeginPlaybackWithFirstClip: clip)
-    view.sendSubviewToBack(topBackgroundImageView)
-    view.sendSubviewToBack(usernameLabel)
-    view.sendSubviewToBack(followButton)
+    view.sendSubview(toBack: topBackgroundImageView)
+    view.sendSubview(toBack: usernameLabel)
+    view.sendSubview(toBack: followButton)
   }
 
-  override func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
+  override func timelinePlayer(_ timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
     super.timelinePlayer(timelinePlayer, didEndPlaybackWithLastClip: clip)
-    view.bringSubviewToFront(topBackgroundImageView)
-    view.bringSubviewToFront(usernameLabel)
-    view.bringSubviewToFront(followButton)
+    view.bringSubview(toFront: topBackgroundImageView)
+    view.bringSubview(toFront: usernameLabel)
+    view.bringSubview(toFront: followButton)
   }
 }

@@ -18,13 +18,13 @@ class PulsingLoadingIndicatorView: UIView {
   // MARK: UIView
 
   convenience init() {
-    self.init(frame: CGRectZero)
+    self.init(frame: CGRect.zero)
   }
 
   override init(frame: CGRect) {
     super.init(frame: frame)
     clipsToBounds = true
-    hidden = true
+    isHidden = true
   }
 
   required init?(coder: NSCoder) {
@@ -39,15 +39,15 @@ class PulsingLoadingIndicatorView: UIView {
 
   // MARK: Internal
 
-  func startAnimating(color: UIColor = UIColor.whiteColor(), withDelay delay: Bool = true) {
+  func startAnimating(_ color: UIColor = UIColor.white, withDelay delay: Bool = true) {
     if delay {
-      backgroundColor = color.colorWithAlphaComponent(0)
-      hidden = false
-      UIView.animateWithDuration(0.1,
+      backgroundColor = color.withAlphaComponent(0)
+      isHidden = false
+      UIView.animate(withDuration: 0.1,
         delay: 1,
-        options: .CurveLinear,
+        options: .curveLinear,
         animations: {
-          self.backgroundColor = color.colorWithAlphaComponent(0.2)
+          self.backgroundColor = color.withAlphaComponent(0.2)
         },
         completion: { finished in
           if finished {
@@ -55,26 +55,26 @@ class PulsingLoadingIndicatorView: UIView {
           }
       })
     } else {
-      backgroundColor = color.colorWithAlphaComponent(0.2)
-      hidden = false
+      backgroundColor = color.withAlphaComponent(0.2)
+      isHidden = false
       startPulseAnimation(color: color)
     }
   }
 
   func stopAnimating() {
     layer.removeAllAnimations()
-    hidden = true
+    isHidden = true
   }
 
   // MARK: Private
 
-  private func startPulseAnimation(color color: UIColor) {
-    backgroundColor = color.colorWithAlphaComponent(0.2)
-    UIView.animateWithDuration(1,
+  fileprivate func startPulseAnimation(color: UIColor) {
+    backgroundColor = color.withAlphaComponent(0.2)
+    UIView.animate(withDuration: 1,
       delay: 0,
-      options: [.CurveLinear, .Autoreverse, .Repeat],
+      options: [.curveLinear, .autoreverse, .repeat],
       animations: { () -> Void in
-        self.backgroundColor = color.colorWithAlphaComponent(0.9)
+        self.backgroundColor = color.withAlphaComponent(0.9)
       },
       completion: nil)
   }

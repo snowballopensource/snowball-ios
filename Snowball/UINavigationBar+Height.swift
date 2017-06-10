@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UINavigationBar {
-  public override func sizeThatFits(size: CGSize) -> CGSize {
+  open override func sizeThatFits(_ size: CGSize) -> CGSize {
     let width = superview?.frame.size.width ?? 0
     return CGSize(width: width, height: 60)
   }

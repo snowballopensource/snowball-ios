@@ -13,7 +13,7 @@ extension UINavigationBar {
 
   // MARK: Properties
 
-  private struct AssociatedKeys {
+  fileprivate struct AssociatedKeys {
     static var transparentKey = "transparentKey"
   }
 
@@ -24,13 +24,13 @@ extension UINavigationBar {
     set {
       objc_setAssociatedObject(self, &AssociatedKeys.transparentKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
       if newValue {
-        setBackgroundImage(UIImage(), forBarMetrics: .Default)
-        translucent = true
+        setBackgroundImage(UIImage(), for: .default)
+        isTranslucent = true
         shadowImage = UIImage()
       } else {
         let appearance = UINavigationBar.appearance()
-        setBackgroundImage(appearance.backgroundImageForBarMetrics(.Default), forBarMetrics: .Default)
-        translucent = appearance.translucent
+        setBackgroundImage(appearance.backgroundImage(for: .default), for: .default)
+        isTranslucent = appearance.isTranslucent
         shadowImage = appearance.shadowImage
       }
     }

@@ -23,20 +23,20 @@ class TimelineViewController: UIViewController {
   let pulsingLoadingIndicatorView = PulsingLoadingIndicatorView()
   let timelineCollectionView = TimelineCollectionView()
   let fetchedResultsController: FetchedResultsController<Clip>
-  var collectionViewUpdates = [NSBlockOperation]()
+  var collectionViewUpdates = [BlockOperation]()
 
   // MARK: TimelineViewControllerState
   enum TimelineViewControllerState {
-    case Default, Recording, Playing, Previewing
+    case `default`, recording, playing, previewing
   }
-  var state = TimelineViewControllerState.Default {
+  var state = TimelineViewControllerState.default {
     didSet {
-      let navBarHidden = (state == .Playing || state == .Previewing || state == .Recording)
+      let navBarHidden = (state == .playing || state == .previewing || state == .recording)
       navigationController?.setNavigationBarHidden(navBarHidden, animated: true)
-      playerView.hidden = (state != .Playing)
-      timelineCollectionView.scrollEnabled = (state != .Playing && state != .Previewing)
+      playerView.isHidden = (state != .playing)
+      timelineCollectionView.isScrollEnabled = (state != .playing && state != .previewing)
 
-      if state != .Playing {
+      if state != .playing {
         endBufferingState()
       }
     }
@@ -57,7 +57,7 @@ class TimelineViewController: UIViewController {
     let collectionViewLayout = timelineCollectionView.collectionViewLayout as! TimelineCollectionViewFlowLayout
     collectionViewLayout.delegate = self
 
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimelineViewController.applicationWillEnterForeground), name: UIApplicationWillEnterForegroundNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(TimelineViewController.applicationWillEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
   }
 
   required init?(coder: NSCoder) {
@@ -65,7 +65,7 @@ class TimelineViewController: UIViewController {
   }
 
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
 
   // MARK: UIViewController
@@ -73,12 +73,12 @@ class TimelineViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    view.backgroundColor = UIColor.whiteColor()
+    view.backgroundColor = UIColor.white
 
     if navigationController?.viewControllers.first == self {
-      navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-friends"), style: .Plain, target: self, action: #selector(TimelineViewController.leftBarButtonItemPressed))
+      navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-friends"), style: .plain, target: self, action: #selector(TimelineViewController.leftBarButtonItemPressed))
     } else {
-      navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-back"), style: .Plain, target: self, action: #selector(TimelineViewController.backBarButtonItemPressed))
+      navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "top-back"), style: .plain, target: self, action: #selector(TimelineViewController.backBarButtonItemPressed))
     }
 
     view.addSubview(playerView)
@@ -90,7 +90,7 @@ class TimelineViewController: UIViewController {
     }
     player.delegate = self
     playerView.player = player
-    playerView.hidden = true
+    playerView.isHidden = true
 
     view.insertSubview(playerBufferingImageView, belowSubview: playerView)
     constrain(playerBufferingImageView, playerView) { playerBufferingImageView, playerView in
@@ -123,7 +123,7 @@ class TimelineViewController: UIViewController {
     fetchedResultsController.performFetch()
   }
 
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
 
     if isAppearingForFirstTime() {
@@ -139,14 +139,14 @@ class TimelineViewController: UIViewController {
     }
   }
 
-  func clipForCell(cell: ClipCollectionViewCell) -> Clip? {
-    if let indexPath = timelineCollectionView.indexPathForCell(cell) {
+  func clipForCell(_ cell: ClipCollectionViewCell) -> Clip? {
+    if let indexPath = timelineCollectionView.indexPath(for: cell) {
       return fetchedResultsController.objectAtIndexPath(indexPath)
     }
     return nil
   }
 
-  func scrollToCellForClip(clip: Clip, animated: Bool) {
+  func scrollToCellForClip(_ clip: Clip, animated: Bool) {
     if let indexPath = fetchedResultsController.indexPathForObject(clip) {
       timelineCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: animated)
     }
@@ -154,14 +154,14 @@ class TimelineViewController: UIViewController {
 
   // MARK: Private
 
-  private func cellForClip(clip: Clip) -> ClipCollectionViewCell? {
+  fileprivate func cellForClip(_ clip: Clip) -> ClipCollectionViewCell? {
     if let indexPath = fetchedResultsController.indexPathForObject(clip) {
       return timelineCollectionView.cellForItemAtIndexPath(indexPath) as? ClipCollectionViewCell
     }
     return nil
   }
 
-  private func scrollToPriorityClipAnimated(animated: Bool) {
+  fileprivate func scrollToPriorityClipAnimated(_ animated: Bool) {
     if let clipNeedingAttenion = self.timeline.clipsNeedingAttention.last {
       self.scrollToCellForClip(clipNeedingAttenion, animated: animated)
     } else if let bookmarkedClip = self.timeline.bookmarkedClip {
@@ -169,78 +169,78 @@ class TimelineViewController: UIViewController {
     }
   }
 
-  private func setStateToPlayingClipForVisibleCells(clip: Clip) {
+  fileprivate func setStateToPlayingClipForVisibleCells(_ clip: Clip) {
     let playingClipCell = cellForClip(clip)
-    for cell in timelineCollectionView.visibleCells() as! [ClipCollectionViewCell] {
-      let state: ClipCollectionViewCellState = (cell == playingClipCell) ? .PlayingActive : .PlayingIdle
+    for cell in timelineCollectionView.visibleCells as! [ClipCollectionViewCell] {
+      let state: ClipCollectionViewCellState = (cell == playingClipCell) ? .playingActive : .playingIdle
       cell.setState(state, animated: true)
     }
   }
 
-  private func resetStateForCell(cell: ClipCollectionViewCell) {
+  fileprivate func resetStateForCell(_ cell: ClipCollectionViewCell) {
     guard let clip = clipForCell(cell) else { return }
     cell.setState(cellStateForClip(clip), animated: true)
   }
 
-  private func resetStateForVisibleCells() {
-    for cell in timelineCollectionView.visibleCells() as! [ClipCollectionViewCell] {
+  fileprivate func resetStateForVisibleCells() {
+    for cell in timelineCollectionView.visibleCells as! [ClipCollectionViewCell] {
       resetStateForCell(cell)
     }
   }
 
-  private func reconfigureVisibleCells() {
-    for cell in timelineCollectionView.visibleCells() as! [ClipCollectionViewCell] {
+  fileprivate func reconfigureVisibleCells() {
+    for cell in timelineCollectionView.visibleCells as! [ClipCollectionViewCell] {
       guard let clip = clipForCell(cell) else { return }
       cell.configueForClip(clip, state: cellStateForClip(clip), animated: true)
     }
   }
 
-  private func cellStateForClip(clip: Clip) -> ClipCollectionViewCellState {
-    var state = ClipCollectionViewCellState.Default
+  fileprivate func cellStateForClip(_ clip: Clip) -> ClipCollectionViewCellState {
+    var state = ClipCollectionViewCellState.default
     if player.playing {
       if player.currentClip == clip {
-        state = .PlayingActive
+        state = .playingActive
       } else {
-        state = .PlayingIdle
+        state = .playingIdle
       }
     } else {
       if clip == timeline.bookmarkedClip {
-        state = .Bookmarked
+        state = .bookmarked
       }
       if clip.state == .PendingAcceptance {
-        state = .PendingAcceptance
+        state = .pendingAcceptance
       } else if clip.state == .UploadFailed {
-        state = .UploadFailed
+        state = .uploadFailed
       } else if clip.state == .Uploading {
-        state = .Uploading
+        state = .uploading
       }
     }
     return state
   }
 
-  private func setClipBuffering(clip: Clip) {
-    if let thumbnailURLString = clip.thumbnailURL, thumbnailURL = NSURL(string: thumbnailURLString) {
+  fileprivate func setClipBuffering(_ clip: Clip) {
+    if let thumbnailURLString = clip.thumbnailURL, let thumbnailURL = URL(string: thumbnailURLString) {
       playerBufferingImageView.setImageFromURL(thumbnailURL)
       pulsingLoadingIndicatorView.startAnimating()
     }
   }
 
-  private func endBufferingState() {
+  fileprivate func endBufferingState() {
     playerBufferingImageView.image = nil
     pulsingLoadingIndicatorView.stopAnimating()
   }
 
   // MARK: Actions
 
-  @objc private func applicationWillEnterForeground() {
+  @objc fileprivate func applicationWillEnterForeground() {
     refresh()
   }
 
-  @objc private func backBarButtonItemPressed() {
-    navigationController?.popViewControllerAnimated(true)
+  @objc fileprivate func backBarButtonItemPressed() {
+    navigationController?.popViewController(animated: true)
   }
 
-  @objc private func leftBarButtonItemPressed() {
+  @objc fileprivate func leftBarButtonItemPressed() {
     authenticateUser(
       afterSuccessfulAuthentication:  {
         self.refresh()
@@ -254,16 +254,16 @@ class TimelineViewController: UIViewController {
 // MARK: - UICollectionViewDataSource
 extension TimelineViewController: UICollectionViewDataSource {
 
-  func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+  func numberOfSections(in collectionView: UICollectionView) -> Int {
     return fetchedResultsController.numberOfSections()
   }
 
-  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return fetchedResultsController.numberOfRowsForSectionIndex(section)
   }
 
-  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(ClipCollectionViewCell), forIndexPath: indexPath) as! ClipCollectionViewCell
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(ClipCollectionViewCell), for: indexPath) as! ClipCollectionViewCell
     if let clip = fetchedResultsController.objectAtIndexPath(indexPath) {
       cell.configueForClip(clip, state: cellStateForClip(clip))
     }
@@ -275,13 +275,13 @@ extension TimelineViewController: UICollectionViewDataSource {
 // MARK: - FetchedResultsControllerDelegate
 extension TimelineViewController: FetchedResultsControllerDelegate {
 
-  func controllerWillChangeContent<T: Object>(controller: FetchedResultsController<T>) {
+  func controllerWillChangeContent<T: Object>(_ controller: FetchedResultsController<T>) {
     collectionViewUpdates.removeAll()
   }
 
-  func controllerDidChangeSection<T: Object>(controller: FetchedResultsController<T>, section: FetchResultsSectionInfo<T>, sectionIndex: UInt, changeType: NSFetchedResultsChangeType) {
-    let section = NSIndexSet(index: Int(sectionIndex))
-    collectionViewUpdates.append(NSBlockOperation {
+  func controllerDidChangeSection<T: Object>(_ controller: FetchedResultsController<T>, section: FetchResultsSectionInfo<T>, sectionIndex: UInt, changeType: NSFetchedResultsChangeType) {
+    let section = IndexSet(integer: Int(sectionIndex))
+    collectionViewUpdates.append(BlockOperation {
       switch changeType {
       case .Insert:
         self.timelineCollectionView.insertSections(section)
@@ -294,27 +294,27 @@ extension TimelineViewController: FetchedResultsControllerDelegate {
     )
   }
 
-  func controllerDidChangeObject<T: Object>(controller: FetchedResultsController<T>, anObject object: SafeObject<T>, indexPath: NSIndexPath?, changeType: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-    collectionViewUpdates.append(NSBlockOperation {
+  func controllerDidChangeObject<T: Object>(_ controller: FetchedResultsController<T>, anObject object: SafeObject<T>, indexPath: IndexPath?, changeType: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    collectionViewUpdates.append(BlockOperation {
       switch changeType {
       case .Insert:
-        self.timelineCollectionView.insertItemsAtIndexPaths([newIndexPath!])
+        self.timelineCollectionView.insertItems(at: [newIndexPath!])
       case .Delete:
-        self.timelineCollectionView.deleteItemsAtIndexPaths([indexPath!])
+        self.timelineCollectionView.deleteItems(at: [indexPath!])
       case .Update:
         let clip = self.timeline.clips[indexPath!.row]
-        if let cell = self.timelineCollectionView.cellForItemAtIndexPath(indexPath!) as? ClipCollectionViewCell {
+        if let cell = self.timelineCollectionView.cellForItem(at: indexPath!) as? ClipCollectionViewCell {
           let state = self.cellStateForClip(clip)
           cell.setState(state, animated: true)
         }
       case .Move:
-        self.timelineCollectionView.moveItemAtIndexPath(indexPath!, toIndexPath: newIndexPath!)
+        self.timelineCollectionView.moveItem(at: indexPath!, to: newIndexPath!)
       }
       }
     )
   }
 
-  func controllerDidChangeContent<T: Object>(controller: FetchedResultsController<T>) {
+  func controllerDidChangeContent<T: Object>(_ controller: FetchedResultsController<T>) {
     timelineCollectionView.performBatchUpdates({
       for updateClosure in self.collectionViewUpdates {
         updateClosure.start()
@@ -329,19 +329,19 @@ extension TimelineViewController: FetchedResultsControllerDelegate {
 
 // MARK: - TimelinePlayerDelegate
 extension TimelineViewController: TimelinePlayerDelegate {
-  func timelinePlayerShouldBeginPlayback(timelinePlayer: TimelinePlayer) -> Bool {
+  func timelinePlayerShouldBeginPlayback(_ timelinePlayer: TimelinePlayer) -> Bool {
     return true
   }
 
-  func timelinePlayer(timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
-    state = .Playing
+  func timelinePlayer(_ timelinePlayer: TimelinePlayer, willBeginPlaybackWithFirstClip clip: Clip) {
+    state = .playing
     setClipBuffering(clip)
     scrollToCellForClip(clip, animated: true)
     setStateToPlayingClipForVisibleCells(clip)
     Analytics.track("Watch Clip")
   }
 
-  func timelinePlayer(timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
+  func timelinePlayer(_ timelinePlayer: TimelinePlayer, didTransitionFromClip fromClip: Clip, toClip: Clip) {
     setClipBuffering(toClip)
     scrollToCellForClip(toClip, animated: true)
     player.topOffQueue()
@@ -349,8 +349,8 @@ extension TimelineViewController: TimelinePlayerDelegate {
     Analytics.track("Watch Clip")
   }
 
-  func timelinePlayer(timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
-    state = .Default
+  func timelinePlayer(_ timelinePlayer: TimelinePlayer, didEndPlaybackWithLastClip clip: Clip) {
+    state = .default
     timeline.bookmarkedClip = clip
     resetStateForVisibleCells()
   }
@@ -358,7 +358,7 @@ extension TimelineViewController: TimelinePlayerDelegate {
 
 // MARK: - ClipCollectionViewCellDelegate
 extension TimelineViewController: ClipCollectionViewCellDelegate {
-  func clipCollectionViewCellPlayButtonTapped(cell: ClipCollectionViewCell) {
+  func clipCollectionViewCellPlayButtonTapped(_ cell: ClipCollectionViewCell) {
     guard let clip = clipForCell(cell) else { player.stop(); return }
     if player.playing {
       if clip == player.currentClip {
@@ -372,11 +372,11 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
     }
   }
 
-  func clipCollectionViewCellAddButtonTapped(cell: ClipCollectionViewCell) {}
+  func clipCollectionViewCellAddButtonTapped(_ cell: ClipCollectionViewCell) {}
 
-  func clipCollectionViewCellRetryUploadButtonTapped(cell: ClipCollectionViewCell) {}
+  func clipCollectionViewCellRetryUploadButtonTapped(_ cell: ClipCollectionViewCell) {}
 
-  func clipCollectionViewCellProfileButtonTapped(cell: ClipCollectionViewCell) {
+  func clipCollectionViewCellProfileButtonTapped(_ cell: ClipCollectionViewCell) {
     authenticateUser(
       afterSuccessfulAuthentication:  {
         self.refresh()
@@ -387,8 +387,8 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
     })
   }
 
-  func clipCollectionViewCellLongPressTriggered(cell: ClipCollectionViewCell) {
-    cell.setState(.Options, animated: true)
+  func clipCollectionViewCellLongPressTriggered(_ cell: ClipCollectionViewCell) {
+    cell.setState(.options, animated: true)
     guard let clip = clipForCell(cell), let user = clip.user else { return }
     authenticateUser(
       afterSuccessfulAuthentication: {
@@ -397,7 +397,7 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
       whenAlreadyAuthenticated: {
         let isCurrentUser = (user == User.currentUser)
 
-        let confirmed: UIAlertAction -> Void = { action in
+        let confirmed: (UIAlertAction) -> Void = { action in
           if isCurrentUser {
             guard let clipID = clip.id else {
               // Clip does not have an ID but user wants to delete it
@@ -409,61 +409,61 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
               return
             }
             SwiftSpinner.show(NSLocalizedString("Deleting...", comment: ""))
-            SnowballAPI.request(SnowballRoute.DeleteClip(clipID: clipID)) { response in
+            SnowballAPI.request(SnowballRoute.deleteClip(clipID: clipID)) { response in
               SwiftSpinner.hide()
               switch response {
-              case .Success:
+              case .success:
                 Database.performTransaction {
                   Database.delete(clip)
                 }
-              case .Failure(let error):
+              case .failure(let error):
                 print(error) // TODO: Handle error
               }
             }
           } else {
             guard let clipID = clip.id else { return }
             SwiftSpinner.show(NSLocalizedString("Flagging...", comment: ""))
-            SnowballAPI.request(SnowballRoute.FlagClip(clipID: clipID)) { response in
+            SnowballAPI.request(SnowballRoute.flagClip(clipID: clipID)) { response in
               SwiftSpinner.hide()
               switch response {
-              case .Success:
+              case .success:
                 self.resetStateForCell(cell)
-              case .Failure(let error):
+              case .failure(let error):
                 print(error) // TODO: Handle error
               }
             }
           }
         }
-        let cancelled: UIAlertAction -> Void = { action in
+        let cancelled: (UIAlertAction) -> Void = { action in
           self.resetStateForCell(cell)
         }
 
         var alertConfirmAction: UIAlertAction
         var alertCancelAction: UIAlertAction
         if isCurrentUser {
-          alertConfirmAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .Destructive, handler: confirmed)
-          alertCancelAction = UIAlertAction(title: NSLocalizedString("Don't Delete", comment: ""), style: .Cancel, handler: cancelled)
+          alertConfirmAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive, handler: confirmed)
+          alertCancelAction = UIAlertAction(title: NSLocalizedString("Don't Delete", comment: ""), style: .cancel, handler: cancelled)
         } else {
-          alertConfirmAction = UIAlertAction(title: NSLocalizedString("Flag", comment: ""), style: .Destructive, handler: confirmed)
-          alertCancelAction = UIAlertAction(title: NSLocalizedString("Don't Flag", comment: ""), style: .Cancel, handler: cancelled)
+          alertConfirmAction = UIAlertAction(title: NSLocalizedString("Flag", comment: ""), style: .destructive, handler: confirmed)
+          alertCancelAction = UIAlertAction(title: NSLocalizedString("Don't Flag", comment: ""), style: .cancel, handler: cancelled)
         }
 
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(alertConfirmAction)
         alert.addAction(alertCancelAction)
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     })
   }
 
-  func clipCollectionViewCellLikeButtonTapped(cell: ClipCollectionViewCell) {
-    guard let clip = clipForCell(cell), clipID = clip.id else { return }
+  func clipCollectionViewCellLikeButtonTapped(_ cell: ClipCollectionViewCell) {
+    guard let clip = clipForCell(cell), let clipID = clip.id else { return }
     authenticateUser(
       afterSuccessfulAuthentication: {
         self.refresh()
     },
       whenAlreadyAuthenticated: {
         let likedCurrently = clip.liked
-        func setClipLiked(liked: Bool) {
+        func setClipLiked(_ liked: Bool) {
           Database.performTransaction {
             clip.liked = liked
             Database.save(clip)
@@ -472,16 +472,16 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
         setClipLiked(!likedCurrently)
         let route: SnowballRoute
         if likedCurrently {
-          route = SnowballRoute.UnlikeClip(clipID: clipID)
+          route = SnowballRoute.unlikeClip(clipID: clipID)
           Analytics.track("Unlike Clip")
         } else {
-          route = SnowballRoute.LikeClip(clipID: clipID)
+          route = SnowballRoute.likeClip(clipID: clipID)
           Analytics.track("Like Clip")
         }
         SnowballAPI.request(route) { response in
           switch response {
-          case .Success: break
-          case .Failure(let error):
+          case .success: break
+          case .failure(let error):
             print(error)
             setClipLiked(likedCurrently)
           }
@@ -492,7 +492,7 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
 
 // MARK: - UIScrollViewPullToLoadDelegate
 extension TimelineViewController: UIScrollViewPullToLoadDelegate {
-  func scrollViewDidPullToLoad(scrollView: UIScrollView) {
+  func scrollViewDidPullToLoad(_ scrollView: UIScrollView) {
     timeline.requestNextPageOfClips {
       scrollView.stopPullToLoadAnimation()
     }
@@ -501,14 +501,14 @@ extension TimelineViewController: UIScrollViewPullToLoadDelegate {
 
 // MARK: - TimelineCollectionViewDelegate
 extension TimelineViewController: TimelineCollectionViewDelegate {
-  func timelineCollectionViewSwipedLeft(collectionView: TimelineCollectionView) {
-    if let currentClip = player.currentClip, nextClip = timeline.clipAfterClip(currentClip) {
+  func timelineCollectionViewSwipedLeft(_ collectionView: TimelineCollectionView) {
+    if let currentClip = player.currentClip, let nextClip = timeline.clipAfterClip(currentClip) {
       player.skipToClip(nextClip)
     }
   }
 
-  func timelineCollectionViewSwipedRight(collectionView: TimelineCollectionView) {
-    if let currentClip = player.currentClip, previousClip = timeline.clipBeforeClip(currentClip) {
+  func timelineCollectionViewSwipedRight(_ collectionView: TimelineCollectionView) {
+    if let currentClip = player.currentClip, let previousClip = timeline.clipBeforeClip(currentClip) {
       player.skipToClip(previousClip)
     }
   }
@@ -516,7 +516,7 @@ extension TimelineViewController: TimelineCollectionViewDelegate {
 
 // MARK: - TimelineCollectionViewFlowLayoutDelegate
 extension TimelineViewController: TimelineCollectionViewFlowLayoutDelegate {
-  func timelineCollectionViewFlowLayout(layout: TimelineCollectionViewFlowLayout, willFinalizeCollectionViewUpdates updates: [UICollectionViewUpdateItem]) {
+  func timelineCollectionViewFlowLayout(_ layout: TimelineCollectionViewFlowLayout, willFinalizeCollectionViewUpdates updates: [UICollectionViewUpdateItem]) {
 
     // Only reloads of cells, no insert/delete here
     // There are no updates here since we're not calling "reloadItemAtIndexPath" when the FRC updates
@@ -527,7 +527,7 @@ extension TimelineViewController: TimelineCollectionViewFlowLayoutDelegate {
     // e.g. adding a clip, deleting a clip, etc.
     // we let the default scroll handler do it, or use other scroll overrides
     if updates.count == 1, let update = updates.first {
-      if update.updateAction == .Insert {
+      if update.updateAction == .insert {
         let clip = timeline.clips[update.indexPathAfterUpdate!.row]
         if clip.state == .PendingAcceptance {
           return
@@ -540,7 +540,7 @@ extension TimelineViewController: TimelineCollectionViewFlowLayoutDelegate {
     if timeline.currentPage > 1 {
       // Loading another page
       let contentSizeBeforeAnimation = timelineCollectionView.contentSize
-      let contentSizeAfterAnimation = layout.collectionViewContentSize()
+      let contentSizeAfterAnimation = layout.collectionViewContentSize
       let xOffset = contentSizeAfterAnimation.width - contentSizeBeforeAnimation.width
       if xOffset < 0 {
         timelineCollectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)

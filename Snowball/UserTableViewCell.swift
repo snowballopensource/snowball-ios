@@ -18,7 +18,7 @@ class UserTableViewCell: UITableViewCell {
   let userAvatarImageView = UserAvatarImageView()
   let usernameLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont.SnowballFont.mediumFont.fontWithSize(17)
+    label.font = UIFont.SnowballFont.mediumFont.withSize(17)
     return label
   }()
   let followButton = FollowButton()
@@ -29,7 +29,7 @@ class UserTableViewCell: UITableViewCell {
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-    selectionStyle = .None
+    selectionStyle = .none
 
     addSubview(userAvatarImageView)
     constrain(userAvatarImageView) { userAvatarImageView in
@@ -61,24 +61,24 @@ class UserTableViewCell: UITableViewCell {
 
   // MARK: Internal
 
-  func configureForUser(user: User) {
+  func configureForUser(_ user: User) {
     userAvatarImageView.setUser(user)
 
     usernameLabel.text = user.username
     usernameLabel.textColor = user.color
 
     followButton.configureForUser(user)
-    followButton.addTarget(self, action: #selector(UserTableViewCell.followButtonTapped), forControlEvents: .TouchUpInside)
+    followButton.addTarget(self, action: #selector(UserTableViewCell.followButtonTapped), for: .touchUpInside)
   }
 
   // MARK: Actions
 
-  @objc private func followButtonTapped() {
+  @objc fileprivate func followButtonTapped() {
     delegate?.userTableViewCellFollowButtonTapped(self)
   }
 }
 
 // MARK: -
 protocol UserTableViewCellDelegate {
-  func userTableViewCellFollowButtonTapped(cell: UserTableViewCell)
+  func userTableViewCellFollowButtonTapped(_ cell: UserTableViewCell)
 }
