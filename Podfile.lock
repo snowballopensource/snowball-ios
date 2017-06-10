@@ -1,51 +1,65 @@
 PODS:
-  - Alamofire (3.5.1)
-  - Amplitude-iOS (3.14.0)
-  - Cartography (0.7.0)
+  - Alamofire (4.4.0)
+  - Amplitude-iOS (3.14.1)
+  - Cartography (1.1.0)
   - HanekeSwift (0.10.1)
-  - RBQFetchedResultsController (4.0.4):
+  - RBQFetchedResultsController (5.0.2):
+    - RBQSafeRealmObject
     - Realm (>= 1.0.0)
-  - Realm (1.1.0):
-    - Realm/Headers (= 1.1.0)
-  - Realm/Headers (1.1.0)
-  - RealmSwift (1.1.0):
-    - Realm (= 1.1.0)
-  - SwiftFetchedResultsController (4.0.4):
-    - RBQFetchedResultsController (>= 4.0.4)
-    - RealmSwift (>= 1.0.0)
-  - SwiftSpinner (0.9.5)
+    - RealmUtilities
+  - RBQSafeRealmObject (1.1):
+    - Realm (>= 0.99.1)
+    - RealmUtilities (>= 0.2.1)
+  - Realm (2.8.0):
+    - Realm/Headers (= 2.8.0)
+  - Realm/Headers (2.8.0)
+  - RealmSwift (2.8.0):
+    - Realm (= 2.8.0)
+  - RealmUtilities (0.4):
+    - Realm (>= 0.95)
+  - SafeRealmObject (1.1):
+    - RBQSafeRealmObject
+    - RealmSwift (>= 0.99.1)
+    - RealmUtilities (>= 0.2.1)
+  - SwiftFetchedResultsController (5.0.2):
+    - RBQFetchedResultsController (>= 5.0.2)
+    - RealmSwift (>= 2.1.1)
+    - SafeRealmObject
+  - SwiftSpinner (1.2.1)
 
 DEPENDENCIES:
-  - Alamofire (= 3.5.1)
+  - Alamofire
   - Amplitude-iOS
-  - Cartography (= 0.7)
-  - HanekeSwift (from `https://github.com/Haneke/HanekeSwift`, commit `2f304e8`)
-  - RBQFetchedResultsController (= 4.0.4)
-  - RealmSwift (= 1.1.0)
-  - SwiftFetchedResultsController (= 4.0.4)
-  - SwiftSpinner (= 0.9.5)
+  - Cartography
+  - HanekeSwift (from `https://github.com/Haneke/HanekeSwift`, branch `feature/swift-3`)
+  - RealmSwift
+  - SwiftFetchedResultsController
+  - SwiftSpinner
 
 EXTERNAL SOURCES:
   HanekeSwift:
-    :commit: 2f304e8
+    :branch: feature/swift-3
     :git: https://github.com/Haneke/HanekeSwift
 
 CHECKOUT OPTIONS:
   HanekeSwift:
-    :commit: 2f304e8
+    :commit: 2f6d87f1f725d204d85cb34492e8c399cd5a200f
     :git: https://github.com/Haneke/HanekeSwift
 
 SPEC CHECKSUMS:
-  Alamofire: 0dfba1184a543e2aa160f4e39cac4e8aba48d223
-  Amplitude-iOS: d50378ef97434cd910e6c9f21a45d0d8ee660c44
-  Cartography: dd6044b6fe352252f68b648df5bff47841e591cc
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Amplitude-iOS: 4a3c8807b2ea5369dc11e87e23825bff01e5a922
+  Cartography: '0538ccb4044acbbda2266335fc58cb4228794d90'
   HanekeSwift: 4113367892828e7700d24a384027de6ebc79aad1
-  RBQFetchedResultsController: 56494d69fef1e47f9f70c3adcf1317d7b2e3d71c
-  Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
-  RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
-  SwiftFetchedResultsController: 4439e56787c27a5407ab5cc4dcab339478f24284
-  SwiftSpinner: c6585a0ae5c67eb33e737695cce88f0262008cce
+  RBQFetchedResultsController: 24877a429680be6d22709a2e527bcb766877bf4e
+  RBQSafeRealmObject: 128e6ece2acceeb7dea9d00b8fa40ba4c489c3fa
+  Realm: 929243ad2b618b3232e70658bedc61110e7563f1
+  RealmSwift: 5b7079b891f2833d1849294161ba3e092bbda3f6
+  RealmUtilities: bd4d18141e62a6cdcfa1859f1f090a27ab282628
+  SafeRealmObject: b881780ebc49621ab4a12bb14cd283955fe540ad
+  SwiftFetchedResultsController: 377825910b5294a48295481ab04e70b8fa9696de
+  SwiftSpinner: 62a28bbb4035f252a1e91b0e17fc40bdbbfa0aab
 
-PODFILE CHECKSUM: 766e993718e094536c8d34c9f9c84133e1c012ef
+PODFILE CHECKSUM: 964073e2e5202210ae276331932c34997e9fef58
 
 COCOAPODS: 1.2.1

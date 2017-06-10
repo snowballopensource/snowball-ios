@@ -365,7 +365,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
   }
 
   func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
-    if let error = error {
+    if let error = error as NSError? {
       let successful = error.userInfo[AVErrorRecordingSuccessfullyFinishedKey] as? NSNumber
       if successful?.boolValue == true {} else {
         // TODO: Show error
@@ -393,7 +393,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     // Crop to middle of the view
     // http://www.one-dreamer.com/cropping-video-square-like-vine-instagram-xcode/
     let initialTransform = CGAffineTransform(translationX: videoTrack.naturalSize.height, y: -(videoTrack.naturalSize.width - videoTrack.naturalSize.height) / 2 )
-    let transform = initialTransform.rotated(by: CGFloat(M_PI_2))
+    let transform = initialTransform.rotated(by: CGFloat(Double.pi / 2))
 
     transformer.setTransform(transform, at: kCMTimeZero)
     instruction.layerInstructions = [transformer]

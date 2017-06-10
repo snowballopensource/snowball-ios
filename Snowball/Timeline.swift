@@ -17,10 +17,10 @@ class Timeline {
   let type: TimelineType
   let clips: Results<Clip>
   var clipPendingAcceptance: Clip? {
-    return clips.filter("stateString == %@", ClipState.PendingAcceptance.rawValue).sorted("createdAt").last
+    return clips.filter("stateString == %@", ClipState.PendingAcceptance.rawValue).sorted(byKeyPath: "createdAt").last
   }
   var clipsNeedingAttention: Results<Clip> {
-    return clips.filter("stateString == %@ || stateString == %@", ClipState.PendingAcceptance.rawValue, ClipState.UploadFailed.rawValue).sorted("createdAt")
+    return clips.filter("stateString == %@ || stateString == %@", ClipState.PendingAcceptance.rawValue, ClipState.UploadFailed.rawValue).sorted(byKeyPath: "createdAt")
   }
   var currentPage = 0
   fileprivate let kClipBookmarkDateKey = "ClipBookmarkDate"
@@ -61,20 +61,20 @@ class Timeline {
 
   init(type: TimelineType) {
     self.type = type
-    sortDescriptors = [SortDescriptor(property: "stateString"), SortDescriptor(property: "createdAt")]
+    sortDescriptors = [SortDescriptor(keyPath: "stateString"), SortDescriptor(keyPath: "createdAt")]
     switch type {
     case .home:
       predicate = NSPredicate(format: "inHomeTimeline == %@", true as CVarArg)
     case .user(let userID):
       predicate = NSPredicate(format: "timelineID == %@ && user.id == %@", id, userID)
     }
-    self.clips = Database.findAll(Clip).filter(predicate).sorted(sortDescriptors)
+    self.clips = Database.findAll(Clip.self).filter(predicate).sorted(by: sortDescriptors)
   }
 
   // MARK: Internal
 
   func clipBeforeClip(_ clip: Clip) -> Clip? {
-    if let clipIndex = clips.indexOf(clip) {
+    if let clipIndex = clips.index(of: clip) {
       let beforeClipIndex = clipIndex - 1
       if beforeClipIndex >= 0 {
         return clips[beforeClipIndex]
@@ -87,14 +87,17 @@ class Timeline {
     return clipsAfterClip(clip).first
   }
 
-  func clipsIncludingAndAfterClip(_ clip: Clip) -> Slice<Results<Clip>> {
-    guard let clipIndex = clips.indexOf(clip) else { return clips[clips.startIndex..<clips.endIndex] }
-    return clips[clipIndex..<clips.endIndex]
+  func clipsIncludingAndAfterClip(_ clip: Clip) -> [Clip] {
+    let clips = Array(self.clips)
+    guard let index = clips.index(of: clip) else {
+      return clips
+    }
+    return Array(clips.dropFirst(index))
   }
 
-  func clipsAfterClip(_ clip: Clip) -> Slice<Results<Clip>> {
+  func clipsAfterClip(_ clip: Clip) -> [Clip] {
     let clips = clipsIncludingAndAfterClip(clip)
-    return clips[(clips.startIndex + 1)..<clips.endIndex]
+    return Array(clips.dropFirst())
   }
 
   func requestRefreshOfClips(_ completion: (() -> Void)? = nil) {
@@ -142,7 +145,7 @@ class Timeline {
       guard let clipID = clip.id else { break }
       clipIDs.append(clipID)
     }
-    let clipsToDelete = Database.findAll(Clip).filter("NOT id IN %@", clipIDs).filter("stateString == %@", ClipState.Default.rawValue)
+    let clipsToDelete = Database.findAll(Clip.self).filter("NOT id IN %@", clipIDs).filter("stateString == %@", ClipState.Default.rawValue)
     Database.performTransaction {
       Database.realm.delete(clipsToDelete)
     }

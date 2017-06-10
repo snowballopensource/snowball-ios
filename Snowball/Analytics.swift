@@ -36,7 +36,7 @@ class Analytics {
   // MARK: - Internal
 
   class func initialize() {
-    Analytics.sharedAnalytics
+    _ = Analytics.sharedAnalytics
   }
 
   class func track(_ eventName: String, properties: [String: String]? = nil) {

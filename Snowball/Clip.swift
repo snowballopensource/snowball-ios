@@ -74,7 +74,7 @@ class Clip: Object {
 
   static func cleanUpFailedClipUploads() {
     Database.performTransaction {
-      for clip in Database.findAll(Clip).filter("stateString == %@", ClipState.Uploading.rawValue) {
+      for clip in Database.findAll(Clip.self).filter("stateString == %@", ClipState.Uploading.rawValue) {
         clip.state = ClipState.UploadFailed
         Database.save(clip)
       }

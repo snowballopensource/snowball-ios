@@ -8,6 +8,7 @@
 
 import Cartography
 import RealmSwift
+import SafeRealmObject
 import SwiftFetchedResultsController
 import SwiftSpinner
 import UIKit
@@ -120,7 +121,7 @@ class TimelineViewController: UIViewController {
     timelineCollectionView.enablePullToLoadWithDelegate(self)
 
     fetchedResultsController.delegate = self
-    fetchedResultsController.performFetch()
+    _ = fetchedResultsController.performFetch()
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -148,7 +149,7 @@ class TimelineViewController: UIViewController {
 
   func scrollToCellForClip(_ clip: Clip, animated: Bool) {
     if let indexPath = fetchedResultsController.indexPathForObject(clip) {
-      timelineCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: animated)
+      timelineCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
     }
   }
 
@@ -156,7 +157,7 @@ class TimelineViewController: UIViewController {
 
   fileprivate func cellForClip(_ clip: Clip) -> ClipCollectionViewCell? {
     if let indexPath = fetchedResultsController.indexPathForObject(clip) {
-      return timelineCollectionView.cellForItemAtIndexPath(indexPath) as? ClipCollectionViewCell
+      return timelineCollectionView.cellForItem(at: indexPath) as? ClipCollectionViewCell
     }
     return nil
   }
@@ -263,7 +264,7 @@ extension TimelineViewController: UICollectionViewDataSource {
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(ClipCollectionViewCell), for: indexPath) as! ClipCollectionViewCell
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(ClipCollectionViewCell.self), for: indexPath) as! ClipCollectionViewCell
     if let clip = fetchedResultsController.objectAtIndexPath(indexPath) {
       cell.configueForClip(clip, state: cellStateForClip(clip))
     }
@@ -283,31 +284,31 @@ extension TimelineViewController: FetchedResultsControllerDelegate {
     let section = IndexSet(integer: Int(sectionIndex))
     collectionViewUpdates.append(BlockOperation {
       switch changeType {
-      case .Insert:
+      case .insert:
         self.timelineCollectionView.insertSections(section)
-      case .Delete:
+      case .delete:
         self.timelineCollectionView.deleteSections(section)
-      case .Update, .Move:
+      case .update, .move:
         self.timelineCollectionView.reloadSections(section)
       }
       }
     )
   }
 
-  func controllerDidChangeObject<T: Object>(_ controller: FetchedResultsController<T>, anObject object: SafeObject<T>, indexPath: IndexPath?, changeType: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+  func controller<T: Object>(_ controller: FetchedResultsController<T>, didChangeObject object: SafeObject<T>, atIndexPath indexPath: IndexPath?, forChangeType changeType: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
     collectionViewUpdates.append(BlockOperation {
       switch changeType {
-      case .Insert:
+      case .insert:
         self.timelineCollectionView.insertItems(at: [newIndexPath!])
-      case .Delete:
+      case .delete:
         self.timelineCollectionView.deleteItems(at: [indexPath!])
-      case .Update:
+      case .update:
         let clip = self.timeline.clips[indexPath!.row]
         if let cell = self.timelineCollectionView.cellForItem(at: indexPath!) as? ClipCollectionViewCell {
           let state = self.cellStateForClip(clip)
           cell.setState(state, animated: true)
         }
-      case .Move:
+      case .move:
         self.timelineCollectionView.moveItem(at: indexPath!, to: newIndexPath!)
       }
       }

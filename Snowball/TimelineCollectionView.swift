@@ -33,7 +33,7 @@ class TimelineCollectionView: UICollectionView {
     super.init(frame: CGRect.zero, collectionViewLayout: layout)
     showsHorizontalScrollIndicator = false
     backgroundColor = UIColor.white
-    register(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell))
+    register(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell.self))
 
     addGestureRecognizer(leftSwipeGestureRecognizer)
     leftSwipeGestureRecognizer.addTarget(self, action: #selector(TimelineCollectionView.leftSwipeGestureRecognizerSwiped))

@@ -81,7 +81,7 @@ class UserTimelineViewController: TimelineViewController {
   }
 
   fileprivate func setFollowButtonState() {
-    let followImage = user.following ? UIImage(imageLiteral: "button-following") : UIImage(imageLiteral: "button-follow")
+    let followImage = user.following ? #imageLiteral(resourceName: "button-following") : #imageLiteral(resourceName: "button-follow")
     followButton.setBackgroundImage(followImage, for: UIControlState())
   }
 

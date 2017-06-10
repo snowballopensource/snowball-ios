@@ -17,8 +17,8 @@ struct SnowballAPI {
   static func request(_ route: SnowballRoute, completion: @escaping (_ response: Response) -> Void) {
     Alamofire.request(route).validate().responseJSON { afResponse in
       switch afResponse.result {
-      case .Success: completion(response: .Success)
-      case .Failure: completion(response: .Failure(errorFromResponse(afResponse)))
+      case .success: completion(.success)
+      case .failure: completion(.failure(errorFromResponse(afResponse)))
       }
     }
   }
@@ -34,22 +34,22 @@ struct SnowballAPI {
   static func requestObject<T: Object>(_ route: SnowballRoute, beforeSave: ((_ object: T) -> Void)?, completion: @escaping (_ response: ObjectResponse<T>) -> Void) {
     Alamofire.request(route).validate().responseJSON { afResponse in
       switch afResponse.result {
-      case .Success(let value):
+      case .success(let value):
         if let value = value as? JSONObject {
           var object: T?
           Database.performTransaction {
             object = T.fromJSONObject(value, beforeSave: beforeSave)
           }
           if let object = object {
-            completion(response: .Success(object))
+            completion(.success(object))
           } else {
-            completion(response: .Failure(NSError.snowballErrorWithReason(nil)))
+            completion(.failure(NSError.snowballErrorWithReason(nil)))
           }
         } else {
-          completion(response: .Failure(NSError.snowballErrorWithReason(nil)))
+          completion(.failure(NSError.snowballErrorWithReason(nil)))
         }
-      case .Failure:
-        completion(response: .Failure(errorFromResponse(afResponse)))
+      case .failure:
+        completion(.failure(errorFromResponse(afResponse)))
       }
     }
   }
@@ -57,18 +57,18 @@ struct SnowballAPI {
   static func requestObjects<T: Object>(_ route: SnowballRoute, beforeSaveEveryObject: ((_ object: T) -> Void)?, completion: @escaping (_ response: ObjectResponse<[T]>) -> Void) {
     Alamofire.request(route).validate().responseJSON { afResponse in
       switch afResponse.result {
-      case .Success(let value):
+      case .success(let value):
         if let value = value as? JSONArray {
           var objects = [T]()
           Database.performTransaction {
             objects = T.fromJSONArray(value, beforeSaveEveryObject: beforeSaveEveryObject)
           }
-          completion(response: .Success(objects))
+          completion(.success(objects))
         } else {
-          completion(response: .Failure(NSError.snowballErrorWithReason(nil)))
+          completion(.failure(NSError.snowballErrorWithReason(nil)))
         }
-      case .Failure:
-        completion(response: .Failure(errorFromResponse(afResponse)))
+      case .failure:
+        completion(.failure(errorFromResponse(afResponse)))
       }
     }
   }
@@ -81,28 +81,28 @@ struct SnowballAPI {
       Database.save(clip)
     }
 
-    let onFailure: (_ response: Alamofire.Response<AnyObject, NSError>?) -> Void = { response in
+    let onFailure: (_ response: Alamofire.DataResponse<Any>?) -> Void = { response in
       Database.performTransaction {
         clip.state = .UploadFailed
         Database.save(clip)
       }
       if let response = response {
-        completion(response: .Failure(errorFromResponse(response)))
+        completion(.failure(errorFromResponse(response)))
       } else {
-        completion(response: .Failure(NSError.snowballErrorWithReason(nil)))
+        completion(.failure(NSError.snowballErrorWithReason(nil)))
       }
     }
 
     ClipUploadQueue.addOperationWithBlock {
       let multipartFormData: ((MultipartFormData) -> Void) = { multipartFormData in
-        multipartFormData.appendBodyPart(fileURL: videoURL, name: "video")
+        multipartFormData.append(videoURL, withName: "video")
       }
-      Alamofire.upload(SnowballRoute.UploadClip, multipartFormData: multipartFormData) { encodingResult in
+      Alamofire.upload(multipartFormData: multipartFormData, with: SnowballRoute.uploadCurrentUserAvatar) { encodingResult in
         switch(encodingResult) {
-        case .Success(let upload, _, _):
+        case .success(let upload, _, _):
           upload.validate().responseJSON { afResponse in
             switch(afResponse.result) {
-            case .Success(let value):
+            case .success(let value):
               if let JSON = value as? JSONObject {
                 Analytics.track("Create Clip")
                 Database.performTransaction {
@@ -110,60 +110,60 @@ struct SnowballAPI {
                   clip.state = .Default
                   Database.save(clip)
                 }
-              } else { onFailure(response: afResponse) }
-            case .Failure: onFailure(response: afResponse)
+              } else { onFailure(afResponse) }
+            case .failure: onFailure(afResponse)
             }
           }
-        case .Failure: onFailure(response: nil)
+        case .failure: onFailure(nil)
         }
       }
     }
   }
 
   static func uploadUserAvatar(_ image: UIImage, completion: @escaping (_ response: ObjectResponse<User>) -> Void) {
-    let onFailure: (_ response: Alamofire.Response<AnyObject, NSError>?) -> Void = { response in
+    let onFailure: (_ response: Alamofire.DataResponse<Any>?) -> Void = { response in
       if let response = response {
-        completion(response: .Failure(errorFromResponse(response)))
+        completion(.failure(errorFromResponse(response)))
       } else {
-        completion(response: .Failure(NSError.snowballErrorWithReason(nil)))
+        completion(.failure(NSError.snowballErrorWithReason(nil)))
       }
     }
     let multipartFormData: ((MultipartFormData) -> Void) = { multipartFormData in
       if let data = UIImageJPEGRepresentation(image, 1) {
-        multipartFormData.appendBodyPart(data: data, name: "avatar", fileName: "image.jpg", mimeType: "image/jpeg")
+        multipartFormData.append(data, withName: "avatar", fileName: "image.jpg", mimeType: "image/jpeg")
       } else {
-        onFailure(response: nil)
+        onFailure(nil)
         return
       }
     }
-    Alamofire.upload(SnowballRoute.UploadCurrentUserAvatar, multipartFormData: multipartFormData) { encodingResult in
+    Alamofire.upload(multipartFormData: multipartFormData, with: SnowballRoute.uploadCurrentUserAvatar) { encodingResult in
       switch encodingResult {
-      case .Success(let upload, _, _):
+      case .success(let upload, _, _):
         upload.validate().responseJSON { afResponse in
           switch afResponse.result {
-          case .Success(let value):
+          case .success(let value):
             if let JSON = value as? JSONObject, let user = User.currentUser {
               Database.performTransaction {
                 user.importJSON(JSON)
                 Database.save(user)
               }
-              completion(response: .Success(user))
-            } else { onFailure(response: afResponse) }
-          case .Failure: onFailure(response: afResponse)
+              completion(.success(user))
+            } else { onFailure(afResponse) }
+          case .failure: onFailure(afResponse)
           }
         }
-      case .Failure: onFailure(response: nil)
+      case .failure: onFailure(nil)
       }
     }
   }
 
   // MARK: Private
 
-  fileprivate static func errorFromResponse(_ response: Alamofire.Response<AnyObject, NSError>) -> NSError {
+  fileprivate static func errorFromResponse(_ response: Alamofire.DataResponse<Any>) -> NSError {
     var error = NSError.snowballErrorWithReason(nil)
     if let data = response.data {
       do {
-        if let serverErrorJSON = try JSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? [String: AnyObject], let message = serverErrorJSON["message"] as? String {
+        if let serverErrorJSON = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: AnyObject], let message = serverErrorJSON["message"] as? String {
           error = NSError.snowballErrorWithReason(message)
           return error
         }

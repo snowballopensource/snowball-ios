@@ -262,8 +262,8 @@ class ClipCollectionViewCell: UICollectionViewCell {
       usernameLabel.text = user.username
 
       let isCurrentUser = (user == User.currentUser)
-      deleteImageView.hidden = !isCurrentUser
-      flagImageView.hidden = isCurrentUser
+      deleteImageView.isHidden = !isCurrentUser
+      flagImageView.isHidden = isCurrentUser
     }
 
     timeAgoLabel.text = clip.createdAt?.shortTimeSinceString() ?? NSLocalizedString("Now", comment: "")
@@ -420,7 +420,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
   }
 
   fileprivate func _spinUserAvatarImageView() {
-    let fullRotation = CGFloat(M_PI * -2)
+    let fullRotation = CGFloat(Double.pi * -2)
     UIView.animateKeyframes(withDuration: userAvatarImageViewBounceDuration,
       delay: 0,
       options: [.calculationModePaced, UIViewKeyframeAnimationOptions(rawValue: UIViewAnimationOptions.curveLinear.rawValue)],

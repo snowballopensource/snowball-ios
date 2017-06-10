@@ -37,7 +37,7 @@ struct Database {
   }
 
   static func find<T: Object>(_ id: String) -> T? {
-    return findAll(T).filter("id = %@", id).first
+    return findAll(T.self).filter("id = %@", id).first
   }
 
   static func findOrInitialize<T: Object>(_ id: String) -> T {

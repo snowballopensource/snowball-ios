@@ -41,7 +41,7 @@ class FindFriendsViewController: UIViewController {
   fileprivate let addressBook: ABAddressBook? = {
     var error: Unmanaged<CFError>?
     let addressBook = ABAddressBookCreateWithOptions(nil, &error)
-    if error != nil {
+    if let error = error {
       print("Address book creation error: \(error)")
       return nil
     }

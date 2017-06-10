@@ -238,8 +238,8 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
           }
           resetAvatarImageView() // TODO: This should be in success only, but the server doesn't reply with JSON when sending a 204 right now.
           switch response {
-          case .Success: break
-          case .Failure(let error): error.displayToUserIfAppropriateFromViewController(self)
+          case .success: break
+          case .failure(let error): error.displayToUserIfAppropriateFromViewController(self)
           }
         }
       }

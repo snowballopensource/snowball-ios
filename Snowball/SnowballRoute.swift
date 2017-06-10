@@ -10,6 +10,7 @@ import Alamofire
 import Foundation
 
 enum SnowballRoute: URLRequestConvertible {
+
   // Authentication
   case signUp(username: String, email: String, password: String)
   case signIn(email: String, password: String)
@@ -41,28 +42,28 @@ enum SnowballRoute: URLRequestConvertible {
     return "https://api.snowball.is/v1/"
   }()
 
-  fileprivate var method: Alamofire.Method {
+  fileprivate var method: Alamofire.HTTPMethod {
     switch self {
-    case .signUp: return .POST
-    case .signIn: return .POST
-    case .getCurrentUser: return .GET
-    case .updateCurrentUser: return .PATCH
-    case .uploadCurrentUserAvatar: return .PATCH
-    case .getCurrentUserFollowers: return .GET
-    case .getCurrentUserFollowing: return .GET
-    case .followUser: return .PUT
-    case .unfollowUser: return .DELETE
-    case .findUsersByPhoneNumbers: return .POST
-    case .findUsersByUsername: return .POST
-    case .findRecommendedUsers: return .GET
-    case .registerForPushNotifications: return .PUT
-    case .getClipStream: return .GET
-    case .getClipStreamForUser: return .GET
-    case .deleteClip: return .DELETE
-    case .likeClip: return .PUT
-    case .unlikeClip: return .DELETE
-    case .flagClip: return .PUT
-    case .uploadClip: return .POST
+    case .signUp: return .post
+    case .signIn: return .post
+    case .getCurrentUser: return .get
+    case .updateCurrentUser: return .patch
+    case .uploadCurrentUserAvatar: return .patch
+    case .getCurrentUserFollowers: return .get
+    case .getCurrentUserFollowing: return .get
+    case .followUser: return .put
+    case .unfollowUser: return .delete
+    case .findUsersByPhoneNumbers: return .post
+    case .findUsersByUsername: return .post
+    case .findRecommendedUsers: return .get
+    case .registerForPushNotifications: return .put
+    case .getClipStream: return .get
+    case .getClipStreamForUser: return .get
+    case .deleteClip: return .delete
+    case .likeClip: return .put
+    case .unlikeClip: return .delete
+    case .flagClip: return .put
+    case .uploadClip: return .post
     }
   }
 
@@ -93,14 +94,14 @@ enum SnowballRoute: URLRequestConvertible {
 
   fileprivate var parameterEncoding: ParameterEncoding? {
     switch self {
-    case .signUp: return ParameterEncoding.JSON
-    case .signIn: return ParameterEncoding.JSON
-    case .updateCurrentUser: return ParameterEncoding.JSON
-    case .findUsersByPhoneNumbers: return ParameterEncoding.JSON
-    case .findUsersByUsername: return ParameterEncoding.JSON
-    case .registerForPushNotifications: return .JSON
-    case .getClipStream: return ParameterEncoding.URL
-    case .getClipStreamForUser: return ParameterEncoding.URL
+    case .signUp: return JSONEncoding.default
+    case .signIn: return JSONEncoding.default
+    case .updateCurrentUser: return JSONEncoding.default
+    case .findUsersByPhoneNumbers: return JSONEncoding.default
+    case .findUsersByUsername: return JSONEncoding.default
+    case .registerForPushNotifications: return JSONEncoding.default
+    case .getClipStream: return URLEncoding.default
+    case .getClipStreamForUser: return URLEncoding.default
     default: return nil
     }
   }
@@ -132,18 +133,18 @@ enum SnowballRoute: URLRequestConvertible {
 
   // MARK: URLRequestConvertible
 
-  var URLRequest: NSMutableURLRequest {
-    let URL = Foundation.URL(string: SnowballRoute.baseURLString)
-    let mutableURLRequest = NSMutableURLRequest(url: URL!.appendingPathComponent(path))
-    mutableURLRequest.HTTPMethod = method.rawValue
+  func asURLRequest() -> URLRequest {
+    let url = URL(string: SnowballRoute.baseURLString)
+    var urlRequest = URLRequest(url: url!.appendingPathComponent(path))
+    urlRequest.httpMethod = method.rawValue
     if let authToken = User.currentUser?.authToken {
       let encodedAuthTokenData = "\(authToken):".data(using: String.Encoding.utf8)!
       let encodedAuthToken = encodedAuthTokenData.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
-      mutableURLRequest.setValue("Basic \(encodedAuthToken)", forHTTPHeaderField: "Authorization")
+      urlRequest.setValue("Basic \(encodedAuthToken)", forHTTPHeaderField: "Authorization")
     }
-    if let params = parameters {
-      return parameterEncoding!.encode(mutableURLRequest, parameters: params).0
+    if let params = parameters, let parameterEncoding = parameterEncoding {
+      urlRequest = try! parameterEncoding.encode(urlRequest, with: params)
     }
-    return mutableURLRequest
+    return urlRequest
   }
 }

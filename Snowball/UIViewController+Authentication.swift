@@ -36,8 +36,8 @@ private class RoundedCornerViewController: UIViewController {
     super.init(nibName: nil, bundle: nil)
 
     addChildViewController(childViewController)
-    let childView = childViewController.view
-    view.addSubview(childView!)
+    let childView = childViewController.view!
+    view.addSubview(childView)
     constrain(childView) { childView in
       childView.left == childView.superview!.left
       childView.top == childView.superview!.top
@@ -46,8 +46,8 @@ private class RoundedCornerViewController: UIViewController {
     }
     childViewController.didMove(toParentViewController: self)
 
-    childView?.layer.cornerRadius = 10
-    childView?.clipsToBounds = true
+    childView.layer.cornerRadius = 10
+    childView.clipsToBounds = true
   }
 
   required init?(coder aDecoder: NSCoder) {

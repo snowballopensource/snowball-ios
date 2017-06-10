@@ -16,7 +16,7 @@ extension UIView {
         self.setHidden(hidden, animated: false)
       }) 
     } else {
-      alpha = CGFloat(!hidden)
+      alpha = hidden ? 0 : 1
     }
   }
 }

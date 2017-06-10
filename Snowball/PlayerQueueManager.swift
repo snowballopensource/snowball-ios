@@ -66,7 +66,7 @@ class PlayerQueueManager {
 
   // MARK: Private
 
-  fileprivate func fillPlayerQueueWithClips(_ clips: Slice<Results<Clip>>, ignoringPlayerItemsCount: Bool, readyToPlayFirstClip: (() -> Void)?) {
+  fileprivate func fillPlayerQueueWithClips(_ clips: [Clip], ignoringPlayerItemsCount: Bool, readyToPlayFirstClip: (() -> Void)?) {
     let playerItemsCount = ignoringPlayerItemsCount ? 0 : (player?.items().count ?? 0)
     let clipsEnqueuedCount = playerItemsCount + uncancelledOperations.count
     let totalClipsLeftCount = clips.count
