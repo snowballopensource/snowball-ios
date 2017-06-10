@@ -148,7 +148,7 @@ class TimelineViewController: UIViewController {
   }
 
   func scrollToCellForClip(_ clip: Clip, animated: Bool) {
-    if let indexPath = fetchedResultsController.indexPathForObject(clip) {
+    if let indexPath = fetchedResultsController.indexPathForObject(clip), indexPath.section != NSNotFound {
       timelineCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
     }
   }
