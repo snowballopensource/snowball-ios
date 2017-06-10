@@ -32,7 +32,7 @@ DEPENDENCIES:
   - Amplitude-iOS
   - Cartography
   - HanekeSwift (from `https://github.com/Haneke/HanekeSwift`, branch `feature/swift-3`)
-  - RealmSwift
+  - RealmSwift (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
   - SwiftFetchedResultsController
   - SwiftSpinner
 
@@ -40,11 +40,19 @@ EXTERNAL SOURCES:
   HanekeSwift:
     :branch: feature/swift-3
     :git: https://github.com/Haneke/HanekeSwift
+  RealmSwift:
+    :branch: master
+    :git: https://github.com/realm/realm-cocoa.git
+    :submodules: true
 
 CHECKOUT OPTIONS:
   HanekeSwift:
     :commit: 2f6d87f1f725d204d85cb34492e8c399cd5a200f
     :git: https://github.com/Haneke/HanekeSwift
+  RealmSwift:
+    :commit: 217fb6d6830c9c079b00c1fc5655257521721ee0
+    :git: https://github.com/realm/realm-cocoa.git
+    :submodules: true
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
@@ -54,12 +62,12 @@ SPEC CHECKSUMS:
   RBQFetchedResultsController: 24877a429680be6d22709a2e527bcb766877bf4e
   RBQSafeRealmObject: 128e6ece2acceeb7dea9d00b8fa40ba4c489c3fa
   Realm: 929243ad2b618b3232e70658bedc61110e7563f1
-  RealmSwift: 5b7079b891f2833d1849294161ba3e092bbda3f6
+  RealmSwift: e6de146dc51a7fab690348c3e1a1c4202edcc889
   RealmUtilities: bd4d18141e62a6cdcfa1859f1f090a27ab282628
   SafeRealmObject: b881780ebc49621ab4a12bb14cd283955fe540ad
   SwiftFetchedResultsController: 377825910b5294a48295481ab04e70b8fa9696de
   SwiftSpinner: 62a28bbb4035f252a1e91b0e17fc40bdbbfa0aab
 
-PODFILE CHECKSUM: 964073e2e5202210ae276331932c34997e9fef58
+PODFILE CHECKSUM: aba922e956dbae732acc5e86c1f5a960c49de4d8
 
 COCOAPODS: 1.2.1
