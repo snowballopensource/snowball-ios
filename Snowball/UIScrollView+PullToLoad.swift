@@ -14,12 +14,12 @@ extension UIScrollView {
 
   // MARK: Properties
 
-  fileprivate struct AssociatedKeys {
+  private struct AssociatedKeys {
     static var pullToLoadStateKey = "pullToLoadState"
     static var pullToLoadDelegateKey = "pullToLoadDelegate"
   }
 
-  fileprivate(set) var pullToLoadState: UIScrollViewPullToLoadState {
+  private(set) var pullToLoadState: UIScrollViewPullToLoadState {
     get {
       return UIScrollViewPullToLoadState(rawValue: objc_getAssociatedObject(self, &AssociatedKeys.pullToLoadStateKey) as? Int ?? UIScrollViewPullToLoadState.default.rawValue)!
     }
@@ -28,7 +28,7 @@ extension UIScrollView {
     }
   }
 
-  fileprivate var pullToLoadDelegate: UIScrollViewPullToLoadDelegate? {
+  private var pullToLoadDelegate: UIScrollViewPullToLoadDelegate? {
     get {
       return objc_getAssociatedObject(self, &AssociatedKeys.pullToLoadDelegateKey) as? UIScrollViewPullToLoadDelegate
     }
@@ -64,7 +64,7 @@ extension UIScrollView {
   // MARK: Private
 
   // This method only supports horizontal scrolling (e.g. the timeline). Convert to vertical and add an option for that if support is desired.
-  fileprivate func scrollViewDidScrollToContentOffset(_ contentOffset: CGPoint) {
+  private func scrollViewDidScrollToContentOffset(_ contentOffset: CGPoint) {
     let scrollThreshold: CGFloat = -60
     if pullToLoadState != .loading {
       if pullToLoadState == .triggered && !isDragging {

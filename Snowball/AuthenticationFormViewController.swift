@@ -19,7 +19,7 @@ class AuthenticationFormViewController: UIViewController {
 
   // MARK: Properties
 
-  fileprivate let type: AuthenticationFormViewControllerType
+  private let type: AuthenticationFormViewControllerType
 
   let topLabel: UILabel = {
     let label = UILabel()
@@ -150,7 +150,7 @@ class AuthenticationFormViewController: UIViewController {
 
   // MARK: Actions
 
-  @objc fileprivate func submitButtonPressed() {
+  @objc private func submitButtonPressed() {
     authenticate()
   }
 
@@ -185,7 +185,7 @@ class AuthenticationFormViewController: UIViewController {
     }
   }
 
-  @objc fileprivate func leftBarButtonItemPressed() {
+  @objc private func leftBarButtonItemPressed() {
     navigationController?.popViewController(animated: true)
   }
 }

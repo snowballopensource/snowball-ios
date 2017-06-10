@@ -26,6 +26,6 @@ extension UIFont {
       }
     }()
 
-    fileprivate static let defaultFontSize: CGFloat = 16
+    private static let defaultFontSize: CGFloat = 16
   }
 }

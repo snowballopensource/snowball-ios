@@ -13,7 +13,7 @@ extension UINavigationBar {
 
   // MARK: Properties
 
-  fileprivate struct AssociatedKeys {
+  private struct AssociatedKeys {
     static var transparentKey = "transparentKey"
   }
 

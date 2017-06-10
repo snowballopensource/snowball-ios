@@ -159,7 +159,7 @@ struct SnowballAPI {
 
   // MARK: Private
 
-  fileprivate static func errorFromResponse(_ response: Alamofire.DataResponse<Any>) -> NSError {
+  private static func errorFromResponse(_ response: Alamofire.DataResponse<Any>) -> NSError {
     var error = NSError.snowballErrorWithReason(nil)
     if let data = response.data {
       do {

@@ -47,7 +47,7 @@ class HomeTimelineViewController: TimelineViewController {
 
   // MARK: Private
 
-  fileprivate func tryUploadingClip(_ clip: Clip) {
+  private func tryUploadingClip(_ clip: Clip) {
     state = .default
     SnowballAPI.queueClipForUploadingAndHandleStateChanges(clip) { (response) -> Void in
       switch response {
@@ -59,7 +59,7 @@ class HomeTimelineViewController: TimelineViewController {
 
   // MARK: Actions
 
-  @objc fileprivate func rightBarButtonItemPressed() {
+  @objc private func rightBarButtonItemPressed() {
     cameraViewController.changeCamera()
   }
 

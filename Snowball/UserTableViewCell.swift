@@ -73,7 +73,7 @@ class UserTableViewCell: UITableViewCell {
 
   // MARK: Actions
 
-  @objc fileprivate func followButtonTapped() {
+  @objc private func followButtonTapped() {
     delegate?.userTableViewCellFollowButtonTapped(self)
   }
 }

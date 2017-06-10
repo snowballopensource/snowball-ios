@@ -69,10 +69,10 @@ class ClipCollectionViewCell: UICollectionViewCell {
   }()
 
   let userAvatarImageView = UserAvatarImageView()
-  fileprivate let userAvatarImageViewBounceConstraintGroup = ConstraintGroup()
-  fileprivate let userAvatarImageViewBounceDuration = 1.0
-  fileprivate var userAvatarImageViewBounceInProgress = false
-  fileprivate var userAvatarImageViewShouldContinueBouncing = false
+  private let userAvatarImageViewBounceConstraintGroup = ConstraintGroup()
+  private let userAvatarImageViewBounceDuration = 1.0
+  private var userAvatarImageViewBounceInProgress = false
+  private var userAvatarImageViewShouldContinueBouncing = false
 
   let profileButton = UIButton()
   let usernameLabel: UILabel = {
@@ -306,31 +306,31 @@ class ClipCollectionViewCell: UICollectionViewCell {
 
   // MARK: Private
 
-  @objc fileprivate func playButtonTapped() {
+  @objc private func playButtonTapped() {
     delegate?.clipCollectionViewCellPlayButtonTapped(self)
   }
 
-  @objc fileprivate func addButtonTapped() {
+  @objc private func addButtonTapped() {
     delegate?.clipCollectionViewCellAddButtonTapped(self)
   }
 
-  @objc fileprivate func retryUploadButtonTapped() {
+  @objc private func retryUploadButtonTapped() {
     delegate?.clipCollectionViewCellRetryUploadButtonTapped(self)
   }
 
-  @objc fileprivate func profileButtonTapped() {
+  @objc private func profileButtonTapped() {
     delegate?.clipCollectionViewCellProfileButtonTapped(self)
   }
 
-  @objc fileprivate func longPressGestureRecognizerTriggered() {
+  @objc private func longPressGestureRecognizerTriggered() {
     delegate?.clipCollectionViewCellLongPressTriggered(self)
   }
 
-  @objc fileprivate func likeButtonTapped() {
+  @objc private func likeButtonTapped() {
     delegate?.clipCollectionViewCellLikeButtonTapped(self)
   }
 
-  fileprivate func setThumbnailScaledDown(_ scaledDown: Bool, animated: Bool) {
+  private func setThumbnailScaledDown(_ scaledDown: Bool, animated: Bool) {
     if animated {
       UIView.animate(withDuration: 0.4, animations: {
         self.setThumbnailScaledDown(scaledDown, animated: false)
@@ -344,7 +344,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
   }
 
-  fileprivate func setUserAvatarImageViewBounceConstraints(_ position: Int = 0) {
+  private func setUserAvatarImageViewBounceConstraints(_ position: Int = 0) {
     // 0 through 2, to represent the keyframes of the animation.
     // 0 is start of bounce, 2 is top of bounce
     let bounceHeight = ClipCollectionViewCell.defaultSize.width / 4 * 3
@@ -358,7 +358,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
   }
 
-  fileprivate func userAvatarImageViewBeginBouncing() {
+  private func userAvatarImageViewBeginBouncing() {
     if userAvatarImageViewBounceInProgress { return }
     userAvatarImageViewBounceInProgress = true
     userAvatarImageViewShouldContinueBouncing = true
@@ -366,7 +366,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     _bounceUserAvatarImageView()
   }
 
-  fileprivate func userAvatarImageViewStopBouncingAnimated(_ animated: Bool) {
+  private func userAvatarImageViewStopBouncingAnimated(_ animated: Bool) {
     userAvatarImageViewShouldContinueBouncing = false
     if !animated {
       userAvatarImageView.layer.removeAllAnimations()
@@ -374,7 +374,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     }
   }
 
-  fileprivate func _bounceUserAvatarImageView(toTop: Bool = true) {
+  private func _bounceUserAvatarImageView(toTop: Bool = true) {
     let animationCurve = (toTop) ? UIViewAnimationOptions.curveEaseOut : UIViewAnimationOptions.curveEaseIn
     UIView.animateKeyframes(withDuration: userAvatarImageViewBounceDuration / 2,
       delay: 0,
@@ -419,7 +419,7 @@ class ClipCollectionViewCell: UICollectionViewCell {
     })
   }
 
-  fileprivate func _spinUserAvatarImageView() {
+  private func _spinUserAvatarImageView() {
     let fullRotation = CGFloat(Double.pi * -2)
     UIView.animateKeyframes(withDuration: userAvatarImageViewBounceDuration,
       delay: 0,

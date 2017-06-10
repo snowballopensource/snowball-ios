@@ -21,7 +21,7 @@ class User: Object {
   dynamic var following = false
   dynamic var email: String?
   dynamic var phoneNumber: String?
-  fileprivate dynamic var colorData = NSKeyedArchiver.archivedData(withRootObject: UIColor.SnowballColor.randomColor)
+  private dynamic var colorData = NSKeyedArchiver.archivedData(withRootObject: UIColor.SnowballColor.randomColor)
   var color: UIColor {
     get {
       return NSKeyedUnarchiver.unarchiveObject(with: colorData) as? UIColor ?? UIColor.SnowballColor.blueColor
@@ -32,9 +32,9 @@ class User: Object {
   }
   var authToken: String?
 
-  fileprivate static let kCurrentUserIDKey = "CurrentUserID"
-  fileprivate static let kCurrentUserAuthTokenKey = "CurrentUserAuthToken"
-  fileprivate static var _currentUser: User?
+  private static let kCurrentUserIDKey = "CurrentUserID"
+  private static let kCurrentUserAuthTokenKey = "CurrentUserAuthToken"
+  private static var _currentUser: User?
   static var currentUser: User? {
     get {
       let defaults = UserDefaults.standard

@@ -26,7 +26,7 @@ class FindFriendsViewController: UIViewController {
     tableView.separatorStyle = .none
     return tableView
   }()
-  fileprivate let tableViewTopConstraintGroup = ConstraintGroup()
+  private let tableViewTopConstraintGroup = ConstraintGroup()
   let searchTextField: FormTextField = {
     let textField = FormTextField()
     textField.placeholder = NSLocalizedString("Find by username", comment: "")
@@ -38,7 +38,7 @@ class FindFriendsViewController: UIViewController {
     return textField
   }()
   var users = [User]()
-  fileprivate let addressBook: ABAddressBook? = {
+  private let addressBook: ABAddressBook? = {
     var error: Unmanaged<CFError>?
     let addressBook = ABAddressBookCreateWithOptions(nil, &error)
     if let error = error {
@@ -135,7 +135,7 @@ class FindFriendsViewController: UIViewController {
     }
   }
 
-  fileprivate func getPhoneNumbersFromAddressBook(onSuccess: @escaping (_ phoneNumbers: [String]) -> Void, onFailure: @escaping () -> Void) {
+  private func getPhoneNumbersFromAddressBook(onSuccess: @escaping (_ phoneNumbers: [String]) -> Void, onFailure: @escaping () -> Void) {
     ABAddressBookRequestAccessWithCompletion(addressBook) { (granted, error) in
       if granted {
         let authorizationStatus = ABAddressBookGetAuthorizationStatus()
@@ -180,11 +180,11 @@ class FindFriendsViewController: UIViewController {
 
   // MARK: Actions
 
-  @objc fileprivate func leftBarButtonItemPressed() {
+  @objc private func leftBarButtonItemPressed() {
     navigationController?.popViewController(animated: true)
   }
 
-  @objc fileprivate func segmentedControlValueChanged() {
+  @objc private func segmentedControlValueChanged() {
     performUserRequest()
   }
 }

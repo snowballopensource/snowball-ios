@@ -125,7 +125,7 @@ private class AuthenticationPresentationController: UIPresentationController {
 
   // MARK: Private
 
-  @objc fileprivate func cancelButtonPressed() {
+  @objc private func cancelButtonPressed() {
     presentedViewController.dismiss(animated: true, completion: nil)
   }
 }

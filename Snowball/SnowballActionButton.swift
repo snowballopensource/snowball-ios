@@ -20,7 +20,7 @@ class SnowballActionButton: UIButton {
 
   static let defaultHeight: CGFloat = 45
 
-  fileprivate let gradient: CAGradientLayer = {
+  private let gradient: CAGradientLayer = {
     let gradient = CAGradientLayer()
     gradient.colors = [
       UIColor(colorLiteralRed: 246/255.0, green: 245/255.0, blue: 23/255.0, alpha: 1).cgColor,

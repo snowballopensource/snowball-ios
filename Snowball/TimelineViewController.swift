@@ -155,14 +155,14 @@ class TimelineViewController: UIViewController {
 
   // MARK: Private
 
-  fileprivate func cellForClip(_ clip: Clip) -> ClipCollectionViewCell? {
+  private func cellForClip(_ clip: Clip) -> ClipCollectionViewCell? {
     if let indexPath = fetchedResultsController.indexPathForObject(clip) {
       return timelineCollectionView.cellForItem(at: indexPath) as? ClipCollectionViewCell
     }
     return nil
   }
 
-  fileprivate func scrollToPriorityClipAnimated(_ animated: Bool) {
+  private func scrollToPriorityClipAnimated(_ animated: Bool) {
     if let clipNeedingAttenion = self.timeline.clipsNeedingAttention.last {
       self.scrollToCellForClip(clipNeedingAttenion, animated: animated)
     } else if let bookmarkedClip = self.timeline.bookmarkedClip {
@@ -226,22 +226,22 @@ class TimelineViewController: UIViewController {
     }
   }
 
-  fileprivate func endBufferingState() {
+  private func endBufferingState() {
     playerBufferingImageView.image = nil
     pulsingLoadingIndicatorView.stopAnimating()
   }
 
   // MARK: Actions
 
-  @objc fileprivate func applicationWillEnterForeground() {
+  @objc private func applicationWillEnterForeground() {
     refresh()
   }
 
-  @objc fileprivate func backBarButtonItemPressed() {
+  @objc private func backBarButtonItemPressed() {
     navigationController?.popViewController(animated: true)
   }
 
-  @objc fileprivate func leftBarButtonItemPressed() {
+  @objc private func leftBarButtonItemPressed() {
     authenticateUser(
       afterSuccessfulAuthentication:  {
         self.refresh()

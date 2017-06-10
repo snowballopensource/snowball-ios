@@ -99,7 +99,7 @@ class SegmentedControl: UIControl {
 
   // MARK: Private
 
-  fileprivate func highlightIndex(_ index: Int) {
+  private func highlightIndex(_ index: Int) {
     for i in 0 ..< labels.count {
       let label = labels[i]
       let underline = underlines[i]

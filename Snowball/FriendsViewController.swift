@@ -110,7 +110,7 @@ class FriendsViewController: UIViewController {
 
   // MARK: Private
 
-  fileprivate func reloadUserData() {
+  private func reloadUserData() {
     if let user = User.currentUser {
       // Handle coming back from EditProfile VC
       userAvatarImageView.setUser(user)
@@ -118,7 +118,7 @@ class FriendsViewController: UIViewController {
     }
   }
 
-  fileprivate func refresh() {
+  private func refresh() {
     self.users.removeAll()
     self.tableView.reloadData()
 
@@ -147,24 +147,24 @@ class FriendsViewController: UIViewController {
 
   // MARK: Actions
 
-  @objc fileprivate func leftBarButtonItemPressed() {
+  @objc private func leftBarButtonItemPressed() {
     AppDelegate.sharedInstance.window?.transitionRootViewControllerToViewController(HomeNavigationController())
   }
 
-  @objc fileprivate func rightBarButtonItemPressed() {
+  @objc private func rightBarButtonItemPressed() {
     navigationController?.pushViewController(FindFriendsViewController(), animated: true)
   }
 
-  @objc fileprivate func segmentedControlValueChanged() {
+  @objc private func segmentedControlValueChanged() {
     refresh()
   }
 
-  @objc fileprivate func profileButtonPressed() {
+  @objc private func profileButtonPressed() {
     guard let user = User.currentUser else { return }
     navigationController?.pushViewController(UserTimelineViewController(user: user), animated: true)
   }
 
-  @objc fileprivate func editProfileButtonPressed() {
+  @objc private func editProfileButtonPressed() {
     navigationController?.pushViewController(EditProfileViewController(), animated: true)
   }
 }

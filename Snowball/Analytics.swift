@@ -13,12 +13,7 @@ class Analytics {
 
   // MARK: - Properties
 
-  fileprivate class var sharedAnalytics: Analytics {
-    struct Singleton {
-      static let sharedAnalytics = Analytics()
-    }
-    return Singleton.sharedAnalytics
-  }
+  private static let shared = Analytics()
 
   var amplitude: Amplitude {
     return Amplitude.instance()
@@ -36,20 +31,20 @@ class Analytics {
   // MARK: - Internal
 
   class func initialize() {
-    _ = Analytics.sharedAnalytics
+    _ = shared
   }
 
   class func track(_ eventName: String, properties: [String: String]? = nil) {
-    Analytics.sharedAnalytics.track(eventName, properties: properties)
+    shared.track(eventName, properties: properties)
   }
 
   class func identify(_ userID: String) {
-    Analytics.sharedAnalytics.identify(userID)
+    shared.identify(userID)
   }
 
   // MARK: - Private
 
-  fileprivate func track(_ eventName: String, properties: [String: String]? = nil) {
+  private func track(_ eventName: String, properties: [String: String]? = nil) {
     if isDebug() {
       print("Received but not tracking event: \(eventName)")
     } else {
@@ -62,7 +57,7 @@ class Analytics {
     }
   }
 
-  fileprivate func identify(_ userID: String) {
+  private func identify(_ userID: String) {
     if !isDebug() {
       amplitude.setUserId(userID)
     }

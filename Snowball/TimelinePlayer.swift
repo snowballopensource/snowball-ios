@@ -12,8 +12,8 @@ class TimelinePlayer: AVQueuePlayer {
 
   // MARK: Properties
 
-  fileprivate(set) var playing = false
-  fileprivate let queueManager: PlayerQueueManager
+  private(set) var playing = false
+  private let queueManager: PlayerQueueManager
   var delegate: TimelinePlayerDelegate?
   var currentClip: Clip? {
     didSet {
@@ -41,7 +41,7 @@ class TimelinePlayer: AVQueuePlayer {
     }
   }
 
-  fileprivate let currentItemKeyPath = "currentItem"
+  private let currentItemKeyPath = "currentItem"
 
   // MARK: Initializers
 

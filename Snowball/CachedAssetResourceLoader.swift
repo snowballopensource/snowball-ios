@@ -55,7 +55,7 @@ extension CachedAssetResourceLoader: AVAssetResourceLoaderDelegate {
     return false
   }
 
-  fileprivate func UTIFromFileExtension(_ fileExtension: String) -> String? {
+  private func UTIFromFileExtension(_ fileExtension: String) -> String? {
     guard let UTI: CFString = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension as NSString, nil)?.takeRetainedValue() else { return nil }
     return UTI as String
   }

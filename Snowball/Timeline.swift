@@ -23,7 +23,7 @@ class Timeline {
     return clips.filter("stateString == %@ || stateString == %@", ClipState.PendingAcceptance.rawValue, ClipState.UploadFailed.rawValue).sorted(byKeyPath: "createdAt")
   }
   var currentPage = 0
-  fileprivate let kClipBookmarkDateKey = "ClipBookmarkDate"
+  private let kClipBookmarkDateKey = "ClipBookmarkDate"
   var bookmarkedClip: Clip? {
     get {
       if type.allowsBookmark {
@@ -112,7 +112,7 @@ class Timeline {
 
   // MARK: Private
 
-  fileprivate func requestClipsOnCurrentPage(_ completion: (() -> Void)?) {
+  private func requestClipsOnCurrentPage(_ completion: (() -> Void)?) {
     let requestedPage = currentPage
     let route: SnowballRoute = {
       switch self.type {
@@ -139,7 +139,7 @@ class Timeline {
     })
   }
 
-  fileprivate func deleteClipsNotInClips(_ clips: [Clip]) {
+  private func deleteClipsNotInClips(_ clips: [Clip]) {
     var clipIDs = [String]()
     for clip in clips {
       guard let clipID = clip.id else { break }

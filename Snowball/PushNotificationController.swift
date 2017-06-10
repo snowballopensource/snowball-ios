@@ -13,7 +13,7 @@ class PushNotificationController {
 
   // MARK: Properties
 
-  fileprivate static let sharedInstance = PushNotificationController()
+  private static let shared = PushNotificationController()
 
   // MARK: Internal
 

@@ -28,19 +28,19 @@ class FormTextField: UITextField {
 
   var hintWidth: CGFloat = 0
 
-  fileprivate let hintLabel: UILabel = {
+  private let hintLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.SnowballFont.regularFont.withSize(16)
     label.textColor = UIColor.black
     return label
   }()
 
-  fileprivate let bottomBorder: CALayer = {
+  private let bottomBorder: CALayer = {
     let layer = CALayer()
     layer.backgroundColor = UIColor.black.cgColor
     return layer
   }()
-  fileprivate let bottomBorderWidth: CGFloat = 1
+  private let bottomBorderWidth: CGFloat = 1
 
   // MARK: Initializers
 

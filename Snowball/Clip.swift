@@ -22,7 +22,7 @@ class Clip: Object {
   dynamic var user: User?
   dynamic var inHomeTimeline = false
   dynamic var timelineID: String?
-  fileprivate dynamic var stateString = ClipState.Default.rawValue
+  private dynamic var stateString = ClipState.Default.rawValue
 
   var state: ClipState {
     get {

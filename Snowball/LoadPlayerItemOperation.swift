@@ -25,7 +25,7 @@ class LoadPlayerItemOperation: Operation {
 
   override var isAsynchronous: Bool { return true }
 
-  fileprivate var _executing = false
+  private var _executing = false
   override var isExecuting: Bool {
     get {
       return _executing
@@ -37,7 +37,7 @@ class LoadPlayerItemOperation: Operation {
     }
   }
 
-  fileprivate var _finished = false
+  private var _finished = false
   override var isFinished: Bool {
     get {
       return _finished

@@ -133,11 +133,11 @@ class EditProfileViewController: UIViewController {
 
   // MARK: Private
 
-  @objc fileprivate func leftBarButtonItemPressed() {
+  @objc private func leftBarButtonItemPressed() {
     navigationController?.popViewController(animated: true)
   }
 
-  @objc fileprivate func rightBarButtonItemPressed() {
+  @objc private func rightBarButtonItemPressed() {
     guard let user = User.currentUser else { return }
 
     var hasChanges = false
@@ -194,7 +194,7 @@ class EditProfileViewController: UIViewController {
     }
   }
 
-  @objc fileprivate func editAvatarButtonPressed() {
+  @objc private func editAvatarButtonPressed() {
     let imagePickerController = UIImagePickerController()
     imagePickerController.delegate = self
     imagePickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary

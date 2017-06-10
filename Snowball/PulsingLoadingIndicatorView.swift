@@ -68,7 +68,7 @@ class PulsingLoadingIndicatorView: UIView {
 
   // MARK: Private
 
-  fileprivate func startPulseAnimation(color: UIColor) {
+  private func startPulseAnimation(color: UIColor) {
     backgroundColor = color.withAlphaComponent(0.2)
     UIView.animate(withDuration: 1,
       delay: 0,

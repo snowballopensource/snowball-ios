@@ -14,13 +14,13 @@ class TimelineCollectionView: UICollectionView {
 
   var timelineDelegate: TimelineCollectionViewDelegate?
 
-  fileprivate let leftSwipeGestureRecognizer: UISwipeGestureRecognizer = {
+  private let leftSwipeGestureRecognizer: UISwipeGestureRecognizer = {
     let gestureRecognizer = UISwipeGestureRecognizer()
     gestureRecognizer.direction = .left
     return gestureRecognizer
   }()
 
-  fileprivate let rightSwipeGestureRecognizer: UISwipeGestureRecognizer = {
+  private let rightSwipeGestureRecognizer: UISwipeGestureRecognizer = {
     let gestureRecognizer = UISwipeGestureRecognizer()
     gestureRecognizer.direction = .right
     return gestureRecognizer
@@ -36,10 +36,10 @@ class TimelineCollectionView: UICollectionView {
     register(ClipCollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(ClipCollectionViewCell.self))
 
     addGestureRecognizer(leftSwipeGestureRecognizer)
-    leftSwipeGestureRecognizer.addTarget(self, action: #selector(TimelineCollectionView.leftSwipeGestureRecognizerSwiped))
+    leftSwipeGestureRecognizer.addTarget(self, action: #selector(leftSwipeGestureRecognizerSwiped))
 
     addGestureRecognizer(rightSwipeGestureRecognizer)
-    rightSwipeGestureRecognizer.addTarget(self, action: #selector(TimelineCollectionView.rightSwipeGestureRecognizerSwiped))
+    rightSwipeGestureRecognizer.addTarget(self, action: #selector(rightSwipeGestureRecognizerSwiped))
   }
 
   required init?(coder: NSCoder) {
@@ -48,13 +48,13 @@ class TimelineCollectionView: UICollectionView {
 
   // MARK: Private
 
-  @objc fileprivate func leftSwipeGestureRecognizerSwiped() {
+  @objc private func leftSwipeGestureRecognizerSwiped() {
     if !isScrollEnabled {
       timelineDelegate?.timelineCollectionViewSwipedLeft(self)
     }
   }
 
-  @objc fileprivate func rightSwipeGestureRecognizerSwiped() {
+  @objc private func rightSwipeGestureRecognizerSwiped() {
     if !isScrollEnabled {
       timelineDelegate?.timelineCollectionViewSwipedRight(self)
     }
@@ -74,7 +74,7 @@ class TimelineCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
   var delegate: TimelineCollectionViewFlowLayoutDelegate?
 
-  fileprivate var updateItems = [UICollectionViewUpdateItem]()
+  private var updateItems = [UICollectionViewUpdateItem]()
 
   // MARK: Initializers
 

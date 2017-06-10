@@ -42,7 +42,7 @@ enum SnowballRoute: URLRequestConvertible {
     return "https://api.snowball.is/v1/"
   }()
 
-  fileprivate var method: Alamofire.HTTPMethod {
+  private var method: Alamofire.HTTPMethod {
     switch self {
     case .signUp: return .post
     case .signIn: return .post
@@ -67,7 +67,7 @@ enum SnowballRoute: URLRequestConvertible {
     }
   }
 
-  fileprivate var path: String {
+  private var path: String {
     switch self {
     case .signUp: return "users/sign-up"
     case .signIn: return "users/sign-in"
@@ -92,7 +92,7 @@ enum SnowballRoute: URLRequestConvertible {
     }
   }
 
-  fileprivate var parameterEncoding: ParameterEncoding? {
+  private var parameterEncoding: ParameterEncoding? {
     switch self {
     case .signUp: return JSONEncoding.default
     case .signIn: return JSONEncoding.default
@@ -106,7 +106,7 @@ enum SnowballRoute: URLRequestConvertible {
     }
   }
 
-  fileprivate var parameters: [String: AnyObject]? {
+  private var parameters: [String: AnyObject]? {
     switch self {
     case .signUp(let username, let email, let password): return ["username": username as AnyObject, "email": email as AnyObject, "password": password as AnyObject]
     case .signIn(let email, let password): return ["email": email as AnyObject, "password": password as AnyObject]

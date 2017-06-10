@@ -14,10 +14,10 @@ class UserTimelineViewController: TimelineViewController {
 
   // MARK: Properties
 
-  fileprivate let topBackgroundImageView = UIImageView()
-  fileprivate let usernameLabel: UILabel
-  fileprivate let followButton: UIButton
-  fileprivate let user: User
+  private let topBackgroundImageView = UIImageView()
+  private let usernameLabel: UILabel
+  private let followButton: UIButton
+  private let user: User
 
   // MARK: Initializers
 
@@ -80,7 +80,7 @@ class UserTimelineViewController: TimelineViewController {
     }
   }
 
-  fileprivate func setFollowButtonState() {
+  private func setFollowButtonState() {
     let followImage = user.following ? #imageLiteral(resourceName: "button-following") : #imageLiteral(resourceName: "button-follow")
     followButton.setBackgroundImage(followImage, for: UIControlState())
   }

@@ -27,7 +27,7 @@ class SingleItemLoopingPlayer: AVPlayer {
 
   // MARK: Private
 
-  fileprivate func registerPlayerItemForNotifications(_ playerItem: AVPlayerItem) {
+  private func registerPlayerItemForNotifications(_ playerItem: AVPlayerItem) {
     NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem, queue: nil) { (notification) in
       if let playerItem = notification.object as? AVPlayerItem {
         playerItem.seek(to: kCMTimeZero)

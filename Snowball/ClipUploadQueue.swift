@@ -12,9 +12,9 @@ class ClipUploadQueue {
 
   // MARK: Properties
 
-  fileprivate static let sharedInstance = ClipUploadQueue()
+  private static let shared = ClipUploadQueue()
 
-  fileprivate var operationQueue: OperationQueue = {
+  private var operationQueue: OperationQueue = {
     let operationQueue = OperationQueue()
     operationQueue.name = "upload queue"
     operationQueue.maxConcurrentOperationCount = 1
@@ -24,6 +24,6 @@ class ClipUploadQueue {
   // MARK: - Internal
 
   static func addOperationWithBlock(_ block: @escaping () -> Void) {
-    sharedInstance.operationQueue.addOperation(block)
+    shared.operationQueue.addOperation(block)
   }
 }

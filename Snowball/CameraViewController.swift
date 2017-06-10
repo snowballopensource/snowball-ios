@@ -20,7 +20,7 @@ class CameraViewController: UIViewController {
 
   var delegate: CameraViewControllerDelegate?
 
-  fileprivate let cameraView: CameraView = {
+  private let cameraView: CameraView = {
     let view = CameraView()
     view.backgroundColor = UIColor.black
     let previewLayer = view.layer as! AVCaptureVideoPreviewLayer
@@ -28,16 +28,16 @@ class CameraViewController: UIViewController {
     return view
   }()
 
-  fileprivate let captureSession = AVCaptureSession()
+  private let captureSession = AVCaptureSession()
 
-  fileprivate let captureSessionQueue = DispatchQueue(label: "CaptureSessionQueue", attributes: [])
+  private let captureSessionQueue = DispatchQueue(label: "CaptureSessionQueue", attributes: [])
 
-  fileprivate var currentVideoDeviceInput: AVCaptureDeviceInput!
+  private var currentVideoDeviceInput: AVCaptureDeviceInput!
 
-  fileprivate var movieFileOutput: AVCaptureMovieFileOutput!
+  private var movieFileOutput: AVCaptureMovieFileOutput!
 
-  fileprivate let kDefaultCameraPositionKey = "DetaultCameraPosition"
-  fileprivate var defaultCameraPosition: AVCaptureDevicePosition {
+  private let kDefaultCameraPositionKey = "DetaultCameraPosition"
+  private var defaultCameraPosition: AVCaptureDevicePosition {
     get {
       let lastCameraPositionString = UserDefaults.standard.object(forKey: kDefaultCameraPositionKey) as? String
       if lastCameraPositionString == "back" {
@@ -57,29 +57,29 @@ class CameraViewController: UIViewController {
     }
   }
 
-  fileprivate let playerView = PlayerView()
+  private let playerView = PlayerView()
 
-  fileprivate var player: SingleItemLoopingPlayer {
+  private var player: SingleItemLoopingPlayer {
     return playerView.player as! SingleItemLoopingPlayer
   }
 
-  fileprivate var cancelPreviewButton: UIButton = {
+  private var cancelPreviewButton: UIButton = {
     let button = UIButton()
     button.setImage(UIImage(named: "top-x"), for: UIControlState())
     return button
   }()
-  fileprivate let cancelPreviewButtonAnimatableConstraints = ConstraintGroup()
+  private let cancelPreviewButtonAnimatableConstraints = ConstraintGroup()
 
-  fileprivate let progressView: UIProgressView = {
+  private let progressView: UIProgressView = {
     let progressView = UIProgressView()
     progressView.progressTintColor = User.currentUser?.color ?? UIColor.SnowballColor.blueColor
     progressView.trackTintColor = UIColor.clear
     return progressView
   }()
 
-  fileprivate var progressViewTimer: Timer?
+  private var progressViewTimer: Timer?
 
-  fileprivate let maxRecordingSeconds = 3.0
+  private let maxRecordingSeconds = 3.0
 
   fileprivate let FPS: Int32 = 24
 
@@ -226,7 +226,7 @@ class CameraViewController: UIViewController {
 
   // MARK: Private
 
-  @objc fileprivate func toggleRecording(_ sender: UILongPressGestureRecognizer) {
+  @objc private func toggleRecording(_ sender: UILongPressGestureRecognizer) {
     switch (sender.state) {
     case .began:
       beginRecording()
@@ -236,11 +236,11 @@ class CameraViewController: UIViewController {
     }
   }
 
-  fileprivate func checkDeviceAuthorizationStatus() {
+  private func checkDeviceAuthorizationStatus() {
     AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: nil)
   }
 
-  fileprivate func captureDeviceForMediaType(_ mediaType: String, position: AVCaptureDevicePosition? = nil) -> AVCaptureDevice? {
+  private func captureDeviceForMediaType(_ mediaType: String, position: AVCaptureDevicePosition? = nil) -> AVCaptureDevice? {
     let devices = AVCaptureDevice.devices(withMediaType: mediaType)
     if let _ = position {
       for device in devices! {
@@ -255,19 +255,19 @@ class CameraViewController: UIViewController {
     return nil
   }
 
-  fileprivate func beginSession() {
+  private func beginSession() {
     captureSessionQueue.async {
       self.captureSession.startRunning()
     }
   }
 
-  fileprivate func endSession() {
+  private func endSession() {
     captureSessionQueue.async {
       self.captureSession.stopRunning()
     }
   }
 
-  fileprivate func beginRecording() {
+  private func beginRecording() {
     captureSessionQueue.async {
       if let recording = self.movieFileOutput?.isRecording {
         if !recording {
@@ -279,7 +279,7 @@ class CameraViewController: UIViewController {
     }
   }
 
-  fileprivate func endRecording() {
+  private func endRecording() {
     captureSessionQueue.async {
       if let recording = self.movieFileOutput?.isRecording {
         if recording {
@@ -318,7 +318,7 @@ class CameraViewController: UIViewController {
     progressView.progress = 0
   }
 
-  @objc fileprivate func progressViewTimerDidFire(_ timer: Timer) {
+  @objc private func progressViewTimerDidFire(_ timer: Timer) {
     let timeInterval = timer.userInfo as! Double
     if progressView.progress < 1 {
       progressView.progress += Float(timeInterval / maxRecordingSeconds)
@@ -330,12 +330,12 @@ class CameraViewController: UIViewController {
     player.playVideoURL(url)
   }
 
-  @objc fileprivate func cancelPreview() {
+  @objc private func cancelPreview() {
     endPreview()
     delegate?.videoPreviewDidCancel()
   }
 
-  fileprivate func setCancelPreviewButtonHidden(_ hidden: Bool, animated: Bool) {
+  private func setCancelPreviewButtonHidden(_ hidden: Bool, animated: Bool) {
     if animated {
       UIView.animate(withDuration: 0.4, animations: {
         self.setCancelPreviewButtonHidden(hidden, animated: false)

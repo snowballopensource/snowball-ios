@@ -14,16 +14,16 @@ class PlayerQueueManager {
 
   // MARK: Properties
 
-  fileprivate let timeline: Timeline
+  private let timeline: Timeline
   weak var player: AVQueuePlayer?
-  fileprivate let queue: OperationQueue = {
+  private let queue: OperationQueue = {
     let queue = OperationQueue()
     queue.qualityOfService = .userInitiated
     queue.maxConcurrentOperationCount = 1
     return queue
   }()
-  fileprivate let desiredMaximumClipCount = 3
-  fileprivate var uncancelledOperations: [Operation] {
+  private let desiredMaximumClipCount = 3
+  private var uncancelledOperations: [Operation] {
     return queue.operations.filter({ !$0.isCancelled })
   }
   var isLoadingAdditionalClips: Bool {
@@ -66,7 +66,7 @@ class PlayerQueueManager {
 
   // MARK: Private
 
-  fileprivate func fillPlayerQueueWithClips(_ clips: [Clip], ignoringPlayerItemsCount: Bool, readyToPlayFirstClip: (() -> Void)?) {
+  private func fillPlayerQueueWithClips(_ clips: [Clip], ignoringPlayerItemsCount: Bool, readyToPlayFirstClip: (() -> Void)?) {
     let playerItemsCount = ignoringPlayerItemsCount ? 0 : (player?.items().count ?? 0)
     let clipsEnqueuedCount = playerItemsCount + uncancelledOperations.count
     let totalClipsLeftCount = clips.count
@@ -77,7 +77,7 @@ class PlayerQueueManager {
     enqueueClipsInPlayer(clipsToEnqueue, readyToPlayFirstClip: readyToPlayFirstClip)
   }
 
-  fileprivate func enqueueClipsInPlayer(_ clips: [Clip], readyToPlayFirstClip: (() -> Void)?) {
+  private func enqueueClipsInPlayer(_ clips: [Clip], readyToPlayFirstClip: (() -> Void)?) {
     guard let clip = clips.first else { return }
     enqueueClipInPlayer(clip) {
       readyToPlayFirstClip?()
@@ -87,7 +87,7 @@ class PlayerQueueManager {
     enqueueClipsInPlayer(nextClips, readyToPlayFirstClip: nil)
   }
 
-  fileprivate func enqueueClipInPlayer(_ clip: Clip, completion: @escaping () -> Void) {
+  private func enqueueClipInPlayer(_ clip: Clip, completion: @escaping () -> Void) {
     guard let playerItem = ClipPlayerItem(clip: clip) else { return }
     let loadPlayerItemOperation = LoadPlayerItemOperation(playerItem: playerItem)
     weak var safeOperation = loadPlayerItemOperation
