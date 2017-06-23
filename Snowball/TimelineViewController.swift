@@ -276,11 +276,11 @@ extension TimelineViewController: UICollectionViewDataSource {
 // MARK: - FetchedResultsControllerDelegate
 extension TimelineViewController: FetchedResultsControllerDelegate {
 
-  func controllerWillChangeContent<T: Object>(_ controller: FetchedResultsController<T>) {
+  func controllerWillChangeContent<T>(_ controller: FetchedResultsController<T>) {
     collectionViewUpdates.removeAll()
   }
 
-  func controllerDidChangeSection<T: Object>(_ controller: FetchedResultsController<T>, section: FetchResultsSectionInfo<T>, sectionIndex: UInt, changeType: NSFetchedResultsChangeType) {
+  func controllerDidChangeSection<T>(_ controller: FetchedResultsController<T>, section: FetchResultsSectionInfo<T>, sectionIndex: UInt, changeType: NSFetchedResultsChangeType) {
     let section = IndexSet(integer: Int(sectionIndex))
     collectionViewUpdates.append(BlockOperation {
       switch changeType {
@@ -295,7 +295,7 @@ extension TimelineViewController: FetchedResultsControllerDelegate {
     )
   }
 
-  func controller<T: Object>(_ controller: FetchedResultsController<T>, didChangeObject object: SafeObject<T>, atIndexPath indexPath: IndexPath?, forChangeType changeType: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+  func controller<T>(_ controller: FetchedResultsController<T>, didChangeObject object: SafeObject<T>, atIndexPath indexPath: IndexPath?, forChangeType changeType: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
     collectionViewUpdates.append(BlockOperation {
       switch changeType {
       case .insert:
@@ -315,7 +315,7 @@ extension TimelineViewController: FetchedResultsControllerDelegate {
     )
   }
 
-  func controllerDidChangeContent<T: Object>(_ controller: FetchedResultsController<T>) {
+  func controllerDidChangeContent<T>(_ controller: FetchedResultsController<T>) {
     timelineCollectionView.performBatchUpdates({
       for updateClosure in self.collectionViewUpdates {
         updateClosure.start()
