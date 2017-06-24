@@ -26,6 +26,11 @@ class TimelineViewController: UIViewController {
   let fetchedResultsController: FetchedResultsController<Clip>
   var collectionViewUpdates = [BlockOperation]()
 
+  /// Used in `HomeTimelineViewController`; after we add a clip,
+  /// wait for the fetchedResultsController refresh and *then* scroll to the
+  // newly added clip.
+  var needsScrollToClip: Clip?
+
   // MARK: TimelineViewControllerState
   enum TimelineViewControllerState {
     case `default`, recording, playing, previewing
@@ -322,6 +327,10 @@ extension TimelineViewController: FetchedResultsControllerDelegate {
       }
       }, completion: { _ in
         if self.collectionViewUpdates.count > 0 {
+          if let clip = self.needsScrollToClip {
+            self.needsScrollToClip = nil
+            self.scrollToCellForClip(clip, animated: true)
+          }
           self.reconfigureVisibleCells()
         }
     })
