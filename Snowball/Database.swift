@@ -31,7 +31,7 @@ struct Database {
     realm.delete(object)
   }
 
-  static func findAll<T: Object>(_ type: T.Type) -> Results<T> {
+  static func findAll<T>(_ type: T.Type) -> Results<T> {
     return realm.objects(type)
   }
 
