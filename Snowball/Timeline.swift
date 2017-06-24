@@ -68,7 +68,8 @@ class Timeline {
     case .user(let userID):
       predicate = NSPredicate(format: "timelineID == %@ && user.id == %@", id, userID)
     }
-    self.clips = Database.findAll(Clip.self).filter(predicate).sorted(by: sortDescriptors)
+    let db = Database()
+    self.clips = db.findAll(Clip.self).filter(predicate).sorted(by: sortDescriptors)
   }
 
   // MARK: Internal
@@ -145,9 +146,10 @@ class Timeline {
       guard let clipID = clip.id else { break }
       clipIDs.append(clipID)
     }
-    let clipsToDelete = Database.findAll(Clip.self).filter("NOT id IN %@", clipIDs).filter("stateString == %@", ClipState.Default.rawValue)
-    Database.performTransaction {
-      Database.realm.delete(clipsToDelete)
+    let db = Database()
+    let clipsToDelete = db.findAll(Clip.self).filter("NOT id IN %@", clipIDs).filter("stateString == %@", ClipState.Default.rawValue)
+    db.performTransaction {
+      db.realm.delete(clipsToDelete)
     }
   }
 }

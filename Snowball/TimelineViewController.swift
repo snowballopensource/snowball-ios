@@ -49,7 +49,8 @@ class TimelineViewController: UIViewController {
     timeline = Timeline(type: timelineType)
     player = TimelinePlayer(timeline: timeline)
 
-    let fetchRequest = FetchRequest<Clip>(realm: Database.realm, predicate: timeline.predicate)
+    let db = Database()
+    let fetchRequest = FetchRequest<Clip>(realm: db.realm, predicate: timeline.predicate)
     fetchRequest.sortDescriptors = timeline.sortDescriptors
     fetchedResultsController = FetchedResultsController<Clip>(fetchRequest: fetchRequest, sectionNameKeyPath: nil, cacheName: nil)
 
@@ -148,8 +149,10 @@ class TimelineViewController: UIViewController {
   }
 
   func scrollToCellForClip(_ clip: Clip, animated: Bool) {
-    if let indexPath = fetchedResultsController.indexPathForObject(clip), indexPath.section != NSNotFound {
-      timelineCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
+    if let indexPath = fetchedResultsController.indexPathForObject(clip) {
+      if indexPath.section != NSNotFound {
+        timelineCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
+      }
     }
   }
 
@@ -403,8 +406,9 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
             guard let clipID = clip.id else {
               // Clip does not have an ID but user wants to delete it
               if user == User.currentUser {
-                Database.performTransaction {
-                  Database.delete(clip)
+                let db = Database()
+                db.performTransaction {
+                  db.delete(clip)
                 }
               }
               return
@@ -414,8 +418,9 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
               SwiftSpinner.hide()
               switch response {
               case .success:
-                Database.performTransaction {
-                  Database.delete(clip)
+                let db = Database()
+                db.performTransaction {
+                  db.delete(clip)
                 }
               case .failure(let error):
                 print(error) // TODO: Handle error
@@ -465,9 +470,10 @@ extension TimelineViewController: ClipCollectionViewCellDelegate {
       whenAlreadyAuthenticated: {
         let likedCurrently = clip.liked
         func setClipLiked(_ liked: Bool) {
-          Database.performTransaction {
+          let db = Database()
+          db.performTransaction {
             clip.liked = liked
-            Database.save(clip)
+            db.save(clip)
           }
         }
         setClipLiked(!likedCurrently)

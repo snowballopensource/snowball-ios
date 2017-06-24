@@ -35,19 +35,16 @@ struct SnowballAPI {
     Alamofire.request(route).validate().responseJSON { afResponse in
       switch afResponse.result {
       case .success(let value):
-        if let value = value as? JSONObject {
-          var object: T?
-          Database.performTransaction {
-            object = T.fromJSONObject(value, beforeSave: beforeSave)
-          }
-          if let object = object {
-            completion(.success(object))
+        let db = Database()
+        var result: ObjectResponse<T>?
+        db.performTransaction {
+          if let value = value as? JSONObject, let object = T.fromJSONObject(value, beforeSave: beforeSave) {
+            result = .success(object)
           } else {
-            completion(.failure(NSError.snowballErrorWithReason(nil)))
+            result = .failure(NSError.snowballErrorWithReason(nil))
           }
-        } else {
-          completion(.failure(NSError.snowballErrorWithReason(nil)))
         }
+        completion(result!)
       case .failure:
         completion(.failure(errorFromResponse(afResponse)))
       }
@@ -60,7 +57,7 @@ struct SnowballAPI {
       case .success(let value):
         if let value = value as? JSONArray {
           var objects = [T]()
-          Database.performTransaction {
+          Database().performTransaction {
             objects = T.fromJSONArray(value, beforeSaveEveryObject: beforeSaveEveryObject)
           }
           completion(.success(objects))
@@ -76,15 +73,16 @@ struct SnowballAPI {
   static func queueClipForUploadingAndHandleStateChanges(_ clip: Clip, completion: @escaping (_ response: ObjectResponse<Clip>) -> Void) {
     guard let videoURLString = clip.videoURL, let videoURL = URL(string: videoURLString) else { return }
 
-    Database.performTransaction {
+    let db = Database()
+    db.performTransaction {
       clip.state = .Uploading
-      Database.save(clip)
+      db.save(clip)
     }
 
     let onFailure: (_ response: Alamofire.DataResponse<Any>?) -> Void = { response in
-      Database.performTransaction {
+      db.performTransaction {
         clip.state = .UploadFailed
-        Database.save(clip)
+        db.save(clip)
       }
       if let response = response {
         completion(.failure(errorFromResponse(response)))
@@ -105,10 +103,11 @@ struct SnowballAPI {
             case .success(let value):
               if let JSON = value as? JSONObject {
                 Analytics.track("Create Clip")
-                Database.performTransaction {
+                let db = Database()
+                db.performTransaction {
                   clip.importJSON(JSON)
                   clip.state = .Default
-                  Database.save(clip)
+                  db.save(clip)
                 }
               } else { onFailure(afResponse) }
             case .failure: onFailure(afResponse)
@@ -143,9 +142,10 @@ struct SnowballAPI {
           switch afResponse.result {
           case .success(let value):
             if let JSON = value as? JSONObject, let user = User.currentUser {
-              Database.performTransaction {
+              let db = Database()
+              db.performTransaction {
                 user.importJSON(JSON)
-                Database.save(user)
+                db.save(user)
               }
               completion(.success(user))
             } else { onFailure(afResponse) }

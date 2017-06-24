@@ -109,8 +109,9 @@ extension TimelineViewController: CameraViewControllerDelegate {
     clip.videoURL = videoURL.absoluteString
     clip.thumbnailURL = thumbnailURL.absoluteString
     clip.user = User.currentUser
-    Database.performTransaction {
-      Database.save(clip)
+    let db = Database()
+    db.performTransaction {
+      db.save(clip)
     }
     scrollToCellForClip(clip, animated: true)
   }
@@ -118,8 +119,9 @@ extension TimelineViewController: CameraViewControllerDelegate {
   func videoPreviewDidCancel() {
     state = .default
     if let pendingClip = timeline.clipPendingAcceptance {
-      Database.performTransaction {
-        Database.delete(pendingClip)
+      let db = Database()
+      db.performTransaction {
+        db.delete(pendingClip)
       }
     }
   }

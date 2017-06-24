@@ -73,10 +73,11 @@ class Clip: Object {
   // MARK: Internal
 
   static func cleanUpFailedClipUploads() {
-    Database.performTransaction {
-      for clip in Database.findAll(Clip.self).filter("stateString == %@", ClipState.Uploading.rawValue) {
+    let db = Database()
+    db.performTransaction {
+      for clip in db.findAll(Clip.self).filter("stateString == %@", ClipState.Uploading.rawValue) {
         clip.state = ClipState.UploadFailed
-        Database.save(clip)
+        db.save(clip)
       }
     }
   }

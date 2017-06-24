@@ -14,33 +14,35 @@ struct Database {
 
   // MARK: Properties
 
-  static var realm: Realm {
-    return try! Realm()
+  let realm: Realm
+
+  init() {
+    realm = try! Realm()
   }
 
   // MARK: Internal
 
-  static func performTransaction(_ transaction: () -> Void) {
+  func performTransaction(_ transaction: () -> Void) {
     try! realm.write(transaction)
   }
 
-  static func save(_ object: Object) {
+  func save(_ object: Object) {
     realm.add(object, update: true)
   }
 
-  static func delete(_ object: Object) {
+  func delete(_ object: Object) {
     realm.delete(object)
   }
 
-  static func findAll<T: Object>(_ type: T.Type) -> Results<T> {
+  func findAll<T>(_ type: T.Type) -> Results<T> {
     return realm.objects(type)
   }
 
-  static func find<T: Object>(_ id: String) -> T? {
+  func find<T: Object>(_ id: String) -> T? {
     return findAll(T.self).filter("id = %@", id).first
   }
 
-  static func findOrInitialize<T: Object>(_ id: String) -> T {
+  func findOrInitialize<T: Object>(_ id: String) -> T {
     return find(id) ?? T()
   }
 }

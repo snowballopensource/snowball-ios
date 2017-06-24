@@ -202,9 +202,10 @@ extension FriendsViewController: UserTableViewCellDelegate {
     let followingCurrently = user.following
 
     func setFollowing(_ following: Bool) {
-      Database.performTransaction {
+      let db = Database()
+      db.performTransaction {
         user.following = following
-        Database.save(user)
+        db.save(user)
       }
       cell.followButton.setFollowing(following, animated: true)
     }

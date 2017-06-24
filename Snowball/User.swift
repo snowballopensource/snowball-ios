@@ -42,7 +42,8 @@ class User: Object {
         if let _currentUser = _currentUser {
           return _currentUser
         } else {
-          _currentUser = Database.find(currentUserID)
+          let db = Database()
+          _currentUser = db.find(currentUserID)
           _currentUser?.authToken = currentUserAuthToken
           return _currentUser
         }

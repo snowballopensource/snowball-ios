@@ -172,7 +172,8 @@ class EditProfileViewController: UIViewController {
         SwiftSpinner.hide()
         switch response {
         case .success:
-          Database.performTransaction {
+          let db = Database()
+          db.performTransaction {
             if let username = newUsername {
               user.username = username
             }
@@ -182,7 +183,7 @@ class EditProfileViewController: UIViewController {
             if let phoneNumber = newPhoneNumber {
               user.phoneNumber = phoneNumber
             }
-            Database.save(user)
+            db.save(user)
           }
           self.navigationController?.popViewController(animated: true)
 

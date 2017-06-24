@@ -17,10 +17,11 @@ extension Object {
 
   static func fromJSONObject<T: Object>(_ JSON: JSONObject, beforeSave: ((_ object: T) -> Void)? = nil) -> T? {
     if let id = JSON["id"] as? String {
-      let object: T = Database.findOrInitialize(id)
+      let db = Database()
+      let object: T = db.findOrInitialize(id)
       object.importJSON(JSON)
       beforeSave?(object)
-      Database.save(object)
+      db.save(object)
       return object
     }
     return nil
