@@ -68,6 +68,7 @@
 
 /* Begin PBXFileReference section */
 		0875F9EA1E39694C000406B0 /* Snowball.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Snowball.entitlements; sourceTree = "<group>"; };
+		08C3579A1EFE6EB200A1E4ED /* Realm+Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+Debug.swift"; sourceTree = "<group>"; };
 		60213AFCD11F984AD6A61C68 /* Pods-Snowball.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snowball.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snowball/Pods-Snowball.debug.xcconfig"; sourceTree = "<group>"; };
 		8075D2639AC8113164D9F2B1 /* Pods-Snowball.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snowball.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snowball/Pods-Snowball.release.xcconfig"; sourceTree = "<group>"; };
 		BA007EB41C88054E00186A5C /* PulsingLoadingIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulsingLoadingIndicatorView.swift; sourceTree = "<group>"; };
@@ -201,6 +202,7 @@
 		BA73BCD91C1AA62400B22588 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				08C3579A1EFE6EB200A1E4ED /* Realm+Debug.swift */,
 				BA9410A01C1FB33500D366C5 /* Database.swift */,
 				BA73BCE81C1AB84F00B22588 /* Clip.swift */,
 				BAD774FE1C1DE18E00ED1A64 /* User.swift */,

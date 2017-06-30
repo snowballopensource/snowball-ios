@@ -26,6 +26,11 @@ class TimelineViewController: UIViewController {
   let fetchedResultsController: FetchedResultsController<Clip>
   var collectionViewUpdates = [BlockOperation]()
 
+  /// Used in `HomeTimelineViewController`; after we add a clip,
+  /// wait for the fetchedResultsController refresh and *then* scroll to the
+  // newly added clip.
+  var needsScrollToClip: Clip?
+
   // MARK: TimelineViewControllerState
   enum TimelineViewControllerState {
     case `default`, recording, playing, previewing
@@ -148,7 +153,7 @@ class TimelineViewController: UIViewController {
   }
 
   func scrollToCellForClip(_ clip: Clip, animated: Bool) {
-    if let indexPath = fetchedResultsController.indexPathForObject(clip), indexPath.section != NSNotFound {
+    if let indexPath = fetchedResultsController.indexPathForObject(clip) {
       timelineCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
     }
   }
@@ -322,6 +327,10 @@ extension TimelineViewController: FetchedResultsControllerDelegate {
       }
       }, completion: { _ in
         if self.collectionViewUpdates.count > 0 {
+          if let clip = self.needsScrollToClip {
+            self.needsScrollToClip = nil
+            self.scrollToCellForClip(clip, animated: true)
+          }
           self.reconfigureVisibleCells()
         }
     })
